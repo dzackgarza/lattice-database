@@ -87,7 +87,7 @@ duplicates:
 deduplicate:
     just _latticedb deduplicate
 
-test-commit:
+test-commit: tensor-boundary
     @just -f ~/ai-review-ci/justfiles/sage.just -d . test-commit
 
 test-push:
@@ -95,3 +95,41 @@ test-push:
 
 test-ci:
     @just -f ~/ai-review-ci/justfiles/sage.just -d . test-ci
+
+# Detect coordinate conventions written in the database source (research
+# CONTRIBUTING.md, OWN-24): coordinate operations belong to research's
+# preamble/tensors/. The scan is necessary but not sufficient: semantic
+# ownership needs review.
+tensor-boundary:
+    #!/usr/bin/env bash
+    set -uo pipefail
+    files=$(git ls-files 'src/*.py') || exit 1
+    total=0
+    for pattern in '$X.transpose()' '$X.T' '$X.matrix_action_right($$$A)' '$X.matrix_action_left($$$A)' '$X.einsum($$$A)' 'einsum($$$A)' '$X.matmul($$$A)' 'matmul($$$A)' '$X.dot($$$A)' '$X @ $Y'; do
+        matches=$(ast-grep run --lang python --pattern "$pattern" --json $files)
+        status=$?
+        # ast-grep returns 1 for a valid query with zero matches.
+        if [ "$status" -gt 1 ]; then
+            echo "tensor-boundary scanner failed (status $status) for $pattern" >&2
+            exit "$status"
+        fi
+        if ! findings=$(printf '%s\n' "$matches" | python3 -c '
+    import json, sys
+    for hit in json.load(sys.stdin):
+        print("{}:{}: {}".format(hit["file"], hit["range"]["start"]["line"] + 1, hit["lines"].strip()))
+    '); then
+            echo "tensor-boundary could not read the matches for $pattern" >&2
+            exit 1
+        fi
+        n=$(printf '%s\n' "$findings" | grep -c . || true)
+        total=$((total + n))
+        printf '%4d  %s\n' "$n" "$pattern"
+        if [ "$n" -gt 0 ]; then
+            printf '%s\n' "$findings" | head -40
+        fi
+    done
+    if [ "$total" -gt 0 ]; then
+        echo "$total suspected coordinate operations in src/: state the owned pullback, contraction, composition, inverse or application in research's preamble instead."
+        exit 1
+    fi
+    echo "No prohibited syntax detected; categorical ownership still requires source review."

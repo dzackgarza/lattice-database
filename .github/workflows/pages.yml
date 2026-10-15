@@ -18,6 +18,10 @@ jobs:
       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
       - name: Install uv
         uses: astral-sh/setup-uv@c18668ad3cf93ea998bef934396af7bb5c839dc7 # v10.2.0
+        # The default cache-dependency-glob walks all 161k files of the checkout and overflows
+        # the action's stack; there is no lockfile for a cache key to hash.
+        with:
+          enable-cache: false
       # The pandoc release used on the workstation; the build converts the record prose with it.
       - name: Install pandoc
         run: |

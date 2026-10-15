@@ -29,6 +29,10 @@ jobs:
           path: research
       - name: Install uv (astral-sh/setup-uv v10.2.0)
         uses: astral-sh/setup-uv@c18668ad3cf93ea998bef934396af7bb5c839dc7
+        # The default cache-dependency-glob walks all 161k files of the checkout and overflows
+        # the action's stack; there is no lockfile for a cache key to hash.
+        with:
+          enable-cache: false
       - name: Locate SageMath
         run: 'sage_bin=$(command -v sage)
 
