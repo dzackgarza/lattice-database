@@ -1,0 +1,31 @@
+name: format
+'on':
+  schedule:
+    # Nightly, 06:00 UTC. The commit gate leaves lattices/ to this job (justfile,
+    # ai_review_ci_format_scheduled_dirs).
+    - cron: '0 6 * * *'
+  workflow_dispatch: null
+permissions:
+  contents: write
+concurrency:
+  group: format
+  cancel-in-progress: false
+jobs:
+  format-cards:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+      - name: Install uv
+        uses: astral-sh/setup-uv@c18668ad3cf93ea998bef934396af7bb5c839dc7 # v10.2.0
+      - name: Install just
+        run: sudo apt-get install --yes just
+      - run: just format-cards
+      - name: Commit the formatted cards
+        run: |
+          git add lattices
+          if git diff --cached --quiet; then
+            exit 0
+          fi
+          git -c user.name=github-actions -c user.email=41898282+github-actions[bot]@users.noreply.github.com \
+            commit -m "Format lattice cards"
+          git push
