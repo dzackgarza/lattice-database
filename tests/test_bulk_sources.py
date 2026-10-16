@@ -21,8 +21,8 @@ def test_nipp_tables_preserve_the_source_discriminants_and_group_orders() -> Non
 
 
 def test_brandt_intrau_tables_apply_their_distinct_parity_conventions() -> None:
-    odd = brandt_intrau.table(SOURCES / "brandt_intrau" / "Brandt_1.html", odd_form=True)[0]
-    even = brandt_intrau.table(SOURCES / "brandt_intrau" / "Brandt_2.html", odd_form=False)[0]
+    odd = brandt_intrau.odd_table(SOURCES / "brandt_intrau" / "Brandt_1.html")[0]
+    even = brandt_intrau.even_table(SOURCES / "brandt_intrau" / "Brandt_2.html")[0]
     assert (odd.discriminant, odd.gram_tensor) == (-4, ((1, 0, 0), (0, 1, 0), (0, 0, 1)))
     assert (even.discriminant, even.gram_tensor) == (-2, ((2, 1, 1), (1, 2, 1), (1, 1, 2)))
 
@@ -41,8 +41,8 @@ def test_union_archive_retains_repeated_names_at_distinct_positions() -> None:
 
 
 def test_brandt_and_watson_source_forms_seed_valid_lattice_records() -> None:
-    odd = brandt_intrau.table(SOURCES / "brandt_intrau" / "Brandt_1.html", odd_form=True)[0]
-    even = brandt_intrau.table(SOURCES / "brandt_intrau" / "Brandt_2.html", odd_form=False)[0]
+    odd = brandt_intrau.odd_table(SOURCES / "brandt_intrau" / "Brandt_1.html")[0]
+    even = brandt_intrau.even_table(SOURCES / "brandt_intrau" / "Brandt_2.html")[0]
     watson_entry = watson.stored(SOURCES / "watson" / "watson.txt")[0]
     for entry, declared in (
         (odd, brandt_intrau.record(odd)[0]),
