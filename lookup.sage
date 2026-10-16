@@ -19,17 +19,17 @@ import latticedb
 from dzack_research.preamble.categories.lattices import Lattices
 from latticedb.model import Lattice
 
-LATTICES = Path(latticedb.__file__).resolve().parents[2] / "lattices"
+LATTICES = Path(latticedb.__file__).resolve().parents[2r] / "lattices"
 
 
-def card(tag):
+def card(tag: str) -> Lattice:
     r"""The validated record whose permanent identifier is ``tag``."""
     record = Lattice.model_validate(frontmatter.load(str(LATTICES / f"{tag}.md")).metadata)
     assert record.tag == tag, f"lattices/{tag}.md states tag {record.tag}"
     return record
 
 
-def lattice(tag):
+def lattice(tag: str) -> Lattices.ParentMethods:
     r"""The preamble lattice over ``ZZ`` of the Gram tensor stored on card ``tag``."""
     record = card(tag)
     assert record.gram_tensor is not None, f"card {tag} stores no Gram tensor"

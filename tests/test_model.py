@@ -401,3 +401,122 @@ def test_a_morphism_is_rejected_when_its_matrix_is_not_rectangular_or_a_line_doe
 def test_the_images_of_a_morphism_are_the_columns_of_its_matrix() -> None:
     morphism = Morphism.model_validate({"target": "0001", "name": "phi", "matrix": [[1, 2], [3, 4], [5, 6]], "row_subdivisions": [1, 2], "column_subdivisions": [1]})
     assert morphism.images == ((1, 3, 5), (2, 4, 6))
+
+
+@pytest.mark.parametrize("rank", [None, 2])
+def test_sparse_card_preserves_stated_simple_roots_without_inventing_rank(
+    rank: int | None,
+) -> None:
+    lattice = Lattice.model_validate(
+        {
+            "tag": "0001",
+            "name": "Source-stated lattice",
+            "latex": "L",
+            "rank": rank,
+            "definite": {
+                "roots": [{"type": "A1", "scale": 1, "simple_roots": [[1, 0]]}]
+            },
+            "root_sublattice": {"invariant_factors": [1]},
+        }
+    )
+    assert lattice.rank == rank
+    assert lattice.definite is not None and lattice.definite.roots is not None
+    assert lattice.definite.roots[0].simple_roots == ((1, 0),)
+    assert lattice.root_sublattice is not None
+    assert lattice.root_sublattice.invariant_factors == (1,)
+
+
+@pytest.mark.parametrize("rank", [None, 2])
+def test_sparse_card_preserves_complete_stated_minimal_shell(rank: int | None) -> None:
+    lattice = Lattice.model_validate(
+        {
+            "tag": "0001",
+            "name": "Source-stated lattice",
+            "latex": "L",
+            "rank": rank,
+            "definite": {
+                "minimum": 2,
+                "kissing_number": 2,
+                "minimal_vectors": [[1, 0], [-1, 0]],
+            },
+        }
+    )
+    assert lattice.rank == rank
+    assert lattice.definite is not None
+    assert lattice.definite.minimal_vectors == [[1, 0], [-1, 0]]
+    assert lattice.definite.kissing_number == 2
+
+
+@pytest.mark.parametrize("rank", [None, 2])
+def test_sparse_card_preserves_stated_root_span_and_factors(rank: int | None) -> None:
+    lattice = Lattice.model_validate(
+        {
+            "tag": "0001",
+            "name": "Source-stated lattice",
+            "latex": "L",
+            "rank": rank,
+            "root_span": {"roots": [[1, 1], [1, -1]], "norms": [2, -2]},
+            "root_sublattice": {"invariant_factors": [1, 2]},
+        }
+    )
+    assert lattice.rank == rank
+    assert lattice.root_span is not None
+    assert lattice.root_span.roots == ((1, 1), (1, -1))
+    assert lattice.root_span.norms == (2, -2)
+    assert lattice.root_sublattice is not None
+    assert lattice.root_sublattice.invariant_factors == (1, 2)
+
+
+@pytest.mark.parametrize(
+    ("fields", "expected"),
+    [
+        ({"rank": 2, "gram_tensor": [[2]]}, "gram_tensor_shape"),
+        ({"rank": 2, "signature": [2, 1]}, "signature_shape"),
+        ({"signature": [-1, 2]}, "signature_shape"),
+        (
+            {
+                "definite": {
+                    "roots": [{"type": "A2", "scale": 1, "simple_roots": [[1, 0]]}]
+                }
+            },
+            "roots_shape",
+        ),
+        (
+            {
+                "definite": {
+                    "minimum": 2,
+                    "kissing_number": 2,
+                    "minimal_vectors": [[1, 0]],
+                }
+            },
+            "minimal_shell_shape",
+        ),
+        (
+            {"root_span": {"roots": [[1, 1], [1, -1]], "norms": [2]}},
+            "root_span_norms_shape",
+        ),
+        (
+            {
+                "root_span": {"roots": [[1, 1]], "norms": [2]},
+                "root_sublattice": {"invariant_factors": [0, 2]},
+            },
+            "root_sublattice_factors_shape",
+        ),
+        (
+            {
+                "root_span": {"roots": [[1, 1]], "norms": [2]},
+                "root_sublattice": {"invariant_factors": [2, 3]},
+            },
+            "root_sublattice_factors_shape",
+        ),
+        ({"rank": 2, "definite": {"roots": [{"type": "A1", "scale": 1, "simple_roots": [[1, 0, 0]]}]}}, "roots_shape"),
+        ({"rank": 2, "definite": {"minimum": 2, "kissing_number": 2, "minimal_vectors": [[1, 0, 0], [-1, 0, 0]]}}, "minimal_shell_shape"),
+        ({"rank": 2, "root_span": {"roots": [[1, 1, 0]], "norms": [2]}}, "root_span_shape"),
+        ({"rank": 2, "root_span": {"roots": [[1, 1]], "norms": [2]}, "root_sublattice": {"invariant_factors": [1, 1, 2]}}, "root_sublattice_factors_shape"),
+    ],
+)
+def test_sparse_cards_reject_inconsistent_stated_shapes(
+    fields: dict[str, Yaml], expected: str
+) -> None:
+    record = {"tag": "0001", "name": "Source-stated lattice", "latex": "L", **fields}
+    assert expected in error_types(record)

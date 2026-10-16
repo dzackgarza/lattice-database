@@ -890,21 +890,28 @@ class Lattice(Record):
         return self
 
     def _shape_problems(self) -> Iterator[InitErrorDetails]:
-        if self.rank is None or self.gram_tensor is None or self.signature is None or self.determinant is None or self.definiteness is None:
-            return
-        if len(self.gram_tensor) != self.rank or any(len(row) != self.rank for row in self.gram_tensor):
+        rank = self.rank
+        if (
+            rank is not None
+            and self.gram_tensor is not None
+            and (
+                len(self.gram_tensor) != rank
+                or any(len(row) != rank for row in self.gram_tensor)
+            )
+        ):
             yield _problem(
                 "gram_tensor_shape",
                 "a (0,2)-tensor on a module of rank {rank} has {rank} rows of {rank} components",
                 ("gram_tensor",),
-                {"rank": self.rank},
+                {"rank": rank},
             )
-        if min(self.signature) < 0 or self.nullity < 0:
+        if self.signature is not None and (
+            min(self.signature) < 0 or (rank is not None and sum(self.signature) > rank)
+        ):
             yield _problem(
                 "signature_shape",
-                "n_plus and n_minus are nonnegative with n_plus + n_minus <= {rank}",
+                "n_plus and n_minus are nonnegative and their sum does not exceed the rank when stated",
                 ("signature",),
-                {"rank": self.rank},
             )
 
     def _integral_problems(self) -> Iterator[InitErrorDetails]:
@@ -1009,8 +1016,14 @@ class Lattice(Record):
         data = self.definite
         generator_names = data.automorphism_group_generator_morphisms
         if generator_names is not None:
-            self_isometry_names = [morphism.name for morphism in self.morphisms if morphism.target == self.tag and morphism.scale == 1]
-            if len(set(generator_names)) != len(generator_names) or any(self_isometry_names.count(name) != 1 for name in generator_names):
+            self_isometry_names = [
+                morphism.name
+                for morphism in self.morphisms
+                if morphism.target == self.tag and morphism.scale == 1
+            ]
+            if len(set(generator_names)) != len(generator_names) or any(
+                self_isometry_names.count(name) != 1 for name in generator_names
+            ):
                 yield _problem(
                     "automorphism_group_generators",
                     "each generator name occurs once in the generator list and names exactly one isometry L -> L (a morphism entry with scale 1) on this lattice card",
@@ -1018,13 +1031,17 @@ class Lattice(Record):
                 )
         yield from self._theta_problems()
         if data.roots is not None and any(
-            len(component.simple_roots) != component.rank or any(len(row) != self.rank for row in component.simple_roots) for component in data.roots
+            len(component.simple_roots) != component.rank
+            or (
+                self.rank is not None
+                and any(len(row) != self.rank for row in component.simple_roots)
+            )
+            for component in data.roots
         ):
             yield _problem(
                 "roots_shape",
-                "a component of rank m has m simple roots, each with {rank} coordinates",
+                "a component of rank m has m simple roots, each with the stated lattice rank of coordinates when known",
                 ("definite", "roots"),
-                {"rank": self.rank},
             )
         if data.minimal_vectors is not None:
             vectors = data.minimal_vectors
@@ -1033,7 +1050,7 @@ class Lattice(Record):
                 or data.minimum is None
                 or len(vectors) != data.kissing_number
                 or len({tuple(v) for v in vectors}) != len(vectors)
-                or any(len(v) != self.rank for v in vectors)
+                or (self.rank is not None and any(len(v) != self.rank for v in vectors))
             ):
                 yield _problem(
                     "minimal_shell_shape",
@@ -1080,7 +1097,9 @@ class Lattice(Record):
                     "`definite.roots` states the roots of a definite lattice, so the `root_span` block is an error there",
                     ("root_span",),
                 )
-            if any(len(row) != self.rank for row in (*span.roots, *(span.embedding or ()))):
+            if self.rank is not None and any(
+                len(row) != self.rank for row in (*span.roots, *(span.embedding or ()))
+            ):
                 yield _problem(
                     "root_span_shape",
                     "each row lists {rank} coordinates",
@@ -1100,7 +1119,9 @@ class Lattice(Record):
                     ("root_span",),
                 )
         sublattice = self.root_sublattice
-        decided = (self.definite is not None and self.definite.roots is not None) or span is not None
+        decided = (
+            self.definite is not None and self.definite.roots is not None
+        ) or span is not None
         if sublattice is None:
             return
         if not decided:
@@ -1111,13 +1132,19 @@ class Lattice(Record):
             )
             return
         factors = sublattice.invariant_factors
-        if len(factors) > self.rank or any(d < 1 for d in factors) or any(second % first != 0 for first, second in zip(factors, factors[1:], strict=False)):
-            message = "at most {rank} positive invariant factors, each dividing the next"
+        if (
+            (self.rank is not None and len(factors) > self.rank)
+            or any(d < 1 for d in factors)
+            or any(
+                second % first != 0
+                for first, second in zip(factors, factors[1:], strict=False)
+            )
+        ):
+            message = "positive invariant factors, each dividing the next, numbering at most the lattice rank when stated"
             yield _problem(
                 "root_sublattice_factors_shape",
                 message,
                 ("root_sublattice", "invariant_factors"),
-                {"rank": self.rank},
             )
 
 
