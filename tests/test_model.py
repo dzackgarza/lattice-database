@@ -50,7 +50,7 @@ def test_group_cardinality_is_plain_serialized_schema_data() -> None:
 def test_definite_group_generators_name_scale_one_self_morphisms() -> None:
     record = e8()
     generator = [[-int(i == j) for j in range(8)] for i in range(8)]
-    record["morphisms"] = [{"target": "0001", "name": "minus identity", "matrix": generator}]
+    record["morphisms"] = [{"target": "0001", "name": "minus identity", "matrix": generator, "scale": 1}]
     definite = dict(record["definite"])
     definite["automorphism_group_generator_morphisms"] = ["minus identity"]
     record["definite"] = definite
@@ -413,9 +413,7 @@ def test_sparse_card_preserves_stated_simple_roots_without_inventing_rank(
             "name": "Source-stated lattice",
             "latex": "L",
             "rank": rank,
-            "definite": {
-                "roots": [{"type": "A1", "scale": 1, "simple_roots": [[1, 0]]}]
-            },
+            "definite": {"roots": [{"type": "A1", "scale": 1, "simple_roots": [[1, 0]]}]},
             "root_sublattice": {"invariant_factors": [1]},
         }
     )
@@ -474,11 +472,7 @@ def test_sparse_card_preserves_stated_root_span_and_factors(rank: int | None) ->
         ({"rank": 2, "signature": [2, 1]}, "signature_shape"),
         ({"signature": [-1, 2]}, "signature_shape"),
         (
-            {
-                "definite": {
-                    "roots": [{"type": "A2", "scale": 1, "simple_roots": [[1, 0]]}]
-                }
-            },
+            {"definite": {"roots": [{"type": "A2", "scale": 1, "simple_roots": [[1, 0]]}]}},
             "roots_shape",
         ),
         (
@@ -515,8 +509,6 @@ def test_sparse_card_preserves_stated_root_span_and_factors(rank: int | None) ->
         ({"rank": 2, "root_span": {"roots": [[1, 1]], "norms": [2]}, "root_sublattice": {"invariant_factors": [1, 1, 2]}}, "root_sublattice_factors_shape"),
     ],
 )
-def test_sparse_cards_reject_inconsistent_stated_shapes(
-    fields: dict[str, Yaml], expected: str
-) -> None:
+def test_sparse_cards_reject_inconsistent_stated_shapes(fields: dict[str, Yaml], expected: str) -> None:
     record = {"tag": "0001", "name": "Source-stated lattice", "latex": "L", **fields}
     assert expected in error_types(record)

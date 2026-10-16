@@ -1,5 +1,7 @@
 """Certificate-consistency checks for stored lattice cards."""
 
+from __future__ import annotations
+
 import frontmatter
 
 from latticedb import certificates, corpus, genus, records
@@ -24,8 +26,7 @@ def problems(loaded: Corpus, held: Certificates) -> list[str]:
             found.append(f"{entry.path}: fields awaiting source transcription or enrichment: {', '.join(missing)}")
             continue
         metadata = corpus.front_matter(frontmatter.load(str(entry.path)))
-        card_certifications = metadata.get("certifications")
-        cited = card_certifications if isinstance(card_certifications, dict) else {}
+        cited = entry.lattice.certifications
         derive_name = f"{entry.lattice.tag} derive"
         derive_hash = certificates.certification_hash(derive_name, entry.lattice, records.derived_projection(metadata))
         derive_log = held.get(derive_name)

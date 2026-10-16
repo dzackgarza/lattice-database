@@ -14,3 +14,7 @@ Work that adds a field to the schema lands the schema first (`model.py` validato
   16, Theorem 2, the same check a complete genera card already specifies.
   `latticedb verify` reports a theorem-certified value whose input card lost its certificate, and refuses a theorem citation that names no formalized result.
   Certification of a card whose Gram tensor another card already states joins that card, so a theorem-certified value is never written to a second card.
+
+- [ ] **Published preamble integration failures**. With research `1699ded997fa68971f5af487c28dd73ab5027b0e`, existing graph publication and graph-property tests reach `CoxeterDiagrams.from_roots` → `_root_basis_diagram` → `tensor` → `_owned_coordinate_component`, where the owned integer ring rejects the raw Sage scalar `2`. Existing cohomology admission reaches `Lattices.ElementMethods.is_root` → `subobject_on(...).is_primitive()` → inclusion cokernel → `_coordinate_framed_free_module`, where `FramedFreeModules(None)` rejects the missing base ring.
+  Existing definite-card derivation also reaches `Lattices.kissing_number` → `_kissing_number` → `len(shortest_vectors())` → `Sets.ParentMethods.cardinality`, which cannot compute the cardinality of the supplied finite enumeration `{e_1, -e_1, e_0, -e_0}`. These preamble-owned operations must fulfill their existing contracts; preserve the consumer assertions and every supplied root, label and scale generator.
+  Acceptance: the unchanged `tests/test_corpus.py` and `tests/test_geometric.py` suites pass against published research main.

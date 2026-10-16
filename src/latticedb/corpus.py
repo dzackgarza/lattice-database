@@ -15,6 +15,8 @@ morphism names its codomain lattice by tag; incoming morphisms are derived by in
 the cards.
 """
 
+from __future__ import annotations
+
 import json
 import re
 from dataclasses import dataclass
@@ -22,7 +24,7 @@ from pathlib import Path
 
 import frontmatter
 import yaml
-from pydantic import TypeAdapter, ValidationError
+from pydantic import BaseModel, ConfigDict, TypeAdapter, ValidationError
 
 from latticedb.catalogues import (
     ArithmeticGroup,
@@ -295,7 +297,7 @@ def _stated_gram(path: Path) -> GramTensor | None:
     """
     from latticedb import records
 
-    rows: list[list[int | str]] = []
+    rows: list[Yaml] = []
     started = False
     with path.open() as handle:
         for line in handle:
@@ -309,9 +311,10 @@ def _stated_gram(path: Path) -> GramTensor | None:
             tokens = _GRAM_TOKEN.findall(match.group(1))
             covered = "".join(first or second for first, second in tokens)
             if covered != re.sub(r"[\s,]", "", match.group(1)) or not tokens:
-                return records.gram_tensor(frontmatter.load(str(path)).metadata.get("gram_tensor"))
+                value = TypeAdapter(Yaml).validate_python(frontmatter.load(str(path)).metadata.get("gram_tensor"))
+                return records.gram_tensor(value)
             rows.append([int(token) if "/" not in token else token for token in (first or second for first, second in tokens)])
-    if not started or not rows or any(len(row) != len(rows) for row in rows):
+    if not started or not rows or any(not isinstance(row, list) or len(row) != len(rows) for row in rows):
         return None
     return records.gram_tensor(rows)
 
@@ -325,7 +328,16 @@ def gram_key(gram: GramTensor) -> str:
     return ";".join(",".join(str(value) for value in row) for row in gram)
 
 
-def _read_index(root: Path) -> dict[str, list[str]] | None:
+class GramIndex(BaseModel):
+    """The stored tensor-to-tags map and the tags without a stored tensor."""
+
+    model_config = ConfigDict(strict=True, extra="allow")
+
+    grams: dict[str, list[str]]
+    without: list[str]
+
+
+def _read_index(root: Path) -> GramIndex | None:
     """The stored index, or `None` when it is missing or malformed.
 
     The file holds two maps: `grams`, Gram key -> tags stating it, and
@@ -335,23 +347,14 @@ def _read_index(root: Path) -> dict[str, list[str]] | None:
     if not path.exists():
         return None
     try:
-        data = json.loads(path.read_text())
-    except ValueError:
+        return GramIndex.model_validate_json(path.read_text())
+    except ValidationError:
         return None
-    if (
-        not isinstance(data, dict)
-        or not isinstance(data.get("grams"), dict)
-        or not isinstance(data.get("without"), list)
-        or any(not isinstance(key, str) or not isinstance(tags, list) or any(not isinstance(tag, str) for tag in tags) for key, tags in data["grams"].items())
-        or any(not isinstance(tag, str) for tag in data["without"])
-    ):
-        return None
-    return data
 
 
-def save_index(root: Path, index: dict[str, list[str]]) -> None:
+def save_index(root: Path, index: GramIndex) -> None:
     """Write the index file."""
-    (root / GRAM_INDEX_FILE).write_text(json.dumps(index, separators=(",", ":")))
+    (root / GRAM_INDEX_FILE).write_text(json.dumps(index.model_dump(), separators=(",", ":")))
 
 
 def append_index(root: Path, tag: str, gram: GramTensor) -> None:
@@ -361,7 +364,7 @@ def append_index(root: Path, tag: str, gram: GramTensor) -> None:
         gram_index(root)
         data = _read_index(root)
         assert data is not None
-    data["grams"].setdefault(gram_key(gram), []).append(tag)
+    data.grams.setdefault(gram_key(gram), []).append(tag)
     save_index(root, data)
 
 
@@ -375,17 +378,17 @@ def gram_index(root: Path) -> dict[str, list[str]]:
     """
     paths = {path.stem: path for path in (root / "lattices").glob("*.md")}
     data = _read_index(root)
-    if data is not None and ({tag for tags in data["grams"].values() for tag in tags} | set(data["without"])) == set(paths):
+    if data is not None and ({tag for tags in data.grams.values() for tag in tags} | set(data.without)) == set(paths):
         changed = False
-        for tag in list(data["without"]):
+        for tag in list(data.without):
             gram = _stated_gram(paths[tag])
             if gram is not None:
-                data["grams"].setdefault(gram_key(gram), []).append(tag)
-                data["without"].remove(tag)
+                data.grams.setdefault(gram_key(gram), []).append(tag)
+                data.without.remove(tag)
                 changed = True
         if changed:
             save_index(root, data)
-        return data["grams"]
+        return data.grams
     grams: dict[str, list[str]] = {}
     without: list[str] = []
     for stem in sorted(paths):
@@ -394,6 +397,6 @@ def gram_index(root: Path) -> dict[str, list[str]]:
             without.append(stem)
         else:
             grams.setdefault(gram_key(gram), []).append(stem)
-    data = {"grams": grams, "without": without}
+    data = GramIndex(grams=grams, without=without)
     save_index(root, data)
     return grams

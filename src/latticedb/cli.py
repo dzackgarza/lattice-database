@@ -171,9 +171,9 @@ def morphism(
     ],
     description: Annotated[str | None, Parameter(help="One or two sentences on the morphism.")] = None,
     scale: Annotated[
-        int,
+        int | None,
         Parameter(help="The integer c with b_T(phi x, phi y) = c b_S(x, y): a morphism S(c) -> T."),
-    ] = 1,
+    ] = None,
     row_subdivisions: Annotated[
         str,
         Parameter(help="JSON list of the lines between rows, as SageMath's `M.subdivisions()[0]`."),
@@ -196,7 +196,7 @@ def morphism(
     }
     if description is not None:
         added["description"] = description
-    if scale != 1:
+    if scale is not None:
         added["scale"] = scale
     metadata = corpus.front_matter(document)
     metadata["morphisms"] = [*metadata.get("morphisms", []), added]

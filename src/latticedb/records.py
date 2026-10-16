@@ -7,164 +7,69 @@ stored fields. It contains no independent lattice algorithm.
 `record_text` writes a lattice card, including the morphisms whose domain is that card.
 """
 
+from __future__ import annotations
+
 from collections.abc import Mapping, Sequence
 from fractions import Fraction
 from itertools import combinations
 
-import yaml
-from dzack_research.preamble.categories.lattices import Lattices
-from dzack_research.preamble.categories.modules.framed.formed.form_modules import FormModules
+from dzack_research.preamble.categories.coxeter_diagrams import CoxeterDiagrams, RootedCoxeterDiagrams
+from dzack_research.preamble.categories.lattices import DefiniteLattices, Lattices
+from dzack_research.preamble.categories.modules.framed.formed.form_modules import FormModules, FreeFormModules
 from dzack_research.preamble.categories.modules.pure.modules import Modules
+from dzack_research.preamble.categories.rings.ring_foundation import _OwnedRingElement, _OwnedRingParent
 from dzack_research.preamble.categories.sets.finite_families import finite_family
-from dzack_research.preamble.rings import session_ring_objects
+from dzack_research.preamble.rings import OwnedRings, session_ring_objects
 
 from latticedb import model
-from latticedb.model import GramTensor, Lattice, Yaml
+from latticedb.card_serialization import KEYS as KEYS
+from latticedb.card_serialization import MORPHISM_KEYS as MORPHISM_KEYS
+from latticedb.card_serialization import Flow as Flow
+from latticedb.card_serialization import _block as _block
+from latticedb.card_serialization import _body as _body
+from latticedb.card_serialization import _is_scalar as _is_scalar
+from latticedb.card_serialization import _ordered as _ordered
+from latticedb.card_serialization import _row as _row
+from latticedb.card_serialization import _styled as _styled
+from latticedb.card_serialization import gram_tensor as gram_tensor
+from latticedb.card_serialization import rational as rational
+from latticedb.card_serialization import record_text as record_text
+from latticedb.model import GramTensor, Lattice, Morphism, Yaml
 
 _SESSION_RINGS = session_ring_objects()
-ZZ = _SESSION_RINGS["ZZ"]
+_integers = _SESSION_RINGS["ZZ"]
+assert isinstance(_integers, _OwnedRingParent)
+ZZ: _OwnedRingParent = _integers
+_ring = _SESSION_RINGS["ZZ"]
+assert isinstance(_ring, OwnedRings.ParentMethods)
+integer_ring: OwnedRings.ParentMethods = _ring
+_domain = _SESSION_RINGS["ZZ"]
+assert isinstance(_domain, OwnedRings.NoZeroDivisors.Commutative.Nontrivial.ParentMethods)
+integer_domain: OwnedRings.NoZeroDivisors.Commutative.Nontrivial.ParentMethods = _domain
 QQ = _SESSION_RINGS["QQ"]
-_QQ_AS_ZZ_MODULE = Modules(QQ).restriction_of_scalars(ZZ.fraction_field_map())(QQ)
-
-KEYS = (
-    "tag",
-    "name",
-    "latex",
-    "aliases",
-    "certifications",
-    "rank",
-    "gram_tensor",
-    "signature",
-    "determinant",
-    "definiteness",
-    "dual_gram_tensor",
-    "integral",
-    "definite",
-    "indefinite",
-    "root_span",
-    "root_sublattice",
-    "morphisms",
-    "orthogonal_group",
-    "arithmetic_groups",
-    "families",
-    "related",
-    "references",
-    "hyperbolic",
-)
-"""The keys of a record, in the order in which a record lists them."""
+_QQ_AS_ZZ_MODULE = Modules(QQ).restriction_of_scalars(integer_domain.fraction_field_map())(QQ)
 
 
-class Flow(list[Yaml]):
-    """A list that YAML writes on one line."""
-
-
-yaml.add_representer(
-    Flow,
-    lambda dumper, data: dumper.represent_sequence("tag:yaml.org,2002:seq", data, flow_style=True),
-)
-
-
-def _is_scalar(value: Yaml) -> bool:
-    match value:
-        case list() | dict():
-            return False
-        case _:
-            return True
-
-
-def _styled(value: Yaml) -> Yaml:
-    """Return the value with each list of scalars as a `Flow`: the layout of a record."""
-    match value:
-        case dict():
-            return {key: _styled(item) for key, item in value.items()}
-        case list() if all(_is_scalar(item) for item in value):
-            return Flow(value)
-        case list():
-            return [_styled(item) for item in value]
-        case _:
-            return value
-
-
-def record_text(record: dict[str, Yaml], prose: str) -> str:
-    """Return the text of the file of a record."""
-    assert set(record) <= set(KEYS), set(record) - set(KEYS)
-    ordered = {key: _styled(record[key]) for key in KEYS if key in record}
-    return "---\n" + yaml.dump(ordered, sort_keys=False, allow_unicode=True, width=100000) + "---\n" + _body(prose)
-
-
-def _body(prose: str) -> str:
-    """The prose after the front matter, in the form the Markdown formatter flowmark keeps.
-
-    That is two blank lines when there is no prose, else a blank line and the prose.
-    """
-    return "\n" + prose + "\n" if prose else "\n\n"
-
-
-MORPHISM_KEYS = (
-    "target",
-    "name",
-    "description",
-    "matrix",
-    "scale",
-    "row_subdivisions",
-    "column_subdivisions",
-)
-"""The keys of a morphism, in the order in which a lattice card lists them."""
-
-
-def rational(value: Fraction) -> int | str:
-    """Return the value as a record writes it: an integer, or a string `p/q`."""
-    return int(value) if value.denominator == 1 else str(value)
-
-
-def gram_tensor(rows: Yaml) -> GramTensor:
-    """Read the `gram_tensor` field of a record: rows of integers or strings `p/q`."""
-    match rows:
-        case list():
-            return tuple(_row(row) for row in rows)
-        case _:
-            raise AssertionError("gram_tensor is a list of rows")
-
-
-def _row(row: Yaml) -> tuple[Fraction, ...]:
-    match row:
-        case list():
-            return tuple(model.rational(value) for value in row)
-        case _:
-            raise AssertionError("each row of gram_tensor is a list")
-
-
-def _block(record: dict[str, Yaml], key: str) -> dict[str, Yaml]:
-    match record.get(key):
-        case dict() as block:
-            return block
-        case _:
-            return {}
-
-
-def _ordered(block: dict[str, Yaml], fields: tuple[str, ...]) -> dict[str, Yaml]:
-    assert set(block) <= set(fields), set(block) - set(fields)
-    return {field: block[field] for field in fields if field in block}
-
-
-def _fraction_of(value) -> Fraction:
+def _fraction_of(value: _OwnedRingElement) -> Fraction:
     """A rational value of the preamble, as the `Fraction` a card stores."""
     return Fraction(int(value.numerator()), int(value.denominator()))
 
 
-def _integral_twist(formed):
+def _integral_twist(formed: FormModules.ParentMethods) -> tuple[Lattices.ParentMethods, int]:
     """The twist `L(m)` of `formed` by the denominator `m` of its scale, as a ZZ-lattice, and `m`.
 
     `formed` is a finite free ZZ-module with a QQ-valued bilinear form.  Its twist by
     the denominator of its scale is integral, and a twist does not change which
     vectors define reflections; card fields stated in the original scale divide by `m`.
     """
-    multiplier = ZZ(int(formed.scale_submodule().principal_generator().denominator()))
+    scale = formed.scale_submodule()
+    ideal = integer_domain.fractional_ideal(*(value.underlying_element() for value in scale.embedded_module_generators()))
+    multiplier = ZZ(int(ideal.principal_generator().denominator()))
     gram = formed.twist(multiplier).gram_tensor().change_ring(ZZ)
     return Lattices(ZZ)(gram), int(multiplier)
 
 
-def _theta_series_prefix(lattice, minimum: Fraction, existing_length: int) -> tuple[int, ...]:
+def _theta_series_prefix(lattice: Lattices.ParentMethods, minimum: Fraction, existing_length: int) -> tuple[int, ...]:
     """The coefficients of the theta series that a card stores.
 
     The card stores the coefficients up to 12 in rank at most 4, 8 in rank at most 8,
@@ -177,7 +82,7 @@ def _theta_series_prefix(lattice, minimum: Fraction, existing_length: int) -> tu
     return tuple(int(series[index]) for index in range(bound + 1))
 
 
-def _norm_two_root_types(lattice) -> tuple[str, ...]:
+def _norm_two_root_types(lattice: Lattices.ParentMethods) -> tuple[str, ...]:
     """The ADE types of the roots of square 2 (square -2 when negative definite), as `E8`, `A2`.
 
     The preamble recognizes the type on the root sublattice of the negative-definite
@@ -192,7 +97,7 @@ def _norm_two_root_types(lattice) -> tuple[str, ...]:
     return tuple(name for _rank, name in ranked)
 
 
-def _root_span_factors(formed, roots: tuple[tuple[int, ...], ...]) -> tuple[int, ...]:
+def _root_span_factors(formed: FormModules.ParentMethods, roots: tuple[tuple[int, ...], ...]) -> tuple[int, ...]:
     """The invariant factors of the inclusion of the span of these roots.
 
     They are the units up to the rank of the span, followed by the torsion
@@ -200,12 +105,16 @@ def _root_span_factors(formed, roots: tuple[tuple[int, ...], ...]) -> tuple[int,
     """
     if not roots:
         return ()
-    span = formed.subobject_on(tuple(formed(root) for root in roots))
+    from dzack_research.preamble.categories.modules.framed.framed_free_modules import FramedFreeModules
+
+    framed: object = formed
+    assert isinstance(framed, FramedFreeModules.ParentMethods)
+    span = framed.subobject_on(tuple(formed(root) for root in roots))
     torsion = tuple(abs(int(factor)) for factor in span.inclusion().cokernel().invariant_factors() if factor != 0)
     return (1,) * (int(span.module_rank()) - len(torsion)) + torsion
 
 
-def card_level(lattice) -> int:
+def card_level(lattice: Lattices.ParentMethods) -> int:
     """The least k with k b(x,x) even on L^*, for a nondegenerate integral lattice.
 
     L(2) is even with L(2)^* = L^*/2 and b_{L(2)}(x/2, x/2) = b(x,x)/2, so this k is half the level of L(2).
@@ -216,12 +125,14 @@ def card_level(lattice) -> int:
 def _integral(
     record: dict[str, Yaml],
     gram: GramTensor,
-    lattice,
+    lattice: Lattices.ParentMethods,
 ) -> dict[str, Yaml]:
     rank = len(gram)
     declared = _block(record, "integral")
     block: dict[str, Yaml] = {"parity": "even" if lattice.is_even() else "odd"}
-    if lattice.determinant() != 0:
+    determinant_source: object = lattice
+    assert isinstance(determinant_source, FreeFormModules.FinitelyGenerated.ParentMethods)
+    if determinant_source.determinant() != 0:
         invariants = tuple(abs(int(factor)) for factor in lattice.correlation_morphism().cokernel().invariant_factors() if abs(int(factor)) > 1)
         block["discriminant_group"] = list(invariants)
         if lattice.is_even() and lattice.is_p_elementary(2):
@@ -237,20 +148,22 @@ def _integral(
     return _ordered(block, tuple(model.IntegralData.model_fields))
 
 
-def _root_component(lattice, component, rescaling: Fraction) -> tuple[str, Fraction, tuple[tuple[int, ...], ...]]:
+def _root_component(lattice: Lattices.ParentMethods, component: RootedCoxeterDiagrams.ParentMethods, rescaling: Fraction) -> tuple[str, Fraction, tuple[tuple[int, ...], ...]]:
     """Serialize one root-system component: its type, signed scale and ordered simple roots.
 
     The simple roots are listed in the vertex order of the diagram of the component's
     type, in the coordinates of the lattice's module generators.  The card names the
     rank-two type B2, where the preamble's diagram of that type is C2.
     """
-    isomorphism_from_type_diagram = component.isomorphism_from_type_diagram()
+    diagram: object = component
+    assert isinstance(diagram, CoxeterDiagrams.ParentMethods)
+    isomorphism_from_type_diagram = diagram.isomorphism_from_type_diagram()
     labels = tuple(lattice.module_generating_set())
     roots = tuple(
         tuple(int(component.root(isomorphism_from_type_diagram(vertex)).to_vector()(label)) for label in labels) for vertex in isomorphism_from_type_diagram.domain().vertices()
     )
     scale = component.root_scale()
-    root_type = "B2" if component.label() == "C2" else component.label()
+    root_type = "B2" if diagram.label() == "C2" else diagram.label()
     return (
         root_type,
         Fraction(int(scale.numerator()), int(scale.denominator())) / rescaling,
@@ -261,10 +174,10 @@ def _root_component(lattice, component, rescaling: Fraction) -> tuple[str, Fract
 def _definite(
     record: dict[str, Yaml],
     gram: GramTensor,
-    formed,
-    computation_lattice,
+    formed: FormModules.ParentMethods,
+    computation_lattice: Lattices.ParentMethods,
     rescaling: Fraction,
-    integral_lattice=None,
+    integral_lattice: Lattices.ParentMethods | None = None,
 ) -> dict[str, Yaml]:
     declared = _block(record, "definite")
     labels = tuple(computation_lattice.module_generating_set())
@@ -276,11 +189,12 @@ def _definite(
         )
         / rescaling
     )
+    minimal_vectors: list[Yaml] = [list[Yaml](row) for row in sorted([int(vector.to_vector()(label)) for label in labels] for vector in computation_lattice.shortest_vectors())]
     block: dict[str, Yaml] = {
         "minimum": rational(minimum),
         "kissing_number": int(computation_lattice.kissing_number()),
         # A twist L(m) has the vectors of L and rescales the form, so it keeps the minimal shell and perfection.
-        "minimal_vectors": sorted([int(vector.to_vector()(label)) for label in labels] for vector in computation_lattice.shortest_vectors()),
+        "minimal_vectors": minimal_vectors,
         "perfect": bool(computation_lattice.is_voronoi_perfect()),
     }
     if integral_lattice is not None:
@@ -301,19 +215,29 @@ def _definite(
     return _ordered(block, tuple(model.DefiniteData.model_fields))
 
 
-def _root_span(record: dict[str, Yaml], formed) -> tuple[dict[str, Yaml], tuple[tuple[int, ...], ...]] | None:
+def _root_span(record: dict[str, Yaml], formed: FormModules.ParentMethods) -> tuple[dict[str, Yaml], tuple[tuple[int, ...], ...]] | None:
     """Serialize the authored roots spanning the root sublattice, with their norms."""
     match record.get("root_span"):
         case dict() as authored:
             block = dict(authored)
-            roots = tuple(tuple(int(entry) for entry in row) for row in block["roots"])
+            rows = block["roots"]
+            assert isinstance(rows, list), "root_span.roots is a list of rows"
+            parsed_rows = []
+            for row in rows:
+                assert isinstance(row, list), "each root is a list of coordinates"
+                parsed_row = []
+                for entry in row:
+                    assert isinstance(entry, (int, float, str)), "root coordinates must be numeric scalars"
+                    parsed_row.append(int(entry))
+                parsed_rows.append(tuple(parsed_row))
+            roots = tuple(parsed_rows)
         case _:
             return None
     block["norms"] = [rational(_fraction_of(formed(root).q())) for root in roots]
     return _ordered(block, tuple(model.RootSpan.model_fields)), roots
 
 
-def _root_sublattice(formed, roots) -> dict[str, Yaml]:
+def _root_sublattice(formed: FormModules.ParentMethods, roots: tuple[tuple[int, ...], ...]) -> dict[str, Yaml]:
     """Serialize the invariant factors of the root rows and, when the roots span, the norms that suffice.
 
     The stored norms are the fewest distinct root norms, smallest first, whose roots
@@ -356,11 +280,12 @@ def derive(record: dict[str, Yaml]) -> dict[str, Yaml]:
     """
     gram = gram_tensor(record["gram_tensor"])
     rank = len(gram)
-    module = ZZ.free_module(rank)
+    module = integer_ring.free_module(rank)
     formed = FormModules(ZZ)(module.bilinear_hom_space(_QQ_AS_ZZ_MODULE)(gram))
     signature = formed.signature_pair()
     n_plus = int(signature.first())
     n_minus = int(signature.second())
+    assert isinstance(formed, FreeFormModules.FinitelyGenerated.ParentMethods)
     formed_determinant = formed.determinant()
     determinant = Fraction(
         int(formed_determinant.numerator()),
@@ -415,7 +340,8 @@ def derive(record: dict[str, Yaml]) -> dict[str, Yaml]:
             integral_lattice,
         )
         labels = tuple(integral_twist.module_generating_set())
-        reflective_roots = tuple(tuple(int(root.to_vector()(label)) for label in labels) for root in integral_twist.reflective_roots())
+        definite_lattice = DefiniteLattices(ZZ)(integral_twist)
+        reflective_roots = tuple(tuple(int(root.to_vector()(label)) for label in labels) for root in definite_lattice.reflective_roots())
         derived["root_sublattice"] = _root_sublattice(formed, reflective_roots)
     else:
         found = _root_span(record, formed)
@@ -480,32 +406,22 @@ def derived_projection(record: Mapping[str, Yaml]) -> dict[str, Yaml]:
     return projected
 
 
-def gram_problems(gram: GramTensor) -> list[str]:
-    """Structural problems of a Gram tensor stored on a lattice card."""
-    rank = len(gram)
-    if any(len(row) != rank for row in gram):
-        return [f"gram_tensor: a (0,2)-tensor on a module of rank {rank} has {rank} rows of {rank} components"]
-    if any(gram[i][j] != gram[j][i] for i in range(rank) for j in range(i)):
-        return ["gram_tensor: b(e_i, e_j) differs from b(e_j, e_i) for some i, j"]
-    return []
-
-
-def _generator_blocks(formed, lines):
+def _generator_blocks(formed: FormModules.ParentMethods, lines: tuple[int, ...]) -> tuple[tuple[FormModules.ElementMethods, ...], ...]:
     """The module generators of `formed`, cut into consecutive blocks at the card's subdivision lines."""
     bounds = (0, *lines, int(formed.module_rank()))
     labels = tuple(formed.module_generating_set())
     return tuple(tuple(formed.module_generator(label) for label in labels[low:high]) for low, high in zip(bounds, bounds[1:], strict=False))
 
 
-def _mutually_orthogonal(blocks) -> bool:
+def _mutually_orthogonal(blocks: Sequence[Sequence[FormModules.ElementMethods]]) -> bool:
     """Whether every element of each block is orthogonal to every element of every later block."""
     return all(left.is_orthogonal_to(right) for index, block in enumerate(blocks) for later in blocks[index + 1 :] for left in block for right in later)
 
 
-def _preserves_forms(source, target, images) -> bool:
+def _preserves_forms(source: FormModules.ParentMethods, target: FormModules.ParentMethods, images: Sequence[FormModules.ElementMethods]) -> bool:
     """Whether the module map `source -> target` with these generator images preserves the forms."""
     module_map = source.module_category().Mor(source, target)(images)
-    return source.Mor(target).preserves_forms(module_map)
+    return bool(source.Mor(target).preserves_forms(module_map))
 
 
 def local_admission_problems(lattice: Lattice) -> list[str]:
@@ -525,7 +441,9 @@ def local_admission_problems(lattice: Lattice) -> list[str]:
         except TypeError, ValueError:
             found.append("integral: the stored integral block requires the form to take values in ZZ")
         else:
-            if owned.determinant() != 0:
+            determinant_source: object = owned
+            assert isinstance(determinant_source, FreeFormModules.FinitelyGenerated.ParentMethods)
+            if determinant_source.determinant() != 0:
                 if integral.level is not None and integral.level != card_level(owned):
                     found.append("integral.level: the stated level does not equal the preamble-computed level")
                 if integral.bad_reduction_primes is not None:
@@ -545,9 +463,14 @@ def local_admission_problems(lattice: Lattice) -> list[str]:
                         found.append("integral.delta: delta is defined only for an even 2-elementary lattice")
                     elif integral.delta != int(owned.delta()):
                         found.append(f"integral.delta: stated {integral.delta}, computed {int(owned.delta())}")
-    formed = FormModules(ZZ)(ZZ.free_module(lattice.rank).bilinear_hom_space(_QQ_AS_ZZ_MODULE)(gram)) if lattice.definite is not None or lattice.root_span is not None else None
+    formed = (
+        FormModules(ZZ)(integer_ring.free_module(lattice.rank).bilinear_hom_space(_QQ_AS_ZZ_MODULE)(gram))
+        if lattice.definite is not None or lattice.root_span is not None
+        else None
+    )
     definite = lattice.definite
     if definite is not None:
+        assert formed is not None
         if formed.definiteness() not in ("positive_definite", "negative_definite"):
             found.append("definite: the stored definite block requires a definite form")
         if definite.perfect is not None:
@@ -558,10 +481,11 @@ def local_admission_problems(lattice: Lattice) -> list[str]:
             found.append("definite.automorphism_group_order: x -> -x is an isometry of order 2, so the order is even")
     span = lattice.root_span
     if span is not None:
+        assert formed is not None
         integral_twist, _multiplier = _integral_twist(formed)
         found.extend(f"root_span.roots: {list(row)} is not a root of L" for row in span.roots if not integral_twist(row).is_root())
         if span.embedding is not None:
-            ambient = ZZ.free_module(lattice.rank)
+            ambient = integer_ring.free_module(lattice.rank)
             embedding_span = ambient.subobject_on(tuple(ambient(row) for row in span.embedding))
             root_span = ambient.subobject_on(tuple(ambient(row) for row in span.roots))
             if (
@@ -583,7 +507,7 @@ def relational_admission_problems(lattice: Lattice, written: Mapping[str, Lattic
         missing = [summand.tag for summand in span.summands if summand.tag not in written]
         found.extend(f"root_span.summands: the tag {tag} is not in the corpus" for tag in missing)
         if not missing and span.summands:
-            target = FormModules(ZZ)(ZZ.free_module(lattice.rank).bilinear_hom_space(_QQ_AS_ZZ_MODULE)(lattice.gram_tensor))
+            target = FormModules(ZZ)(integer_ring.free_module(lattice.rank).bilinear_hom_space(_QQ_AS_ZZ_MODULE)(lattice.gram_tensor))
             offset = 0
             blocks = []
             valid = True
@@ -595,7 +519,7 @@ def relational_admission_problems(lattice: Lattice, written: Mapping[str, Lattic
                 if offset + source_record.rank > len(span.embedding):
                     valid = False
                     break
-                source = FormModules(ZZ)(ZZ.free_module(source_record.rank).bilinear_hom_space(_QQ_AS_ZZ_MODULE)(source_record.gram_tensor)).twist(summand.scale)
+                source = FormModules(ZZ)(integer_ring.free_module(source_record.rank).bilinear_hom_space(_QQ_AS_ZZ_MODULE)(source_record.gram_tensor)).twist(summand.scale)
                 rows = span.embedding[offset : offset + source_record.rank]
                 images = tuple(target(row) for row in rows)
                 offset += source_record.rank
@@ -611,14 +535,6 @@ def relational_admission_problems(lattice: Lattice, written: Mapping[str, Lattic
     return found
 
 
-def admission_problems(lattice: Lattice, written: Mapping[str, Lattice]) -> list[str]:
-    """All preamble-backed admission problems of one lattice card."""
-    return [
-        *local_admission_problems(lattice),
-        *relational_admission_problems(lattice, written),
-    ]
-
-
 def definite_isometry_problems(lattices: Sequence[Lattice]) -> dict[str, list[str]]:
     """The definite cards isometric to another card in another basis, by tag.
 
@@ -630,7 +546,7 @@ def definite_isometry_problems(lattices: Sequence[Lattice]) -> dict[str, list[st
     by the check of repeated Gram tensors instead.
     """
     definite = tuple(lattice for lattice in lattices if lattice.definite is not None and lattice.rank is not None and lattice.gram_tensor is not None)
-    models = tuple(_integral_twist(FormModules(ZZ)(ZZ.free_module(lattice.rank).bilinear_hom_space(_QQ_AS_ZZ_MODULE)(lattice.gram_tensor))) for lattice in definite)
+    models = tuple(_integral_twist(FormModules(ZZ)(integer_ring.free_module(lattice.rank).bilinear_hom_space(_QQ_AS_ZZ_MODULE)(lattice.gram_tensor))) for lattice in definite)
     classes = Lattices(ZZ).isometry_classes(finite_family(tuple(model for model, _multiplier in models)))
     found: dict[str, list[str]] = {}
     for block in classes:
@@ -644,14 +560,16 @@ def definite_isometry_problems(lattices: Sequence[Lattice]) -> dict[str, list[st
     return found
 
 
-def morphism_problems(morphism, source: Lattice, target: Lattice) -> list[str]:
+def morphism_problems(morphism: Morphism, source: Lattice, target: Lattice) -> list[str]:
     """Mathematical problems of a stored lattice morphism, delegated to preamble Mor."""
     if source.rank is None or source.gram_tensor is None or target.rank is None or target.gram_tensor is None:
         return []
     if len(morphism.matrix) != target.rank or len(morphism.matrix[0]) != source.rank:
         return [f"{morphism.name}: the matrix must have {target.rank} rows and {source.rank} columns"]
-    source_formed = FormModules(ZZ)(ZZ.free_module(source.rank).bilinear_hom_space(_QQ_AS_ZZ_MODULE)(source.gram_tensor)).twist(morphism.scale)
-    target_formed = FormModules(ZZ)(ZZ.free_module(target.rank).bilinear_hom_space(_QQ_AS_ZZ_MODULE)(target.gram_tensor))
+    if morphism.scale is None:
+        raise ValueError("morphism scale must be stated before verifying the morphism")
+    source_formed = FormModules(ZZ)(integer_ring.free_module(source.rank).bilinear_hom_space(_QQ_AS_ZZ_MODULE)(source.gram_tensor)).twist(morphism.scale)
+    target_formed = FormModules(ZZ)(integer_ring.free_module(target.rank).bilinear_hom_space(_QQ_AS_ZZ_MODULE)(target.gram_tensor))
     found: list[str] = []
     if not _preserves_forms(
         source_formed,

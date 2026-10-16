@@ -1,5 +1,6 @@
 """Geometric objects use their Hodge numbers and the lattice corpus together."""
 
+import re
 from pathlib import Path
 
 import frontmatter
@@ -48,6 +49,11 @@ def test_k3_hodge_diamond_and_lattice_link_are_published(tmp_path: Path) -> None
     assert "<span>1</span><span>20</span><span>1</span>" in html
     assert 'href="../geometric-objects/k3-surface.html"' in (target / "tag" / "027E.html").read_text()
     assert "Huybrechts" in html
+    stylesheets = re.findall(r'<link rel="stylesheet" href="([^"]+)"', html)
+    assert stylesheets == ["../assets/styles.css", "../assets/pages.css"]
+    for stylesheet in stylesheets:
+        published = (target / "geometric-objects" / stylesheet).resolve()
+        assert published.read_bytes() == (ROOT / "src" / "latticedb" / "assets" / published.name).read_bytes()
     assert 'href="./geometric-families/k3-hilbert.html"' in (target / "geometric-objects.html").read_text()
     hilbert = (target / "geometric-objects" / "k3-hilbert-2.html").read_text()
     assert 'href="../tag/027Z.html"' in hilbert

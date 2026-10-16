@@ -19,26 +19,39 @@ present a Satake diagram on the Dynkin diagram of the root basis.
 
 from __future__ import annotations
 
+from collections.abc import Callable
 from fractions import Fraction
 from typing import Annotated, Self
 
 from dzack_research.preamble.categories.coxeter_diagrams import CoxeterDiagrams
 from dzack_research.preamble.categories.modules.framed.formed.form_modules import FormModules
 from dzack_research.preamble.categories.modules.pure.modules import Modules
+from dzack_research.preamble.categories.rings.ring_foundation import _OwnedRingParent
 from dzack_research.preamble.categories.satake_diagrams import SatakeDiagrams
+from dzack_research.preamble.categories.sets.indexed_families import finite_indexed_family_from_values
 from dzack_research.preamble.categories.vinberg_invariants import (
     VinbergInvariantMatrices,
 )
-from dzack_research.preamble.rings import session_ring_objects
-from pydantic import Field, model_validator
+from dzack_research.preamble.rings import OwnedRings, session_ring_objects
+from pydantic import Field, TypeAdapter, ValidationError, model_validator
 from pydantic_core import PydanticCustomError
 
 from latticedb.model import GramTensor, Record, Slug, Yaml, rational
 
+_CARTAN_PAIR = TypeAdapter(tuple[int, int])
+
 _SESSION_RINGS = session_ring_objects()
-ZZ = _SESSION_RINGS["ZZ"]
+_integers = _SESSION_RINGS["ZZ"]
+assert isinstance(_integers, _OwnedRingParent)
+ZZ: _OwnedRingParent = _integers
+_ring = _SESSION_RINGS["ZZ"]
+assert isinstance(_ring, OwnedRings.ParentMethods)
+integer_ring: OwnedRings.ParentMethods = _ring
+_domain = _SESSION_RINGS["ZZ"]
+assert isinstance(_domain, OwnedRings.NoZeroDivisors.Commutative.Nontrivial.ParentMethods)
+integer_domain: OwnedRings.NoZeroDivisors.Commutative.Nontrivial.ParentMethods = _domain
 QQ = _SESSION_RINGS["QQ"]
-_QQ_AS_ZZ_MODULE = Modules(QQ).restriction_of_scalars(ZZ.fraction_field_map())(QQ)
+_QQ_AS_ZZ_MODULE = Modules(QQ).restriction_of_scalars(integer_domain.fraction_field_map())(QQ)
 
 
 class GraphVertex(Record):
@@ -109,7 +122,7 @@ class WeightedGraph(Record):
     def _presents_mirrors(self) -> bool:
         return self._states("norm_squared", "gram")
 
-    def _gram(self, square_key: str, pairing) -> GramTensor:
+    def _gram(self, square_key: str, pairing: Callable[[GraphEdge], Fraction]) -> GramTensor:
         """The Gram tensor with the stated squares on the diagonal and `pairing(bond)` off it."""
         position = {vertex.id: index for index, vertex in enumerate(self.vertices)}
         rows = [[rational(vertex.datum(square_key)) if column == row else 0 for column in range(len(self.vertices))] for row, vertex in enumerate(self.vertices)]
@@ -124,7 +137,12 @@ class WeightedGraph(Record):
     def _root_pairing(self, bond: GraphEdge) -> Fraction:
         """`b(alpha_i, alpha_j) = a_ij q_i / 2` for the Cartan pair `(a_ij, a_ji)` of the bond."""
         squares = {vertex.id: rational(vertex.datum("root_length_squared")) for vertex in self.vertices}
-        forward, backward = bond.datum("cartan")
+        cartan = bond.datum("cartan")
+        assert isinstance(cartan, list) and len(cartan) == 2, "a Cartan pair has two entries"
+        try:
+            forward, backward = _CARTAN_PAIR.validate_python(tuple(cartan), strict=True)
+        except ValidationError as error:
+            raise TypeError("Cartan entries must be integers") from error
         pairing = forward * squares[bond.source] / 2
         assert pairing == backward * squares[bond.target] / 2, (
             f"{self.slug}: the Cartan pair {bond.datum('cartan')} of the bond {bond.id} is not "
@@ -136,7 +154,7 @@ class WeightedGraph(Record):
     def _mirror_pairing(self, bond: GraphEdge) -> Fraction:
         return rational(bond.datum("gram"))
 
-    def _gram_form(self):
+    def _gram_form(self) -> FormModules.ParentMethods | None:
         """The presented formed module: the root basis with its invariant form, or the mirror normals.
 
         None when the decorations present neither.
@@ -148,7 +166,7 @@ class WeightedGraph(Record):
                 gram = self._gram("norm_squared", self._mirror_pairing)
             case _:
                 return None
-        module = ZZ.free_module(len(gram))
+        module = integer_ring.free_module(len(gram))
         return FormModules(ZZ)(module.bilinear_hom_space(_QQ_AS_ZZ_MODULE)(gram))
 
     def cartan_matrix(self) -> tuple[tuple[int, ...], ...] | None:
@@ -158,19 +176,25 @@ class WeightedGraph(Record):
         position = {vertex.id: index for index, vertex in enumerate(self.vertices)}
         rows = [[2 if column == row else 0 for column in range(len(self.vertices))] for row in range(len(self.vertices))]
         for bond in self._bonds():
-            forward, backward = bond.datum("cartan")
+            cartan = bond.datum("cartan")
+            assert isinstance(cartan, list) and len(cartan) == 2, "a Cartan pair has two entries"
+            forward, backward = cartan
+            if not isinstance(forward, (int, float, str)) or not isinstance(backward, (int, float, str)):
+                raise TypeError("Cartan entries must be numeric scalars or integer strings")
             rows[position[bond.source]][position[bond.target]] = int(forward)
             rows[position[bond.target]][position[bond.source]] = int(backward)
         return tuple(tuple(row) for row in rows)
 
-    def vinberg_invariant_matrix(self):
+    def vinberg_invariant_matrix(self) -> VinbergInvariantMatrices.ParentMethods | None:
         """The matrix of invariants of the pairs of presented mirrors, or None when the card presents none."""
         form = self._gram_form()
         if form is None:
             return None
-        return VinbergInvariantMatrices().from_root_gram(form.gram_tensor(), index_set=tuple(vertex.id for vertex in self.vertices))
+        invariants = VinbergInvariantMatrices().from_root_gram(form.gram_tensor(), index_set=tuple(vertex.id for vertex in self.vertices))
+        assert isinstance(invariants, VinbergInvariantMatrices.ParentMethods)
+        return invariants
 
-    def satake_diagram(self):
+    def satake_diagram(self) -> SatakeDiagrams.ParentMethods | None:
         """The Satake diagram the card's root basis and Satake marks present, or None.
 
         The Dynkin diagram is the diagram of the simple roots of the presented root
@@ -181,9 +205,12 @@ class WeightedGraph(Record):
         marked = any(vertex.datum("satake") is not None for vertex in self.vertices)
         if not (self._presents_root_basis() and marked):
             return None
+        assert form is not None
         diagram = CoxeterDiagrams().from_roots(
-            tuple(form.module_generators()),
-            index_set=tuple(vertex.id for vertex in self.vertices),
+            finite_indexed_family_from_values(
+                None,
+                {vertex.id: root for vertex, root in zip(self.vertices, form.module_generators(), strict=True)},
+            ),
         )
         position = {vertex.id: index for index, vertex in enumerate(self.vertices)}
         partner = {vertex.id: vertex.id for vertex in self.vertices}

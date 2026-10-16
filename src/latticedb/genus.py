@@ -8,6 +8,8 @@ an authored value that disagrees is replaced by the computed value, and the resu
 card value is certified. A computation that does not finish remains uncertified.
 """
 
+from __future__ import annotations
+
 import json
 import os
 import subprocess
@@ -18,7 +20,7 @@ from pathlib import Path
 from typing import TypedDict
 
 import frontmatter
-from pydantic import BaseModel
+from pydantic import BaseModel, TypeAdapter
 
 from latticedb import certificates, corpus, exceeded, records
 from latticedb.certificates import Certificate, Certificates
@@ -71,13 +73,14 @@ def certified_value(field: str, value: Yaml, lattice: Lattice | None = None) -> 
         if lattice is None or not isinstance(value, list):
             return value
         by_name = {morphism.name: morphism for morphism in lattice.morphisms if morphism.target == lattice.tag and morphism.scale == 1}
-        if any(name not in by_name for name in value):
+        names = TypeAdapter(list[str]).validate_python(value, strict=True)
+        if any(name not in by_name for name in names):
             return value
-        matrices = [[list(row) for row in by_name[name].matrix] for name in value]
-        return sorted(
-            matrices,
+        matrices = sorted(
+            (by_name[name].matrix for name in names),
             key=lambda rows: tuple(entry for row in rows for entry in row),
         )
+        return [[[entry for entry in row] for row in matrix] for matrix in matrices]
     if field in {"primitive_orbits", "discriminant_orbits"}:
         if not isinstance(value, dict):
             return value
@@ -105,6 +108,8 @@ def applies(field: str, lattice: Lattice, planes: int) -> bool:
         case _ if lattice.integral is None:
             return False
         case "reflective":
+            if lattice.rank is None:
+                raise ValueError(f"{field} requires a stored source rank")
             # Signature (1, 1) has a half-line as its domain, where no polyhedron criterion applies.
             return lattice.rank >= 3 and 1 in (lattice.signature or ())
         case "roots" | "norms":
@@ -113,15 +118,25 @@ def applies(field: str, lattice: Lattice, planes: int) -> bool:
             # The preamble does not present it yet: TODO node `theta-cusp-form-coordinates`.
             return False
         case "siegel_eisenstein_coefficients":
+            if lattice.definite is None:
+                return False
+            if lattice.rank is None:
+                raise ValueError(f"{field} requires a stored source rank")
             # Siegel's Hauptsatz requires more than one variable.
-            return lattice.definite is not None and lattice.rank >= 2
+            return lattice.rank >= 2
         case "regular" | "genus_theta_series" | "theta_series_cuspidal_component":
             return lattice.definite is not None
         case "spinor_regular":
-            return lattice.definite is not None and lattice.rank >= 3
+            if lattice.definite is None:
+                return False
+            if lattice.rank is None:
+                raise ValueError(f"{field} requires a stored source rank")
+            return lattice.rank >= 3
         case "discriminant_sequence":
             return lattice.definite is not None and lattice.integral.parity == "even"
         case "spinor_genus_count" | "spinor_genera":
+            if lattice.rank is None:
+                raise ValueError(f"{field} requires a stored source rank")
             return lattice.rank >= 3
         case "primitive_orbits":
             return lattice.definite is not None
@@ -170,8 +185,7 @@ def requests(
             continue
         applicable = [field for field in BLOCKS if applies(field, lattice, bounds.get(lattice.tag, 0))]
         metadata = corpus.front_matter(frontmatter.load(str(entry.path)))
-        card_certifications = metadata.get("certifications")
-        cited = card_certifications if isinstance(card_certifications, dict) else {}
+        cited = lattice.certifications
         fields = []
         for field in applicable:
             block_name = BLOCKS[field][0]
@@ -184,6 +198,8 @@ def requests(
             if stored_value is None or certificates.is_pending(held, computation, cited.get(f"{block_name}.{field}"), expected_hash):
                 fields.append(field)
         if fields:
+            if lattice.rank is None or lattice.gram_tensor is None:
+                raise ValueError(f"{lattice.tag}: computation requests require a stored rank and Gram tensor")
             interrupted = [field for field in fields if exceeded.seconds_run(log, name(lattice.tag, field), lattice) is not None]
             fields = interrupted + [field for field in fields if field not in interrupted]
             gram = [[int(value) if value.denominator == 1 else str(value) for value in row] for row in lattice.gram_tensor]
@@ -256,7 +272,7 @@ def store(path: Path, values: dict[str, Yaml]) -> None:
     """Replace each computed scope on the card by the completed computation."""
     document = frontmatter.load(str(path))
     metadata = corpus.front_matter(document)
-    morphisms = list(metadata.get("morphisms", []))
+    morphisms = TypeAdapter(list[dict[str, Yaml]]).validate_python(metadata.get("morphisms", []), strict=True)
     if "roots" in values:
         # Computed roots generate L, so L = ZPhi(L) and the block has no summands or embedding.
         metadata["root_span"] = {}
@@ -266,7 +282,8 @@ def store(path: Path, values: dict[str, Yaml]) -> None:
             continue
         if field == "automorphism_group_generator_morphisms":
             assert isinstance(value, list)
-            value, morphisms = _generator_morphisms(path.stem, morphisms, value)
+            generator_names, morphisms = _generator_morphisms(path.stem, morphisms, value)
+            value = [name for name in generator_names]
         # The hyperbolic block holds only computed fields, so the first computed value creates it.
         match metadata.setdefault(block_name, {}):
             case dict() as block:
@@ -291,7 +308,7 @@ def store(path: Path, values: dict[str, Yaml]) -> None:
                 else:
                     block[field] = value
                 metadata[block_name] = {key: block[key] for key in model.model_fields if key in block}
-    metadata["morphisms"] = morphisms
+    metadata["morphisms"] = [morphism for morphism in morphisms]
     text = records.record_text(metadata, document.content)
     if text != path.read_text():
         path.write_text(text)
@@ -332,7 +349,7 @@ def certify(
         store(entry.path, values)
         stored = corpus.front_matter(frontmatter.load(str(entry.path)))
         stored_lattice = Lattice.model_validate(stored)
-        card_certifications = dict(stored.get("certifications") or {})
+        card_certifications = dict(stored_lattice.certifications)
         for field in BLOCKS:
             if field not in values or values[field] is None:
                 continue
@@ -347,7 +364,7 @@ def certify(
             )
             card_certifications[f"{block_name}.{field}"] = certificate_hash
             held[computation] = Certificate(hash=certificate_hash, by=str(values["by"]))
-        stored["certifications"] = card_certifications
+        stored["certifications"] = {name: certificate_hash for name, certificate_hash in card_certifications.items()}
         document = frontmatter.load(str(entry.path))
         entry.path.write_text(records.record_text(stored, document.content))
         certificates.save(root, held)
@@ -368,16 +385,16 @@ def cite(path: Path, field: str, value: Yaml, reference: dict[str, str], held: C
     document = frontmatter.load(str(path))
     metadata = corpus.front_matter(document)
     block_name = BLOCKS[field][0]
-    block = dict(metadata.get(block_name) or {})
+    block = TypeAdapter(dict[str, Yaml]).validate_python(metadata.get(block_name) or {}, strict=True)
     assert block.get(field) in (None, value), f"{path}: {block_name}.{field} is {block.get(field)}, the source proves {value}"
     block[field] = value
     metadata[block_name] = {key: block[key] for key in BLOCKS[field][1].model_fields if key in block}
-    references = list(metadata.get("references") or [])
+    references = TypeAdapter(list[Yaml]).validate_python(metadata.get("references") or [], strict=True)
     if reference not in references:
-        metadata["references"] = [*references, reference]
+        metadata["references"] = [*references, {key: value for key, value in reference.items()}]
     lattice = Lattice.model_validate(metadata)
     computation = name(lattice.tag, field)
     certificate_hash = certificates.certification_hash(computation, lattice, certified_value(field, value, lattice))
-    metadata["certifications"] = {**dict(metadata.get("certifications") or {}), f"{block_name}.{field}": certificate_hash}
+    metadata["certifications"] = {**lattice.certifications, f"{block_name}.{field}": certificate_hash}
     held[computation] = Certificate(hash=certificate_hash, by=reference["citation"])
     path.write_text(records.record_text(metadata, document.content))

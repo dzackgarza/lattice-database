@@ -149,12 +149,18 @@ class LocallyRingedSpace(Record):
     name: str = Field(min_length=1)
 
 
-class ComplexManifold(LocallyRingedSpace):
+class ComplexManifoldRecord(LocallyRingedSpace):
+    """Shared fields of complex and Hermitian manifold records."""
+
+    kind: str
+    complex_dimension: Annotated[int, Field(ge=0)]
+    algebraic_model: Slug | None = None
+
+
+class ComplexManifold(ComplexManifoldRecord):
     """A connected complex manifold, including an analytification when named."""
 
     kind: Literal["complex_manifold"]
-    complex_dimension: Annotated[int, Field(ge=0)]
-    algebraic_model: Slug | None = None
 
 
 class ProjectiveComplexVariety(LocallyRingedSpace):
@@ -220,10 +226,10 @@ class ProjectiveComplexVariety(LocallyRingedSpace):
         )
 
 
-class RiemannianSymmetricSpace(LocallyRingedSpace):
-    """A connected Riemannian symmetric space with a specified symmetric presentation."""
+class RiemannianSymmetricSpaceRecord(LocallyRingedSpace):
+    """Shared fields and checks of Riemannian and Hermitian symmetric records."""
 
-    kind: Literal["riemannian_symmetric_space"]
+    kind: str
     real_dimension: Annotated[int, Field(gt=0)]
     group: str = Field(min_length=1)
     isotropy_group: str = Field(min_length=1)
@@ -255,7 +261,13 @@ class RiemannianSymmetricSpace(LocallyRingedSpace):
         return self
 
 
-class HermitianSymmetricSpace(RiemannianSymmetricSpace, ComplexManifold):
+class RiemannianSymmetricSpace(RiemannianSymmetricSpaceRecord):
+    """A connected Riemannian symmetric space with a specified symmetric presentation."""
+
+    kind: Literal["riemannian_symmetric_space"]
+
+
+class HermitianSymmetricSpace(RiemannianSymmetricSpaceRecord, ComplexManifoldRecord):
     """A Riemannian symmetric space with an invariant complex and Hermitian structure."""
 
     kind: Literal["hermitian_symmetric_space"]

@@ -7,6 +7,8 @@ its target record, a geometric object against the lattices, the graphs and the
 other geometric objects that it names.
 """
 
+from __future__ import annotations
+
 from pathlib import Path
 
 from dzack_research.preamble.categories.sets.cardinals import aleph0, cardinal
@@ -16,6 +18,7 @@ from latticedb.corpus import FAMILIES_FILE, Corpus
 from latticedb.geometric import (
     ComplexManifold,
     GeometricFamily,
+    HermitianSymmetricSpace,
     ProjectiveComplexVariety,
     RiemannianSymmetricSpace,
 )
@@ -115,6 +118,8 @@ def bond_order_problems(loaded: Corpus) -> list[str]:
             stored = edge.datum("order")
             if edge.relation != "bond" or stored is None:
                 continue
+            if not isinstance(stored, (int, float, str)):
+                raise ValueError(f"{entry.path}: bond {edge.id} has a nonnumeric Coxeter order {stored!r}")
             expected = aleph0 if stored == "infinity" else cardinal(int(stored))
             constructed = diagram.coxeter_entry(edge.source, edge.target)
             if constructed != expected:
@@ -165,23 +170,27 @@ def geometric_problems(loaded: Corpus) -> list[str]:
                     )
             if record.analytic_space is not None:
                 analytic = by_geometric.get(record.analytic_space)
-                if not isinstance(analytic, ComplexManifold) or analytic.algebraic_model != record.slug or analytic.complex_dimension != record.dimension:
+                if (
+                    not isinstance(analytic, (ComplexManifold, HermitianSymmetricSpace))
+                    or analytic.algebraic_model != record.slug
+                    or analytic.complex_dimension != record.dimension
+                ):
                     found.append(f"{geometric_entry.path}: analytic space must name this variety back and have the same complex dimension")
-        if isinstance(record, ComplexManifold) and record.algebraic_model is not None:
+        if isinstance(record, (ComplexManifold, HermitianSymmetricSpace)) and record.algebraic_model is not None:
             algebraic = by_geometric.get(record.algebraic_model)
             if not isinstance(algebraic, ProjectiveComplexVariety) or algebraic.analytic_space != record.slug or algebraic.dimension != record.complex_dimension:
                 found.append(f"{geometric_entry.path}: algebraic model must name this analytic space back and have the same complex dimension")
-        if isinstance(record, RiemannianSymmetricSpace) and record.compact_dual is not None:
+        if isinstance(record, (RiemannianSymmetricSpace, HermitianSymmetricSpace)) and record.compact_dual is not None:
             dual = by_geometric.get(record.compact_dual)
-            if not isinstance(dual, RiemannianSymmetricSpace) or dual.noncompact_dual != record.slug or dual.real_dimension != record.real_dimension:
+            if not isinstance(dual, (RiemannianSymmetricSpace, HermitianSymmetricSpace)) or dual.noncompact_dual != record.slug or dual.real_dimension != record.real_dimension:
                 found.append(f"{geometric_entry.path}: compact dual must be a symmetric space of the same dimension and name this space back")
-        if isinstance(record, RiemannianSymmetricSpace):
+        if isinstance(record, (RiemannianSymmetricSpace, HermitianSymmetricSpace)):
             for diagram in record.diagrams:
                 if diagram not in by_graph:
                     found.append(f"{geometric_entry.path}: diagram {diagram} is not in the corpus")
-        if isinstance(record, RiemannianSymmetricSpace) and record.noncompact_dual is not None:
+        if isinstance(record, (RiemannianSymmetricSpace, HermitianSymmetricSpace)) and record.noncompact_dual is not None:
             dual = by_geometric.get(record.noncompact_dual)
-            if not isinstance(dual, RiemannianSymmetricSpace) or dual.compact_dual != record.slug or dual.real_dimension != record.real_dimension:
+            if not isinstance(dual, (RiemannianSymmetricSpace, HermitianSymmetricSpace)) or dual.compact_dual != record.slug or dual.real_dimension != record.real_dimension:
                 found.append(f"{geometric_entry.path}: noncompact dual must be a symmetric space of the same dimension and name this space back")
     return found
 

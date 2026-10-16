@@ -37,8 +37,8 @@
       <tbody>
         {% if lattice.rank is not none %}<tr><th scope="row">Rank</th><td>{{ lattice.rank }}</td></tr>{% endif %}
         {% if lattice.signature %}<tr><th scope="row">{{ theory("lattices", "signature", "Signature") }} \((n_+, n_-)\)</th><td>({{ lattice.signature[0] }}, {{ lattice.signature[1] }})</td></tr>{% endif %}
-        {% if lattice.nullity %}
-        <tr><th scope="row">Rank of the {{ theory("lattices", "degenerate", "radical") }}</th><td>{{ lattice.nullity }}</td></tr>
+        {% if nullity %}
+        <tr><th scope="row">Rank of the {{ theory("lattices", "degenerate", "radical") }}</th><td>{{ nullity }}</td></tr>
         {% endif %}
         {% if lattice.determinant is not none %}<tr><th scope="row">{{ theory("lattices", "signature", "Determinant") }}</th><td>\({{ rational_tex(lattice.determinant) }}\)</td></tr>{% endif %}
       </tbody>
@@ -101,8 +101,8 @@
         {% endif %}
         {% if lattice.integral.bad_reduction_primes is not none %}
         <tr><th scope="row">{{ theory("zeta", "bad-reduction", "Primes of bad reduction") }} \(\Sigma_L = \{p \mid 2 \det L\}\)</th><td>\(\{ {{- lattice.integral.bad_reduction_primes | join(", ") -}} \}\)</td></tr>
-        <tr><th scope="row">{{ theory("zeta", "zeta", "Zeta function") }} of the cone \(X_0 : Q(x) = 0\)</th><td>\(\zeta^\Sigma(X_0, s) = {{ zeta_tex(lattice, true) }}\)</td></tr>
-        <tr><th scope="row">{{ theory("zeta", "zeta", "Zeta function") }} of \(X_n : Q(x) = n\), \(n \neq 0\)</th><td>\(\zeta^\Sigma(X_n, s) = {{ zeta_tex(lattice, false) }}\)</td></tr>
+        <tr><th scope="row">{{ theory("zeta", "zeta", "Zeta function") }} of the cone \(X_0 : Q(x) = 0\)</th><td>\(\zeta^\Sigma(X_0, s) = {{ cone_zeta_tex(lattice) }}\)</td></tr>
+        <tr><th scope="row">{{ theory("zeta", "zeta", "Zeta function") }} of \(X_n : Q(x) = n\), \(n \neq 0\)</th><td>\(\zeta^\Sigma(X_n, s) = {{ nonzero_zeta_tex(lattice) }}\)</td></tr>
         {% endif %}
         {% if lattice.integral.quadratic_character is not none %}
         <tr><th scope="row">{{ theory("zeta", "character", "Character of the discriminant") }} \(\chi_D\), \(D = (-1)^{ {{- lattice.rank // 2 -}} } \det L\)</th><td>{% if lattice.integral.quadratic_character == 1 %}trivial{% else %}\(\chi_{ {{- lattice.integral.quadratic_character -}} } = \left(\frac{ {{- lattice.integral.quadratic_character -}} }{\cdot}\right)\){% endif %}</td></tr>
@@ -331,7 +331,7 @@
     {% for morphism, target, tex, text in outgoing_morphisms %}
     <section aria-labelledby="morphism-{{ loop.index }}">
       <h4 id="morphism-{{ loop.index }}">{{ morphism.name | inline_markup }}</h4>
-      <p>\(L{% if morphism.scale != 1 %}({{ morphism.scale }}){% endif %} \to\) <a class="tag" href="{{ root }}tag/{{ target.tag }}.html">{{ target.tag }}</a> \({{ target.latex }}\).</p>
+      <p>\(L{% if morphism.scale is none %}(?){% elif morphism.scale != 1 %}({{ morphism.scale }}){% endif %} \to\) <a class="tag" href="{{ root }}tag/{{ target.tag }}.html">{{ target.tag }}</a> \({{ target.latex }}\).</p>
       {% if morphism.description %}<p>{{ morphism.description | inline_markup }}</p>{% endif %}
       <div class="table-scroll">\[{{ tex }}\]</div>
       <div class="copy-block"><pre id="morphism-matrix-{{ loop.index }}">{{ text }}</pre><button type="button" data-copy="morphism-matrix-{{ loop.index }}">Copy</button></div>
@@ -342,7 +342,7 @@
     <h3>To this lattice</h3>
     <ul class="related-list">
       {% for source, morphism in incoming_morphisms %}
-      <li><a class="tag" href="{{ root }}tag/{{ source.tag }}.html#morphisms">{{ source.tag }}</a> \({{ source.latex }}{% if morphism.scale != 1 %}({{ morphism.scale }}){% endif %} \to L\): {{ morphism.name | inline_markup }}</li>
+      <li><a class="tag" href="{{ root }}tag/{{ source.tag }}.html#morphisms">{{ source.tag }}</a> \({{ source.latex }}{% if morphism.scale is none %}(?){% elif morphism.scale != 1 %}({{ morphism.scale }}){% endif %} \to L\): {{ morphism.name | inline_markup }}</li>
       {% endfor %}
     </ul>
     {% endif %}

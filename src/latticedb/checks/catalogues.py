@@ -6,6 +6,8 @@ catalogue to a lattice, a morphism, a geometric object or another catalogue is
 checked here.
 """
 
+from __future__ import annotations
+
 from collections.abc import Sequence
 
 from latticedb.corpus import CatalogueEntry, Corpus
@@ -37,16 +39,16 @@ def reference_problems(loaded: Corpus) -> list[str]:
     lie_groups = {entry.value.slug: entry.value for entry in loaded.lie_groups}
     arithmetic_groups = {entry.value.slug: entry.value for entry in loaded.arithmetic_groups}
 
-    for entry in loaded.lie_groups:
-        group = entry.value
-        for factor in group.maximal_compact_factors:
+    for lie_group_entry in loaded.lie_groups:
+        lie_group = lie_group_entry.value
+        for factor in lie_group.maximal_compact_factors:
             if factor not in lie_groups:
-                found.append(f"{entry.path}: maximal compact factor {factor} is not a Lie-group card")
+                found.append(f"{lie_group_entry.path}: maximal compact factor {factor} is not a Lie-group card")
 
-    for entry in loaded.arithmetic_groups:
-        arithmetic = entry.value
+    for arithmetic_group_entry in loaded.arithmetic_groups:
+        arithmetic = arithmetic_group_entry.value
         lattice = lattices.get(arithmetic.lattice)
-        path = str(entry.path)
+        path = str(arithmetic_group_entry.path)
         ambient = lie_groups.get(arithmetic.ambient_lie_group)
         if lattice is None:
             found.append(f"{path}: lattice {arithmetic.lattice} is not in the corpus")
@@ -57,15 +59,15 @@ def reference_problems(loaded: Corpus) -> list[str]:
             parent = arithmetic_groups.get(arithmetic.parent_group)
             if parent is None or parent.lattice != arithmetic.lattice:
                 found.append(f"{path}: parent arithmetic group must be a card on lattice {arithmetic.lattice}")
-        group = arithmetic.data
-        if group.defining_relators is not None and group.generator_morphisms is None:
+        group_data = arithmetic.data
+        if group_data.defining_relators is not None and group_data.generator_morphisms is None:
             found.append(f"{path}: relators require the generator list they are words in")
-        for name in group.generator_morphisms or ():
+        for name in group_data.generator_morphisms or ():
             names = {morphism.name for morphism in lattice.morphisms if morphism.target == lattice.tag and morphism.scale == 1}
             if name not in names:
                 found.append(f"{path}: generator {name} is not a named self-isometry of {lattice.tag}")
-        if group.stabilized is not None:
-            kind, identifier = group.stabilized.kind, group.stabilized.identifier
+        if group_data.stabilized is not None:
+            kind, identifier = group_data.stabilized.kind, group_data.stabilized.identifier
             available = {
                 "chamber": {lattice.tag},
                 "geometric_object": objects,
@@ -73,96 +75,96 @@ def reference_problems(loaded: Corpus) -> list[str]:
             }
             if kind in available and identifier not in available[kind]:
                 found.append(f"{path}: stabilized {kind} {identifier} is not in the corpus")
-        for orbit_data in group.orbits or ():
+        for orbit_data in group_data.orbits or ():
             for vector in orbit_data.representatives:
                 if lattice.rank is None or len(vector) != lattice.rank:
                     found.append(f"{path}: orbit representative must have rank {lattice.rank} coordinates")
-        chamber = group.chamber
+        chamber = group_data.chamber
         if chamber is not None:
             if lattice.rank is None or len(chamber.interior_vector) != lattice.rank or any(len(wall) != lattice.rank for wall in chamber.wall_normals):
                 found.append(f"{path}: chamber vectors must lie in its lattice")
 
-    for entry in loaded.entries:
-        lattice = entry.lattice
+    for lattice_entry in loaded.entries:
+        lattice = lattice_entry.lattice
         if lattice.orthogonal_group is not None:
-            group = arithmetic_groups.get(lattice.orthogonal_group)
-            if group is None or group.lattice != lattice.tag or group.standard_name != "O":
-                found.append(f"{entry.path}: orthogonal_group must name the O arithmetic-group card of this lattice")
+            lattice_group = arithmetic_groups.get(lattice.orthogonal_group)
+            if lattice_group is None or lattice_group.lattice != lattice.tag or lattice_group.standard_name != "O":
+                found.append(f"{lattice_entry.path}: orthogonal_group must name the O arithmetic-group card of this lattice")
         for slug in lattice.arithmetic_groups:
-            group = arithmetic_groups.get(slug)
-            if group is None or group.lattice != lattice.tag:
-                found.append(f"{entry.path}: arithmetic group {slug} must be a card on this lattice")
+            lattice_group = arithmetic_groups.get(slug)
+            if lattice_group is None or lattice_group.lattice != lattice.tag:
+                found.append(f"{lattice_entry.path}: arithmetic group {slug} must be a card on this lattice")
         if lattice.orthogonal_group is not None and lattice.orthogonal_group not in lattice.arithmetic_groups:
-            found.append(f"{entry.path}: orthogonal_group must also occur in arithmetic_groups")
+            found.append(f"{lattice_entry.path}: orthogonal_group must also occur in arithmetic_groups")
 
-    for entry in loaded.genera:
-        genus = entry.value
+    for genus_entry in loaded.genera:
+        genus = genus_entry.value
         for tag in genus.representative_tags:
             if tag not in lattices:
-                found.append(f"{entry.path}: representative {tag} is not a lattice card")
+                found.append(f"{genus_entry.path}: representative {tag} is not a lattice card")
         if genus.class_number is not None and len(genus.representative_tags) > genus.class_number:
-            found.append(f"{entry.path}: more representative tags than the genus class number")
-    for entry in loaded.polytopes:
-        polytope = entry.value
+            found.append(f"{genus_entry.path}: more representative tags than the genus class number")
+    for polytope_entry in loaded.polytopes:
+        polytope = polytope_entry.value
         if polytope.metric_lattice is not None:
             if polytope.metric_lattice not in lattices:
-                found.append(f"{entry.path}: metric lattice {polytope.metric_lattice} is not in the corpus")
+                found.append(f"{polytope_entry.path}: metric lattice {polytope.metric_lattice} is not in the corpus")
         if polytope.polar is not None:
             polar = polytopes.get(polytope.polar)
             if polar is None or polar.ambient_rank != polytope.ambient_rank or polar.polar != polytope.slug:
-                found.append(f"{entry.path}: polar polytope must name this polytope back and have the same rank")
-    for entry in loaded.toric_varieties:
-        if entry.value.polytope not in polytopes:
-            found.append(f"{entry.path}: polytope {entry.value.polytope} is not in the corpus")
-    for entry in loaded.geometric:
-        record = entry.geometric
+                found.append(f"{polytope_entry.path}: polar polytope must name this polytope back and have the same rank")
+    for toric_varietie_entry in loaded.toric_varieties:
+        if toric_varietie_entry.value.polytope not in polytopes:
+            found.append(f"{toric_varietie_entry.path}: polytope {toric_varietie_entry.value.polytope} is not in the corpus")
+    for geometric_entry in loaded.geometric:
+        record = geometric_entry.geometric
         if isinstance(record, ProjectiveComplexVariety):
-            construction = record.construction
-            if isinstance(construction, ToricHypersurfaceConstruction) and construction.toric_variety not in toric:
-                found.append(f"{entry.path}: toric variety {construction.toric_variety} is not in the corpus")
-            group = record.automorphism_identity_component
-            if group is not None and group.cohomology_action is not None and group.cohomology_action not in arithmetic_groups:
-                found.append(f"{entry.path}: cohomology action {group.cohomology_action} is not in the corpus")
-    for entry in loaded.geometric_families:
-        construction = entry.family.construction
-        if isinstance(construction, ToricHypersurfaceConstruction) and construction.toric_variety not in toric:
-            found.append(f"{entry.path}: toric variety {construction.toric_variety} is not in the corpus")
+            object_construction = record.construction
+            if isinstance(object_construction, ToricHypersurfaceConstruction) and object_construction.toric_variety not in toric:
+                found.append(f"{geometric_entry.path}: toric variety {object_construction.toric_variety} is not in the corpus")
+            automorphism_group = record.automorphism_identity_component
+            if automorphism_group is not None and automorphism_group.cohomology_action is not None and automorphism_group.cohomology_action not in arithmetic_groups:
+                found.append(f"{geometric_entry.path}: cohomology action {automorphism_group.cohomology_action} is not in the corpus")
+    for geometric_familie_entry in loaded.geometric_families:
+        family_construction = geometric_familie_entry.family.construction
+        if isinstance(family_construction, ToricHypersurfaceConstruction) and family_construction.toric_variety not in toric:
+            found.append(f"{geometric_familie_entry.path}: toric variety {family_construction.toric_variety} is not in the corpus")
 
     targets = {"object": objects, "family": families, "toric_variety": toric}
-    for entry in loaded.geometric_maps:
-        map_record = entry.value
+    for geometric_map_entry in loaded.geometric_maps:
+        map_record = geometric_map_entry.value
         for endpoint in (
             map_record.source,
             map_record.target,
             map_record.generic_fiber,
         ):
             if endpoint is not None and endpoint.slug not in targets[endpoint.kind]:
-                found.append(f"{entry.path}: {endpoint.kind} {endpoint.slug} is not in the corpus")
-    for entry in loaded.local_systems:
-        system = entry.value
+                found.append(f"{geometric_map_entry.path}: {endpoint.kind} {endpoint.slug} is not in the corpus")
+    for local_system_entry in loaded.local_systems:
+        system = local_system_entry.value
         if system.family not in families:
-            found.append(f"{entry.path}: geometric family {system.family} is not in the corpus")
+            found.append(f"{local_system_entry.path}: geometric family {system.family} is not in the corpus")
         fibration = maps.get(system.fibration)
         if fibration is None or fibration.kind != "fibration" or fibration.source.kind != "family" or fibration.source.slug != system.family:
-            found.append(f"{entry.path}: fibration {system.fibration} must have {system.family} as its source family")
+            found.append(f"{local_system_entry.path}: fibration {system.fibration} must have {system.family} as its source family")
         if system.fiber_lattice is not None:
             lattice = lattices.get(system.fiber_lattice)
             if lattice is None:
-                found.append(f"{entry.path}: fiber lattice {system.fiber_lattice} is not in the corpus")
-    for entry in loaded.operators:
-        for realization in entry.value.realizations:
+                found.append(f"{local_system_entry.path}: fiber lattice {system.fiber_lattice} is not in the corpus")
+    for operator_entry in loaded.operators:
+        for realization in operator_entry.value.realizations:
             if realization.family not in families:
-                found.append(f"{entry.path}: geometric family {realization.family} is not in the corpus")
+                found.append(f"{operator_entry.path}: geometric family {realization.family} is not in the corpus")
             if realization.local_system is not None:
-                system = systems.get(realization.local_system)
-                if system is None or system.family != realization.family or system.degree != realization.cohomology_degree:
-                    found.append(f"{entry.path}: local system {realization.local_system} must belong to the stated family and degree")
-    for entry in loaded.moduli_problems:
-        problem = entry.value
+                realization_system = systems.get(realization.local_system)
+                if realization_system is None or realization_system.family != realization.family or realization_system.degree != realization.cohomology_degree:
+                    found.append(f"{operator_entry.path}: local system {realization.local_system} must belong to the stated family and degree")
+    for moduli_problem_entry in loaded.moduli_problems:
+        problem = moduli_problem_entry.value
         if problem.geometric_family not in families:
-            found.append(f"{entry.path}: geometric family {problem.geometric_family} is not in the corpus")
+            found.append(f"{moduli_problem_entry.path}: geometric family {problem.geometric_family} is not in the corpus")
         if problem.arithmetic_subgroup is not None and problem.arithmetic_subgroup not in arithmetic_groups:
-            found.append(f"{entry.path}: arithmetic subgroup {problem.arithmetic_subgroup} is not an arithmetic-group card")
+            found.append(f"{moduli_problem_entry.path}: arithmetic subgroup {problem.arithmetic_subgroup} is not an arithmetic-group card")
     return found
 
 

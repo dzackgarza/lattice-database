@@ -11,6 +11,8 @@ proves: its certificate names that source's citation, and the value is never
 recomputed.
 """
 
+from __future__ import annotations
+
 import hashlib
 import json
 from pathlib import Path
@@ -51,6 +53,8 @@ def digest(text: str) -> str:
 
 def certification_hash(name: str, lattice: Lattice, value: object) -> str:
     """Commit to one computation name, Gram tensor, and stored result."""
+    if lattice.gram_tensor is None:
+        raise ValueError("a certification hash requires a stored Gram tensor")
     return digest(
         json.dumps(
             {

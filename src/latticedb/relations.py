@@ -1,9 +1,12 @@
 """Derived indices of stored relations, with all lattice mathematics delegated to preamble."""
 
+from __future__ import annotations
+
 from collections.abc import Sequence
 
 from dzack_research.preamble.categories.lattices import Lattices
 from dzack_research.preamble.rings import session_ring_objects
+from pydantic import TypeAdapter
 
 from latticedb.corpus import Entry
 from latticedb.model import Lattice
@@ -15,7 +18,8 @@ def hyperbolic_planes(lattice: Lattice) -> int | None:
     """Return ``n`` when the card represents ``U^n``; recognition is preamble-owned."""
     if lattice.integral is None:
         return None
-    return Lattices(ZZ)(lattice.gram_tensor).hyperbolic_plane_power_if_even_unimodular()
+    result = Lattices(ZZ)(lattice.gram_tensor).hyperbolic_plane_power_if_even_unimodular()
+    return TypeAdapter(int | None).validate_python(result, strict=True)
 
 
 def hyperbolic_index_bounds(entries: Sequence[Entry]) -> dict[str, int]:
@@ -28,6 +32,8 @@ def hyperbolic_index_bounds(entries: Sequence[Entry]) -> dict[str, int]:
         if planes is None:
             continue
         for morphism in source.morphisms:
+            if morphism.target in by_tag and morphism.scale is None:
+                raise ValueError("morphism scale must be stated before deriving hyperbolic index bounds")
             if morphism.scale == 1 and morphism.target in by_tag:
                 bounds[morphism.target] = max(planes, bounds.get(morphism.target, 0))
     return bounds

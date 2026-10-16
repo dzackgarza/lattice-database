@@ -14,7 +14,6 @@ import shutil
 import subprocess
 from collections.abc import Iterator
 from dataclasses import dataclass
-from fractions import Fraction
 from html.parser import HTMLParser
 from importlib.resources import files
 from pathlib import Path
@@ -27,8 +26,12 @@ from markupsafe import Markup, escape
 from pydantic import BaseModel, Field
 
 from latticedb.catalogues import ArithmeticGroup, LieGroup
+from latticedb.collection_query import Cell as Cell
+from latticedb.collection_query import Collection as Collection
+from latticedb.collection_query import Row as Row
+from latticedb.collection_query import matches_collection
 from latticedb.corpus import Entry, load
-from latticedb.geometric import ProjectiveComplexVariety, RiemannianSymmetricSpace
+from latticedb.geometric import HermitianSymmetricSpace, ProjectiveComplexVariety, RiemannianSymmetricSpace
 from latticedb.model import (
     DefiniteData,
     HyperbolicData,
@@ -36,18 +39,82 @@ from latticedb.model import (
     IntegralData,
     Lattice,
     Morphism,
-    OrbitGroup,
     PrimitiveOrbitSeries,
     Record,
     Reference,
     Related,
     RootSpan,
     RootSystemComponent,
-    Vector,
 )
-
-type Cell = str | int | float | bool | None | list[str]
-type Row = dict[str, Cell]
+from latticedb.site_formatting import (
+    ORBIT_GROUP_KEYS as ORBIT_GROUP_KEYS,
+)
+from latticedb.site_formatting import (
+    block_tex as block_tex,
+)
+from latticedb.site_formatting import (
+    cardinality_tex as cardinality_tex,
+)
+from latticedb.site_formatting import (
+    combination_tex as combination_tex,
+)
+from latticedb.site_formatting import (
+    cone_zeta_tex as cone_zeta_tex,
+)
+from latticedb.site_formatting import (
+    genus_tex as genus_tex,
+)
+from latticedb.site_formatting import (
+    group_tex as group_tex,
+)
+from latticedb.site_formatting import (
+    group_text as group_text,
+)
+from latticedb.site_formatting import (
+    matrix_tex as matrix_tex,
+)
+from latticedb.site_formatting import (
+    matrix_text as matrix_text,
+)
+from latticedb.site_formatting import (
+    nonzero_zeta_tex as nonzero_zeta_tex,
+)
+from latticedb.site_formatting import (
+    orbit_group_tex as orbit_group_tex,
+)
+from latticedb.site_formatting import (
+    orbit_series_tex as orbit_series_tex,
+)
+from latticedb.site_formatting import (
+    rational_tex as rational_tex,
+)
+from latticedb.site_formatting import (
+    root_span_tex as root_span_tex,
+)
+from latticedb.site_formatting import (
+    root_span_text as root_span_text,
+)
+from latticedb.site_formatting import (
+    root_system_tex as root_system_tex,
+)
+from latticedb.site_formatting import (
+    set_tex as set_tex,
+)
+from latticedb.site_formatting import (
+    span_summands as span_summands,
+)
+from latticedb.site_formatting import (
+    subgroup_tex as subgroup_tex,
+)
+from latticedb.site_formatting import (
+    summand_images as summand_images,
+)
+from latticedb.site_formatting import (
+    summand_name as summand_name,
+)
+from latticedb.site_formatting import (
+    theta_tex as theta_tex,
+)
 
 DEFINITENESS_LABEL = {
     "positive_definite": "positive definite",
@@ -64,19 +131,6 @@ PANES = {
     "family": "families",
 }
 """Query parameter of the database page -> the row key whose filter pane it selects."""
-
-
-class Collection(Record):
-    """A page that lists the lattices whose database row satisfies `where`."""
-
-    title: str = Field(description="Title of the page. Dollar signs mark TeX.")
-    summary: str = Field(description="One sentence that says which lattices the page lists. Dollar signs mark TeX.")
-    where: dict[str, int | str | bool | list[str]] = Field(
-        description=(
-            "Key of a row of `lattices.json` -> required value. A lattice is listed when every condition holds. "
-            "For a key whose value is a list, such as `properties`, the list must contain the required value, or each of the required values."
-        )
-    )
 
 
 class Article(Record):
@@ -102,217 +156,10 @@ class CollectionPage:
     members: tuple[Entry, ...]
 
 
-def rational_tex(value: Fraction) -> str:
-    if value.denominator == 1:
-        return str(value.numerator)
-    return f"{'-' if value < 0 else ''}\\tfrac{{{abs(value.numerator)}}}{{{value.denominator}}}"
-
-
-def group_text(factors: tuple[int, ...]) -> str:
-    """`Z/2^3 + Z/4` for the invariant factors (2, 2, 2, 4); `0` for the trivial group."""
-    runs = [(factor, factors.count(factor)) for factor in dict.fromkeys(factors)]
-    return " + ".join(f"(Z/{factor})^{count}" if count > 1 else f"Z/{factor}" for factor, count in runs) or "0"
-
-
-def group_tex(factors: tuple[int, ...]) -> str:
-    runs = [(factor, factors.count(factor)) for factor in dict.fromkeys(factors)]
-    return " \\oplus ".join(f"(\\mathbb{{Z}}/{factor})^{{{count}}}" if count > 1 else f"\\mathbb{{Z}}/{factor}" for factor, count in runs) or "0"
-
-
-def orbit_group_tex(group: OrbitGroup) -> str:
-    """TeX for a key of `integral.primitive_orbits`, such as `\\widetilde{SO}^+(L)` for `SOtilde+`."""
-    name, plus = group.removesuffix("+"), "^+" if group.endswith("+") else ""
-    letters = name.removesuffix("tilde")
-    return f"\\widetilde{{{letters}}}{plus}(L)" if name.endswith("tilde") else f"\\mathrm{{{letters}}}{plus}(L)"
-
-
-ORBIT_GROUP_KEYS = ("O", "SO", "O+", "SO+", "Otilde", "SOtilde", "Otilde+", "SOtilde+")
-"""The eight standard subgroup keys of $O(L)$: the keys of `integral.primitive_orbits`."""
-
-
-def subgroup_tex(key: str) -> str:
-    """TeX for a standard arithmetic-subgroup name or a named subgroup such as `Gamma_En_2`."""
-    return orbit_group_tex(key) if key in ORBIT_GROUP_KEYS else key.replace("_", "\\_")
-
-
-def cardinality_tex(cardinality: int | str) -> str:
-    """TeX for a stored finite or countably infinite group cardinality."""
-    if cardinality == "aleph0":
-        return "\\aleph_0"
-    return str(cardinality)
-
-
-def orbit_series_tex(series: PrimitiveOrbitSeries) -> str:
-    """TeX for $F_{L,\\Gamma}(z, w)$: the stated nonzero terms, `?` for each coefficient that is not stated, and the order to which the series is stated."""
-    terms = []
-    for n in sorted(series.degrees, key=lambda n: (abs(n), -n)):
-        count = series.coefficient(n)
-        if count == 0:
-            continue
-        variable = "" if n == 0 else ("z" if n > 0 else "w") + (f"^{{{abs(n)}}}" if abs(n) > 1 else "")
-        coefficient = "?" if count is None else str(count)
-        terms.append(coefficient if not variable else (variable if coefficient == "1" else f"{coefficient}\\,{variable}"))
-    order = f"O(z^{{{len(series.z) + 1}}}, w^{{{len(series.w) + 1}}})"
-    return " + ".join([*terms, order])
-
-
-def _argument(shift: int) -> str:
-    return "s" if shift == 0 else f"s - {shift}" if shift > 0 else f"s + {-shift}"
-
-
-def _character_tex(character) -> str:
-    coefficient = int(character.coefficient)
-    if not character.times_norm_parameter:
-        return str(coefficient)
-    return "n" if coefficient == 1 else "-n" if coefficient == -1 else f"{coefficient}n"
-
-
-def _l_factor_tex(factor) -> str:
-    argument = _argument(int(factor.shift))
-    character = factor.character
-    if int(character.coefficient) == 1 and not character.times_norm_parameter:
-        return f"\\zeta^\\Sigma({argument})"
-    return f"L^\\Sigma({argument}, \\chi_{{{_character_tex(character)}}})"
-
-
-def zeta_tex(lattice: Lattice, cone: bool) -> str:
-    """Render the preamble-owned affine-quadric zeta factorization."""
-    from dzack_research.preamble.categories.lattices import Lattices
-    from dzack_research.preamble.rings import session_ring_objects
-
-    integers = session_ring_objects()["ZZ"]
-    owned = Lattices(integers)(lattice.gram_tensor)
-    factorization = owned.quadratic_hypersurface_zeta_factorization(cone=cone)
-    numerator = "\\, ".join(_l_factor_tex(factor) for factor in factorization.numerator)
-    if not factorization.denominator:
-        return numerator
-    denominator = "\\, ".join(_l_factor_tex(factor) for factor in factorization.denominator)
-    return f"\\frac{{{numerator}}}{{{denominator}}}"
-
-
-def genus_tex(symbol: str) -> str:
-    """TeX for a stored genus symbol such as `II_{1,9} (2: 2^10)`."""
-    head, _, local = symbol.partition(" (")
-    letters, _, signature = head.partition("_")
-    tex = f"\\mathrm{{{letters}}}_{signature}"
-    if not local:
-        return tex
-    parts = []
-    for part in local.removesuffix(")").split("; "):
-        prime, _, body = part.partition(": ")
-        body = re.sub(r"\^(-?\d+)", r"^{\1}", body)
-        body = re.sub(r"\]_(\d+)", r"]_{\1}", body)
-        parts.append(f"{prime}\\colon {body.replace(' ', '\\,')}")
-    return f"{tex}\\ \\bigl({';\\ '.join(parts)}\\bigr)"
-
-
-def root_system_tex(components: tuple[str, ...]) -> str:
-    """`D_{4} \\oplus A_{1}^{3}` for the irreducible components (D4, A1, A1, A1)."""
-    runs = [(component, components.count(component)) for component in dict.fromkeys(components)]
-    return " \\oplus ".join(f"{component[0]}_{{{component[1:]}}}" + (f"^{{{count}}}" if count > 1 else "") for component, count in runs)
-
-
-def set_tex(values: tuple[Fraction, ...]) -> str:
-    """`\\{-2, \\tfrac{2}{3}\\}` for the set of the values."""
-    return f"\\{{{', '.join(rational_tex(value) for value in sorted(set(values)))}\\}}"
-
-
-def combination_tex(coordinates: Vector, symbol: str = "e") -> str:
-    """`e_{1} - 2e_{3}` for the coordinates (1, 0, -2); `0` for the zero vector."""
-    terms = []
-    for index, coefficient in enumerate(coordinates, start=1):
-        if coefficient == 0:
-            continue
-        sign = "-" if coefficient < 0 else "+"
-        size = "" if abs(coefficient) == 1 else str(abs(coefficient))
-        terms.append((sign, f"{size}{symbol}_{{{index}}}"))
-    if not terms:
-        return "0"
-    first_sign, first = terms[0]
-    return ("-" if first_sign == "-" else "") + first + "".join(f" {sign} {term}" for sign, term in terms[1:])
-
-
-def _runs(names: list[str]) -> list[tuple[str, int]]:
-    return [(name, names.count(name)) for name in dict.fromkeys(names)]
-
-
-def root_span_tex(components: tuple[RootSystemComponent, ...]) -> str:
-    """Render the stored component types and scales, without deriving another lattice identification."""
-    names = [component.type if component.scale == 1 else f"{component.type}({rational_tex(component.scale)})" for component in components]
-    runs = _runs(names)
-    return " \\oplus ".join(f"{name}^{{{count}}}" if count > 1 else name for name, count in runs) or "0"
-
-
-def root_span_text(components: tuple[RootSystemComponent, ...]) -> str:
-    names = [component.type if component.scale == 1 else f"{component.type}({component.scale})" for component in components]
-    runs = _runs(names)
-    return " + ".join(f"{name}^{count}" if count > 1 else name for name, count in runs) or "0"
-
-
-def block_tex(block: list[int], symbol: str = "e") -> str:
-    """`e_{3}, \\dots, e_{10}` for the indices 3 to 10; each vector for fewer than four indices or a block with a gap."""
-    if len(block) > 3 and block[-1] - block[0] == len(block) - 1:
-        return f"{symbol}_{{{block[0]}}}, \\dots, {symbol}_{{{block[-1]}}}"
-    return ", ".join(f"{symbol}_{{{index}}}" for index in block)
-
-
-def matrix_tex(morphism: Morphism) -> str:
-    """The matrix as a TeX `array`, with a vertical line at each column subdivision and `\\hline` at each row subdivision."""
-    columns = len(morphism.matrix[0])
-    bounds = (0, *morphism.column_subdivisions, columns)
-    alignment = "|".join("r" * (high - low) for low, high in zip(bounds, bounds[1:], strict=False))
-    lines = []
-    for index, matrix_row in enumerate(morphism.matrix):
-        if index in morphism.row_subdivisions:
-            lines.append("\\hline")
-        lines.append(" & ".join(str(value) for value in matrix_row) + " \\\\")
-    return f"\\left(\\begin{{array}}{{{alignment}}}\n" + "\n".join(lines) + "\n\\end{array}\\right)"
-
-
-def matrix_text(morphism: Morphism) -> str:
-    """The matrix and its subdivisions as JSON, one row per line, in the form that `latticedb morphism` reads."""
-    rows = ",\n  ".join(json.dumps(list(matrix_row)) for matrix_row in morphism.matrix)
-    row_lines = json.dumps(list(morphism.row_subdivisions))
-    column_lines = json.dumps(list(morphism.column_subdivisions))
-    return f'{{"matrix": [\n  {rows}\n],\n "row_subdivisions": {row_lines},\n "column_subdivisions": {column_lines}}}'
-
-
-def summand_name(record: Lattice, scale: int) -> tuple[str, str]:
-    """The stored card name for $M$, with ``(k)`` appended for a nontrivial twist."""
-    if scale == 1:
-        return record.name, record.latex
-    return f"{record.name}({scale})", f"{record.latex}({scale})"
-
-
-def span_summands(lattice: Lattice, lattices: dict[str, Lattice]) -> list[tuple[Lattice, str]]:
-    """`(M, name of M(k) as TeX)` for each summand $M(k)$ of `root_span.summands`."""
-    span = lattice.root_span
-    if span is None or span.summands is None:
-        return []
-    return [(lattices[summand.tag], summand_name(lattices[summand.tag], summand.scale)[1]) for summand in span.summands]
-
-
-def summand_images(lattice: Lattice, lattices: dict[str, Lattice]) -> list[tuple[Lattice, str, int, Vector]]:
-    """`(M, name of M(k) as TeX, j, x)` for each row `x` of `root_span.embedding`: the embedding sends the basis vector $e_j$ of the summand $M(k)$ to `x`."""
-    span = lattice.root_span
-    if span is None or span.summands is None or span.embedding is None:
-        return []
-    sources = [(record, name, j) for record, name in span_summands(lattice, lattices) for j in range(1, record.rank + 1)]
-    return [(record, name, j, image) for (record, name, j), image in zip(sources, span.embedding, strict=True)]
-
-
 def inline_markup(text: str) -> Markup:
     """HTML for one line of copy, in which backticks mark code and dollar signs mark TeX."""
     code = re.sub(r"`([^`]+)`", r"<code>\1</code>", str(escape(text)))
     return Markup(re.sub(r"\$([^$]+)\$", r"\\(\1\\)", code))
-
-
-def theta_tex(theta: tuple[int, ...]) -> str:
-    terms = [
-        "1",
-        *(f"{count}q^{{{power}}}" if power > 1 else f"{count}q" for power, count in enumerate(theta) if power > 0 and count > 0),
-    ]
-    return " + ".join([*terms, f"O(q^{{{len(theta)}}})"])
 
 
 PROPERTY_MEANINGS = {
@@ -430,16 +277,6 @@ def row(lattice: Lattice, lattices: dict[str, Lattice]) -> Row:
     }
 
 
-def _satisfies(record: Row, key: str, required: int | str | bool | list[str]) -> bool:
-    match record[key], required:
-        case list() as values, list() as wanted:
-            return all(item in values for item in wanted)
-        case list() as values, _:
-            return required in values
-        case value, _:
-            return value == required
-
-
 def collections(directory: Path, entries: tuple[Entry, ...]) -> tuple[CollectionPage, ...]:
     lattices = {entry.lattice.tag: entry.lattice for entry in entries}
     rows = {tag: row(lattice, lattices) for tag, lattice in lattices.items()}
@@ -449,7 +286,7 @@ def collections(directory: Path, entries: tuple[Entry, ...]) -> tuple[Collection
         document = frontmatter.load(str(path))
         collection = Collection.model_validate(document.metadata)
         assert set(collection.where) <= keys, f"{path}: unknown row keys {sorted(set(collection.where) - keys)}"
-        members = tuple(entry for entry in entries if all(_satisfies(rows[entry.lattice.tag], key, value) for key, value in collection.where.items()))
+        members = tuple(entry for entry in entries if matches_collection(rows[entry.lattice.tag], collection))
         assert members, f"{path}: no lattice satisfies the conditions"
         pages.append(CollectionPage(path.stem, collection, document.content, members))
     return tuple(pages)
@@ -581,7 +418,7 @@ def orthogonal_groups(
         ambient = groups.get(arithmetic.ambient_lie_group)
         if ambient is None or ambient.orthogonal_signature is None:
             continue
-        key = tuple(ambient.orthogonal_signature)
+        key = (ambient.orthogonal_signature[0], ambient.orthogonal_signature[1])
         counts[key] = counts.get(key, 0) + 1
     orthogonal = {tuple(group.orthogonal_signature): group for group in groups.values() if group.orthogonal_signature is not None}
     limit = max((q for _, q in orthogonal), default=0)
@@ -627,7 +464,8 @@ def build(root: Path, target: Path) -> int:
         subgroup_tex=subgroup_tex,
         cardinality_tex=cardinality_tex,
         orbit_series_tex=orbit_series_tex,
-        zeta_tex=zeta_tex,
+        cone_zeta_tex=cone_zeta_tex,
+        nonzero_zeta_tex=nonzero_zeta_tex,
         theta_tex=theta_tex,
         root_system_tex=root_system_tex,
         set_tex=set_tex,
@@ -651,7 +489,7 @@ def build(root: Path, target: Path) -> int:
     (target / "arithmetic-group").mkdir()
     shutil.copytree(str(files("latticedb") / "assets"), target / "assets")
 
-    ranks = sorted({entry.lattice.rank for entry in entries if entry.lattice.rank is not None})
+    ranks: list[int | None] = [*sorted({entry.lattice.rank for entry in entries if entry.lattice.rank is not None})]
     if any(entry.lattice.rank is None for entry in entries):
         ranks.append(None)
     by_rank = {rank: [entry for entry in entries if entry.lattice.rank == rank] for rank in ranks}
@@ -673,6 +511,7 @@ def build(root: Path, target: Path) -> int:
             lattice_page.render(
                 root="../",
                 lattice=lattice,
+                nullity=lattice.nullity,
                 prose=prose[index],
                 components_text=components.replace('"', ""),
                 related=[(by_tag[related.tag].lattice, related.relation) for related in lattice.related],
@@ -721,8 +560,8 @@ def build(root: Path, target: Path) -> int:
     orthogonal_groups(target, environment, lattices, lie_groups, arithmetic_groups)
     lie_group_prose = markdown_to_html([entry.prose for entry in corpus.lie_groups])
     lie_group_page = environment.get_template("lie-group.html.j2")
-    for entry, rendered_prose in zip(corpus.lie_groups, lie_group_prose, strict=True):
-        group = entry.value
+    for lie_entry, rendered_prose in zip(corpus.lie_groups, lie_group_prose, strict=True):
+        group = lie_entry.value
         member_lattices = [
             lattice
             for lattice in lattices.values()
@@ -741,16 +580,16 @@ def build(root: Path, target: Path) -> int:
         )
     arithmetic_prose = markdown_to_html([entry.prose for entry in corpus.arithmetic_groups])
     arithmetic_group_page = environment.get_template("arithmetic-group.html.j2")
-    for entry, rendered_prose in zip(corpus.arithmetic_groups, arithmetic_prose, strict=True):
-        group = entry.value
-        (target / "arithmetic-group" / f"{group.slug}.html").write_text(
+    for arithmetic_entry, rendered_prose in zip(corpus.arithmetic_groups, arithmetic_prose, strict=True):
+        arithmetic_group = arithmetic_entry.value
+        (target / "arithmetic-group" / f"{arithmetic_group.slug}.html").write_text(
             arithmetic_group_page.render(
                 root="../",
-                group=group,
+                group=arithmetic_group,
                 prose=rendered_prose,
-                lattice=lattices[group.lattice],
-                ambient=lie_groups[group.ambient_lie_group],
-                parent=arithmetic_groups.get(group.parent_group) if group.parent_group else None,
+                lattice=lattices[arithmetic_group.lattice],
+                ambient=lie_groups[arithmetic_group.ambient_lie_group],
+                parent=arithmetic_groups.get(arithmetic_group.parent_group) if arithmetic_group.parent_group else None,
             )
         )
     (target / "arithmetic-groups.html").write_text(
@@ -801,7 +640,7 @@ def build(root: Path, target: Path) -> int:
     family_page = environment.get_template("geometric-family.html.j2")
     for family_entry, rendered_prose in zip(geometric_families, family_prose, strict=True):
         family = family_entry.family
-        instances = [entry.geometric for entry in geometric if entry.geometric.family == family.slug]
+        instances = [entry.geometric for entry in geometric if isinstance(entry.geometric, ProjectiveComplexVariety) and entry.geometric.family == family.slug]
         (target / "geometric-families" / f"{family.slug}.html").write_text(family_page.render(root="../", family=family, instances=instances, prose=rendered_prose))
     (target / "geometric-objects.html").write_text(
         environment.get_template("geometric-objects.html.j2").render(root="./", geometric=geometric, geometric_families=geometric_families)
@@ -811,7 +650,11 @@ def build(root: Path, target: Path) -> int:
     graph_page = environment.get_template("graph.html.j2")
     for graph_entry, rendered_prose in zip(graphs, graph_prose, strict=True):
         graph = graph_entry.graph
-        objects = [entry.geometric for entry in geometric if isinstance(entry.geometric, RiemannianSymmetricSpace) and graph.slug in entry.geometric.diagrams]
+        objects = [
+            entry.geometric
+            for entry in geometric
+            if isinstance(entry.geometric, (RiemannianSymmetricSpace, HermitianSymmetricSpace)) and graph.slug in entry.geometric.diagrams
+        ]
         (target / "graphs" / f"{graph.slug}.html").write_text(graph_page.render(root="../", graph=graph, objects=objects, prose=rendered_prose))
     (target / "graphs.html").write_text(environment.get_template("graphs.html.j2").render(root="./", graphs=graphs))
     models = [(heading, key, model.__doc__, list(model.model_fields.items())) for heading, key, model in fields()]
