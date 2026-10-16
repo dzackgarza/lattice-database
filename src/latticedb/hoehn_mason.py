@@ -15,25 +15,36 @@ matrices acting on row vectors in the coordinates of that basis.  A card matrix
 has the images of the source generators as its columns.
 """
 
-from collections.abc import Mapping
+from collections.abc import Mapping, Sequence
 from pathlib import Path
 
+from dzack_research.preamble.categories.abstract_categories.mor_categories import CategoricalMor
 from dzack_research.preamble.categories.lattices import Lattices
 from dzack_research.preamble.categories.modules.framed.formed.form_modules import (
     FormModules,
 )
+from dzack_research.preamble.categories.modules.framed.framed_free_modules import FramedFreeModules
 from dzack_research.preamble.categories.modules.pure.modules import Modules
-from dzack_research.preamble.rings import session_ring_objects
+from dzack_research.preamble.categories.rings.ring_foundation import _OwnedRingElement, _OwnedRingParent
+from dzack_research.preamble.rings import OwnedRings, session_ring_objects
 from pydantic import BaseModel, ConfigDict, TypeAdapter
 
 from latticedb import corpus, hashimoto
 from latticedb.corpus import Matrix
-from latticedb.model import Lattice, Tag, rational
+from latticedb.model import GramTensor, Lattice, Tag, rational
 
 _SESSION_RINGS = session_ring_objects()
-ZZ = _SESSION_RINGS["ZZ"]
+_integers = _SESSION_RINGS["ZZ"]
+assert isinstance(_integers, _OwnedRingParent)
+ZZ: _OwnedRingParent = _integers
+_ring = _SESSION_RINGS["ZZ"]
+assert isinstance(_ring, OwnedRings.ParentMethods)
+integer_ring: OwnedRings.ParentMethods = _ring
+_domain = _SESSION_RINGS["ZZ"]
+assert isinstance(_domain, OwnedRings.NoZeroDivisors.Commutative.Nontrivial.ParentMethods)
+integer_domain: OwnedRings.NoZeroDivisors.Commutative.Nontrivial.ParentMethods = _domain
 QQ = _SESSION_RINGS["QQ"]
-_QQ_AS_ZZ_MODULE = Modules(QQ).restriction_of_scalars(ZZ.fraction_field_map())(QQ)
+_QQ_AS_ZZ_MODULE = Modules(QQ).restriction_of_scalars(integer_domain.fraction_field_map())(QQ)
 LEECH_RANK = 24
 
 
@@ -71,19 +82,39 @@ def stored(directory: Path) -> tuple[Leech, tuple[Entry, ...]]:
     return leech, entries
 
 
-def _formed(gram):
+def _formed_module(value: object) -> FormModules.ParentMethods:
+    if not isinstance(value, FormModules.ParentMethods):
+        raise TypeError("the owned form-module category must return a module with a form")
+    return value
+
+
+def _coordinate_vector(value: object) -> FramedFreeModules.ElementMethods:
+    if not isinstance(value, FramedFreeModules.ElementMethods):
+        raise TypeError("a stored coordinate image must belong to the owned framed free module")
+    return value.to_vector()
+
+
+def _integer_coefficient(value: object) -> int:
+    if not isinstance(value, _OwnedRingElement):
+        raise TypeError("a stored matrix coefficient must be an element of the owned scalar ring")
+    return int(value)
+
+
+def _formed(gram: GramTensor | None) -> FormModules.ParentMethods:
     """The free module ``Z^n`` with the rational bilinear form of Gram tensor ``gram``."""
-    module = ZZ.free_module(len(gram))
-    return FormModules(ZZ)(module.bilinear_hom_space(_QQ_AS_ZZ_MODULE)(gram))
+    if gram is None:
+        raise ValueError("a Gram tensor must be stated before constructing the source module")
+    module = integer_ring.free_module(len(gram))
+    return _formed_module(FormModules(ZZ)(module.bilinear_hom_space(_QQ_AS_ZZ_MODULE)(gram)))
 
 
-def _rows(target, rows: Matrix):
+def _rows(target: Modules.ParentMethods, rows: Matrix) -> CategoricalMor.ElementMethods:
     """The module map ``Z^k -> target`` taking the ``i``-th generator to the ``i``-th row."""
-    source = ZZ.free_module(len(rows))
-    return source.module_category().Mor(source, target)(tuple(target(row) for row in rows))
+    source = integer_ring.free_module(len(rows))
+    return hashimoto._module_map(source.module_category().Mor(source, target)(tuple(target(row) for row in rows)))
 
 
-def _leech_lattice(leech: Leech):
+def _leech_lattice(leech: Leech) -> tuple[FormModules.ParentMethods, FormModules.ParentMethods, CategoricalMor.ElementMethods]:
     """``(V, leech[1], φ)``: the coordinate space, the lattice on the printed basis, and ``φ: Z^24 -> V``.
 
     ``φ`` takes the printed basis to its rows in ``V``; the form of
@@ -91,61 +122,72 @@ def _leech_lattice(leech: Leech):
     """
     space = _formed(tuple(tuple(rational(value) for value in row) for row in leech.inner_product))
     basis = _rows(space.unformed_module(), leech.basis)
-    return space, FormModules(ZZ)(space.form().pullback(basis)), basis
+    return space, _formed_module(FormModules(ZZ)(space.form().pullback(basis))), basis
 
 
-def _sublattice(space, lattice, basis, rows: Matrix):
+def _sublattice(
+    space: FormModules.ParentMethods, lattice: FormModules.ParentMethods, basis: CategoricalMor.ElementMethods, rows: Matrix
+) -> tuple[FormModules.ParentMethods, CategoricalMor.ElementMethods] | None:
     """The printed rows as a sublattice ``S`` of ``leech[1]``, with the restricted form, and its inclusion.
 
     The map ``Z^k -> V`` given by the rows factors through ``φ`` exactly when
     every row is a vector of ``leech[1]``; otherwise the answer is ``None``.
     """
-    inclusion = _rows(space.unformed_module(), rows).factor_through_or_none(basis)
+    inclusion = hashimoto._linear_map(_rows(space.unformed_module(), rows)).factor_through_or_none(basis)
     if inclusion is None:
         return None
+    inclusion = hashimoto._module_map(inclusion)
     sublattice = FormModules(ZZ)(lattice.form().pullback(inclusion))
-    generators = inclusion.domain()
-    return sublattice, sublattice.module_category().Mor(sublattice, lattice)(lambda label: lattice(inclusion(generators.module_generator(label))))
+    generators = hashimoto._module_parent(inclusion.domain())
+    return _formed_module(sublattice), hashimoto._module_map(
+        sublattice.module_category().Mor(sublattice, lattice)(lambda label: lattice(inclusion(generators.module_generator(label))))
+    )
 
 
-def _complementary(space, coinvariant_inclusion, fixed_inclusion, entry: Entry) -> bool:
+def _complementary(
+    space: FormModules.ParentMethods, coinvariant_inclusion: CategoricalMor.ElementMethods, fixed_inclusion: CategoricalMor.ElementMethods, entry: Entry
+) -> bool:
     """Whether ``A`` and ``B`` are orthogonal in ``leech[1]`` and their ranks sum to 24."""
-    ranks = int(coinvariant_inclusion.image().module_rank()) + int(fixed_inclusion.image().module_rank())
+    ranks = int(hashimoto._linear_map(coinvariant_inclusion).image().module_rank()) + int(hashimoto._linear_map(fixed_inclusion).image().module_rank())
     return ranks == LEECH_RANK and all(space(left).is_orthogonal_to(space(right)) for left in entry.coinvariant_basis for right in entry.fixed_basis)
 
 
-def _endomorphism(lattice, generator: Matrix):
+def _endomorphism(lattice: FormModules.ParentMethods, generator: Matrix) -> CategoricalMor.ElementMethods:
     """The stored generator as the endomorphism of ``leech[1]`` taking the ``i``-th basis vector to row ``i``."""
-    return lattice.module_category().Mor(lattice, lattice)(tuple(lattice(row) for row in generator))
+    return hashimoto._module_map(lattice.module_category().Mor(lattice, lattice)(tuple(lattice(row) for row in generator)))
 
 
-def _fixes(endomorphism, inclusion) -> bool:
+def _fixes(endomorphism: CategoricalMor.ElementMethods, inclusion: CategoricalMor.ElementMethods) -> bool:
     """Whether ``g`` is the identity on the sublattice included by ``inclusion``, checked on its generators."""
-    sublattice = inclusion.domain()
+    sublattice = hashimoto._module_parent(inclusion.domain())
     return all(endomorphism(inclusion(sublattice.module_generator(label))) == inclusion(sublattice.module_generator(label)) for label in sublattice.module_generating_set())
 
 
-def _restriction(endomorphism, inclusion):
+def _restriction(endomorphism: CategoricalMor.ElementMethods, inclusion: CategoricalMor.ElementMethods) -> CategoricalMor.ElementMethods | None:
     """``g|_A: A -> A``, the factor of ``g ∘ ι`` through ``ι``; ``None`` when ``g(A)`` is not contained in ``A``."""
-    return (endomorphism * inclusion).factor_through_or_none(inclusion)
+    restricted = hashimoto._linear_map(hashimoto._module_map(endomorphism * inclusion)).factor_through_or_none(inclusion)
+    return None if restricted is None else hashimoto._module_map(restricted)
 
 
-def _record_isometry(record: Lattice, twist: int, sublattice, record_basis: Matrix):
+def _record_isometry(record: Lattice, twist: int, sublattice: FormModules.ParentMethods, record_basis: Matrix) -> CategoricalMor.ElementMethods | None:
     """The isometry ``R(t) -> S`` whose matrix is the stored record basis, or ``None``."""
     return hashimoto.basis_isometry(_formed(record.gram_tensor).twist(twist), sublattice, record_basis)
 
 
-def _matrix(morphism) -> Matrix:
+def _matrix(morphism: CategoricalMor.ElementMethods) -> Matrix:
     """The card matrix of ``morphism``: the images of the source generators as columns."""
-    source = morphism.domain()
-    images = tuple(morphism(source.module_generator(label)).to_vector() for label in source.module_generating_set())
-    return tuple(tuple(int(image(label)) for image in images) for label in morphism.codomain().module_generating_set())
+    source = hashimoto._module_parent(morphism.domain())
+    target = hashimoto._module_parent(morphism.codomain())
+    images = tuple(_coordinate_vector(morphism(source.module_generator(label))) for label in source.module_generating_set())
+    return tuple(tuple(_integer_coefficient(image(label)) for image in images) for label in target.module_generating_set())
 
 
-def _record_matrices(isometry, restrictions) -> tuple[Matrix, ...]:
+def _record_matrices(isometry: CategoricalMor.ElementMethods, restrictions: Sequence[CategoricalMor.ElementMethods | None]) -> tuple[Matrix, ...]:
     """The matrices of ``ψ^{-1} ∘ g|_A ∘ ψ`` for the record isometry ``ψ: R(t) -> A``."""
-    inverse = isometry.inverse()
-    return tuple(_matrix(inverse * restriction * isometry) for restriction in restrictions)
+    inverse = hashimoto._linear_map(isometry).inverse()
+    if any(restriction is None for restriction in restrictions):
+        raise ValueError("every restriction must be defined before serializing its matrix")
+    return tuple(_matrix(hashimoto._module_map(inverse * restriction * isometry)) for restriction in restrictions if restriction is not None)
 
 
 def automorphisms(leech: Leech, entry: Entry, record: Lattice) -> tuple[Matrix, ...]:
@@ -171,7 +213,7 @@ def embedding(leech: Leech, entry: Entry, leech_record: Lattice, record: Lattice
     sublattice, inclusion = coinvariant
     isometry = _record_isometry(record, entry.twist, sublattice, entry.record_basis)
     assert isometry is not None, f"lattices[{entry.i},{entry.j}]: the stored basis is not an isometry from {entry.record}({entry.twist}) to A"
-    return _matrix(leech_isometry.inverse() * inclusion * isometry)
+    return _matrix(hashimoto._module_map(hashimoto._linear_map(leech_isometry).inverse() * inclusion * isometry))
 
 
 def group_order(record: Lattice, generators: tuple[Matrix, ...]) -> int:
@@ -193,7 +235,7 @@ def check(
     found: list[str] = []
     space, lattice, basis = _leech_lattice(leech)
     leech_isometry = hashimoto.basis_isometry(_formed(lattices[leech.record].gram_tensor), lattice, leech.record_basis)
-    leech_inverse = None if leech_isometry is None else leech_isometry.inverse()
+    leech_inverse = None if leech_isometry is None else hashimoto._linear_map(leech_isometry).inverse()
     if leech_isometry is None:
         found.append(f"leech[1]: the stored basis is not an isometry from {leech.record} to leech[1]")
     by_n = {row.n: row for row in groups}
@@ -210,7 +252,7 @@ def check(
             continue
         sublattice, inclusion = coinvariant
         endomorphisms = tuple(_endomorphism(lattice, generator) for generator in entry.stabilizer_generators)
-        if not all(lattice.Mor(lattice).preserves_forms(endomorphism) and _fixes(endomorphism, fixed[1]) for endomorphism in endomorphisms):
+        if not all(FormModules(lattice.base_ring()).Mor(lattice, lattice).preserves_forms(endomorphism) and _fixes(endomorphism, fixed[1]) for endomorphism in endomorphisms):
             found.append(f"{name}: a generator of C is not an isometry of leech[1] that fixes B")
             continue
         restrictions = tuple(_restriction(endomorphism, inclusion) for endomorphism in endomorphisms)

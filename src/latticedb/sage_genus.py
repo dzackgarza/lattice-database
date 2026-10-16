@@ -11,8 +11,12 @@ import sys
 from fractions import Fraction
 from typing import TypedDict
 
+from dzack_research.preamble.categories.abstract_categories.mor_categories import CategoricalMor
 from dzack_research.preamble.categories.hyperbolic_lattices import HyperbolicLattices
 from dzack_research.preamble.categories.lattices import Lattices
+from dzack_research.preamble.categories.modules.pure.modules import Modules
+from dzack_research.preamble.categories.rings.commutative_algebra import FormalPowerSeriesRings
+from dzack_research.preamble.categories.rings.ring_foundation import _OwnedRingElement
 from dzack_research.preamble.rings import session_ring_objects
 
 _RINGS = session_ring_objects()
@@ -31,10 +35,12 @@ class Request(TypedDict):
 JsonValue = object
 
 
-def _matrix_rows(morphism) -> list[list[int]]:
+def _matrix_rows(morphism: CategoricalMor.ElementMethods) -> list[list[int]]:
     """Serialize a preamble morphism in the selected domain/codomain framings."""
     domain = morphism.domain()
     codomain = morphism.codomain()
+    if not isinstance(domain, Modules.ParentMethods) or not isinstance(codomain, Modules.ParentMethods):
+        raise TypeError("a generator morphism must have owned module endpoints")
     source_labels = tuple(domain.module_generating_set())
     target_labels = tuple(codomain.module_generating_set())
     return [
@@ -43,7 +49,7 @@ def _matrix_rows(morphism) -> list[list[int]]:
     ]
 
 
-def _orthogonal_group_data(lattice) -> dict[str, JsonValue]:
+def _orthogonal_group_data(lattice: Lattices.ParentMethods) -> dict[str, JsonValue]:
     """Serialize the preamble-owned ``O(L)`` and its selected generators."""
     group = lattice.orthogonal_group().select_group_resolution()
     return {
@@ -52,7 +58,7 @@ def _orthogonal_group_data(lattice) -> dict[str, JsonValue]:
     }
 
 
-def _root_span_data(lattice) -> dict[str, JsonValue]:
+def _root_span_data(lattice: Lattices.ParentMethods) -> dict[str, JsonValue]:
     """Serialize roots of ``L`` that generate ``L``, with their norms ``b(r, r)``.
 
     ``root_module_generating_set`` returns only when the roots generate ``L``,
@@ -67,7 +73,7 @@ def _root_span_data(lattice) -> dict[str, JsonValue]:
     }
 
 
-def _reflective(lattice) -> bool | None:
+def _reflective(lattice: Lattices.ParentMethods) -> bool | None:
     """Serialize the preamble's answer to whether ``W(L)`` has finite index in ``O(L)``.
 
     ``is_reflective`` answers ``True`` when Vinberg's algorithm completes and
@@ -80,9 +86,9 @@ def _reflective(lattice) -> bool | None:
             return None
 
 
-def _decided(answer) -> bool | None:
-    """Serialize a regularity answer: ``True`` or ``False`` when decided, and otherwise nothing."""
-    match answer:
+def _regular(lattice: Lattices.ParentMethods) -> bool | None:
+    """Serialize the preamble's regularity answer when it is decided."""
+    match lattice.is_regular():
         case True:
             return True
         case False:
@@ -91,36 +97,47 @@ def _decided(answer) -> bool | None:
             return None
 
 
-def _modular_scale(lattice) -> int | bool:
+def _spinor_regular(lattice: Lattices.ParentMethods) -> bool | None:
+    """Serialize the preamble's spinor-regularity answer when it is decided."""
+    match lattice.is_spinor_regular():
+        case True:
+            return True
+        case False:
+            return False
+        case _:
+            return None
+
+
+def _modular_scale(lattice: Lattices.ParentMethods) -> int | bool:
     """Serialize the preamble's \\(k\\) with \\(L\\cong L^*(k)\\), or ``False`` when there is none."""
     scale = lattice.modular_scale()
     return False if scale is None else int(scale)
 
 
-def _rational(value) -> int | str:
+def _rational(value: int | Fraction | _OwnedRingElement) -> int | str:
     """Serialize a preamble rational number as an integer or a string `p/q`."""
     number = Fraction(str(value))
     return number.numerator if number.denominator == 1 else f"{number.numerator}/{number.denominator}"
 
 
-def _coefficients(series, bound: int) -> list[int | str]:
+def _coefficients(series: FormalPowerSeriesRings.ElementMethods, bound: int) -> list[int | str]:
     """Serialize the coefficients of `q^0, ..., q^bound` of a preamble power series."""
     return [_rational(series[exponent]) for exponent in range(bound + 1)]
 
 
-def _local_densities(lattice, bound: int) -> list[dict[str, JsonValue]]:
+def _local_densities(lattice: Lattices.ParentMethods, bound: int) -> list[dict[str, JsonValue]]:
     """Serialize the preamble's local densities `beta_p(L, m)`, `m = 1, ..., bound`, at each prime dividing `2 det L`."""
     genus = lattice.genus()
     return [{"prime": int(prime), "densities": [_rational(genus.local_density(prime, value)) for value in range(1, bound + 1)]} for prime in lattice.bad_reduction_primes()]
 
 
-def _anisotropic_primes(lattice) -> list[int]:
+def _anisotropic_primes(lattice: Lattices.ParentMethods) -> list[int]:
     """Serialize the primes dividing `2 det L` at which the preamble's genus is anisotropic."""
     anisotropic = lattice.genus().anisotropic_primes()
     return [int(prime) for prime in lattice.bad_reduction_primes() if prime in anisotropic]
 
 
-def _local_representations(lattice) -> list[dict[str, JsonValue]]:
+def _local_representations(lattice: Lattices.ParentMethods) -> list[dict[str, JsonValue]]:
     """Serialize the preamble's least represented valuation of each square class, at each prime dividing `2 det L` where it is not every class."""
     representations = lattice.genus().local_representations()
     exceptional = representations.index_set()
@@ -165,8 +182,8 @@ VALUES = {
     "discriminant_orbits": lambda lattice: lattice.discriminant_orbit_series(),
     "reflective": _reflective,
     "modular_scale": _modular_scale,
-    "regular": lambda lattice: _decided(lattice.is_regular()),
-    "spinor_regular": lambda lattice: _decided(lattice.is_spinor_regular()),
+    "regular": _regular,
+    "spinor_regular": _spinor_regular,
     "anisotropic_primes": _anisotropic_primes,
     "local_representations": _local_representations,
 }

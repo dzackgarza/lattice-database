@@ -34,7 +34,10 @@ def store(root: Path, loaded: Corpus) -> list[str]:
         entry_by_object_id[id(value)] = entry
 
     new: dict[Tag, list[dict[str, Yaml]]] = {}
-    for source, target, scale, embedding, parts in category.coordinate_diagonal_embeddings(tuple(owned)):
+    category_methods: object = category
+    if not isinstance(category_methods, Lattices.SubcategoryMethods):
+        raise TypeError("coordinate diagonal embeddings require the owned lattice category")
+    for source, target, scale, embedding, parts in category_methods.coordinate_diagonal_embeddings(tuple(owned)):
         source_entry = entry_by_object_id[id(source)]
         target_entry = entry_by_object_id[id(target)]
         domain = embedding.domain()
@@ -47,14 +50,14 @@ def store(root: Path, loaded: Corpus) -> list[str]:
         ]
         numbered_parts = tuple(tuple(position + 1 for position in part) for part in parts)
         sets = " \\sqcup ".join("\\{" + ", ".join(str(position) for position in part) + "\\}" for part in numbered_parts)
+        stored_matrix: list[Yaml] = [[value for value in row] for row in matrix]
         morphism: dict[str, Yaml] = {
             "target": target_entry.lattice.tag,
             "name": f"Diagonal into the summands ${sets}$",
             "description": ("Summand $j$ of the source maps diagonally into the selected coordinate-orthogonal summands of the target, counted from 1 in the stored basis."),
-            "matrix": matrix,
+            "matrix": stored_matrix,
         }
-        if scale != 1:
-            morphism["scale"] = scale
+        morphism["scale"] = scale
         held = source_entry.lattice.morphisms
         parsed_matrix = tuple(tuple(int(entry) for entry in row) for row in matrix)
         if any(existing.target == target_entry.lattice.tag and existing.matrix == parsed_matrix and existing.scale == scale for existing in held):
@@ -66,7 +69,7 @@ def store(root: Path, loaded: Corpus) -> list[str]:
         document = frontmatter.load(str(path))
         metadata = corpus.front_matter(document)
         stored = TypeAdapter(list[dict[str, Yaml]]).validate_python(metadata.get("morphisms", []))
-        metadata["morphisms"] = stored + morphisms
+        metadata["morphisms"] = [*stored, *morphisms]
         path.write_text(records.record_text(metadata, document.content))
     print(f"{sum(len(morphisms) for morphisms in new.values())} preamble-computed embeddings written to {len(new)} source lattice cards")
     return []

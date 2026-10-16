@@ -414,7 +414,7 @@ This is notation for that map, not a database normalization rule: $S(c)$ may its
 The subdivisions are the lines of a block matrix, as SageMath's `M.subdivisions()` returns them: a line $k$ lies between rows (or columns) $k$ and $k + 1$.
 Verification constructs the morphism $S(c) \to T$ in the preamble, which accepts the matrix exactly when $M^{\top} G_T M = c \, G_S$, and asks the preamble whether the parts that the lines cut are orthogonal summands of $T$ (rows) and of $S$ (columns).
 
-`latticedb enrich --summand-maps` asks the preamble operation `Lattices(ZZ).coordinate_diagonal_embeddings` for these embeddings and writes each one on its source lattice card, with the morphism naming its orthogonal-sum target $T$.
+`latticedb enrich-summand-maps` asks the preamble operation `Lattices(ZZ).coordinate_diagonal_embeddings` for these embeddings and writes each one on its source lattice card, with the morphism naming its orthogonal-sum target $T$.
 The preamble computes them as follows; lattice-db only matches the returned lattices to cards and serializes the matrices.
 The orthogonal summands of $T$ are the connected components of the graph on its basis in which $e_i$ and $e_j$ are adjacent when $b(e_i, e_j) \neq 0$; group them by their Gram matrix, $T = \bigoplus_M M^{n_M}$.
 The diagonal $x \mapsto (x, \ldots, x)$ embeds $M(k)$ into $M^k$.

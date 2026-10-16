@@ -421,7 +421,7 @@ def _mutually_orthogonal(blocks: Sequence[Sequence[FormModules.ElementMethods]])
 def _preserves_forms(source: FormModules.ParentMethods, target: FormModules.ParentMethods, images: Sequence[FormModules.ElementMethods]) -> bool:
     """Whether the module map `source -> target` with these generator images preserves the forms."""
     module_map = source.module_category().Mor(source, target)(images)
-    return bool(source.Mor(target).preserves_forms(module_map))
+    return bool(FormModules(source.base_ring()).Mor(source, target).preserves_forms(module_map))
 
 
 def local_admission_problems(lattice: Lattice) -> list[str]:

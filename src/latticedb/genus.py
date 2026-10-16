@@ -245,11 +245,11 @@ def computed(chosen: list[Request]) -> Iterator[dict[str, Yaml]]:
 def _generator_morphisms(tag: str, morphisms: list[dict[str, Yaml]], matrices: list[Yaml]) -> tuple[list[str], list[dict[str, Yaml]]]:
     """Place computed generators of O(L) on the lattice card and return their names."""
     names: list[str] = []
-    used_self_names = {morphism["name"] for morphism in morphisms if morphism.get("target") == tag and morphism.get("scale", 1) == 1 and isinstance(morphism.get("name"), str)}
+    used_self_names = {morphism["name"] for morphism in morphisms if isinstance(morphism.get("name"), str)}
     for index, matrix in enumerate(matrices, start=1):
         assert isinstance(matrix, list)
         existing = next(
-            (morphism for morphism in morphisms if morphism.get("target") == tag and morphism["matrix"] == matrix and morphism.get("scale", 1) == 1),
+            (morphism for morphism in morphisms if morphism.get("target") == tag and morphism["matrix"] == matrix and morphism.get("scale") == 1),
             None,
         )
         if existing is None:
@@ -259,7 +259,7 @@ def _generator_morphisms(tag: str, morphisms: list[dict[str, Yaml]], matrices: l
             while name in used_self_names:
                 name = f"{base} #{suffix}"
                 suffix += 1
-            morphisms.append({"target": tag, "name": name, "matrix": matrix})
+            morphisms.append({"target": tag, "name": name, "matrix": matrix, "scale": 1})
             used_self_names.add(name)
         else:
             assert isinstance(existing["name"], str)

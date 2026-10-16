@@ -95,8 +95,8 @@ def _expression_value(node: ast.AST, parameter: str, value: int) -> int:
     match node:
         case ast.Expression():
             return _expression_value(node.body, parameter, value)
-        case ast.Constant() if type(node.value) is int:
-            return node.value
+        case ast.Constant(value=int() as integer) if not isinstance(integer, bool):
+            return integer
         case ast.Name() if node.id == parameter:
             return value
         case ast.BinOp() if isinstance(node.op, (ast.Add, ast.Sub, ast.Mult)):

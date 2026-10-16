@@ -11,6 +11,7 @@ from urllib.request import Request, urlopen
 import frontmatter
 import yaml
 from cyclopts import App, Parameter
+from pydantic import TypeAdapter
 
 from latticedb import (
     bulk_index,
@@ -25,7 +26,7 @@ from latticedb import (
     site,
     summands,
 )
-from latticedb.model import Yaml
+from latticedb.model import GramTensor, Lattice, Yaml
 
 SERVED = Path("/var/www/static-sites/lattice-database")
 ADDRESS = "http://127.0.0.1/"
@@ -146,10 +147,11 @@ def regular_ternaries_seed(root: Root = Path()) -> None:
     held = certificates.load(root)
     written = 0
     for entry in regular_ternaries.entries():
-        key = corpus.gram_key(records.gram_tensor(entry.gram_tensor))
+        gram = TypeAdapter(GramTensor).validate_python(entry.gram_tensor)
+        key = corpus.gram_key(gram)
         if key not in index:
             path = _author(root, *regular_ternaries.record(entry))
-            corpus.append_index(root, path.stem, records.gram_tensor(entry.gram_tensor))
+            corpus.append_index(root, path.stem, gram)
             index[key] = [path.stem]
             written += 1
         for tag in index[key]:
@@ -199,7 +201,8 @@ def morphism(
     if scale is not None:
         added["scale"] = scale
     metadata = corpus.front_matter(document)
-    metadata["morphisms"] = [*metadata.get("morphisms", []), added]
+    existing = TypeAdapter(list[dict[str, Yaml]]).validate_python(metadata.get("morphisms", []))
+    metadata["morphisms"] = [*existing, added]
     path.write_text(records.record_text(metadata, document.content))
     print(path)
 
@@ -282,13 +285,11 @@ def enrich(
         tuple[str, ...],
         Parameter(help="Tag of a card to compute; repeat for each one. All cards when absent."),
     ] = (),
-    summand_maps: Annotated[bool, Parameter(help="Compute orthogonal summand maps over the corpus.")] = False,
     root: Root = Path(),
 ) -> None:
     """Compute ordinary derived card fields without certifying them."""
     loaded = corpus.load(root)
     selected = set(tag)
-    found: list[str] = []
     for entry in loaded.entries:
         lattice = entry.lattice
         if lattice.gram_tensor is None or (selected and lattice.tag not in selected):
@@ -301,10 +302,12 @@ def enrich(
         if updated != text:
             entry.path.write_text(updated)
             print(f"{entry.path}: derived values written")
-    if summand_maps and not tag:
-        problems = summands.store(root, loaded)
-        found.extend(problems)
-    _refuse(found)
+
+
+@app.command
+def enrich_summand_maps(*, root: Root = Path()) -> None:
+    """Write preamble-computed orthogonal summand maps over the corpus."""
+    _refuse(summands.store(root, corpus.load(root)))
 
 
 @app.command
@@ -332,14 +335,13 @@ def certify(
         document = frontmatter.load(str(entry.path))
         metadata = corpus.front_matter(document)
         computation = f"{lattice.tag} derive"
-        cited = metadata.get("certifications")
-        cited_hash = cited.get("derive") if isinstance(cited, dict) else None
+        cited_hash = lattice.certifications.get("derive")
         expected_hash = certificates.certification_hash(computation, lattice, records.derived_projection(metadata))
         if certificates.is_certified(held, computation, cited_hash, expected_hash):
             continue
         computed = records.derive(metadata)
         certificate_hash = certificates.certification_hash(computation, lattice, records.derived_projection(computed))
-        card_certifications = dict(computed.get("certifications") or {})
+        card_certifications: dict[str, Yaml] = {name: value for name, value in Lattice.model_validate(computed).certifications.items()}
         card_certifications["derive"] = certificate_hash
         computed["certifications"] = card_certifications
         entry.path.write_text(records.record_text(computed, document.content))

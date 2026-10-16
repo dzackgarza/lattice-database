@@ -12,11 +12,16 @@ import re
 from collections.abc import Mapping
 from pathlib import Path
 
+from dzack_research.preamble.categories.abstract_categories.mor_categories import CategoricalMor
 from dzack_research.preamble.categories.lattices import Lattices
+from dzack_research.preamble.categories.modules.framed.formed.form_modules import FormModules
+from dzack_research.preamble.categories.modules.module_morphisms.module_morphisms import ModuleMorphismMethods
+from dzack_research.preamble.categories.modules.pure.modules import Modules
 from dzack_research.preamble.rings import session_ring_objects
 from pydantic import BaseModel, ConfigDict, TypeAdapter
 
 from latticedb import corpus
+from latticedb.corpus import Matrix
 from latticedb.model import Lattice, Tag
 
 ZZ = session_ring_objects()["ZZ"]
@@ -86,7 +91,7 @@ def symbol_group(symbol: str) -> list[int]:
     return sorted(int(match[1]) for match in found if match is not None for _ in range(int(match[3])))
 
 
-def _discriminant_prime_powers(lattice) -> tuple[int, ...]:
+def _discriminant_prime_powers(lattice: Lattices.ParentMethods) -> tuple[int, ...]:
     """The orders of the cyclic prime-power factors of the discriminant group, in increasing order.
 
     The preamble splits the discriminant group into its primary components; the
@@ -96,7 +101,7 @@ def _discriminant_prime_powers(lattice) -> tuple[int, ...]:
     return tuple(sorted(abs(int(order)) for prime in components.index_set() for order in components[prime].invariant_factors()))
 
 
-def _coinvariant_summary(lattice) -> tuple[int, int, int, tuple[int, ...]]:
+def _coinvariant_summary(lattice: Lattices.ParentMethods) -> tuple[int, int, int, tuple[int, ...]]:
     """`(c, n_+, |q|, group of q)` as Table 10.2 prints them."""
     signature = lattice.signature_pair()
     return (
@@ -107,7 +112,7 @@ def _coinvariant_summary(lattice) -> tuple[int, int, int, tuple[int, ...]]:
     )
 
 
-def _printed_summary(lattice) -> tuple[int, tuple[int, int], int, tuple[int, ...]]:
+def _printed_summary(lattice: Lattices.ParentMethods) -> tuple[int, tuple[int, int], int, tuple[int, ...]]:
     """`(rank, signature, |q|, group of q)` as Table 10.3 states them for a printed Gram tensor."""
     signature = lattice.signature_pair()
     return (
@@ -118,7 +123,26 @@ def _printed_summary(lattice) -> tuple[int, tuple[int, int], int, tuple[int, ...
     )
 
 
-def basis_isometry(source, target, basis_rows):
+def _module_map(value: object) -> CategoricalMor.ElementMethods:
+    """Validate the native generated arrow and its module-method interface."""
+    if not isinstance(value, CategoricalMor.ElementMethods) or not isinstance(value, ModuleMorphismMethods):
+        raise TypeError("the owned module category must return a generated module morphism")
+    return value
+
+
+def _linear_map(value: CategoricalMor.ElementMethods) -> ModuleMorphismMethods:
+    if not isinstance(value, ModuleMorphismMethods):
+        raise TypeError("the arrow must implement the owned module morphism methods")
+    return value
+
+
+def _module_parent(value: object) -> Modules.ParentMethods:
+    if not isinstance(value, Modules.ParentMethods):
+        raise TypeError("the arrow endpoint must implement the owned module methods")
+    return value
+
+
+def basis_isometry(source: FormModules.ParentMethods, target: FormModules.ParentMethods, basis_rows: Matrix) -> CategoricalMor.ElementMethods | None:
     """The printed change of basis `P` as an isometry from `source` onto `target`, or `None`.
 
     The columns of `P` are the images of the generators of `source` in the
@@ -126,13 +150,13 @@ def basis_isometry(source, target, basis_rows):
     preserves the forms and is bijective.
     """
     images = tuple(target(column) for column in zip(*basis_rows, strict=True))
-    module_map = source.module_category().Mor(source, target)(images)
-    if source.Mor(target).preserves_forms(module_map) and module_map.is_injective() and module_map.is_surjective():
+    module_map = _module_map(source.module_category().Mor(source, target)(images))
+    if FormModules(source.base_ring()).Mor(source, target).preserves_forms(module_map) and _linear_map(module_map).is_injective() and _linear_map(module_map).is_surjective():
         return module_map
     return None
 
 
-def _primitive_orthogonal_pair(ambient, first, second) -> bool:
+def _primitive_orthogonal_pair(ambient: Lattices.ParentMethods, first: Matrix, second: Matrix) -> bool:
     """Whether the column spans of two stored embedding matrices are complementary in `ambient`.
 
     The two spans must be orthogonal, of ranks summing to the rank of `ambient`,

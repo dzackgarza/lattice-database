@@ -206,3 +206,14 @@ def test_the_corpus_loads_lattice_families_and_checks_their_slugs(tmp_path: Path
         "og6-polarized-split",
     ]
     assert [problem for problem in checks.report(tmp_path) if "lattice-families" in problem] == []
+
+
+@pytest.mark.parametrize("literal", ["True", "False", "1.5", "'2'", "None"])
+def test_family_expression_parser_refuses_noninteger_literals(literal: str) -> None:
+    with pytest.raises(ValidationError, match="integer arithmetic"):
+        LatticeFamily.model_validate(_family(rank=1, signature=[1, 0], gram_template=[[f"d + {literal}"]]))
+
+
+def test_family_expression_parser_accepts_integer_literals() -> None:
+    family = LatticeFamily.model_validate(_family(rank=1, signature=[1, 0], gram_template=[["d + 2"]]))
+    assert family.gram_template == (("d + 2",),)

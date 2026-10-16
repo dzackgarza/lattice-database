@@ -127,6 +127,8 @@ def held(corpus: Corpus) -> Held:
     grouped: dict[tuple[Tag, Tag], list[tuple[Matrix, int]]] = {}
     for entry in corpus.entries:
         for morphism in entry.lattice.morphisms:
+            if morphism.scale is None:
+                raise ValueError("morphism scale must be stated before indexing morphisms for verification")
             grouped.setdefault((entry.lattice.tag, morphism.target), []).append((morphism.matrix, morphism.scale))
     return {pair: tuple(values) for pair, values in grouped.items()}
 

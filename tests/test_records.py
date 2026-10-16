@@ -187,9 +187,9 @@ def test_a_derive_certificate_binds_the_computed_values_for_its_gram_tensor(
 
 def test_morphism_authors_stored_map_data(tmp_path: Path) -> None:
     root = write_corpus(tmp_path)
-    run("morphism", "0001", "0001", "--name", "identity", "--matrix", "[[1]]", "--root", str(root))
-    run("morphism", "0001", "0001", "--name", "negation", "--matrix", "[[-1]]", "--root", str(root))
-    run("morphism", "0001", "0001", "--name", "doubling", "--matrix", "[[2]]", "--root", str(root))
+    run("morphism", "0001", "0001", "--name", "identity", "--matrix", "[[1]]", "--scale", "1", "--root", str(root))
+    run("morphism", "0001", "0001", "--name", "negation", "--matrix", "[[-1]]", "--scale", "1", "--root", str(root))
+    run("morphism", "0001", "0001", "--name", "doubling", "--matrix", "[[2]]", "--scale", "1", "--root", str(root))
     (entry,) = corpus.load(root).entries
     assert [(morphism.name, morphism.matrix, morphism.scale) for morphism in entry.lattice.morphisms] == [
         ("identity", ((1,),), 1),
