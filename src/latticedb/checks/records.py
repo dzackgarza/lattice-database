@@ -21,7 +21,17 @@ def shared_gram_problems(loaded: Corpus) -> list[str]:
 def problems(loaded: Corpus, held: Certificates) -> list[str]:
     found: list[str] = []
     for entry in loaded.entries:
-        missing = [name for name in ("rank", "gram_tensor", "signature", "determinant", "definiteness") if getattr(entry.lattice, name) is None]
+        missing = [
+            name
+            for name, value in (
+                ("rank", entry.lattice.rank),
+                ("gram_tensor", entry.lattice.gram_tensor),
+                ("signature", entry.lattice.signature),
+                ("determinant", entry.lattice.determinant),
+                ("definiteness", entry.lattice.definiteness),
+            )
+            if value is None
+        ]
         if missing:
             found.append(f"{entry.path}: fields awaiting source transcription or enrichment: {', '.join(missing)}")
             continue
