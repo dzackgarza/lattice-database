@@ -74,7 +74,7 @@ def _nebe_sloane_rows(path: Path) -> Iterable[dict[str, Yaml]]:
             "source": "nebe_sloane",
             "id": f"union:{entry.ordinal}",
             "name": entry.name,
-            "sections": entry.sections,
+            "sections": {heading: list[Yaml](lines) for heading, lines in entry.sections.items()},
         }
 
 

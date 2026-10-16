@@ -46,8 +46,8 @@ def table(path: Path, *, odd_form: bool) -> list[BrandtIntrauEntry]:
         if match is None:
             continue
         assert discriminant < 0, f"{path}:{line_number}: form without discriminant"
-        number, *coefficients = (int(value) for value in match.groups())
-        entries.append(BrandtIntrauEntry(path.name, line_number, number, discriminant, tuple(coefficients), odd_form))
+        number, a, b, c, d, e, f = (int(value) for value in match.groups())
+        entries.append(BrandtIntrauEntry(path.name, line_number, number, discriminant, (a, b, c, d, e, f), odd_form))
     return entries
 
 

@@ -115,10 +115,10 @@ def record(entry: TernaryEntry) -> tuple[dict[str, Yaml], str]:
         "name": name,
         "latex": name,
         "aliases": [],
-        "gram_tensor": entry.gram_tensor,
+        "gram_tensor": [list(row) for row in entry.gram_tensor],
         "families": [],
         "related": [],
-        "references": [entry.reference],
+        "references": [dict[str, Yaml](entry.reference)],
         "definite": {field: entry.proved for field in entry.certified},
     }
     prose = (

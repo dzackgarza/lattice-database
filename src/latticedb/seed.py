@@ -3,6 +3,7 @@
 from pathlib import Path
 
 import frontmatter
+from pydantic import TypeAdapter
 
 from latticedb import corpus, nebe_sloane, records
 from latticedb.model import Yaml
@@ -38,9 +39,10 @@ def _reference(source: str, source_id: str, row: dict[str, Yaml]) -> dict[str, Y
 
 
 def _archive_card(row: dict[str, Yaml], source_id: str) -> tuple[dict[str, Yaml], str]:
-    sections = row["sections"]
-    if not isinstance(sections, dict):
+    raw_sections = row["sections"]
+    if not isinstance(raw_sections, dict):
         raise ValueError(f"{source_id} has no archive sections")
+    sections = TypeAdapter(dict[str, list[str]]).validate_python(raw_sections, strict=True)
     title = str(row["name"])
     name = f"{title} ({source_id})"
     fields: dict[str, Yaml] = {
@@ -64,7 +66,12 @@ def _archive_card(row: dict[str, Yaml], source_id: str) -> tuple[dict[str, Yaml]
     gram = sections.get("GRAM_MATRIX") or sections.get("GRAM")
     if isinstance(gram, list) and gram:
         try:
-            matrix = nebe_sloane.maple_components(gram, int(fields["rank"])) if "GRAM_MATRIX" in sections else nebe_sloane.components(gram)
+            if "GRAM_MATRIX" in sections:
+                rank = fields["rank"]
+                assert isinstance(rank, int)
+                matrix = nebe_sloane.maple_components(gram, rank)
+            else:
+                matrix = nebe_sloane.components(gram)
             fields["gram_tensor"] = [list(line) for line in matrix]
         except ArithmeticError, AssertionError, KeyError, ValueError, IndexError, SyntaxError:
             pass
@@ -156,7 +163,7 @@ def run(root: Path, limit: int | None = None) -> tuple[int, int, tuple[str, ...]
     missing: list[str] = []
     for path in paths:
         document = frontmatter.load(str(path))
-        row = dict(document.metadata)
+        row = corpus.front_matter(document)
         fields, prose = card(row)
         if "gram_tensor" not in fields:
             missing.append(f"{row.get('source')}:{row.get('id')}")

@@ -41,7 +41,7 @@ class NippEntry:
 
 def _lines(path: Path) -> list[str]:
     page = path.read_text(encoding="latin-1")
-    blocks = _PRE.findall(page)
+    blocks = [match.group(1) for match in _PRE.finditer(page)]
     assert len(blocks) == 1, f"{path}: expected one table"
     return unescape(blocks[0]).splitlines()
 
