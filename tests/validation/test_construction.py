@@ -39,6 +39,10 @@ def _owned(lattice: Lattice):
 
 def test_stored_lattice_morphisms_construct_in_the_preamble(loaded: corpus.Corpus) -> None:
     cards = {entry.lattice.tag: entry.lattice for entry in loaded.entries}
+    for source_tag, source_card in cards.items():
+        for stored in source_card.morphisms:
+            assert stored.scale is not None, f"{source_tag} -> {stored.target}: source must state the morphism scale before verification"
+
     owned = {tag: _owned(lattice) for tag, lattice in cards.items()}
 
     for source_tag, source_card in cards.items():
