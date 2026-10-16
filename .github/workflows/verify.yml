@@ -35,7 +35,7 @@ jobs:
           enable-cache: false
       - name: Locate SageMath
         run: |
-          echo "SAGE_BIN=/sage/sage" >> "$GITHUB_ENV"
+          echo "SAGE_BIN=/sage/.venv/bin/sage" >> "$GITHUB_ENV"
           /sage/.venv/bin/python -c 'import sys, sage.all; assert sys.version_info >= (3, 14); print(sys.version)'
       - name: Install lattice database into SageMath
         run: |
