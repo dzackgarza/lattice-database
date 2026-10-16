@@ -14,8 +14,8 @@ def test_an_unstated_morphism_scale_remains_unknown() -> None:
 
 
 def test_verifying_a_morphism_requires_its_stated_scale() -> None:
-    source = Lattice.model_validate({"tag": "0001", "name": "source", "rank": 1, "gram_tensor": [[2]]})
-    target = Lattice.model_validate({"tag": "0002", "name": "target", "rank": 1, "gram_tensor": [[2]]})
+    source = Lattice.model_validate({"tag": "0001", "name": "source", "latex": "S", "rank": 1, "gram_tensor": [[2]]})
+    target = Lattice.model_validate({"tag": "0002", "name": "target", "latex": "T", "rank": 1, "gram_tensor": [[2]]})
     morphism = Morphism.model_validate({"target": "0002", "name": "map", "matrix": [[1]]})
     with pytest.raises(ValueError, match="morphism scale must be stated"):
         morphism_problems(morphism, source, target)
