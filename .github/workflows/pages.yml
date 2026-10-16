@@ -41,7 +41,7 @@ jobs:
               /sage/.venv/bin/python -c "import sys, sage.all; assert sys.version_info >= (3, 14)"
               apt-get update
               apt-get install --yes /workspace/pandoc.deb
-              /sage/.venv/bin/uv pip install --python /sage/.venv/bin/python -e research -e .
+              uv pip install --python /sage/.venv/bin/python -e research -e .
               /sage/.venv/bin/python -m latticedb build
             '
       - uses: actions/configure-pages@983d7736d9b0ae728b81ab479565c72886d7745b # v5
