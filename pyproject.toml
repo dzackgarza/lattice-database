@@ -32,3 +32,7 @@ dev = [
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
+
+# Project category providers are the research preamble consumed by lookup.sage.
+[tool.sage-mypy-category-plugin]
+packages = ["dzack_research.preamble"]
