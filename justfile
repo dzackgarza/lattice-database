@@ -133,3 +133,7 @@ tensor-boundary:
         exit 1
     fi
     echo "No prohibited syntax detected; categorical ownership still requires source review."
+
+# Run the scheduled whole-tree audit (semgrep and debt scans) through the central implementation.
+ambient:
+    @just -f ~/ai-review-ci/justfiles/sage.just -d . ambient
