@@ -4,7 +4,7 @@ name: format
     # Nightly, 06:00 UTC. The commit gate leaves lattices/ to this job (justfile,
     # ai_review_ci_format_scheduled_dirs).
     - cron: '0 6 * * *'
-  workflow_dispatch: null
+  workflow_dispatch:
 permissions:
   contents: write
 concurrency:
@@ -23,6 +23,14 @@ jobs:
           enable-cache: false
       - name: Install just
         run: sudo apt-get install --yes just
+      - name: Install pandoc-flowmark (pinned)
+        run: |
+          tag=flowmark-3.10.2-4
+          curl -sSL -o /tmp/pandoc-flowmark.tar.gz "https://github.com/dzackgarza/pandoc/releases/download/$tag/$tag-linux-amd64.tar.gz"
+          echo "50ce56aa651ce19e94a7c9f2d0376f3b09510396659f5e39a56fff9f3a83d2a9  /tmp/pandoc-flowmark.tar.gz" | sha256sum -c -
+          tar xzf /tmp/pandoc-flowmark.tar.gz -C /tmp
+          sudo install -m755 "/tmp/$tag-linux-amd64/pandoc-flowmark" /usr/local/bin/pandoc-flowmark
+          pandoc-flowmark --version | head -1
       - run: just format-cards
       - name: Commit the formatted cards
         run: |

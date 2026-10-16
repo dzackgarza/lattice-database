@@ -2,7 +2,7 @@ name: verify
 'on':
   schedule:
     - cron: 17 3 * * *
-  workflow_dispatch: null
+  workflow_dispatch:
 permissions:
   contents: read
 concurrency:
@@ -13,7 +13,7 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 350
     container:
-      image: sagemath/sagemath:latest
+      image: ghcr.io/dzackgarza/sage:develop
       options: --user root
     defaults:
       run:
@@ -34,15 +34,12 @@ jobs:
         with:
           enable-cache: false
       - name: Locate SageMath
-        run: 'sage_bin=$(command -v sage)
-
-          echo "SAGE_BIN=$sage_bin" >> "$GITHUB_ENV"
-
-          '
+        run: |
+          echo "SAGE_BIN=/sage/sage" >> "$GITHUB_ENV"
+          /sage/.venv/bin/python -c 'import sys, sage.all; assert sys.version_info >= (3, 14); print(sys.version)'
       - name: Install lattice database into SageMath
         run: |
-          sage_python="$("$SAGE_BIN" -c 'import sys; print(sys.executable)')"
-          uv pip install --python "$sage_python" -e . pytest
+          uv pip install --python /sage/.venv/bin/python -e research -e . pytest
       - name: Verify lattice cards and certificate hashes
         run: |
           sage_python="$("$SAGE_BIN" -c 'import sys; print(sys.executable)')"
