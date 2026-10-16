@@ -14,7 +14,7 @@ from pathlib import Path
 
 from dzack_research.preamble.categories.abstract_categories.mor_categories import CategoricalMor
 from dzack_research.preamble.categories.lattices import Lattices
-from dzack_research.preamble.categories.modules.framed.formed.form_modules import FormModules
+from dzack_research.preamble.categories.modules.framed.formed.form_modules import FormedModuleMor, FormModules
 from dzack_research.preamble.categories.modules.module_morphisms.module_morphisms import ModuleMorphismMethods
 from dzack_research.preamble.categories.modules.pure.modules import Modules
 from dzack_research.preamble.rings import session_ring_objects
@@ -151,7 +151,10 @@ def basis_isometry(source: FormModules.ParentMethods, target: FormModules.Parent
     """
     images = tuple(target(column) for column in zip(*basis_rows, strict=True))
     module_map = _module_map(source.module_category().Mor(source, target)(images))
-    if FormModules(source.base_ring()).Mor(source, target).preserves_forms(module_map) and _linear_map(module_map).is_injective() and _linear_map(module_map).is_surjective():
+    form_morphisms = FormModules(source.base_ring()).Mor(source, target)
+    if not isinstance(form_morphisms, FormedModuleMor):
+        raise TypeError("the public form-module Mor must implement the owned form-preservation query")
+    if form_morphisms.preserves_forms(module_map) and _linear_map(module_map).is_injective() and _linear_map(module_map).is_surjective():
         return module_map
     return None
 

@@ -44,6 +44,7 @@ def test_stored_lattice_morphisms_construct_in_the_preamble(loaded: corpus.Corpu
     for source_tag, source_card in cards.items():
         for stored in source_card.morphisms:
             target_card = cards[stored.target]
+            assert stored.scale is not None, f"{source_tag} -> {stored.target}: source must state the morphism scale before verification"
             source = owned[source_tag].twist(stored.scale)
             target = owned[target_card.tag]
             source.Mor(target)(tuple(target(image) for image in stored.images))

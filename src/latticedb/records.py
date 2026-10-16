@@ -15,7 +15,7 @@ from itertools import combinations
 
 from dzack_research.preamble.categories.coxeter_diagrams import CoxeterDiagrams, RootedCoxeterDiagrams
 from dzack_research.preamble.categories.lattices import DefiniteLattices, Lattices
-from dzack_research.preamble.categories.modules.framed.formed.form_modules import FormModules, FreeFormModules
+from dzack_research.preamble.categories.modules.framed.formed.form_modules import FormedModuleMor, FormModules, FreeFormModules
 from dzack_research.preamble.categories.modules.pure.modules import Modules
 from dzack_research.preamble.categories.rings.ring_foundation import _OwnedRingElement, _OwnedRingParent
 from dzack_research.preamble.categories.sets.finite_families import finite_family
@@ -421,7 +421,10 @@ def _mutually_orthogonal(blocks: Sequence[Sequence[FormModules.ElementMethods]])
 def _preserves_forms(source: FormModules.ParentMethods, target: FormModules.ParentMethods, images: Sequence[FormModules.ElementMethods]) -> bool:
     """Whether the module map `source -> target` with these generator images preserves the forms."""
     module_map = source.module_category().Mor(source, target)(images)
-    return bool(FormModules(source.base_ring()).Mor(source, target).preserves_forms(module_map))
+    form_morphisms = FormModules(source.base_ring()).Mor(source, target)
+    if not isinstance(form_morphisms, FormedModuleMor):
+        raise TypeError("the public form-module Mor must implement the owned form-preservation query")
+    return bool(form_morphisms.preserves_forms(module_map))
 
 
 def local_admission_problems(lattice: Lattice) -> list[str]:

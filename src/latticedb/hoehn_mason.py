@@ -21,6 +21,7 @@ from pathlib import Path
 from dzack_research.preamble.categories.abstract_categories.mor_categories import CategoricalMor
 from dzack_research.preamble.categories.lattices import Lattices
 from dzack_research.preamble.categories.modules.framed.formed.form_modules import (
+    FormedModuleMor,
     FormModules,
 )
 from dzack_research.preamble.categories.modules.framed.framed_free_modules import FramedFreeModules
@@ -252,7 +253,10 @@ def check(
             continue
         sublattice, inclusion = coinvariant
         endomorphisms = tuple(_endomorphism(lattice, generator) for generator in entry.stabilizer_generators)
-        if not all(FormModules(lattice.base_ring()).Mor(lattice, lattice).preserves_forms(endomorphism) and _fixes(endomorphism, fixed[1]) for endomorphism in endomorphisms):
+        form_morphisms = FormModules(lattice.base_ring()).Mor(lattice, lattice)
+        if not isinstance(form_morphisms, FormedModuleMor):
+            raise TypeError("the public form-module Mor must implement the owned form-preservation query")
+        if not all(form_morphisms.preserves_forms(endomorphism) and _fixes(endomorphism, fixed[1]) for endomorphism in endomorphisms):
             found.append(f"{name}: a generator of C is not an isometry of leech[1] that fixes B")
             continue
         restrictions = tuple(_restriction(endomorphism, inclusion) for endomorphism in endomorphisms)

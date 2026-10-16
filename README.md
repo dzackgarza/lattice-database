@@ -411,6 +411,11 @@ morphisms:
 The matrix is in the bases of the two records, with rank $T$ rows and rank $S$ columns: column $j$ lists the coordinates of $\varphi(e_j)$.
 A morphism with `scale: c` has domain the twist $S(c)$ of its source card $S$, so $b_T(\varphi x,\varphi y)=c\,b_S(x,y)$.
 This is notation for that map, not a database normalization rule: $S(c)$ may itself also have a lattice card.
+
+The `scale` field may be absent while a card awaits source transcription; its value then remains unknown.
+Scale-dependent verification and generation require an explicit value.
+Use `--scale 1` when authoring a scale-one morphism.
+
 The subdivisions are the lines of a block matrix, as SageMath's `M.subdivisions()` returns them: a line $k$ lies between rows (or columns) $k$ and $k + 1$.
 Verification constructs the morphism $S(c) \to T$ in the preamble, which accepts the matrix exactly when $M^{\top} G_T M = c \, G_S$, and asks the preamble whether the parts that the lines cut are orthogonal summands of $T$ (rows) and of $S$ (columns).
 

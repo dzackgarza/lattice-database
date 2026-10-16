@@ -26,3 +26,13 @@ def test_source_intake_accepts_native_formed_modules_and_module_maps() -> None:
 def test_coordinate_embeddings_are_owned_category_methods() -> None:
     category = Lattices(session_ring_objects()["ZZ"])
     assert isinstance(category, Lattices.SubcategoryMethods)
+
+
+def test_public_form_morphism_query_implements_its_declared_owner() -> None:
+    from dzack_research.preamble.categories.modules.framed.formed.form_modules import FormedModuleMor
+
+    formed = hoehn_mason._formed(((Fraction(2),),))
+    query = FormModules(formed.base_ring()).Mor(formed, formed)
+    assert isinstance(query, FormedModuleMor)
+    lattice = Lattices(session_ring_objects()["ZZ"])([[2]])
+    assert isinstance(FormModules(lattice.base_ring()).Mor(lattice, lattice), FormedModuleMor)

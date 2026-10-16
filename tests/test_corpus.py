@@ -248,7 +248,7 @@ def test_the_inclusion_of_a_summand_is_a_morphism_whose_lines_cut_orthogonal_sum
 def test_the_summands_of_1_plus_1_give_its_inclusion_once_and_its_diagonal_at_scale_2(
     tmp_path: Path,
 ) -> None:
-    stated: list[dict[str, Yaml]] = [{"name": "first summand", "matrix": [[1], [0]]}]
+    stated: list[dict[str, Yaml]] = [{"name": "first summand", "matrix": [[1], [0]], "scale": 1}]
     directory = write_morphisms(write(tmp_path, rank_one("0001"), square_sum()), "0001", "0002", stated)
     assert summands.store(directory, corpus.load(directory)) == []
     assert summands.store(directory, corpus.load(directory)) == []
