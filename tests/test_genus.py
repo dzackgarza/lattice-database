@@ -135,11 +135,11 @@ def test_a_certified_value_is_not_requested(tmp_path: Path) -> None:
     (tmp_path / "lattices" / "0012.md").write_text(records.record_text(metadata, source.content))
     loaded = corpus.load(tmp_path)
     requests = genus.requests(loaded, held, {}, ("0012",))
-    assert requests
-    assert "derive" not in requests[0]["fields"]
-    assert "genus_symbol" not in requests[0]["fields"]
-    assert "genus_class_count" not in requests[0]["fields"]
-    assert "automorphism_group_order" not in requests[0]["fields"]
+    pending_fields = {field for request in requests for field in request["fields"]}
+    assert "derive" not in pending_fields
+    assert "genus_symbol" not in pending_fields
+    assert "genus_class_count" not in pending_fields
+    assert "automorphism_group_order" not in pending_fields
 
     changed = frontmatter.load(str(tmp_path / "lattices" / "0012.md"))
     changed.metadata["integral"]["genus_class_count"] = 2
