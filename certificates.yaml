@@ -7,9 +7,39 @@
 0011 derive:
   hash: e749f68dc94b5dafc646a4b4158294174169eaad14ace7cb852c6b977b8792de
   by: latticedb 0.1.0
+0012 definite.automorphism_group_generator_morphisms:
+  hash: 9eccb879b3f91766bebe1d7c7693ae2de7d5a44802809520e36438621a1f0cc6
+  by: research preamble
+0012 definite.automorphism_group_order:
+  hash: 518c36b1d85114c13ff98f1f712d7ece7d826ee3f9420edd577766363a099b1b
+  by: research preamble
 0012 derive:
   hash: c976badfa7598eade92c4767fcaa3ab20a9452667be939a4495ff21b08037030
   by: latticedb 0.1.0
+0012 form.integer_valued:
+  hash: 0616ca613d932b54e48992eee5ad49409284166a888a2f998af6e3f6e62f0b15
+  by: research preamble
+0012 integral.discriminant_sequence:
+  hash: eb5a259122f5b6ca9f8d852c0d63a3751319b641a287d1bab40e8f7c81a14162
+  by: research preamble
+0012 integral.elementary_primes:
+  hash: ff7e739787a48edeec9777c269763731f783015189ebaaef1c392c8b814e0244
+  by: research preamble
+0012 integral.genus_class_count:
+  hash: b771bacdfbbc0d3f414c8db277746781b08b9f05d41b29f8522c234d23bb6e54
+  by: research preamble
+0012 integral.genus_symbol:
+  hash: 90e760aca6fb86f3f49f301e0f4e86525a02c896bf43ea994654e432fe7fa286
+  by: research preamble
+0012 integral.hyperbolic_index:
+  hash: 8e27cfede336c1adb8689f8cddd9899c3be18688a6ff72f7830dedd19f575b48
+  by: research preamble
+0012 integral.overlattice_count:
+  hash: e0de6060c871744d04b394a62c9d6f55c19990e6fc8972ed36b7f3ce74b3ff99
+  by: research preamble
+0012 integral.primitive_orbits:
+  hash: 5a4430096eb02533237fe05d0abeb1c97203b4d0fc7f4e828937a335ae18a3d9
+  by: research preamble
 0022 definite.regular:
   hash: fe243acbf92ce2783463cdaa1cce3543b3046eae669f6a6974fe292aae8e5fc8
   by: 'W. C. Jagy, I. Kaplansky and A. Schiemann, There are 913 regular ternary forms,
