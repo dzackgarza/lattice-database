@@ -31,6 +31,9 @@ from latticedb.invariant_models import (
     DiscriminantSequenceData as DiscriminantSequenceData,
 )
 from latticedb.invariant_models import (
+    FormData as FormData,
+)
+from latticedb.invariant_models import (
     GroupData as GroupData,
 )
 from latticedb.invariant_models import (
@@ -206,6 +209,7 @@ class Lattice(Record):
     families: Annotated[tuple[Family, ...], Field(strict=False)] = Field(default=(), description="Named families that contain the lattice.")
     related: Annotated[tuple[Related, ...], Field(strict=False)] = Field(default=(), description="Related lattices in the catalogue.")
     references: Annotated[tuple[Reference, ...], Field(strict=False)] = Field(default=(), description="Literature for the lattice.")
+    form: FormData | None = Field(default=None, description=FormData.__doc__)
     integral: IntegralData | None = Field(default=None, description=IntegralData.__doc__)
     definite: DefiniteData | None = Field(default=None, description=DefiniteData.__doc__)
     indefinite: IndefiniteData | None = Field(default=None, description=IndefiniteData.__doc__)
@@ -245,6 +249,8 @@ class Lattice(Record):
         return self
 
     def _shape_problems(self) -> Iterator[InitErrorDetails]:
+        if self.form is not None and self.form.integer_valued is False and self.integral is not None:
+            yield _problem("integrality_conflict", "a non-integer-valued form cannot carry the integral hypothesis", ("integral",))
         rank = self.rank
         if rank is not None and self.gram_tensor is not None and (len(self.gram_tensor) != rank or any(len(row) != rank for row in self.gram_tensor)):
             yield _problem(

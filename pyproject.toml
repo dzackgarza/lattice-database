@@ -35,6 +35,8 @@ dev = [
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
+# Keep diagnostics from evaluating representations of lazy preamble objects.
+addopts = "--tb=short"
 
 # Project category providers are the research preamble consumed by lookup.sage.
 [tool.sage-mypy-category-plugin]

@@ -226,7 +226,8 @@ The block itself is stored data: the schema validates its shape, while mathemati
 
 | Block | Hypothesis on the lattice | Fields |
 | --- | --- | --- |
-| `integral` | every $b(e_i, e_j)$ is an integer | `parity`, `level`, `modular_scale`, `discriminant_group`, `discriminant_sequence`, `overlattice_count`, `delta`, `bad_reduction_primes`, `quadratic_character`, `genus_symbol`, `genus_class_count`, `spinor_genus_count`, `spinor_genera`, `hyperbolic_index`, `primitive_orbits`, `anisotropic_primes`, `local_representations`, `local_densities` |
+| `form` | a stored bilinear form | `integer_valued` |
+| `integral` | every $b(e_i, e_j)$ is an integer | `parity`, `elementary_primes`, `level`, `modular_scale`, `discriminant_group`, `discriminant_sequence`, `overlattice_count`, `delta`, `bad_reduction_primes`, `quadratic_character`, `genus_symbol`, `genus_class_count`, `spinor_genus_count`, `spinor_genera`, `hyperbolic_index`, `primitive_orbits`, `anisotropic_primes`, `local_representations`, `local_densities` |
 | `definite` | $b$ is positive or negative definite | `minimum`, `kissing_number`, `minimal_vectors`, `perfect`, `regular`, `spinor_regular`, `automorphism_group_order`, `automorphism_group_generator_morphisms`, `theta_series`, `genus_theta_series`, `theta_series_cuspidal_component`, `cusp_form_coordinates`, `siegel_eisenstein_coefficients`, `root_system`, `roots` |
 | `root_span` | $b$ is not definite | `roots`, `norms`, `summands`, `embedding` |
 | `root_sublattice` | $b$ is definite, or the record has `root_span` | `invariant_factors`, `norms` |
@@ -608,3 +609,7 @@ Sources read on 2026-10-02 that yield nothing, each because the page is not data
 - Scholl's packungen site, <http://www.home.unix-ag.org/scholl/packungen/>: an interactive search over images, no lattice data to read.
 
 - Schiemann's extrep pages: moved with his KIT group and not answering as data on 2026-10-02.
+
+`form.integer_valued` records the preamble's integrality predicate, including `false`; absence claims nothing.
+`integral.elementary_primes` is `[p]` for a nontrivial elementary abelian discriminant group of prime exponent `p`, `[]` for a negative answer, and absent when unknown.
+Certification names are `<tag> form.integer_valued` and `<tag> integral.elementary_primes`. Collection labels read these stored values.

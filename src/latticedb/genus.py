@@ -25,6 +25,7 @@ from latticedb import certificates, corpus, exceeded, records
 from latticedb.certificates import Certificate, Certificates
 from latticedb.model import (
     DefiniteData,
+    FormData,
     HyperbolicData,
     IntegralData,
     Lattice,
@@ -34,6 +35,8 @@ from latticedb.model import (
 )
 
 BLOCKS: dict[str, tuple[str, type[BaseModel]]] = {
+    "integer_valued": ("form", FormData),
+    "elementary_primes": ("integral", IntegralData),
     "genus_symbol": ("integral", IntegralData),
     "genus_class_count": ("integral", IntegralData),
     "overlattice_count": ("integral", IntegralData),
@@ -101,6 +104,8 @@ def certified_value(field: str, value: Yaml, lattice: Lattice | None = None) -> 
 def applies(field: str, lattice: Lattice) -> bool:
     """Whether the preamble exposes `field` on this stored lattice."""
     match field:
+        case "integer_valued":
+            return True
         case "automorphism_group_order" | "automorphism_group_generator_morphisms":
             return lattice.definite is not None
         case _ if lattice.integral is None:

@@ -251,9 +251,19 @@ class LocalRepresentation(Record):
     )
 
 
+class FormData(Record):
+    """Stored predicates of the lattice's bilinear form, including negative answers."""
+
+    integer_valued: bool | None = Field(default=None, description="Whether the bilinear form takes values in the integers; null means unknown.")
+
+
 class IntegralData(Record):
     """Stored invariants of an integer-valued lattice, when available."""
 
+    elementary_primes: Annotated[tuple[Annotated[int, Field(ge=2)], ...], Field(strict=False, max_length=1)] | None = Field(
+        default=None,
+        description="The singleton [p] when the nontrivial discriminant group is elementary abelian of prime exponent p; [] when it is not; null means unknown.",
+    )
     parity: Literal["even", "odd"] = Field(description="`even` when $b(x, x)$ is even for every $x$, `odd` otherwise.")
     level: Annotated[int, Field(gt=0)] | None = Field(
         default=None,
