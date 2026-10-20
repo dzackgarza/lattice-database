@@ -45,6 +45,10 @@ def test_selected_card_certification_does_not_verify_unrelated_morphisms(tmp_pat
     (tmp_path / corpus.RETIRED_FILE).write_text("{}\n")
     for tag in ("0012", "0016", "0026"):
         shutil.copy(REPOSITORY / "lattices" / f"{tag}.md", tmp_path / "lattices")
+    path = tmp_path / "lattices" / "0016.md"
+    document = frontmatter.load(str(path))
+    del document.metadata["morphisms"][0]["scale"]
+    path.write_text(records.record_text(corpus.front_matter(document), document.content))
     requested = genus.requests(corpus.load(tmp_path), {}, {}, ("0012",))
     assert [request["tag"] for request in requested] == ["0012"]
 

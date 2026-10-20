@@ -43,7 +43,11 @@ def test_stored_lattice_morphisms_construct_in_the_preamble(loaded: corpus.Corpu
         for stored in source_card.morphisms:
             assert stored.scale is not None, f"{source_tag} -> {stored.target}: source must state the morphism scale before verification"
 
-    owned = {tag: _owned(lattice) for tag, lattice in cards.items()}
+    # Construct every endpoint of a stored morphism. Cards with no such claim
+    # may be sparse, and do not need mathematical construction for this check.
+    endpoints = {source_tag for source_tag, card in cards.items() if card.morphisms}
+    endpoints.update(stored.target for card in cards.values() for stored in card.morphisms)
+    owned = {tag: _owned(cards[tag]) for tag in sorted(endpoints)}
 
     for source_tag, source_card in cards.items():
         for stored in source_card.morphisms:

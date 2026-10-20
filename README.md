@@ -34,6 +34,7 @@ The site is served locally at <http://lattice-database.localhost/>, and publishe
 | `src/latticedb/graphs.py` | Schema for weighted vertices, edges and stored graph-classification labels; no diagram recognition |
 | `src/latticedb/catalogues.py` | Schemas of Lie groups, arithmetic groups, genera, polytopes, toric varieties, maps, local systems and operators |
 | `src/latticedb/records.py` | Calls preamble-owned lattice operations for enrichment/CI verification and serializes returned values; writes cards as files |
+| `src/latticedb/legacy_morphisms.py` | Restores explicit morphism scales from matching cards at the pinned import revision, whose schema declared omitted scales as 1; it leaves later morphisms unknown |
 | `src/latticedb/nebe_sloane.py` | Reads an entry of the Catalogue of Lattices (G. Nebe, N. J. A. Sloane) and writes it as the declared fields of a record |
 | `src/latticedb/hashimoto.py` | Reads Tables 10.2 and 10.3 of Hashimoto for source intake and provenance collation; it is not part of mathematical verification |
 | `src/latticedb/hoehn_mason.py` | Reads the Höhn--Mason ancillary data for source intake and provenance collation; it is not part of mathematical verification |
