@@ -90,9 +90,11 @@ deduplicate:
 test-commit: tensor-boundary
     @just -f ~/ai-review-ci/justfiles/sage.just -d . test-commit
 
-test-push:
-    @just -f ~/ai-review-ci/justfiles/sage.just -d . test-push
+# Keep local pushes bounded: shared commit checks and the small schema specimen.
+# The shared Sage push gate discovers the full corpus suite, so it belongs in CI.
+test-push: test-commit test
 
+# Run the complete shared gate, including every source and corpus test, in CI.
 test-ci:
     @just -f ~/ai-review-ci/justfiles/sage.just -d . test-ci
 
