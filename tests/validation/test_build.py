@@ -18,6 +18,11 @@ ROOT = Path(__file__).resolve().parent.parent.parent
 
 
 @pytest.fixture(scope="module")
+def loaded() -> corpus.Corpus:
+    return corpus.load(ROOT)
+
+
+@pytest.fixture(scope="module")
 def built(tmp_path_factory: pytest.TempPathFactory) -> Path:
     target = tmp_path_factory.mktemp("site") / "_site"
     site.build(ROOT, target)
@@ -35,8 +40,8 @@ def sections(built: Path, tag: str) -> set[str]:
     return {block for block in ("integral", "definite", "indefinite", "hyperbolic") if f'<h2 id="{block}">' in html}
 
 
-def test_the_database_has_one_row_and_one_page_for_each_record(built: Path, rows: dict[str, site.Row]) -> None:
-    tags = {entry.lattice.tag for entry in corpus.load(ROOT).entries}
+def test_the_database_has_one_row_and_one_page_for_each_record(built: Path, rows: dict[str, site.Row], loaded: corpus.Corpus) -> None:
+    tags = {entry.lattice.tag for entry in loaded.entries}
     assert set(rows) == tags
     assert {path.stem for path in (built / "tag").glob("*.html")} == tags
 
@@ -66,9 +71,9 @@ def test_the_page_of_a_lattice_shows_the_components_of_its_gram_tensor(
     assert "[[2,0,-1,0,0,0,0,0]," in html.replace(" ", "")
 
 
-def test_a_collection_page_links_exactly_the_lattices_that_satisfy_its_conditions(built: Path, rows: dict[str, site.Row]) -> None:
+def test_a_collection_page_links_exactly_the_lattices_that_satisfy_its_conditions(built: Path, rows: dict[str, site.Row], loaded: corpus.Corpus) -> None:
     html = (built / "collection" / "even-unimodular.html").read_text()
-    lattices = [entry.lattice for entry in corpus.load(ROOT).entries]
+    lattices = [entry.lattice for entry in loaded.entries]
     members = {lattice.tag for lattice in lattices if "even-unimodular" in lattice.families}
     assert members
     assert {tag for tag in rows if f'href="../tag/{tag}.html"' in html} == members
@@ -147,9 +152,9 @@ def test_the_page_of_a_lattice_writes_its_roots_in_the_basis_of_the_record(
     assert r"\langle -2 \rangle" in u
 
 
-def test_the_fields_page_defines_every_property_of_the_database(built: Path) -> None:
+def test_the_fields_page_defines_every_property_of_the_database(built: Path, loaded: corpus.Corpus) -> None:
     html = (built / "fields.html").read_text()
-    labels = {label for entry in corpus.load(ROOT).entries for label in site.properties(entry.lattice)}
+    labels = {label for entry in loaded.entries for label in site.properties(entry.lattice)}
     assert labels
     for label in labels:
         page, anchor, _ = site.PROPERTY_MEANINGS["p-elementary" if label.endswith("-elementary") else label]
@@ -159,9 +164,9 @@ def test_the_fields_page_defines_every_property_of_the_database(built: Path) -> 
 
 def test_the_fields_page_lists_every_family_with_its_meaning_and_its_number_of_lattices(
     built: Path,
+    loaded: corpus.Corpus,
 ) -> None:
     html = (built / "fields.html").read_text()
-    loaded = corpus.load(ROOT)
     assert loaded.families
     for family, meaning in loaded.families.items():
         count = sum(family in entry.lattice.families for entry in loaded.entries)
@@ -179,8 +184,9 @@ def test_the_fields_page_documents_every_field_of_a_record(built: Path) -> None:
 
 def test_each_stored_morphism_is_rendered_on_its_source_and_backlinked_from_its_target(
     built: Path,
+    loaded: corpus.Corpus,
 ) -> None:
-    entries = corpus.load(ROOT).entries
+    entries = loaded.entries
     stored = [(entry.lattice, morphism) for entry in entries for morphism in entry.lattice.morphisms]
     assert stored
     for source, morphism in stored:
@@ -190,7 +196,9 @@ def test_each_stored_morphism_is_rendered_on_its_source_and_backlinked_from_its_
         assert f'href="../tag/{source.tag}.html#morphisms"' in target_html
 
 
-def test_a_source_lattice_page_draws_the_lines_of_its_morphism_matrices(built: Path) -> None:
+def test_a_source_lattice_page_draws_the_lines_of_its_morphism_matrices(
+    built: Path,
+) -> None:
     html = (built / "tag" / "0128.html").read_text()
     assert r"\begin{array}{rr|rrrrrrrr}" in html
     assert html.count(r"\hline") == 4
