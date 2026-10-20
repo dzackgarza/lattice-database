@@ -37,6 +37,7 @@ runs:
         docker exec -i -w "$GITHUB_WORKSPACE" sage-env \
           uv pip install --python /sage/.venv/bin/python \
           --requirements pyproject.toml --requirements research/pyproject.toml \
+          --group pyproject.toml:dev --group research/pyproject.toml:dev \
           --excludes .github/actions/sage/provided.txt \
           --overrides .github/actions/sage/overrides.txt \
           --reinstall-package pyyaml --only-binary pyyaml pytest

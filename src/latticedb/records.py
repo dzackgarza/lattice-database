@@ -451,10 +451,10 @@ def local_admission_problems(lattice: Lattice) -> list[str]:
         else:
             determinant_source: object = owned
             assert isinstance(determinant_source, FreeFormModules.FinitelyGenerated.ParentMethods)
-            if any(
-                value is not None
-                for value in (integral.level, integral.bad_reduction_primes, integral.quadratic_character, integral.discriminant_group, integral.delta)
-            ) and determinant_source.determinant() != 0:
+            if (
+                any(value is not None for value in (integral.level, integral.bad_reduction_primes, integral.quadratic_character, integral.discriminant_group, integral.delta))
+                and determinant_source.determinant() != 0
+            ):
                 if integral.level is not None and integral.level != card_level(owned):
                     found.append("integral.level: the stated level does not equal the preamble-computed level")
                 if integral.bad_reduction_primes is not None:
