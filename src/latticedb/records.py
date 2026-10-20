@@ -233,7 +233,7 @@ def _root_span(record: dict[str, Yaml], formed: FormModules.ParentMethods) -> tu
             roots = tuple(parsed_rows)
         case _:
             return None
-    block["norms"] = [rational(_fraction_of(formed(root).q())) for root in roots]
+    block["norms"] = [rational(_fraction_of(formed(root).q().underlying_element())) for root in roots]
     return _ordered(block, tuple(model.RootSpan.model_fields)), roots
 
 
@@ -244,7 +244,7 @@ def _root_sublattice(formed: FormModules.ParentMethods, roots: tuple[tuple[int, 
     alone still span the lattice.
     """
     rank = int(formed.module_rank())
-    norm_of = {root: _fraction_of(formed(root).q()) for root in roots}
+    norm_of = {root: _fraction_of(formed(root).q().underlying_element()) for root in roots}
     factors = _root_span_factors(formed, roots)
     block: dict[str, Yaml] = {"invariant_factors": list(factors)}
     unimodular_span = (1,) * rank
@@ -282,7 +282,10 @@ def derive(record: dict[str, Yaml]) -> dict[str, Yaml]:
     rank = len(gram)
     module = integer_ring.free_module(rank)
     formed = FormModules(ZZ)(module.bilinear_hom_space(_QQ_AS_ZZ_MODULE)(gram))
-    signature = formed.signature_pair()
+    # Inertia uses ordered scalar values on the rational extension; the original
+    # ZZ-module retains the integral coordinates used by root and span operations.
+    rational_lattice = Lattices(QQ)(gram)
+    signature = rational_lattice.signature_pair()
     n_plus = int(signature.first())
     n_minus = int(signature.second())
     assert isinstance(formed, FreeFormModules.FinitelyGenerated.ParentMethods)
@@ -300,7 +303,7 @@ def derive(record: dict[str, Yaml]) -> dict[str, Yaml]:
             integral_twist, twist_multiplier = _integral_twist(formed)
         case _:
             integral_twist, twist_multiplier = integral_lattice, 1
-    definiteness = formed.definiteness()
+    definiteness = rational_lattice.definiteness()
     dual: dict[str, Yaml] = {}
     if determinant != 0:
         dual_gram = Lattices(QQ)(gram).dual_lattice().gram_tensor()
@@ -474,7 +477,7 @@ def local_admission_problems(lattice: Lattice) -> list[str]:
     definite = lattice.definite
     if definite is not None:
         assert formed is not None
-        if formed.definiteness() not in ("positive_definite", "negative_definite"):
+        if Lattices(QQ)(gram).definiteness() not in ("positive_definite", "negative_definite"):
             found.append("definite: the stored definite block requires a definite form")
         if definite.perfect is not None:
             integral_twist, _multiplier = _integral_twist(formed)

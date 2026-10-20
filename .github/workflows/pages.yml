@@ -3,7 +3,14 @@ name: pages
   push:
     branches:
       - main
-  workflow_dispatch:
+  workflow_dispatch: null
+  workflow_run:
+    workflows:
+      - certify
+    types:
+      - completed
+    branches:
+      - main
 permissions:
   contents: read
   pages: write
@@ -15,19 +22,16 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
       - name: Check out the research preamble
         uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
         with:
           repository: dzackgarza/research
           path: research
       - name: Install uv
-        uses: astral-sh/setup-uv@c18668ad3cf93ea998bef934396af7bb5c839dc7 # v10.2.0
-        # The default cache-dependency-glob walks all 161k files of the checkout and overflows
-        # the action's stack; there is no lockfile for a cache key to hash.
+        uses: astral-sh/setup-uv@c18668ad3cf93ea998bef934396af7bb5c839dc7
         with:
           enable-cache: false
-      # The pandoc release used on the workstation; the build converts the record prose with it.
       - name: Install pandoc
         run: |
           curl --fail --location --output pandoc.deb https://github.com/jgm/pandoc/releases/download/3.10.2/pandoc-3.10.2-1-amd64.deb
@@ -44,8 +48,8 @@ jobs:
               uv pip install --python /sage/.venv/bin/python -e research -e .
               /sage/.venv/bin/python -m latticedb build
             '
-      - uses: actions/configure-pages@983d7736d9b0ae728b81ab479565c72886d7745b # v5
-      - uses: actions/upload-pages-artifact@56afc609e74202658d3ffba0e8f6dda462b719fa # v3
+      - uses: actions/configure-pages@983d7736d9b0ae728b81ab479565c72886d7745b
+      - uses: actions/upload-pages-artifact@56afc609e74202658d3ffba0e8f6dda462b719fa
         with:
           path: _site
   deploy:
@@ -56,4 +60,4 @@ jobs:
       url: ${{ steps.deployment.outputs.page_url }}
     steps:
       - id: deployment
-        uses: actions/deploy-pages@d6db90164ac5ed86f2b6aed7e0febac5b3c0c03e # v4
+        uses: actions/deploy-pages@d6db90164ac5ed86f2b6aed7e0febac5b3c0c03e

@@ -11,13 +11,12 @@ card value is certified. A computation that does not finish remains uncertified.
 from __future__ import annotations
 
 import json
-import os
 import subprocess
 import sys
 import time
 from collections.abc import Iterator
 from pathlib import Path
-from typing import TypedDict
+from typing import NotRequired, TypedDict
 
 import frontmatter
 from pydantic import BaseModel, TypeAdapter
@@ -158,11 +157,13 @@ class Request(TypedDict):
     integral: bool
     fields: list[str]
     series_bound: int
+    planes: int
+    record: NotRequired[dict[str, Yaml]]
 
 
 def name(tag: str, field: str) -> str:
     """The name of the certificate of `field` of the record `tag`."""
-    return f"{tag} {BLOCKS[field][0]}.{field}"
+    return f"{tag} derive" if field == "derive" else f"{tag} {BLOCKS[field][0]}.{field}"
 
 
 def requests(
@@ -181,11 +182,20 @@ def requests(
     bounds = hyperbolic_index_bounds(loaded.entries)
     for entry in loaded.entries:
         lattice = entry.lattice
-        if lattice.determinant == 0 or (tags and lattice.tag not in tags):
+        if lattice.gram_tensor is None or (tags and lattice.tag not in tags):
             continue
-        applicable = [field for field in BLOCKS if applies(field, lattice, bounds.get(lattice.tag, 0))]
         metadata = corpus.front_matter(frontmatter.load(str(entry.path)))
         cited = lattice.certifications
+        derive_name = name(lattice.tag, "derive")
+        derive_hash = certificates.certification_hash(derive_name, lattice, records.derived_projection(metadata))
+        needs_derive = certificates.is_pending(held, derive_name, cited.get("derive"), derive_hash)
+        needs_derive = needs_derive and not exceeded.is_exceeded(log, derive_name, lattice)
+        if not needs_derive and lattice.rank is None:
+            # A timed-out derivation cannot supply missing hypotheses for later operations.
+            continue
+        if not needs_derive and lattice.determinant == 0:
+            continue
+        applicable = list(BLOCKS) if lattice.rank is None else [field for field in BLOCKS if applies(field, lattice, bounds.get(lattice.tag, 0))]
         fields = []
         for field in applicable:
             block_name = BLOCKS[field][0]
@@ -197,49 +207,45 @@ def requests(
             expected_hash = certificates.certification_hash(computation, lattice, certified_value(field, stored_value, lattice))
             if stored_value is None or certificates.is_pending(held, computation, cited.get(f"{block_name}.{field}"), expected_hash):
                 fields.append(field)
+        if needs_derive:
+            fields.insert(0, "derive")
         if fields:
-            if lattice.rank is None or lattice.gram_tensor is None:
-                raise ValueError(f"{lattice.tag}: computation requests require a stored rank and Gram tensor")
             interrupted = [field for field in fields if exceeded.seconds_run(log, name(lattice.tag, field), lattice) is not None]
             fields = interrupted + [field for field in fields if field not in interrupted]
             gram = [[int(value) if value.denominator == 1 else str(value) for value in row] for row in lattice.gram_tensor]
-            (resumed if interrupted else chosen).append(
-                {
-                    "tag": lattice.tag,
-                    "gram": gram,
-                    "integral": lattice.integral is not None,
-                    "fields": fields,
-                    "series_bound": series_bound(lattice.rank),
-                }
-            )
+            request: Request = {
+                "tag": lattice.tag,
+                "gram": gram,
+                "integral": lattice.integral is not None,
+                "fields": fields,
+                "series_bound": series_bound(len(lattice.gram_tensor)),
+                "planes": bounds.get(lattice.tag, 0),
+            }
+            if needs_derive:
+                request["record"] = metadata
+                # Derivation supplies the hypotheses even when another field was interrupted.
+                request["fields"] = ["derive", *[field for field in fields if field != "derive"]]
+            (resumed if interrupted else chosen).append(request)
     return resumed + chosen
 
 
 def computed(chosen: list[Request]) -> Iterator[dict[str, Yaml]]:
     """The values that SageMath computes for `chosen`, one record at a time."""
     task = json.dumps({"lattices": chosen})
-    # Keep the host SageMath environment separate from the project environment.
-    environment = {variable: value for variable, value in os.environ.items() if variable != "VIRTUAL_ENV"}
-    own = str(Path(sys.prefix) / "bin")
-    environment["PATH"] = os.pathsep.join(entry for entry in environment["PATH"].split(os.pathsep) if entry != own)
-    command = [
-        environment["SAGE_BIN"],
-        "-c",
-        f"import runpy; runpy.run_path({str(SAGE_MODULE)!r}, run_name='__main__')",
-    ]
+    command = [sys.executable, "-m", "latticedb.sage_genus"]
     with subprocess.Popen(
         command,
         stdin=subprocess.PIPE,
         stdout=subprocess.PIPE,
         text=True,
-        env=environment,
     ) as process:
         assert process.stdin is not None and process.stdout is not None
         process.stdin.write(task)
         process.stdin.close()
         # SageMath writes a carriage return to standard output for some lattices (for E8, record 0094), which reads as an empty line.
         yield from (json.loads(line) for line in process.stdout if line.strip())
-    assert process.returncode == 0, f"{SAGE_MODULE} exited with status {process.returncode}"
+    if process.returncode != 0:
+        yield {"worker_exit": process.returncode}
 
 
 def _generator_morphisms(tag: str, morphisms: list[dict[str, Yaml]], matrices: list[Yaml]) -> tuple[list[str], list[dict[str, Yaml]]]:
@@ -329,7 +335,15 @@ def certify(
     """
     by_tag = {entry.lattice.tag: entry for entry in loaded.entries}
     log = exceeded.load(root)
+    running: dict[str, float] = {}
     for values in computed(requests(loaded, held, log, tags)):
+        if "worker_exit" in values:
+            # A crash is not a whole-job timeout. Retain its actual elapsed time
+            # so fixing the exception makes the operation eligible again.
+            for computation, started_at in running.items():
+                log[computation] = exceeded.Interruption(hash=log[computation].hash, seconds=int(time.time() - started_at))
+            exceeded.save(root, log)
+            raise ChildProcessError(f"{SAGE_MODULE} exited with status {values['worker_exit']}")
         entry = by_tag[str(values["tag"])]
         match values:
             case {"started": list() as started}:
@@ -340,11 +354,26 @@ def certify(
                         hash=exceeded.input_hash(computation, entry.lattice),
                         seconds=seconds,
                     )
+                    running[computation] = time.time()
                 exceeded.save(root, log)
+                continue
+            case {"derived": dict() as derived}:
+                stored_lattice = Lattice.model_validate(derived)
+                computation = name(stored_lattice.tag, "derive")
+                certificate_hash = certificates.certification_hash(computation, stored_lattice, records.derived_projection(derived))
+                derived["certifications"] = {**stored_lattice.certifications, "derive": certificate_hash}
+                entry.path.write_text(records.record_text(derived, entry.prose))
+                held[computation] = Certificate(hash=certificate_hash, by=str(values["by"]))
+                certificates.save(root, held)
+                log.pop(computation, None)
+                running.pop(computation, None)
+                exceeded.save(root, log)
+                print(stored_lattice.tag, "derive", flush=True)
                 continue
         for field in BLOCKS:
             if field in values:
                 log.pop(name(entry.lattice.tag, field), None)
+                running.pop(name(entry.lattice.tag, field), None)
         exceeded.save(root, log)
         store(entry.path, values)
         stored = corpus.front_matter(frontmatter.load(str(entry.path)))

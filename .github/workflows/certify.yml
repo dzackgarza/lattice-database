@@ -5,7 +5,7 @@ name: certify
   workflow_dispatch:
     inputs:
       tag:
-        description: 'Certify one lattice tag while debugging this workflow; omit for the full corpus.'
+        description: Certify one lattice tag while debugging this workflow; omit for the full corpus.
         required: false
         type: string
 permissions:
@@ -21,24 +21,25 @@ jobs:
       run:
         shell: bash -el {0}
     steps:
+      - name: Reserve time to persist results
+        run: echo "CERTIFY_DEADLINE=$(( $(date +%s) + 340 * 60 ))" >> "$GITHUB_ENV"
       - name: Check out (actions/checkout v4)
         id: checkout
         uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
         with:
           fetch-depth: 0
           ref: main
-      # The preamble that owns the lattice mathematics lives in the research repository.
       - name: Check out research (actions/checkout v4)
         uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
         with:
           repository: dzackgarza/research
           path: research
       - name: Restore the Julia depot
-        uses: actions/cache@0057852bfaa89a56745cba8c7296529d2fc39830
+        uses: actions/cache/restore@0057852bfaa89a56745cba8c7296529d2fc39830
         with:
           path: ${{ runner.temp }}/julia
-          key: julia-1.10.11-oscar-${{ github.run_id }}
-          restore-keys: julia-1.10.11-oscar-
+          key: ${{ runner.os }}-julia-1.10.11-oscar-66037961702ae6ceea7fb3d5e1544b75dcc95511
+        id: julia-cache
       - name: Start the canonical research Sage environment
         run: |-
           mkdir -p "$RUNNER_TEMP/julia"
@@ -55,9 +56,11 @@ jobs:
       - name: Install current research and lattice database checkouts
         run: |
           docker exec -i -w "$GITHUB_WORKSPACE" sage-env \
-            /sage/.venv/bin/uv pip install --python /sage/.venv/bin/python --no-deps --editable "$GITHUB_WORKSPACE/research"
+            uv pip install --python /sage/.venv/bin/python --no-deps --editable "$GITHUB_WORKSPACE/research"
           docker exec -i -w "$GITHUB_WORKSPACE" sage-env \
-            /sage/.venv/bin/uv pip install --python /sage/.venv/bin/python --editable . pytest
+            uv pip install --python /sage/.venv/bin/python --editable . pytest
+          docker exec -i sage-env uv pip install --python /sage/.venv/bin/python --no-deps \
+            "sage-julia-bridge @ git+https://github.com/dzackgarza/sage-julia-bridge.git@66037961702ae6ceea7fb3d5e1544b75dcc95511"
       - name: Install Julia and the Oscar project of sage-julia-bridge
         run: |-
           # The preamble reaches Oscar through sage-julia-bridge, which starts Julia in
@@ -74,12 +77,20 @@ jobs:
               using Pkg; Pkg.instantiate(); Pkg.precompile(); using Oscar
               println(\"Oscar \", Oscar.VERSION_NUMBER)"
           '
+      - name: Cache the provisioned Julia environment before computing
+        if: steps.julia-cache.outputs.cache-hit != 'true'
+        uses: actions/cache/save@0057852bfaa89a56745cba8c7296529d2fc39830
+        with:
+          path: ${{ runner.temp }}/julia
+          key: ${{ steps.julia-cache.outputs.cache-primary-key }}
       - name: Compute and certify uncertified card values
         env:
           LATTICEDB_TAG: ${{ github.event.inputs.tag || '' }}
         run: |
-          # The job allows 350 minutes; the run gets 330 of them, and the rest commits its results.
-          minutes=330
+          # Include provisioning in the job budget and reserve ten minutes for persistence.
+          minutes=$(( (CERTIFY_DEADLINE - $(date +%s)) / 60 ))
+          (( minutes > 0 ))
+          if (( minutes > 330 )); then minutes=330; fi
           args=(--minutes "$minutes")
           if [[ -n "$LATTICEDB_TAG" ]]; then
             args+=(--tag "$LATTICEDB_TAG")

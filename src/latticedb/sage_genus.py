@@ -9,7 +9,6 @@ JSON line.
 import json
 import sys
 from fractions import Fraction
-from typing import TypedDict
 
 from dzack_research.preamble.categories.abstract_categories.mor_categories import CategoricalMor
 from dzack_research.preamble.categories.hyperbolic_lattices import HyperbolicLattices
@@ -19,17 +18,13 @@ from dzack_research.preamble.categories.rings.commutative_algebra import FormalP
 from dzack_research.preamble.categories.rings.ring_foundation import _OwnedRingElement
 from dzack_research.preamble.rings import session_ring_objects
 
+from latticedb import records
+from latticedb.genus import Request, applies
+from latticedb.model import Lattice
+
 _RINGS = session_ring_objects()
 OWNED_ZZ = _RINGS["ZZ"]
 OWNED_QQ = _RINGS["QQ"]
-
-
-class Request(TypedDict):
-    tag: str
-    gram: list[list[int | str]]
-    integral: bool
-    fields: list[str]
-    series_bound: int
 
 
 JsonValue = object
@@ -51,7 +46,7 @@ def _matrix_rows(morphism: CategoricalMor.ElementMethods) -> list[list[int]]:
 
 def _orthogonal_group_data(lattice: Lattices.ParentMethods) -> dict[str, JsonValue]:
     """Serialize the preamble-owned ``O(L)`` and its selected generators."""
-    group = lattice.orthogonal_group().select_group_resolution()
+    group = lattice.orthogonal_group()
     return {
         "automorphism_group_order": int(group.cardinality()),
         "automorphism_group_generator_morphisms": [_matrix_rows(generator) for generator in group.group_generators()],
@@ -203,6 +198,15 @@ def main() -> None:
     task = json.load(sys.stdin)
     lattices: list[Request] = task["lattices"]
     for request in lattices:
+        if "derive" in request["fields"]:
+            _start(request["tag"], ["derive"])
+            derived = records.derive(request["record"])
+            _emit(request["tag"], {"derived": derived})
+            stored = Lattice.model_validate(derived)
+            if stored.determinant == 0:
+                continue
+            request["integral"] = stored.integral is not None
+            request["fields"] = [field for field in request["fields"] if field != "derive" and applies(field, stored, request["planes"])]
         ring = OWNED_ZZ if request["integral"] else OWNED_QQ
         lattice = Lattices(ring)(request["gram"])
         joint_fields: set[str] = set()

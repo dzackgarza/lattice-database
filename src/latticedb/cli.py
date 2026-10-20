@@ -3,7 +3,6 @@
 import json
 import sys
 import time
-from importlib.metadata import version
 from pathlib import Path
 from typing import Annotated
 from urllib.request import Request, urlopen
@@ -207,9 +206,6 @@ def morphism(
     print(path)
 
 
-LATTICEDB = f"latticedb {version('latticedb')}"
-
-
 @app.command
 def verify(root: Root = Path()) -> None:
     """Report stored-card inconsistencies without changing cards; mathematics is delegated to the preamble."""
@@ -327,27 +323,7 @@ def certify(
     deadline = time.time() + 60 * minutes
     loaded = corpus.load(root)
     held = certificates.load(root)
-    selected = set(tag)
-    for entry in loaded.entries:
-        lattice = entry.lattice
-        if lattice.gram_tensor is None or (selected and lattice.tag not in selected):
-            continue
-        document = frontmatter.load(str(entry.path))
-        metadata = corpus.front_matter(document)
-        computation = f"{lattice.tag} derive"
-        cited_hash = lattice.certifications.get("derive")
-        expected_hash = certificates.certification_hash(computation, lattice, records.derived_projection(metadata))
-        if certificates.is_certified(held, computation, cited_hash, expected_hash):
-            continue
-        computed = records.derive(metadata)
-        certificate_hash = certificates.certification_hash(computation, lattice, records.derived_projection(computed))
-        card_certifications: dict[str, Yaml] = {name: value for name, value in Lattice.model_validate(computed).certifications.items()}
-        card_certifications["derive"] = certificate_hash
-        computed["certifications"] = card_certifications
-        entry.path.write_text(records.record_text(computed, document.content))
-        held[computation] = certificates.Certificate(hash=certificate_hash, by=LATTICEDB)
-        certificates.save(root, held)
-    genus.certify(root, corpus.load(root), held, tag, deadline)
+    genus.certify(root, loaded, held, tag, deadline)
 
 
 @app.command

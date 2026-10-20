@@ -378,13 +378,15 @@ Editing $G$ or $v$ breaks the card's hash commitment; a computation that times o
 | `<tag> <block>.<field>` | A value returned by a preamble operation, such as `0012 integral.genus_symbol` | The Gram tensor |
 
 `latticedb certify` requests a preamble computation exactly when the card does not already cite the matching completed certificate.
-It writes the returned result to the card whether or not an authored value was already present, then writes the hash citation to `certifications` and writes only the hash and computation provenance to `certificates.yaml`.
+It writes the returned result to the card whether or not an authored value was already present, then writes the hash citation to `certifications` and writes only the hash and computation provenance to `certificates.yaml`. Derivation runs in the same streamed queue, immediately before the remaining computations for its card.
+Cards without a Gram tensor remain source cards and do not enter this queue; a Gram-only card first receives its derived hypotheses.
 
 `exceeded.yaml` is the permanent log of computations that a certification job ended before they finished.
 An entry maps the computation name to a hash of that name and the Gram tensor, and to the seconds the computation had run when the job's timeout ended it.
 Certification writes the entry when the computation starts and deletes it when the computation finishes, so the entries that remain after a job are the computations its timeout ended.
 A computation that ran for at least five hours does not fit in one job, and certification never requests it again.
-A computation that ran for less started late in its job; the next job computes it first.
+A computation that ran for less is requested first by the next job, after any required derivation.
+If the computation process crashes, certification fails and records its actual elapsed time rather than treating the crash as a whole-job timeout.
 A changed Gram tensor changes the hash, so the entry no longer applies.
 After a faster implementation lands, delete the entry by hand.
 
@@ -519,7 +521,8 @@ These tests detect importer/transcription drift.
 They do not certify a lattice invariant and do not contribute to `just verify`.
 
 The build needs `pandoc` on `PATH`. The pages load MathJax and DataTables from a CDN. Ordinary enrichment uses the preamble's lattice computations.
-`latticedb certify` needs SageMath at `$SAGE_BIN` for the expensive certification computations.
+`latticedb certify` runs under SageMath's Python and starts its computation worker with that same interpreter.
+The nightly workflow provisions the bridge's Oscar project, saves completed values even after a computation failure or timeout, and triggers a site build when it finishes.
 
 ## Sources to absorb
 
