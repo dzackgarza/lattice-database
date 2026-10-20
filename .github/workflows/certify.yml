@@ -55,6 +55,23 @@ jobs:
             124) echo "Certification budget exhausted; preserving completed values." ;;
             *) exit "$status" ;;
           esac
+      - name: Archive completed data before Git integration
+        if: ${{ always() && steps.checkout.outcome == 'success' }}
+        shell: bash --noprofile --norc -e -o pipefail {0}
+        run: |
+          git config --global --add safe.directory "$GITHUB_WORKSPACE"
+          git add lattices certificates.yaml exceeded.yaml
+          git diff --cached --binary > "$RUNNER_TEMP/certification.patch"
+          git rev-parse HEAD > "$RUNNER_TEMP/certification-base.txt"
+      - name: Retain completed data even if integration fails
+        if: ${{ always() && steps.checkout.outcome == 'success' }}
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: certification-${{ github.run_id }}-${{ github.run_attempt }}
+          path: |-
+            ${{ runner.temp }}/certification.patch
+            ${{ runner.temp }}/certification-base.txt
+          if-no-files-found: error
       - name: Commit completed computations to main
         if: ${{ always() && steps.checkout.outcome == 'success' }}
         shell: bash --noprofile --norc -e -o pipefail {0}
@@ -65,29 +82,30 @@ jobs:
             echo "No newly completed computations."
             exit 0
           fi
-
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
           git commit -m 'feat: certify computed card values'
-
-          staging_branch="certify-${GITHUB_RUN_ID}"
-          git push origin "HEAD:refs/heads/${staging_branch}"
-
+          recovery_branches=()
           for attempt in 1 2 3 4 5; do
             git fetch origin main
             if ! git rebase origin/main; then
-              git rebase --abort || true
-              echo "::error::Computed values conflict with current main; durable result remains on ${staging_branch}."
+              git rebase --abort
+              echo "::error::Computed values conflict with main; recover the uploaded certification patch."
               exit 1
             fi
+            # Rebase first: a GitHub App cannot push an older workflow tree to a new branch.
+            staging_branch="certify-${GITHUB_RUN_ID}-${GITHUB_RUN_ATTEMPT}-${attempt}"
+            if ! git push origin "HEAD:refs/heads/${staging_branch}"; then
+              continue
+            fi
+            recovery_branches+=("$staging_branch")
             if git push origin HEAD:main; then
-              git push origin --delete "${staging_branch}"
+              git push origin --delete "${recovery_branches[@]}"
               exit 0
             fi
             echo "main advanced during push attempt ${attempt}; rebasing and retrying."
           done
-
-          echo "::error::Could not integrate computed values into main after 5 attempts; durable result remains on ${staging_branch}."
+          echo "::error::Could not integrate computed values; the uploaded certification patch retains all completed data."
           exit 1
       - name: Stop the Sage environment
         if: always()
