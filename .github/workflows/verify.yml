@@ -49,9 +49,10 @@ jobs:
       - name: Validate preamble owner contracts
         run: |
           docker exec -i --workdir "$GITHUB_WORKSPACE/research" \
-            --env "PYTHONPATH=$GITHUB_WORKSPACE/research/src" \
+            --env "PYTHONPATH=$GITHUB_WORKSPACE/_ci-support/ai-review-ci/tool-artifacts/pytest_plugins:$GITHUB_WORKSPACE/research/src" \
             sage-env /sage/.venv/bin/python -c 'import sage.all, sys, pytest; sys.exit(pytest.main(sys.argv[1:]))' \
-            tests/lattices/test_lattice_database_owner_contracts.py \
+            -p qc_sage_session -p qc_unique_inventory \
+            tests/lattices/test_lattice_database_owner_contracts.sage \
             tests/lattices/test_coordinate_diagonal_embeddings.py
       - name: Run every lattice database test, including Sage sessions and source intake
         run: |
