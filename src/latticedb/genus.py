@@ -235,7 +235,7 @@ def requests(
     return resumed + chosen
 
 
-def computed(chosen: list[Request], deadline: float) -> Generator[dict[str, Yaml], None, None]:
+def computed(chosen: list[Request], deadline: float) -> Generator[dict[str, Yaml]]:
     """Stream results and elapsed-time checkpoints until the job deadline."""
     if not chosen:
         return
@@ -366,6 +366,7 @@ def certify(
     by_tag = {entry.lattice.tag: entry for entry in loaded.entries}
     log = exceeded.load(root)
     running: dict[str, float] = {}
+
     def checkpoint() -> None:
         if running:
             for computation, started_at in running.items():

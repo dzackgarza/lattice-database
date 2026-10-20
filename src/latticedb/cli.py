@@ -359,6 +359,7 @@ def next_tag(root: Root = Path()) -> None:
 
 def main() -> None:
     """Run the CLI, unwinding workers and persistence on CI termination."""
+
     def terminate(signum: int, frame: FrameType | None) -> None:
         raise SystemExit(128 + signum)
 

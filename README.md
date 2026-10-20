@@ -385,7 +385,8 @@ Cards without a Gram tensor remain source cards and do not enter this queue; a G
 
 `exceeded.yaml` is the permanent log of computations that a certification job ended before they finished.
 An entry maps the computation name to a hash of that name and the Gram tensor, and to the seconds the computation had run when the job's timeout ended it.
-Certification starts the entry at zero elapsed seconds, checkpoints actual runtime every thirty seconds and on graceful termination, and deletes it when the computation finishes. A hard kill retains the latest checkpoint; an early interruption remains eligible for retry.
+Certification starts the entry at zero elapsed seconds, checkpoints actual runtime every thirty seconds and on graceful termination, and deletes it when the computation finishes.
+A hard kill retains the latest checkpoint; an early interruption remains eligible for retry.
 A computation that ran for at least five hours does not fit in one job, and certification never requests it again.
 A computation that ran for less is requested first by the next job, after any required derivation.
 If the computation process crashes, certification fails and records its actual elapsed time rather than treating the crash as a whole-job timeout.
