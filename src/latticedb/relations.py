@@ -16,7 +16,7 @@ ZZ = session_ring_objects()["ZZ"]
 
 def hyperbolic_planes(lattice: Lattice) -> int | None:
     """Return ``n`` when the card represents ``U^n``; recognition is preamble-owned."""
-    if lattice.integral is None:
+    if lattice.integral is None or lattice.gram_tensor is None:
         return None
     result = Lattices(ZZ)(lattice.gram_tensor).hyperbolic_plane_power_if_even_unimodular()
     return TypeAdapter(int | None).validate_python(result, strict=True)
@@ -28,6 +28,8 @@ def hyperbolic_index_bounds(entries: Sequence[Entry]) -> dict[str, int]:
     bounds: dict[str, int] = {}
     for entry in entries:
         source = entry.lattice
+        if not source.morphisms:
+            continue
         planes = hyperbolic_planes(source)
         if planes is None:
             continue

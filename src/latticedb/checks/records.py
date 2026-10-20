@@ -21,22 +21,12 @@ def shared_gram_problems(loaded: Corpus) -> list[str]:
 def problems(loaded: Corpus, held: Certificates) -> list[str]:
     found: list[str] = []
     for entry in loaded.entries:
-        missing = [
-            name
-            for name, value in (
-                ("rank", entry.lattice.rank),
-                ("gram_tensor", entry.lattice.gram_tensor),
-                ("signature", entry.lattice.signature),
-                ("determinant", entry.lattice.determinant),
-                ("definiteness", entry.lattice.definiteness),
-            )
-            if value is None
-        ]
-        if missing:
-            found.append(f"{entry.path}: fields awaiting source transcription or enrichment: {', '.join(missing)}")
+        cited = entry.lattice.certifications
+        if entry.lattice.gram_tensor is None:
+            if cited or any(name.startswith(f"{entry.lattice.tag} ") for name in held):
+                found.append(f"{entry.path}: completed certificates require a stored defining Gram tensor")
             continue
         metadata = corpus.front_matter(corpus.read_card(entry.path))
-        cited = entry.lattice.certifications
         derive_name = f"{entry.lattice.tag} derive"
         derive_hash = certificates.certification_hash(derive_name, entry.lattice, records.derived_projection(metadata))
         derive_log = held.get(derive_name)
