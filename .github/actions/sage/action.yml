@@ -21,12 +21,13 @@ runs:
           --volume "$GITHUB_WORKSPACE:$GITHUB_WORKSPACE" \
           --volume "$RUNNER_TEMP/julia:/julia" \
           --env JULIA_DEPOT_PATH=/julia/depot \
+          --env MAXIMA_PREFIX=/sage/subprojects/maxima-5.47.0/share \
           --env SAGE_JULIA_COMMAND=/julia/julia-1.10.11/bin/julia \
           --workdir "$GITHUB_WORKSPACE" \
           ghcr.io/dzackgarza/sage:develop sleep infinity
         docker exec -i -w "$GITHUB_WORKSPACE" sage-env \
           /sage/.venv/bin/python -c \
-          'import sys, sage.version; assert sys.version_info >= (3, 14); print(sys.version); print(sage.version.version)'
+          'import sys, sage.version, sage.all, sage.interfaces.maxima_lib; assert sys.version_info >= (3, 14); print(sys.version); print(sage.version.version)'
       shell: bash
     - name: Install current research and lattice database checkouts
       run: |
