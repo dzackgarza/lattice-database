@@ -7,6 +7,7 @@ They are provenance/importer checks, not mathematical certification.
 import shutil
 from pathlib import Path
 
+from dzack_research.preamble.categories.lattices import Lattices
 from dzack_research.preamble.categories.modules.framed.formed.form_modules import FormModules
 from dzack_research.preamble.categories.modules.pure.modules import Modules
 from dzack_research.preamble.rings import session_ring_objects
@@ -113,6 +114,7 @@ def test_nebe_sloane_reads_the_full_matrix_of_shimada_86() -> None:
     module = integers.free_module(entry.dimension)
     values = Modules(rationals).restriction_of_scalars(integers.fraction_field_map())(rationals)
     formed = FormModules(integers)(module.bilinear_hom_space(values)(entry.gram_tensor))
-    signature = formed.signature_pair()
+    # Inertia needs ordered scalar values, so it is read on the rational extension.
+    signature = Lattices(rationals)(entry.gram_tensor).signature_pair()
     assert (int(signature.first()), int(signature.second()), 0) == (86, 0, 0)
     assert int(formed.determinant()) == entry.determinant
