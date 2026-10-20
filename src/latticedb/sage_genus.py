@@ -206,7 +206,7 @@ def main() -> None:
             if stored.determinant == 0:
                 continue
             request["integral"] = stored.integral is not None
-            request["fields"] = [field for field in request["fields"] if field != "derive" and applies(field, stored, request["planes"])]
+            request["fields"] = [field for field in request["fields"] if field != "derive" and applies(field, stored)]
         ring = OWNED_ZZ if request["integral"] else OWNED_QQ
         lattice = Lattices(ring)(request["gram"])
         joint_fields: set[str] = set()

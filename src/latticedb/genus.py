@@ -32,7 +32,6 @@ from latticedb.model import (
     Yaml,
     series_bound,
 )
-from latticedb.relations import hyperbolic_index_bounds
 
 BLOCKS: dict[str, tuple[str, type[BaseModel]]] = {
     "genus_symbol": ("integral", IntegralData),
@@ -99,7 +98,7 @@ def certified_value(field: str, value: Yaml, lattice: Lattice | None = None) -> 
     return value
 
 
-def applies(field: str, lattice: Lattice, planes: int) -> bool:
+def applies(field: str, lattice: Lattice) -> bool:
     """Whether the preamble exposes `field` on this stored lattice."""
     match field:
         case "automorphism_group_order" | "automorphism_group_generator_morphisms":
@@ -140,7 +139,7 @@ def applies(field: str, lattice: Lattice, planes: int) -> bool:
         case "primitive_orbits":
             return lattice.definite is not None
         case "discriminant_orbits":
-            index = max(planes, lattice.integral.hyperbolic_index or 0)
+            index = lattice.integral.hyperbolic_index or 0
             return lattice.definite is None and lattice.integral.parity == "even" and index >= 2
         case _:
             return True
@@ -157,7 +156,6 @@ class Request(TypedDict):
     integral: bool
     fields: list[str]
     series_bound: int
-    planes: int
     record: NotRequired[dict[str, Yaml]]
 
 
@@ -179,7 +177,6 @@ def requests(
     """
     resumed: list[Request] = []
     chosen: list[Request] = []
-    bounds = hyperbolic_index_bounds(loaded.entries)
     for entry in loaded.entries:
         lattice = entry.lattice
         if lattice.gram_tensor is None or (tags and lattice.tag not in tags):
@@ -195,7 +192,7 @@ def requests(
             continue
         if not needs_derive and lattice.determinant == 0:
             continue
-        applicable = list(BLOCKS) if lattice.rank is None else [field for field in BLOCKS if applies(field, lattice, bounds.get(lattice.tag, 0))]
+        applicable = list(BLOCKS) if lattice.rank is None else [field for field in BLOCKS if applies(field, lattice)]
         fields = []
         for field in applicable:
             block_name = BLOCKS[field][0]
@@ -219,7 +216,6 @@ def requests(
                 "integral": lattice.integral is not None,
                 "fields": fields,
                 "series_bound": series_bound(len(lattice.gram_tensor)),
-                "planes": bounds.get(lattice.tag, 0),
             }
             if needs_derive:
                 request["record"] = metadata
