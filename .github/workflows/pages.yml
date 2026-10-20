@@ -23,35 +23,25 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
-      - name: Check out the research preamble
-        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
-        with:
-          repository: dzackgarza/research
-          path: research
-      - name: Install uv
-        uses: astral-sh/setup-uv@c18668ad3cf93ea998bef934396af7bb5c839dc7
-        with:
-          enable-cache: false
+      - name: Provision the shared Sage environment
+        uses: ./.github/actions/sage
       - name: Install pandoc
         run: |
           curl --fail --location --output pandoc.deb https://github.com/jgm/pandoc/releases/download/3.10.2/pandoc-3.10.2-1-amd64.deb
-          sudo apt-get install --yes ./pandoc.deb
       - name: Build the lattice database
         run: |
-          docker run --rm --user root \
-            --volume "$GITHUB_WORKSPACE:/workspace" --workdir /workspace \
-            --env PYTHONPATH=/workspace/research/src:/workspace/src \
-            ghcr.io/dzackgarza/sage:develop bash -euc '
-              /sage/.venv/bin/python -c "import sys, sage.all; assert sys.version_info >= (3, 14)"
-              apt-get update
-              apt-get install --yes /workspace/pandoc.deb
-              uv pip install --python /sage/.venv/bin/python -e research -e .
-              /sage/.venv/bin/python -m latticedb build
-            '
+          docker exec -i sage-env apt-get update
+          docker exec -i sage-env apt-get install --yes "$GITHUB_WORKSPACE/pandoc.deb"
+          docker exec -i \
+            --env "PYTHONPATH=$GITHUB_WORKSPACE/research/src:$GITHUB_WORKSPACE/src" \
+            sage-env /sage/.venv/bin/python -m latticedb build
       - uses: actions/configure-pages@983d7736d9b0ae728b81ab479565c72886d7745b
       - uses: actions/upload-pages-artifact@56afc609e74202658d3ffba0e8f6dda462b719fa
         with:
           path: _site
+      - name: Stop the Sage environment
+        if: always()
+        run: docker rm --force sage-env
   deploy:
     needs: build
     runs-on: ubuntu-latest

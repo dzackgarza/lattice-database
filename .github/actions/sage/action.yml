@@ -1,0 +1,62 @@
+name: Lattice database Sage environment
+description: Provision the research preamble, lattice database and pinned Julia/Oscar bridge in sage-env.
+runs:
+  using: composite
+  steps:
+    - name: Check out research (actions/checkout v4)
+      uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+      with:
+        repository: dzackgarza/research
+        path: research
+    - name: Restore the Julia depot
+      uses: actions/cache/restore@0057852bfaa89a56745cba8c7296529d2fc39830
+      with:
+        path: ${{ runner.temp }}/julia
+        key: ${{ runner.os }}-julia-1.10.11-oscar-66037961702ae6ceea7fb3d5e1544b75dcc95511
+      id: julia-cache
+    - name: Start the canonical research Sage environment
+      run: |-
+        mkdir -p "$RUNNER_TEMP/julia"
+        docker run --detach --name sage-env \
+          --volume "$GITHUB_WORKSPACE:$GITHUB_WORKSPACE" \
+          --volume "$RUNNER_TEMP/julia:/julia" \
+          --env JULIA_DEPOT_PATH=/julia/depot \
+          --env SAGE_JULIA_COMMAND=/julia/julia-1.10.11/bin/julia \
+          --workdir "$GITHUB_WORKSPACE" \
+          ghcr.io/dzackgarza/sage:develop sleep infinity
+        docker exec -i -w "$GITHUB_WORKSPACE" sage-env \
+          /sage/.venv/bin/python -c \
+          'import sys, sage.version; assert sys.version_info >= (3, 14); print(sys.version); print(sage.version.version)'
+      shell: bash
+    - name: Install current research and lattice database checkouts
+      run: |
+        docker exec -i -w "$GITHUB_WORKSPACE" sage-env \
+          uv pip install --python /sage/.venv/bin/python --no-deps --editable "$GITHUB_WORKSPACE/research"
+        docker exec -i -w "$GITHUB_WORKSPACE" sage-env \
+          uv pip install --python /sage/.venv/bin/python --editable . pytest
+        docker exec -i sage-env uv pip install --python /sage/.venv/bin/python --no-deps \
+          "sage-julia-bridge @ git+https://github.com/dzackgarza/sage-julia-bridge.git@66037961702ae6ceea7fb3d5e1544b75dcc95511"
+      shell: bash
+    - name: Install Julia and the Oscar project of sage-julia-bridge
+      run: |-
+        # The preamble reaches Oscar through sage-julia-bridge, which starts Julia in
+        # the bridge's own project (`julia_env`, pinned to Julia 1.10.11). The Sage
+        # image has no Julia, so the job installs that release and instantiates the
+        # project into the cached depot.
+        docker exec -i sage-env bash -euc '
+          if [ ! -x /julia/julia-1.10.11/bin/julia ]; then
+            curl -fsSL https://julialang-s3.julialang.org/bin/linux/x64/1.10/julia-1.10.11-linux-x86_64.tar.gz \
+              | tar -xz -C /julia
+          fi
+          project="$(/sage/.venv/bin/python -c "import pathlib, sage_julia_bridge; print(pathlib.Path(sage_julia_bridge.__file__).with_name(\"julia_env\"))")"
+          /julia/julia-1.10.11/bin/julia --project="$project" --startup-file=no --color=no -e "
+            using Pkg; Pkg.instantiate(); Pkg.precompile(); using Oscar
+            println(\"Oscar \", Oscar.VERSION_NUMBER)"
+        '
+      shell: bash
+    - name: Cache the provisioned Julia environment before computing
+      if: steps.julia-cache.outputs.cache-hit != 'true'
+      uses: actions/cache/save@0057852bfaa89a56745cba8c7296529d2fc39830
+      with:
+        path: ${{ runner.temp }}/julia
+        key: ${{ steps.julia-cache.outputs.cache-primary-key }}
