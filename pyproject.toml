@@ -5,7 +5,7 @@ description = "Catalogue of lattices: one markdown file per lattice, validated m
 requires-python = ">=3.14"
 dependencies = [
     "pydantic>=2.11",
-    "pyyaml>=6.0",
+    "pyyaml>=6.0.3",
     "python-frontmatter>=1.1",
     "jinja2>=3.1",
     "python-flint>=0.9",

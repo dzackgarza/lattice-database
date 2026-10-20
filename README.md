@@ -523,6 +523,7 @@ They do not certify a lattice invariant and do not contribute to `just verify`.
 
 The build needs `pandoc` on `PATH`. The pages load MathJax and DataTables from a CDN. Ordinary enrichment uses the preamble's lattice computations.
 `latticedb certify` runs under SageMath's Python and starts its computation worker with that same interpreter.
+Card reads use PyYAML's LibYAML safe parser; the shared CI environment installs its native wheel so corpus loading does not consume the computation budget.
 The nightly workflow provisions the bridge's Oscar project, saves completed values even after a computation failure or timeout, and triggers a site build when it finishes.
 
 ## Sources to absorb

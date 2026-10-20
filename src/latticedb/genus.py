@@ -181,7 +181,7 @@ def requests(
         lattice = entry.lattice
         if lattice.gram_tensor is None or (tags and lattice.tag not in tags):
             continue
-        metadata = corpus.front_matter(frontmatter.load(str(entry.path)))
+        metadata = corpus.front_matter(corpus.read_card(entry.path))
         cited = lattice.certifications
         derive_name = name(lattice.tag, "derive")
         derive_hash = certificates.certification_hash(derive_name, lattice, records.derived_projection(metadata))
@@ -272,7 +272,7 @@ def _generator_morphisms(tag: str, morphisms: list[dict[str, Yaml]], matrices: l
 
 def store(path: Path, values: dict[str, Yaml]) -> None:
     """Replace each computed scope on the card by the completed computation."""
-    document = frontmatter.load(str(path))
+    document = corpus.read_card(path)
     metadata = corpus.front_matter(document)
     morphisms = TypeAdapter(list[dict[str, Yaml]]).validate_python(metadata.get("morphisms", []), strict=True)
     if "roots" in values:
@@ -372,7 +372,7 @@ def certify(
                 running.pop(name(entry.lattice.tag, field), None)
         exceeded.save(root, log)
         store(entry.path, values)
-        stored = corpus.front_matter(frontmatter.load(str(entry.path)))
+        stored = corpus.front_matter(corpus.read_card(entry.path))
         stored_lattice = Lattice.model_validate(stored)
         card_certifications = dict(stored_lattice.certifications)
         for field in BLOCKS:
@@ -390,7 +390,7 @@ def certify(
             card_certifications[f"{block_name}.{field}"] = certificate_hash
             held[computation] = Certificate(hash=certificate_hash, by=str(values["by"]))
         stored["certifications"] = {name: certificate_hash for name, certificate_hash in card_certifications.items()}
-        document = frontmatter.load(str(entry.path))
+        document = corpus.read_card(entry.path)
         entry.path.write_text(records.record_text(stored, document.content))
         certificates.save(root, held)
         print(
@@ -407,7 +407,7 @@ def cite(path: Path, field: str, value: Yaml, reference: dict[str, str], held: C
     recomputes the value. A different value already on the card contradicts
     the source and stops the run.
     """
-    document = frontmatter.load(str(path))
+    document = corpus.read_card(path)
     metadata = corpus.front_matter(document)
     block_name = BLOCKS[field][0]
     block = TypeAdapter(dict[str, Yaml]).validate_python(metadata.get(block_name) or {}, strict=True)

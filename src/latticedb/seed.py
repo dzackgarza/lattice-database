@@ -121,7 +121,7 @@ def attach(path: Path, fields: dict[str, Yaml], prose: str) -> None:
     card: a source's name for an entry is not always a name of the lattice the
     entry's Gram tensor states, and the prose records it.
     """
-    document = frontmatter.load(str(path))
+    document = corpus.read_card(path)
     held = corpus.front_matter(document)
     for key, value in fields.items():
         if key in _IDENTITY:
@@ -162,7 +162,7 @@ def run(root: Path, limit: int | None = None) -> tuple[int, int, tuple[str, ...]
     attached = 0
     missing: list[str] = []
     for path in paths:
-        document = frontmatter.load(str(path))
+        document = corpus.read_card(path)
         row = corpus.front_matter(document)
         fields, prose = card(row)
         if "gram_tensor" not in fields:

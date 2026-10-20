@@ -66,7 +66,7 @@ def store(root: Path, loaded: Corpus) -> list[str]:
 
     for source, morphisms in new.items():
         path = root / "lattices" / f"{source}.md"
-        document = frontmatter.load(str(path))
+        document = corpus.read_card(path)
         metadata = corpus.front_matter(document)
         stored = TypeAdapter(list[dict[str, Yaml]]).validate_python(metadata.get("morphisms", []))
         metadata["morphisms"] = [*stored, *morphisms]

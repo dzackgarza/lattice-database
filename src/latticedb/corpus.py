@@ -24,6 +24,7 @@ from pathlib import Path
 
 import frontmatter
 import yaml
+from frontmatter.default_handlers import YAMLHandler
 from pydantic import BaseModel, ConfigDict, TypeAdapter, ValidationError
 
 from latticedb.catalogues import (
@@ -42,6 +43,22 @@ from latticedb.catalogues import (
 from latticedb.geometric import GeometricFamily, GeometricObject
 from latticedb.graphs import WeightedGraph
 from latticedb.model import Family, GramTensor, Lattice, Tag, Yaml
+
+
+class _CardYaml(YAMLHandler):
+    """Parse card YAML with LibYAML's safe constructor."""
+
+    def load(self, fm: str, **kwargs: object) -> object:
+        return yaml.load(fm, Loader=yaml.CSafeLoader)
+
+
+_CARD_YAML = _CardYaml()
+
+
+def read_card(path: Path) -> frontmatter.Post:
+    """Read a stored card using the native safe YAML parser."""
+    return frontmatter.load(path, handler=_CARD_YAML)
+
 
 TAG_ALPHABET = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ"
 
@@ -149,7 +166,7 @@ def _catalogue[Value: CatalogueRecord](root: Path, directory: str, schema: type[
     """Every record of `root/directory` that has the shape of `schema`."""
     entries: list[CatalogueEntry[Value]] = []
     for path in sorted((root / directory).glob("*.md")):
-        document = frontmatter.load(str(path))
+        document = read_card(path)
         try:
             value = schema.model_validate(document.metadata)
         except ValidationError as error:
@@ -184,7 +201,7 @@ def load(root: Path) -> Corpus:
     if not paths:
         found.append(f"{directory}: no records")
     for path in paths:
-        document = frontmatter.load(str(path))
+        document = read_card(path)
         try:
             lattice = Lattice.model_validate(document.metadata)
             entries.append(Entry(lattice, document.content, path))
@@ -193,7 +210,7 @@ def load(root: Path) -> Corpus:
     geometric: list[GeometricEntry] = []
     geometric_adapter = TypeAdapter(GeometricObject)
     for path in sorted((root / "geometric-objects").glob("*.md")):
-        document = frontmatter.load(str(path))
+        document = read_card(path)
         try:
             geometric.append(
                 GeometricEntry(
@@ -206,7 +223,7 @@ def load(root: Path) -> Corpus:
             found.extend(_record_problems(path, error))
     geometric_families: list[GeometricFamilyEntry] = []
     for path in sorted((root / "geometric-families").glob("*.md")):
-        document = frontmatter.load(str(path))
+        document = read_card(path)
         try:
             geometric_families.append(
                 GeometricFamilyEntry(
@@ -219,7 +236,7 @@ def load(root: Path) -> Corpus:
             found.extend(_record_problems(path, error))
     graphs: list[GraphEntry] = []
     for path in sorted((root / "graphs").glob("*.md")):
-        document = frontmatter.load(str(path))
+        document = read_card(path)
         try:
             graphs.append(
                 GraphEntry(
@@ -313,7 +330,7 @@ def _stated_gram(path: Path) -> GramTensor | None:
             tokens = _GRAM_TOKEN.findall(match.group(1))
             covered = "".join(first or second for first, second in tokens)
             if covered != re.sub(r"[\s,]", "", match.group(1)) or not tokens:
-                value = TypeAdapter(Yaml).validate_python(frontmatter.load(str(path)).metadata.get("gram_tensor"))
+                value = TypeAdapter(Yaml).validate_python(read_card(path).metadata.get("gram_tensor"))
                 return records.gram_tensor(value)
             rows.append([int(token) if "/" not in token else token for token in (first or second for first, second in tokens)])
     if not started or not rows or any(not isinstance(row, list) or len(row) != len(rows) for row in rows):

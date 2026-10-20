@@ -35,7 +35,7 @@ def problems(loaded: Corpus, held: Certificates) -> list[str]:
         if missing:
             found.append(f"{entry.path}: fields awaiting source transcription or enrichment: {', '.join(missing)}")
             continue
-        metadata = corpus.front_matter(frontmatter.load(str(entry.path)))
+        metadata = corpus.front_matter(corpus.read_card(entry.path))
         cited = entry.lattice.certifications
         derive_name = f"{entry.lattice.tag} derive"
         derive_hash = certificates.certification_hash(derive_name, entry.lattice, records.derived_projection(metadata))

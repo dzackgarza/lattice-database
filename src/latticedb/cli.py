@@ -187,7 +187,7 @@ def morphism(
 ) -> None:
     """Author a morphism on the source lattice card."""
     path = root / "lattices" / f"{source}.md"
-    document = frontmatter.load(str(path))
+    document = corpus.read_card(path)
     added: dict[str, Yaml] = {
         "target": target,
         "name": name,
@@ -250,10 +250,10 @@ def deduplicate(root: Root = Path()) -> None:
     for tags in corpus.duplicate_grams(loaded.entries).values():
         earliest, *later = sorted(tags)
         survivor = root / "lattices" / f"{earliest}.md"
-        kept = corpus.front_matter(frontmatter.load(str(survivor)))
+        kept = corpus.front_matter(corpus.read_card(survivor))
         for tag in later:
             path = root / "lattices" / f"{tag}.md"
-            document = frontmatter.load(str(path))
+            document = corpus.read_card(path)
             fields = corpus.front_matter(document)
             cited = fields.get("certifications")
             for certified in cited if isinstance(cited, dict) else {}:

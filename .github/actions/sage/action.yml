@@ -33,7 +33,7 @@ runs:
         docker exec -i -w "$GITHUB_WORKSPACE" sage-env \
           uv pip install --python /sage/.venv/bin/python --no-deps --editable "$GITHUB_WORKSPACE/research"
         docker exec -i -w "$GITHUB_WORKSPACE" sage-env \
-          uv pip install --python /sage/.venv/bin/python --editable . pytest
+          uv pip install --python /sage/.venv/bin/python --reinstall-package pyyaml --only-binary pyyaml --editable . pytest
         docker exec -i sage-env uv pip install --python /sage/.venv/bin/python --no-deps \
           "sage-julia-bridge @ git+https://github.com/dzackgarza/sage-julia-bridge.git@66037961702ae6ceea7fb3d5e1544b75dcc95511"
       shell: bash

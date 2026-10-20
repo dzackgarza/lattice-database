@@ -30,7 +30,7 @@ from latticedb.collection_query import Cell as Cell
 from latticedb.collection_query import Collection as Collection
 from latticedb.collection_query import Row as Row
 from latticedb.collection_query import matches_collection
-from latticedb.corpus import Entry, load
+from latticedb.corpus import Entry, load, read_card
 from latticedb.geometric import HermitianSymmetricSpace, ProjectiveComplexVariety, RiemannianSymmetricSpace
 from latticedb.model import (
     DefiniteData,
@@ -283,7 +283,7 @@ def collections(directory: Path, entries: tuple[Entry, ...]) -> tuple[Collection
     keys = set(next(iter(rows.values())))
     pages = []
     for path in sorted(directory.glob("*.md")):
-        document = frontmatter.load(str(path))
+        document = read_card(path)
         collection = Collection.model_validate(document.metadata)
         assert set(collection.where) <= keys, f"{path}: unknown row keys {sorted(set(collection.where) - keys)}"
         members = tuple(entry for entry in entries if matches_collection(rows[entry.lattice.tag], collection))
@@ -295,7 +295,7 @@ def collections(directory: Path, entries: tuple[Entry, ...]) -> tuple[Collection
 def articles(directory: Path) -> tuple[ArticlePage, ...]:
     pages = []
     for path in directory.glob("*.md"):
-        document = frontmatter.load(str(path))
+        document = read_card(path)
         pages.append(ArticlePage(path.stem, Article.model_validate(document.metadata), document.content))
     orders = [page.article.order for page in pages]
     assert len(set(orders)) == len(orders), f"{directory}: two theory pages have one order"
