@@ -19,7 +19,7 @@ from pathlib import Path
 import yaml
 from pydantic import Field, TypeAdapter
 
-from latticedb import certificates
+from latticedb import certificates, storage
 from latticedb.model import Lattice, Record
 
 EXCEEDED_FILE = "exceeded.yaml"
@@ -49,7 +49,7 @@ def load(root: Path) -> Interruptions:
 
 def save(root: Path, log: Interruptions) -> None:
     data = {name: entry.model_dump() for name, entry in sorted(log.items())}
-    (root / EXCEEDED_FILE).write_text(yaml.safe_dump(data, sort_keys=False, allow_unicode=True))
+    storage.write_text(root / EXCEEDED_FILE, yaml.safe_dump(data, sort_keys=False, allow_unicode=True))
 
 
 def input_hash(name: str, lattice: Lattice) -> str:

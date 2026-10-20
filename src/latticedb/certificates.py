@@ -20,6 +20,7 @@ from pathlib import Path
 import yaml
 from pydantic import Field, TypeAdapter
 
+from latticedb import storage
 from latticedb.model import Lattice, Record
 
 CERTIFICATES_FILE = "certificates.yaml"
@@ -44,7 +45,7 @@ def load(root: Path) -> Certificates:
 
 def save(root: Path, certificates: Certificates) -> None:
     data = {name: certificate.model_dump(exclude_none=True) for name, certificate in sorted(certificates.items())}
-    (root / CERTIFICATES_FILE).write_text(yaml.safe_dump(data, sort_keys=False, allow_unicode=True))
+    storage.write_text(root / CERTIFICATES_FILE, yaml.safe_dump(data, sort_keys=False, allow_unicode=True))
 
 
 def digest(text: str) -> str:

@@ -68,3 +68,14 @@ def test_finishing_a_previously_interrupted_computation_clears_its_log(tmp_path:
     genus.certify(tmp_path, loaded, {}, ("0012",), time.time() + 60)
     assert exceeded.load(tmp_path) == {}
     assert computation in certificates.load(tmp_path)
+
+
+def test_an_interrupted_certificate_write_preserves_completed_certificates(tmp_path: Path) -> None:
+    held = {"completed": certificates.Certificate(hash="b" * 64, by="previous computation")}
+    certificates.save(tmp_path, held)
+    before = (tmp_path / certificates.CERTIFICATES_FILE).read_bytes()
+    result = subprocess.run([sys.executable, str(REPOSITORY / "tests/fixtures/interrupted_certificate_write.py"), str(tmp_path)], capture_output=True, text=True)
+    assert result.returncode == 27, result.stderr
+    assert (tmp_path / certificates.CERTIFICATES_FILE).read_bytes() == before
+    assert certificates.load(tmp_path) == held
+    assert list(tmp_path.iterdir()) == [tmp_path / certificates.CERTIFICATES_FILE]

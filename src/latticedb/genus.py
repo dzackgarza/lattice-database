@@ -25,7 +25,7 @@ from typing import NotRequired, TypedDict
 import frontmatter
 from pydantic import BaseModel, TypeAdapter
 
-from latticedb import certificates, corpus, exceeded, records
+from latticedb import certificates, corpus, exceeded, records, storage
 from latticedb.certificates import Certificate, Certificates
 from latticedb.model import (
     DefiniteData,
@@ -347,7 +347,7 @@ def store(path: Path, values: dict[str, Yaml]) -> None:
     metadata["morphisms"] = [morphism for morphism in morphisms]
     text = records.record_text(metadata, document.content)
     if text != path.read_text():
-        path.write_text(text)
+        storage.write_text(path, text)
 
 
 def certify(
@@ -401,7 +401,7 @@ def certify(
                         computation = name(stored_lattice.tag, "derive")
                         certificate_hash = certificates.certification_hash(computation, stored_lattice, records.derived_projection(derived))
                         derived["certifications"] = {**stored_lattice.certifications, "derive": certificate_hash}
-                        entry.path.write_text(records.record_text(derived, entry.prose))
+                        storage.write_text(entry.path, records.record_text(derived, entry.prose))
                         held[computation] = Certificate(hash=certificate_hash, by=str(values["by"]))
                         certificates.save(root, held)
                         log.pop(computation, None)
@@ -434,7 +434,7 @@ def certify(
                     held[computation] = Certificate(hash=certificate_hash, by=str(values["by"]))
                 stored["certifications"] = {name: certificate_hash for name, certificate_hash in card_certifications.items()}
                 document = corpus.read_card(entry.path)
-                entry.path.write_text(records.record_text(stored, document.content))
+                storage.write_text(entry.path, records.record_text(stored, document.content))
                 certificates.save(root, held)
                 print(
                     entry.lattice.tag,
