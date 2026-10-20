@@ -44,12 +44,14 @@ from latticedb.geometric import GeometricFamily, GeometricObject
 from latticedb.graphs import WeightedGraph
 from latticedb.model import Family, GramTensor, Lattice, Tag, Yaml
 
+_CARD_METADATA = TypeAdapter(dict[str, Yaml])
+
 
 class _CardYaml(YAMLHandler):
     """Parse card YAML with LibYAML's safe constructor."""
 
-    def load(self, fm: str, **kwargs: object) -> object:
-        return yaml.load(fm, Loader=yaml.CSafeLoader)
+    def load(self, fm: str, **kwargs: object) -> dict[str, Yaml]:
+        return _CARD_METADATA.validate_python(yaml.load(fm, Loader=yaml.CSafeLoader))
 
 
 _CARD_YAML = _CardYaml()
