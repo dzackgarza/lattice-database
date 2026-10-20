@@ -297,7 +297,8 @@ def derive(record: dict[str, Yaml]) -> dict[str, Yaml]:
     # The selected finite Gram tensor is the datum of this formed module.
     # Its ring-valuedness operation checks the entries directly, without
     # reconstructing them by evaluating the classifying Hom.
-    integral_lattice = Lattices(ZZ)(gram) if formed.is_base_ring_valued() else None
+    integer_valued = formed.is_base_ring_valued()
+    integral_lattice = Lattices(ZZ)(gram) if integer_valued else None
     match integral_lattice:
         case None:
             integral_twist, twist_multiplier = _integral_twist(formed)
@@ -324,6 +325,7 @@ def derive(record: dict[str, Yaml]) -> dict[str, Yaml]:
     derived: dict[str, Yaml] = {
         **record,
         "rank": rank,
+        "form": {"integer_valued": integer_valued},
         "signature": [n_plus, n_minus],
         "determinant": rational(determinant),
         "definiteness": definiteness,

@@ -34,6 +34,7 @@ from latticedb.corpus import Entry, load, read_card
 from latticedb.geometric import HermitianSymmetricSpace, ProjectiveComplexVariety, RiemannianSymmetricSpace
 from latticedb.model import (
     DefiniteData,
+    FormData,
     HyperbolicData,
     IndefiniteData,
     IntegralData,
@@ -200,15 +201,18 @@ PROPERTY_MEANINGS = {
 def properties(lattice: Lattice) -> list[str]:
     """Property labels explicitly supported by stored card fields."""
     found = []
+    if lattice.form is not None and lattice.form.integer_valued is False:
+        found.append("not integral")
     if lattice.integral is not None:
+        found.extend(f"{prime}-elementary" for prime in lattice.integral.elementary_primes or ())
         found.extend(["integral", lattice.integral.parity])
     if lattice.root_sublattice is not None and lattice.root_sublattice.norms is not None:
         found.append("root lattice")
     if lattice.hyperbolic is not None:
         found.append("hyperbolic")
-    if lattice.indefinite is not None:
+    if lattice.indefinite is not None and lattice.indefinite.isotropic is not None:
         found.append("isotropic" if lattice.indefinite.isotropic else "anisotropic")
-    if lattice.hyperbolic is not None:
+    if lattice.hyperbolic is not None and lattice.hyperbolic.reflective is not None:
         found.append("reflective" if lattice.hyperbolic.reflective else "not reflective")
     return found
 
@@ -373,6 +377,7 @@ def markdown_to_html(texts: list[str], bibliography: Path | None = None) -> list
 def fields() -> Iterator[tuple[str, str | None, type[BaseModel]]]:
     """The models of the schema: heading, block key, model."""
     yield "Every lattice", None, Lattice
+    yield "Bilinear form", "form", FormData
     yield "Integral lattice", "integral", IntegralData
     yield (
         "Series of orbits of primitive vectors",

@@ -13,6 +13,7 @@ from fractions import Fraction
 from dzack_research.preamble.categories.abstract_categories.mor_categories import CategoricalMor
 from dzack_research.preamble.categories.hyperbolic_lattices import HyperbolicLattices
 from dzack_research.preamble.categories.lattices import Lattices
+from dzack_research.preamble.categories.modules.framed.formed.form_modules import FormModules
 from dzack_research.preamble.categories.modules.pure.modules import Modules
 from dzack_research.preamble.categories.rings.commutative_algebra import FormalPowerSeriesRings
 from dzack_research.preamble.categories.rings.ring_foundation import _OwnedRingElement
@@ -42,6 +43,21 @@ def _matrix_rows(morphism: CategoricalMor.ElementMethods) -> list[list[int]]:
         [int(codomain.framing_morphism().lift(morphism(domain.module_generator(source_label)))(target_label)) for source_label in source_labels]
         for target_label in target_labels
     ]
+
+
+def _integer_valued(lattice: Lattices.ParentMethods) -> bool:
+    """Ask the integer module whether its scalar-valued form is integer-valued."""
+    values = Modules(OWNED_QQ).restriction_of_scalars(OWNED_ZZ.fraction_field_map())(OWNED_QQ)
+    module = OWNED_ZZ.free_module(int(lattice.module_rank()))
+    form = FormModules(OWNED_ZZ)(module.bilinear_hom_space(values)(lattice.gram_tensor()))
+    return form.is_base_ring_valued()
+
+
+def _elementary_primes(lattice: Lattices.ParentMethods) -> list[int]:
+    """Serialize the preamble's prime-elementary predicates for a nontrivial discriminant group."""
+    if lattice.discriminant_group().cardinality() == 1:
+        return []
+    return [int(prime) for prime in lattice.bad_reduction_primes() if lattice.is_p_elementary(prime)]
 
 
 def _orthogonal_group_data(lattice: Lattices.ParentMethods) -> dict[str, JsonValue]:
@@ -166,6 +182,8 @@ JOINT = (
 
 
 VALUES = {
+    "integer_valued": _integer_valued,
+    "elementary_primes": _elementary_primes,
     "genus_symbol": lambda lattice: str(lattice.conway_sloane_genus_symbol()),
     "genus_class_count": lambda lattice: int(lattice.genus_class_number()),
     "overlattice_count": lambda lattice: int(lattice.integral_overlattice_inclusions().cardinality()),
@@ -203,6 +221,11 @@ def main() -> None:
             derived = records.derive(request["record"])
             _emit(request["tag"], {"derived": derived})
             stored = Lattice.model_validate(derived)
+            if "integer_valued" in request["fields"]:
+                assert stored.form is not None
+                _start(request["tag"], ["integer_valued"])
+                _emit(request["tag"], {"integer_valued": stored.form.integer_valued})
+                request["fields"].remove("integer_valued")
             if stored.determinant == 0:
                 continue
             request["integral"] = stored.integral is not None

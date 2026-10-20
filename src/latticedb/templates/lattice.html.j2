@@ -35,6 +35,7 @@
     <h2 id="invariants">Invariants</h2>
     <table class="facts">
       <tbody>
+        {% if lattice.form and lattice.form.integer_valued is not none %}<tr><th scope="row">{{ theory("lattices", "integral", "Integer-valued form") }}</th><td>{{ yes_no(lattice.form.integer_valued) }}</td></tr>{% endif %}
         {% if lattice.rank is not none %}<tr><th scope="row">Rank</th><td>{{ lattice.rank }}</td></tr>{% endif %}
         {% if lattice.signature %}<tr><th scope="row">{{ theory("lattices", "signature", "Signature") }} \((n_+, n_-)\)</th><td>({{ lattice.signature[0] }}, {{ lattice.signature[1] }})</td></tr>{% endif %}
         {% if nullity %}
@@ -90,6 +91,7 @@
     <h2 id="integral">Integral lattice</h2>
     <table class="facts">
       <tbody>
+        {% if lattice.integral.elementary_primes is not none %}<tr><th scope="row">{{ theory("discriminant-forms", "two-elementary", "Elementary discriminant primes") }}</th><td>{{ lattice.integral.elementary_primes | join(", ") if lattice.integral.elementary_primes else "none" }}</td></tr>{% endif %}
         <tr><th scope="row">{{ theory("lattices", "integral", "Parity") }}</th><td>{{ lattice.integral.parity }}</td></tr>
        {% if lattice.integral.discriminant_group is not none %}
        <tr><th scope="row">{{ theory("discriminant-forms", "discriminant-group", "Discriminant group") }}</th><td>\({{ group_tex(lattice.integral.discriminant_group) }}\)</td></tr>
