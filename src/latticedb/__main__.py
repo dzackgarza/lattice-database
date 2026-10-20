@@ -1,3 +1,3 @@
-from latticedb.cli import app
+from latticedb.cli import main
 
-app()
+main()

@@ -18,7 +18,7 @@ dependencies = [
 ]
 
 [project.scripts]
-latticedb = "latticedb.cli:app"
+latticedb = "latticedb.cli:main"
 
 [build-system]
 requires = ["hatchling"]

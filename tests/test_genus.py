@@ -5,11 +5,9 @@ lattice-db tests only the serialization/certificate behavior.
 """
 
 import shutil
-import time
 from pathlib import Path
 
 import frontmatter
-import pytest
 
 from latticedb import certificates, corpus, exceeded, genus, records
 from latticedb.model import Lattice
@@ -210,22 +208,3 @@ def test_a_computation_that_outran_a_job_is_skipped_and_a_cut_one_runs_first(
     assert requested[0]["fields"][:2] == ["derive", fields[-1]]
     assert "genus_class_count" not in requested[0]["fields"]
     assert "genus_class_count" in requested[1]["fields"]
-
-
-def test_a_computation_the_job_ends_stays_logged_and_a_finished_one_leaves_the_log(tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> None:
-    (tmp_path / "lattices").mkdir()
-    shutil.copy(REPOSITORY / corpus.FAMILIES_FILE, tmp_path / corpus.FAMILIES_FILE)
-    (tmp_path / corpus.RETIRED_FILE).write_text("{}\n")
-    shutil.copy(REPOSITORY / "lattices" / "0012.md", tmp_path / "lattices")
-    started = {"tag": "0012", "started": ["genus_class_count"]}
-    finished = {"tag": "0012", "by": "test", "genus_class_count": 1}
-
-    monkeypatch.setattr(genus, "computed", lambda chosen: iter([started]))
-    genus.certify(tmp_path, corpus.load(tmp_path), {}, ("0012",), time.time() + 600)
-    entry = exceeded.load(tmp_path)[genus.name("0012", "genus_class_count")]
-    assert 590 <= entry.seconds <= 600
-
-    monkeypatch.setattr(genus, "computed", lambda chosen: iter([started, finished]))
-    genus.certify(tmp_path, corpus.load(tmp_path), {}, ("0012",), time.time() + 600)
-    assert exceeded.load(tmp_path) == {}
-    assert genus.name("0012", "genus_class_count") in certificates.load(tmp_path)

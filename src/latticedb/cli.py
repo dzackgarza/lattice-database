@@ -1,9 +1,11 @@
 """Seed, author, enrich, verify, and publish lattice cards."""
 
 import json
+import signal
 import sys
 import time
 from pathlib import Path
+from types import FrameType
 from typing import Annotated
 from urllib.request import Request, urlopen
 
@@ -353,3 +355,12 @@ def deploy(root: Root = Path()) -> None:
 def next_tag(root: Root = Path()) -> None:
     """Print the tag for the next new record."""
     print(corpus.next_tag(root))
+
+
+def main() -> None:
+    """Run the CLI, unwinding workers and persistence on CI termination."""
+    def terminate(signum: int, frame: FrameType | None) -> None:
+        raise SystemExit(128 + signum)
+
+    signal.signal(signal.SIGTERM, terminate)
+    app()

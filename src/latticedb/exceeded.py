@@ -3,12 +3,12 @@
 `exceeded.yaml` maps the name of a computation to the hash of that name and the
 Gram tensor, with the seconds the computation had run when its job ended.
 
-Certification writes the entry when a computation starts, with the seconds left
-until the job's timeout, and deletes it when the computation finishes. So an
-entry that remains after a job records a computation the timeout ended, and the
-time it ran. A computation that ran for at least `WINDOW_SECONDS` does not fit in
+Certification writes zero elapsed seconds when a computation starts, checkpoints
+its actual elapsed time every thirty seconds, and deletes it when it finishes.
+Graceful termination writes a final checkpoint; a hard kill retains the latest
+checkpoint. An entry that remains records unfinished work and its elapsed time. A computation that ran for at least `WINDOW_SECONDS` does not fit in
 one job: certification never requests it again. A computation that ran for less
-was ended only because it started late, and the next job computes it first.
+was interrupted or started late, and the next job computes it first.
 
 The log is permanent. A changed Gram tensor changes the hash, so the entry no
 longer applies. After a faster implementation, delete the entry by hand.

@@ -11,10 +11,14 @@ card value is certified. A computation that does not finish remains uncertified.
 from __future__ import annotations
 
 import json
+import os
+import selectors
+import signal
 import subprocess
 import sys
 import time
-from collections.abc import Iterator
+from collections.abc import Generator, Iterator
+from contextlib import closing
 from pathlib import Path
 from typing import NotRequired, TypedDict
 
@@ -231,23 +235,47 @@ def requests(
     return resumed + chosen
 
 
-def computed(chosen: list[Request]) -> Iterator[dict[str, Yaml]]:
-    """The values that SageMath computes for `chosen`, one record at a time."""
-    task = json.dumps({"lattices": chosen})
+def computed(chosen: list[Request], deadline: float) -> Generator[dict[str, Yaml], None, None]:
+    """Stream results and elapsed-time checkpoints until the job deadline."""
+    if not chosen:
+        return
     command = [sys.executable, "-m", "latticedb.sage_genus"]
-    with subprocess.Popen(
-        command,
-        stdin=subprocess.PIPE,
-        stdout=subprocess.PIPE,
-        text=True,
-    ) as process:
+    with subprocess.Popen(command, stdin=subprocess.PIPE, stdout=subprocess.PIPE, start_new_session=True) as process:
         assert process.stdin is not None and process.stdout is not None
-        process.stdin.write(task)
-        process.stdin.close()
-        # SageMath writes a carriage return to standard output for some lattices (for E8, record 0094), which reads as an empty line.
-        yield from (json.loads(line) for line in process.stdout if line.strip())
-    if process.returncode != 0:
-        yield {"worker_exit": process.returncode}
+        try:
+            process.stdin.write(json.dumps({"lattices": chosen}).encode())
+            process.stdin.close()
+            pending = b""
+            with selectors.DefaultSelector() as selector:
+                selector.register(process.stdout, selectors.EVENT_READ)
+                while True:
+                    remaining = deadline - time.time()
+                    if remaining <= 0:
+                        yield {"deadline": True}
+                        return
+                    if not selector.select(min(30, remaining)):
+                        yield {"checkpoint": True}
+                        continue
+                    chunk = os.read(process.stdout.fileno(), 65536)
+                    if not chunk:
+                        if pending.strip():
+                            yield json.loads(pending)
+                        break
+                    pending += chunk
+                    while b"\n" in pending:
+                        line, pending = pending.split(b"\n", 1)
+                        if line.strip():
+                            yield json.loads(line)
+            process.wait()
+            if process.returncode != 0:
+                yield {"worker_exit": process.returncode}
+        finally:
+            if process.poll() is None:
+                try:
+                    os.killpg(process.pid, signal.SIGTERM)
+                except ProcessLookupError:
+                    if process.poll() is None:
+                        raise
 
 
 def _generator_morphisms(tag: str, morphisms: list[dict[str, Yaml]], matrices: list[Yaml]) -> tuple[list[str], list[dict[str, Yaml]]]:
@@ -333,77 +361,87 @@ def certify(
 
     `deadline` is the time, in seconds since the epoch, at which the job's timeout
     ends this run. A computation in progress is logged in `exceeded.yaml` until it
-    finishes, with the seconds it will have run if the timeout ends it.
+    finishes, checkpointing the seconds actually spent in this run.
     """
     by_tag = {entry.lattice.tag: entry for entry in loaded.entries}
     log = exceeded.load(root)
     running: dict[str, float] = {}
-    for values in computed(requests(loaded, held, log, tags)):
-        if "worker_exit" in values:
-            # A crash is not a whole-job timeout. Retain its actual elapsed time
-            # so fixing the exception makes the operation eligible again.
+    def checkpoint() -> None:
+        if running:
             for computation, started_at in running.items():
-                log[computation] = exceeded.Interruption(hash=log[computation].hash, seconds=int(time.time() - started_at))
+                log[computation] = exceeded.Interruption(hash=log[computation].hash, seconds=int(time.monotonic() - started_at))
             exceeded.save(root, log)
-            raise ChildProcessError(f"{SAGE_MODULE} exited with status {values['worker_exit']}")
-        entry = by_tag[str(values["tag"])]
-        match values:
-            case {"started": list() as started}:
-                seconds = int(deadline - time.time())
-                for field in started:
-                    computation = name(entry.lattice.tag, str(field))
-                    log[computation] = exceeded.Interruption(
-                        hash=exceeded.input_hash(computation, entry.lattice),
-                        seconds=seconds,
+
+    try:
+        with closing(computed(requests(loaded, held, log, tags), deadline)) as stream:
+            for values in stream:
+                if "checkpoint" in values:
+                    checkpoint()
+                    continue
+                if "deadline" in values:
+                    print("Certification time budget exhausted", flush=True)
+                    return
+                if "worker_exit" in values:
+                    raise ChildProcessError(f"{SAGE_MODULE} exited with status {values['worker_exit']}")
+                entry = by_tag[str(values["tag"])]
+                match values:
+                    case {"started": list() as started}:
+                        for field in started:
+                            computation = name(entry.lattice.tag, str(field))
+                            log[computation] = exceeded.Interruption(
+                                hash=exceeded.input_hash(computation, entry.lattice),
+                                seconds=0,
+                            )
+                            running[computation] = time.monotonic()
+                        exceeded.save(root, log)
+                        continue
+                    case {"derived": dict() as derived}:
+                        stored_lattice = Lattice.model_validate(derived)
+                        computation = name(stored_lattice.tag, "derive")
+                        certificate_hash = certificates.certification_hash(computation, stored_lattice, records.derived_projection(derived))
+                        derived["certifications"] = {**stored_lattice.certifications, "derive": certificate_hash}
+                        entry.path.write_text(records.record_text(derived, entry.prose))
+                        held[computation] = Certificate(hash=certificate_hash, by=str(values["by"]))
+                        certificates.save(root, held)
+                        log.pop(computation, None)
+                        running.pop(computation, None)
+                        exceeded.save(root, log)
+                        print(stored_lattice.tag, "derive", flush=True)
+                        continue
+                for field in BLOCKS:
+                    if field in values:
+                        log.pop(name(entry.lattice.tag, field), None)
+                        running.pop(name(entry.lattice.tag, field), None)
+                exceeded.save(root, log)
+                store(entry.path, values)
+                stored = corpus.front_matter(corpus.read_card(entry.path))
+                stored_lattice = Lattice.model_validate(stored)
+                card_certifications = dict(stored_lattice.certifications)
+                for field in BLOCKS:
+                    if field not in values or values[field] is None:
+                        continue
+                    block_name = BLOCKS[field][0]
+                    block = stored.get(block_name)
+                    assert isinstance(block, dict)
+                    computation = name(entry.lattice.tag, field)
+                    certificate_hash = certificates.certification_hash(
+                        computation,
+                        stored_lattice,
+                        certified_value(field, block.get(field), stored_lattice),
                     )
-                    running[computation] = time.time()
-                exceeded.save(root, log)
-                continue
-            case {"derived": dict() as derived}:
-                stored_lattice = Lattice.model_validate(derived)
-                computation = name(stored_lattice.tag, "derive")
-                certificate_hash = certificates.certification_hash(computation, stored_lattice, records.derived_projection(derived))
-                derived["certifications"] = {**stored_lattice.certifications, "derive": certificate_hash}
-                entry.path.write_text(records.record_text(derived, entry.prose))
-                held[computation] = Certificate(hash=certificate_hash, by=str(values["by"]))
+                    card_certifications[f"{block_name}.{field}"] = certificate_hash
+                    held[computation] = Certificate(hash=certificate_hash, by=str(values["by"]))
+                stored["certifications"] = {name: certificate_hash for name, certificate_hash in card_certifications.items()}
+                document = corpus.read_card(entry.path)
+                entry.path.write_text(records.record_text(stored, document.content))
                 certificates.save(root, held)
-                log.pop(computation, None)
-                running.pop(computation, None)
-                exceeded.save(root, log)
-                print(stored_lattice.tag, "derive", flush=True)
-                continue
-        for field in BLOCKS:
-            if field in values:
-                log.pop(name(entry.lattice.tag, field), None)
-                running.pop(name(entry.lattice.tag, field), None)
-        exceeded.save(root, log)
-        store(entry.path, values)
-        stored = corpus.front_matter(corpus.read_card(entry.path))
-        stored_lattice = Lattice.model_validate(stored)
-        card_certifications = dict(stored_lattice.certifications)
-        for field in BLOCKS:
-            if field not in values or values[field] is None:
-                continue
-            block_name = BLOCKS[field][0]
-            block = stored.get(block_name)
-            assert isinstance(block, dict)
-            computation = name(entry.lattice.tag, field)
-            certificate_hash = certificates.certification_hash(
-                computation,
-                stored_lattice,
-                certified_value(field, block.get(field), stored_lattice),
-            )
-            card_certifications[f"{block_name}.{field}"] = certificate_hash
-            held[computation] = Certificate(hash=certificate_hash, by=str(values["by"]))
-        stored["certifications"] = {name: certificate_hash for name, certificate_hash in card_certifications.items()}
-        document = corpus.read_card(entry.path)
-        entry.path.write_text(records.record_text(stored, document.content))
-        certificates.save(root, held)
-        print(
-            entry.lattice.tag,
-            {field: values[field] for field in BLOCKS if field in values},
-            flush=True,
-        )
+                print(
+                    entry.lattice.tag,
+                    {field: values[field] for field in BLOCKS if field in values},
+                    flush=True,
+                )
+    finally:
+        checkpoint()
 
 
 def cite(path: Path, field: str, value: Yaml, reference: dict[str, str], held: Certificates) -> None:
