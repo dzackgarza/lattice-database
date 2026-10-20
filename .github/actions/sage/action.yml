@@ -31,13 +31,14 @@ runs:
     - name: Install current research and lattice database checkouts
       run: |
         docker exec -i -w "$GITHUB_WORKSPACE" sage-env \
-          uv pip install --python /sage/.venv/bin/python --no-deps --editable "$GITHUB_WORKSPACE/research"
+          uv pip install --python /sage/.venv/bin/python --no-deps \
+          --editable "$GITHUB_WORKSPACE/research" --editable .
         docker exec -i -w "$GITHUB_WORKSPACE" sage-env \
-          uv pip install --python /sage/.venv/bin/python --no-deps --editable .
-        docker exec -i sage-env uv pip install --python /sage/.venv/bin/python \
-          --reinstall-package pyyaml --only-binary pyyaml 'pyyaml>=6.0.3' pytest
-        docker exec -i sage-env uv pip install --python /sage/.venv/bin/python --no-deps \
-          "sage-julia-bridge @ git+https://github.com/dzackgarza/sage-julia-bridge.git@66037961702ae6ceea7fb3d5e1544b75dcc95511"
+          uv pip install --python /sage/.venv/bin/python \
+          --requirements pyproject.toml --requirements research/pyproject.toml \
+          --excludes .github/actions/sage/provided.txt \
+          --overrides .github/actions/sage/overrides.txt \
+          --reinstall-package pyyaml --only-binary pyyaml pytest
         docker exec -i sage-env uv pip check --python /sage/.venv/bin/python
       shell: bash
     - name: Install Julia and the Oscar project of sage-julia-bridge
