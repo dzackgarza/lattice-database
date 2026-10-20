@@ -55,7 +55,8 @@ def test_stored_lattice_morphisms_construct_in_the_preamble(loaded: corpus.Corpu
             assert stored.scale is not None, f"{source_tag} -> {stored.target}: source must state the morphism scale before verification"
             source = owned[source_tag].twist(stored.scale)
             target = owned[target_card.tag]
-            source.Mor(target)(tuple(target(image) for image in stored.images))
+            category = Lattices(ZZ) if source_card.integral is not None and target_card.integral is not None else FormModules(ZZ)
+            category.Mor(source, target)(tuple(target(image) for image in stored.images))
 
 
 def test_integral_root_span_sum_embeddings_construct_in_the_preamble(
@@ -77,7 +78,7 @@ def test_integral_root_span_sum_embeddings_construct_in_the_preamble(
             continue
         target = category(target_card.gram_tensor)
         source = category.biproduct(tuple(category(cards[summand.tag].gram_tensor).twist(summand.scale) for summand in span.summands))
-        source.Mor(target)(tuple(target(row) for row in span.embedding))
+        category.Mor(source, target)(tuple(target(row) for row in span.embedding))
 
 
 def test_local_system_monodromies_construct_as_preamble_automorphisms(
