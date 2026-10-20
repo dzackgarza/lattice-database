@@ -195,9 +195,10 @@ def requests(
         if not needs_derive and lattice.rank is None:
             # A timed-out derivation cannot supply missing hypotheses for later operations.
             continue
-        if not needs_derive and lattice.determinant == 0:
-            continue
-        applicable = list(BLOCKS) if lattice.rank is None else [field for field in BLOCKS if applies(field, lattice)]
+        if lattice.determinant == 0:
+            applicable = ["integer_valued"]
+        else:
+            applicable = list(BLOCKS) if lattice.rank is None else [field for field in BLOCKS if applies(field, lattice)]
         fields = []
         for field in applicable:
             block_name = BLOCKS[field][0]
