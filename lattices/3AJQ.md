@@ -3,6 +3,9 @@ tag: 3AJQ
 name: brandt_intrau Brandt_2.html:25537
 latex: brandt_intrau Brandt_2.html:25537
 aliases: []
+certifications:
+  derive: 4e043aad301bde0aaa0ec3da4b4605669fdf8cc9ad70a9e35fa62706cdd2c02b
+  form.integer_valued: 9f952fe227beecd9656d25158f776a390f736e07ab9a24de6655c474b08f9e2b
 rank: 3
 gram_tensor:
 - [2, 0, 0]
@@ -11,6 +14,34 @@ gram_tensor:
 signature: [3, 0]
 determinant: 1806
 definiteness: positive_definite
+dual_gram_tensor:
+- [1/2, 0, 0]
+- [0, 38/301, -1/301]
+- [0, -1/301, 8/903]
+form:
+  integer_valued: true
+integral:
+  parity: even
+  level: 3612
+  discriminant_group: [1806]
+  bad_reduction_primes: [2, 3, 7, 43]
+definite:
+  minimum: 2
+  kissing_number: 2
+  minimal_vectors:
+  - [-1, 0, 0]
+  - [1, 0, 0]
+  perfect: false
+  theta_series: [1, 0, 2, 0, 0, 0, 0, 0, 4, 0, 4, 0, 0]
+  root_system: [A1]
+  roots:
+  - type: A1
+    scale: 1
+    simple_roots:
+    - [1, 0, 0]
+root_sublattice:
+  invariant_factors: [1]
+morphisms: []
 families: []
 related: []
 references:

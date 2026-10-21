@@ -3,6 +3,9 @@ tag: 2OBJ
 name: brandt_intrau Brandt_1.html:2170
 latex: brandt_intrau Brandt_1.html:2170
 aliases: []
+certifications:
+  derive: d8032388136d7e575c4e930cc443314ad3ace7ba45b037fec09b9c4149b2689e
+  form.integer_valued: fc73392ae2c28848880dc403d7943902aadf045def8103889e474e8f0d5323d2
 rank: 3
 gram_tensor:
 - [2, 0, 1]
@@ -11,6 +14,42 @@ gram_tensor:
 signature: [3, 0]
 determinant: 148
 definiteness: positive_definite
+dual_gram_tensor:
+- [19/37, 0, -1/37]
+- [0, 1/4, 0]
+- [-1/37, 0, 2/37]
+form:
+  integer_valued: true
+integral:
+  parity: odd
+  level: 296
+  discriminant_group: [148]
+  bad_reduction_primes: [2, 37]
+definite:
+  minimum: 2
+  kissing_number: 2
+  minimal_vectors:
+  - [-1, 0, 0]
+  - [1, 0, 0]
+  perfect: false
+  theta_series: [1, 0, 2, 0, 2, 0, 4, 0, 2, 0, 0, 0, 4]
+  root_system: [A1]
+  roots:
+  - type: A1
+    scale: 2
+    simple_roots:
+    - [0, 1, 0]
+  - type: A1
+    scale: 37
+    simple_roots:
+    - [1, 0, -2]
+  - type: A1
+    scale: 1
+    simple_roots:
+    - [1, 0, 0]
+root_sublattice:
+  invariant_factors: [1, 1, 2]
+morphisms: []
 families: []
 related: []
 references:
