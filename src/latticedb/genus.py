@@ -198,11 +198,12 @@ def requests(
 
     A computation that ran for a whole job without finishing is not requested. One
     that a job ended after a shorter time is requested first, so it runs for a whole job.
-    The other cards follow by rank and then absolute determinant, and within a card the
-    semi-decisions follow the fields that every procedure finishes.
+    The other cards follow by rank and then absolute determinant. The semi-decisions of
+    every card that needs no derivation are separate requests after all of them.
     """
     resumed: list[Request] = []
     chosen: list[Request] = []
+    searches: list[Request] = []
     sizes: dict[str, tuple[int, Fraction]] = {}
     for entry in loaded.entries:
         lattice = entry.lattice
@@ -237,7 +238,12 @@ def requests(
         if fields:
             interrupted = [field for field in fields if exceeded.seconds_run(log, name(lattice.tag, field), lattice) is not None]
             rest = [field for field in fields if field not in interrupted]
-            fields = interrupted + [field for field in rest if field not in SEMI_DECISIONS] + [field for field in rest if field in SEMI_DECISIONS]
+            semi = [field for field in rest if field in SEMI_DECISIONS]
+            fields = interrupted + [field for field in rest if field not in SEMI_DECISIONS]
+            if needs_derive:
+                # Derivation supplies the hypotheses that select the card's fields, so they stay together.
+                fields += semi
+                semi = []
             gram = [[int(value) if value.denominator == 1 else str(value) for value in row] for row in lattice.gram_tensor]
             request: Request = {
                 "tag": lattice.tag,
@@ -250,10 +256,19 @@ def requests(
                 request["record"] = metadata
                 # Derivation supplies the hypotheses even when another field was interrupted.
                 request["fields"] = ["derive", *[field for field in fields if field != "derive"]]
-            (resumed if interrupted else chosen).append(request)
+            if request["fields"]:
+                (resumed if interrupted else chosen).append(request)
+            if semi:
+                searches.append({**request, "fields": semi})
             sizes[lattice.tag] = (len(gram), abs(lattice.determinant or Fraction(0)))
-    # Smaller cards finish sooner, so each job certifies as many values as it can.
-    return resumed + sorted(chosen, key=lambda request: sizes[request["tag"]])
+
+    # Smaller cards finish sooner, so each job certifies as many values as it can. A
+    # semi-decision can hold its worker for the rest of the job, so the searches of
+    # every card follow the fields that every procedure finishes.
+    def by_size(request: Request) -> tuple[int, Fraction]:
+        return sizes[request["tag"]]
+
+    return resumed + sorted(chosen, key=by_size) + sorted(searches, key=by_size)
 
 
 MEMORY_RESERVE = 0.1

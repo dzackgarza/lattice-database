@@ -220,19 +220,22 @@ def test_shards_partition_the_cards() -> None:
     assert all(shards)
 
 
-def test_smaller_cards_come_first_and_semi_decisions_end_each_card(tmp_path: Path) -> None:
+def test_smaller_cards_come_first_and_every_card_precedes_the_searches(tmp_path: Path) -> None:
     (tmp_path / "lattices").mkdir()
     shutil.copy(REPOSITORY / corpus.FAMILIES_FILE, tmp_path / corpus.FAMILIES_FILE)
     (tmp_path / corpus.RETIRED_FILE).write_text("{}\n")
     for tag in ("0012", "0016", "0026"):
         shutil.copy(REPOSITORY / "lattices" / f"{tag}.md", tmp_path / "lattices")
-    requested = genus.requests(corpus.load(tmp_path), {}, {}, ())
+    # U and A2 are derived, so their searches are queued apart from their other fields;
+    # II_{1,2} still needs derivation, which selects its fields, so its request stays whole.
+    derived = {computation: certificate for computation, certificate in certificates.load(REPOSITORY).items() if computation.endswith(" derive")}
+    requested = genus.requests(corpus.load(tmp_path), derived, {}, ())
     # U has determinant -1 and A2 determinant 3, both of rank 2; II_{1,2} has rank 3.
-    assert [request["tag"] for request in requested] == ["0016", "0012", "0026"]
-    for request in requested:
-        semi = [index for index, field in enumerate(request["fields"]) if field in genus.SEMI_DECISIONS]
-        assert semi == list(range(len(request["fields"]) - len(semi), len(request["fields"])))
-    assert "roots" in requested[0]["fields"]
+    assert [request["tag"] for request in requested] == ["0016", "0012", "0026", "0016", "0012"]
+    assert not any(set(request["fields"]) & genus.SEMI_DECISIONS for request in requested[:2])
+    assert requested[2]["fields"][0] == "derive"
+    assert all(set(request["fields"]) <= genus.SEMI_DECISIONS for request in requested[3:])
+    assert "roots" in requested[3]["fields"]
 
 
 FAKE_WORKER = """
