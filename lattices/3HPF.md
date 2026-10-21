@@ -59,4 +59,5 @@ references:
 
 Catalogue of Lattices archive entry `union:370` names `MW44`.
 
-A Mordell Weil lattice of Elkies and Shioda. Sent by Gabriele Nebe.
+A Mordell Weil lattice of Elkies and Shioda.
+Sent by Gabriele Nebe.

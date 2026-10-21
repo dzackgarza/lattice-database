@@ -23,4 +23,4 @@ references:
 
 Catalogue of Lattices archive entry `union:276` names `KAPPA8*`.
 
-Obtained by multiplying gram matrix for: KAPPA8*  by  0.120000000000D+02
+Obtained by multiplying gram matrix for: KAPPA8* by 0.120000000000D+02

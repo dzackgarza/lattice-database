@@ -45,4 +45,6 @@ references:
 
 Catalogue of Lattices archive entry `union:339` names `LAMBDA30`.
 
-A laminated lattice LAMBDA30, constructed as in Sect. 7, Chap. 6 of SPLAG, at scale at which it is integral.
+A laminated lattice LAMBDA30, constructed as in Sect.
+7, Chap.
+6 of SPLAG, at scale at which it is integral.

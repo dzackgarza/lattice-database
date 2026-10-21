@@ -40,4 +40,7 @@ references:
 
 Catalogue of Lattices archive entry `union:334` names `LAMBDA25`.
 
-A laminated lattice LAMBDA25, constructed as in Sect. 7, Chap. 6 of SPLAG, at scale at which it is integral. The theta series of this lattice is given by sequence A024211.
+A laminated lattice LAMBDA25, constructed as in Sect.
+7, Chap.
+6 of SPLAG, at scale at which it is integral.
+The theta series of this lattice is given by sequence A024211.

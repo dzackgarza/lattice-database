@@ -21,4 +21,5 @@ references:
 
 Catalogue of Lattices archive entry `union:23` names `6QF.6.d`.
 
-Fixed sublattice of type 1^2 2 4 8^2 in Leech. Strongly 8-modular.
+Fixed sublattice of type 1^2 2 4 8^2 in Leech.
+Strongly 8-modular.

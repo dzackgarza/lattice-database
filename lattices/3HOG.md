@@ -41,4 +41,6 @@ references:
 
 Catalogue of Lattices archive entry `union:335` names `LAMBDA26`.
 
-A laminated lattice LAMBDA26, constructed as in Sect. 7, Chap. 6 of SPLAG, at scale at which it is integral.
+A laminated lattice LAMBDA26, constructed as in Sect.
+7, Chap.
+6 of SPLAG, at scale at which it is integral.

@@ -28,4 +28,6 @@ references:
 
 Catalogue of Lattices archive entry `union:305` names `LAMBDA13_MIN`.
 
-A laminated lattice. There are three inequivalent 13-dim. laminated lattices; this is Lambda^{min}_13, the one with the smallest kissing number.
+A laminated lattice.
+There are three inequivalent 13-dim.
+laminated lattices; this is Lambda^{min}_13, the one with the smallest kissing number.

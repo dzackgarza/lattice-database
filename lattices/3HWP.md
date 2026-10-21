@@ -18,4 +18,5 @@ references:
 
 Catalogue of Lattices archive entry `union:632` names `digonal I (classical holotype)`.
 
-Also called orthorhombic I One of the Bravais lattices. Holotype = smallest determinant of any classically integral lattice of this type.
+Also called orthorhombic I One of the Bravais lattices.
+Holotype = smallest determinant of any classically integral lattice of this type.

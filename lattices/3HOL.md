@@ -46,4 +46,6 @@ references:
 
 Catalogue of Lattices archive entry `union:340` names `LAMBDA31`.
 
-Laminated lattice LAMBDA31, constructed as in Sect. 7, Chap. 6 of SPLAG, at scale at which it is integral.
+Laminated lattice LAMBDA31, constructed as in Sect.
+7, Chap.
+6 of SPLAG, at scale at which it is integral.

@@ -42,4 +42,6 @@ references:
 
 Catalogue of Lattices archive entry `union:336` names `LAMBDA27`.
 
-A laminated lattice LAMBDA27, constructed as in Sect. 7, Chap. 6 of SPLAG, at scale at which it is integral.
+A laminated lattice LAMBDA27, constructed as in Sect.
+7, Chap.
+6 of SPLAG, at scale at which it is integral.

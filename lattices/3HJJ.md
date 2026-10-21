@@ -27,4 +27,5 @@ references:
 
 Catalogue of Lattices archive entry `union:158` names `D12+`.
 
-The unique indecomposable 12-d unimodular lattice. Theta series: see sequence A014745.
+The unique indecomposable 12-d unimodular lattice.
+Theta series: see sequence A014745.

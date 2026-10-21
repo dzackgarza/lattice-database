@@ -22,4 +22,4 @@ references:
 
 Catalogue of Lattices archive entry `union:275` names `KAPPA7*`.
 
-Obtained by multiplying gram matrix for: KAPPA7*  by  0.240000000000D+02
+Obtained by multiplying gram matrix for: KAPPA7* by 0.240000000000D+02

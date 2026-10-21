@@ -22,4 +22,5 @@ references:
 
 Catalogue of Lattices archive entry `union:560` names `P7.4`.
 
-One of the perfect 7-dimensional lattices. This is D7.
+One of the perfect 7-dimensional lattices.
+This is D7.

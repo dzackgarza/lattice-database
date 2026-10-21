@@ -72,4 +72,5 @@ references:
 - citation: R. Laza and Z. Zheng, "Automorphisms and periods of cubic fourfolds", Mathematische Zeitschrift 300 (2021), 1455-1507, Section 2.1, DOI 10.1007/s00209-021-02810-x.
 ---
 
-The unique unimodular odd lattice of signature $(21, 2)$, up to isometry. For a smooth cubic fourfold $X$, the middle cohomology group $H^{4}(X, \mathbb{Z})$ with the natural intersection pairing is a unimodular odd lattice of signature $(21, 2)$, uniquely specified by these conditions, hence isometric to this lattice (Laza–Zheng, Section 2.1). It contains the square $\eta_X$ of the hyperplane class, with $b(\eta_X, \eta_X) = 3$, whose orthogonal complement is the primitive cohomology lattice $E_{8}^{\oplus 2} \oplus U^{\oplus 2} \oplus A_{2}$.
+The unique unimodular odd lattice of signature $(21, 2)$, up to isometry.
+For a smooth cubic fourfold $X$, the middle cohomology group $H^{4}(X, \mathbb{Z})$ with the natural intersection pairing is a unimodular odd lattice of signature $(21, 2)$, uniquely specified by these conditions, hence isometric to this lattice (Laza–Zheng, Section 2.1). It contains the square $\eta_X$ of the hyperplane class, with $b(\eta_X, \eta_X) = 3$, whose orthogonal complement is the primitive cohomology lattice $E_{8}^{\oplus 2} \oplus U^{\oplus 2} \oplus A_{2}$.

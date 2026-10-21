@@ -38,4 +38,5 @@ Source entry `watson:3:8` gives this Gram tensor.
 
 Catalogue of Lattices archive entry `union:773` names `monoclinic P (even holotype)`.
 
-One of the Bravais lattices. Holotype = smallest determinant of any even integral lattice of this type.
+One of the Bravais lattices.
+Holotype = smallest determinant of any even integral lattice of this type.

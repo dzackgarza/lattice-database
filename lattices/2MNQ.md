@@ -24,4 +24,5 @@ Source entry `brandt_intrau:Brandt_1.html:27` gives this Gram tensor.
 
 Catalogue of Lattices archive entry `union:772` names `monoclinic P (classical holotype)`.
 
-One of the Bravais lattices. Holotype = smallest determinant of any classically integral lattice of this type.
+One of the Bravais lattices.
+Holotype = smallest determinant of any classically integral lattice of this type.

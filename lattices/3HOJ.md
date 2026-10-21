@@ -44,4 +44,6 @@ references:
 
 Catalogue of Lattices archive entry `union:338` names `LAMBDA29`.
 
-A laminated lattice LAMBDA29, constructed as in Sect. 7, Chap. 6 of SPLAG, at scale at which it is integral.
+A laminated lattice LAMBDA29, constructed as in Sect.
+7, Chap.
+6 of SPLAG, at scale at which it is integral.

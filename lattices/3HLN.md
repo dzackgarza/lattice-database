@@ -23,4 +23,6 @@ references:
 
 Catalogue of Lattices archive entry `union:234` names `Q8(1)`.
 
-The icosian (or Maass) lattice Q_8(1) in LDL II (see references). The minimal vectors are the 120 unit icosians (SPLAG, Chap. 8). Also called H4.
+The icosian (or Maass) lattice Q_8(1) in LDL II (see references).
+The minimal vectors are the 120 unit icosians (SPLAG, Chap.
+8). Also called H4.

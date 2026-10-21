@@ -26,4 +26,4 @@ references:
 
 Catalogue of Lattices archive entry `union:273` names `KAPPA11*`.
 
-Obtained by multiplying gram matrix for: KAPPA11*  by  0.120000000000D+02
+Obtained by multiplying gram matrix for: KAPPA11* by 0.120000000000D+02

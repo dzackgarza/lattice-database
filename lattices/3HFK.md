@@ -50,4 +50,6 @@ references:
 
 Catalogue of Lattices archive entry `union:15` names `35MIN3a`.
 
-dim 35 , min 3, even though certified to have min 4 by LLL, when the original Gram matrix was run through L:=LatticeWithGram(LLLGram(GramMatrix(L))); "LLLmin = ",Norm(L.1); in Magma. Note the quite large kissing number!  No excuses!
+dim 35 , min 3, even though certified to have min 4 by LLL, when the original Gram matrix was run through L:=LatticeWithGram(LLLGram(GramMatrix(L))); "LLLmin = ",Norm(L.1); in Magma.
+Note the quite large kissing number!
+No excuses!

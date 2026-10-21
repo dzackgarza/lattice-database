@@ -51,4 +51,5 @@ references:
 
 Catalogue of Lattices archive entry `union:153` names `Delta5`.
 
-Constructed by G. Nebe applying the Turyn construction to the Coxeter Todd lattice. This yields in total five 3-modular lattices of dimension 36
+Constructed by G. Nebe applying the Turyn construction to the Coxeter Todd lattice.
+This yields in total five 3-modular lattices of dimension 36

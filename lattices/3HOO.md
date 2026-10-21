@@ -45,4 +45,4 @@ references:
 
 Catalogue of Lattices archive entry `union:343` names `LAMBDA31nc`.
 
-Obtained by multiplying gram matrix for: LAMBDA31  by  0.250000000000D+00
+Obtained by multiplying gram matrix for: LAMBDA31 by 0.250000000000D+00

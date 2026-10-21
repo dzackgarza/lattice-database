@@ -18,4 +18,6 @@ references:
 
 Catalogue of Lattices archive entry `union:627` names `cubic P (even holotype)`.
 
-One of the Bravais lattices. Holotype = smallest determinant of any even integral lattice of this type. Simple cubic lattice.
+One of the Bravais lattices.
+Holotype = smallest determinant of any even integral lattice of this type.
+Simple cubic lattice.

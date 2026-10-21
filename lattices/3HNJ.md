@@ -27,4 +27,6 @@ references:
 
 Catalogue of Lattices archive entry `union:302` names `LAMBDA12_MIN`.
 
-A laminated lattice. There are three inequivalent 12-dim. laminated lattices; this is Lambda^{min}_12, the one with the smallest kissing number.
+A laminated lattice.
+There are three inequivalent 12-dim.
+laminated lattices; this is Lambda^{min}_12, the one with the smallest kissing number.

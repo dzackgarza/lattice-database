@@ -79,4 +79,6 @@ references:
 
 Catalogue of Lattices archive entry `union:371` names `MW64`.
 
-64-dimensional Elkies (or Mordell-Weil) lattice. From Vahid Tarokh (tarokh@research.att.com). Det = 2^52
+64-dimensional Elkies (or Mordell-Weil) lattice.
+From Vahid Tarokh (tarokh@research.att.com).
+Det = 2^52

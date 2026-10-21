@@ -263,4 +263,4 @@ references:
 
 Catalogue of Lattices archive entry `union:601` names `Thompson-Smith`.
 
-Even unimodular lattice with minimum  >= 10 (Lempken, Schroeder, Tiep (preprint)) and <= 12 (explicit vector of norm 12)
+Even unimodular lattice with minimum >= 10 (Lempken, Schroeder, Tiep (preprint)) and <= 12 (explicit vector of norm 12)

@@ -25,4 +25,4 @@ references:
 
 Catalogue of Lattices archive entry `union:272` names `KAPPA10*`.
 
-Obtained by multiplying gram matrix for: KAPPA10*  by  0.180000000000D+02
+Obtained by multiplying gram matrix for: KAPPA10* by 0.180000000000D+02

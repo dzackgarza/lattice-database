@@ -23,4 +23,5 @@ references:
 
 Catalogue of Lattices archive entry `union:30` names `O(6)`.
 
-The "odd" version of G2 x F4 (F8.6.std). Construction: Take vector v of norm 8 in L/2L, where L = G2 x F4; this is the odd nbr of L with respect to v.
+The "odd" version of G2 x F4 (F8.6.std).
+Construction: Take vector v of norm 8 in L/2L, where L = G2 x F4; this is the odd nbr of L with respect to v.

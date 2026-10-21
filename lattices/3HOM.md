@@ -46,4 +46,7 @@ references:
 
 Catalogue of Lattices archive entry `union:341` names `LAMBDA31B`.
 
-A laminated lattice LAMBDA31, constructed as in Sect. 7, Chap. 6 of SPLAG, at scale at which it is integral. (In this version the two equal coordinates used to define the LAMBDA7 are equivalent under the map "i".  See also LAMBDA31.)
+A laminated lattice LAMBDA31, constructed as in Sect.
+7, Chap.
+6 of SPLAG, at scale at which it is integral.
+(In this version the two equal coordinates used to define the LAMBDA7 are equivalent under the map "i". See also LAMBDA31.)

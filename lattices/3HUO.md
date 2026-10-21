@@ -22,4 +22,5 @@ references:
 
 Catalogue of Lattices archive entry `union:559` names `P7.33`.
 
-One of the perfect 7-dimensional lattices. This is A7.
+One of the perfect 7-dimensional lattices.
+This is A7.

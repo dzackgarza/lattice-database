@@ -36,8 +36,12 @@ Source entry `brandt_intrau:Brandt_2.html:1` gives this Gram tensor.
 
 Catalogue of Lattices archive entry `union:622` names `cubic F (classical holotype)`.
 
-One of the Bravais lattices. Holotype = smallest determinant of any classically integral lattice of this type. Face-centered cubic lattice A3 = D3.
+One of the Bravais lattices.
+Holotype = smallest determinant of any classically integral lattice of this type.
+Face-centered cubic lattice A3 = D3.
 
 Catalogue of Lattices archive entry `union:623` names `cubic F (even holotype)`.
 
-One of the Bravais lattices. Holotype = smallest determinant of any even integral lattice of this type. Face-centered cubic lattice A3 = D3.
+One of the Bravais lattices.
+Holotype = smallest determinant of any even integral lattice of this type.
+Face-centered cubic lattice A3 = D3.

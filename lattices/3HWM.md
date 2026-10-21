@@ -18,4 +18,5 @@ references:
 
 Catalogue of Lattices archive entry `union:629` names `digonal C (even holotype)`.
 
-Also called orthorhombic C One of the Bravais lattices. Holotype = smallest determinant of any even integral lattice of this type.
+Also called orthorhombic C One of the Bravais lattices.
+Holotype = smallest determinant of any even integral lattice of this type.

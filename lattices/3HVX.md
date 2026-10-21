@@ -29,4 +29,5 @@ references:
 
 Catalogue of Lattices archive entry `union:604` names `E7^2+`.
 
-The unique indecomposable 14-d unimodular lattice. Theta series: see sequence A004535.
+The unique indecomposable 14-d unimodular lattice.
+Theta series: see sequence A004535.

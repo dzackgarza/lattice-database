@@ -18,4 +18,5 @@ references:
 
 Catalogue of Lattices archive entry `union:630` names `digonal F (classical holotype)`.
 
-Also called orthorhombic F One of the Bravais lattices. Holotype = smallest determinant of any classically integral lattice of this type.
+Also called orthorhombic F One of the Bravais lattices.
+Holotype = smallest determinant of any classically integral lattice of this type.

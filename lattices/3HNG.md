@@ -26,4 +26,6 @@ references:
 
 Catalogue of Lattices archive entry `union:299` names `LAMBDA11_MIN`.
 
-A laminated lattice. There are two inequivalent 11-dim. laminated lattices; this is Lambda^{min}_11, the one with the smallest kissing number.
+A laminated lattice.
+There are two inequivalent 11-dim.
+laminated lattices; this is Lambda^{min}_11, the one with the smallest kissing number.

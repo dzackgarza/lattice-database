@@ -18,4 +18,5 @@ references:
 
 Catalogue of Lattices archive entry `union:635` names `digonal P (even holotype)`.
 
-Also called orthorhombic P One of the Bravais lattices. Holotype = smallest determinant of any even integral lattice of this type.
+Also called orthorhombic P One of the Bravais lattices.
+Holotype = smallest determinant of any even integral lattice of this type.

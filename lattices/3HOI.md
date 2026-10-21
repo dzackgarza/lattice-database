@@ -43,4 +43,6 @@ references:
 
 Catalogue of Lattices archive entry `union:337` names `LAMBDA28`.
 
-A laminated lattice LAMBDA28, constructed as in Sect. 7, Chap. 6 of SPLAG, at scale at which it is integral.
+A laminated lattice LAMBDA28, constructed as in Sect.
+7, Chap.
+6 of SPLAG, at scale at which it is integral.

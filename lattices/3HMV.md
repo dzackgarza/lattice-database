@@ -51,4 +51,5 @@ references:
 
 Catalogue of Lattices archive entry `union:278` names `KP36`.
 
-The Kschischang-Pasupathy 36-d lattice, the densest packing known in 36 dimensions. Sent by Christine Bachoc <bachoc@math.u-bordeaux.fr>                      . math.u-bordeaux.fr!bachoc Wed Sep  4 11:05:44 +0200 1996 A Gram matrix of the lattice of dim 36 det 3^20 min 8 constructed over the Eisensteins.
+The Kschischang-Pasupathy 36-d lattice, the densest packing known in 36 dimensions.
+Sent by Christine Bachoc <bachoc@math.u-bordeaux.fr> . math.u-bordeaux.fr!bachoc Wed Sep 4 11:05:44 +0200 1996 A Gram matrix of the lattice of dim 36 det 3^20 min 8 constructed over the Eisensteins.

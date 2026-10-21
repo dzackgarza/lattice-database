@@ -38,4 +38,5 @@ references:
 
 Catalogue of Lattices archive entry `union:348` names `L_24.2`.
 
-CycloQuaternionic lattice of type Delta2 Extremal 3-modular lattice. Official name is ^((5+sqrt(13))/2)L_24,2
+CycloQuaternionic lattice of type Delta2 Extremal 3-modular lattice.
+Official name is ^((5+sqrt(13))/2)L_24,2

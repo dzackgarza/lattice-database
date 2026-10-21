@@ -40,4 +40,5 @@ references:
 
 Catalogue of Lattices archive entry `union:8` names `25MIN2a`.
 
-Borcherds has classified all 25-d unimodular lattices. This has kissing number 92.
+Borcherds has classified all 25-d unimodular lattices.
+This has kissing number 92.

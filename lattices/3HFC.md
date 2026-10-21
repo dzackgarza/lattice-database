@@ -40,4 +40,5 @@ references:
 
 Catalogue of Lattices archive entry `union:7` names `25MIN2`.
 
-Borcherds has classified all 25-d unimodular lattices. This (Leech + Z) has the smallest kissing number.
+Borcherds has classified all 25-d unimodular lattices.
+This (Leech + Z) has the smallest kissing number.

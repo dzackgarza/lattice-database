@@ -43,4 +43,5 @@ references:
 
 Catalogue of Lattices archive entry `union:245` names `J2dim14`.
 
-Superlattice of the lattice of the maximal finite group [ +-J2:2 ]_{28} of index 3, not invariant under the outer automorphism. The endomorphism ring as a ZJ2-lattice is only a suborder of index 3 in the maximal order of Q[sqrt{5}].
+Superlattice of the lattice of the maximal finite group [ +-J2:2 ]_{28} of index 3, not invariant under the outer automorphism.
+The endomorphism ring as a ZJ2-lattice is only a suborder of index 3 in the maximal order of Q[sqrt{5}].

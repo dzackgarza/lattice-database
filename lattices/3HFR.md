@@ -21,4 +21,5 @@ references:
 
 Catalogue of Lattices archive entry `union:22` names `6QF.6.c`.
 
-In good genus. There is just one other extremal lattice in this genus, namely     [  4  0  0  2 -2  1]     [  0  4  0  1 -2 -2]     [  0  0  4  2 -1  2]     [  2  1  2  5 -2  1]     [ -2 -2 -1 -2  5  0]     [  1 -2  2  1  0  5]
+In good genus.
+There is just one other extremal lattice in this genus, namely [ 4 0 0 2 -2 1] [ 0 4 0 1 -2 -2] [ 0 0 4 2 -1 2] [ 2 1 2 5 -2 1] [ -2 -2 -1 -2 5 0] [ 1 -2 2 1 0 5]

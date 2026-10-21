@@ -30,4 +30,5 @@ references:
 
 Catalogue of Lattices archive entry `union:42` names `A15+`.
 
-The unique indecomposable 15-d unimodular lattice. Theta series: see sequence A004536.
+The unique indecomposable 15-d unimodular lattice.
+Theta series: see sequence A004536.

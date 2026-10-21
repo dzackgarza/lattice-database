@@ -27,4 +27,6 @@ references:
 
 Catalogue of Lattices archive entry `union:301` names `LAMBDA12_MID`.
 
-A laminated lattice. There are three inequivalent 12-dim. laminated lattices; this is Lambda^{mid}_12, the one with the mid-ranked kissing number.
+A laminated lattice.
+There are three inequivalent 12-dim.
+laminated lattices; this is Lambda^{mid}_12, the one with the mid-ranked kissing number.

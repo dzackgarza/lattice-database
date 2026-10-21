@@ -18,4 +18,5 @@ references:
 
 Catalogue of Lattices archive entry `union:633` names `digonal I (even holotype)`.
 
-Also called orthorhombic I One of the Bravais lattices. Holotype = smallest determinant of any even integral lattice of this type.
+Also called orthorhombic I One of the Bravais lattices.
+Holotype = smallest determinant of any even integral lattice of this type.

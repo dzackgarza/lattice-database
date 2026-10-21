@@ -24,4 +24,5 @@ Source entry `brandt_intrau:Brandt_2.html:65` gives this Gram tensor.
 
 Catalogue of Lattices archive entry `union:631` names `digonal F (even holotype)`.
 
-Also called orthorhombic F One of the Bravais lattices. Holotype = smallest determinant of any even integral lattice of this type.
+Also called orthorhombic F One of the Bravais lattices.
+Holotype = smallest determinant of any even integral lattice of this type.

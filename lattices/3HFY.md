@@ -23,4 +23,4 @@ references:
 
 Catalogue of Lattices archive entry `union:29` names `O(5)`.
 
-The "odd" version of Q_8(1). Construction: Take vector v of norm 8 in L/2L, where L = Q_8(1) = H4.std is the Icosian lattice; then this is nbr of Q_8(1) with  respect to v.
+The "odd" version of Q_8(1). Construction: Take vector v of norm 8 in L/2L, where L = Q_8(1) = H4.std is the Icosian lattice; then this is nbr of Q_8(1) with respect to v.

@@ -39,4 +39,6 @@ references:
 
 Catalogue of Lattices archive entry `union:347` names `(4+sqrt(5)) x Leech`.
 
-The space of invariant forms of 2.J2 Y SL(2,5) contains the Leech lattice. In this space one can construct a sequence of modular lattices of level (n^2+5n+5) and minimum 2(2n+4) for n=0,1,2,... of which the density tends to the density of the Leech lattice. For n=0 one finds the well known extremal 5-modular lattice and for n=1, one gets this lattice.
+The space of invariant forms of 2.J2 Y SL(2,5) contains the Leech lattice.
+In this space one can construct a sequence of modular lattices of level (n^2+5n+5) and minimum 2(2n+4) for n=0,1,2,... of which the density tends to the density of the Leech lattice.
+For n=0 one finds the well known extremal 5-modular lattice and for n=1, one gets this lattice.

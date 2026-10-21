@@ -34,4 +34,5 @@ x in E8 with sum x(i) = 0
 
 Catalogue of Lattices archive entry `union:533` names `P7.1`.
 
-One of the perfect 7-dimensional lattices. This is E7.
+One of the perfect 7-dimensional lattices.
+This is E7.

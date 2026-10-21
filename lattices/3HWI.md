@@ -18,4 +18,6 @@ references:
 
 Catalogue of Lattices archive entry `union:625` names `cubic I (even holotype)`.
 
-One of the Bravais lattices. Holotype = smallest determinant of any even integral lattice of this type. Body-centered cubic lattice A3* = D3*.
+One of the Bravais lattices.
+Holotype = smallest determinant of any even integral lattice of this type.
+Body-centered cubic lattice A3* = D3*.

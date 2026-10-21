@@ -28,4 +28,4 @@ references:
 
 Catalogue of Lattices archive entry `union:274` names `KAPPA13*`.
 
-Obtained by multiplying gram matrix for: KAPPA13*  by  0.120000000000D+02
+Obtained by multiplying gram matrix for: KAPPA13* by 0.120000000000D+02
