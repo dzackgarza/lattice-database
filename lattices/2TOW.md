@@ -3,6 +3,9 @@ tag: 2TOW
 name: brandt_intrau Brandt_2.html:3689
 latex: brandt_intrau Brandt_2.html:3689
 aliases: []
+certifications:
+  derive: 168f08c43c52db6587c0e71fd0ba18af6c0af9b07de423d2df57973e89e7bda7
+  form.integer_valued: da8cec17b920dde1a16fd23099cf53e758af2d1f00f63deb2f10cb6074125f51
 rank: 3
 gram_tensor:
 - [2, 0, 1]
@@ -11,6 +14,42 @@ gram_tensor:
 signature: [3, 0]
 determinant: 628
 definiteness: positive_definite
+dual_gram_tensor:
+- [79/157, 1/314, -1/157]
+- [1/314, 159/628, -1/157]
+- [-1/157, -1/157, 2/157]
+form:
+  integer_valued: true
+integral:
+  parity: even
+  level: 1256
+  discriminant_group: [628]
+  bad_reduction_primes: [2, 157]
+definite:
+  minimum: 2
+  kissing_number: 2
+  minimal_vectors:
+  - [-1, 0, 0]
+  - [1, 0, 0]
+  perfect: false
+  theta_series: [1, 0, 2, 0, 2, 0, 4, 0, 2, 0, 0, 0, 4]
+  root_system: [A1]
+  roots:
+  - type: A1
+    scale: 2
+    simple_roots:
+    - [0, 1, 0]
+  - type: A1
+    scale: 1
+    simple_roots:
+    - [1, 0, 0]
+  - type: A1
+    scale: 157
+    simple_roots:
+    - [1, 1, -2]
+root_sublattice:
+  invariant_factors: [1, 1, 2]
+morphisms: []
 families: []
 related: []
 references:

@@ -3,6 +3,9 @@ tag: 2ONV
 name: brandt_intrau Brandt_1.html:2623
 latex: brandt_intrau Brandt_1.html:2623
 aliases: []
+certifications:
+  derive: 32768d718c5f5ee61c06686a5b89629e0a20a966284f12c1d2470afcc188e55b
+  form.integer_valued: 47d6dd4d3ecfbb8e9912d124b09342dfaddd08cf079a54e9dfd5be31c4df252f
 rank: 3
 gram_tensor:
 - [2, 0, 1]
@@ -11,6 +14,42 @@ gram_tensor:
 signature: [3, 0]
 determinant: 165
 definiteness: positive_definite
+dual_gram_tensor:
+- [28/55, 0, -1/55]
+- [0, 1/3, 0]
+- [-1/55, 0, 2/55]
+form:
+  integer_valued: true
+integral:
+  parity: odd
+  level: 330
+  discriminant_group: [165]
+  bad_reduction_primes: [2, 3, 5, 11]
+definite:
+  minimum: 2
+  kissing_number: 2
+  minimal_vectors:
+  - [-1, 0, 0]
+  - [1, 0, 0]
+  perfect: false
+  theta_series: [1, 0, 2, 2, 0, 4, 0, 0, 2, 0, 0, 4, 2]
+  root_system: [A1]
+  roots:
+  - type: A1
+    scale: 3/2
+    simple_roots:
+    - [0, 1, 0]
+  - type: A1
+    scale: 55
+    simple_roots:
+    - [1, 0, -2]
+  - type: A1
+    scale: 1
+    simple_roots:
+    - [1, 0, 0]
+root_sublattice:
+  invariant_factors: [1, 1, 2]
+morphisms: []
 families: []
 related: []
 references:
