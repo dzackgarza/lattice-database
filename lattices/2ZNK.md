@@ -3,6 +3,9 @@ tag: 2ZNK
 name: brandt_intrau Brandt_2.html:11423
 latex: brandt_intrau Brandt_2.html:11423
 aliases: []
+certifications:
+  derive: 80a8bec86101e92e6d6663da78cd576a395d876a38904446e1d9976d1f0a48aa
+  form.integer_valued: b019f668f7d0b37f02a22f109e3c0e5cf087459802eeda52ded6f4536daf98ab
 rank: 3
 gram_tensor:
 - [2, 1, 1]
@@ -11,6 +14,34 @@ gram_tensor:
 signature: [3, 0]
 determinant: 1168
 definiteness: positive_definite
+dual_gram_tensor:
+- [151/292, -13/584, -7/584]
+- [-13/584, 63/1168, -11/1168]
+- [-7/584, -11/1168, 39/1168]
+form:
+  integer_valued: true
+integral:
+  parity: even
+  level: 2336
+  discriminant_group: [1168]
+  bad_reduction_primes: [2, 73]
+definite:
+  minimum: 2
+  kissing_number: 2
+  minimal_vectors:
+  - [-1, 0, 0]
+  - [1, 0, 0]
+  perfect: false
+  theta_series: [1, 0, 2, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0]
+  root_system: [A1]
+  roots:
+  - type: A1
+    scale: 1
+    simple_roots:
+    - [1, 0, 0]
+root_sublattice:
+  invariant_factors: [1]
+morphisms: []
 families: []
 related: []
 references:

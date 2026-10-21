@@ -3,6 +3,9 @@ tag: 2OIK
 name: brandt_intrau Brandt_1.html:2428
 latex: brandt_intrau Brandt_1.html:2428
 aliases: []
+certifications:
+  derive: fe777804ef612921f853780fbb9e47c0f08278eb148ea9d629c02acd9e387c1e
+  form.integer_valued: 1bafeed205574257d89e6b62b04c9ce778451550729760e4df187d43645406ca
 rank: 3
 gram_tensor:
 - [2, 0, 0]
@@ -11,6 +14,34 @@ gram_tensor:
 signature: [3, 0]
 determinant: 158
 definiteness: positive_definite
+dual_gram_tensor:
+- [1/2, 0, 0]
+- [0, 11/79, -3/79]
+- [0, -3/79, 8/79]
+form:
+  integer_valued: true
+integral:
+  parity: odd
+  level: 316
+  discriminant_group: [158]
+  bad_reduction_primes: [2, 79]
+definite:
+  minimum: 2
+  kissing_number: 2
+  minimal_vectors:
+  - [-1, 0, 0]
+  - [1, 0, 0]
+  perfect: false
+  theta_series: [1, 0, 2, 0, 0, 0, 0, 0, 4, 0, 4, 2, 0]
+  root_system: [A1]
+  roots:
+  - type: A1
+    scale: 1
+    simple_roots:
+    - [1, 0, 0]
+root_sublattice:
+  invariant_factors: [1]
+morphisms: []
 families: []
 related: []
 references:

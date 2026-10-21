@@ -6,13 +6,52 @@ aliases: []
 certifications:
   definite.regular: ebb9302414ba3c50193e263d98ee1e64a2dec029cf59f71546947e56290b7d4d
   definite.spinor_regular: 2bff5e0662e73c630fe13e86a29bbec44d08e7049da8bde9ea14a5f79a92d29c
+  derive: 938adff7a6559b5872de2c95e1ce8403c2348e2f9536449c42bf4baac1ae5bfc
+  form.integer_valued: 1bf2cf9b96a5d6a2c459264815c16a585640c8fc6a4520afa55da19348823038
+  integral.elementary_primes: 9f37ee0fee3bc0623761a76cfa04c1070a885dd1201f04285033eed367205318
+  integral.genus_symbol: 1216390e787e1415a77b455b958f1e8ce9094355710b142cc2937393956b0115
+  integral.genus_class_count: 6aeb8bcb6fbbe3707f8466ae1a538279dcd4996c12cebba58ce6b817aba47c5b
+rank: 3
 gram_tensor:
 - [17, 2, 1]
 - [2, 20, 10]
 - [1, 10, 257]
+signature: [3, 0]
+determinant: 84672
+definiteness: positive_definite
+dual_gram_tensor:
+- [5/84, -1/168, 0]
+- [-1/168, 13/252, -1/504]
+- [0, -1/504, 1/252]
+form:
+  integer_valued: true
+integral:
+  elementary_primes: []
+  parity: odd
+  level: 504
+  discriminant_group: [168, 504]
+  bad_reduction_primes: [2, 3, 7]
+  genus_symbol: 'I_{3,0} (2: [1^1]_1:8^-2; 3: 1^-1 3^-1 9^1; 7: 1^-1 7^2)'
+  genus_class_count: 1
 definite:
+  minimum: 17
+  kissing_number: 2
+  minimal_vectors:
+  - [-1, 0, 0]
+  - [1, 0, 0]
+  perfect: false
   regular: true
   spinor_regular: true
+  theta_series: [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2]
+  root_system: []
+  roots:
+  - type: A1
+    scale: 504
+    simple_roots:
+    - [0, 1, -2]
+root_sublattice:
+  invariant_factors: [1]
+morphisms: []
 families: []
 related: []
 references:

@@ -3,6 +3,9 @@ tag: 3BZO
 name: brandt_intrau Brandt_2.html:27403
 latex: brandt_intrau Brandt_2.html:27403
 aliases: []
+certifications:
+  derive: 0c83197ddc075841a57a5209d753b667b299285109fc78af2613076d6d771f8b
+  form.integer_valued: 64427b1cde30d522bfea6bd0ab0ea88623e517fb0648da1ed4f3d9bd6b367095
 rank: 3
 gram_tensor:
 - [4, 1, 1]
@@ -11,6 +14,30 @@ gram_tensor:
 signature: [3, 0]
 determinant: 1874
 definiteness: positive_definite
+dual_gram_tensor:
+- [479/1874, -23/1874, -19/1874]
+- [-23/1874, 95/1874, -3/1874]
+- [-19/1874, -3/1874, 79/1874]
+form:
+  integer_valued: true
+integral:
+  parity: even
+  level: 3748
+  discriminant_group: [1874]
+  bad_reduction_primes: [2, 937]
+definite:
+  minimum: 4
+  kissing_number: 2
+  minimal_vectors:
+  - [-1, 0, 0]
+  - [1, 0, 0]
+  perfect: false
+  theta_series: [1, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0]
+  root_system: []
+  roots: []
+root_sublattice:
+  invariant_factors: []
+morphisms: []
 families: []
 related: []
 references:
