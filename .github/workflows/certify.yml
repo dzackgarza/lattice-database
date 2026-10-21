@@ -63,6 +63,19 @@ jobs:
             124) echo "Certification budget exhausted; preserving completed values." ;;
             *) exit "$status" ;;
           esac
+      - name: Stop certification before reading its output
+        if: ${{ always() && steps.checkout.outcome == 'success' }}
+        shell: bash --noprofile --norc -e -o pipefail {0}
+        run: |
+          # A cancelled job kills the exec but not the process inside the container, which would
+          # keep checkpointing into the worktree under the commit step. The container stays up:
+          # the merge driver runs in it.
+          docker exec sage-env pkill -TERM -f 'latticedb certify' || true
+          for _ in $(seq 1 30); do
+            docker exec sage-env pgrep -f 'latticedb certify' >/dev/null || exit 0
+            sleep 1
+          done
+          docker exec sage-env pkill -KILL -f 'latticedb' || true
       - name: Archive completed data before Git integration
         if: ${{ always() && steps.checkout.outcome == 'success' }}
         shell: bash --noprofile --norc -e -o pipefail {0}

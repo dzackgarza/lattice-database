@@ -126,10 +126,3 @@ def test_no_two_shards_write_the_same_certificate_group() -> None:
         shard = next(index for index in range(16) if genus.in_shard(tag, (index, 16)))
         owners.setdefault(certificates.group(tag), set()).add(shard)
     assert all(len(shards) == 1 for shards in owners.values())
-
-
-def test_certificates_of_the_legacy_single_file_are_read_with_the_groups(tmp_path: Path) -> None:
-    grouped = {"0012 derive": certificates.Certificate(hash="a" * 64, by="computed")}
-    certificates.save(tmp_path, grouped)
-    (tmp_path / certificates.LEGACY_FILE).write_text(yaml.safe_dump({"3999 derive": {"hash": "b" * 64, "by": "computed"}}))
-    assert set(certificates.load(tmp_path)) == {"0012 derive", "3999 derive"}

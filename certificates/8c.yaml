@@ -1,3 +1,66 @@
+03JE definite.automorphism_group_generator_morphisms:
+  hash: 341c2ed18094a1da19d80693582de125060581edd25514371942f548a5542ce8
+  by: research preamble
+03JE definite.automorphism_group_order:
+  hash: e162330b018c5af0731266d7cd2938b1a14d5dae12751a735b9b47fbd510b87c
+  by: research preamble
+03JE definite.genus_theta_series:
+  hash: 58f0c2d5e56694f5af4f82003aaa57b7b2f8ddcb3f3c1a523fd98c291d877541
+  by: research preamble
+03JE definite.siegel_eisenstein_coefficients:
+  hash: a55a6748cc66f6d33a095adfa840bd3d58bb0c27b4e58bfebe046f23eb7ff5fd
+  by: research preamble
+03JE definite.theta_series_cuspidal_component:
+  hash: 6c00facf398f207d533cd7dd56200f36c3d811852b4158051263298df0d729ea
+  by: research preamble
+03JE derive:
+  hash: 78fb109404e87e8cb739219cf989f18c9510e13a5fdbeeba86c41e5d6cc699b4
+  by: research preamble
+03JE form.integer_valued:
+  hash: 440bc222710953f0121e880c7a14bfb7af8de867fe37048bb3011b3b9444c138
+  by: research preamble
+03JE integral.anisotropic_primes:
+  hash: 6d1cbd9dfbb92390498ef04f9e4728d53a2751714447202a9c00aadc1fcc8d7b
+  by: research preamble
+03JE integral.elementary_primes:
+  hash: df38759d3814a8e0acb0ddddc9a69eb1f0f1431d65feb03fc18f2b884560e02d
+  by: research preamble
+03JE integral.genus_class_count:
+  hash: 31c9bc424c5b846e8b34d90c5cb0b69d55f2c654e1e310ef1f2d7fef63b454b6
+  by: research preamble
+03JE integral.genus_symbol:
+  hash: 95fe4d43551d87f1303c6166c70968b1a9eced368f26d3ab1794a26d8377342c
+  by: research preamble
+03JE integral.hyperbolic_index:
+  hash: e445ea718e78920958bdf3c8107f1d3f99b0890a3f5b80b51a0d2546f4784819
+  by: research preamble
+03JE integral.local_densities:
+  hash: 0de8e8ab8fc7aebca771a77293ec218fd8d456503faafb12550ef13e73169698
+  by: research preamble
+03JE integral.local_representations:
+  hash: 8fb761c29dd0681bc1d11c17bae5e41f93b226e91364924a5b5d3e530501d350
+  by: research preamble
+03JE integral.modular_scale:
+  hash: 1d4907b69a467ef15b20b79247dc75ee339a14c5669fc24f804e5fafb8c7a0ee
+  by: research preamble
+03JE integral.overlattice_count:
+  hash: 88e38c6056f380b7faa05b0089129866abdc26617705f2e777619148afce0452
+  by: research preamble
+03JE integral.primitive_orbits:
+  hash: 63020b687867089d79faff431bf795584fd4b7dbccb5450fe9535ae9cccf3adb
+  by: research preamble
+03JE integral.spinor_genera:
+  hash: 9328b66037c36ef6078668adf9ff91434c6bc7516aad17766779a3d651066a36
+  by: research preamble
+03JE integral.spinor_genus_count:
+  hash: 46e8b0762ed3387e8c2bee30d8110446d29dcefabe3b8db4fd79bc631e402362
+  by: research preamble
+2MPZ definite.automorphism_group_generator_morphisms:
+  hash: c2b5492d867cc5d1549fe99dfd6ad013fa129d94291da42cdca8f9b068035370
+  by: research preamble
+2MPZ definite.automorphism_group_order:
+  hash: 9adfe42bfbaeda22b2e4d426a49bd04a5a420139ee6af7a222573708f3146bdf
+  by: research preamble
 2MPZ definite.regular:
   hash: 62812aca11c7421eabaa53140f6325c5b91fa6b278df4f0dd0ee4b8acadb3264
   by: 'W. C. Jagy, I. Kaplansky and A. Schiemann, There are 913 regular ternary forms,
@@ -18,6 +81,36 @@
     by its spinor genus (A. G. Earnest and A. Haensch, Completeness of the list of
     spinor regular ternary quadratic forms, arXiv:1711.05811v2 (2018), Abstract) and
     the spinor genus lies in the genus.'
+2MPZ derive:
+  hash: 0d8e37b0bc07f9348f4346a698470e47a64f02e5f1b6710fb39c7147f2041308
+  by: research preamble
+2MPZ form.integer_valued:
+  hash: 83714011e7e3a7caaee93f391d79f98c366b4c5cd065177fbb9ba75d18b75d06
+  by: research preamble
+2MSL derive:
+  hash: c945a4d47ded43d4f77f8932b8d838763f5990129ecbc0125363d9bcab48e344
+  by: research preamble
+2MSL form.integer_valued:
+  hash: 2eed4f51ea1a74b96b5c56aeaf068f9439b7a672fb80bb73cad1213a639402d1
+  by: research preamble
+2N25 derive:
+  hash: e43c538582361bef314b5f639365773238c41a78d7ac9478716b9c1b0eb55c51
+  by: research preamble
+2N25 form.integer_valued:
+  hash: ca5be2c9078eaed844b61632ca3c3f61befc12c48659d0ac187ba08f2f3bc26e
+  by: research preamble
+2N4S derive:
+  hash: 1e16b0faab311dfca03302854cbad24e147389e4a6ceabacfc8937d1a228888e
+  by: research preamble
+2N4S form.integer_valued:
+  hash: 9b7e0c1a550309c93b13b98fa8d69f6aad307fbe608591c46c2cdd7f5003b1de
+  by: research preamble
+2NFL definite.automorphism_group_generator_morphisms:
+  hash: 8b0e5882bb4ecb7837dbe112ec6c12acbc5eb6f835c41b8bbf816967147d4f65
+  by: research preamble
+2NFL definite.automorphism_group_order:
+  hash: 14a78dfd7c0d9853d65b0caac690437f35f93fe36fd1129ec0ea99a5be6d2756
+  by: research preamble
 2NFL definite.regular:
   hash: 0a394484f20292cae490fa77f95c3fc54cd4406b9f78b41b87207b1774f0c1a2
   by: 'W. C. Jagy, I. Kaplansky and A. Schiemann, There are 913 regular ternary forms,
@@ -38,6 +131,948 @@
     by its spinor genus (A. G. Earnest and A. Haensch, Completeness of the list of
     spinor regular ternary quadratic forms, arXiv:1711.05811v2 (2018), Abstract) and
     the spinor genus lies in the genus.'
+2NFL derive:
+  hash: d1830132b5a879cff180082d19674446442e9bb4c03127dd3e66e542e5359de8
+  by: research preamble
+2NFL form.integer_valued:
+  hash: 02a45992c6b3f167f1e88760ec1ceb5ebb7b19f37bd265becf784f3963866917
+  by: research preamble
+2NHU derive:
+  hash: e410cb5418b979ba407e01bad2687ea8172b5e7be2f8ce9f80aa06c6a95f23a3
+  by: research preamble
+2NHU form.integer_valued:
+  hash: 8895267e25ccb84aaaee95798eebdb0f77d225bfe6bff3a1019c108a0e10bd08
+  by: research preamble
+2O1X derive:
+  hash: 4338d030c1a19870fd9e4d56206250e4e76fcb108ae28e60193cdb6f225a2885
+  by: research preamble
+2O1X form.integer_valued:
+  hash: d474e0548e50c54fb67db663d021ebba7ce3e37e4d0cbbe29ed186b746befee3
+  by: research preamble
+2O22 derive:
+  hash: db3eeebbdb3948f9b849ddda0755ccf424e12739ffa80d666bba3ef82ef3cfa1
+  by: research preamble
+2O22 form.integer_valued:
+  hash: b4725f7d71551afcc8af3c87622570ffa00ed3494cc55b28e62187b0b08c02de
+  by: research preamble
+2O2K derive:
+  hash: 1141a005ce99a09271b75d997f2d3f91db9ab5a7ffc13ffbd5a623f1c057e565
+  by: research preamble
+2O2K form.integer_valued:
+  hash: b0a2bda9e11775fef0a463736e986d84fe3d2c5f8023a56ac989bdc9a7a1b6bd
+  by: research preamble
+2O9S derive:
+  hash: 9686735526426fd6a666b550b43c58bef63f64db8381c9e8af7ccc904138b32f
+  by: research preamble
+2O9S form.integer_valued:
+  hash: 08bce464bb6944c9cee6637ba318c5cda58b3b5f343d93451df683527c62570a
+  by: research preamble
+2OD6 derive:
+  hash: df9bd32ddaa46057aa12ba3679bcc1db55e8f2b570f79ba193555cf160da5fdf
+  by: research preamble
+2OD6 form.integer_valued:
+  hash: 447839956f85326d69a82360366d44442f842fa2f9cb339a2165ae6d0b2c814e
+  by: research preamble
+2OO6 derive:
+  hash: 965f672f82d2f155416b0f8dfbc474627a6a7527e94e2e750ec454ae638214d8
+  by: research preamble
+2OO6 form.integer_valued:
+  hash: 7c19b714070bef94400d6da322c9991fb1bc74a688c346cb8461e5641ecb8d56
+  by: research preamble
+2OSE derive:
+  hash: cc0bd7c46b57ac6178e549e0ecb9dc348cc59fe05e9eec186de52c31e7349ac0
+  by: research preamble
+2OSE form.integer_valued:
+  hash: 535fa9ef477922a78f11168f60f91725cc943ff1c513723bcadd4a5e3e1fca37
+  by: research preamble
+2P98 derive:
+  hash: 893e9b8f7ac7aa8f89d358adfb56d6dc7b5987368ef2a14ddcbe2a86fa11796e
+  by: research preamble
+2P98 form.integer_valued:
+  hash: c1bcb8aae1dc065b5e1c5a540d2d945d5f0b61bc26778b9c63be1f90213d04ee
+  by: research preamble
+2PAK derive:
+  hash: 60f6a5e27c9b7667d0f8c9efe51f5cf1fc774805cf0767c3bdb4e841087a730e
+  by: research preamble
+2PAK form.integer_valued:
+  hash: 242a61bae615ce7553332bad0541b5bfc57cc9fec6c2eefa4063cbec87d24ac1
+  by: research preamble
+2PDE derive:
+  hash: 4fffcc733115bb157a718be85465b5ee376b49918b349865ba2f4bc0afbf07c4
+  by: research preamble
+2PDE form.integer_valued:
+  hash: 885fe6ac7ccd329a74f885840dd10a223c3fc511ad458b011ae2c92b18ff30f5
+  by: research preamble
+2PJ5 derive:
+  hash: 9229dbe0d282648acd282def69b3f9bc11f1baffb517074485857e3da2b8b150
+  by: research preamble
+2PJ5 form.integer_valued:
+  hash: dee67bef21c6e4a3b040a0f4c13ea9cb99e5d6bd6221dddbd139ff450ae09bfe
+  by: research preamble
+2PU7 derive:
+  hash: dd92667b5f0a74e388b32ed0170439d894a648e56ed88765a3b6e5a67cd8cea6
+  by: research preamble
+2PU7 form.integer_valued:
+  hash: 25faac3f27e2b4f76322bae473744d6031739fa603cc054bca3df9c81124d694
+  by: research preamble
+2PX5 derive:
+  hash: fe3b406687307e65dd1281069e5c7ad15d26ed8c787ea125180e1bafbf2ef893
+  by: research preamble
+2PX5 form.integer_valued:
+  hash: 616e0cb8c0107531a2b02ec1e8634a8a06889314367b5ec40e3135399f08d20d
+  by: research preamble
+2QAM derive:
+  hash: b0f5328bd5df247dfaaef2674536dc6107cdc555ec85eb56b7081e1646a9f04b
+  by: research preamble
+2QAM form.integer_valued:
+  hash: 297bb8618540f09c0da93aaf756c9d90674cf2357b839e1f8eaf039920bca0d9
+  by: research preamble
+2QO8 derive:
+  hash: e64825e8abcb4d5c23011c2c0cb2b52726a1693549a701a2c6cb26d83b225ee9
+  by: research preamble
+2QO8 form.integer_valued:
+  hash: a8b0b8beee0ca129f82c62912dd6b198a3d8714026bc92f8a5d2730525a39aa6
+  by: research preamble
+2QWI derive:
+  hash: 80d397f54cf02a5e54483d8419d53c04a684b33da334759715bdcf14e6dfbc52
+  by: research preamble
+2QWI form.integer_valued:
+  hash: d24698cca8ff901b648ef7c44a7e0f81c752bd19ad23249f46b7d634f51fcc9b
+  by: research preamble
+2R7V derive:
+  hash: 112d0e8bdccef5a620f765bf313fac2ed8be7c3b977ed78a81216e3e525ecb25
+  by: research preamble
+2R7V form.integer_valued:
+  hash: 77d07473a0222e440b9f1b68e900ad5e36cadce2716af2f5285ba084106967f1
+  by: research preamble
+2RAC derive:
+  hash: 87adea8cf36c877f9b4fb65d0954249caddc5223eca1921bf529350e0fd73b09
+  by: research preamble
+2RAC form.integer_valued:
+  hash: 6c6f9e82f1cc4840d822e61224b901a18ef85e005218c6bccb568429e0eb4d0e
+  by: research preamble
+2RDE derive:
+  hash: 7cfe7d163e994d0a5071fe653192faf287e1f1f41f644aaa66198a800e578182
+  by: research preamble
+2RDE form.integer_valued:
+  hash: 631ad401273ea3cd9053006c5da16dc150a28ee18ff263c91e43c8a394e44336
+  by: research preamble
+2SDY derive:
+  hash: b842dbf4540796d885d113ad4f42c695b6a57b3e533cf975ec07f77697254b6f
+  by: research preamble
+2SDY form.integer_valued:
+  hash: 4697921e70e043248ffce3e355b5d48adbbfa9602a588123b6a718dbfe0fa981
+  by: research preamble
+2SO4 derive:
+  hash: 88ccb1880bde0694a63fdefec4b2bbea3859cc607ed5742bfe21f3d59451b4ef
+  by: research preamble
+2SO4 form.integer_valued:
+  hash: 747b588e00070b61d28a4464f3b393d46b4853b4dbd8ae56367aa24f19e38b21
+  by: research preamble
+2SSL derive:
+  hash: 7fde8d401e98f4e8622a15f5721c8930242eb1759294b71ea0f3bcb55ba1b660
+  by: research preamble
+2SSL form.integer_valued:
+  hash: 22817578ce1d4ad54c5898c1945033fd423a50899cb96aca4a0ab1af0581d5e9
+  by: research preamble
+2STJ derive:
+  hash: 07a707eb14f4ed1b871bad963847e8e6e00275793eba688e6b3dc6b34573140d
+  by: research preamble
+2STJ form.integer_valued:
+  hash: b583f483164c35beb99b9c939b051adcc2c9a8361e2f938be9e69a5ccdbebbb5
+  by: research preamble
+2SUN derive:
+  hash: db4bccebb6ef5c11698c032e871b13b5982fa0ca292f65a1eff7958af2547e34
+  by: research preamble
+2SUN form.integer_valued:
+  hash: 6279009c0f6491838601d7c1e823eed4827142fd28fa229f99e48b03cedf7489
+  by: research preamble
+2SWF derive:
+  hash: f45af4d0943061adffeb573580c502c89e89a9ed91a443f0d316d4fb2e689f69
+  by: research preamble
+2SWF form.integer_valued:
+  hash: fdadc8311d46d2b98b5e7563e2364c711ebc579576867d1d843bbf5679c4aebe
+  by: research preamble
+2SY9 derive:
+  hash: a8bdc704e82baf2b00c2ff1d1407ce71fa877864a5318795c143eda922438c44
+  by: research preamble
+2SY9 form.integer_valued:
+  hash: a65c76fa589b3908c97573b3fda39cf2962d2af309042bd47c0be54f5aa9536d
+  by: research preamble
+2T67 derive:
+  hash: 53c5b1b2776db1aa4dc3a2d0022910866e3575d4c27e54cecf41d14ec80fe126
+  by: research preamble
+2T67 form.integer_valued:
+  hash: 159ce0b94ab2a479bdad1c0b227590b5eb294892f241d734cb4332ba0e5648ef
+  by: research preamble
+2TBQ derive:
+  hash: ecc82a3d3c9279d34fcd9a130bc37b25101d4c0d3f35742764dd73e0f43de613
+  by: research preamble
+2TBQ form.integer_valued:
+  hash: 627d5da0f912795ae96a26d70e5103742f154527f5b0b2c1a4d18a1563b53af2
+  by: research preamble
+2TC0 derive:
+  hash: 9f6348a297a32c843aec476ec5f97a6b9ac2e17f8a52280df748e40c8633a36d
+  by: research preamble
+2TC0 form.integer_valued:
+  hash: d398b8e29728d2bb5bcaf8e4cb09d7f12b335bd20191eabe3bb3e468d67ea3e3
+  by: research preamble
+2TR5 derive:
+  hash: 528c085acb166d102628a6210e96578d661c1e518239b0d975c229abdd7bb36c
+  by: research preamble
+2TR5 form.integer_valued:
+  hash: 6ad557d784922e6a4ca2d2652b68325ed4278931d9a6698dafd6d4cb51c5d8ac
+  by: research preamble
+2TWC derive:
+  hash: 5f8ff1b01c80ebba7d4392749ff770952e1e7b9031b78898dde7ea9629096596
+  by: research preamble
+2TWC form.integer_valued:
+  hash: 3999f6511e756f1c7671868cc97c6a8b95db7e86ec4d67cabb13ec07122c1ca3
+  by: research preamble
+2TYZ derive:
+  hash: db1ace2cee2e9b2bceba13325126e53f938eaee0229a44f31f5b1aee0e4f751f
+  by: research preamble
+2TYZ form.integer_valued:
+  hash: 97b6d529af8b2965f90ee6dc55394f1e4a9cf5dc70e8b553df2a9590e386e6bc
+  by: research preamble
+2U5C derive:
+  hash: 435b34c723006e8af0f469114c3b755ef85f6454bc76de85c81eccca493dd3de
+  by: research preamble
+2U5C form.integer_valued:
+  hash: 4d8f5b6cb4ead0f3221e82362582e3c5a2eb645ccc004187e4909bbc453a51de
+  by: research preamble
+2U8N derive:
+  hash: 11374ecd0d36c6f6ba70410ea2d2d69c9c2ee96986921ce6c437d74fa2af936b
+  by: research preamble
+2U8N form.integer_valued:
+  hash: 44c0ffdfd563b8c385a8d3302865b46b817ed09d85e9cfe17a8dc0493ba23737
+  by: research preamble
+2UE1 derive:
+  hash: 3b9c591acd7b6700fe6d89e6bd6f8ceef2744b2fd644de322530cb39f301576d
+  by: research preamble
+2UE1 form.integer_valued:
+  hash: cd0fecd9030f931edb7e4f5a41d60d6ad49fda2fd7bd7d09fd1e62f7559be019
+  by: research preamble
+2UJV derive:
+  hash: b4ebeee3e0f11cdb0aa2b0a0fe5e88fa110ae2f02c8152453ce7f4c9ff53e921
+  by: research preamble
+2UJV form.integer_valued:
+  hash: 88e48f812368b35a47a836b0c75ccbb6abf9afcc8f7e3f9159c45739269b862a
+  by: research preamble
+2UNQ derive:
+  hash: 8f905c3ff760c29f0bb02b084fb0d1088a429a36a4d1c253a7f58a9a5a687476
+  by: research preamble
+2UNQ form.integer_valued:
+  hash: 7deedc17067a9861e458452f1e9ae4aebe28f9be5dea470a7d047bb95f808703
+  by: research preamble
+2USE derive:
+  hash: 08b57e835185c6bf466af166f94b59057870381eeff8239f9246682fdec966f0
+  by: research preamble
+2USE form.integer_valued:
+  hash: a4b1b5cc704df39ce0f0101bd20a1a9b0437c623c6880dff6bcd6b9812d6b63f
+  by: research preamble
+2USH derive:
+  hash: 02860090c32f14cc21aab2a431f10db14315283d0c6bf7aec7940d103ca2d8c4
+  by: research preamble
+2USH form.integer_valued:
+  hash: c47b29af9e6e13dc2e9e3ae0649bd2a958e5936f889fa8f3da1ff3228965e29d
+  by: research preamble
+2V2P derive:
+  hash: 8454f2b31f837bd0678b75738451f9f07d5d218b15913df55f587bbbe229cf03
+  by: research preamble
+2V2P form.integer_valued:
+  hash: b0a953a6e786b11590884f5f926de5623c3f376c53adcc8435fc155e0e2ae23e
+  by: research preamble
+2VAO derive:
+  hash: dd8327229d497fa2b24cb8d4fb4943708c09109e0d5189fb2008776fa96a5d42
+  by: research preamble
+2VAO form.integer_valued:
+  hash: d76055b76a002c678bf3ccd5debfb712d7613ad5832afc570ec084eda5d7e0d9
+  by: research preamble
+2VG5 derive:
+  hash: 5df1e5959b333abb9db517f4209f88d17964f43bad9e1355a3d6be68bdf2332d
+  by: research preamble
+2VG5 form.integer_valued:
+  hash: 3a9d39392f69119e27e5df755c59562dab60378b5e25fa4455ae864cc827fbe4
+  by: research preamble
+2VG9 derive:
+  hash: ca4787c17b4b7e88cc3c766ea71a6b87080bff5ba675c9afaaf531ed3cc87564
+  by: research preamble
+2VG9 form.integer_valued:
+  hash: d5f957dc48acc296446fcaac5f8c57c2481635ec098e49d0a861b233c3d535e6
+  by: research preamble
+2VY8 derive:
+  hash: 97831fc234cc8c4b1b8c066e71fd0f0c3511f12218607fb7f42e4e6293be4d53
+  by: research preamble
+2VY8 form.integer_valued:
+  hash: 9e328e45caca04efa8b0ac8395903443fdccef7d1ac2316c1ee99db0d290efb6
+  by: research preamble
+2W7I derive:
+  hash: a6e131628a09f095e38098ff66f1ca9af35fdf4637df38456ae6da6a55e3689f
+  by: research preamble
+2W7I form.integer_valued:
+  hash: e87d6e865bf8d5c43e03f095ee182e3e75a574090b09565d396d677d6996501f
+  by: research preamble
+2WE9 derive:
+  hash: ae93fa31541591d18bce5088d189cd560007e275684ac25b075366b41dde7721
+  by: research preamble
+2WE9 form.integer_valued:
+  hash: 49a5dcde80ae6e7e188f9ef14448d2d1e9205197ea00dc6e3f005b8a349fc734
+  by: research preamble
+2WEA derive:
+  hash: 72756921eb37f330b6c724bbfb3c137c5072eb3617db72f6af4c7a7f2a85b73c
+  by: research preamble
+2WEA form.integer_valued:
+  hash: 51256250b3a369787621e2ca57da6978ef3e42a65f5722109b19d84b33477777
+  by: research preamble
+2WJ1 derive:
+  hash: 2d5c5ccf6003714cf1b0d3de5f237764f6a7b8be8567ea2bd8cec9c87667ce39
+  by: research preamble
+2WJ1 form.integer_valued:
+  hash: fa5715de7d314bd1698f4d99a51d2a5145eddb354875a01bd78129fe0e9dbb94
+  by: research preamble
+2WJJ derive:
+  hash: f367906aa745fb7873672b68399bbdb781ca0689be7578826b90456a134a593b
+  by: research preamble
+2WJJ form.integer_valued:
+  hash: b8a2e1b49ac50c829f4c427357730c4defb5cc7a62ea9accc5532cd28b2dce80
+  by: research preamble
+2WKA derive:
+  hash: 42244b63f4926080f41a2d83842435c4d955bda104107daf3b1383d06eb112ce
+  by: research preamble
+2WKA form.integer_valued:
+  hash: 97e7d6af060154e9511cf1a4e84f1c6ec34b3883be0671a34bb8844e9682ee2f
+  by: research preamble
+2WQU derive:
+  hash: 9386fb0b858d673f7429ad13ce49fdef2f5f1c8721c10185a14717d638d6e04d
+  by: research preamble
+2WQU form.integer_valued:
+  hash: 64019feb5d09d1fd690df9b2818589556f08a9598f6001c17f9864ec76aee774
+  by: research preamble
+2X28 derive:
+  hash: 76c41850e0c6e2fc244afa513199a5d82dffa4e06f2d15bf25be87339954716d
+  by: research preamble
+2X28 form.integer_valued:
+  hash: 9ce355d8d5eef54eb8d9784abb2e6ba7dbc5da164bd0ab68d2f2256b5851e816
+  by: research preamble
+2XOA derive:
+  hash: c4c0070a0c916ad2f06034de1f8295d70e1bfc3f5dce1c1cd206ec3b4ce6b789
+  by: research preamble
+2XOA form.integer_valued:
+  hash: 8b9e91e66670006fb9cdc9b4da44c073ae0c03d51ec8511571ff04aaa6e29739
+  by: research preamble
+2XRK derive:
+  hash: 9bed9b263d031c61b92e84a272ec367481b1fab793abc3bc5caac05e4e038b38
+  by: research preamble
+2XRK form.integer_valued:
+  hash: 7640bc37a7cde9534cd7850ce79e452be6c95c2fb880d64cf57a545c9b4a744b
+  by: research preamble
+2XSQ derive:
+  hash: 873b3bc31373b1667fa7bc1c9f5b385f7aeaa8f5c43520e02ccf0299761ed1e5
+  by: research preamble
+2XSQ form.integer_valued:
+  hash: 0dceb9226e6695f5d798ada95d619aaeb2b72829eb46f608343142a546ac8ce2
+  by: research preamble
+2XWJ derive:
+  hash: 8ee845cfd80d87da297ccd90f6a5a1a4c64bfa0d190f3853c0aa429781212775
+  by: research preamble
+2XWJ form.integer_valued:
+  hash: 086b3c34c69f45f4cba871269730e729944924fee0f829348a1da3147921047a
+  by: research preamble
+2XWM derive:
+  hash: 81f481a9839c50fc76dcd5ff054e635c9e9d7eeb452398bfe77ba01165c1b179
+  by: research preamble
+2XWM form.integer_valued:
+  hash: 73f18559406f971c689f22d806ba9dc5a2aed7b6b86791ed1d9d16b300d49f5e
+  by: research preamble
+2XXY derive:
+  hash: 4a88f2c858bdfd213e752c843e971a6f96c37ab2556cc3dbf7357b220a961a85
+  by: research preamble
+2XXY form.integer_valued:
+  hash: bd4206ffce0289e99fe9847e279eae848e73e9b8a9e515dcad6dc5a3536a2a34
+  by: research preamble
+2YA3 derive:
+  hash: ffc3e447383b65742509df359442859cd959bc462eaa9ffe3c7f9e9fae421c16
+  by: research preamble
+2YA3 form.integer_valued:
+  hash: 29acb0a8c032e381a341fcbcf62489718bd312e6787d3a9e93c05ec75c6a5e13
+  by: research preamble
+2YPZ derive:
+  hash: 5889c184f689808c058ffd0201be4fed14c40d05a9c3202563646a00628d82af
+  by: research preamble
+2YPZ form.integer_valued:
+  hash: 6f4413087fbb5740d9caac22e50c55fb34285858e97941b29733b1b4bad395b3
+  by: research preamble
+2YZW derive:
+  hash: 159b063e51e3b67bdfd88232b976bef01286d31d8f4c4a6648b24c9229d0cb07
+  by: research preamble
+2YZW form.integer_valued:
+  hash: 8b4418936c8de479062a89b3a39918f157774cd68e9a3bab32ec25f0650439a1
+  by: research preamble
+2Z0H derive:
+  hash: ddccfacf0ee0ea28f25594fda66ff84db1e29335e78fccfcc99a214d098c8deb
+  by: research preamble
+2Z0H form.integer_valued:
+  hash: d56dd916550345b82439014d9c0b161471ac9c146eb61ab9bcff216e8fbcf947
+  by: research preamble
+2Z2X derive:
+  hash: 0609db1e7b5d54c36e95ef8d8d9d2185aa7276753c996beba82133f322b96a59
+  by: research preamble
+2Z2X form.integer_valued:
+  hash: 7a103281e5d015f3fe7601dac1030ba760c2b55a5f7c4228474177b3d4389757
+  by: research preamble
+2Z93 derive:
+  hash: b68a5242558aeedd1c4bc2c6e16dcba363546e9f82ca92c02ed1d276c46e1ee4
+  by: research preamble
+2Z93 form.integer_valued:
+  hash: 59738292595a0d01e17c8f583b07a39633aca31560fd78bd4f27e31c49d5ea02
+  by: research preamble
+2ZFH derive:
+  hash: 73337a8f7d5833b743ae1b74e43b0d7ef78ad9195b5ccc9ca2f3091b54d7d10d
+  by: research preamble
+2ZFH form.integer_valued:
+  hash: af243ff29f70d752d727c5a72bff605cae919af877fa6d385f1712a318cd4939
+  by: research preamble
+2ZI3 derive:
+  hash: d012e8c5cd1a751c08486cf7fd16b4e93bbdf3f454c404e46da93ea8386a36a3
+  by: research preamble
+2ZI3 form.integer_valued:
+  hash: e0521a7001a45e163e927452af78cddf5a698595f8736793a71cc023dc79650f
+  by: research preamble
+2ZPD derive:
+  hash: a02d02870ad6da114b798aa8ed9c903bc5df35580b795be1d8f92ac15de26bf6
+  by: research preamble
+2ZPD form.integer_valued:
+  hash: c2e05159524db8a70a05704e1cd328b8edbb131d20e200109aff26c955e8945e
+  by: research preamble
+2ZRP derive:
+  hash: 7224f05701d897e2a27233fb4695c5f63ee06012f102658c6b4c7e2bc7176a18
+  by: research preamble
+2ZRP form.integer_valued:
+  hash: f32bb71895c043a3c543db40d5b4672ef7565557edfd3d324d1f20807484ba2e
+  by: research preamble
+2ZRW derive:
+  hash: 5922cfe0244526973b92f62001ba84ae5a0d0ecd903b8cb9f001533b022f0565
+  by: research preamble
+2ZRW form.integer_valued:
+  hash: 78242a7a8de53ed5286626759e9c56872968ed1f044745d3e79b46ab9dfd4a3a
+  by: research preamble
+2ZW9 derive:
+  hash: 08ad813518bf55e2994b5fdcd02a2973a7bda081cade0a2e0f571686f71481e9
+  by: research preamble
+2ZW9 form.integer_valued:
+  hash: ab921c8660ce4299fd8d44db0057bdafb249c6f18a828243e68fd7dbe324300d
+  by: research preamble
+305E derive:
+  hash: 8f19954ec3c000a20495a86bafe06fff2065b6775f907a96a65d31e877565ff8
+  by: research preamble
+305E form.integer_valued:
+  hash: 3d55e936ab01ab69f177ab171dcd2e98ea7cfc5322a54564628ccf892aa36464
+  by: research preamble
+30CI derive:
+  hash: 36cc70f385517e891b9677b2595dbc1f4a17b392ecf97ba9887121a80d36ed43
+  by: research preamble
+30CI form.integer_valued:
+  hash: 2a5c10926a462ebe894034b54c7e02b43a5256fa695c084e20bf122566be6181
+  by: research preamble
+30F9 derive:
+  hash: 5a20f2a9dcb9484435a9c337df07eb5f136d33468684f77705b10eeba78054b8
+  by: research preamble
+30F9 form.integer_valued:
+  hash: 06ae7ae7fcc9a4326fb010aa201ec79d5f967ac1815d5753101f1db3b43e7187
+  by: research preamble
+30JW derive:
+  hash: 381262383cc98e8201385f22be374694cd0f8da799e5460ac7414fb0f9ed006f
+  by: research preamble
+30JW form.integer_valued:
+  hash: d5645ff4cffcde4aa42e3651be8798a7ab92f037b60309358fe0f52db9d945b0
+  by: research preamble
+30SF derive:
+  hash: 7ad271c6c20b01be18699f0723c2bd5ed37071250269b2dcb628b024e2f43a02
+  by: research preamble
+30SF form.integer_valued:
+  hash: e5518b41133724d8ba4e4f98bdbdf9e981b1c7ec5f86359abd74d064894e42fc
+  by: research preamble
+311C derive:
+  hash: ce9a4ee9cc63a3652ab111cc8bb5dbd38787db503ada7072d1ddf9b4fa18158e
+  by: research preamble
+311C form.integer_valued:
+  hash: 693967be6dc09517520155a9be111c50e80b1054529c58e69ee1a9ed09c423cc
+  by: research preamble
+31K2 derive:
+  hash: c98a2d614d93f81d9d7ecd3e74b0f5e881216e979e948c6a45dd5f9abae0eb28
+  by: research preamble
+31K2 form.integer_valued:
+  hash: f697de8176aa96065d80763d6cc6a42fc43f7b3c38f367b72db16452d99c84fc
+  by: research preamble
+31ZY derive:
+  hash: a76636fb94bc3838c3ab366d6f8241078e38202621156df9a57248576eadcf4e
+  by: research preamble
+31ZY form.integer_valued:
+  hash: 0e2b261762f11da003c7a46d8ce755da9b44f9395b3ffc9fcf1edc67c0856266
+  by: research preamble
+3247 derive:
+  hash: 533d4d6a185b488501c44ab4463ac170563b1271eb4ec4ba93176834f1e056bc
+  by: research preamble
+3247 form.integer_valued:
+  hash: a58f2519e46ebf274ba767850c5cc3eb72bcd582b0334b71386021b64f8a46c1
+  by: research preamble
+324L derive:
+  hash: c3073fd90bea3976d696bfbdfea4325ded457a979aaa639ad804bc2791a8c9f2
+  by: research preamble
+324L form.integer_valued:
+  hash: b6f1e7af826aa804976eeeae10092416e950214a225a2e0aa42fdaabb81d076e
+  by: research preamble
+32LM derive:
+  hash: 311708c4b319bb6f79e8a947341aca6c3d2984c2bf7acc5bd3299aeccf2da236
+  by: research preamble
+32LM form.integer_valued:
+  hash: 30c92daf06a286215686aebcaefa2c0e9a798023cacfc8aea7052c965b2f626d
+  by: research preamble
+32LZ derive:
+  hash: 9e5551e3f3d5ecc4e7db2ae1d3fd77274bd1ea9f9866ff2c64bbef00f5dae163
+  by: research preamble
+32LZ form.integer_valued:
+  hash: ee4b701334dc2f940323f712ae23db351e717ea22de33d7ed966563a1aa01652
+  by: research preamble
+32YT derive:
+  hash: da4d0b94b2f9330ec312499ab5c0e9e583941d4106d9e3b930c3eb3662bdb25b
+  by: research preamble
+32YT form.integer_valued:
+  hash: e0c9b29195081d3590a1f071910b13f76a2143c7d0fceb45c67e44e0e62ffb7f
+  by: research preamble
+331O derive:
+  hash: 490617d182cac73cbf651cbd6158e38215805dabb3b730206bf836fff9167248
+  by: research preamble
+331O form.integer_valued:
+  hash: ad34336d122231c0a934dc9648b6f5526e963d791d60e93477b439c161bd0436
+  by: research preamble
+3390 derive:
+  hash: df8955bba3905c75ef8baa22629505529c7492ec7b718d524399c7f253c75197
+  by: research preamble
+3390 form.integer_valued:
+  hash: fb4530ef9386c3680c558de43cfdf182761237787ef1bb21ac37590996e79874
+  by: research preamble
+347U derive:
+  hash: 37d29f970f110082efe64dac7529ba6541c811356868af336bfb1347e1c5b01a
+  by: research preamble
+347U form.integer_valued:
+  hash: 3eb04078a6fad2361a6754ade4a96b381cb8c27507313c01661db035183451e5
+  by: research preamble
+348L derive:
+  hash: 720c84b405b95c60eb4e0e1917f600fea3d9970c5565fdfc67891636d342ee58
+  by: research preamble
+348L form.integer_valued:
+  hash: 37b4c4302492107bb22517b3a68e47e5d10f998c78aec143ebdcfa792f872115
+  by: research preamble
+34D8 derive:
+  hash: ffbca41d976cdfd4bcedcf7935db3e61f154892fbf8b9e31f177b183e4737a2e
+  by: research preamble
+34D8 form.integer_valued:
+  hash: ab0add3842d96300e8073a2efed7ec59f0f68a922b770b5e75eb8b3bc2701b2b
+  by: research preamble
+34J6 derive:
+  hash: b6093b235a0cf211c0dc995385bcd2fa835de1262a0fb52bfd08e6f251c452f6
+  by: research preamble
+34J6 form.integer_valued:
+  hash: 6385adb0130f0acadfd3de7f83c55ec5ae50a647725d4d588eb34b48d9a0ffb2
+  by: research preamble
+34NZ derive:
+  hash: 2a674a4dc9a94d1e4a09c41d2318635ccbd80e24b1d610b94e62ad7dba9feaab
+  by: research preamble
+34NZ form.integer_valued:
+  hash: caa86b2e473a534fbd30d96a89113d5f2e3586acc93f6ceda71d2e792d20eb2c
+  by: research preamble
+34QT derive:
+  hash: eba3864b5d14f178757fe30dbec3c674e126c9351271c3610359f70c467c441e
+  by: research preamble
+34QT form.integer_valued:
+  hash: c929cc3b9c7942a5440dc9ddd9adfb6ba0241f1e6df8f6fae15807208a109f97
+  by: research preamble
+353P derive:
+  hash: 1bd3410884b467d3e3c234482cb3076cee274f59029481ef7beaaf032be77a06
+  by: research preamble
+353P form.integer_valued:
+  hash: 906d425b499980010ce15711b15102d3253925884de0f047b772262a4d9b55fa
+  by: research preamble
+3581 derive:
+  hash: bc8913e61d91ffbb04cb6f4f6fe2603f55d0593dae7462a5c6d9ade3e09e9b67
+  by: research preamble
+3581 form.integer_valued:
+  hash: 93cfe1a9451541e4465e3128cb64cd1f0d72ff83d9adb2436482d43fa264ba0e
+  by: research preamble
+35B4 derive:
+  hash: db768ff9918ffdd2dabbd64b6ed13ce8df869ea780bfa8be00e3796ce5357800
+  by: research preamble
+35B4 form.integer_valued:
+  hash: 8975ec15ca8669eac9efaadf6a884eb1a98fd09f8e0e9b9c2be2ea7b62be2604
+  by: research preamble
+35H4 derive:
+  hash: 7845670816a0dfe526f43300fe020ac754aee1dc23e52c867d8d332b57ee186f
+  by: research preamble
+35H4 form.integer_valued:
+  hash: 01b6e9a6ca6ec52b887b294951d98b6506a2449b186d994e8df781ae943aef03
+  by: research preamble
+35MP derive:
+  hash: 634faf0ea174187e9043b088be979f31cd5af886333d8f6c35c75d375be1e96d
+  by: research preamble
+35MP form.integer_valued:
+  hash: a8950ff6544a78bac5efd4d3c7a318e83e8586e20055624dc86b7b2cc92386bc
+  by: research preamble
+35NM derive:
+  hash: 66ed7d4be06a62c5660333514ee8c3a6ae2c14964e8ba68a6dee218252c15c9f
+  by: research preamble
+35NM form.integer_valued:
+  hash: 9e2363ffd7cf9b84915103515b1c72b8f36a1ba67578b231284d017010dfd918
+  by: research preamble
+35NN derive:
+  hash: 430d90b16c4db70dfe93727719c3f59e4e6ce3e617da4995c28db9e4c9f38559
+  by: research preamble
+35NN form.integer_valued:
+  hash: 6dd6f5bb459ad29226d481de7188b0cdddba751820cacf67222ca79e338b743f
+  by: research preamble
+35XR derive:
+  hash: ae2a55f0ccb3f94c41a202eda2ba58c2065692fa9f0d510650dbd27d129f5251
+  by: research preamble
+35XR form.integer_valued:
+  hash: 1d7e115b8f3fd3e0e7d587d5306fb5fe148f400e88a589de0bf20b0ef08ffa28
+  by: research preamble
+360B derive:
+  hash: 286753925edc618441a27595272550cc1d111ad14ea454dafe7e4e2378fde3a9
+  by: research preamble
+360B form.integer_valued:
+  hash: ff2e307f2d97d8ae6c3c29c148ac3b402f476aab7c8f8ca43f873cec2f48598e
+  by: research preamble
+368I derive:
+  hash: b7c09966f1227d7f297800d5b6270e72ad106706798201610a522d3171902a0d
+  by: research preamble
+368I form.integer_valued:
+  hash: 2a1f9c936a510c9939aa1635903f2cdd1cf675bee6c0c83a523498e71e241283
+  by: research preamble
+36AP derive:
+  hash: d3967305e6a08a5d3268c0d2629dcbf540cb44d0379fae024c4e79d3634c8140
+  by: research preamble
+36AP form.integer_valued:
+  hash: 75e1211a40f67f9a0ad5b5f5dfd06972e5999b89a2633ea1e8bbdd714c25d8fa
+  by: research preamble
+36DE derive:
+  hash: d6dd511697c3b6b9a17b7f7b974e8ff75d3ff53a45a78c69e0102de070745e25
+  by: research preamble
+36DE form.integer_valued:
+  hash: cbbde96d1ef38ab722dbfab786fb7b8db676b734635eb161b91743ee1370a4c5
+  by: research preamble
+36E3 derive:
+  hash: 5656c50d238d1173d18ed7c00919022749e5fa75111a2e953345a49cfb1fc22b
+  by: research preamble
+36E3 form.integer_valued:
+  hash: d00007888cb6cf126534e4a7867b360fb459dd89c731e40888204980dbfa82a2
+  by: research preamble
+36EE derive:
+  hash: 51c899144a0d2b58a01d60221ea65b4a8b919166bfc575f2bc0e7e302d8acbd7
+  by: research preamble
+36EE form.integer_valued:
+  hash: 5957eac3cd9f2694528b382a544a3762e03431c0c76a919e1d8c278e87597921
+  by: research preamble
+36HX derive:
+  hash: 6b191da9243a5e98696e5397a2fb656e3b1b933caf8433ad715b9789349359eb
+  by: research preamble
+36HX form.integer_valued:
+  hash: 40ad68ff669c07a6cd4f1e14f6fe5147b19ef514a2170861a9b054b0f97e4c08
+  by: research preamble
+36PP derive:
+  hash: f83443c892b97f6acd649f924c06b57d10d5760fae7bd3fd5168332bf3134c00
+  by: research preamble
+36PP form.integer_valued:
+  hash: 6d4ee0eb917e547fb324c4c005e292804b559a381372d302235e0e2c6f43bc61
+  by: research preamble
+36SK derive:
+  hash: a6d00cea9706abbd6468f707136fe02a75b4607404f6eee0e16ba4085a2aa980
+  by: research preamble
+36SK form.integer_valued:
+  hash: d0a63c8b37b638b028c30a5dd6f9866e577a69234b716e973119e76afea2f244
+  by: research preamble
+36YZ derive:
+  hash: 671ee60564aebf1a7a6c66ee802c1594849d9edecf817cadf099417bf8701561
+  by: research preamble
+36YZ form.integer_valued:
+  hash: 8b8b8885268e4edc26e30568c7a633c3ff5078edad86d06dd409a8ca859a8ac3
+  by: research preamble
+374A derive:
+  hash: eb5d50095278287200c14e46ad036c7280237803b601b35827b48287afe77c73
+  by: research preamble
+374A form.integer_valued:
+  hash: c39c8cd45293f59d7f1ef6b08fb4e3d6d478e7a89ee120ee4fc792768308c290
+  by: research preamble
+377B derive:
+  hash: cd2347faf59537df6b2f64a9d0a1447f096954021c8d69930d017efb98562a0d
+  by: research preamble
+377B form.integer_valued:
+  hash: ad90ab24dd5a7cc4954179d9cbc7bd0506c5eeb165c901cc5f2affb617bc2f46
+  by: research preamble
+379A derive:
+  hash: 057d6868d69d87e46a7e189ba0fb9ad2966501bc79ec327404eadaa4bf11fb88
+  by: research preamble
+379A form.integer_valued:
+  hash: 40eb2aff04efbef464c0a9f8385f4be67ea19921cef6e1e88ffae26d2ff30de9
+  by: research preamble
+37C1 derive:
+  hash: 9d39814fb70d5de8d724d4a360c036da618b3e0953d0c7cb9ae231bd5275a60e
+  by: research preamble
+37C1 form.integer_valued:
+  hash: 9427ac764e79812fea1881cd3f90f16b3ddfffb8ce0cc5068d1bef68d2368a69
+  by: research preamble
+37MK derive:
+  hash: c83eb0c5052e0981b832d06c176bf16e9d3773f824fa0e7c1da74923f8cd829f
+  by: research preamble
+37MK form.integer_valued:
+  hash: ed494ff15616b04af5234df4390230a5fbb312f7a2a69a7af4c5086b53a64543
+  by: research preamble
+3837 derive:
+  hash: f648048c004ebc064fa9c7902914886724a177f64c776f20a0a87ace24443689
+  by: research preamble
+3837 form.integer_valued:
+  hash: 16e8e4e9f011f253de06a047697109b601239d761ec8f1010cd52850dc54b9f6
+  by: research preamble
+38MS derive:
+  hash: 682491fb172fb1dcc41fcfe871b4adaa29449e41e4661b9083428cce69136adc
+  by: research preamble
+38MS form.integer_valued:
+  hash: f64332e4405ad15653b34f79d1e0daea71b5c44ba3c96e552a046a805a844d27
+  by: research preamble
+38N3 derive:
+  hash: 4c58303a12aac5ce555683ec388b639a5ce2abdeb51ed803521c95a8e7bd7087
+  by: research preamble
+38N3 form.integer_valued:
+  hash: b82832c8ffed93eb259d6eb675aa139f18f8380689f9362a058083dd84dbbd3d
+  by: research preamble
+39E2 derive:
+  hash: 0acd606deefe6c35fbfe0d36d7afc05af8f33ba190f7f09c3ba1a2a061bc2a1e
+  by: research preamble
+39E2 form.integer_valued:
+  hash: 8f652dff3fe7c1aad0138e7dfae03171f7c0b0fb1b5a4d6ae50ea89a15499b06
+  by: research preamble
+39OQ derive:
+  hash: d105147d194f82f8c8cad56b211cfdf413151e8f7b55248bf74caedcb05b9c7c
+  by: research preamble
+39OQ form.integer_valued:
+  hash: 07459d440385cbf524af5cb7bf9eb80803e36ace3a6130292ba368c78e9859c6
+  by: research preamble
+3A4D derive:
+  hash: b91cf446abe8ec39b7d71c6935903bef4101d477883dcc5c5943dac3dc7200cb
+  by: research preamble
+3A4D form.integer_valued:
+  hash: 4acae49391570a7fe4e0fddd3471d70266e1bedfdfe806a737fda1b35412d3bc
+  by: research preamble
+3AAN derive:
+  hash: 4d423bf3fd6d1857918798265a6164404aa543ec1d6c371c7898a700406e3abe
+  by: research preamble
+3AAN form.integer_valued:
+  hash: 2bb1a896597c40d3147cb7d81c2d86965baf785f3768be786675f70c67caa72e
+  by: research preamble
+3AD3 derive:
+  hash: 48f3ee39ace812095d0fbb2fc1ecc35782dee79e46eebea71267c7c452d11361
+  by: research preamble
+3AD3 form.integer_valued:
+  hash: 28f545b6216a0033f64a9d5b824265e1a312481673fe60ca76ef9f62e06bfe5b
+  by: research preamble
+3ANK derive:
+  hash: c2a3df14a906cefd84b30070cf8e7ff8bb6f0d198b63f2b26d912775a8dca5de
+  by: research preamble
+3ANK form.integer_valued:
+  hash: 0e0f14cb259dc8c03ae6e7c5c03eef3b3804ee13daac6861f203d02be27b64f2
+  by: research preamble
+3ARQ derive:
+  hash: 321e8820f46ef6dadd43d7a401aa1babe9bb07cff1dcdbb1b30bba3f44cc7c4e
+  by: research preamble
+3ARQ form.integer_valued:
+  hash: 0bf907e4c4f7ba41dd8ea33af002d0d22f6b3e3cd993e62d26de908a036276dc
+  by: research preamble
+3AT4 derive:
+  hash: cc5918373d8a419cba073d8fb53313f057b49c06f5a0f00193625e700324508a
+  by: research preamble
+3AT4 form.integer_valued:
+  hash: 8293f42e094306c9d9dd2e0421425035537cfa55af3b47783a36c9a9f8c68676
+  by: research preamble
+3AV1 derive:
+  hash: 857e2a3131b2d752a28f7b8731c8427c08fdb23dd55f7da6ddf028fef67f0973
+  by: research preamble
+3AV1 form.integer_valued:
+  hash: 6e702e4846f499a4f0f97792dc621e755b66434af9d6678a2bc009ab7c7c5247
+  by: research preamble
+3B0T derive:
+  hash: 8e98b34a055617bf1f1a28c01729f51340e28268e6f85094ef5620e9dd6adb29
+  by: research preamble
+3B0T form.integer_valued:
+  hash: 83a967cd9255a3ad4a8aa54bd018d6fefe47fe61bc5dc4b327df975fca48f7eb
+  by: research preamble
+3B4Z derive:
+  hash: 3a1f7a1bccad7d1fc886c974c6592ccfb100eb19e6659d7daa054946c053bca0
+  by: research preamble
+3B4Z form.integer_valued:
+  hash: 6e334980b185a18b4743fb45aa8da7e02c2b72a865dd8a3a4dfb8cc2608e848d
+  by: research preamble
+3BK5 derive:
+  hash: ec0105dc1a59855558b0a106f8ed0d821165ee5dec4868ee03a23dfa38bc3044
+  by: research preamble
+3BK5 form.integer_valued:
+  hash: de981160d95010ac7090c22a1e7e0b261ca416bf6a37596f30e0478fb0ac9f26
+  by: research preamble
+3CBO derive:
+  hash: fde798e3f2d2bfd074dd49c0a529a2ce675fbaad735cab7ca7fc84d82d983153
+  by: research preamble
+3CBO form.integer_valued:
+  hash: f329f9bf0ebf5364a42910a9d9243b8d62ee436c8612b70721b8e5b1a629fce3
+  by: research preamble
+3CF4 derive:
+  hash: 7e97d2d056e03ffc1bbc1c89d13f8bfa8a88f53653b69ffe6157a1f7db08dd12
+  by: research preamble
+3CF4 form.integer_valued:
+  hash: c940877e162442e30122179bfca5cf5484a29cb332776565f80eb282a82a3a98
+  by: research preamble
+3CH0 derive:
+  hash: 44bf15c803319f00bb1c94cdf8d69d8bf6cfc646a715a33ee8f454ebfe2a4b65
+  by: research preamble
+3CH0 form.integer_valued:
+  hash: 3e411740e59fccf4257ee7ed8b92c38246306d9ae23c9e3c4d27c680d9bae35a
+  by: research preamble
+3CMK derive:
+  hash: c0f93e27153fcf67631d34264f9c0d5b3b8f59d57b220c73d1417484e0e2acd3
+  by: research preamble
+3CMK form.integer_valued:
+  hash: 731b960771bb42bb367de9f792388c85787ac0d650652abcc098e1b49112aed5
+  by: research preamble
+3CN2 derive:
+  hash: 0190fca8148a9724b2cd73aa399a41d4fd98ba73caed7463725627ca751690b2
+  by: research preamble
+3CN2 form.integer_valued:
+  hash: d2bda28abca80dde575cdb065c174fc0a03f3c26a7d9e82bb0681872565c735a
+  by: research preamble
+3CNT derive:
+  hash: 83b5877dfca46c25d81dfb57f25387c508371949bf20a902f820a5824d4d295a
+  by: research preamble
+3CNT form.integer_valued:
+  hash: 63320f0741a969b392c905f23f32a4ed50c58cd3d6c6c51da498b5610cd066d8
+  by: research preamble
+3CO8 derive:
+  hash: a704e971e6883c974e9d1cf0d5aff330dd33d828bf0941280d5e75393c471f03
+  by: research preamble
+3CO8 form.integer_valued:
+  hash: 2b1710d3574f26af546720e62c7e2a8f4e803b6209f452014873ffe39ab5a564
+  by: research preamble
+3DCV derive:
+  hash: 2b113bb7ad958425b838feff9dca0feca6c5a63a6e274ddf891f1658045b628d
+  by: research preamble
+3DCV form.integer_valued:
+  hash: 65da5d56bc340ed6d8e2f2ac397879806135081de9246413fa1041351c065c2c
+  by: research preamble
+3DFY derive:
+  hash: d4233234bdd3f7a07b19c5dfd478e5c3347244fd1758a3fb847249f14e028d0b
+  by: research preamble
+3DFY form.integer_valued:
+  hash: c8602c8160b674fa1bef4308f50252f1492cbf8a2c27f9deb5c0016efdfe94bd
+  by: research preamble
+3DGM derive:
+  hash: a7854c09dbbbea5977204e8b330daf94a4958c5acfa23f5fe51749610ab8c49c
+  by: research preamble
+3DGM form.integer_valued:
+  hash: b64547c26f7c4dfc56fe8bf1b0e00eaa18b61a26dc7b7e25add2165603adafdf
+  by: research preamble
+3DM0 derive:
+  hash: bb7b697a216933d69a93082b881385d13cc9b9ffba92d6786f5bb57ecf2b3c44
+  by: research preamble
+3DM0 form.integer_valued:
+  hash: 99f4b4c77cbf9b40c5bab26d2c75859a8dae3ed1964508b78ae4c3c5cd612f77
+  by: research preamble
+3DNL derive:
+  hash: f64559614a4ab135b00cb45235df34f04f7b54670971bbcedc4971bfcbe07996
+  by: research preamble
+3DNL form.integer_valued:
+  hash: 00021ffb8ea6b233fe4c3bd08cb22994957fbcd50212a6254cab7ce323724715
+  by: research preamble
+3DWA derive:
+  hash: 3c851822c233c3537b1943b922c752a9f67be84ea477f9908f8c0e5f1afa8b40
+  by: research preamble
+3DWA form.integer_valued:
+  hash: da64fb2b6cea6f63669044a4c027fee7be6981eab2f18e8f6bf73bb64e46bf49
+  by: research preamble
+3E58 derive:
+  hash: 64cf16a585ac747daf01d13c71e035fa0adaac7d40b21ae88e781e316d8eac52
+  by: research preamble
+3E58 form.integer_valued:
+  hash: d710761831d7ca7562364a37552c3a9e19308fb20782f3ae3bdc737df7aedd51
+  by: research preamble
+3E6E derive:
+  hash: eae5781fe25d82fde88c1e231ed02394ca6f1ebca5d4d5e833716515e03e3a92
+  by: research preamble
+3E6E form.integer_valued:
+  hash: 3db5e27a33b8e8a6decba2299c790f723cc006fe92dbff3c0c8b93d365c4fe70
+  by: research preamble
+3EGJ derive:
+  hash: 783207b475a95405e7d06bef36c1b36c2623a6432e60e45386741716fed32c71
+  by: research preamble
+3EGJ form.integer_valued:
+  hash: 1506ea436d97feb415e436735a2d38967c00c58a779fb587d13d141a01c7734e
+  by: research preamble
+3EHQ derive:
+  hash: d7b6e55ce9ab7b6245f7a2d87a07c9fdc2bb061faff85e70a7ab9adbce8d3beb
+  by: research preamble
+3EHQ form.integer_valued:
+  hash: a763241e2e4b07aaf610610fd5d8e50e4eab32cc806a340d2368e0def3add6fb
+  by: research preamble
+3EKS derive:
+  hash: 7869a7e7394955650c01db83b164ed4225a887d31da4477913f4f162df0a198d
+  by: research preamble
+3EKS form.integer_valued:
+  hash: ddd03acd551573023de69a66cdcb40b0b8edd2f35791e06d59b28e0b889bd6a4
+  by: research preamble
+3EM9 derive:
+  hash: ca74873ca5460c83ac0339f31e34f0c2c6f6f8900fa463991bd11beacba6a81e
+  by: research preamble
+3EM9 form.integer_valued:
+  hash: 4f877d72b42cd35875256fc8b023321d393182c3b0772f840040ee35447d8536
+  by: research preamble
+3EO1 derive:
+  hash: af647e70cde03c3ad933cc421e330ab92588725a8ee428c4c6ef821508c25136
+  by: research preamble
+3EO1 form.integer_valued:
+  hash: f34d5d013a911cbe1474d9561dbf29eb893bb1b142eed8c733cc686c6b210c5d
+  by: research preamble
+3EYF derive:
+  hash: 4d32b6bc899613fa36c713d0ca78eb7d060bb8295ff76a0a2807a3ce43d5fb52
+  by: research preamble
+3EYF form.integer_valued:
+  hash: 9e509012c6e09039799aeecb597a45df8988d4c294df1872b824222fd6cb6c94
+  by: research preamble
+3F6Y derive:
+  hash: bd7accfae2bb8c5ce4a06c4c9fdebaff5751b3a2b7a8dbc8cad89dde9f1ccc6d
+  by: research preamble
+3F6Y form.integer_valued:
+  hash: 27fceab14c6d11f2bc1cd8f01f5a577919a94bd74974bc60f2833eec7ec819cb
+  by: research preamble
+3FDH derive:
+  hash: 14d271b9219ada9ce92de4194bd542749c0f1aeb06d91f6d856a1dff30c025ad
+  by: research preamble
+3FDH form.integer_valued:
+  hash: c69c44b8ea6f9cfb835210731ecddaad76acad3361d5b83f11c78b51ebd71b8e
+  by: research preamble
+3FI4 derive:
+  hash: 29e50494c28635d5449cc18e0336eb344f4391c689b5ff0984a13c211e5c908f
+  by: research preamble
+3FI4 form.integer_valued:
+  hash: 78177ef7440a88327b1d0c3fbac91fc326a9d87968d94e04a4c744e71b1a980d
+  by: research preamble
+3FS9 derive:
+  hash: a0090791ae1f96e77c4370fcc9f69f74da34929b9d5c42781007d5c660f1d46c
+  by: research preamble
+3FS9 form.integer_valued:
+  hash: 64d8faa2acbc0194f7267c8ede66d8a7a767befd2bc6959858c3b3ed79334e31
+  by: research preamble
+3G3J definite.automorphism_group_generator_morphisms:
+  hash: cecf612b3aa085b1264ca64bd408efcf50df1fbc6d0b26458c097673803d3df8
+  by: research preamble
+3G3J definite.automorphism_group_order:
+  hash: c6b1183aec0f3848a5b0ee330137ad1cab75e6deafd8bec618d67fc88ae5f55d
+  by: research preamble
 3G3J definite.regular:
   hash: 8673bcd82357784ab4d396c515f49f87d01b6b7a20c9b59205fb2612bb54f1ea
   by: 'W. C. Jagy, I. Kaplansky and A. Schiemann, There are 913 regular ternary forms,
@@ -58,6 +1093,30 @@
     by its spinor genus (A. G. Earnest and A. Haensch, Completeness of the list of
     spinor regular ternary quadratic forms, arXiv:1711.05811v2 (2018), Abstract) and
     the spinor genus lies in the genus.'
+3G3J derive:
+  hash: 25e4c33d8a7460486cb92db112020a6711c0c9f0febd829648afb732e6289975
+  by: research preamble
+3G3J form.integer_valued:
+  hash: 4b092e02c9ab1fd5c8a517911c97e69eb092a01a9a03539879b5b81456cf02b8
+  by: research preamble
+3G52 derive:
+  hash: 134b532fb8cee3c34a2baf3255babaf2be841be7982cd97595eb34370a25dce7
+  by: research preamble
+3G52 form.integer_valued:
+  hash: 40086760e880f3cf77a05e555851798cb357125f0f9be5a1ccea97aab10bdf8c
+  by: research preamble
+3G74 derive:
+  hash: ee22945a13b13142493bc91cd72d430880565ef0670cb4eedec16bbe00e0bcdb
+  by: research preamble
+3G74 form.integer_valued:
+  hash: 9ea1c6f1c6376ca2da2c670222ef767abb82e2aa331f1e5b7eb9e5412ace53ba
+  by: research preamble
+3GFP definite.automorphism_group_generator_morphisms:
+  hash: 4c5cde93bc6c35127dd59cb6afb00db42369a1564f3b3c6dea81494b864d108c
+  by: research preamble
+3GFP definite.automorphism_group_order:
+  hash: 8ea22aac040818ef4d91010e1f73ea84fa7bdb9f1784ab5a38cd25a6904a0eb7
+  by: research preamble
 3GFP definite.regular:
   hash: a64325dcf71d357b09b62bf0ba4f39f4711335f787ca0bf133daa1c2a375e67a
   by: 'W. C. Jagy, I. Kaplansky and A. Schiemann, There are 913 regular ternary forms,
@@ -78,6 +1137,27 @@
     by its spinor genus (A. G. Earnest and A. Haensch, Completeness of the list of
     spinor regular ternary quadratic forms, arXiv:1711.05811v2 (2018), Abstract) and
     the spinor genus lies in the genus.'
+3GFP derive:
+  hash: 3f660a2d717f380310c1866f80ddef9e5d2f1c540cde0b8e8ee10f495854e03f
+  by: research preamble
+3GFP form.integer_valued:
+  hash: 44e12d8112623b9b7895965613ecd141c347c772a4f1dae6a20ab41033bd769c
+  by: research preamble
+3GKT derive:
+  hash: 4e07567dbfe6a5dd75a8afe96dea487852455af0fb4e15bea705c13c4157e6ab
+  by: research preamble
+3GKT form.integer_valued:
+  hash: 20aacf5ced3afaa99f4419ae9ed0de3fed53f051b17cdef71d2d2fd5498f8243
+  by: research preamble
+3I3H definite.automorphism_group_generator_morphisms:
+  hash: 61046b6f5a43f77e57927efd5e008972c58981215bb7718e052132fa425c5565
+  by: research preamble
+3I3H definite.automorphism_group_order:
+  hash: 7f80b948236cfcdf3af5dfafce9094376a519d16eb70923e20011c38d65f9734
+  by: research preamble
+3I3H definite.genus_theta_series:
+  hash: b21928b391ceac7a7fd519b302cf7dee3d006b110e5145cf7ea255f8fd2bfff9
+  by: research preamble
 3I3H definite.regular:
   hash: 083252ede6a25b1f0eb0ab719257c8d04517fe34a6d11cde0abca835d192c12d
   by: 'W. C. Jagy, I. Kaplansky and A. Schiemann, There are 913 regular ternary forms,
@@ -86,6 +1166,9 @@
     positive-definite integral ternary quadratic forms, Integers 19 (2019), #A45,
     Tables 1 and 2; regular by W. C. Jagy, I. Kaplansky and A. Schiemann, There are
     913 regular ternary forms, Mathematika 44 (1997), 332-341.'
+3I3H definite.siegel_eisenstein_coefficients:
+  hash: a1a63e23d18348134e57dc153e8e380765c3c58ab62a5265083ab4103dab2b39
+  by: research preamble
 3I3H definite.spinor_regular:
   hash: 1ff20f12c08936d7cdc2c4a42e5f6da37c31e323acbe600e395cfe20f875b4d7
   by: 'W. C. Jagy, I. Kaplansky and A. Schiemann, There are 913 regular ternary forms,
@@ -98,6 +1181,60 @@
     by its spinor genus (A. G. Earnest and A. Haensch, Completeness of the list of
     spinor regular ternary quadratic forms, arXiv:1711.05811v2 (2018), Abstract) and
     the spinor genus lies in the genus.'
+3I3H definite.theta_series_cuspidal_component:
+  hash: 171e841195ebb5fc2909f38012acd65426310f046e38009d128f5b6ac11ef5ac
+  by: research preamble
+3I3H derive:
+  hash: 015d6b34ca284efaea9e9b701660295bffa74d987e6e6dd891c57a248831ee62
+  by: research preamble
+3I3H form.integer_valued:
+  hash: 648b09b6d59d2ac9f41a02a39996737b6a89ec3b0cc7ea81952e89dd4727482b
+  by: research preamble
+3I3H integral.anisotropic_primes:
+  hash: 43d04161f186b3118c179504f81f07a721e7ffa6e2f3cc085d5b5110e3fbde21
+  by: research preamble
+3I3H integral.elementary_primes:
+  hash: e41d8197559a7b0584d8a4484dd845e8a586536d584ddb6c8dcb2e0736863085
+  by: research preamble
+3I3H integral.genus_class_count:
+  hash: 8ab3d4ca840f490c5f43ccf5b62f619720970194d4ca85839a962f4af46ed4e5
+  by: research preamble
+3I3H integral.genus_symbol:
+  hash: a24038a0cdce93f5bb0e1f33d484d3a2ed7a7b31a46fb4f9608957078c920191
+  by: research preamble
+3I3H integral.hyperbolic_index:
+  hash: 33d9dd8aa853736b27c9f0dbe849a9cbb5db6573eef7e4311fa127841a9e8394
+  by: research preamble
+3I3H integral.local_densities:
+  hash: 5abef10274e56256618dc3f2fcb48a86a069f40c896b0f6cdf0342bae0cccc7e
+  by: research preamble
+3I3H integral.local_representations:
+  hash: e6c20a6dc1cb2cfe190af7441d673f5a3ffd34b27f74b771163f1ce81c046d41
+  by: research preamble
+3I3H integral.modular_scale:
+  hash: 54bc55ddb883815f61ee7b21fd06463098b1ef72bc75234c9f27ec1c06550d63
+  by: research preamble
+3I3H integral.overlattice_count:
+  hash: 69d7eae38f46be05d882aadc9a95c718c135e053927d7d9dc5e8ef693f3ab410
+  by: research preamble
+3I3H integral.primitive_orbits:
+  hash: e91bebb179a92446ece0231f5ce7521472734c2fb84e60586d6121aa8b99e467
+  by: research preamble
+3I3H integral.spinor_genera:
+  hash: 2670bd1916d19e404d24337544c408cf05b5c845c3116aaee689dd2ea8c4f358
+  by: research preamble
+3I3H integral.spinor_genus_count:
+  hash: c467a09e0bd21b138aa775ecafc479cea33afac46d403d1c0c085e9e48afa159
+  by: research preamble
+3I7X definite.automorphism_group_generator_morphisms:
+  hash: cab834501263d822ece6fc9b8ee198d97947b5dd39a809b97d543af424de3e11
+  by: research preamble
+3I7X definite.automorphism_group_order:
+  hash: 1a91de32c21f1af4c8d012d42a4ddb68095d02fc5029fcde64ea2943c5929322
+  by: research preamble
+3I7X definite.genus_theta_series:
+  hash: 3c9a84b4f07a811c831093e8892f47e7a5887edfe8ff0a7f0b6753df8fd0479e
+  by: research preamble
 3I7X definite.regular:
   hash: c3f271011e8f80b50dcb4cda8e3a867bd5b27047acf174b4982ca56ff2730ec3
   by: 'W. C. Jagy, I. Kaplansky and A. Schiemann, There are 913 regular ternary forms,
@@ -106,6 +1243,9 @@
     positive-definite integral ternary quadratic forms, Integers 19 (2019), #A45,
     Tables 1 and 2; regular by W. C. Jagy, I. Kaplansky and A. Schiemann, There are
     913 regular ternary forms, Mathematika 44 (1997), 332-341.'
+3I7X definite.siegel_eisenstein_coefficients:
+  hash: 49ebb84636684857867bf7f58113a5a8fae06415a878cbfadeb07354ca4d5366
+  by: research preamble
 3I7X definite.spinor_regular:
   hash: fdc7e9e30014711dd2aace84ebff8459753a1787605f2315b769bceb24c241c3
   by: 'W. C. Jagy, I. Kaplansky and A. Schiemann, There are 913 regular ternary forms,
@@ -118,6 +1258,60 @@
     by its spinor genus (A. G. Earnest and A. Haensch, Completeness of the list of
     spinor regular ternary quadratic forms, arXiv:1711.05811v2 (2018), Abstract) and
     the spinor genus lies in the genus.'
+3I7X definite.theta_series_cuspidal_component:
+  hash: 4259297d6edcf692d54629be772e543dbcfc04fb1b11c7d0da70ca889bfdeacf
+  by: research preamble
+3I7X derive:
+  hash: 74120c2c5a0dc606ab2ad0c7a1900f31bd725c79da867107c9338e6d4e15cf93
+  by: research preamble
+3I7X form.integer_valued:
+  hash: 4e725a0aebfb52b82a71e6bb193ca6c1d6a1edaa3b8ff55c482f0578d6a7af44
+  by: research preamble
+3I7X integral.anisotropic_primes:
+  hash: 96faac212072265ac965197ed35f00a437869f8cb007c59ce598cfb3879810bc
+  by: research preamble
+3I7X integral.elementary_primes:
+  hash: 02941185476bb1f8879eeb3ff84e04c4a7e7fc08ac42850dc27aa4ed86aaced0
+  by: research preamble
+3I7X integral.genus_class_count:
+  hash: c12622a111356777e138071531a33037151e60e37adab35c2ccde412f251f603
+  by: research preamble
+3I7X integral.genus_symbol:
+  hash: 3a195ae4120d39da12babd4baa2b78999e9721ae2d194022b83a3848ad9987e8
+  by: research preamble
+3I7X integral.hyperbolic_index:
+  hash: af75fe19bfa3940ddc2819171abf031754a5db5e5359acd324a8df768a6f70ac
+  by: research preamble
+3I7X integral.local_densities:
+  hash: 55bd4265720fb4414db14727da9a998a054269739a372537c3b6da9e8da6137b
+  by: research preamble
+3I7X integral.local_representations:
+  hash: c0e3a4b93c13d584fe9c1f4f50f513f5869abe3e3274599a4f6130375bf20f04
+  by: research preamble
+3I7X integral.modular_scale:
+  hash: 10693b37eb6e4da5cb9341f06ee5ececf4b8928d34a60e92fc323c0a8d1d0cbb
+  by: research preamble
+3I7X integral.overlattice_count:
+  hash: c04ddce17127a2f5183be829cade379b4db7412c145d55f9c94bc1edd9b14eb1
+  by: research preamble
+3I7X integral.primitive_orbits:
+  hash: 25d68f0c3e29fb0a7df5687f38ea09cf247281e637c35761a1b3cbcdad267610
+  by: research preamble
+3I7X integral.spinor_genera:
+  hash: 14f6a746c68812d50d02ca9e31db3a2891e78123806d8adbf7a1e1c09625ea8d
+  by: research preamble
+3I7X integral.spinor_genus_count:
+  hash: cdf8a052f17e518c8a75db843491a5087345bceaff0337f0f51bd8383fdfe11b
+  by: research preamble
+3IBH definite.automorphism_group_generator_morphisms:
+  hash: 8422c9eec00d9c1b36e436a8b2148be0dbdf7fcfa2771440f31e8006860d7103
+  by: research preamble
+3IBH definite.automorphism_group_order:
+  hash: fa49daf785f08efce481f11cba01655ec2c8e59d2aaee3603ab20fb572e5741f
+  by: research preamble
+3IBH definite.genus_theta_series:
+  hash: 8aa43d88c45afa33bf9ed178f31b7c639d7bcba7d84363e96ba79b29e5fcefc0
+  by: research preamble
 3IBH definite.regular:
   hash: fa39b94fb239bf1973c2066581293d94b8b436d44a7f725e0169b847e533885b
   by: 'W. C. Jagy, I. Kaplansky and A. Schiemann, There are 913 regular ternary forms,
@@ -126,6 +1320,9 @@
     positive-definite integral ternary quadratic forms, Integers 19 (2019), #A45,
     Tables 1 and 2; regular by W. C. Jagy, I. Kaplansky and A. Schiemann, There are
     913 regular ternary forms, Mathematika 44 (1997), 332-341.'
+3IBH definite.siegel_eisenstein_coefficients:
+  hash: 67c00397495120270190be1b7f867ce4510c7571f53aa5f6ab37945317d1ae54
+  by: research preamble
 3IBH definite.spinor_regular:
   hash: 7e780b7cf9adee71362d88f4935b9ba331b74d6a6fd1513f5d1060cada1c2f60
   by: 'W. C. Jagy, I. Kaplansky and A. Schiemann, There are 913 regular ternary forms,
@@ -138,3 +1335,51 @@
     by its spinor genus (A. G. Earnest and A. Haensch, Completeness of the list of
     spinor regular ternary quadratic forms, arXiv:1711.05811v2 (2018), Abstract) and
     the spinor genus lies in the genus.'
+3IBH definite.theta_series_cuspidal_component:
+  hash: 6c2cfdc9520ff29495bb35e0bedc7480b6eb2552e10b0868a0c8377d50c9d4ef
+  by: research preamble
+3IBH derive:
+  hash: 05d377ac9be6efd7d8b94d122a3503d5ef940e13d4f4e63ae9ec212af863d0cd
+  by: research preamble
+3IBH form.integer_valued:
+  hash: 338fe9e7f66e92fda18767cbec0a9e9c6def9a61c48eed7a45b83abd4c55656c
+  by: research preamble
+3IBH integral.anisotropic_primes:
+  hash: cba1a40fd8912eaf5f359b7a2b5d8c8aa437054467b72c17babc05112562f724
+  by: research preamble
+3IBH integral.discriminant_sequence:
+  hash: 578dcca2bd0e5f0bb099c4202c2836a3bee2edfc8c32d2034df7abe94ee893d0
+  by: research preamble
+3IBH integral.elementary_primes:
+  hash: 99ef8f7ed6c555ddeaf5d59b7643aac67115675ea381d1ec4595658938329dc2
+  by: research preamble
+3IBH integral.genus_class_count:
+  hash: 8b91ed0e0ac12e844f7e21aa50d05c26de2bd5c8572fb983600b014587897dbc
+  by: research preamble
+3IBH integral.genus_symbol:
+  hash: edcc67b91dff2d244fa85202c5fb3d09f0e1e895e9bd8f500308426e9c25d427
+  by: research preamble
+3IBH integral.hyperbolic_index:
+  hash: ab38c1bc6e208cdf97dfa2cf0669566dc6f03ed377ead5f515978f028f156d1f
+  by: research preamble
+3IBH integral.local_densities:
+  hash: 56e20db84e6d38d93c5552a503a262ff2a414c209c183cdcd2245f0804915cd0
+  by: research preamble
+3IBH integral.local_representations:
+  hash: 1b0bc0ad654d7154a39b0065e5817e441088eb3f1195898104bfe585267fb162
+  by: research preamble
+3IBH integral.modular_scale:
+  hash: bef951fca5c566938d46da5ec5fb70b57426f2858a03d0f7d38d9dd0b8eab7d1
+  by: research preamble
+3IBH integral.overlattice_count:
+  hash: 555318346d572b7df9a81448c873e5c25b21b01deb30bd311e741b900c2d34b9
+  by: research preamble
+3IBH integral.primitive_orbits:
+  hash: bc43b3253880190477dd40e9b2195903fcabe5661ddf208235b9dd515c626d43
+  by: research preamble
+3IBH integral.spinor_genera:
+  hash: 8ef45f5eb71a1b685b81d6d4f84084b3c3b92f2642f8543119b3838a1076482f
+  by: research preamble
+3IBH integral.spinor_genus_count:
+  hash: fcf78f7bf93c9194d06bf530171e00662158f4af1f262130023357ce9a480864
+  by: research preamble

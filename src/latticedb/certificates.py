@@ -30,9 +30,6 @@ from latticedb import storage
 from latticedb.model import Lattice, Record
 
 CERTIFICATES_DIR = "certificates"
-LEGACY_FILE = "certificates.yaml"
-"""The single certificate file that preceded the groups. Certification runs begun before the
-split still commit to it, so it is read with the groups until those runs have finished."""
 
 
 class Certificate(Record):
@@ -65,8 +62,7 @@ def _group_of(name: str) -> str:
 
 def load(root: Path) -> Certificates:
     held: Certificates = {}
-    legacy = [root / LEGACY_FILE] if (root / LEGACY_FILE).exists() else []
-    for path in [*legacy, *sorted((root / CERTIFICATES_DIR).glob("*.yaml"))]:
+    for path in sorted((root / CERTIFICATES_DIR).glob("*.yaml")):
         held.update(TypeAdapter(Certificates).validate_python(yaml.load(path.read_text(), Loader=yaml.CSafeLoader) or {}))
     return held
 
