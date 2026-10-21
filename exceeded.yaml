@@ -286,6 +286,18 @@
 12UK integral.genus_class_count:
   hash: c4f43b43577a539875cf145c72ad42406df6ac7c2d9ded82215702a57678294b
   seconds: 15
+13FN definite.genus_theta_series:
+  hash: 1e8d95a3b246eaec657283c77a2709d23f90bf3c0ea68600347b1f43a5d96601
+  seconds: 2
+13FP integral.overlattice_count:
+  hash: 70444b173f7ca6c407f1b73a917c85f43136814be227aeb2bf40ab0f385fca4b
+  seconds: 3
+13G0 integral.overlattice_count:
+  hash: 32b70f1a3833e3c56921ac0e99187c94fce99b6a788634186dfe184af14b6e18
+  seconds: 1
+13G2 integral.genus_class_count:
+  hash: a2146cf882d473e27844a50718e4e03aa8cae0c66b2947e10fa8e034c577853d
+  seconds: 1
 13SQ integral.genus_class_count:
   hash: 065fa3229c845075f6544d628b7c662fb05009d0851819e99232d6648177c861
   seconds: 30
