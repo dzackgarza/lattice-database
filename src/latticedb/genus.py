@@ -200,7 +200,7 @@ def requests(
     A computation that ran for a whole job without finishing is not requested. One
     that a job ended after a shorter time is requested first, so it runs for a whole job.
     The other cards follow by rank and then absolute determinant. The semi-decisions of
-    every card that needs no derivation are separate requests after all of them.
+    every card are separate requests after all of them.
     """
     resumed: list[Request] = []
     chosen: list[Request] = []
@@ -241,10 +241,6 @@ def requests(
             rest = [field for field in fields if field not in interrupted]
             semi = [field for field in rest if field in SEMI_DECISIONS]
             fields = interrupted + [field for field in rest if field not in SEMI_DECISIONS]
-            if needs_derive:
-                # Derivation supplies the hypotheses that select the card's fields, so they stay together.
-                fields += semi
-                semi = []
             gram = [[int(value) if value.denominator == 1 else str(value) for value in row] for row in lattice.gram_tensor]
             request: Request = {
                 "tag": lattice.tag,
@@ -260,6 +256,7 @@ def requests(
             if request["fields"]:
                 (resumed if interrupted else chosen).append(request)
             if semi:
+                # A card that needs derivation carries its record, which selects the searches that apply.
                 searches.append({**request, "fields": semi})
             sizes[lattice.tag] = (len(gram), abs(lattice.determinant or Fraction(0)))
 

@@ -232,9 +232,13 @@ def _run(tag: str, fields: list[str], compute: Callable[[], dict[str, JsonValue]
 def _compute(request: Request) -> None:
     """Emit each requested value of one card as it completes, in the order requested."""
     tag = request["tag"]
-    if "derive" in request["fields"]:
-        derived = _run(tag, ["derive"], lambda: {"derived": records.derive(request["record"])})
-        stored = Lattice.model_validate(derived["derived"])
+    if "record" in request:
+        if "derive" in request["fields"]:
+            derived = _run(tag, ["derive"], lambda: {"derived": records.derive(request["record"])})["derived"]
+        else:
+            # The card's first request emitted this derivation; it is repeated only to select the fields.
+            derived = records.derive(request["record"])
+        stored = Lattice.model_validate(derived)
         if "integer_valued" in request["fields"]:
             assert stored.form is not None
             _start(tag, ["integer_valued"])

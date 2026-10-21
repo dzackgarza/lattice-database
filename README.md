@@ -397,7 +397,8 @@ After a faster implementation lands, delete the entry by hand.
 
 The queue runs on `--workers` Sage processes, by default one per CPU. A worker holds one card at a time and takes the next only when that card is done, so a computation that never returns holds back only its own worker.
 After the interrupted computations, cards are queued by rank and then absolute determinant, so each job reaches as many cards as it can.
-The semi-decisions (`roots`, `norms`, `reflective`, `regular`, `spinor_regular`) of every derived card are queued after all the other fields of every card, since one that does not return holds its worker for the rest of the job; a card that still needs derivation keeps its fields in one request, because derivation selects them.
+The semi-decisions (`roots`, `norms`, `reflective`, `regular`, `spinor_regular`) of every card are queued after all the other fields of every card, since one that does not return holds its worker for the rest of the job.
+A card that still needs derivation carries its record into that later request, and the worker derives it again only to select the searches that apply.
 When less than a tenth of the machine's memory is available, certification kills the worker holding the most memory and reports that card as a failure, so a computation that outgrows the runner costs its own card and not the whole job.
 The nightly workflow runs `--shard i/16` on sixteen runners; a card belongs to the shard given by a SHA-256 hash of its tag, so the shards partition the corpus.
 Each shard rebases its commit onto `main`. `.gitattributes` merges `certificates.yaml` and `exceeded.yaml` key by key with `latticedb merge-keyed-map`, since shards never change the same key.

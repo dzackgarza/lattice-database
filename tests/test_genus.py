@@ -25,7 +25,7 @@ def test_sparse_cards_do_not_block_computable_cards(tmp_path: Path) -> None:
     shutil.copy(REPOSITORY / "lattices" / "0012.md", tmp_path / "lattices")
     (tmp_path / "lattices" / "9999.md").write_text("---\ntag: '9999'\nname: Sparse source card\nlatex: S\n---\n")
     requested = genus.requests(corpus.load(tmp_path), {}, {}, ())
-    assert [request["tag"] for request in requested] == ["0012"]
+    assert {request["tag"] for request in requested} == {"0012"}
 
 
 def test_gram_only_card_queues_derivation_before_invariants(tmp_path: Path) -> None:
@@ -51,7 +51,7 @@ def test_selected_card_certification_does_not_verify_unrelated_morphisms(tmp_pat
     del document.metadata["morphisms"][0]["scale"]
     path.write_text(records.record_text(corpus.front_matter(document), document.content))
     requested = genus.requests(corpus.load(tmp_path), {}, {}, ("0012",))
-    assert [request["tag"] for request in requested] == ["0012"]
+    assert {request["tag"] for request in requested} == {"0012"}
 
 
 def test_a_computed_series_of_orbits_replaces_its_prefix_and_preserves_the_authored_tail(
@@ -156,7 +156,7 @@ def test_a_definite_binary_lattice_requests_regularity_and_no_spinor_regularity(
     shutil.copy(REPOSITORY / corpus.FAMILIES_FILE, tmp_path / corpus.FAMILIES_FILE)
     (tmp_path / corpus.RETIRED_FILE).write_text("{}\n")
     shutil.copy(REPOSITORY / "lattices" / "0012.md", tmp_path / "lattices")
-    fields = genus.requests(corpus.load(tmp_path), {}, {}, ())[0]["fields"]
+    fields = [field for request in genus.requests(corpus.load(tmp_path), {}, {}, ()) for field in request["fields"]]
     assert "regular" in fields
     assert "spinor_regular" not in fields
 
@@ -226,16 +226,18 @@ def test_smaller_cards_come_first_and_every_card_precedes_the_searches(tmp_path:
     (tmp_path / corpus.RETIRED_FILE).write_text("{}\n")
     for tag in ("0012", "0016", "0026"):
         shutil.copy(REPOSITORY / "lattices" / f"{tag}.md", tmp_path / "lattices")
-    # U and A2 are derived, so their searches are queued apart from their other fields;
-    # II_{1,2} still needs derivation, which selects its fields, so its request stays whole.
+    # U and A2 are derived; II_{1,2} still needs derivation, so its search request
+    # carries its record, from which the worker selects the searches that apply.
     derived = {computation: certificate for computation, certificate in certificates.load(REPOSITORY).items() if computation.endswith(" derive")}
     requested = genus.requests(corpus.load(tmp_path), derived, {}, ())
     # U has determinant -1 and A2 determinant 3, both of rank 2; II_{1,2} has rank 3.
-    assert [request["tag"] for request in requested] == ["0016", "0012", "0026", "0016", "0012"]
-    assert not any(set(request["fields"]) & genus.SEMI_DECISIONS for request in requested[:2])
-    assert requested[2]["fields"][0] == "derive"
-    assert all(set(request["fields"]) <= genus.SEMI_DECISIONS for request in requested[3:])
-    assert "roots" in requested[3]["fields"]
+    assert [request["tag"] for request in requested] == ["0016", "0012", "0026"] * 2
+    finishing, searches = requested[:3], requested[3:]
+    assert not any(set(request["fields"]) & genus.SEMI_DECISIONS for request in finishing)
+    assert finishing[2]["fields"][0] == "derive"
+    assert all(set(request["fields"]) <= genus.SEMI_DECISIONS for request in searches)
+    assert "roots" in searches[0]["fields"]
+    assert "record" in searches[2] and "derive" not in searches[2]["fields"]
 
 
 FAKE_WORKER = """
