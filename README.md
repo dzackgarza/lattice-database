@@ -389,7 +389,9 @@ An entry maps the computation name to a hash of that name and the Gram tensor, a
 Certification starts the entry at zero elapsed seconds, checkpoints actual runtime every thirty seconds and on graceful termination, and deletes it when the computation finishes.
 A hard kill retains the latest checkpoint; an early interruption remains eligible for retry.
 A computation that ran for at least five hours does not fit in one job, and certification never requests it again.
-A computation that ran for less is requested first by the next job, after any required derivation.
+A computation that ran for less is requested first in its phase by the next job, after any required derivation.
+An entry is `lost` from the start of its computation until the job's final checkpoint.
+An entry that is still lost was running when its runner died, possibly because of it, so the next job requests it after every other computation.
 If a worker crashes on a card, certification drops the entry of the computation it was running, since a crash is a defect and not a timeout.
 A fresh worker takes the card's computations that had not started, then the other cards, and certification fails once the queue is done.
 A worker that crashes before starting any computation is not replaced.
@@ -398,11 +400,14 @@ After a faster implementation lands, delete the entry by hand.
 
 The queue runs on `--workers` Sage processes, by default one per CPU. A worker holds one card at a time and takes the next only when that card is done, so a computation that never returns holds back only its own worker.
 After the interrupted computations, cards are queued by rank and then absolute determinant, so each job reaches as many cards as it can.
+While other requests wait, resumed computations hold at most all but one worker, so every job certifies new values.
 The semi-decisions (`roots`, `norms`, `reflective`, `regular`, `spinor_regular`) of every card are queued after all the other fields of every card, since one that does not return holds its worker for the rest of the job.
+A cut search leads that phase: every job ends inside a search, and resuming it at the start of the next job would hold its workers through the fields that every procedure finishes.
 A card that still needs derivation carries its record into that later request, and the worker derives it again only to select the searches that apply.
 When less than a tenth of the machine's memory is available, certification kills the worker holding the most memory and reports that card as a failure, so a computation that outgrows the runner costs its own card and not the whole job.
 The nightly workflow runs `--shard i/16` on sixteen runners; a card belongs to the shard given by a SHA-256 hash of its tag, so the shards partition the corpus.
-Each shard rebases its commit onto `main`. `.gitattributes` merges the files of `certificates/` and `exceeded.yaml` key by key with `latticedb merge-keyed-map`, since shards never change the same key.
+Every half hour and at the end of its job, each shard pushes what it has certified since its last push onto `main` (`.github/scripts/persist.sh`), so a runner that dies loses at most half an hour.
+`.gitattributes` merges the files of `certificates/` and `exceeded.yaml` key by key with `latticedb merge-keyed-map`, since shards never change the same key.
 
 Run ordinary enrichment for selected cards with `just enrich --tag <tag>`. Certification is run by the nightly CI certification workflow; a selected card can be certified explicitly with `just certify --tag <tag>` when debugging that workflow.
 

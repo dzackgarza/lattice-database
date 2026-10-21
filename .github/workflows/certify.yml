@@ -39,10 +39,22 @@ jobs:
           ref: main
       - name: Provision the shared Sage environment
         uses: ./.github/actions/sage
+      - name: Configure Git integration
+        shell: bash --noprofile --norc -e -o pipefail {0}
+        run: |
+          git config --global --add safe.directory "$GITHUB_WORKSPACE"
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          # Shards own disjoint tags, so `exceeded.yaml` merges key by key (.gitattributes).
+          # Git runs the driver in the worktree being merged, so its directory is "$PWD".
+          git config merge.keyed-map.driver 'docker exec -i --workdir "$PWD" --env PYTHONPATH='"$GITHUB_WORKSPACE/research/src:$GITHUB_WORKSPACE/src"' sage-env /sage/.venv/bin/python -m latticedb merge-keyed-map %O %A %B'
       - name: Compute and certify uncertified card values
         env:
           LATTICEDB_TAG: ${{ github.event.inputs.tag || '' }}
         run: |
+          # Push progress every half hour, so a runner that dies loses at most that much.
+          ( while sleep 1800; do .github/scripts/persist.sh "${{ matrix.shard }}/$SHARDS" || true; done ) &
+          persister=$!
           # Include provisioning in the job budget and reserve ten minutes for persistence.
           minutes=$(( (CERTIFY_DEADLINE - $(date +%s)) / 60 ))
           (( minutes > 0 ))
@@ -58,6 +70,7 @@ jobs:
             --env "PYTHONPATH=$GITHUB_WORKSPACE/research/src:$GITHUB_WORKSPACE/src" \
             --workdir "$GITHUB_WORKSPACE" \
             sage-env timeout "${minutes}m" /sage/.venv/bin/python -m latticedb certify "${args[@]}" || status=$?
+          kill "$persister" || true
           case "$status" in
             0) ;;
             124) echo "Certification budget exhausted; preserving completed values." ;;
@@ -96,42 +109,7 @@ jobs:
       - name: Commit completed computations to main
         if: ${{ always() && steps.checkout.outcome == 'success' }}
         shell: bash --noprofile --norc -e -o pipefail {0}
-        run: |
-          git config --global --add safe.directory "$GITHUB_WORKSPACE"
-          git add -A lattices certificates exceeded.yaml
-          if git diff --cached --quiet; then
-            echo "No newly completed computations."
-            exit 0
-          fi
-          git config user.name 'github-actions[bot]'
-          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          # Shards own disjoint tags, so the certificate logs merge key by key (.gitattributes).
-          git config merge.keyed-map.driver "docker exec -i --workdir $GITHUB_WORKSPACE --env PYTHONPATH=$GITHUB_WORKSPACE/research/src:$GITHUB_WORKSPACE/src sage-env /sage/.venv/bin/python -m latticedb merge-keyed-map %O %A %B"
-          git commit -m "feat: certify computed card values (shard ${{ matrix.shard }}/$SHARDS)"
-          recovery_branches=()
-          # Every shard reaches its deadline together, so pushes race; retry with jitter.
-          for attempt in $(seq 1 30); do
-            git fetch origin main
-            if ! git rebase origin/main; then
-              git rebase --abort
-              echo "::error::Computed values conflict with main; recover the uploaded certification patch."
-              exit 1
-            fi
-            # Rebase first: a GitHub App cannot push an older workflow tree to a new branch.
-            staging_branch="certify-${GITHUB_RUN_ID}-${GITHUB_RUN_ATTEMPT}-${{ matrix.shard }}-${attempt}"
-            if ! git push origin "HEAD:refs/heads/${staging_branch}"; then
-              continue
-            fi
-            recovery_branches+=("$staging_branch")
-            if git push origin HEAD:main; then
-              git push origin --delete "${recovery_branches[@]}"
-              exit 0
-            fi
-            echo "main advanced during push attempt ${attempt}; rebasing and retrying."
-            sleep $(( RANDOM % 20 + 1 ))
-          done
-          echo "::error::Could not integrate computed values; the uploaded certification patch retains all completed data."
-          exit 1
+        run: .github/scripts/persist.sh "${{ matrix.shard }}/$SHARDS" final
       - name: Stop the Sage environment
         if: always()
         shell: bash --noprofile --norc -e -o pipefail {0}

@@ -203,12 +203,15 @@ def requests(
     for a whole job. The other cards follow by rank and then absolute determinant. The
     semi-decisions of every card are separate requests after all of them: every job
     ends inside a search, so a cut search resumed at the start of the next job would
-    hold its workers through the fields that every procedure finishes.
+    hold its workers through the fields that every procedure finishes. A computation
+    that was running when a runner died comes after everything else, so a computation
+    that ends its runner cannot end the next job early.
     """
     resumed: list[Request] = []
     chosen: list[Request] = []
     resumed_searches: list[Request] = []
     searches: list[Request] = []
+    lost: list[Request] = []
     sizes: dict[str, tuple[int, Fraction]] = {}
     for entry in loaded.entries:
         lattice = entry.lattice
@@ -242,12 +245,23 @@ def requests(
                 fields.append(field)
         if needs_derive:
             fields.insert(0, "derive")
+        if needs_derive and exceeded.was_lost(log, derive_name, lattice):
+            # Without its derivation the card has no hypotheses for its other fields.
+            lost_fields, fields = fields, []
+        else:
+            lost_fields = [field for field in fields if exceeded.was_lost(log, name(lattice.tag, field), lattice)]
+            fields = [field for field in fields if field not in lost_fields]
+        gram = [[int(value) if value.denominator == 1 else str(value) for value in row] for row in lattice.gram_tensor]
+        if lost_fields:
+            lost.append({"tag": lattice.tag, "gram": gram, "integral": lattice.integral is not None, "fields": lost_fields, "series_bound": series_bound(len(gram))})
+            if needs_derive:
+                lost[-1]["record"] = metadata
+            sizes[lattice.tag] = (len(gram), abs(lattice.determinant or Fraction(0)))
         if fields:
             interrupted = [field for field in fields if exceeded.seconds_run(log, name(lattice.tag, field), lattice) is not None]
             rest = [field for field in fields if field not in interrupted]
             semi = [field for field in interrupted + rest if field in SEMI_DECISIONS]
             fields = [field for field in interrupted + rest if field not in SEMI_DECISIONS]
-            gram = [[int(value) if value.denominator == 1 else str(value) for value in row] for row in lattice.gram_tensor]
             request: Request = {
                 "tag": lattice.tag,
                 "gram": gram,
@@ -275,7 +289,7 @@ def requests(
     def by_size(request: Request) -> tuple[int, Fraction]:
         return sizes[request["tag"]]
 
-    return resumed + sorted(chosen, key=by_size) + resumed_searches + sorted(searches, key=by_size)
+    return resumed + sorted(chosen, key=by_size) + resumed_searches + sorted(searches, key=by_size) + sorted(lost, key=by_size)
 
 
 MEMORY_RESERVE = 0.1
@@ -524,13 +538,14 @@ def certify(
     # that `certificates/` lacks, so it is recomputed.
     unsaved: set[str] = set()
 
-    def checkpoint() -> None:
+    def checkpoint(final: bool = False) -> None:
         if unsaved:
             certificates.save(root, held, unsaved)
             unsaved.clear()
         if running:
             for computation, started_at in running.items():
-                log[computation] = exceeded.Interruption(hash=log[computation].hash, seconds=int(time.monotonic() - started_at))
+                # Until the final checkpoint, a pushed entry is lost if the runner dies.
+                log[computation] = exceeded.Interruption(hash=log[computation].hash, seconds=int(time.monotonic() - started_at), lost=not final)
             exceeded.save(root, log)
 
     try:
@@ -559,6 +574,7 @@ def certify(
                             log[computation] = exceeded.Interruption(
                                 hash=exceeded.input_hash(computation, entry.lattice),
                                 seconds=0,
+                                lost=True,
                             )
                             running[computation] = time.monotonic()
                         exceeded.save(root, log)
@@ -609,7 +625,7 @@ def certify(
                     flush=True,
                 )
     finally:
-        checkpoint()
+        checkpoint(final=True)
     if failures:
         raise ChildProcessError(f"{SAGE_MODULE} failed on " + ", ".join(failures))
 

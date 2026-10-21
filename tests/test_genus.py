@@ -235,6 +235,22 @@ def test_a_cut_search_resumes_first_among_the_searches_not_before_the_other_fiel
     assert requested[2]["fields"][0] == "regular"
 
 
+def test_a_computation_running_when_its_runner_died_comes_after_everything_else(tmp_path: Path) -> None:
+    (tmp_path / "lattices").mkdir()
+    shutil.copy(REPOSITORY / corpus.FAMILIES_FILE, tmp_path / corpus.FAMILIES_FILE)
+    (tmp_path / corpus.RETIRED_FILE).write_text("{}\n")
+    for tag in ("0012", "0016"):
+        shutil.copy(REPOSITORY / "lattices" / f"{tag}.md", tmp_path / "lattices")
+    loaded = corpus.load(tmp_path)
+    a2 = next(entry.lattice for entry in loaded.entries if entry.lattice.tag == "0012")
+    computation = genus.name("0012", "genus_symbol")
+    log = {computation: exceeded.Interruption(hash=exceeded.input_hash(computation, a2), seconds=600, lost=True)}
+    requested = genus.requests(loaded, derived(), log, ())
+    assert requested[-1]["tag"] == "0012" and requested[-1]["fields"] == ["genus_symbol"]
+    assert all("genus_symbol" not in request["fields"] for request in requested[:-1] if request["tag"] == "0012")
+    assert not any(request.get("resumed") for request in requested)
+
+
 def test_resumed_requests_leave_one_worker_to_the_rest(tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> None:
     worker = tmp_path / "worker.py"
     worker.write_text(FAKE_WORKER)

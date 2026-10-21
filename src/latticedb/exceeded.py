@@ -10,6 +10,11 @@ checkpoint. An entry that remains records unfinished work and its elapsed time. 
 one job: certification never requests it again. A computation that ran for less
 was interrupted or started late, and the next job computes it first.
 
+Entries are `lost` from the start of their computation until the job's final
+checkpoint, and the job pushes its progress while it runs. An entry that is
+still lost was running when its runner died, possibly because of it, so the next
+job requests it after every other computation rather than first.
+
 The log is permanent. A changed Gram tensor changes the hash, so the entry no
 longer applies. After a faster implementation, delete the entry by hand.
 """
@@ -35,6 +40,7 @@ first in its job runs for more than this before the timeout ends it.
 class Interruption(Record):
     hash: str = Field(description="SHA-256 digest of the computation name and Gram tensor.")
     seconds: int = Field(description="Seconds the computation had run when its job ended.")
+    lost: bool = Field(default=False, description="Whether the runner died while the computation ran, so that it may have ended the job.")
 
 
 Interruptions = dict[str, Interruption]
@@ -48,7 +54,7 @@ def load(root: Path) -> Interruptions:
 
 
 def save(root: Path, log: Interruptions) -> None:
-    data = {name: entry.model_dump() for name, entry in sorted(log.items())}
+    data = {name: entry.model_dump(exclude_defaults=True) for name, entry in sorted(log.items())}
     storage.write_text(root / EXCEEDED_FILE, yaml.dump(data, Dumper=yaml.CSafeDumper, sort_keys=False, allow_unicode=True))
 
 
@@ -63,6 +69,12 @@ def seconds_run(log: Interruptions, name: str, lattice: Lattice) -> int | None:
     if entry is None or entry.hash != input_hash(name, lattice):
         return None
     return entry.seconds
+
+
+def was_lost(log: Interruptions, name: str, lattice: Lattice) -> bool:
+    """Whether this computation was running when its runner died."""
+    entry = log.get(name)
+    return entry is not None and entry.lost and entry.hash == input_hash(name, lattice)
 
 
 def is_exceeded(log: Interruptions, name: str, lattice: Lattice) -> bool:
