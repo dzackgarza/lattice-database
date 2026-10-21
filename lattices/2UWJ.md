@@ -3,6 +3,9 @@ tag: 2UWJ
 name: brandt_intrau Brandt_2.html:5268
 latex: brandt_intrau Brandt_2.html:5268
 aliases: []
+certifications:
+  derive: 3f13b75ad4f2181917a33078b66f6cb3839759c43f68468bfd66336f9d5f3169
+  form.integer_valued: a11a352269b0333543dead61ad66ca6b757382859076b32af4be6b45493fd342
 rank: 3
 gram_tensor:
 - [6, 3, 0]
@@ -11,6 +14,34 @@ gram_tensor:
 signature: [3, 0]
 determinant: 762
 definiteness: positive_definite
+dual_gram_tensor:
+- [151/762, -8/127, 3/254]
+- [-8/127, 16/127, -3/127]
+- [3/254, -3/127, 17/254]
+form:
+  integer_valued: true
+integral:
+  parity: even
+  level: 1524
+  discriminant_group: [762]
+  bad_reduction_primes: [2, 3, 127]
+definite:
+  minimum: 6
+  kissing_number: 2
+  minimal_vectors:
+  - [-1, 0, 0]
+  - [1, 0, 0]
+  perfect: false
+  theta_series: [1, 0, 0, 0, 0, 0, 2, 0, 0, 0, 4, 0, 0]
+  root_system: []
+  roots:
+  - type: A1
+    scale: 3
+    simple_roots:
+    - [1, 0, 0]
+root_sublattice:
+  invariant_factors: [1]
+morphisms: []
 families: []
 related: []
 references:
