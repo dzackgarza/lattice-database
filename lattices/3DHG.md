@@ -3,6 +3,9 @@ tag: 3DHG
 name: brandt_intrau Brandt_2.html:29292
 latex: brandt_intrau Brandt_2.html:29292
 aliases: []
+certifications:
+  derive: fd7abadcccb27945dfea29831fd95146c783ab62b71704b0933a75267f63feb8
+  form.integer_valued: 0601f495ae05c5b77b653a4e8c8eaf2cc4810490ae6e912975bf1752185a3797
 rank: 3
 gram_tensor:
 - [2, 0, 1]
@@ -11,6 +14,34 @@ gram_tensor:
 signature: [3, 0]
 determinant: 1944
 definiteness: positive_definite
+dual_gram_tensor:
+- [247/486, 5/972, -4/243]
+- [5/972, 67/1944, -5/486]
+- [-4/243, -5/486, 8/243]
+form:
+  integer_valued: true
+integral:
+  parity: even
+  level: 3888
+  discriminant_group: [1944]
+  bad_reduction_primes: [2, 3]
+definite:
+  minimum: 2
+  kissing_number: 2
+  minimal_vectors:
+  - [-1, 0, 0]
+  - [1, 0, 0]
+  perfect: false
+  theta_series: [1, 0, 2, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0]
+  root_system: [A1]
+  roots:
+  - type: A1
+    scale: 1
+    simple_roots:
+    - [1, 0, 0]
+root_sublattice:
+  invariant_factors: [1]
+morphisms: []
 families: []
 related: []
 references:
