@@ -8,8 +8,9 @@ certifications:
   definite.spinor_regular: de161f816bf6d4c1b59d76cfe1efff9660504defeae58def680ad167d902316c
   derive: edd5869bc8842cead724c81e64647365a2a2241685dcd57746b4719b169f7016
   form.integer_valued: 99992c90495157923c68a2a798ad0e5baad498c4f14a04298d0134a53928831b
-  definite.automorphism_group_order: 7b8a81747088df89c430cb288413e2ac5fb7284bdced6ad501692d442200add7
-  definite.automorphism_group_generator_morphisms: 0df4a2592af80cfac0ca0240755acaa1e24bfb81d571950eea084467b53283e4
+  integral.elementary_primes: 2cdd8053a4165731b26c8b76d0de4755a7648f17e1e0cd7393bdbcc81d10c239
+  integral.genus_symbol: b2204ba0a1c5d540963afcc7e11004a017f6f1148c9b91eb74d8d0436cbb3824
+  integral.genus_class_count: 85e958cbff0020c7ef74f88b1b50cdb9d72ceff77ae0a69ed11abbb802ec0798
 rank: 3
 gram_tensor:
 - [17, 8, 3]
@@ -25,15 +26,16 @@ dual_gram_tensor:
 form:
   integer_valued: true
 integral:
+  elementary_primes: []
   parity: odd
   level: 320
   discriminant_group: [160, 160]
   bad_reduction_primes: [2, 5]
+  genus_symbol: 'I_{3,0} (2: [1^1]_1:[32^2]_6; 5: 1^-1 5^-2)'
+  genus_class_count: 1
 definite:
   minimum: 17
   kissing_number: 2
-  automorphism_group_order: 2
-  automorphism_group_generator_morphisms: [O(L) generator 1]
   minimal_vectors:
   - [-1, 0, 0]
   - [1, 0, 0]
@@ -45,14 +47,7 @@ definite:
   roots: []
 root_sublattice:
   invariant_factors: []
-morphisms:
-- target: 3GHX
-  name: O(L) generator 1
-  matrix:
-  - [-1, 0, 0]
-  - [0, -1, 0]
-  - [0, 0, -1]
-  scale: 1
+morphisms: []
 families: []
 related: []
 references:

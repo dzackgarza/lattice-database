@@ -8,8 +8,23 @@ certifications:
   definite.spinor_regular: ee54ab4bfa542c1d0c3a23071afaaa096ba8d83334f3538ced97c1be7291e1b2
   derive: e39ef0c5485ae8f66a64276ddee7ea1a692eafa35709cd4d99f30e933bf39eca
   form.integer_valued: e4d9b6c22ee0e0894b29ef2441fb147a1bd3ef6f7e2be9309aadb9d3a9eb658d
+  integral.elementary_primes: a2fae31c4b1162517f3604c8b4d2bb281337ada495a3db932aecda28906d3d4f
+  integral.genus_symbol: eac9a526b035831b2e5f96234e399a8e703a8d3bcf2c610dd9d9721ca35a32a4
+  integral.genus_class_count: 1f77973aa6332ecda9a7de7fe81e1496fd2c7ea5a174df86472108e2d0995e64
+  integral.overlattice_count: 6a9533d543e6860bf593218d185ec3576189786e6ad65a3a0a4028b3ce2a7855
+  integral.spinor_genus_count: a0c75318e62fd63c172676c96edb370784c650c98c5707e7da6b35c4f2902c9f
+  integral.spinor_genera: a87a5f6693d19448a7143f7d5f836c80b777fa615a55fd7a5332a6c00051639c
+  integral.hyperbolic_index: 06e18578893f135298cdeed94aea31015c6c63c7033a670baec20a867bd4ca8b
   definite.automorphism_group_order: db636704a647e0b1809c16f1e0d2b17257eb327ffc607b715239ca6a35c79473
   definite.automorphism_group_generator_morphisms: b579b73274d60a45450ec644b167cd99b2945699531638fbd232249855b48913
+  integral.primitive_orbits: 32cab83c542d7252b35d28871fbb20abf3b13698d4b5f7fb624f7fbdfa608947
+  integral.modular_scale: 0ae98c5554edad11ebb83a5ccc375793611714b684554e501c8764eb22975929
+  definite.genus_theta_series: 69cdde98e03fad349411d19279b4ecd2eee3d4363fab97e48a477603ef64351a
+  definite.theta_series_cuspidal_component: 6e5437d901facd248e5744bb85572ffd6982cbf0de0651dd43b42bf4563fad9d
+  definite.siegel_eisenstein_coefficients: 43569d996d5e449e3b2427d73a350441cd565f42331ab1926e83cf9795372e80
+  integral.anisotropic_primes: 0100bd2af157eaad9872c35fca6cd419b11347a7aa39d564d965e0cdd0557be9
+  integral.local_representations: 30e65c0d138f6fc01d401ecf9778335949ed4ce57a0510e1158028e9851d796e
+  integral.local_densities: ccf4ca07973b38b1c7575e43602479c317260b534ea11a87bef57ecdddd5174e
 rank: 3
 gram_tensor:
 - [2, 0, 0]
@@ -25,10 +40,72 @@ dual_gram_tensor:
 form:
   integer_valued: true
 integral:
+  elementary_primes: []
   parity: odd
   level: 32
+  modular_scale: false
   discriminant_group: [2, 16]
+  overlattice_count: 3
   bad_reduction_primes: [2]
+  genus_symbol: 'I_{3,0} (2: [1^-1 2^1]_6:[16^-1]_5)'
+  genus_class_count: 1
+  spinor_genus_count: 1
+  spinor_genera: [1]
+  hyperbolic_index: 0
+  primitive_orbits:
+    O:
+      constant: 0
+      z: [0, 1, 0, 1]
+      w: [0, 0, 0, 0]
+    SO:
+      constant: 0
+      z: [0, 1, 0, 1]
+      w: [0, 0, 0, 0]
+    Otilde:
+      constant: 0
+      z: [0, 1, 0, 2]
+      w: [0, 0, 0, 0]
+    SOtilde:
+      constant: 0
+      z: [0, 2, 0, 2]
+      w: [0, 0, 0, 0]
+    O+:
+      constant: 0
+      z: [0, 1, 0, 1]
+      w: [0, 0, 0, 0]
+    SO+:
+      constant: 0
+      z: [0, 1, 0, 1]
+      w: [0, 0, 0, 0]
+    Otilde+:
+      constant: 0
+      z: [0, 2, 0, 2]
+      w: [0, 0, 0, 0]
+    SOtilde+:
+      constant: 0
+      z: [0, 2, 0, 2]
+      w: [0, 0, 0, 0]
+  anisotropic_primes: [2]
+  local_representations:
+  - prime: 2
+    classes:
+    - representative: 1
+      least_valuation: 2
+    - representative: 3
+      least_valuation: 2
+    - representative: 5
+      least_valuation: 0
+    - representative: 7
+      least_valuation: 0
+    - representative: 2
+      least_valuation: 1
+    - representative: 6
+      least_valuation: 1
+    - representative: 10
+      least_valuation: 3
+  local_densities:
+  - prime: 2
+    densities: [0, 2, 0, 1, 2, 2, 2, 1, 0, 0, 0, 1]
 definite:
   minimum: 2
   kissing_number: 2
@@ -41,6 +118,9 @@ definite:
   regular: true
   spinor_regular: true
   theta_series: [1, 0, 2, 0, 2, 4, 4, 8, 2, 0, 0, 0, 4]
+  genus_theta_series: [1, 0, 2, 0, 2, 4, 4, 8, 2, 0, 0, 0, 4]
+  theta_series_cuspidal_component: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+  siegel_eisenstein_coefficients: [0, 2, 0, 2, 4, 4, 8, 2, 0, 0, 0, 4]
   root_system: [A1]
   roots:
   - type: A1
