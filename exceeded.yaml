@@ -4,6 +4,12 @@
 0013 root_span.roots:
   hash: d554012a9945766678751eb645d24ef6a538179f75a665c0a9e2e9a495301766
   seconds: 7093
+0016 root_span.norms:
+  hash: 1e7e75d758d70ef603ecb38ebe567f87a7a87d46dcca69492beb4561d82414b1
+  seconds: 7041
+0016 root_span.roots:
+  hash: 0ef8eb3e0ea7efbd8e3412547c51ffea7d31a91d34a498aa4bf50b538473b9f7
+  seconds: 7041
 0036 root_span.norms:
   hash: 1f572c5cb6e2fe0a7a9485ad987ed234baf947647f987f3fd85422416bac9c0e
   seconds: 19583
@@ -54,13 +60,13 @@
   seconds: 19454
 0186 definite.regular:
   hash: aa1c4344a965a5c3862bbbd12fa685ec7c90381517745b58925562b37d7c921c
-  seconds: 8045
+  seconds: 7046
 0187 integral.genus_class_count:
   hash: ea005f9e52ef046e1f1d60f3f2e5f8c1361ab4a6a9df8468bc35b0a7e12c86f5
   seconds: 19450
 0190 integral.genus_class_count:
   hash: 433a339f3d553e1f5746901dabe698b5e3b2f55e95fa2d3b19c7610a8e2a9b6d
-  seconds: 7914
+  seconds: 7046
 0195 hyperbolic.reflective:
   hash: 68762afd99871cacaca8a18d1222f36436a9d44556ef26f6670d8c45ec7191b8
   seconds: 19483
@@ -82,6 +88,12 @@
 028H root_span.roots:
   hash: 3972d62c5635fd12a6000757eee801330f6e31ebda13ff762f530792d29e33b9
   seconds: 10332
+02A4 root_span.norms:
+  hash: 7aa8f3884b58876a5dc80ffa089f36db637c10b477965d6999e19c884f8a55fa
+  seconds: 5548
+02A4 root_span.roots:
+  hash: e2ca1e7013d839ff43e2d289572c32609b3f6893d831d7c5c768a82c4bedeadb
+  seconds: 5548
 02CA definite.regular:
   hash: 19f55fd396dd553659d07d97db9e76d92583413e3309ac197c1e6d59e81fb212
   seconds: 10007

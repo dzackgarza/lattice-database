@@ -3,6 +3,9 @@ tag: 3CIW
 name: brandt_intrau Brandt_2.html:28079
 latex: brandt_intrau Brandt_2.html:28079
 aliases: []
+certifications:
+  derive: 004355026d1fab9229f76d4788b343b2c8a4bf6612a48da88c3560a480a2c9e0
+  form.integer_valued: 686821684c8c3ac077eeacdf1b29e2b32e0a16abbb893b0a363c27726f25a5ee
 rank: 3
 gram_tensor:
 - [2, 0, 1]
@@ -11,6 +14,42 @@ gram_tensor:
 signature: [3, 0]
 determinant: 1900
 definiteness: positive_definite
+dual_gram_tensor:
+- [238/475, 0, -1/475]
+- [0, 1/4, 0]
+- [-1/475, 0, 2/475]
+form:
+  integer_valued: true
+integral:
+  parity: even
+  level: 3800
+  discriminant_group: [1900]
+  bad_reduction_primes: [2, 5, 19]
+definite:
+  minimum: 2
+  kissing_number: 2
+  minimal_vectors:
+  - [-1, 0, 0]
+  - [1, 0, 0]
+  perfect: false
+  theta_series: [1, 0, 2, 0, 2, 0, 4, 0, 2, 0, 0, 0, 4]
+  root_system: [A1]
+  roots:
+  - type: A1
+    scale: 2
+    simple_roots:
+    - [0, 1, 0]
+  - type: A1
+    scale: 475
+    simple_roots:
+    - [1, 0, -2]
+  - type: A1
+    scale: 1
+    simple_roots:
+    - [1, 0, 0]
+root_sublattice:
+  invariant_factors: [1, 1, 2]
+morphisms: []
 families: []
 related: []
 references:
