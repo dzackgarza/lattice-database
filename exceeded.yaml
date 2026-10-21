@@ -99,7 +99,7 @@
   seconds: 19684
 02EH definite.regular:
   hash: 00353b7ce809d708b712c96f39b0814310238fd49def9c0ca69cb49549d47fed
-  seconds: 7091
+  seconds: 19607
 02HF definite.regular:
   hash: 0c237b1045eda280af634947bed6d7f1e6e920617a2a81e89cf67f7a5e2987c2
   seconds: 6615
@@ -289,6 +289,15 @@
 0UQQ integral.genus_class_count:
   hash: 3c7a62c259f36fe941b8a52bc1fdbcb6206276102b5b118109c6bf2b0bcc5ab0
   seconds: 6
+0VBL integral.discriminant_sequence:
+  hash: a0a5a44f32511fdf24bda5d1769c729bd38c797c5df53b9b26f9dc31ec839cee
+  seconds: 0
+0VC3 integral.genus_class_count:
+  hash: ae25d7a7a413e2d35e94451fe3206904bb26ee6d326f04cc41a16a13d3b1d4de
+  seconds: 16
+0VC6 integral.genus_class_count:
+  hash: b896d4d24ee17337aac169360414252e5c791b861551be5ce03b78167fca0a9c
+  seconds: 0
 12Q7 integral.discriminant_sequence:
   hash: 42295aff0ee5269a9fd98dbe3cc678db9ae59cd9a14f5b3e43b31df9a415dad6
   seconds: 10
