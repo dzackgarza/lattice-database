@@ -3,6 +3,9 @@ tag: 2ROA
 name: brandt_intrau Brandt_2.html:1073
 latex: brandt_intrau Brandt_2.html:1073
 aliases: []
+certifications:
+  derive: 6484d33fe06c6e9f6c75b93c1c090cee836c54382e4a03bf21597d7a5b8f7080
+  form.integer_valued: 2dbadcfdfe32271d8f3f05a2ddbade62dabf60c24cafae96d3ddced8b01c1bb2
 rank: 3
 gram_tensor:
 - [2, 1, 0]
@@ -11,6 +14,34 @@ gram_tensor:
 signature: [3, 0]
 determinant: 314
 definiteness: positive_definite
+dual_gram_tensor:
+- [82/157, -7/157, 1/157]
+- [-7/157, 14/157, -2/157]
+- [1/157, -2/157, 23/314]
+form:
+  integer_valued: true
+integral:
+  parity: even
+  level: 628
+  discriminant_group: [314]
+  bad_reduction_primes: [2, 157]
+definite:
+  minimum: 2
+  kissing_number: 2
+  minimal_vectors:
+  - [-1, 0, 0]
+  - [1, 0, 0]
+  perfect: false
+  theta_series: [1, 0, 2, 0, 0, 0, 0, 0, 2, 0, 0, 0, 4]
+  root_system: [A1]
+  roots:
+  - type: A1
+    scale: 1
+    simple_roots:
+    - [1, 0, 0]
+root_sublattice:
+  invariant_factors: [1]
+morphisms: []
 families: []
 related: []
 references:

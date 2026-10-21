@@ -3,6 +3,9 @@ tag: 3FJO
 name: watson 2:1064
 latex: watson 2:1064
 aliases: []
+certifications:
+  derive: 1df6ab04d58255895665f1e0aacf19de5b4d319139e0becc585d49afcbdbd430
+  form.integer_valued: 122158cfac9655bdc9475987c7f3c6fb0f3ed3a026bbfe2ed098bb4d90bb100e
 rank: 2
 gram_tensor:
 - [96, -24]
@@ -10,6 +13,30 @@ gram_tensor:
 signature: [2, 0]
 determinant: 7392
 definiteness: positive_definite
+dual_gram_tensor:
+- [83/7392, 1/308]
+- [1/308, 1/77]
+form:
+  integer_valued: true
+integral:
+  parity: odd
+  level: 14784
+  discriminant_group: [7392]
+  bad_reduction_primes: [2, 3, 7, 11]
+  quadratic_character: -1848
+definite:
+  minimum: 83
+  kissing_number: 2
+  minimal_vectors:
+  - [0, -1]
+  - [0, 1]
+  perfect: false
+  theta_series: [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2]
+  root_system: []
+  roots: []
+root_sublattice:
+  invariant_factors: []
+morphisms: []
 families: []
 related: []
 references:
