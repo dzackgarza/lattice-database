@@ -3,6 +3,9 @@ tag: 3DSK
 name: brandt_intrau Brandt_2.html:29736
 latex: brandt_intrau Brandt_2.html:29736
 aliases: []
+certifications:
+  derive: 120187f9c587ef76c13de10a89f469a92913b979cb33f3687b43e911630badae
+  form.integer_valued: f623bed6eb90db5ac04c18fcd8ffa64e3b12a5129710bc81a8ffd0737e506124
 rank: 3
 gram_tensor:
 - [2, 1, 0]
@@ -11,6 +14,42 @@ gram_tensor:
 signature: [3, 0]
 determinant: 1960
 definiteness: positive_definite
+dual_gram_tensor:
+- [18/35, -1/35, 0]
+- [-1/35, 2/35, 0]
+- [0, 0, 1/56]
+form:
+  integer_valued: true
+integral:
+  parity: even
+  level: 560
+  discriminant_group: [7, 280]
+  bad_reduction_primes: [2, 5, 7]
+definite:
+  minimum: 2
+  kissing_number: 2
+  minimal_vectors:
+  - [-1, 0, 0]
+  - [1, 0, 0]
+  perfect: false
+  theta_series: [1, 0, 2, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0]
+  root_system: [A1]
+  roots:
+  - type: A1
+    scale: 28
+    simple_roots:
+    - [0, 0, 1]
+  - type: A1
+    scale: 35
+    simple_roots:
+    - [1, -2, 0]
+  - type: A1
+    scale: 1
+    simple_roots:
+    - [1, 0, 0]
+root_sublattice:
+  invariant_factors: [1, 1, 2]
+morphisms: []
 families: []
 related: []
 references:

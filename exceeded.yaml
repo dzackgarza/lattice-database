@@ -82,12 +82,6 @@
 027I hyperbolic.reflective:
   hash: 65b639f7c618bdd9c9b2aeb802b0a67eb1d8e0e0cb6586f2fa1c031d99d7323a
   seconds: 18799
-028H root_span.norms:
-  hash: 30f0da4bf56d92bc6bb8f0745d95594bd7ed7d437e1648a7d38726dd309e8cca
-  seconds: 10332
-028H root_span.roots:
-  hash: 3972d62c5635fd12a6000757eee801330f6e31ebda13ff762f530792d29e33b9
-  seconds: 10332
 02A4 root_span.norms:
   hash: 7aa8f3884b58876a5dc80ffa089f36db637c10b477965d6999e19c884f8a55fa
   seconds: 5548
@@ -136,6 +130,9 @@
 0312 definite.regular:
   hash: 1dbd9c69d410f45b3f632879382d98ad7cf46fb151cdb7bf31459e0b11669576
   seconds: 6588
+0355 definite.regular:
+  hash: 7afad65b7caa7fb0581fc4e8bc16e61bbdb40bb3b5b5b3540cdcd364249ee8d5
+  seconds: 6270
 039O definite.regular:
   hash: f8e3fbd6924edea3446ee8491ff558dd8f6aa8cf084591f27c0f590e4bd835de
   seconds: 6580
@@ -172,6 +169,9 @@
 04IF definite.regular:
   hash: 0fd8ed2912bb5a67e6f28ac1342739fe260ec4dd38cbe3acb9becd6b28206481
   seconds: 6014
+04JN definite.regular:
+  hash: dbe2c11c3b2b3070d37b3bb642829d32c1d9267ae938c26a512e520d2317d1e5
+  seconds: 6259
 04PA definite.regular:
   hash: 80d51b75f0e6d2ae029fa467f8afa327cdf36fc56ecbb01b91d67fbb3c4c7cdb
   seconds: 6604
@@ -190,9 +190,15 @@
 0556 definite.regular:
   hash: c2ca923e1ba151cdc010e1b02f8870fc787fcb78290032fafddaa9e04544f80a
   seconds: 6564
+0558 definite.regular:
+  hash: 9e406e63a12e87042fc30e41cfbd47571b3057c9135ee5871f314f9ff5021cba
+  seconds: 6243
 05EU definite.regular:
   hash: 65c01eb82b475b81ad90512b66315c1720727978a80895331543d9bffbbebcd9
   seconds: 6440
+05LF definite.regular:
+  hash: 6b0a7c228b92ac3de6673b7f9cc1703bffa66c489be9eb8031709356ceaac1a3
+  seconds: 5973
 05LM definite.regular:
   hash: 040269255d5800bfa764c9640f4b72490ec8df092fcf259e763727aadbbc7751
   seconds: 7018
