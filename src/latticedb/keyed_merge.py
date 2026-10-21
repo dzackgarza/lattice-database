@@ -14,7 +14,7 @@ Mapping = dict[str, object]
 
 
 def _load(path: Path) -> Mapping:
-    data = yaml.safe_load(path.read_text()) or {}
+    data = yaml.load(path.read_text(), Loader=yaml.CSafeLoader) or {}
     assert isinstance(data, dict), f"{path} holds no top-level map"
     return data
 
@@ -42,4 +42,4 @@ def merge(base: Mapping, ours: Mapping, theirs: Mapping) -> Mapping:
 def merge_files(base: Path, ours: Path, theirs: Path) -> None:
     """Write the merge of `base`, `ours` and `theirs` to `ours`, as Git's merge driver protocol requires."""
     merged = merge(_load(base), _load(ours), _load(theirs))
-    ours.write_text(yaml.safe_dump(merged, sort_keys=False, allow_unicode=True))
+    ours.write_text(yaml.dump(merged, Dumper=yaml.CSafeDumper, sort_keys=False, allow_unicode=True))

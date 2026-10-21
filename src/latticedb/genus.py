@@ -416,8 +416,16 @@ def certify(
     log = exceeded.load(root)
     running: dict[str, float] = {}
     failures: list[str] = []
+    # Writing certificates.yaml costs time linear in the corpus, so certificates are
+    # saved at each checkpoint rather than with each value. A card whose certificate
+    # a hard kill lost cites a hash that certificates.yaml lacks, so it is recomputed.
+    unsaved = False
 
     def checkpoint() -> None:
+        nonlocal unsaved
+        if unsaved:
+            certificates.save(root, held)
+            unsaved = False
         if running:
             for computation, started_at in running.items():
                 log[computation] = exceeded.Interruption(hash=log[computation].hash, seconds=int(time.monotonic() - started_at))
@@ -460,7 +468,7 @@ def certify(
                         derived["certifications"] = {**stored_lattice.certifications, "derive": certificate_hash}
                         storage.write_text(entry.path, records.record_text(derived, entry.prose))
                         held[computation] = Certificate(hash=certificate_hash, by=str(values["by"]))
-                        certificates.save(root, held)
+                        unsaved = True
                         log.pop(computation, None)
                         running.pop(computation, None)
                         exceeded.save(root, log)
@@ -492,7 +500,7 @@ def certify(
                 stored["certifications"] = {name: certificate_hash for name, certificate_hash in card_certifications.items()}
                 document = corpus.read_card(entry.path)
                 storage.write_text(entry.path, records.record_text(stored, document.content))
-                certificates.save(root, held)
+                unsaved = True
                 print(
                     entry.lattice.tag,
                     {field: values[field] for field in BLOCKS if field in values},

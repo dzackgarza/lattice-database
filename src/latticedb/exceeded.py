@@ -44,12 +44,12 @@ def load(root: Path) -> Interruptions:
     path = root / EXCEEDED_FILE
     if not path.exists():
         return {}
-    return TypeAdapter(Interruptions).validate_python(yaml.safe_load(path.read_text()) or {})
+    return TypeAdapter(Interruptions).validate_python(yaml.load(path.read_text(), Loader=yaml.CSafeLoader) or {})
 
 
 def save(root: Path, log: Interruptions) -> None:
     data = {name: entry.model_dump() for name, entry in sorted(log.items())}
-    storage.write_text(root / EXCEEDED_FILE, yaml.safe_dump(data, sort_keys=False, allow_unicode=True))
+    storage.write_text(root / EXCEEDED_FILE, yaml.dump(data, Dumper=yaml.CSafeDumper, sort_keys=False, allow_unicode=True))
 
 
 def input_hash(name: str, lattice: Lattice) -> str:

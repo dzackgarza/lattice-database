@@ -40,12 +40,12 @@ def load(root: Path) -> Certificates:
     path = root / CERTIFICATES_FILE
     if not path.exists():
         return {}
-    return TypeAdapter(Certificates).validate_python(yaml.safe_load(path.read_text()) or {})
+    return TypeAdapter(Certificates).validate_python(yaml.load(path.read_text(), Loader=yaml.CSafeLoader) or {})
 
 
 def save(root: Path, certificates: Certificates) -> None:
     data = {name: certificate.model_dump(exclude_none=True) for name, certificate in sorted(certificates.items())}
-    storage.write_text(root / CERTIFICATES_FILE, yaml.safe_dump(data, sort_keys=False, allow_unicode=True))
+    storage.write_text(root / CERTIFICATES_FILE, yaml.dump(data, Dumper=yaml.CSafeDumper, sort_keys=False, allow_unicode=True))
 
 
 def digest(text: str) -> str:
