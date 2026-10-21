@@ -3,6 +3,9 @@ tag: 2XNS
 name: brandt_intrau Brandt_2.html:8829
 latex: brandt_intrau Brandt_2.html:8829
 aliases: []
+certifications:
+  derive: 4defda360a63061c83b770db0ec5f4c718748ade6c264f6162087573cff7fafe
+  form.integer_valued: 15c042fa454461855056b56b48c3c3a4de329df36ad0a81442163330a1955618
 rank: 3
 gram_tensor:
 - [2, 0, 1]
@@ -11,6 +14,34 @@ gram_tensor:
 signature: [3, 0]
 determinant: 1014
 definiteness: positive_definite
+dual_gram_tensor:
+- [511/1014, 1/1014, -4/507]
+- [1/1014, 127/1014, -1/507]
+- [-4/507, -1/507, 8/507]
+form:
+  integer_valued: true
+integral:
+  parity: even
+  level: 2028
+  discriminant_group: [1014]
+  bad_reduction_primes: [2, 3, 13]
+definite:
+  minimum: 2
+  kissing_number: 2
+  minimal_vectors:
+  - [-1, 0, 0]
+  - [1, 0, 0]
+  perfect: false
+  theta_series: [1, 0, 2, 0, 0, 0, 0, 0, 4, 0, 4, 0, 0]
+  root_system: [A1]
+  roots:
+  - type: A1
+    scale: 1
+    simple_roots:
+    - [1, 0, 0]
+root_sublattice:
+  invariant_factors: [1]
+morphisms: []
 families: []
 related: []
 references:
