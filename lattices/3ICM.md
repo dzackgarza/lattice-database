@@ -24,7 +24,6 @@ certifications:
   integral.anisotropic_primes: 80660f51227d1b242b753e7778e2674d8f265c0117e8b342e2754120791ca186
   integral.local_representations: 41b1e7b8de3e83c2446ac2954818f3a589e7af1584e7542083e17177b55fbdd2
   integral.local_densities: d8cfc11006339b1744998ec99282661b3258b6438aba51137ddea400d745a42b
-  definite.regular: 0217d66955237327008f56db2ac88a8ca029f0e3f9cc5f34936c059e93147658
 rank: 3
 gram_tensor:
 - [13, 5, 4]
@@ -129,7 +128,6 @@ definite:
   - [0, 1, 0]
   - [1, 0, 0]
   perfect: false
-  regular: false
   spinor_regular: true
   theta_series: [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4]
   genus_theta_series: [1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0]
