@@ -6,6 +6,9 @@ aliases: []
 certifications:
   derive: 0e47926f58c68b64207bd112fc89f1ac879ee57e81ba80bfcb6f5e5e51d5456f
   form.integer_valued: 002527acefb91f6832cce66b63aa66d4ef2f02e112e95f06f8ff475743598a3c
+  integral.elementary_primes: 43a1e1f0051248ab98932ba91dfd0ebb06312f88ce33b4d8dea26d9a00d3a60d
+  integral.genus_symbol: c330e9c06fdc9328c6a44178b2e80ffe1036da128e1baade594e90893cf5f985
+  integral.genus_class_count: e85d75328ab096a1960b3ce4c2d2bbfe328c4a454e968cd006ad0a86f840e825
 rank: 3
 gram_tensor:
 - [23, -8, -11]
@@ -21,10 +24,13 @@ dual_gram_tensor:
 form:
   integer_valued: true
 integral:
+  elementary_primes: []
   parity: odd
   level: 576
   discriminant_group: [96, 288]
   bad_reduction_primes: [2, 3]
+  genus_symbol: 'I_{3,0} (2: [1^1]_7:[32^-2]_2; 3: 1^-1 3^1 9^-1)'
+  genus_class_count: 1
 definite:
   minimum: 23
   kissing_number: 2
