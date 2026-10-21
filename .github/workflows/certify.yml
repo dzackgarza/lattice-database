@@ -15,6 +15,14 @@ concurrency:
   cancel-in-progress: false
 jobs:
   certify:
+    # Each shard is a runner with its own job budget. A computation that never ends
+    # spends one worker of one shard, so the corpus advances on every other worker.
+    strategy:
+      fail-fast: false
+      matrix:
+        shard: ${{ fromJSON(github.event.inputs.tag && '[0]' || '[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15]') }}
+    env:
+      SHARDS: ${{ github.event.inputs.tag && 1 || 16 }}
     runs-on: ubuntu-latest
     timeout-minutes: 350
     defaults:
@@ -39,7 +47,7 @@ jobs:
           minutes=$(( (CERTIFY_DEADLINE - $(date +%s)) / 60 ))
           (( minutes > 0 ))
           if (( minutes > 330 )); then minutes=330; fi
-          args=(--minutes "$minutes")
+          args=(--minutes "$minutes" --shard "${{ matrix.shard }}/$SHARDS")
           if [[ -n "$LATTICEDB_TAG" ]]; then
             args+=(--tag "$LATTICEDB_TAG")
           fi
@@ -67,7 +75,7 @@ jobs:
         if: ${{ always() && steps.checkout.outcome == 'success' }}
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
         with:
-          name: certification-${{ github.run_id }}-${{ github.run_attempt }}
+          name: certification-${{ github.run_id }}-${{ github.run_attempt }}-shard-${{ matrix.shard }}
           path: |-
             ${{ runner.temp }}/certification.patch
             ${{ runner.temp }}/certification-base.txt
@@ -84,9 +92,12 @@ jobs:
           fi
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git commit -m 'feat: certify computed card values'
+          # Shards own disjoint tags, so the certificate logs merge key by key (.gitattributes).
+          git config merge.keyed-map.driver "docker exec -i --workdir $GITHUB_WORKSPACE --env PYTHONPATH=$GITHUB_WORKSPACE/research/src:$GITHUB_WORKSPACE/src sage-env /sage/.venv/bin/python -m latticedb merge-keyed-map %O %A %B"
+          git commit -m "feat: certify computed card values (shard ${{ matrix.shard }}/$SHARDS)"
           recovery_branches=()
-          for attempt in 1 2 3 4 5; do
+          # Every shard reaches its deadline together, so pushes race; retry with jitter.
+          for attempt in $(seq 1 30); do
             git fetch origin main
             if ! git rebase origin/main; then
               git rebase --abort
@@ -94,7 +105,7 @@ jobs:
               exit 1
             fi
             # Rebase first: a GitHub App cannot push an older workflow tree to a new branch.
-            staging_branch="certify-${GITHUB_RUN_ID}-${GITHUB_RUN_ATTEMPT}-${attempt}"
+            staging_branch="certify-${GITHUB_RUN_ID}-${GITHUB_RUN_ATTEMPT}-${{ matrix.shard }}-${attempt}"
             if ! git push origin "HEAD:refs/heads/${staging_branch}"; then
               continue
             fi
@@ -104,6 +115,7 @@ jobs:
               exit 0
             fi
             echo "main advanced during push attempt ${attempt}; rebasing and retrying."
+            sleep $(( RANDOM % 20 + 1 ))
           done
           echo "::error::Could not integrate computed values; the uploaded certification patch retains all completed data."
           exit 1

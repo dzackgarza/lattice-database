@@ -1,6 +1,7 @@
 """Seed, author, enrich, verify, and publish lattice cards."""
 
 import json
+import os
 import signal
 import sys
 import time
@@ -21,6 +22,7 @@ from latticedb import (
     checks,
     corpus,
     genus,
+    keyed_merge,
     records,
     regular_ternaries,
     seed,
@@ -114,6 +116,12 @@ def new(
     path = _author(root, declared, prose)
     corpus.append_index(root, path.stem, parsed)
     print(path)
+
+
+@app.command(name="merge-keyed-map")
+def merge_keyed_map(base: Path, ours: Path, theirs: Path) -> None:
+    """Git merge driver for `certificates.yaml` and `exceeded.yaml`: merge them key by key into OURS."""
+    keyed_merge.merge_files(base, ours, theirs)
 
 
 @app.command(name="bulk-source-fetch")
@@ -319,13 +327,24 @@ def certify(
         int,
         Parameter(help="Minutes until the job's timeout ends this run; a computation still running then stays in `exceeded.yaml`."),
     ],
+    workers: Annotated[
+        int,
+        Parameter(help="Sage processes computing at once; a search that never returns holds only one. Defaults to the CPU count."),
+    ] = os.cpu_count() or 1,
+    shard: Annotated[
+        str,
+        Parameter(help="`i/n`: certify only the cards whose tag falls in shard `i` of `n`, so `n` jobs share the corpus."),
+    ] = "0/1",
     root: Root = Path(),
 ) -> None:
     """Compute uncertified card values, replace disagreements, and certify the computed results."""
     deadline = time.time() + 60 * minutes
+    index, count = (int(part) for part in shard.split("/"))
+    if not 0 <= index < count:
+        raise ValueError(f"shard {shard} names no shard of {count}")
     loaded = corpus.load(root)
     held = certificates.load(root)
-    genus.certify(root, loaded, held, tag, deadline)
+    genus.certify(root, loaded, held, tag, deadline, workers, (index, count))
 
 
 @app.command

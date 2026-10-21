@@ -79,3 +79,20 @@ def test_an_interrupted_certificate_write_preserves_completed_certificates(tmp_p
     assert (tmp_path / certificates.CERTIFICATES_FILE).read_bytes() == before
     assert certificates.load(tmp_path) == held
     assert list(tmp_path.iterdir()) == [tmp_path / certificates.CERTIFICATES_FILE]
+
+
+def test_a_search_that_never_ends_does_not_hold_back_other_cards(tmp_path: Path) -> None:
+    prepare_card(tmp_path, "0016")
+    shutil.copy(REPOSITORY / "lattices" / "0012.md", tmp_path / "lattices")
+    loaded = corpus.load(tmp_path)
+    lattices = {entry.lattice.tag: entry.lattice for entry in loaded.entries}
+    # A cut root search on U is resumed first; its semi-decision never returns.
+    log = {
+        genus.name("0016", field): exceeded.Interruption(hash=exceeded.input_hash(genus.name("0016", field), lattices["0016"]), seconds=60)
+        for field in ("roots", "norms")
+    }
+    exceeded.save(tmp_path, log)
+    genus.certify(tmp_path, loaded, {}, (), time.time() + 150, workers=2)
+    held = certificates.load(tmp_path)
+    assert genus.name("0012", "genus_symbol") in held
+    assert genus.name("0016", "roots") in exceeded.load(tmp_path)

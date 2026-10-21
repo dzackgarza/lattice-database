@@ -208,3 +208,10 @@ def test_a_computation_that_outran_a_job_is_skipped_and_a_cut_one_runs_first(
     assert requested[0]["fields"][:2] == ["derive", fields[-1]]
     assert "genus_class_count" not in requested[0]["fields"]
     assert "genus_class_count" in requested[1]["fields"]
+
+
+def test_shards_partition_the_cards() -> None:
+    tags = [f"{number:04d}" for number in range(1, 200)]
+    shards = [[tag for tag in tags if genus.in_shard(tag, (index, 4))] for index in range(4)]
+    assert sorted(tag for shard in shards for tag in shard) == tags
+    assert all(shards)

@@ -389,9 +389,13 @@ Certification starts the entry at zero elapsed seconds, checkpoints actual runti
 A hard kill retains the latest checkpoint; an early interruption remains eligible for retry.
 A computation that ran for at least five hours does not fit in one job, and certification never requests it again.
 A computation that ran for less is requested first by the next job, after any required derivation.
-If the computation process crashes, certification fails and records its actual elapsed time rather than treating the crash as a whole-job timeout.
+If a worker crashes on a card, certification drops that card's entries, since a crash is a defect and not a timeout, continues with the other cards on a fresh worker, and fails once the queue is done.
 A changed Gram tensor changes the hash, so the entry no longer applies.
 After a faster implementation lands, delete the entry by hand.
+
+The queue runs on `--workers` Sage processes, by default one per CPU. A worker holds one card at a time and takes the next only when that card is done, so a computation that never returns holds back only its own worker.
+The nightly workflow runs `--shard i/16` on sixteen runners; a card belongs to the shard given by a SHA-256 hash of its tag, so the shards partition the corpus.
+Each shard rebases its commit onto `main`. `.gitattributes` merges `certificates.yaml` and `exceeded.yaml` key by key with `latticedb merge-keyed-map`, since shards never change the same key.
 
 Run ordinary enrichment for selected cards with `just enrich --tag <tag>`. Certification is run by the nightly CI certification workflow; a selected card can be certified explicitly with `just certify --tag <tag>` when debugging that workflow.
 

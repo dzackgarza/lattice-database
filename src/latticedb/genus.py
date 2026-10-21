@@ -10,6 +10,7 @@ card value is certified. A computation that does not finish remains uncertified.
 
 from __future__ import annotations
 
+import hashlib
 import json
 import os
 import selectors
@@ -17,6 +18,7 @@ import signal
 import subprocess
 import sys
 import time
+from collections import deque
 from collections.abc import Generator, Iterator
 from contextlib import closing
 from pathlib import Path
@@ -173,13 +175,20 @@ def name(tag: str, field: str) -> str:
     return f"{tag} derive" if field == "derive" else f"{tag} {BLOCKS[field][0]}.{field}"
 
 
+def in_shard(tag: str, shard: tuple[int, int]) -> bool:
+    """Whether the card `tag` belongs to shard `i` of `n`, by a hash that every job computes alike."""
+    index, count = shard
+    return int.from_bytes(hashlib.sha256(tag.encode()).digest()[:8], "big") % count == index
+
+
 def requests(
     loaded: corpus.Corpus,
     held: Certificates,
     log: exceeded.Interruptions,
     tags: tuple[str, ...],
+    shard: tuple[int, int] = (0, 1),
 ) -> list[Request]:
-    """For each nondegenerate record, the uncertified applicable preamble computations.
+    """For each nondegenerate record in `shard`, the uncertified applicable preamble computations.
 
     A computation that ran for a whole job without finishing is not requested. One
     that a job ended after a shorter time is requested first, so it runs for a whole job.
@@ -188,7 +197,7 @@ def requests(
     chosen: list[Request] = []
     for entry in loaded.entries:
         lattice = entry.lattice
-        if lattice.gram_tensor is None or (tags and lattice.tag not in tags):
+        if lattice.gram_tensor is None or (tags and lattice.tag not in tags) or not in_shard(lattice.tag, shard):
             continue
         metadata = corpus.front_matter(corpus.read_card(entry.path))
         cited = lattice.certifications
@@ -235,47 +244,83 @@ def requests(
     return resumed + chosen
 
 
-def computed(chosen: list[Request], deadline: float) -> Generator[dict[str, Yaml]]:
-    """Stream results and elapsed-time checkpoints until the job deadline."""
-    if not chosen:
+def computed(chosen: list[Request], deadline: float, workers: int) -> Generator[dict[str, Yaml]]:
+    """Stream results from `workers` Sage processes, with checkpoints, until the job deadline.
+
+    A worker holds one card and receives the next only after reporting it done, so a
+    search that never returns holds back only its own worker. A worker that exits while
+    holding a card yields `{"tag": tag, "failed": status}`; another takes the remaining cards.
+    """
+    queue = deque(chosen)
+    if not queue:
         return
     command = [sys.executable, "-m", "latticedb.sage_genus"]
-    with subprocess.Popen(command, stdin=subprocess.PIPE, stdout=subprocess.PIPE, start_new_session=True) as process:
-        assert process.stdin is not None and process.stdout is not None
+    holding: dict[subprocess.Popen[bytes], str] = {}
+    pending: dict[subprocess.Popen[bytes], bytes] = {}
+    with selectors.DefaultSelector() as selector:
+
+        def assign(process: subprocess.Popen[bytes]) -> None:
+            assert process.stdin is not None
+            request = queue.popleft()
+            holding[process] = request["tag"]
+            process.stdin.write((json.dumps(request) + "\n").encode())
+            process.stdin.flush()
+
+        def spawn() -> None:
+            process = subprocess.Popen(command, stdin=subprocess.PIPE, stdout=subprocess.PIPE, start_new_session=True)
+            assert process.stdout is not None
+            selector.register(process.stdout, selectors.EVENT_READ, process)
+            pending[process] = b""
+            assign(process)
+
         try:
-            process.stdin.write(json.dumps({"lattices": chosen}).encode())
-            process.stdin.close()
-            pending = b""
-            with selectors.DefaultSelector() as selector:
-                selector.register(process.stdout, selectors.EVENT_READ)
-                while True:
-                    remaining = deadline - time.time()
-                    if remaining <= 0:
-                        yield {"deadline": True}
-                        return
-                    if not selector.select(min(30, remaining)):
-                        yield {"checkpoint": True}
-                        continue
-                    chunk = os.read(process.stdout.fileno(), 65536)
+            for _ in range(min(workers, len(queue))):
+                spawn()
+            checkpointed = time.monotonic()
+            while pending:
+                remaining = deadline - time.time()
+                if remaining <= 0:
+                    yield {"deadline": True}
+                    return
+                if time.monotonic() - checkpointed >= 30:
+                    checkpointed = time.monotonic()
+                    yield {"checkpoint": True}
+                for key, _ in selector.select(min(30, remaining)):
+                    process = key.data
+                    chunk = os.read(key.fd, 65536)
                     if not chunk:
-                        if pending.strip():
-                            yield json.loads(pending)
-                        break
-                    pending += chunk
-                    while b"\n" in pending:
-                        line, pending = pending.split(b"\n", 1)
-                        if line.strip():
-                            yield json.loads(line)
-            process.wait()
-            if process.returncode != 0:
-                yield {"worker_exit": process.returncode}
+                        selector.unregister(key.fileobj)
+                        process.wait()
+                        del pending[process]
+                        tag = holding.pop(process, None)
+                        if tag is not None:
+                            yield {"tag": tag, "failed": process.returncode}
+                        if queue:
+                            spawn()
+                        continue
+                    pending[process] += chunk
+                    while b"\n" in pending[process]:
+                        line, pending[process] = pending[process].split(b"\n", 1)
+                        if not line.strip():
+                            continue
+                        values = json.loads(line)
+                        if "done" not in values:
+                            yield values
+                            continue
+                        del holding[process]
+                        if queue:
+                            assign(process)
+                        else:
+                            assert process.stdin is not None
+                            process.stdin.close()
         finally:
-            if process.poll() is None:
-                try:
-                    os.killpg(process.pid, signal.SIGTERM)
-                except ProcessLookupError:
-                    if process.poll() is None:
-                        raise
+            for process in pending:
+                if process.poll() is None:
+                    try:
+                        os.killpg(process.pid, signal.SIGTERM)
+                    except ProcessLookupError:
+                        if process.poll() is None:
+                            raise
 
 
 def _generator_morphisms(tag: str, morphisms: list[dict[str, Yaml]], matrices: list[Yaml]) -> tuple[list[str], list[dict[str, Yaml]]]:
@@ -356,16 +401,21 @@ def certify(
     held: Certificates,
     tags: tuple[str, ...],
     deadline: float,
+    workers: int = 1,
+    shard: tuple[int, int] = (0, 1),
 ) -> None:
-    """Compute every uncertified value, replace its card scope, and certify the result.
+    """Compute every uncertified value on `workers` processes, replace its card scope, and certify the result.
 
     `deadline` is the time, in seconds since the epoch, at which the job's timeout
     ends this run. A computation in progress is logged in `exceeded.yaml` until it
-    finishes, checkpointing the seconds actually spent in this run.
+    finishes, checkpointing the seconds actually spent in this run. A worker that
+    fails on a card ends no other card's computations; the run raises after the
+    queue is done, so the failure is reported with every completed value stored.
     """
     by_tag = {entry.lattice.tag: entry for entry in loaded.entries}
     log = exceeded.load(root)
     running: dict[str, float] = {}
+    failures: list[str] = []
 
     def checkpoint() -> None:
         if running:
@@ -374,16 +424,23 @@ def certify(
             exceeded.save(root, log)
 
     try:
-        with closing(computed(requests(loaded, held, log, tags), deadline)) as stream:
+        with closing(computed(requests(loaded, held, log, tags, shard), deadline, workers)) as stream:
             for values in stream:
                 if "checkpoint" in values:
                     checkpoint()
                     continue
                 if "deadline" in values:
                     print("Certification time budget exhausted", flush=True)
-                    return
-                if "worker_exit" in values:
-                    raise ChildProcessError(f"{SAGE_MODULE} exited with status {values['worker_exit']}")
+                    break
+                if "failed" in values:
+                    tag = str(values["tag"])
+                    for computation in [computation for computation in running if computation.startswith(f"{tag} ")]:
+                        # A failure is a defect to repair, not a computation that outran its job.
+                        log.pop(computation, None)
+                        running.pop(computation)
+                    exceeded.save(root, log)
+                    failures.append(f"{tag} (exit status {values['failed']})")
+                    continue
                 entry = by_tag[str(values["tag"])]
                 match values:
                     case {"started": list() as started}:
@@ -443,6 +500,8 @@ def certify(
                 )
     finally:
         checkpoint()
+    if failures:
+        raise ChildProcessError(f"{SAGE_MODULE} failed on " + ", ".join(failures))
 
 
 def cite(path: Path, field: str, value: Yaml, reference: dict[str, str], held: Certificates) -> None:
