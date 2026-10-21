@@ -3,6 +3,27 @@ tag: 0FHE
 name: Nipp form d893.html:3652
 latex: Nipp form d893.html:3652
 aliases: []
+certifications:
+  derive: 96904be680ab6e8310c64ad7236474a1403fea72f2582efc44907ca067eca3bc
+  form.integer_valued: f01a9852a88c1507e23e5d71af0de8dcf9cb2ccf4c73ec4e66346f4ffee954a2
+  integral.elementary_primes: d538e683821cf63c1e3c26f3b853bbf0dce0bb0173c9852a87f2f845b0adcc6a
+  integral.genus_symbol: ee08f7f92544c3f32ba0b72ecb5cc1f321d09ca9ad631d1a25a3cffb2c245fc8
+  integral.genus_class_count: 6c6317acab28f38c3a9cd60f61b96af980b6d62f0733bee3fd6c46d368e307d1
+  integral.overlattice_count: 8c295bcb27a20221181c128875333a459b71cd979d5fb2767c418d77a24a01aa
+  integral.spinor_genus_count: 8865996ec3eb7b22b87b5f0e6008e2811a1d6eba582ff813e72360ff7b6af4f0
+  integral.spinor_genera: 46d760a89e2ee3d733927a8236418c006da7eb48159625421afb7f05b077e811
+  integral.hyperbolic_index: 7d74c4c0aa304f581cfafc466a777d6ce4ac14d6e318bbb30b2c61cd9d900e89
+  definite.automorphism_group_order: b944ba4070adff6d4a703bee6a7ce2e22ef9c8ae69a120a6b0e876a2baad710c
+  definite.automorphism_group_generator_morphisms: f349c9fd0a1c6d1fd4b6127d0b2eabc322056bc09c4c89438a526475fad9d4b5
+  integral.discriminant_sequence: 543ef89221c1c82b38691f30698a5bb9104b75bacd30eca371277a0cecaa0c2f
+  integral.primitive_orbits: 6be83517058098f0818a8d13c34fe968cfa676b26fa577e03276739ad34f4a9e
+  integral.modular_scale: dc3045f3a95eec691c2bfbc45ba9b3efebe68b0594272e42ffb4233a6e8f2c0d
+  definite.genus_theta_series: c49cea96f1b999890bf54427a9db918b0c18d0fc3e28be8c5c9c739a78df3abe
+  definite.theta_series_cuspidal_component: 09b7cefe13799a50d90e3e49c618c7cd1dde3dd5e5f58e9c401c9d4ff30f2c48
+  definite.siegel_eisenstein_coefficients: 69c2dd6ab22c2c7858bf99ba8dd0cb6358fe393fa93625d289cf605d67e7dc67
+  integral.anisotropic_primes: 96339641fa37d0f8433adb1c7bf195698626899f7f0786d194dc7cd1a53eaea7
+  integral.local_representations: 9601836fcbf83e3c64feb90633278c251d7465b2ca9d51f58dc91ba0e70c1d45
+  integral.local_densities: 8370cd55f6d2e271faf646f740961d376984896cb3735a7dc3fbb300ca3a58dc
 rank: 4
 gram_tensor:
 - [4, 1, 1, 2]
@@ -12,21 +33,143 @@ gram_tensor:
 signature: [4, 0]
 determinant: 873
 definiteness: positive_definite
+dual_gram_tensor:
+- [274/873, -44/873, -53/873, -7/97]
+- [-44/873, 160/873, 34/873, -1/97]
+- [-53/873, 34/873, 160/873, 1/97]
+- [-7/97, -1/97, 1/97, 14/97]
+form:
+  integer_valued: true
 integral:
+  elementary_primes: []
   parity: even
+  level: 873
+  modular_scale: false
   discriminant_group: [873]
+  discriminant_sequence:
+    discriminant_factors: [873]
+    discriminant_basis_lifts:
+    - [44/873, -160/873, -34/873, 1/97]
+    discriminant_quadratic_gram:
+    - [160/873]
+    discriminant_group_order: 4
+    discriminant_generators:
+    - - [98]
+    - - [872]
+    image_generators:
+    - - [872]
+    - - [775]
+    image_order: 4
+    kernel_order: 1
+    coset_representatives:
+    - - [1]
+    mm_trivial: true
+    image_normal: true
+    quotient_generator_cosets: [0, 0]
+    quotient_multiplication:
+    - [0]
   overlattice_count: 2
   bad_reduction_primes: [2, 3, 97]
   quadratic_character: 97
+  genus_symbol: 'II_{4,0} (2: 1^4; 3: 1^3 9^1; 97: 1^-3 97^-1)'
+  genus_class_count: 31
+  spinor_genus_count: 1
+  spinor_genera: [31]
+  hyperbolic_index: 0
+  primitive_orbits:
+    O:
+      constant: 0
+      z: [0, 0, 0, 1]
+      w: [0, 0, 0, 0]
+    SO:
+      constant: 0
+      z: [0, 0, 0, 1]
+      w: [0, 0, 0, 0]
+    Otilde:
+      constant: 0
+      z: [0, 0, 0, 2]
+      w: [0, 0, 0, 0]
+    SOtilde:
+      constant: 0
+      z: [0, 0, 0, 2]
+      w: [0, 0, 0, 0]
+    O+:
+      constant: 0
+      z: [0, 0, 0, 1]
+      w: [0, 0, 0, 0]
+    SO+:
+      constant: 0
+      z: [0, 0, 0, 1]
+      w: [0, 0, 0, 0]
+    Otilde+:
+      constant: 0
+      z: [0, 0, 0, 2]
+      w: [0, 0, 0, 0]
+    SOtilde+:
+      constant: 0
+      z: [0, 0, 0, 2]
+      w: [0, 0, 0, 0]
+  anisotropic_primes: []
+  local_representations:
+  - prime: 2
+    classes:
+    - representative: 1
+      least_valuation: 2
+    - representative: 3
+      least_valuation: 2
+    - representative: 5
+      least_valuation: 2
+    - representative: 7
+      least_valuation: 2
+    - representative: 2
+      least_valuation: 1
+    - representative: 6
+      least_valuation: 1
+    - representative: 10
+      least_valuation: 1
+    - representative: 14
+      least_valuation: 1
+  local_densities:
+  - prime: 2
+    densities: [0, 3/2, 0, 9/4, 0, 3/2, 0, 21/8, 0, 3/2, 0, 9/4]
+  - prime: 3
+    densities: [2/3, 4/3, 8/9, 2/3, 4/3, 8/9, 2/3, 4/3, 32/27, 2/3, 4/3, 8/9]
+  - prime: 97
+    densities: [96/97, 96/97, 96/97, 96/97, 98/97, 96/97, 98/97, 96/97, 96/97, 98/97, 96/97, 96/97]
 definite:
   minimum: 4
   kissing_number: 2
   automorphism_group_order: 4
+  automorphism_group_generator_morphisms: [O(L) generator 1, O(L) generator 2]
+  minimal_vectors:
+  - [-1, 0, 0, 0]
+  - [1, 0, 0, 0]
+  perfect: false
   theta_series: [1, 0, 0, 0, 2, 0, 4, 0, 8, 0, 4, 0, 8]
+  genus_theta_series: [1, 0, 24/17, 0, 36/17, 0, 48/17, 0, 168/17, 0, 49/17, 0, 144/17]
+  theta_series_cuspidal_component: [0, 0, -24/17, 0, -2/17, 0, 20/17, 0, -32/17, 0, 19/17, 0, -8/17]
+  siegel_eisenstein_coefficients: [0, 24/17, 0, 36/17, 0, 48/17, 0, 168/17, 0, 49/17, 0, 144/17]
   root_system: []
   roots: []
 root_sublattice:
   invariant_factors: []
+morphisms:
+- target: 0FHE
+  name: O(L) generator 1
+  matrix:
+  - [-1, 0, 0, 0]
+  - [0, -1, 0, 0]
+  - [0, 0, -1, 0]
+  - [0, 0, 0, -1]
+  scale: 1
+- target: 0FHE
+  name: O(L) generator 2
+  matrix:
+  - [1, 0, 0, 1]
+  - [0, 0, 1, 0]
+  - [0, 1, 0, 0]
+  - [0, 0, 0, -1]
+  scale: 1
 families: []
 related: []
 references:
