@@ -6,6 +6,8 @@ from pathlib import Path
 
 import yaml
 
+from latticedb import keyed_merge
+
 REPOSITORY = Path(__file__).resolve().parent.parent
 
 
@@ -42,3 +44,10 @@ def test_two_shards_rebase_adjacent_certificates_without_conflict(tmp_path: Path
         "0003 derive",
         "0004 derive",
     ]
+
+
+def test_a_key_both_sides_changed_takes_the_incoming_shard() -> None:
+    base = {"0001 genus": {"seconds": 0}, "0002 genus": {"seconds": 0}}
+    main = {"0001 genus": {"seconds": 30}, "0002 genus": {"seconds": 5}}
+    shard = {"0001 genus": {"seconds": 90}, "0002 genus": {"seconds": 0}}
+    assert keyed_merge.merge(base, main, shard) == {"0001 genus": {"seconds": 90}, "0002 genus": {"seconds": 5}}

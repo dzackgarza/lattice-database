@@ -38,7 +38,8 @@ for attempt in $(seq 1 30); do
   git -C "$worktree" reset --quiet --hard FETCH_HEAD
   picked=""
   # Shards own disjoint cards and certificate files; exceeded.yaml merges key by key.
-  if ! git -C "$worktree" cherry-pick "$snapshot" >/dev/null; then
+  # A card that an overlapping writer also changed keeps this shard's newer lines.
+  if ! git -C "$worktree" cherry-pick -X theirs "$snapshot" >/dev/null; then
     git -C "$worktree" cherry-pick --abort
     echo "::error::Computed values conflict with main; the next snapshot retries them."
     break

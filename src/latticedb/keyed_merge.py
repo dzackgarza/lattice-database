@@ -4,6 +4,11 @@ The files of `certificates/` and `exceeded.yaml` map a computation name, which b
 its card's tag, to one record. Certification shards own disjoint tags, so two shards
 never change the same key; Git's line merge still conflicts when their keys are
 adjacent. Git calls this merge as the driver of those files (`.gitattributes`).
+
+A shard pushes by cherry-picking its change onto `main`, so `theirs` is the shard.
+A key that `main` also changed was written by an overlapping writer, such as a
+hand recovery during the run; the shard's own record of its card is the newer one
+and wins, so one stale key never keeps a shard's values from landing.
 """
 
 from pathlib import Path
@@ -20,22 +25,13 @@ def _load(path: Path) -> Mapping:
 
 
 def merge(base: Mapping, ours: Mapping, theirs: Mapping) -> Mapping:
-    """Take each key's change from the side that made one; a key both sides changed differently conflicts."""
+    """Take each key's change from the side that made one; a key both sides changed takes `theirs`."""
     merged: Mapping = {}
-    conflicts = []
     for key in sorted(base.keys() | ours.keys() | theirs.keys()):
         original, mine, other = base.get(key), ours.get(key), theirs.get(key)
-        if mine == other or other == original:
-            value = mine
-        elif mine == original:
-            value = other
-        else:
-            conflicts.append(key)
-            continue
+        value = mine if other == original else other
         if value is not None:
             merged[key] = value
-    if conflicts:
-        raise ValueError("both sides changed " + ", ".join(conflicts))
     return merged
 
 
