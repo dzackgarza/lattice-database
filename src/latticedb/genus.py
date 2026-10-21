@@ -14,6 +14,7 @@ import hashlib
 import json
 import os
 import selectors
+import shutil
 import signal
 import subprocess
 import sys
@@ -345,11 +346,12 @@ def computed(chosen: list[Request], deadline: float, workers: int) -> Generator[
                     return
                 if time.monotonic() - checkpointed >= 30:
                     checkpointed = time.monotonic()
-                    # The job log records memory, so a runner lost to it is diagnosed from CI.
+                    # The job log records memory and disk, so a runner lost to either is diagnosed from CI.
                     if holding:
                         largest = max(holding, key=lambda process: _resident_bytes(process.pid))
                         print(
-                            f"memory: {_meminfo('MemAvailable') / 2**30:.1f} GiB available; {holding[largest]['tag']} holds {_resident_bytes(largest.pid) / 2**30:.1f} GiB",
+                            f"memory: {_meminfo('MemAvailable') / 2**30:.1f} GiB available; {holding[largest]['tag']} holds {_resident_bytes(largest.pid) / 2**30:.1f} GiB; "
+                            f"disk: {shutil.disk_usage('.').free / 2**30:.1f} GiB free",
                             flush=True,
                         )
                     yield {"checkpoint": True}
