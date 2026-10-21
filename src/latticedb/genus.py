@@ -330,6 +330,13 @@ def computed(chosen: list[Request], deadline: float, workers: int) -> Generator[
                     return
                 if time.monotonic() - checkpointed >= 30:
                     checkpointed = time.monotonic()
+                    # The job log records memory, so a runner lost to it is diagnosed from CI.
+                    if holding:
+                        largest = max(holding, key=lambda process: _resident_bytes(process.pid))
+                        print(
+                            f"memory: {_meminfo('MemAvailable') / 2**30:.1f} GiB available; {holding[largest]['tag']} holds {_resident_bytes(largest.pid) / 2**30:.1f} GiB",
+                            flush=True,
+                        )
                     yield {"checkpoint": True}
                 candidates = [process for process in holding if started[process] and process not in exhausted]
                 if candidates and _meminfo("MemAvailable") < reserve:
