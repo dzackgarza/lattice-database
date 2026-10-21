@@ -120,7 +120,7 @@ def new(
 
 @app.command(name="merge-keyed-map")
 def merge_keyed_map(base: Path, ours: Path, theirs: Path) -> None:
-    """Git merge driver for `certificates.yaml` and `exceeded.yaml`: merge them key by key into OURS."""
+    """Git merge driver for the files of `certificates/` and `exceeded.yaml`: merge them key by key into OURS."""
     keyed_merge.merge_files(base, ours, theirs)
 
 
@@ -251,7 +251,7 @@ def deduplicate(root: Root = Path()) -> None:
 
     The merged card's references, families, related lattices and prose join the
     earliest card, whose stated values they must agree with. Its certificates
-    leave `certificates.yaml`: a value it certified is already on the earliest
+    leave `certificates/`: a value it certified is already on the earliest
     card under that card's own certificate.
     """
     loaded = corpus.load(root)

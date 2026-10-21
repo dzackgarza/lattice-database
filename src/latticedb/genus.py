@@ -10,7 +10,6 @@ card value is certified. A computation that does not finish remains uncertified.
 
 from __future__ import annotations
 
-import hashlib
 import json
 import os
 import selectors
@@ -185,7 +184,7 @@ def name(tag: str, field: str) -> str:
 def in_shard(tag: str, shard: tuple[int, int]) -> bool:
     """Whether the card `tag` belongs to shard `i` of `n`, by a hash that every job computes alike."""
     index, count = shard
-    return int.from_bytes(hashlib.sha256(tag.encode()).digest()[:8], "big") % count == index
+    return certificates.tag_hash(tag) % count == index
 
 
 def requests(
@@ -501,16 +500,15 @@ def certify(
     log = exceeded.load(root)
     running: dict[str, float] = {}
     failures: list[str] = []
-    # Writing certificates.yaml costs time linear in the corpus, so certificates are
-    # saved at each checkpoint rather than with each value. A card whose certificate
-    # a hard kill lost cites a hash that certificates.yaml lacks, so it is recomputed.
-    unsaved = False
+    # Certificates are saved at each checkpoint, in the groups of the cards that changed,
+    # rather than with each value. A card whose certificate a hard kill lost cites a hash
+    # that `certificates/` lacks, so it is recomputed.
+    unsaved: set[str] = set()
 
     def checkpoint() -> None:
-        nonlocal unsaved
         if unsaved:
-            certificates.save(root, held)
-            unsaved = False
+            certificates.save(root, held, unsaved)
+            unsaved.clear()
         if running:
             for computation, started_at in running.items():
                 log[computation] = exceeded.Interruption(hash=log[computation].hash, seconds=int(time.monotonic() - started_at))
@@ -553,7 +551,7 @@ def certify(
                         derived["certifications"] = {**stored_lattice.certifications, "derive": certificate_hash}
                         storage.write_text(entry.path, records.record_text(derived, entry.prose))
                         held[computation] = Certificate(hash=certificate_hash, by=str(values["by"]))
-                        unsaved = True
+                        unsaved.add(stored_lattice.tag)
                         log.pop(computation, None)
                         running.pop(computation, None)
                         exceeded.save(root, log)
@@ -585,7 +583,7 @@ def certify(
                 stored["certifications"] = {name: certificate_hash for name, certificate_hash in card_certifications.items()}
                 document = corpus.read_card(entry.path)
                 storage.write_text(entry.path, records.record_text(stored, document.content))
-                unsaved = True
+                unsaved.add(entry.lattice.tag)
                 print(
                     entry.lattice.tag,
                     {field: values[field] for field in BLOCKS if field in values},

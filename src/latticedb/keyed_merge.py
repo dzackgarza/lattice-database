@@ -1,9 +1,9 @@
 """Three-way merge of a top-level YAML map, one key at a time.
 
-`certificates.yaml` and `exceeded.yaml` map a computation name, which begins with
+The files of `certificates/` and `exceeded.yaml` map a computation name, which begins with
 its card's tag, to one record. Certification shards own disjoint tags, so two shards
 never change the same key; Git's line merge still conflicts when their keys are
-adjacent. Git calls this merge as the driver of both files (`.gitattributes`).
+adjacent. Git calls this merge as the driver of those files (`.gitattributes`).
 """
 
 from pathlib import Path

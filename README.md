@@ -369,7 +369,8 @@ For a fixed input, a completed computation certifies its value permanently.
 The value itself is stored only on the lattice card.
 The card's `certifications` map cites one SHA-256 certificate hash for each completed computation.
 That hash commits to the computation name, the card's Gram tensor and the stored result.
-`certificates.yaml` stores the same hash with the program and version that computed it, but does not duplicate the result.
+`certificates/` stores the same hash with the program and version that computed it, but does not duplicate the result.
+`certificates/<group>.yaml` holds the certificates of the cards whose tag hash falls in `<group>`, one of 256 buckets of the SHA-256 hash that also assigns certification shards, so no file outgrows the Git host's 100 MB limit, a checkpoint rewrites only the groups whose cards changed, and no two of the sixteen shards write the same file.
 Thus a certificate states a fact $I(G)=v$ without creating a second store of $v$.
 It does not expire when the implementation changes.
 Editing $G$ or $v$ breaks the card's hash commitment; a computation that times out or otherwise does not finish has no certificate.
@@ -380,7 +381,7 @@ Editing $G$ or $v$ breaks the card's hash commitment; a computation that times o
 | `<tag> <block>.<field>` | A value returned by a preamble operation, such as `0012 integral.genus_symbol` | The Gram tensor |
 
 `latticedb certify` requests a preamble computation exactly when the card does not already cite the matching completed certificate.
-It writes the returned result to the card whether or not an authored value was already present, then writes the hash citation to `certifications` and writes only the hash and computation provenance to `certificates.yaml`. Derivation runs in the same streamed queue, immediately before the remaining computations for its card.
+It writes the returned result to the card whether or not an authored value was already present, then writes the hash citation to `certifications` and writes only the hash and computation provenance to `certificates/`. Derivation runs in the same streamed queue, immediately before the remaining computations for its card.
 Cards without a Gram tensor remain source cards and do not enter this queue; a Gram-only card first receives its derived hypotheses.
 
 `exceeded.yaml` is the permanent log of computations that a certification job ended before they finished.
@@ -401,7 +402,7 @@ The semi-decisions (`roots`, `norms`, `reflective`, `regular`, `spinor_regular`)
 A card that still needs derivation carries its record into that later request, and the worker derives it again only to select the searches that apply.
 When less than a tenth of the machine's memory is available, certification kills the worker holding the most memory and reports that card as a failure, so a computation that outgrows the runner costs its own card and not the whole job.
 The nightly workflow runs `--shard i/16` on sixteen runners; a card belongs to the shard given by a SHA-256 hash of its tag, so the shards partition the corpus.
-Each shard rebases its commit onto `main`. `.gitattributes` merges `certificates.yaml` and `exceeded.yaml` key by key with `latticedb merge-keyed-map`, since shards never change the same key.
+Each shard rebases its commit onto `main`. `.gitattributes` merges the files of `certificates/` and `exceeded.yaml` key by key with `latticedb merge-keyed-map`, since shards never change the same key.
 
 Run ordinary enrichment for selected cards with `just enrich --tag <tag>`. Certification is run by the nightly CI certification workflow; a selected card can be certified explicitly with `just certify --tag <tag>` when debugging that workflow.
 

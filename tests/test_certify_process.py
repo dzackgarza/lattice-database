@@ -10,6 +10,8 @@ import sys
 import time
 from pathlib import Path
 
+import yaml
+
 from latticedb import certificates, corpus, exceeded, genus
 
 REPOSITORY = Path(__file__).resolve().parent.parent
@@ -71,14 +73,15 @@ def test_finishing_a_previously_interrupted_computation_clears_its_log(tmp_path:
 
 
 def test_an_interrupted_certificate_write_preserves_completed_certificates(tmp_path: Path) -> None:
-    held = {"completed": certificates.Certificate(hash="b" * 64, by="previous computation")}
+    held = {"0012 derive": certificates.Certificate(hash="b" * 64, by="previous computation")}
     certificates.save(tmp_path, held)
-    before = (tmp_path / certificates.CERTIFICATES_FILE).read_bytes()
+    group = tmp_path / certificates.CERTIFICATES_DIR / f"{certificates.group('0012')}.yaml"
+    before = group.read_bytes()
     result = subprocess.run([sys.executable, str(REPOSITORY / "tests/fixtures/interrupted_certificate_write.py"), str(tmp_path)], capture_output=True, text=True)
     assert result.returncode == 27, result.stderr
-    assert (tmp_path / certificates.CERTIFICATES_FILE).read_bytes() == before
+    assert group.read_bytes() == before
     assert certificates.load(tmp_path) == held
-    assert list(tmp_path.iterdir()) == [tmp_path / certificates.CERTIFICATES_FILE]
+    assert list((tmp_path / certificates.CERTIFICATES_DIR).iterdir()) == [group]
 
 
 def test_a_search_that_never_ends_does_not_hold_back_other_cards(tmp_path: Path) -> None:
@@ -93,3 +96,40 @@ def test_a_search_that_never_ends_does_not_hold_back_other_cards(tmp_path: Path)
     held = certificates.load(tmp_path)
     assert genus.name("0012", "genus_symbol") in held
     assert genus.name("0016", "roots") in exceeded.load(tmp_path)
+
+
+def test_certificates_are_saved_in_the_groups_of_their_tags(tmp_path: Path) -> None:
+    held = {
+        "0012 derive": certificates.Certificate(hash="a" * 64, by="computed"),
+        "3999 derive": certificates.Certificate(hash="b" * 64, by="computed"),
+    }
+    certificates.save(tmp_path, held)
+    directory = tmp_path / certificates.CERTIFICATES_DIR
+    names = {certificates.group("0012") + ".yaml", certificates.group("3999") + ".yaml"}
+    assert {path.name for path in directory.iterdir()} == names
+    held["0013 derive"] = certificates.Certificate(hash="c" * 64, by="computed")
+    other = directory / f"{certificates.group('3999')}.yaml"
+    untouched = other.stat().st_mtime_ns
+    # A checkpoint names the cards that changed, and rewrites only their groups.
+    certificates.save(tmp_path, held, {"0013"})
+    assert other.stat().st_mtime_ns == untouched
+    assert certificates.load(tmp_path) == held
+    del held["3999 derive"]
+    certificates.save(tmp_path, held)
+    assert "3999 derive" not in certificates.load(tmp_path)
+
+
+def test_no_two_shards_write_the_same_certificate_group() -> None:
+    tags = [f"{number:04d}" for number in range(1, 4000)]
+    owners: dict[str, set[int]] = {}
+    for tag in tags:
+        shard = next(index for index in range(16) if genus.in_shard(tag, (index, 16)))
+        owners.setdefault(certificates.group(tag), set()).add(shard)
+    assert all(len(shards) == 1 for shards in owners.values())
+
+
+def test_certificates_of_the_legacy_single_file_are_read_with_the_groups(tmp_path: Path) -> None:
+    grouped = {"0012 derive": certificates.Certificate(hash="a" * 64, by="computed")}
+    certificates.save(tmp_path, grouped)
+    (tmp_path / certificates.LEGACY_FILE).write_text(yaml.safe_dump({"3999 derive": {"hash": "b" * 64, "by": "computed"}}))
+    assert set(certificates.load(tmp_path)) == {"0012 derive", "3999 derive"}

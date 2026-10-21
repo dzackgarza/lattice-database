@@ -45,7 +45,7 @@ card may enter the site.
 Certification is a separate CI phase. It asks the preamble to compute each uncertified value from
 the card's defining mathematical input. If an authored or seeded value disagrees, the preamble
 result replaces it. The
-resulting card value then receives a certificate hash, and `certificates.yaml` records that hash
+resulting card value then receives a certificate hash, and `certificates/` records that hash
 with computation provenance. A value that a seeded source proves, such as the regularity of a form
 in the Jagy–Kaplansky–Schiemann list, is certified when it is seeded: its certificate names the
 source's citation as provenance, and certification never computes it.
@@ -127,7 +127,7 @@ after a CI timeout.
 
 The lattice card is the only store of a computed value. Its `certifications` map cites a SHA-256
 certificate hash that commits to the computation name, the Gram tensor and that stored result.
-`certificates.yaml` stores the same hash with computation provenance, never a second copy of the
+`certificates/` stores the same hash with computation provenance, never a second copy of the
 result. A matching completed certificate is permanent: implementation/version changes do not make
 it stale. Changing the Gram tensor or result breaks the hash and requires a new computation.
 A timeout or unfinished computation has no certificate. A computation that ran for a whole

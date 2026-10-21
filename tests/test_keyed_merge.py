@@ -14,7 +14,8 @@ def git(root: Path, *arguments: str) -> None:
 
 
 def write(root: Path, data: dict[str, object]) -> None:
-    (root / "certificates.yaml").write_text(yaml.safe_dump(data, sort_keys=False))
+    (root / "certificates").mkdir(exist_ok=True)
+    (root / "certificates" / "shared.yaml").write_text(yaml.safe_dump(data, sort_keys=False))
 
 
 def test_two_shards_rebase_adjacent_certificates_without_conflict(tmp_path: Path) -> None:
@@ -35,7 +36,7 @@ def test_two_shards_rebase_adjacent_certificates_without_conflict(tmp_path: Path
     git(tmp_path, "commit", "-q", "-am", "shard 0")
     git(tmp_path, "checkout", "-q", "shard")
     git(tmp_path, "rebase", "-q", "main")
-    assert list(yaml.safe_load((tmp_path / "certificates.yaml").read_text())) == [
+    assert list(yaml.safe_load((tmp_path / "certificates" / "shared.yaml").read_text())) == [
         "0001 derive",
         "0002 derive",
         "0003 derive",

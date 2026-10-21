@@ -1,2 +1,2 @@
-certificates.yaml merge=keyed-map
+certificates/*.yaml merge=keyed-map
 exceeded.yaml merge=keyed-map

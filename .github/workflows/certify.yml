@@ -68,7 +68,7 @@ jobs:
         shell: bash --noprofile --norc -e -o pipefail {0}
         run: |
           git config --global --add safe.directory "$GITHUB_WORKSPACE"
-          git add lattices certificates.yaml exceeded.yaml
+          git add -A lattices certificates exceeded.yaml
           git diff --cached --binary > "$RUNNER_TEMP/certification.patch"
           git rev-parse HEAD > "$RUNNER_TEMP/certification-base.txt"
       - name: Retain completed data even if integration fails
@@ -85,7 +85,7 @@ jobs:
         shell: bash --noprofile --norc -e -o pipefail {0}
         run: |
           git config --global --add safe.directory "$GITHUB_WORKSPACE"
-          git add lattices certificates.yaml exceeded.yaml
+          git add -A lattices certificates exceeded.yaml
           if git diff --cached --quiet; then
             echo "No newly completed computations."
             exit 0
