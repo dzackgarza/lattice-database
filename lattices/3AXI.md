@@ -3,6 +3,9 @@ tag: 3AXI
 name: brandt_intrau Brandt_2.html:26034
 latex: brandt_intrau Brandt_2.html:26034
 aliases: []
+certifications:
+  derive: 368fb4d1256e44e01ed38939c4f6cc30d1c0565eb2fb465e82e20016e4baf27c
+  form.integer_valued: 27ad50097cc04d3166a6f5074f558b09afd584113bd130e87b16bc63b9c40768
 rank: 3
 gram_tensor:
 - [6, 0, 3]
@@ -11,6 +14,34 @@ gram_tensor:
 signature: [3, 0]
 determinant: 1824
 definiteness: positive_definite
+dual_gram_tensor:
+- [79/456, 1/304, -1/76]
+- [1/304, 77/608, -1/152]
+- [-1/76, -1/152, 1/38]
+form:
+  integer_valued: true
+integral:
+  parity: even
+  level: 3648
+  discriminant_group: [1824]
+  bad_reduction_primes: [2, 3, 19]
+definite:
+  minimum: 6
+  kissing_number: 2
+  minimal_vectors:
+  - [-1, 0, 0]
+  - [1, 0, 0]
+  perfect: false
+  theta_series: [1, 0, 0, 0, 0, 0, 2, 0, 2, 0, 0, 0, 0]
+  root_system: []
+  roots:
+  - type: A1
+    scale: 3
+    simple_roots:
+    - [1, 0, 0]
+root_sublattice:
+  invariant_factors: [1]
+morphisms: []
 families: []
 related: []
 references:

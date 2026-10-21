@@ -6,6 +6,10 @@ aliases: []
 certifications:
   definite.regular: 9dac15d7f1ede677bea8207a3119f9ebfddcc305ce873ec3662f1c44bbe8aeb2
   definite.spinor_regular: 792653c7529101fcb7d474bf8005390b07498299e738958275bcdc1c9cceeb39
+  derive: 31ce6ea6b3767269d369d357bc73625703d33956725d423a34db706a3996d846
+  form.integer_valued: 254ef41af4fe24cbfd14021bfb024a80998d072bcb6ab90b75f1a7f8126d44c0
+  definite.automorphism_group_order: 1760832d9cedea37a02a0d51137abc3903fbfc9e75a8c13b7e40c2090f2bb0a5
+  definite.automorphism_group_generator_morphisms: c4db3b8c0b21794e98ec12d2434e074cf8d46552fb957ea954374951e43105be
 rank: 3
 gram_tensor:
 - [1, 0, 0]
@@ -14,9 +18,67 @@ gram_tensor:
 signature: [3, 0]
 determinant: 12
 definiteness: positive_definite
+dual_gram_tensor:
+- [1, 0, 0]
+- [0, 1, 0]
+- [0, 0, 1/12]
+form:
+  integer_valued: true
+integral:
+  parity: odd
+  level: 24
+  discriminant_group: [12]
+  bad_reduction_primes: [2, 3]
 definite:
+  minimum: 1
+  kissing_number: 4
+  automorphism_group_order: 16
+  automorphism_group_generator_morphisms: [O(L) generator 1, O(L) generator 2, O(L) generator 3]
+  minimal_vectors:
+  - [-1, 0, 0]
+  - [0, -1, 0]
+  - [0, 1, 0]
+  - [1, 0, 0]
+  perfect: false
   regular: true
   spinor_regular: true
+  theta_series: [1, 4, 4, 0, 4, 8, 0, 0, 4, 4, 8, 0, 2]
+  root_system: [A1, A1]
+  roots:
+  - type: B2
+    scale: 1/2
+    simple_roots:
+    - [0, 1, 0]
+    - [1, -1, 0]
+  - type: A1
+    scale: 6
+    simple_roots:
+    - [0, 0, 1]
+root_sublattice:
+  invariant_factors: [1, 1, 1]
+  norms: [1, 12]
+morphisms:
+- target: 2MNV
+  name: O(L) generator 1
+  matrix:
+  - [-1, 0, 0]
+  - [0, -1, 0]
+  - [0, 0, -1]
+  scale: 1
+- target: 2MNV
+  name: O(L) generator 2
+  matrix:
+  - [0, -1, 0]
+  - [1, 0, 0]
+  - [0, 0, 1]
+  scale: 1
+- target: 2MNV
+  name: O(L) generator 3
+  matrix:
+  - [-1, 0, 0]
+  - [0, 1, 0]
+  - [0, 0, 1]
+  scale: 1
 families: []
 related: []
 references:
