@@ -218,6 +218,39 @@ def test_a_computation_that_outran_a_job_is_skipped_and_a_cut_one_runs_first(
     assert "genus_class_count" in requested[1]["fields"]
 
 
+def test_a_cut_search_resumes_first_among_the_searches_not_before_the_other_fields(tmp_path: Path) -> None:
+    (tmp_path / "lattices").mkdir()
+    shutil.copy(REPOSITORY / corpus.FAMILIES_FILE, tmp_path / corpus.FAMILIES_FILE)
+    (tmp_path / corpus.RETIRED_FILE).write_text("{}\n")
+    for tag in ("0012", "0016"):
+        shutil.copy(REPOSITORY / "lattices" / f"{tag}.md", tmp_path / "lattices")
+    loaded = corpus.load(tmp_path)
+    a2 = next(entry.lattice for entry in loaded.entries if entry.lattice.tag == "0012")
+    computation = genus.name("0012", "regular")
+    log = {computation: exceeded.Interruption(hash=exceeded.input_hash(computation, a2), seconds=60)}
+    requested = genus.requests(loaded, derived(), log, ())
+    # Both cards' finishing fields come first by size; A2's cut search leads the searches.
+    assert [request["tag"] for request in requested] == ["0016", "0012", "0012", "0016"]
+    assert not any(request.get("resumed") for request in requested)
+    assert requested[2]["fields"][0] == "regular"
+
+
+def test_resumed_requests_leave_one_worker_to_the_rest(tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> None:
+    worker = tmp_path / "worker.py"
+    worker.write_text(FAKE_WORKER)
+    monkeypatch.setattr(genus, "WORKER", [sys.executable, str(worker)])
+
+    def request(tag: str, field: str, resumed: bool) -> genus.Request:
+        made: genus.Request = {"tag": tag, "gram": [[2]], "integral": True, "fields": [field], "series_bound": 1}
+        return {**made, "resumed": True} if resumed else made
+
+    # Two resumed computations that never finish lead the queue of two workers.
+    queue = [request("0001", "grows", True), request("0002", "grows", True), request("0003", "genus_symbol", False)]
+    stream = genus.computed(queue, time.time() + 10, 2)
+    finished = [values for values in stream if "checkpoint" not in values and "started" not in values and "deadline" not in values]
+    assert finished == [{"tag": "0003", "genus_symbol": True}]
+
+
 def test_shards_partition_the_cards() -> None:
     tags = [f"{number:04d}" for number in range(1, 200)]
     shards = [[tag for tag in tags if genus.in_shard(tag, (index, 4))] for index in range(4)]
@@ -231,9 +264,10 @@ def test_smaller_cards_come_first_and_every_card_precedes_the_searches(tmp_path:
     (tmp_path / corpus.RETIRED_FILE).write_text("{}\n")
     for tag in ("0012", "0016", "0026"):
         shutil.copy(REPOSITORY / "lattices" / f"{tag}.md", tmp_path / "lattices")
-    # U and A2 are derived; II_{1,2} still needs derivation, so its search request
-    # carries its record, from which the worker selects the searches that apply.
-    requested = genus.requests(corpus.load(tmp_path), derived(), {}, ())
+    # U and A2 are derived; II_{1,2} is held underived, so its search request carries
+    # its record, from which the worker selects the searches that apply.
+    held = {computation: certificate for computation, certificate in derived().items() if computation != "0026 derive"}
+    requested = genus.requests(corpus.load(tmp_path), held, {}, ())
     # U has determinant -1 and A2 determinant 3, both of rank 2; II_{1,2} has rank 3.
     assert [request["tag"] for request in requested] == ["0016", "0012", "0026"] * 2
     finishing, searches = requested[:3], requested[3:]

@@ -174,6 +174,8 @@ class Request(TypedDict):
     fields: list[str]
     series_bound: int
     record: NotRequired[dict[str, Yaml]]
+    resumed: NotRequired[bool]
+    """A computation of these fields was cut short by an earlier job."""
 
 
 def name(tag: str, field: str) -> str:
@@ -197,12 +199,15 @@ def requests(
     """For each nondegenerate record in `shard`, the uncertified applicable preamble computations.
 
     A computation that ran for a whole job without finishing is not requested. One
-    that a job ended after a shorter time is requested first, so it runs for a whole job.
-    The other cards follow by rank and then absolute determinant. The semi-decisions of
-    every card are separate requests after all of them.
+    that a job ended after a shorter time is requested first in its phase, so it runs
+    for a whole job. The other cards follow by rank and then absolute determinant. The
+    semi-decisions of every card are separate requests after all of them: every job
+    ends inside a search, so a cut search resumed at the start of the next job would
+    hold its workers through the fields that every procedure finishes.
     """
     resumed: list[Request] = []
     chosen: list[Request] = []
+    resumed_searches: list[Request] = []
     searches: list[Request] = []
     sizes: dict[str, tuple[int, Fraction]] = {}
     for entry in loaded.entries:
@@ -240,8 +245,8 @@ def requests(
         if fields:
             interrupted = [field for field in fields if exceeded.seconds_run(log, name(lattice.tag, field), lattice) is not None]
             rest = [field for field in fields if field not in interrupted]
-            semi = [field for field in rest if field in SEMI_DECISIONS]
-            fields = interrupted + [field for field in rest if field not in SEMI_DECISIONS]
+            semi = [field for field in interrupted + rest if field in SEMI_DECISIONS]
+            fields = [field for field in interrupted + rest if field not in SEMI_DECISIONS]
             gram = [[int(value) if value.denominator == 1 else str(value) for value in row] for row in lattice.gram_tensor]
             request: Request = {
                 "tag": lattice.tag,
@@ -255,10 +260,13 @@ def requests(
                 # Derivation supplies the hypotheses even when another field was interrupted.
                 request["fields"] = ["derive", *[field for field in fields if field != "derive"]]
             if request["fields"]:
-                (resumed if interrupted else chosen).append(request)
+                if set(interrupted) - SEMI_DECISIONS:
+                    resumed.append({**request, "resumed": True})
+                else:
+                    chosen.append(request)
             if semi:
                 # A card that needs derivation carries its record, which selects the searches that apply.
-                searches.append({**request, "fields": semi})
+                (resumed_searches if set(interrupted) & SEMI_DECISIONS else searches).append({**request, "fields": semi})
             sizes[lattice.tag] = (len(gram), abs(lattice.determinant or Fraction(0)))
 
     # Smaller cards finish sooner, so each job certifies as many values as it can. A
@@ -267,7 +275,7 @@ def requests(
     def by_size(request: Request) -> tuple[int, Fraction]:
         return sizes[request["tag"]]
 
-    return resumed + sorted(chosen, key=by_size) + sorted(searches, key=by_size)
+    return resumed + sorted(chosen, key=by_size) + resumed_searches + sorted(searches, key=by_size)
 
 
 MEMORY_RESERVE = 0.1
@@ -313,6 +321,17 @@ def computed(chosen: list[Request], deadline: float, workers: int) -> Generator[
         return
     reserve = MEMORY_RESERVE * _meminfo("MemTotal")
     holding: dict[subprocess.Popen[bytes], Request] = {}
+
+    def next_request() -> Request:
+        # Resumed computations may outrun the job again; while other requests wait, one
+        # worker is kept from them, so every job certifies new values.
+        if workers > 1 and sum(1 for request in holding.values() if request.get("resumed")) >= workers - 1:
+            for index, request in enumerate(queue):
+                if not request.get("resumed"):
+                    del queue[index]
+                    return request
+        return queue.popleft()
+
     started: dict[subprocess.Popen[bytes], set[str]] = {}
     pending: dict[subprocess.Popen[bytes], bytes] = {}
     exhausted: set[subprocess.Popen[bytes]] = set()
@@ -320,7 +339,7 @@ def computed(chosen: list[Request], deadline: float, workers: int) -> Generator[
 
         def assign(process: subprocess.Popen[bytes]) -> None:
             assert process.stdin is not None
-            request = queue.popleft()
+            request = next_request()
             holding[process] = request
             started[process] = set()
             process.stdin.write((json.dumps(request) + "\n").encode())
