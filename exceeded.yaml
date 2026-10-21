@@ -93,13 +93,13 @@
   seconds: 6986
 02CA definite.regular:
   hash: 19f55fd396dd553659d07d97db9e76d92583413e3309ac197c1e6d59e81fb212
-  seconds: 7123
+  seconds: 19684
 02CZ definite.regular:
   hash: 9798e0528b4f784cd55d655663aa1c0e71d0a39dc83601aebedac213740645ba
   seconds: 18162
 02DD definite.regular:
   hash: d60d758ae36e6973936e75f88700f3238df3dc2191830aa95c150649949e04f7
-  seconds: 7123
+  seconds: 19684
 02EH definite.regular:
   hash: 00353b7ce809d708b712c96f39b0814310238fd49def9c0ca69cb49549d47fed
   seconds: 7091
@@ -256,6 +256,12 @@
 077Q definite.regular:
   hash: 914902341abad2a39c8826f5252d6b055b15688bc1c8d16016333081f7fab22c
   seconds: 6640
+0QP5 definite.genus_theta_series:
+  hash: 1dca75602f06e5452662e22868bdc8c4b894c681709da27665aec21d6e4343a2
+  seconds: 6
+0QP6 definite.siegel_eisenstein_coefficients:
+  hash: fe1d85fcdeeec2f0202d295bca920f6a63d144de852ddecfbe558b3b9d156d14
+  seconds: 4
 0U8G definite.genus_theta_series:
   hash: ed8e8a6100cd0c4a3b97dbf09489f5d8bef5b79df9f54631358d9d15d11bd20f
   seconds: 5
