@@ -3,6 +3,9 @@ tag: 2ZCG
 name: brandt_intrau Brandt_2.html:11015
 latex: brandt_intrau Brandt_2.html:11015
 aliases: []
+certifications:
+  derive: 090a48558b379d706beaee6b82873d93b2b00cd2763446d2f0369198ab883360
+  form.integer_valued: b58d6a089cc2d96cdf4331aee12ae65abf959b590b3b3809fe98981d78d21dc0
 rank: 3
 gram_tensor:
 - [10, 2, 0]
@@ -11,6 +14,30 @@ gram_tensor:
 signature: [3, 0]
 determinant: 1142
 definiteness: positive_definite
+dual_gram_tensor:
+- [119/1142, -12/571, 5/571]
+- [-12/571, 60/571, -25/571]
+- [5/571, -25/571, 58/571]
+form:
+  integer_valued: true
+integral:
+  parity: even
+  level: 2284
+  discriminant_group: [1142]
+  bad_reduction_primes: [2, 571]
+definite:
+  minimum: 10
+  kissing_number: 2
+  minimal_vectors:
+  - [-1, 0, 0]
+  - [1, 0, 0]
+  perfect: false
+  theta_series: [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 4]
+  root_system: []
+  roots: []
+root_sublattice:
+  invariant_factors: []
+morphisms: []
 families: []
 related: []
 references:
