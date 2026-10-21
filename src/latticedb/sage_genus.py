@@ -8,6 +8,7 @@ JSON line.
 
 import json
 import sys
+from collections.abc import Callable
 from fractions import Fraction
 
 from dzack_research.preamble.categories.abstract_categories.mor_categories import CategoricalMor
@@ -216,17 +217,28 @@ def _emit(tag: str, values: dict[str, JsonValue]) -> None:
     print(json.dumps({"tag": tag, "by": "research preamble", **values}), flush=True)
 
 
+def _run(tag: str, fields: list[str], compute: Callable[[], dict[str, JsonValue]]) -> dict[str, JsonValue]:
+    """Announce one computation, then emit its values.
+
+    A computation that raises ends this worker; the parent hands the card's
+    computations that had not started to a new worker.
+    """
+    _start(tag, fields)
+    values = compute()
+    _emit(tag, values)
+    return values
+
+
 def _compute(request: Request) -> None:
-    """Emit each requested value of one card as it completes."""
+    """Emit each requested value of one card as it completes, in the order requested."""
+    tag = request["tag"]
     if "derive" in request["fields"]:
-        _start(request["tag"], ["derive"])
-        derived = records.derive(request["record"])
-        _emit(request["tag"], {"derived": derived})
-        stored = Lattice.model_validate(derived)
+        derived = _run(tag, ["derive"], lambda: {"derived": records.derive(request["record"])})
+        stored = Lattice.model_validate(derived["derived"])
         if "integer_valued" in request["fields"]:
             assert stored.form is not None
-            _start(request["tag"], ["integer_valued"])
-            _emit(request["tag"], {"integer_valued": stored.form.integer_valued})
+            _start(tag, ["integer_valued"])
+            _emit(tag, {"integer_valued": stored.form.integer_valued})
             request["fields"].remove("integer_valued")
         if stored.determinant == 0:
             return
@@ -234,21 +246,23 @@ def _compute(request: Request) -> None:
         request["fields"] = [field for field in request["fields"] if field != "derive" and applies(field, stored)]
     ring = OWNED_ZZ if request["integral"] else OWNED_QQ
     lattice = Lattices(ring)(request["gram"])
-    joint_fields: set[str] = set()
-    for fields, compute in JOINT:
-        chosen = fields & set(request["fields"])
-        if not chosen:
-            continue
-        _start(request["tag"], sorted(fields))
-        # The answer is one computation, so every field of it is stored together.
-        _emit(request["tag"], compute(lattice))
-        joint_fields |= fields
+    joint = {field: (fields, compute) for fields, compute in JOINT for field in fields}
+    done: set[str] = set()
     for field in request["fields"]:
-        if field in joint_fields:
+        if field in done:
             continue
-        _start(request["tag"], [field])
-        value = SERIES[field](lattice, request["series_bound"]) if field in SERIES else VALUES[field](lattice)
-        _emit(request["tag"], {field: value})
+        if field in joint:
+            # The answer is one computation, so every field of it is stored together.
+            fields, compute = joint[field]
+            done |= fields
+            _run(tag, sorted(fields), lambda: compute(lattice))
+            continue
+        done.add(field)
+        _run(
+            tag,
+            [field],
+            lambda: {field: SERIES[field](lattice, request["series_bound"]) if field in SERIES else VALUES[field](lattice)},
+        )
 
 
 def main() -> None:

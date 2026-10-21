@@ -21,6 +21,7 @@ import time
 from collections import deque
 from collections.abc import Generator, Iterator
 from contextlib import closing
+from fractions import Fraction
 from pathlib import Path
 from typing import NotRequired, TypedDict
 
@@ -157,6 +158,11 @@ def applies(field: str, lattice: Lattice) -> bool:
 
 
 SAGE_MODULE = Path(__file__).with_name("sage_genus.py")
+WORKER = [sys.executable, "-m", "latticedb.sage_genus"]
+"""The command of one worker process, which reads requests and writes JSON lines."""
+
+SEMI_DECISIONS = frozenset({"roots", "norms", "reflective", "regular", "spinor_regular"})
+"""Fields whose procedure need not terminate, requested after a card's other fields."""
 
 
 class Request(TypedDict):
@@ -192,9 +198,12 @@ def requests(
 
     A computation that ran for a whole job without finishing is not requested. One
     that a job ended after a shorter time is requested first, so it runs for a whole job.
+    The other cards follow by rank and then absolute determinant, and within a card the
+    semi-decisions follow the fields that every procedure finishes.
     """
     resumed: list[Request] = []
     chosen: list[Request] = []
+    sizes: dict[str, tuple[int, Fraction]] = {}
     for entry in loaded.entries:
         lattice = entry.lattice
         if lattice.gram_tensor is None or (tags and lattice.tag not in tags) or not in_shard(lattice.tag, shard):
@@ -227,7 +236,8 @@ def requests(
             fields.insert(0, "derive")
         if fields:
             interrupted = [field for field in fields if exceeded.seconds_run(log, name(lattice.tag, field), lattice) is not None]
-            fields = interrupted + [field for field in fields if field not in interrupted]
+            rest = [field for field in fields if field not in interrupted]
+            fields = interrupted + [field for field in rest if field not in SEMI_DECISIONS] + [field for field in rest if field in SEMI_DECISIONS]
             gram = [[int(value) if value.denominator == 1 else str(value) for value in row] for row in lattice.gram_tensor]
             request: Request = {
                 "tag": lattice.tag,
@@ -241,7 +251,39 @@ def requests(
                 # Derivation supplies the hypotheses even when another field was interrupted.
                 request["fields"] = ["derive", *[field for field in fields if field != "derive"]]
             (resumed if interrupted else chosen).append(request)
-    return resumed + chosen
+            sizes[lattice.tag] = (len(gram), abs(lattice.determinant or Fraction(0)))
+    # Smaller cards finish sooner, so each job certifies as many values as it can.
+    return resumed + sorted(chosen, key=lambda request: sizes[request["tag"]])
+
+
+MEMORY_RESERVE = 0.1
+"""The fraction of the machine's memory that the workers leave available.
+
+Below it the worker holding the most memory is killed, so a computation that
+outgrows the runner costs its own card rather than the runner and the whole job.
+"""
+
+
+def _meminfo(key: str) -> int:
+    """One `/proc/meminfo` entry, in bytes."""
+    for line in Path("/proc/meminfo").read_text().splitlines():
+        label, _, value = line.partition(":")
+        if label == key:
+            return int(value.split()[0]) * 1024
+    raise KeyError(key)
+
+
+def _resident_bytes(group: int) -> int:
+    """The resident memory of every process in the process group `group`."""
+    total = 0
+    for stat in Path("/proc").glob("[0-9]*/stat"):
+        try:
+            fields = stat.read_text().rsplit(")", 1)[1].split()
+        except OSError:
+            continue  # The process exited after the listing.
+        if int(fields[2]) == group:
+            total += int(fields[21]) * os.sysconf("SC_PAGE_SIZE")
+    return total
 
 
 def computed(chosen: list[Request], deadline: float, workers: int) -> Generator[dict[str, Yaml]]:
@@ -249,25 +291,29 @@ def computed(chosen: list[Request], deadline: float, workers: int) -> Generator[
 
     A worker holds one card and receives the next only after reporting it done, so a
     search that never returns holds back only its own worker. A worker that exits while
-    holding a card yields `{"tag": tag, "failed": status}`; another takes the remaining cards.
+    holding a card yields `{"tag": tag, "failed": reason}`; another takes the remaining
+    cards, beginning with the computations of that card that had not started.
     """
     queue = deque(chosen)
     if not queue:
         return
-    command = [sys.executable, "-m", "latticedb.sage_genus"]
-    holding: dict[subprocess.Popen[bytes], str] = {}
+    reserve = MEMORY_RESERVE * _meminfo("MemTotal")
+    holding: dict[subprocess.Popen[bytes], Request] = {}
+    started: dict[subprocess.Popen[bytes], set[str]] = {}
     pending: dict[subprocess.Popen[bytes], bytes] = {}
+    exhausted: set[subprocess.Popen[bytes]] = set()
     with selectors.DefaultSelector() as selector:
 
         def assign(process: subprocess.Popen[bytes]) -> None:
             assert process.stdin is not None
             request = queue.popleft()
-            holding[process] = request["tag"]
+            holding[process] = request
+            started[process] = set()
             process.stdin.write((json.dumps(request) + "\n").encode())
             process.stdin.flush()
 
         def spawn() -> None:
-            process = subprocess.Popen(command, stdin=subprocess.PIPE, stdout=subprocess.PIPE, start_new_session=True)
+            process = subprocess.Popen(WORKER, stdin=subprocess.PIPE, stdout=subprocess.PIPE, start_new_session=True)
             assert process.stdout is not None
             selector.register(process.stdout, selectors.EVENT_READ, process)
             pending[process] = b""
@@ -285,17 +331,31 @@ def computed(chosen: list[Request], deadline: float, workers: int) -> Generator[
                 if time.monotonic() - checkpointed >= 30:
                     checkpointed = time.monotonic()
                     yield {"checkpoint": True}
-                for key, _ in selector.select(min(30, remaining)):
+                candidates = [process for process in holding if started[process] and process not in exhausted]
+                if candidates and _meminfo("MemAvailable") < reserve:
+                    largest = max(candidates, key=lambda process: _resident_bytes(process.pid))
+                    exhausted.add(largest)
+                    os.killpg(largest.pid, signal.SIGKILL)
+                for key, _ in selector.select(min(5, remaining)):
                     process = key.data
                     chunk = os.read(key.fd, 65536)
                     if not chunk:
                         selector.unregister(key.fileobj)
+                        assert process.stdin is not None and process.stdout is not None
+                        process.stdin.close()
+                        process.stdout.close()
                         process.wait()
                         del pending[process]
-                        tag = holding.pop(process, None)
-                        if tag is not None:
-                            yield {"tag": tag, "failed": process.returncode}
-                        if queue:
+                        request = holding.pop(process, None)
+                        begun = started.pop(process, set())
+                        if request is not None:
+                            unstarted = [field for field in request["fields"] if field not in begun]
+                            if begun and unstarted and "derive" not in request["fields"]:
+                                queue.appendleft({**request, "fields": unstarted})
+                            reason = "memory exhausted" if process in exhausted else f"exit status {process.returncode}"
+                            yield {"tag": request["tag"], "failed": reason}
+                        # A worker that ends before starting a computation would end its successor alike.
+                        if queue and (request is None or begun):
                             spawn()
                         continue
                     pending[process] += chunk
@@ -305,6 +365,8 @@ def computed(chosen: list[Request], deadline: float, workers: int) -> Generator[
                             continue
                         values = json.loads(line)
                         if "done" not in values:
+                            if "started" in values:
+                                started[process] |= set(values["started"])
                             yield values
                             continue
                         del holding[process]
@@ -447,7 +509,7 @@ def certify(
                         log.pop(computation, None)
                         running.pop(computation)
                     exceeded.save(root, log)
-                    failures.append(f"{tag} (exit status {values['failed']})")
+                    failures.append(f"{tag} ({values['failed']})")
                     continue
                 entry = by_tag[str(values["tag"])]
                 match values:

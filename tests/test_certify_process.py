@@ -87,10 +87,7 @@ def test_a_search_that_never_ends_does_not_hold_back_other_cards(tmp_path: Path)
     loaded = corpus.load(tmp_path)
     lattices = {entry.lattice.tag: entry.lattice for entry in loaded.entries}
     # A cut root search on U is resumed first; its semi-decision never returns.
-    log = {
-        genus.name("0016", field): exceeded.Interruption(hash=exceeded.input_hash(genus.name("0016", field), lattices["0016"]), seconds=60)
-        for field in ("roots", "norms")
-    }
+    log = {genus.name("0016", field): exceeded.Interruption(hash=exceeded.input_hash(genus.name("0016", field), lattices["0016"]), seconds=60) for field in ("roots", "norms")}
     exceeded.save(tmp_path, log)
     genus.certify(tmp_path, loaded, {}, (), time.time() + 150, workers=2)
     held = certificates.load(tmp_path)

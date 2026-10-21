@@ -5,9 +5,12 @@ lattice-db tests only the serialization/certificate behavior.
 """
 
 import shutil
+import sys
+import time
 from pathlib import Path
 
 import frontmatter
+import pytest
 
 from latticedb import certificates, corpus, exceeded, genus, records
 from latticedb.model import Lattice
@@ -215,3 +218,64 @@ def test_shards_partition_the_cards() -> None:
     shards = [[tag for tag in tags if genus.in_shard(tag, (index, 4))] for index in range(4)]
     assert sorted(tag for shard in shards for tag in shard) == tags
     assert all(shards)
+
+
+def test_smaller_cards_come_first_and_semi_decisions_end_each_card(tmp_path: Path) -> None:
+    (tmp_path / "lattices").mkdir()
+    shutil.copy(REPOSITORY / corpus.FAMILIES_FILE, tmp_path / corpus.FAMILIES_FILE)
+    (tmp_path / corpus.RETIRED_FILE).write_text("{}\n")
+    for tag in ("0012", "0016", "0026"):
+        shutil.copy(REPOSITORY / "lattices" / f"{tag}.md", tmp_path / "lattices")
+    requested = genus.requests(corpus.load(tmp_path), {}, {}, ())
+    # U has determinant -1 and A2 determinant 3, both of rank 2; II_{1,2} has rank 3.
+    assert [request["tag"] for request in requested] == ["0016", "0012", "0026"]
+    for request in requested:
+        semi = [index for index, field in enumerate(request["fields"]) if field in genus.SEMI_DECISIONS]
+        assert semi == list(range(len(request["fields"]) - len(semi), len(request["fields"])))
+    assert "roots" in requested[0]["fields"]
+
+
+FAKE_WORKER = """
+import json, sys, time
+for line in sys.stdin:
+    request = json.loads(line)
+    for field in request["fields"]:
+        print(json.dumps({"tag": request["tag"], "started": [field]}), flush=True)
+        if field == "raises":
+            sys.exit(1)
+        if field == "grows":
+            time.sleep(60)
+        print(json.dumps({"tag": request["tag"], field: True}), flush=True)
+    print(json.dumps({"tag": request["tag"], "done": True}), flush=True)
+"""
+
+
+def _pool(tmp_path: Path, fields: list[str]) -> list[dict[str, object]]:
+    worker = tmp_path / "worker.py"
+    worker.write_text(FAKE_WORKER)
+    request: genus.Request = {"tag": "0012", "gram": [[2]], "integral": True, "fields": fields, "series_bound": 1}
+    stream = genus.computed([request], time.time() + 60, 1)
+    return [values for values in stream if "checkpoint" not in values and "started" not in values]
+
+
+def test_a_card_continues_on_a_new_worker_after_one_computation_fails(tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> None:
+    monkeypatch.setattr(genus, "WORKER", [sys.executable, str(tmp_path / "worker.py")])
+    assert _pool(tmp_path, ["genus_symbol", "raises", "regular"]) == [
+        {"tag": "0012", "genus_symbol": True},
+        {"tag": "0012", "failed": "exit status 1"},
+        {"tag": "0012", "regular": True},
+    ]
+
+
+def test_the_largest_worker_is_killed_when_memory_runs_low(tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> None:
+    monkeypatch.setattr(genus, "WORKER", [sys.executable, str(tmp_path / "worker.py")])
+    # A reserve above the machine's memory is never available, so the worker is killed at once.
+    monkeypatch.setattr(genus, "MEMORY_RESERVE", 2.0)
+    assert _pool(tmp_path, ["grows"]) == [{"tag": "0012", "failed": "memory exhausted"}]
+
+
+def test_a_worker_that_fails_before_computing_is_not_replaced(monkeypatch: pytest.MonkeyPatch) -> None:
+    monkeypatch.setattr(genus, "WORKER", [sys.executable, "-c", "raise SystemExit(3)"])
+    requests: list[genus.Request] = [{"tag": tag, "gram": [[2]], "integral": True, "fields": ["genus_symbol"], "series_bound": 1} for tag in ("0011", "0012")]
+    stream = genus.computed(requests, time.time() + 60, 1)
+    assert [values for values in stream if "checkpoint" not in values] == [{"tag": "0011", "failed": "exit status 3"}]

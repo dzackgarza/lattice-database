@@ -389,11 +389,15 @@ Certification starts the entry at zero elapsed seconds, checkpoints actual runti
 A hard kill retains the latest checkpoint; an early interruption remains eligible for retry.
 A computation that ran for at least five hours does not fit in one job, and certification never requests it again.
 A computation that ran for less is requested first by the next job, after any required derivation.
-If a worker crashes on a card, certification drops that card's entries, since a crash is a defect and not a timeout, continues with the other cards on a fresh worker, and fails once the queue is done.
+If a worker crashes on a card, certification drops the entry of the computation it was running, since a crash is a defect and not a timeout.
+A fresh worker takes the card's computations that had not started, then the other cards, and certification fails once the queue is done.
+A worker that crashes before starting any computation is not replaced.
 A changed Gram tensor changes the hash, so the entry no longer applies.
 After a faster implementation lands, delete the entry by hand.
 
 The queue runs on `--workers` Sage processes, by default one per CPU. A worker holds one card at a time and takes the next only when that card is done, so a computation that never returns holds back only its own worker.
+After the interrupted computations, cards are queued by rank and then absolute determinant, so each job reaches as many cards as it can, and within a card the semi-decisions (`roots`, `norms`, `reflective`, `regular`, `spinor_regular`) follow the fields whose procedures always finish.
+When less than a tenth of the machine's memory is available, certification kills the worker holding the most memory and reports that card as a failure, so a computation that outgrows the runner costs its own card and not the whole job.
 The nightly workflow runs `--shard i/16` on sixteen runners; a card belongs to the shard given by a SHA-256 hash of its tag, so the shards partition the corpus.
 Each shard rebases its commit onto `main`. `.gitattributes` merges `certificates.yaml` and `exceeded.yaml` key by key with `latticedb merge-keyed-map`, since shards never change the same key.
 
