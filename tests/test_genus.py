@@ -18,6 +18,11 @@ from latticedb.model import Lattice
 REPOSITORY = Path(__file__).resolve().parent.parent
 
 
+def derived() -> certificates.Certificates:
+    """The repository's derive certificates, so a copied card requests the fields that apply to it."""
+    return {computation: certificate for computation, certificate in certificates.load(REPOSITORY).items() if computation.endswith(" derive")}
+
+
 def test_sparse_cards_do_not_block_computable_cards(tmp_path: Path) -> None:
     (tmp_path / "lattices").mkdir()
     shutil.copy(REPOSITORY / corpus.FAMILIES_FILE, tmp_path / corpus.FAMILIES_FILE)
@@ -156,7 +161,7 @@ def test_a_definite_binary_lattice_requests_regularity_and_no_spinor_regularity(
     shutil.copy(REPOSITORY / corpus.FAMILIES_FILE, tmp_path / corpus.FAMILIES_FILE)
     (tmp_path / corpus.RETIRED_FILE).write_text("{}\n")
     shutil.copy(REPOSITORY / "lattices" / "0012.md", tmp_path / "lattices")
-    fields = [field for request in genus.requests(corpus.load(tmp_path), {}, {}, ()) for field in request["fields"]]
+    fields = [field for request in genus.requests(corpus.load(tmp_path), derived(), {}, ()) for field in request["fields"]]
     assert "regular" in fields
     assert "spinor_regular" not in fields
 
@@ -168,7 +173,7 @@ def test_a_definite_binary_lattice_requests_its_genus_series_siegel_product_and_
     shutil.copy(REPOSITORY / corpus.FAMILIES_FILE, tmp_path / corpus.FAMILIES_FILE)
     (tmp_path / corpus.RETIRED_FILE).write_text("{}\n")
     shutil.copy(REPOSITORY / "lattices" / "0012.md", tmp_path / "lattices")
-    request = genus.requests(corpus.load(tmp_path), {}, {}, ())[0]
+    request = genus.requests(corpus.load(tmp_path), derived(), {}, ())[0]
     assert request["series_bound"] == 12
     fields = request["fields"]
     for field in (
@@ -228,8 +233,7 @@ def test_smaller_cards_come_first_and_every_card_precedes_the_searches(tmp_path:
         shutil.copy(REPOSITORY / "lattices" / f"{tag}.md", tmp_path / "lattices")
     # U and A2 are derived; II_{1,2} still needs derivation, so its search request
     # carries its record, from which the worker selects the searches that apply.
-    derived = {computation: certificate for computation, certificate in certificates.load(REPOSITORY).items() if computation.endswith(" derive")}
-    requested = genus.requests(corpus.load(tmp_path), derived, {}, ())
+    requested = genus.requests(corpus.load(tmp_path), derived(), {}, ())
     # U has determinant -1 and A2 determinant 3, both of rank 2; II_{1,2} has rank 3.
     assert [request["tag"] for request in requested] == ["0016", "0012", "0026"] * 2
     finishing, searches = requested[:3], requested[3:]
@@ -284,3 +288,14 @@ def test_a_worker_that_fails_before_computing_is_not_replaced(monkeypatch: pytes
     requests: list[genus.Request] = [{"tag": tag, "gram": [[2]], "integral": True, "fields": ["genus_symbol"], "series_bound": 1} for tag in ("0011", "0012")]
     stream = genus.computed(requests, time.time() + 60, 1)
     assert [values for values in stream if "checkpoint" not in values] == [{"tag": "0011", "failed": "exit status 3"}]
+
+
+def test_an_underived_seeded_card_requests_its_invariants_with_its_derivation(tmp_path: Path) -> None:
+    (tmp_path / "lattices").mkdir()
+    shutil.copy(REPOSITORY / corpus.FAMILIES_FILE, tmp_path / corpus.FAMILIES_FILE)
+    (tmp_path / corpus.RETIRED_FILE).write_text("{}\n")
+    shutil.copy(REPOSITORY / "lattices" / "3999.md", tmp_path / "lattices")
+    # A seeded card states its rank but none of the hypotheses that derivation supplies.
+    requested = genus.requests(corpus.load(tmp_path), {}, {}, ())
+    assert requested[0]["fields"][0] == "derive"
+    assert "genus_symbol" in requested[0]["fields"]

@@ -222,7 +222,9 @@ def requests(
         if lattice.determinant == 0:
             applicable = ["integer_valued"]
         else:
-            applicable = list(BLOCKS) if lattice.rank is None else [field for field in BLOCKS if applies(field, lattice)]
+            # Before derivation the card lacks the hypotheses that select its fields, so all
+            # are requested and the worker keeps those that apply to the derived card.
+            applicable = list(BLOCKS) if lattice.rank is None or needs_derive else [field for field in BLOCKS if applies(field, lattice)]
         fields = []
         for field in applicable:
             block_name = BLOCKS[field][0]
