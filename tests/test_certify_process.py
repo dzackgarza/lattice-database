@@ -10,6 +10,7 @@ import sys
 import time
 from pathlib import Path
 
+import pytest
 import yaml
 
 from latticedb import certificates, corpus, exceeded, genus
@@ -56,6 +57,8 @@ def test_an_early_termination_does_not_blacklist_a_computation_for_a_whole_job(t
     lattice = loaded.entries[0].lattice
     interruptions = exceeded.load(tmp_path)
     assert not exceeded.is_exceeded(interruptions, computation, lattice)
+    # The job ended it, not the death of its runner.
+    assert not exceeded.was_lost(interruptions, computation, lattice)
     requested = genus.requests(loaded, certificates.load(tmp_path), interruptions, ("0016",))
     assert "roots" in requested[0]["fields"]
     assert "norms" in requested[0]["fields"]
@@ -126,3 +129,22 @@ def test_no_two_shards_write_the_same_certificate_group() -> None:
         shard = next(index for index in range(16) if genus.in_shard(tag, (index, 16)))
         owners.setdefault(certificates.group(tag), set()).add(shard)
     assert all(len(shards) == 1 for shards in owners.values())
+
+
+def test_a_computation_killed_for_memory_is_run_last_by_the_next_job(tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> None:
+    prepare_card(tmp_path, "0012")
+    worker = tmp_path / "worker.py"
+    worker.write_text(
+        "import json, sys, time\n"
+        "request = json.loads(sys.stdin.readline())\n"
+        'print(json.dumps({"tag": request["tag"], "started": [request["fields"][0]]}), flush=True)\n'
+        "time.sleep(60)\n"
+    )
+    monkeypatch.setattr(genus, "WORKER", [sys.executable, str(worker)])
+    # A reserve above the machine's memory is never available, so the worker is killed at once.
+    monkeypatch.setattr(genus, "MEMORY_RESERVE", 2.0)
+    loaded = corpus.load(tmp_path)
+    first = genus.requests(loaded, {}, {}, ())[0]["fields"][0]
+    with pytest.raises(ChildProcessError, match="memory exhausted"):
+        genus.certify(tmp_path, loaded, {}, (), time.time() + 60)
+    assert exceeded.was_lost(exceeded.load(tmp_path), genus.name("0012", first), loaded.entries[0].lattice)

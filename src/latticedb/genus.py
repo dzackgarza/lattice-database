@@ -560,9 +560,13 @@ def certify(
                 if "failed" in values:
                     tag = str(values["tag"])
                     for computation in [computation for computation in running if computation.startswith(f"{tag} ")]:
-                        # A failure is a defect to repair, not a computation that outran its job.
-                        log.pop(computation, None)
-                        running.pop(computation)
+                        started_at = running.pop(computation)
+                        if values["failed"] == "memory exhausted":
+                            # It would exhaust the next job's memory too, so that job runs it last.
+                            log[computation] = exceeded.Interruption(hash=log[computation].hash, seconds=int(time.monotonic() - started_at), lost=True)
+                        else:
+                            # A failure is a defect to repair, not a computation that outran its job.
+                            log.pop(computation, None)
                     exceeded.save(root, log)
                     failures.append(f"{tag} ({values['failed']})")
                     continue

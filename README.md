@@ -405,6 +405,7 @@ The semi-decisions (`roots`, `norms`, `reflective`, `regular`, `spinor_regular`)
 A cut search leads that phase: every job ends inside a search, and resuming it at the start of the next job would hold its workers through the fields that every procedure finishes.
 A card that still needs derivation carries its record into that later request, and the worker derives it again only to select the searches that apply.
 When less than a tenth of the machine's memory is available, certification kills the worker holding the most memory and reports that card as a failure, so a computation that outgrows the runner costs its own card and not the whole job.
+Its computation is logged as lost, so the next job runs it last.
 The nightly workflow runs `--shard i/16` on sixteen runners; a card belongs to the shard given by a SHA-256 hash of its tag, so the shards partition the corpus.
 Every half hour and at the end of its job, each shard pushes what it has certified since its last push onto `main` (`.github/scripts/persist.sh`), so a runner that dies loses at most half an hour.
 `.gitattributes` merges the files of `certificates/` and `exceeded.yaml` key by key with `latticedb merge-keyed-map`, since shards never change the same key.
