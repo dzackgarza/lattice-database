@@ -3,6 +3,9 @@ tag: 2UMN
 name: brandt_intrau Brandt_2.html:4902
 latex: brandt_intrau Brandt_2.html:4902
 aliases: []
+certifications:
+  derive: 773b0f9fedaee115eaa0272d1c16dfd6f72063c44fe7571e3a5ec69912a8cd01
+  form.integer_valued: 288227ab49e617cbc14fcfe95c6dcb041eff511f27270b612e084875136a6129
 rank: 3
 gram_tensor:
 - [2, 0, 1]
@@ -11,6 +14,34 @@ gram_tensor:
 signature: [3, 0]
 determinant: 736
 definiteness: positive_definite
+dual_gram_tensor:
+- [371/736, 1/736, -3/368]
+- [1/736, 123/736, -1/368]
+- [-3/368, -1/368, 3/184]
+form:
+  integer_valued: true
+integral:
+  parity: even
+  level: 1472
+  discriminant_group: [736]
+  bad_reduction_primes: [2, 23]
+definite:
+  minimum: 2
+  kissing_number: 2
+  minimal_vectors:
+  - [-1, 0, 0]
+  - [1, 0, 0]
+  perfect: false
+  theta_series: [1, 0, 2, 0, 0, 0, 2, 0, 6, 0, 0, 0, 0]
+  root_system: [A1]
+  roots:
+  - type: A1
+    scale: 1
+    simple_roots:
+    - [1, 0, 0]
+root_sublattice:
+  invariant_factors: [1]
+morphisms: []
 families: []
 related: []
 references:

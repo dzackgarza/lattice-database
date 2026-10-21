@@ -3,6 +3,9 @@ tag: 3EVU
 name: watson 2:206
 latex: watson 2:206
 aliases: []
+certifications:
+  derive: 0fae2df89c0418ccd3be309b9544c2cbfff06b66dbcabc2e01b70e626b5a1b47
+  form.integer_valued: 5d844b9c4874d161dc158bb8dcd97baf40d0418a565913f22d8ceb14499a9b1a
 rank: 2
 gram_tensor:
 - [13, 5]
@@ -10,6 +13,30 @@ gram_tensor:
 signature: [2, 0]
 determinant: 742
 definiteness: positive_definite
+dual_gram_tensor:
+- [59/742, -5/742]
+- [-5/742, 13/742]
+form:
+  integer_valued: true
+integral:
+  parity: odd
+  level: 1484
+  discriminant_group: [742]
+  bad_reduction_primes: [2, 7, 53]
+  quadratic_character: -2968
+definite:
+  minimum: 13
+  kissing_number: 2
+  minimal_vectors:
+  - [-1, 0]
+  - [1, 0]
+  perfect: false
+  theta_series: [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2]
+  root_system: []
+  roots: []
+root_sublattice:
+  invariant_factors: []
+morphisms: []
 families: []
 related: []
 references:

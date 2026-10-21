@@ -3,6 +3,9 @@ tag: 3DYQ
 name: brandt_intrau Brandt_2.html:29967
 latex: brandt_intrau Brandt_2.html:29967
 aliases: []
+certifications:
+  derive: 88cd1540f9db21d19eb0d41f92a2063d913b90a240fe5ac573554acc4ca5b901
+  form.integer_valued: a99adf86f790cea2cb0c02a9f158487d41b4c78e9989231dfd9ea66d4a2891e5
 rank: 3
 gram_tensor:
 - [2, 1, 1]
@@ -11,6 +14,34 @@ gram_tensor:
 signature: [3, 0]
 determinant: 1968
 definiteness: positive_definite
+dual_gram_tensor:
+- [1015/1968, -47/1968, -5/656]
+- [-47/1968, 103/1968, -3/656]
+- [-5/656, -3/656, 13/656]
+form:
+  integer_valued: true
+integral:
+  parity: even
+  level: 3936
+  discriminant_group: [1968]
+  bad_reduction_primes: [2, 3, 41]
+definite:
+  minimum: 2
+  kissing_number: 2
+  minimal_vectors:
+  - [-1, 0, 0]
+  - [1, 0, 0]
+  perfect: false
+  theta_series: [1, 0, 2, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0]
+  root_system: [A1]
+  roots:
+  - type: A1
+    scale: 1
+    simple_roots:
+    - [1, 0, 0]
+root_sublattice:
+  invariant_factors: [1]
+morphisms: []
 families: []
 related: []
 references:
