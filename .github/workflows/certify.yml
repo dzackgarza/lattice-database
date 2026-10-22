@@ -59,7 +59,7 @@ jobs:
           minutes=$(( (CERTIFY_DEADLINE - $(date +%s)) / 60 ))
           (( minutes > 0 ))
           if (( minutes > 330 )); then minutes=330; fi
-          args=(--minutes "$minutes" --shard "${{ matrix.shard }}/$SHARDS")
+          args=(--minutes "$minutes" --shard "${{ matrix.shard }}/$SHARDS" --workers 1)
           if [[ -n "$LATTICEDB_TAG" ]]; then
             args+=(--tag "$LATTICEDB_TAG")
           fi
