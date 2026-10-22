@@ -333,10 +333,6 @@
   hash: e9a35b7da91dcd00dd2193b061e2e0619539524bab6b5805ec303e0514afa883
   seconds: 0
   lost: true
-0Z3E integral.elementary_primes:
-  hash: 646649578c89a563ec2e70816b3050d3306d6b9952534f098d552970f2d974d2
-  seconds: 0
-  lost: true
 14GP integral.genus_class_count:
   hash: ebbbead04771d1bd8cfebc45efa2ad3838a8aefdb3f2e0d9f3b23c7571dbc8d6
   seconds: 0
@@ -628,6 +624,10 @@
 3GEH integral.overlattice_count:
   hash: 75b98a72eb3d3314b6fd55e345ca2d1ed9bc31c3e559ecc31215d5b9823c122a
   seconds: 8
+  lost: true
+3GMV integral.discriminant_sequence:
+  hash: a029d73c5d8f9f678e04dd83c1942161a59bd3b1d96906b02234c4400830a4da
+  seconds: 42
   lost: true
 3GPO integral.discriminant_sequence:
   hash: 669b61a0d61a7bcfbe71eebfa13f6e0c430415676829472753737ebd7aa760bf
