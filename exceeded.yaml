@@ -253,12 +253,22 @@
 077Q definite.regular:
   hash: 914902341abad2a39c8826f5252d6b055b15688bc1c8d16016333081f7fab22c
   seconds: 6640
-0KUX integral.genus_class_count:
-  hash: a82c2a31f6919d2a761ee56df8e475e98952f7cb94247f726453a4c914300923
+0LX3 definite.siegel_eisenstein_coefficients:
+  hash: 2d7301207cc43bb763f03cfdecc163a5304ed8c19b18274a86dd376fd527f8b6
   seconds: 0
-0KVU integral.genus_class_count:
-  hash: 740119abb1b3960f1b431da66c3f33d9da6f1592a0747cde0f65b466c7d5d812
+  lost: true
+0LX4 integral.discriminant_sequence:
+  hash: 8eced17e5c13db90e8c712cd0f56666078e329e8d910d15b50531ff63f77b314
   seconds: 0
+  lost: true
+0LXB integral.genus_class_count:
+  hash: cb40cb68b5f0b28e4dd59623f9051a37c8d579c21d9488372f363deed861a38d
+  seconds: 0
+  lost: true
+0LXI integral.genus_class_count:
+  hash: 59f3e860a26817f0ea30db37aed80596a35ce07a4da85a02788a9faac7b514cb
+  seconds: 0
+  lost: true
 0QP5 definite.genus_theta_series:
   hash: 1dca75602f06e5452662e22868bdc8c4b894c681709da27665aec21d6e4343a2
   seconds: 6
@@ -407,6 +417,10 @@
 3G19 integral.overlattice_count:
   hash: 85dd3c9eeaaf9ed6fc3f16d83ae0ec9ab30091e8fdc6b8a60b9112c7bad9e76b
   seconds: 11
+  lost: true
+3G2C integral.overlattice_count:
+  hash: 25b27fea9e8a5e9e17935f186d225267c4ac2c2f6362f9c4072aa656d94fff30
+  seconds: 32
   lost: true
 3G3B integral.overlattice_count:
   hash: e24fd77ac5a892c1b1c1007b498edfbddf61a344ea67b0f93576a4eea8f0b3f8
