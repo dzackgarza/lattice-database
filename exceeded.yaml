@@ -269,12 +269,6 @@
   hash: 59f3e860a26817f0ea30db37aed80596a35ce07a4da85a02788a9faac7b514cb
   seconds: 0
   lost: true
-0QP5 definite.genus_theta_series:
-  hash: 1dca75602f06e5452662e22868bdc8c4b894c681709da27665aec21d6e4343a2
-  seconds: 6
-0QP6 definite.siegel_eisenstein_coefficients:
-  hash: fe1d85fcdeeec2f0202d295bca920f6a63d144de852ddecfbe558b3b9d156d14
-  seconds: 4
 0R1K definite.genus_theta_series:
   hash: 31404e1cdf1c5a3e94be3d22b91a8a10c9b1ae92272e9a5ff3622356ec6cf1bd
   seconds: 10
@@ -290,6 +284,18 @@
 0U9W derive:
   hash: 598e895717bf692e81031d13c284847aff5d48e4959a6c41a5c699b1af36a748
   seconds: 6
+0UWB integral.local_representations:
+  hash: 3250e625ece1d7e3059bbb24741e1f7fa1c5a20b69e017dd0256ee5901354c02
+  seconds: 2
+0UWH definite.theta_series_cuspidal_component:
+  hash: 80dfe05a6e39c44e3104e49e2d4ccc6326190484787b9c241146e71c141167d1
+  seconds: 1
+0UX2 integral.genus_class_count:
+  hash: 3c35d1601dcc2ab6af83ba9d30d5aa0058d9bf9fb8f5f4662df787e977726bf5
+  seconds: 25
+0UXM integral.genus_class_count:
+  hash: a8e50936bd4c69a228beb3447c9445c60d96325e1f72cca5a7a0f406a633b5c6
+  seconds: 7
 0VBL integral.discriminant_sequence:
   hash: a0a5a44f32511fdf24bda5d1769c729bd38c797c5df53b9b26f9dc31ec839cee
   seconds: 0
@@ -426,6 +432,10 @@
   hash: e854025caec32cdc53db35f38be171ebfee984fa1260869e837c4fc360bb3e15
   seconds: 19
   lost: true
+3EQO integral.overlattice_count:
+  hash: 4628632bcb557b995b941a72de84eee7ac7dd6b07fe1216218f8c9097f757f08
+  seconds: 19
+  lost: true
 3EQP integral.overlattice_count:
   hash: 54a6cc2d871996f4e8ec4680ed360d81d3d8a3c464d21fea1a048e76ad4a8a84
   seconds: 26
@@ -437,6 +447,14 @@
 3F9Q integral.overlattice_count:
   hash: c5f530c5933b2f8155ff85d53c9efdebc3ee7d36aed05b5044677883143bdfec
   seconds: 13
+  lost: true
+3F9S integral.overlattice_count:
+  hash: 9b1657fc71b7ee33c35de544188adabcaf49c37f8fc61f9ad49e753e2dbb09ff
+  seconds: 19
+  lost: true
+3F9T integral.overlattice_count:
+  hash: 86f54dc740c33dfec3324a253602e0a9398addd082574ae8b7d72ca5dbce4175
+  seconds: 22
   lost: true
 3F9V integral.overlattice_count:
   hash: 8d6a2b7c393d8327a1fad0045ad698a12af4177dd0462a63a7021e3c9aa811c5
