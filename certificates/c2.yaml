@@ -25131,11 +25131,26 @@
 3GR2 definite.automorphism_group_order:
   hash: 7a44255a86258baf92c619eeddcbef09982e40b3241893b84971914146eb930d
   by: research preamble
+3GR2 definite.genus_theta_series:
+  hash: 8d1ba184b4b49edfa84987edb971666c8de9fa11947612c1e90a60bfad7460c9
+  by: research preamble
+3GR2 definite.siegel_eisenstein_coefficients:
+  hash: 0c901127d8130353d27703d71a36a434b5cac2d8ee4a89282efc1408d52650c7
+  by: research preamble
+3GR2 definite.theta_series_cuspidal_component:
+  hash: 907eb74b3c526c96997c171ea9792b9ec312e3a2321321467fc27bc951f2a961
+  by: research preamble
 3GR2 derive:
   hash: 16dfeaac6abdb2a7a319852da823496cab8bcdb545653dbcd31de4776adcdd04
   by: research preamble
 3GR2 form.integer_valued:
   hash: 5f56fe441aa3ad5c52ca7e1b7a06946edac2e650f6369863a0eb63f7b06f8894
+  by: research preamble
+3GR2 integral.anisotropic_primes:
+  hash: 5c8da4efd70c7a70e887783d2bc7670fe30421a426f930d54125809eb756f06b
+  by: research preamble
+3GR2 integral.discriminant_sequence:
+  hash: 15380ceb3abeb6ab1c5e9077cd753866dfbb620649908b69fcfda501072676b1
   by: research preamble
 3GR2 integral.elementary_primes:
   hash: 4017e6d09a178b4c559d34d3d4ab5d83c01e950f091307b6f6d7bb6a432bad93
@@ -25149,8 +25164,20 @@
 3GR2 integral.hyperbolic_index:
   hash: 46707bc35b6c23e873e2cbd87446e1aa3ec245f7d88330b3d5795ff4e6091dfb
   by: research preamble
+3GR2 integral.local_densities:
+  hash: 5d81d9b873d11a157545f1e45b1e23eb58b1db3513b9261a41ebb8b94e3a9f24
+  by: research preamble
+3GR2 integral.local_representations:
+  hash: 2b185db4398e0ec0b016911315a0183b1a430f62bf720832e888a41ebf724993
+  by: research preamble
+3GR2 integral.modular_scale:
+  hash: c1a35fc5b7f73bda547ad127971dc7ffd7b9115ab7e57810f7274644af46fd0c
+  by: research preamble
 3GR2 integral.overlattice_count:
   hash: 14bfdeb5a00bd0a2f6f12ed2aa1d9dcc32b9192121d7eac03722f97a5d6c0cc2
+  by: research preamble
+3GR2 integral.primitive_orbits:
+  hash: 000ed30ad70eb08679348a05aa290190cfe6072d1767ad21d57428ff753e2b41
   by: research preamble
 3GR2 integral.spinor_genera:
   hash: 9200f71433f718b21a91c24c087dccad52e4b13ec4068d1c3c82c604a3a45b1a
