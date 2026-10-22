@@ -19,6 +19,11 @@ certifications:
   integral.primitive_orbits: d3d187e334cd6c85c5d162e756852ffd942e6dc5f6ef0785b6d1b13b7351727a
   integral.modular_scale: 3ecb10d0e54342667e953586479feb3e3ca22e372158ffe678095385acecb277
   definite.genus_theta_series: dd741bf1464b48ee6f55e2692b797b08b64da72af8271ec991a0c457dd7643e2
+  definite.theta_series_cuspidal_component: fc6e0dae79c3313d9be9ab8350a96197c7d670ee7e80bc29407a87da7eec0062
+  definite.siegel_eisenstein_coefficients: 68c5ca22c82ae439515522b77068ded7d05a3c8c755532d05cbe19c6ee6f4936
+  integral.anisotropic_primes: 5c3573d8e644e5ce88187523b00231e84443ff357e17c50c8e9120c5948b1b9b
+  integral.local_representations: 64ec621a2f2e7d6bf07569ca7af70e00d34cfcf12ed49b90c062eedb32370563
+  integral.local_densities: bb84c520ca78cae36ea826314e15f8a4057bf94d0bfa26d30015bd9d7df92f50
 rank: 4
 gram_tensor:
 - [2, 1, 1, 0]
@@ -103,6 +108,31 @@ integral:
       constant: 0
       z: [0, 2, 0, 4]
       w: [0, 0, 0, 0]
+  anisotropic_primes: []
+  local_representations:
+  - prime: 2
+    classes:
+    - representative: 1
+      least_valuation: 2
+    - representative: 3
+      least_valuation: 2
+    - representative: 5
+      least_valuation: 2
+    - representative: 7
+      least_valuation: 2
+    - representative: 2
+      least_valuation: 1
+    - representative: 6
+      least_valuation: 1
+    - representative: 10
+      least_valuation: 1
+    - representative: 14
+      least_valuation: 1
+  local_densities:
+  - prime: 2
+    densities: [0, 3/2, 0, 9/4, 0, 3/2, 0, 21/8, 0, 3/2, 0, 9/4]
+  - prime: 1697
+    densities: [1696/1697, 1696/1697, 1698/1697, 1696/1697, 1698/1697, 1698/1697, 1698/1697, 1696/1697, 1696/1697, 1698/1697, 1696/1697, 1698/1697]
 definite:
   minimum: 2
   kissing_number: 2
@@ -114,6 +144,8 @@ definite:
   perfect: false
   theta_series: [1, 0, 2, 0, 4, 0, 0, 0, 6, 0, 0, 0, 4]
   genus_theta_series: [1, 0, 848/1003, 0, 2544/1003, 0, 1698/1003, 0, 5936/1003, 0, 3396/1003, 0, 5094/1003]
+  theta_series_cuspidal_component: [0, 0, 1158/1003, 0, 1468/1003, 0, -1698/1003, 0, 82/1003, 0, -3396/1003, 0, -1082/1003]
+  siegel_eisenstein_coefficients: [0, 848/1003, 0, 2544/1003, 0, 1698/1003, 0, 5936/1003, 0, 3396/1003, 0, 5094/1003]
   root_system: [A1]
   roots:
   - type: A1
