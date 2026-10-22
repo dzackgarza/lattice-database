@@ -27329,6 +27329,12 @@
 3GQK integral.spinor_genus_count:
   hash: cccebf507ad6d38715cb8b55e2233fa8d31b430aad996159c19280df73bc4dac
   by: research preamble
+3GRU definite.automorphism_group_generator_morphisms:
+  hash: 48c9a0bf2b2f6cff138d25f2e66780ac227eb44c726e8c25fcb303417606466b
+  by: research preamble
+3GRU definite.automorphism_group_order:
+  hash: 65b9eee8a64d41dd920aff049997db5a32c85e41c7016f5437cc85b522035e3c
+  by: research preamble
 3GRU derive:
   hash: 9dc65e664b049b90e65e09fbf0e1fbba26ab470dd90725ced27ea70e8f89c03e
   by: research preamble
@@ -27343,6 +27349,15 @@
   by: research preamble
 3GRU integral.genus_symbol:
   hash: 4fca3dd16913586d493fc661eed02413b46dc4d8b7d2e8518a301d46f8ea23df
+  by: research preamble
+3GRU integral.hyperbolic_index:
+  hash: b229e8c63220a2cf3d8117ed70bb67ab118dba4ae7405e2940f65b41187c983e
+  by: research preamble
+3GRU integral.spinor_genera:
+  hash: 59be37cf8c633a991384e82e8615c5847f90e55b4de3b0d113dd5bc38be3a0c5
+  by: research preamble
+3GRU integral.spinor_genus_count:
+  hash: 242d3dec511f6af78abf8e9b3fbb60cf66d22605fe043833dd8559151039a06a
   by: research preamble
 3I7N definite.automorphism_group_generator_morphisms:
   hash: fdfe82bd61d283c78a3e86f9b25b17246d7076e997d02d0dc33a090452e65c4e

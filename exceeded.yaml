@@ -405,12 +405,6 @@
 1JLE integral.genus_class_count:
   hash: 3d23810c8a838328f6633afa64ed54dcf983dc6c23e792d47236e065ce6d5a07
   seconds: 27
-1NYI definite.siegel_eisenstein_coefficients:
-  hash: 48a4c7047b93a758b2193e66853b04c75607cc0a058b564c7c57dec07304513a
-  seconds: 2
-1NZ4 integral.genus_class_count:
-  hash: 0635f685066f84b2893f4188f4f9fe2a8f96ce13ea54aeb76279e1749fa8b1b8
-  seconds: 4
 2Z02 definite.genus_theta_series:
   hash: 3399cafd0a1856af5eb56c9396a96136a20b63946876b17a9c246e4b34d6fc6d
   seconds: 0
@@ -571,9 +565,10 @@
   hash: 75b98a72eb3d3314b6fd55e345ca2d1ed9bc31c3e559ecc31215d5b9823c122a
   seconds: 8
   lost: true
-3GRF integral.discriminant_sequence:
-  hash: f179bec771a8fa987c62ecc2e82f410929e8b711affc8e9235e880eb4c40f643
-  seconds: 226
+3GRU integral.discriminant_sequence:
+  hash: 0873c77aea247747beee5f6503d4678ca0c393ad59c2a14ff0e34fd7c44871c6
+  seconds: 292
+  lost: true
 3GW5 integral.overlattice_count:
   hash: 4638adc325a0ee6d4d9136c3852ee4c80d348052095c2f530e2b1196e868f777
   seconds: 5
