@@ -309,10 +309,6 @@
   hash: fa36a0215c9394768ad0dc5fc9ba6fa459b7390e1e92dba69508d3952353013e
   seconds: 0
   lost: true
-0WJ8 integral.overlattice_count:
-  hash: 546e7d627fcd87b1096b17d7db1ce963a0634773d1ab0566a25e82e38a4cd927
-  seconds: 0
-  lost: true
 0WV9 definite.genus_theta_series:
   hash: e13a2e1c9c0e0605678506eff7d2d27210d07d37dd2f67a9637c75bbf5ce0833
   seconds: 0
@@ -331,6 +327,10 @@
   lost: true
 0YVT integral.elementary_primes:
   hash: e9a35b7da91dcd00dd2193b061e2e0619539524bab6b5805ec303e0514afa883
+  seconds: 0
+  lost: true
+10HZ integral.genus_class_count:
+  hash: 25e7bc36f0e14d9767f47a270679fc2798cd83c039536bfcc8d990f9acd09cc8
   seconds: 0
   lost: true
 14GP integral.genus_class_count:
