@@ -319,18 +319,6 @@
 12TH derive:
   hash: 8d5e0439b982983c5215d8c6ad6f93c339445f863464d3513ed993ea5d19440c
   seconds: 2
-12TO integral.genus_class_count:
-  hash: b89961263b86b70a81b0a85c892d99e2f7ac4e51962e964a52eed210b2b32ec3
-  seconds: 13
-12TY integral.genus_class_count:
-  hash: ec53aa78cb8e2064073c7ba2bbed2f3b869d4ab329a29897475dda6defb78cd0
-  seconds: 17
-12U9 integral.genus_class_count:
-  hash: e771bf358664473cec045810375dad90cf7d1ebc9e7baf71c9c7369d1e5f360f
-  seconds: 16
-12UK integral.genus_class_count:
-  hash: c4f43b43577a539875cf145c72ad42406df6ac7c2d9ded82215702a57678294b
-  seconds: 15
 135S integral.overlattice_count:
   hash: 6fc7e4a92164dc9b78d0bc1415434461d2f0b53b00fb0f258b5f85be6ebfa884
   seconds: 1
@@ -367,6 +355,22 @@
 13UK integral.elementary_primes:
   hash: 5eed87aefa97f60d1939afeda6ceccdd48490968311442796c0b0f0bfba6ccae
   seconds: 1
+14GP integral.genus_class_count:
+  hash: ebbbead04771d1bd8cfebc45efa2ad3838a8aefdb3f2e0d9f3b23c7571dbc8d6
+  seconds: 0
+  lost: true
+14I2 integral.genus_class_count:
+  hash: 53ae977c12cd55c6593ae3e4ff3e2a330f2c4644ba08ef51e962ae89497be507
+  seconds: 0
+  lost: true
+14I5 integral.genus_class_count:
+  hash: 58b1e63d270d1bcd91e4b665698fcd5099f7c6b73db389af28f439dc7b2b640c
+  seconds: 0
+  lost: true
+14IS integral.genus_class_count:
+  hash: ff001c37cb5dbdcf1279331de0414a5e76ddf89fd20ce18f50841b1a4491fe3e
+  seconds: 0
+  lost: true
 19MG integral.genus_class_count:
   hash: 557a803c92ec424cc03b32bceb959a017f087b3d4d34d72adfdb30e7d10a81ec
   seconds: 8
@@ -400,3 +404,15 @@
 1LK4 integral.genus_class_count:
   hash: 92aa2b51c6cd2fbf49d0c824317d02cd8b8dda69ee67c3c66c604309fe8bb414
   seconds: 8
+3G19 integral.overlattice_count:
+  hash: 85dd3c9eeaaf9ed6fc3f16d83ae0ec9ab30091e8fdc6b8a60b9112c7bad9e76b
+  seconds: 11
+  lost: true
+3G3B integral.overlattice_count:
+  hash: e24fd77ac5a892c1b1c1007b498edfbddf61a344ea67b0f93576a4eea8f0b3f8
+  seconds: 12
+  lost: true
+3G5J integral.overlattice_count:
+  hash: 224b4c63f167cd90e61b6adf2b88fa1e73b5fecfbcc3c8c4d838918f1f60b3f2
+  seconds: 7
+  lost: true
