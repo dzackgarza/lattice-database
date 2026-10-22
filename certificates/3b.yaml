@@ -24549,6 +24549,9 @@
 3G6U definite.automorphism_group_order:
   hash: a2fbcd0c3c1559cd19de9795f6e2cf447fd6f324d7699d6aa8cb5fc28f917a2e
   by: research preamble
+3G6U definite.genus_theta_series:
+  hash: 9eb38377be4d359c2e65dace6649001cd2e52d50bf112de800fcf0a7dc4a3b8d
+  by: research preamble
 3G6U definite.regular:
   hash: 1cc6fea060a4383c40f4d6318f0c51346d11d61c2127e62080d843a1d4fb2c98
   by: 'W. C. Jagy, I. Kaplansky and A. Schiemann, There are 913 regular ternary forms,
@@ -24557,6 +24560,9 @@
     positive-definite integral ternary quadratic forms, Integers 19 (2019), #A45,
     Tables 1 and 2; regular by W. C. Jagy, I. Kaplansky and A. Schiemann, There are
     913 regular ternary forms, Mathematika 44 (1997), 332-341.'
+3G6U definite.siegel_eisenstein_coefficients:
+  hash: 040fbcdcf143e23d7abed890d6631188b77f94ca91a5401cb53d726cdc3142f8
+  by: research preamble
 3G6U definite.spinor_regular:
   hash: 98d6d9a0b44037574127a25eeacaa9b8a023429fcad0215a9daf25c71ba224a7
   by: 'W. C. Jagy, I. Kaplansky and A. Schiemann, There are 913 regular ternary forms,
@@ -24569,11 +24575,17 @@
     by its spinor genus (A. G. Earnest and A. Haensch, Completeness of the list of
     spinor regular ternary quadratic forms, arXiv:1711.05811v2 (2018), Abstract) and
     the spinor genus lies in the genus.'
+3G6U definite.theta_series_cuspidal_component:
+  hash: c48c98a68193165d68c4065bc9487577ea5fa1a1983990bfe5542922cb4e8b86
+  by: research preamble
 3G6U derive:
   hash: 8fadd4863a9d7b9f9c2d644d15f632394a8ca10ee976fd115afd65c420522640
   by: research preamble
 3G6U form.integer_valued:
   hash: c1ce8846153cf2c13c24140a73a70ddea808a9ec128f9c76c4367011de6064b0
+  by: research preamble
+3G6U integral.anisotropic_primes:
+  hash: 1f9a6ce31b2f746308932dda3d374a496aaf49595942a423f15788765935c3c1
   by: research preamble
 3G6U integral.elementary_primes:
   hash: efce8cce9f5dcbf802f0d73b6b27bb323a5106632aebeca13778437769ca72db
@@ -24583,6 +24595,27 @@
   by: research preamble
 3G6U integral.genus_symbol:
   hash: 3e40ba268c429a2046644f5c083ff1d0e62a428911602248d3283712633fe7b5
+  by: research preamble
+3G6U integral.hyperbolic_index:
+  hash: 01e8c903c35ba56f1af06aac0a91921d13e5a5e2cb388fad15c6228d228a0a4e
+  by: research preamble
+3G6U integral.local_densities:
+  hash: 944d41c537618c9912db64587109a921a84e6273758afbfeaeb292a92637446f
+  by: research preamble
+3G6U integral.local_representations:
+  hash: 0279a7828032c11980c829807a0e9ee488cf6ac8da204a4c20b6de633c042ff6
+  by: research preamble
+3G6U integral.modular_scale:
+  hash: a77a5dea433489b2147da45d3d1348710cdd0dad679b8e50053e68fbd42ddbe3
+  by: research preamble
+3G6U integral.primitive_orbits:
+  hash: bd8144e0b097060ed698bfc4e0a0abe8d02fb14d77159089ba0391985306feeb
+  by: research preamble
+3G6U integral.spinor_genera:
+  hash: ab8d94908d21fd1d1bdf0b22598fc065b4d9de0600aad40ffd6fbbe07e1a2a0a
+  by: research preamble
+3G6U integral.spinor_genus_count:
+  hash: e9f130098c8e154fba3f2e330bc03bed52e0605bec7003925ee683fc2ad73c11
   by: research preamble
 3G89 definite.automorphism_group_generator_morphisms:
   hash: 3093aee253fb3ba61245bfb1a056be3f00fc74ab87581e236eb204ce9268e690

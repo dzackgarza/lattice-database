@@ -401,18 +401,18 @@
 1A77 integral.discriminant_sequence:
   hash: ce6c6ff8a0c3d51ea206826c51f5b76cb54ee390910be7233565996ec632da7f
   seconds: 12
-1J4X integral.discriminant_sequence:
-  hash: 887c97232a70bd12bfb141d5d6e0b74f4bc260b86c658995598aa05f5bdcb39c
+1JL3 integral.genus_class_count:
+  hash: a8e50299b7c26ba57cf6cb4fb3b9cd826ec2562910617df8fa3a00aac905c31d
+  seconds: 127
+1JL4 integral.primitive_orbits:
+  hash: 170bdf0506d0864ae9a0184bea553439fd9388c00bb77498c04ce502a2ba1db8
   seconds: 6
-1J58 integral.genus_class_count:
-  hash: b9fbb8164baaf2ea5c5b721d0f2a8029aac37fc165788910683c68893d97491d
-  seconds: 15
-1J5C integral.genus_class_count:
-  hash: d752a38c0f9c09e7a5cdcb61116df65382837a3111d9c182474cb6321e3ab617
-  seconds: 15
-1J5O integral.genus_class_count:
-  hash: 514d8abddd88622c87878535af419bc08d5d2dbb37a7a7b17223993e68da8855
-  seconds: 8
+1JL8 integral.genus_class_count:
+  hash: 7b6231a4b3ed29a155a9912c14ffe05736fde7004d29527293affe4faa92511c
+  seconds: 58
+1JLE integral.genus_class_count:
+  hash: 3d23810c8a838328f6633afa64ed54dcf983dc6c23e792d47236e065ce6d5a07
+  seconds: 27
 1LIV definite.genus_theta_series:
   hash: 266cc3d1280d0d3001664fd279623b3f51923d2c0db7b970377d625c8f550902
   seconds: 8
@@ -473,6 +473,10 @@
 3G6I integral.overlattice_count:
   hash: 34ead854a932ade29ae0c5fc8810760114be5b86ef4cd1d5296803c25b3b67dc
   seconds: 5
+  lost: true
+3G6U integral.overlattice_count:
+  hash: 54d00cf6ae7a28dc51fc442844c6b5b472ed58ead63bcd3bbd214246be8d3c7f
+  seconds: 15
   lost: true
 3GEH integral.overlattice_count:
   hash: 75b98a72eb3d3314b6fd55e345ca2d1ed9bc31c3e559ecc31215d5b9823c122a
