@@ -350,18 +350,18 @@
 12TH derive:
   hash: 8d5e0439b982983c5215d8c6ad6f93c339445f863464d3513ed993ea5d19440c
   seconds: 2
-135S integral.overlattice_count:
-  hash: 6fc7e4a92164dc9b78d0bc1415434461d2f0b53b00fb0f258b5f85be6ebfa884
-  seconds: 1
-135X integral.genus_class_count:
-  hash: 2b9df439db41a64922315a1f925b56f990259ed834f0316ed85d01576dea2faa
-  seconds: 23
-1360 integral.genus_class_count:
-  hash: d431be6a4b08de5adadbd5d05df043a792b0d62bef99eb6e63a87eab8853e9f8
-  seconds: 13
-136H integral.elementary_primes:
-  hash: fc28384ed476ce73c7c3f0b79c7c2f710845eda575c2cc8b2ab4f2965774f239
-  seconds: 0
+142W integral.genus_class_count:
+  hash: f88d66f53ecc623826986fc778206a8738150ee9415127a297c491d9dd89bd14
+  seconds: 42
+1430 integral.genus_class_count:
+  hash: 3a4365cfb8211ef0cbce6727f93928f7aaa9781289a0afcb70f8d326bc9a6dfc
+  seconds: 31
+1433 integral.genus_class_count:
+  hash: 13b0c5c46349629a9f52c9741451ac445f174601003bb116e9349acae434a058
+  seconds: 12
+143H integral.genus_class_count:
+  hash: 0cc052790fbe6e03db521dcc0d1ff858d85c1f36d31bf3050e6ecef2cb6bdcc1
+  seconds: 8
 14EL integral.discriminant_sequence:
   hash: 24172b234fc02d08b5cd752f1aa7e732746cf5f014a152f7a081eb88c0edb1b0
   seconds: 4
@@ -604,6 +604,10 @@
 3IA8 integral.overlattice_count:
   hash: e36916caf7fbebcd996ca951c96c9cd4f2638c87b2d08177090d866ce130a952
   seconds: 10
+  lost: true
+3IA9 integral.overlattice_count:
+  hash: 3a9f70891094ea1c9aa6df75793847bf694dda2c1b1e403a332bcc3ed60ad482
+  seconds: 14
   lost: true
 3IAA integral.overlattice_count:
   hash: 4f1751bbbce530589efed62e842ae178488d26a03643e1b59b4629de806c02db

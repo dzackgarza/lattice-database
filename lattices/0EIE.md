@@ -22,6 +22,8 @@ certifications:
   definite.theta_series_cuspidal_component: 1d73223f3f2ad1591301e21a49bacccfc6cf03a78421e4e65324b0db28520411
   definite.siegel_eisenstein_coefficients: c61ec99212e5d37fc6400261bc96d63967c3778906c12671c3cfbb046c31b162
   integral.anisotropic_primes: 23667f49ab137cb7ecb9df93d4061bba914fac823573ec2d142b4705ba61a40b
+  integral.local_representations: d0ea8f4372901e696e08151be4ab9d332cd8b3002a770778ba7cd4f9a87dd144
+  integral.local_densities: 409196959bed556fc6bb9acf835caea5b0aa77139d5f15c8b84bd2f36217135d
 rank: 4
 gram_tensor:
 - [2, 1, 1, 1]
@@ -119,6 +121,30 @@ integral:
       z: [0, 1, 0, 1]
       w: [0, 0, 0, 0]
   anisotropic_primes: []
+  local_representations:
+  - prime: 2
+    classes:
+    - representative: 1
+      least_valuation: 2
+    - representative: 3
+      least_valuation: 2
+    - representative: 5
+      least_valuation: 2
+    - representative: 7
+      least_valuation: 2
+    - representative: 2
+      least_valuation: 1
+    - representative: 6
+      least_valuation: 1
+    - representative: 10
+      least_valuation: 1
+    - representative: 14
+      least_valuation: 1
+  local_densities:
+  - prime: 2
+    densities: [0, 3/2, 0, 9/4, 0, 5/2, 0, 15/8, 0, 3/2, 0, 7/4]
+  - prime: 211
+    densities: [210/211, 212/211, 212/211, 210/211, 210/211, 210/211, 212/211, 212/211, 210/211, 212/211, 210/211, 212/211]
 definite:
   minimum: 2
   kissing_number: 12
