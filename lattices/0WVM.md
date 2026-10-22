@@ -22,6 +22,7 @@ certifications:
   definite.theta_series_cuspidal_component: bc0e66bc1fe67e34fabde9e63ec76ed3928d54b63ed6e8b2b4ae30fdc245bf07
   definite.siegel_eisenstein_coefficients: a6f0fc79990039b6245c665b6460391efe747dc505f63e678c724f577d0d4039
   integral.anisotropic_primes: bd6d7423d576e97632ad1ff90c8e51ee948d36470196e5a60a4c9584d21c2b0b
+  integral.local_densities: 2d50453edc0f6be03159f6ba419c79031cef2a9aaf9f9437c9fbeac3e30f6bbd
 rank: 4
 gram_tensor:
 - [2, 0, 1, 0]
@@ -124,6 +125,13 @@ integral:
       z: [0, 2, 0, 2]
       w: [0, 0, 0, 0]
   anisotropic_primes: []
+  local_densities:
+  - prime: 2
+    densities: [0, 1, 0, 7/2, 0, 1, 0, 9/4, 0, 1, 0, 7/2]
+  - prime: 5
+    densities: [4/5, 6/5, 6/5, 4/5, 24/25, 4/5, 6/5, 6/5, 4/5, 24/25, 4/5, 6/5]
+  - prime: 13
+    densities: [12/13, 14/13, 12/13, 12/13, 14/13, 14/13, 14/13, 14/13, 12/13, 12/13, 14/13, 12/13]
 definite:
   minimum: 2
   kissing_number: 2
