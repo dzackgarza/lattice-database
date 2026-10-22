@@ -11626,6 +11626,966 @@
 1763 integral.spinor_genus_count:
   hash: a0ed6a5f1cf4ae769593944ec0b36c0ffe157da29650da1330484f27cca3e16f
   by: research preamble
+17UX definite.automorphism_group_generator_morphisms:
+  hash: 1ee4e6d32681d4ccb6ece5c1ee2ee3bd32ac8e28da3f1f66d5941a7ef1bdeb7a
+  by: research preamble
+17UX definite.automorphism_group_order:
+  hash: 0d6a894b4af65d2d180db4a5f3b2a3804554579a5abdceac017eece72caaa835
+  by: research preamble
+17UX definite.genus_theta_series:
+  hash: f3c9e380136f044eb612a55e7bbcfc28b3220a544a83335eabe7769297e004e6
+  by: research preamble
+17UX definite.siegel_eisenstein_coefficients:
+  hash: fa25a6c22a16dd8fa535c90a339bd820f12c63af36eaa5597ad8f4c59e88c6d8
+  by: research preamble
+17UX definite.theta_series_cuspidal_component:
+  hash: 56f172364d6e4e483528f286257e9f883d7405440a00a82805675268b76de6b5
+  by: research preamble
+17UX derive:
+  hash: 198bb946ccccc902c281f4bc8d2f8e26783d324a68f1fc3123d43865eb58d0b8
+  by: research preamble
+17UX form.integer_valued:
+  hash: 612a690d308d299675464694e81eb7ca36847750725b1be38cd9b3bb304a4f04
+  by: research preamble
+17UX integral.anisotropic_primes:
+  hash: 07e8cd7e56fe92e72091f8c7b07ec7d5306d328f1409050baa3322774246f27a
+  by: research preamble
+17UX integral.discriminant_sequence:
+  hash: 6683f8dc2fa34d4b7a98ba95eccdee2113cd967e57a5c20f7f4ac1d3c78321bb
+  by: research preamble
+17UX integral.elementary_primes:
+  hash: b2f3907407ffab8bb3470463e02c808ebd592d04193f7cf91fbd8f6a54c4167b
+  by: research preamble
+17UX integral.genus_class_count:
+  hash: ffb6a9fbf32652a647036a28ca7e8f0d385f6d41ee7bca9ef8c51ff98910b224
+  by: research preamble
+17UX integral.genus_symbol:
+  hash: 08f537b735ec5e56d05ae299808cb634b6d8b107a28b41811ef7f7b31158e008
+  by: research preamble
+17UX integral.hyperbolic_index:
+  hash: f657c7e0b36834b89de107e3d0d0243b7b29cc7d8b28b19857b2a4f781a33c38
+  by: research preamble
+17UX integral.local_densities:
+  hash: 55b9b218ba487523ecbcf962dc35ae8f340fe93afb885259ed0b83e5c7d47d79
+  by: research preamble
+17UX integral.local_representations:
+  hash: 75989d8712a5466ad8b9cb3cb364c0cafa8d8e5413e1974783a180e76ecc1047
+  by: research preamble
+17UX integral.modular_scale:
+  hash: 90f9d63fb721d524869e225d0784087bea76d609fb5c29b21da8d3c4cc977fe5
+  by: research preamble
+17UX integral.overlattice_count:
+  hash: 11212b4e138191a4ff55d34e74f22e2591c441760914c4c92113247134b33b61
+  by: research preamble
+17UX integral.primitive_orbits:
+  hash: 01b2aa05747182ecd43959c0f5731a374c51996eb91925da765c7be90bdce5dd
+  by: research preamble
+17UX integral.spinor_genera:
+  hash: 28f2d91e5be60f7eb538f2e0986009452d16c0cea39211b30006fdc81e129084
+  by: research preamble
+17UX integral.spinor_genus_count:
+  hash: 701bc5c6401b861cae68dfc9a144dcf666cf6ed8c98ad7bd061c009bdaf1e8ce
+  by: research preamble
+17V6 definite.automorphism_group_generator_morphisms:
+  hash: a0dd9d19892fa37d84b9a737c7806db4d0bc3ac55ace1d29051c0599081fd7c0
+  by: research preamble
+17V6 definite.automorphism_group_order:
+  hash: 228adccf912a059678f076b5ef6b884591dfb0c41b1a9c63ae0de35d4093c7ea
+  by: research preamble
+17V6 definite.genus_theta_series:
+  hash: 548454a7825a4d2cb6c5055308dbdb93c0045629c4cf80a247efd06987d6a6a3
+  by: research preamble
+17V6 definite.siegel_eisenstein_coefficients:
+  hash: 6ec98141a0b09309930025afd4af8d5b6edb3ce0af5119915cc4e6a46a60385f
+  by: research preamble
+17V6 definite.theta_series_cuspidal_component:
+  hash: 80890f34fc0c5f0104bce1af573b0a6a2c5603e5c7587f25ebc24c12c8726e1a
+  by: research preamble
+17V6 derive:
+  hash: c15d690a1627bc3a02e9c2dc64691d76a267456f607b5acf2b91ba2e329068da
+  by: research preamble
+17V6 form.integer_valued:
+  hash: 074a0d5a99aa52833ca06a93c35dfb3bab6cd3680eabd7a2dfb7d4989fe7e36f
+  by: research preamble
+17V6 integral.anisotropic_primes:
+  hash: 8856b67098efa529ea26b344a3f53f8b0412b0902c25596a51a307f1f9270940
+  by: research preamble
+17V6 integral.discriminant_sequence:
+  hash: ea9ebcc0a998c592e62c5f82c0c13dc87e135fc62171db8061967c53c07a46b3
+  by: research preamble
+17V6 integral.elementary_primes:
+  hash: 7106ddc02e903df8fd2c3c0c3aeb9c7d8910db284b42afbd2c70318197e48ed3
+  by: research preamble
+17V6 integral.genus_class_count:
+  hash: a91a0b929aaa3441474343facb52ae45066665adad21c4e0240825a1ee5b8c86
+  by: research preamble
+17V6 integral.genus_symbol:
+  hash: c547bb6276ad4f6bed5fa9249ff6f9f33bf544989c12c878af43a1b0e1283b2e
+  by: research preamble
+17V6 integral.hyperbolic_index:
+  hash: 56b59959ed6f7f74b4395d634257f4b6412c487b040975633596c589a75b8562
+  by: research preamble
+17V6 integral.local_densities:
+  hash: bb2596b9bff9f1023d06234380e5a39baaf50cd8d93c78a8d9e1886b141ddc5f
+  by: research preamble
+17V6 integral.local_representations:
+  hash: 6d1abe1527ccc11de632c9633d03a40a00407360437f768d934d6812eb153624
+  by: research preamble
+17V6 integral.modular_scale:
+  hash: 6755716be07c7618f13805adeb208e40e5b9923ba3a49fa25ebcdd9a691983cf
+  by: research preamble
+17V6 integral.overlattice_count:
+  hash: b2c4115fa9b5ddd439fcc4d5bb4434ffeacf295f63f8efa69e8dc438c51c57f2
+  by: research preamble
+17V6 integral.primitive_orbits:
+  hash: bf69d18b9fb60b5e8cf8e86d6235f0ad9f799f09e3bd3e00aa2abe613e4bc44b
+  by: research preamble
+17V6 integral.spinor_genera:
+  hash: 8ba6b5ba1ee37f7eda1406f55cdd4756bdd84551d3f0755873df0019e313d207
+  by: research preamble
+17V6 integral.spinor_genus_count:
+  hash: 0c53b7a4d7c7c972c39bd451659e164fd3940980a3e7af92ba76563c73d40e09
+  by: research preamble
+17VH definite.automorphism_group_generator_morphisms:
+  hash: 17e62e6652412b5b79e500ba8ee81feca1cb78079c2925d9db6316da2fe870a5
+  by: research preamble
+17VH definite.automorphism_group_order:
+  hash: aec6322383601c5317be1a939769f60da6cddbd1d08a1e5e3e0c21628d9cb355
+  by: research preamble
+17VH definite.genus_theta_series:
+  hash: e8d250314ae485307275a6d0a9f7d304487364607b906f07c502fe4982134e32
+  by: research preamble
+17VH definite.siegel_eisenstein_coefficients:
+  hash: cc86f0681f7e4850b4339d27fb9f997c2ae8f125121642e4431a05f5180536fe
+  by: research preamble
+17VH definite.theta_series_cuspidal_component:
+  hash: 922b7adaacb8d341a3dee3ca1fe426e8f1d23ed1a2be56d8f28e21e1d373db22
+  by: research preamble
+17VH derive:
+  hash: aea8436f9c02f4d829bc65cf50a7d4641bddd1a328bd2c990d26fd4423109730
+  by: research preamble
+17VH form.integer_valued:
+  hash: cb8f24e85170bb2b33973c5b4d72d1217464750ac0c909e61838c5e5ee287424
+  by: research preamble
+17VH integral.anisotropic_primes:
+  hash: 8f3366f3f4abe72c10eed52c9626e4f1af5a8300715c9a4dd957aedaa9a3faa4
+  by: research preamble
+17VH integral.discriminant_sequence:
+  hash: e6387099dc0bb32766c856830b9deef0deac4a087a4ffd40bdc62c7c8d78521e
+  by: research preamble
+17VH integral.elementary_primes:
+  hash: 1189481b2ebab3cd02e8587d1a048c3943cd0e5d20affb43d391bb6f6ae67892
+  by: research preamble
+17VH integral.genus_class_count:
+  hash: c6812a2e002f796eb859cbae5505622ba1361781a6057c8937e8ff48c67bccb1
+  by: research preamble
+17VH integral.genus_symbol:
+  hash: acbeee2d7481f0f7f709611560637c97327a78acae3b57fadf2b1f732a2a610a
+  by: research preamble
+17VH integral.hyperbolic_index:
+  hash: eff944b4f8d8c30dd186d0b7d7d842c8b260ca4ac01124cd920dbc485151fb1b
+  by: research preamble
+17VH integral.local_densities:
+  hash: 151322fba093cb2cd8a64fde94dd0c1de54a12edf873865cbe2b9d0678c5706b
+  by: research preamble
+17VH integral.local_representations:
+  hash: f9610e25049d25814495548e1a6f8a57362f378f51574567f38d223ca33eeb20
+  by: research preamble
+17VH integral.modular_scale:
+  hash: 00a5ce5d4abb89b76f625974d2f9e57ec3caf27386fb122c70e0bd90b4581e0b
+  by: research preamble
+17VH integral.overlattice_count:
+  hash: bad9b20384a9ea35356600229f79076587d94210337a721cff3c18987c28dd44
+  by: research preamble
+17VH integral.primitive_orbits:
+  hash: 973b3af9497cd907f975f82fa1fcb6e070b3e2648aa7f2517ef0b7dfe2ba43bd
+  by: research preamble
+17VH integral.spinor_genera:
+  hash: f15ef88130143d3ac305481c1b425ae00eda1ce76c55d67699f569f6808d4213
+  by: research preamble
+17VH integral.spinor_genus_count:
+  hash: 46ece246377750a5c78d109380eff79170216263e8672b965bbc114bd563e863
+  by: research preamble
+17XK definite.automorphism_group_generator_morphisms:
+  hash: 1d5b2f4d8667814518bc03bc39779e3a014b14b7a9391744a9e5da3d0b45de6b
+  by: research preamble
+17XK definite.automorphism_group_order:
+  hash: a06ce599a23dadfd79a6a469d3423cb65268a024bbe41efd93d5669d41560f5c
+  by: research preamble
+17XK definite.genus_theta_series:
+  hash: 3d379f90a609168509db4ec97ea35a18cc8599bbe66f5c8d81bf89a1673f2648
+  by: research preamble
+17XK definite.siegel_eisenstein_coefficients:
+  hash: 6ad01913cb2d47ddad13d2db428cbdfc55df774b38e83dfa83b26836994dc67c
+  by: research preamble
+17XK definite.theta_series_cuspidal_component:
+  hash: 19ab2456667983c2cdce46a02a835347c3b570168dc8dbd4341e940f7ac10fa6
+  by: research preamble
+17XK derive:
+  hash: 28eb0a5f62bc2cf765574f847d361bb34fca933ead1af82fcc17b5ebeb834a4b
+  by: research preamble
+17XK form.integer_valued:
+  hash: ab813e8ff1b73aa86dd3689b2f4242db3cb9efadedbfe45a4d64c290647fd808
+  by: research preamble
+17XK integral.anisotropic_primes:
+  hash: 1bf9a7fdc2c4856bbd851e0cdf4ce2ae1855b2a31f6c1daeced6cc10397bb969
+  by: research preamble
+17XK integral.discriminant_sequence:
+  hash: 0217016fea25bd002ac2e771d18a622b2fe1bbd792037a51462a857d073260af
+  by: research preamble
+17XK integral.elementary_primes:
+  hash: ad6ef326923f97bce9e82d536ff826defa4c24c3084e51b860931649afc4c728
+  by: research preamble
+17XK integral.genus_class_count:
+  hash: 41022935621bf3f1bf5f2556bfb593e3de6410dd4a7a139dc6cd992baf5be802
+  by: research preamble
+17XK integral.genus_symbol:
+  hash: d0d42d75e8ab170cbcf57af951d1903ef0c3ec781c349f62201d8cff2c0d6277
+  by: research preamble
+17XK integral.hyperbolic_index:
+  hash: 45d691ee2748a12a97686ed33f21708fa302eaecc554968cab7b6e243e9dd5fc
+  by: research preamble
+17XK integral.local_densities:
+  hash: e81d53a1684f5a32bb94483c4c18421399ed9fec1b18d523bba3a9c75d8946cf
+  by: research preamble
+17XK integral.local_representations:
+  hash: 5e9b10e6870f265c4f832305a99b7c188cdee9017643cd4dc6f4046d6b184924
+  by: research preamble
+17XK integral.modular_scale:
+  hash: 1e77c7b6b0b4c36fab56b5e3d11840ec512e765888d01f05661a827744aaf8a1
+  by: research preamble
+17XK integral.overlattice_count:
+  hash: 0ef523212221678176e69c21d6baeef88dabbe06db4cd81841194c0605bc46dd
+  by: research preamble
+17XK integral.primitive_orbits:
+  hash: 65f87efb7b0c5a1350c8ce48057852e6eb4903661a6aecbaada4547ae28cd7ec
+  by: research preamble
+17XK integral.spinor_genera:
+  hash: a6be37f91864b745876badaf38b49b42492dddeda2998dff44845c808b74f909
+  by: research preamble
+17XK integral.spinor_genus_count:
+  hash: 52eddfb4c40f975424e11353188f1bd0da2bf4ba9ab6182aa76b942b44a5af70
+  by: research preamble
+185T definite.automorphism_group_generator_morphisms:
+  hash: 212e929d113d75338feb0157f3b62d75d116de5b0b75608605b8c9635d78c753
+  by: research preamble
+185T definite.automorphism_group_order:
+  hash: 5011c75ff068d5c4a00cb1cc3f1777233f0155bf465ada1ce28fc1bbb88d17f6
+  by: research preamble
+185T definite.genus_theta_series:
+  hash: 7a3247c5c5d3dc29af38798be3352ded4fbb478b0cc6bda6a251cc82e91b4abe
+  by: research preamble
+185T definite.siegel_eisenstein_coefficients:
+  hash: 9de9ed996b854770ae2ca5120bf834104dee4e4c5aba5422b79a500b27a07704
+  by: research preamble
+185T definite.theta_series_cuspidal_component:
+  hash: 9423fc0b4e6649dd4d999021681a9676756c468e53c9f1a89f1c6f86d8fff817
+  by: research preamble
+185T derive:
+  hash: f52afc9175de6ffdf3b0d25c36b2ca19d82520cc6b4bda29ef1189d56b18ce69
+  by: research preamble
+185T form.integer_valued:
+  hash: b05a170dec5fef49ab7f074c33282631d624b95d1a4e6e13b2ea9b3a085a076e
+  by: research preamble
+185T integral.anisotropic_primes:
+  hash: a98eb11037f44c0da63396bf9ec1230a96529679b57a25c5ab4ab6f4590628c1
+  by: research preamble
+185T integral.discriminant_sequence:
+  hash: 8252c7f9b3ecf288f4d7003de8ab0a8232a91d57aaa53c90c555b9cf9816321c
+  by: research preamble
+185T integral.elementary_primes:
+  hash: 69908c48c083af5ee9d9d208d71d77c4142c713e8024832d499fc977d1846d22
+  by: research preamble
+185T integral.genus_class_count:
+  hash: 5880ef640dc6f2794fb6831ce768887e93cf533ed9bc07a8c293255bd0dfd3d4
+  by: research preamble
+185T integral.genus_symbol:
+  hash: 517bff1b428e194550c30c8f937ef5a658798cc510cc0cd3f717a30e801f2209
+  by: research preamble
+185T integral.hyperbolic_index:
+  hash: 67579c636d527350c010cc6596c936d8f7b5688016a9ff0d2040c595149f099b
+  by: research preamble
+185T integral.local_densities:
+  hash: 1db77eb9786efc8aabb30b89260ff38e7ab10a921e16be3abbc2d9607aa440c8
+  by: research preamble
+185T integral.local_representations:
+  hash: e3aff2a64d5bb39e64e901e94c8fda813cd0dbd51c67e3f7822a0a4ae1b70e53
+  by: research preamble
+185T integral.modular_scale:
+  hash: 6884a4d0d3281b30c7bfcb7a18dbe171a7731947c95a3323aa64f83e0c6aeedd
+  by: research preamble
+185T integral.overlattice_count:
+  hash: 17ede4326ce43a78b3dffe98b113c7b535ca14e5b78b42b9beac7091877a272b
+  by: research preamble
+185T integral.primitive_orbits:
+  hash: 7cab3eae3c884e8aea4032615de637a4ff7db3fee944aa2e3a946d75c335d5af
+  by: research preamble
+185T integral.spinor_genera:
+  hash: 89255ca91e9d1459da8ec81990df2c038628da0423192a971f261252455387a9
+  by: research preamble
+185T integral.spinor_genus_count:
+  hash: 4958d34af305845fb988b8783d4342074eb45736043f2ee080e57fcba62e2df1
+  by: research preamble
+186K definite.automorphism_group_generator_morphisms:
+  hash: 097767ec637cd47985fb0e2a0e28fb18c9413ad8a7f5e43348cc593e6072966f
+  by: research preamble
+186K definite.automorphism_group_order:
+  hash: c68317ba8990aefccee50d76817fe4d0612618ff334a0e26e2ce571ca8e1aac7
+  by: research preamble
+186K definite.genus_theta_series:
+  hash: 6d77c683bca4f0fe24a9ca6b196d611f15607a091399778187aa5507342fcb2f
+  by: research preamble
+186K definite.siegel_eisenstein_coefficients:
+  hash: 8dc8f5b9512d134c658a524f4b7f4e5eae972e046d32bb0b9b3b90665f9102f6
+  by: research preamble
+186K definite.theta_series_cuspidal_component:
+  hash: 415100bbb8517ec2afda673d1ff39b43dc92985e49c7130b97d972b0ba3a67b3
+  by: research preamble
+186K derive:
+  hash: d510ed717254ef554fdfb468ff25ee8f1bcdf6714cd0179dc8056963fbd9d70d
+  by: research preamble
+186K form.integer_valued:
+  hash: 48402ffcf789335d7108b8326d6a117672b9c128d0f7ca77d7d73c2f107affde
+  by: research preamble
+186K integral.anisotropic_primes:
+  hash: 67b87295ad9de03899cd4642c242366599db93ae8ebf5cead864a772e11649c4
+  by: research preamble
+186K integral.discriminant_sequence:
+  hash: b20216c77813f1ee9ef59cc994b2d353cd07ab73c5e9149ef20ff660926517cf
+  by: research preamble
+186K integral.elementary_primes:
+  hash: 2979fe65125b08c68d9f29157480e06eb08677dfbd4fb4b0b9247603d0bc1471
+  by: research preamble
+186K integral.genus_class_count:
+  hash: 4d633157dd93611f4ac40c0166a02ec220b521372f297e743905ec6d46ba896c
+  by: research preamble
+186K integral.genus_symbol:
+  hash: 8f8443e907a673deadfae5fd3dfda1298d9a28cec61e0fccf7536c80c8a743b0
+  by: research preamble
+186K integral.hyperbolic_index:
+  hash: f6f2d6fefcd1bdc6b7070f0026d6ca7310b4b0c3fd0b1437902785b851ef3aca
+  by: research preamble
+186K integral.local_densities:
+  hash: f6f24de9c0eb789d5ced956a8dafb286b3d56bf512611cbd0fad8975045b86ef
+  by: research preamble
+186K integral.local_representations:
+  hash: fd1ec128baea1899d465d0a4a5fac37f98f47a61ebc797f19794671e1ba90f21
+  by: research preamble
+186K integral.modular_scale:
+  hash: 4892c5314d775644bddc3f44ffc49b2dca4b56511acf2c03e2bf580a191e1a83
+  by: research preamble
+186K integral.overlattice_count:
+  hash: e2a9cbd266b113054bf4b4fbd8b515219b49f1e150a491edad2a20913b856cc6
+  by: research preamble
+186K integral.primitive_orbits:
+  hash: f89b0142fedf8746625f7fbd70ceb653bb695bd2e436a8439109353d1c0b380c
+  by: research preamble
+186K integral.spinor_genera:
+  hash: 435ba42b2d1be669cbdb2afe8763993025d32d13fbe3ebfa622f529b9510ca2f
+  by: research preamble
+186K integral.spinor_genus_count:
+  hash: eb245440bd359a97e70ab02d47e511defa40804e7d10b0b804d268b7057a456d
+  by: research preamble
+1883 definite.automorphism_group_generator_morphisms:
+  hash: 763ac98de30872b6430fff1154270377bd5f47cb960b098c87d741e7e25aff72
+  by: research preamble
+1883 definite.automorphism_group_order:
+  hash: d35aae6108b6e35f9bba2f0cc0264c35ed24b6061fe01dc4322e099976e20d35
+  by: research preamble
+1883 definite.genus_theta_series:
+  hash: c180e3c98a9d25910855e29aa294b8c3e94da469ef71a68fef75f94b0697f4a1
+  by: research preamble
+1883 definite.siegel_eisenstein_coefficients:
+  hash: 6d32aa9dfd983a231b1881a0525f829381212ec85443adafd09eca5839e42ece
+  by: research preamble
+1883 definite.theta_series_cuspidal_component:
+  hash: 5dafc076bd0ab99fc939e562078290f23f5967018d22143539c6e4c3974a035c
+  by: research preamble
+1883 derive:
+  hash: e641fc72cc42d71c136c1732506463309beeee3ac630f5188f3710afddd7492c
+  by: research preamble
+1883 form.integer_valued:
+  hash: b23b90cf61c5c7a2accbd92e9f4b0cd93f1b5f2bd05f77bfc3334fb0c406caab
+  by: research preamble
+1883 integral.anisotropic_primes:
+  hash: 5a628ef78ace8e244a6c5ae77a91df1f8217bd711fb50688c48814364e41022f
+  by: research preamble
+1883 integral.discriminant_sequence:
+  hash: 47f53d110b6bf9c6c7a59e55e36b0eb13c720c4d0d0b607cf6b543201b2dffab
+  by: research preamble
+1883 integral.elementary_primes:
+  hash: c7f5881a4a53c79d5394e72760942a6cd8467c1988b31110b00bd503044cd3ed
+  by: research preamble
+1883 integral.genus_class_count:
+  hash: ab960159361f99c84940958f1910dd5d98b8c9445e00a52561b98b8e1103e056
+  by: research preamble
+1883 integral.genus_symbol:
+  hash: 7798c64b11ba6d7ffde2bcd524d087b990e02f96840a856aa60d8e83bf6ce8c9
+  by: research preamble
+1883 integral.hyperbolic_index:
+  hash: a4fef0cfb66a271fad8d77792cc4e1979c0277bdda5fbe09876397b9821b018a
+  by: research preamble
+1883 integral.local_densities:
+  hash: 41010414e43ae6efe13df03e01bd38298c17f78e2cfc0093ac8b1eff88928c13
+  by: research preamble
+1883 integral.local_representations:
+  hash: 02c6882bf277d167cb291e6e7e16cbce630baf7bf86e065789cc542dba89dda3
+  by: research preamble
+1883 integral.modular_scale:
+  hash: a914d1ffcb7155f6115ed1d0be756af0d9d940e57a9093cfda6b6bc08abf0264
+  by: research preamble
+1883 integral.overlattice_count:
+  hash: 14f106f788f5266ff7da1694a06feeabad51233e9d8dcd2e3efec458a7ffbaec
+  by: research preamble
+1883 integral.primitive_orbits:
+  hash: 7f6804a0d808a5672f06e6de0e26362599f8321fa1d2d8aafdffd4e4f77c804a
+  by: research preamble
+1883 integral.spinor_genera:
+  hash: d73498ce464d5174ceea5c60268b33e6f3f064068fbc66b947a05c7a03e2d821
+  by: research preamble
+1883 integral.spinor_genus_count:
+  hash: 4745d49dfb41258a03f31873ac9db886c2fda2d4cca480bfff42537a018bf616
+  by: research preamble
+18BZ definite.automorphism_group_generator_morphisms:
+  hash: c3cf4e8282086ba89e0d0bf552fdcb1bcca822c075f81236934dfee43525ccbd
+  by: research preamble
+18BZ definite.automorphism_group_order:
+  hash: e4c193ece2ee00bf2f2304ba7a6a7b5ff1aa2b952b8a63016a2db947aaba1bad
+  by: research preamble
+18BZ definite.genus_theta_series:
+  hash: ed152278bf5c95511f74d7f2729794260bcb411fc89e1686027289d3f8d9c6ca
+  by: research preamble
+18BZ definite.siegel_eisenstein_coefficients:
+  hash: e18124b751fadc9872a39e1238920d96f34ea08fa71c9bc0340d44862954ec85
+  by: research preamble
+18BZ definite.theta_series_cuspidal_component:
+  hash: c983aa1267fa8a73dea878a1ad5806edfa61bb1a001bcf74b332e45e3483fb7b
+  by: research preamble
+18BZ derive:
+  hash: 581ff57c0adc2ace87aecbf32a283921bb28634beb21474d4b79323774e3cda7
+  by: research preamble
+18BZ form.integer_valued:
+  hash: 63d6ff5eaeded10ed6be9a1d649f840c7c7b08b8724a05d259f42542cb3a1212
+  by: research preamble
+18BZ integral.anisotropic_primes:
+  hash: 3a4b16a8c9c55f4dc1a85ca559a6b7e2089cf4085c459c7a316a0f39f1ea77c2
+  by: research preamble
+18BZ integral.discriminant_sequence:
+  hash: 7641ba226e94c4f5467859dda4a7792b307e78583afd781ebdb152f8cc3d4720
+  by: research preamble
+18BZ integral.elementary_primes:
+  hash: f98c51559f028efa8e4394a10ffb53b06dbb3dfc1cbfbdb13971de965ba35307
+  by: research preamble
+18BZ integral.genus_class_count:
+  hash: 5f6c4227e3c23682b196509ef25b4d37d6d7ef5413b78390e8160b5f7ef26f65
+  by: research preamble
+18BZ integral.genus_symbol:
+  hash: 12cb476122b855fea7d1ca7c280f22a76c6c891ec3ac48bc9d93f6dd0294c034
+  by: research preamble
+18BZ integral.hyperbolic_index:
+  hash: f6ae39438834888317ca99416c2205eb3a71e355864797a06dd8d5df152e898d
+  by: research preamble
+18BZ integral.local_densities:
+  hash: 53f3fca7f4b00334127617461c9bae3a2693e80a5882f6cab4fa8bee33e53d40
+  by: research preamble
+18BZ integral.local_representations:
+  hash: 010f3e1afbc0353b7581d3ee3906522525f96b829d3be7527d894839ce5889f7
+  by: research preamble
+18BZ integral.modular_scale:
+  hash: aa73c1d4f5cc98d898b8dc7658e601fd4e80291187df5d72665bdbafa6ed5907
+  by: research preamble
+18BZ integral.overlattice_count:
+  hash: 59d201de5da473e0041f4fde93260c6a0d5083c125dd0ba07efc9c96ed3f0844
+  by: research preamble
+18BZ integral.primitive_orbits:
+  hash: 7060ab141f0a9aff239dcf6c8f7a5d4cd3bc1d3e616e5eada2b8a1c99dc600f8
+  by: research preamble
+18BZ integral.spinor_genera:
+  hash: 24925c15c3632246388c463a17c11b17d527aa8308a89ca5dd7fe3b6e24c3a58
+  by: research preamble
+18BZ integral.spinor_genus_count:
+  hash: dbb1fed5c5a0fb8b6ecd36871eb5be2c8c407966ab60c1b60fd8a38078b8d3a8
+  by: research preamble
+18I3 definite.automorphism_group_generator_morphisms:
+  hash: 4339042ed54aa0f467272e0f1014cd91297ef452c7e9939fcb1741316c86aa5b
+  by: research preamble
+18I3 definite.automorphism_group_order:
+  hash: 2f7211c9ddca778e057db027585bc59f65f19980073fb078ae244ef2866003e4
+  by: research preamble
+18I3 definite.genus_theta_series:
+  hash: 33b5db9620fee5319063bfc23890ca08aeb58687c78e36a085c70bf94c8acaa1
+  by: research preamble
+18I3 definite.siegel_eisenstein_coefficients:
+  hash: 7acf0e0db4fbb64e4d472c42328af6740ed29c2afa618396e78a92f5bd2f7c7c
+  by: research preamble
+18I3 definite.theta_series_cuspidal_component:
+  hash: 7d059d94e25fd9aec2cc5cf0c20206b5a3c180890afe01be9e4c835fe8535ad5
+  by: research preamble
+18I3 derive:
+  hash: 0ede6b9c28746b171dad1bd8ba5dd9103ad5bf24b30465f353d653c161a332e3
+  by: research preamble
+18I3 form.integer_valued:
+  hash: 40007e4e98eb3e778c4cd03f3640856e8c22b6b9a6f45854b7d4b647c9437198
+  by: research preamble
+18I3 integral.anisotropic_primes:
+  hash: 0d5808a850ec5f1dcadfd7e7080f8f3cc6fcbc0477d30fe965ec45c0fe540983
+  by: research preamble
+18I3 integral.discriminant_sequence:
+  hash: 1cbd9b7def5dcb95232ed3b26e23f070f21d6f04977e45d005fde0d01960beef
+  by: research preamble
+18I3 integral.elementary_primes:
+  hash: 61fa7107012739d68bc8a45798bc4bdf5b782bdafaf020bc63d8a64b4578ec9c
+  by: research preamble
+18I3 integral.genus_class_count:
+  hash: 880fbc50428d99ff2544c1503132b9b8559c2ec60f2b8cbfce4272d3a9da33f7
+  by: research preamble
+18I3 integral.genus_symbol:
+  hash: b274f7c65ca307a5133d858342b1360d55615c4648867cc72886b6c1abe841c2
+  by: research preamble
+18I3 integral.hyperbolic_index:
+  hash: 9740504c992c4a8792e730d01ce534d6601cc6152327fe51a119a27068a3ec2a
+  by: research preamble
+18I3 integral.local_densities:
+  hash: 304f2220502bb52130992783b00189efc582a8290847b12df291addb5824ea47
+  by: research preamble
+18I3 integral.local_representations:
+  hash: 9ef0553820e25f531a40c2afa7aeb25c18faa14e3db75efd56d351ab60bf1d97
+  by: research preamble
+18I3 integral.modular_scale:
+  hash: d2e646dbd7e0e0d640e5f0c88cf51d319517b69a6e929396d1927cf02be1a040
+  by: research preamble
+18I3 integral.overlattice_count:
+  hash: 9abe70031292a9963701fe60473f65b411779a5f1756506406be8b5f043cb28b
+  by: research preamble
+18I3 integral.primitive_orbits:
+  hash: 96c8b15c819a8929ca37b3b052c3a5b82907c0c228658d65ea8268484a0c60bc
+  by: research preamble
+18I3 integral.spinor_genera:
+  hash: e0daf40ba6fae84f0b80e9b1710eeb1171eedb90901c8154a7c166e5cb6c3271
+  by: research preamble
+18I3 integral.spinor_genus_count:
+  hash: 023580097d0d279fc21f8f64383080fdb36399968ac53d83164a6665aa41f7a2
+  by: research preamble
+18JF definite.automorphism_group_generator_morphisms:
+  hash: d6310441411867f77ec524f393d949172eabe80d22a857637977ca23e6bbf274
+  by: research preamble
+18JF definite.automorphism_group_order:
+  hash: 4511d2ec01e3b80cc15ba9e130652fc29624da03160e4995c9bf806e3b7159c9
+  by: research preamble
+18JF definite.genus_theta_series:
+  hash: 85521019e8622db9ac5472c31f7f830e3beca336f95a195a49b7435df4886804
+  by: research preamble
+18JF definite.siegel_eisenstein_coefficients:
+  hash: 66cc17293dc933b86635d4f2a9cb13dbfe40c11e862592dea61096ceb771b094
+  by: research preamble
+18JF definite.theta_series_cuspidal_component:
+  hash: 7c0e777b3dd90303648e77915ec9b973f15abddc9b90d1a71cc8e86f29d3cef9
+  by: research preamble
+18JF derive:
+  hash: fe31b084e7f4bd244014c09f36877aaf036f72bff3e3e280d3553070afefe7ea
+  by: research preamble
+18JF form.integer_valued:
+  hash: b79961e405db56054a6f581167dd0cae4b7ccee8274150272adc1045da1bbf47
+  by: research preamble
+18JF integral.anisotropic_primes:
+  hash: 37fc4d1fcf2d42f9b61e499e55dca31099a635972217067091dd66a029832edd
+  by: research preamble
+18JF integral.discriminant_sequence:
+  hash: 8903daa6a273ca2765d99ec01dd87326bd9a07974781127d2778f50c17b67034
+  by: research preamble
+18JF integral.elementary_primes:
+  hash: 931f0d2e77a7f972cc61e848f9b4932cf0471d23101b09965aa4e7b220c3be6e
+  by: research preamble
+18JF integral.genus_class_count:
+  hash: aea02beb88c01db201e9f3de18f5a66264303b73054aaf522e830ea99b9176c7
+  by: research preamble
+18JF integral.genus_symbol:
+  hash: a473310885177218762367a234b7d2355e70a3c8358f94bfca3c7749b3c2907d
+  by: research preamble
+18JF integral.hyperbolic_index:
+  hash: deb3e5d6227c747f4dca90aa2648a4d22f89bc11143ba8aa735b27a0363c015c
+  by: research preamble
+18JF integral.local_densities:
+  hash: 223ba9ba4cf8b23973dc47a06c74d162015475ff40dfa46cb7f138f6289ccb20
+  by: research preamble
+18JF integral.local_representations:
+  hash: 311cf13f0577188642c5a5233b4cee2ea915b939223d12adb33ed1c13c81b9f4
+  by: research preamble
+18JF integral.modular_scale:
+  hash: 6369ee1b372b27ca74d63fc2575413653ff248e20409034847605892bded0244
+  by: research preamble
+18JF integral.overlattice_count:
+  hash: 34dfd83cf4c26a8657d1a320f8f0db05711ee5875b1bd2bcfdc8e452c880bfbd
+  by: research preamble
+18JF integral.primitive_orbits:
+  hash: 89e92c679129208ac34b279f58b7c44353b47941143bd1e4cfb83854bc1d3fea
+  by: research preamble
+18JF integral.spinor_genera:
+  hash: 3573a32c77567590cec083a2a81945472c91cce9b8bfb5925d2c9554471b05d7
+  by: research preamble
+18JF integral.spinor_genus_count:
+  hash: 59fc5ccf6ec549f0ffd49a1bed9418753dfec0717b6832784d870d314f1fc209
+  by: research preamble
+18OQ definite.automorphism_group_generator_morphisms:
+  hash: 22aa97e6a7efaa94e436399c54fda960643c60e1a48fa6b790fe0dbd737dbb73
+  by: research preamble
+18OQ definite.automorphism_group_order:
+  hash: da12f6dc7128f472dc8ef1080b13436a39aa7d2c4c24e3b176436d5e18af66e4
+  by: research preamble
+18OQ definite.genus_theta_series:
+  hash: 51b689c5b2b289d4508c1c9a547e6e5cd120ecf6bcb4d525a874ae183829a145
+  by: research preamble
+18OQ definite.siegel_eisenstein_coefficients:
+  hash: c9650df0db102f498ef096403296bc2398786908209758bb16ed6cead6198930
+  by: research preamble
+18OQ definite.theta_series_cuspidal_component:
+  hash: 7a2dfcfdb1dbbc766508873b513616d1802d06ec006737d4df20b3772e715e24
+  by: research preamble
+18OQ derive:
+  hash: 5c7c689abb0ec2b8684764b56bebfc6017c88a4a9b11ba6627c1cfb6313582b7
+  by: research preamble
+18OQ form.integer_valued:
+  hash: 4864cc47efa23ee9dad3d23a20fbbba7b2d252cf4f27dbd6fab4fdba9cd28215
+  by: research preamble
+18OQ integral.anisotropic_primes:
+  hash: 86b40c7e6a669b5b7ae93d81dc5dc9cc29cf73f39a750ac608d5d5200d2075d6
+  by: research preamble
+18OQ integral.discriminant_sequence:
+  hash: a15d8e0946cb4e3771d74bb66a7b49f8697f26aa515bf7b227e9670dd6415c5f
+  by: research preamble
+18OQ integral.elementary_primes:
+  hash: 90f6042e5c6f3c9bbb39bb51eccff931dcdb472484ab71fde4bf064c4c08c014
+  by: research preamble
+18OQ integral.genus_class_count:
+  hash: 5f99961763f8536b44e7dbac4df42e12ead4c40087bfd850f9a54f8a34f8c7c7
+  by: research preamble
+18OQ integral.genus_symbol:
+  hash: 0ebebeeb2b6926185869aeca5be7dbcfc5cad97d1fe36ce55ee11a7d9542c899
+  by: research preamble
+18OQ integral.hyperbolic_index:
+  hash: 533bdef0cdd2cc5521c0280792052763eef1bc1f64adbfefb6a73b8845136939
+  by: research preamble
+18OQ integral.local_densities:
+  hash: 6e21d384063870d684538137d89e374d0e54c7173292aa49293a550c2e44a25d
+  by: research preamble
+18OQ integral.local_representations:
+  hash: 0cd43b5e8d98650d4731a779cc28ef7a344424403b1a12c9ee954a06e7913617
+  by: research preamble
+18OQ integral.modular_scale:
+  hash: 872e358d593c33d5eb7c0598a8b24a65f3cf5ed13f716a10b768b9fbf512db21
+  by: research preamble
+18OQ integral.overlattice_count:
+  hash: a5efca6004ba0e6f86694d1e3813e19d7eb4de01368a0e59aa6edcc003012ec2
+  by: research preamble
+18OQ integral.primitive_orbits:
+  hash: 1296b05aa1b753c0502905e599feb65819fd699c21932bfd5e2a8ffe7f4ebda0
+  by: research preamble
+18OQ integral.spinor_genera:
+  hash: ef2dde684fdb0529bb233e1dd2f6b0eeb5e444d4d1ca72e2dfffdec640a5463b
+  by: research preamble
+18OQ integral.spinor_genus_count:
+  hash: bef60db3e358822265d9e9e22b9acb5f59f81b1b400823b53f5a21a7fc1b3e91
+  by: research preamble
+18UI definite.automorphism_group_generator_morphisms:
+  hash: 27d08a095535342059e5a7ff21d42a37be7b42ae96b941f8d3aed3756ffce5f2
+  by: research preamble
+18UI definite.automorphism_group_order:
+  hash: 97a72f6dfb323d0f5a83611b9e1224382c12a0d7b4ea13bbcedc10ce74dec960
+  by: research preamble
+18UI definite.genus_theta_series:
+  hash: 66658450d08514d4643a65dc962886b20b50acc55709438f22c8bcb4db090ed4
+  by: research preamble
+18UI definite.siegel_eisenstein_coefficients:
+  hash: 839f4120bc3af0f13e9f8a95e9761ae35b8c43903421ad4a753e8925ddefbb38
+  by: research preamble
+18UI definite.theta_series_cuspidal_component:
+  hash: c0b35d462c4572c6317c6ea79b7da34e9e6e7c5499716a43a7fd417902ced70a
+  by: research preamble
+18UI derive:
+  hash: eaf63d4dc7e3504682e108b1abf64f1a0b2aad195d3c6e18fe6f28512d34e6bc
+  by: research preamble
+18UI form.integer_valued:
+  hash: 6b88e73556845d0d80f2b4aa7a3649b54b47b9a7f2f4a3247765e397cf655f34
+  by: research preamble
+18UI integral.anisotropic_primes:
+  hash: 617d9c936b9d016278ac3901b53140627ffecf9fde397abe33c1c56b528515b3
+  by: research preamble
+18UI integral.discriminant_sequence:
+  hash: 1a7644e21686b77ba5abdc94923b9ea7831018ccb3ffad7c46b03c422166a245
+  by: research preamble
+18UI integral.elementary_primes:
+  hash: 2931ff7a296c6d41ba7143531ca903c41796f907df98ad412b2d8eb79b7c0c2d
+  by: research preamble
+18UI integral.genus_class_count:
+  hash: b0fb61e100bbac390b2c7e134e338ee87e92bd87a0770233beb0926218d0689e
+  by: research preamble
+18UI integral.genus_symbol:
+  hash: 80dd58ad72764f12790269e4029f57e78f36bedc42ce5cbb849c0d79f09415c6
+  by: research preamble
+18UI integral.hyperbolic_index:
+  hash: 0a2ed7699ab2eeec4ebcd7794c8a2f3f36d565b76ad773ef4da862ad11c6855d
+  by: research preamble
+18UI integral.local_densities:
+  hash: 65e354a4bd7e4b4fc6809b7fe7bbfa62d2f8eaf0ee2a25f2e53199b71b820a38
+  by: research preamble
+18UI integral.local_representations:
+  hash: 9117ad64e83b05d1b39375559f2e7244692e16cfa4da99d5ed82c34ea3df09ca
+  by: research preamble
+18UI integral.modular_scale:
+  hash: 9c9c9927f0d5d34be10a81b805fcea414ebc5da0c1d6f335185d7422ec2d2cd2
+  by: research preamble
+18UI integral.overlattice_count:
+  hash: df27d69b2ceb49565361293dbd462bf62a443b9cfa7e94a9dfee907e08895fb2
+  by: research preamble
+18UI integral.primitive_orbits:
+  hash: fa85cad8e9ff1967ff9faaf52c56e138578802e1e620a020c54133a594b27939
+  by: research preamble
+18UI integral.spinor_genera:
+  hash: aabffa9e9c0c2d1490a868f402fb49f3cd543b1a66f54baf49fc50204c08e9a2
+  by: research preamble
+18UI integral.spinor_genus_count:
+  hash: af7cf113ae45dde7f0562b21af429bb88d0b456648bfdb1e54880aa00daaaaf5
+  by: research preamble
+18WO definite.automorphism_group_generator_morphisms:
+  hash: 8b265d7ec13aebb5e338e49cbbb18f4fc42f3dc77734da436e8ece4895c97e88
+  by: research preamble
+18WO definite.automorphism_group_order:
+  hash: da2e3a638ae6de308eb9a81f500e68125643f00af8b304cf7cf0c4d1ae0183a0
+  by: research preamble
+18WO definite.genus_theta_series:
+  hash: f725c0543d86ebb2c49e7bbc8995a2781b2ffd90bc183a4ebfa58cc8d18b5bcb
+  by: research preamble
+18WO definite.siegel_eisenstein_coefficients:
+  hash: e69b89a0fe39427725935655d5ae8106a24e48dddbcf3c02a93b525d8840188d
+  by: research preamble
+18WO definite.theta_series_cuspidal_component:
+  hash: e941cfbd8fb415ecf6e6c80993f2a57bb2dec301a63ffa3181dfd9605bb25e3c
+  by: research preamble
+18WO derive:
+  hash: 332280c42fb91b4b8b9e920dc6943a82f5f46801573e1b1fd687198f9ca3d7fc
+  by: research preamble
+18WO form.integer_valued:
+  hash: 6a297412d23d367cc9e68150f7fe7a7eaa2055937397a7458ea76468060e80c8
+  by: research preamble
+18WO integral.anisotropic_primes:
+  hash: aede77b3f4f04ff0278599960cee1d7c3a0ce35706230d46163b45f41d021851
+  by: research preamble
+18WO integral.discriminant_sequence:
+  hash: aeb3d23f29db0de081188c1bb6269e6f7eb6eb8648892535d9aa813c0606f75d
+  by: research preamble
+18WO integral.elementary_primes:
+  hash: e77162c19d6ff9008d776dd5d5fa0489202731815bad51faee284d58070424b8
+  by: research preamble
+18WO integral.genus_class_count:
+  hash: b22f5e92884fdc797955cd3259ef97b99607ac13b2f501d8dff32d4ec8e9edf3
+  by: research preamble
+18WO integral.genus_symbol:
+  hash: 0014e6ef6e3b05d43e03d8b82a9d49baca122c70233169b71a0bbf8bde446ac8
+  by: research preamble
+18WO integral.hyperbolic_index:
+  hash: e38d73f0e427cbe7f64d87f5469c7ae7b137fbca950ba9df02fa7636cc71e0da
+  by: research preamble
+18WO integral.local_densities:
+  hash: ab4e4a2f41fc1872c5634e20d8726b306cf90bdc55a6b95deb36cd002766f319
+  by: research preamble
+18WO integral.local_representations:
+  hash: 0cefec1d3115689984979648bfdae522304fa2a4081958d329a42cedc7f2de25
+  by: research preamble
+18WO integral.modular_scale:
+  hash: 47573e26e990a874022ad2bb2e7293673a9a8b26406bc18f660a09da85ed9327
+  by: research preamble
+18WO integral.overlattice_count:
+  hash: b6afa36d33232e54ff2a1ee6035becc7197a919e4bf5137444e3ea12d735f6a8
+  by: research preamble
+18WO integral.primitive_orbits:
+  hash: 32a3051b905b127041ea81a46bd61cd4a7277a9a1beebf017bbcc2ef6c3d9b63
+  by: research preamble
+18WO integral.spinor_genera:
+  hash: ca3cabc56489ee5c9e7658a0d5a5ff47313870be0c3b52a5299d33b8fe912ec1
+  by: research preamble
+18WO integral.spinor_genus_count:
+  hash: 2c40188b2d12f8f4118c7b67468efc4f6dfd3854025a93ea83c211d3dadf9e8e
+  by: research preamble
+193H definite.automorphism_group_generator_morphisms:
+  hash: a9aaec647b613f0e6ab1b6f23d86390a62f194aac071f19586ac923edc677a6c
+  by: research preamble
+193H definite.automorphism_group_order:
+  hash: 0c2e1116f66c8ce470d9e687c71abb2e653cf74ddbc56a45332219188ed4d09c
+  by: research preamble
+193H definite.genus_theta_series:
+  hash: 89669ece0bbd75ecb9f83dce2bfeadaf6fb008bbb675186d4e550d023f8d3808
+  by: research preamble
+193H definite.siegel_eisenstein_coefficients:
+  hash: ed5b4e5f7c6334b5cd7cdf8b802132a106c3e5e67e383c49cbfa538d8ca5e1e5
+  by: research preamble
+193H definite.theta_series_cuspidal_component:
+  hash: bc2e928a2770d95b2526d889a21d84bbe22e82a57184f9b63b9523e5db0f610d
+  by: research preamble
+193H derive:
+  hash: 5bcfaf164b09332eff891627ddefc70a98fd4cb749f2168284c4b9976aa60aea
+  by: research preamble
+193H form.integer_valued:
+  hash: 9616840447850be1994e958ce4abf330269627baf7e39d019c1dc5f0b7e8e6fc
+  by: research preamble
+193H integral.anisotropic_primes:
+  hash: 8f59d6dfe7b04ea557422be850909f89aea4fed1dbcc40680f20f3b285e5e3df
+  by: research preamble
+193H integral.discriminant_sequence:
+  hash: dc2c5b0ffade75c79f205bd7ababdb286d955ba7776d1093fb9759ecc8d597e3
+  by: research preamble
+193H integral.elementary_primes:
+  hash: 6340c76d584f3caaba7df73628c033a71192be28bc29224aa68e39b591d01b72
+  by: research preamble
+193H integral.genus_class_count:
+  hash: 7281f03c5cd76e0b92919e63ecbe1a5276cff1bc7a4c9860807901fd7f518606
+  by: research preamble
+193H integral.genus_symbol:
+  hash: f3cae66ad7889e5b660f00ee71f0fe2e4718c4f5716f7405291e036af17bf4c8
+  by: research preamble
+193H integral.hyperbolic_index:
+  hash: fd75a68a57c8e417c02cc642e01d28c3deb6f40c1c3d2a5b4e1e1b8952665486
+  by: research preamble
+193H integral.local_densities:
+  hash: d9bb88cacf3f537253442f43a353e808dd66dc941b8a5c2c78159e241625d2d4
+  by: research preamble
+193H integral.local_representations:
+  hash: a6fe8816d170e186f6682e01e525ce8516ae6607bc6d9455ee131e533ad0cfd6
+  by: research preamble
+193H integral.modular_scale:
+  hash: 305c669db5be121fb8a9566e32bb96f1d6f9b82da0e990ceb2c7937b90781c01
+  by: research preamble
+193H integral.overlattice_count:
+  hash: 8a92b5d8abb7a826781353f11b47a388c131191d9a677363bcc64d2f98a0a1c9
+  by: research preamble
+193H integral.primitive_orbits:
+  hash: adeca45c55f8612fac7801caf8fa6dd3bde34244e17592507048d7371b89df71
+  by: research preamble
+193H integral.spinor_genera:
+  hash: f1a846d603e21f1527e9357467c0bebc2002fc776c3b308aa2210d3649d3791d
+  by: research preamble
+193H integral.spinor_genus_count:
+  hash: 26e84cf104a334d09e3cb627fb67fe5ea2efe3979124271c383ece649cf9d7b1
+  by: research preamble
+198Z definite.automorphism_group_generator_morphisms:
+  hash: 4bcd9e5f8e4a2ff06115508911ed6937e4b004339b3fa4f548563e7c031ce872
+  by: research preamble
+198Z definite.automorphism_group_order:
+  hash: a1e3717a4d813b74fc5c7d8040ed5b206bc8985091bcb82ff2dad7dc022194e3
+  by: research preamble
+198Z definite.genus_theta_series:
+  hash: 97cd98a910b4465126fb0765ac73007a8ae90a43910cd30d171897868e522ca3
+  by: research preamble
+198Z definite.siegel_eisenstein_coefficients:
+  hash: 81291772c63271b2ec339b73733ec29b5382146029d0479d5ea64a5b71690c37
+  by: research preamble
+198Z definite.theta_series_cuspidal_component:
+  hash: cbf09519324f494578064001e52deb9d202e5509ee56bf89eb67a9b1b3a90563
+  by: research preamble
+198Z derive:
+  hash: dc3668836061f8361c4c9ea215be78717ab699bf311293104a496a6ad40b99e9
+  by: research preamble
+198Z form.integer_valued:
+  hash: c54f50d3442efc2954975e36d434d69f4e1c3115ac8f2b37e2d4b3ef17612556
+  by: research preamble
+198Z integral.anisotropic_primes:
+  hash: fb7015c0b10db22fd37f46b519a3b6e4da3f7856d5f4320fadb38ea3c53b93da
+  by: research preamble
+198Z integral.discriminant_sequence:
+  hash: 122b4131a7a5843c4894246df5449b02337ef3f8fce29135a39451d1b7fd1374
+  by: research preamble
+198Z integral.elementary_primes:
+  hash: 1d0ed4744b9da1dc8e8df6850570bd8d9b46a87e7f0090beff50b6447fb9bbbc
+  by: research preamble
+198Z integral.genus_class_count:
+  hash: c8fdbbdc44fe2ed8b89b5418582243fb009d7560535b863a1be199db895d90ae
+  by: research preamble
+198Z integral.genus_symbol:
+  hash: 9fc6525faef9a95e24efab1403f2c1aabf619fd2a89f908339fcd1e0567cec8b
+  by: research preamble
+198Z integral.hyperbolic_index:
+  hash: ebb75eb989f6ab54ef234346d07b6369eda26177e56ff47b0cf58afeacec1938
+  by: research preamble
+198Z integral.local_densities:
+  hash: 5b363920a64fa99b1a1da8f7a933fd1cad245cfadd189da0bb731fb68d3c0fde
+  by: research preamble
+198Z integral.local_representations:
+  hash: f62e8b10ed0301a4ed3ba507b95aaf5c3da9ad16e278e31ed4c3cbfd56c0cc8e
+  by: research preamble
+198Z integral.modular_scale:
+  hash: 4abe32c0e9f552a4fd799075089e8125aed216a79dd2420ba8196e046a5cd073
+  by: research preamble
+198Z integral.overlattice_count:
+  hash: 9c1eaa017ab9d851f9fa4f13d908db44739d8d36e5166bfbb9637b572c76a397
+  by: research preamble
+198Z integral.primitive_orbits:
+  hash: 9b8cdcf8128ef607d509db1ffd2eebcfa7c82c54825bd52cc94c4e9feb39f244
+  by: research preamble
+198Z integral.spinor_genera:
+  hash: 20f5d96cd0e1ed409a3beccf6e7f852dff27d839fbdd684d0656c7d68b8dcc3f
+  by: research preamble
+198Z integral.spinor_genus_count:
+  hash: 279e81ba4c81e65b2fa3e76e8bb254a008b2b76fce154a84d87beab791f76d71
+  by: research preamble
+19FT definite.automorphism_group_generator_morphisms:
+  hash: c1171ba7c82979025cfe8f148c614914d52517f0d8640fa0d06d32dc3a6bd6da
+  by: research preamble
+19FT definite.automorphism_group_order:
+  hash: 347b5adb554ce2d130e53631e5816247256391f76d4b7f33c3f1e6f086b6e0e0
+  by: research preamble
+19FT definite.genus_theta_series:
+  hash: 3fe893def0bb566f65c16bc3946674d348bf24cf2554acfa78e36fb07b1c0a99
+  by: research preamble
+19FT definite.siegel_eisenstein_coefficients:
+  hash: 9d7d45355c6f7feada6d7aa0d013a4b8132dc5a98a3c81b0d9eed83116f9d64c
+  by: research preamble
+19FT definite.theta_series_cuspidal_component:
+  hash: 7fef5afbfb40ca7758f6f4ba19de7a63d7cd427081c77e3b2cc9e72466836ba2
+  by: research preamble
+19FT derive:
+  hash: 0ee955d9ff39ce734b766f01c51abc1b5e3e9685839674c383cdcca2579c0e2f
+  by: research preamble
+19FT form.integer_valued:
+  hash: afe009d8b690d19a44e8fa8a940f6cc8621d4bab4a3b4a909d98ce966c4ed969
+  by: research preamble
+19FT integral.anisotropic_primes:
+  hash: 9ad9bf4f6b1c8dca84af12a606fa4b911f37856aecbdbbd0e444baaa0d386da2
+  by: research preamble
+19FT integral.discriminant_sequence:
+  hash: 7ba92de01ea682e3bf190d375b5167e377113ee9b59608056bf36c6917c8a06b
+  by: research preamble
+19FT integral.elementary_primes:
+  hash: bf728f17e0666a770df3de687e7a93d4785c42df0eb930923300419f9b1accef
+  by: research preamble
+19FT integral.genus_class_count:
+  hash: 0a7bb0f0ea6d94264bf22896bcbf91f412efd4df6d1620c21482337a126cced1
+  by: research preamble
+19FT integral.genus_symbol:
+  hash: 40c04e5f643c9851db1bf8d00c3119115d97d00f48d48f84105958d742eaa38f
+  by: research preamble
+19FT integral.hyperbolic_index:
+  hash: a1a403eb3a88981f7d8cf6956d39a74ca74634994f356fe73f43545b2e1a0fca
+  by: research preamble
+19FT integral.local_densities:
+  hash: 47027f86d6a1ee31e0a115f7daa623718bc79385df898eb0330f5d4d8f4205f1
+  by: research preamble
+19FT integral.local_representations:
+  hash: 33381befe8067c6977d1081206f587db05f0e44d012a340ab69370521e1096f9
+  by: research preamble
+19FT integral.modular_scale:
+  hash: c0ba597b4f16541aa68538109922053a52ef4eea674bcbe0730704295b1f4ba3
+  by: research preamble
+19FT integral.overlattice_count:
+  hash: b6c69bfee3234966208cea75ca2e1b9638446a31df88ba4ee070904e40e30afe
+  by: research preamble
+19FT integral.primitive_orbits:
+  hash: 9fb90f5bf7da325e28375aa6fc07baaa511dfa45caf609eebd746c62ad4321d1
+  by: research preamble
+19FT integral.spinor_genera:
+  hash: 49a11b1215c0088b27ffa099405f3c44c2ada1b74d08a9644dd0363b1fe71c5f
+  by: research preamble
+19FT integral.spinor_genus_count:
+  hash: 25957458d64ebc9b5d6159fa814a70ef5a27659fdf78b45f5402d8770e03490e
+  by: research preamble
 1A30 definite.automorphism_group_generator_morphisms:
   hash: 5c5ac9db078e96514661187d9d3e4c67e183c5039addfe05a85388f58dc1ed6a
   by: research preamble
