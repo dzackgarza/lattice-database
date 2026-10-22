@@ -22,6 +22,8 @@ certifications:
   definite.theta_series_cuspidal_component: 9f6c730e628a20fa5d0b0ca9061a8dc69c9fc36dbd2041fdf32dd1fdda8509fc
   definite.siegel_eisenstein_coefficients: f4d932b6f40e3207b242dd9cbe5467dc20971aea83daf1c73745a4b4c3be041b
   integral.anisotropic_primes: ecdd3f73531a0793eaaa9f8b40196b5978f587d64b9ea921ecd7d4bb0e7d8673
+  integral.local_representations: 7895ed0ec0a2160ae11312ef394bd416b300945f0f300fc0635b9be72381fe94
+  integral.local_densities: f0d934fa555e35ec07f3c7a747e03901ec42bead3c36b52063aa36207868840b
 rank: 4
 gram_tensor:
 - [2, 1, 1, 1]
@@ -126,6 +128,34 @@ integral:
       z: [0, 2, 0, 0]
       w: [0, 0, 0, 0]
   anisotropic_primes: []
+  local_representations:
+  - prime: 2
+    classes:
+    - representative: 1
+      least_valuation: 2
+    - representative: 3
+      least_valuation: 2
+    - representative: 5
+      least_valuation: 2
+    - representative: 7
+      least_valuation: 2
+    - representative: 2
+      least_valuation: 1
+    - representative: 6
+      least_valuation: 1
+    - representative: 10
+      least_valuation: 1
+    - representative: 14
+      least_valuation: 1
+  local_densities:
+  - prime: 2
+    densities: [0, 3/2, 0, 9/4, 0, 5/2, 0, 15/8, 0, 3/2, 0, 7/4]
+  - prime: 3
+    densities: [2/3, 4/3, 8/9, 2/3, 4/3, 8/9, 2/3, 4/3, 34/27, 2/3, 4/3, 8/9]
+  - prime: 5
+    densities: [4/5, 6/5, 6/5, 4/5, 26/25, 4/5, 6/5, 6/5, 4/5, 24/25, 4/5, 6/5]
+  - prime: 7
+    densities: [8/7, 8/7, 6/7, 8/7, 6/7, 6/7, 50/49, 8/7, 8/7, 6/7, 8/7, 6/7]
 definite:
   minimum: 2
   kissing_number: 2

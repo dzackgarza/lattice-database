@@ -285,18 +285,6 @@
   hash: cb939d159aaf605902244332c73fc9bcf7b4c086ee6bee50447c0de01a87cbfa
   seconds: 0
   lost: true
-0UWB integral.local_representations:
-  hash: 3250e625ece1d7e3059bbb24741e1f7fa1c5a20b69e017dd0256ee5901354c02
-  seconds: 2
-0UWH definite.theta_series_cuspidal_component:
-  hash: 80dfe05a6e39c44e3104e49e2d4ccc6326190484787b9c241146e71c141167d1
-  seconds: 1
-0UX2 integral.genus_class_count:
-  hash: 3c35d1601dcc2ab6af83ba9d30d5aa0058d9bf9fb8f5f4662df787e977726bf5
-  seconds: 25
-0UXM integral.genus_class_count:
-  hash: a8e50936bd4c69a228beb3447c9445c60d96325e1f72cca5a7a0f406a633b5c6
-  seconds: 7
 0V5M integral.overlattice_count:
   hash: c9286753470fe2e20412881862f115276e7351f86c27404940ff5ffc6afebf68
   seconds: 0
@@ -315,6 +303,10 @@
   lost: true
 0WDK integral.genus_class_count:
   hash: fa36a0215c9394768ad0dc5fc9ba6fa459b7390e1e92dba69508d3952353013e
+  seconds: 0
+  lost: true
+0WEZ integral.overlattice_count:
+  hash: cdaceb68b137b24eb537660a622a48841feec357ee8ed97384459686f1c750cf
   seconds: 0
   lost: true
 0WV9 definite.genus_theta_series:
