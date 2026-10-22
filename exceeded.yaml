@@ -333,10 +333,6 @@
   hash: f0687b1513ecc995e29023c3d3bf09bad48712a86477a683f8924ccb74583553
   seconds: 52
   lost: true
-12F2 integral.discriminant_sequence:
-  hash: 627f6da888ba15f36218ec1aa4535542ef38b0a84d6a6f71494216a06ed26679
-  seconds: 0
-  lost: true
 134I integral.discriminant_sequence:
   hash: d899c056d8060f42b16474b961cb3f64b93608cf216e1a3547ddf9a28d97aed5
   seconds: 0
@@ -359,6 +355,10 @@
   lost: true
 14IS integral.genus_class_count:
   hash: ff001c37cb5dbdcf1279331de0414a5e76ddf89fd20ce18f50841b1a4491fe3e
+  seconds: 0
+  lost: true
+14R9 integral.genus_class_count:
+  hash: 9bb5990def02a438cbbe6ad5afe9c3b9af9da6139b356aa7f50537ae02f59b9b
   seconds: 0
   lost: true
 15YT integral.discriminant_sequence:
