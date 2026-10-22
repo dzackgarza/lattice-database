@@ -377,10 +377,6 @@
   hash: db76bc93ddc6c878167b42141a3c0472a05c0396872be5821782c563a8b0f029
   seconds: 0
   lost: true
-18O8 integral.genus_class_count:
-  hash: c1a635e00feb533bc4bce06a0775cca888008593af421799173ba2d9f40c257e
-  seconds: 0
-  lost: true
 18TJ integral.discriminant_sequence:
   hash: 85ce9c836f2df8b9f9faf8ba5f38041ee9f9d52c2168f83014abc0f89fd4302a
   seconds: 52
@@ -391,6 +387,10 @@
   lost: true
 19IJ integral.genus_class_count:
   hash: 430ed7268f4bd8dccda62331ded8ef403c34208e8171f4d0b2336426636f0f36
+  seconds: 0
+  lost: true
+1AFX definite.genus_theta_series:
+  hash: 599c6cecafa7b463d0fc6103ade4c548f476ee54a9180980eff04ff5a48baa24
   seconds: 0
   lost: true
 1F6O integral.primitive_orbits:
