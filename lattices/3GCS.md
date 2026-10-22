@@ -10,6 +10,21 @@ certifications:
   form.integer_valued: 2cd4a32a7ff3eab2ab25a60db2fcda47ae7f6cefc253f4ab7cb074f88ff66e46
   definite.automorphism_group_order: bca0a18b691fe525bddd40d4d93bc4e7e2260c2b4bbba4e6832b5ef037dfcb27
   definite.automorphism_group_generator_morphisms: d2b8856897c1db2345e51d11f0144527402dde9cdcb07a38ef6729fade34549b
+  integral.elementary_primes: 01ad8b294a7f3d5f694dc5ae3b57e4fe3611a35fb5f868dc3a5364c35b91ca74
+  integral.genus_symbol: effe3c1157eace5c1561e792bdedfb5b54b6fc53803540ead717faadac7b8a4a
+  integral.genus_class_count: cc38049cbafae2e5ac2850b21bbf746ef6abc3cb64d1dbe2a300c36448c021bb
+  integral.overlattice_count: c32868153df1618d9feb04b008fa4d4cb8a5adea4f873fdf5df3ab88c65f810b
+  integral.spinor_genus_count: 4f93fb859bf6b8df40a8dc2547a085e04b5b416aad2faca10c9053f58f822655
+  integral.spinor_genera: fb9659ea2177b7a57949e052caf6638382b92609451704226af25fcb16a83f78
+  integral.hyperbolic_index: 6ae12dd96809d9474ae48d814d5690efc8cab07309c3570bb9e3d8dd172a82ae
+  integral.primitive_orbits: 8208d17cd06853a46f16e8fc38e76aa309bc377241574629e4fdd121102af589
+  integral.modular_scale: c2aa4430d9e89bcf66f1fd2e026b26bb7da226ba9a206efe0f3121449b20d4e5
+  definite.genus_theta_series: d09dc334bc325e90d4adaad52bb7449c56c4694eb963ac7fc07953a418d3ea66
+  definite.theta_series_cuspidal_component: 466603d04b2cfa43bc734f6acb6f1d1f0d4eabd758677b6279eb48628bcfb3ab
+  definite.siegel_eisenstein_coefficients: 02a16dbe529e53c2d22ebd2ee0df95c2177925b176a74875690eea25b5015722
+  integral.anisotropic_primes: e5a4f2af008e952f5c3861a3acdd696cff4adc43f5fcad63edc44e4f2ab3ac53
+  integral.local_representations: 40316530bb540f318d45e2f16f52fb8ed986211880c82a29c7f65e40606d6c74
+  integral.local_densities: d7f36eeedd6cc04cb7d8db342eaec0390f587a1454436ca05985afd7f1a4e70c
 rank: 3
 gram_tensor:
 - [4, 2, 2]
@@ -25,10 +40,84 @@ dual_gram_tensor:
 form:
   integer_valued: true
 integral:
+  elementary_primes: []
   parity: odd
   level: 72
+  modular_scale: false
   discriminant_group: [12, 36]
+  overlattice_count: 10
   bad_reduction_primes: [2, 3]
+  genus_symbol: 'I_{3,0} (2: [1^-1]_3 [4^2]_6; 3: 1^1 3^-1 9^-1)'
+  genus_class_count: 1
+  spinor_genus_count: 1
+  spinor_genera: [1]
+  hyperbolic_index: 0
+  primitive_orbits:
+    O:
+      constant: 0
+      z: [0, 0, 0, 1]
+      w: [0, 0, 0, 0]
+    SO:
+      constant: 0
+      z: [0, 0, 0, 1]
+      w: [0, 0, 0, 0]
+    Otilde:
+      constant: 0
+      z: [0, 0, 0, 2]
+      w: [0, 0, 0, 0]
+    SOtilde:
+      constant: 0
+      z: [0, 0, 0, 2]
+      w: [0, 0, 0, 0]
+    O+:
+      constant: 0
+      z: [0, 0, 0, 1]
+      w: [0, 0, 0, 0]
+    SO+:
+      constant: 0
+      z: [0, 0, 0, 1]
+      w: [0, 0, 0, 0]
+    Otilde+:
+      constant: 0
+      z: [0, 0, 0, 2]
+      w: [0, 0, 0, 0]
+    SOtilde+:
+      constant: 0
+      z: [0, 0, 0, 2]
+      w: [0, 0, 0, 0]
+  anisotropic_primes: [2]
+  local_representations:
+  - prime: 2
+    classes:
+    - representative: 1
+      least_valuation: 2
+    - representative: 3
+      least_valuation: 0
+    - representative: 7
+      least_valuation: 0
+    - representative: 2
+      least_valuation: 3
+    - representative: 6
+      least_valuation: 3
+    - representative: 10
+      least_valuation: 3
+    - representative: 14
+      least_valuation: 3
+  - prime: 3
+    classes:
+    - representative: 1
+      least_valuation: 0
+    - representative: 2
+      least_valuation: 2
+    - representative: 3
+      least_valuation: 3
+    - representative: 6
+      least_valuation: 1
+  local_densities:
+  - prime: 2
+    densities: [0, 0, 2, 2, 0, 0, 2, 3, 0, 0, 2, 3]
+  - prime: 3
+    densities: [2, 0, 0, 2, 0, 2, 2, 0, 2/3, 2, 0, 0]
 definite:
   minimum: 4
   kissing_number: 2
@@ -41,6 +130,9 @@ definite:
   regular: true
   spinor_regular: true
   theta_series: [1, 0, 0, 0, 2, 0, 0, 4, 0, 0, 0, 0, 0]
+  genus_theta_series: [1, 0, 0, 0, 2, 0, 0, 4, 0, 0, 0, 0, 0]
+  theta_series_cuspidal_component: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+  siegel_eisenstein_coefficients: [0, 0, 0, 2, 0, 0, 4, 0, 0, 0, 0, 0]
   root_system: []
   roots:
   - type: A1
