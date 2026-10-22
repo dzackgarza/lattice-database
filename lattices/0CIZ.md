@@ -15,6 +15,15 @@ certifications:
   integral.hyperbolic_index: 7b2af89cf8fbb0807c2411a385be6089692688b2814bfe85bf76affae61250b7
   definite.automorphism_group_order: 5c573faef3de53e31cdf7ffbc213b0e496ab7b64b34dcfb9343e700ef3396a7a
   definite.automorphism_group_generator_morphisms: c9bf04e572298e4f8b1b5232e152c7c8921eb8bb8c194e42dacaf6f51823f94b
+  integral.discriminant_sequence: e678a63dc8ddd01638893d6c56a389dd2eb8d6d7b85358675b91df2735c9715a
+  integral.primitive_orbits: acc89265138fb37797d3007754d7a97b9597abde3adfc244c7c927c70e4db2b9
+  integral.modular_scale: 1db48dd11b525746ab2405434cbf71c8c7f0e0573f3edfe96c397bd86d1467de
+  definite.genus_theta_series: 71f8f613e2abf422599456122569acb8e50470d044a5aaffbccc949447a2622b
+  definite.theta_series_cuspidal_component: 58219f82f4e6d019c77abade663411f797b882be6feac88ace0e642b0933b4eb
+  definite.siegel_eisenstein_coefficients: 54b8be2f088d46c76b8ff3f62074de796442be1aba617d0b8156d2cadb0bb2b5
+  integral.anisotropic_primes: 395a8ac1a5517b09460e333392511cd9f0083f077d2e388fe4ff188dfdcf01c9
+  integral.local_representations: b59bd31829e9cb7ecac0354161cd4c6c286dfcf9adca8eabc538ee29d7b4fedf
+  integral.local_densities: 12ff21ee7665ea7e24cdd1bbe502542fdf88a59f3ad0e0909346d28e035a65e7
 rank: 4
 gram_tensor:
 - [2, 0, 1, 0]
@@ -35,7 +44,39 @@ integral:
   elementary_primes: []
   parity: even
   level: 386
+  modular_scale: false
   discriminant_group: [2, 386]
+  discriminant_sequence:
+    discriminant_factors: [2, 386]
+    discriminant_basis_lifts:
+    - ['0', 1/2, '0', '0']
+    - [52/193, 4/193, 89/193, -1/386]
+    discriminant_quadratic_gram:
+    - ['1', 1/2]
+    - [1/2, 26/193]
+    discriminant_group_order: 4
+    discriminant_generators:
+    - - [1, 0]
+      - [1, 1]
+    - - [1, 0]
+      - [1, 385]
+    image_generators:
+    - - [1, 0]
+      - [0, 385]
+    - - [1, 0]
+      - [1, 1]
+    - - [1, 0]
+      - [1, 385]
+    image_order: 4
+    kernel_order: 2
+    coset_representatives:
+    - - [1, 0]
+      - [0, 1]
+    mm_trivial: true
+    image_normal: true
+    quotient_generator_cosets: [0, 0]
+    quotient_multiplication:
+    - [0]
   overlattice_count: 4
   bad_reduction_primes: [2, 193]
   quadratic_character: 193
@@ -44,6 +85,64 @@ integral:
   spinor_genus_count: 1
   spinor_genera: [32]
   hyperbolic_index: 0
+  primitive_orbits:
+    O:
+      constant: 0
+      z: [0, 1, 0, 1]
+      w: [0, 0, 0, 0]
+    SO:
+      constant: 0
+      z: [0, 1, 0, 1]
+      w: [0, 0, 0, 0]
+    Otilde:
+      constant: 0
+      z: [0, 1, 0, 2]
+      w: [0, 0, 0, 0]
+    SOtilde:
+      constant: 0
+      z: [0, 2, 0, 2]
+      w: [0, 0, 0, 0]
+    O+:
+      constant: 0
+      z: [0, 1, 0, 1]
+      w: [0, 0, 0, 0]
+    SO+:
+      constant: 0
+      z: [0, 1, 0, 1]
+      w: [0, 0, 0, 0]
+    Otilde+:
+      constant: 0
+      z: [0, 2, 0, 2]
+      w: [0, 0, 0, 0]
+    SOtilde+:
+      constant: 0
+      z: [0, 2, 0, 2]
+      w: [0, 0, 0, 0]
+  anisotropic_primes: []
+  local_representations:
+  - prime: 2
+    classes:
+    - representative: 1
+      least_valuation: 2
+    - representative: 3
+      least_valuation: 2
+    - representative: 5
+      least_valuation: 2
+    - representative: 7
+      least_valuation: 2
+    - representative: 2
+      least_valuation: 1
+    - representative: 6
+      least_valuation: 1
+    - representative: 10
+      least_valuation: 1
+    - representative: 14
+      least_valuation: 1
+  local_densities:
+  - prime: 2
+    densities: [0, 1, 0, 5/2, 0, 1, 0, 13/4, 0, 1, 0, 5/2]
+  - prime: 193
+    densities: [192/193, 192/193, 192/193, 192/193, 194/193, 192/193, 192/193, 192/193, 192/193, 194/193, 194/193, 192/193]
 definite:
   minimum: 2
   kissing_number: 2
@@ -54,6 +153,9 @@ definite:
   - [1, 0, 0, 0]
   perfect: false
   theta_series: [1, 0, 2, 0, 2, 0, 4, 0, 10, 0, 0, 0, 12]
+  genus_theta_series: [1, 0, 32/49, 0, 160/49, 0, 128/49, 0, 416/49, 0, 388/147, 0, 640/49]
+  theta_series_cuspidal_component: [0, 0, 66/49, 0, -62/49, 0, 68/49, 0, 74/49, 0, -388/147, 0, -52/49]
+  siegel_eisenstein_coefficients: [0, 32/49, 0, 160/49, 0, 128/49, 0, 416/49, 0, 388/147, 0, 640/49]
   root_system: [A1]
   roots:
   - type: A1
