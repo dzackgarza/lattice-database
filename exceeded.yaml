@@ -285,15 +285,6 @@
   hash: cb939d159aaf605902244332c73fc9bcf7b4c086ee6bee50447c0de01a87cbfa
   seconds: 0
   lost: true
-0U8G definite.genus_theta_series:
-  hash: ed8e8a6100cd0c4a3b97dbf09489f5d8bef5b79df9f54631358d9d15d11bd20f
-  seconds: 5
-0U90 integral.genus_class_count:
-  hash: 07b013c0bcff6881fd326d3fbc10fbeba513f7b208ee90ff3f6ba6bab55ba8b7
-  seconds: 6
-0U9W derive:
-  hash: 598e895717bf692e81031d13c284847aff5d48e4959a6c41a5c699b1af36a748
-  seconds: 6
 0UWB integral.local_representations:
   hash: 3250e625ece1d7e3059bbb24741e1f7fa1c5a20b69e017dd0256ee5901354c02
   seconds: 2
@@ -306,6 +297,10 @@
 0UXM integral.genus_class_count:
   hash: a8e50936bd4c69a228beb3447c9445c60d96325e1f72cca5a7a0f406a633b5c6
   seconds: 7
+0V5M integral.overlattice_count:
+  hash: c9286753470fe2e20412881862f115276e7351f86c27404940ff5ffc6afebf68
+  seconds: 0
+  lost: true
 0WAI integral.overlattice_count:
   hash: b1a20c42bfab9c464f1297da7432cf2dfbc92a87b9773ea5af3e743a59f3ab7c
   seconds: 0
@@ -440,6 +435,10 @@
 3EQM integral.overlattice_count:
   hash: b24c341722a1a2511c75df278b1fa58920272ba61601093c35c164f7209f8381
   seconds: 8
+  lost: true
+3EQN integral.overlattice_count:
+  hash: e8d71ca6893f59982033236babca89154941f78764341f3d5b60a3e6389deb8b
+  seconds: 14
   lost: true
 3EQO integral.overlattice_count:
   hash: 4628632bcb557b995b941a72de84eee7ac7dd6b07fe1216218f8c9097f757f08
