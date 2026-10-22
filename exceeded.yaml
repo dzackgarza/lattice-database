@@ -385,10 +385,6 @@
   hash: 76b6a86797d8fb044b36341c2c8b05e92c61c97eb02230e4fed2019c2cc239a2
   seconds: 0
   lost: true
-178N integral.overlattice_count:
-  hash: ee6774fc528ad330719d8f0937bd582036e5059292b0994a543d0de5bacf25be
-  seconds: 0
-  lost: true
 17GN integral.genus_class_count:
   hash: bee58167c2568715b6c1127d14920ca053003979425520cfeeb4010f7274608e
   seconds: 0
@@ -396,6 +392,10 @@
 17YN integral.genus_class_count:
   hash: 4218116e0b7d47dadd2b6ab127b65c422578f2646a2c8e14b38ac067233bb6a0
   seconds: 26
+  lost: true
+1A62 integral.discriminant_sequence:
+  hash: ea991e8db2b155ce55baabdef28e180c436cd1fa61081c6963a71c3b161fc226
+  seconds: 0
   lost: true
 1F3D integral.genus_class_count:
   hash: e6f89b07eee811e580e5694ec396bdcb65a87f2fb3bbc98818232b152905e945
