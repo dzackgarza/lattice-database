@@ -24,6 +24,14 @@ jobs:
           repository: dzackgarza/ai-review-ci
           ref: e3ecc613e2cc41238f6f3717e8107d2a7c2519ba
           path: _ci-support/ai-review-ci
+      - name: Install Just for CI diagnostics
+        uses: extractions/setup-just@53165ef7e734c5c07cb06b3c8e7b647c5aa16db3
+        with:
+          just-version: '1.59.0'
+      - name: Check architectural tensor ownership (CI only)
+        run: |
+          npm install --global @ast-grep/cli@0.41.0
+          just tensor-boundary
       - name: Provision the shared Sage environment
         uses: ./.github/actions/sage
       - name: Validate preamble owner contracts

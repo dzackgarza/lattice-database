@@ -1,6 +1,8 @@
 name: PR QC
+# Explicitly opt in to the former stabilized-project PR review. The database
+# is pre-v1 and its diagnostics must not gate ordinary pull requests.
 on:
-  pull_request: {}
+  workflow_dispatch: {}
 jobs:
   qc-ci:
     uses: dzackgarza/ai-review-ci/.github/workflows/_qc.yml@main

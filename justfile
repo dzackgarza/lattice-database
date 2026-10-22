@@ -87,12 +87,14 @@ duplicates:
 deduplicate:
     just _latticedb deduplicate
 
-test-commit: tensor-boundary
+# MVP publication: inspect staged syntax only; model tests and architectural
+# ownership rules run in CI, not at every commit.
+test-commit:
     @just -f ~/ai-review-ci/justfiles/sage.just -d . test-commit
 
-# Keep local pushes bounded: shared commit checks and the small schema specimen.
-# The shared Sage push gate discovers the full corpus suite, so it belongs in CI.
-test-push: test-commit test
+# Publishing work does not wait for the database's test suite.
+test-push:
+    @just -f ~/ai-review-ci/justfiles/sage.just -d . test-push
 
 # Run the complete shared gate, including every source and corpus test, in CI.
 test-ci:
