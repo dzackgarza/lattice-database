@@ -412,15 +412,10 @@
 16WQ integral.genus_class_count:
   hash: 2d5c93860c66304d6c0eed755e220ecdec407dd640f0c7697e34e50c47fead43
   seconds: 6
-1A4F integral.local_densities:
-  hash: c0306adac92f3c39d1137918aa2d07ab593bdf8b54ec5f42ac281d17f056e5b4
-  seconds: 3
-1A5L definite.genus_theta_series:
-  hash: 0cdd902777cc91781cd5a437cba878594d8e43514376d07cc2e03b2bb97b47ee
-  seconds: 3
-1A77 integral.discriminant_sequence:
-  hash: ce6c6ff8a0c3d51ea206826c51f5b76cb54ee390910be7233565996ec632da7f
-  seconds: 12
+1CHE integral.genus_class_count:
+  hash: 859cba6cf9f84fe93c471abb1d9b5c1e67a0e788161d0a86c894cbfb349a882d
+  seconds: 0
+  lost: true
 1JL3 integral.genus_class_count:
   hash: a8e50299b7c26ba57cf6cb4fb3b9cd826ec2562910617df8fa3a00aac905c31d
   seconds: 127
