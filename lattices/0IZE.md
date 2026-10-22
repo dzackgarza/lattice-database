@@ -17,6 +17,12 @@ certifications:
   definite.automorphism_group_generator_morphisms: cc539f892961c50ecd0812533d84c084d7bebb71fd293f59dca7becc586cdcc0
   integral.primitive_orbits: a5427c5e58098085025ff8ebcfc935fe02e31af0e02cdfd5b8be6ce8f1c59dc0
   integral.modular_scale: bda58ff99c686d7886e77fbf137a3cdbd52a924c5cf4139d5656d6d5a25955b4
+  definite.genus_theta_series: ff9e9d494d6c72b95e14333842d82134c3a5ce5dc749d27543bcac5a6f6bb289
+  definite.theta_series_cuspidal_component: af4e034ba30a9fefb53820a14b51bfba639fff554dc256c5a4d89d66eb011943
+  definite.siegel_eisenstein_coefficients: 85be44ceded6382efc7944b3aa01b1c7b85b81cfc2691c9f9c83c171bd3fd546
+  integral.anisotropic_primes: 48136e76af4ecab78a4e0c6b4fd0c5630a78e5fa782804d1e552a49355b022a5
+  integral.local_representations: 23fe572faef88f13a34fa76a4a3816137ee426f434b9df783929118056a0e5bb
+  integral.local_densities: 5f261e028dfad5e5bd166cef8eaf26c4361681636fc84415a03e98388da9a302
 rank: 4
 gram_tensor:
 - [3, 1, 1, 1]
@@ -80,6 +86,13 @@ integral:
       constant: 0
       z: [0, 0, 6, 8]
       w: [0, 0, 0, 0]
+  anisotropic_primes: []
+  local_representations: []
+  local_densities:
+  - prime: 2
+    densities: [1, 1/2, 1, 7/4, 1, 1/2, 1, 9/8, 1, 1/2, 1, 7/4]
+  - prime: 61
+    densities: [60/61, 62/61, 60/61, 60/61, 60/61, 62/61, 62/61, 62/61, 60/61, 62/61, 62/61, 60/61]
 definite:
   minimum: 3
   kissing_number: 6
@@ -94,6 +107,9 @@ definite:
   - [1, 0, 0, 0]
   perfect: false
   theta_series: [1, 0, 0, 6, 8, 8, 6, 4, 10, 14, 8, 12, 30]
+  genus_theta_series: [1, 12/11, 62/55, 48/11, 84/11, 72/11, 248/55, 372/55, 558/55, 156/11, 372/55, 124/11, 336/11]
+  theta_series_cuspidal_component: [0, -12/11, -62/55, 18/11, 4/11, 16/11, 82/55, -152/55, -8/55, -2/11, 68/55, 8/11, -6/11]
+  siegel_eisenstein_coefficients: [12/11, 62/55, 48/11, 84/11, 72/11, 248/55, 372/55, 558/55, 156/11, 372/55, 124/11, 336/11]
   root_system: []
   roots: []
 root_sublattice:
