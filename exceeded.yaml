@@ -253,6 +253,10 @@
 077Q definite.regular:
   hash: 914902341abad2a39c8826f5252d6b055b15688bc1c8d16016333081f7fab22c
   seconds: 6640
+0IWP integral.overlattice_count:
+  hash: 265700e450e026070cb54741da2af77a1cc0ea2a2c356514b95eab55caf6c202
+  seconds: 0
+  lost: true
 0LX3 definite.siegel_eisenstein_coefficients:
   hash: 2d7301207cc43bb763f03cfdecc163a5304ed8c19b18274a86dd376fd527f8b6
   seconds: 0
@@ -401,9 +405,9 @@
   hash: 3512993a42e82fcf7c90ae3036e93ad3d8fb5b4fe241e256f8bc0a92834bc00a
   seconds: 0
   lost: true
-37ZW integral.spinor_genus_count:
-  hash: 80d84ad108135a0d63f986f9483eb4011260646830f9217d6357e570ba1b0d86
-  seconds: 0
+3BV3 definite.siegel_eisenstein_coefficients:
+  hash: 4be43fed87facb172ca082e1bbd69e4a81eca70025fe243420745dac788d942a
+  seconds: 12
   lost: true
 3EQJ integral.overlattice_count:
   hash: 52066d7af793638c57d3ece509269d08dd6799446070c618d0cd23ca318c4c3c
@@ -564,6 +568,10 @@
 3G8K integral.discriminant_sequence:
   hash: 4152cb42565b89dc4c1f337699fceb522af5c05dc43445b3a496cba841abca35
   seconds: 10
+  lost: true
+3G9X integral.overlattice_count:
+  hash: 7d2dea858c2562c95c65f4b4bf1562d3b60c2c8f32dcfc265639131fd351ea11
+  seconds: 5
   lost: true
 3GEH integral.overlattice_count:
   hash: 75b98a72eb3d3314b6fd55e345ca2d1ed9bc31c3e559ecc31215d5b9823c122a
