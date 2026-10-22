@@ -17359,11 +17359,23 @@
 1JL4 definite.automorphism_group_order:
   hash: f805102afdc8a01ecc3f5293614d438588db890273fba348fde88d187560a058
   by: research preamble
+1JL4 definite.genus_theta_series:
+  hash: 63153cf63a98ddcab86f37b549c20d1fe1e69f755beb5826091948f53198cbf1
+  by: research preamble
+1JL4 definite.siegel_eisenstein_coefficients:
+  hash: 67289a2ac4c81377c5be13c3bdf462345ac97777c38b114f499d9cce1f2def5f
+  by: research preamble
+1JL4 definite.theta_series_cuspidal_component:
+  hash: 81db1e424b432e47c21d2f658789217c1eaf7088e153a6ee922de80fc2793d40
+  by: research preamble
 1JL4 derive:
   hash: 10af3ec7e9f530b9f9bbd06cad97ecae3d034625b8206c3c0f84c3b06dee5e87
   by: research preamble
 1JL4 form.integer_valued:
   hash: 4a155376d6799f36869a6ba76e0018190304f541d793f07d8e8ee1fe1e95155c
+  by: research preamble
+1JL4 integral.anisotropic_primes:
+  hash: 4bc99151d13bd338e0a47bc1fc2eee8be4cb3edae2d078445bae4d7628c2b06e
   by: research preamble
 1JL4 integral.discriminant_sequence:
   hash: 66c2217a8f1dab87cc28bb7a5bbad7ca4e6a94ccdb0b1689208370d98198af54
@@ -17380,8 +17392,20 @@
 1JL4 integral.hyperbolic_index:
   hash: e86c92b13b6fdb32db355cda46653b01bee8001badda52c378cbce0eabc2ed1a
   by: research preamble
+1JL4 integral.local_densities:
+  hash: 2ecf8b456b6374ea02f87abcdff26d569f68fa9f73fa3bfa5b740e4f86498276
+  by: research preamble
+1JL4 integral.local_representations:
+  hash: 1a4272ab780900794f4758f77d12275ac929e55f3e0fe39735194acff2826de8
+  by: research preamble
+1JL4 integral.modular_scale:
+  hash: 5a7028b490765b9674a3db1fe5892b5032aec329575bb4ed8006d49500cc3d27
+  by: research preamble
 1JL4 integral.overlattice_count:
   hash: 34cde670709927a75a800f3979c45acb73d84617fdb3771c7ae3537abc97a4c2
+  by: research preamble
+1JL4 integral.primitive_orbits:
+  hash: 1f41c404ffe85de0b962cc7163d80ba470a8ce2f52ab2d18f4e8b1a9e030a52f
   by: research preamble
 1JL4 integral.spinor_genera:
   hash: ca62ebbc0e3db2a6f734743d04f96955a71ecca1225c7af0822cd6605dab652a
