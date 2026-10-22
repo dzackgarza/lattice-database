@@ -427,10 +427,6 @@
   hash: 2996dac438b3ce2f8f9b9042cdcd682f5d508e13e2ea9a3f88c496eb5b7962e8
   seconds: 13
   lost: true
-1KAL integral.genus_class_count:
-  hash: 7822a36617040cc9bfa46e37d9a7b802c30683902a156be1073c2950ad23a159
-  seconds: 12
-  lost: true
 1KGM integral.genus_class_count:
   hash: 75fc8b21de081487ce57f0ebb8b9025ee83dc78a7f22e944191248dafe0ff24d
   seconds: 0
@@ -439,6 +435,9 @@
   hash: 5ec02122782c5210f413bb8d16db30dd35f3f8c8d17fdfa2b2f8245b12d1685c
   seconds: 0
   lost: true
+1L9E integral.discriminant_sequence:
+  hash: 0abc5586843474f67e21c869790aa40ca4b63eb7fedfbc7ffbbc83512e185292
+  seconds: 2
 1LPO integral.discriminant_sequence:
   hash: c2d56853c688ca548dd50df42dc26996cbe6f8a73e77d63b9dc95c2c53e7aeb5
   seconds: 0
