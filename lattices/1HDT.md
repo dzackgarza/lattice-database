@@ -15,6 +15,15 @@ certifications:
   integral.hyperbolic_index: 308f07fda6dcc82fd08f9f11e6865d7729dc833ff1af457de63b45d6c7904789
   definite.automorphism_group_order: 328c47485aa2b0ad3fd6c8011ee63033a0cd9c1f5f286245f179276ddcab7e9b
   definite.automorphism_group_generator_morphisms: 1651a17d3b361e0c0deafebfbc5c2a081cf64881738d31a4d5454f03e9c3674f
+  integral.discriminant_sequence: 835e1cf17922f18c536ce8633ed8c9743016b73fbed0095b257142eadd500f91
+  integral.primitive_orbits: 45c58f47cff4c067d3369eeb18c616f1a8b65c9830e4ccdd19e68eea9a052756
+  integral.modular_scale: ff079bcc9d77ddeff20c75a64bfdd29f10b435e6b22051e83eb7e9a8cea565f1
+  definite.genus_theta_series: c5300bfda1423d69b57c8e20c8134167f4861bfef7f2b49eca672e3d6a2046e1
+  definite.theta_series_cuspidal_component: b046b03290c0e02c8007d4bd3c2aa7372d371480230c1a63df46906ef14294e4
+  definite.siegel_eisenstein_coefficients: 0361534f67992d7db4e18a4a1d4cbc44149023e41b8661a0e7742aa85ed8289c
+  integral.anisotropic_primes: f60b958c7dcf6880e51f4ffaef9f31d9806266687f10e954a52073d4dc48a46d
+  integral.local_representations: 0a1f53e5605cf89f5258cfb0a09182e5bd3be942d24245c8c001044ee54fed11
+  integral.local_densities: cedc7bcd1b71bc194274c0cf6d392b3b4ac56a0b00e17c7950ae0e654fbb691b
 rank: 4
 gram_tensor:
 - [2, 1, 0, 0]
@@ -35,7 +44,40 @@ integral:
   elementary_primes: []
   parity: even
   level: 1648
+  modular_scale: false
   discriminant_group: [2, 824]
+  discriminant_sequence:
+    discriminant_factors: [2, 824]
+    discriminant_basis_lifts:
+    - [-1/2, '0', 1/2, '0']
+    - [195/824, -195/412, -285/824, 1/824]
+    discriminant_quadratic_gram:
+    - [1/2, '0']
+    - ['0', 839/824]
+    discriminant_group_order: 4
+    discriminant_generators:
+    - - [1, 0]
+      - [0, 207]
+    - - [1, 0]
+      - [0, 823]
+    image_generators:
+    - - [1, 0]
+      - [0, 823]
+    - - [1, 0]
+      - [0, 823]
+    image_order: 2
+    kernel_order: 2
+    coset_representatives:
+    - - [1, 0]
+      - [0, 1]
+    - - [1, 0]
+      - [0, 207]
+    mm_trivial: false
+    image_normal: true
+    quotient_generator_cosets: [1, 0]
+    quotient_multiplication:
+    - [0, 1]
+    - [1, 0]
   overlattice_count: 3
   bad_reduction_primes: [2, 103]
   quadratic_character: 412
@@ -44,6 +86,64 @@ integral:
   spinor_genus_count: 1
   spinor_genera: [74]
   hyperbolic_index: 0
+  primitive_orbits:
+    O:
+      constant: 0
+      z: [0, 1, 0, 1]
+      w: [0, 0, 0, 0]
+    SO:
+      constant: 0
+      z: [0, 1, 0, 2]
+      w: [0, 0, 0, 0]
+    Otilde:
+      constant: 0
+      z: [0, 1, 0, 2]
+      w: [0, 0, 0, 0]
+    SOtilde:
+      constant: 0
+      z: [0, 2, 0, 4]
+      w: [0, 0, 0, 0]
+    O+:
+      constant: 0
+      z: [0, 1, 0, 2]
+      w: [0, 0, 0, 0]
+    SO+:
+      constant: 0
+      z: [0, 1, 0, 2]
+      w: [0, 0, 0, 0]
+    Otilde+:
+      constant: 0
+      z: [0, 2, 0, 4]
+      w: [0, 0, 0, 0]
+    SOtilde+:
+      constant: 0
+      z: [0, 2, 0, 4]
+      w: [0, 0, 0, 0]
+  anisotropic_primes: []
+  local_representations:
+  - prime: 2
+    classes:
+    - representative: 1
+      least_valuation: 2
+    - representative: 3
+      least_valuation: 2
+    - representative: 5
+      least_valuation: 2
+    - representative: 7
+      least_valuation: 2
+    - representative: 2
+      least_valuation: 1
+    - representative: 6
+      least_valuation: 1
+    - representative: 10
+      least_valuation: 1
+    - representative: 14
+      least_valuation: 1
+  local_densities:
+  - prime: 2
+    densities: [0, 5/2, 0, 3/2, 0, 3/2, 0, 11/4, 0, 5/2, 0, 3/2]
+  - prime: 103
+    densities: [102/103, 102/103, 104/103, 102/103, 104/103, 104/103, 102/103, 102/103, 102/103, 104/103, 104/103, 104/103]
 definite:
   minimum: 2
   kissing_number: 2
@@ -54,6 +154,9 @@ definite:
   - [1, 0, 0, 0]
   perfect: false
   theta_series: [1, 0, 2, 0, 4, 0, 0, 0, 6, 0, 0, 0, 0]
+  genus_theta_series: [1, 0, 85/76, 0, 51/38, 0, 52/19, 0, 187/38, 0, 260/57, 0, 104/19]
+  theta_series_cuspidal_component: [0, 0, 67/76, 0, 101/38, 0, -52/19, 0, 41/38, 0, -260/57, 0, -104/19]
+  siegel_eisenstein_coefficients: [0, 85/76, 0, 51/38, 0, 52/19, 0, 187/38, 0, 260/57, 0, 104/19]
   root_system: [A1]
   roots:
   - type: A1
