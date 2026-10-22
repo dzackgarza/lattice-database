@@ -15,6 +15,15 @@ certifications:
   integral.hyperbolic_index: f7beb18b482b36e37700a4060c542e89e4f61370d1f278016fba2eb748b6edb4
   definite.automorphism_group_order: 925a3d64e881139e5ba0820519dea69775c77b38dd4948ecafefa9a52ab6e5ec
   definite.automorphism_group_generator_morphisms: b4fe8995fd7158c762465becf295f42bdaee240b1e466c73685c9893732aeb89
+  integral.discriminant_sequence: df0acf7e4d6bfb7a0ac61f0e9421651ad6baffea646162f7ac97370bfd29e4ce
+  integral.primitive_orbits: 35cd6a92b697a68c4c4e4736cd3abeca97984b38a430d9cb8c569067d7908cc4
+  integral.modular_scale: b7fe0ca70cd3e3f9e2ad5bcd1331dc01a807b7e7cbcb0880a976385ab609f70b
+  definite.genus_theta_series: 7841fa2b03d5beb1f76b649ae7a4c825f39de56f99d1145f5d8810bb064a8663
+  definite.theta_series_cuspidal_component: 729fe0a7ce888dab1fd87a9d7ffb63b0dfcebe324e2e48dd593c5df720a52e8b
+  definite.siegel_eisenstein_coefficients: b2f159e280174da748327746ee6355567a28f8cc247d9dc1450d166048df1dde
+  integral.anisotropic_primes: 15e6f7ccf4fe84bce6d79cfa45c9abaf42fdff98499798a257ac919af39f26b7
+  integral.local_representations: 7b9f5fdcf1397841b3969527828abc0be10615fef52681354ec4104149b5780c
+  integral.local_densities: f1bba1cf3b8df3b64e8dd6a9c49eaf6fae6c53a7623338ae0a8992ba60a93d6f
 rank: 4
 gram_tensor:
 - [4, 1, 0, -1]
@@ -35,7 +44,38 @@ integral:
   elementary_primes: []
   parity: even
   level: 1236
+  modular_scale: false
   discriminant_group: [2, 618]
+  discriminant_sequence:
+    discriminant_factors: [2, 618]
+    discriminant_basis_lifts:
+    - [-1/2, '0', 1/2, '0']
+    - [-33/103, -443/618, -235/618, 1/618]
+    discriminant_quadratic_gram:
+    - [1/2, 1/2]
+    - [1/2, 422/309]
+    discriminant_group_order: 4
+    discriminant_generators:
+    - - [1, 0]
+      - [0, 205]
+    - - [1, 0]
+      - [0, 617]
+    image_generators:
+    - - [1, 0]
+      - [0, 617]
+    image_order: 2
+    kernel_order: 1
+    coset_representatives:
+    - - [1, 0]
+      - [0, 1]
+    - - [1, 0]
+      - [0, 205]
+    mm_trivial: false
+    image_normal: true
+    quotient_generator_cosets: [1, 0]
+    quotient_multiplication:
+    - [0, 1]
+    - [1, 0]
   overlattice_count: 2
   bad_reduction_primes: [2, 3, 103]
   quadratic_character: 309
@@ -44,6 +84,66 @@ integral:
   spinor_genus_count: 1
   spinor_genera: [47]
   hyperbolic_index: 0
+  primitive_orbits:
+    O:
+      constant: 0
+      z: [0, 0, 0, 1]
+      w: [0, 0, 0, 0]
+    SO:
+      constant: 0
+      z: [0, 0, 0, 1]
+      w: [0, 0, 0, 0]
+    Otilde:
+      constant: 0
+      z: [0, 0, 0, 2]
+      w: [0, 0, 0, 0]
+    SOtilde:
+      constant: 0
+      z: [0, 0, 0, 2]
+      w: [0, 0, 0, 0]
+    O+:
+      constant: 0
+      z: [0, 0, 0, 1]
+      w: [0, 0, 0, 0]
+    SO+:
+      constant: 0
+      z: [0, 0, 0, 1]
+      w: [0, 0, 0, 0]
+    Otilde+:
+      constant: 0
+      z: [0, 0, 0, 2]
+      w: [0, 0, 0, 0]
+    SOtilde+:
+      constant: 0
+      z: [0, 0, 0, 2]
+      w: [0, 0, 0, 0]
+  anisotropic_primes: []
+  local_representations:
+  - prime: 2
+    classes:
+    - representative: 1
+      least_valuation: 2
+    - representative: 3
+      least_valuation: 2
+    - representative: 5
+      least_valuation: 2
+    - representative: 7
+      least_valuation: 2
+    - representative: 2
+      least_valuation: 1
+    - representative: 6
+      least_valuation: 1
+    - representative: 10
+      least_valuation: 1
+    - representative: 14
+      least_valuation: 1
+  local_densities:
+  - prime: 2
+    densities: [0, 2, 0, 3/2, 0, 2, 0, 11/4, 0, 2, 0, 3/2]
+  - prime: 3
+    densities: [4/3, 2/3, 8/9, 4/3, 2/3, 10/9, 4/3, 2/3, 28/27, 4/3, 2/3, 8/9]
+  - prime: 103
+    densities: [104/103, 104/103, 102/103, 104/103, 102/103, 102/103, 104/103, 104/103, 104/103, 102/103, 102/103, 102/103]
 definite:
   minimum: 4
   kissing_number: 2
@@ -54,6 +154,9 @@ definite:
   - [1, 0, 0, 0]
   perfect: false
   theta_series: [1, 0, 0, 0, 2, 0, 4, 0, 2, 0, 8, 0, 6]
+  genus_theta_series: [1, 0, 208/295, 0, 624/295, 0, 204/59, 0, 1144/295, 0, 2448/295, 0, 1224/295]
+  theta_series_cuspidal_component: [0, 0, -208/295, 0, -34/295, 0, 32/59, 0, -554/295, 0, -88/295, 0, 546/295]
+  siegel_eisenstein_coefficients: [0, 208/295, 0, 624/295, 0, 204/59, 0, 1144/295, 0, 2448/295, 0, 1224/295]
   root_system: []
   roots: []
 root_sublattice:
