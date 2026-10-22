@@ -18,6 +18,12 @@ certifications:
   integral.discriminant_sequence: 6fa1f98fd1ce3f4ac551faa9eb61dffc3025492760cc4adf1bb04b36f1db8575
   integral.primitive_orbits: c5e80da9846824d6e7f4f2e9c008f9abe2c1e4a7770608b9bfe3c08b1dd2dc6b
   integral.modular_scale: c0ecd7f39a4690568fd7164e97bd6e16302aa4cae50cc4e483af265906f6e829
+  definite.genus_theta_series: a15a24f1d9d458f8a308926f5f09077264a4fa0c16b845c5ce2af1e15fe93b8c
+  definite.theta_series_cuspidal_component: 0b371d97cd57927520bbc41e58250f003f9cc87ed4dc4745377f0c385bb64b3c
+  definite.siegel_eisenstein_coefficients: 62e2d03ae621cfdb571e3349f5d297a70ecadc5e31ace9f9d1120504a2315cc4
+  integral.anisotropic_primes: c307be84e9ab71fd1384d49c86c9a347c3e915724e51398612ba4187bc97dade
+  integral.local_representations: 0dc8be055c718353c175d18302cde4c3de1e95e2ff43d11d9b53ede42932522e
+  integral.local_densities: 7a7478a72d36d06915312e2b4c4dca6d5beb7096c74101101da656a85f081e6e
 rank: 4
 gram_tensor:
 - [2, 1, 0, 0]
@@ -121,6 +127,33 @@ integral:
       constant: 0
       z: [0, 2, 0, 4]
       w: [0, 0, 0, 0]
+  anisotropic_primes: []
+  local_representations:
+  - prime: 2
+    classes:
+    - representative: 1
+      least_valuation: 2
+    - representative: 3
+      least_valuation: 2
+    - representative: 5
+      least_valuation: 2
+    - representative: 7
+      least_valuation: 2
+    - representative: 2
+      least_valuation: 1
+    - representative: 6
+      least_valuation: 1
+    - representative: 10
+      least_valuation: 1
+    - representative: 14
+      least_valuation: 1
+  local_densities:
+  - prime: 2
+    densities: [0, 5/2, 0, 7/4, 0, 3/2, 0, 17/8, 0, 5/2, 0, 9/4]
+  - prime: 7
+    densities: [8/7, 8/7, 6/7, 8/7, 6/7, 6/7, 50/49, 8/7, 8/7, 6/7, 8/7, 6/7]
+  - prime: 61
+    densities: [62/61, 60/61, 62/61, 62/61, 62/61, 60/61, 60/61, 60/61, 62/61, 60/61, 60/61, 62/61]
 definite:
   minimum: 2
   kissing_number: 2
@@ -131,6 +164,9 @@ definite:
   - [1, 0, 0, 0]
   perfect: false
   theta_series: [1, 0, 2, 0, 4, 0, 0, 0, 6, 0, 6, 0, 4]
+  genus_theta_series: [1, 0, 16/13, 0, 1736/975, 0, 144/65, 0, 272/65, 0, 48/13, 0, 2232/325]
+  theta_series_cuspidal_component: [0, 0, 10/13, 0, 2164/975, 0, -144/65, 0, 118/65, 0, 30/13, 0, -932/325]
+  siegel_eisenstein_coefficients: [0, 16/13, 0, 1736/975, 0, 144/65, 0, 272/65, 0, 48/13, 0, 2232/325]
   root_system: [A1]
   roots:
   - type: A1
