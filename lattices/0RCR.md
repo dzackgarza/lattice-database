@@ -23,6 +23,7 @@ certifications:
   definite.siegel_eisenstein_coefficients: 94e043dc0747983f75979a06e17a6b19682c080bf50154a38485f73e7d01869d
   integral.anisotropic_primes: 37488deb144fd9da60845af4eba97d346deedc33f9566695a4b1657b2446d4c1
   integral.local_representations: c44aa05dfe9ba323f066841a9851fefe13f3ad63f6193dce7ecb269822dc07d9
+  integral.local_densities: 366ea3360d9750dad37146e7591505a2497a1be7f64936376c221154faedd88d
 rank: 4
 gram_tensor:
 - [2, 0, 0, 1]
@@ -148,6 +149,11 @@ integral:
       least_valuation: 1
     - representative: 14
       least_valuation: 1
+  local_densities:
+  - prime: 2
+    densities: [0, 1, 0, 13/4, 0, 1, 0, 23/8, 0, 1, 0, 11/4]
+  - prime: 37
+    densities: [36/37, 38/37, 36/37, 36/37, 38/37, 38/37, 36/37, 38/37, 36/37, 36/37, 36/37, 36/37]
 definite:
   minimum: 2
   kissing_number: 4
