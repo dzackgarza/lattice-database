@@ -20,6 +20,10 @@ certifications:
   integral.modular_scale: 5e6c174ae8854366a2588d0c5affc6d7539ae3b109da4d744824691890b58104
   definite.genus_theta_series: 182bed86ff9408791230caef0cae8d819b68debd7a068cf99b96209e33c2b31c
   definite.theta_series_cuspidal_component: f66a2a8cb7e8edb1ca5391ea74a551a7782ae843a5c52bb99177a74a844669d6
+  definite.siegel_eisenstein_coefficients: 618067787313e537a897271cc87fc8b9e418a9a80d19bda765bfaa6729d9f3b4
+  integral.anisotropic_primes: cd0ab2bbe368d134a194d0aaa531ed30bf8aa5d31b7537ef50deb2150cdf5cde
+  integral.local_representations: 54ec1dba1951f062de9e09a8e02b2a6737943746cff55d62e1012bd758c57c22
+  integral.local_densities: 407e7a8fc7d81b37c57efce41e84f31b34d362a2a0f2456d0c136286086a21e2
 rank: 4
 gram_tensor:
 - [2, 1, 1, 0]
@@ -123,6 +127,33 @@ integral:
       constant: 0
       z: [0, 2, 0, 4]
       w: [0, 0, 0, 0]
+  anisotropic_primes: []
+  local_representations:
+  - prime: 2
+    classes:
+    - representative: 1
+      least_valuation: 2
+    - representative: 3
+      least_valuation: 2
+    - representative: 5
+      least_valuation: 2
+    - representative: 7
+      least_valuation: 2
+    - representative: 2
+      least_valuation: 1
+    - representative: 6
+      least_valuation: 1
+    - representative: 10
+      least_valuation: 1
+    - representative: 14
+      least_valuation: 1
+  local_densities:
+  - prime: 2
+    densities: [0, 5/2, 0, 9/4, 0, 3/2, 0, 17/8, 0, 5/2, 0, 7/4]
+  - prime: 5
+    densities: [4/5, 6/5, 6/5, 4/5, 26/25, 4/5, 6/5, 6/5, 4/5, 24/25, 4/5, 6/5]
+  - prime: 67
+    densities: [68/67, 66/67, 66/67, 68/67, 66/67, 68/67, 66/67, 66/67, 68/67, 68/67, 66/67, 66/67]
 definite:
   minimum: 2
   kissing_number: 2
@@ -135,6 +166,7 @@ definite:
   theta_series: [1, 0, 2, 0, 4, 0, 4, 0, 8, 0, 10, 0, 4]
   genus_theta_series: [1, 0, 495/277, 0, 612/277, 0, 408/277, 0, 1683/277, 0, 2040/277, 0, 1386/277]
   theta_series_cuspidal_component: [0, 0, 59/277, 0, 496/277, 0, 700/277, 0, 533/277, 0, 730/277, 0, -278/277]
+  siegel_eisenstein_coefficients: [0, 495/277, 0, 612/277, 0, 408/277, 0, 1683/277, 0, 2040/277, 0, 1386/277]
   root_system: [A1]
   roots:
   - type: A1
