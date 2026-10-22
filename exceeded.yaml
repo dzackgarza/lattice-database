@@ -381,10 +381,6 @@
   hash: 15faf7f6fbe50262ecbe3495984bd51aaa0a7a10130b827ba371217ab99b4de6
   seconds: 0
   lost: true
-1CET integral.genus_class_count:
-  hash: cf7a50e24a26433762b30460e456cea4371823e4d8fc4911b75e60036cd72bfb
-  seconds: 0
-  lost: true
 1DQL integral.genus_class_count:
   hash: 599132a71d64247e347ba30d38e3940a3d588412478693947ff7f2738ef6edf7
   seconds: 0
@@ -395,6 +391,10 @@
   lost: true
 1EJL integral.genus_class_count:
   hash: 502548d8580e8b1cf699f546866e2c59d3589026f9ea4a5d50e8ec23b432856a
+  seconds: 0
+  lost: true
+1FES integral.genus_class_count:
+  hash: 1738489dfa9d55e57137d1bc80a16fdbd13986d8688ae06a1699c84b79445360
   seconds: 0
   lost: true
 1HDM definite.genus_theta_series:
