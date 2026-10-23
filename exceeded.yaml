@@ -405,10 +405,6 @@
   hash: aa9a82c8d21972721e8be9c08518da9a41ebe41fa9eafc96e77816086779ea31
   seconds: 0
   lost: true
-1FZY definite.siegel_eisenstein_coefficients:
-  hash: 72f60544d69cd0182db078a76f168658db6a266915460ff5093d4bccf191413f
-  seconds: 0
-  lost: true
 1GRN integral.overlattice_count:
   hash: 2d69994bb46caf54ef5fc24bfc85749b4e47e08c0890c0841e7baa197fa96e52
   seconds: 0
@@ -416,6 +412,10 @@
 1H0O definite.genus_theta_series:
   hash: b0f89a5848cd05644ee76d01b66b8e2b39d712adec97a445fc448c5e13bb6308
   seconds: 17
+  lost: true
+1H8E integral.overlattice_count:
+  hash: 6fd34e7a98e5065491b16561532b745d8fa7aa895637700aecd44a65bb719bbd
+  seconds: 0
   lost: true
 1HI8 integral.discriminant_sequence:
   hash: bdfbab998af3d055cc103b993daad459eda6edc5b8ed067deaf4732fa06bcbfb
