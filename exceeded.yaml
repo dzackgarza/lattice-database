@@ -449,11 +449,12 @@
   hash: 903cdd7c799a368953c6aa16145f48c25802c482cbe70041403dfa460ca0f785
   seconds: 0
   lost: true
-1M1K integral.discriminant_sequence:
-  hash: 177b271f783aa1283e7459ae7b263ceef6db502166b0554e7491bf961ed4ae5b
-  seconds: 2
 1M44 derive:
   hash: c1a4e5d8ba7494459f3b7d5e4bd8ef92ccb488ef6c3428b44b71e907eca4cfe6
+  seconds: 0
+  lost: true
+1MQA integral.primitive_orbits:
+  hash: ea5da9e903864370342c83ac74678188013844650e2aedd11f1a54e0a04ef277
   seconds: 0
   lost: true
 1QNX integral.genus_class_count:
