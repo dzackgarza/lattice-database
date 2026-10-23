@@ -445,10 +445,6 @@
   hash: c2d56853c688ca548dd50df42dc26996cbe6f8a73e77d63b9dc95c2c53e7aeb5
   seconds: 0
   lost: true
-1M44 derive:
-  hash: c1a4e5d8ba7494459f3b7d5e4bd8ef92ccb488ef6c3428b44b71e907eca4cfe6
-  seconds: 0
-  lost: true
 1MQA integral.primitive_orbits:
   hash: ea5da9e903864370342c83ac74678188013844650e2aedd11f1a54e0a04ef277
   seconds: 0
@@ -648,6 +644,10 @@
 3GEH integral.overlattice_count:
   hash: 75b98a72eb3d3314b6fd55e345ca2d1ed9bc31c3e559ecc31215d5b9823c122a
   seconds: 8
+  lost: true
+3GPD integral.discriminant_sequence:
+  hash: 708de2617cd39080cb56e76c1e13d680bd87df47773654a16bd392487fd3dd16
+  seconds: 218
   lost: true
 3GPP integral.discriminant_sequence:
   hash: a819e01ddf483f798e7b1e85c1c30c22723efa72094f46aaadc47759cd968c8f
