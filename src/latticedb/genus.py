@@ -347,7 +347,7 @@ def computed(chosen: list[Request], deadline: float, workers: int) -> Generator[
 
     def next_request() -> Request:
         # Resumed computations may outrun the job again; while other requests wait, one
-        # worker is kept from them, so every job certifies new values.
+        # worker is kept available for the other requests.
         if workers > 1 and sum(1 for request in holding.values() if request.get("resumed")) >= workers - 1:
             for index, request in enumerate(queue):
                 if not request.get("resumed"):

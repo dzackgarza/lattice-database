@@ -151,8 +151,8 @@ certificate hash that commits to the computation name, the Gram tensor and that 
 result. A matching completed certificate is permanent: implementation/version changes do not make
 it stale. Changing the Gram tensor or result breaks the hash and requires a new computation.
 A timeout or unfinished computation has no certificate. A computation that ran for a whole
-certification job without finishing is logged in `exceeded.yaml` and is never requested again,
-so the nightly job does not spend each run on the same computation.
+certification job without finishing is logged in `exceeded.yaml` and held for manual triage,
+so later CI runs spend their budgets on other work until an explicit retry is justified.
 
 Worker errors and memory failures enter `failures.yaml` with their input, stderr,
 runtime and CI provenance. Open entries quarantine the matching computation and input

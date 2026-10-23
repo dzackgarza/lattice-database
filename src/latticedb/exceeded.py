@@ -7,16 +7,17 @@ Certification writes zero elapsed seconds when a computation starts, checkpoints
 its actual elapsed time every thirty seconds, and deletes it when it finishes.
 Graceful termination writes a final checkpoint; a hard kill retains the latest
 checkpoint. An entry that remains records unfinished work and its elapsed time. A computation that ran for at least `WINDOW_SECONDS` does not fit in
-one job: certification never requests it again. A computation that ran for less
+one job: certification holds it for manual triage. A computation that ran for less
 was interrupted or started late, and the next job computes it first.
 
 Entries are `lost` from the start of their computation until the job's final
 checkpoint, and the job pushes its progress while it runs. An entry that is
-still lost was running when its runner died, possibly because of it, so the next
-job requests it after every other computation rather than first.
+still lost was running when its runner died; the next certification run recovers
+it into the manual failure ledger before scheduling work.
 
 The log is permanent. A changed Gram tensor changes the hash, so the entry no
-longer applies. After a faster implementation, delete the entry by hand.
+longer applies. After a repair or an investigation that justifies retrying, use
+``retry-computation`` to record the decision and release the matching input.
 """
 
 from pathlib import Path

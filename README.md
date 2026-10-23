@@ -440,7 +440,8 @@ card and certificate changes establish what the database retained.
 An entry maps the computation name to a hash of that name and the Gram tensor, and to the seconds the computation had run when the job's timeout ended it.
 Certification starts the entry at zero elapsed seconds, checkpoints actual runtime every thirty seconds and on graceful termination, and deletes it when the computation finishes.
 A hard kill retains the latest checkpoint; an early interruption remains eligible for retry.
-A computation that ran for at least five hours does not fit in one job, and certification never requests it again.
+A computation that ran for at least five hours is held for manual triage and an
+explicit retry decision.
 A computation that ran for less is requested first in its phase by the next job, after any required derivation.
 An entry is `lost` from the start of its computation until the job's final checkpoint.
 An entry that is still lost was running when its runner died. The next certification
@@ -450,7 +451,8 @@ If a worker crashes on a card, certification records the failed computation in
 then the other cards, and certification fails once the queue is done.
 A worker that crashes before starting any computation is not replaced.
 A changed Gram tensor changes the hash, so the entry no longer applies.
-After a faster implementation lands, delete the entry by hand.
+After a faster implementation lands, record the repair and release the computation
+with `just retry-computation`, as described below.
 
 The queue runs on `--workers` Sage processes, by default one per CPU. A worker holds one card at a time and takes the next only when that card is done, so a computation that never returns holds back only its own worker.
 After the interrupted computations, cards are queued by rank and then absolute determinant, so each job reaches as many cards as it can.
