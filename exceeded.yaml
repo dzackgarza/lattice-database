@@ -413,13 +413,17 @@
   hash: bdfbab998af3d055cc103b993daad459eda6edc5b8ed067deaf4732fa06bcbfb
   seconds: 0
   lost: true
-1IX2 integral.genus_class_count:
-  hash: b7f0c86ceea233f3d50a502e457af2e2b3ff951bfd3cad8c6312bf990748d61a
-  seconds: 0
+1JHS derive:
+  hash: 92e01d55e9c92a8fec296efd4e16df38ebc785b48108f3375fe0d67c911b7dcb
+  seconds: 10
   lost: true
 1JLB integral.genus_class_count:
   hash: a78008d3a8708815b384e4eb52b599ba368431774753883758046524702f843d
   seconds: 62
+  lost: true
+1JPM integral.discriminant_sequence:
+  hash: 2bb42b7451899403ad851c80c1dba526a6f5ca1521797404729cb5ae39ea6c43
+  seconds: 0
   lost: true
 1K1V definite.siegel_eisenstein_coefficients:
   hash: fa311dabf68de8f75c6653e62e85b673c1a085182d5e4cc656ed2e221a003e11
