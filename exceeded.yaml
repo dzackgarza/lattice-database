@@ -449,6 +449,10 @@
   hash: 7e2255c702d4964b8ebd7db07b01f7a07d9814462bb452b96f0ed5de747f54a1
   seconds: 0
   lost: true
+1NNL integral.genus_class_count:
+  hash: ad4076cc6e7c0643aa5662a8735e0844ee7ac2d16a9ace8ce2f7d8f33e902d69
+  seconds: 0
+  lost: true
 1RPG integral.genus_class_count:
   hash: bba09f74ebbe103ada9196aaab0bf0be190e667552ebf8b94280e47da257720d
   seconds: 8
@@ -660,10 +664,6 @@
 3GP1 integral.overlattice_count:
   hash: dc927e7dffa463fb642e33538f94079ce2a08d4cff738b359d68d8d689fa7d5d
   seconds: 15
-  lost: true
-3GPP integral.discriminant_sequence:
-  hash: a819e01ddf483f798e7b1e85c1c30c22723efa72094f46aaadc47759cd968c8f
-  seconds: 7540
   lost: true
 3GPU integral.discriminant_sequence:
   hash: ed0e1de71b5299d75a1e502e60afb74a46dafe5f2072e21ee6c6ed5814d2a082
