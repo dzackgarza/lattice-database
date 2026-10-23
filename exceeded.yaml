@@ -413,10 +413,6 @@
   hash: bdfbab998af3d055cc103b993daad459eda6edc5b8ed067deaf4732fa06bcbfb
   seconds: 0
   lost: true
-1HOR integral.primitive_orbits:
-  hash: f98f7167bf18eca8f85fbf9a9ad578e8e86f263a88250c50e8be86f93073824c
-  seconds: 0
-  lost: true
 1JLB integral.genus_class_count:
   hash: a78008d3a8708815b384e4eb52b599ba368431774753883758046524702f843d
   seconds: 62
@@ -428,6 +424,10 @@
 1JUM integral.genus_class_count:
   hash: a5e9c3d47898ca5cb1e311289484355948792fb8a6524461dea0d698047abc2a
   seconds: 17
+  lost: true
+1JX2 integral.genus_class_count:
+  hash: 439bcd90d28c98a64c2f587dd9a3bdb462d4f90be4113f37547e69229a160124
+  seconds: 0
   lost: true
 1K1V definite.siegel_eisenstein_coefficients:
   hash: fa311dabf68de8f75c6653e62e85b673c1a085182d5e4cc656ed2e221a003e11
