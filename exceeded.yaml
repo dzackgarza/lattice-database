@@ -439,9 +439,6 @@
 1M1K integral.discriminant_sequence:
   hash: 177b271f783aa1283e7459ae7b263ceef6db502166b0554e7491bf961ed4ae5b
   seconds: 2
-1PXQ integral.overlattice_count:
-  hash: 2807ac189c5e6bdcd2b197c749a7ca6d2e34e91a0b4523a17e09e0535d8aa889
-  seconds: 3
 1RZC integral.genus_class_count:
   hash: b65339e2276b84793117c019cdabe6ec8f1b4b9b39df1f926d16ac7e9f8b0be7
   seconds: 2
@@ -631,6 +628,10 @@
 3GPU integral.overlattice_count:
   hash: 679b7857df870c585e20e67396282d532424c3d06fe6b86a0b2fcfb0fbede657
   seconds: 10
+  lost: true
+3GQ2 integral.discriminant_sequence:
+  hash: 96d8236f212099a9a6fc02562a01a03a45b59bb60f8aa132efa26565a6f0a801
+  seconds: 1228
   lost: true
 3GRU integral.discriminant_sequence:
   hash: 0873c77aea247747beee5f6503d4678ca0c393ad59c2a14ff0e34fd7c44871c6
