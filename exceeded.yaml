@@ -441,8 +441,8 @@
   hash: c3022a7e4205baab023d451f19c3df37da8b90233ab8d0c0845a214a68125690
   seconds: 0
   lost: true
-1NDT integral.genus_class_count:
-  hash: e3fb54d7941814722536ab3c04f526496aa861258d994a4ed7ac4766427d498a
+1OGO derive:
+  hash: 68c76d033cb730bdf0f31299941a9e052d6a6e709a3e38f8622d9fd96b3db053
   seconds: 0
   lost: true
 1S95 integral.genus_class_count:
@@ -693,6 +693,10 @@
   hash: 01c3291850d9067945eec96dcf47cad2765768f42fc05ef8f529a6b93d5e7177
   seconds: 15743
   lost: true
+3GRH integral.overlattice_count:
+  hash: f1ece2c50445cd8ee1195e2df638499a0fffc7315bbf8d1de1c6963adbee057c
+  seconds: 5
+  lost: true
 3GRU integral.discriminant_sequence:
   hash: 0873c77aea247747beee5f6503d4678ca0c393ad59c2a14ff0e34fd7c44871c6
   seconds: 18241
@@ -707,6 +711,10 @@
 3GW5 integral.overlattice_count:
   hash: 4638adc325a0ee6d4d9136c3852ee4c80d348052095c2f530e2b1196e868f777
   seconds: 5
+  lost: true
+3GW6 integral.overlattice_count:
+  hash: 5cfdbc2ca9747a79ac1f371cec4fd066a539693acc0eda3b133425026d405dae
+  seconds: 10
   lost: true
 3GWR integral.overlattice_count:
   hash: 836db517473faaeaa34246fe1f1fa761d816846114d210a46b13530d6de2d5f8
