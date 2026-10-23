@@ -22,6 +22,8 @@ certifications:
   definite.theta_series_cuspidal_component: 09e26ec4642b26548b7ac75e6a6da4e8664bc13d4b5d70894a8c4989abfa2c02
   definite.siegel_eisenstein_coefficients: 38f1def79627b1cb3c3d0f582dd851a6135583b89616df29b55899ddb1c3dcd1
   integral.anisotropic_primes: dcec1742ded7348332b4f30412199f49c17ec89a07c3764eb4c102307b6f8145
+  integral.local_representations: dc09171633f01f4ce40eb95fcffb506f6b6d382c90294ef30ab183b651fb8f1b
+  integral.local_densities: 99fdc8d7201ce5459fb16ee2321d756b9ef590c75d20cadcb69aa73eb3c3e9bf
 rank: 5
 gram_tensor:
 - [2, 0, 0, 0, 0]
@@ -122,6 +124,30 @@ integral:
       z: [0, 2, 0, 12]
       w: [0, 0, 0, 0]
   anisotropic_primes: []
+  local_representations:
+  - prime: 2
+    classes:
+    - representative: 1
+      least_valuation: 2
+    - representative: 3
+      least_valuation: 2
+    - representative: 5
+      least_valuation: 2
+    - representative: 7
+      least_valuation: 2
+    - representative: 2
+      least_valuation: 1
+    - representative: 6
+      least_valuation: 1
+    - representative: 10
+      least_valuation: 1
+    - representative: 14
+      least_valuation: 1
+  local_densities:
+  - prime: 2
+    densities: [0, 35/16, 0, 15/8, 0, 15/8, 0, 275/128]
+  - prime: 11
+    densities: [12/11, 10/11, 12/11, 12/11, 12/11, 10/11, 10/11, 10/11]
 definite:
   minimum: 2
   kissing_number: 2
