@@ -413,10 +413,6 @@
   hash: bdfbab998af3d055cc103b993daad459eda6edc5b8ed067deaf4732fa06bcbfb
   seconds: 0
   lost: true
-1HOR integral.primitive_orbits:
-  hash: f98f7167bf18eca8f85fbf9a9ad578e8e86f263a88250c50e8be86f93073824c
-  seconds: 0
-  lost: true
 1JLB integral.genus_class_count:
   hash: a78008d3a8708815b384e4eb52b599ba368431774753883758046524702f843d
   seconds: 62
@@ -428,6 +424,10 @@
 1JUM integral.genus_class_count:
   hash: a5e9c3d47898ca5cb1e311289484355948792fb8a6524461dea0d698047abc2a
   seconds: 17
+  lost: true
+1JX2 integral.genus_class_count:
+  hash: 439bcd90d28c98a64c2f587dd9a3bdb462d4f90be4113f37547e69229a160124
+  seconds: 0
   lost: true
 1K1V definite.siegel_eisenstein_coefficients:
   hash: fa311dabf68de8f75c6653e62e85b673c1a085182d5e4cc656ed2e221a003e11
@@ -465,12 +465,12 @@
   hash: bf89660deaa6334fb40ff017f9f7a5427c5c2d85f11e6e377685d721f0edfff2
   seconds: 11
   lost: true
-1X4H derive:
-  hash: 132e9878102cd35f70540921f163330ce8aa3bdbf801fb2bfc6c70a5a6b38b12
+1YG3 integral.genus_class_count:
+  hash: d3d273286f94f4999e02f91d23785a2dbb965bed7467c046daff9a086a7612f2
   seconds: 0
   lost: true
-1YKL derive:
-  hash: 84127801d66a69d8cc9d615e17dae85293306b133463c707037cc64eb7ab5760
+1ZPK integral.genus_class_count:
+  hash: f31884f244ad68ca148b13bce5308934574649a83837bbfebe85a6acc975dacc
   seconds: 0
   lost: true
 3BV3 definite.siegel_eisenstein_coefficients:
@@ -659,11 +659,11 @@
   lost: true
 3GPP integral.discriminant_sequence:
   hash: a819e01ddf483f798e7b1e85c1c30c22723efa72094f46aaadc47759cd968c8f
-  seconds: 5738
+  seconds: 7540
   lost: true
 3GPU integral.discriminant_sequence:
   hash: ed0e1de71b5299d75a1e502e60afb74a46dafe5f2072e21ee6c6ed5814d2a082
-  seconds: 8339
+  seconds: 10142
   lost: true
 3GPU integral.overlattice_count:
   hash: 679b7857df870c585e20e67396282d532424c3d06fe6b86a0b2fcfb0fbede657
@@ -671,7 +671,7 @@
   lost: true
 3GQ2 integral.discriminant_sequence:
   hash: 96d8236f212099a9a6fc02562a01a03a45b59bb60f8aa132efa26565a6f0a801
-  seconds: 8527
+  seconds: 10329
   lost: true
 3GRG integral.discriminant_sequence:
   hash: 01c3291850d9067945eec96dcf47cad2765768f42fc05ef8f529a6b93d5e7177
