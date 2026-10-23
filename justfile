@@ -19,8 +19,9 @@ default:
 # Run lattice-database workflows in the repository's Sage Python with both source
 # trees visible.  The preamble is the normal mathematical computation boundary.
 [private]
+[positional-arguments]
 _latticedb *ARGS:
-    PYTHONPATH="$HOME/research/src:src" "$(just -f ~/ai-review-ci/justfiles/sage.just -d . _sage-python)" -m latticedb {{ARGS}}
+    PYTHONPATH="$HOME/research/src:src" "$(just -f ~/ai-review-ci/justfiles/sage.just -d . _sage-python)" -m latticedb "$@"
 
 # Author a lattice card from its Gram tensor: `just new --gram '[[2,1],[1,2]]' --name A2 --latex A_2`
 new *ARGS:
@@ -47,12 +48,14 @@ certify *ARGS:
     just _latticedb certify {{ARGS}}
 
 # Inspect recorded certification failures and their triage history
+[positional-arguments]
 certification-failures *ARGS:
-    just _latticedb certification-failures {{ARGS}}
+    just _latticedb certification-failures "$@"
 
 # Release a failed computation: TAG block.field --note 'repair or investigation'
+[positional-arguments]
 retry-computation *ARGS:
-    just _latticedb retry-computation {{ARGS}}
+    just _latticedb retry-computation "$@"
 
 # Report stored-card inconsistencies, delegating mathematical checks to the preamble
 verify:
@@ -84,8 +87,9 @@ test-validation:
     PYTHONPATH="$HOME/research/src:src" "$(just -f ~/ai-review-ci/justfiles/sage.just -d . _sage-python)" -m pytest tests/test_catalogue_schemas.py tests/test_corpus.py tests/test_genus.py tests/test_geometric.py tests/test_hashimoto.py tests/test_records.py tests/validation
 
 # Certification scheduling, failure triage and persistence on small specimens
+[positional-arguments]
 test-certification *ARGS:
-    PYTHONPATH="$HOME/research/src:src" "$(just -f ~/ai-review-ci/justfiles/sage.just -d . _sage-python)" -m pytest tests/test_genus.py tests/test_failures.py tests/test_persist.py {{ARGS}}
+    PYTHONPATH="$HOME/research/src:src" "$(just -f ~/ai-review-ci/justfiles/sage.just -d . _sage-python)" -m pytest tests/test_genus.py tests/test_failures.py tests/test_persist.py "$@"
 
 # Exercise archived-source importers and source-to-card collation; provenance only, not mathematical validation
 test-source-intake:
