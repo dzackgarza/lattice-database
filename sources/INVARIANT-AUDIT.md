@@ -13,7 +13,9 @@ The matrices first differ at $b(e_1,e_{11})$: `GRAM` prints $-8$, and `GRAM_MATR
 The entry also states minimum $8$ and kissing number $109421928$; neither is an invariant of the indefinite form.
 The archive reader uses `GRAM_MATRIX` for this entry.
 Its lattice record is [`3HVR`](../lattices/3HVR.md), which stores a Gram tensor.
-This source-locator reconciliation does not establish the status of its minimum or kissing-number checks.
+Its source-stated minimum and kissing number are claims about that defining Gram
+tensor. Establishing them computationally requires the corresponding preamble results;
+the card stores the values and their certificates record the completed computation.
 
 ## Bulk catalogue source tables
 
@@ -23,9 +25,10 @@ The stored source files are read by `nipp.py`, `brandt_intrau.py`, `watson.py`, 
 It also indexes every named Nebe–Sloane union archive entry by ordinal and retains its source sections.
 Every normalized row has a source-locator reference on a permanent lattice card
 (reconciled 2026-10-23; see [source coverage](../README.md#sources-to-absorb)).
-This establishes source-reference coverage, not independent mathematical verification
-or complete transcription of every source claim. Of the Nebe–Sloane cards, 66 still
-lack a defining Gram tensor.
+This reconciliation establishes that every indexed entry is represented. Completing
+intake means supplying its defining data and transcribing its applicable source claims;
+certification then computes values from the defining data and stores the results with
+evidence. Of the Nebe–Sloane cards, 66 still lack a defining Gram tensor.
 
 | Published source | Source rows |
 | --- | ---: |

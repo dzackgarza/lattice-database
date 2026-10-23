@@ -1,11 +1,23 @@
 # Lattice database
 
-A catalogue of lattices.
+A database of lattices and the mathematical knowledge accumulated about them.
 A *lattice* here is a free module $L$ of finite rank over $\mathbb{Z}$ with a symmetric bilinear form $b \colon L \times L \to \mathbb{Q}$.
 The form can be definite, indefinite or degenerate, and its values need not be integers.
 
 Each lattice has one Markdown file, `lattices/<TAG>.md`. The YAML front matter of the file is the record of the lattice; the body is prose about it.
 The build reads the cards, writes one page for each lattice, and writes one table, with one row per record, that the database page filters, sorts and exports.
+
+The cards are the durable store of computations: invariants, identifications, relations
+and maps. A lattice's Gram tensor supplies the input for further computations owned by
+`dzack_research.preamble`. As those computations finish, their results become stored
+knowledge about that lattice. A fixed collection of lattices can therefore support an
+expanding corpus of mathematical results.
+
+A stored field and its certificate describe two parts of that knowledge. The field
+holds the value; the certificate records the completed computation or cited proof
+that establishes it. For example, a genus class count transcribed from a table supplies
+a source claim. A completed preamble computation of that count supplies independent
+computational evidence, whether it confirms the claim or replaces it.
 
 The site is served locally at <http://lattice-database.localhost/>, and published at <https://dzackgarza.github.io/lattice-database/> by `.github/workflows/pages.yml`. Its mathematics comes from `dzack_research.preamble` in the [research repository](https://github.com/dzackgarza/research): every recipe and workflow puts that repository's `src/` on `PYTHONPATH` (locally `~/research/src`).
 
@@ -354,7 +366,11 @@ State only data and claims that the card can support.
 A sparse card remains a site card while it awaits preamble computation.
 
 **Certify:** `just certify` is the CI orchestration phase.
-It asks the preamble for each uncertified result, replaces a disagreeing authored value with the returned value, and only then writes the certificate hash to the card and certificate log.
+For an eligible card and computation, it uses the Gram tensor to request a result
+from the preamble, stores the returned value, and records its certificate. An empty
+field receives its first value; an equal authored or source value gains computational
+evidence; a disagreeing value is replaced by the computed result. A matching completed
+certificate makes the stored result reusable in subsequent certification runs.
 
 **Verify:** `just verify` is read-only.
 A Gram tensor determines its lattice, so two cards stating one Gram tensor are a verification error.
@@ -382,7 +398,42 @@ Editing $G$ or $v$ breaks the card's hash commitment; a computation that times o
 
 `latticedb certify` requests a preamble computation exactly when the card does not already cite the matching completed certificate.
 It writes the returned result to the card whether or not an authored value was already present, then writes the hash citation to `certifications` and writes only the hash and computation provenance to `certificates/`. Derivation runs in the same streamed queue, immediately before the remaining computations for its card.
-Cards without a Gram tensor remain source cards and do not enter this queue; a Gram-only card first receives its derived hypotheses.
+Cards with a source identity and no Gram tensor are sparse permanent records awaiting
+defining data. Once a Gram tensor is supplied, certification can construct the lattice;
+a Gram-only card first receives its derived hypotheses, which select the applicable
+later computations.
+
+### Daily accumulation of results
+
+The scheduled certification workflow is a computation-and-storage loop over the cards.
+Each run requests eligible computations that lack matching completed certificates,
+stores completed results and their certificates, and pushes progress to `main`.
+Subsequent runs reuse the certified values and spend their budgets on the remaining
+eligible work. The queue and interruption log determine which unfinished work is
+retried. A run may preserve useful results even when another computation fails.
+
+Measure daily growth from persisted changes on `main`, using UTC day boundaries.
+For each card and named computation, compare the stored result and its matching
+certificate before and after the interval:
+
+| Persisted change | Knowledge added |
+| --- | --- |
+| An absent result gains a value and certificate | A newly stored computed result |
+| An existing uncertified value gains a matching certificate | Computational evidence establishing the stored value |
+| A stored value is replaced and the replacement is certified | A corrected result with computational evidence |
+
+Report these outcomes separately when the question asks how much previously unknown
+data was computed. A total of new certificates measures accumulated certified
+computations across these outcomes. The `derive` certificate covers a bundle of
+fields, so counting individual populated fields requires comparing that bundle too.
+Source-proved certificates carry citation provenance and can be counted separately
+from certificates produced by computation.
+
+A positive daily gradient means that persisted results or evidence increased in each
+reported day. Establish unattended daily operation from scheduled runs and their
+persisted output over that same interval; record manual runs alongside the days they
+contributed to. Workflow conclusions describe execution status, while the committed
+card and certificate changes establish what the database retained.
 
 `exceeded.yaml` is the permanent log of computations that a certification job ended before they finished.
 An entry maps the computation name to a hash of that name and the Gram tensor, and to the seconds the computation had run when the job's timeout ended it.
@@ -400,7 +451,9 @@ After a faster implementation lands, delete the entry by hand.
 
 The queue runs on `--workers` Sage processes, by default one per CPU. A worker holds one card at a time and takes the next only when that card is done, so a computation that never returns holds back only its own worker.
 After the interrupted computations, cards are queued by rank and then absolute determinant, so each job reaches as many cards as it can.
-While other requests wait, resumed computations hold at most all but one worker, so every job certifies new values.
+While other requests wait, resumed computations hold at most all but one worker,
+leaving capacity for further work. Actual progress depends on those computations
+finishing and their results being persisted.
 The semi-decisions (`roots`, `norms`, `reflective`, `regular`, `spinor_regular`) of every card are queued after all the other fields of every card, since one that does not return holds its worker for the rest of the job.
 A cut search leads that phase: every job ends inside a search, and resuming it at the start of the next job would hold its workers through the fields that every procedure finishes.
 A card that still needs derivation carries its record into that later request, and the worker derives it again only to select the searches that apply.
@@ -557,6 +610,14 @@ All rows in the four normalized bulk archives have source references on permanen
 119,635 Nipp rows, 36,399 Brandt–Intrau rows, 3,494 Watson rows and 823 Nebe–Sloane rows
 (source-locator reconciliation, 2026-10-23). These are source-row counts, not distinct-lattice counts.
 There are no pending cards in `lattices/source/`.
+
+Source intake has several independently checkable stages: the archived row, its
+normalized representation, the permanent card carrying its source locator, and the
+source claims transcribed into that card. Reconcile coverage by matching each
+normalized row's source and locator to card references. Then inspect the represented
+cards for defining data and the other source claims still to transcribe. The staging
+directory records work waiting to be seeded; the source-to-card comparison establishes
+which entries are represented.
 
 The remaining work includes supplying defining Gram tensors on 66 existing Nebe–Sloane cards.
 The archive's `D_n*` entries print exact halves, while `Bring8` and `mcc` print rounded

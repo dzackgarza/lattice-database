@@ -3,6 +3,26 @@
 `README.md` owns the schema, the commands and the conventions. This file states the purpose that
 governs every change to the database.
 
+## Corpus growth is accumulated mathematical knowledge
+
+The corpus consists of stored lattice data, computed results, relations, maps and
+the evidence establishing them. Daily certification grows this knowledge by asking
+the preamble for eligible results, writing returned values to cards and persisting
+their certificates. A fixed collection of cards supports continuing computation.
+
+Evaluate progress from persisted card and certificate changes over a stated interval.
+Distinguish newly populated results, existing values established by computation, and
+corrected values. Each adds knowledge; their separate counts answer different questions.
+A certificate counts a completed named computation, and `derive` covers several fields.
+Use scheduled-run history together with persisted output to establish daily autonomous
+progress. The README's certification section defines the reporting measures.
+
+For source coverage, match archived or normalized source locators to permanent card
+references, then inspect which defining data and source claims those cards contain.
+An entry can already have a permanent card while still awaiting a Gram tensor or other
+source data. Establish an intake backlog from that comparison and name its actual
+entries before proposing further seeding.
+
 ## The preamble owns lattice mathematics
 
 `latticedb` consumes the lattice mathematics presented by
