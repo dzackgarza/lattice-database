@@ -15931,11 +15931,23 @@
 1HI8 definite.automorphism_group_order:
   hash: 05bdb3de5834fd6f5411ef5c24072a5ab45c87b7578054e92c638a8453e9e11b
   by: research preamble
+1HI8 definite.genus_theta_series:
+  hash: d67efcc15378b8a76cf8e65996f401ddf463a4481de45b600adf1916b9343853
+  by: research preamble
+1HI8 definite.siegel_eisenstein_coefficients:
+  hash: dd28001478b80d194a7c0b6e00c89c4553ec1ebce39396187eb5689bd3c36f13
+  by: research preamble
+1HI8 definite.theta_series_cuspidal_component:
+  hash: 55768a80823cd9ddad7cff9394ff9f8951e5b3b036cc43fa70183ea851c028fa
+  by: research preamble
 1HI8 derive:
   hash: f595e1e917b074399a59f9e9c01e586f5e27b053e9f6f905eb166aa429fa0dad
   by: research preamble
 1HI8 form.integer_valued:
   hash: b22dc441e51083648d51d19a5b54d5e38a4c665ab1a771ebe034f4689db9cb27
+  by: research preamble
+1HI8 integral.anisotropic_primes:
+  hash: 7665d29d8fdff596eda5a8f8471021b45d45ad084ad173132fb10e3f0e3384f0
   by: research preamble
 1HI8 integral.elementary_primes:
   hash: 72e35c069c0f87ff6d80662c812670cdcacf51db4fed1c0a2a8883f4b0762e11
@@ -15949,8 +15961,20 @@
 1HI8 integral.hyperbolic_index:
   hash: f259db282ba81027a559c22bf15241decddf305d1fc1623bdd8ee79965a88350
   by: research preamble
+1HI8 integral.local_densities:
+  hash: f935ad416ec23050327b01beda33b3095563e12c445e0a3ce0648f3aade37890
+  by: research preamble
+1HI8 integral.local_representations:
+  hash: c6f4cae9414d3053122b6a0d09f087647d4e77a0363d3ed1529cf2383a6f4f26
+  by: research preamble
+1HI8 integral.modular_scale:
+  hash: 9e1eb3ddd1c21a199a0864b86d8d0182933d15ea4390f9c7204b85bf98fbcdbb
+  by: research preamble
 1HI8 integral.overlattice_count:
   hash: b420eac9d7585b6e84353273a0d17066f04476d3a53d44cacc769f7a1d35e221
+  by: research preamble
+1HI8 integral.primitive_orbits:
+  hash: 0ad4885f37ba27903e50c5bf73c78f6bb7c69914d73eec3f1eac4c4f812d7a45
   by: research preamble
 1HI8 integral.spinor_genera:
   hash: 34fc0c6dd1562b8617f94377d6d0174e3b983b9e1909491aa7f71340908c70d7
