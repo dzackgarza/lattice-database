@@ -421,10 +421,6 @@
   hash: c4d3b3c4964c6b69799612f966e5a76dc5f9de6cc43f55a0350416c42659887a
   seconds: 0
   lost: true
-1JUM integral.genus_class_count:
-  hash: a5e9c3d47898ca5cb1e311289484355948792fb8a6524461dea0d698047abc2a
-  seconds: 17
-  lost: true
 1JX2 integral.genus_class_count:
   hash: 439bcd90d28c98a64c2f587dd9a3bdb462d4f90be4113f37547e69229a160124
   seconds: 0
@@ -436,6 +432,10 @@
 1KAD integral.genus_class_count:
   hash: 2996dac438b3ce2f8f9b9042cdcd682f5d508e13e2ea9a3f88c496eb5b7962e8
   seconds: 13
+  lost: true
+1KVH definite.theta_series_cuspidal_component:
+  hash: c2dbdaed7292166780a1c0af9b15855bceb06b0a18f36a328bdd7ec97b6ed1c7
+  seconds: 0
   lost: true
 1L3B integral.overlattice_count:
   hash: 5ec02122782c5210f413bb8d16db30dd35f3f8c8d17fdfa2b2f8245b12d1685c
