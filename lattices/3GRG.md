@@ -9,6 +9,11 @@ certifications:
   integral.elementary_primes: 04c010fcf8c374c4d23865db4feb8b4d1aedbbf411ab70304dbf25a31c34b008
   integral.genus_symbol: af706c5b941001a450cf72ab811581503d7211daeae936a4849b9741ea995c9e
   integral.genus_class_count: 6a75c44419ac9ee9547cf62f8f3826aad728352510b444c40e10d8b0ab65cf69
+  integral.spinor_genus_count: 89ef8d0f003a57579dd3729ba72a290d10804eb34701151e3a6530370ec78dad
+  integral.spinor_genera: dbc2304038ef9dc5b330bc68d8d7cc8701c45938b7e3de0bc88d0d5668b26e00
+  integral.hyperbolic_index: 8efea4dc47acfbf66d2f835fa0d71ce470d34846774dc6aefd3cc12cda644fd8
+  definite.automorphism_group_order: bb1440e18a6ef0ef2e0e34b2bd2a2e48e57ce9ce868b4ae12089638d4da55970
+  definite.automorphism_group_generator_morphisms: cdfb8a6e837ecf5546bfb4e1272bb86839d4d1dc8f9cf86d7f26bf7ab247a0d1
 rank: 4
 gram_tensor:
 - [14, 3, 2, -1]
@@ -34,9 +39,14 @@ integral:
   quadratic_character: 33
   genus_symbol: 'II_{4,0} (2: 1^-2:4^-2; 3: 1^3 3^-1; 11: 1^1 11^3)'
   genus_class_count: 1
+  spinor_genus_count: 1
+  spinor_genera: [1]
+  hyperbolic_index: 0
 definite:
   minimum: 14
   kissing_number: 4
+  automorphism_group_order: 8
+  automorphism_group_generator_morphisms: [O(L) generator 1, O(L) generator 2, O(L) generator 3]
   minimal_vectors:
   - [-1, 0, 0, 0]
   - [0, -1, 0, 0]
@@ -56,7 +66,31 @@ definite:
     - [1, -1, 0, 0]
 root_sublattice:
   invariant_factors: [1, 1]
-morphisms: []
+morphisms:
+- target: 3GRG
+  name: O(L) generator 1
+  matrix:
+  - [-1, 0, 0, 0]
+  - [0, -1, 0, 0]
+  - [0, 0, -1, 0]
+  - [0, 0, 0, -1]
+  scale: 1
+- target: 3GRG
+  name: O(L) generator 2
+  matrix:
+  - [0, 1, 0, 0]
+  - [1, 0, 0, 0]
+  - [0, 0, 1, 0]
+  - [0, 0, 0, 1]
+  scale: 1
+- target: 3GRG
+  name: O(L) generator 3
+  matrix:
+  - [1, 0, 0, 0]
+  - [0, 1, 0, 0]
+  - [0, 0, 1, -1]
+  - [0, 0, 0, -1]
+  scale: 1
 families: []
 related: []
 references:
