@@ -443,10 +443,6 @@
 1R6G definite.genus_theta_series:
   hash: 489b1e7bfea938bcade94debb5eca49ebc81369aca00e9d12fd6af5a24dd8332
   seconds: 3
-1VC7 integral.genus_class_count:
-  hash: 6c4d31d74472d4893f03900b449e23d3a10c2620c69d7c1965935396dedfd0e2
-  seconds: 233
-  lost: true
 1VLE integral.genus_class_count:
   hash: 509d6cbfe503150e17cfe9928bc9b8111120e9407b200503675e808cfacfe72e
   seconds: 32
@@ -457,6 +453,9 @@
   hash: bf89660deaa6334fb40ff017f9f7a5427c5c2d85f11e6e377685d721f0edfff2
   seconds: 11
   lost: true
+1VXG integral.genus_class_count:
+  hash: 5f8b0f446afc351c000beedff0dd37286c6c1d84bbfc197cb3b5b5bcb9024890
+  seconds: 14
 1XEP integral.spinor_genera:
   hash: 31e6986fe026d98e42c61972796bc9a750739bec7e9e797354e0faf70396d9de
   seconds: 0
