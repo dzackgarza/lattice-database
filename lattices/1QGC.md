@@ -3,6 +3,27 @@ tag: 1QGC
 name: nipp tbl.256.html:4534
 latex: nipp tbl.256.html:4534
 aliases: []
+certifications:
+  derive: 31b81a21af5949017192db97cfcf9f7f0a5559ca52de1bdf23ee2ba4c68478d3
+  form.integer_valued: 91a5b55f673a531b2573088de9f6094389e2300add813aaddcbe8d209e1ef73d
+  integral.elementary_primes: d56ad76f5abd311f65cdd21594b354c61eb11c83fb5c5f9fffdd689b42a2608b
+  integral.genus_symbol: f0522ad214ebaf623585340d3e20b002648008395cf46f5afe25e21dec86c052
+  integral.genus_class_count: fdee9f2ca2420963c66020823575316f4a11d4db1af6564b0c1bde61b12c1786
+  integral.overlattice_count: 43451ad41f418d51f1eeaac0c267dff2457e8c26bf812edaf1f9263bd0ed2d4a
+  integral.spinor_genus_count: ab22464601bbf97058520afcfb798018bb3ec4664cb4db83d59a63dd31711bfa
+  integral.spinor_genera: a8c2aaa509c47f5064a34a55e92cc43c2a96ff67f12ebd72218f24363f46d506
+  integral.hyperbolic_index: b5e082cda3aa72463c13406c72c42d17767bc2d0c2e615d83de22033020e920c
+  definite.automorphism_group_order: 4de14094e110c5dbaac93ce4e86092ceb3a897f6cdce6863f4bf96f39889980f
+  definite.automorphism_group_generator_morphisms: 43d8b898015ce0da2d25a9bca8dad6d391a3249f37f5460f3ccc8d72aea24cc8
+  integral.discriminant_sequence: 9316184a920d6bb119f203c40da4f33cb0684dab93ca127e825de05ff924beca
+  integral.primitive_orbits: 4c98d3dce3a2fcce11485d12a86bf43acea74a9b51bb1e231ae70e36a2494360
+  integral.modular_scale: 098a815a9c3a2687bb658a7353a1a47ed153d141dc1d411f54ae734487d92c84
+  definite.genus_theta_series: b1394bd9e6eaf3c1dd625a89c59affcbd8cabc02f1e8c932d8d9cf542d9fca00
+  definite.theta_series_cuspidal_component: a8fe0fd9284aff52d672d3b19cfb8e281960f724725e7b2b0df2b12e09b2511e
+  definite.siegel_eisenstein_coefficients: a645b5932c194712e22249f7e218e793a812e83641096c8312c58468baddd314
+  integral.anisotropic_primes: 6ef016f24721bc43584b1c2a280908044e11403623ee7e1839dc7049bc78ad52
+  integral.local_representations: ecfaf5f1b04ba1642c6e2cc9b646f368509881611564ed7f18128b22295b518f
+  integral.local_densities: 8d7ba1940fc0b7c9c11b8aa333749b91960ff78d84ff0e474abff94cb2058e4d
 rank: 5
 gram_tensor:
 - [4, 1, 0, 0, 0]
@@ -13,6 +34,180 @@ gram_tensor:
 signature: [5, 0]
 determinant: 348
 definiteness: positive_definite
+dual_gram_tensor:
+- [8/29, -3/29, 0, -1/29, 2/29]
+- [-3/29, 12/29, 0, 4/29, -8/29]
+- [0, 0, 1/3, -1/6, 0]
+- [-1/29, 4/29, -1/6, 161/348, -15/58]
+- [2/29, -8/29, 0, -15/58, 15/29]
+form:
+  integer_valued: true
+integral:
+  elementary_primes: []
+  parity: even
+  level: 696
+  modular_scale: false
+  discriminant_group: [348]
+  discriminant_sequence:
+    discriminant_factors: [348]
+    discriminant_basis_lifts:
+    - [513/29, 152/29, 59/6, -1/348, -19/58]
+    discriminant_quadratic_gram:
+    - [281/348]
+    discriminant_group_order: 8
+    discriminant_generators:
+    - - [59]
+    - - [173]
+    - - [347]
+    image_generators:
+    - - [347]
+    - - [175]
+    - - [59]
+    image_order: 8
+    kernel_order: 1
+    coset_representatives:
+    - - [1]
+    mm_trivial: true
+    image_normal: true
+    quotient_generator_cosets: [0, 0, 0]
+    quotient_multiplication:
+    - [0]
+  overlattice_count: 2
+  bad_reduction_primes: [2, 3, 29]
+  genus_symbol: 'II_{5,0} (2: 1^4:[4^1]_7; 3: 1^-4 3^1; 29: 1^4 29^-1)'
+  genus_class_count: 11
+  spinor_genus_count: 1
+  spinor_genera: [11]
+  hyperbolic_index: 0
+  primitive_orbits:
+    O:
+      constant: 0
+      z: [0, 0, 0, 6]
+      w: [0, 0, 0, 0]
+    SO:
+      constant: 0
+      z: [0, 0, 0, 6]
+      w: [0, 0, 0, 0]
+    Otilde:
+      constant: 0
+      z: [0, 0, 0, 18]
+      w: [0, 0, 0, 0]
+    SOtilde:
+      constant: 0
+      z: [0, 0, 0, 18]
+      w: [0, 0, 0, 0]
+    O+:
+      constant: 0
+      z: [0, 0, 0, 6]
+      w: [0, 0, 0, 0]
+    SO+:
+      constant: 0
+      z: [0, 0, 0, 6]
+      w: [0, 0, 0, 0]
+    Otilde+:
+      constant: 0
+      z: [0, 0, 0, 18]
+      w: [0, 0, 0, 0]
+    SOtilde+:
+      constant: 0
+      z: [0, 0, 0, 18]
+      w: [0, 0, 0, 0]
+  anisotropic_primes: []
+  local_representations:
+  - prime: 2
+    classes:
+    - representative: 1
+      least_valuation: 2
+    - representative: 3
+      least_valuation: 2
+    - representative: 5
+      least_valuation: 2
+    - representative: 7
+      least_valuation: 2
+    - representative: 2
+      least_valuation: 1
+    - representative: 6
+      least_valuation: 1
+    - representative: 10
+      least_valuation: 1
+    - representative: 14
+      least_valuation: 1
+  local_densities:
+  - prime: 2
+    densities: [0, 3/2, 0, 39/16, 0, 3/2, 0, 39/16]
+  - prime: 3
+    densities: [10/9, 10/9, 22/27, 10/9, 10/9, 20/27, 10/9, 10/9]
+  - prime: 29
+    densities: [840/841, 840/841, 840/841, 840/841, 840/841, 840/841, 840/841, 840/841]
+definite:
+  minimum: 4
+  kissing_number: 18
+  automorphism_group_order: 8
+  automorphism_group_generator_morphisms: [O(L) generator 1, O(L) generator 2, O(L) generator 3]
+  minimal_vectors:
+  - [-1, 0, 0, 0, 0]
+  - [0, -1, 0, -1, 1]
+  - [0, -1, 0, 0, 0]
+  - [0, -1, 0, 0, 1]
+  - [0, 0, -1, 0, 0]
+  - [0, 0, -1, 1, 0]
+  - [0, 0, 0, -1, 0]
+  - [0, 0, 0, -1, 1]
+  - [0, 0, 0, 0, -1]
+  - [0, 0, 0, 0, 1]
+  - [0, 0, 0, 1, -1]
+  - [0, 0, 0, 1, 0]
+  - [0, 0, 1, -1, 0]
+  - [0, 0, 1, 0, 0]
+  - [0, 1, 0, 0, -1]
+  - [0, 1, 0, 0, 0]
+  - [0, 1, 0, 1, -1]
+  - [1, 0, 0, 0, 0]
+  perfect: false
+  theta_series: [1, 0, 0, 0, 18, 0, 14, 0, 38]
+  genus_theta_series: [1, 0, 1434/421, 0, 6084/421, 0, 4752/421, 0, 18642/421]
+  theta_series_cuspidal_component: [0, 0, -1434/421, 0, 1494/421, 0, 1142/421, 0, -2644/421]
+  siegel_eisenstein_coefficients: [0, 1434/421, 0, 6084/421, 0, 4752/421, 0, 18642/421]
+  root_system: []
+  roots:
+  - type: A1
+    scale: 2
+    simple_roots:
+    - [0, 0, 0, 1, 0]
+  - type: A1
+    scale: 6
+    simple_roots:
+    - [0, 0, 2, -1, 0]
+root_sublattice:
+  invariant_factors: [1, 2]
+morphisms:
+- target: 1QGC
+  name: O(L) generator 1
+  matrix:
+  - [-1, 0, 0, 0, 0]
+  - [0, -1, 0, 0, 0]
+  - [0, 0, -1, 0, 0]
+  - [0, 0, 0, -1, 0]
+  - [0, 0, 0, 0, -1]
+  scale: 1
+- target: 1QGC
+  name: O(L) generator 2
+  matrix:
+  - [1, 0, 0, 0, 0]
+  - [0, 1, 0, 0, 0]
+  - [0, 0, 1, 0, 0]
+  - [0, 0, -1, -1, -1]
+  - [0, 0, 0, 0, 1]
+  scale: 1
+- target: 1QGC
+  name: O(L) generator 3
+  matrix:
+  - [1, 0, 0, 0, 0]
+  - [0, 1, 0, 0, 0]
+  - [0, 0, -1, 0, 0]
+  - [0, 0, 1, 1, 0]
+  - [0, 0, 0, 0, 1]
+  scale: 1
 families: []
 related: []
 references:
