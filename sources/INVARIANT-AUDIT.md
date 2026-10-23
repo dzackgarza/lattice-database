@@ -12,7 +12,8 @@ The [`Shimada_86` entry in the Nebe–Sloane union archive](https://www.math.rwt
 The matrices first differ at $b(e_1,e_{11})$: `GRAM` prints $-8$, and `GRAM_MATRIX` prints $8$.
 The entry also states minimum $8$ and kissing number $109421928$; neither is an invariant of the indefinite form.
 The archive reader uses `GRAM_MATRIX` for this entry.
-Its lattice record and minimum and kissing-number checks remain to be added.
+Its lattice record is [`3HVR`](../lattices/3HVR.md), which stores a Gram tensor.
+This source-locator reconciliation does not establish the status of its minimum or kissing-number checks.
 
 ## Bulk catalogue source tables
 
@@ -20,7 +21,11 @@ These are source rows, including repeated presentations and twists.
 They are not a count of distinct isometry classes or of lattice records.
 The stored source files are read by `nipp.py`, `brandt_intrau.py`, `watson.py`, and `nebe_sloane.py`. `latticedb bulk-index` writes the parsed Nipp, Brandt–Intrau–Schiemann, and Watson forms to `sources/normalized/`, with exact Gram determinants and source locators.
 It also indexes every named Nebe–Sloane union archive entry by ordinal and retains its source sections.
-These source rows still need identification with the corpus's lattice records.
+Every normalized row has a source-locator reference on a permanent lattice card
+(reconciled 2026-10-23; see [source coverage](../README.md#sources-to-absorb)).
+This establishes source-reference coverage, not independent mathematical verification
+or complete transcription of every source claim. Of the Nebe–Sloane cards, 66 still
+lack a defining Gram tensor.
 
 | Published source | Source rows |
 | --- | ---: |

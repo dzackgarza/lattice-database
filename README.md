@@ -553,13 +553,18 @@ Read the source's attached extraction and PDF before searching outside Zotero.
 The corpus must absorb the whole Catalogue of Lattices (G. Nebe, N. J. A. Sloane), <https://www.math.rwth-aachen.de/~Gabriele.Nebe/LATTICES/>. `sources/nebe_sloane/` holds the absorbed entries and the catalogue's `union.gz` archive.
 The definite records include the laminated lattices $\Lambda_9$ to $\Lambda_{20}$, $K_{12}$, $\kappa_7$ to $\kappa_9$, $BW_{16}$, the Leech lattice $\Lambda_{24}$, the 23 other Niemeier lattices, and the binary `BGF.2.2112`, `BGF.2.213`, `BGF.2.214`, and `BGF.2.216` entries.
 
-The work that remains, in order:
+All rows in the four normalized bulk archives have source references on permanent lattice cards:
+119,635 Nipp rows, 36,399 Brandt–Intrau rows, 3,494 Watson rows and 823 Nebe–Sloane rows
+(source-locator reconciliation, 2026-10-23). These are source-row counts, not distinct-lattice counts.
+There are no pending cards in `lattices/source/`.
 
-1. Absorb the remaining entries of the bulk archive.
-   The archive is stored at `sources/nebe_sloane/union.gz`. Its `D_n*` entries print exact halves, while `Bring8` and `mcc` print rounded decimal Gram components that require source-specific exact data.
-   The `Shimada_86` entry has two conflicting matrices: its full `GRAM_MATRIX` is positive definite with the stated determinant, while its lower-triangular `GRAM` is indefinite and has a different determinant.
-   The [source audit](sources/INVARIANT-AUDIT.md#shimada_86-source-conflict) records the exact comparison.
-   Source entries are not discarded merely because their forms are scalar twists of other lattice cards.
+The remaining work includes supplying defining Gram tensors on 66 existing Nebe–Sloane cards.
+The archive's `D_n*` entries print exact halves, while `Bring8` and `mcc` print rounded
+decimal Gram components that require source-specific exact data. Their sparse cards already exist.
+`Shimada_86` also has a card, `3HVR`, with a Gram tensor; its two conflicting source matrices
+are described in the [source audit](sources/INVARIANT-AUDIT.md#shimada_86-source-conflict).
+Source-reference coverage establishes transcription provenance, not mathematical correctness
+or complete transcription of every source field.
 
 Source intake is one-way.
 A source contributes the claims it states — Gram tensors, identifications, invariants, relations, generators and maps — and every claim that belongs to the mathematical corpus lands in the appropriate card, relation, morphism or catalogue record.
