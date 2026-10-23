@@ -442,12 +442,13 @@
 1PXQ integral.overlattice_count:
   hash: 2807ac189c5e6bdcd2b197c749a7ca6d2e34e91a0b4523a17e09e0535d8aa889
   seconds: 3
-1RZ4 integral.genus_class_count:
-  hash: 0c1c78dd51d4e45f7e03b7a561405c017dfe3cf671227f4d023d6f4aaa5ef0e2
-  seconds: 37
 1RZC integral.genus_class_count:
   hash: b65339e2276b84793117c019cdabe6ec8f1b4b9b39df1f926d16ac7e9f8b0be7
   seconds: 2
+1SVH integral.genus_class_count:
+  hash: 4177283f6ed0455aaa8c9c3a190b488deb7aaa0632c876f668a1e3f6288158af
+  seconds: 0
+  lost: true
 1UPI integral.overlattice_count:
   hash: 957c7ece1bdd43f5dfa64b77905bae808375f0b527c0f5ee48b6ca274948ebc2
   seconds: 2
