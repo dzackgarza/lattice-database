@@ -445,10 +445,6 @@
   hash: c2d56853c688ca548dd50df42dc26996cbe6f8a73e77d63b9dc95c2c53e7aeb5
   seconds: 0
   lost: true
-1LQ9 integral.genus_class_count:
-  hash: 903cdd7c799a368953c6aa16145f48c25802c482cbe70041403dfa460ca0f785
-  seconds: 0
-  lost: true
 1M44 derive:
   hash: c1a4e5d8ba7494459f3b7d5e4bd8ef92ccb488ef6c3428b44b71e907eca4cfe6
   seconds: 0
@@ -652,6 +648,10 @@
 3GEH integral.overlattice_count:
   hash: 75b98a72eb3d3314b6fd55e345ca2d1ed9bc31c3e559ecc31215d5b9823c122a
   seconds: 8
+  lost: true
+3GPP integral.discriminant_sequence:
+  hash: a819e01ddf483f798e7b1e85c1c30c22723efa72094f46aaadc47759cd968c8f
+  seconds: 272
   lost: true
 3GPU integral.discriminant_sequence:
   hash: ed0e1de71b5299d75a1e502e60afb74a46dafe5f2072e21ee6c6ed5814d2a082
