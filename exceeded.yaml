@@ -333,10 +333,6 @@
   hash: 689494ca5adb8488fc95a4f406d1751e6e84acc6252b85cb91dbc6cd8b4d2b92
   seconds: 0
   lost: true
-14B8 derive:
-  hash: 67ddc8fe49bd95bbe4e85b622e9bf7984659f019b60410b3a3c06597b39dc236
-  seconds: 0
-  lost: true
 14GP integral.genus_class_count:
   hash: ebbbead04771d1bd8cfebc45efa2ad3838a8aefdb3f2e0d9f3b23c7571dbc8d6
   seconds: 0
@@ -367,6 +363,10 @@
   lost: true
 15ZJ integral.genus_class_count:
   hash: 76b6a86797d8fb044b36341c2c8b05e92c61c97eb02230e4fed2019c2cc239a2
+  seconds: 0
+  lost: true
+1625 integral.primitive_orbits:
+  hash: ef10a172e39ddc5545059e882b305a20f0f1a0c43184d04ffc50cd6723e6851e
   seconds: 0
   lost: true
 16KU integral.genus_class_count:
