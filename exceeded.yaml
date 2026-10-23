@@ -421,10 +421,6 @@
   hash: a78008d3a8708815b384e4eb52b599ba368431774753883758046524702f843d
   seconds: 62
   lost: true
-1JPM integral.discriminant_sequence:
-  hash: 2bb42b7451899403ad851c80c1dba526a6f5ca1521797404729cb5ae39ea6c43
-  seconds: 0
-  lost: true
 1K1V definite.siegel_eisenstein_coefficients:
   hash: fa311dabf68de8f75c6653e62e85b673c1a085182d5e4cc656ed2e221a003e11
   seconds: 0
@@ -432,6 +428,10 @@
 1KAD integral.genus_class_count:
   hash: 2996dac438b3ce2f8f9b9042cdcd682f5d508e13e2ea9a3f88c496eb5b7962e8
   seconds: 13
+  lost: true
+1KHF integral.genus_class_count:
+  hash: f37eb5ba994fb0e22388ceab76bfba2592c564d8db7207cbc9d6cd2c37b5b4e6
+  seconds: 0
   lost: true
 1L3B integral.overlattice_count:
   hash: 5ec02122782c5210f413bb8d16db30dd35f3f8c8d17fdfa2b2f8245b12d1685c
