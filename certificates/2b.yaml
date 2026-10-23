@@ -18850,11 +18850,32 @@
 1UKR integral.spinor_genus_count:
   hash: 3002d91398894dd1029b6d24721497499035f9b4dd5644b1ce081c9238ea0f52
   by: research preamble
+1UPI definite.automorphism_group_generator_morphisms:
+  hash: 24aab3ace079e076687b60596d3d195dc55f0da60952cac8ea8c17bb55e64283
+  by: research preamble
+1UPI definite.automorphism_group_order:
+  hash: 255bae788dfb2a0ff6b5d61cfab7c5d5a84d6bbe50d8f00b9e299250e0320579
+  by: research preamble
+1UPI definite.genus_theta_series:
+  hash: 2300cbb2a7e560db1792ebe138685d68af9286d8a6908badb44268aadfb29b01
+  by: research preamble
+1UPI definite.siegel_eisenstein_coefficients:
+  hash: 82661884deb9da7ae417cf7eafa2d4c9735ad939d64cd41e341bdc92402cd68b
+  by: research preamble
+1UPI definite.theta_series_cuspidal_component:
+  hash: a824afc45f9deac48bb69a3c847b6c6f0b210a2c97c25f16e70c250a2eeab62a
+  by: research preamble
 1UPI derive:
   hash: 781dabb66c35ebcd09fc419e8d0936bcce9ebb1ea39f3f2414fa01f88cf4281a
   by: research preamble
 1UPI form.integer_valued:
   hash: 7272d7a0cc9b735ee8cf95e8cf9ac9c735227e51e2acc8540baa3684ac4c0f82
+  by: research preamble
+1UPI integral.anisotropic_primes:
+  hash: 4369ccb4a89f3846e1dfaba9cce96cf9f79944984b05a06f4b85d189eb59a2c0
+  by: research preamble
+1UPI integral.discriminant_sequence:
+  hash: 20ce00c7fbc52c4f7036717210744f1f53b96c580ee1419ba217f94fa4fd6979
   by: research preamble
 1UPI integral.elementary_primes:
   hash: 587d82c23bc76123920a9235b8bb1b67ef8265e0a6abddb499d724d641ca88da
@@ -18864,6 +18885,30 @@
   by: research preamble
 1UPI integral.genus_symbol:
   hash: 31720bc702ef34f6263015d3c680492455d8d893220dcd0826ac14ef8e608159
+  by: research preamble
+1UPI integral.hyperbolic_index:
+  hash: 92129e31835915ceac2eb75092f40a314eaf40b4f4b4cc37f61d2705242418fd
+  by: research preamble
+1UPI integral.local_densities:
+  hash: 9fa4c58b739c033ea7c8a7b9f960e98fce3ff6dcf960bc319dea0e4e2eb797f1
+  by: research preamble
+1UPI integral.local_representations:
+  hash: 9c34cf26568f3e6ab9836fcc04fcafb29df4ee580fe072cfdfd503247d96cafd
+  by: research preamble
+1UPI integral.modular_scale:
+  hash: 3707c2992d1eabb39c6ad54fa399251198ed29d0b02063f2936d0a2e91b36428
+  by: research preamble
+1UPI integral.overlattice_count:
+  hash: feba07cfabb641fe93fd49d2878f1b2d2f79a5ad45d3f6eec602bd2bbce1ccfe
+  by: research preamble
+1UPI integral.primitive_orbits:
+  hash: bdf4b0c1e575a4ddc1a47295a195ace0b31c9557a58c1c2777aa75cb26674752
+  by: research preamble
+1UPI integral.spinor_genera:
+  hash: 405770c90926ec5a45e8c253f9d310d00258758da51dad52a8539d088a0f3fcd
+  by: research preamble
+1UPI integral.spinor_genus_count:
+  hash: 2af7b16f214fa6a10563bab4e1dc8a4b15e911c8f3ad569de182553d5e3f016b
   by: research preamble
 2MOW definite.automorphism_group_generator_morphisms:
   hash: 0a8c041d29ff4a8b98cc2dddd83bfda5e6bb574a8f992ccff3019c127683026f

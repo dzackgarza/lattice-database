@@ -329,9 +329,6 @@
   hash: e9a35b7da91dcd00dd2193b061e2e0619539524bab6b5805ec303e0514afa883
   seconds: 0
   lost: true
-133C integral.local_representations:
-  hash: 0edff9a9feb59168c91237bf97fab342eb092749efd5a60072f09e7deb136b11
-  seconds: 2
 135Y integral.genus_class_count:
   hash: 689494ca5adb8488fc95a4f406d1751e6e84acc6252b85cb91dbc6cd8b4d2b92
   seconds: 0
@@ -384,23 +381,26 @@
   hash: 15faf7f6fbe50262ecbe3495984bd51aaa0a7a10130b827ba371217ab99b4de6
   seconds: 0
   lost: true
-197O integral.genus_class_count:
-  hash: 3ff06758fdc48e1edba6df022f88ddbe0f084b53dfad17e723ddb346422f2b72
-  seconds: 15
 19UQ integral.overlattice_count:
   hash: f392809a8bbb25f719d67fc23afa660c52c3188479f7a5a69bfffbe4f6f49369
   seconds: 0
   lost: true
-1EDJ integral.hyperbolic_index:
-  hash: cbfa87aa4a5e78275b947ff92c778b103ea5a6bca059cc667906239ff67f235a
-  seconds: 2
+1B1Y derive:
+  hash: c797c6b46193b291657f0b0a8a11b3d7b4b26d1fc92cecc7555789d2a4d5e956
+  seconds: 0
+  lost: true
+1E4M definite.genus_theta_series:
+  hash: d7c64037632fee89953decdc013e161f16f25e3ddeb85d56b82be0231cf40d1f
+  seconds: 27
+  lost: true
+1F5T integral.genus_class_count:
+  hash: f3991e5f751d2d1951bdfacf32cc2ce045b0991ab39b3065aa05f67b28ae00ab
+  seconds: 0
+  lost: true
 1F6O integral.primitive_orbits:
   hash: aa9a82c8d21972721e8be9c08518da9a41ebe41fa9eafc96e77816086779ea31
   seconds: 0
   lost: true
-1G6T definite.genus_theta_series:
-  hash: e649271558cfff952f31df84bea2f72770c3e890ef15f9b1b3c61cc491109a3f
-  seconds: 3
 1GRN integral.overlattice_count:
   hash: 2d69994bb46caf54ef5fc24bfc85749b4e47e08c0890c0841e7baa197fa96e52
   seconds: 0
@@ -413,9 +413,21 @@
   hash: bdfbab998af3d055cc103b993daad459eda6edc5b8ed067deaf4732fa06bcbfb
   seconds: 0
   lost: true
+1HOR integral.primitive_orbits:
+  hash: f98f7167bf18eca8f85fbf9a9ad578e8e86f263a88250c50e8be86f93073824c
+  seconds: 0
+  lost: true
 1JLB integral.genus_class_count:
   hash: a78008d3a8708815b384e4eb52b599ba368431774753883758046524702f843d
   seconds: 62
+  lost: true
+1JM0 integral.genus_class_count:
+  hash: c4d3b3c4964c6b69799612f966e5a76dc5f9de6cc43f55a0350416c42659887a
+  seconds: 0
+  lost: true
+1JUM integral.genus_class_count:
+  hash: a5e9c3d47898ca5cb1e311289484355948792fb8a6524461dea0d698047abc2a
+  seconds: 17
   lost: true
 1K1V definite.siegel_eisenstein_coefficients:
   hash: fa311dabf68de8f75c6653e62e85b673c1a085182d5e4cc656ed2e221a003e11
@@ -429,31 +441,37 @@
   hash: 5ec02122782c5210f413bb8d16db30dd35f3f8c8d17fdfa2b2f8245b12d1685c
   seconds: 0
   lost: true
-1L9E integral.discriminant_sequence:
-  hash: 0abc5586843474f67e21c869790aa40ca4b63eb7fedfbc7ffbbc83512e185292
-  seconds: 2
+1LG5 integral.overlattice_count:
+  hash: 324254904300a0950698756f975eb4f63d10e23fc1a85e44decd0e7fb164bfd7
+  seconds: 0
+  lost: true
 1LPO integral.discriminant_sequence:
   hash: c2d56853c688ca548dd50df42dc26996cbe6f8a73e77d63b9dc95c2c53e7aeb5
   seconds: 0
   lost: true
-1M1K integral.discriminant_sequence:
-  hash: 177b271f783aa1283e7459ae7b263ceef6db502166b0554e7491bf961ed4ae5b
-  seconds: 2
-1PXQ integral.overlattice_count:
-  hash: 2807ac189c5e6bdcd2b197c749a7ca6d2e34e91a0b4523a17e09e0535d8aa889
-  seconds: 3
-1RZ4 integral.genus_class_count:
-  hash: 0c1c78dd51d4e45f7e03b7a561405c017dfe3cf671227f4d023d6f4aaa5ef0e2
-  seconds: 37
-1RZC integral.genus_class_count:
-  hash: b65339e2276b84793117c019cdabe6ec8f1b4b9b39df1f926d16ac7e9f8b0be7
-  seconds: 2
-1UPI integral.overlattice_count:
-  hash: 957c7ece1bdd43f5dfa64b77905bae808375f0b527c0f5ee48b6ca274948ebc2
-  seconds: 2
+1QEW integral.elementary_primes:
+  hash: af73d28ec2fbba958fce78f813250af005dfe45fbfbada60b02439d50d34e3ef
+  seconds: 0
+  lost: true
+1T0D derive:
+  hash: 703031831a0a21f22cad93316b37b7a758a7133cf1235e1a954d7d4fa7f50304
+  seconds: 0
+  lost: true
+1VLB integral.overlattice_count:
+  hash: 082482f2d8144f5a48d001492856c4a7d0c6c2c28979dc5795584af4caa73988
+  seconds: 0
+  lost: true
 1VQZ integral.genus_class_count:
   hash: bf89660deaa6334fb40ff017f9f7a5427c5c2d85f11e6e377685d721f0edfff2
   seconds: 11
+  lost: true
+1X4H derive:
+  hash: 132e9878102cd35f70540921f163330ce8aa3bdbf801fb2bfc6c70a5a6b38b12
+  seconds: 0
+  lost: true
+1YKL derive:
+  hash: 84127801d66a69d8cc9d615e17dae85293306b133463c707037cc64eb7ab5760
+  seconds: 0
   lost: true
 3BV3 definite.siegel_eisenstein_coefficients:
   hash: 4be43fed87facb172ca082e1bbd69e4a81eca70025fe243420745dac788d942a
@@ -514,6 +532,10 @@
 3EW8 integral.overlattice_count:
   hash: fce110031073db602b33d438d214af3920d48cdee426ee72e2a9a656b21cd183
   seconds: 25
+  lost: true
+3EW9 integral.overlattice_count:
+  hash: c8052093d39aea98d382f33e9df6ff7f586d47332485f99f801e293c96a1cd2b
+  seconds: 10
   lost: true
 3EWA integral.overlattice_count:
   hash: b8bd2bf212065624fc89c1747176f55fc07052f2773835e12e0ac03bed9c2850
@@ -603,6 +625,10 @@
   hash: 224b4c63f167cd90e61b6adf2b88fa1e73b5fecfbcc3c8c4d838918f1f60b3f2
   seconds: 7
   lost: true
+3G5P integral.overlattice_count:
+  hash: 5a44397e49a4a862203a3ddfa51f2c629317c5c0175b84e7b640522bd3424541
+  seconds: 5
+  lost: true
 3G5X integral.overlattice_count:
   hash: ee1f4a7d0b377a9993b77fa3d6444c4907d5e97372afcb9c9258c478112eb3e4
   seconds: 6
@@ -627,19 +653,40 @@
   hash: 75b98a72eb3d3314b6fd55e345ca2d1ed9bc31c3e559ecc31215d5b9823c122a
   seconds: 8
   lost: true
+3GP1 integral.overlattice_count:
+  hash: dc927e7dffa463fb642e33538f94079ce2a08d4cff738b359d68d8d689fa7d5d
+  seconds: 15
+  lost: true
+3GPP integral.discriminant_sequence:
+  hash: a819e01ddf483f798e7b1e85c1c30c22723efa72094f46aaadc47759cd968c8f
+  seconds: 5738
+  lost: true
+3GPU integral.discriminant_sequence:
+  hash: ed0e1de71b5299d75a1e502e60afb74a46dafe5f2072e21ee6c6ed5814d2a082
+  seconds: 8339
+  lost: true
 3GPU integral.overlattice_count:
   hash: 679b7857df870c585e20e67396282d532424c3d06fe6b86a0b2fcfb0fbede657
   seconds: 10
   lost: true
+3GQ2 integral.discriminant_sequence:
+  hash: 96d8236f212099a9a6fc02562a01a03a45b59bb60f8aa132efa26565a6f0a801
+  seconds: 8527
+  lost: true
+3GRG integral.discriminant_sequence:
+  hash: 01c3291850d9067945eec96dcf47cad2765768f42fc05ef8f529a6b93d5e7177
+  seconds: 8443
+  lost: true
 3GRU integral.discriminant_sequence:
   hash: 0873c77aea247747beee5f6503d4678ca0c393ad59c2a14ff0e34fd7c44871c6
   seconds: 18241
-3GT2 integral.discriminant_sequence:
-  hash: 79dd637fdc1b012f11ba828ace25a823eafd3ff25115f642b57be9a49f099c8a
-  seconds: 1160
 3GVS integral.overlattice_count:
   hash: 08ed3d3d97ba6ede8efea82cce0080d3ea5206f140bdd1239f06276842783102
   seconds: 10
+  lost: true
+3GVT integral.overlattice_count:
+  hash: 980f3cd45727183a8b2dc7d54ae624ff2174d1fe0dead0677e420e8cca92d16f
+  seconds: 19
   lost: true
 3GW5 integral.overlattice_count:
   hash: 4638adc325a0ee6d4d9136c3852ee4c80d348052095c2f530e2b1196e868f777

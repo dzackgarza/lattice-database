@@ -16,6 +16,13 @@ certifications:
   definite.automorphism_group_order: 903ac63753995cb38a6e28fa618aff9fa12a9db3d6df28357f5769f449fd349c
   definite.automorphism_group_generator_morphisms: f03c7acd09818de0096a08201b6fa192be50720f0dc013cf5f4866bb05f95300
   integral.discriminant_sequence: 0af2db7afac1aab65f6fbccc25f3591522fe55dbe0e0b3cb2b6e3b550c553aa5
+  integral.modular_scale: 662b34c12a41c0898039aee033a7d99c057b226e7078e8c9df8ab7d1b86c623d
+  definite.genus_theta_series: 7d04d094f56582ea758c1e159124aa0697e3ada503b229611919c2937dd5f1fb
+  definite.theta_series_cuspidal_component: 32402062010a403035e9c3c310be39634764212205e4574064f4f32fad6e0467
+  definite.siegel_eisenstein_coefficients: c619b4cceea3077085074879c883ff702fd53ce93607e0d13a47fa6598fa0594
+  integral.anisotropic_primes: 8946c06cc1c26d722cff410f8bf2e4ed1634a3d23519a56d4bcdf3ba62898e02
+  integral.local_representations: f158cfdc05bdccaef9c15d40bbe00b02af9b1569e39bccfdb6bf9854a17f87ff
+  integral.local_densities: e9fc263aed182677e932208532c1c7a136457d9387118868b79081e1ec0810e6
 rank: 4
 gram_tensor:
 - [4, 1, 0, 2]
@@ -36,6 +43,7 @@ integral:
   elementary_primes: [857]
   parity: even
   level: 857
+  modular_scale: false
   discriminant_group: [857]
   discriminant_sequence:
     discriminant_factors: [857]
@@ -65,6 +73,31 @@ integral:
   spinor_genus_count: 1
   spinor_genera: [51]
   hyperbolic_index: 0
+  anisotropic_primes: []
+  local_representations:
+  - prime: 2
+    classes:
+    - representative: 1
+      least_valuation: 2
+    - representative: 3
+      least_valuation: 2
+    - representative: 5
+      least_valuation: 2
+    - representative: 7
+      least_valuation: 2
+    - representative: 2
+      least_valuation: 1
+    - representative: 6
+      least_valuation: 1
+    - representative: 10
+      least_valuation: 1
+    - representative: 14
+      least_valuation: 1
+  local_densities:
+  - prime: 2
+    densities: [0, 3/2, 0, 9/4, 0, 3/2, 0, 21/8, 0, 3/2, 0, 9/4]
+  - prime: 857
+    densities: [856/857, 856/857, 858/857, 856/857, 858/857, 858/857, 858/857, 856/857, 856/857, 858/857, 858/857, 858/857]
 definite:
   minimum: 4
   kissing_number: 2
@@ -75,6 +108,9 @@ definite:
   - [1, 0, 0, 0]
   perfect: false
   theta_series: [1, 0, 0, 0, 2, 0, 2, 0, 10, 0, 8, 0, 10]
+  genus_theta_series: [1, 0, 214/179, 0, 642/179, 0, 429/179, 0, 1498/179, 0, 858/179, 0, 1287/179]
+  theta_series_cuspidal_component: [0, 0, -214/179, 0, -284/179, 0, -71/179, 0, 292/179, 0, 574/179, 0, 503/179]
+  siegel_eisenstein_coefficients: [0, 214/179, 0, 642/179, 0, 429/179, 0, 1498/179, 0, 858/179, 0, 1287/179]
   root_system: []
   roots: []
 root_sublattice:
