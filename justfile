@@ -46,6 +46,14 @@ enrich *ARGS:
 certify *ARGS:
     just _latticedb certify {{ARGS}}
 
+# Inspect recorded certification failures and their triage history
+certification-failures *ARGS:
+    just _latticedb certification-failures {{ARGS}}
+
+# Release a failed computation: TAG block.field --note 'repair or investigation'
+retry-computation *ARGS:
+    just _latticedb retry-computation {{ARGS}}
+
 # Report stored-card inconsistencies, delegating mathematical checks to the preamble
 verify:
     just _latticedb verify
@@ -74,6 +82,10 @@ test:
 # CI-only constructor/serialization/publication integration. Mathematical correctness lives in preamble tests.
 test-validation:
     PYTHONPATH="$HOME/research/src:src" "$(just -f ~/ai-review-ci/justfiles/sage.just -d . _sage-python)" -m pytest tests/test_catalogue_schemas.py tests/test_corpus.py tests/test_genus.py tests/test_geometric.py tests/test_hashimoto.py tests/test_records.py tests/validation
+
+# Certification scheduling, failure triage and persistence on small specimens
+test-certification *ARGS:
+    PYTHONPATH="$HOME/research/src:src" "$(just -f ~/ai-review-ci/justfiles/sage.just -d . _sage-python)" -m pytest tests/test_genus.py tests/test_failures.py tests/test_persist.py {{ARGS}}
 
 # Exercise archived-source importers and source-to-card collation; provenance only, not mathematical validation
 test-source-intake:

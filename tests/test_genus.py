@@ -11,6 +11,7 @@ from pathlib import Path
 
 import frontmatter
 import pytest
+import yaml
 
 from latticedb import certificates, corpus, exceeded, genus, records
 from latticedb.model import Lattice
@@ -20,7 +21,12 @@ REPOSITORY = Path(__file__).resolve().parent.parent
 
 def derived() -> certificates.Certificates:
     """The repository's derive certificates, so a copied card requests the fields that apply to it."""
-    return {computation: certificate for computation, certificate in certificates.load(REPOSITORY).items() if computation.endswith(" derive")}
+    held: certificates.Certificates = {}
+    for tag in ("0012", "0016", "0026"):
+        path = REPOSITORY / "certificates" / f"{certificates.group(tag)}.yaml"
+        stored = yaml.load(path.read_text(), Loader=yaml.CSafeLoader)
+        held[f"{tag} derive"] = certificates.Certificate.model_validate(stored[f"{tag} derive"])
+    return held
 
 
 def test_sparse_cards_do_not_block_computable_cards(tmp_path: Path) -> None:

@@ -67,6 +67,9 @@ jobs:
           # before the commit step reads the cards and `exceeded.yaml`.
           status=0
           docker exec -i \
+              --env "LATTICEDB_RUN_URL=$GITHUB_SERVER_URL/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID/attempts/$GITHUB_RUN_ATTEMPT" \
+              --env "LATTICEDB_REVISION=$(git rev-parse HEAD)" \
+              --env "LATTICEDB_RESEARCH_REVISION=$(git -C research rev-parse HEAD)" \
             --env "PYTHONPATH=$GITHUB_WORKSPACE/research/src:$GITHUB_WORKSPACE/src" \
             --workdir "$GITHUB_WORKSPACE" \
             sage-env timeout "${minutes}m" /sage/.venv/bin/python -m latticedb certify "${args[@]}" || status=$?
@@ -94,7 +97,7 @@ jobs:
         shell: bash --noprofile --norc -e -o pipefail {0}
         run: |
           git config --global --add safe.directory "$GITHUB_WORKSPACE"
-          git add -A lattices certificates exceeded.yaml
+          git add -A lattices certificates exceeded.yaml failures.yaml
           git diff --cached --binary > "$RUNNER_TEMP/certification.patch"
           git rev-parse HEAD > "$RUNNER_TEMP/certification-base.txt"
       - name: Retain completed data even if integration fails

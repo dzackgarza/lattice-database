@@ -59,6 +59,7 @@ The site is served locally at <http://lattice-database.localhost/>, and publishe
 | `sources/brandt_intrau/` | Brandt–Intrau–Schiemann's odd and even ternary form tables, read by `src/latticedb/brandt_intrau.py` |
 | `sources/watson/watson.txt` | Watson's single-class genus representatives, read by `src/latticedb/watson.py` |
 | `sources/normalized/*.jsonl.gz` | Reproducible source-row index: parsed Nipp, Brandt–Intrau–Schiemann, and Watson rows, plus every named Nebe–Sloane archive entry with its source sections and ordinal; the index computes no new mathematical invariants |
+| `failures.yaml` | Manual triage ledger for failed certification computations, with defining inputs, stderr, runtime, CI provenance and retry history |
 | `sources/hashimoto/table_10_2.json`, `table_10_3.json` | Tables 10.2 and 10.3 of K. Hashimoto, arXiv:1012.2682, as printed, each row linked to the records of $\Lambda_G$ and $\Lambda^G$ by a twist and a change of basis |
 | `sources/hoehn_mason/leech.json`, `lattices_<i>_<j>.json` | The Leech lattice and the 40 entries `lattices[i,j]` of the Magma file of G. Höhn and G. Mason, arXiv:1505.06420, whose coinvariant lattice is $\Lambda_G(-1)$ for a row of Table 10.2 of Hashimoto: the bases and the stabilizer generators as printed, each linked to its record by a twist and a change of basis |
 | `tests/` | Tests of the validators, of the record commands and of the built site |
@@ -442,9 +443,11 @@ A hard kill retains the latest checkpoint; an early interruption remains eligibl
 A computation that ran for at least five hours does not fit in one job, and certification never requests it again.
 A computation that ran for less is requested first in its phase by the next job, after any required derivation.
 An entry is `lost` from the start of its computation until the job's final checkpoint.
-An entry that is still lost was running when its runner died, possibly because of it, so the next job requests it after every other computation.
-If a worker crashes on a card, certification drops the entry of the computation it was running, since a crash is a defect and not a timeout.
-A fresh worker takes the card's computations that had not started, then the other cards, and certification fails once the queue is done.
+An entry that is still lost was running when its runner died. The next certification
+run recovers it into manual triage before scheduling further work.
+If a worker crashes on a card, certification records the failed computation in
+`failures.yaml`. A fresh worker takes the card's computations that had not started,
+then the other cards, and certification fails once the queue is done.
 A worker that crashes before starting any computation is not replaced.
 A changed Gram tensor changes the hash, so the entry no longer applies.
 After a faster implementation lands, delete the entry by hand.
@@ -458,10 +461,46 @@ The semi-decisions (`roots`, `norms`, `reflective`, `regular`, `spinor_regular`)
 A cut search leads that phase: every job ends inside a search, and resuming it at the start of the next job would hold its workers through the fields that every procedure finishes.
 A card that still needs derivation carries its record into that later request, and the worker derives it again only to select the searches that apply.
 When less than a tenth of the machine's memory is available, certification kills the worker holding the most memory and reports that card as a failure, so a computation that outgrows the runner costs its own card and not the whole job.
-Its computation is logged as lost, so the next job runs it last.
+Its computation enters the manual triage ledger and stays out of automatic retries
+while its disposition is `open`.
 The nightly workflow runs `--shard i/16` on sixteen runners; a card belongs to the shard given by a SHA-256 hash of its tag, so the shards partition the corpus.
 Every half hour and at the end of its job, each shard pushes what it has certified since its last push onto `main` (`.github/scripts/persist.sh`), so a runner that dies loses at most half an hour.
-`.gitattributes` merges the files of `certificates/` and `exceeded.yaml` key by key with `latticedb merge-keyed-map`, since shards never change the same key.
+`.gitattributes` merges the files of `certificates/`, `exceeded.yaml` and `failures.yaml`
+key by key with `latticedb merge-keyed-map`, since shards own disjoint tags.
+
+### Manual triage and retry
+
+`failures.yaml` is the durable work queue for ordinary worker errors, memory failures
+and computations that exhaust a full certification window. Each computation has an
+`open`, `retry` or `resolved` disposition and a history of attempts. An attempt records
+its Gram tensor and input hash, reason, captured stderr (including any traceback),
+elapsed seconds and timestamp. Hosted attempts also name the CI run and the exact
+database and research revisions. A process killed without emitting stderr still has
+its exit reason, input and provenance.
+
+An `open` entry quarantines that computation on that input. Other computations remain
+eligible. An error before a worker announces its first computation creates a
+`<TAG> worker` entry, which quarantines that card's requests until its worker problem
+is investigated. A changed defining input is eligible independently of the old failure.
+
+Inspect the evidence and record the repair or investigation that justifies a retry:
+
+```sh
+just certification-failures
+just retry-computation 3GRU integral.discriminant_sequence --note 'Describe the preamble repair or reproduction experiment'
+```
+
+Commit the triage decision for the next CI run, or reproduce on that one card locally
+with `just certify --tag 3GRU --minutes 10 --workers 1`. Retry clears the matching
+interruption entry while retaining the failure evidence and note. A completed result
+resolves its matching entry; another failure appends an attempt and reopens it.
+At startup, certification also resolves entries whose matching completed certificates
+have since landed from another runner.
+CI checkpoints, recovery patches and final pushes include the triage ledger alongside
+completed results. Certification also recovers matching historical full-window timeouts
+and lost-runner entries from `exceeded.yaml`. Recovered attempts name that file as their
+evidence source; their recorded time and run provenance describe when they entered
+triage, while the original exception output may be available only in older CI logs.
 
 Run ordinary enrichment for selected cards with `just enrich --tag <tag>`. Certification is run by the nightly CI certification workflow; a selected card can be certified explicitly with `just certify --tag <tag>` when debugging that workflow.
 

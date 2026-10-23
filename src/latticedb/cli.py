@@ -21,6 +21,7 @@ from latticedb import (
     certificates,
     checks,
     corpus,
+    failures,
     genus,
     keyed_merge,
     records,
@@ -314,6 +315,18 @@ def enrich(
 def enrich_summand_maps(*, root: Root = Path()) -> None:
     """Write preamble-computed orthogonal summand maps over the corpus."""
     _refuse(summands.store(root, corpus.load(root)))
+
+
+@app.command
+def certification_failures(root: Root = Path()) -> None:
+    """Show the durable triage ledger, including error evidence and retry history."""
+    print(json.dumps({key: value.model_dump(mode="json") for key, value in failures.load(root).items()}, indent=2))
+
+
+@app.command
+def retry_computation(tag: str, computation: str, *, note: str, root: Root = Path()) -> None:
+    """Release one failed computation after recording its repair or triage decision."""
+    failures.retry(root, f"{tag} {computation}", note)
 
 
 @app.command

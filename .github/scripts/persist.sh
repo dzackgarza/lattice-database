@@ -20,7 +20,7 @@ grep -qxF '/.persist/' .git/info/exclude || echo '/.persist/' >> .git/info/exclu
 pushed="$(cat "$state/pushed" 2>/dev/null || git rev-parse HEAD)"
 
 GIT_INDEX_FILE="$state/index" git read-tree "$pushed"
-GIT_INDEX_FILE="$state/index" git add -A -- lattices certificates exceeded.yaml
+GIT_INDEX_FILE="$state/index" git add -A -- lattices certificates exceeded.yaml failures.yaml
 tree="$(GIT_INDEX_FILE="$state/index" git write-tree)"
 if [[ "$tree" == "$(git rev-parse "$pushed^{tree}")" ]]; then
   echo "No newly completed computations."

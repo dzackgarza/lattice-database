@@ -20,15 +20,17 @@ import sys
 import time
 from collections import deque
 from collections.abc import Generator, Iterator
-from contextlib import closing
+from contextlib import ExitStack, closing
 from fractions import Fraction
 from pathlib import Path
+from tempfile import TemporaryFile
+from typing import BinaryIO
 from typing import NotRequired, TypedDict
 
 import frontmatter
 from pydantic import BaseModel, TypeAdapter
 
-from latticedb import certificates, corpus, exceeded, records, storage
+from latticedb import certificates, corpus, exceeded, failures, records, storage
 from latticedb.certificates import Certificate, Certificates
 from latticedb.model import (
     DefiniteData,
@@ -195,6 +197,8 @@ def requests(
     log: exceeded.Interruptions,
     tags: tuple[str, ...],
     shard: tuple[int, int] = (0, 1),
+    *,
+    failed: failures.Failures | None = None,
 ) -> list[Request]:
     """For each nondegenerate record in `shard`, the uncertified applicable preamble computations.
 
@@ -213,9 +217,12 @@ def requests(
     searches: list[Request] = []
     lost: list[Request] = []
     sizes: dict[str, tuple[int, Fraction]] = {}
+    triage = {} if failed is None else failed
     for entry in loaded.entries:
         lattice = entry.lattice
         if lattice.gram_tensor is None or (tags and lattice.tag not in tags) or not in_shard(lattice.tag, shard):
+            continue
+        if failures.blocked(triage, f"{lattice.tag} worker", lattice):
             continue
         metadata = corpus.front_matter(corpus.read_card(entry.path))
         cited = lattice.certifications
@@ -223,6 +230,8 @@ def requests(
         derive_hash = certificates.certification_hash(derive_name, lattice, records.derived_projection(metadata))
         needs_derive = certificates.is_pending(held, derive_name, cited.get("derive"), derive_hash)
         needs_derive = needs_derive and not exceeded.is_exceeded(log, derive_name, lattice)
+        if needs_derive and failures.blocked(triage, derive_name, lattice):
+            continue
         if not needs_derive and lattice.rank is None:
             # A timed-out derivation cannot supply missing hypotheses for later operations.
             continue
@@ -238,7 +247,7 @@ def requests(
             block = metadata.get(block_name)
             stored_value = block.get(field) if isinstance(block, dict) else None
             computation = name(lattice.tag, field)
-            if exceeded.is_exceeded(log, computation, lattice):
+            if exceeded.is_exceeded(log, computation, lattice) or failures.blocked(triage, computation, lattice):
                 continue
             expected_hash = certificates.certification_hash(computation, lattice, certified_value(field, stored_value, lattice))
             if stored_value is None or certificates.is_pending(held, computation, cited.get(f"{block_name}.{field}"), expected_hash):
@@ -349,7 +358,18 @@ def computed(chosen: list[Request], deadline: float, workers: int) -> Generator[
     started: dict[subprocess.Popen[bytes], set[str]] = {}
     pending: dict[subprocess.Popen[bytes], bytes] = {}
     exhausted: set[subprocess.Popen[bytes]] = set()
-    with selectors.DefaultSelector() as selector:
+    errors: dict[subprocess.Popen[bytes], BinaryIO] = {}
+    with ExitStack() as resources, selectors.DefaultSelector() as selector:
+
+        def stderr(process: subprocess.Popen[bytes]) -> str:
+            output = errors[process]
+            output.seek(0)
+            text = output.read().decode("utf-8", errors="replace")
+            output.seek(0)
+            output.truncate()
+            if text:
+                print(text, file=sys.stderr, end="", flush=True)
+            return text
 
         def assign(process: subprocess.Popen[bytes]) -> None:
             assert process.stdin is not None
@@ -360,7 +380,9 @@ def computed(chosen: list[Request], deadline: float, workers: int) -> Generator[
             process.stdin.flush()
 
         def spawn() -> None:
-            process = subprocess.Popen(WORKER, stdin=subprocess.PIPE, stdout=subprocess.PIPE, start_new_session=True)
+            output = resources.enter_context(TemporaryFile())
+            process = subprocess.Popen(WORKER, stdin=subprocess.PIPE, stdout=subprocess.PIPE, stderr=output, start_new_session=True)
+            errors[process] = output
             assert process.stdout is not None
             selector.register(process.stdout, selectors.EVENT_READ, process)
             pending[process] = b""
@@ -408,7 +430,10 @@ def computed(chosen: list[Request], deadline: float, workers: int) -> Generator[
                             if begun and unstarted and "derive" not in request["fields"]:
                                 queue.appendleft({**request, "fields": unstarted})
                             reason = "memory exhausted" if process in exhausted else f"exit status {process.returncode}"
-                            yield {"tag": request["tag"], "failed": reason}
+                            error = stderr(process)
+                            yield {"tag": request["tag"], "failed": reason, **({"stderr": error} if error else {})}
+                        errors.pop(process).close()
+                        exhausted.discard(process)
                         # A worker that ends before starting a computation would end its successor alike.
                         if queue and (request is None or begun):
                             spawn()
@@ -424,6 +449,7 @@ def computed(chosen: list[Request], deadline: float, workers: int) -> Generator[
                                 started[process] |= set(values["started"])
                             yield values
                             continue
+                        stderr(process)
                         del holding[process]
                         if queue:
                             assign(process)
@@ -531,8 +557,37 @@ def certify(
     """
     by_tag = {entry.lattice.tag: entry for entry in loaded.entries}
     log = exceeded.load(root)
+    failed = failures.recover(root, {tag: entry.lattice for tag, entry in by_tag.items() if (not tags or tag in tags) and in_shard(tag, shard)}, log)
+    reconciled = False
+    for computation, failure in failed.items():
+        tag, field = computation.split(" ", 1)
+        entry = by_tag.get(tag)
+        if entry is None or (tags and tag not in tags) or not in_shard(tag, shard) or failure.disposition == "resolved":
+            continue
+        lattice = entry.lattice
+        if lattice.gram_tensor is None or failure.attempts[-1].hash != exceeded.input_hash(computation, lattice):
+            continue
+        metadata = corpus.front_matter(corpus.read_card(entry.path))
+        if field == "derive":
+            value = records.derived_projection(metadata)
+        else:
+            short = field.rsplit(".", 1)[-1]
+            if short not in BLOCKS or name(tag, short) != computation:
+                continue
+            block = metadata.get(BLOCKS[short][0])
+            if not isinstance(block, dict) or block.get(short) is None:
+                continue
+            value = certified_value(short, block[short], lattice)
+        expected = certificates.certification_hash(computation, lattice, value)
+        if certificates.is_certified(held, computation, lattice.certifications.get(field), expected):
+            failed[computation] = failure.model_copy(update={"disposition": "resolved"})
+            log.pop(computation, None)
+            reconciled = True
+    if reconciled:
+        failures.save(root, failed)
+        exceeded.save(root, log)
     running: dict[str, float] = {}
-    failures: list[str] = []
+    worker_failures: list[str] = []
     # Certificates are saved at each checkpoint, in the groups of the cards that changed,
     # rather than with each value. A card whose certificate a hard kill lost cites a hash
     # that `certificates/` lacks, so it is recomputed.
@@ -546,10 +601,13 @@ def certify(
             for computation, started_at in running.items():
                 # Until the final checkpoint, a pushed entry is lost if the runner dies.
                 log[computation] = exceeded.Interruption(hash=log[computation].hash, seconds=int(time.monotonic() - started_at), lost=not final)
+                if final and log[computation].seconds >= exceeded.WINDOW_SECONDS:
+                    tag = computation.split(" ", 1)[0]
+                    failed[computation] = failures.record(root, computation, by_tag[tag].lattice, "certification budget exhausted", "", log[computation].seconds)
             exceeded.save(root, log)
 
     try:
-        with closing(computed(requests(loaded, held, log, tags, shard), deadline, workers)) as stream:
+        with closing(computed(requests(loaded, held, log, tags, shard, failed=failed), deadline, workers)) as stream:
             for values in stream:
                 if "checkpoint" in values:
                     checkpoint()
@@ -559,18 +617,26 @@ def certify(
                     break
                 if "failed" in values:
                     tag = str(values["tag"])
-                    for computation in [computation for computation in running if computation.startswith(f"{tag} ")]:
+                    active = [computation for computation in running if computation.startswith(f"{tag} ")]
+                    for computation in active or [f"{tag} worker"]:
+                        elapsed = time.monotonic() - running[computation] if computation in running else 0
+                        failed[computation] = failures.record(root, computation, by_tag[tag].lattice, str(values["failed"]), str(values.get("stderr", "")), elapsed)
+                    for computation in active:
                         started_at = running.pop(computation)
                         if values["failed"] == "memory exhausted":
-                            # It would exhaust the next job's memory too, so that job runs it last.
+                            # Preserve its interruption evidence; triage quarantines the retry.
                             log[computation] = exceeded.Interruption(hash=log[computation].hash, seconds=int(time.monotonic() - started_at), lost=True)
                         else:
                             # A failure is a defect to repair, not a computation that outran its job.
                             log.pop(computation, None)
                     exceeded.save(root, log)
-                    failures.append(f"{tag} ({values['failed']})")
+                    worker_failures.append(f"{tag} ({values['failed']})")
                     continue
                 entry = by_tag[str(values["tag"])]
+                worker_name = f"{entry.lattice.tag} worker"
+                if "started" not in values and worker_name in failed and failed[worker_name].disposition == "retry":
+                    failures.resolve(root, worker_name, entry.lattice)
+                    failed[worker_name] = failures.load(root)[worker_name]
                 match values:
                     case {"started": list() as started}:
                         for field in started:
@@ -590,6 +656,8 @@ def certify(
                         derived["certifications"] = {**stored_lattice.certifications, "derive": certificate_hash}
                         storage.write_text(entry.path, records.record_text(derived, entry.prose))
                         held[computation] = Certificate(hash=certificate_hash, by=str(values["by"]))
+                        if computation in failed:
+                            failures.resolve(root, computation, stored_lattice)
                         unsaved.add(stored_lattice.tag)
                         log.pop(computation, None)
                         running.pop(computation, None)
@@ -619,6 +687,8 @@ def certify(
                     )
                     card_certifications[f"{block_name}.{field}"] = certificate_hash
                     held[computation] = Certificate(hash=certificate_hash, by=str(values["by"]))
+                    if computation in failed:
+                        failures.resolve(root, computation, stored_lattice)
                 stored["certifications"] = {name: certificate_hash for name, certificate_hash in card_certifications.items()}
                 document = corpus.read_card(entry.path)
                 storage.write_text(entry.path, records.record_text(stored, document.content))
@@ -630,8 +700,8 @@ def certify(
                 )
     finally:
         checkpoint(final=True)
-    if failures:
-        raise ChildProcessError(f"{SAGE_MODULE} failed on " + ", ".join(failures))
+    if worker_failures:
+        raise ChildProcessError(f"{SAGE_MODULE} failed on " + ", ".join(worker_failures))
 
 
 def cite(path: Path, field: str, value: Yaml, reference: dict[str, str], held: Certificates) -> None:
