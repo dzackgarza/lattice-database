@@ -481,10 +481,6 @@
   hash: 92a23e4b2fc0cd39369317e8c643ed4e1719a175a1c58589321b655a24f7b6f5
   seconds: 0
   lost: true
-1XT4 derive:
-  hash: 0da50d9044bb405a6b8609f8f3bd6189a8f6b59ce5d024bc056b6682a2445f94
-  seconds: 0
-  lost: true
 1XZ4 integral.genus_class_count:
   hash: 74c16994c3b77952038ba93c20a18b544b6f1c57c52852339204c037805c0eac
   seconds: 23
@@ -496,6 +492,10 @@
 1YDS integral.genus_class_count:
   hash: 43701248704ac476a2e87076e3517a579dc7a14927b53ffd7975a646d3978b4c
   seconds: 12
+  lost: true
+1Z35 derive:
+  hash: 01da2e37c0f6b7966a21c682c300559019e190e3658e1b85859bae77f9722190
+  seconds: 0
   lost: true
 1ZON integral.elementary_primes:
   hash: 3257bea340bac7a0a798770c1f57b877e9e9fb48914c44752fea07cbec1a2885
