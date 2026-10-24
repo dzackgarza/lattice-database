@@ -457,10 +457,6 @@
   hash: bf89660deaa6334fb40ff017f9f7a5427c5c2d85f11e6e377685d721f0edfff2
   seconds: 11
   lost: true
-1X26 derive:
-  hash: ed57a3eef369f9707c8ae70db9c48971cdd0a12b25ffe35142ea67f00a4f34fc
-  seconds: 0
-  lost: true
 1XEP integral.spinor_genera:
   hash: 31e6986fe026d98e42c61972796bc9a750739bec7e9e797354e0faf70396d9de
   seconds: 0
@@ -472,6 +468,10 @@
 1XZ4 integral.genus_class_count:
   hash: 74c16994c3b77952038ba93c20a18b544b6f1c57c52852339204c037805c0eac
   seconds: 23
+  lost: true
+1Y4V derive:
+  hash: 7db80120000102acf9f9e1a81c5b387313d248339a10be0885936b6ec76926c4
+  seconds: 0
   lost: true
 1YDS integral.genus_class_count:
   hash: 43701248704ac476a2e87076e3517a579dc7a14927b53ffd7975a646d3978b4c
