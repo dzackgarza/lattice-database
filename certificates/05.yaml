@@ -27767,11 +27767,23 @@
 3GQ2 definite.automorphism_group_order:
   hash: 842e2f7dacd3e846a7c14d30543f0182eec202bb3215ea10c19ef5786a50375b
   by: research preamble
+3GQ2 definite.genus_theta_series:
+  hash: 0f2896ed317ce2d13fd04bfe50133fdfae5b074dfe13884c02474877346f214b
+  by: research preamble
+3GQ2 definite.siegel_eisenstein_coefficients:
+  hash: 1edeb5a7b9e93b8b004a7d201059496ff081b8ad0df5ea6b4c51629ab65c5b94
+  by: research preamble
+3GQ2 definite.theta_series_cuspidal_component:
+  hash: d7bccbab8dfae50bc1440a7241504b2c5b2b5e4194bcbaacb74648f8eca9736b
+  by: research preamble
 3GQ2 derive:
   hash: c7fb18aa9ff8cbe8fff66dbd1e716836a3cae3707b3162697e0adf68822fb6d6
   by: research preamble
 3GQ2 form.integer_valued:
   hash: 101c553da9862bab2215d9bdd210a8308ac4abcc0dd37cf27a4edfbb64a934d3
+  by: research preamble
+3GQ2 integral.anisotropic_primes:
+  hash: 5cdb45075aa40326695f117a8e90bf9c089b982df11712c2209d95b4b7c43e8f
   by: research preamble
 3GQ2 integral.elementary_primes:
   hash: 5a231223c246d51c855fe15edcefeb1550af6c8ed20127497ffebd28a154b387
@@ -27784,6 +27796,18 @@
   by: research preamble
 3GQ2 integral.hyperbolic_index:
   hash: 35880c452763cbe19c7ff309f78dc135490fe6348fce51a3c18678d72cba33d3
+  by: research preamble
+3GQ2 integral.local_densities:
+  hash: 86dc736f3ba69f52ab8c515b122c6cd33eef683e90701a4b514ddc34c27bb25e
+  by: research preamble
+3GQ2 integral.local_representations:
+  hash: 9237ad37371416ef67e2a44d5c7206f394d022bc43ec736d00452b64dd054858
+  by: research preamble
+3GQ2 integral.modular_scale:
+  hash: a82b89d3b6cf6b296b5a622177efb549b5f10495657f82fbcd792e4f5afeb0cd
+  by: research preamble
+3GQ2 integral.primitive_orbits:
+  hash: 020b659368535f9dfcb8d979f081128232b4eb012cd8fada70d5c4610a4461df
   by: research preamble
 3GQ2 integral.spinor_genera:
   hash: a7cc25453ec4507f40af407a042a2c1768aa261a0f87f74d5bc17208d2226ed3

@@ -29064,6 +29064,62 @@
     database_revision: dea30614e6711ce0b908fff7519c3fa6a99a3365
     research_revision: null
   notes: []
+3G94 integral.overlattice_count:
+  disposition: open
+  attempts:
+  - hash: c7e2016e420c467116179f45ae76371815e689b69d40becbc86a556deaba1ed1
+    gram_tensor:
+    - - 21
+      - 3
+      - -9
+    - - 3
+      - 29
+      - 13
+    - - -9
+      - 13
+      - 101
+    reason: exit status 1
+    stderr: "Traceback (most recent call last):\n  File \"<frozen runpy>\", line 203,
+      in _run_module_as_main\n  File \"<frozen runpy>\", line 88, in _run_code\n  File
+      \"/home/runner/work/lattice-database/lattice-database/src/latticedb/sage_genus.py\",
+      line 285, in <module>\n    main()\n    ~~~~^^\n  File \"/home/runner/work/lattice-database/lattice-database/src/latticedb/sage_genus.py\",
+      line 280, in main\n    _compute(request)\n    ~~~~~~~~^^^^^^^^^\n  File \"/home/runner/work/lattice-database/lattice-database/src/latticedb/sage_genus.py\",
+      line 265, in _compute\n    _run(\n    ~~~~^\n        tag,\n        ^^^^\n        [field],\n
+      \       ^^^^^^^^\n        lambda: {field: SERIES[field](lattice, request[\"series_bound\"])
+      if field in SERIES else VALUES[field](lattice)},\n        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n
+      \   )\n    ^\n  File \"/home/runner/work/lattice-database/lattice-database/src/latticedb/sage_genus.py\",
+      line 227, in _run\n    values = compute()\n  File \"/home/runner/work/lattice-database/lattice-database/src/latticedb/sage_genus.py\",
+      line 268, in <lambda>\n    lambda: {field: SERIES[field](lattice, request[\"series_bound\"])
+      if field in SERIES else VALUES[field](lattice)},\n                                                                                            ~~~~~~~~~~~~~^^^^^^^^^\n
+      \ File \"/home/runner/work/lattice-database/lattice-database/src/latticedb/sage_genus.py\",
+      line 194, in <lambda>\n    \"overlattice_count\": lambda lattice: int(lattice.integral_overlattice_inclusions().cardinality()),\n
+      \                                            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^\n
+      \ File \"/home/runner/work/lattice-database/lattice-database/research/src/dzack_research/preamble/categories/lattices.py\",
+      line 5396, in integral_overlattice_inclusions\n    return _overlattice_inclusions(self.discriminant_bilinear_form())\n
+      \ File \"/home/runner/work/lattice-database/lattice-database/research/src/dzack_research/preamble/categories/lattices.py\",
+      line 350, in _overlattice_inclusions\n    isotropic = form.isotropic_subgroups()\n
+      \ File \"sage/misc/cachefunc.pyx\", line 2350, in sage.misc.cachefunc.CachedMethodCallerNoArgs.__call__\n
+      \   self.cache = f(self._instance)\n  File \"/home/runner/work/lattice-database/lattice-database/research/src/dzack_research/preamble/categories/modules/framed/formed/discriminant_modules.py\",
+      line 230, in isotropic_subgroups\n    return _isotropic_subgroups(self, quadratic=False)\n
+      \ File \"/home/runner/work/lattice-database/lattice-database/research/src/dzack_research/preamble/categories/modules/framed/formed/discriminant_modules.py\",
+      line 767, in _isotropic_subgroups\n    pairings, self_values = _engine_quotient_form_family_contractions(\n
+      \                           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^\n        bilinear_form.pullback(selected_smith_map),\n
+      \       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n        ambient.form().pullback(selected_smith_map)
+      if quadratic else None,\n        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n
+      \       coordinates,\n        ^^^^^^^^^^^^\n    )\n    ^\n  File \"/home/runner/work/lattice-database/lattice-database/research/src/dzack_research/preamble/tensors/tensor.py\",
+      line 1521, in _engine_quotient_form_family_contractions\n    _engine_modular_pairing_pullback(b_coefficients,
+      row_family, denominator),\n    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n
+      \ File \"/home/runner/work/lattice-database/lattice-database/research/src/dzack_research/preamble/tensors/tensor.py\",
+      line 1472, in _engine_modular_pairing_pullback\n    return (first_contraction
+      @ coordinates.transpose()) % modulus\n            ~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~\nnumpy._core._exceptions._ArrayMemoryError:
+      Unable to allocate 21.7 GiB for an array with shape (54000, 54000) and data
+      type int64\n"
+    seconds: 1.2927800820000357
+    recorded_at: 2026-10-24 08:34:15.223348+00:00
+    run_url: https://github.com/dzackgarza/lattice-database/actions/runs/40077222835/attempts/1
+    database_revision: 972cd798ea14d57de15ad2d2ac01af7822d03c5b
+    research_revision: 65b1618676dabee6abe5ba9a6678b165c6621b85
+  notes: []
 3G9X integral.overlattice_count:
   disposition: open
   attempts:
@@ -29236,6 +29292,161 @@
     run_url: null
     database_revision: dea30614e6711ce0b908fff7519c3fa6a99a3365
     research_revision: null
+  notes: []
+3GPV integral.overlattice_count:
+  disposition: open
+  attempts:
+  - hash: b90d6d0308388fc3c0a5907057332ec5e382e53099ba376dee253b279037eba7
+    gram_tensor:
+    - - 14
+      - 2
+      - -6
+      - -7
+    - - 2
+      - 20
+      - 9
+      - -1
+    - - -6
+      - 9
+      - 42
+      - 3
+    - - -7
+      - -1
+      - 3
+      - 38
+    reason: exit status 1
+    stderr: "Traceback (most recent call last):\n  File \"<frozen runpy>\", line 203,
+      in _run_module_as_main\n  File \"<frozen runpy>\", line 88, in _run_code\n  File
+      \"/home/runner/work/lattice-database/lattice-database/src/latticedb/sage_genus.py\",
+      line 285, in <module>\n    main()\n    ~~~~^^\n  File \"/home/runner/work/lattice-database/lattice-database/src/latticedb/sage_genus.py\",
+      line 280, in main\n    _compute(request)\n    ~~~~~~~~^^^^^^^^^\n  File \"/home/runner/work/lattice-database/lattice-database/src/latticedb/sage_genus.py\",
+      line 265, in _compute\n    _run(\n    ~~~~^\n        tag,\n        ^^^^\n        [field],\n
+      \       ^^^^^^^^\n        lambda: {field: SERIES[field](lattice, request[\"series_bound\"])
+      if field in SERIES else VALUES[field](lattice)},\n        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n
+      \   )\n    ^\n  File \"/home/runner/work/lattice-database/lattice-database/src/latticedb/sage_genus.py\",
+      line 227, in _run\n    values = compute()\n  File \"/home/runner/work/lattice-database/lattice-database/src/latticedb/sage_genus.py\",
+      line 268, in <lambda>\n    lambda: {field: SERIES[field](lattice, request[\"series_bound\"])
+      if field in SERIES else VALUES[field](lattice)},\n                                                                                            ~~~~~~~~~~~~~^^^^^^^^^\n
+      \ File \"/home/runner/work/lattice-database/lattice-database/src/latticedb/sage_genus.py\",
+      line 194, in <lambda>\n    \"overlattice_count\": lambda lattice: int(lattice.integral_overlattice_inclusions().cardinality()),\n
+      \                                            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^\n
+      \ File \"/home/runner/work/lattice-database/lattice-database/research/src/dzack_research/preamble/categories/lattices.py\",
+      line 5396, in integral_overlattice_inclusions\n    return _overlattice_inclusions(self.discriminant_bilinear_form())\n
+      \ File \"/home/runner/work/lattice-database/lattice-database/research/src/dzack_research/preamble/categories/lattices.py\",
+      line 350, in _overlattice_inclusions\n    isotropic = form.isotropic_subgroups()\n
+      \ File \"sage/misc/cachefunc.pyx\", line 2350, in sage.misc.cachefunc.CachedMethodCallerNoArgs.__call__\n
+      \   self.cache = f(self._instance)\n  File \"/home/runner/work/lattice-database/lattice-database/research/src/dzack_research/preamble/categories/modules/framed/formed/discriminant_modules.py\",
+      line 230, in isotropic_subgroups\n    return _isotropic_subgroups(self, quadratic=False)\n
+      \ File \"/home/runner/work/lattice-database/lattice-database/research/src/dzack_research/preamble/categories/modules/framed/formed/discriminant_modules.py\",
+      line 767, in _isotropic_subgroups\n    pairings, self_values = _engine_quotient_form_family_contractions(\n
+      \                           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^\n        bilinear_form.pullback(selected_smith_map),\n
+      \       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n        ambient.form().pullback(selected_smith_map)
+      if quadratic else None,\n        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n
+      \       coordinates,\n        ^^^^^^^^^^^^\n    )\n    ^\n  File \"/home/runner/work/lattice-database/lattice-database/research/src/dzack_research/preamble/tensors/tensor.py\",
+      line 1521, in _engine_quotient_form_family_contractions\n    _engine_modular_pairing_pullback(b_coefficients,
+      row_family, denominator),\n    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n
+      \ File \"/home/runner/work/lattice-database/lattice-database/research/src/dzack_research/preamble/tensors/tensor.py\",
+      line 1472, in _engine_modular_pairing_pullback\n    return (first_contraction
+      @ coordinates.transpose()) % modulus\n            ~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~\nnumpy._core._exceptions._ArrayMemoryError:
+      Unable to allocate 804. GiB for an array with shape (328509, 328509) and data
+      type int64\n"
+    seconds: 2.2619209349998073
+    recorded_at: 2026-10-24 08:34:33.620952+00:00
+    run_url: https://github.com/dzackgarza/lattice-database/actions/runs/40077222835/attempts/1
+    database_revision: 972cd798ea14d57de15ad2d2ac01af7822d03c5b
+    research_revision: 65b1618676dabee6abe5ba9a6678b165c6621b85
+  notes: []
+3GQ2 integral.discriminant_sequence:
+  disposition: open
+  attempts:
+  - hash: 96d8236f212099a9a6fc02562a01a03a45b59bb60f8aa132efa26565a6f0a801
+    gram_tensor:
+    - - 14
+      - -4
+      - -2
+      - 7
+    - - -4
+      - 14
+      - 7
+      - -2
+    - - -2
+      - 7
+      - 26
+      - -1
+    - - 7
+      - -2
+      - -1
+      - 26
+    reason: certification budget exhausted (recovered from exceeded.yaml)
+    stderr: ''
+    seconds: 19247.0
+    recorded_at: 2026-10-24 08:33:42.809672+00:00
+    run_url: https://github.com/dzackgarza/lattice-database/actions/runs/40077222835/attempts/1
+    database_revision: 972cd798ea14d57de15ad2d2ac01af7822d03c5b
+    research_revision: 65b1618676dabee6abe5ba9a6678b165c6621b85
+  notes: []
+3GQ2 integral.overlattice_count:
+  disposition: open
+  attempts:
+  - hash: 3e71c4d83d3f1e66ab075937a451ee58737952d5c2d727e83940dd0e0b09b802
+    gram_tensor:
+    - - 14
+      - -4
+      - -2
+      - 7
+    - - -4
+      - 14
+      - 7
+      - -2
+    - - -2
+      - 7
+      - 26
+      - -1
+    - - 7
+      - -2
+      - -1
+      - 26
+    reason: exit status 1
+    stderr: "Traceback (most recent call last):\n  File \"<frozen runpy>\", line 203,
+      in _run_module_as_main\n  File \"<frozen runpy>\", line 88, in _run_code\n  File
+      \"/home/runner/work/lattice-database/lattice-database/src/latticedb/sage_genus.py\",
+      line 285, in <module>\n    main()\n    ~~~~^^\n  File \"/home/runner/work/lattice-database/lattice-database/src/latticedb/sage_genus.py\",
+      line 280, in main\n    _compute(request)\n    ~~~~~~~~^^^^^^^^^\n  File \"/home/runner/work/lattice-database/lattice-database/src/latticedb/sage_genus.py\",
+      line 265, in _compute\n    _run(\n    ~~~~^\n        tag,\n        ^^^^\n        [field],\n
+      \       ^^^^^^^^\n        lambda: {field: SERIES[field](lattice, request[\"series_bound\"])
+      if field in SERIES else VALUES[field](lattice)},\n        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n
+      \   )\n    ^\n  File \"/home/runner/work/lattice-database/lattice-database/src/latticedb/sage_genus.py\",
+      line 227, in _run\n    values = compute()\n  File \"/home/runner/work/lattice-database/lattice-database/src/latticedb/sage_genus.py\",
+      line 268, in <lambda>\n    lambda: {field: SERIES[field](lattice, request[\"series_bound\"])
+      if field in SERIES else VALUES[field](lattice)},\n                                                                                            ~~~~~~~~~~~~~^^^^^^^^^\n
+      \ File \"/home/runner/work/lattice-database/lattice-database/src/latticedb/sage_genus.py\",
+      line 194, in <lambda>\n    \"overlattice_count\": lambda lattice: int(lattice.integral_overlattice_inclusions().cardinality()),\n
+      \                                            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^\n
+      \ File \"/home/runner/work/lattice-database/lattice-database/research/src/dzack_research/preamble/categories/lattices.py\",
+      line 5396, in integral_overlattice_inclusions\n    return _overlattice_inclusions(self.discriminant_bilinear_form())\n
+      \ File \"/home/runner/work/lattice-database/lattice-database/research/src/dzack_research/preamble/categories/lattices.py\",
+      line 350, in _overlattice_inclusions\n    isotropic = form.isotropic_subgroups()\n
+      \ File \"sage/misc/cachefunc.pyx\", line 2350, in sage.misc.cachefunc.CachedMethodCallerNoArgs.__call__\n
+      \   self.cache = f(self._instance)\n  File \"/home/runner/work/lattice-database/lattice-database/research/src/dzack_research/preamble/categories/modules/framed/formed/discriminant_modules.py\",
+      line 230, in isotropic_subgroups\n    return _isotropic_subgroups(self, quadratic=False)\n
+      \ File \"/home/runner/work/lattice-database/lattice-database/research/src/dzack_research/preamble/categories/modules/framed/formed/discriminant_modules.py\",
+      line 767, in _isotropic_subgroups\n    pairings, self_values = _engine_quotient_form_family_contractions(\n
+      \                           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^\n        bilinear_form.pullback(selected_smith_map),\n
+      \       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n        ambient.form().pullback(selected_smith_map)
+      if quadratic else None,\n        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n
+      \       coordinates,\n        ^^^^^^^^^^^^\n    )\n    ^\n  File \"/home/runner/work/lattice-database/lattice-database/research/src/dzack_research/preamble/tensors/tensor.py\",
+      line 1521, in _engine_quotient_form_family_contractions\n    _engine_modular_pairing_pullback(b_coefficients,
+      row_family, denominator),\n    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n
+      \ File \"/home/runner/work/lattice-database/lattice-database/research/src/dzack_research/preamble/tensors/tensor.py\",
+      line 1472, in _engine_modular_pairing_pullback\n    return (first_contraction
+      @ coordinates.transpose()) % modulus\n            ~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~\nnumpy._core._exceptions._ArrayMemoryError:
+      Unable to allocate 61.9 GiB for an array with shape (91125, 91125) and data
+      type int64\n"
+    seconds: 2.349808780000103
+    recorded_at: 2026-10-24 08:34:25.663935+00:00
+    run_url: https://github.com/dzackgarza/lattice-database/actions/runs/40077222835/attempts/1
+    database_revision: 972cd798ea14d57de15ad2d2ac01af7822d03c5b
+    research_revision: 65b1618676dabee6abe5ba9a6678b165c6621b85
   notes: []
 3GRB derive:
   disposition: open
@@ -29918,6 +30129,69 @@
     database_revision: 972cd798ea14d57de15ad2d2ac01af7822d03c5b
     research_revision: 65b1618676dabee6abe5ba9a6678b165c6621b85
   notes: []
+3GXJ integral.overlattice_count:
+  disposition: open
+  attempts:
+  - hash: 3933dd721052ca6a982628fff9f61d4a88b8cc6e11f6bf5d8bb8965a1fd2b53e
+    gram_tensor:
+    - - 16
+      - 4
+      - -4
+      - 8
+    - - 4
+      - 13
+      - -1
+      - 2
+    - - -4
+      - -1
+      - 13
+      - -2
+    - - 8
+      - 2
+      - -2
+      - 28
+    reason: exit status 1
+    stderr: "Traceback (most recent call last):\n  File \"<frozen runpy>\", line 203,
+      in _run_module_as_main\n  File \"<frozen runpy>\", line 88, in _run_code\n  File
+      \"/home/runner/work/lattice-database/lattice-database/src/latticedb/sage_genus.py\",
+      line 285, in <module>\n    main()\n    ~~~~^^\n  File \"/home/runner/work/lattice-database/lattice-database/src/latticedb/sage_genus.py\",
+      line 280, in main\n    _compute(request)\n    ~~~~~~~~^^^^^^^^^\n  File \"/home/runner/work/lattice-database/lattice-database/src/latticedb/sage_genus.py\",
+      line 265, in _compute\n    _run(\n    ~~~~^\n        tag,\n        ^^^^\n        [field],\n
+      \       ^^^^^^^^\n        lambda: {field: SERIES[field](lattice, request[\"series_bound\"])
+      if field in SERIES else VALUES[field](lattice)},\n        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n
+      \   )\n    ^\n  File \"/home/runner/work/lattice-database/lattice-database/src/latticedb/sage_genus.py\",
+      line 227, in _run\n    values = compute()\n  File \"/home/runner/work/lattice-database/lattice-database/src/latticedb/sage_genus.py\",
+      line 268, in <lambda>\n    lambda: {field: SERIES[field](lattice, request[\"series_bound\"])
+      if field in SERIES else VALUES[field](lattice)},\n                                                                                            ~~~~~~~~~~~~~^^^^^^^^^\n
+      \ File \"/home/runner/work/lattice-database/lattice-database/src/latticedb/sage_genus.py\",
+      line 194, in <lambda>\n    \"overlattice_count\": lambda lattice: int(lattice.integral_overlattice_inclusions().cardinality()),\n
+      \                                            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^\n
+      \ File \"/home/runner/work/lattice-database/lattice-database/research/src/dzack_research/preamble/categories/lattices.py\",
+      line 5396, in integral_overlattice_inclusions\n    return _overlattice_inclusions(self.discriminant_bilinear_form())\n
+      \ File \"/home/runner/work/lattice-database/lattice-database/research/src/dzack_research/preamble/categories/lattices.py\",
+      line 350, in _overlattice_inclusions\n    isotropic = form.isotropic_subgroups()\n
+      \ File \"sage/misc/cachefunc.pyx\", line 2350, in sage.misc.cachefunc.CachedMethodCallerNoArgs.__call__\n
+      \   self.cache = f(self._instance)\n  File \"/home/runner/work/lattice-database/lattice-database/research/src/dzack_research/preamble/categories/modules/framed/formed/discriminant_modules.py\",
+      line 230, in isotropic_subgroups\n    return _isotropic_subgroups(self, quadratic=False)\n
+      \ File \"/home/runner/work/lattice-database/lattice-database/research/src/dzack_research/preamble/categories/modules/framed/formed/discriminant_modules.py\",
+      line 767, in _isotropic_subgroups\n    pairings, self_values = _engine_quotient_form_family_contractions(\n
+      \                           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^\n        bilinear_form.pullback(selected_smith_map),\n
+      \       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n        ambient.form().pullback(selected_smith_map)
+      if quadratic else None,\n        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n
+      \       coordinates,\n        ^^^^^^^^^^^^\n    )\n    ^\n  File \"/home/runner/work/lattice-database/lattice-database/research/src/dzack_research/preamble/tensors/tensor.py\",
+      line 1521, in _engine_quotient_form_family_contractions\n    _engine_modular_pairing_pullback(b_coefficients,
+      row_family, denominator),\n    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n
+      \ File \"/home/runner/work/lattice-database/lattice-database/research/src/dzack_research/preamble/tensors/tensor.py\",
+      line 1472, in _engine_modular_pairing_pullback\n    return (first_contraction
+      @ coordinates.transpose()) % modulus\n            ~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~\nnumpy._core._exceptions._ArrayMemoryError:
+      Unable to allocate 22.8 GiB for an array with shape (55296, 55296) and data
+      type int64\n"
+    seconds: 2.104683942999827
+    recorded_at: 2026-10-24 08:34:21.689743+00:00
+    run_url: https://github.com/dzackgarza/lattice-database/actions/runs/40077222835/attempts/1
+    database_revision: 972cd798ea14d57de15ad2d2ac01af7822d03c5b
+    research_revision: 65b1618676dabee6abe5ba9a6678b165c6621b85
+  notes: []
 3GXO integral.overlattice_count:
   disposition: open
   attempts:
@@ -30485,6 +30759,62 @@
       type int64\n"
     seconds: 0.866815041999871
     recorded_at: 2026-10-24 08:28:46.734246+00:00
+    run_url: https://github.com/dzackgarza/lattice-database/actions/runs/40077222835/attempts/1
+    database_revision: 972cd798ea14d57de15ad2d2ac01af7822d03c5b
+    research_revision: 65b1618676dabee6abe5ba9a6678b165c6621b85
+  notes: []
+3IAF integral.overlattice_count:
+  disposition: open
+  attempts:
+  - hash: 842950971e4ef8c67a51b730b8e29871139e658a2bcb5e1f3fe5d3fd76c976b2
+    gram_tensor:
+    - - 21
+      - 0
+      - 6
+    - - 0
+      - 40
+      - 20
+    - - 6
+      - 20
+      - 76
+    reason: exit status 1
+    stderr: "Traceback (most recent call last):\n  File \"<frozen runpy>\", line 203,
+      in _run_module_as_main\n  File \"<frozen runpy>\", line 88, in _run_code\n  File
+      \"/home/runner/work/lattice-database/lattice-database/src/latticedb/sage_genus.py\",
+      line 285, in <module>\n    main()\n    ~~~~^^\n  File \"/home/runner/work/lattice-database/lattice-database/src/latticedb/sage_genus.py\",
+      line 280, in main\n    _compute(request)\n    ~~~~~~~~^^^^^^^^^\n  File \"/home/runner/work/lattice-database/lattice-database/src/latticedb/sage_genus.py\",
+      line 265, in _compute\n    _run(\n    ~~~~^\n        tag,\n        ^^^^\n        [field],\n
+      \       ^^^^^^^^\n        lambda: {field: SERIES[field](lattice, request[\"series_bound\"])
+      if field in SERIES else VALUES[field](lattice)},\n        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n
+      \   )\n    ^\n  File \"/home/runner/work/lattice-database/lattice-database/src/latticedb/sage_genus.py\",
+      line 227, in _run\n    values = compute()\n  File \"/home/runner/work/lattice-database/lattice-database/src/latticedb/sage_genus.py\",
+      line 268, in <lambda>\n    lambda: {field: SERIES[field](lattice, request[\"series_bound\"])
+      if field in SERIES else VALUES[field](lattice)},\n                                                                                            ~~~~~~~~~~~~~^^^^^^^^^\n
+      \ File \"/home/runner/work/lattice-database/lattice-database/src/latticedb/sage_genus.py\",
+      line 194, in <lambda>\n    \"overlattice_count\": lambda lattice: int(lattice.integral_overlattice_inclusions().cardinality()),\n
+      \                                            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^\n
+      \ File \"/home/runner/work/lattice-database/lattice-database/research/src/dzack_research/preamble/categories/lattices.py\",
+      line 5396, in integral_overlattice_inclusions\n    return _overlattice_inclusions(self.discriminant_bilinear_form())\n
+      \ File \"/home/runner/work/lattice-database/lattice-database/research/src/dzack_research/preamble/categories/lattices.py\",
+      line 350, in _overlattice_inclusions\n    isotropic = form.isotropic_subgroups()\n
+      \ File \"sage/misc/cachefunc.pyx\", line 2350, in sage.misc.cachefunc.CachedMethodCallerNoArgs.__call__\n
+      \   self.cache = f(self._instance)\n  File \"/home/runner/work/lattice-database/lattice-database/research/src/dzack_research/preamble/categories/modules/framed/formed/discriminant_modules.py\",
+      line 230, in isotropic_subgroups\n    return _isotropic_subgroups(self, quadratic=False)\n
+      \ File \"/home/runner/work/lattice-database/lattice-database/research/src/dzack_research/preamble/categories/modules/framed/formed/discriminant_modules.py\",
+      line 767, in _isotropic_subgroups\n    pairings, self_values = _engine_quotient_form_family_contractions(\n
+      \                           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^\n        bilinear_form.pullback(selected_smith_map),\n
+      \       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n        ambient.form().pullback(selected_smith_map)
+      if quadratic else None,\n        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n
+      \       coordinates,\n        ^^^^^^^^^^^^\n    )\n    ^\n  File \"/home/runner/work/lattice-database/lattice-database/research/src/dzack_research/preamble/tensors/tensor.py\",
+      line 1521, in _engine_quotient_form_family_contractions\n    _engine_modular_pairing_pullback(b_coefficients,
+      row_family, denominator),\n    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n
+      \ File \"/home/runner/work/lattice-database/lattice-database/research/src/dzack_research/preamble/tensors/tensor.py\",
+      line 1472, in _engine_modular_pairing_pullback\n    return (first_contraction
+      @ coordinates.transpose()) % modulus\n            ~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~\nnumpy._core._exceptions._ArrayMemoryError:
+      Unable to allocate 21.7 GiB for an array with shape (54000, 54000) and data
+      type int64\n"
+    seconds: 1.1357292169998345
+    recorded_at: 2026-10-24 08:34:17.975435+00:00
     run_url: https://github.com/dzackgarza/lattice-database/actions/runs/40077222835/attempts/1
     database_revision: 972cd798ea14d57de15ad2d2ac01af7822d03c5b
     research_revision: 65b1618676dabee6abe5ba9a6678b165c6621b85
