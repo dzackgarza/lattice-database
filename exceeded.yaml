@@ -485,10 +485,6 @@
   hash: 3257bea340bac7a0a798770c1f57b877e9e9fb48914c44752fea07cbec1a2885
   seconds: 22
   lost: true
-20NV derive:
-  hash: 3e90b09ea654b9859c70698599412629cce89554e5e394bf1b703ae3bedfd6cb
-  seconds: 0
-  lost: true
 20QR integral.hyperbolic_index:
   hash: 37918b7e84d5761569817dfc0899a9eabc7fdb8c14715e2ccecd6d44d0886834
   seconds: 0
@@ -496,6 +492,10 @@
 20R7 derive:
   hash: d6c4ae1deb69097e66d6c098ffa3bc579fd61ad1f3f886f291f39327748d757d
   seconds: 15
+  lost: true
+21BH derive:
+  hash: a07fe1a78f1c40bd83d08897b07062c32c2637c9b44f78a8d461dd8243aaca4f
+  seconds: 0
   lost: true
 21K1 derive:
   hash: 38cddcf62f6070e848ee1a7cbb1e01b5d5d1dff64ddf7eb3e8e361e0be76906c
