@@ -501,10 +501,6 @@
   hash: 3257bea340bac7a0a798770c1f57b877e9e9fb48914c44752fea07cbec1a2885
   seconds: 22
   lost: true
-20AQ derive:
-  hash: e09b5e9eae1fc2a7594c36bf2e8c7cae29db8652fbc79779cf93f45c7867b57e
-  seconds: 0
-  lost: true
 20QR integral.hyperbolic_index:
   hash: 37918b7e84d5761569817dfc0899a9eabc7fdb8c14715e2ccecd6d44d0886834
   seconds: 0
@@ -516,6 +512,10 @@
 212P derive:
   hash: 7bd76da31f9216932db06e87ae3bd282d7457e788a2437229bfb8e88196a4d82
   seconds: 0
+  lost: true
+213S derive:
+  hash: 32471617cf071c664824b74ee0eaa980f99e3a0c8be41ef395c9ecb1bed0e6fa
+  seconds: 5
   lost: true
 22WM definite.genus_theta_series:
   hash: db2c67761ca07439200009ff404ef36acf5cd34ddfc747267124c03e39b063c3
