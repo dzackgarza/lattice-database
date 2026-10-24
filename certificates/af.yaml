@@ -12937,11 +12937,20 @@
 1E4M definite.automorphism_group_order:
   hash: c64056839a4e192d4a757c9a7ac6b7248b2f46b419f69156a85f62c54f055f22
   by: research preamble
+1E4M definite.siegel_eisenstein_coefficients:
+  hash: 5c1f874f2963941fdf253d10bbc329489f46d9470e33ba48d8c760949a06ae25
+  by: research preamble
+1E4M definite.theta_series_cuspidal_component:
+  hash: 2b05cd0001173585e9e0a6d30a810e5c8f205d7432f0c707ea25a02309cb7459
+  by: research preamble
 1E4M derive:
   hash: 0ba1f3996b2a327a06eaac6932e0afbf2ea26ea7bc3915f9281884ca56462c89
   by: research preamble
 1E4M form.integer_valued:
   hash: 2e0bf3935c8b8235f75ed270af40c7ba4dd19486454114b10b2111a3eb854e33
+  by: research preamble
+1E4M integral.anisotropic_primes:
+  hash: 5b5aa7991cb97e05a4bd51ffc35fbc4ccef06e132fdc8b576d7f69e14293b80c
   by: research preamble
 1E4M integral.discriminant_sequence:
   hash: 5c73df4138aa126e440647eed4d1712887a46c7e986152db8b06bd729a56c3c4
@@ -12957,6 +12966,12 @@
   by: research preamble
 1E4M integral.hyperbolic_index:
   hash: 54950448fa6deead619c4d7ef82725847ae136cf8e85874a61800d4900bf6f71
+  by: research preamble
+1E4M integral.local_densities:
+  hash: 40a987da25186bfedd0f6175a93de08f9b72495bd2640355656446ce73ada57b
+  by: research preamble
+1E4M integral.local_representations:
+  hash: 4f8254486a316091638ee680a99801f2b5ae0c035a76ed271de1532ae2db8934
   by: research preamble
 1E4M integral.modular_scale:
   hash: 0bb22e3baf310a463ced9e2ab9d0ca00be4498f3a8b0cfc0adbae5440b1a5f7d
