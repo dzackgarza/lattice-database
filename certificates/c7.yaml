@@ -29820,11 +29820,23 @@
 3GRI definite.automorphism_group_order:
   hash: 35828be27afeebd3b733823181fa586727a40b81e8fa5db7531de3156edf03b2
   by: research preamble
+3GRI definite.genus_theta_series:
+  hash: d1dee02d59ace80ac5e5271054de8cb8d414666d823ae4baf1a68927d579453d
+  by: research preamble
+3GRI definite.siegel_eisenstein_coefficients:
+  hash: 919e833874baf299392334e882c3950df3db7b7e8585d488191550c1db0bacbb
+  by: research preamble
+3GRI definite.theta_series_cuspidal_component:
+  hash: 28d132138a684a5ffcf8a01fc12981cd1c92c0461da3d2755030a7f43320cba5
+  by: research preamble
 3GRI derive:
   hash: cd6f7d81d5d40b2dacff8b9fdb3b36aa2e62a80648d5ab09af348643116481b9
   by: research preamble
 3GRI form.integer_valued:
   hash: 34722c7224fabf446db721d3d407ac0d4c9833b8fcc26e496b76f948d00287bf
+  by: research preamble
+3GRI integral.anisotropic_primes:
+  hash: 273416fe7a754184336e4afe917733068c10e3d1101f560723e2d28b1938c444
   by: research preamble
 3GRI integral.elementary_primes:
   hash: ddc8eea82a592e80edb1081ac0567902214c5c6bc7f0bfb23d95eead7a1c2418
@@ -29837,6 +29849,18 @@
   by: research preamble
 3GRI integral.hyperbolic_index:
   hash: 4200341f7bc996eab9f8ef082206a29489c73df5ed66c638125972689a25510a
+  by: research preamble
+3GRI integral.local_densities:
+  hash: ffafb5a7b971befef525cded409969afa138f630d4c74b00512510934550c0c9
+  by: research preamble
+3GRI integral.local_representations:
+  hash: c661a2a1ef4d4ed560cc8c98c6a28cfac9793d31998efab7b492891e26cde30e
+  by: research preamble
+3GRI integral.modular_scale:
+  hash: 9f3ec541c8bce2dae16cbdaf738291246185cb611f625f6425c610018700d76f
+  by: research preamble
+3GRI integral.primitive_orbits:
+  hash: fe26e83ff1e8198a5a94ea6c5c51f68cf312d1f26b20a80d3efc00960b40ccc9
   by: research preamble
 3GRI integral.spinor_genera:
   hash: d8855e4ec69fc78000069f2c3f1628e26d16e0955c49ae04d84095df2cfab381
