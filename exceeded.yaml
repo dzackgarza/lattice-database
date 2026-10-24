@@ -465,10 +465,6 @@
   hash: bf89660deaa6334fb40ff017f9f7a5427c5c2d85f11e6e377685d721f0edfff2
   seconds: 11
   lost: true
-1WES derive:
-  hash: b1823c9fc27d0a8d593fb486fc49a29cf1700cf344f0af7afdc6a1d17d20f811
-  seconds: 0
-  lost: true
 1WP6 derive:
   hash: 51fc954190693b62bff9cfad1ca865b13a523d5152ccae0cc8adf01dc730ff21
   seconds: 0
@@ -480,6 +476,10 @@
 1X4P derive:
   hash: 119beb062bfe7cdfdd8dd12c964f3453217d9b5d64c40ae35ec81445fd8b0b7b
   seconds: 10
+  lost: true
+1XDN derive:
+  hash: ec9f762eb29c0955f738cf834d06fa65a7b7d11fede5be01870c25aecabd5859
+  seconds: 20
   lost: true
 1XEP integral.spinor_genera:
   hash: 31e6986fe026d98e42c61972796bc9a750739bec7e9e797354e0faf70396d9de
