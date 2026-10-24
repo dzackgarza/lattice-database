@@ -481,10 +481,6 @@
   hash: 43701248704ac476a2e87076e3517a579dc7a14927b53ffd7975a646d3978b4c
   seconds: 12
   lost: true
-1ZC4 derive:
-  hash: c7f5b5efeb4256f3553e7d001d8815e69a0a07fc1f64985d507dbd95fa61b1d8
-  seconds: 0
-  lost: true
 1ZON integral.elementary_primes:
   hash: 3257bea340bac7a0a798770c1f57b877e9e9fb48914c44752fea07cbec1a2885
   seconds: 22
@@ -495,6 +491,10 @@
   lost: true
 1ZX6 derive:
   hash: 1041282eef0e2710f59def630cf7e0a5b71e657a6d1be5fbd4b4c24d5af2640f
+  seconds: 0
+  lost: true
+2020 derive:
+  hash: 3df5cc22ea221d397c25f678db7656ba9bc3837e5a6a404a4a5d6f1a015fc36d
   seconds: 0
   lost: true
 20QR integral.hyperbolic_index:
