@@ -29223,11 +29223,29 @@
 3GB1 integral.spinor_genus_count:
   hash: 1ace5c0e3e5a68507ca15b66e3d6cdde9030d7ffbe8a815cd775d5f5c0694b70
   by: research preamble
+3GVI definite.automorphism_group_generator_morphisms:
+  hash: 75f0020fa40ff64d1dd220a632edaf715cf4328d70b668eb121b6c9249c7f6a6
+  by: research preamble
+3GVI definite.automorphism_group_order:
+  hash: 24f991224ca8d1f2fc0026db6af984a3e6a1152a06ec05e50bd1042ba1ec1148
+  by: research preamble
+3GVI definite.genus_theta_series:
+  hash: 00393499e2ef55f9a343a8570b4e01a40353e40b71d40b285cc9a2df8c9ca4b2
+  by: research preamble
+3GVI definite.siegel_eisenstein_coefficients:
+  hash: 7362133947ddb94de2c61b3520029167b771d3c8de74b71716b265a6bbac2915
+  by: research preamble
+3GVI definite.theta_series_cuspidal_component:
+  hash: 3b810e5779ac794e755c73e31241fdf5378b7b137fed43f0879a402844ae3a3c
+  by: research preamble
 3GVI derive:
   hash: e2e66f9a1b2fd75350a3fd5c319f9a87ee42fb9cdad9218755d9d8055e57c8da
   by: research preamble
 3GVI form.integer_valued:
   hash: ed7a10903b771e2f6d12bd2341b6a0b7c2491d6f7581afb72a81b31c9b4de853
+  by: research preamble
+3GVI integral.anisotropic_primes:
+  hash: 74bf190cecb8ec2a2f1de6d0fdd52e94a6f0d844e07716081659f6b8bdb628bc
   by: research preamble
 3GVI integral.elementary_primes:
   hash: a5e232f22dfa1c023cbea475e970f942dc31a34cbee0ce0f778dd186b195b699
@@ -29237,6 +29255,27 @@
   by: research preamble
 3GVI integral.genus_symbol:
   hash: db21e2b9307acb0560e53d19a04a47d281d1a76232bde72045b2ede55c8626b5
+  by: research preamble
+3GVI integral.hyperbolic_index:
+  hash: 5fd61b7969fd22cf0e202b79391b4eadc19574ee13e59ececa001857ab143871
+  by: research preamble
+3GVI integral.local_densities:
+  hash: 292a93b21680c7d0501f3b26e0aadb522c93dea0f67c5163effe252f323cfa30
+  by: research preamble
+3GVI integral.local_representations:
+  hash: 1140125c0e80c7d93ef9fc28f5517fdfcdc61c539c449f54ceb251001a3e02ff
+  by: research preamble
+3GVI integral.modular_scale:
+  hash: a51849d35aa61510b909c341ee52d615edb2df3a76a8dbff2849bf449162321e
+  by: research preamble
+3GVI integral.primitive_orbits:
+  hash: 4eae2563cb12b5838385ba21a3f6a8c8728dc9339f2be4f611b5768e3f36718d
+  by: research preamble
+3GVI integral.spinor_genera:
+  hash: c57a560bd6f8bcb81b00c548c31356867fc80b1f90bc384534f43e9430b1ce46
+  by: research preamble
+3GVI integral.spinor_genus_count:
+  hash: afa2f6ef14d7f2ca3f6e55b2b0abd54b34ac3868d7f3c6a954dd842e047d2e76
   by: research preamble
 3I2T definite.automorphism_group_generator_morphisms:
   hash: 3b392322da13fea4267df6b32b8986417f6b97ef38af621870f679475af4014b
