@@ -488,11 +488,12 @@
   hash: 43701248704ac476a2e87076e3517a579dc7a14927b53ffd7975a646d3978b4c
   seconds: 12
   lost: true
-1YU7 derive:
-  hash: c700bf9e9fdf7bd96bb5117ee6c66a25caa0e4d1f394543709a0bead9410abe8
-  seconds: 10
 1YXR derive:
   hash: 135685c7888e77d7d28bf98053768afed9f12683d82ad55a42b147958e8cd2bd
+  seconds: 0
+  lost: true
+1ZAD derive:
+  hash: be7c8823377ec2ffe00fa54ba514e8727c0ed1baa9620da9f411d5acbd51c1e4
   seconds: 0
   lost: true
 1ZON integral.elementary_primes:
