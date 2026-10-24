@@ -27063,11 +27063,23 @@
 3GPK definite.automorphism_group_order:
   hash: a66c459a07ab65f76db0e8d0a6320ed7c2cd6b42611d5f5ffc1824e0d87029c1
   by: research preamble
+3GPK definite.genus_theta_series:
+  hash: 8206ad95dd73f772fb53f1dc8abb12d1fc0abcecc8f6f3a478731c50be6f3aca
+  by: research preamble
+3GPK definite.siegel_eisenstein_coefficients:
+  hash: 0a3a37e1a402e1286e637f5cc3cc2b1012b6800791166eb17a32661a3430bfb3
+  by: research preamble
+3GPK definite.theta_series_cuspidal_component:
+  hash: 83b7e8fda7d61fb83099597e55c62a2ccd76d760030668c85c1ff6737c66b0f6
+  by: research preamble
 3GPK derive:
   hash: f39d1eb69eb4f6dd7b145ccd6789c002f47cef67804844e1d73e5fa48d490361
   by: research preamble
 3GPK form.integer_valued:
   hash: 2ded3e3cf9bfbffb1c6618e8ab02a5f9e16e287eb9ed1aaae416421e9218c1df
+  by: research preamble
+3GPK integral.anisotropic_primes:
+  hash: 7869ee07e0f51767e61ff72545c9d35c0a44277e4bb36d9f127149d81fa996f9
   by: research preamble
 3GPK integral.elementary_primes:
   hash: a0cdcfd5b435d363fc31852d0ada4077827f1c9e60f40b8c3de7afd6693af97e
@@ -27081,8 +27093,20 @@
 3GPK integral.hyperbolic_index:
   hash: 6d0594f61c8ccfb19e09aeef7fdae8c8ae2f27733fe9a2c675f0e2f4c1745606
   by: research preamble
+3GPK integral.local_densities:
+  hash: e851766f44d2f39a845d2f05bf198f28acba87c8f142f9bdf7f2c7ea41f1557e
+  by: research preamble
+3GPK integral.local_representations:
+  hash: 2ac03644df3a1811e899db7b7ade6fe02025d991fad2eb89b9d1481aa46665f5
+  by: research preamble
+3GPK integral.modular_scale:
+  hash: fcadcb2df5c8780497493aa87c402b41f5df8be7d62a01de89789858c4f315d6
+  by: research preamble
 3GPK integral.overlattice_count:
   hash: 1595fd39049385f80aaf2111174f561acafa9b17a12a6916a63c1c073712b336
+  by: research preamble
+3GPK integral.primitive_orbits:
+  hash: ce9b3c734135d5d9ccef58c1ab1f85aef0386abbf8a0d22de0a0a16945dd8920
   by: research preamble
 3GPK integral.spinor_genera:
   hash: 313dc999e8d0a7dd3e02285e902095abaa2ecc092f36cbb98f64677be9b038dd
