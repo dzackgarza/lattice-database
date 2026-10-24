@@ -453,9 +453,6 @@
   hash: de9e3cd7a459ec311b2a8d45497ea2040eeb4790dc3de5bfe0ebce3808ad3aa0
   seconds: 0
   lost: true
-1VLE integral.genus_class_count:
-  hash: 509d6cbfe503150e17cfe9928bc9b8111120e9407b200503675e808cfacfe72e
-  seconds: 32
 1VMV derive:
   hash: 6a2d908809f3b625a399709e97188d458e7f0fd72644b7eed3a421b008bff942
   seconds: 0
@@ -740,6 +737,10 @@
 3GRH integral.overlattice_count:
   hash: f1ece2c50445cd8ee1195e2df638499a0fffc7315bbf8d1de1c6963adbee057c
   seconds: 5
+  lost: true
+3GRI integral.discriminant_sequence:
+  hash: 4529964f5b619ec349dc12dcedb0093e62085fabecced73212fbd67d3e726a6f
+  seconds: 1054
   lost: true
 3GRU integral.discriminant_sequence:
   hash: 0873c77aea247747beee5f6503d4678ca0c393ad59c2a14ff0e34fd7c44871c6
