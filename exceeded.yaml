@@ -481,10 +481,6 @@
   hash: 43701248704ac476a2e87076e3517a579dc7a14927b53ffd7975a646d3978b4c
   seconds: 12
   lost: true
-1Z5S derive:
-  hash: ac16fa253f1491ee82b3c6b8e03b32b47df08865520b4e3b622bbf53df984acb
-  seconds: 0
-  lost: true
 1ZC4 derive:
   hash: c7f5b5efeb4256f3553e7d001d8815e69a0a07fc1f64985d507dbd95fa61b1d8
   seconds: 0
@@ -495,6 +491,10 @@
   lost: true
 1ZTQ derive:
   hash: 0bb12cb8bfb81e3ac326260b6240423e72404025bd1ff6606695a3e0f7e5d1b6
+  seconds: 0
+  lost: true
+1ZX6 derive:
+  hash: 1041282eef0e2710f59def630cf7e0a5b71e657a6d1be5fbd4b4c24d5af2640f
   seconds: 0
   lost: true
 20QR integral.hyperbolic_index:
