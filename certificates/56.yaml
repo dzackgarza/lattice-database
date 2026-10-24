@@ -28255,11 +28255,23 @@
 3GPU definite.automorphism_group_order:
   hash: fb3bfa14e3552046ba51f2cb3da9ff4ba8a3a8203e56467a4ceae98d07b22dab
   by: research preamble
+3GPU definite.genus_theta_series:
+  hash: 400302c94f6ab7d897ae85b693f5a24822e21408b32ec4bf03cbd55f607ebcaa
+  by: research preamble
+3GPU definite.siegel_eisenstein_coefficients:
+  hash: d29207fb327ca80324a4227add5fd3226a3b8eb7c308a4cb27b8cc0238f67902
+  by: research preamble
+3GPU definite.theta_series_cuspidal_component:
+  hash: 7bde15fc3bb02c1bc16a17a54f8a7f940282c073f181f2e60129e13251f0e0a1
+  by: research preamble
 3GPU derive:
   hash: 163af2337f9a847fa3044afe5041233e906f33b730a08813a4427be64a4d2705
   by: research preamble
 3GPU form.integer_valued:
   hash: 1173c350e9b17cfaf929d157af07eaf321f8879c3ff14695ce5a78514d1420e6
+  by: research preamble
+3GPU integral.anisotropic_primes:
+  hash: 4ae79668a1546fa9e20feacbc0d0b03dd60ec59faeb503a0d738a814ec1168de
   by: research preamble
 3GPU integral.elementary_primes:
   hash: 2555eae7ee67e94e7f27694a2031509721d5ee183e328756d259fe5fdecc4568
@@ -28272,6 +28284,18 @@
   by: research preamble
 3GPU integral.hyperbolic_index:
   hash: 6c095648f2ad65281296f5714aaad79f7e221c1515c67e219e598383f41fa794
+  by: research preamble
+3GPU integral.local_densities:
+  hash: a61f00a467955afc69ee701ede7c13a71512f6ba85af9cad2ba6a003b7bb0b44
+  by: research preamble
+3GPU integral.local_representations:
+  hash: 37850b90a2983bde2efc658d55e12d7106c80da05f21c5217fdeb894e1cdc37a
+  by: research preamble
+3GPU integral.modular_scale:
+  hash: 8ab6d3ad3fc114192c09a539bb70a754db2473e4ac500c3a2b3d3e2b285fbb52
+  by: research preamble
+3GPU integral.primitive_orbits:
+  hash: 15d7d95b25ea137ecde73fec79d1e724a0299a70b82ba9c1970de46cfdb60b77
   by: research preamble
 3GPU integral.spinor_genera:
   hash: 8e59392bfcb198c68ef45d14c7dab8770a42d81bf524c6ab3ff12f379127b6a3
