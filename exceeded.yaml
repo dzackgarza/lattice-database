@@ -449,9 +449,6 @@
   hash: de9e3cd7a459ec311b2a8d45497ea2040eeb4790dc3de5bfe0ebce3808ad3aa0
   seconds: 0
   lost: true
-1R6G definite.genus_theta_series:
-  hash: 489b1e7bfea938bcade94debb5eca49ebc81369aca00e9d12fd6af5a24dd8332
-  seconds: 3
 1VLE integral.genus_class_count:
   hash: 509d6cbfe503150e17cfe9928bc9b8111120e9407b200503675e808cfacfe72e
   seconds: 32
@@ -614,6 +611,10 @@
   hash: 5dc7166865bfe8c08cc3486fa4a44c3cd635f5cf4d5072b8da35e74fad14e8c2
   seconds: 8
   lost: true
+3F9X integral.overlattice_count:
+  hash: ab37867b5589db0dec799d09c2f601ff6c6e178a7b0257e006ebdbf42cc1ee75
+  seconds: 10
+  lost: true
 3FMP integral.overlattice_count:
   hash: 93eff831ad0264a91d19a54c9e0288e80a41d054f0582f6a37d6e9a608ed2262
   seconds: 27
@@ -723,6 +724,10 @@
 3GRG integral.discriminant_sequence:
   hash: 01c3291850d9067945eec96dcf47cad2765768f42fc05ef8f529a6b93d5e7177
   seconds: 18980
+3GRH integral.discriminant_sequence:
+  hash: 2c52ed46d41ee0f435df86175dade18a201a59de27e94ce21d06861f7844a1a7
+  seconds: 1084
+  lost: true
 3GRH integral.overlattice_count:
   hash: f1ece2c50445cd8ee1195e2df638499a0fffc7315bbf8d1de1c6963adbee057c
   seconds: 5

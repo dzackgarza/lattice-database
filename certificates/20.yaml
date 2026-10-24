@@ -18274,11 +18274,23 @@
 1R6G definite.automorphism_group_order:
   hash: 67f22f3d802f9f5cf43e7f0e8036206e8f6d85b02aad7dcc95b66a46ddc3c8f6
   by: research preamble
+1R6G definite.genus_theta_series:
+  hash: c8bc8eeb44c6e9a23206d9d69b743779dee8dd54b03ad9120b4b863ce38188fc
+  by: research preamble
+1R6G definite.siegel_eisenstein_coefficients:
+  hash: 5307fa93afa9584f7d460c4715d321da4e334dc36192d4f093ac3455d1d3a972
+  by: research preamble
+1R6G definite.theta_series_cuspidal_component:
+  hash: 878c09031f16b046daa2f394b43c27aa2e51ffcfe2d21a7a5f1abf46782fb7a9
+  by: research preamble
 1R6G derive:
   hash: a3f123b5cc7a2f0d9374055ae72d9b94cb927356979d737f1b51fbecfde8543a
   by: research preamble
 1R6G form.integer_valued:
   hash: 67ce9d469ac12d76308982f97631718879ce5c0e7e227a1ff26b77711521337c
+  by: research preamble
+1R6G integral.anisotropic_primes:
+  hash: 4410e0736ab9d064f630890dbb2c36726e561d509c8f94474e43cdfb42cecf99
   by: research preamble
 1R6G integral.discriminant_sequence:
   hash: 3eb538f5d0db428d3743fdcc49e5383b5b1ac0f7e7fa3aae2f4367722106da4e
@@ -18294,6 +18306,12 @@
   by: research preamble
 1R6G integral.hyperbolic_index:
   hash: 3d7a28de6d0dc4245e98730ad29423832c6c3c5584dc9fdf62a0f071fd510faa
+  by: research preamble
+1R6G integral.local_densities:
+  hash: 509933d6d9d8ad250562669b91b51f20a766a05aa6ed12b4659bd14b9d326005
+  by: research preamble
+1R6G integral.local_representations:
+  hash: 34c50408fbcb1aafa508521208ee1b79b298ea8c3b939c9bfeaebc0ffe81d436
   by: research preamble
 1R6G integral.modular_scale:
   hash: 7e0f84a412c20c2e7d430e593cf0e1ccd01720220a76def8ff17324b06650fa6

@@ -9,6 +9,11 @@ certifications:
   integral.elementary_primes: 1882a72a27e9cc7e463bb0963073180e09233aa5949b78786db56574d4eac81c
   integral.genus_symbol: ffb1541ab06b44bda0615321eb4c8e5e9c671b92d2fe19b1e2a599fc260c7c78
   integral.genus_class_count: 284f475e211cb71dfb512251cdf90e9b07945c842eeefc53bcfe4c5d6eb51db5
+  integral.spinor_genus_count: a2cfcc98e4fe5b68d46af017b1eee5fe732a39b4f2a91639b6936066f1975f5f
+  integral.spinor_genera: de0f911b3a708a8df53af88ee94aff5b249704b8b5f1a8041b2b14c1cd36a6d6
+  integral.hyperbolic_index: 1d1b325ea08738ff8e25a5db14b8c7a854775219e7917e80fc063f3226376ece
+  definite.automorphism_group_order: c1f0ea7494dcababae3080a71d95eb44540b8fd7ff89dde996488b389da1698d
+  definite.automorphism_group_generator_morphisms: 1b398b81f38d317b10c7227c70666330fb1e154ecdc3a8c6a55efa1ad8458575
 rank: 4
 gram_tensor:
 - [12, 6, 3, -3]
@@ -34,9 +39,14 @@ integral:
   quadratic_character: 33
   genus_symbol: 'II_{4,0} (2: 1^4; 3: 1^-1 3^3; 11: 1^1 11^3)'
   genus_class_count: 1
+  spinor_genus_count: 1
+  spinor_genera: [1]
+  hyperbolic_index: 0
 definite:
   minimum: 12
   kissing_number: 2
+  automorphism_group_order: 16
+  automorphism_group_generator_morphisms: [O(L) generator 1, O(L) generator 2, O(L) generator 3, O(L) generator 4]
   minimal_vectors:
   - [-1, 0, 0, 0]
   - [1, 0, 0, 0]
@@ -54,7 +64,39 @@ definite:
     - [1, -1, -2, 0]
 root_sublattice:
   invariant_factors: [1, 1]
-morphisms: []
+morphisms:
+- target: 3GRH
+  name: O(L) generator 1
+  matrix:
+  - [-1, 0, 0, 0]
+  - [0, -1, 0, 0]
+  - [0, 0, -1, 0]
+  - [0, 0, 0, -1]
+  scale: 1
+- target: 3GRH
+  name: O(L) generator 2
+  matrix:
+  - [1, 1, 0, 0]
+  - [0, -1, 0, 0]
+  - [0, 0, 0, -1]
+  - [0, 0, -1, 0]
+  scale: 1
+- target: 3GRH
+  name: O(L) generator 3
+  matrix:
+  - [1, 0, 1, 0]
+  - [0, 1, -1, 0]
+  - [0, 0, -1, 0]
+  - [0, 0, 0, 1]
+  scale: 1
+- target: 3GRH
+  name: O(L) generator 4
+  matrix:
+  - [1, 0, 0, 0]
+  - [0, 1, 0, -1]
+  - [0, 0, 1, 0]
+  - [0, 0, 0, -1]
+  scale: 1
 families: []
 related: []
 references:
