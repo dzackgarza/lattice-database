@@ -469,10 +469,6 @@
   hash: 51fc954190693b62bff9cfad1ca865b13a523d5152ccae0cc8adf01dc730ff21
   seconds: 0
   lost: true
-1X4P derive:
-  hash: 119beb062bfe7cdfdd8dd12c964f3453217d9b5d64c40ae35ec81445fd8b0b7b
-  seconds: 10
-  lost: true
 1XDN derive:
   hash: ec9f762eb29c0955f738cf834d06fa65a7b7d11fede5be01870c25aecabd5859
   seconds: 20
@@ -484,6 +480,10 @@
 1XPY integral.genus_class_count:
   hash: d309ef81a8484bbbc0343c98be9a0ef2a1336faa9ee50e7f43d7940f94963fc7
   seconds: 28
+  lost: true
+1XR4 derive:
+  hash: 92a23e4b2fc0cd39369317e8c643ed4e1719a175a1c58589321b655a24f7b6f5
+  seconds: 0
   lost: true
 1XT4 derive:
   hash: 0da50d9044bb405a6b8609f8f3bd6189a8f6b59ce5d024bc056b6682a2445f94
