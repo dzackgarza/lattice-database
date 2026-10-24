@@ -21868,11 +21868,32 @@
 20CD integral.spinor_genus_count:
   hash: fa28906ac9af92ddf4e22bfb0b66cf3da55f2bac2d3c85a1491a83ef236ebc84
   by: research preamble
+20QR definite.automorphism_group_generator_morphisms:
+  hash: de53a5c7c2052cdf42d2465ea99ad0fb29d85b1520930ef52daabe608e48ccc4
+  by: research preamble
+20QR definite.automorphism_group_order:
+  hash: fffb1af8aab5e088b6d234d6e38883e715c7bf3848d44ccf10547a111c02118d
+  by: research preamble
+20QR definite.genus_theta_series:
+  hash: 7c48b9b54471b855b777c97f0ac1c63acd0762a330bf1b8f264f886f1023b81d
+  by: research preamble
+20QR definite.siegel_eisenstein_coefficients:
+  hash: 3d7004ce531809a6cce148c9ee28b8333da1b007300e63f2e9193e7d14b91363
+  by: research preamble
+20QR definite.theta_series_cuspidal_component:
+  hash: 729ae8f78d98b55f1d1883f79acaa281f4218383441401e56d3221687174a929
+  by: research preamble
 20QR derive:
   hash: 670257b0eb87b4dc3d377e53cfd1f505da1bdc69bde8b7a12e920c2bcd34b0d4
   by: research preamble
 20QR form.integer_valued:
   hash: 994d8e6a131bdaf7fc5eb0b4b0e0b9f28b5396b3408caf401e54b5f9a732f414
+  by: research preamble
+20QR integral.anisotropic_primes:
+  hash: b29d8bbd7e239fdc90cf4eaad80d04d64c7308757b6b5e11df6e3ef1bdcfdcf8
+  by: research preamble
+20QR integral.discriminant_sequence:
+  hash: 2916125f8880ee2472aa2465bb6465d72487b1e53d5174b193ffc4d3d5bdfe22
   by: research preamble
 20QR integral.elementary_primes:
   hash: 28d97ca1eadaf3bf3167cd988045006a345478c162c95ea41bd5f1bd48efbf48
@@ -21883,8 +21904,20 @@
 20QR integral.genus_symbol:
   hash: b58c00ca1fcebb7186e158863aa0358cc63cfedf60d527d621af237f6bba27a3
   by: research preamble
+20QR integral.local_densities:
+  hash: fd11c54b824afef900fca6e6196787d15ceeb82ca6c8a7378579f7e036978534
+  by: research preamble
+20QR integral.local_representations:
+  hash: 9e29408b03fb5970a848518d72658bbf640273d9f4485bdb13080312e0226342
+  by: research preamble
+20QR integral.modular_scale:
+  hash: faa3d45e5dd4db13b85e7f872a0106bfd7bc40af633499337a59149d445b7c70
+  by: research preamble
 20QR integral.overlattice_count:
   hash: 4fb048ee750138b986697c05d70a704441632a5fad556695dce8b195fbbe0aa2
+  by: research preamble
+20QR integral.primitive_orbits:
+  hash: 525816701e3cb09f731ecdab25b397c4fc5bf11d9b3763333b1c309f74343553
   by: research preamble
 20QR integral.spinor_genera:
   hash: b06e034ebb641cb9b76fcc75fe6ac49686bb31a7d0c6ef18c516b34de0e7f03d
