@@ -27146,11 +27146,29 @@
 3GUH integral.spinor_genus_count:
   hash: fff5d269a2a2de4d1ca45c0500fd8e2c05500430ae7f20ec57899ff108e74cb9
   by: research preamble
+3GVT definite.automorphism_group_generator_morphisms:
+  hash: a249f34e0f2cf9867e182e97c316df225602fa6dfe18ea13a4a13ad42c2bcdab
+  by: research preamble
+3GVT definite.automorphism_group_order:
+  hash: 6ff2b7d3c743b68a2b5fb0328639ce68c45997daeb0be27e63e0bc4918cfab45
+  by: research preamble
+3GVT definite.genus_theta_series:
+  hash: aa4f81879d73f107c2f750805dbf239089073e28db59ca590ca36980eea710d4
+  by: research preamble
+3GVT definite.siegel_eisenstein_coefficients:
+  hash: 70df965a41ed2386c75758e4700f737b387ff3e886a79490cfe575131a88b634
+  by: research preamble
+3GVT definite.theta_series_cuspidal_component:
+  hash: f7ebdc80635693f5c31f70816944290d92c3da46ce9b75381d1ab4630cb0bfcc
+  by: research preamble
 3GVT derive:
   hash: 485f486e3ce8b1fff23bced3deac5bb604213c7d7d14214573e1baa85a5dd688
   by: research preamble
 3GVT form.integer_valued:
   hash: 6c37e7f11488ca1bbf2c9e99bcb3caa519b837746ebd3419e00670f6805d9535
+  by: research preamble
+3GVT integral.anisotropic_primes:
+  hash: f984271bef32fe66f32fe46355cc4fd1db3e094af9027823d7bf7ac45090b683
   by: research preamble
 3GVT integral.elementary_primes:
   hash: 89942c9f8c909157380116a9d19c0a074b86ec7d33d60a550f42a0276ebcd250
@@ -27160,6 +27178,27 @@
   by: research preamble
 3GVT integral.genus_symbol:
   hash: b1211046cd2276145ec058b663026e09d6522869beb9175c113672470aa72ab8
+  by: research preamble
+3GVT integral.hyperbolic_index:
+  hash: a6d820dabe11de1abf42b569aa85684bfcf41342893a18634d8e81a670a6ee2c
+  by: research preamble
+3GVT integral.local_densities:
+  hash: 9974fb0e1b70c4adbeb730d5878392cd63fe983919b2eb5e1679da2940ba16e4
+  by: research preamble
+3GVT integral.local_representations:
+  hash: e137752ad2dcf11839daaa43a55d20c61299e72e90d2a8a68aeb4e157d3fdd9b
+  by: research preamble
+3GVT integral.modular_scale:
+  hash: 8d9f0e5220cd39421894776457033b08e0f5ea655d1426e8112ac986cb4706f8
+  by: research preamble
+3GVT integral.primitive_orbits:
+  hash: ef5ff31e9f8eee2ed85d11ab2333b7be0ccb737a3b2e8e9d237cd98927348c4b
+  by: research preamble
+3GVT integral.spinor_genera:
+  hash: 411a1825958219defb9dcaadd26fecf150a62c74e6ec255b576183cbdc4d4d8c
+  by: research preamble
+3GVT integral.spinor_genus_count:
+  hash: 9154f86ee0f6eb1b94641540502cbc7d680fb6b2449c79b845a116968ff3d182
   by: research preamble
 3GX7 definite.automorphism_group_generator_morphisms:
   hash: 451e9e11398538f7c55681ce3f187acabfbe49b7af5d8f22780c3b3ca9b5bed1
