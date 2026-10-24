@@ -26986,11 +26986,23 @@
 3GPC definite.automorphism_group_order:
   hash: 8b6fa7e9f435e0b6d3fc9ff77d879f4b3515b3a3aabf9e89b64e1329d10a3dcf
   by: research preamble
+3GPC definite.genus_theta_series:
+  hash: 2a7e1251ea468765adb400f0b643b21dbec6e37605e9d409dcaa4e983e06de5d
+  by: research preamble
+3GPC definite.siegel_eisenstein_coefficients:
+  hash: cbc1399e75433a20b556a2cba77b68e0b1ecd301b26374af3194fca339adaca5
+  by: research preamble
+3GPC definite.theta_series_cuspidal_component:
+  hash: 984815bbfe2bc8cd1a0d7b67e94ec8a69c4b3a7e180ed29d040d83093db6e65c
+  by: research preamble
 3GPC derive:
   hash: 4e7431e5a8ec8a0f4c4050b3c9dc97981a058163246a98fd1b5a6af0936409c2
   by: research preamble
 3GPC form.integer_valued:
   hash: e086c72bd012847bc77e3caa2348ec6e1976a183786f599d80c05af6bae2cdfc
+  by: research preamble
+3GPC integral.anisotropic_primes:
+  hash: 57ade78280b2bd078d82947c2bc50f84b973d2da53a24d2c03ccd3189390c04d
   by: research preamble
 3GPC integral.elementary_primes:
   hash: 1d78686d0c373c4249820d784c455ea50f2e387e28a609f839965f0a33cac512
@@ -27004,8 +27016,20 @@
 3GPC integral.hyperbolic_index:
   hash: 08412a5e1629b3b5482013054fd683152040346e99e2beae3403cc0bc09608c5
   by: research preamble
+3GPC integral.local_densities:
+  hash: b9b80faf960974ad9bdc5c912f214903e35afaf0afc462b9274a3a4895f9de52
+  by: research preamble
+3GPC integral.local_representations:
+  hash: 01a30539b62ac9adf1f97c9aefef3374342d994f400c4ca2bf65fb77d5a8f20b
+  by: research preamble
+3GPC integral.modular_scale:
+  hash: 939c42074c35ffd0f5b537bfdd17bfe114e529f256a7f540b8de71cd8cd22421
+  by: research preamble
 3GPC integral.overlattice_count:
   hash: ef1e66465bd723f23be860c348c40e9ab7a377328fbd2bc59df4a557e170ddb8
+  by: research preamble
+3GPC integral.primitive_orbits:
+  hash: de0982d622e59873c1111c48add4c29e8a7bfccb3ff5f7b2a880f8e673e37b44
   by: research preamble
 3GPC integral.spinor_genera:
   hash: 84f6bf23b0a1c59e9bfcfa05bdf61c9984ffe122746a5dd20ceca29fd6505da6
