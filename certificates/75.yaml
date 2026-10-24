@@ -25144,11 +25144,23 @@
 3GPV definite.automorphism_group_order:
   hash: 1750dfcceaaa56e09787ad1ea2c9f1fb2497846373b7985faf84ff481dbf37b3
   by: research preamble
+3GPV definite.genus_theta_series:
+  hash: f2cfa3d917ddb47357690bbf025d70a018d51d8391d860f10e7bd61f1243e1bd
+  by: research preamble
+3GPV definite.siegel_eisenstein_coefficients:
+  hash: 4e46224d407c3aeea5427ca9d29b8c834ae6f3bdca320ed2fd0a7b63b5d0e727
+  by: research preamble
+3GPV definite.theta_series_cuspidal_component:
+  hash: 16533606842b0f78541d5ddb21c4cd24e11b95719f6400716f19f591e01123e5
+  by: research preamble
 3GPV derive:
   hash: cdc04519842ea46c6c56f70e4e32cb1c3c942295d5db108ad953734355528b08
   by: research preamble
 3GPV form.integer_valued:
   hash: 71ba7af125bf574551e42b493e453956f8fdfb12b95043ec5fa31749f2be2a59
+  by: research preamble
+3GPV integral.anisotropic_primes:
+  hash: fa60759e67b2904125330f157c9710efbeb303525313165b1bac596c1ab249f8
   by: research preamble
 3GPV integral.elementary_primes:
   hash: e46d73802481b914dd6e413b899e65bbb899ba461b3a39633b4896f24031d763
@@ -25161,6 +25173,18 @@
   by: research preamble
 3GPV integral.hyperbolic_index:
   hash: e4f6d594460f13be7682e70931bea31e4127ca2f4fbc37d220b902bb6152a559
+  by: research preamble
+3GPV integral.local_densities:
+  hash: c49568a54a394f91dc477cfa00f0fc1f5ef6b91aeffd06c7611b6199760427a6
+  by: research preamble
+3GPV integral.local_representations:
+  hash: 887b6cca9b97135282b050541913243677c2dcbd0a5bf6552f902d3dcda35108
+  by: research preamble
+3GPV integral.modular_scale:
+  hash: c85f32bdfc9f645258522e5ee5c7a72af3ac35da5856519cb1de3edbff17196b
+  by: research preamble
+3GPV integral.primitive_orbits:
+  hash: 144e75fedbaee94f4197bbefe15cd9c218b0e6aa2eea6ca7a11a9a9f5dfc98f0
   by: research preamble
 3GPV integral.spinor_genera:
   hash: 9c06b7db7c7313a7dd8ac7f8c7737d77779bb21dd2631fb75b456e2618c07648
