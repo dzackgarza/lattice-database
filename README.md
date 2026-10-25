@@ -375,6 +375,7 @@ certificate makes the stored result reusable in subsequent certification runs.
 
 **Verify:** `just verify` is read-only.
 A Gram tensor determines its lattice, so two cards stating one Gram tensor are a verification error.
+Card uniqueness compares the stated tensors entrywise; isometric forms in different bases may have separate cards.
 It checks structural/reference/certificate coherence and delegates mathematical validation of stored claims to the corresponding preamble lattice, morphism, group or other mathematical object.
 Lattice-db contains no second implementation of those operations.
 Archived intake sources are not verification oracles.

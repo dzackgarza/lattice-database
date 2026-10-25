@@ -34,8 +34,7 @@ def lattice_problems(loaded: Corpus, root: Path) -> list[str]:
     """The problems that concern more than one lattice record.
 
     A file name that is not its tag, a tag that a source row also reserves, a retired tag,
-    a repeated name or Gram tensor, a definite card isometric to another in another basis,
-    a family that `families.yaml` does not list, and a
+    a repeated name or Gram tensor, a family that `families.yaml` does not list, and a
     related or summand tag that is not in the corpus.
     """
     entries = loaded.entries
@@ -69,8 +68,6 @@ def lattice_problems(loaded: Corpus, root: Path) -> list[str]:
             elif related.tag not in by_tag:
                 found.append(f"{entry.path}: the related tag {related.tag} is not in the corpus")
         found.extend(f"{entry.path}: {problem}" for problem in records.relational_admission_problems(lattice, by_tag))
-    isometric = records.definite_isometry_problems(tuple(entry.lattice for entry in entries))
-    found.extend(f"{entry.path}: {problem}" for entry in entries for problem in isometric.get(entry.lattice.tag, ()))
     return found
 
 

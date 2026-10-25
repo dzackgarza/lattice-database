@@ -322,6 +322,20 @@ def test_new_refuses_a_gram_tensor_the_corpus_holds(tmp_path: Path) -> None:
     assert [path.name for path in sorted((tmp_path / "lattices").glob("*.md"))] == ["0001.md"]
 
 
+def test_distinct_gram_tensors_in_isometric_bases_are_separate_cards(tmp_path: Path) -> None:
+    first: dict[str, Yaml] = {
+        "tag": "0001", "name": "A2 first basis", "latex": "A_2", "rank": 2,
+        "gram_tensor": [[2, -1], [-1, 2]], "definite": {},
+    }
+    second: dict[str, Yaml] = {
+        "tag": "0002", "name": "A2 second basis", "latex": "A_2'", "rank": 2,
+        "gram_tensor": [[2, 1], [1, 2]], "definite": {},
+    }
+    directory = write(tmp_path, first, second)
+
+    assert not any("isometric to" in problem for problem in checks.report(directory))
+
+
 def test_new_writes_a_fresh_gram_tensor_and_appends_the_index(tmp_path: Path) -> None:
     (tmp_path / "lattices").mkdir()
     (tmp_path / "lattices" / "0001.md").write_text("---\ngram_tensor:\n- [2]\n---\n")

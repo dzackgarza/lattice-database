@@ -18,7 +18,6 @@ from dzack_research.preamble.categories.lattices import DefiniteLattices, Lattic
 from dzack_research.preamble.categories.modules.framed.formed.form_modules import FormedModuleMor, FormModules, FreeFormModules
 from dzack_research.preamble.categories.modules.pure.modules import Modules
 from dzack_research.preamble.categories.rings.ring_foundation import _OwnedRingElement, _OwnedRingParent
-from dzack_research.preamble.categories.sets.finite_families import finite_family
 from dzack_research.preamble.rings import OwnedRings, session_ring_objects
 
 from latticedb import model
@@ -446,7 +445,7 @@ def local_admission_problems(lattice: Lattice) -> list[str]:
             # build an entire QQ-valued Hom(ZZ^n tensor ZZ^n, QQ) merely to
             # test its n^2 basis values for integrality.
             owned = Lattices(ZZ)(gram)
-        except TypeError, ValueError:
+        except (TypeError, ValueError):
             found.append("integral: the stored integral block requires the form to take values in ZZ")
         else:
             determinant_source: object = owned
@@ -543,31 +542,6 @@ def relational_admission_problems(lattice: Lattice, written: Mapping[str, Lattic
                 valid = False
             if not valid:
                 found.append("root_span.embedding: the rows do not realize the stated orthogonal sum")
-    return found
-
-
-def definite_isometry_problems(lattices: Sequence[Lattice]) -> dict[str, list[str]]:
-    """The definite cards isometric to another card in another basis, by tag.
-
-    A card's form `L` is isometric to another's `L'` exactly when the denominators
-    `m` of their scales agree and the integral twists `L(m)`, `L'(m)` are isometric.
-    The preamble partitions the twists into isometry classes in one call; each class
-    is then split by `m`, and every card after the first of a part is reported against
-    that first card. A card whose Gram tensor equals that of the first card is reported
-    by the check of repeated Gram tensors instead.
-    """
-    definite = tuple(lattice for lattice in lattices if lattice.definite is not None and lattice.rank is not None and lattice.gram_tensor is not None)
-    models = tuple(_integral_twist(FormModules(ZZ)(integer_ring.free_module(lattice.rank).bilinear_hom_space(_QQ_AS_ZZ_MODULE)(lattice.gram_tensor))) for lattice in definite)
-    classes = Lattices(ZZ).isometry_classes(finite_family(tuple(model for model, _multiplier in models)))
-    found: dict[str, list[str]] = {}
-    for block in classes:
-        first_of_multiplier: dict[int, Lattice] = {}
-        for index in block:
-            lattice = definite[int(index)]
-            first = first_of_multiplier.setdefault(models[int(index)][1], lattice)
-            if first is lattice or first.gram_tensor == lattice.gram_tensor:
-                continue
-            found.setdefault(lattice.tag, []).append(f"the lattice is isometric to {first.tag} ({first.name}), in another basis")
     return found
 
 
