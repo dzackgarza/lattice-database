@@ -1,0 +1,17 @@
+---
+tag: 3IDV
+name: Constructed lattice 3IDV
+latex: L_{\mathrm{3IDV}}
+rank: 3
+gram_tensor:
+- [-1, 0, 0]
+- [0, -1, 0]
+- [0, 0, -2]
+related:
+- tag: 3ICW
+  relation: This presentation is obtained by orthogonal sum of 3ICW, 3ICW, 3ICX.
+- tag: 3ICX
+  relation: This presentation is obtained by orthogonal sum of 3ICW, 3ICW, 3ICX.
+---
+
+The selected Gram tensor is obtained by orthogonal sum of 3ICW, 3ICW, 3ICX.

@@ -1,0 +1,26 @@
+---
+tag: 6BVM
+name: Constructed lattice 6BVM
+latex: L_{\mathrm{6BVM}}
+rank: 10
+gram_tensor:
+- [0, -1, 0, 0, 0, 0, 0, 0, 0, 0]
+- [-1, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+- [0, 0, 2, -1, 0, 0, 0, 0, 0, 0]
+- [0, 0, -1, 2, -1, 0, 0, 0, 0, 0]
+- [0, 0, 0, -1, 2, 0, 0, 0, 0, 0]
+- [0, 0, 0, 0, 0, -2, 1, 0, 0, 0]
+- [0, 0, 0, 0, 0, 1, -2, 1, 0, 0]
+- [0, 0, 0, 0, 0, 0, 1, -2, 1, 0]
+- [0, 0, 0, 0, 0, 0, 0, 1, -2, 1]
+- [0, 0, 0, 0, 0, 0, 0, 0, 1, -2]
+related:
+- tag: 3ICY
+  relation: This presentation is obtained by orthogonal sum of 3ICY, 0023, 3IFB.
+- tag: '0023'
+  relation: This presentation is obtained by orthogonal sum of 3ICY, 0023, 3IFB.
+- tag: 3IFB
+  relation: This presentation is obtained by orthogonal sum of 3ICY, 0023, 3IFB.
+---
+
+The selected Gram tensor is obtained by orthogonal sum of 3ICY, 0023, 3IFB.

@@ -1,0 +1,28 @@
+---
+tag: 4DER
+name: Constructed lattice 4DER
+latex: L_{\mathrm{4DER}}
+rank: 10
+gram_tensor:
+- [1, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+- [0, 2, 0, 0, 0, 0, 0, 0, 0, 0]
+- [0, 0, 2, 0, 0, 0, 0, 0, 0, 0]
+- [0, 0, 0, -2, 0, 0, 0, 0, 0, 0]
+- [0, 0, 0, 0, -4, 2, 0, 0, 0, 0]
+- [0, 0, 0, 0, 2, -4, 2, 0, 0, 0]
+- [0, 0, 0, 0, 0, 2, -4, 2, 0, 0]
+- [0, 0, 0, 0, 0, 0, 2, -4, 2, 2]
+- [0, 0, 0, 0, 0, 0, 0, 2, -4, 0]
+- [0, 0, 0, 0, 0, 0, 0, 2, 0, -4]
+related:
+- tag: '0001'
+  relation: This presentation is obtained by orthogonal sum of 0001, 0002, 0002, 3ICX, 3IFL.
+- tag: '0002'
+  relation: This presentation is obtained by orthogonal sum of 0001, 0002, 0002, 3ICX, 3IFL.
+- tag: 3ICX
+  relation: This presentation is obtained by orthogonal sum of 0001, 0002, 0002, 3ICX, 3IFL.
+- tag: 3IFL
+  relation: This presentation is obtained by orthogonal sum of 0001, 0002, 0002, 3ICX, 3IFL.
+---
+
+The selected Gram tensor is obtained by orthogonal sum of 0001, 0002, 0002, 3ICX, 3IFL.

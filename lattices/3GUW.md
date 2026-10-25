@@ -183,7 +183,11 @@ morphisms:
   - [0, 0, 1, -1]
   scale: 1
 families: []
-related: []
+related:
+- tag: '0001'
+  relation: This presentation is obtained by orthogonal sum of 0001, 0001, 3ID2.
+- tag: 3ID2
+  relation: This presentation is obtained by orthogonal sum of 0001, 0001, 3ID2.
 references:
 - citation: Watson, primitive lattices of class number one, 4:361.
   url: https://www.math.rwth-aachen.de/~Gabriele.Nebe/LATTICES/Classi/watson

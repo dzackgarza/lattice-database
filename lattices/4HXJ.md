@@ -1,0 +1,28 @@
+---
+tag: 4HXJ
+name: Constructed lattice 4HXJ
+latex: L_{\mathrm{4HXJ}}
+rank: 10
+gram_tensor:
+- [1, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+- [0, 2, 0, 0, 0, 0, 0, 0, 0, 0]
+- [0, 0, -4, 2, 0, 0, 0, 0, 0, 0]
+- [0, 0, 2, -4, 0, 0, 0, 0, 0, 0]
+- [0, 0, 0, 0, 4, -2, 0, 0, 0, 0]
+- [0, 0, 0, 0, -2, 4, -2, 0, 0, 0]
+- [0, 0, 0, 0, 0, -2, 4, -2, 0, 0]
+- [0, 0, 0, 0, 0, 0, -2, 4, -2, 0]
+- [0, 0, 0, 0, 0, 0, 0, -2, 4, -2]
+- [0, 0, 0, 0, 0, 0, 0, 0, -2, 4]
+related:
+- tag: '0001'
+  relation: This presentation is obtained by orthogonal sum of 0001, 0002, 3ID1, 3IFJ.
+- tag: '0002'
+  relation: This presentation is obtained by orthogonal sum of 0001, 0002, 3ID1, 3IFJ.
+- tag: 3ID1
+  relation: This presentation is obtained by orthogonal sum of 0001, 0002, 3ID1, 3IFJ.
+- tag: 3IFJ
+  relation: This presentation is obtained by orthogonal sum of 0001, 0002, 3ID1, 3IFJ.
+---
+
+The selected Gram tensor is obtained by orthogonal sum of 0001, 0002, 3ID1, 3IFJ.

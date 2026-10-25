@@ -10,8 +10,8 @@ The preamble's construction enumeration is unbounded. A database run may select 
 
 ## Completion condition
 
-1. The preamble supplies the known standard families and property predicates. Every seed used by the corpus passes the untwisted and indecomposable predicates. **Status:** the authoring command checks each seed; verify the full rank-10 family before claiming coverage.
-2. The canonical unordered sum family through rank 10 and form content 2 is stored as cards. Each card has a valid defining Gram tensor. Exact duplicate tensors join one card. Every stored construction link has a reciprocal link. **Status:** population is in progress.
+1. The preamble supplies the known standard families and property predicates. Every seed used by the corpus passes the untwisted and indecomposable predicates. **Status:** complete for the known rank-10 family used by the sum corpus; the authoring command checked every seed before construction.
+2. The canonical unordered sum family through rank 10 and form content 2 is stored as cards. Each card has a valid defining Gram tensor. Exact duplicate tensors join one card. Every stored construction link has a reciprocal link. **Status:** complete. The entire generated card interval passed schema, rank, exact Gram-index, and reciprocal-link checks.
 3. Tensor products of the known scaled seed presentations, in both factor orders, are stored through the same rank and content bounds. The corpus also stores selected compositions from the preamble's unbounded construction iterator. **Status:** authoring commands exist; live corpus coverage is pending.
 4. Proper integral overlattices of the selected seed, tensor, and sum presentations are stored within the bounds. Each computed inclusion is recorded as a morphism on its source card and passes preamble-backed map verification. **Status:** authoring commands exist; live corpus coverage is pending.
 5. The whole newly generated family, Gram index, and disk use are validated at one persisted revision. The actual coverage is stated. A finite prefix or run budget does not establish exhaustive closure. **Status:** pending.
@@ -20,6 +20,6 @@ Full gluing at rank 10 exceeds the present card layout. For \(U(2)^5\), the disc
 
 ## Next work, ranked
 
-1. Finish the canonical sum population. Check the complete generated tag interval against the index and schema, and check every new reciprocal construction link.
-2. Run the ordered tensor and proper-overlattice authoring commands on the known family. Then sweep the sum and tensor card intervals for proper overlattices, starting at low rank. Record the exact source and inclusion ranges covered.
-3. Compare the resulting coverage with the requested rank and content bounds. Extend the corpus while storage permits. Keep the unbounded preamble enumeration available for further deterministic prefixes.
+1. Run the ordered tensor authoring command on the known family. Then run the proper-overlattice authoring commands on selected seed, tensor, and sum presentations, starting at low rank. Record the exact source and inclusion ranges covered.
+2. Compare the resulting coverage with the requested rank and content bounds. Extend the corpus while storage permits. Keep the unbounded preamble enumeration available for further deterministic prefixes.
+3. Validate the completed construction corpus at one persisted revision, including every stored gluing map, then check the database verification command and repository delivery gate.

@@ -1,0 +1,28 @@
+---
+tag: 5BXM
+name: Constructed lattice 5BXM
+latex: L_{\mathrm{5BXM}}
+rank: 10
+gram_tensor:
+- [-1, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+- [0, -2, 0, 0, 0, 0, 0, 0, 0, 0]
+- [0, 0, 0, -1, 0, 0, 0, 0, 0, 0]
+- [0, 0, -1, 0, 0, 0, 0, 0, 0, 0]
+- [0, 0, 0, 0, 4, -2, 0, 0, 0, 0]
+- [0, 0, 0, 0, -2, 4, -2, 0, 0, 0]
+- [0, 0, 0, 0, 0, -2, 4, -2, 0, -2]
+- [0, 0, 0, 0, 0, 0, -2, 4, -2, 0]
+- [0, 0, 0, 0, 0, 0, 0, -2, 4, 0]
+- [0, 0, 0, 0, 0, 0, -2, 0, 0, 4]
+related:
+- tag: 3ICW
+  relation: This presentation is obtained by orthogonal sum of 3ICW, 3ICX, 3ICY, 3IFP.
+- tag: 3ICX
+  relation: This presentation is obtained by orthogonal sum of 3ICW, 3ICX, 3ICY, 3IFP.
+- tag: 3ICY
+  relation: This presentation is obtained by orthogonal sum of 3ICW, 3ICX, 3ICY, 3IFP.
+- tag: 3IFP
+  relation: This presentation is obtained by orthogonal sum of 3ICW, 3ICX, 3ICY, 3IFP.
+---
+
+The selected Gram tensor is obtained by orthogonal sum of 3ICW, 3ICX, 3ICY, 3IFP.

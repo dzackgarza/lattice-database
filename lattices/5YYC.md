@@ -1,0 +1,24 @@
+---
+tag: 5YYC
+name: Constructed lattice 5YYC
+latex: L_{\mathrm{5YYC}}
+rank: 10
+gram_tensor:
+- [-2, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+- [0, -2, 0, 0, 0, 0, 0, 0, 0, 0]
+- [0, 0, -2, 0, 0, 0, 0, 0, 0, 0]
+- [0, 0, 0, -2, 0, 0, 0, 0, 0, 0]
+- [0, 0, 0, 0, 2, -1, 0, 0, 0, 0]
+- [0, 0, 0, 0, -1, 2, -1, 0, 0, 0]
+- [0, 0, 0, 0, 0, -1, 2, -1, 0, 0]
+- [0, 0, 0, 0, 0, 0, -1, 2, -1, -1]
+- [0, 0, 0, 0, 0, 0, 0, -1, 2, 0]
+- [0, 0, 0, 0, 0, 0, 0, -1, 0, 2]
+related:
+- tag: 3ICX
+  relation: This presentation is obtained by orthogonal sum of 3ICX, 3ICX, 3ICX, 3ICX, 0063.
+- tag: '0063'
+  relation: This presentation is obtained by orthogonal sum of 3ICX, 3ICX, 3ICX, 3ICX, 0063.
+---
+
+The selected Gram tensor is obtained by orthogonal sum of 3ICX, 3ICX, 3ICX, 3ICX, 0063.

@@ -1,0 +1,20 @@
+---
+tag: 5QUA
+name: Constructed lattice 5QUA
+latex: L_{\mathrm{5QUA}}
+rank: 4
+gram_tensor:
+- [2, 0, 0, 0]
+- [0, -2, 0, 0]
+- [0, 0, 0, 1]
+- [0, 0, 1, 0]
+related:
+- tag: '0002'
+  relation: This presentation is obtained by orthogonal sum of 0002, 3ICX, 0016.
+- tag: 3ICX
+  relation: This presentation is obtained by orthogonal sum of 0002, 3ICX, 0016.
+- tag: '0016'
+  relation: This presentation is obtained by orthogonal sum of 0002, 3ICX, 0016.
+---
+
+The selected Gram tensor is obtained by orthogonal sum of 0002, 3ICX, 0016.

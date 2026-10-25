@@ -1,0 +1,26 @@
+---
+tag: 4UEB
+name: Constructed lattice 4UEB
+latex: L_{\mathrm{4UEB}}
+rank: 10
+gram_tensor:
+- [-1, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+- [0, -1, 0, 0, 0, 0, 0, 0, 0, 0]
+- [0, 0, -1, 0, 0, 0, 0, 0, 0, 0]
+- [0, 0, 0, -2, 0, 0, 0, 0, 0, 0]
+- [0, 0, 0, 0, -2, 0, 0, 0, 0, 0]
+- [0, 0, 0, 0, 0, -2, 1, 0, 0, 0]
+- [0, 0, 0, 0, 0, 1, -2, 1, 0, 0]
+- [0, 0, 0, 0, 0, 0, 1, -2, 1, 1]
+- [0, 0, 0, 0, 0, 0, 0, 1, -2, 0]
+- [0, 0, 0, 0, 0, 0, 0, 1, 0, -2]
+related:
+- tag: 3ICW
+  relation: This presentation is obtained by orthogonal sum of 3ICW, 3ICW, 3ICW, 3ICX, 3ICX, 3IFE.
+- tag: 3ICX
+  relation: This presentation is obtained by orthogonal sum of 3ICW, 3ICW, 3ICW, 3ICX, 3ICX, 3IFE.
+- tag: 3IFE
+  relation: This presentation is obtained by orthogonal sum of 3ICW, 3ICW, 3ICW, 3ICX, 3ICX, 3IFE.
+---
+
+The selected Gram tensor is obtained by orthogonal sum of 3ICW, 3ICW, 3ICW, 3ICX, 3ICX, 3IFE.

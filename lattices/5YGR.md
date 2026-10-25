@@ -1,0 +1,20 @@
+---
+tag: 5YGR
+name: Constructed lattice 5YGR
+latex: L_{\mathrm{5YGR}}
+rank: 6
+gram_tensor:
+- [-2, 0, 0, 0, 0, 0]
+- [0, -2, 0, 0, 0, 0]
+- [0, 0, -2, 0, 0, 0]
+- [0, 0, 0, -2, 0, 0]
+- [0, 0, 0, 0, 0, 1]
+- [0, 0, 0, 0, 1, 0]
+related:
+- tag: 3ICX
+  relation: This presentation is obtained by orthogonal sum of 3ICX, 3ICX, 3ICX, 3ICX, 0016.
+- tag: '0016'
+  relation: This presentation is obtained by orthogonal sum of 3ICX, 3ICX, 3ICX, 3ICX, 0016.
+---
+
+The selected Gram tensor is obtained by orthogonal sum of 3ICX, 3ICX, 3ICX, 3ICX, 0016.

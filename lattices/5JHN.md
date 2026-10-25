@@ -1,0 +1,22 @@
+---
+tag: 5JHN
+name: Constructed lattice 5JHN
+latex: L_{\mathrm{5JHN}}
+rank: 8
+gram_tensor:
+- [2, 0, 0, 0, 0, 0, 0, 0]
+- [0, 2, 0, 0, 0, 0, 0, 0]
+- [0, 0, 2, 0, 0, 0, 0, 0]
+- [0, 0, 0, 2, 0, 0, 0, 0]
+- [0, 0, 0, 0, -2, 1, 0, 0]
+- [0, 0, 0, 0, 1, -2, 1, 0]
+- [0, 0, 0, 0, 0, 1, -2, 1]
+- [0, 0, 0, 0, 0, 0, 1, -2]
+related:
+- tag: '0002'
+  relation: This presentation is obtained by orthogonal sum of 0002, 0002, 0002, 0002, 3IF5.
+- tag: 3IF5
+  relation: This presentation is obtained by orthogonal sum of 0002, 0002, 0002, 0002, 3IF5.
+---
+
+The selected Gram tensor is obtained by orthogonal sum of 0002, 0002, 0002, 0002, 3IF5.

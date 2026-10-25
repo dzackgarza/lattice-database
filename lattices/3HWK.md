@@ -196,7 +196,9 @@ morphisms:
   - [0, 0, 1]
   scale: 1
 families: []
-related: []
+related:
+- tag: '0002'
+  relation: This presentation is obtained by orthogonal sum of 0002, 0002, 0002.
 references:
 - citation: G. Nebe and N. J. A. Sloane, Catalogue of Lattices, archive entry union:627.
   url: https://www.math.rwth-aachen.de/~Gabriele.Nebe/LATTICES/union.gz
