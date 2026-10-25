@@ -346,7 +346,7 @@ A record that is not definite and has no `root_span` block is not decided, and i
 
 ## Tags
 
-A tag is four characters from `0-9` and `A-Z`. The file name is the tag.
+A tag is at least four characters from `0-9` and `A-Z`. Tags continue in base 36 past `ZZZZ`; the file name is the tag.
 A tag is permanent: it never moves to another lattice, and a record is never renumbered.
 When a record leaves the corpus, its tag goes to `retired-tags.yaml` with the lattice that was there and why it is not a record.
 Verification reports a reused tag.

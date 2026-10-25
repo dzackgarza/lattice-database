@@ -145,6 +145,17 @@ def test_next_tag_starts_an_empty_corpus_at_0001(tmp_path: Path) -> None:
     assert corpus.next_tag(tmp_path) == "0001"
 
 
+def test_tags_continue_past_four_base_36_digits(tmp_path: Path) -> None:
+    directory = write(tmp_path, rank_one("ZZZZ"))
+    tag = corpus.next_tag(directory)
+    assert tag == "10000"
+    (directory / "lattices" / f"{tag}.md").write_text(
+        "---\n" + yaml.safe_dump(rank_one(tag)) + "---\n\nA test record.\n"
+    )
+    assert corpus.next_tag(directory) == "10001"
+    assert [entry.lattice.tag for entry in corpus.load(directory).entries] == ["10000", "ZZZZ"]
+
+
 def test_source_cards_do_not_reserve_tags_and_verify_reports_them(tmp_path: Path) -> None:
     directory = write(tmp_path, rank_one("0001"))
     source = directory / "lattices" / "source"

@@ -55,7 +55,7 @@ def rational(value: Yaml | Fraction) -> Fraction:
 
 
 Rational = Annotated[Fraction, BeforeValidator(rational)]
-Tag = Annotated[str, Field(pattern=r"^[0-9A-Z]{4}$")]
+Tag = Annotated[str, Field(pattern=r"^[0-9A-Z]{4,}$")]
 Slug = Annotated[str, Field(pattern=r"^[a-z0-9]+(?:-[a-z0-9]+)*$")]
 Family = Annotated[str, Field(pattern=r"^[a-z0-9]+(-[a-z0-9]+)*$")]
 AdeType = Annotated[str, Field(pattern=r"^(A[1-9]\d*|D[4-9]|D[1-9]\d+|E[678])$")]

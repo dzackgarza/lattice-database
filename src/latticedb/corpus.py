@@ -274,18 +274,14 @@ def load(root: Path) -> Corpus:
 
 def next_tag(root: Path) -> str:
     """The tag after the greatest card filename or retired tag."""
-    value = 0
     tags = [path.stem for path in (root / "lattices").glob("*.md")]
     retired = yaml.safe_load((root / RETIRED_FILE).read_text()) or {}
-    for character in max([*tags, *retired], default="0000"):
-        value = value * len(TAG_ALPHABET) + TAG_ALPHABET.index(character)
-    value += 1
+    value = max((int(tag, len(TAG_ALPHABET)) for tag in (*tags, *retired)), default=0) + 1
     digits = []
-    for _ in range(4):
+    while value:
         value, digit = divmod(value, len(TAG_ALPHABET))
         digits.append(TAG_ALPHABET[digit])
-    assert value == 0, "the four-character tag space is full"
-    return "".join(reversed(digits))
+    return "".join(reversed(digits)).zfill(4)
 
 
 def duplicate_grams(entries: tuple[Entry, ...]) -> dict[GramTensor, list[str]]:

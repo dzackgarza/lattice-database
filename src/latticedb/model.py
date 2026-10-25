@@ -145,7 +145,7 @@ from latticedb.record_types import (
 
 
 class Lattice(Record):
-    tag: Tag = Field(description="Permanent identifier: four characters from 0-9 and A-Z. The file name is the tag.")
+    tag: Tag = Field(description="Permanent identifier: at least four characters from 0-9 and A-Z. The file name is the tag.")
     name: str = Field(description="Name as plain text, for search.")
     latex: str = Field(description="Name as TeX, without math delimiters.")
     aliases: Annotated[tuple[str, ...], Field(strict=False)] = Field(default=(), description="Other names, as plain text.")
