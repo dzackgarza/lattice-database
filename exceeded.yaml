@@ -512,9 +512,10 @@
 2DAP derive:
   hash: 304b3d61db3c5d9bb14b642d31e9cc09559ed406ae124b34275a2d36697273be
   seconds: 13
-2G4M derive:
-  hash: cd9397b9cf723b31c8efa0764c69f4372323d9a43cb356e01ca65d946f13b4ab
-  seconds: 5
+2GMD derive:
+  hash: b7d69e17b8063c06df480cc2b2398e1c93168374084b091435f641124867a747
+  seconds: 0
+  lost: true
 3BV3 definite.siegel_eisenstein_coefficients:
   hash: 4be43fed87facb172ca082e1bbd69e4a81eca70025fe243420745dac788d942a
   seconds: 12
