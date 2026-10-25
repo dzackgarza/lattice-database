@@ -139,6 +139,77 @@ def populate_standard_sums(
     print(f"{result.new_cards} cards authored; {result.existing_cards} presentations already held")
 
 
+@app.command(name="populate-construction-prefix")
+def populate_construction_prefix(
+    root: Root = Path(),
+    max_expressions: Annotated[int, Parameter(help="Number of expressions to take from the unbounded preamble iterator.")] = 100,
+    max_rank: Annotated[int, Parameter(help="Largest rank to store.")] = 10,
+    max_content: Annotated[int, Parameter(help="Largest absolute form content to store.")] = 2,
+) -> None:
+    """Store a prefix of known lattice constructions, including tensors and gluings."""
+    from dzack_research.preamble.categories.lattices import Lattices
+    from dzack_research.preamble.rings import session_ring_objects
+
+    from latticedb import construction_corpus
+
+    category = Lattices(session_ring_objects()["ZZ"])
+    seeds = category.Untwisted().Indecomposable().known_objects(max_rank=max_rank)
+    result = construction_corpus.populate_construction_prefix(
+        root, seeds, max_expressions=max_expressions, max_rank=max_rank, max_content=max_content
+    )
+    print(f"{result.new_cards} cards authored; {result.existing_cards} presentations already held")
+
+
+@app.command(name="populate-standard-products")
+def populate_standard_products(
+    root: Root = Path(),
+    max_rank: Annotated[int, Parameter(help="Largest rank to store.")] = 10,
+    max_content: Annotated[int, Parameter(help="Largest absolute form content to store.")] = 2,
+    max_inclusions_per_source: Annotated[int | None, Parameter(help="Optional count of gluing inclusions to visit per source.")] = None,
+) -> None:
+    """Author tensor products of all known small twists and their proper overlattices."""
+    from dzack_research.preamble.categories.lattices import Lattices
+    from dzack_research.preamble.rings import session_ring_objects
+
+    from latticedb import construction_corpus
+
+    category = Lattices(session_ring_objects()["ZZ"])
+    seeds = category.Untwisted().Indecomposable().known_objects(max_rank=max_rank)
+    result = construction_corpus.populate_standard_products(
+        root, seeds, max_rank=max_rank, max_content=max_content,
+        max_inclusions_per_source=max_inclusions_per_source,
+    )
+    print(f"{result.new_cards} cards authored; {result.existing_cards} presentations already held")
+
+
+@app.command(name="populate-overlattices")
+def populate_overlattices(
+    root: Root = Path(),
+    start_tag: Annotated[str, Parameter(help="First source-card tag to visit.")] = "0000",
+    end_tag: Annotated[str | None, Parameter(help="Last source-card tag to visit, inclusive.")] = None,
+    max_rank: Annotated[int, Parameter(help="Largest rank to store.")] = 10,
+    max_content: Annotated[int, Parameter(help="Largest absolute form content to store.")] = 2,
+    max_sources: Annotated[int | None, Parameter(help="Optional count of source cards to visit, in rank and tag order.")] = None,
+    max_inclusions_per_source: Annotated[int | None, Parameter(help="Optional count of inclusions to visit per source.")] = None,
+) -> None:
+    """Author proper integral overlattices of selected existing cards."""
+    from latticedb import construction_corpus
+
+    radix = len(corpus.TAG_ALPHABET)
+    start = int(start_tag, radix)
+    end = None if end_tag is None else int(end_tag, radix)
+    tags = (
+        path.stem for path in (root / "lattices").glob("*.md")
+        if int(path.stem, radix) >= start
+        and (end is None or int(path.stem, radix) <= end)
+    )
+    result = construction_corpus.populate_overlattices_of_cards(
+        root, tags, max_rank=max_rank, max_content=max_content,
+        max_sources=max_sources, max_inclusions_per_source=max_inclusions_per_source,
+    )
+    print(f"{result.new_cards} cards authored; {result.existing_cards} presentations already held")
+
+
 @app.command(name="merge-keyed-map")
 def merge_keyed_map(base: Path, ours: Path, theirs: Path) -> None:
     """Git merge driver for the files of `certificates/` and `exceeded.yaml`: merge them key by key into OURS."""

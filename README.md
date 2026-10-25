@@ -366,6 +366,23 @@ State only data and claims that the card can support.
 indecomposable integral specimens and their scales `1`, `-1`, `2`, `-2`, up to rank 10 and
 form content 2 by default. It joins an existing exact Gram tensor, records construction
 relations in both directions, and resumes safely by checking the stored Gram index.
+`just populate-construction-prefix --max-expressions N` takes the first `N` expressions
+from the preamble's unbounded construction enumeration. Its seed family is the same
+known property-category family. Eligible twists, sums, tensor products and proper
+integral overlattices become individual cards; a gluing inclusion is stored as a
+morphism on its source card. The expression count limits one database run, not the
+preamble iterator or the class of lattices.
+`just populate-standard-products` visits tensor products of every known untwisted
+indecomposable seed at scales `1`, `-1`, `2`, `-2`, then the proper integral
+overlattices of those presentations. `--max-inclusions-per-source N` optionally
+limits how many preamble inclusions this database run visits for each source;
+without it, the command visits all of them. Construction and gluing results
+join cards by exact Gram tensor and store reciprocal relations and inclusion maps.
+`just populate-overlattices --start-tag TAG --end-tag TAG` visits proper integral
+overlattices of existing cards in that tag interval, ordered by rank and tag.
+`--max-sources N` and `--max-inclusions-per-source N` are optional run budgets.
+The source cards can be sums or tensor products, so this command also covers
+gluings after those constructions have been authored.
 
 **Enrich:** `just enrich` calls preamble-owned operations and stores their returned values on existing cards without changing certification status.
 A sparse card remains a site card while it awaits preamble computation.
@@ -618,6 +635,10 @@ The `justfile` calls it.
 | `just seed` | Convert stored source rows into permanent lattice cards |
 | `just regular-ternaries` | Seed the regular and spinor regular ternary forms as cards whose `definite.regular` or `definite.spinor_regular` is certified by citation |
 | `just new ...` | Author a lattice card from a Gram tensor and supplied fields |
+| `just populate-standard-sums ...` | Author canonical sums of known untwisted indecomposable lattices and small twists |
+| `just populate-standard-products ...` | Author ordered tensor products of those twists and their proper integral overlattices |
+| `just populate-overlattices ...` | Author proper integral overlattices of selected existing cards |
+| `just populate-construction-prefix ...` | Store a chosen prefix of the preamble's unbounded construction enumeration |
 | `just morphism S T ...` | Append a morphism with domain `S` and codomain `T` to lattice card `S` |
 | `just enrich ...` | Compute and store additional fields on existing cards |
 | `just certify ...` | CI orchestration: store preamble-returned uncertified scopes and attach certificate hashes |

@@ -370,8 +370,27 @@ def _read_index(root: Path) -> GramIndex | None:
 
 
 def save_index(root: Path, index: GramIndex) -> None:
-    """Write the index file."""
-    (root / GRAM_INDEX_FILE).write_text(json.dumps(index.model_dump(), separators=(",", ":")))
+    """Write the index, preserving its existing layout when only keys are added."""
+    path = root / GRAM_INDEX_FILE
+    if path.exists():
+        previous_text = path.read_text()
+        try:
+            previous = GramIndex.model_validate_json(previous_text)
+        except ValidationError:
+            previous = None
+        if previous is not None and previous.without == index.without and previous.model_extra == index.model_extra and all(
+            index.grams.get(key) == tags for key, tags in previous.grams.items()
+        ):
+            added = [(key, tags) for key, tags in index.grams.items() if key not in previous.grams]
+            if not added:
+                return
+            marker = '\n  },\n  "without":'
+            if previous.grams and marker in previous_text:
+                before, after = previous_text.split(marker, 1)
+                lines = [f"    {json.dumps(key)}: {json.dumps(tags)}" for key, tags in added]
+                path.write_text(before + ",\n" + ",\n".join(lines) + marker + after)
+                return
+    path.write_text(json.dumps(index.model_dump(), indent=2) + "\n")
 
 
 def append_index(root: Path, tag: str, gram: GramTensor) -> None:

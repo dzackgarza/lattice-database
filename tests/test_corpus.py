@@ -313,6 +313,19 @@ def test_gram_index_lists_the_tags_stating_each_tensor(tmp_path: Path) -> None:
     assert corpus.gram_index(tmp_path) == {"2": ["0001", "0002", "0004"]}
 
 
+def test_gram_index_addition_preserves_existing_lines(tmp_path: Path) -> None:
+    path = tmp_path / corpus.GRAM_INDEX_FILE
+    original = '{\n  "grams": {\n    "1": ["0001"]\n  },\n  "without": []\n}\n'
+    path.write_text(original)
+    index = corpus.GramIndex(grams={"1": ["0001"], "2": ["0002"]}, without=[])
+
+    corpus.save_index(tmp_path, index)
+
+    assert path.read_text() == original.replace(
+        '"1": ["0001"]', '"1": ["0001"],\n    "2": ["0002"]'
+    )
+
+
 def test_new_refuses_a_gram_tensor_the_corpus_holds(tmp_path: Path) -> None:
     (tmp_path / "lattices").mkdir()
     (tmp_path / "lattices" / "0001.md").write_text("---\ngram_tensor:\n- [2]\n---\n")

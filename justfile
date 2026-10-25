@@ -31,6 +31,18 @@ new *ARGS:
 populate-standard-sums *ARGS:
     just _latticedb populate-standard-sums {{ARGS}}
 
+# Store a caller-chosen prefix of the preamble's unbounded construction enumeration
+populate-construction-prefix *ARGS:
+    just _latticedb populate-construction-prefix {{ARGS}}
+
+# Author tensor products of known specimens and their proper integral overlattices
+populate-standard-products *ARGS:
+    just _latticedb populate-standard-products {{ARGS}}
+
+# Author proper integral overlattices of selected existing lattice cards
+populate-overlattices *ARGS:
+    just _latticedb populate-overlattices {{ARGS}}
+
 # Author a morphism on source card S: `just morphism 0016 0016 --name exchange --matrix '[[0,1],[1,0]]'`
 morphism SOURCE TARGET *ARGS:
     just _latticedb morphism {{SOURCE}} {{TARGET}} {{ARGS}}
