@@ -437,29 +437,17 @@
   hash: c2d56853c688ca548dd50df42dc26996cbe6f8a73e77d63b9dc95c2c53e7aeb5
   seconds: 0
   lost: true
-1NWX derive:
-  hash: 45fce1d3381682216f5728ecae08c542596e7f808d0f4547647c415daf6f1752
-  seconds: 0
-  lost: true
-1P0G derive:
-  hash: 0087f3abea5bced44b3741d394e9e134f3e2fb04b3889bac5cb09f02a7bf7d3c
-  seconds: 0
-  lost: true
-1SB7 derive:
-  hash: 434490582be3dae569d7e19d5a017971696bb33f9f48960d1e67280f52790229
-  seconds: 0
-  lost: true
-1TCY derive:
-  hash: ca4593dfc0e95e0c5a7d14ba0a49bf539255b48b932355232a5ff44375c24d5d
-  seconds: 5
-  lost: true
-1TW1 derive:
-  hash: 6c98ab75e940861cbb9c746dedb8e9abaec9c6d109571f6f3e0f2cecba283fee
+1UJ2 derive:
+  hash: 67d45b33429de41171f34effa19d2ece2d8e00962b8167d9e182f44fc0c1a8b9
   seconds: 0
   lost: true
 1VQZ integral.genus_class_count:
   hash: bf89660deaa6334fb40ff017f9f7a5427c5c2d85f11e6e377685d721f0edfff2
   seconds: 11
+  lost: true
+1VTN derive:
+  hash: bbdf81859a7c83b1f25fef66b09c19c7fe6e0bf6a4e65c21fe5aad8eca91aef1
+  seconds: 0
   lost: true
 1XEP integral.spinor_genera:
   hash: 31e6986fe026d98e42c61972796bc9a750739bec7e9e797354e0faf70396d9de
@@ -477,56 +465,64 @@
   hash: 43701248704ac476a2e87076e3517a579dc7a14927b53ffd7975a646d3978b4c
   seconds: 12
   lost: true
-1YRT derive:
-  hash: a626099387c6ac978f018c74ddcb9afdd2eefe75eaf55687a8713576d4360d9f
-  seconds: 0
-  lost: true
 1ZON integral.elementary_primes:
   hash: 3257bea340bac7a0a798770c1f57b877e9e9fb48914c44752fea07cbec1a2885
   seconds: 22
   lost: true
-1ZX6 derive:
-  hash: 1041282eef0e2710f59def630cf7e0a5b71e657a6d1be5fbd4b4c24d5af2640f
+2027 derive:
+  hash: 43ddb4cbbad734f83ffb5f5d21dd8da7461266bb70055d04f9d8bc076dc5942d
   seconds: 0
   lost: true
-2020 derive:
-  hash: 3df5cc22ea221d397c25f678db7656ba9bc3837e5a6a404a4a5d6f1a015fc36d
-  seconds: 0
-  lost: true
-20ON derive:
-  hash: fb57f1f3892175e59921e1294d22eb62e1a1efe65401bd5d607b58eb6d7a4189
+20I5 derive:
+  hash: aa3388cfb0facd3d56dc39699f20c23c133212356223d3bd33c05007efadbdeb
   seconds: 0
   lost: true
 20QR integral.hyperbolic_index:
   hash: 37918b7e84d5761569817dfc0899a9eabc7fdb8c14715e2ccecd6d44d0886834
   seconds: 0
   lost: true
-21IH derive:
-  hash: 6e557174cb2e8be6aa8407fea7bdc8a9e3cc4312ef34272ce546dfd40dc94198
-  seconds: 0
-  lost: true
-228H derive:
-  hash: 95fabc8fe4c0e7279ceb0bdb65ac1d56d8d908f65cd4a4fcbe7e31d72f209594
-  seconds: 0
-  lost: true
-22K1 derive:
-  hash: 527d930b11119e6971c0078cf130b84ae391d8d4ec9b0d3337d996c9bb553d18
+22NM derive:
+  hash: 70fd813f60898f7e41dd64a4e36a3bae7bef91e9f482572a49a50d3e52a06342
   seconds: 0
   lost: true
 22WM definite.genus_theta_series:
   hash: db2c67761ca07439200009ff404ef36acf5cd34ddfc747267124c03e39b063c3
   seconds: 0
   lost: true
-23JW derive:
-  hash: 9ea820399f9517a8dca95cce91550f1cdfec658271a8bb4220c9e99b6081e433
+25LU derive:
+  hash: a8efb7df865e7f51636bc49aa6fd78ef34c9fa568df953a47f06a5519e7e1f12
   seconds: 0
   lost: true
-28CU derive:
-  hash: 018a445d8b29ea793d41093a05d48b0b1297ec3b9ace185f1c5d95a3a55831c0
+270Z derive:
+  hash: e268cf9e1fa850d62af0e41ed657a93a532d639cbda65817de32710086f1e071
   seconds: 0
   lost: true
-2AKX derive:
-  hash: 6f8af7d8a04da14dab2f626b248d8b7a5ea3d587ab0ad8b5f73372c40ed9e6bb
+273B derive:
+  hash: 6bd01e89a0a50721f29ab8cd8aab21bba857cb7e665747eeb4b724ec1c3ee8be
+  seconds: 0
+  lost: true
+27UJ derive:
+  hash: a92d56fd7d4bca21a89d21c76f7a848fc8e72b34ed36924cb931a017aa04ba25
+  seconds: 0
+  lost: true
+2AS5 derive:
+  hash: 7fa15cd1a4dd2d2d5efbb7847f82cd6cef272a42ea42a0c511ae65285cf7ac04
+  seconds: 10
+  lost: true
+2AZA derive:
+  hash: bd5f31895d58172e4c9b1ab0532696a5fd9e2ceb23a2c41dfe9b817a1a1f0f25
+  seconds: 0
+  lost: true
+2D4U derive:
+  hash: a25f0461effd259f81b1af3f8dfbc85474138ee2b45c8acadff51cc1d87c20f6
+  seconds: 0
+  lost: true
+2IVD derive:
+  hash: 18bbc4cd68cdceeb3030401f77e87fe2d7899f45ca183ae445e359940127f1ae
+  seconds: 0
+  lost: true
+2KVD derive:
+  hash: acd15b0ade4de3b1c874f94bf7a5e62f816c4f781d3cb9fb40337e357f3360f3
   seconds: 0
   lost: true
 3BV3 definite.siegel_eisenstein_coefficients:
@@ -721,6 +717,9 @@
   hash: dc927e7dffa463fb642e33538f94079ce2a08d4cff738b359d68d8d689fa7d5d
   seconds: 15
   lost: true
+3GPB integral.discriminant_sequence:
+  hash: 460c7770d41c5c7c67d04de7226b0c1c61ec51ac300b5f334c6755fe0c67a2c9
+  seconds: 19024
 3GPC integral.discriminant_sequence:
   hash: 190cbd78d6cdbc65820550517b1ffe5769307bdfa5a754cf35fcab9fd702f33b
   seconds: 2095
@@ -748,8 +747,7 @@
   seconds: 18980
 3GRH integral.discriminant_sequence:
   hash: 2c52ed46d41ee0f435df86175dade18a201a59de27e94ce21d06861f7844a1a7
-  seconds: 10246
-  lost: true
+  seconds: 19047
 3GRH integral.overlattice_count:
   hash: f1ece2c50445cd8ee1195e2df638499a0fffc7315bbf8d1de1c6963adbee057c
   seconds: 5
