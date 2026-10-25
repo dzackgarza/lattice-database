@@ -27,6 +27,10 @@ _latticedb *ARGS:
 new *ARGS:
     just _latticedb new {{ARGS}}
 
+# Author all canonical sums of known untwisted indecomposables up to rank 10 and form content 2
+populate-standard-sums *ARGS:
+    just _latticedb populate-standard-sums {{ARGS}}
+
 # Author a morphism on source card S: `just morphism 0016 0016 --name exchange --matrix '[[0,1],[1,0]]'`
 morphism SOURCE TARGET *ARGS:
     just _latticedb morphism {{SOURCE}} {{TARGET}} {{ARGS}}

@@ -362,6 +362,10 @@ A source that proves a value of its rows certifies it: `just regular-ternaries` 
 **Author:** Write or edit `lattices/<TAG>.md` for a lattice without a stored source row.
 The tag names its permanent page.
 State only data and claims that the card can support.
+`just populate-standard-sums` authors canonical unordered sums of the preamble's known untwisted
+indecomposable integral specimens and their scales `1`, `-1`, `2`, `-2`, up to rank 10 and
+form content 2 by default. It joins an existing exact Gram tensor, records construction
+relations in both directions, and resumes safely by checking the stored Gram index.
 
 **Enrich:** `just enrich` calls preamble-owned operations and stores their returned values on existing cards without changing certification status.
 A sparse card remains a site card while it awaits preamble computation.

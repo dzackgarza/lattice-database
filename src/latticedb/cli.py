@@ -119,6 +119,26 @@ def new(
     print(path)
 
 
+@app.command(name="populate-standard-sums")
+def populate_standard_sums(
+    root: Root = Path(),
+    max_rank: Annotated[int, Parameter(help="Largest rank of an authored construction (default: 10).")] = 10,
+    max_content: Annotated[int, Parameter(help="Largest absolute form content after scaling (default: 2).")] = 2,
+) -> None:
+    """Author Gram presentations of all canonical sums of known untwisted indecomposables and their small twists."""
+    from dzack_research.preamble.categories.lattices import Lattices
+    from dzack_research.preamble.rings import session_ring_objects
+
+    from latticedb import construction_corpus
+
+    category = Lattices(session_ring_objects()["ZZ"])
+    seeds = category.Untwisted().Indecomposable().known_objects(max_rank=max_rank)
+    result = construction_corpus.populate_standard_sums(
+        root, seeds, max_rank=max_rank, max_content=max_content
+    )
+    print(f"{result.new_cards} cards authored; {result.existing_cards} presentations already held")
+
+
 @app.command(name="merge-keyed-map")
 def merge_keyed_map(base: Path, ours: Path, theirs: Path) -> None:
     """Git merge driver for the files of `certificates/` and `exceeded.yaml`: merge them key by key into OURS."""
