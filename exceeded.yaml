@@ -443,12 +443,13 @@
 1SEA derive:
   hash: e5d7d9093e04092e287ce9d5b0ab446bb845a84bec2f28c5201c86ff7ad75a38
   seconds: 8
-1VNS derive:
-  hash: cf004b2d8d8812f2a5cd95a020c8cfbf0154fa09673a5457d85a8fe88e9d26b7
-  seconds: 13
 1VQZ integral.genus_class_count:
   hash: bf89660deaa6334fb40ff017f9f7a5427c5c2d85f11e6e377685d721f0edfff2
   seconds: 11
+  lost: true
+1W4Q derive:
+  hash: bbe06520936136b8c684ee95b30478c5019e9e15a41c4e4a221d4a3a903e6285
+  seconds: 10
   lost: true
 1X0F derive:
   hash: 33987aaed7810026672fdd53e17750432f3495efbb8eb00494ef1fbfeacf3e78
