@@ -244,6 +244,11 @@ def test_even_unimodular_named_cards_enrich_and_verify_delta(tmp_path: Path) -> 
         enriched = frontmatter.load(str(lattices / f"{tag}.md")).metadata
         assert enriched["integral"]["delta"] == 0
 
+    # The public verifier traverses the persisted cards and invokes the same
+    # mathematical admission checks used by the read-only verification CLI.
+    verification_problems = checks.report(root)
+    assert not any("integral.delta" in problem for problem in verification_problems)
+
     # Verification's invariant path re-constructs Lattices(ZZ)(Gram) from the
     # stored claim. Exercise that exact named-card path and require no delta
     # admission finding, rather than checking a category-cast surrogate.
