@@ -82,8 +82,6 @@ def _integral_twist(formed: FormModules.ParentMethods) -> tuple[Lattices.ParentM
         value_module = value.parent()
         if hasattr(value_module, "regular_module_identification"):
             value = value_module.regular_module_identification()(value)
-        else:
-            value = value.underlying_element()
         scale_values.append(value)
     ideal = integer_domain.fractional_ideal(*scale_values)
     multiplier = ZZ(int(ideal.principal_generator().denominator()))
