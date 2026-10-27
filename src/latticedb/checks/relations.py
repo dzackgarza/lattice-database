@@ -11,7 +11,7 @@ from __future__ import annotations
 
 from pathlib import Path
 
-from dzack_research.preamble.categories.sets.cardinals import aleph0, cardinal
+from sage_extensions.categories.sets.cardinals import aleph0, cardinal
 
 from latticedb import records
 from latticedb.corpus import FAMILIES_FILE, Corpus

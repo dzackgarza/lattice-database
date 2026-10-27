@@ -126,8 +126,8 @@ def populate_standard_sums(
     max_content: Annotated[int, Parameter(help="Largest absolute form content after scaling (default: 2).")] = 2,
 ) -> None:
     """Author Gram presentations of all canonical sums of known untwisted indecomposables and their small twists."""
-    from dzack_research.preamble.categories.lattices import Lattices
-    from dzack_research.preamble.rings import session_ring_objects
+    from sage_extensions.categories.lattices import Lattices
+    from sage_extensions.rings import session_ring_objects
 
     from latticedb import construction_corpus
 
@@ -147,8 +147,8 @@ def populate_construction_prefix(
     max_content: Annotated[int, Parameter(help="Largest absolute form content to store.")] = 2,
 ) -> None:
     """Store a prefix of known lattice constructions, including tensors and gluings."""
-    from dzack_research.preamble.categories.lattices import Lattices
-    from dzack_research.preamble.rings import session_ring_objects
+    from sage_extensions.categories.lattices import Lattices
+    from sage_extensions.rings import session_ring_objects
 
     from latticedb import construction_corpus
 
@@ -168,8 +168,8 @@ def populate_standard_products(
     max_inclusions_per_source: Annotated[int | None, Parameter(help="Optional count of gluing inclusions to visit per source.")] = None,
 ) -> None:
     """Author tensor products of all known small twists and their proper overlattices."""
-    from dzack_research.preamble.categories.lattices import Lattices
-    from dzack_research.preamble.rings import session_ring_objects
+    from sage_extensions.categories.lattices import Lattices
+    from sage_extensions.rings import session_ring_objects
 
     from latticedb import construction_corpus
 

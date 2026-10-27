@@ -12,12 +12,12 @@ import re
 from collections.abc import Mapping
 from pathlib import Path
 
-from dzack_research.preamble.categories.abstract_categories.mor_categories import CategoricalMor
-from dzack_research.preamble.categories.lattices import Lattices
-from dzack_research.preamble.categories.modules.framed.formed.form_modules import FormedModuleMor, FormModules
-from dzack_research.preamble.categories.modules.module_morphisms.module_morphisms import ModuleMorphismMethods
-from dzack_research.preamble.categories.modules.pure.modules import Modules
-from dzack_research.preamble.rings import session_ring_objects
+from sage_extensions.categories.abstract_categories.mor_categories import CategoricalMor
+from sage_extensions.categories.lattices import Lattices
+from sage_extensions.categories.modules.framed.formed.form_modules import FormedModuleMor, FormModules
+from sage_extensions.categories.modules.module_morphisms.module_morphisms import ModuleMorphismMethods
+from sage_extensions.categories.modules.pure.modules import Modules
+from sage_extensions.rings import session_ring_objects
 from pydantic import BaseModel, ConfigDict, TypeAdapter
 
 from latticedb import corpus

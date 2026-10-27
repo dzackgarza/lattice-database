@@ -23,16 +23,17 @@ from collections.abc import Callable
 from fractions import Fraction
 from typing import Annotated, Self
 
-from dzack_research.preamble.categories.coxeter_diagrams import CoxeterDiagrams
-from dzack_research.preamble.categories.modules.framed.formed.form_modules import FormModules
-from dzack_research.preamble.categories.modules.pure.modules import Modules
-from dzack_research.preamble.categories.rings.ring_foundation import _OwnedRingParent
-from dzack_research.preamble.categories.satake_diagrams import SatakeDiagrams
-from dzack_research.preamble.categories.sets.indexed_families import finite_indexed_family_from_values
-from dzack_research.preamble.categories.vinberg_invariants import (
+from sage_extensions.categories.coxeter_diagrams import CoxeterDiagrams
+from sage_extensions.categories.modules.framed.formed.form_modules import FormModules
+from sage_extensions.categories.modules.pure.modules import Modules
+from sage_extensions.categories.rings.ring_foundation import _OwnedRingParent
+from sage_extensions.categories.satake_diagrams import SatakeDiagrams
+from sage_extensions.categories.sets.indexed_families import finite_indexed_family_from_values
+from sage_extensions.categories.vinberg_invariants import (
     VinbergInvariantMatrices,
 )
-from dzack_research.preamble.rings import OwnedRings, session_ring_objects
+from sage_extensions.categories.rings.ring_foundation import OwnedRings
+from sage_extensions.rings import session_ring_objects
 from pydantic import Field, TypeAdapter, ValidationError, model_validator
 from pydantic_core import PydanticCustomError
 
@@ -51,7 +52,7 @@ _domain = _SESSION_RINGS["ZZ"]
 assert isinstance(_domain, OwnedRings.NoZeroDivisors.Commutative.Nontrivial.ParentMethods)
 integer_domain: OwnedRings.NoZeroDivisors.Commutative.Nontrivial.ParentMethods = _domain
 QQ = _SESSION_RINGS["QQ"]
-_QQ_AS_ZZ_MODULE = Modules(QQ).restriction_of_scalars(integer_domain.fraction_field_map())(QQ)
+_QQ_AS_ZZ_MODULE = Modules(QQ).restriction_of_scalars(integer_domain.fraction_field_map())(QQ.regular_module())
 
 
 class GraphVertex(Record):

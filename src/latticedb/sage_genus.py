@@ -11,14 +11,15 @@ import sys
 from collections.abc import Callable
 from fractions import Fraction
 
-from dzack_research.preamble.categories.abstract_categories.mor_categories import CategoricalMor
-from dzack_research.preamble.categories.hyperbolic_lattices import HyperbolicLattices
-from dzack_research.preamble.categories.lattices import Lattices
-from dzack_research.preamble.categories.modules.framed.formed.form_modules import FormModules
-from dzack_research.preamble.categories.modules.pure.modules import Modules
-from dzack_research.preamble.categories.rings.commutative_algebra import FormalPowerSeriesRings
-from dzack_research.preamble.categories.rings.ring_foundation import _OwnedRingElement
-from dzack_research.preamble.rings import OwnedRings, session_ring_objects
+from sage_extensions.categories.abstract_categories.mor_categories import CategoricalMor
+from sage_extensions.categories.hyperbolic_lattices import HyperbolicLattices
+from sage_extensions.categories.lattices import Lattices
+from sage_extensions.categories.modules.framed.formed.form_modules import FormModules
+from sage_extensions.categories.modules.pure.modules import Modules
+from sage_extensions.categories.rings.commutative_algebra import FormalPowerSeriesRings
+from sage_extensions.categories.rings.ring_foundation import _OwnedRingElement
+from sage_extensions.categories.rings.ring_foundation import OwnedRings
+from sage_extensions.rings import session_ring_objects
 
 from latticedb import records
 from latticedb.genus import Request, applies

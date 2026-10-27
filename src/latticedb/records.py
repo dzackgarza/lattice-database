@@ -13,12 +13,18 @@ from collections.abc import Mapping, Sequence
 from fractions import Fraction
 from itertools import combinations
 
-from dzack_research.preamble.categories.coxeter_diagrams import CoxeterDiagrams, RootedCoxeterDiagrams
-from dzack_research.preamble.categories.lattices import DefiniteLattices, Lattices
-from dzack_research.preamble.categories.modules.framed.formed.form_modules import FormedModuleMor, FormModules, FreeFormModules
-from dzack_research.preamble.categories.modules.pure.modules import Modules
-from dzack_research.preamble.categories.rings.ring_foundation import _OwnedRingElement, _OwnedRingParent
-from dzack_research.preamble.rings import OwnedRings, session_ring_objects
+from sage_extensions.categories.coxeter_diagrams import CoxeterDiagrams, RootedCoxeterDiagrams
+from sage_extensions.categories.lattices import DefiniteLattices, Lattices
+from sage_extensions.categories.modules.framed.formed.form_modules import (
+    FormedModuleMor,
+    FormModules,
+    FreeFormModules,
+    _value_from_module_element,
+)
+from sage_extensions.categories.modules.pure.modules import Modules
+from sage_extensions.categories.rings.ring_foundation import _OwnedRingElement, _OwnedRingParent
+from sage_extensions.categories.rings.ring_foundation import OwnedRings
+from sage_extensions.rings import session_ring_objects
 
 from latticedb import model
 from latticedb.card_serialization import KEYS as KEYS
@@ -46,12 +52,21 @@ _domain = _SESSION_RINGS["ZZ"]
 assert isinstance(_domain, OwnedRings.NoZeroDivisors.Commutative.Nontrivial.ParentMethods)
 integer_domain: OwnedRings.NoZeroDivisors.Commutative.Nontrivial.ParentMethods = _domain
 QQ = _SESSION_RINGS["QQ"]
-_QQ_AS_ZZ_MODULE = Modules(QQ).restriction_of_scalars(integer_domain.fraction_field_map())(QQ)
+_QQ_AS_ZZ_MODULE = Modules(QQ).restriction_of_scalars(integer_domain.fraction_field_map())(QQ.regular_module())
 
 
 def _fraction_of(value: _OwnedRingElement) -> Fraction:
     """A rational value of the preamble, as the `Fraction` a card stores."""
     return Fraction(int(value.numerator()), int(value.denominator()))
+
+
+def _formed_norm_fraction(formed: FormModules.ParentMethods, element: tuple[int, ...]) -> Fraction:
+    """Read a formed norm through its value-module and regular-module identifications."""
+    norm = _value_from_module_element(formed, formed(element).q())
+    value_module = norm.parent()
+    if hasattr(value_module, "regular_module_identification"):
+        norm = value_module.regular_module_identification()(norm)
+    return _fraction_of(norm)
 
 
 def _integral_twist(formed: FormModules.ParentMethods) -> tuple[Lattices.ParentMethods, int]:
@@ -62,7 +77,15 @@ def _integral_twist(formed: FormModules.ParentMethods) -> tuple[Lattices.ParentM
     vectors define reflections; card fields stated in the original scale divide by `m`.
     """
     scale = formed.scale_submodule()
-    ideal = integer_domain.fractional_ideal(*(value.underlying_element() for value in scale.embedded_module_generators()))
+    scale_values = []
+    for value in scale.embedded_module_generators():
+        value_module = value.parent()
+        if hasattr(value_module, "regular_module_identification"):
+            value = value_module.regular_module_identification()(value)
+        else:
+            value = value.underlying_element()
+        scale_values.append(value)
+    ideal = integer_domain.fractional_ideal(*scale_values)
     multiplier = ZZ(int(ideal.principal_generator().denominator()))
     gram = formed.twist(multiplier).gram_tensor().change_ring(ZZ)
     return Lattices(ZZ)(gram), int(multiplier)
@@ -104,7 +127,7 @@ def _root_span_factors(formed: FormModules.ParentMethods, roots: tuple[tuple[int
     """
     if not roots:
         return ()
-    from dzack_research.preamble.categories.modules.framed.framed_free_modules import FramedFreeModules
+    from sage_extensions.categories.modules.framed.framed_free_modules import FramedFreeModules
 
     framed: object = formed
     assert isinstance(framed, FramedFreeModules.ParentMethods)
@@ -232,7 +255,7 @@ def _root_span(record: dict[str, Yaml], formed: FormModules.ParentMethods) -> tu
             roots = tuple(parsed_rows)
         case _:
             return None
-    block["norms"] = [rational(_fraction_of(formed(root).q().underlying_element())) for root in roots]
+    block["norms"] = [rational(_formed_norm_fraction(formed, root)) for root in roots]
     return _ordered(block, tuple(model.RootSpan.model_fields)), roots
 
 
@@ -243,7 +266,7 @@ def _root_sublattice(formed: FormModules.ParentMethods, roots: tuple[tuple[int, 
     alone still span the lattice.
     """
     rank = int(formed.module_rank())
-    norm_of = {root: _fraction_of(formed(root).q().underlying_element()) for root in roots}
+    norm_of = {root: _formed_norm_fraction(formed, root) for root in roots}
     factors = _root_span_factors(formed, roots)
     block: dict[str, Yaml] = {"invariant_factors": list(factors)}
     unimodular_span = (1,) * rank
@@ -280,7 +303,14 @@ def derive(record: dict[str, Yaml]) -> dict[str, Yaml]:
     gram = gram_tensor(record["gram_tensor"])
     rank = len(gram)
     module = integer_ring.free_module(rank)
-    formed = FormModules(ZZ)(module.bilinear_hom_space(_QQ_AS_ZZ_MODULE)(gram))
+    rational_gram = tuple(
+        tuple(
+            _QQ_AS_ZZ_MODULE.wrap(QQ(entry.numerator) / QQ(entry.denominator))
+            for entry in row
+        )
+        for row in gram
+    )
+    formed = FormModules(ZZ)(module.bilinear_hom_space(_QQ_AS_ZZ_MODULE)(rational_gram))
     # Inertia uses ordered scalar values on the rational extension; the original
     # ZZ-module retains the integral coordinates used by root and span operations.
     rational_lattice = Lattices(QQ)(gram)
@@ -474,7 +504,19 @@ def local_admission_problems(lattice: Lattice) -> list[str]:
                     elif integral.delta != int(owned.delta()):
                         found.append(f"integral.delta: stated {integral.delta}, computed {int(owned.delta())}")
     formed = (
-        FormModules(ZZ)(integer_ring.free_module(lattice.rank).bilinear_hom_space(_QQ_AS_ZZ_MODULE)(gram))
+        FormModules(ZZ)(
+            integer_ring.free_module(lattice.rank).bilinear_hom_space(_QQ_AS_ZZ_MODULE)(
+                tuple(
+                    tuple(
+                        _QQ_AS_ZZ_MODULE.wrap(
+                            QQ(Fraction(value).numerator) / QQ(Fraction(value).denominator)
+                        )
+                        for value in row
+                    )
+                    for row in gram
+                )
+            )
+        )
         if lattice.definite is not None or lattice.root_span is not None
         else None
     )

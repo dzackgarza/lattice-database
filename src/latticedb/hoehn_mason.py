@@ -18,16 +18,17 @@ has the images of the source generators as its columns.
 from collections.abc import Mapping, Sequence
 from pathlib import Path
 
-from dzack_research.preamble.categories.abstract_categories.mor_categories import CategoricalMor
-from dzack_research.preamble.categories.lattices import Lattices
-from dzack_research.preamble.categories.modules.framed.formed.form_modules import (
+from sage_extensions.categories.abstract_categories.mor_categories import CategoricalMor
+from sage_extensions.categories.lattices import Lattices
+from sage_extensions.categories.modules.framed.formed.form_modules import (
     FormedModuleMor,
     FormModules,
 )
-from dzack_research.preamble.categories.modules.framed.framed_free_modules import FramedFreeModules
-from dzack_research.preamble.categories.modules.pure.modules import Modules
-from dzack_research.preamble.categories.rings.ring_foundation import _OwnedRingElement, _OwnedRingParent
-from dzack_research.preamble.rings import OwnedRings, session_ring_objects
+from sage_extensions.categories.modules.framed.framed_free_modules import FramedFreeModules
+from sage_extensions.categories.modules.pure.modules import Modules
+from sage_extensions.categories.rings.ring_foundation import _OwnedRingElement, _OwnedRingParent
+from sage_extensions.categories.rings.ring_foundation import OwnedRings
+from sage_extensions.rings import session_ring_objects
 from pydantic import BaseModel, ConfigDict, TypeAdapter
 
 from latticedb import corpus, hashimoto
@@ -45,7 +46,7 @@ _domain = _SESSION_RINGS["ZZ"]
 assert isinstance(_domain, OwnedRings.NoZeroDivisors.Commutative.Nontrivial.ParentMethods)
 integer_domain: OwnedRings.NoZeroDivisors.Commutative.Nontrivial.ParentMethods = _domain
 QQ = _SESSION_RINGS["QQ"]
-_QQ_AS_ZZ_MODULE = Modules(QQ).restriction_of_scalars(integer_domain.fraction_field_map())(QQ)
+_QQ_AS_ZZ_MODULE = Modules(QQ).restriction_of_scalars(integer_domain.fraction_field_map())(QQ.regular_module())
 LEECH_RANK = 24
 
 

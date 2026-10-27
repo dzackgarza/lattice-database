@@ -7,7 +7,7 @@ from pathlib import Path
 import frontmatter
 import yaml
 
-from latticedb import certificates, checks, corpus, records, site
+from latticedb import certificates, checks, corpus, genus, records, site
 from latticedb.cli import app
 from latticedb.model import Lattice, Yaml
 
@@ -244,6 +244,71 @@ def test_even_unimodular_named_cards_enrich_and_verify_delta(tmp_path: Path) -> 
         enriched = frontmatter.load(str(lattices / f"{tag}.md")).metadata
         assert enriched["integral"]["delta"] == 0
 
+    # Certification has a separate worker/serialization route. Exercise it on
+    # the same disposable cards; the bounded deadline also ensures any slower
+    # independent genus searches cannot turn this regression into an open-ended
+    # test. The derive request must cross the same delta path as enrichment.
+    # Seed certificates for the already-derived non-derive fields so the
+    # certification worker isolates the derive consumer rather than launching
+    # unrelated genus computations (e.g. hyperbolic-index searches).
+    held_certificates = certificates.load(root)
+    for tag in ("029K", "3ICV"):
+        card_path = lattices / f"{tag}.md"
+        document = frontmatter.load(str(card_path))
+        metadata = document.metadata
+        lattice = Lattice.model_validate(metadata)
+        cited = dict(metadata.get("certifications", {}))
+        for field, (block_name, _model) in genus.BLOCKS.items():
+            block = metadata.get(block_name)
+            value = block.get(field) if isinstance(block, dict) else None
+            if value is None:
+                continue
+            computation = genus.name(tag, field)
+            digest = certificates.certification_hash(
+                computation,
+                lattice,
+                genus.certified_value(field, value, lattice),
+            )
+            cited[f"{block_name}.{field}"] = digest
+            held_certificates[computation] = certificates.Certificate(
+                hash=digest,
+                by="focused regression fixture",
+            )
+        document["certifications"] = cited
+        card_path.write_text(frontmatter.dumps(document))
+    certificates.save(root, held_certificates, ("029K", "3ICV"))
+
+    # Certify one named card per invocation: the scheduler completes a card's
+    # derive request before moving to the next card, while unrelated expensive
+    # genus fields can legitimately consume the remainder of a certification
+    # window. This assertion concerns persisted derive certification for both
+    # named inputs, not the order of unrelated genus fields.
+    for tag in ("029K", "3ICV"):
+        run(
+            "certify",
+            "--tag", tag,
+            "--minutes", "1",
+            "--workers", "1",
+            "--root", str(root),
+        )
+    held_certificates = certificates.load(root)
+    for tag in ("029K", "3ICV"):
+        certified_input = frontmatter.load(str(lattices / f"{tag}.md")).metadata
+        assert certified_input["integral"]["delta"] == 0
+        certified_lattice = Lattice.model_validate(certified_input)
+        derive_name = f"{tag} derive"
+        derive_hash = certificates.certification_hash(
+            derive_name,
+            certified_lattice,
+            records.derived_projection(certified_input),
+        )
+        assert certificates.is_certified(
+            held_certificates,
+            derive_name,
+            certified_lattice.certifications.get("derive"),
+            derive_hash,
+        )
+
     # The public verifier traverses the persisted cards and invokes the same
     # mathematical admission checks used by the read-only verification CLI.
     verification_problems = checks.report(root)
@@ -256,7 +321,7 @@ def test_even_unimodular_named_cards_enrich_and_verify_delta(tmp_path: Path) -> 
         metadata = frontmatter.load(str(lattices / f"{tag}.md")).metadata
         record = declared(metadata["name"], metadata["gram_tensor"])
         record["tag"] = tag
-        record["integral"] = {"delta": metadata["integral"]["delta"]}
+        record["integral"] = {"parity": "even", "delta": metadata["integral"]["delta"]}
         lattice = Lattice.model_validate(record)
         problems = records.local_admission_problems(lattice)
         assert not any("integral.delta" in problem for problem in problems)

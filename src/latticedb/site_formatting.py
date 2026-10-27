@@ -6,7 +6,7 @@ import json
 import re
 from fractions import Fraction
 
-from dzack_research.preamble.categories.lattice_zeta_invariants import PartialLFactor, QuadraticCharacterDiscriminant, QuadraticHypersurfaceZetaFactorization
+from sage_extensions.categories.lattice_zeta_invariants import PartialLFactor, QuadraticCharacterDiscriminant, QuadraticHypersurfaceZetaFactorization
 
 from latticedb.model import (
     Lattice,
@@ -93,8 +93,8 @@ def _l_factor_tex(factor: PartialLFactor) -> str:
 
 def cone_zeta_tex(lattice: Lattice) -> str:
     """Render the preamble-owned zeta factorization of the zero level."""
-    from dzack_research.preamble.categories.lattices import Lattices
-    from dzack_research.preamble.rings import session_ring_objects
+    from sage_extensions.categories.lattices import Lattices
+    from sage_extensions.rings import session_ring_objects
 
     owned = Lattices(session_ring_objects()["ZZ"])(lattice.gram_tensor)
     return _zeta_factorization_tex(owned.quadratic_hypersurface_zeta_factorization(cone=True))
@@ -102,8 +102,8 @@ def cone_zeta_tex(lattice: Lattice) -> str:
 
 def nonzero_zeta_tex(lattice: Lattice) -> str:
     """Render the preamble-owned zeta factorization of a nonzero level."""
-    from dzack_research.preamble.categories.lattices import Lattices
-    from dzack_research.preamble.rings import session_ring_objects
+    from sage_extensions.categories.lattices import Lattices
+    from sage_extensions.rings import session_ring_objects
 
     owned = Lattices(session_ring_objects()["ZZ"])(lattice.gram_tensor)
     return _zeta_factorization_tex(owned.quadratic_hypersurface_zeta_factorization(cone=False))
