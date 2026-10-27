@@ -226,6 +226,37 @@ def test_admission_recomputes_authored_reduction_invariants_through_the_preamble
     assert any("integral.quadratic_character" in problem for problem in problems)
 
 
+def test_even_unimodular_named_cards_enrich_and_verify_delta(tmp_path: Path) -> None:
+    """The original rank-28 even-unimodular cards retain delta on both consumers."""
+    root = tmp_path / "corpus"
+    lattices = root / "lattices"
+    lattices.mkdir(parents=True)
+    shutil.copy(REPOSITORY / corpus.FAMILIES_FILE, root / corpus.FAMILIES_FILE)
+    (root / corpus.RETIRED_FILE).write_text("{}\n")
+    for tag in ("029K", "3ICV"):
+        source = frontmatter.load(str(REPOSITORY / "lattices" / f"{tag}.md"))
+        (lattices / f"{tag}.md").write_text(frontmatter.dumps(source))
+
+    # Run the actual enrichment consumer on both original Gram tensors, in a
+    # disposable corpus so no authored or persisted card data is overwritten.
+    for tag in ("029K", "3ICV"):
+        run("enrich", "--tag", tag, "--root", str(root))
+        enriched = frontmatter.load(str(lattices / f"{tag}.md")).metadata
+        assert enriched["integral"]["delta"] == 0
+
+    # Verification's invariant path re-constructs Lattices(ZZ)(Gram) from the
+    # stored claim. Exercise that exact named-card path and require no delta
+    # admission finding, rather than checking a category-cast surrogate.
+    for tag in ("029K", "3ICV"):
+        metadata = frontmatter.load(str(lattices / f"{tag}.md")).metadata
+        record = declared(metadata["name"], metadata["gram_tensor"])
+        record["tag"] = tag
+        record["integral"] = {"delta": metadata["integral"]["delta"]}
+        lattice = Lattice.model_validate(record)
+        problems = records.local_admission_problems(lattice)
+        assert not any("integral.delta" in problem for problem in problems)
+
+
 def test_admission_recomputes_authored_perfectness_through_the_preamble() -> None:
     record = records.derive(declared("A2", [[2, -1], [-1, 2]]))
     definite = dict(record["definite"])
