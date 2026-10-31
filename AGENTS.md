@@ -1,5 +1,10 @@
 # Lattice database: agent guidance
 
+Use the [shared math container](https://github.com/dzackgarza/ai-review-ci/blob/main/SAGE-CONTAINER.md#use-the-image)
+(`ghcr.io/dzackgarza/sage:develop`) for Lean/elan, Sage with mypy, GAP,
+Julia/Oscar, Macaulay2, and Singular. The guide covers image pull/run commands,
+CI use, and the host launchers.
+
 `README.md` owns the schema, the commands and the conventions. This file states the purpose that
 governs every change to the database.
 
