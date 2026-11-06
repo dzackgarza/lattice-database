@@ -33,7 +33,11 @@ each triple of ranks eleven to twenty, each checked against the sum's own Gram m
 """
 
 from fractions import Fraction
+from pathlib import Path
+import re
 from typing import Iterator
+
+ROOT = Path(__file__).parent.parent
 
 
 def exists(times_plus: int, times_minus: int, a: int, delta: int) -> bool:
@@ -372,3 +376,54 @@ def test_every_triple_of_rank_eleven_to_twenty_is_an_orthogonal_sum_of_the_piece
         gram = sum_gram(candidates[0])
         assert invariants(gram) == triple, (triple, candidates[0], invariants(gram))
         assert signature(gram) == (1, triple[0] - 1), (triple, candidates[0], signature(gram))
+
+
+FAMILY = "nikulin-two-elementary"
+
+
+def card_heads() -> Iterator[tuple[str, str]]:
+    """Each card's tag and the YAML head of its file, unparsed: the test below reads every card."""
+    for path in (ROOT / "lattices").glob("*.md"):
+        text = path.read_text(encoding="utf-8")
+        end = text.find("\n---", 4)
+        yield path.stem, text[:end] if end != -1 else text
+
+
+def lists_family(head: str, family: str) -> bool:
+    """Whether a card's head lists the family, inline after `families:` or one per line under it."""
+    lines = head.splitlines()
+    for index, line in enumerate(lines):
+        if not line.startswith("families:"):
+            continue
+        if family in line:
+            return True
+        for following in lines[index + 1:]:
+            if not following.startswith("- "):
+                break
+            if family in following:
+                return True
+    return False
+
+
+def test_the_family_holds_one_record_for_each_of_the_75_triples() -> None:
+    """The collection is one record for each row of the table, and the corpus holds exactly that.
+
+    The page states the count, and the count is the check of the transcription: Nikulin's
+    Table 1 has 75 rows, which is Alexeev and Engel's "there are 75 cases" (arXiv:2208.10383,
+    §1). A second record for a triple a record already states would be a lattice recorded
+    twice, since for t+, t- > 0 the invariants determine the isometry class (Nikulin 1980,
+    Theorem 3.6.2, p. 144).
+    """
+    page = (ROOT / "pages" / f"{FAMILY}.md").read_text(encoding="utf-8")
+    stated = re.search(r"The table has (\d+) rows", page)
+    assert stated is not None, "the page no longer states how many rows the table has"
+    recorded: list[tuple[str, tuple[int, int, int]]] = []
+    for tag, head in card_heads():
+        if not lists_family(head, FAMILY):
+            continue
+        found = re.search(r"\((?:r, a, delta)\) = \((\d+), (\d+), ([01])\)", head)
+        assert found is not None, f"{tag} is in the family and states no (r, a, delta)"
+        recorded.append((tag, (int(found.group(1)), int(found.group(2)), int(found.group(3)))))
+    assert len(recorded) == int(stated.group(1)), f"{len(recorded)} records, the page states {stated.group(1)}"
+    assert len(recorded) == len(list(triples())) == 75
+    assert sorted(triple for _, triple in recorded) == sorted(triples())
