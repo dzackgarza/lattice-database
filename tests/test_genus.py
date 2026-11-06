@@ -139,6 +139,14 @@ def test_a_card_without_an_integral_block_requests_no_primitive_orbits() -> None
     assert not genus.applies("primitive_orbits", lattice)
 
 
+def test_the_plane_count_enters_the_certified_orbit_result_only_when_it_is_stated() -> None:
+    """#3: a row that states `planes` commits to it, and a row written before the field keeps its hash."""
+    without = genus.certified_value("primitive_orbits", {"O": {"constant": 2, "z": [0, 1], "w": [0, 1]}})
+    assert without == {"O": {"constant": 2, "z": [0, 1], "w": [0, 1]}}
+    with_planes = genus.certified_value("primitive_orbits", {"O": {"constant": 2, "planes": 2, "reference": {"citation": "Sterk"}}})
+    assert with_planes == {"O": {"constant": 2, "z": None, "w": None, "planes": 2}}
+
+
 def test_a_missing_value_is_written(tmp_path: Path) -> None:
     path = tmp_path / "0012.md"
     shutil.copy(REPOSITORY / "lattices" / "0012.md", path)

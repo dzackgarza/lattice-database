@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from typing import Annotated, Literal, Self
+from typing import Annotated, Literal, Self, get_args
 
 from pydantic import Field, model_validator
 
@@ -14,11 +14,20 @@ from latticedb.record_types import (
     Record,
     Reference,
     RootType,
+    Slug,
     Summand,
     VectorList,
 )
 
 OrbitGroup = Literal["O", "O+", "SO", "SO+", "Otilde", "Otilde+", "SOtilde", "SOtilde+"]
+"""The eight standard subgroups of $O(L)$."""
+
+STANDARD_SUBGROUPS: tuple[str, ...] = get_args(OrbitGroup)
+"""The keys of the eight standard subgroups, in the order the schema lists them."""
+
+Subgroup = OrbitGroup | Slug
+"""A subgroup of $O(L)$: one of the eight standard keys, or the slug of an arithmetic-group card of the same lattice, such as `gamma-en-2`."""
+
 """A subgroup $\\Gamma$ of $O(L)$: $S$ is the kernel of the determinant, `+` the kernel of the real spinor norm, and `tilde` the kernel of the action on $A_L$."""
 
 
@@ -38,6 +47,13 @@ class PrimitiveOrbitSeries(Record):
         description=(
             "$c_\\Gamma(0)$, the number of $\\Gamma$-orbits of primitive isotropic lines, not of primitive isotropic vectors. "
             "The orbits of $v$ and of $-v$ are one line orbit unless $-v = \\gamma v$ for some $\\gamma \\in \\Gamma$, so the line count is at least half the vector count and equals it where every orbit is its own negative, as on a definite lattice, where both are 0."
+        ),
+    )
+    planes: Annotated[int, Field(ge=0)] | None = Field(
+        default=None,
+        description=(
+            "The number of $\\Gamma$-orbits of primitive isotropic planes, the rank-two totally isotropic sublattices: the one-dimensional boundary components of the Baily–Borel compactification. "
+            "A lattice of signature $(2, n)$ with $n \\geq 1$ has them; on a definite lattice the count is 0."
         ),
     )
     z: OrbitCounts = Field(
@@ -376,12 +392,13 @@ class IntegralData(Record):
             "(Nikulin 1980, Theorem 1.13.1*). Requires a nonzero determinant; absent when it is not computed."
         ),
     )
-    primitive_orbits: dict[OrbitGroup, PrimitiveOrbitSeries] | None = Field(
+    primitive_orbits: dict[Subgroup, PrimitiveOrbitSeries] | None = Field(
         default=None,
         description=(
             "For a group $\\Gamma \\subseteq O(L)$, the series $F_{L,\\Gamma}(z, w)$ whose coefficient $c_\\Gamma(n)$ is the number of $\\Gamma$-orbits of primitive "
-            "vectors $v$ with $b(v, v) = n$ for $n \\neq 0$, and whose constant term $c_\\Gamma(0)$ is the number of $\\Gamma$-orbits of primitive isotropic *lines*, "
-            "the rank-one isotropic sublattices, for an indefinite lattice (theory/orbits.md). The keys are `O`, `SO`, `O+`, `SO+`, `Otilde`, `SOtilde`, `Otilde+` and `SOtilde+`: $S$ is the kernel of the determinant, "
+            "vectors $v$ with $b(v, v) = n$ for $n \\neq 0$, whose constant term $c_\\Gamma(0)$ is the number of $\\Gamma$-orbits of primitive isotropic *lines*, "
+            "the rank-one isotropic sublattices, for an indefinite lattice (theory/orbits.md), and whose `planes` counts their primitive isotropic planes. "
+            "The keys are `O`, `SO`, `O+`, `SO+`, `Otilde`, `SOtilde`, `Otilde+` and `SOtilde+`, and the slug of an arithmetic-group card of the same lattice for a named subgroup: $S$ is the kernel of the determinant, "
             "$+$ the kernel of the real spinor norm, and $\\widetilde{O}(L)$ the kernel of $O(L) \\to O(A_L)$. "
             "Computed by `latticedb certify` from the preamble's `primitive_orbit_series`, which enumerates the vectors of a definite lattice "
             "and returns the coefficients it owns for an indefinite one; the certificate binds the constant term and the first four $z$- and $w$-coefficients. "

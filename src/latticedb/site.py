@@ -542,6 +542,7 @@ def build(root: Path, target: Path) -> int:
                 ),
                 orthogonal_group=(arithmetic_groups.get(lattice.orthogonal_group) if lattice.orthogonal_group is not None else None),
                 arithmetic_groups=[arithmetic_groups[slug] for slug in lattice.arithmetic_groups if slug in arithmetic_groups],
+                subgroup_latex={slug: arithmetic_groups[slug].latex for slug in arithmetic_groups if arithmetic_groups[slug].lattice == lattice.tag},
                 previous=entries[index - 1].lattice if index > 0 else None,
                 following=entries[index + 1].lattice if index + 1 < len(entries) else None,
             )

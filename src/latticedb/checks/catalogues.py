@@ -12,6 +12,7 @@ from collections.abc import Sequence
 
 from latticedb.corpus import CatalogueEntry, Corpus
 from latticedb.geometric import ProjectiveComplexVariety, ToricHypersurfaceConstruction
+from latticedb.invariant_models import STANDARD_SUBGROUPS
 
 
 def slug_problems(entries: Sequence[CatalogueEntry]) -> list[str]:
@@ -104,6 +105,12 @@ def reference_problems(loaded: Corpus) -> list[str]:
                 found.append(f"{lattice_entry.path}: arithmetic group {slug} must be a card on this lattice")
         if lattice.orthogonal_group is not None and lattice.orthogonal_group not in lattice.arithmetic_groups:
             found.append(f"{lattice_entry.path}: orthogonal_group must also occur in arithmetic_groups")
+        for key in (lattice.integral.primitive_orbits or {}) if lattice.integral is not None else {}:
+            if key in STANDARD_SUBGROUPS:
+                continue
+            named = arithmetic_groups.get(key)
+            if named is None or named.lattice != lattice.tag:
+                found.append(f"{lattice_entry.path}: primitive_orbits names {key}, which is not an arithmetic-group card of {lattice.tag}")
 
     for genus_entry in loaded.genera:
         genus = genus_entry.value

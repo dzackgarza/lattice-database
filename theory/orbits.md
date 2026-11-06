@@ -64,6 +64,10 @@ So $$c_\Gamma(0) = \tfrac{1}{2}\bigl(c_\Gamma^{\mathrm{vec}}(0) + s_\Gamma\bigr)
 The number a record stores in `integral.primitive_orbits[Γ].constant` is $c_\Gamma(0)$, the line count; the two counts agree exactly when every orbit is its own negative, as they do on a definite lattice, where both are $0$.
 The line count is the number of $0$-cusps of the Baily–Borel boundary, which is why it is the line count that a card stores.
 
+$c_\Gamma$ counts primitive isotropic *planes* as well, the rank-two totally isotropic sublattices $E = \mathbb{Z}v + \mathbb{Z}w$, and a record stores that number in `planes`: these are the $1$-cusps of the Baily–Borel boundary, as the lines are its $0$-cusps, and for a lattice of signature $(2, n)$ they are the next stratum of the same compactification.
+A lattice of signature $(1, n)$ has no isotropic plane, and on a definite lattice the count is $0$.
+A row whose key is not one of the eight standard groups names an arithmetic-group card of the same lattice, such as $\Gamma_{\mathrm{En},2}$, and its coefficients are that subgroup's.
+
 So $F_{L,\Gamma}(0, 0) = c_\Gamma(0)$ is the number of $\Gamma$-orbits of primitive isotropic lines, the coefficient of $z^n$ is the number of $\Gamma$-orbits of primitive vectors of norm $n$, and the coefficient of $w^n$ is that of norm $-n$.
 A record states the coefficients that are known, through $z^4$ and $w^4$ at first, and a coefficient that is not known is null.
 An indefinite card states the constant term alone: no positive or negative norm is bounded there.

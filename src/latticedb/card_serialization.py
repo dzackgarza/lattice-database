@@ -127,6 +127,40 @@ def _block(record: dict[str, Yaml], key: str) -> dict[str, Yaml]:
             return {}
 
 
+ORBIT_CERTIFIED_BOUND = 4
+"""The z/w degree through which a certificate commits to a series of orbits."""
+
+
+def orbit_projection(series: dict[str, Yaml]) -> dict[str, Yaml]:
+    """The coefficients of a series of orbits that its certificate commits to.
+
+    One entry per subgroup key: the constant term, which counts primitive isotropic
+    lines on an indefinite lattice, the count of primitive isotropic planes, and the
+    first `ORBIT_CERTIFIED_BOUND` coefficients of `z` and of `w`. A coefficient beyond
+    that bound, and a key of the entry such as its `reference`, is not part of the
+    certified result.
+    """
+    projected: dict[str, Yaml] = {}
+    for group, series_of_group in series.items():
+        if not isinstance(series_of_group, dict):
+            projected[group] = series_of_group
+            continue
+        z = series_of_group.get("z")
+        w = series_of_group.get("w")
+        entry: dict[str, Yaml] = {
+            "constant": series_of_group.get("constant"),
+            "z": z[:ORBIT_CERTIFIED_BOUND] if isinstance(z, list) else z,
+            "w": w[:ORBIT_CERTIFIED_BOUND] if isinstance(w, list) else w,
+        }
+        planes = series_of_group.get("planes")
+        if planes is not None:
+            # Only a stated plane count enters the commitment, so a certificate written
+            # before the field existed still names the same result.
+            entry["planes"] = planes
+        projected[group] = entry
+    return projected
+
+
 def _ordered(block: dict[str, Yaml], fields: tuple[str, ...]) -> dict[str, Yaml]:
     assert set(block) <= set(fields), set(block) - set(fields)
     return {field: block[field] for field in fields if field in block}

@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import json
 import re
+from collections.abc import Mapping
 from fractions import Fraction
 
 from sage_extensions.categories.lattice_zeta_invariants import PartialLFactor, QuadraticCharacterDiscriminant, QuadraticHypersurfaceZetaFactorization
@@ -35,8 +36,10 @@ def group_tex(factors: tuple[int, ...]) -> str:
     return " \\oplus ".join(f"(\\mathbb{{Z}}/{factor})^{{{count}}}" if count > 1 else f"\\mathbb{{Z}}/{factor}" for factor, count in runs) or "0"
 
 
-def orbit_group_tex(group: OrbitGroup) -> str:
-    """TeX for a key of `integral.primitive_orbits`, such as `\\widetilde{SO}^+(L)` for `SOtilde+`."""
+def orbit_group_tex(group: str, named: Mapping[str, str] | None = None) -> str:
+    """TeX for a key of `integral.primitive_orbits`: `\\widetilde{SO}^+(L)` for `SOtilde+`, or a named subgroup's card TeX."""
+    if group not in ORBIT_GROUP_KEYS:
+        return (named or {}).get(group, group.replace("_", "\\_"))
     name, plus = group.removesuffix("+"), "^+" if group.endswith("+") else ""
     letters = name.removesuffix("tilde")
     return f"\\widetilde{{{letters}}}{plus}(L)" if name.endswith("tilde") else f"\\mathrm{{{letters}}}{plus}(L)"

@@ -256,6 +256,8 @@ An indefinite lattice's $O(L)$ is infinite, so its card states the group in `aut
 `integral.primitive_orbits` maps each of `O`, `SO`, `O+`, `SO+`, `Otilde`, `SOtilde`, `Otilde+` and `SOtilde+` to the coefficients `constant`, `z` and `w` of the series $F_{L,\Gamma}(z, w)$, null where a coefficient is not known (`theory/orbits.md`).
 `z` and `w` count the $\Gamma$-orbits of primitive vectors of norm $n$ and $-n$; `constant` counts the $\Gamma$-orbits of primitive isotropic **lines**, the rank-one isotropic sublattices, and not of vectors: an indefinite lattice has infinitely many primitive isotropic vectors on each line, so the vector count is not the one a card states.
 The two counts differ where a vector orbit is not its own negative — the orbits of $v$ and of $-v$ are one line orbit unless $-v = \gamma v$ — and agree on a definite card, where both are 0.
+`planes` counts the $\Gamma$-orbits of primitive isotropic planes, the $1$-cusps of the Baily–Borel boundary, on a lattice of signature $(2, n)$, and is absent where no source or computation states it.
+A key that is not one of the eight standard groups is the slug of an `arithmetic-groups/` card of the same lattice, such as `gamma-en-2`, and its coefficients are that subgroup's; `latticedb verify` refuses a key that names no such card.
 An indefinite card states the constant term alone, the number of $0$-cusps of the Baily–Borel boundary.
 The row is requested on every integral card, definite or indefinite: the preamble returns the coefficients it owns for that lattice, and its certificate binds the constant term and the first four $z$- and $w$-coefficients.
 

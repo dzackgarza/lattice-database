@@ -383,6 +383,17 @@ def test_the_series_of_orbits_of_a2_is_accepted() -> None:
     assert lattice.integral.primitive_orbits["SOtilde"].coefficient(-2) is None
 
 
+def test_an_orbit_row_may_state_planes_and_name_an_arithmetic_group() -> None:
+    """#3: the plane count and a subgroup named by an arithmetic-group slug are stored schema data."""
+    record = with_block(a2(), "integral", primitive_orbits={"O": {"constant": 2, "planes": 2}, "gamma-en-2": {"constant": 5}})
+    lattice = Lattice.model_validate(record)
+    assert lattice.integral is not None and lattice.integral.primitive_orbits is not None
+    assert lattice.integral.primitive_orbits["O"].planes == 2
+    assert lattice.integral.primitive_orbits["gamma-en-2"].constant == 5
+    with pytest.raises(ValidationError):
+        Lattice.model_validate(with_block(a2(), "integral", primitive_orbits={"O": {"constant": 2, "planes": -1}}))
+
+
 def test_orbit_series_are_stored_schema_data_not_mathematically_recomputed() -> None:
     lattice = Lattice.model_validate(with_orbits(a2(), O=[1, 1], SO=[0, 0], O_plus=[7, 3]))
     assert lattice.integral is not None

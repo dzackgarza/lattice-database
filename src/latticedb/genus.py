@@ -30,7 +30,7 @@ from typing import NotRequired, TypedDict
 import frontmatter
 from pydantic import BaseModel, TypeAdapter
 
-from latticedb import certificates, corpus, exceeded, failures, records, storage
+from latticedb import card_serialization, certificates, corpus, exceeded, failures, records, storage
 from latticedb.certificates import Certificate, Certificates
 from latticedb.model import (
     Automorphisms,
@@ -81,8 +81,8 @@ $O(L)$ of an indefinite lattice is infinite, so the card states the group by its
 generators; the order is a field of `definite` alone (#8).
 """
 
-ORBIT_CERTIFIED_BOUND = 4
-"""The z/w degree through which the bounded preamble orbit computation certifies a series."""
+ORBIT_CERTIFIED_BOUND = card_serialization.ORBIT_CERTIFIED_BOUND
+"""The z/w degree through which the preamble orbit computation certifies a series."""
 
 
 def certified_value(field: str, value: Yaml, lattice: Lattice | None = None) -> Yaml:
@@ -100,21 +100,7 @@ def certified_value(field: str, value: Yaml, lattice: Lattice | None = None) -> 
         )
         return [[[entry for entry in row] for row in matrix] for matrix in matrices]
     if field in {"primitive_orbits", "discriminant_orbits"}:
-        if not isinstance(value, dict):
-            return value
-        projected: dict[str, Yaml] = {}
-        for group, series in value.items():
-            if not isinstance(series, dict):
-                projected[group] = series
-                continue
-            z = series.get("z")
-            w = series.get("w")
-            projected[group] = {
-                "constant": series.get("constant"),
-                "z": z[:ORBIT_CERTIFIED_BOUND] if isinstance(z, list) else z,
-                "w": w[:ORBIT_CERTIFIED_BOUND] if isinstance(w, list) else w,
-            }
-        return projected
+        return card_serialization.orbit_projection(value) if isinstance(value, dict) else value
     return value
 
 
