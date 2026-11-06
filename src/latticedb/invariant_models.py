@@ -34,6 +34,34 @@ Subgroup = OrbitGroup | Slug
 OrbitCounts = Annotated[tuple[Annotated[int, Field(ge=0)] | None, ...], Field(strict=False)]
 
 
+class PolarizationRow(Record):
+    """Dutour Sikirić–Hulek's Table 4 line for one degree: the counts the table writes `#h` and `#Γ̄_h`.
+
+    The degree is that of a numerical polarization of an Enriques surface, $h^2 = 2d$ for a primitive
+    $h$ in $M(1/2) = U \\oplus E_8(-1) = \\operatorname{Num}(S)$ (arXiv:2302.01679, Section 2, p. 6).
+    """
+
+    polarizations: Annotated[int, Field(ge=0)] = Field(
+        alias="#h",
+        description=(
+            "The number `#h` of orbits of primitive vectors of this degree in the fundamental domain of the "
+            "Weyl group of $U \\oplus E_8(-1)$, which is that lattice's isometry group (arXiv:2302.01679, (8), p. 9): "
+            "the polarizations of this degree up to isometry (Table 4, p. 17; Table 3, p. 16, gives a "
+            "representative of each). Dutour Sikirić–Hulek state that these numbers agree with the corresponding "
+            "list in Ciliberto–Dedieu–Galati–Knutsen, Appendix."
+        ),
+    )
+    groups: Annotated[int, Field(ge=0)] = Field(
+        alias="#Γ̄_h",
+        description=(
+            "The number `#Γ̄_h` of conjugacy classes of the groups $\\bar\\Gamma_h = \\pi_M(O(M, h)) \\subset "
+            "O^+(\\mathbb{F}_2^{10})$ that the polarizations of this degree define (arXiv:2302.01679, (5) and "
+            "Question 2.1, p. 7; Table 4, p. 17): the modular groups, up to conjugacy."
+        ),
+    )
+    reference: Reference | None = Field(default=None, description="The source of the two counts, with its table and page.")
+
+
 class PrimitiveOrbitSeries(Record):
     """The series $F_{L,\\Gamma}(z, w) = c_\\Gamma(0) + \\sum_{n \\geq 1} c_\\Gamma(n) z^n + \\sum_{n \\geq 1} c_\\Gamma(-n) w^n$ in $\\mathbb{Z}[[z, w]]$.
 
@@ -306,6 +334,14 @@ class FormData(Record):
 class IntegralData(Record):
     """Stored invariants of an integer-valued lattice, when available."""
 
+    @model_validator(mode="after")
+    def _polarization_degrees(self) -> Self:
+        """A degree is even: the table indexes its rows by $2d$, the degree of a polarization."""
+        for degree in (self.polarization_counts or {}):
+            if degree % 2:
+                raise ValueError(f"{degree} is not a degree 2d of a polarization")
+        return self
+
     elementary_primes: Annotated[tuple[Annotated[int, Field(ge=2)], ...], Field(strict=False, max_length=1)] | None = Field(
         default=None,
         description="The singleton [p] when the nontrivial discriminant group is elementary abelian of prime exponent p; [] when it is not; null means unknown.",
@@ -428,6 +464,17 @@ class IntegralData(Record):
             "Computed by `latticedb certify` from the preamble's `primitive_orbit_series`, which enumerates the vectors of a definite lattice "
             "and returns the coefficients it owns for an indefinite one; the certificate binds the constant term and the first four $z$- and $w$-coefficients. "
             "A coefficient that the operation does not return is stated with a reference. Requires a nonzero determinant."
+        ),
+    )
+    polarization_counts: dict[Annotated[int, Field(ge=2)], PolarizationRow] | None = Field(
+        default=None,
+        description=(
+            "Dutour Sikirić–Hulek's Table 4 (arXiv:2302.01679, p. 17), keyed by the degree $2d$ of a numerical "
+            "polarization of an Enriques surface: for each degree, `#h` is the number of orbits of primitive "
+            "vectors of that degree in $U \\oplus E_8(-1) = \\operatorname{Num}(S)$, and `#Γ̄_h` the number of "
+            "conjugacy classes of the modular groups $\\bar\\Gamma_h$ those polarizations define. The table's two "
+            "cumulative columns are not stored: each is the sum of these rows up to its degree. Certified by the "
+            "table's citation, so `latticedb certify` never recomputes it."
         ),
     )
     discriminant_orbits: dict[OrbitGroup, PrimitiveOrbitSeries] | None = Field(

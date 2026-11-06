@@ -558,3 +558,16 @@ def test_sparse_card_preserves_stated_root_span_and_factors(rank: int | None) ->
 def test_sparse_cards_reject_inconsistent_stated_shapes(fields: dict[str, Yaml], expected: str) -> None:
     record = {"tag": "0001", "name": "Source-stated lattice", "latex": "L", **fields}
     assert expected in error_types(record)
+
+
+def test_a_polarization_count_row_is_stored_under_its_degree_with_the_tables_names() -> None:
+    """#10: Table 4's two counts of a degree are schema data, keyed by the degree and named as the table names them."""
+    record = with_block(a2(), "integral", polarization_counts={2: {"#h": 1, "#Γ̄_h": 1}, 12: {"#h": 4, "#Γ̄_h": 3}})
+    lattice = Lattice.model_validate(record)
+    assert lattice.integral is not None and lattice.integral.polarization_counts is not None
+    assert lattice.integral.polarization_counts[12].polarizations == 4
+    assert lattice.integral.polarization_counts[12].groups == 3
+    with pytest.raises(ValidationError, match="not a degree"):
+        Lattice.model_validate(with_block(a2(), "integral", polarization_counts={3: {"#h": 1, "#Γ̄_h": 1}}))
+    with pytest.raises(ValidationError):
+        Lattice.model_validate(with_block(a2(), "integral", polarization_counts={2: {"#h": 1, "#gamma_h": 1}}))

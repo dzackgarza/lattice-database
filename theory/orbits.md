@@ -168,3 +168,12 @@ For the K3 lattice $U^3 \oplus E_8(-1)^2$ this is [GHS 2013](https://arxiv.org/a
 :::
 
 GHS 2009: V. Gritsenko, K. Hulek and G. K. Sankaran, *Abelianisation of orthogonal groups and the fundamental group of modular varieties*, arXiv:0810.1614. GHS 2013: V. Gritsenko, K. Hulek and G. K. Sankaran, *Moduli of K3 surfaces and irreducible symplectic manifolds*, arXiv:1012.4155. Dawes 2022: M. Dawes, *Orbits in lattices*, arXiv:2205.10601.
+
+## Counts of polarizations {#polarizations}
+
+A numerical polarization of an Enriques surface $S$ is a primitive class $h \in \operatorname{Num}(S) = M(1/2) = U \oplus E_8(-1)$ with $h^2 = 2d > 0$ ([Dutour Sikirić–Hulek 2024](https://arxiv.org/abs/2302.01679), Section 2, p. 6).
+$U \oplus E_8(-1)$ is 2-reflective, and its Weyl group is its isometry group ((8), p. 9), so the $O(U \oplus E_8(-1))$-orbits of primitive vectors of one degree — the polarizations of that degree up to isometry — are counted in the fundamental domain $D$ of that Weyl group (Section 3.1, p. 8).
+Dutour Sikirić and Hulek write $\#h$ for that number in degree $2d$, and $\#\bar\Gamma_h$ for the number of conjugacy classes of the groups $\bar\Gamma_h = \pi_M(O(M, h)) \subset O^+(\mathbb{F}_2^{10})$ that those polarizations define ((5) and Question 2.1, p. 7), and they tabulate both for $2d = 2, \dots, 72$ in Table 4, p. 17.
+
+A card stores the two counts under `integral.polarization_counts`, keyed by the degree $2d$ and under the table's own names, each row citing the table and its page.
+The table's two cumulative columns are sums of the stored rows and are not values of their own, so they are not stored.

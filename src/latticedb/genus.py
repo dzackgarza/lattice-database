@@ -134,11 +134,13 @@ def applies(field: str, lattice: Lattice) -> bool:
       quadratic form of an even lattice.
     - `discriminant_orbits`: the Eichler hypothesis of `theory/orbits.md`, an even
       lattice of hyperbolic index at least 2.
+    - `polarization_counts`: no preamble operation presents a table of a source, and
+      every count it holds is certified by the citation of that table.
 
     Everything else — including `integral.primitive_orbits` and the automorphism
     generators on an indefinite card — is asked on every card that can store it (#8).
     """
-    if field == "cusp_form_coordinates":
+    if field in {"cusp_form_coordinates", "polarization_counts"}:
         return False
     block_name, _model = stored_in(field, lattice.definiteness)
     match block_name:
@@ -204,6 +206,9 @@ def stored_in(field: str, definiteness: str | None = None) -> tuple[str, type[Ba
     match (field, definiteness):
         case ("automorphism_group_generator_morphisms", "indefinite"):
             return AUTOMORPHISMS, Automorphisms
+        case ("polarization_counts", _):
+            # Outside BLOCKS: the preamble does not compute it, and a cited count is never requested.
+            return "integral", IntegralData
         case _:
             return BLOCKS[field]
 
