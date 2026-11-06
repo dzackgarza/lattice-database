@@ -93,6 +93,70 @@ def test_group_orbit_and_genus_links_use_the_existing_lattice_records(
     assert loaded.genera[0].value.mass == Fraction(1, 12)
 
 
+def _arithmetic_group(generators: list[str] | None) -> dict[str, object]:
+    """An arithmetic-group card for A2 whose generators are named on the A2 card."""
+    data: dict[str, object] = {"cardinality": 6}
+    if generators is not None:
+        data["generator_morphisms"] = generators
+    return {
+        "slug": "a2-rotations",
+        "name": "Rotations of A2",
+        "latex": "C_{3}",
+        "lattice": "0012",
+        "ambient_lie_group": "o-0-2",
+        "data": data,
+    }
+
+
+def test_an_arithmetic_group_generator_is_one_scale_one_self_isometry_of_its_lattice(
+    tmp_path: Path,
+) -> None:
+    """Each name in `data.generator_morphisms` is one isometry L -> L on the card it names."""
+    (tmp_path / "lattices").mkdir()
+    (tmp_path / "lattices" / "0012.md").symlink_to(ROOT / "lattices" / "0012.md")
+    for name in ("families.yaml", "retired-tags.yaml"):
+        (tmp_path / name).symlink_to(ROOT / name)
+    (tmp_path / "lie-groups").mkdir()
+    (tmp_path / "lie-groups" / "o-0-2.md").symlink_to(ROOT / "lie-groups" / "o-0-2.md")
+    path = tmp_path / "arithmetic-groups" / "a2-rotations.md"
+    _record(path, _arithmetic_group(["O(L) generator 1"]))
+    assert [problem for problem in checks.report(tmp_path) if "generator" in problem] == []
+
+    _record(path, _arithmetic_group(["not an isometry", "O(L) generator 1", "O(L) generator 1"]))
+    problems = checks.report(tmp_path)
+    assert any("generator not an isometry is not one scale-1 self-morphism of 0012" in problem for problem in problems)
+    assert any("each generator of 0012 occurs once in the generator list" in problem for problem in problems)
+
+
+def test_an_arithmetic_group_index_is_a_positive_integer_or_absent() -> None:
+    record = _arithmetic_group(None)
+    data = dict(record["data"])  # type: ignore[arg-type]
+    assert ArithmeticGroup.model_validate(record).data.index_in_orthogonal_group is None
+    assert ArithmeticGroup.model_validate(record | {"data": data | {"index_in_orthogonal_group": 67456}}).data.index_in_orthogonal_group == 67456
+    with pytest.raises(ValidationError):
+        ArithmeticGroup.model_validate(record | {"data": data | {"index_in_orthogonal_group": 0}})
+
+
+def test_the_coble_card_and_its_group_cards_state_only_their_defining_data() -> None:
+    """#7: T_Co's fields wait on `certify` and on sage-extensions#286, so the card carries none of them."""
+    card = frontmatter.load(str(ROOT / "lattices" / "6JRR.md")).metadata
+    assert card["name"] == "T_Co"
+    assert (card["rank"], card["signature"], card["determinant"], card["definiteness"]) == (11, [2, 9], -2048, "indefinite")
+    assert card["gram_tensor"][0][0] == 2 and card["gram_tensor"][1][2] == 2 and card["gram_tensor"][3][3] == -4
+    assert "certifications" not in card
+    assert set(card["integral"]) == {"parity"}
+    assert set(card["indefinite"]) == {"isotropic"}
+    assert "definite" not in card and "root_span" not in card and "morphisms" not in card
+    for slug in ("otilde-t-co", "otilde-plus-t-co"):
+        group = ArithmeticGroup.model_validate(frontmatter.load(str(ROOT / "arithmetic-groups" / f"{slug}.md")).metadata)
+        assert group.lattice == "6JRR"
+        assert group.ambient_lie_group == "o-2-9"
+        assert group.data.index_in_orthogonal_group is None
+        assert group.data.generator_morphisms is None
+        assert group.data.reference is None
+    assert ArithmeticGroup.model_validate(frontmatter.load(str(ROOT / "arithmetic-groups" / "otilde-plus-t-co.md")).metadata).parent_group == "otilde-t-co"
+
+
 def test_complete_intersection_configuration_has_the_stated_dimension() -> None:
     source = frontmatter.load(str(ROOT / "geometric-objects" / "k3-surface.md"))
     source.metadata["slug"] = "quartic-k3"

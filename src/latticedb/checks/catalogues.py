@@ -62,10 +62,18 @@ def reference_problems(loaded: Corpus) -> list[str]:
         group_data = arithmetic.data
         if group_data.defining_relators is not None and group_data.generator_morphisms is None:
             found.append(f"{path}: relators require the generator list they are words in")
-        for name in group_data.generator_morphisms or ():
-            names = {morphism.name for morphism in lattice.morphisms if morphism.target == lattice.tag and morphism.scale == 1}
-            if name not in names:
-                found.append(f"{path}: generator {name} is not a named self-isometry of {lattice.tag}")
+        generators = group_data.generator_morphisms
+        if generators is not None:
+            # A generator is one isometry L -> L on the lattice card it names, so its name
+            # occurs once in the list and names exactly one morphism entry with scale 1.
+            names = [morphism.name for morphism in lattice.morphisms if morphism.target == lattice.tag and morphism.scale == 1]
+            if len(set(generators)) != len(generators):
+                found.append(f"{path}: each generator of {lattice.tag} occurs once in the generator list")
+            found.extend(
+                f"{path}: generator {name} is not one scale-1 self-morphism of {lattice.tag}"
+                for name in dict.fromkeys(generators)
+                if names.count(name) != 1
+            )
         if group_data.stabilized is not None:
             kind, identifier = group_data.stabilized.kind, group_data.stabilized.identifier
             available = {
