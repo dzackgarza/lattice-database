@@ -142,12 +142,15 @@ def applies(field: str, lattice: Lattice) -> bool:
         return False
     block_name, _model = stored_in(field, lattice.definiteness)
     match block_name:
-        case "definite":
-            return lattice.definite is not None
-        case "indefinite":
-            return lattice.indefinite is not None
-        case "hyperbolic":
-            return lattice.hyperbolic is not None
+        # The block gate only rejects: a field it admits still has to pass the
+        # operation's own domain below, which is how a definite card of rank 2 is
+        # refused for spinor regularity.
+        case "definite" if lattice.definite is None:
+            return False
+        case "indefinite" if lattice.indefinite is None:
+            return False
+        case "hyperbolic" if lattice.hyperbolic is None:
+            return False
         case "integral" if lattice.integral is None:
             return False
     rank = lattice.rank
