@@ -355,3 +355,26 @@ def test_an_underived_seeded_card_requests_its_invariants_with_its_derivation(tm
     requested = genus.requests(corpus.load(tmp_path), {}, {}, ())
     assert requested[0]["fields"][0] == "derive"
     assert "genus_symbol" in requested[0]["fields"]
+
+
+def test_certification_stores_the_exact_two_adic_densities_of_the_sum_of_three_squares(tmp_path: Path) -> None:
+    # The preamble prints a local density as `(3)/(2)`; the card stores the rational `3/2`.
+    (tmp_path / "lattices").mkdir()
+    shutil.copy(REPOSITORY / corpus.FAMILIES_FILE, tmp_path / corpus.FAMILIES_FILE)
+    (tmp_path / corpus.RETIRED_FILE).write_text("{}\n")
+    path = tmp_path / "lattices" / "0022.md"
+    document = frontmatter.load(str(REPOSITORY / "lattices" / "0022.md"))
+    del document.metadata["integral"]["local_densities"]
+    del document.metadata["certifications"]["integral.local_densities"]
+    path.write_text(records.record_text(corpus.front_matter(document), document.content))
+    stored = yaml.load((REPOSITORY / "certificates" / f"{certificates.group('0022')}.yaml").read_text(), Loader=yaml.CSafeLoader)
+    held = {name: certificates.Certificate.model_validate(value) for name, value in stored.items() if name.startswith("0022 ")}
+    del held["0022 integral.local_densities"]
+    loaded = corpus.load(tmp_path)
+    assert genus.requests(loaded, held, {}, ("0022",))[0]["fields"] == ["local_densities"]
+    genus.certify(tmp_path, loaded, held, ("0022",), time.time() + 120)
+    # Oracle: the density of t at 2 for x^2 + y^2 + z^2 is #{x in (Z/2^k)^3 : x.x = t mod 2^k} / 2^(2k),
+    # counted for k = 6; the count is constant from k = 5 on.
+    expected = ["3/2", "3/2", 1, "3/4", "3/2", "3/2", 0, "3/4", "3/2", "3/2", 1, "1/2"]
+    assert frontmatter.load(str(path)).metadata["integral"]["local_densities"] == [{"prime": 2, "densities": expected}]
+    assert genus.name("0022", "local_densities") in certificates.load(tmp_path)
