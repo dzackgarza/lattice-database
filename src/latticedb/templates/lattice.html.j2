@@ -185,6 +185,9 @@
     <table class="facts">
       <tbody>
         <tr><th scope="row">{{ theory("indefinite-lattices", "isotropic", "Isotropic") }}</th><td>{{ yes_no(lattice.indefinite.isotropic) }}</td></tr>
+        {% if lattice.automorphisms and lattice.automorphisms.automorphism_group_generator_morphisms %}
+        <tr><th scope="row">Generators of the {{ theory("indefinite-lattices", "isometry-group", "isometry group") }} \(O(L)\)</th><td>{{ lattice.automorphisms.automorphism_group_generator_morphisms | join(", ") }}</td></tr>
+        {% endif %}
       </tbody>
     </table>
   </section>

@@ -33,6 +33,7 @@ from latticedb.collection_query import matches_collection
 from latticedb.corpus import Entry, load, read_card
 from latticedb.geometric import HermitianSymmetricSpace, ProjectiveComplexVariety, RiemannianSymmetricSpace
 from latticedb.model import (
+    Automorphisms,
     DefiniteData,
     FormData,
     HyperbolicData,
@@ -396,6 +397,7 @@ def fields() -> Iterator[tuple[str, str | None, type[BaseModel]]]:
         RootSystemComponent,
     )
     yield "Indefinite lattice", "indefinite", IndefiniteData
+    yield "Generators of an isometry group that is infinite", "automorphisms", Automorphisms
     yield "Hyperbolic lattice", "hyperbolic", HyperbolicData
     yield "Roots of a lattice that is not definite", "root_span", RootSpan
     yield "Related lattice", "related[]", Related

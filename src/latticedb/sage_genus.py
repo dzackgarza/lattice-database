@@ -68,12 +68,18 @@ def _elementary_primes(lattice: Lattices.ParentMethods) -> list[int]:
 
 
 def _orthogonal_group_data(lattice: Lattices.ParentMethods) -> dict[str, JsonValue]:
-    """Serialize the preamble-owned ``O(L)`` and its selected generators."""
+    """Serialize the preamble-owned ``O(L)``, its order when it has one, and its selected generators.
+
+    $O(L)$ of an indefinite lattice is infinite, so that card states the group by its
+    generators and has no order to serialize (#8).
+    """
     group = lattice.orthogonal_group()
-    return {
-        "automorphism_group_order": int(group.cardinality()),
-        "automorphism_group_generator_morphisms": [_matrix_rows(generator) for generator in group.group_generators()],
-    }
+    generators = [_matrix_rows(generator) for generator in group.group_generators()]
+    match lattice.definiteness():
+        case "positive_definite" | "negative_definite":
+            return {"automorphism_group_order": int(group.cardinality()), "automorphism_group_generator_morphisms": generators}
+        case _:
+            return {"automorphism_group_generator_morphisms": generators}
 
 
 def _root_span_data(lattice: Lattices.ParentMethods) -> dict[str, JsonValue]:
@@ -258,10 +264,13 @@ def _compute(request: Request) -> None:
         if field in done:
             continue
         if field in joint:
-            # The answer is one computation, so every field of it is stored together.
+            # The answer is one computation, so every field of it that was asked for is
+            # announced until it finishes and stored together. A field of the computation
+            # this request did not ask for is not announced: it would be logged as an
+            # interruption and never stored.
             fields, compute = joint[field]
             done |= fields
-            _run(tag, sorted(fields), lambda: compute(lattice))
+            _run(tag, [asked for asked in sorted(fields) if asked in request["fields"]], lambda: compute(lattice))
             continue
         done.add(field)
         _run(

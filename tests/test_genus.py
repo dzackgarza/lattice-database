@@ -411,6 +411,58 @@ def test_certification_stores_the_exact_two_adic_densities_of_the_sum_of_three_s
     assert genus.name("0022", "local_densities") in certificates.load(tmp_path)
 
 
+def test_certification_stores_an_indefinite_card_automorphism_generators(tmp_path: Path) -> None:
+    """#8: U's O(L) is infinite, so its card is asked for the generators alone and certifies them."""
+    (tmp_path / "lattices").mkdir()
+    shutil.copy(REPOSITORY / corpus.FAMILIES_FILE, tmp_path / corpus.FAMILIES_FILE)
+    (tmp_path / corpus.RETIRED_FILE).write_text("{}\n")
+    path = tmp_path / "lattices" / "0016.md"
+    document = frontmatter.load(str(REPOSITORY / "lattices" / "0016.md"))
+    # The orbit series of U: one orbit of primitive isotropic vectors, e + f, and no vector of
+    # norm +-1 because U is even.
+    series = {"constant": 1, "z": [0, 0, 0, 0], "w": [0, 0, 0, 0]}
+    metadata = corpus.front_matter(document)
+    metadata["integral"] = {**metadata["integral"], "primitive_orbits": {group: dict(series) for group in ("O", "SO", "O+", "SO+", "Otilde", "SOtilde", "Otilde+", "SOtilde+")}}
+    lattice = Lattice.model_validate(metadata)
+    stored = yaml.load((REPOSITORY / "certificates" / f"{certificates.group('0016')}.yaml").read_text(), Loader=yaml.CSafeLoader)
+    held = {name: certificates.Certificate.model_validate(value) for name, value in stored.items() if name.startswith("0016 ")}
+    # Every value already on the card carries its certificate, so the generators are the only field
+    # this card is asked for.
+    citations = dict(metadata["certifications"])
+    for field in genus.BLOCKS:
+        block_name = genus.stored_in(field, "indefinite")[0]
+        block = metadata.get(block_name)
+        value = block.get(field) if isinstance(block, dict) else None
+        if field == "automorphism_group_generator_morphisms" or value is None:
+            continue
+        computation = genus.name("0016", field, "indefinite")
+        digest = certificates.certification_hash(computation, lattice, genus.certified_value(field, value, lattice))
+        held[computation] = certificates.Certificate(hash=digest, by="test")
+        citations[f"{block_name}.{field}"] = digest
+    metadata["certifications"] = citations
+    path.write_text(records.record_text(metadata, document.content))
+    loaded = corpus.load(tmp_path)
+    assert [field for request in genus.requests(loaded, held, {}, ("0016",)) for field in request["fields"]] == ["automorphism_group_generator_morphisms"]
+    genus.certify(tmp_path, loaded, held, ("0016",), time.time() + 120)
+    card = corpus.front_matter(corpus.read_card(path))
+    # The group is stated by generators alone: no order field, and no `definite` block.
+    assert "definite" not in card
+    certified = Lattice.model_validate(card)
+    assert certified.automorphisms is not None
+    names = certified.automorphisms.automorphism_group_generator_morphisms
+    assert names is not None and len(names) == 2
+    stored_morphisms = {morphism.name: morphism.matrix for morphism in certified.morphisms if morphism.target == "0016" and morphism.scale == 1}
+    matrices = [stored_morphisms[name] for name in names]
+    # The two signed swaps of U: b(x, x) = 2 x_0 x_1 is preserved by e <-> f and by -1.
+    assert {tuple(entry for row in matrix for entry in row) for matrix in matrices} == {(-1, 0, 0, -1), (0, 1, 1, 0)}
+    gram = [[0, 1], [1, 0]]
+    for matrix in matrices:
+        # An isometry of the stored Gram tensor: M^T G M = G.
+        assert [[sum(matrix[i][k] * gram[k][l] * matrix[j][l] for k in range(2) for l in range(2)) for j in range(2)] for i in range(2)] == gram
+    assert "automorphism_group_order" not in card["automorphisms"]
+    assert genus.name("0016", "automorphism_group_generator_morphisms", "indefinite") in certificates.load(tmp_path)
+
+
 def test_certification_keeps_a_root_lattice_integer_valued(tmp_path: Path) -> None:
     # A2 has Gram tensor [[2, -1], [-1, 2]]: every entry is an integer, so its form is integer-valued.
     (tmp_path / "lattices").mkdir()

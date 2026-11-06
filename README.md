@@ -226,6 +226,7 @@ A person writes `name`, `latex`, `aliases`, `families`, `related`, `references` 
 Lattice-db contains no implementation of these operations.
 For a definite integral lattice, CI consumes `L.orthogonal_group()`: the preamble computes and frames $O(L)$, and lattice-db only serializes its cardinality and generator isometries.
 Generator matrices are stored once, as isometries $L\to L$ (morphism entries from the card to itself with `scale: 1`), and the `definite` field stores their names.
+On an indefinite lattice the same operation returns generators of an infinite $O(L)$: the card stores them, and only them, in `automorphisms`, because the group has no order to state.
 The discriminant sequence and the two orbit series are likewise computed by lattice methods and serialized by the certification adapter.
 A completed computation replaces any disagreeing authored value in the scope it computes and then certifies the resulting card value.
 A computation has no time limit of its own: it runs until it finishes or the CI job ends.
@@ -241,6 +242,7 @@ The block itself is stored data: the schema validates its shape, while mathemati
 | --- | --- | --- |
 | `form` | a stored bilinear form | `integer_valued` |
 | `integral` | every $b(e_i, e_j)$ is an integer | `parity`, `elementary_primes`, `level`, `modular_scale`, `discriminant_group`, `discriminant_sequence`, `overlattice_count`, `delta`, `bad_reduction_primes`, `quadratic_character`, `genus_symbol`, `genus_class_count`, `spinor_genus_count`, `spinor_genera`, `hyperbolic_index`, `primitive_orbits`, `anisotropic_primes`, `local_representations`, `local_densities` |
+| `automorphisms` | $b$ is not definite, so $O(L)$ is infinite: the group is stated by generators and has no order | `automorphism_group_generator_morphisms` |
 | `definite` | $b$ is positive or negative definite | `minimum`, `kissing_number`, `minimal_vectors`, `perfect`, `regular`, `spinor_regular`, `automorphism_group_order`, `automorphism_group_generator_morphisms`, `theta_series`, `genus_theta_series`, `theta_series_cuspidal_component`, `cusp_form_coordinates`, `siegel_eisenstein_coefficients`, `root_system`, `roots` |
 | `root_span` | $b$ is not definite | `roots`, `norms`, `summands`, `embedding` |
 | `root_sublattice` | $b$ is definite, or the record has `root_span` | `invariant_factors`, `norms` |
@@ -249,7 +251,8 @@ The block itself is stored data: the schema validates its shape, while mathemati
 
 All invariant blocks and computed fields may be absent on a sparse card.
 A populated field is either authored/source-stated or the serialized result of a preamble operation.
-`definite.automorphism_group_generator_morphisms` is a list of names of isometries $L\to L$ on the same card (morphism entries with `scale: 1`); its certificate commits to the corresponding matrices, not to the chosen names.
+`definite.automorphism_group_generator_morphisms` and `automorphisms.automorphism_group_generator_morphisms` are lists of names of isometries $L\to L$ on the same card (morphism entries with `scale: 1`); their certificates commit to the corresponding matrices, not to the chosen names.
+An indefinite lattice's $O(L)$ is infinite, so its card states the group in `automorphisms`, by generators alone: `latticedb certify` asks the preamble operation `L.orthogonal_group()` for them, and there is no order field to fill (`theory/indefinite-lattices.md`).
 `integral.primitive_orbits` maps each of `O`, `SO`, `O+`, `SO+`, `Otilde`, `SOtilde`, `Otilde+` and `SOtilde+` to the coefficients `constant`, `z` and `w` of the series $F_{L,\Gamma}(z, w)$ of the numbers of $\Gamma$-orbits of primitive vectors of each norm, null where a coefficient is not known (`theory/orbits.md`).
 The row is requested on every integral card, definite or indefinite: the preamble returns the coefficients it owns for that lattice, and its certificate binds the constant term and the first four $z$- and $w$-coefficients.
 

@@ -454,6 +454,23 @@ class RootSystemComponent(Record):
         return int(self.type[1:])
 
 
+class Automorphisms(Record):
+    r"""The generators of $O(L)$ of a lattice whose group is infinite, as isometries of this card.
+
+    An indefinite lattice's $O(L)$ is infinite, so the card states no order: the group is
+    presented by the generators it stores, each an isometry $L \to L$ of this card's Gram
+    tensor. A definite lattice states the order with its generators in `definite`.
+    """
+
+    automorphism_group_generator_morphisms: Annotated[tuple[str, ...], Field(strict=False)] | None = Field(
+        default=None,
+        description=(
+            "Names of self-isometries in this card's `morphisms` field that generate $O(L)$, computed by CI from the preamble operation `L.orthogonal_group()`. "
+            "Each name is a morphism entry whose `target` is this card's tag and whose `scale` is 1."
+        ),
+    )
+
+
 class DefiniteData(Record):
     """Invariants of a definite lattice. They are stated for a positive definite form; on a negative definite lattice they are the invariants of $-b$."""
 

@@ -18,6 +18,13 @@ $L$ is *isotropic* when $b(x, x) = 0$ for some nonzero $x \in L$, and *anisotrop
 A lattice of rank $n + 1 \geq 2$ is *hyperbolic* when its form is nondegenerate with signature $(1, n)$ or $(n, 1)$.
 :::
 
+## Isometry group {#isometry-group}
+
+$O(L)$ is infinite for an indefinite lattice: it contains the Eichler transvections $t(c, a)\colon v \mapsto v - b(a, v) c$ for a primitive isotropic $c$ and $a \in L$, and $\widetilde{O}(L)$ contains them, so the store of an arithmetic subgroup of $O(L)$ cannot be its order.
+
+A record states $O(L)$ by generators, in the block `automorphisms`: one entry names an isometry $L \to L$, a [morphism](morphisms.html) of the card to itself with scale 1, and the preamble operation `L.orthogonal_group()` supplies them.
+It states no order, because the group has none; a definite lattice states the order with its generators, in the block `definite`.
+
 ## Reflective lattices {#reflective}
 
 ::: {.definition}

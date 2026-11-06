@@ -22,6 +22,9 @@ from pydantic import Field, ValidationError, model_validator
 from pydantic_core import InitErrorDetails
 
 from latticedb.invariant_models import (
+    Automorphisms as Automorphisms,
+)
+from latticedb.invariant_models import (
     ChamberData as ChamberData,
 )
 from latticedb.invariant_models import (
@@ -211,6 +214,7 @@ class Lattice(Record):
     references: Annotated[tuple[Reference, ...], Field(strict=False)] = Field(default=(), description="Literature for the lattice.")
     form: FormData | None = Field(default=None, description=FormData.__doc__)
     integral: IntegralData | None = Field(default=None, description=IntegralData.__doc__)
+    automorphisms: Automorphisms | None = Field(default=None, description=Automorphisms.__doc__)
     definite: DefiniteData | None = Field(default=None, description=DefiniteData.__doc__)
     indefinite: IndefiniteData | None = Field(default=None, description=IndefiniteData.__doc__)
     hyperbolic: HyperbolicData | None = Field(default=None, description=HyperbolicData.__doc__)
@@ -240,6 +244,7 @@ class Lattice(Record):
         if not problems:
             problems = [
                 *self._integral_problems(),
+                *self._automorphism_problems(),
                 *self._definite_problems(),
                 *self._root_problems(),
                 *self._dual_problems(),
@@ -362,19 +367,29 @@ class Lattice(Record):
                 {"listed": len(genera), "count": count},
             )
 
+    def _generator_problems(self, block: str, generator_names: tuple[str, ...] | None) -> Iterator[InitErrorDetails]:
+        """The stored names of generators must each name one isometry of this card."""
+        if generator_names is None:
+            return
+        self_isometry_names = [morphism.name for morphism in self.morphisms if morphism.target == self.tag and morphism.scale == 1]
+        if len(set(generator_names)) != len(generator_names) or any(self_isometry_names.count(name) != 1 for name in generator_names):
+            yield _problem(
+                "automorphism_group_generators",
+                "each generator name occurs once in the generator list and names exactly one isometry L -> L (a morphism entry with scale 1) on this lattice card",
+                (block, "automorphism_group_generator_morphisms"),
+            )
+
+    def _automorphism_problems(self) -> Iterator[InitErrorDetails]:
+        """An indefinite lattice's $O(L)$ is infinite, so its block states generators and no order."""
+        if self.automorphisms is None:
+            return
+        yield from self._generator_problems("automorphisms", self.automorphisms.automorphism_group_generator_morphisms)
+
     def _definite_problems(self) -> Iterator[InitErrorDetails]:
         if self.definite is None:
             return
         data = self.definite
-        generator_names = data.automorphism_group_generator_morphisms
-        if generator_names is not None:
-            self_isometry_names = [morphism.name for morphism in self.morphisms if morphism.target == self.tag and morphism.scale == 1]
-            if len(set(generator_names)) != len(generator_names) or any(self_isometry_names.count(name) != 1 for name in generator_names):
-                yield _problem(
-                    "automorphism_group_generators",
-                    "each generator name occurs once in the generator list and names exactly one isometry L -> L (a morphism entry with scale 1) on this lattice card",
-                    ("definite", "automorphism_group_generator_morphisms"),
-                )
+        yield from self._generator_problems("definite", data.automorphism_group_generator_morphisms)
         yield from self._theta_problems()
         if data.roots is not None and any(
             len(component.simple_roots) != component.rank or (self.rank is not None and any(len(row) != self.rank for row in component.simple_roots))

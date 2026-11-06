@@ -66,6 +66,41 @@ def test_definite_group_generators_name_scale_one_self_morphisms() -> None:
         Lattice.model_validate(bad)
 
 
+def test_an_indefinite_card_states_its_generators_and_no_order() -> None:
+    """The block of an infinite $O(L)$: generators that name self-isometries, and no order field."""
+    record = u()
+    swap, minus = [[0, 1], [1, 0]], [[-1, 0], [0, -1]]
+    record["morphisms"] = [
+        {"target": "0016", "name": "the swap", "matrix": swap, "scale": 1},
+        {"target": "0016", "name": "minus the identity", "matrix": minus, "scale": 1},
+    ]
+    record["automorphisms"] = {"automorphism_group_generator_morphisms": ["the swap", "minus the identity"]}
+    lattice = Lattice.model_validate(record)
+    assert lattice.automorphisms is not None
+    assert lattice.automorphisms.automorphism_group_generator_morphisms == ("the swap", "minus the identity")
+    assert "automorphism_group_order" not in type(lattice.automorphisms).model_fields
+
+    missing = record | {"automorphisms": {"automorphism_group_generator_morphisms": ["missing"]}}
+    with pytest.raises(ValidationError, match="each generator name occurs once"):
+        Lattice.model_validate(missing)
+
+
+def u() -> dict[str, Yaml]:
+    """The hyperbolic plane U = I_{1,1}: indefinite, even, unimodular, one orbit of primitive isotropic vectors."""
+    return {
+        "tag": "0016",
+        "name": "U",
+        "latex": "U",
+        "rank": 2,
+        "gram_tensor": [[0, 1], [1, 0]],
+        "signature": [1, 1],
+        "determinant": -1,
+        "definiteness": "indefinite",
+        "integral": {"parity": "even"},
+        "indefinite": {"isotropic": True},
+    }
+
+
 def e8() -> dict[str, Yaml]:
     """The root lattice E8: even, unimodular, positive definite, 240 minimal vectors."""
     return {

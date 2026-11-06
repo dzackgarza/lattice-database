@@ -42,8 +42,9 @@ def problems(loaded: Corpus, held: Certificates, cards: frozenset[str] | None = 
             held, derive_name, cited.get("derive"), derive_hash
         ):
             found.append(f"{entry.path}: Gram-derived fields contradict their completed computation certificate")
-        for field, (block_name, _) in genus.BLOCKS.items():
-            computation = genus.name(entry.lattice.tag, field)
+        for field in genus.BLOCKS:
+            block_name = genus.stored_in(field, entry.lattice.definiteness)[0]
+            computation = genus.name(entry.lattice.tag, field, entry.lattice.definiteness)
             certificate = held.get(computation)
             block = metadata.get(block_name)
             value = block.get(field) if isinstance(block, dict) else None

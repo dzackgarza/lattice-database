@@ -23,6 +23,7 @@ KEYS = (
     "dual_gram_tensor",
     "form",
     "integral",
+    "automorphisms",
     "definite",
     "indefinite",
     "root_span",

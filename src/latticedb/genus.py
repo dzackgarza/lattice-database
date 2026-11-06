@@ -33,6 +33,7 @@ from pydantic import BaseModel, TypeAdapter
 from latticedb import certificates, corpus, exceeded, failures, records, storage
 from latticedb.certificates import Certificate, Certificates
 from latticedb.model import (
+    Automorphisms,
     DefiniteData,
     FormData,
     HyperbolicData,
@@ -72,6 +73,13 @@ BLOCKS: dict[str, tuple[str, type[BaseModel]]] = {
     "norms": ("root_span", RootSpan),
 }
 """Each preamble-computed field, with the card block that stores it."""
+
+AUTOMORPHISMS = "automorphisms"
+"""The block of an indefinite card's automorphism data: the generators of $O(L)$, no order.
+
+$O(L)$ of an indefinite lattice is infinite, so the card states the group by its
+generators; the order is a field of `definite` alone (#8).
+"""
 
 ORBIT_CERTIFIED_BOUND = 4
 """The z/w degree through which the bounded preamble orbit computation certifies a series."""
@@ -127,8 +135,12 @@ def applies(field: str, lattice: Lattice) -> bool:
     match field:
         case "integer_valued":
             return True
-        case "automorphism_group_order" | "automorphism_group_generator_morphisms":
+        case "automorphism_group_order":
             return lattice.definite is not None
+        case "automorphism_group_generator_morphisms":
+            # An indefinite card asks for the generators of its infinite O(L); a definite one
+            # asks for the same generators in `definite`, beside the order (#8).
+            return lattice.definite is not None or lattice.definiteness == "indefinite"
         case _ if lattice.integral is None:
             return False
         case "reflective":
@@ -190,9 +202,23 @@ class Request(TypedDict):
     """A computation of these fields was cut short by an earlier job."""
 
 
-def name(tag: str, field: str) -> str:
-    """The name of the certificate of `field` of the record `tag`."""
-    return f"{tag} derive" if field == "derive" else f"{tag} {BLOCKS[field][0]}.{field}"
+def stored_in(field: str, definiteness: str | None = None) -> tuple[str, type[BaseModel]]:
+    """The block that stores `field` on a card of `definiteness`, and that block's model.
+
+    A definite card states the order of $O(L)$ with its generators in `definite`, where
+    `BLOCKS` keeps every field. An indefinite lattice's $O(L)$ is infinite, so its data
+    is the generators alone and lives in `automorphisms` (#8).
+    """
+    match (field, definiteness):
+        case ("automorphism_group_generator_morphisms", "indefinite"):
+            return AUTOMORPHISMS, Automorphisms
+        case _:
+            return BLOCKS[field]
+
+
+def name(tag: str, field: str, definiteness: str | None = None) -> str:
+    """The name of the certificate of `field` of the record `tag`, in the block that stores it."""
+    return f"{tag} derive" if field == "derive" else f"{tag} {stored_in(field, definiteness)[0]}.{field}"
 
 
 def in_shard(tag: str, shard: tuple[int, int]) -> bool:
@@ -253,10 +279,10 @@ def requests(
             applicable = list(BLOCKS) if lattice.rank is None or needs_derive else [field for field in BLOCKS if applies(field, lattice)]
         fields = []
         for field in applicable:
-            block_name = BLOCKS[field][0]
+            block_name = stored_in(field, lattice.definiteness)[0]
             block = metadata.get(block_name)
             stored_value = block.get(field) if isinstance(block, dict) else None
-            computation = name(lattice.tag, field)
+            computation = name(lattice.tag, field, lattice.definiteness)
             if exceeded.is_exceeded(log, computation, lattice) or failures.blocked(triage, computation, lattice):
                 continue
             expected_hash = certificates.certification_hash(computation, lattice, certified_value(field, stored_value, lattice))
@@ -268,7 +294,7 @@ def requests(
             # Without its derivation the card has no hypotheses for its other fields.
             lost_fields, fields = fields, []
         else:
-            lost_fields = [field for field in fields if exceeded.was_lost(log, name(lattice.tag, field), lattice)]
+            lost_fields = [field for field in fields if exceeded.was_lost(log, name(lattice.tag, field, lattice.definiteness), lattice)]
             fields = [field for field in fields if field not in lost_fields]
         gram = [[int(value) if value.denominator == 1 else str(value) for value in row] for row in lattice.gram_tensor]
         if lost_fields:
@@ -277,7 +303,7 @@ def requests(
                 lost[-1]["record"] = metadata
             sizes[lattice.tag] = (len(gram), abs(lattice.determinant or Fraction(0)))
         if fields:
-            interrupted = [field for field in fields if exceeded.seconds_run(log, name(lattice.tag, field), lattice) is not None]
+            interrupted = [field for field in fields if exceeded.seconds_run(log, name(lattice.tag, field, lattice.definiteness), lattice) is not None]
             rest = [field for field in fields if field not in interrupted]
             semi = [field for field in interrupted + rest if field in SEMI_DECISIONS]
             fields = [field for field in interrupted + rest if field not in SEMI_DECISIONS]
@@ -510,10 +536,11 @@ def store(path: Path, values: dict[str, Yaml]) -> None:
     if "roots" in values:
         # Computed roots generate L, so L = ZPhi(L) and the block has no summands or embedding.
         metadata["root_span"] = {}
-    for field, (block_name, model) in BLOCKS.items():
+    for field in BLOCKS:
         value = values.get(field)
         if value is None:
             continue
+        block_name, model = stored_in(field, metadata.get("definiteness"))
         if field == "automorphism_group_generator_morphisms":
             assert isinstance(value, list)
             generator_names, morphisms = _generator_morphisms(path.stem, morphisms, value)
@@ -582,9 +609,9 @@ def certify(
             value = records.derived_projection(metadata)
         else:
             short = field.rsplit(".", 1)[-1]
-            if short not in BLOCKS or name(tag, short) != computation:
+            if short not in BLOCKS or name(tag, short, lattice.definiteness) != computation:
                 continue
-            block = metadata.get(BLOCKS[short][0])
+            block = metadata.get(stored_in(short, lattice.definiteness)[0])
             if not isinstance(block, dict) or block.get(short) is None:
                 continue
             value = certified_value(short, block[short], lattice)
@@ -650,7 +677,7 @@ def certify(
                 match values:
                     case {"started": list() as started}:
                         for field in started:
-                            computation = name(entry.lattice.tag, str(field))
+                            computation = name(entry.lattice.tag, str(field), entry.lattice.definiteness)
                             log[computation] = exceeded.Interruption(
                                 hash=exceeded.input_hash(computation, entry.lattice),
                                 seconds=0,
@@ -676,8 +703,8 @@ def certify(
                         continue
                 for field in BLOCKS:
                     if field in values:
-                        log.pop(name(entry.lattice.tag, field), None)
-                        running.pop(name(entry.lattice.tag, field), None)
+                        log.pop(name(entry.lattice.tag, field, entry.lattice.definiteness), None)
+                        running.pop(name(entry.lattice.tag, field, entry.lattice.definiteness), None)
                 exceeded.save(root, log)
                 store(entry.path, values)
                 stored = corpus.front_matter(corpus.read_card(entry.path))
@@ -686,10 +713,10 @@ def certify(
                 for field in BLOCKS:
                     if field not in values or values[field] is None:
                         continue
-                    block_name = BLOCKS[field][0]
+                    block_name = stored_in(field, stored_lattice.definiteness)[0]
                     block = stored.get(block_name)
                     assert isinstance(block, dict)
-                    computation = name(entry.lattice.tag, field)
+                    computation = name(entry.lattice.tag, field, stored_lattice.definiteness)
                     certificate_hash = certificates.certification_hash(
                         computation,
                         stored_lattice,
@@ -723,16 +750,16 @@ def cite(path: Path, field: str, value: Yaml, reference: dict[str, str], held: C
     """
     document = corpus.read_card(path)
     metadata = corpus.front_matter(document)
-    block_name = BLOCKS[field][0]
+    block_name, model = stored_in(field, metadata.get("definiteness"))
     block = TypeAdapter(dict[str, Yaml]).validate_python(metadata.get(block_name) or {}, strict=True)
     assert block.get(field) in (None, value), f"{path}: {block_name}.{field} is {block.get(field)}, the source proves {value}"
     block[field] = value
-    metadata[block_name] = {key: block[key] for key in BLOCKS[field][1].model_fields if key in block}
+    metadata[block_name] = {key: block[key] for key in model.model_fields if key in block}
     references = TypeAdapter(list[Yaml]).validate_python(metadata.get("references") or [], strict=True)
     if reference not in references:
         metadata["references"] = [*references, {key: value for key, value in reference.items()}]
     lattice = Lattice.model_validate(metadata)
-    computation = name(lattice.tag, field)
+    computation = name(lattice.tag, field, lattice.definiteness)
     certificate_hash = certificates.certification_hash(computation, lattice, certified_value(field, value, lattice))
     metadata["certifications"] = {**lattice.certifications, f"{block_name}.{field}": certificate_hash}
     held[computation] = Certificate(hash=certificate_hash, by=reference["citation"])
