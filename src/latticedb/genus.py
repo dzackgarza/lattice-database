@@ -772,3 +772,53 @@ def cite(path: Path, field: str, value: Yaml, reference: dict[str, str], held: C
     metadata["certifications"] = {**lattice.certifications, f"{block_name}.{field}": certificate_hash}
     held[computation] = Certificate(hash=certificate_hash, by=reference["citation"])
     path.write_text(records.record_text(metadata, document.content))
+
+
+def cite_orbit_row(
+    path: Path,
+    group: str,
+    series: dict[str, Yaml],
+    reference: dict[str, str],
+    held: Certificates,
+) -> None:
+    """Store one row of `integral.primitive_orbits` and certify the field by the row's citation.
+
+    A row is the series of one subgroup, keyed by its group: the citation that proves it names
+    the paper and the locator, and it joins the card's references. The certificate is one per
+    field, so its hash commits to the projected row set and its provenance names the citation of
+    every row that carries one, this row's first; certification therefore never recomputes a
+    cited row, and a different value already on the card contradicts the source.
+    """
+    document = corpus.read_card(path)
+    metadata = corpus.front_matter(document)
+    block_name, model = stored_in("primitive_orbits", metadata.get("definiteness"))
+    block = TypeAdapter(dict[str, Yaml]).validate_python(metadata.get(block_name) or {}, strict=True)
+    rows = block.get("primitive_orbits")
+    series_of_group = dict(TypeAdapter(dict[str, Yaml]).validate_python(rows or {}, strict=True))
+    assert series_of_group.get(group) in (None, series), (
+        f"{path}: {block_name}.primitive_orbits.{group} is {series_of_group.get(group)}, the source proves {series}"
+    )
+    series_of_group[group] = series
+    block["primitive_orbits"] = {key: series_of_group[key] for key in sorted(series_of_group)}
+    metadata[block_name] = {key: block[key] for key in model.model_fields if key in block}
+    references = TypeAdapter(list[Yaml]).validate_python(metadata.get("references") or [], strict=True)
+    if reference not in references:
+        metadata["references"] = [*references, {key: value for key, value in reference.items()}]
+    lattice = Lattice.model_validate(metadata)
+    computation = name(lattice.tag, "primitive_orbits", lattice.definiteness)
+    certificate_hash = certificates.certification_hash(computation, lattice, certified_value("primitive_orbits", block["primitive_orbits"], lattice))
+    metadata["certifications"] = {**lattice.certifications, f"{block_name}.primitive_orbits": certificate_hash}
+    held[computation] = Certificate(hash=certificate_hash, by=_orbit_provenance(block["primitive_orbits"], reference))
+    path.write_text(records.record_text(metadata, document.content))
+
+
+def _orbit_provenance(series_of_group: dict[str, Yaml], reference: dict[str, str]) -> str:
+    """The citations of the rows a certificate commits to, this row's own first."""
+    citations = [reference["citation"]]
+    for key in sorted(series_of_group):
+        row = series_of_group[key]
+        cited = row.get("reference") if isinstance(row, dict) else None
+        citation = cited.get("citation") if isinstance(cited, dict) else None
+        if citation and citation not in citations:
+            citations.append(citation)
+    return "; ".join(citations)

@@ -367,6 +367,7 @@ The address of a lattice is `tag/<TAG>.html`.
 Seeding reads the source rows and writes cards.
 A row whose Gram tensor a card already states joins that card: its citation, families, related lattices and prose are added there, its other stated values must agree with the card's, and no second card is written.
 A source that proves a value of its rows certifies it: `just regular-ternaries` stores each regular or spinor regular ternary form's value with a certificate whose provenance is the row's citation.
+A row of `integral.primitive_orbits` is certified the same way by `genus.cite_orbit_row`: it stores the row under its group key, joins the citation with its locator to the card's references, and writes the field's one certificate, whose hash commits to the projected row set and whose provenance names the citation of every row that carries one, the cited row's first.
 
 **Author:** Write or edit `lattices/<TAG>.md` for a lattice without a stored source row.
 The tag names its permanent page.

@@ -564,3 +564,39 @@ def test_certification_keeps_a_root_lattice_integer_valued(tmp_path: Path) -> No
     genus.certify(tmp_path, loaded, held, ("0012",), time.time() + 120)
     assert frontmatter.load(str(path)).metadata["form"]["integer_valued"] is True
     assert genus.name("0012", "integer_valued") in certificates.load(tmp_path)
+
+
+def test_a_primitive_orbit_row_is_stored_and_certified_by_its_citations(tmp_path: Path) -> None:
+    """A cited row joins the field under its group key, and one certificate names every citation."""
+    (tmp_path / "lattices").mkdir()
+    shutil.copy(REPOSITORY / corpus.FAMILIES_FILE, tmp_path / corpus.FAMILIES_FILE)
+    (tmp_path / corpus.RETIRED_FILE).write_text("{}\n")
+    shutil.copy(REPOSITORY / "lattices" / "029J.md", tmp_path / "lattices")
+    path = tmp_path / "lattices" / "029J.md"
+    reference = {
+        "citation": "H. Sterk, \"Compactifications of the period space of Enriques surfaces, Part I\", "
+        "Math. Z. 207 (1991), 1-36, Theorem 4.0.1, p. 55.",
+        "url": "https://doi.org/10.1007/BF02571383",
+    }
+    held: certificates.Certificates = {}
+    genus.cite_orbit_row(path, "SOtilde", {"constant": 3}, reference, held)
+
+    metadata = corpus.front_matter(corpus.read_card(path))
+    series_of_group = metadata["integral"]["primitive_orbits"]
+    assert series_of_group["SOtilde"] == {"constant": 3}
+    assert {"O", "gamma-en-2", "Otilde+"} <= set(series_of_group), "the rows already on the card stay"
+    assert reference in [dict(entry) for entry in metadata["references"]], "the citation joins the card"
+    lattice = Lattice.model_validate(metadata)
+    computation = genus.name("029J", "primitive_orbits", lattice.definiteness)
+    digest = certificates.certification_hash(
+        computation,
+        lattice,
+        genus.certified_value("primitive_orbits", series_of_group, lattice),
+    )
+    assert lattice.certifications["integral.primitive_orbits"] == digest
+    assert held[computation].hash == digest
+    assert held[computation].by.startswith(reference["citation"]), "this row's citation leads the provenance"
+    assert "Sterk" in held[computation].by and "Dutour" in held[computation].by, "the other cited rows are named too"
+
+    with pytest.raises(AssertionError, match="the source proves"):
+        genus.cite_orbit_row(path, "O", {"constant": 3}, reference, held)
