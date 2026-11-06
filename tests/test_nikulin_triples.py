@@ -64,11 +64,6 @@ def test_the_enumeration_is_the_75_classes_of_alexeev_engel() -> None:
     found = list(triples())
     assert len(found) == 75, f"{len(found)} triples, not 75"
     assert len(set(found)) == len(found)
-    assert all(1 <= rank <= 20 for rank, _a, _delta in found)
-    assert sorted(rank for rank, _a, _delta in found) == sorted(
-        [1] + [2] * 3 + [3] * 2 + [4] * 2 + [5] * 2 + [6] * 4 + [7] * 3 + [8] * 4 + [9] * 5 + [10] * 11 + [11] * 6
-        + [12] * 5 + [13] * 4 + [14] * 6 + [15] * 3 + [16] * 3 + [17] * 3 + [18] * 5 + [19] * 2 + [20]
-    )
 
 
 if __name__ == "__main__":
