@@ -128,6 +128,20 @@ def test_an_arithmetic_group_generator_is_one_scale_one_self_isometry_of_its_lat
     assert any("each generator of 0012 occurs once in the generator list" in problem for problem in problems)
 
 
+def test_an_arithmetic_group_states_its_line_plane_and_flag_counts() -> None:
+    """#10: the three stratum counts are nonnegative integers, and a flag count requires both strata."""
+    record = _arithmetic_group(None)
+    data = dict(record["data"])  # type: ignore[arg-type]
+    stated = ArithmeticGroup.model_validate(record | {"data": data | {"line_orbits": 1, "plane_orbits": 4, "flag_orbits": 7}})
+    assert (stated.data.line_orbits, stated.data.plane_orbits, stated.data.flag_orbits) == (1, 4, 7)
+    assert ArithmeticGroup.model_validate(record | {"data": data | {"plane_orbits": 9}}).data.plane_orbits == 9
+    assert ArithmeticGroup.model_validate(record).data.flag_orbits is None
+    with pytest.raises(ValidationError, match="a flag count requires"):
+        ArithmeticGroup.model_validate(record | {"data": data | {"flag_orbits": 7}})
+    with pytest.raises(ValidationError):
+        ArithmeticGroup.model_validate(record | {"data": data | {"line_orbits": -1}})
+
+
 def test_an_arithmetic_group_index_is_a_positive_integer_or_absent() -> None:
     record = _arithmetic_group(None)
     data = dict(record["data"])  # type: ignore[arg-type]

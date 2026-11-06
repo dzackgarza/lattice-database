@@ -157,7 +157,32 @@ class GroupData(Record):
             "in the record basis. A group states a set of representatives, not necessarily all of them."
         ),
     )
+    line_orbits: Annotated[int, Field(ge=0)] | None = Field(
+        default=None,
+        description=(
+            "The number of $\\Gamma$-orbits of primitive isotropic lines, the rank-one isotropic sublattices: the $0$-cusps of the Baily–Borel boundary, "
+            "as `integral.primitive_orbits[\\Gamma].constant` states them on the lattice card, when a source or a computation counts them for this subgroup."
+        ),
+    )
+    plane_orbits: Annotated[int, Field(ge=0)] | None = Field(
+        default=None,
+        description=(
+            "The number of $\\Gamma$-orbits of primitive isotropic planes, the rank-two totally isotropic sublattices: the $1$-cusps, as "
+            "`integral.primitive_orbits[\\Gamma].planes` states them on the lattice card."
+        ),
+    )
+    flag_orbits: Annotated[int, Field(ge=0)] | None = Field(
+        default=None,
+        description="The number of $\\Gamma$-orbits of isotropic flags, a primitive isotropic line contained in a primitive isotropic plane: the incidence of the two strata.",
+    )
     reference: Reference | None = Field(default=None, description="The source of the structure and the representatives.")
+
+    @model_validator(mode="after")
+    def _orbit_counts(self) -> Self:
+        """A flag count is made of the two strata it joins, so it requires both counts."""
+        if self.flag_orbits is not None and (self.line_orbits is None or self.plane_orbits is None):
+            raise ValueError("a flag count requires the line and plane counts whose incidence it counts")
+        return self
 
 
 class DiscriminantSequenceData(Record):
