@@ -378,3 +378,23 @@ def test_certification_stores_the_exact_two_adic_densities_of_the_sum_of_three_s
     expected = ["3/2", "3/2", 1, "3/4", "3/2", "3/2", 0, "3/4", "3/2", "3/2", 1, "1/2"]
     assert frontmatter.load(str(path)).metadata["integral"]["local_densities"] == [{"prime": 2, "densities": expected}]
     assert genus.name("0022", "local_densities") in certificates.load(tmp_path)
+
+
+def test_certification_keeps_a_root_lattice_integer_valued(tmp_path: Path) -> None:
+    # A2 has Gram tensor [[2, -1], [-1, 2]]: every entry is an integer, so its form is integer-valued.
+    (tmp_path / "lattices").mkdir()
+    shutil.copy(REPOSITORY / corpus.FAMILIES_FILE, tmp_path / corpus.FAMILIES_FILE)
+    (tmp_path / corpus.RETIRED_FILE).write_text("{}\n")
+    path = tmp_path / "lattices" / "0012.md"
+    document = frontmatter.load(str(REPOSITORY / "lattices" / "0012.md"))
+    del document.metadata["form"]["integer_valued"]
+    del document.metadata["certifications"]["form.integer_valued"]
+    path.write_text(records.record_text(corpus.front_matter(document), document.content))
+    stored = yaml.load((REPOSITORY / "certificates" / f"{certificates.group('0012')}.yaml").read_text(), Loader=yaml.CSafeLoader)
+    held = {name: certificates.Certificate.model_validate(value) for name, value in stored.items() if name.startswith("0012 ")}
+    del held[genus.name("0012", "integer_valued")]
+    loaded = corpus.load(tmp_path)
+    assert genus.requests(loaded, held, {}, ("0012",))[0]["fields"] == ["integer_valued"]
+    genus.certify(tmp_path, loaded, held, ("0012",), time.time() + 120)
+    assert frontmatter.load(str(path)).metadata["form"]["integer_valued"] is True
+    assert genus.name("0012", "integer_valued") in certificates.load(tmp_path)
