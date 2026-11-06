@@ -54,7 +54,7 @@ def _integer_valued(lattice: Lattices.ParentMethods) -> bool:
     assert isinstance(integer_ring, OwnedRings.ParentMethods)
     integer_domain = OWNED_ZZ
     assert isinstance(integer_domain, OwnedRings.NoZeroDivisors.Commutative.Nontrivial.ParentMethods)
-    values = Modules(OWNED_QQ).restriction_of_scalars(integer_domain.fraction_field_map())(OWNED_QQ)
+    values = Modules(OWNED_QQ).restriction_of_scalars(integer_domain.fraction_field_map())(OWNED_QQ.regular_module())
     module = integer_ring.free_module(int(lattice.module_rank()))
     form = FormModules(OWNED_ZZ)(module.bilinear_hom_space(values)(lattice.gram_tensor()))
     return form.is_base_ring_valued()
