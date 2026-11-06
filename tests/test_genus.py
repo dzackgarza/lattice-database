@@ -490,12 +490,31 @@ def test_certification_stores_an_indefinite_card_automorphism_generators(tmp_pat
     assert names is not None and len(names) == 2
     stored_morphisms = {morphism.name: morphism.matrix for morphism in certified.morphisms if morphism.target == "0016" and morphism.scale == 1}
     matrices = [stored_morphisms[name] for name in names]
-    # The two signed swaps of U: b(x, x) = 2 x_0 x_1 is preserved by e <-> f and by -1.
-    assert {tuple(entry for row in matrix for entry in row) for matrix in matrices} == {(-1, 0, 0, -1), (0, 1, 1, 0)}
+    # A generating set is not canonical, so the test states the contract and not a chosen set:
+    # every stored matrix is an isometry of the card's Gram tensor, and the group they generate
+    # is O(U), of order 4.
     gram = [[0, 1], [1, 0]]
-    for matrix in matrices:
-        # An isometry of the stored Gram tensor: M^T G M = G.
-        assert [[sum(matrix[i][k] * gram[k][l] * matrix[j][l] for k in range(2) for l in range(2)) for j in range(2)] for i in range(2)] == gram
+
+    def product(left: list[list[int]], right: list[list[int]]) -> list[list[int]]:
+        return [[sum(left[i][k] * right[k][j] for k in range(2)) for j in range(2)] for i in range(2)]
+
+    def preserves(matrix: list[list[int]]) -> bool:
+        conjugated = [[sum(matrix[i][k] * gram[k][l] * matrix[j][l] for k in range(2) for l in range(2)) for j in range(2)] for i in range(2)]
+        return conjugated == gram
+
+    assert all(preserves(matrix) for matrix in matrices), "a stored generator is not an isometry of U"
+    identity = [[1, 0], [0, 1]]
+    generated = {tuple(entry for row in identity for entry in row)}
+    frontier = [identity]
+    while frontier:
+        current = frontier.pop()
+        for matrix in matrices:
+            image = product(matrix, current)
+            key = tuple(entry for row in image for entry in row)
+            if key not in generated:
+                generated.add(key)
+                frontier.append(image)
+    assert len(generated) == 4, f"the stored generators span a group of order {len(generated)}, not |O(U)| = 4"
     assert "automorphism_group_order" not in card["automorphisms"]
     assert genus.name("0016", "automorphism_group_generator_morphisms", "indefinite") in certificates.load(tmp_path)
 
