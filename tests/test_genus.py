@@ -133,23 +133,29 @@ def test_an_indefinite_card_requests_and_stores_the_eight_primitive_orbit_rows(
 
 
 def test_the_database_asks_the_owner_on_every_card_of_the_operations_class() -> None:
-    """#8: only a block the card cannot carry stops a request; the owner's domain does not.
+    """#8: a request is withheld by the schema's block and by the domain the owner states.
 
-    A2 is definite and U is indefinite, both are integral: the fields the database used to
-    withhold by an owner domain limit (`discriminant_sequence` on an indefinite card,
-    `spinor_genus_count` below rank 3) are now asked, and the definite-only blocks are still
-    not asked on the indefinite card because it cannot carry them.
+    A2 is definite, even, rank 2; U is indefinite, even, rank 2 with hyperbolic index 1. What
+    the database withheld by a guess at the owner's power rather than by its stated domain is
+    asked: the automorphism generators on the indefinite card, in `automorphisms`, and
+    `primitive_orbits` on both. The owner's stated limits still hold — spinor genera need rank
+    at least three, the discriminant sequence a definite even card, the discriminant orbits an
+    even card of hyperbolic index at least two — and a definite block field is not asked on an
+    indefinite card, which cannot store it.
     """
     definite = Lattice.model_validate(frontmatter.load(str(REPOSITORY / "lattices" / "0012.md")).metadata)
     indefinite = Lattice.model_validate(frontmatter.load(str(REPOSITORY / "lattices" / "0016.md")).metadata)
-    assert genus.applies("primitive_orbits", indefinite) and genus.applies("primitive_orbits", definite)
-    assert genus.applies("automorphism_group_generator_morphisms", indefinite) and genus.applies("automorphism_group_generator_morphisms", definite)
-    assert genus.applies("discriminant_sequence", indefinite), "an owner domain limit no longer withholds the call"
-    assert genus.applies("spinor_genus_count", definite), "a rank the operation reads no longer withholds the call"
+    assert genus.applies("primitive_orbits", definite) and genus.applies("primitive_orbits", indefinite)
+    assert genus.applies("automorphism_group_generator_morphisms", definite) and genus.applies("automorphism_group_generator_morphisms", indefinite)
     assert genus.applies("siegel_eisenstein_coefficients", definite)
+    assert genus.applies("discriminant_sequence", definite)
+    assert not genus.applies("spinor_regular", definite), "spinor regularity needs rank at least three"
+    assert not genus.applies("spinor_genus_count", definite), "spinor genera need rank at least three"
+    assert not genus.applies("discriminant_sequence", indefinite), "a definite even card is the domain"
+    assert not genus.applies("discriminant_orbits", indefinite), "hyperbolic index 1 is outside the Eichler hypothesis"
     assert not genus.applies("regular", indefinite), "an indefinite card cannot carry the definite block"
-    assert not genus.applies("genus_theta_series", indefinite)
     assert not genus.applies("automorphism_group_order", indefinite)
+    assert not genus.applies("roots", definite), "a definite card states its roots in `definite.roots`"
     assert not genus.applies("cusp_form_coordinates", definite), "the owner does not present it"
 
 

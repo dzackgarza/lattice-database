@@ -107,20 +107,36 @@ def certified_value(field: str, value: Yaml, lattice: Lattice | None = None) -> 
 def applies(field: str, lattice: Lattice) -> bool:
     """Whether `certify` asks the preamble for `field` of this stored lattice.
 
-    The database asks for every field whose value the card can hold, and does not
-    decide what the preamble computes: an operation the owner defines on a class of
-    lattices is asked on every card of that class, its value is stored, its refusal
-    is recorded by `failures.py` and a call that does not finish by `exceeded.py`
-    (#8). Two database-side facts remain. `cusp_form_coordinates` the owner does not
-    present at all. And a field whose block is named for a hypothesis the card does
-    not satisfy cannot be stored: a value written into `definite` on an indefinite
-    card would contradict the card's own `definiteness`, so that field is not asked
-    on that card, and the same holds for `integral` and `hyperbolic`.
+    The database asks for a field when two things hold: the card can store the value,
+    and the card lies in the domain the owner states for the operation. Neither is a
+    guess at what the owner can compute — the owner says where it is defined, in its
+    own errors ("spinor genera of Integral lattice of rank 2 and signature (2, 0)
+    require a nondegenerate lattice of finite rank at least three") and in the schema,
+    and a card outside a domain gets no field rather than a failure queued every run.
 
-    So `integral.primitive_orbits` is asked on every integral card, definite or
-    indefinite, and `automorphism_group_generator_morphisms` on every card — in
-    `definite` beside the order where the card is definite, and in `automorphisms`
-    where its `O(L)` is infinite.
+    The database's own facts:
+    - `cusp_form_coordinates`: the owner does not present it.
+    - The block a value is stored in names its hypothesis, so a field of `definite`,
+      `indefinite`, `hyperbolic` or `integral` is asked only on a card that satisfies
+      it; a value written into `definite` on an indefinite card would contradict the
+      card's `definiteness`.
+    - `roots` and `norms` are stored in `root_span`, which the schema refuses on a
+      definite card, whose roots are `definite.roots`.
+
+    The owner's stated domain:
+    - `spinor_regular`, `spinor_genus_count` and `spinor_genera`: rank at least 3, as
+      the owner's error states.
+    - `siegel_eisenstein_coefficients`: rank at least 2, Siegel's Hauptsatz requiring
+      more than one variable.
+    - `reflective`: rank at least 3, signature (1, 1) being a half-line where no
+      polyhedron criterion applies.
+    - `discriminant_sequence`: a definite even card, its discriminant form being the
+      quadratic form of an even lattice.
+    - `discriminant_orbits`: the Eichler hypothesis of `theory/orbits.md`, an even
+      lattice of hyperbolic index at least 2.
+
+    Everything else — including `integral.primitive_orbits` and the automorphism
+    generators on an indefinite card — is asked on every card that can store it (#8).
     """
     if field == "cusp_form_coordinates":
         return False
@@ -132,8 +148,24 @@ def applies(field: str, lattice: Lattice) -> bool:
             return lattice.indefinite is not None
         case "hyperbolic":
             return lattice.hyperbolic is not None
-        case "integral":
-            return lattice.integral is not None
+        case "integral" if lattice.integral is None:
+            return False
+    rank = lattice.rank
+    match field:
+        case "roots" | "norms":
+            return lattice.definite is None
+        case "reflective" | "spinor_regular" | "spinor_genus_count" | "spinor_genera":
+            if rank is None:
+                raise ValueError(f"{field} requires a stored source rank")
+            return rank >= 3
+        case "siegel_eisenstein_coefficients":
+            if rank is None:
+                raise ValueError(f"{field} requires a stored source rank")
+            return rank >= 2
+        case "discriminant_sequence":
+            return lattice.definite is not None and lattice.integral.parity == "even"
+        case "discriminant_orbits":
+            return lattice.definite is None and lattice.integral.parity == "even" and (lattice.integral.hyperbolic_index or 0) >= 2
         case _:
             return True
 
