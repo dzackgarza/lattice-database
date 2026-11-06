@@ -1,0 +1,89 @@
+diff --git a/.github/workflows/verify.yml b/.github/workflows/verify.yml
+index d91be0c4ce..232ebd6147 100644
+--- a/.github/workflows/verify.yml
++++ b/.github/workflows/verify.yml
+@@ -2,14 +2,68 @@ name: verify
+ 'on':
+   schedule:
+     - cron: 17 3 * * *
+-  workflow_dispatch: null
++  workflow_dispatch:
++    inputs:
++      tags:
++        description: Lattice tags to verify, separated by spaces; omit for the whole corpus. A tag is verified in its shard, so the run verifies the shards that hold the tags named here.
++        required: false
++        type: string
+ permissions:
+   contents: read
+ concurrency:
+   group: verify
+   cancel-in-progress: false
+ jobs:
++  plan:
++    # Sixteen jobs, one per shard, so one shard of the corpus is one job's memory: a shard killed
++    # for memory fails its own job and names itself, and the other fifteen still verify their cards.
++    # `latticedb verify` takes a shard and not a tag, so a dispatch of tags narrows the run to the
++    # shards that hold them, which is the finest selection the command offers.
++    runs-on: ubuntu-latest
++    timeout-minutes: 5
++    outputs:
++      matrix: ${{ steps.plan.outputs.matrix }}
++    steps:
++      - name: Expand the tags input into the job matrix
++        id: plan
++        shell: bash --noprofile --norc -e -o pipefail {0}
++        env:
++          TAGS: ${{ github.event.inputs.tags || '' }}
++        run: |
++          mapfile -t named < <(printf '%s' "$TAGS" | tr -s '[:space:]' '\n' | sed '/^$/d' | awk '!seen[$0]++')
++          shards=()
++          if (( ${#named[@]} == 0 )); then
++            # Without a list the run verifies the whole corpus, in sixteen shards.
++            for shard in $(seq 0 15); do
++              shards+=("$shard")
++            done
++          else
++            for tag in "${named[@]}"; do
++              # The tag reaches a shell argument, so it is checked here.
++              if [[ ! "$tag" =~ ^[0-9A-Z]+$ ]]; then
++                echo "not a lattice tag: $tag" >&2
++                exit 1
++              fi
++              # The shard of a tag is the rule `certificates.tag_hash` applies: the first eight
++              # bytes of the SHA-256 of the tag, big endian, modulo the shard count.
++              shards+=("$(python3 -c 'import hashlib, sys; print(int.from_bytes(hashlib.sha256(sys.argv[1].encode()).digest()[:8], "big") % 16)' "$tag")")
++            done
++            mapfile -t shards < <(printf '%s\n' "${shards[@]}" | sort -n -u)
++          fi
++          entries=()
++          for shard in "${shards[@]}"; do
++            entries+=("{\"shard\":$shard}")
++          done
++          matrix="{\"include\":[$(IFS=,; echo "${entries[*]}")]}"
++          printf '%s\n' "$matrix"
++          printf 'matrix=%s\n' "$matrix" >> "$GITHUB_OUTPUT"
+   cards:
++    needs: plan
++    strategy:
++      fail-fast: false
++      matrix: ${{ fromJSON(needs.plan.outputs.matrix) }}
++    env:
++      SHARDS: 16
+     runs-on: ubuntu-latest
+     timeout-minutes: 350
+     defaults:
+@@ -22,10 +76,12 @@ jobs:
+         uses: ./.github/actions/sage
+       - name: Verify lattice cards and certificate hashes
+         run: |
++          # The command reports `memory: ... peak for this process` before it refuses its problems,
++          # so this shard's log carries the ceiling the shard needed.
+           docker exec -i --workdir "$GITHUB_WORKSPACE" \
+             --env "PYTHONPATH=$GITHUB_WORKSPACE/research/src:$GITHUB_WORKSPACE/src" \
+-            sage-env /sage/.venv/bin/python -m latticedb verify
++            sage-env /sage/.venv/bin/python -m latticedb verify --shard "${{ matrix.shard }}/$SHARDS"
+       - name: Stop the Sage environment
+         if: always()
+         run: docker rm --force sage-env
+-    name: Stored cards and certificates
++    name: Stored cards and certificates, shard ${{ matrix.shard }}/16
