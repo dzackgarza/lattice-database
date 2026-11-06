@@ -309,16 +309,32 @@ def morphism(
 
 
 @app.command
-def verify(root: Root = Path()) -> None:
+def verify(
+    root: Root = Path(),
+    shard: Annotated[
+        str | None,
+        Parameter(help="`i/n`: verify only the cards whose tag falls in shard `i` of `n`; every shard by default."),
+    ] = None,
+) -> None:
     """Report stored-card inconsistencies without changing cards; mathematics is delegated to the preamble."""
+    selected: tuple[int, int] | None = None
+    if shard is not None:
+        index, count = (int(part) for part in shard.split("/"))
+        if not 0 <= index < count:
+            raise ValueError(f"shard {shard} names no shard of {count}")
+        selected = (index, count)
     try:
-        count, problems = checks.run(root)
+        verified, problems = checks.run(root, selected)
     except corpus.CorpusInvalid as invalid:
         print("\n".join(invalid.problems), file=sys.stderr)
         print(f"{len(invalid.problems)} problems", file=sys.stderr)
         sys.exit(1)
+    # Each verification process reports the peak memory it needed. This one's peak is
+    # that ceiling when it verified a single shard; it is reported before the run
+    # refuses its problems, so a run that finds one still records what it needed.
+    print(f"memory: {checks.peak()} peak for this process", flush=True)
     _refuse(problems)
-    print(f"{count} lattice cards structurally verified")
+    print(f"{verified} lattice cards structurally verified")
 
 
 @app.command

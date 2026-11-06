@@ -18,9 +18,17 @@ def shared_gram_problems(loaded: Corpus) -> list[str]:
     return [f"cards {', '.join(tags)} state one Gram tensor; a lattice has one card" for tags in corpus.duplicate_grams(loaded.entries).values()]
 
 
-def problems(loaded: Corpus, held: Certificates) -> list[str]:
+def problems(loaded: Corpus, held: Certificates, cards: frozenset[str] | None = None) -> list[str]:
+    """The stored claims of `cards` that contradict a certificate, and their local admission problems.
+
+    `cards` selects the records whose claims are checked: `latticedb verify` checks
+    the cards of one shard per run, because the preamble keeps every structure it
+    constructs for the life of the process (#6).
+    """
     found: list[str] = []
     for entry in loaded.entries:
+        if cards is not None and entry.lattice.tag not in cards:
+            continue
         cited = entry.lattice.certifications
         if entry.lattice.gram_tensor is None:
             if cited or any(name.startswith(f"{entry.lattice.tag} ") for name in held):

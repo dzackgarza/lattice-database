@@ -52,3 +52,16 @@ def test_partial_cards_still_have_their_completed_certificates_checked(tmp_path:
 def test_a_certificate_without_its_defining_gram_tensor_is_an_error(tmp_path: Path) -> None:
     write_card(tmp_path, {"certifications": {"integral.genus_class_count": "0" * 64}})
     assert any("certificate" in problem.lower() and "Gram tensor" in problem for problem in checks.report(tmp_path))
+
+
+def test_a_shard_reports_the_problems_of_its_own_cards_only(tmp_path: Path) -> None:
+    """#6: the shards partition the cards, and each run checks the cards of its own shard."""
+    path = write_card(tmp_path, {"gram_tensor": [[2]], "rank": 1})
+    document = corpus.read_card(path)
+    metadata = corpus.front_matter(document)
+    metadata["certifications"] = {"integral.genus_class_count": "0" * 64}
+    path.write_text(records.record_text(metadata, document.content))
+    mine = certificates.tag_hash("0001") % 2
+    assert any("contradicts its completed computation certificate" in problem for problem in checks.run(tmp_path, (mine, 2))[1])
+    assert checks.run(tmp_path, (1 - mine, 2))[1] == ()
+    assert checks.run(tmp_path, (mine, 2))[0] == 1

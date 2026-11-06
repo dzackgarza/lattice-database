@@ -30,12 +30,14 @@ SOURCE_DIRECTORY = "lattices/source"
 """Where `seed` reads rows that have not yet become permanent cards."""
 
 
-def lattice_problems(loaded: Corpus, root: Path) -> list[str]:
+def lattice_problems(loaded: Corpus, root: Path, cards: frozenset[str] | None = None) -> list[str]:
     """The problems that concern more than one lattice record.
 
     A file name that is not its tag, a tag that a source row also reserves, a retired tag,
     a repeated name or Gram tensor, a family that `families.yaml` does not list, and a
-    related or summand tag that is not in the corpus.
+    related or summand tag that is not in the corpus. The checks that construct a
+    preamble object run for the cards `cards`, the shard of one `latticedb verify`
+    run (#6); the reference checks need every card and run in each shard.
     """
     entries = loaded.entries
     retired = loaded.retired
@@ -67,18 +69,21 @@ def lattice_problems(loaded: Corpus, root: Path) -> list[str]:
                 found.append(f"{entry.path}: a record cannot be related to itself")
             elif related.tag not in by_tag:
                 found.append(f"{entry.path}: the related tag {related.tag} is not in the corpus")
-        found.extend(f"{entry.path}: {problem}" for problem in records.relational_admission_problems(lattice, by_tag))
+        if cards is None or lattice.tag in cards:
+            found.extend(f"{entry.path}: {problem}" for problem in records.relational_admission_problems(lattice, by_tag))
     return found
 
 
-def morphism_problems(loaded: Corpus) -> list[str]:
-    """Reference and preamble-backed mathematical problems of stored morphisms."""
+def morphism_problems(loaded: Corpus, cards: frozenset[str] | None = None) -> list[str]:
+    """Reference and preamble-backed mathematical problems of the stored morphisms whose source is in `cards`."""
     entries = loaded.entries
     retired = loaded.retired
     found: list[str] = []
     by_tag = {entry.lattice.tag: entry.lattice for entry in entries}
     for entry in entries:
         source = entry.lattice
+        if cards is not None and source.tag not in cards:
+            continue
         for morphism in source.morphisms:
             target = by_tag.get(morphism.target)
             if target is None:
@@ -192,11 +197,11 @@ def geometric_problems(loaded: Corpus) -> list[str]:
     return found
 
 
-def problems(loaded: Corpus, root: Path) -> list[str]:
-    """Every problem of the references that run between the records."""
+def problems(loaded: Corpus, root: Path, cards: frozenset[str] | None = None) -> list[str]:
+    """Every problem of the references that run between the records, for the cards `cards`."""
     return [
-        *lattice_problems(loaded, root),
-        *morphism_problems(loaded),
+        *lattice_problems(loaded, root, cards),
+        *morphism_problems(loaded, cards),
         *geometric_problems(loaded),
         *bond_order_problems(loaded),
     ]
