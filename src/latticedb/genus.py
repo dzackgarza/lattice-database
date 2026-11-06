@@ -111,7 +111,19 @@ def certified_value(field: str, value: Yaml, lattice: Lattice | None = None) -> 
 
 
 def applies(field: str, lattice: Lattice) -> bool:
-    """Whether the preamble exposes `field` on this stored lattice."""
+    """Whether `certify` asks the preamble for `field` of this stored lattice.
+
+    The database decides only what it owns: that the card carries the block which
+    stores the value (`BLOCKS`), and whether the value it cites is still pending.
+    Which lattices the preamble computes a field for is the preamble's answer, so
+    an operation extended to a new class of lattices is requested on that class:
+    `integral.primitive_orbits` is asked on an indefinite card, whose
+    `primitive_orbit_series` returns the coefficients the owner has for it (#8).
+    The cases below name the two calls whose input this card cannot supply (a
+    block it does not carry, a rank the operation reads) and `cusp_form_coordinates`,
+    which the owner does not present; a raise or a non-terminating search is
+    recorded by `failures.py` and `exceeded.py` instead of being pre-empted here.
+    """
     match field:
         case "integer_valued":
             return True
@@ -150,8 +162,6 @@ def applies(field: str, lattice: Lattice) -> bool:
             if lattice.rank is None:
                 raise ValueError(f"{field} requires a stored source rank")
             return lattice.rank >= 3
-        case "primitive_orbits":
-            return lattice.definite is not None
         case "discriminant_orbits":
             index = lattice.integral.hyperbolic_index or 0
             return lattice.definite is None and lattice.integral.parity == "even" and index >= 2

@@ -251,6 +251,7 @@ All invariant blocks and computed fields may be absent on a sparse card.
 A populated field is either authored/source-stated or the serialized result of a preamble operation.
 `definite.automorphism_group_generator_morphisms` is a list of names of isometries $L\to L$ on the same card (morphism entries with `scale: 1`); its certificate commits to the corresponding matrices, not to the chosen names.
 `integral.primitive_orbits` maps each of `O`, `SO`, `O+`, `SO+`, `Otilde`, `SOtilde`, `Otilde+` and `SOtilde+` to the coefficients `constant`, `z` and `w` of the series $F_{L,\Gamma}(z, w)$ of the numbers of $\Gamma$-orbits of primitive vectors of each norm, null where a coefficient is not known (`theory/orbits.md`).
+The row is requested on every integral card, definite or indefinite: the preamble returns the coefficients it owns for that lattice, and its certificate binds the constant term and the first four $z$- and $w$-coefficients.
 
 ### Orthogonal, arithmetic and Lie groups
 

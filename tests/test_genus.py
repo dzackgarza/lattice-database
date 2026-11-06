@@ -107,6 +107,37 @@ def test_orbit_certificate_value_excludes_source_only_tail_and_reference() -> No
     }
 
 
+def test_an_indefinite_card_requests_and_stores_the_eight_primitive_orbit_rows(
+    tmp_path: Path,
+) -> None:
+    """#8: `integral.primitive_orbits` is asked on an indefinite card, not only on a definite one."""
+    (tmp_path / "lattices").mkdir()
+    shutil.copy(REPOSITORY / corpus.FAMILIES_FILE, tmp_path / corpus.FAMILIES_FILE)
+    (tmp_path / corpus.RETIRED_FILE).write_text("{}\n")
+    path = tmp_path / "lattices" / "0016.md"
+    shutil.copy(REPOSITORY / "lattices" / "0016.md", path)
+    document = frontmatter.load(str(path))
+    # U = I_{1,1}: indefinite, even and unimodular, so its eight groups are one group.
+    assert document.metadata["definiteness"] == "indefinite"
+    assert "primitive_orbits" not in document.metadata["integral"]
+    fields = [field for request in genus.requests(corpus.load(tmp_path), derived(), {}, ("0016",)) for field in request["fields"]]
+    assert "primitive_orbits" in fields
+    # One orbit of primitive isotropic vectors, e + f; U is even, so no vector of norm +-1.
+    series = {"constant": 1, "z": [0, 0, 0, 0], "w": [0, 0, 0, 0]}
+    genus.store(path, {"primitive_orbits": {group: series for group in ("O", "SO", "O+", "SO+", "Otilde", "SOtilde", "Otilde+", "SOtilde+")}})
+    integral = corpus.load(tmp_path).entries[0].lattice.integral
+    assert integral is not None and integral.primitive_orbits is not None
+    assert set(integral.primitive_orbits) == {"O", "SO", "O+", "SO+", "Otilde", "SOtilde", "Otilde+", "SOtilde+"}
+    assert integral.primitive_orbits["Otilde+"].constant == 1
+
+
+def test_a_card_without_an_integral_block_requests_no_primitive_orbits() -> None:
+    """The database's own fact: a value has no block to be stored in on this card."""
+    lattice = Lattice.model_validate({"tag": "9998", "name": "Half-integral", "latex": "H", "gram_tensor": [["1/2"]]})
+    assert lattice.integral is None
+    assert not genus.applies("primitive_orbits", lattice)
+
+
 def test_a_missing_value_is_written(tmp_path: Path) -> None:
     path = tmp_path / "0012.md"
     shutil.copy(REPOSITORY / "lattices" / "0012.md", path)
