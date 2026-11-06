@@ -4,8 +4,8 @@ name: certify
     - cron: 17 3 * * *
   workflow_dispatch:
     inputs:
-      tag:
-        description: Certify one lattice tag while debugging this workflow; omit for the full corpus.
+      tags:
+        description: Lattice tags to certify, separated by spaces; omit for the full corpus.
         required: false
         type: string
 permissions:
@@ -14,15 +14,50 @@ concurrency:
   group: certify
   cancel-in-progress: false
 jobs:
+  plan:
+    # One dispatch certifies every tag it names, in one job per tag. A dispatch per tag instead
+    # queues on the concurrency group above, which keeps one run running and one pending and
+    # cancels the older pending run, so a batch of dispatches certified one tag.
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    outputs:
+      matrix: ${{ steps.plan.outputs.matrix }}
+    steps:
+      - name: Expand the tags input into the job matrix
+        id: plan
+        shell: bash --noprofile --norc -e -o pipefail {0}
+        env:
+          TAGS: ${{ github.event.inputs.tags || '' }}
+        run: |
+          mapfile -t named < <(printf '%s' "$TAGS" | tr -s '[:space:]' '\n' | sed '/^$/d' | awk '!seen[$0]++')
+          entries=()
+          if (( ${#named[@]} == 0 )); then
+            # Without a list the run certifies the whole corpus in sixteen shards, as before.
+            for shard in $(seq 0 15); do
+              entries+=("{\"tag\":\"\",\"shard\":$shard,\"shards\":16}")
+            done
+          else
+            for tag in "${named[@]}"; do
+              # The tag reaches both a shell argument and this JSON, so it is checked here.
+              if [[ ! "$tag" =~ ^[0-9A-Z]+$ ]]; then
+                echo "not a lattice tag: $tag" >&2
+                exit 1
+              fi
+              entries+=("{\"tag\":\"$tag\",\"shard\":0,\"shards\":1}")
+            done
+          fi
+          matrix="{\"include\":[$(IFS=,; echo "${entries[*]}")]}"
+          printf '%s\n' "$matrix"
+          printf 'matrix=%s\n' "$matrix" >> "$GITHUB_OUTPUT"
   certify:
+    needs: plan
     # Each shard is a runner with its own job budget. A computation that never ends
     # spends one worker of one shard, so the corpus advances on every other worker.
     strategy:
       fail-fast: false
-      matrix:
-        shard: ${{ fromJSON(github.event.inputs.tag && '[0]' || '[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15]') }}
+      matrix: ${{ fromJSON(needs.plan.outputs.matrix) }}
     env:
-      SHARDS: ${{ github.event.inputs.tag && 1 || 16 }}
+      SHARDS: ${{ matrix.shards }}
     runs-on: ubuntu-latest
     timeout-minutes: 350
     defaults:
@@ -50,7 +85,7 @@ jobs:
           git config merge.keyed-map.driver 'docker exec -i --workdir "$PWD" --env PYTHONPATH='"$GITHUB_WORKSPACE/research/src:$GITHUB_WORKSPACE/src"' sage-env /sage/.venv/bin/python -m latticedb merge-keyed-map %O %A %B'
       - name: Compute and certify uncertified card values
         env:
-          LATTICEDB_TAG: ${{ github.event.inputs.tag || '' }}
+          LATTICEDB_TAG: ${{ matrix.tag }}
         run: |
           # Push progress every half hour, so a runner that dies loses at most that much.
           ( while sleep 1800; do .github/scripts/persist.sh "${{ matrix.shard }}/$SHARDS" || true; done ) &
@@ -104,7 +139,7 @@ jobs:
         if: ${{ always() && steps.checkout.outcome == 'success' }}
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
         with:
-          name: certification-${{ github.run_id }}-${{ github.run_attempt }}-shard-${{ matrix.shard }}
+          name: certification-${{ github.run_id }}-${{ github.run_attempt }}-shard-${{ matrix.shard }}${{ matrix.tag && format('-{0}', matrix.tag) || '' }}
           path: |-
             ${{ runner.temp }}/certification.patch
             ${{ runner.temp }}/certification-base.txt
