@@ -28,12 +28,17 @@ OrbitCounts = Annotated[tuple[Annotated[int, Field(ge=0)] | None, ...], Field(st
 class PrimitiveOrbitSeries(Record):
     """The series $F_{L,\\Gamma}(z, w) = c_\\Gamma(0) + \\sum_{n \\geq 1} c_\\Gamma(n) z^n + \\sum_{n \\geq 1} c_\\Gamma(-n) w^n$ in $\\mathbb{Z}[[z, w]]$.
 
-    $c_\\Gamma(n)$ is the number of $\\Gamma$-orbits on the primitive vectors $v$ with $b(v, v) = n$. A coefficient that is not known is null.
+    For $n \\neq 0$, $c_\\Gamma(n)$ is the number of $\\Gamma$-orbits on the primitive vectors $v$ with $b(v, v) = n$.
+    $c_\\Gamma(0)$ is the number of $\\Gamma$-orbits of primitive isotropic *lines*, the rank-one isotropic sublattices, which is what a $0$-cusp of the Baily–Borel boundary is: an indefinite lattice has infinitely many primitive isotropic vectors on each such line, so the vector count is not the stored one.
+    A coefficient that is not known is null.
     """
 
     constant: Annotated[int, Field(ge=0)] | None = Field(
         default=None,
-        description="$c_\\Gamma(0)$, the number of orbits of primitive isotropic vectors.",
+        description=(
+            "$c_\\Gamma(0)$, the number of $\\Gamma$-orbits of primitive isotropic lines, not of primitive isotropic vectors. "
+            "The orbits of $v$ and of $-v$ are one line orbit unless $-v = \\gamma v$ for some $\\gamma \\in \\Gamma$, so the line count is at least half the vector count and equals it where every orbit is its own negative, as on a definite lattice, where both are 0."
+        ),
     )
     z: OrbitCounts = Field(
         default=(),
@@ -375,7 +380,8 @@ class IntegralData(Record):
         default=None,
         description=(
             "For a group $\\Gamma \\subseteq O(L)$, the series $F_{L,\\Gamma}(z, w)$ whose coefficient $c_\\Gamma(n)$ is the number of $\\Gamma$-orbits of primitive "
-            "vectors $v$ with $b(v, v) = n$. The keys are `O`, `SO`, `O+`, `SO+`, `Otilde`, `SOtilde`, `Otilde+` and `SOtilde+`: $S$ is the kernel of the determinant, "
+            "vectors $v$ with $b(v, v) = n$ for $n \\neq 0$, and whose constant term $c_\\Gamma(0)$ is the number of $\\Gamma$-orbits of primitive isotropic *lines*, "
+            "the rank-one isotropic sublattices, for an indefinite lattice (theory/orbits.md). The keys are `O`, `SO`, `O+`, `SO+`, `Otilde`, `SOtilde`, `Otilde+` and `SOtilde+`: $S$ is the kernel of the determinant, "
             "$+$ the kernel of the real spinor norm, and $\\widetilde{O}(L)$ the kernel of $O(L) \\to O(A_L)$. "
             "Computed by `latticedb certify` from the preamble's `primitive_orbit_series`, which enumerates the vectors of a definite lattice "
             "and returns the coefficients it owns for an indefinite one; the certificate binds the constant term and the first four $z$- and $w$-coefficients. "

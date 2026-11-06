@@ -253,7 +253,10 @@ All invariant blocks and computed fields may be absent on a sparse card.
 A populated field is either authored/source-stated or the serialized result of a preamble operation.
 `definite.automorphism_group_generator_morphisms` and `automorphisms.automorphism_group_generator_morphisms` are lists of names of isometries $L\to L$ on the same card (morphism entries with `scale: 1`); their certificates commit to the corresponding matrices, not to the chosen names.
 An indefinite lattice's $O(L)$ is infinite, so its card states the group in `automorphisms`, by generators alone: `latticedb certify` asks the preamble operation `L.orthogonal_group()` for them, and there is no order field to fill (`theory/indefinite-lattices.md`).
-`integral.primitive_orbits` maps each of `O`, `SO`, `O+`, `SO+`, `Otilde`, `SOtilde`, `Otilde+` and `SOtilde+` to the coefficients `constant`, `z` and `w` of the series $F_{L,\Gamma}(z, w)$ of the numbers of $\Gamma$-orbits of primitive vectors of each norm, null where a coefficient is not known (`theory/orbits.md`).
+`integral.primitive_orbits` maps each of `O`, `SO`, `O+`, `SO+`, `Otilde`, `SOtilde`, `Otilde+` and `SOtilde+` to the coefficients `constant`, `z` and `w` of the series $F_{L,\Gamma}(z, w)$, null where a coefficient is not known (`theory/orbits.md`).
+`z` and `w` count the $\Gamma$-orbits of primitive vectors of norm $n$ and $-n$; `constant` counts the $\Gamma$-orbits of primitive isotropic **lines**, the rank-one isotropic sublattices, and not of vectors: an indefinite lattice has infinitely many primitive isotropic vectors on each line, so the vector count is not the one a card states.
+The two counts differ where a vector orbit is not its own negative — the orbits of $v$ and of $-v$ are one line orbit unless $-v = \gamma v$ — and agree on a definite card, where both are 0.
+An indefinite card states the constant term alone, the number of $0$-cusps of the Baily–Borel boundary.
 The row is requested on every integral card, definite or indefinite: the preamble returns the coefficients it owns for that lattice, and its certificate binds the constant term and the first four $z$- and $w$-coefficients.
 
 ### Orthogonal, arithmetic and Lie groups

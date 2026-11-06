@@ -127,7 +127,7 @@
       </tbody>
     </table>
     {% if lattice.integral.primitive_orbits %}
-    <h3 id="primitive-orbits">{{ theory("orbits", "primitive-orbits", "Orbits of primitive vectors") }} \(F_{L,\Gamma}(z, w) = \sum_n c_\Gamma(n)\, z^n\), with \(w^n\) for \(z^{-n}\)</h3>
+    <h3 id="primitive-orbits">{{ theory("orbits", "primitive-orbits", "Orbits of primitive vectors") }} \(F_{L,\Gamma}(z, w) = \sum_n c_\Gamma(n)\, z^n\), with \(w^n\) for \(z^{-n}\); the constant term counts primitive isotropic lines</h3>
     <table class="facts">
       <tbody>
         {% for group, series in lattice.integral.primitive_orbits.items() %}

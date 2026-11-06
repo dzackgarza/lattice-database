@@ -1,6 +1,6 @@
 ---
 title: Orbits of primitive vectors
-summary: The series $F_{L,\Gamma}(z, w)$ of $\Gamma$-orbits of primitive vectors of each norm, and the series $F_{A_L,\Gamma}(z, w)$ of $\Gamma$-orbits on the discriminant group, for eight subgroups $\Gamma$ of $O(L)$.
+summary: The series $F_{L,\Gamma}(z, w)$ of $\Gamma$-orbits of primitive vectors of each norm, whose constant term counts $\Gamma$-orbits of primitive isotropic lines, and the series $F_{A_L,\Gamma}(z, w)$ of $\Gamma$-orbits on the discriminant group, for eight subgroups $\Gamma$ of $O(L)$.
 order: 10
 ---
 
@@ -52,17 +52,26 @@ When $A_L = 0$, $\widetilde{O}(L) = O(L)$, and the eight groups are at most four
 ## The series of orbits {#primitive-orbits}
 
 ::: {.definition}
-For a subgroup $\Gamma$ of $O(L)$ and an integer $n$, $c_\Gamma(n)$ is the number of $\Gamma$-orbits on the primitive vectors $v \in L$ with $b(v, v) = n$, when it is finite.
+For a subgroup $\Gamma$ of $O(L)$ and an integer $n \neq 0$, $c_\Gamma(n)$ is the number of $\Gamma$-orbits on the primitive vectors $v \in L$ with $b(v, v) = n$, when it is finite.
+A *primitive isotropic line* is a rank-one isotropic sublattice $\mathbb{Z}v$ with $v$ primitive isotropic, and $c_\Gamma(0)$ is the number of $\Gamma$-orbits of them, when it is finite.
 The *series of orbits of primitive vectors* is $$F_{L,\Gamma}(z, w) = c_\Gamma(0) + \sum_{n \geq 1} c_\Gamma(n) z^n + \sum_{n \geq 1} c_\Gamma(-n) w^n \in \mathbb{Z}[[z, w]].$$
 :::
 
-So $F_{L,\Gamma}(0, 0)$ is the number of $\Gamma$-orbits of primitive isotropic vectors, the coefficient of $z^n$ is the number of $\Gamma$-orbits of primitive vectors of norm $n$, and the coefficient of $w^n$ is that of norm $-n$.
+The constant term counts primitive isotropic *lines* and not primitive isotropic vectors, because an indefinite lattice has infinitely many of the latter on each of those lines: every primitive isotropic vector has norm $0$, so it spans one of them, and $\mathbb{Z}v = \mathbb{Z}(-v)$.
+A $\Gamma$-orbit of lines is the image of the $\Gamma$-orbits of its primitive vectors, and $\Gamma[v] = \Gamma[-v]$, so one line orbit is the union of the orbit of $v$ and the orbit of $-v$.
+Those are two orbits, or one when $-v = \gamma v$ for some $\gamma \in \Gamma$; by the [proposition below](#discriminant-orbits) that happens exactly when $v^* + L = -v^* + L$ in $A_L$, that is when $2(v^* + L) = 0$.
+So $$c_\Gamma(0) = \tfrac{1}{2}\bigl(c_\Gamma^{\mathrm{vec}}(0) + s_\Gamma\bigr),$$ where $c_\Gamma^{\mathrm{vec}}(0)$ is the number of $\Gamma$-orbits of primitive isotropic vectors and $s_\Gamma$ is the number of those orbits that are their own negative.
+The number a record stores in `integral.primitive_orbits[Γ].constant` is $c_\Gamma(0)$, the line count; the two counts agree exactly when every orbit is its own negative, as they do on a definite lattice, where both are $0$.
+The line count is the number of $0$-cusps of the Baily–Borel boundary, which is why it is the line count that a card stores.
+
+So $F_{L,\Gamma}(0, 0) = c_\Gamma(0)$ is the number of $\Gamma$-orbits of primitive isotropic lines, the coefficient of $z^n$ is the number of $\Gamma$-orbits of primitive vectors of norm $n$, and the coefficient of $w^n$ is that of norm $-n$.
 A record states the coefficients that are known, through $z^4$ and $w^4$ at first, and a coefficient that is not known is null.
+An indefinite card states the constant term alone: no positive or negative norm is bounded there.
 
 Each coefficient obeys these relations, which `latticedb check` verifies:
 
-- $c_\Gamma(n) = 0$ exactly when no primitive vector has norm $n$, for every $\Gamma$.
-  That is so for odd $n$ when $L$ is even, and for $n = 0$ and for $n$ of the sign opposite to $b$ when $L$ is definite.
+- $c_\Gamma(n) = 0$ exactly when no primitive vector has norm $n$, for every nonzero $n$ and every $\Gamma$; $c_\Gamma(0) = 0$ exactly when $L$ has no primitive isotropic vector.
+  That is so for odd $n$ when $L$ is even, and for $n$ of the sign opposite to $b$ when $L$ is definite.
 
 - When $n$ has no square factor $k^2 > 1$, every vector of norm $n$ is primitive, since $b(kv, kv) = k^2 b(v, v)$.
   Then $c_\Gamma(n) = 0$ exactly when the [theta series](definite-lattices.html#theta-series) has no vector of norm $n$.
@@ -135,9 +144,18 @@ $L$ is even and indefinite, and $\operatorname{rank} L = 4 + \operatorname{rank}
 :::
 
 `latticedb certify` computes $F_{L,\Gamma}$ through $z^4$ and $w^4$ for a definite lattice, by enumerating its vectors, and $F_{A_L,\Gamma}$ through $z^4$ and $w^4$ and $n = 0$ for an even lattice whose hyperbolic index, stored or bounded from below by stored embeddings $U^k \to L$, is at least 2. The two are stored in `integral.primitive_orbits` and `integral.discriminant_orbits`.
-`integral.primitive_orbits` is requested on an indefinite card too, and carries the coefficients that the owner's `primitive_orbit_series` returns for it: for an indefinite lattice, the constant term $c_\Gamma(0)$ of the [proposition above](#discriminant-orbits), the number of $\Gamma$-orbits of primitive isotropic vectors, with the coefficients the owner has not computed stated by a `reference` or absent. The class `TorsionQuadraticModule` of SageMath gives $A_L$, $q_L$ and generators of $O(q_L)$, and the orbits on $S_n$ are found by breadth-first search.
+`integral.primitive_orbits` is requested on an indefinite card too, and carries the coefficients that the owner's `primitive_orbit_series` returns for it: the constant term $c_\Gamma(0)$, the number of $\Gamma$-orbits of primitive isotropic **lines** of the [section above](#primitive-orbits), which the [proposition](#discriminant-orbits) counts through the isotropic classes of $A_L$, and no $z$- or $w$-coefficient, since no norm is bounded there.
+By that section $c_\Gamma(0)$ is not the number of $\Gamma$-orbits of primitive isotropic vectors unless every one of them is its own negative; the [example below](#discriminant-orbits) is a lattice where the two differ. The class `TorsionQuadraticModule` of SageMath gives $A_L$, $q_L$ and generators of $O(q_L)$, and the orbits on $S_n$ are found by breadth-first search.
 By the proposition above, $F_{A_L,\Gamma}$ equals $F_{L,\Gamma}$ on that class; outside it the two differ, and $F_{A_L,\Gamma}$ is what this computation yields.
 For an odd lattice the coefficients are stated with a `reference` that proves them.
+
+::: {.example}
+Let $L_9 = U \oplus U \oplus \langle -18 \rangle$, with basis $e, f, e_1, f_1, g$ and $b(g, g) = -18$, so that $A_{L_9} = \mathbb{Z}/18$ and the class of $k g / 18$ has $q_L = -k^2/18$ in $\mathbb{Q}/2\mathbb{Z}$.
+Then $q_L = 0$ exactly for $k = 0, 6, 12$, so by the proposition $\widetilde{O}(L_9)$ has three orbits of primitive isotropic vectors: $e$, and the vector $v = 3e + 3f + g$ with its negative.
+Indeed $v$ is primitive and isotropic, $\operatorname{div}(v) = 3$, and $v^* + L = e + f + g/3$ is the class $6$, while $(-v)^* + L = -e - f - g/3$ is the class $12$.
+The classes $6$ and $12$ are negatives of one another, so the orbits of $v$ and of $-v$ are one orbit of lines, and the class $0$ satisfies $2 \cdot 0 = 0$, so its orbit is its own negative and is another.
+So $\widetilde{O}(L_9)$ has $3$ orbits of primitive isotropic vectors and $c_{\widetilde{O}}(0) = 2$: two orbits of primitive isotropic lines.
+:::
 
 ::: {.example}
 Let $L = U^2 \oplus L'$ be even and unimodular.
