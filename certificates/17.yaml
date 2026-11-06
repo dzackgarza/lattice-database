@@ -31512,3 +31512,11 @@
 3GO2 integral.spinor_genus_count:
   hash: 68948b1c59b677df91ba41b5ce2ed7d8cb53a42d84b4c13cc7cedd7ca63d3886
   by: research preamble
+6JRY integral.primitive_orbits:
+  hash: 86026923d796b5aa627b8363bc7249b52193764a9a55e30de6dc8c5f12992423
+  by: 'J. Scattone, "On the compactification of moduli spaces for algebraic K3 surfaces",
+    Mem. Amer. Math. Soc. 374 (1987): Proposition 5.4.7 with Corollary 5.4.8(2), p.
+    78 — E -> E^perp/E is a bijection from the O(L_k)-orbits of primitive isotropic
+    planes onto G(k), so there are h(k) of them — with Section 6.3 (Degree four),
+    p. 100: G(2) consists of nine isomorphism classes; hence 9 orbits of primitive
+    isotropic planes of O(Lambda_4), those of the 1-cusps of the Baily-Borel compactification.'
