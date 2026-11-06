@@ -25,8 +25,14 @@ form is 2-elementary with the same (a, δ), so the condition is 1)-7) for
 The count of the enumeration is the check of this transcription: Alexeev and Engel,
 "Modular compactifications and the Cox ring of Enriques surfaces" (arXiv:2208.10383),
 §1, "there are 75 cases". It is a check and never a value a card carries.
+
+The pieces of the sums are U, U(2), <2>, <-2> = A_1(-1), E_7(-1), E_8(-1), E_8(-2) and
+D_n(-1) for even n. Every one of the 75 triples is the invariants of an orthogonal sum of
+them, and the searches below return such a sum for each triple of rank at most ten and for
+each triple of ranks eleven to twenty, each checked against the sum's own Gram matrix.
 """
 
+from fractions import Fraction
 from typing import Iterator
 
 
@@ -126,3 +132,243 @@ def test_the_D_n_lattices_have_the_elementary_divisors_of_the_source() -> None:
         assert determinant(gram) == -4 * (-1) ** n or abs(determinant(gram)) == 4, determinant(gram)
         assert abs(determinant(gram)) == 4
         assert elementary_divisors(gram) == ([2, 2] if n % 2 == 0 else [4]), (n, elementary_divisors(gram))
+
+
+def cartan(n: int, edges: list[tuple[int, int]]) -> list[list[int]]:
+    """The Gram matrix in a basis of simple roots of a lattice with this Dynkin diagram.
+
+    Bourbaki draws E_8 as the chain 1-3-4-5-6-7-8 with 2 attached to 4, and E_7 is that
+    diagram with 8 deleted (Lie Groups and Lie Algebras, ch. 4-6, plates).
+    """
+    gram = [[0] * n for _ in range(n)]
+    for index in range(n):
+        gram[index][index] = 2
+    for first, second in edges:
+        gram[first][second] = gram[second][first] = -1
+    return gram
+
+
+E_8_DIAGRAM = [(0, 2), (2, 3), (3, 4), (4, 5), (5, 6), (6, 7), (1, 3)]
+
+
+def negative(gram: list[list[int]]) -> list[list[int]]:
+    return [[-value for value in row] for row in gram]
+
+
+PIECES: dict[str, list[list[int]]] = {
+    "U": [[0, 1], [1, 0]],
+    "U(2)": [[0, 2], [2, 0]],
+    "<2>": [[2]],
+    "<-2>": [[-2]],
+    "E_8(-1)": negative(cartan(8, E_8_DIAGRAM)),
+    "E_8(-2)": [[2 * value for value in row] for row in negative(cartan(8, E_8_DIAGRAM))],
+    "E_7(-1)": negative(cartan(7, [edge for edge in E_8_DIAGRAM if max(edge) < 7])),
+}
+"""The pieces the sums are made of: `<2>` is the rank one form of 2, and `<-2>` is A_1(-1).
+
+U and U(2) are the two hyperbolic planes, E_8(-1) the negative definite E_8 and E_8(-2) its
+double, and E_7(-1) the negative definite E_7, whose invariants are (r, a, delta) = (7, 1, 1).
+"""
+
+PIECES.update({f"D_{n}(-1)": dn(n) for n in range(4, 21, 2)})
+
+
+def invariant_factors(gram: list[list[int]]) -> list[int]:
+    """The invariant factors of a nonsingular integer matrix, by integer row and column operations.
+
+    A row or column operation by an elementary integer matrix changes the basis of the
+    Z-module and not the module, so the diagonal of the matrix reached here lists the
+    invariant factors of the form.
+    """
+    rows = len(gram)
+    columns = len(gram[0])
+    work = [row[:] for row in gram]
+    for pivot in range(min(rows, columns)):
+        while True:
+            smallest = None
+            for i in range(pivot, rows):
+                for j in range(pivot, columns):
+                    if work[i][j] and (smallest is None or abs(work[i][j]) < abs(work[smallest[0]][smallest[1]])):
+                        smallest = (i, j)
+            if smallest is None:
+                break
+            i, j = smallest
+            work[i], work[pivot] = work[pivot], work[i]
+            for row in work:
+                row[j], row[pivot] = row[pivot], row[j]
+            while True:
+                cleared = True
+                for i in range(pivot + 1, rows):
+                    if work[i][pivot]:
+                        quotient = work[i][pivot] // work[pivot][pivot]
+                        work[i] = [a - quotient * b for a, b in zip(work[i], work[pivot])]
+                        cleared = cleared and not work[i][pivot]
+                for j in range(pivot + 1, columns):
+                    if work[pivot][j]:
+                        quotient = work[pivot][j] // work[pivot][pivot]
+                        for row in work:
+                            row[j] -= quotient * row[pivot]
+                        cleared = cleared and not work[pivot][j]
+                if cleared:
+                    break
+                smallest = None
+                for i in range(pivot, rows):
+                    for j in range(pivot, columns):
+                        if (i == pivot and j == pivot) or not work[i][j]:
+                            continue
+                        if (i == pivot or j == pivot) and (smallest is None or abs(work[i][j]) < abs(work[pivot][pivot])):
+                            smallest = (i, j)
+                if smallest is not None:
+                    i, j = smallest
+                    work[i], work[pivot] = work[pivot], work[i]
+                    for row in work:
+                        row[j], row[pivot] = row[pivot], row[j]
+            remainder = next(
+                (i for i in range(pivot + 1, rows) for j in range(pivot + 1, columns) if work[i][j] % work[pivot][pivot]),
+                None,
+            )
+            if remainder is None:
+                break
+            work[pivot] = [a + b for a, b in zip(work[pivot], work[remainder])]
+    return [abs(work[index][index]) for index in range(min(rows, columns))]
+
+
+def inverse(gram: list[list[int]]) -> list[list[Fraction]]:
+    """The exact inverse, by Gauss-Jordan elimination over the rationals."""
+    size = len(gram)
+    work = [
+        [Fraction(value) for value in row] + [Fraction(int(i == j)) for j in range(size)]
+        for i, row in enumerate(gram)
+    ]
+    for column in range(size):
+        pivot = next((row for row in range(column, size) if work[row][column]), None)
+        if pivot is None:
+            raise ValueError("singular")
+        work[column], work[pivot] = work[pivot], work[column]
+        scale = work[column][column]
+        work[column] = [value / scale for value in work[column]]
+        for row in range(size):
+            if row != column and work[row][column]:
+                factor = work[row][column]
+                work[row] = [a - factor * b for a, b in zip(work[row], work[column])]
+    return [row[size:] for row in work]
+
+
+def signature(gram: list[list[int]]) -> tuple[int, int]:
+    """The counts of positive and negative eigenvalues, by Jacobi's rotations on floating point."""
+    size = len(gram)
+    work = [[float(value) for value in row] for row in gram]
+    for _ in range(100):
+        if sum(work[i][j] ** 2 for i in range(size) for j in range(size) if i != j) < 1e-18:
+            break
+        for p in range(size):
+            for q in range(p + 1, size):
+                if abs(work[p][q]) < 1e-16:
+                    continue
+                angle = (work[q][q] - work[p][p]) / (2 * work[p][q])
+                tangent = (1 if angle >= 0 else -1) / (abs(angle) + (angle * angle + 1) ** 0.5)
+                cosine = 1 / (tangent * tangent + 1) ** 0.5
+                sine = tangent * cosine
+                for k in range(size):
+                    if k in (p, q):
+                        continue
+                    left, right = work[k][p], work[k][q]
+                    work[k][p] = work[p][k] = cosine * left - sine * right
+                    work[k][q] = work[q][k] = sine * left + cosine * right
+                diagonal_p, diagonal_q, off = work[p][p], work[q][q], work[p][q]
+                work[p][p] = cosine * cosine * diagonal_p - 2 * sine * cosine * off + sine * sine * diagonal_q
+                work[q][q] = sine * sine * diagonal_p + 2 * sine * cosine * off + cosine * cosine * diagonal_q
+                work[p][q] = work[q][p] = 0.0
+    return (
+        sum(1 for index in range(size) if work[index][index] > 1e-9),
+        sum(1 for index in range(size) if work[index][index] < -1e-9),
+    )
+
+
+def invariants(gram: list[list[int]]) -> tuple[int, int, int]:
+    """(rank, a, delta) of an even integral form whose invariants are Nikulin's.
+
+    a is the number of invariant factors equal to 2, and delta is 0 exactly when every
+    diagonal entry of the inverse Gram matrix is an integer (Nikulin 1980, §1).
+    """
+    factors = invariant_factors(gram)
+    if any(factor not in (1, 2) for factor in factors):
+        raise ValueError(f"the invariant factors {factors} are not those of a 2-elementary lattice")
+    delta = 0 if all(value.denominator == 1 for i, row in enumerate(inverse(gram)) for value in [row[i]]) else 1
+    return len(gram), factors.count(2), delta
+
+
+def sum_gram(names: tuple[str, ...] | list[str]) -> list[list[int]]:
+    """The Gram matrix of the orthogonal sum of these pieces, in the order the names are in."""
+    blocks = [PIECES[name] for name in names]
+    size = sum(len(block) for block in blocks)
+    gram = [[0] * size for _ in range(size)]
+    offset = 0
+    for block in blocks:
+        for i, row in enumerate(block):
+            for j, value in enumerate(row):
+                gram[offset + i][offset + j] = value
+        offset += len(block)
+    return gram
+
+
+def sums(triple: tuple[int, int, int]) -> list[tuple[str, ...]]:
+    """Every multiset of the pieces whose orthogonal sum has the invariants of `triple`, shortest first.
+
+    The only bound on the number of summands is the rank, which each piece spends at least one
+    of, so seven summands at rank eight are in the search.
+    """
+    rank, a, delta = triple
+    named = sorted(PIECES)
+    facts = {name: (invariants(PIECES[name]), signature(PIECES[name])) for name in named}
+    found: list[tuple[str, ...]] = []
+
+    def walk(chosen: list[str], index: int, height: int, total_a: int, total_delta: int, signs: tuple[int, int]) -> None:
+        if height == rank:
+            if total_a == a and total_delta == delta and signs == (1, rank - 1):
+                found.append(tuple(chosen))
+            return
+        if height > rank or total_a > a or signs[0] > 1 or index == len(named):
+            return
+        name = named[index]
+        (piece_rank, piece_a, piece_delta), (positive, negative) = facts[name]
+        count = 0
+        while height + count * piece_rank <= rank and total_a + count * piece_a <= a and signs[0] + count * positive <= 1:
+            walk(
+                chosen + [name] * count,
+                index + 1,
+                height + count * piece_rank,
+                total_a + count * piece_a,
+                max(total_delta, piece_delta if count else 0),
+                (signs[0] + count * positive, signs[1] + count * negative),
+            )
+            count += 1
+
+    walk([], 0, 0, 0, 0, (0, 0))
+    return sorted(found, key=len)
+
+
+def test_every_triple_of_rank_at_most_ten_is_an_orthogonal_sum_of_the_pieces() -> None:
+    """Each triple of rank at most ten is the invariants of a sum of the pieces.
+
+    The sum a search returns is checked against its own Gram matrix: the rank, a and delta
+    recomputed from the matrix, and the signature (1, r - 1) that makes the lattice hyperbolic.
+    """
+    wanted = [triple for triple in triples() if triple[0] <= 10]
+    for triple in wanted:
+        candidates = sums(triple)
+        assert candidates, f"no sum of the pieces has the invariants {triple}"
+        gram = sum_gram(candidates[0])
+        assert invariants(gram) == triple, (triple, candidates[0], invariants(gram))
+        assert signature(gram) == (1, triple[0] - 1), (triple, candidates[0], signature(gram))
+
+
+def test_every_triple_of_rank_eleven_to_twenty_is_an_orthogonal_sum_of_the_pieces() -> None:
+    """Each triple of ranks eleven to twenty is the invariants of a sum of the pieces."""
+    wanted = [triple for triple in triples() if triple[0] >= 11]
+    for triple in wanted:
+        candidates = sums(triple)
+        assert candidates, f"no sum of the pieces has the invariants {triple}"
+        gram = sum_gram(candidates[0])
+        assert invariants(gram) == triple, (triple, candidates[0], invariants(gram))
+        assert signature(gram) == (1, triple[0] - 1), (triple, candidates[0], signature(gram))
