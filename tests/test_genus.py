@@ -7,13 +7,14 @@ lattice-db tests only the serialization/certificate behavior.
 import shutil
 import sys
 import time
+from fractions import Fraction
 from pathlib import Path
 
 import frontmatter
 import pytest
 import yaml
 
-from latticedb import certificates, corpus, exceeded, genus, records
+from latticedb import certificates, corpus, exceeded, genus, records, sage_genus
 from latticedb.model import Lattice
 
 REPOSITORY = Path(__file__).resolve().parent.parent
@@ -386,6 +387,34 @@ def test_an_underived_seeded_card_requests_its_invariants_with_its_derivation(tm
     requested = genus.requests(corpus.load(tmp_path), {}, {}, ())
     assert requested[0]["fields"][0] == "derive"
     assert "genus_symbol" in requested[0]["fields"]
+
+
+class Printed:
+    """A preamble rational whose printed form is the one a Fraction rejects: `(3)/(2)`."""
+
+    def __init__(self, numerator: int, denominator: int) -> None:
+        self._numerator, self._denominator = numerator, denominator
+
+    def numerator(self) -> int:
+        return self._numerator
+
+    def denominator(self) -> int:
+        return self._denominator
+
+    def __str__(self) -> str:
+        return f"({self._numerator})/({self._denominator})"
+
+
+def test_a_rational_is_serialized_from_its_numerator_and_denominator_never_its_text() -> None:
+    """#4: the owner prints a localized rational as `(3)/(2)`, and the card stores the value `3/2`."""
+    with pytest.raises(ValueError):
+        # The printed form is not a number: reading it was the defect.
+        Fraction(str(Printed(3, 2)))
+    assert sage_genus._rational(Printed(3, 2)) == "3/2"
+    assert sage_genus._rational(Printed(6, 3)) == 2
+    assert sage_genus._rational(Printed(-9, 6)) == "-3/2"
+    # The value classes the adapter receives keep the pair they were given, so the reduction happens here.
+    assert sage_genus._rational(Printed(0, 5)) == 0
 
 
 def test_certification_stores_the_exact_two_adic_densities_of_the_sum_of_three_squares(tmp_path: Path) -> None:
