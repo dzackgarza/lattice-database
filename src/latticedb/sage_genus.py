@@ -17,6 +17,7 @@ from sage_extensions.categories.lattices import Lattices
 from sage_extensions.categories.modules.framed.formed.form_modules import FormModules
 from sage_extensions.categories.modules.pure.modules import Modules
 from sage_extensions.categories.rings.commutative_algebra import FormalPowerSeriesRings
+from sage_extensions.categories.rings.ring_foundation import LocalizationRings
 from sage_extensions.categories.rings.ring_foundation import _OwnedRingElement
 from sage_extensions.categories.rings.ring_foundation import OwnedRings
 from sage_extensions.rings import session_ring_objects
@@ -131,9 +132,9 @@ def _modular_scale(lattice: Lattices.ParentMethods) -> int | bool:
     return False if scale is None else int(scale)
 
 
-def _rational(value: int | Fraction | _OwnedRingElement) -> int | str:
-    """Serialize a preamble rational number as an integer or a string `p/q`."""
-    number = Fraction(str(value))
+def _rational(value: _OwnedRingElement | LocalizationRings.ElementMethods) -> int | str:
+    """Serialize a preamble rational number, from its numerator and denominator, as an integer or a string `p/q` in lowest terms."""
+    number = Fraction(int(value.numerator()), int(value.denominator()))
     return number.numerator if number.denominator == 1 else f"{number.numerator}/{number.denominator}"
 
 
