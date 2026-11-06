@@ -401,6 +401,12 @@ field receives its first value; an equal authored or source value gains computat
 evidence; a disagreeing value is replaced by the computed result. A matching completed
 certificate makes the stored result reusable in subsequent certification runs.
 
+A consumer that needs one card's values certifies that card alone: `latticedb certify --tag 6JRR --minutes 30`, or from the checkout `just certify --tag 6JRR --minutes 30`, which runs the same command with the research preamble on `PYTHONPATH` and the repository's Sage Python.
+Run it from the checkout that holds `lattices/` and `certificates/`, repeat `--tag` to name several cards, and leave `--tag` off only for the CI phase, which takes the whole corpus and divides it with `--shard i/n`.
+It writes the card `lattices/<TAG>.md`, whose computed fields are replaced and whose `certifications` gain one entry per completed value, `certificates/<group>.yaml` with each certificate's hash and provenance, and `failures.yaml` for a computation whose worker died; a computation still running when `--minutes` ends stays in `exceeded.yaml` and certifies nothing.
+It prints each card's stored values as it stores them and exits 0 unless a worker died.
+A preamble call that raises, or an owner value the database rejects (`_rational`, #4), ends that Sage worker and not the run: its input and stderr go to `failures.yaml`, every value completed before the raise is stored and certified, and the command then exits non-zero with `ChildProcessError: <path>/sage_genus.py failed on <TAG> (exit status 1)` and the worker's traceback on stderr, which quarantines that computation until `retry-computation` releases it.
+
 **Verify:** `just verify` is read-only.
 A Gram tensor determines its lattice, so two cards stating one Gram tensor are a verification error.
 Card uniqueness compares the stated tensors entrywise; isometric forms in different bases may have separate cards.

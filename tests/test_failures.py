@@ -59,6 +59,29 @@ def test_worker_startup_failure_is_persisted_and_requires_explicit_retry(tmp_pat
     assert "repairing the worker environment" in repeated.notes[-1]
 
 
+def test_the_certify_command_takes_one_named_card_and_queues_its_worker_failure(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    """`latticedb certify --tag <TAG>` is the consumer command: one card, its failure queued, non-zero exit."""
+    from latticedb import cli, failures
+
+    (tmp_path / "lattices").mkdir()
+    for tag in ("0012", "0016"):
+        shutil.copy(REPOSITORY / "lattices" / f"{tag}.md", tmp_path / "lattices" / f"{tag}.md")
+    shutil.copy(REPOSITORY / corpus.FAMILIES_FILE, tmp_path / corpus.FAMILIES_FILE)
+    (tmp_path / corpus.RETIRED_FILE).write_text("{}\n")
+    # No preamble computation: the worker module is missing, so this exercises the command's
+    # per-card path and its failure route without calling Sage for a value.
+    monkeypatch.setattr(genus, "WORKER", [sys.executable, "-m", "latticedb.unavailable_worker"])
+    with pytest.raises(ChildProcessError, match="0012"):
+        cli.app(["certify", "--tag", "0012", "--minutes", "1", "--root", str(tmp_path)])
+    queued = failures.load(tmp_path)
+    assert set(queued) == {"0012 worker"}, "the run must ask only for the card it was named"
+    assert queued["0012 worker"].disposition == "open"
+    assert "latticedb.unavailable_worker" in queued["0012 worker"].attempts[-1].stderr
+    assert queued["0012 worker"].attempts[-1].gram_tensor == [[2, -1], [-1, 2]]
+
+
 def test_a_worker_that_ended_before_reading_its_request_is_queued_not_raised(
     tmp_path: Path, monkeypatch: pytest.MonkeyPatch
 ) -> None:
