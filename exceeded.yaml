@@ -79,9 +79,13 @@
 027I hyperbolic.reflective:
   hash: 65b639f7c618bdd9c9b2aeb802b0a67eb1d8e0e0cb6586f2fa1c031d99d7323a
   seconds: 18799
-029J integral.overlattice_count:
-  hash: 91deba99a3987fd75aed2d974c4af39fd1cbd558a892eeb0f18d4a8dda311a96
-  seconds: 1074
+029J root_span.norms:
+  hash: 6235fd4bcbdefa4b6c4ce797f3abace20db87adcbef14b79ce493c5d379726b6
+  seconds: 811
+  lost: true
+029J root_span.roots:
+  hash: 9ead2b2ed7cae50f3d16f7c1b311cd6425078d39f07fc033a018629b57e08cfb
+  seconds: 811
   lost: true
 02A4 root_span.norms:
   hash: 7aa8f3884b58876a5dc80ffa089f36db637c10b477965d6999e19c884f8a55fa

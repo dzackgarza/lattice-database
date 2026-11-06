@@ -46,6 +46,12 @@
 029J integral.genus_symbol:
   hash: fb98b3f22bbd459342a01647238f16f0cdd8a49df2e6b5c79d7eed28f5a3cfd3
   by: research preamble
+029J integral.hyperbolic_index:
+  hash: 5cf6c0ce64e54de677b2b44e77845c06e1647184fea71ffab251d73d3ef772dd
+  by: research preamble
+029J integral.overlattice_count:
+  hash: fbee967e1b55590729bfc20e0ad18414cd6c56fd1f256f36877344dd718493b5
+  by: research preamble
 029J integral.primitive_orbits:
   hash: 1cdbfedc2662caa0b3a346b949dc225caac4ac0ac5e691fb6fedf9397c39028d
   by: 'V. Alexeev, P. Engel, D. Z. Garza, L. Schaffler, "Compact moduli of Enriques
@@ -75,6 +81,12 @@
     Engel, D. Z. Garza, L. Schaffler, "Compact moduli of Enriques surfaces of degree
     2", Nagoya Math. J. 249 (2025), Section 3.3, p. 590: "There are five 0-cusps for
     which we use Sterk''s numbering 1, 2, 3, 4, 5. There are also 9 distinct 1-cusps."'
+029J integral.spinor_genera:
+  hash: e9ddab999374f38d5df2789bd8354c69625543c7e768a436a23e2a88d3be900d
+  by: research preamble
+029J integral.spinor_genus_count:
+  hash: 5cbd19a16c41ca623e916a09b4ef8af4fd036f38a83534cd1d3168b4d645f8b9
+  by: research preamble
 02F3 definite.automorphism_group_generator_morphisms:
   hash: 548d74166c788b40001a5d631f38d2be65f7d9f185d5cef8d23e76ef45a2cd55
   by: research preamble
