@@ -14,7 +14,7 @@ dependencies = [
     "markdown-it-py>=4.2.0",
     "pydantic-core",
     "MarkupSafe",
-    "dzack-research @ git+https://github.com/dzackgarza/research.git@main",
+    "dzack-research @ git+https://github.com/dzackgarza/research",
 ]
 
 [project.scripts]
