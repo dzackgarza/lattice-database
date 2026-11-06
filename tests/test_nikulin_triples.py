@@ -69,3 +69,60 @@ def test_the_enumeration_is_the_75_classes_of_alexeev_engel() -> None:
 if __name__ == "__main__":
     for triple in triples():
         print(triple)
+
+
+def dn(n: int) -> list[list[int]]:
+    """The negative definite D_n root lattice: -1 times the standard Gram matrix of D_n.
+
+    Its determinant is 4 for every n >= 4, and its discriminant group is (Z/2)^2 for
+    even n and Z/4 for odd n (Conway and Sloane, Sphere Packings, Lattices and Groups,
+    ch. 4, §7.1, p. 117). Only the even n are therefore 2-elementary pieces of a sum:
+    for n ≡ 0 (mod 4) the glue vectors have integral norms and delta = 0, for
+    n ≡ 2 (mod 4) they have norm 3/2 and delta = 1.
+    """
+    gram = [[0] * n for _ in range(n)]
+    for i in range(n):
+        gram[i][i] = -2
+    # The diagram of D_n is the chain 1-2-...-(n-1) with n attached to n-2, not a chain:
+    # the tridiagonal matrix is A_n's Cartan matrix, and D_4's is a star.
+    for i in range(n - 2):
+        gram[i][i + 1] = gram[i + 1][i] = 1
+    gram[n - 3][n - 1] = gram[n - 1][n - 3] = 1
+    return gram
+
+
+def elementary_divisors(gram: list[list[int]]) -> list[int]:
+    """The invariant factors of an integer matrix, by the gcd of its minors."""
+    size = len(gram)
+    minors = [[gram[i][j] for j in range(size)] for i in range(size)]
+    divisors = []
+    previous = 1
+    for order in range(1, size + 1):
+        from itertools import combinations
+        from math import gcd
+
+        best = 0
+        for rows in combinations(range(size), order):
+            for columns in combinations(range(size), order):
+                minor = determinant([[gram[i][j] for j in columns] for i in rows])
+                best = gcd(best, abs(minor))
+        divisors.append(best // previous if previous else best)
+        previous = best
+    return [d for d in divisors if d > 1]
+
+
+def determinant(gram: list[list[int]]) -> int:
+    """A small integer determinant, by Laplace expansion."""
+    if len(gram) == 1:
+        return gram[0][0]
+    return sum((-1) ** column * gram[0][column] * determinant([row[:column] + row[column + 1:] for row in gram[1:]])
+               for column in range(len(gram)))
+
+
+def test_the_D_n_lattices_have_the_elementary_divisors_of_the_source() -> None:
+    """det D_n = 4, with (2, 2) for even n and (4) for odd n: SPLAG ch. 4, §7.1, p. 117."""
+    for n in range(4, 8):
+        gram = dn(n)
+        assert determinant(gram) == -4 * (-1) ** n or abs(determinant(gram)) == 4, determinant(gram)
+        assert abs(determinant(gram)) == 4
+        assert elementary_divisors(gram) == ([2, 2] if n % 2 == 0 else [4]), (n, elementary_divisors(gram))
