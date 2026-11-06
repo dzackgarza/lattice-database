@@ -107,62 +107,33 @@ def certified_value(field: str, value: Yaml, lattice: Lattice | None = None) -> 
 def applies(field: str, lattice: Lattice) -> bool:
     """Whether `certify` asks the preamble for `field` of this stored lattice.
 
-    The database decides only what it owns: that the card carries the block which
-    stores the value (`BLOCKS`), and whether the value it cites is still pending.
-    Which lattices the preamble computes a field for is the preamble's answer, so
-    an operation extended to a new class of lattices is requested on that class:
-    `integral.primitive_orbits` is asked on an indefinite card, whose
-    `primitive_orbit_series` returns the coefficients the owner has for it (#8).
-    The cases below name the two calls whose input this card cannot supply (a
-    block it does not carry, a rank the operation reads) and `cusp_form_coordinates`,
-    which the owner does not present; a raise or a non-terminating search is
-    recorded by `failures.py` and `exceeded.py` instead of being pre-empted here.
+    The database asks for every field whose value the card can hold, and does not
+    decide what the preamble computes: an operation the owner defines on a class of
+    lattices is asked on every card of that class, its value is stored, its refusal
+    is recorded by `failures.py` and a call that does not finish by `exceeded.py`
+    (#8). Two database-side facts remain. `cusp_form_coordinates` the owner does not
+    present at all. And a field whose block is named for a hypothesis the card does
+    not satisfy cannot be stored: a value written into `definite` on an indefinite
+    card would contradict the card's own `definiteness`, so that field is not asked
+    on that card, and the same holds for `integral` and `hyperbolic`.
+
+    So `integral.primitive_orbits` is asked on every integral card, definite or
+    indefinite, and `automorphism_group_generator_morphisms` on every card — in
+    `definite` beside the order where the card is definite, and in `automorphisms`
+    where its `O(L)` is infinite.
     """
-    match field:
-        case "integer_valued":
-            return True
-        case "automorphism_group_order":
+    if field == "cusp_form_coordinates":
+        return False
+    block_name, _model = stored_in(field, lattice.definiteness)
+    match block_name:
+        case "definite":
             return lattice.definite is not None
-        case "automorphism_group_generator_morphisms":
-            # An indefinite card asks for the generators of its infinite O(L); a definite one
-            # asks for the same generators in `definite`, beside the order (#8).
-            return lattice.definite is not None or lattice.definiteness == "indefinite"
-        case _ if lattice.integral is None:
-            return False
-        case "reflective":
-            if lattice.rank is None:
-                raise ValueError(f"{field} requires a stored source rank")
-            # Signature (1, 1) has a half-line as its domain, where no polyhedron criterion applies.
-            return lattice.rank >= 3 and 1 in (lattice.signature or ())
-        case "roots" | "norms":
-            return lattice.definite is None
-        case "cusp_form_coordinates":
-            # The preamble does not present it yet: TODO node `theta-cusp-form-coordinates`.
-            return False
-        case "siegel_eisenstein_coefficients":
-            if lattice.definite is None:
-                return False
-            if lattice.rank is None:
-                raise ValueError(f"{field} requires a stored source rank")
-            # Siegel's Hauptsatz requires more than one variable.
-            return lattice.rank >= 2
-        case "regular" | "genus_theta_series" | "theta_series_cuspidal_component":
-            return lattice.definite is not None
-        case "spinor_regular":
-            if lattice.definite is None:
-                return False
-            if lattice.rank is None:
-                raise ValueError(f"{field} requires a stored source rank")
-            return lattice.rank >= 3
-        case "discriminant_sequence":
-            return lattice.definite is not None and lattice.integral.parity == "even"
-        case "spinor_genus_count" | "spinor_genera":
-            if lattice.rank is None:
-                raise ValueError(f"{field} requires a stored source rank")
-            return lattice.rank >= 3
-        case "discriminant_orbits":
-            index = lattice.integral.hyperbolic_index or 0
-            return lattice.definite is None and lattice.integral.parity == "even" and index >= 2
+        case "indefinite":
+            return lattice.indefinite is not None
+        case "hyperbolic":
+            return lattice.hyperbolic is not None
+        case "integral":
+            return lattice.integral is not None
         case _:
             return True
 
