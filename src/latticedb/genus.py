@@ -20,7 +20,7 @@ import sys
 import time
 from collections import deque
 from collections.abc import Generator, Iterator
-from contextlib import ExitStack, closing
+from contextlib import ExitStack, closing, suppress
 from fractions import Fraction
 from pathlib import Path
 from tempfile import TemporaryFile
@@ -408,12 +408,29 @@ def computed(chosen: list[Request], deadline: float, workers: int) -> Generator[
             return text
 
         def assign(process: subprocess.Popen[bytes]) -> None:
+            """Hand the next request to `process`.
+
+            A worker that ended before it read the request — a startup failure such as a
+            missing module — leaves the write to raise `BrokenPipeError`. The request stays
+            the process's holding, so the read loop reports the failure with the worker's
+            stderr and the card is queued for triage instead of the run ending here.
+            """
             assert process.stdin is not None
             request = next_request()
             holding[process] = request
             started[process] = set()
-            process.stdin.write((json.dumps(request) + "\n").encode())
-            process.stdin.flush()
+            try:
+                process.stdin.write((json.dumps(request) + "\n").encode())
+                process.stdin.flush()
+            except BrokenPipeError:
+                pass
+
+        def release(process: subprocess.Popen[bytes]) -> None:
+            """Close a worker's pipes; one that ended before its request was written raises nothing."""
+            assert process.stdin is not None and process.stdout is not None
+            with suppress(BrokenPipeError):
+                process.stdin.close()
+            process.stdout.close()
 
         def spawn() -> None:
             output = resources.enter_context(TemporaryFile())
@@ -454,9 +471,7 @@ def computed(chosen: list[Request], deadline: float, workers: int) -> Generator[
                     chunk = os.read(key.fd, 65536)
                     if not chunk:
                         selector.unregister(key.fileobj)
-                        assert process.stdin is not None and process.stdout is not None
-                        process.stdin.close()
-                        process.stdout.close()
+                        release(process)
                         process.wait()
                         del pending[process]
                         request = holding.pop(process, None)
@@ -491,7 +506,8 @@ def computed(chosen: list[Request], deadline: float, workers: int) -> Generator[
                             assign(process)
                         else:
                             assert process.stdin is not None
-                            process.stdin.close()
+                            with suppress(BrokenPipeError):
+                                process.stdin.close()
         finally:
             for process in pending:
                 if process.poll() is None:

@@ -6,6 +6,7 @@ import shutil
 import sys
 import time
 from pathlib import Path
+from typing import Any
 
 import pytest
 import yaml
@@ -56,6 +57,33 @@ def test_worker_startup_failure_is_persisted_and_requires_explicit_retry(tmp_pat
     assert repeated.disposition == "open"
     assert len(repeated.attempts) == 2
     assert "repairing the worker environment" in repeated.notes[-1]
+
+
+def test_a_worker_that_ended_before_reading_its_request_is_queued_not_raised(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    """Run 42282409094: a worker that ends before its request is written must be triaged, not raised."""
+    loaded = specimen(tmp_path)
+    started = genus.subprocess.Popen
+
+    def started_and_ended(*arguments: object, **keywords: object) -> Any:
+        # The worker a startup failure leaves: it has already ended when the parent writes
+        # its first request, so the write loses the race with the module's import error.
+        process = started(*arguments, **keywords)
+        process.wait(timeout=60)
+        return process
+
+    from latticedb import failures
+
+    monkeypatch.setattr(genus, "WORKER", [sys.executable, "-m", "latticedb.unavailable_worker"])
+    monkeypatch.setattr(genus.subprocess, "Popen", started_and_ended)
+    with pytest.raises(ChildProcessError):
+        genus.certify(tmp_path, loaded, {}, (), time.time() + 30)
+    assert (tmp_path / "failures.yaml").exists(), "the write's BrokenPipeError was raised instead of the failure queued"
+    queued = failures.load(tmp_path)["0012 worker"]
+    assert queued.disposition == "open"
+    assert "latticedb.unavailable_worker" in queued.attempts[-1].stderr
+    assert queued.attempts[-1].gram_tensor == [[2, -1], [-1, 2]]
 
 
 def test_failed_operation_is_quarantined_by_input_without_blocking_other_work(tmp_path: Path) -> None:
