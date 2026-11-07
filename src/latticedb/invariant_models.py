@@ -70,6 +70,10 @@ class DiscriminantForm(Record):
         return self
 
 
+PolarizationDegree = Annotated[str, Field(pattern=r"^[0-9]+$")]
+"""The degree $2d$ of a polarization as a stored mapping keys it: its decimal text, `'2'`, `'4'`, ..."""
+
+
 class PolarizationRow(Record):
     """Dutour Sikirić–Hulek's Table 4 line for one degree: the counts the table writes `#h` and `#Γ̄_h`.
 
@@ -375,10 +379,13 @@ class IntegralData(Record):
 
     @model_validator(mode="after")
     def _polarization_degrees(self) -> Self:
-        """A degree is even: the table indexes its rows by $2d$, the degree of a polarization."""
+        """A key is the decimal text of a degree $2d$: an even integer, written canonically, at least 2."""
         for degree in (self.polarization_counts or {}):
-            if degree % 2:
+            value = int(degree)
+            if value < 2 or value % 2:
                 raise ValueError(f"{degree} is not a degree 2d of a polarization")
+            if str(value) != degree:
+                raise ValueError(f"{degree} is not the canonical decimal text of {value}")
         return self
 
     elementary_primes: Annotated[tuple[Annotated[int, Field(ge=2)], ...], Field(strict=False, max_length=1)] | None = Field(
@@ -514,15 +521,16 @@ class IntegralData(Record):
             "partition, $|A_L| = |\\det L| \\leq 4096$."
         ),
     )
-    polarization_counts: dict[Annotated[int, Field(ge=2)], PolarizationRow] | None = Field(
+    polarization_counts: dict[PolarizationDegree, PolarizationRow] | None = Field(
         default=None,
         description=(
             "Dutour Sikirić–Hulek's Table 4 (arXiv:2302.01679, p. 17), keyed by the degree $2d$ of a numerical "
-            "polarization of an Enriques surface: for each degree, `#h` is the number of orbits of primitive "
-            "vectors of that degree in $U \\oplus E_8(-1) = \\operatorname{Num}(S)$, and `#Γ̄_h` the number of "
-            "conjugacy classes of the modular groups $\\bar\\Gamma_h$ those polarizations define. The table's two "
-            "cumulative columns are not stored: each is the sum of these rows up to its degree. Certified by the "
-            "table's citation, so `latticedb certify` never recomputes it."
+            "polarization of an Enriques surface, written as its decimal text (`'2'`, `'4'`, ..., `'72'`) because a "
+            "stored mapping has string keys (`corpus.front_matter`): for each degree, `#h` is the number of orbits "
+            "of primitive vectors of that degree in $U \\oplus E_8(-1) = \\operatorname{Num}(S)$, and `#Γ̄_h` the "
+            "number of conjugacy classes of the modular groups $\\bar\\Gamma_h$ those polarizations define. The "
+            "table's two cumulative columns are not stored: each is the sum of these rows up to its degree. "
+            "Certified by the table's citation, so `latticedb certify` never recomputes it."
         ),
     )
     discriminant_orbits: dict[OrbitGroup, PrimitiveOrbitSeries] | None = Field(
