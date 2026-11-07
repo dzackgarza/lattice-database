@@ -335,7 +335,8 @@ def requests(
                     chosen.append(request)
             if semi:
                 # A card that needs derivation carries its record, which selects the searches that apply.
-                (resumed_searches if set(interrupted) & SEMI_DECISIONS else searches).append({**request, "fields": semi})
+                # The request is marked, so a run can take one phase or the other.
+                (resumed_searches if set(interrupted) & SEMI_DECISIONS else searches).append({**request, "fields": semi, "searches": True})
             sizes[lattice.tag] = (len(gram), abs(lattice.determinant or Fraction(0)))
 
     # Smaller cards finish sooner, so each job certifies as many values as it can. A
@@ -601,6 +602,16 @@ def store(path: Path, values: dict[str, Yaml]) -> None:
         storage.write_text(path, text)
 
 
+def in_phase(requests: list[Request], searches: bool | None) -> list[Request]:
+    """The requests of one phase: the terminating fields, or the semi-decision searches.
+
+    `None` is both phases, in the order the queue gives them, which is everything else first.
+    """
+    if searches is None:
+        return requests
+    return [request for request in requests if bool(request.get("searches")) == searches]
+
+
 def certify(
     root: Path,
     loaded: corpus.Corpus,
@@ -609,9 +620,13 @@ def certify(
     deadline: float,
     workers: int = 1,
     shard: tuple[int, int] = (0, 1),
+    searches: bool | None = None,
 ) -> None:
     """Compute every uncertified value on `workers` processes, replace its card scope, and certify the result.
 
+    `searches` takes one phase of the queue: `False` the terminating fields alone, `True` the
+    semi-decision searches alone. A search can hold a worker for a whole job, so a dispatched run
+    that only wants the fields does not wait for one, and the searches are a job of their own.
     `deadline` is the time, in seconds since the epoch, at which the job's timeout
     ends this run. A computation in progress is logged in `exceeded.yaml` until it
     finishes, checkpointing the seconds actually spent in this run. A worker that
@@ -670,7 +685,7 @@ def certify(
             exceeded.save(root, log)
 
     try:
-        with closing(computed(requests(loaded, held, log, tags, shard, failed=failed), deadline, workers)) as stream:
+        with closing(computed(in_phase(requests(loaded, held, log, tags, shard, failed=failed), searches), deadline, workers)) as stream:
             for values in stream:
                 if "checkpoint" in values:
                     checkpoint()

@@ -606,3 +606,13 @@ def test_a_primitive_orbit_row_is_stored_and_certified_by_its_citations(tmp_path
 
     with pytest.raises(AssertionError, match="the source proves"):
         genus.cite_orbit_row(path, "O", {"constant": 3}, reference, held)
+
+
+def test_the_queue_separates_the_terminating_fields_from_the_searches() -> None:
+    """#14: a run takes one phase, so a dispatched run does not wait on a schedule run's search."""
+    terminating = {"tag": "0012", "fields": ["integer_valued"]}
+    search = {"tag": "029J", "fields": ["roots", "norms"], "searches": True}
+    queue = [terminating, search]
+    assert genus.in_phase(queue, None) == queue, "both phases, in the queue's order"
+    assert genus.in_phase(queue, False) == [terminating]
+    assert genus.in_phase(queue, True) == [search]

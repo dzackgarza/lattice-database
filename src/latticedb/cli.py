@@ -455,6 +455,10 @@ def certify(
         str,
         Parameter(help="`i/n`: certify only the cards whose tag falls in shard `i` of `n`, so `n` jobs share the corpus."),
     ] = "0/1",
+    phase: Annotated[
+        str,
+        Parameter(help="`all` runs the terminating fields and then the semi-decision searches; `fields` leaves the searches to another run; `searches` takes only them."),
+    ] = "all",
     root: Root = Path(),
 ) -> None:
     """Compute uncertified card values, replace disagreements, and certify the computed results."""
@@ -464,7 +468,16 @@ def certify(
         raise ValueError(f"shard {shard} names no shard of {count}")
     loaded = corpus.load(root)
     held = certificates.load(root)
-    genus.certify(root, loaded, held, tag, deadline, workers, (index, count))
+    match phase:
+        case "all":
+            searches = None
+        case "fields":
+            searches = False
+        case "searches":
+            searches = True
+        case _:
+            raise ValueError(f"phase {phase} is not one of all, fields or searches")
+    genus.certify(root, loaded, held, tag, deadline, workers, (index, count), searches)
 
 
 @app.command

@@ -1,0 +1,151 @@
+diff --git a/.github/workflows/certify-searches.yml b/.github/workflows/certify-searches.yml
+new file mode 100644
+index 0000000000..3967aaf001
+--- /dev/null
++++ b/.github/workflows/certify-searches.yml
+@@ -0,0 +1,122 @@
++name: certify searches
++'on':
++  workflow_run:
++    # A certify run ends when its terminating phase does; the searches follow as a run of their own,
++    # so a dispatch queues behind `certify` only and never behind a search that can hold a worker for
++    # a whole job. A search's progress is `exceeded.yaml`, which that run has already pushed, and
++    # `genus.requests` puts an unfinished search back at the end of the next queue.
++    workflows:
++      - certify
++    types:
++      - completed
++  workflow_dispatch: null
++permissions:
++  contents: write
++concurrency:
++  group: certify-searches
++  cancel-in-progress: false
++jobs:
++  searches:
++    name: Semi-decision searches
++    # Each shard is a runner with its own job budget. A search that never ends spends one worker of
++    # one shard, so the corpus advances on every other worker.
++    strategy:
++      fail-fast: false
++      matrix:
++        shard: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15]
++    env:
++      SHARDS: 16
++    runs-on: ubuntu-latest
++    timeout-minutes: 350
++    defaults:
++      run:
++        shell: bash -el {0}
++    steps:
++      - name: Reserve time to persist results
++        run: echo "CERTIFY_DEADLINE=$(( $(date +%s) + 340 * 60 ))" >> "$GITHUB_ENV"
++      - name: Check out (actions/checkout v4)
++        id: checkout
++        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
++        with:
++          fetch-depth: 0
++          ref: main
++      - name: Provision the shared Sage environment
++        uses: ./.github/actions/sage
++      - name: Configure Git integration
++        shell: bash --noprofile --norc -e -o pipefail {0}
++        run: |
++          git config --global --add safe.directory "$GITHUB_WORKSPACE"
++          git config user.name 'github-actions[bot]'
++          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
++          # Shards own disjoint tags, so `exceeded.yaml` merges key by key (.gitattributes).
++          # Git runs the driver in the worktree being merged, so its directory is "$PWD".
++          git config merge.keyed-map.driver 'docker exec -i --workdir "$PWD" --env PYTHONPATH='"$GITHUB_WORKSPACE/research/src:$GITHUB_WORKSPACE/src"' sage-env /sage/.venv/bin/python -m latticedb merge-keyed-map %O %A %B'
++      - name: Run the semi-decision searches
++        env:
++          LATTICEDB_TAG: ${{ matrix.tag }}
++        run: |
++          # Push progress every half hour, so a runner that dies loses at most that much.
++          ( while sleep 1800; do .github/scripts/persist.sh "${{ matrix.shard }}/$SHARDS" || true; done ) &
++          persister=$!
++          # Include provisioning in the job budget and reserve ten minutes for persistence.
++          minutes=$(( (CERTIFY_DEADLINE - $(date +%s)) / 60 ))
++          (( minutes > 0 ))
++          if (( minutes > 330 )); then minutes=330; fi
++          args=(--minutes "$minutes" --shard "${{ matrix.shard }}/$SHARDS" --workers 1 --phase searches)
++          if [[ -n "$LATTICEDB_TAG" ]]; then
++            args+=(--tag "$LATTICEDB_TAG")
++          fi
++          # The timeout runs inside the container, so it ends the certify process itself
++          # before the commit step reads the cards and `exceeded.yaml`.
++          status=0
++          docker exec -i \
++              --env "LATTICEDB_RUN_URL=$GITHUB_SERVER_URL/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID/attempts/$GITHUB_RUN_ATTEMPT" \
++              --env "LATTICEDB_REVISION=$(git rev-parse HEAD)" \
++              --env "LATTICEDB_RESEARCH_REVISION=$(git -C research rev-parse HEAD)" \
++            --env "PYTHONPATH=$GITHUB_WORKSPACE/research/src:$GITHUB_WORKSPACE/src" \
++            --workdir "$GITHUB_WORKSPACE" \
++            sage-env timeout "${minutes}m" /sage/.venv/bin/python -m latticedb certify "${args[@]}" || status=$?
++          kill "$persister" || true
++          case "$status" in
++            0) ;;
++            124) echo "Certification budget exhausted; preserving completed values." ;;
++            *) exit "$status" ;;
++          esac
++      - name: Stop certification before reading its output
++        if: ${{ always() && steps.checkout.outcome == 'success' }}
++        shell: bash --noprofile --norc -e -o pipefail {0}
++        run: |
++          # A cancelled job kills the exec but not the process inside the container, which would
++          # keep checkpointing into the worktree under the commit step. The container stays up:
++          # the merge driver runs in it.
++          docker exec sage-env pkill -TERM -f 'latticedb certify' || true
++          for _ in $(seq 1 30); do
++            docker exec sage-env pgrep -f 'latticedb certify' >/dev/null || exit 0
++            sleep 1
++          done
++          docker exec sage-env pkill -KILL -f 'latticedb' || true
++      - name: Archive completed data before Git integration
++        if: ${{ always() && steps.checkout.outcome == 'success' }}
++        shell: bash --noprofile --norc -e -o pipefail {0}
++        run: |
++          git config --global --add safe.directory "$GITHUB_WORKSPACE"
++          git add -A lattices certificates exceeded.yaml failures.yaml
++          git diff --cached --binary > "$RUNNER_TEMP/certification.patch"
++          git rev-parse HEAD > "$RUNNER_TEMP/certification-base.txt"
++      - name: Retain completed data even if integration fails
++        if: ${{ always() && steps.checkout.outcome == 'success' }}
++        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
++        with:
++          name: certification-searches-${{ github.run_id }}-${{ github.run_attempt }}-shard-${{ matrix.shard }}${{ matrix.tag && format('-{0}', matrix.tag) || '' }}
++          path: |-
++            ${{ runner.temp }}/certification.patch
++            ${{ runner.temp }}/certification-base.txt
++          if-no-files-found: error
++      - name: Commit completed computations to main
++        if: ${{ always() && steps.checkout.outcome == 'success' }}
++        shell: bash --noprofile --norc -e -o pipefail {0}
++        run: .github/scripts/persist.sh "${{ matrix.shard }}/$SHARDS" final
++      - name: Stop the Sage environment
++        if: always()
++        shell: bash --noprofile --norc -e -o pipefail {0}
++        run: docker rm --force sage-env >/dev/null 2>&1 || true
+diff --git a/.github/workflows/certify.yml b/.github/workflows/certify.yml
+index 1b24281507..b54a3ef72d 100644
+--- a/.github/workflows/certify.yml
++++ b/.github/workflows/certify.yml
+@@ -10,6 +10,9 @@ name: certify
+         type: string
+ permissions:
+   contents: write
++# The group is the run's, so no two runs compute the same card at once; the semi-decision searches
++# are the run of `certify-searches.yml`, whose own group a dispatch never waits behind, and whose
++# progress is `exceeded.yaml`, which this run has already pushed.
+ concurrency:
+   group: certify
+   cancel-in-progress: false
+@@ -94,7 +97,7 @@ jobs:
+           minutes=$(( (CERTIFY_DEADLINE - $(date +%s)) / 60 ))
+           (( minutes > 0 ))
+           if (( minutes > 330 )); then minutes=330; fi
+-          args=(--minutes "$minutes" --shard "${{ matrix.shard }}/$SHARDS" --workers 1)
++          args=(--minutes "$minutes" --shard "${{ matrix.shard }}/$SHARDS" --workers 1 --phase fields)
+           if [[ -n "$LATTICEDB_TAG" ]]; then
+             args+=(--tag "$LATTICEDB_TAG")
+           fi
