@@ -1,11 +1,12 @@
 name: certify
 'on':
   schedule:
-    - cron: 17 3 * * *
+  - cron: 17 3 * * *
   workflow_dispatch:
     inputs:
       tags:
-        description: Lattice tags to certify, separated by spaces; omit for the full corpus.
+        description: Lattice tags to certify, separated by spaces; omit for the 
+          full corpus.
         required: false
         type: string
 permissions:
@@ -26,32 +27,32 @@ jobs:
     outputs:
       matrix: ${{ steps.plan.outputs.matrix }}
     steps:
-      - name: Expand the tags input into the job matrix
-        id: plan
-        shell: bash --noprofile --norc -e -o pipefail {0}
-        env:
-          TAGS: ${{ github.event.inputs.tags || '' }}
-        run: |
-          mapfile -t named < <(printf '%s' "$TAGS" | tr -s '[:space:]' '\n' | sed '/^$/d' | awk '!seen[$0]++')
-          entries=()
-          if (( ${#named[@]} == 0 )); then
-            # Without a list the run certifies the whole corpus in sixteen shards, as before.
-            for shard in $(seq 0 15); do
-              entries+=("{\"tag\":\"\",\"shard\":$shard,\"shards\":16}")
-            done
-          else
-            for tag in "${named[@]}"; do
-              # The tag reaches both a shell argument and this JSON, so it is checked here.
-              if [[ ! "$tag" =~ ^[0-9A-Z]+$ ]]; then
-                echo "not a lattice tag: $tag" >&2
-                exit 1
-              fi
-              entries+=("{\"tag\":\"$tag\",\"shard\":0,\"shards\":1}")
-            done
-          fi
-          matrix="{\"include\":[$(IFS=,; echo "${entries[*]}")]}"
-          printf '%s\n' "$matrix"
-          printf 'matrix=%s\n' "$matrix" >> "$GITHUB_OUTPUT"
+    - name: Expand the tags input into the job matrix
+      id: plan
+      shell: bash --noprofile --norc -e -o pipefail {0}
+      env:
+        TAGS: ${{ github.event.inputs.tags || '' }}
+      run: |
+        mapfile -t named < <(printf '%s' "$TAGS" | tr -s '[:space:]' '\n' | sed '/^$/d' | awk '!seen[$0]++')
+        entries=()
+        if (( ${#named[@]} == 0 )); then
+          # Without a list the run certifies the whole corpus in sixteen shards, as before.
+          for shard in $(seq 0 15); do
+            entries+=("{\"tag\":\"\",\"shard\":$shard,\"shards\":16}")
+          done
+        else
+          for tag in "${named[@]}"; do
+            # The tag reaches both a shell argument and this JSON, so it is checked here.
+            if [[ ! "$tag" =~ ^[0-9A-Z]+$ ]]; then
+              echo "not a lattice tag: $tag" >&2
+              exit 1
+            fi
+            entries+=("{\"tag\":\"$tag\",\"shard\":0,\"shards\":1}")
+          done
+        fi
+        matrix="{\"include\":[$(IFS=,; echo "${entries[*]}")]}"
+        printf '%s\n' "$matrix"
+        printf 'matrix=%s\n' "$matrix" >> "$GITHUB_OUTPUT"
   certify:
     needs: plan
     # Each shard is a runner with its own job budget. A computation that never ends
@@ -67,91 +68,94 @@ jobs:
       run:
         shell: bash -el {0}
     steps:
-      - name: Reserve time to persist results
-        run: echo "CERTIFY_DEADLINE=$(( $(date +%s) + 340 * 60 ))" >> "$GITHUB_ENV"
-      - name: Check out (actions/checkout v4)
-        id: checkout
-        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
-        with:
-          fetch-depth: 0
-          ref: main
-      - name: Provision the shared Sage environment
-        uses: ./.github/actions/sage
-      - name: Configure Git integration
-        shell: bash --noprofile --norc -e -o pipefail {0}
-        run: |
-          git config --global --add safe.directory "$GITHUB_WORKSPACE"
-          git config user.name 'github-actions[bot]'
-          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          # Shards own disjoint tags, so `exceeded.yaml` merges key by key (.gitattributes).
-          # Git runs the driver in the worktree being merged, so its directory is "$PWD".
-          git config merge.keyed-map.driver 'docker exec -i --workdir "$PWD" --env PYTHONPATH='"$GITHUB_WORKSPACE/research/src:$GITHUB_WORKSPACE/src"' sage-env /sage/.venv/bin/python -m latticedb merge-keyed-map %O %A %B'
-      - name: Compute and certify uncertified card values
-        env:
-          LATTICEDB_TAG: ${{ matrix.tag }}
-        run: |
-          # Push progress every half hour, so a runner that dies loses at most that much.
-          ( while sleep 1800; do .github/scripts/persist.sh "${{ matrix.shard }}/$SHARDS" || true; done ) &
-          persister=$!
-          # Include provisioning in the job budget and reserve ten minutes for persistence.
-          minutes=$(( (CERTIFY_DEADLINE - $(date +%s)) / 60 ))
-          (( minutes > 0 ))
-          if (( minutes > 330 )); then minutes=330; fi
-          args=(--minutes "$minutes" --shard "${{ matrix.shard }}/$SHARDS" --workers 1 --phase fields)
-          if [[ -n "$LATTICEDB_TAG" ]]; then
-            args+=(--tag "$LATTICEDB_TAG")
-          fi
-          # The timeout runs inside the container, so it ends the certify process itself
-          # before the commit step reads the cards and `exceeded.yaml`.
-          status=0
-          docker exec -i \
-              --env "LATTICEDB_RUN_URL=$GITHUB_SERVER_URL/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID/attempts/$GITHUB_RUN_ATTEMPT" \
-              --env "LATTICEDB_REVISION=$(git rev-parse HEAD)" \
-              --env "LATTICEDB_RESEARCH_REVISION=$(git -C research rev-parse HEAD)" \
-            --env "PYTHONPATH=$GITHUB_WORKSPACE/research/src:$GITHUB_WORKSPACE/src" \
-            --workdir "$GITHUB_WORKSPACE" \
-            sage-env timeout "${minutes}m" /sage/.venv/bin/python -m latticedb certify "${args[@]}" || status=$?
-          kill "$persister" || true
-          case "$status" in
-            0) ;;
-            124) echo "Certification budget exhausted; preserving completed values." ;;
-            *) exit "$status" ;;
-          esac
-      - name: Stop certification before reading its output
-        if: ${{ always() && steps.checkout.outcome == 'success' }}
-        shell: bash --noprofile --norc -e -o pipefail {0}
-        run: |
-          # A cancelled job kills the exec but not the process inside the container, which would
-          # keep checkpointing into the worktree under the commit step. The container stays up:
-          # the merge driver runs in it.
-          docker exec sage-env pkill -TERM -f 'latticedb certify' || true
-          for _ in $(seq 1 30); do
-            docker exec sage-env pgrep -f 'latticedb certify' >/dev/null || exit 0
-            sleep 1
-          done
-          docker exec sage-env pkill -KILL -f 'latticedb' || true
-      - name: Archive completed data before Git integration
-        if: ${{ always() && steps.checkout.outcome == 'success' }}
-        shell: bash --noprofile --norc -e -o pipefail {0}
-        run: |
-          git config --global --add safe.directory "$GITHUB_WORKSPACE"
-          git add -A lattices certificates exceeded.yaml failures.yaml
-          git diff --cached --binary > "$RUNNER_TEMP/certification.patch"
-          git rev-parse HEAD > "$RUNNER_TEMP/certification-base.txt"
-      - name: Retain completed data even if integration fails
-        if: ${{ always() && steps.checkout.outcome == 'success' }}
-        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
-        with:
-          name: certification-${{ github.run_id }}-${{ github.run_attempt }}-shard-${{ matrix.shard }}${{ matrix.tag && format('-{0}', matrix.tag) || '' }}
-          path: |-
-            ${{ runner.temp }}/certification.patch
-            ${{ runner.temp }}/certification-base.txt
-          if-no-files-found: error
-      - name: Commit completed computations to main
-        if: ${{ always() && steps.checkout.outcome == 'success' }}
-        shell: bash --noprofile --norc -e -o pipefail {0}
-        run: .github/scripts/persist.sh "${{ matrix.shard }}/$SHARDS" final
-      - name: Stop the Sage environment
-        if: always()
-        shell: bash --noprofile --norc -e -o pipefail {0}
-        run: docker rm --force sage-env >/dev/null 2>&1 || true
+    - name: Reserve time to persist results
+      run: echo "CERTIFY_DEADLINE=$(( $(date +%s) + 340 * 60 ))" >> 
+        "$GITHUB_ENV"
+    - name: Check out (actions/checkout v4)
+      id: checkout
+      uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+      with:
+        fetch-depth: 0
+        ref: main
+    - name: Provision the shared Sage environment
+      uses: ./.github/actions/sage
+    - name: Configure Git integration
+      shell: bash --noprofile --norc -e -o pipefail {0}
+      run: |
+        git config --global --add safe.directory "$GITHUB_WORKSPACE"
+        git config user.name 'github-actions[bot]'
+        git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+        # Shards own disjoint tags, so `exceeded.yaml` merges key by key (.gitattributes).
+        # Git runs the driver in the worktree being merged, so its directory is "$PWD".
+        git config merge.keyed-map.driver 'docker exec -i --workdir "$PWD" --env PYTHONPATH='"$GITHUB_WORKSPACE/research/src:$GITHUB_WORKSPACE/src"' sage-env /sage/.venv/bin/python -m latticedb merge-keyed-map %O %A %B'
+    - name: Compute and certify uncertified card values
+      env:
+        LATTICEDB_TAG: ${{ matrix.tag }}
+      run: |
+        # Push progress every half hour, so a runner that dies loses at most that much.
+        ( while sleep 1800; do .github/scripts/persist.sh "${{ matrix.shard }}/$SHARDS" || true; done ) &
+        persister=$!
+        # Include provisioning in the job budget and reserve ten minutes for persistence.
+        minutes=$(( (CERTIFY_DEADLINE - $(date +%s)) / 60 ))
+        (( minutes > 0 ))
+        if (( minutes > 330 )); then minutes=330; fi
+        args=(--minutes "$minutes" --shard "${{ matrix.shard }}/$SHARDS" --workers 1 --phase fields)
+        if [[ -n "$LATTICEDB_TAG" ]]; then
+          args+=(--tag "$LATTICEDB_TAG")
+        fi
+        # The timeout runs inside the container, so it ends the certify process itself
+        # before the commit step reads the cards and `exceeded.yaml`.
+        status=0
+        docker exec -i \
+            --env "LATTICEDB_RUN_URL=$GITHUB_SERVER_URL/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID/attempts/$GITHUB_RUN_ATTEMPT" \
+            --env "LATTICEDB_REVISION=$(git rev-parse HEAD)" \
+            --env "LATTICEDB_RESEARCH_REVISION=$(git -C research rev-parse HEAD)" \
+          --env "PYTHONPATH=$GITHUB_WORKSPACE/research/src:$GITHUB_WORKSPACE/src" \
+          --workdir "$GITHUB_WORKSPACE" \
+          sage-env timeout "${minutes}m" /sage/.venv/bin/python -m latticedb certify "${args[@]}" || status=$?
+        kill "$persister" || true
+        case "$status" in
+          0) ;;
+          124) echo "Certification budget exhausted; preserving completed values." ;;
+          *) exit "$status" ;;
+        esac
+    - name: Stop certification before reading its output
+      if: ${{ always() && steps.checkout.outcome == 'success' }}
+      shell: bash --noprofile --norc -e -o pipefail {0}
+      run: |
+        # A cancelled job kills the exec but not the process inside the container, which would
+        # keep checkpointing into the worktree under the commit step. The container stays up:
+        # the merge driver runs in it.
+        docker exec sage-env pkill -TERM -f 'latticedb certify' || true
+        for _ in $(seq 1 30); do
+          docker exec sage-env pgrep -f 'latticedb certify' >/dev/null || exit 0
+          sleep 1
+        done
+        docker exec sage-env pkill -KILL -f 'latticedb' || true
+    - name: Archive completed data before Git integration
+      if: ${{ always() && steps.checkout.outcome == 'success' }}
+      shell: bash --noprofile --norc -e -o pipefail {0}
+      run: |
+        git config --global --add safe.directory "$GITHUB_WORKSPACE"
+        git add -A lattices certificates exceeded.yaml failures
+        git diff --cached --binary > "$RUNNER_TEMP/certification.patch"
+        git rev-parse HEAD > "$RUNNER_TEMP/certification-base.txt"
+    - name: Retain completed data even if integration fails
+      if: ${{ always() && steps.checkout.outcome == 'success' }}
+      uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+      with:
+        name: certification-${{ github.run_id }}-${{ github.run_attempt 
+          }}-shard-${{ matrix.shard }}${{ matrix.tag && format('-{0}', 
+          matrix.tag) || '' }}
+        path: |-
+          ${{ runner.temp }}/certification.patch
+          ${{ runner.temp }}/certification-base.txt
+        if-no-files-found: error
+    - name: Commit completed computations to main
+      if: ${{ always() && steps.checkout.outcome == 'success' }}
+      shell: bash --noprofile --norc -e -o pipefail {0}
+      run: .github/scripts/persist.sh "${{ matrix.shard }}/$SHARDS" final
+    - name: Stop the Sage environment
+      if: always()
+      shell: bash --noprofile --norc -e -o pipefail {0}
+      run: docker rm --force sage-env >/dev/null 2>&1 || true
