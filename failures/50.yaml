@@ -27,3 +27,97 @@
     database_revision: 972cd798ea14d57de15ad2d2ac01af7822d03c5b
     research_revision: 65b1618676dabee6abe5ba9a6678b165c6621b85
   notes: []
+3IDB integral.hyperbolic_index:
+  disposition: open
+  attempts:
+  - hash: bbd5b105026294a9e6d80f18133dd6c04c355d67ad2aeef6c413470eb47c71c8
+    gram_tensor:
+    - - 1
+      - 0
+      - 0
+    - - 0
+      - 1
+      - 0
+    - - 0
+      - 0
+      - -2
+    reason: exit status 1
+    stderr: "Traceback (most recent call last):\n  File \"<frozen runpy>\", line 203,
+      in _run_module_as_main\n  File \"<frozen runpy>\", line 88, in _run_code\n  File
+      \"/home/runner/work/lattice-database/lattice-database/src/latticedb/sage_genus.py\",
+      line 349, in <module>\n    main()\n    ~~~~^^\n  File \"/home/runner/work/lattice-database/lattice-database/src/latticedb/sage_genus.py\",
+      line 344, in main\n    _compute(request)\n    ~~~~~~~~^^^^^^^^^\n  File \"/home/runner/work/lattice-database/lattice-database/src/latticedb/sage_genus.py\",
+      line 329, in _compute\n    _run(\n    ~~~~^\n        tag,\n        ^^^^\n        [field],\n
+      \       ^^^^^^^^\n        lambda: {field: SERIES[field](lattice, request[\"series_bound\"])
+      if field in SERIES else VALUES[field](lattice)},\n        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n
+      \   )\n    ^\n  File \"/home/runner/work/lattice-database/lattice-database/src/latticedb/sage_genus.py\",
+      line 288, in _run\n    values = compute()\n  File \"/home/runner/work/lattice-database/lattice-database/src/latticedb/sage_genus.py\",
+      line 332, in <lambda>\n    lambda: {field: SERIES[field](lattice, request[\"series_bound\"])
+      if field in SERIES else VALUES[field](lattice)},\n                                                                                            ~~~~~~~~~~~~~^^^^^^^^^\n
+      \ File \"/home/runner/work/lattice-database/lattice-database/src/latticedb/sage_genus.py\",
+      line 205, in <lambda>\n    \"hyperbolic_index\": lambda lattice: int(lattice.integral_hyperbolic_index()),\n
+      \                                           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^\n
+      \ File \"/sage/.venv/lib/python3.14/site-packages/sage_extensions/categories/lattices.py\",
+      line 5164, in integral_hyperbolic_index\n    return self.hyperbolic_index()\n
+      \          ~~~~~~~~~~~~~~~~~~~~~^^\n  File \"sage/misc/cachefunc.pyx\", line
+      2328, in sage.misc.cachefunc.CachedMethodCallerNoArgs.__call__\n    self.cache
+      = f(self._instance)\n  File \"/sage/.venv/lib/python3.14/site-packages/sage_extensions/categories/lattices.py\",
+      line 5304, in hyperbolic_index\n    empty = embeddings.is_empty()\n  File \"/sage/.venv/lib/python3.14/site-packages/sage_extensions/categories/sets/set_categories.py\",
+      line 2445, in is_empty\n    match self._emptiness_decision():\n          ~~~~~~~~~~~~~~~~~~~~~~~~^^\n
+      \ File \"/sage/.venv/lib/python3.14/site-packages/sage_extensions/categories/lattice_morphisms.py\",
+      line 2713, in _emptiness_decision\n    target_embedding_data = self._target_primitive_embedding_data()\n
+      \ File \"sage/misc/cachefunc.pyx\", line 2328, in sage.misc.cachefunc.CachedMethodCallerNoArgs.__call__\n
+      \   self.cache = f(self._instance)\n  File \"/sage/.venv/lib/python3.14/site-packages/sage_extensions/categories/lattice_morphisms.py\",
+      line 2291, in _target_primitive_embedding_data\n    return lattice_engines._oscar_lattices.target_primitive_embedding(\n
+      \          ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^\n        source.gram_tensor(),\n
+      \       ^^^^^^^^^^^^^^^^^^^^^\n        target.gram_tensor(),\n        ^^^^^^^^^^^^^^^^^^^^^\n
+      \   )\n    ^\n  File \"/sage/.venv/lib/python3.14/site-packages/sage_extensions/categories/lattice_engines.py\",
+      line 1337, in target_primitive_embedding\n    result = self._bridge().call(\n
+      \       \"DzackResearchOscarLatticeAdapter.target_primitive_embedding\",\n        _integer_engine_matrix(source_gram),\n
+      \       _integer_engine_matrix(target_gram),\n    )\n  File \"/sage/.venv/lib/python3.14/site-packages/sage_julia_bridge/interface.py\",
+      line 589, in call\n    response = self._request(\"call\", payload)\n  File \"/sage/.venv/lib/python3.14/site-packages/sage_julia_bridge/interface.py\",
+      line 345, in _request\n    return self._request_unlocked(op, payload)\n           ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^\n
+      \ File \"/sage/.venv/lib/python3.14/site-packages/sage_julia_bridge/interface.py\",
+      line 383, in _request_unlocked\n    raise error_class(\n    ...<4 lines>...\n
+      \   )\nsage_julia_bridge.errors.JuliaError: AssertionError: modulus_quadratic_form(A)
+      == modulus_quadratic_form(B)\nStacktrace:\n  [1] __direct_sum(A::Hecke.TorQuadModule,
+      B::Hecke.TorQuadModule, same_ambient::Bool)\n    @ Oscar /opt/julia-depot/packages/Oscar/clzsb/src/NumberTheory/QuadFormAndIsom/embeddings.jl:18\n
+      \ [2] _direct_sum_with_embeddings_orthogonal_groups(A::Hecke.TorQuadModule,
+      B::Hecke.TorQuadModule; same_ambient::Bool)\n    @ Oscar /opt/julia-depot/packages/Oscar/clzsb/src/NumberTheory/QuadFormAndIsom/embeddings.jl:81\n
+      \ [3] _direct_sum_with_embeddings_orthogonal_groups\n    @ /opt/julia-depot/packages/Oscar/clzsb/src/NumberTheory/QuadFormAndIsom/embeddings.jl:76
+      [inlined]\n  [4] _glue_stabilizers(L::Oscar.ZZLatWithIsom, M::Oscar.ZZLatWithIsom,
+      N::Oscar.ZZLatWithIsom; right_action::Nothing, right_discriminant_action::Oscar.AutomorphismGroup{Hecke.TorQuadModule},
+      left_action::Nothing, left_discriminant_action::Nothing, subM::Bool, subN::Bool)\n
+      \   @ Oscar /opt/julia-depot/packages/Oscar/clzsb/src/NumberTheory/QuadFormAndIsom/embeddings.jl:2430\n
+      \ [5] _glue_stabilizers\n    @ /opt/julia-depot/packages/Oscar/clzsb/src/NumberTheory/QuadFormAndIsom/embeddings.jl:2390
+      [inlined]\n  [6] _glue_stabilizers(L::Hecke.ZZLat, M::Hecke.ZZLat, N::Hecke.ZZLat;
+      kwargs::@Kwargs{right_discriminant_action::Oscar.AutomorphismGroup{Hecke.TorQuadModule}})\n
+      \   @ Oscar /opt/julia-depot/packages/Oscar/clzsb/src/NumberTheory/QuadFormAndIsom/embeddings.jl:2464\n
+      \ [7] _glue_stabilizers\n    @ /opt/julia-depot/packages/Oscar/clzsb/src/NumberTheory/QuadFormAndIsom/embeddings.jl:2455
+      [inlined]\n  [8] primitive_embeddings(G::Hecke.ZZGenus, M::Hecke.ZZLat; right_action::Nothing,
+      right_discriminant_action::Nothing, classification::Symbol, first::Bool, exist_only::Bool)\n
+      \   @ Oscar /opt/julia-depot/packages/Oscar/clzsb/src/NumberTheory/QuadFormAndIsom/embeddings.jl:1567\n
+      \ [9] primitive_embeddings\n    @ /opt/julia-depot/packages/Oscar/clzsb/src/NumberTheory/QuadFormAndIsom/embeddings.jl:1420
+      [inlined]\n [10] primitive_embeddings(L::Hecke.ZZLat, M::Hecke.ZZLat; check::Bool,
+      kwargs::@Kwargs{classification::Symbol})\n    @ Oscar /opt/julia-depot/packages/Oscar/clzsb/src/NumberTheory/QuadFormAndIsom/embeddings.jl:1639\n
+      [11] primitive_embeddings\n    @ /opt/julia-depot/packages/Oscar/clzsb/src/NumberTheory/QuadFormAndIsom/embeddings.jl:1632
+      [inlined]\n [12] target_primitive_embedding(source_gram_entries::Matrix{Int64},
+      target_gram_entries::Matrix{Int64})\n    @ Main.DzackResearchOscarLatticeAdapter
+      ./sage_julia_bridge:163\n [13] (::var\"#handle_request##2#handle_request##3\")()\n
+      \   @ Main /sage/.venv/lib/python3.14/site-packages/sage_julia_bridge/julia_bridge.jl:513\n
+      [14] (::var\"#capture##0#capture##1\"{var\"#handle_request##2#handle_request##3\",
+      Pipe, Pipe})()\n    @ Main /sage/.venv/lib/python3.14/site-packages/sage_julia_bridge/julia_bridge.jl:360\n
+      [15] redirect_stdio(f::var\"#capture##0#capture##1\"{var\"#handle_request##2#handle_request##3\",
+      Pipe, Pipe}; stdin::Nothing, stderr::Pipe, stdout::Pipe)\n    @ Base ./stream.jl:1448\n
+      [16] redirect_stdio\n    @ ./stream.jl:1411 [inlined]\n [17] capture\n    @
+      /sage/.venv/lib/python3.14/site-packages/sage_julia_bridge/julia_bridge.jl:358
+      [inlined]\n [18] handle_request(op::String, payload::String)\n    @ Main /sage/.venv/lib/python3.14/site-packages/sage_julia_bridge/julia_bridge.jl:513\n
+      [19] top-level scope\n    @ /sage/.venv/lib/python3.14/site-packages/sage_julia_bridge/julia_bridge.jl:608\n
+      [20] include(mod::Module, _path::String)\n    @ Base ./Base.jl:306\n [21] exec_options(opts::Base.JLOptions)\n
+      \   @ Base ./client.jl:317\n [22] _start()\n    @ Base ./client.jl:550\n"
+    seconds: 113.21800657300037
+    recorded_at: 2026-11-07 11:09:33.444868+00:00
+    run_url: https://github.com/dzackgarza/lattice-database/actions/runs/42363689427/attempts/1
+    database_revision: dde534ecd9d7c61af3800d20eb1635bc7541f38a
+    research_revision: 8ef80cd0b704a288754fd4a4a3fc8d16d272434b
+  notes: []

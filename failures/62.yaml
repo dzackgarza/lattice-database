@@ -9107,3 +9107,25 @@
     database_revision: c2a89d437746f723ea75e804eab9fc739267863f
     research_revision: b7469ee79146b6d98db2923dbc2a508c46d36984
   notes: []
+2VNL integral.discriminant_form:
+  disposition: open
+  attempts:
+  - hash: ace41edc1fddde0afa5cb6341a6767745c4cf74d9730a4448cc3a2eac2d5a752
+    gram_tensor:
+    - - 2
+      - 1
+      - 0
+    - - 1
+      - 18
+      - 1
+    - - 0
+      - 1
+      - 24
+    reason: memory exhausted
+    stderr: ''
+    seconds: 37.420861470999625
+    recorded_at: 2026-11-07 12:34:46.290242+00:00
+    run_url: https://github.com/dzackgarza/lattice-database/actions/runs/42363689427/attempts/1
+    database_revision: dde534ecd9d7c61af3800d20eb1635bc7541f38a
+    research_revision: 8ef80cd0b704a288754fd4a4a3fc8d16d272434b
+  notes: []

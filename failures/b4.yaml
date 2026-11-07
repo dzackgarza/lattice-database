@@ -4959,3 +4959,67 @@
     database_revision: 972cd798ea14d57de15ad2d2ac01af7822d03c5b
     research_revision: 65b1618676dabee6abe5ba9a6678b165c6621b85
   notes: []
+3IEK derive:
+  disposition: open
+  attempts:
+  - hash: 1a6d37079c65e89ac5748d9ba615a064be6461a4a7d7318ad5c1e075ca0404bd
+    gram_tensor:
+    - - 2
+      - 0
+      - 0
+    - - 0
+      - 2
+      - -1
+    - - 0
+      - -1
+      - 2
+    reason: exit status 1
+    stderr: "Traceback (most recent call last):\n  File \"sage/misc/cachefunc.pyx\",
+      line 1965, in sage.misc.cachefunc.CachedMethodCaller.__call__\n    return cache[k]\nKeyError:
+      ((1,), ())\n\nDuring handling of the above exception, another exception occurred:\n\nTraceback
+      (most recent call last):\n  File \"<frozen runpy>\", line 203, in _run_module_as_main\n
+      \ File \"<frozen runpy>\", line 88, in _run_code\n  File \"/home/runner/work/lattice-database/lattice-database/src/latticedb/sage_genus.py\",
+      line 349, in <module>\n    main()\n    ~~~~^^\n  File \"/home/runner/work/lattice-database/lattice-database/src/latticedb/sage_genus.py\",
+      line 344, in main\n    _compute(request)\n    ~~~~~~~~^^^^^^^^^\n  File \"/home/runner/work/lattice-database/lattice-database/src/latticedb/sage_genus.py\",
+      line 298, in _compute\n    derived = _run(tag, [\"derive\"], lambda: {\"derived\":
+      records.derive(request[\"record\"])})[\"derived\"]\n              ~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n
+      \ File \"/home/runner/work/lattice-database/lattice-database/src/latticedb/sage_genus.py\",
+      line 288, in _run\n    values = compute()\n  File \"/home/runner/work/lattice-database/lattice-database/src/latticedb/sage_genus.py\",
+      line 298, in <lambda>\n    derived = _run(tag, [\"derive\"], lambda: {\"derived\":
+      records.derive(request[\"record\"])})[\"derived\"]\n                                                        ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^\n
+      \ File \"/home/runner/work/lattice-database/lattice-database/src/latticedb/records.py\",
+      line 366, in derive\n    derived[\"definite\"] = _definite(\n                          ~~~~~~~~~^\n
+      \       record,\n        ^^^^^^^\n    ...<4 lines>...\n        integral_lattice,\n
+      \       ^^^^^^^^^^^^^^^^^\n    )\n    ^\n  File \"/home/runner/work/lattice-database/lattice-database/src/latticedb/records.py\",
+      line 228, in _definite\n    (_root_component(computation_lattice, component,
+      rescaling) for component in computation_lattice.reflective_root_system_components()),\n
+      \                                                                                ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^\n
+      \ File \"sage/misc/cachefunc.pyx\", line 2328, in sage.misc.cachefunc.CachedMethodCallerNoArgs.__call__\n
+      \   self.cache = f(self._instance)\n  File \"/sage/.venv/lib/python3.14/site-packages/sage_extensions/categories/lattices.py\",
+      line 7149, in reflective_root_system_components\n    return _reflective_root_system_components(self)\n
+      \ File \"/sage/.venv/lib/python3.14/site-packages/sage_extensions/categories/definite_lattices.py\",
+      line 497, in _reflective_root_system_components\n    simple = _simple_roots(lattice,
+      tuple(DefiniteLattices(lattice.base_ring())(lattice).reflective_roots()))\n
+      \                                         ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^\n
+      \ File \"sage/misc/cachefunc.pyx\", line 2328, in sage.misc.cachefunc.CachedMethodCallerNoArgs.__call__\n
+      \   self.cache = f(self._instance)\n  File \"/sage/.venv/lib/python3.14/site-packages/sage_extensions/categories/lattices.py\",
+      line 9119, in reflective_roots\n    tuple(\n    ^^^^^\n  File \"/sage/.venv/lib/python3.14/site-packages/sage_extensions/categories/lattices.py\",
+      line 9122, in <genexpr>\n    for root in self.roots_of_square(sign * length)\n
+      \               ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^\n  File \"sage/misc/cachefunc.pyx\",
+      line 1970, in sage.misc.cachefunc.CachedMethodCaller.__call__\n    w = self._instance_call(*args,
+      **kwds)\n  File \"sage/misc/cachefunc.pyx\", line 1848, in sage.misc.cachefunc.CachedMethodCaller._instance_call\n
+      \   return self.f(self._instance, *args, **kwds)\n  File \"/sage/.venv/lib/python3.14/site-packages/sage_extensions/categories/lattices.py\",
+      line 7095, in roots_of_square\n    return _roots_of_square(self, square)\n  File
+      \"/sage/.venv/lib/python3.14/site-packages/sage_extensions/categories/definite_lattices.py\",
+      line 370, in _roots_of_square\n    return _shell(lattice, square, _square_shell(positive_gram,
+      target, True))\n                                   ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n
+      \ File \"/sage/.venv/lib/python3.14/site-packages/sage_extensions/categories/definite_lattices.py\",
+      line 294, in _square_shell\n    engine_target = SageZZ(_engine_element(target.parent(),
+      target))\n                                           ^^^^^^^^^^^^^\nAttributeError:
+      'int' object has no attribute 'parent'\n"
+    seconds: 3.249277265999808
+    recorded_at: 2026-11-07 11:24:41.457472+00:00
+    run_url: https://github.com/dzackgarza/lattice-database/actions/runs/42363689427/attempts/1
+    database_revision: dde534ecd9d7c61af3800d20eb1635bc7541f38a
+    research_revision: 8ef80cd0b704a288754fd4a4a3fc8d16d272434b
+  notes: []

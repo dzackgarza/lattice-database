@@ -1,0 +1,22 @@
+2VC6 integral.discriminant_form:
+  disposition: open
+  attempts:
+  - hash: 516244c8d87accbe9d4c5080796507089699044e898402971f8243b052398a99
+    gram_tensor:
+    - - 8
+      - 1
+      - 3
+    - - 1
+      - 8
+      - 1
+    - - 3
+      - 1
+      - 14
+    reason: memory exhausted
+    stderr: ''
+    seconds: 43.718223879001016
+    recorded_at: 2026-11-07 14:07:32.526369+00:00
+    run_url: https://github.com/dzackgarza/lattice-database/actions/runs/42363689427/attempts/1
+    database_revision: dde534ecd9d7c61af3800d20eb1635bc7541f38a
+    research_revision: 8ef80cd0b704a288754fd4a4a3fc8d16d272434b
+  notes: []

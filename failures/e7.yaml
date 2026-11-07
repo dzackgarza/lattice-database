@@ -4470,6 +4470,28 @@
     database_revision: c2a89d437746f723ea75e804eab9fc739267863f
     research_revision: b7469ee79146b6d98db2923dbc2a508c46d36984
   notes: []
+2W1T integral.discriminant_form:
+  disposition: open
+  attempts:
+  - hash: 95140a4d13a7fa7f59e3bcfb93402723d9b28865385be82cfc6f73ef7a84bd99
+    gram_tensor:
+    - - 6
+      - 0
+      - 2
+    - - 0
+      - 8
+      - 3
+    - - 2
+      - 3
+      - 20
+    reason: memory exhausted
+    stderr: ''
+    seconds: 13.698075762000371
+    recorded_at: 2026-11-07 15:45:22.997800+00:00
+    run_url: https://github.com/dzackgarza/lattice-database/actions/runs/42363689427/attempts/1
+    database_revision: dde534ecd9d7c61af3800d20eb1635bc7541f38a
+    research_revision: 8ef80cd0b704a288754fd4a4a3fc8d16d272434b
+  notes: []
 3IAB integral.overlattice_count:
   disposition: open
   attempts:
