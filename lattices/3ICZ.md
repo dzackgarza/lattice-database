@@ -14,6 +14,9 @@ certifications:
   integral.anisotropic_primes: f8d28d778a73b0687b37598f20b4716f24cba20ac7846d1abd05bfb870a8585f
   integral.local_representations: e96bc52a7110ca70f3a21a462dada5b5e0ab34c5e7ce38713b00b13e113efbb9
   integral.local_densities: 080839de9e5926f106c89b040aa86b17a0f21b8fcf5dc0b3179f3ecb010e1b9c
+  automorphisms.automorphism_group_generator_morphisms: 05756e1a70a2f0dea914aee1a2aba6359bc7f052ac9f1495aefae4dfb4d16b50
+  integral.discriminant_form: 917b65d986046ba33de39b37326a21c7045da6e904d476a802e4c0c44f946807
+  integral.primitive_orbits: dc38a968fdb64ed1c9bfe2d537f20bc414f0443eceaf29a503116dbc83345add
 rank: 2
 gram_tensor:
 - [0, -2]
@@ -39,6 +42,43 @@ integral:
   genus_symbol: 'II_{1,1} (2: 2^2)'
   genus_class_count: 1
   hyperbolic_index: 0
+  primitive_orbits:
+    O:
+      constant: 1
+      z: []
+      w: []
+    SO:
+      constant: 2
+      z: []
+      w: []
+    Otilde:
+      constant: 2
+      z: []
+      w: []
+    SOtilde:
+      constant: 2
+      z: []
+      w: []
+    O+:
+      constant: 1
+      z: []
+      w: []
+    SO+:
+      constant: 2
+      z: []
+      w: []
+    Otilde+:
+      constant: 2
+      z: []
+      w: []
+    SOtilde+:
+      constant: 2
+      z: []
+      w: []
+  discriminant_form:
+    orthogonal_group_order: 2
+    isotropic_classes: 3
+    isotropic_orbits: 2
   anisotropic_primes: []
   local_representations:
   - prime: 2
@@ -62,9 +102,23 @@ integral:
   local_densities:
   - prime: 2
     densities: [0, 0, 0, 2, 0, 0, 0, 4, 0, 0, 0, 2]
+automorphisms:
+  automorphism_group_generator_morphisms: [O(L) generator 1, O(L) generator 2]
 indefinite:
   isotropic: true
-morphisms: []
+morphisms:
+- target: 3ICZ
+  name: O(L) generator 1
+  matrix:
+  - [-1, 0]
+  - [0, -1]
+  scale: 1
+- target: 3ICZ
+  name: O(L) generator 2
+  matrix:
+  - [0, 1]
+  - [1, 0]
+  scale: 1
 related:
 - tag: '0016'
   relation: This presentation is obtained by scaling the form by -2 of 0016.
