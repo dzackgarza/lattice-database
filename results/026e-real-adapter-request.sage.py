@@ -44,6 +44,5 @@ print("EMITTED_JSON", line)
 assert json.loads(line)["primitive_orbits"]["O"]["constant"] == expected
 
 print("CONSTANT_IS_FINITE", expected)
-print("NONFINITE_CONVERSION", sage_genus._orbit_count(
-    type("Infinite", (), {"is_finite": lambda self: False, "aleph_index": lambda self: 0})()
-), "(the owner's own API for an infinite cardinality; not a lattice assertion)")
+# The main provider probe returned finite `1` too. No owner value for an infinite
+# cardinality is observed here, and nothing synthesizes one.

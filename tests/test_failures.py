@@ -205,10 +205,16 @@ def test_a_ledger_entry_must_be_in_the_shard_of_its_own_tag(tmp_path: Path) -> N
     with pytest.raises(ValueError, match="belongs to the shard"):
         failures.load(tmp_path)
 
-    (tmp_path / failures.DIRECTORY / f"{other}.yaml").write_text("{}\n")
+    # A misplaced duplicate must also be rejected. Keep the original misplaced copy beside a lawful
+    # entry of the same computation of that tag: it is the duplicate that is abnormal, never its two
+    # keys, which are distinct computations of one card and so belong to the same shard.
     (tmp_path / failures.DIRECTORY / f"{owner}.yaml").write_text(
         yaml.safe_dump({"0012 integral.genus_symbol": entry, "0012 genus_symbol": entry})
     )
+    assert set(failures.load(tmp_path)) == {"0012 integral.genus_symbol", "0012 genus_symbol"}, (
+        "two different computations of one card are both in its own shard"
+    )
+    (tmp_path / failures.DIRECTORY / f"{other}.yaml").write_text(yaml.safe_dump({"0012 integral.genus_symbol": entry}))
     with pytest.raises(ValueError, match="belongs to the shard"):
         failures.load(tmp_path)
 

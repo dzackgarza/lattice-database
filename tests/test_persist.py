@@ -9,7 +9,27 @@ import yaml
 
 from latticedb import failures
 
+from datetime import UTC, datetime
+from pathlib import Path as _Path
+
+from latticedb import failures
+
 REPOSITORY = Path(__file__).resolve().parent.parent
+
+
+def failure_attempt(reason: str) -> dict:
+    """A complete `failures.Attempt`, as the ledger's own model requires."""
+    return {
+        "hash": "h",
+        "gram_tensor": [[2]],
+        "reason": reason,
+        "stderr": "",
+        "seconds": 0.0,
+        "recorded_at": datetime(2026, 11, 7, tzinfo=UTC).isoformat(),
+        "run_url": None,
+        "database_revision": None,
+        "research_revision": None,
+    }
 PERSIST = REPOSITORY / ".github" / "scripts" / "persist.sh"
 
 
@@ -58,14 +78,14 @@ def test_shards_push_progress_repeatedly_without_touching_their_worktrees(tmp_pa
     log(first, {"0001 genus": 30})
     (first / "failures").mkdir(exist_ok=True)
     (first / "failures" / f"{failures.group('0001 integral.genus_symbol')}.yaml").write_text(
-        yaml.safe_dump({"0001 integral.genus_symbol": {"disposition": "open", "attempts": [{"reason": "memory exhausted"}]}})
+        yaml.safe_dump({"0001 integral.genus_symbol": {"disposition": "open", "attempts": [failure_attempt("memory exhausted")]}})
     )
     persist(first, "0/2")
     (second / "lattices" / "0002.md").write_text("0002 derived\n")
     log(second, {"0002 genus": 60})
     (second / "failures").mkdir(exist_ok=True)
     (second / "failures" / f"{failures.group('0002 integral.genus_symbol')}.yaml").write_text(
-        yaml.safe_dump({"0002 integral.genus_symbol": {"disposition": "open", "attempts": [{"reason": "exit status 1"}]}})
+        yaml.safe_dump({"0002 integral.genus_symbol": {"disposition": "open", "attempts": [failure_attempt("exit status 1")]}})
     )
     persist(second, "1/2")
     # The first shard keeps computing; its next push carries only what changed since.
