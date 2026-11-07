@@ -207,6 +207,414 @@
     database_revision: dea30614e6711ce0b908fff7519c3fa6a99a3365
     research_revision: null
   notes: []
+026L integral.primitive_orbits:
+  disposition: open
+  attempts:
+  - hash: 6d3830320e26bf31ce971203f44b1a65421e4b1a5189abe9fa7c9c4f31e15d9e
+    gram_tensor:
+    - - 0
+      - 1
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+    - - 1
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+    - - 0
+      - 0
+      - -2
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+    - - 0
+      - 0
+      - 0
+      - -2
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+    - - 0
+      - 0
+      - 0
+      - 0
+      - -2
+      - 0
+      - 0
+      - 0
+      - 0
+    - - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - -2
+      - 0
+      - 0
+      - 0
+    - - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - -2
+      - 0
+      - 0
+    - - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - -2
+      - 0
+    - - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - -2
+    reason: memory exhausted
+    stderr: ''
+    seconds: 1554.3699115619997
+    recorded_at: 2026-11-07 02:42:46.835188+00:00
+    run_url: https://github.com/dzackgarza/lattice-database/actions/runs/42326648686/attempts/1
+    database_revision: 78ef8ce6285aef04059b2c35e88a0ae1a3f57a96
+    research_revision: e94f00da5a9e4670e0480613dd6f5e3d87c75923
+  notes: []
+026Z automorphisms.automorphism_group_generator_morphisms:
+  disposition: resolved
+  attempts:
+  - hash: 4dd08c38de832de3a1793517cff7d24e80977230bb1ecafd495979d9550b0448
+    gram_tensor:
+    - - 0
+      - 2
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+    - - 2
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+    - - 0
+      - 0
+      - -2
+      - 1
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+    - - 0
+      - 0
+      - 1
+      - -2
+      - 1
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+    - - 0
+      - 0
+      - 0
+      - 1
+      - -2
+      - 1
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+    - - 0
+      - 0
+      - 0
+      - 0
+      - 1
+      - -2
+      - 1
+      - 1
+      - 0
+      - 0
+      - 0
+      - 0
+    - - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 1
+      - -2
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+    - - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 1
+      - 0
+      - -2
+      - 0
+      - 0
+      - 0
+      - 0
+    - - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - -2
+      - 0
+      - 0
+      - 0
+    - - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - -2
+      - 0
+      - 0
+    - - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - -2
+      - 0
+    - - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - -2
+    reason: worker or runner lost (recovered from exceeded.yaml)
+    stderr: ''
+    seconds: 590.0
+    recorded_at: 2026-11-07 16:52:36.328167+00:00
+    run_url: https://github.com/dzackgarza/lattice-database/actions/runs/42391523243/attempts/1
+    database_revision: 18abc0744e1b63baf84d248d7fc8601a53dd30e2
+    research_revision: 791a3ac8ed7b2e6799d8e3e0a43e1fd34ad3aae5
+  notes: []
+026Z integral.primitive_orbits:
+  disposition: open
+  attempts:
+  - hash: 9fc09452ce943d99840a339e3b5b4b1dac0c5aaa1afc48a8ce288b2284ce89a1
+    gram_tensor:
+    - - 0
+      - 2
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+    - - 2
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+    - - 0
+      - 0
+      - -2
+      - 1
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+    - - 0
+      - 0
+      - 1
+      - -2
+      - 1
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+    - - 0
+      - 0
+      - 0
+      - 1
+      - -2
+      - 1
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+    - - 0
+      - 0
+      - 0
+      - 0
+      - 1
+      - -2
+      - 1
+      - 1
+      - 0
+      - 0
+      - 0
+      - 0
+    - - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 1
+      - -2
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+    - - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 1
+      - 0
+      - -2
+      - 0
+      - 0
+      - 0
+      - 0
+    - - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - -2
+      - 0
+      - 0
+      - 0
+    - - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - -2
+      - 0
+      - 0
+    - - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - -2
+      - 0
+    - - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - -2
+    reason: memory exhausted
+    stderr: ''
+    seconds: 3.546104787999866
+    recorded_at: 2026-11-07 02:49:59.313771+00:00
+    run_url: https://github.com/dzackgarza/lattice-database/actions/runs/42326648686/attempts/1
+    database_revision: 78ef8ce6285aef04059b2c35e88a0ae1a3f57a96
+    research_revision: e94f00da5a9e4670e0480613dd6f5e3d87c75923
+  notes: []
 0LXI integral.genus_class_count:
   disposition: open
   attempts:
@@ -5596,255 +6004,4 @@
     run_url: https://github.com/dzackgarza/lattice-database/actions/runs/40077222835/attempts/1
     database_revision: 972cd798ea14d57de15ad2d2ac01af7822d03c5b
     research_revision: 65b1618676dabee6abe5ba9a6678b165c6621b85
-  notes: []
-026L integral.primitive_orbits:
-  disposition: open
-  attempts:
-  - hash: 6d3830320e26bf31ce971203f44b1a65421e4b1a5189abe9fa7c9c4f31e15d9e
-    gram_tensor:
-    - - 0
-      - 1
-      - 0
-      - 0
-      - 0
-      - 0
-      - 0
-      - 0
-      - 0
-    - - 1
-      - 0
-      - 0
-      - 0
-      - 0
-      - 0
-      - 0
-      - 0
-      - 0
-    - - 0
-      - 0
-      - -2
-      - 0
-      - 0
-      - 0
-      - 0
-      - 0
-      - 0
-    - - 0
-      - 0
-      - 0
-      - -2
-      - 0
-      - 0
-      - 0
-      - 0
-      - 0
-    - - 0
-      - 0
-      - 0
-      - 0
-      - -2
-      - 0
-      - 0
-      - 0
-      - 0
-    - - 0
-      - 0
-      - 0
-      - 0
-      - 0
-      - -2
-      - 0
-      - 0
-      - 0
-    - - 0
-      - 0
-      - 0
-      - 0
-      - 0
-      - 0
-      - -2
-      - 0
-      - 0
-    - - 0
-      - 0
-      - 0
-      - 0
-      - 0
-      - 0
-      - 0
-      - -2
-      - 0
-    - - 0
-      - 0
-      - 0
-      - 0
-      - 0
-      - 0
-      - 0
-      - 0
-      - -2
-    reason: memory exhausted
-    stderr: ''
-    seconds: 1554.3699115619997
-    recorded_at: 2026-11-07 02:42:46.835188+00:00
-    run_url: https://github.com/dzackgarza/lattice-database/actions/runs/42326648686/attempts/1
-    database_revision: 78ef8ce6285aef04059b2c35e88a0ae1a3f57a96
-    research_revision: e94f00da5a9e4670e0480613dd6f5e3d87c75923
-  notes: []
-026Z integral.primitive_orbits:
-  disposition: open
-  attempts:
-  - hash: 9fc09452ce943d99840a339e3b5b4b1dac0c5aaa1afc48a8ce288b2284ce89a1
-    gram_tensor:
-    - - 0
-      - 2
-      - 0
-      - 0
-      - 0
-      - 0
-      - 0
-      - 0
-      - 0
-      - 0
-      - 0
-      - 0
-    - - 2
-      - 0
-      - 0
-      - 0
-      - 0
-      - 0
-      - 0
-      - 0
-      - 0
-      - 0
-      - 0
-      - 0
-    - - 0
-      - 0
-      - -2
-      - 1
-      - 0
-      - 0
-      - 0
-      - 0
-      - 0
-      - 0
-      - 0
-      - 0
-    - - 0
-      - 0
-      - 1
-      - -2
-      - 1
-      - 0
-      - 0
-      - 0
-      - 0
-      - 0
-      - 0
-      - 0
-    - - 0
-      - 0
-      - 0
-      - 1
-      - -2
-      - 1
-      - 0
-      - 0
-      - 0
-      - 0
-      - 0
-      - 0
-    - - 0
-      - 0
-      - 0
-      - 0
-      - 1
-      - -2
-      - 1
-      - 1
-      - 0
-      - 0
-      - 0
-      - 0
-    - - 0
-      - 0
-      - 0
-      - 0
-      - 0
-      - 1
-      - -2
-      - 0
-      - 0
-      - 0
-      - 0
-      - 0
-    - - 0
-      - 0
-      - 0
-      - 0
-      - 0
-      - 1
-      - 0
-      - -2
-      - 0
-      - 0
-      - 0
-      - 0
-    - - 0
-      - 0
-      - 0
-      - 0
-      - 0
-      - 0
-      - 0
-      - 0
-      - -2
-      - 0
-      - 0
-      - 0
-    - - 0
-      - 0
-      - 0
-      - 0
-      - 0
-      - 0
-      - 0
-      - 0
-      - 0
-      - -2
-      - 0
-      - 0
-    - - 0
-      - 0
-      - 0
-      - 0
-      - 0
-      - 0
-      - 0
-      - 0
-      - 0
-      - 0
-      - -2
-      - 0
-    - - 0
-      - 0
-      - 0
-      - 0
-      - 0
-      - 0
-      - 0
-      - 0
-      - 0
-      - 0
-      - 0
-      - -2
-    reason: memory exhausted
-    stderr: ''
-    seconds: 3.546104787999866
-    recorded_at: 2026-11-07 02:49:59.313771+00:00
-    run_url: https://github.com/dzackgarza/lattice-database/actions/runs/42326648686/attempts/1
-    database_revision: 78ef8ce6285aef04059b2c35e88a0ae1a3f57a96
-    research_revision: e94f00da5a9e4670e0480613dd6f5e3d87c75923
   notes: []
