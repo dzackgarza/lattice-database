@@ -137,8 +137,9 @@ def applies(field: str, lattice: Lattice) -> bool:
       lattice of hyperbolic index at least 2.
     - `polarization_counts`: no preamble operation presents a table of a source, and
       every count it holds is certified by the citation of that table.
-    - `discriminant_form`: the owner partitions $A_L$, so the request is made where the
-      classes of $A_L$ are few, $|A_L| = |\\det L| \\leq 4096$.
+    - `discriminant_form`: $q_L$ is a quadratic form only on an even lattice, and the owner
+      partitions $A_L$, so the request is made on an even card whose classes of $A_L$ are few,
+      $|A_L| = |\\det L| \\leq 4096$.
 
     Everything else — including `integral.primitive_orbits` and the automorphism
     generators on an indefinite card — is asked on every card that can store it (#8).
@@ -163,7 +164,14 @@ def applies(field: str, lattice: Lattice) -> bool:
         case "roots" | "norms":
             return lattice.definite is None
         case "discriminant_form":
-            return lattice.determinant is not None and abs(lattice.determinant) <= 4096
+            # q_L is a quadratic form only on an even lattice, and the orbit partition is of the
+            # classes of A_L, so the request is made on an even card with |A_L| = |det L| small.
+            return (
+                lattice.integral is not None
+                and lattice.integral.parity == "even"
+                and lattice.determinant is not None
+                and abs(lattice.determinant) <= 4096
+            )
         case "reflective" | "spinor_regular" | "spinor_genus_count" | "spinor_genera":
             if rank is None:
                 raise ValueError(f"{field} requires a stored source rank")

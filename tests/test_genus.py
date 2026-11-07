@@ -509,7 +509,9 @@ def test_certification_stores_an_indefinite_card_automorphism_generators(tmp_pat
     metadata["certifications"] = citations
     path.write_text(records.record_text(metadata, document.content))
     loaded = corpus.load(tmp_path)
-    assert [field for request in genus.requests(loaded, held, {}, ("0016",)) for field in request["fields"]] == ["automorphism_group_generator_morphisms"]
+    # U is even and unimodular, so its discriminant form is trivial but stated: |O(q)| = 1, one
+    # isotropic class and one orbit. The card does not state it, so certify asks for it.
+    assert [field for request in genus.requests(loaded, held, {}, ("0016",)) for field in request["fields"]] == ["automorphism_group_generator_morphisms", "discriminant_form"]
     genus.certify(tmp_path, loaded, held, ("0016",), time.time() + 120)
     card = corpus.front_matter(corpus.read_card(path))
     # The group is stated by generators alone: no order field, and no `definite` block.
@@ -563,7 +565,8 @@ def test_certification_keeps_a_root_lattice_integer_valued(tmp_path: Path) -> No
     held = {name: certificates.Certificate.model_validate(value) for name, value in stored.items() if name.startswith("0012 ")}
     del held[genus.name("0012", "integer_valued")]
     loaded = corpus.load(tmp_path)
-    assert genus.requests(loaded, held, {}, ("0012",))[0]["fields"] == ["integer_valued"]
+    # A_2 is even with three classes, so its discriminant form's three invariants are asked too.
+    assert genus.requests(loaded, held, {}, ("0012",))[0]["fields"] == ["integer_valued", "discriminant_form"]
     genus.certify(tmp_path, loaded, held, ("0012",), time.time() + 120)
     assert frontmatter.load(str(path)).metadata["form"]["integer_valued"] is True
     assert genus.name("0012", "integer_valued") in certificates.load(tmp_path)
