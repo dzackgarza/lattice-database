@@ -204,9 +204,9 @@ VALUES = {
     "spinor_genera": lambda lattice: [int(value) for value in lattice.spinor_genus_class_numbers()],
     "hyperbolic_index": lambda lattice: int(lattice.integral_hyperbolic_index()),
     "discriminant_sequence": lambda lattice: lattice.discriminant_sequence_data(),
-    "primitive_orbits": lambda lattice: lattice.primitive_orbit_series(),
+    "primitive_orbits": lambda lattice: _orbit_series(lattice.primitive_orbit_series()),
     "discriminant_form": lambda lattice: _discriminant_form(lattice),
-    "discriminant_orbits": lambda lattice: lattice.discriminant_orbit_series(),
+    "discriminant_orbits": lambda lattice: _orbit_series(lattice.discriminant_orbit_series()),
     "reflective": _reflective,
     "modular_scale": _modular_scale,
     "regular": _regular,
@@ -230,6 +230,41 @@ def _discriminant_form(lattice) -> dict[str, JsonValue]:
         "isotropic_classes": len(isotropic),
         "isotropic_orbits": len(inside),
     }
+
+
+def _orbit_count(value: object) -> object:
+    """One count of an orbit series, as a card states it.
+
+    The owner answers the constant term of an orbit series with the cardinality of its set of orbits —
+    an element of Sage's `Cardinalities` category, whose class is that category's `parent_class` — and
+    not with an `int`, which `json` then refuses. The cardinality's own API is the conversion: `int` of a
+    finite cardinality is its number, and an infinite one has none, so the coefficient is `None`, which
+    `theory/orbits.md` states a coefficient that is not known to be.
+    """
+    if value is None or isinstance(value, int):
+        return value
+    finite = getattr(value, "is_finite", None)
+    if callable(finite) and not finite():
+        return None
+    return int(value)
+
+
+def _orbit_series(series: dict[str, object]) -> dict[str, object]:
+    """An orbit series the owner returns, every count converted to what a card stores."""
+    converted: dict[str, object] = {}
+    for group, row in series.items():
+        if not isinstance(row, dict):
+            converted[group] = row
+            continue
+        entry = dict(row)
+        if "constant" in entry:
+            entry["constant"] = _orbit_count(entry["constant"])
+        for key in ("z", "w"):
+            values = entry.get(key)
+            if isinstance(values, (list, tuple)):
+                entry[key] = [_orbit_count(value) for value in values]
+        converted[group] = entry
+    return converted
 
 
 def _start(tag: str, fields: list[str]) -> None:

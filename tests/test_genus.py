@@ -4,6 +4,7 @@ Mathematical contracts of the requested operations live in preamble tests;
 lattice-db tests only the serialization/certificate behavior.
 """
 
+import json
 import shutil
 import sys
 import time
@@ -616,3 +617,57 @@ def test_the_queue_separates_the_terminating_fields_from_the_searches() -> None:
     assert genus.in_phase(queue, None) == queue, "both phases, in the queue's order"
     assert genus.in_phase(queue, False) == [terminating]
     assert genus.in_phase(queue, True) == [search]
+
+
+def test_the_owner_s_orbit_counts_are_emitted_as_their_exact_cardinalities(capsys: pytest.CaptureFixture[str]) -> None:
+    """#17: `primitive_orbit_series` answers its constant term with a cardinality, not with an `int`.
+
+    The 60-tag run of 01:00Z read one per-tag failure, on 026E: `TypeError: Object of type
+    Cardinalities.parent_class is not JSON serializable`, nested at `primitive_orbits -> O ->
+    constant`. The adapter asks the cardinality for its own number, and states no coefficient where the
+    cardinality is infinite, which no integer coefficient can carry.
+    """
+
+    class Cardinality:
+        """Sage's cardinality element: `int` is its own number, and `json` cannot write it."""
+
+        def __init__(self, count: int) -> None:
+            self.count = count
+
+        def is_finite(self) -> bool:
+            return True
+
+        def __int__(self) -> int:
+            return self.count
+
+    class Infinite:
+        """An infinite cardinality: its own API says no integer describes it."""
+
+        def is_finite(self) -> bool:
+            return False
+
+        def __int__(self) -> int:
+            raise TypeError("an infinite cardinality has no integer")
+
+    class Owner:
+        """A lattice whose series answers, as the owner's does, with cardinality elements."""
+
+        def primitive_orbit_series(self) -> dict:
+            return {
+                "O": {
+                    "constant": Cardinality(2),
+                    "z": [Cardinality(1), Cardinality(0)],
+                    "w": [Cardinality(0)],
+                }
+            }
+
+    # The failure, at the emission that reads the owner's answer: the bare values are not JSON.
+    with pytest.raises(TypeError, match="not JSON serializable"):
+        sage_genus._emit("026E", {"primitive_orbits": Owner().primitive_orbit_series()})
+
+    sage_genus._emit("026E", {"primitive_orbits": sage_genus.VALUES["primitive_orbits"](Owner())})
+    emitted = json.loads(capsys.readouterr().out.strip().splitlines()[-1])
+    assert emitted["primitive_orbits"]["O"]["constant"] == 2
+    assert emitted["primitive_orbits"]["O"]["z"] == [1, 0]
+    assert emitted["primitive_orbits"]["O"]["w"] == [0]
+    assert sage_genus._orbit_series({"O": {"constant": Infinite()}}) == {"O": {"constant": None}}
