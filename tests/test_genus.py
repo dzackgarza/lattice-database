@@ -671,3 +671,56 @@ def test_the_owner_s_orbit_counts_are_emitted_as_their_exact_cardinalities(capsy
     assert emitted["primitive_orbits"]["O"]["z"] == [1, 0]
     assert emitted["primitive_orbits"]["O"]["w"] == [0]
     assert sage_genus._orbit_series({"O": {"constant": Infinite()}}) == {"O": {"constant": "aleph0"}}, "an infinite count is stated, not dropped"
+
+
+def test_the_converted_orbit_counts_are_what_the_card_stores_and_reads_back(tmp_path: Path) -> None:
+    """#16: the value the adapter emits is the value the card stores, finite or infinite, and a reader reads it.
+
+    #15's lesson is that a stored value the reader refuses stops every certify job before a computation,
+    so the stored form of a converted count — an integer, or `aleph0` where the owner states an infinite
+    one — is asserted through `corpus.read_card`, and the certificate's projection of it too.
+    """
+    (tmp_path / "lattices").mkdir()
+    shutil.copy(REPOSITORY / corpus.FAMILIES_FILE, tmp_path / corpus.FAMILIES_FILE)
+    (tmp_path / corpus.RETIRED_FILE).write_text("{}\n")
+    shutil.copy(REPOSITORY / "lattices" / "026E.md", tmp_path / "lattices")
+    path = tmp_path / "lattices" / "026E.md"
+
+    class Cardinality:
+        """Sage's cardinality element of a finite set of orbits."""
+
+        def __init__(self, count: int) -> None:
+            self.count = count
+
+        def is_finite(self) -> bool:
+            return True
+
+        def __int__(self) -> int:
+            return self.count
+
+    class Infinite:
+        """Sage's cardinality element of an infinite set of orbits."""
+
+        def is_finite(self) -> bool:
+            return False
+
+        def __int__(self) -> int:
+            raise TypeError("an infinite cardinality has no integer")
+
+    class Owner:
+        def primitive_orbit_series(self) -> dict:
+            return {
+                "O": {"constant": Cardinality(2), "z": [Cardinality(0)]},
+                "SO": {"constant": Infinite()},
+            }
+
+    genus.store(path, {"primitive_orbits": sage_genus.VALUES["primitive_orbits"](Owner())})
+    stored = corpus.front_matter(corpus.read_card(path))
+    lattice = Lattice.model_validate(stored)
+    assert lattice.integral is not None and lattice.integral.primitive_orbits is not None
+    assert lattice.integral.primitive_orbits["O"].constant == 2
+    assert lattice.integral.primitive_orbits["O"].z == (0,)
+    assert lattice.integral.primitive_orbits["SO"].constant == "aleph0"
+    projection = genus.certified_value("primitive_orbits", stored["integral"]["primitive_orbits"])
+    assert projection["O"]["constant"] == 2
+    assert projection["SO"]["constant"] == "aleph0", "the certificate commits to the stated infinite count"
