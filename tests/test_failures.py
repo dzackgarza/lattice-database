@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import shutil
 import sys
+from datetime import UTC, datetime
 import time
 from pathlib import Path
 from typing import Any
@@ -12,6 +13,7 @@ import pytest
 import yaml
 
 from latticedb import certificates, corpus, genus
+from latticedb import failures
 
 REPOSITORY = Path(__file__).resolve().parent.parent
 
@@ -40,7 +42,6 @@ def test_worker_startup_failure_is_persisted_and_requires_explicit_retry(tmp_pat
         genus.certify(tmp_path, loaded, {}, (), time.time() + 30)
     assert (tmp_path / failures.DIRECTORY).is_dir(), "worker failure was discarded instead of queued for triage"
 
-    from latticedb import failures
 
     queued = failures.load(tmp_path)["0012 worker"]
     assert queued.disposition == "open"
@@ -96,7 +97,6 @@ def test_a_worker_that_ended_before_reading_its_request_is_queued_not_raised(
         process.wait(timeout=60)
         return process
 
-    from latticedb import failures
 
     monkeypatch.setattr(genus, "WORKER", [sys.executable, "-m", "latticedb.unavailable_worker"])
     monkeypatch.setattr(genus.subprocess, "Popen", started_and_ended)
@@ -136,7 +136,6 @@ def test_failed_operation_is_quarantined_by_input_without_blocking_other_work(tm
 
 
 def test_successful_retry_computes_and_resolves_its_failure(tmp_path: Path) -> None:
-    from latticedb import failures
 
     loaded = specimen(tmp_path)
     lattice = loaded.entries[0].lattice
@@ -176,7 +175,6 @@ def test_previous_timeouts_and_lost_workers_enter_manual_triage(tmp_path: Path) 
 
 
 def test_a_later_completed_certificate_resolves_recovered_failure(tmp_path: Path) -> None:
-    from latticedb import failures
 
     loaded = specimen(tmp_path)
     lattice = loaded.entries[0].lattice
@@ -185,3 +183,38 @@ def test_a_later_completed_certificate_resolves_recovered_failure(tmp_path: Path
     # Another runner may finish before the triage-ledger repair is deployed.
     genus.certify(tmp_path, loaded, specimen_certificates(), ("0012",), time.time())
     assert failures.load(tmp_path)[computation].disposition == "resolved"
+
+
+def test_a_ledger_entry_must_be_in_the_shard_of_its_own_tag(tmp_path: Path) -> None:
+    """#17: a computation's shard is `group(tag)`, and a misplaced or duplicated entry is an error."""
+
+    entry = {
+        "disposition": "open",
+        "attempts": [{"hash": "h", "gram_tensor": [[2]], "reason": "exit status 1", "stderr": "", "seconds": 1.0,
+                      "recorded_at": datetime(2026, 11, 7, tzinfo=UTC), "run_url": None, "database_revision": None,
+                      "research_revision": None}],
+        "notes": [],
+    }
+    (tmp_path / failures.DIRECTORY).mkdir()
+    owner = failures.group("0012 integral.genus_symbol")
+    (tmp_path / failures.DIRECTORY / f"{owner}.yaml").write_text(yaml.safe_dump({"0012 integral.genus_symbol": entry}))
+    assert set(failures.load(tmp_path)) == {"0012 integral.genus_symbol"}
+
+    other = next(f"{name:02x}" for name in range(256) if f"{name:02x}" != owner)
+    (tmp_path / failures.DIRECTORY / f"{other}.yaml").write_text(yaml.safe_dump({"0012 integral.genus_symbol": entry}))
+    with pytest.raises(ValueError, match="belongs to the shard"):
+        failures.load(tmp_path)
+
+    (tmp_path / failures.DIRECTORY / f"{other}.yaml").write_text("{}\n")
+    (tmp_path / failures.DIRECTORY / f"{owner}.yaml").write_text(
+        yaml.safe_dump({"0012 integral.genus_symbol": entry, "0012 genus_symbol": entry})
+    )
+    with pytest.raises(ValueError, match="belongs to the shard"):
+        failures.load(tmp_path)
+
+
+def test_the_ledger_is_no_longer_read_as_one_file(tmp_path: Path) -> None:
+    """#17: the single-file ledger is not a reader's format, so a stray one changes nothing."""
+
+    (tmp_path / "failures.yaml").write_text(yaml.safe_dump({"0012 integral.genus_symbol": {"disposition": "open", "attempts": []}}))
+    assert failures.load(tmp_path) == {}

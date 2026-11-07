@@ -159,7 +159,7 @@ A timeout or unfinished computation has no certificate. A computation that ran f
 certification job without finishing is logged in `exceeded.yaml` and held for manual triage,
 so later CI runs spend their budgets on other work until an explicit retry is justified.
 
-Worker errors and memory failures enter `failures.yaml` with their input, stderr,
+Worker errors and memory failures enter `failures/` with their input, stderr,
 runtime and CI provenance. Open entries quarantine the matching computation and input
 for manual triage. An explicit retry records the repair or investigation, releases the
 computation and retains its evidence; a successful retry resolves it. Completed values

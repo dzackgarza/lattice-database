@@ -16,10 +16,6 @@ from latticedb.model import Lattice, Record
 DIRECTORY = "failures"
 """The directory of failure shards: one YAML file per group of card tags, as `certificates/` has."""
 
-LEGACY = "failures.yaml"
-"""The single file the ledger was, read once by the migration and by nothing else."""
-
-
 def group(computation: str) -> str:
     """The shard of the card a computation belongs to, by the same hash that groups certificates."""
     return certificates.group(computation.split(" ", 1)[0])
@@ -47,25 +43,36 @@ Failures = dict[str, Failure]
 
 
 def load(root: Path) -> Failures:
-    """Every shard, merged: a computation is in the shard of its card's tag."""
+    """Every shard: each entry is in the shard of its own card's tag, and no entry is in two shards.
+
+    A file holds the computations whose tag groups to its name; an entry found in another shard, or in
+    two shards, is an error and not a value to merge, because the shard a reader writes to must be the
+    shard that holds it.
+    """
     entries: Failures = {}
     directory = root / DIRECTORY
-    if directory.is_dir():
-        for path in sorted(directory.glob("*.yaml")):
-            shard = TypeAdapter(Failures).validate_python(yaml.load(path.read_text(), Loader=yaml.CSafeLoader) or {})
-            entries.update(shard)
-    legacy = root / LEGACY
-    if legacy.exists():
-        entries.update(TypeAdapter(Failures).validate_python(yaml.load(legacy.read_text(), Loader=yaml.CSafeLoader) or {}))
+    if not directory.is_dir():
+        return entries
+    for path in sorted(directory.glob("*.yaml")):
+        shard = TypeAdapter(Failures).validate_python(yaml.load(path.read_text(), Loader=yaml.CSafeLoader) or {})
+        for computation in shard:
+            owner = certificates.group(computation.split(" ", 1)[0])
+            if owner != path.stem:
+                raise ValueError(f"{path}: {computation} belongs to the shard {owner}, not {path.stem}")
+            if computation in entries:
+                raise ValueError(f"{path}: {computation} is also in another shard")
+        entries.update(shard)
     return entries
 
 
 def save(root: Path, entries: Failures) -> None:
     """Write each shard, and remove a shard that no longer holds an entry.
 
-    A shard holds the computations of the cards of one group of tags, so a run that completes values
-    for one card rewrites one small file: the ledger publishes where a single file reached the file
-    size a Git host refuses, and two runs of disjoint cards never touch the same shard.
+    A shard holds the computations whose card tag hashes to its name, so the largest file is one
+    group's share of the ledger rather than the ledger: the whole publishes where a single file reached
+    the size a Git host refuses. Two runs of different cards usually rewrite different shards, but the
+    hash groups tags rather than partitioning them by hand, so two cards can share one shard; the
+    keyed-map merge driver (`.gitattributes`) merges that one file key by key.
     """
     directory = root / DIRECTORY
     directory.mkdir(parents=True, exist_ok=True)
