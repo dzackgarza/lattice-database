@@ -26,7 +26,7 @@ from pathlib import Path
 
 import yaml
 
-from latticedb import certificates, genus, records
+from latticedb import certificates, failures, genus, records
 from latticedb.model import Lattice
 
 EXCLUDED = {"tag", "name", "latex", "aliases", "remark", "gram_tensor", "rank", "signature", "determinant",
@@ -128,10 +128,10 @@ def main(directory: Path) -> int:
                 differ = compare_records(artifact_certificates[name], shard[name])
                 for detail in differ:
                     problems.append(f"{name}: {detail}")
-            block, field = name[len(f"{tag} "):].split(".", 1)
             if name.endswith(" derive"):
                 stored = records.derived_projection(current_card)
             else:
+                block, field = name[len(f"{tag} "):].split(".", 1)
                 values = current_card.get(block) or {}
                 if field not in values:
                     problems.append(f"{name}: stored field {block}.{field} is missing and its certificate cannot be checked")
@@ -151,10 +151,47 @@ def main(directory: Path) -> int:
                     problems.append(
                         f"{name}: certificate {published_hash[:16]} disagrees with stored value's {expected_hash[:16]}"
                     )
-            if actual_hash := (current_card.get("certifications") or {}).get(f"{block}.{field}"):
+            if name.endswith(" derive"):
+                actual_hash = (current_card.get("certifications") or {}).get("derive")
+            else:
+                actual_hash = (current_card.get("certifications") or {}).get(f"{block}.{field}")
+            if actual_hash:
                 if actual_hash != shard[name]["hash"]:
                     problems.append(
                         f"{name}: on-card certificate {actual_hash[:16]} is not the recovered shard's hash {shard[name]['hash'][:16]}"
+                    )
+        # Every failure attempt the original artifact holds survives in a recovered shard of its own,
+        # validated by `failures.Failures`, not a bare YAML read. `attempts` lists later attempts of a
+        # shard not in the retained data must never be truncated: kept and later ones coexist.
+        for name, failure in recovered_failures.items():
+            if not name.startswith(f"{tag} "):
+                continue
+            shard_path = Path("failures", f"{failures.group(name)}.yaml")
+            expected_attempts = {(item.get("hash") if isinstance(item, dict) else item)
+                                 for item in (failure.get("attempts") or [])}
+            loaded = failures.load(Path("."))
+            if name not in loaded:
+                problems.append(f"{name}: original failure entry is absent")
+                continue
+            actual_attempts = {(attempt.hash for attempt in loaded[name].attempts)}
+            for required in expected_attempts - actual_attempts:
+                problems.append(f"{name}: original failure attempt {required[:16]} is missing")
+            # Later attempts legitimately survive beside an artifact's original ones; nothing extra
+            # is reported merely for being later, and a same-hash change is checked through the model
+            # by comparing the artifact's own attempt record against the recovered one.
+            for artifact_attempt in (failure.get("attempts") or []):
+                hashed = artifact_attempt.get("hash") if isinstance(artifact_attempt, dict) else artifact_attempt
+                if hashed in expected_attempts - actual_attempts:
+                    continue
+                try:
+                    actual = failures.Attempt.model_validate(artifact_attempt)
+                except Exception as error:
+                    problems.append(f"{name}: artifact attempt {str(hashed)[:16]} invalid: {str(error)[:120]}")
+                    continue
+                same = [attempt for attempt in loaded[name].attempts if attempt.hash == hashed]
+                if same and actual not in same:
+                    problems.append(
+                        f"{name}: attempt {hashed[:16]} differs from the artifact's record (model validated against the artifact)"
                     )
         if not artifact_certificates and not Path(f"lattices/{tag}.md").exists():
             problems.append(f"{tag}: neither card nor artifact exists")
