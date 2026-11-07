@@ -34,6 +34,42 @@ Subgroup = OrbitGroup | Slug
 OrbitCounts = Annotated[tuple[Annotated[int, Field(ge=0)] | None, ...], Field(strict=False)]
 
 
+class DiscriminantForm(Record):
+    """The invariants of the discriminant form $(A_L, q_L)$ that a card stores, computed from the Gram tensor.
+
+    The three are the order of the finite orthogonal group $O(A_L, q_L)$, the number of isotropic classes
+    $q_L(x) = 0$, and the number of its orbits on them (theory/discriminant-forms.md).
+    """
+
+    orthogonal_group_order: Annotated[int, Field(ge=1)] = Field(
+        description=(
+            "The order $|O(A_L, q_L)|$ of the orthogonal group of the discriminant form, the group of the "
+            "automorphisms $g$ of $A_L$ with $q_L(g x) = q_L(x)$. Computed by `latticedb certify` from the "
+            "Gram tensor through the owner's discriminant quadratic form, `orthogonal_group().order()`."
+        ),
+    )
+    isotropic_classes: Annotated[int, Field(ge=1)] = Field(
+        description=(
+            "The number of classes $x \\in A_L$ with $q_L(x) = 0$ in $\\mathbb{Q}/2\\mathbb{Z}$, the class $0$ "
+            "among them; computed by `latticedb certify` from the owner's `isotropic_elements()`."
+        ),
+    )
+    isotropic_orbits: Annotated[int, Field(ge=1)] = Field(
+        description=(
+            "The number of orbits of $O(A_L, q_L)$ on the isotropic classes. $q_L$ is constant on an orbit, so "
+            "they are the orbits of the owner's maintained partition that lie inside `isotropic_elements()`."
+        ),
+    )
+    reference: Reference | None = Field(default=None, description="The source, when a record states the numbers.")
+
+    @model_validator(mode="after")
+    def _orbits_fit_the_classes(self) -> Self:
+        """The orbits of a set partition it, and every orbit holds at least one class."""
+        if self.isotropic_orbits > self.isotropic_classes:
+            raise ValueError(f"{self.isotropic_orbits} orbits of {self.isotropic_classes} isotropic classes")
+        return self
+
+
 class PolarizationRow(Record):
     """Dutour Sikirić–Hulek's Table 4 line for one degree: the counts the table writes `#h` and `#Γ̄_h`.
 
@@ -467,6 +503,15 @@ class IntegralData(Record):
             "Computed by `latticedb certify` from the preamble's `primitive_orbit_series`, which enumerates the vectors of a definite lattice "
             "and returns the coefficients it owns for an indefinite one; the certificate binds the constant term and the first four $z$- and $w$-coefficients. "
             "A coefficient that the operation does not return is stated with a reference. Requires a nonzero determinant."
+        ),
+    )
+    discriminant_form: DiscriminantForm | None = Field(
+        default=None,
+        description=(
+            "The invariants of the discriminant form $(A_L, q_L)$: $|O(A_L, q_L)|$, the number of isotropic "
+            "classes, and the number of $O(A_L, q_L)$-orbits on them (theory/discriminant-forms.md). Computed by "
+            "`latticedb certify` from the Gram tensor, and requested where the classes of $A_L$ are few enough to "
+            "partition, $|A_L| = |\\det L| \\leq 4096$."
         ),
     )
     polarization_counts: dict[Annotated[int, Field(ge=2)], PolarizationRow] | None = Field(

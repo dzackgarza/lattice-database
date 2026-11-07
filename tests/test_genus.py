@@ -157,6 +157,9 @@ def test_the_database_asks_the_owner_on_every_card_of_the_operations_class() -> 
     assert not genus.applies("automorphism_group_order", indefinite)
     assert not genus.applies("roots", definite), "a definite card states its roots in `definite.roots`"
     assert not genus.applies("cusp_form_coordinates", definite), "the owner does not present it"
+    assert genus.applies("discriminant_form", Lattice.model_validate(frontmatter.load(str(REPOSITORY / "lattices" / "0016.md")).metadata)), "the hyperbolic plane's discriminant group is trivial"
+    assert not genus.applies("discriminant_form", Lattice.model_validate(frontmatter.load(str(REPOSITORY / "lattices" / "6JRX.md")).metadata)), "the period lattice of degree 2 has 2^17 classes"
+    assert genus.applies("discriminant_form", definite), "A_2 has three classes to partition"
 
 
 def test_a_card_without_an_integral_block_requests_no_primitive_orbits() -> None:

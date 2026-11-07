@@ -68,3 +68,13 @@ The isomorphism classes of involutions of the K3 lattice whose invariant lattice
 Algebrogeometric applications*, J. Soviet Math.
 22 (1983), 1401–1475, Theorem 4.3.2, Table 1 and Remark 4.5.3).
 :::
+
+## Orthogonal group and isotropic classes {#discriminant-orthogonal-group}
+
+The orthogonal group of the discriminant form is $O(A_L, q_L) = \{g \in \operatorname{GL}(A_L) : q_L(gx) = q_L(x)\}$, a finite group, and a card states its order in `orthogonal_group_order`.
+A class $x \in A_L$ is *isotropic* when $q_L(x) = 0$ in $\mathbb{Q}/2\mathbb{Z}$; the class $0$ is one of them, and a card states how many there are in `isotropic_classes`.
+$O(A_L, q_L)$ acts on them, and a card states the number of orbits in `isotropic_orbits`.
+
+`latticedb certify` computes the three from the Gram tensor, at the discriminant quadratic form the owner builds for $L$: its `orthogonal_group().order()`, its `isotropic_elements()`, and its maintained orbit partition `orbits()`.
+$q_L$ is constant on an orbit of $O(A_L, q_L)$, so the orbits of isotropic classes are the orbits of that partition which lie inside the isotropic classes.
+The partition is of the classes of $A_L$, so the request is made where there are few of them, $|A_L| = |\det L| \leq 4096$.

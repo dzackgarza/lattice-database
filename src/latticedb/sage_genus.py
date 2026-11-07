@@ -205,6 +205,7 @@ VALUES = {
     "hyperbolic_index": lambda lattice: int(lattice.integral_hyperbolic_index()),
     "discriminant_sequence": lambda lattice: lattice.discriminant_sequence_data(),
     "primitive_orbits": lambda lattice: lattice.primitive_orbit_series(),
+    "discriminant_form": lambda lattice: _discriminant_form(lattice),
     "discriminant_orbits": lambda lattice: lattice.discriminant_orbit_series(),
     "reflective": _reflective,
     "modular_scale": _modular_scale,
@@ -213,6 +214,22 @@ VALUES = {
     "anisotropic_primes": _anisotropic_primes,
     "local_representations": _local_representations,
 }
+
+
+def _discriminant_form(lattice) -> dict[str, JsonValue]:
+    """The order of $O(A_L, q_L)$, the isotropic classes and their orbits, at the owner's form.
+
+    The orbits are the owner's maintained partition of $A_L$; $q_L$ is constant on an orbit, so an
+    orbit whose classes are isotropic is an orbit of isotropic classes.
+    """
+    form = lattice.discriminant_quadratic_form()
+    isotropic = frozenset(form.isotropic_elements())
+    inside = [orbit for orbit in form.orbits() if set(orbit) <= isotropic]
+    return {
+        "orthogonal_group_order": int(form.orthogonal_group().order()),
+        "isotropic_classes": len(isotropic),
+        "isotropic_orbits": len(inside),
+    }
 
 
 def _start(tag: str, fields: list[str]) -> None:

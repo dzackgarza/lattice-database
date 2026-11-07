@@ -56,6 +56,7 @@ BLOCKS: dict[str, tuple[str, type[BaseModel]]] = {
     "automorphism_group_order": ("definite", DefiniteData),
     "automorphism_group_generator_morphisms": ("definite", DefiniteData),
     "discriminant_sequence": ("integral", IntegralData),
+    "discriminant_form": ("integral", IntegralData),
     "primitive_orbits": ("integral", IntegralData),
     "discriminant_orbits": ("integral", IntegralData),
     "reflective": ("hyperbolic", HyperbolicData),
@@ -136,6 +137,8 @@ def applies(field: str, lattice: Lattice) -> bool:
       lattice of hyperbolic index at least 2.
     - `polarization_counts`: no preamble operation presents a table of a source, and
       every count it holds is certified by the citation of that table.
+    - `discriminant_form`: the owner partitions $A_L$, so the request is made where the
+      classes of $A_L$ are few, $|A_L| = |\\det L| \\leq 4096$.
 
     Everything else — including `integral.primitive_orbits` and the automorphism
     generators on an indefinite card — is asked on every card that can store it (#8).
@@ -159,6 +162,8 @@ def applies(field: str, lattice: Lattice) -> bool:
     match field:
         case "roots" | "norms":
             return lattice.definite is None
+        case "discriminant_form":
+            return lattice.determinant is not None and abs(lattice.determinant) <= 4096
         case "reflective" | "spinor_regular" | "spinor_genus_count" | "spinor_genera":
             if rank is None:
                 raise ValueError(f"{field} requires a stored source rank")

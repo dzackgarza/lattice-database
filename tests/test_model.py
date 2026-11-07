@@ -571,3 +571,17 @@ def test_a_polarization_count_row_is_stored_under_its_degree_with_the_tables_nam
         Lattice.model_validate(with_block(a2(), "integral", polarization_counts={3: {"#h": 1, "#Γ̄_h": 1}}))
     with pytest.raises(ValidationError):
         Lattice.model_validate(with_block(a2(), "integral", polarization_counts={2: {"#h": 1, "#gamma_h": 1}}))
+
+
+def test_a_discriminant_form_row_states_the_group_the_isotropic_classes_and_their_orbits() -> None:
+    """#12: the three invariants of (A_L, q_L) are schema data, and the orbits cannot outnumber the classes."""
+    record = with_block(a2(), "integral", discriminant_form={"orthogonal_group_order": 46998591897600, "isotropic_classes": 528, "isotropic_orbits": 2})
+    lattice = Lattice.model_validate(record)
+    assert lattice.integral is not None and lattice.integral.discriminant_form is not None
+    assert lattice.integral.discriminant_form.orthogonal_group_order == 46998591897600
+    assert lattice.integral.discriminant_form.isotropic_classes == 528
+    assert lattice.integral.discriminant_form.isotropic_orbits == 2
+    with pytest.raises(ValidationError, match="orbits of"):
+        Lattice.model_validate(with_block(a2(), "integral", discriminant_form={"orthogonal_group_order": 2, "isotropic_classes": 1, "isotropic_orbits": 2}))
+    with pytest.raises(ValidationError):
+        Lattice.model_validate(with_block(a2(), "integral", discriminant_form={"orthogonal_group_order": 0, "isotropic_classes": 1, "isotropic_orbits": 1}))
