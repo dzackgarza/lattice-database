@@ -1,20 +1,18 @@
 diff --git a/.github/workflows/certify-searches.yml b/.github/workflows/certify-searches.yml
 new file mode 100644
-index 0000000000..3967aaf001
+index 0000000000..bb9c998a63
 --- /dev/null
 +++ b/.github/workflows/certify-searches.yml
-@@ -0,0 +1,122 @@
+@@ -0,0 +1,116 @@
 +name: certify searches
 +'on':
-+  workflow_run:
-+    # A certify run ends when its terminating phase does; the searches follow as a run of their own,
-+    # so a dispatch queues behind `certify` only and never behind a search that can hold a worker for
-+    # a whole job. A search's progress is `exceeded.yaml`, which that run has already pushed, and
-+    # `genus.requests` puts an unfinished search back at the end of the next queue.
-+    workflows:
-+      - certify
-+    types:
-+      - completed
++  schedule:
++    # After certify's 03:17 run, whose timeout is 350 minutes, so this run's searches follow the
++    # fields they search rather than race them. One job with a 350-minute budget, the share of the
++    # runners the schedule run gave the searches before; a dispatch of this workflow by hand runs the
++    # same job. Whether it overlaps a certify dispatch or not, it holds `certify-searches`, never
++    # `certify`, so a dispatch waits for no search.
++    - cron: 17 10 * * *
 +  workflow_dispatch: null
 +permissions:
 +  contents: write
@@ -24,14 +22,10 @@ index 0000000000..3967aaf001
 +jobs:
 +  searches:
 +    name: Semi-decision searches
-+    # Each shard is a runner with its own job budget. A search that never ends spends one worker of
-+    # one shard, so the corpus advances on every other worker.
-+    strategy:
-+      fail-fast: false
-+      matrix:
-+        shard: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15]
++    # One job, as the schedule run spent on its searches before: a search that never ends spends
++    # this job and no other, and the corpus still advances on every other workflow's runners.
 +    env:
-+      SHARDS: 16
++      SHARDS: 1
 +    runs-on: ubuntu-latest
 +    timeout-minutes: 350
 +    defaults:
@@ -62,13 +56,13 @@ index 0000000000..3967aaf001
 +          LATTICEDB_TAG: ${{ matrix.tag }}
 +        run: |
 +          # Push progress every half hour, so a runner that dies loses at most that much.
-+          ( while sleep 1800; do .github/scripts/persist.sh "${{ matrix.shard }}/$SHARDS" || true; done ) &
++          ( while sleep 1800; do .github/scripts/persist.sh 0/1 || true; done ) &
 +          persister=$!
 +          # Include provisioning in the job budget and reserve ten minutes for persistence.
 +          minutes=$(( (CERTIFY_DEADLINE - $(date +%s)) / 60 ))
 +          (( minutes > 0 ))
 +          if (( minutes > 330 )); then minutes=330; fi
-+          args=(--minutes "$minutes" --shard "${{ matrix.shard }}/$SHARDS" --workers 1 --phase searches)
++          args=(--minutes "$minutes" --shard 0/1 --workers 1 --phase searches)
 +          if [[ -n "$LATTICEDB_TAG" ]]; then
 +            args+=(--tag "$LATTICEDB_TAG")
 +          fi
@@ -113,7 +107,7 @@ index 0000000000..3967aaf001
 +        if: ${{ always() && steps.checkout.outcome == 'success' }}
 +        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
 +        with:
-+          name: certification-searches-${{ github.run_id }}-${{ github.run_attempt }}-shard-${{ matrix.shard }}${{ matrix.tag && format('-{0}', matrix.tag) || '' }}
++          name: certification-searches-${{ github.run_id }}-${{ github.run_attempt }}
 +          path: |-
 +            ${{ runner.temp }}/certification.patch
 +            ${{ runner.temp }}/certification-base.txt
@@ -121,22 +115,22 @@ index 0000000000..3967aaf001
 +      - name: Commit completed computations to main
 +        if: ${{ always() && steps.checkout.outcome == 'success' }}
 +        shell: bash --noprofile --norc -e -o pipefail {0}
-+        run: .github/scripts/persist.sh "${{ matrix.shard }}/$SHARDS" final
++        run: .github/scripts/persist.sh 0/1 final
 +      - name: Stop the Sage environment
 +        if: always()
 +        shell: bash --noprofile --norc -e -o pipefail {0}
 +        run: docker rm --force sage-env >/dev/null 2>&1 || true
 diff --git a/.github/workflows/certify.yml b/.github/workflows/certify.yml
-index 1b24281507..b54a3ef72d 100644
+index 1b24281507..016165703f 100644
 --- a/.github/workflows/certify.yml
 +++ b/.github/workflows/certify.yml
 @@ -10,6 +10,9 @@ name: certify
          type: string
  permissions:
    contents: write
-+# The group is the run's, so no two runs compute the same card at once; the semi-decision searches
-+# are the run of `certify-searches.yml`, whose own group a dispatch never waits behind, and whose
-+# progress is `exceeded.yaml`, which this run has already pushed.
++# The group is the run's, so no two runs compute the same card at once. The semi-decision searches
++# are not in this run: their own scheduled run, `certify-searches.yml`, one job at 10:17, holds the
++# group `certify-searches`, and a dispatch never waits behind it.
  concurrency:
    group: certify
    cancel-in-progress: false
