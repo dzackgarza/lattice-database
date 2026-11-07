@@ -159,7 +159,8 @@ def test_the_database_asks_the_owner_on_every_card_of_the_operations_class() -> 
     assert not genus.applies("roots", definite), "a definite card states its roots in `definite.roots`"
     assert not genus.applies("cusp_form_coordinates", definite), "the owner does not present it"
     assert genus.applies("discriminant_form", Lattice.model_validate(frontmatter.load(str(REPOSITORY / "lattices" / "0016.md")).metadata)), "the hyperbolic plane's discriminant group is trivial"
-    assert not genus.applies("discriminant_form", Lattice.model_validate(frontmatter.load(str(REPOSITORY / "lattices" / "6JRX.md")).metadata)), "the period lattice of degree 2 has 2^17 classes"
+    assert not genus.applies("discriminant_form", Lattice.model_validate(frontmatter.load(str(REPOSITORY / "lattices" / "3F4F.md")).metadata)), "|A_L| = 4323 is above the owner's bound of 4096"
+    assert genus.applies("discriminant_form", Lattice.model_validate(frontmatter.load(str(REPOSITORY / "lattices" / "6JRX.md")).metadata)), "the corrected period lattice of degree 2 has |A_L| = 2"
     assert genus.applies("discriminant_form", definite), "A_2 has three classes to partition"
 
 

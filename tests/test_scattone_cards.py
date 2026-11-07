@@ -13,7 +13,7 @@ from sage.all import CartanMatrix, block_diagonal_matrix, matrix, ZZ
 from sage_extensions.categories.lattices import Lattices
 from sage_extensions.rings import session_ring_objects
 
-from latticedb import card_serialization, certificates, genus
+from latticedb import certificates, genus
 from latticedb.model import Lattice
 
 REPOSITORY = Path(__file__).resolve().parent.parent
@@ -22,6 +22,19 @@ EXPECTED_ROWS = {
     "6JRX": {"O": {"planes": 4}, "O+": {"constant": 1, "planes": 4}, "Otilde+": {"constant": 1}},
     "6JRY": {"O": {"planes": 9}, "O+": {"constant": 1, "planes": 9}, "Otilde+": {"constant": 1}},
 }
+EXPECTED_COUNTS = {
+    "6JRX": {
+        "O": {"constant": None, "z": None, "w": None, "planes": 4},
+        "O+": {"constant": 1, "z": None, "w": None, "planes": 4},
+        "Otilde+": {"constant": 1, "z": None, "w": None},
+    },
+    "6JRY": {
+        "O": {"constant": None, "z": None, "w": None, "planes": 9},
+        "O+": {"constant": 1, "z": None, "w": None, "planes": 9},
+        "Otilde+": {"constant": 1, "z": None, "w": None},
+    },
+}
+"""The counts a certificate commits to: the terms and a stated plane count, never a citation."""
 
 
 def expected_gram(k: int):
@@ -32,7 +45,12 @@ def expected_gram(k: int):
 
 
 def stored(tag: str) -> Lattice:
-    return Lattice.model_validate(frontmatter.load(REPOSITORY / "lattices" / f"{tag}.md").metadata)
+    return Lattice.model_validate(front_matter(tag))
+
+
+def front_matter(tag: str) -> dict:
+    """The card as written, whose `primitive_orbits` rows are the raw series the certificate covers."""
+    return frontmatter.load(REPOSITORY / "lattices" / f"{tag}.md").metadata
 
 
 def test_the_two_scattone_cards_are_the_lattices_of_equation_1_1_1() -> None:
@@ -64,9 +82,14 @@ def test_the_cited_scattone_rows_are_retained_and_certified_against_the_correcte
             for field, value in fields.items():
                 assert getattr(row, field) == value, f"{tag} {group}.{field}"
             assert row.reference is not None and "Scattone" in row.reference.citation
+        # The commitment is over the stored counts and the corrected Gram, and it is what
+        # `latticedb verify` recomputes: the projection takes the front matter's raw rows, not
+        # the validated series, and it drops each row's citation.
+        counts = genus.certified_value("primitive_orbits", front_matter(tag)["integral"]["primitive_orbits"], card)
+        assert counts == EXPECTED_COUNTS[tag]
         name = f"{tag} integral.primitive_orbits"
         assert card.certifications.get("integral.primitive_orbits") == certificates.certification_hash(
-            name, card, card_serialization.orbit_projection(card.integral.primitive_orbits)
+            name, card, counts
         )
         shard = yaml.safe_load((REPOSITORY / "certificates" / f"{certificates.group(tag)}.yaml").read_text()) or {}
         assert shard[name]["hash"] == card.certifications["integral.primitive_orbits"]

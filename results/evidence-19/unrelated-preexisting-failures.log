@@ -1,0 +1,56 @@
+FF                                                                       [100%]
+=================================== FAILURES ===================================
+__________________ test_derive_computes_the_dual_gram_tensor ___________________
+sage/misc/cachefunc.pyx:1965: in sage.misc.cachefunc.CachedMethodCaller.__call__
+    return cache[k]
+E   KeyError: ((1,), ())
+
+During handling of the above exception, another exception occurred:
+tests/test_records.py:211: in test_derive_computes_the_dual_gram_tensor
+    record = records.derive(declared("A2", [[2, -1], [-1, 2]]))
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src/latticedb/records.py:372: in derive
+    derived["definite"] = _definite(
+src/latticedb/records.py:241: in _definite
+    (_root_component(computation_lattice, component, rescaling) for component in computation_lattice.reflective_root_system_components()),
+                                                                                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+sage/misc/cachefunc.pyx:2328: in sage.misc.cachefunc.CachedMethodCallerNoArgs.__call__
+    ???
+/repos/sage-extensions/src/sage_extensions/categories/lattices.py:7089: in reflective_root_system_components
+    return _reflective_root_system_components(self)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/repos/sage-extensions/src/sage_extensions/categories/definite_lattices.py:497: in _reflective_root_system_components
+    simple = _simple_roots(lattice, tuple(DefiniteLattices(lattice.base_ring())(lattice).reflective_roots()))
+                                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+sage/misc/cachefunc.pyx:2328: in sage.misc.cachefunc.CachedMethodCallerNoArgs.__call__
+    ???
+/repos/sage-extensions/src/sage_extensions/categories/lattices.py:8839: in reflective_roots
+    tuple(
+    ^^^^^
+/repos/sage-extensions/src/sage_extensions/categories/lattices.py:8842: in <genexpr>
+    for root in self.roots_of_square(sign * length)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+sage/misc/cachefunc.pyx:1970: in sage.misc.cachefunc.CachedMethodCaller.__call__
+    ???
+sage/misc/cachefunc.pyx:1848: in sage.misc.cachefunc.CachedMethodCaller._instance_call
+    ???
+/repos/sage-extensions/src/sage_extensions/categories/lattices.py:7035: in roots_of_square
+    return _roots_of_square(self, square)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/repos/sage-extensions/src/sage_extensions/categories/definite_lattices.py:370: in _roots_of_square
+    return _shell(lattice, square, _square_shell(positive_gram, target, True))
+                                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/repos/sage-extensions/src/sage_extensions/categories/definite_lattices.py:294: in _square_shell
+    engine_target = SageZZ(_engine_element(target.parent(), target))
+                                           ^^^^^^^^^^^^^
+E   AttributeError: 'int' object has no attribute 'parent'
+___________ test_a_shard_reports_the_problems_of_its_own_cards_only ____________
+tests/test_verification.py:66: in test_a_shard_reports_the_problems_of_its_own_cards_only
+    assert checks.run(tmp_path, (1 - mine, 2))[1] == ()
+E   assert [] == ()
+E     
+E     Use -v to get more diff
+=========================== short test summary info ============================
+FAILED tests/test_records.py::test_derive_computes_the_dual_gram_tensor - Att...
+FAILED tests/test_verification.py::test_a_shard_reports_the_problems_of_its_own_cards_only
+2 failed in 24.97s
