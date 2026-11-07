@@ -10,6 +10,9 @@ name: certify
         type: string
 permissions:
   contents: write
+# The group is the run's, so no two runs compute the same card at once. The semi-decision searches
+# are not in this run: their own scheduled run, `certify-searches.yml`, one job at 10:17, holds the
+# group `certify-searches`, and a dispatch never waits behind it.
 concurrency:
   group: certify
   cancel-in-progress: false
@@ -94,7 +97,7 @@ jobs:
           minutes=$(( (CERTIFY_DEADLINE - $(date +%s)) / 60 ))
           (( minutes > 0 ))
           if (( minutes > 330 )); then minutes=330; fi
-          args=(--minutes "$minutes" --shard "${{ matrix.shard }}/$SHARDS" --workers 1)
+          args=(--minutes "$minutes" --shard "${{ matrix.shard }}/$SHARDS" --workers 1 --phase fields)
           if [[ -n "$LATTICEDB_TAG" ]]; then
             args+=(--tag "$LATTICEDB_TAG")
           fi
