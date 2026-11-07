@@ -1,8 +1,8 @@
 diff --git a/.github/workflows/certification-tests.yml b/.github/workflows/certification-tests.yml
-index 05443cfc83..856fd0ee34 100644
+index 05443cfc83..fcb8b4e9b3 100644
 --- a/.github/workflows/certification-tests.yml
 +++ b/.github/workflows/certification-tests.yml
-@@ -3,20 +3,16 @@ name: Certification regression tests
+@@ -3,20 +3,17 @@ name: Certification regression tests
    push:
      branches:
      - main
@@ -25,6 +25,7 @@ index 05443cfc83..856fd0ee34 100644
 -    - justfile
 +    - 'src/**'
 +    - 'tests/**'
++    - '.github/actions/**'
 +    - '.github/scripts/**'
 +    - '.github/workflows/**'
 +    - '.gitattributes'
