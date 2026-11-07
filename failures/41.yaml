@@ -1,3 +1,212 @@
+0276 automorphisms.automorphism_group_generator_morphisms:
+  disposition: open
+  attempts:
+  - hash: a5ae93d60b3fe8c156683d8b81f9fc27e736f81d4fca562f3d119e436de4cb1d
+    gram_tensor:
+    - - 0
+      - 2
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+    - - 2
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+    - - 0
+      - 0
+      - -2
+      - 1
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+    - - 0
+      - 0
+      - 1
+      - -2
+      - 1
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+    - - 0
+      - 0
+      - 0
+      - 1
+      - -2
+      - 1
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+    - - 0
+      - 0
+      - 0
+      - 0
+      - 1
+      - -2
+      - 1
+      - 1
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+    - - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 1
+      - -2
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+    - - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 1
+      - 0
+      - -2
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+    - - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - -2
+      - 1
+      - 0
+      - 0
+      - 0
+      - 0
+    - - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 1
+      - -2
+      - 1
+      - 0
+      - 0
+      - 0
+    - - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 1
+      - -2
+      - 1
+      - 0
+      - 0
+    - - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 1
+      - -2
+      - 1
+      - 1
+    - - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 1
+      - -2
+      - 0
+    - - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 1
+      - 0
+      - -2
+    reason: memory exhausted
+    stderr: ''
+    seconds: 4775.082155909
+    recorded_at: 2026-11-07 05:49:44.783052+00:00
+    run_url: https://github.com/dzackgarza/lattice-database/actions/runs/42326648686/attempts/1
+    database_revision: 6d3ae3fcdb70aafeceec07cede078879ce178ea8
+    research_revision: 07e034b8a9302d3d325a89ddaa65f54767ca9ee5
+  notes: []
 22YW derive:
   disposition: open
   attempts:
@@ -8449,213 +8658,4 @@
     run_url: https://github.com/dzackgarza/lattice-database/actions/runs/40077222835/attempts/1
     database_revision: 972cd798ea14d57de15ad2d2ac01af7822d03c5b
     research_revision: 65b1618676dabee6abe5ba9a6678b165c6621b85
-  notes: []
-0276 automorphisms.automorphism_group_generator_morphisms:
-  disposition: open
-  attempts:
-  - hash: a5ae93d60b3fe8c156683d8b81f9fc27e736f81d4fca562f3d119e436de4cb1d
-    gram_tensor:
-    - - 0
-      - 2
-      - 0
-      - 0
-      - 0
-      - 0
-      - 0
-      - 0
-      - 0
-      - 0
-      - 0
-      - 0
-      - 0
-      - 0
-    - - 2
-      - 0
-      - 0
-      - 0
-      - 0
-      - 0
-      - 0
-      - 0
-      - 0
-      - 0
-      - 0
-      - 0
-      - 0
-      - 0
-    - - 0
-      - 0
-      - -2
-      - 1
-      - 0
-      - 0
-      - 0
-      - 0
-      - 0
-      - 0
-      - 0
-      - 0
-      - 0
-      - 0
-    - - 0
-      - 0
-      - 1
-      - -2
-      - 1
-      - 0
-      - 0
-      - 0
-      - 0
-      - 0
-      - 0
-      - 0
-      - 0
-      - 0
-    - - 0
-      - 0
-      - 0
-      - 1
-      - -2
-      - 1
-      - 0
-      - 0
-      - 0
-      - 0
-      - 0
-      - 0
-      - 0
-      - 0
-    - - 0
-      - 0
-      - 0
-      - 0
-      - 1
-      - -2
-      - 1
-      - 1
-      - 0
-      - 0
-      - 0
-      - 0
-      - 0
-      - 0
-    - - 0
-      - 0
-      - 0
-      - 0
-      - 0
-      - 1
-      - -2
-      - 0
-      - 0
-      - 0
-      - 0
-      - 0
-      - 0
-      - 0
-    - - 0
-      - 0
-      - 0
-      - 0
-      - 0
-      - 1
-      - 0
-      - -2
-      - 0
-      - 0
-      - 0
-      - 0
-      - 0
-      - 0
-    - - 0
-      - 0
-      - 0
-      - 0
-      - 0
-      - 0
-      - 0
-      - 0
-      - -2
-      - 1
-      - 0
-      - 0
-      - 0
-      - 0
-    - - 0
-      - 0
-      - 0
-      - 0
-      - 0
-      - 0
-      - 0
-      - 0
-      - 1
-      - -2
-      - 1
-      - 0
-      - 0
-      - 0
-    - - 0
-      - 0
-      - 0
-      - 0
-      - 0
-      - 0
-      - 0
-      - 0
-      - 0
-      - 1
-      - -2
-      - 1
-      - 0
-      - 0
-    - - 0
-      - 0
-      - 0
-      - 0
-      - 0
-      - 0
-      - 0
-      - 0
-      - 0
-      - 0
-      - 1
-      - -2
-      - 1
-      - 1
-    - - 0
-      - 0
-      - 0
-      - 0
-      - 0
-      - 0
-      - 0
-      - 0
-      - 0
-      - 0
-      - 0
-      - 1
-      - -2
-      - 0
-    - - 0
-      - 0
-      - 0
-      - 0
-      - 0
-      - 0
-      - 0
-      - 0
-      - 0
-      - 0
-      - 0
-      - 1
-      - 0
-      - -2
-    reason: memory exhausted
-    stderr: ''
-    seconds: 4775.082155909
-    recorded_at: 2026-11-07 05:49:44.783052+00:00
-    run_url: https://github.com/dzackgarza/lattice-database/actions/runs/42326648686/attempts/1
-    database_revision: 6d3ae3fcdb70aafeceec07cede078879ce178ea8
-    research_revision: 07e034b8a9302d3d325a89ddaa65f54767ca9ee5
   notes: []

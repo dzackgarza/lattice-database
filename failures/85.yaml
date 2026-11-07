@@ -4478,6 +4478,35 @@
     database_revision: 972cd798ea14d57de15ad2d2ac01af7822d03c5b
     research_revision: 65b1618676dabee6abe5ba9a6678b165c6621b85
   notes: []
+58S6 integral.local_densities:
+  disposition: open
+  attempts:
+  - hash: e5378e409c24f7701e373876b32586a87eb5a9cf04b7ada7350ac466781f0804
+    gram_tensor:
+    - - -1
+      - 0
+      - 0
+      - 0
+    - - 0
+      - 2
+      - 0
+      - 0
+    - - 0
+      - 0
+      - -4
+      - 2
+    - - 0
+      - 0
+      - 2
+      - -4
+    reason: worker or runner lost (recovered from exceeded.yaml)
+    stderr: ''
+    seconds: 0.0
+    recorded_at: 2026-11-07 16:55:48.071970+00:00
+    run_url: https://github.com/dzackgarza/lattice-database/actions/runs/42391523243/attempts/1
+    database_revision: 18abc0744e1b63baf84d248d7fc8601a53dd30e2
+    research_revision: 791a3ac8ed7b2e6799d8e3e0a43e1fd34ad3aae5
+  notes: []
 6JRT integral.primitive_orbits:
   disposition: open
   attempts:
