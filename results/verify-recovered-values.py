@@ -155,8 +155,11 @@ def main(directory: Path) -> int:
                 actual_hash = (current_card.get("certifications") or {}).get("derive")
             else:
                 actual_hash = (current_card.get("certifications") or {}).get(f"{block}.{field}")
-            if actual_hash:
-                if actual_hash != shard[name]["hash"]:
+            if not actual_hash:
+                problems.append(
+                    f"{name}: on-card certification is missing although the artifact supplies the corresponding certificate"
+                )
+            elif actual_hash != shard[name]["hash"]:
                     problems.append(
                         f"{name}: on-card certificate {actual_hash[:16]} is not the recovered shard's hash {shard[name]['hash'][:16]}"
                     )
@@ -173,7 +176,7 @@ def main(directory: Path) -> int:
             if name not in loaded:
                 problems.append(f"{name}: original failure entry is absent")
                 continue
-            actual_attempts = {(attempt.hash for attempt in loaded[name].attempts)}
+            actual_attempts = {attempt.hash for attempt in loaded[name].attempts}
             for required in expected_attempts - actual_attempts:
                 problems.append(f"{name}: original failure attempt {required[:16]} is missing")
             # Later attempts legitimately survive beside an artifact's original ones; nothing extra
