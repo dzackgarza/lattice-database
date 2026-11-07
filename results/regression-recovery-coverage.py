@@ -30,11 +30,23 @@ FIELDS = ("root_span", "root_sublattice", "morphisms", "dual_gram_tensor")
 
 
 def apply(filename: Path, base: str, artifact: Path) -> dict:
+    """Reconstruct every file the real patch needs, before running `git apply` against it."""
+    patch_path = artifact / "certification.patch"
     work = Path(tempfile.mkdtemp(prefix="artifact-value-", dir=ROOT / "attachments"))
-    source = work / filename
-    source.write_text(subprocess.run(["git", "show", f"{base}:{filename}"], check=True, capture_output=True, text=True).stdout)
-    subprocess.run(["git", "apply", "-p1", str(artifact.resolve())], cwd=work, check=True)
-    return yaml.safe_load(source.read_text().split("---")[1])
+    for path in patch_files(patch_path):
+        source = work / path
+        source.parent.mkdir(parents=True, exist_ok=True)
+        source.write_text(subprocess.run(["git", "show", f"{base}:{path}"], check=True, capture_output=True, text=True).stdout)
+    subprocess.run(["git", "apply", "-p1", str(patch_path.resolve())], cwd=work, check=True)
+    return yaml.safe_load((work / filename).read_text().split("---")[1])
+
+
+def patch_files(patch_path: Path) -> set[str]:
+    return {
+        line[len("diff --git a/"):].rsplit(" b/", 1)[0]
+        for line in patch_path.read_text().splitlines()
+        if line.startswith("diff --git a/") and " b/" in line
+    }
 
 
 def main() -> None:
@@ -74,6 +86,10 @@ def main() -> None:
     current_certificate = ROOT / "certificates" / f"{certificate_shard}.yaml"
     shutil.copy(current_certificate, Path(work, "certificates") / current_certificate.name)
     shutil.copytree(artifact, work / "artifacts" / artifact.name)
+
+    initial = run(work, verifier)
+    if initial.returncode:
+        raise SystemExit(f"baseline does not verify ({initial.returncode}), so this runner proves nothing yet")
 
     original = (work / "lattices" / f"{tag}.md").read_text()
     metadata = yaml.safe_load(original.split("---")[1])
