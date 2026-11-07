@@ -7,9 +7,13 @@ The run predates the ledger's split into `failures/<group>.yaml`, so each shard'
 whole `failures.yaml`. The snapshots are commits made from the run's own patches, in the order of
 `.scratch/recovery-42363689427/snapshots.txt`; the run's base commit is named below.
 
-An entry the run wrote that the ledger does not hold is added. An entry the ledger already holds is
-**kept as it stands**: its disposition is the newer statement, and a recovery never overwrites it.
-Every decision is printed.
+An entry the run wrote that the ledger does not hold is added. An entry the ledger already holds keeps
+its disposition, which is the newer statement, but every attempt the run recorded that the ledger
+does not already hold is added to its history: an attempt is identified by all it records -- hash,
+Gram tensor, reason, stderr, duration, time, run URL and revisions -- and never by its position, so a
+retry on a different input is a distinct attempt and the same attempt recorded twice is not. Attempts
+are ordered by the time they were recorded, so a history stays chronological whichever of the two
+recorded the later one.
 """
 import subprocess
 import sys
@@ -49,11 +53,33 @@ def ledger(rev: str) -> failures.Failures:
     return TypeAdapter(failures.Failures).validate_python(yaml.load(text, Loader=yaml.CSafeLoader) or {})
 
 
+def attempt_key(attempt: "failures.Attempt") -> str:
+    """The identity of one attempt: everything it records, never its position."""
+    return attempt.model_dump_json()
+
+
+def with_every_attempt(current: "failures.Failure", run_entry: "failures.Failure") -> "failures.Failure":
+    """The current entry, its disposition kept, plus every attempt of the run it does not already hold.
+
+    A newer disposition is a statement about the computation now; a distinct attempt is a fact about
+    what happened. Keeping the first must not delete the second. The history stays chronological, so
+    the order is by the time each attempt was recorded.
+    """
+    attempts = list(current.attempts)
+    seen = {attempt_key(attempt) for attempt in attempts}
+    for attempt in run_entry.attempts:
+        if attempt_key(attempt) not in seen:
+            attempts.append(attempt)
+            seen.add(attempt_key(attempt))
+    attempts.sort(key=lambda attempt: attempt.recorded_at)
+    return current.model_copy(update={"attempts": attempts})
+
+
 def main() -> int:
     base = ledger(BASE)
     current = failures.load(ROOT)
     print(f"base ledger {len(base)} entries; current sharded ledger {len(current)} entries")
-    added = kept = same = 0
+    added = kept = same = carried = 0
     for shard, snapshot in SNAPSHOTS:
         entries = ledger(snapshot)
         delta = {key: entry for key, entry in entries.items() if base.get(key) != entry}
@@ -68,14 +94,22 @@ def main() -> int:
             elif current[key] == entry:
                 same += 1
             else:
-                kept += 1
-                print(f"shard {shard}: kept the ledger's own {key} ({current[key].disposition}); "
-                      f"the run's was {entry.disposition}")
+                merged = with_every_attempt(current[key], entry)
+                if merged == current[key]:
+                    kept += 1
+                    print(f"shard {shard}: {key} already holds every attempt ({current[key].disposition})")
+                else:
+                    current[key] = merged
+                    carried += 1
+                    print(f"shard {shard}: added {len(merged.attempts) - len(current[key].attempts)} "
+                          f"attempt(s) to {key}, disposition kept as {merged.disposition} "
+                          f"(the run's was {entry.disposition}); history now {len(merged.attempts)}")
         print(f"shard {shard}: {len(delta)} entries changed against the base, {new_here} newly added")
     failures.save(ROOT, current)
     written = failures.load(ROOT)
     assert written == current, "the sharded ledger does not hold what was saved"
-    print(f"added {added}, already present and equal {same}, kept as they stand {kept}; ledger now {len(written)} entries")
+    print(f"entries added {added}; existing entries given their missing attempts {carried}; "
+          f"already holding every attempt {kept}; identical {same}; ledger now {len(written)} entries")
     return 0
 
 

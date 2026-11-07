@@ -32,12 +32,12 @@ def touched_tags(commits: list[str]) -> list[str]:
     return sorted(tags)
 
 
-def main(commits: list[str]) -> int:
-    tags = touched_tags(commits)
-    print(f"{len(commits)} commits, {len(tags)} cards touched")
+def verify(commit: str) -> tuple[int, list[str]]:
+    """The production certificate checks over the cards one commit touched, in their own corpus."""
+    tags = touched_tags([commit])
     groups = sorted({certificates.group(tag) for tag in tags})
-    with tempfile.TemporaryDirectory(dir=ROOT / ".scratch") as scratch:
-        root = Path(scratch)
+    root = Path(tempfile.mkdtemp(dir=ROOT / ".scratch"))
+    try:
         (root / "lattices").mkdir()
         (root / "certificates").mkdir()
         shutil.copy(ROOT / corpus.FAMILIES_FILE, root / corpus.FAMILIES_FILE)
@@ -48,11 +48,23 @@ def main(commits: list[str]) -> int:
             shutil.copy(ROOT / "lattices" / f"{tag}.md", root / "lattices" / f"{tag}.md")
         loaded = corpus.load(root)
         held = certificates.load(root)
-        problems = checks.records.problems(loaded, held)
-    for problem in problems:
-        print(problem)
-    print(f"{len(problems)} problems in {len(tags)} recovered cards over {len(groups)} certificate groups")
-    return 1 if problems else 0
+        return len(tags), checks.records.problems(loaded, held)
+    finally:
+        shutil.rmtree(root)
+
+
+def main(commits: list[str]) -> int:
+    """One commit at a time, so a run's memory is one commit's corpus and each result is printed."""
+    total_cards = total_problems = 0
+    for commit in commits:
+        cards, problems = verify(commit)
+        total_cards += cards
+        total_problems += len(problems)
+        print(f"{commit}: {cards} cards, {len(problems)} problems", flush=True)
+        for problem in problems:
+            print("   ", problem.replace(str(ROOT), ""), flush=True)
+    print(f"\n{total_problems} problems in {total_cards} recovered cards over {len(commits)} commits")
+    return 1 if total_problems else 0
 
 
 if __name__ == "__main__":

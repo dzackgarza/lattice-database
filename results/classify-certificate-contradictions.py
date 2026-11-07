@@ -55,7 +55,13 @@ def classify(tag: str, field: str) -> tuple[str, str]:
         genus.name(tag, short, lattice.definiteness), lattice, genus.certified_value(short, value, lattice)
     )
     if held == expected:
-        return "uncited", f"shard {held[:12]} is this card's own value; the card cites {str(cited)[:12]}"
+        if cited is None:
+            return "uncited", f"shard {held[:12]} is this card's own value; the card cites nothing"
+        if cited != held:
+            return "stale-citation", (
+                f"the card cites {cited[:12]} but the shard holds {held[:12]}, which is this card's own value"
+            )
+        return "contradiction", f"card and shard agree on {held[:12]} but the verifier still reports a difference"
     return "stale", f"shard {held[:12]} is not this value's hash {expected[:12]}"
 
 
