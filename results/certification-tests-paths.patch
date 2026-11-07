@@ -1,0 +1,34 @@
+diff --git a/.github/workflows/certification-tests.yml b/.github/workflows/certification-tests.yml
+index 05443cfc83..856fd0ee34 100644
+--- a/.github/workflows/certification-tests.yml
++++ b/.github/workflows/certification-tests.yml
+@@ -3,20 +3,16 @@ name: Certification regression tests
+   push:
+     branches:
+     - main
++    # Every file that can change what the certify runs do or how they are tested, rather than a list
++    # of files kept by hand: #16, whose change to `src/latticedb/corpus.py` — the reader every certify
++    # run starts with — was in none of the named files and did not run this gate.
+     paths: &id001
+-    - src/latticedb/genus.py
+-    - src/latticedb/failures.py
+-    - src/latticedb/exceeded.py
+-    - src/latticedb/certificates.py
+-    - src/latticedb/cli.py
+-    - tests/test_genus.py
+-    - tests/test_failures.py
+-    - tests/test_persist.py
+-    - .github/scripts/persist.sh
+-    - .github/workflows/certify.yml
+-    - .github/workflows/certification-tests.yml
+-    - .gitattributes
+-    - justfile
++    - 'src/**'
++    - 'tests/**'
++    - '.github/scripts/**'
++    - '.github/workflows/**'
++    - '.gitattributes'
++    - 'justfile'
+   pull_request:
+     paths: *id001
+   workflow_dispatch: null
