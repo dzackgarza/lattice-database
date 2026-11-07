@@ -1,0 +1,10 @@
+case normal: launcher rc=0 (want 0), PYEXIT=absent, results=2  [two results and the summary: the only case that may pass]
+case incomplete: launcher rc=0 (want 1), PYEXIT=absent, results=2  [two results, no summary: a clean exit must still fail]
+REGRESSION FAIL: incomplete gave rc 0, wanted 1
+case short: launcher rc=0 (want 1), PYEXIT=absent, results=1  [one result of two: a clean exit must still fail]
+REGRESSION FAIL: short gave rc 0, wanted 1
+case raise: launcher rc=1 (want 1), PYEXIT=absent, results=2  [a nonzero guest status must fail]
+case segv: launcher rc=0 (want 1), PYEXIT=absent, results=2  [a signal death the wrapper reports as 0 must fail]
+REGRESSION FAIL: segv gave rc 0, wanted 1
+wrapper: verify-launcher-unrepaired.sh
+REGRESSION FAIL
