@@ -56,6 +56,10 @@
 0136 definite.regular:
   hash: 24dc8dc72b81d5d6e7e340c25a4b99d112be3f93ac239453218c0731d87efd60
   seconds: 19203
+0138 integral.overlattice_count:
+  hash: d38d011821cdd83968615e764af60ab388701ec86f8846a8d04302f3a084bbfd
+  seconds: 1164
+  lost: true
 0138 integral.primitive_orbits:
   hash: e2483b03c6bbfdefcce832d253551b2ffcefad0253308b70ca41b007a6d69137
   seconds: 6306
@@ -79,6 +83,10 @@
 0167 automorphisms.automorphism_group_generator_morphisms:
   hash: 594bc132e3a742d96641deb40726914bd4d187595f4809b3bf2be1b1446d9e29
   seconds: 4854
+  lost: true
+0167 integral.discriminant_form:
+  hash: 8bdccae6fe16483c8a4b2faed40fd68cdcee7002dc9249d715a87cd6764bd242
+  seconds: 30
   lost: true
 0172 definite.regular:
   hash: 765bd194cb2f1618692f7cd328fb90fdc98d0a1cbce0acab29d237b774fa26a5
@@ -208,9 +216,17 @@
   hash: a58743c5896d051ea653551a482fef7f4d79c8b57ea79596509e700771404300
   seconds: 786
   lost: true
+026Y integral.primitive_orbits:
+  hash: 513be57ba175323730e78efcc0a7a3a09135bc1878dcc459d731cfc57973fb01
+  seconds: 793
+  lost: true
 026Z automorphisms.automorphism_group_generator_morphisms:
   hash: 4dd08c38de832de3a1793517cff7d24e80977230bb1ecafd495979d9550b0448
   seconds: 590
+  lost: true
+026Z integral.primitive_orbits:
+  hash: 9fc09452ce943d99840a339e3b5b4b1dac0c5aaa1afc48a8ce288b2284ce89a1
+  seconds: 13
   lost: true
 0270 integral.primitive_orbits:
   hash: 49a2dc6e8c490030f8724073087081e5ba5407d868a90e49b747a3f25bd1d709
@@ -227,6 +243,14 @@
 0273 automorphisms.automorphism_group_generator_morphisms:
   hash: 7383097a3ee31ad0c50d8d3a98804615aecbd73f061b78ab0deee43966e255c4
   seconds: 10401
+  lost: true
+0273 integral.primitive_orbits:
+  hash: 9cb41f50e511291e035e5cbf12f30ad5e8541b9b07ad525cad6e0ac8cbaf51fa
+  seconds: 12
+  lost: true
+0274 automorphisms.automorphism_group_generator_morphisms:
+  hash: 2964b5be9ed8e596875de72f1012e8e03878d1eaf16e8067e5c9d97940599ca3
+  seconds: 1143
   lost: true
 0274 integral.primitive_orbits:
   hash: d80c0a6a48bc46759004960db99d402ddceb1d74febb8bb2e46213e15a7627a9

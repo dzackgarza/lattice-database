@@ -1,0 +1,29 @@
+16KU integral.genus_class_count:
+  disposition: open
+  attempts:
+  - hash: 182a020bd256d7b9ee689e48b8cca285744e6713bd4e5c7b3dce7727fe1a7743
+    gram_tensor:
+    - - 2
+      - 0
+      - 0
+      - 1
+    - - 0
+      - 2
+      - 0
+      - 1
+    - - 0
+      - 0
+      - 18
+      - 9
+    - - 1
+      - 1
+      - 9
+      - 26
+    reason: worker or runner lost (recovered from exceeded.yaml)
+    stderr: ''
+    seconds: 0.0
+    recorded_at: 2026-10-23 11:39:34.759047+00:00
+    run_url: null
+    database_revision: dea30614e6711ce0b908fff7519c3fa6a99a3365
+    research_revision: null
+  notes: []

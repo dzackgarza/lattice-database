@@ -1,0 +1,258 @@
+0013 root_span.norms:
+  disposition: open
+  attempts:
+  - hash: bd327f39158653cc9a337fbebe3cba02f376db79bb521e260771933fcde21ba4
+    gram_tensor:
+    - - 0
+      - 2
+    - - 2
+      - 0
+    reason: certification budget exhausted (recovered from exceeded.yaml)
+    stderr: ''
+    seconds: 19620.0
+    recorded_at: 2026-10-23 11:39:31.411677+00:00
+    run_url: null
+    database_revision: dea30614e6711ce0b908fff7519c3fa6a99a3365
+    research_revision: null
+  notes: []
+0013 root_span.roots:
+  disposition: open
+  attempts:
+  - hash: d554012a9945766678751eb645d24ef6a538179f75a665c0a9e2e9a495301766
+    gram_tensor:
+    - - 0
+      - 2
+    - - 2
+      - 0
+    reason: certification budget exhausted (recovered from exceeded.yaml)
+    stderr: ''
+    seconds: 19620.0
+    recorded_at: 2026-10-23 11:39:31.417006+00:00
+    run_url: null
+    database_revision: dea30614e6711ce0b908fff7519c3fa6a99a3365
+    research_revision: null
+  notes: []
+029J automorphisms.automorphism_group_generator_morphisms:
+  disposition: open
+  attempts:
+  - hash: ed4c578ec785cf87fd37a73232ef8bd088dff7de0b50188473ca676aebcbe34b
+    gram_tensor:
+    - - 0
+      - 1
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+    - - 1
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+    - - 0
+      - 0
+      - 0
+      - 2
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+    - - 0
+      - 0
+      - 2
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+    - - 0
+      - 0
+      - 0
+      - 0
+      - -4
+      - 0
+      - 2
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+    - - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - -4
+      - 0
+      - 2
+      - 0
+      - 0
+      - 0
+      - 0
+    - - 0
+      - 0
+      - 0
+      - 0
+      - 2
+      - 0
+      - -4
+      - 2
+      - 0
+      - 0
+      - 0
+      - 0
+    - - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 2
+      - 2
+      - -4
+      - 2
+      - 0
+      - 0
+      - 0
+    - - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 2
+      - -4
+      - 2
+      - 0
+      - 0
+    - - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 2
+      - -4
+      - 2
+      - 0
+    - - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 2
+      - -4
+      - 2
+    - - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 2
+      - -4
+    reason: exit status 1
+    stderr: "Traceback (most recent call last):\n  File \"<frozen runpy>\", line 203,
+      in _run_module_as_main\n  File \"<frozen runpy>\", line 88, in _run_code\n  File
+      \"/home/runner/work/lattice-database/lattice-database/src/latticedb/sage_genus.py\",
+      line 296, in <module>\n    main()\n    ~~~~^^\n  File \"/home/runner/work/lattice-database/lattice-database/src/latticedb/sage_genus.py\",
+      line 291, in main\n    _compute(request)\n    ~~~~~~~~^^^^^^^^^\n  File \"/home/runner/work/lattice-database/lattice-database/src/latticedb/sage_genus.py\",
+      line 273, in _compute\n    _run(tag, [asked for asked in sorted(fields) if asked
+      in request[\"fields\"]], lambda: compute(lattice))\n    ~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n
+      \ File \"/home/runner/work/lattice-database/lattice-database/src/latticedb/sage_genus.py\",
+      line 235, in _run\n    values = compute()\n  File \"/home/runner/work/lattice-database/lattice-database/src/latticedb/sage_genus.py\",
+      line 273, in <lambda>\n    _run(tag, [asked for asked in sorted(fields) if asked
+      in request[\"fields\"]], lambda: compute(lattice))\n                                                                                         ~~~~~~~^^^^^^^^^\n
+      \ File \"/home/runner/work/lattice-database/lattice-database/src/latticedb/sage_genus.py\",
+      line 77, in _orthogonal_group_data\n    generators = [_matrix_rows(generator)
+      for generator in group.group_generators()]\n                                                           ~~~~~~~~~~~~~~~~~~~~~~^^\n
+      \ File \"/sage/.venv/lib/python3.14/site-packages/sage_extensions/categories/group/groups.py\",
+      line 5541, in group_generators\n    return self.selected_group_resolution().generators(\n
+      \          ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^\n  File \"/sage/.venv/lib/python3.14/site-packages/sage_extensions/categories/group/groups.py\",
+      line 5519, in selected_group_resolution\n    return self.selected_resolution(OwnedGroups())\n
+      \          ~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^\n  File \"/sage/.venv/lib/python3.14/site-packages/sage_extensions/categories/abstract_categories/objects.py\",
+      line 383, in selected_resolution\n    resolution = selected.realize()\n  File
+      \"/sage/.venv/lib/python3.14/site-packages/sage_extensions/categories/abstract_categories/objects.py\",
+      line 116, in realize\n    return self._resolution_factory()\n           ~~~~~~~~~~~~~~~~~~~~~~~~^^\n
+      \ File \"/sage/.venv/lib/python3.14/site-packages/sage_extensions/categories/group/groups.py\",
+      line 1092, in selected_resolution\n    generators = generating_set()\n  File
+      \"/sage/.venv/lib/python3.14/site-packages/sage_extensions/categories/abstract_categories/arrow_categories.py\",
+      line 2390, in <lambda>\n    lambda: self.core_category().base_category()._core_automorphism_generators(self)\n
+      \           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^\n
+      \ File \"/sage/.venv/lib/python3.14/site-packages/sage_extensions/categories/lattices.py\",
+      line 1850, in _core_automorphism_generators\n    return core_mor._computed_group_generators()\n
+      \          ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^\n  File \"sage/misc/cachefunc.pyx\",
+      line 2328, in sage.misc.cachefunc.CachedMethodCallerNoArgs.__call__\n    self.cache
+      = f(self._instance)\n  File \"/sage/.venv/lib/python3.14/site-packages/sage_extensions/categories/lattice_morphisms.py\",
+      line 3810, in _computed_group_generators\n    for generator in automorphism_group_generators(category,
+      lattice)\n                     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^\n
+      \ File \"/repos/sage-indefinite-port/src/sage_indefinite_port/indefinite/marked_lattices.py\",
+      line 111, in automorphism_group_generators\n    generators = RECURSION.orthogonal_group_generators(marked)\n
+      \ File \"/repos/sage-indefinite-port/src/sage_indefinite_port/indefinite/recursive.py\",
+      line 356, in orthogonal_group_generators\n    generators = self._generation_step(profile.signed_view)\n
+      \ File \"/repos/sage-indefinite-port/src/sage_indefinite_port/indefinite/recursive.py\",
+      line 372, in _generation_step\n    isometry for candidate in model.covering_vectors(int(vector.q()),
+      int(vector.content())) if (isometry := self.pointed_isometry(vector, candidate))
+      is not None\n                              ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n
+      \ File \"/repos/sage-indefinite-port/src/sage_indefinite_port/indefinite/eichler.py\",
+      line 1028, in covering_vectors\n    return tuple(self.lattice.scalar_multiple(content,
+      vector) for vector in self.primitive_covering_vectors(square // (content * content)))\n
+      \                                                                            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n
+      \ File \"/repos/sage-indefinite-port/src/sage_indefinite_port/indefinite/eichler.py\",
+      line 999, in primitive_covering_vectors\n    cosets = envelope.right_coset_transversal()\n
+      \ File \"sage/misc/cachefunc.pyx\", line 2328, in sage.misc.cachefunc.CachedMethodCallerNoArgs.__call__\n
+      \   self.cache = f(self._instance)\n  File \"/repos/sage-indefinite-port/src/sage_indefinite_port/indefinite/eichler.py\",
+      line 488, in right_coset_transversal\n    coset_space = self.stabilizer_of_lattice().right_cosets()\n
+      \                 ~~~~~~~~~~~~~~~~~~~~~~~~~~^^\n  File \"sage/misc/cachefunc.pyx\",
+      line 2328, in sage.misc.cachefunc.CachedMethodCallerNoArgs.__call__\n    self.cache
+      = f(self._instance)\n  File \"/repos/sage-indefinite-port/src/sage_indefinite_port/indefinite/eichler.py\",
+      line 464, in stabilizer_of_lattice\n    generators = tuple(_isometry_from_row_matrix(rational_envelope,
+      generator) for generator in OrbitCoverModel.source_generator_matrices(self.model))\n
+      \                ^^^^^\n  File \"/repos/sage-indefinite-port/src/sage_indefinite_port/indefinite/eichler.py\",
+      line 464, in <genexpr>\n    generators = tuple(_isometry_from_row_matrix(rational_envelope,
+      generator) for generator in OrbitCoverModel.source_generator_matrices(self.model))\n
+      \                      ~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n
+      \ File \"/repos/sage-indefinite-port/src/sage_indefinite_port/indefinite/eichler.py\",
+      line 74, in _isometry_from_row_matrix\n    return checked_row_isometry(lattice,
+      lattice, rows)\n  File \"/repos/sage-indefinite-port/src/sage_indefinite_port/indefinite/recursive.py\",
+      line 154, in _isometry_from_row_matrix\n    source_coordinates = tuple(int(coordinates(label))
+      for label in source_labels)\n                         ^^^^^\n  File \"/repos/sage-indefinite-port/src/sage_indefinite_port/indefinite/recursive.py\",
+      line 154, in <genexpr>\n    source_coordinates = tuple(int(coordinates(label))
+      for label in source_labels)\n                               ~~~^^^^^^^^^^^^^^^^^^^^\nTypeError:
+      int() argument must be a string, a bytes-like object or a real number, not 'OwnedJoinCategory.element_class'\n"
+    seconds: 105.1987517980001
+    recorded_at: 2026-11-06 22:32:26.059415+00:00
+    run_url: https://github.com/dzackgarza/lattice-database/actions/runs/42297273985/attempts/1
+    database_revision: c069bdfb7a2dc170b902dba9b9acf0b4c513986f
+    research_revision: e6cc78a879ac400fac9b1c9b97e6e83e36346d73
+  notes: []

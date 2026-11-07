@@ -1,0 +1,22 @@
+3G5P integral.overlattice_count:
+  disposition: open
+  attempts:
+  - hash: 5a44397e49a4a862203a3ddfa51f2c629317c5c0175b84e7b640522bd3424541
+    gram_tensor:
+    - - 28
+      - 14
+      - 0
+    - - 14
+      - 37
+      - 6
+    - - 0
+      - 6
+      - 60
+    reason: worker or runner lost (recovered from exceeded.yaml)
+    stderr: ''
+    seconds: 5.0
+    recorded_at: 2026-10-24 08:34:51.748662+00:00
+    run_url: https://github.com/dzackgarza/lattice-database/actions/runs/40077222835/attempts/1
+    database_revision: 972cd798ea14d57de15ad2d2ac01af7822d03c5b
+    research_revision: 65b1618676dabee6abe5ba9a6678b165c6621b85
+  notes: []
