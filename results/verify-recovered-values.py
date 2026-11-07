@@ -29,42 +29,63 @@ import yaml
 from latticedb import certificates, failures, genus, records
 from latticedb.model import Lattice
 
-EXCLUDED = {"tag", "name", "latex", "aliases", "remark", "gram_tensor", "rank", "signature", "determinant",
-           "definiteness", "references", "families", "morphisms", "related", "arithmetic_groups", "dual_gram_tensor",
-           "root_span", "root_sublattice"}
+def same_values(left, right) -> bool:
+    """Two lists describe the same stored collection, counting every element and not deduplicating.
+
+    Stored generators and morphism presentations are not canonical orderings, so ordering alone is not
+    a loss. A changed matrix, vector or coefficient still differs.
+    """
+    if len(left) != len(right):
+        return False
+    import json
+    first = sorted((json.dumps(value, sort_keys=True, default=str) for value in left))
+    second = sorted((json.dumps(value, sort_keys=True, default=str) for value in right))
+    return first == second
 
 
-def recursedifference_and_metric_additions(base: dict, artifact: dict, current: dict) -> list[str]:
-    """Compare stored field paths in the artifact's computed blocks: any loss or disagreement."""
+def coverage_problems(base, artifact, current, prefix: str = "") -> tuple[list[str], list[str]]:
+    """Every stated stored value must arrive, with any later differing value explicitly named.
+
+    No key is excluded because it is a morphism, a root-span record, a dual form or any other owned
+    block. The artifact is a patch result on the exact base, so what it adds or changes is known; the
+    new base value is not silently treated as a later superseding one.
+    """
     problems: list[str] = []
-    for field, value in artifact.items():
-        if field in EXCLUDED:
-            continue
-        if field not in current:
-            problems.append(f"missing field {field} on main")
-        elif current[field] != value:
-            if isinstance(value, dict) and isinstance(current[field], dict):
-                nested = compare_records(value, current[field])
-                problems.extend(f"{field}.{name}" for name in nested)
+    later: list[str] = []
+    if artifact == current:
+        return problems, later
+    if isinstance(artifact, dict) and isinstance(current, dict):
+        for key, proof in artifact.items():
+            base_value = base.get(key) if isinstance(base, dict) else None
+            present = current.get(key, "__absent__")
+            if present == proof:
+                continue
+            label = f"{prefix}{key}"
+            if present == "__absent__":
+                problems.append(f"{label}: missing on main")
+                continue
+            if isinstance(proof, dict) and isinstance(present, dict):
+                lost, changed = coverage_problems(base_value or {}, proof, present, label + ".")
+                problems.extend(lost)
+                later.extend(changed)
+            elif isinstance(proof, list) and isinstance(present, list) and same_values(proof, present):
+                continue
+            elif present == base_value:
+                problems.append(f"{label}: retained base value, proof {proof!r} never recovered")
             else:
-                problems.append(f"field {field}: on main {current[field]!r} is not artifact {value!r}")
-    for name in current:
-        if name in EXCLUDED:
-            continue
-    return problems
+                # This could be later valid enrichment, and is kept rather than overwritten, but it
+                # must be visible for review instead of hiding with the artifact's equality check.
+                later.append(f"{label}: current {present!r}, retained proof {proof!r}")
+        return problems, later
+    if artifact == current:
+        return problems, later
+    later.append(f"{prefix}: current {current!r}, retained proof {artifact!r}")
+    return problems, later
 
 
-def compare_records(before: dict, after: dict) -> list[str]:
-    problems = []
-    for key, value in before.items():
-        if key not in after:
-            problems.append(f"{key} missing")
-        elif after[key] != value:
-            if isinstance(value, dict):
-                problems.extend(f"{key}.{inner}" for inner in compare_records(value, after[key]))
-            else:
-                problems.append(f"{key}: {after[key]!r} is not artifact {value!r}")
-    return problems
+def recursedifference_and_metric_additions(base: dict, artifact: dict, current: dict) -> tuple[list[str], list[str]]:
+    """All stored fields, including morphisms and root-span data, checked as full records."""
+    return coverage_problems(base, artifact, current)
 
 
 def show(revision: str, path: str) -> str:
@@ -108,8 +129,13 @@ def main(directory: Path) -> int:
         assert current_card["gram_tensor"] == artifact_card["gram_tensor"], (
             f"{tag}: recovered card's Gram tensor differs from the artifact's base"
         )
-        for problem in recursedifference_and_metric_additions({}, artifact_card, current_card):
-            problems.append(f"{tag}: {problem}")
+        previous_card = yaml.safe_load(show(base, f"lattices/{tag}.md").split("---")[1])
+        lost, superseding = coverage_problems(previous_card, artifact_card, current_card)
+        problems.extend(f"{tag}: {problem}" for problem in lost)
+        if superseding:
+            print(f"{tag}: {len(superseding)} later change(s) from the retained proof to inspect (kept)")
+            for change in superseding[-12:]:
+                print(f"  {tag}: {change}"[:280])
         # The recovered card validates as its own model, and its certifications block must agree with the
         # recovered certificate records the artifact says it has computed.
         expected = {name for name in artifact_certificates if name.startswith(f"{tag} ")}
