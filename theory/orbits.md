@@ -57,7 +57,7 @@ A *primitive isotropic line* is a rank-one isotropic sublattice $\mathbb{Z}v$ wi
 The *series of orbits of primitive vectors* is $$F_{L,\Gamma}(z, w) = c_\Gamma(0) + \sum_{n \geq 1} c_\Gamma(n) z^n + \sum_{n \geq 1} c_\Gamma(-n) w^n \in \mathbb{Z}[[z, w]].$$
 :::
 
-The constant term counts primitive isotropic *lines* and not primitive isotropic vectors, because an indefinite lattice has infinitely many of the latter on each of those lines: every primitive isotropic vector has norm $0$, so it spans one of them, and $\mathbb{Z}v = \mathbb{Z}(-v)$.
+The constant term counts primitive isotropic *lines* and not primitive isotropic vectors: every primitive isotropic vector has norm $0$, so it spans one of them, and the primitive vectors of the line $\mathbb{Z}v$ are exactly $v$ and $-v$, since $kv$ is imprimitive for $|k| \geq 2$ — so a line orbit is the union of at most two vector orbits, and the two counts are not the same count.
 A $\Gamma$-orbit of lines is the image of the $\Gamma$-orbits of its primitive vectors, and $\Gamma[v] = \Gamma[-v]$, so one line orbit is the union of the orbit of $v$ and the orbit of $-v$.
 Those are two orbits, or one when $-v = \gamma v$ for some $\gamma \in \Gamma$; by the [proposition below](#discriminant-orbits) that happens exactly when $v^* + L = -v^* + L$ in $A_L$, that is when $2(v^* + L) = 0$.
 So $$c_\Gamma(0) = \tfrac{1}{2}\bigl(c_\Gamma^{\mathrm{vec}}(0) + s_\Gamma\bigr),$$ where $c_\Gamma^{\mathrm{vec}}(0)$ is the number of $\Gamma$-orbits of primitive isotropic vectors and $s_\Gamma$ is the number of those orbits that are their own negative.

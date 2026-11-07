@@ -112,7 +112,7 @@ class PrimitiveOrbitSeries(Record):
     """The series $F_{L,\\Gamma}(z, w) = c_\\Gamma(0) + \\sum_{n \\geq 1} c_\\Gamma(n) z^n + \\sum_{n \\geq 1} c_\\Gamma(-n) w^n$ in $\\mathbb{Z}[[z, w]]$.
 
     For $n \\neq 0$, $c_\\Gamma(n)$ is the number of $\\Gamma$-orbits on the primitive vectors $v$ with $b(v, v) = n$.
-    $c_\\Gamma(0)$ is the number of $\\Gamma$-orbits of primitive isotropic *lines*, the rank-one isotropic sublattices, which is what a $0$-cusp of the Baily–Borel boundary is: an indefinite lattice has infinitely many primitive isotropic vectors on each such line, so the vector count is not the stored one.
+    $c_\\Gamma(0)$ is the number of $\\Gamma$-orbits of primitive isotropic *lines*, the rank-one isotropic sublattices, which is what a $0$-cusp of the Baily–Borel boundary is: the primitive vectors of a line $\\mathbb{Z}v$ are its two generators $v$ and $-v$ and no others, since $kv$ is imprimitive for $|k| \\geq 2$, so an orbit of vectors and its negative can be one orbit of lines and the two counts are not the same count.
     A coefficient that is not known is null, and a count the owner states to be countably infinite is `aleph0`.
     """
 
