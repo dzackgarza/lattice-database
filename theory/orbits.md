@@ -69,7 +69,7 @@ A lattice of signature $(1, n)$ has no isotropic plane, and on a definite lattic
 A row whose key is not one of the eight standard groups names an arithmetic-group card of the same lattice, such as $\Gamma_{\mathrm{En},2}$, and its coefficients are that subgroup's.
 
 So $F_{L,\Gamma}(0, 0) = c_\Gamma(0)$ is the number of $\Gamma$-orbits of primitive isotropic lines, the coefficient of $z^n$ is the number of $\Gamma$-orbits of primitive vectors of norm $n$, and the coefficient of $w^n$ is that of norm $-n$.
-A record states the coefficients that are known, through $z^4$ and $w^4$ at first, and a coefficient that is not known is null.
+A record states the coefficients that are known, through $z^4$ and $w^4$ at first, and a coefficient that is not known is null; a count that the owner states to be countably infinite is `aleph0`, so a stated count is never dropped for being infinite.
 An indefinite card states the constant term alone: no positive or negative norm is bounded there.
 
 Each coefficient obeys these relations, which `latticedb check` verifies:

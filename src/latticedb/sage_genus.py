@@ -239,13 +239,14 @@ def _orbit_count(value: object) -> object:
     an element of Sage's `Cardinalities` category, whose class is that category's `parent_class` — and
     not with an `int`, which `json` then refuses. The cardinality's own API is the conversion: `int` of a
     finite cardinality is its number, and an infinite one has none, so the coefficient is `None`, which
-    `theory/orbits.md` states a coefficient that is not known to be.
+    `theory/orbits.md` states a coefficient that is not known to be. An infinite cardinality is the
+    count `aleph0`, which the schema states, so the owner's answer is never dropped.
     """
     if value is None or isinstance(value, int):
         return value
     finite = getattr(value, "is_finite", None)
     if callable(finite) and not finite():
-        return None
+        return "aleph0"
     return int(value)
 
 

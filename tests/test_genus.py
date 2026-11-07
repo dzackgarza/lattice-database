@@ -670,4 +670,4 @@ def test_the_owner_s_orbit_counts_are_emitted_as_their_exact_cardinalities(capsy
     assert emitted["primitive_orbits"]["O"]["constant"] == 2
     assert emitted["primitive_orbits"]["O"]["z"] == [1, 0]
     assert emitted["primitive_orbits"]["O"]["w"] == [0]
-    assert sage_genus._orbit_series({"O": {"constant": Infinite()}}) == {"O": {"constant": None}}
+    assert sage_genus._orbit_series({"O": {"constant": Infinite()}}) == {"O": {"constant": "aleph0"}}, "an infinite count is stated, not dropped"

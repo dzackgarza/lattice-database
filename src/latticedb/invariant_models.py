@@ -31,7 +31,10 @@ Subgroup = OrbitGroup | Slug
 """A subgroup $\\Gamma$ of $O(L)$: $S$ is the kernel of the determinant, `+` the kernel of the real spinor norm, and `tilde` the kernel of the action on $A_L$."""
 
 
-OrbitCounts = Annotated[tuple[Annotated[int, Field(ge=0)] | None, ...], Field(strict=False)]
+OrbitCount = Annotated[int, Field(ge=0)] | Literal["aleph0"] | None
+"""One coefficient: a count, `aleph0` where the owner states that there are countably many orbits, or null where it is not known."""
+
+OrbitCounts = Annotated[tuple[OrbitCount, ...], Field(strict=False)]
 
 
 class DiscriminantForm(Record):
@@ -110,13 +113,13 @@ class PrimitiveOrbitSeries(Record):
 
     For $n \\neq 0$, $c_\\Gamma(n)$ is the number of $\\Gamma$-orbits on the primitive vectors $v$ with $b(v, v) = n$.
     $c_\\Gamma(0)$ is the number of $\\Gamma$-orbits of primitive isotropic *lines*, the rank-one isotropic sublattices, which is what a $0$-cusp of the Baily–Borel boundary is: an indefinite lattice has infinitely many primitive isotropic vectors on each such line, so the vector count is not the stored one.
-    A coefficient that is not known is null.
+    A coefficient that is not known is null, and a count the owner states to be countably infinite is `aleph0`.
     """
 
-    constant: Annotated[int, Field(ge=0)] | None = Field(
+    constant: OrbitCount = Field(
         default=None,
         description=(
-            "$c_\\Gamma(0)$, the number of $\\Gamma$-orbits of primitive isotropic lines, not of primitive isotropic vectors. "
+            "$c_\\Gamma(0)$, the number of $\\Gamma$-orbits of primitive isotropic lines, not of primitive isotropic vectors, or `aleph0` when the owner states that there are countably many. "
             "The orbits of $v$ and of $-v$ are one line orbit unless $-v = \\gamma v$ for some $\\gamma \\in \\Gamma$, so the line count is at least half the vector count and equals it where every orbit is its own negative, as on a definite lattice, where both are 0."
         ),
     )
