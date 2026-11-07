@@ -1,0 +1,82 @@
+026E integral.primitive_orbits:
+  disposition: open
+  attempts:
+  - hash: b2c2caa23d122c945a68782d3cf315aa6875686fd95b420d5db91831aab6f7c5
+    gram_tensor:
+    - - 0
+      - 1
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+    - - 1
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+    - - 0
+      - 0
+      - -2
+      - 1
+      - 0
+      - 0
+      - 0
+    - - 0
+      - 0
+      - 1
+      - -2
+      - 1
+      - 1
+      - 0
+    - - 0
+      - 0
+      - 0
+      - 1
+      - -2
+      - 0
+      - 0
+    - - 0
+      - 0
+      - 0
+      - 1
+      - 0
+      - -2
+      - 0
+    - - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - -2
+    reason: exit status 1
+    stderr: "Traceback (most recent call last):\n  File \"<frozen runpy>\", line 203,
+      in _run_module_as_main\n  File \"<frozen runpy>\", line 88, in _run_code\n  File
+      \"/repo/src/latticedb/sage_genus.py\", line 349, in <module>\n    main()\n    ~~~~^^\n
+      \ File \"/repo/src/latticedb/sage_genus.py\", line 344, in main\n    _compute(request)\n
+      \   ~~~~~~~~^^^^^^^^^\n  File \"/repo/src/latticedb/sage_genus.py\", line 329,
+      in _compute\n    _run(\n    ~~~~^\n        tag,\n        ^^^^\n        [field],\n
+      \       ^^^^^^^^\n        lambda: {field: SERIES[field](lattice, request[\"series_bound\"])
+      if field in SERIES else VALUES[field](lattice)},\n        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n
+      \   )\n    ^\n  File \"/repo/src/latticedb/sage_genus.py\", line 288, in _run\n
+      \   values = compute()\n  File \"/repo/src/latticedb/sage_genus.py\", line 332,
+      in <lambda>\n    lambda: {field: SERIES[field](lattice, request[\"series_bound\"])
+      if field in SERIES else VALUES[field](lattice)},\n                                                                                            ~~~~~~~~~~~~~^^^^^^^^^\n
+      \ File \"/repo/src/latticedb/sage_genus.py\", line 207, in <lambda>\n    \"primitive_orbits\":
+      lambda lattice: _orbit_series(lattice.primitive_orbit_series()),\n                                                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^\n
+      \ File \"/repos/sage-extensions/src/sage_extensions/categories/lattices.py\",
+      line 3305, in primitive_orbit_series\n    return primitive_orbit_series(self,
+      bound=bound)\n  File \"/repos/sage-extensions/src/sage_extensions/categories/lattice_orbit_invariants.py\",
+      line 136, in primitive_orbit_series\n    raise ValueError(f\"primitive bounded
+      orbit series requires a definite lattice, not {lattice}\")\nValueError: primitive
+      bounded orbit series requires a definite lattice, not Integral lattice of rank
+      7 and signature (1, 6)\n"
+    seconds: 0.2680170370149426
+    recorded_at: 2026-11-07 19:48:21.859298+00:00
+    run_url: null
+    database_revision: null
+    research_revision: null
+  notes: []
