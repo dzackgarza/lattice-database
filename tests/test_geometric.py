@@ -14,20 +14,33 @@ from latticedb.graphs import WeightedGraph
 ROOT = Path(__file__).parent.parent
 
 
+def link_cards_and_their_relations(directory: Path, tags: tuple[str, ...]) -> None:
+    """Symlink the listed cards, then every card their `related` entries name, transitively.
+
+    `site.build` renders each card's relations as links, so a scratch corpus that holds a card but not
+    the cards it relates to cannot build a page at all. The corpus grows by adding cards that relate
+    to existing ones, so the fixture must follow the relations rather than pin a list that goes stale.
+    """
+    directory.mkdir(parents=True, exist_ok=True)
+    pending = list(tags)
+    while pending:
+        tag = pending.pop()
+        path = directory / f"{tag}.md"
+        if path.exists() or not (ROOT / "lattices" / f"{tag}.md").exists():
+            continue
+        path.symlink_to(ROOT / "lattices" / f"{tag}.md")
+        metadata = frontmatter.load(str(path)).metadata
+        for relation in metadata.get("related") or ():
+            pending.append(relation["tag"] if isinstance(relation, dict) else relation)
+        for morphism in metadata.get("morphisms") or ():
+            if isinstance(morphism, dict) and morphism.get("target"):
+                pending.append(morphism["target"])
+
+
 def test_k3_hodge_diamond_and_lattice_link_are_published(tmp_path: Path) -> None:
-    lattice_directory = tmp_path / "lattices"
-    lattice_directory.mkdir()
-    for tag in (
-        "0001",
-        "0002",
-        "0013",
-        "0016",
-        "0151",
-        "027E",
-        "027Z",
-        "0283",
-    ):
-        (lattice_directory / f"{tag}.md").symlink_to(ROOT / "lattices" / f"{tag}.md")
+    link_cards_and_their_relations(
+        tmp_path / "lattices", ("0001", "0002", "0013", "0016", "0151", "027E", "027Z", "0283")
+    )
     for name in ("families.yaml", "retired-tags.yaml", "geometric-bibliography.bib"):
         (tmp_path / name).symlink_to(ROOT / name)
     (tmp_path / "theory").symlink_to(ROOT / "theory", target_is_directory=True)
@@ -65,9 +78,9 @@ def test_k3_hodge_diamond_and_lattice_link_are_published(tmp_path: Path) -> None
 
 
 def test_symmetric_spaces_and_analytic_variety_are_published(tmp_path: Path) -> None:
-    (tmp_path / "lattices").mkdir()
-    for tag in ("0001", "0002", "0011", "0013", "0016", "0151"):
-        (tmp_path / "lattices" / f"{tag}.md").symlink_to(ROOT / "lattices" / f"{tag}.md")
+    link_cards_and_their_relations(
+        tmp_path / "lattices", ("0001", "0002", "0011", "0013", "0016", "0151")
+    )
     (tmp_path / "families.yaml").symlink_to(ROOT / "families.yaml")
     (tmp_path / "retired-tags.yaml").symlink_to(ROOT / "retired-tags.yaml")
     (tmp_path / "geometric-bibliography.bib").symlink_to(ROOT / "geometric-bibliography.bib")
@@ -236,3 +249,73 @@ def test_k3_card_reads_its_transcribed_topology_and_hodge_numbers() -> None:
     source.metadata["betti_numbers"] = [1, 0, 22, 0]
     with pytest.raises(ValidationError, match="b_0 through b_"):
         ProjectiveComplexVariety.model_validate(source.metadata)
+
+
+def test_the_hyperbolic_triangle_card_states_its_gram_signature_and_coxeter_data() -> None:
+    """The (2,3,infinity) triangle: what its card states, and what the mirrors' Gram says.
+
+    A card whose vertices carry `norm_squared` and whose bonds carry `gram` presents the inward unit
+    normals of the walls of a Coxeter polytope (Vinberg, *Hyperbolic reflection groups*, section 2):
+    the Gram matrix of those normals has $G_{vw} = -\\cos(\\pi/m_{vw})$ for a dihedral angle
+    $\\pi/m_{vw}$, and the walls bound an acute-angled hyperbolic polytope exactly when the norms are
+    positive, the off-diagonal entries are nonpositive and the signature is $(n-1, 1, 0)$
+    (Vinberg, section 5). Nothing here is transcribed from a table: every number is recomputed from
+    the card through the owner, so a decoration that does not present this object cannot pass.
+
+    The card states three walls of norm 1 with Gram entries -1/2 and -1, so the angles are
+    $\\pi/3$ and $\\pi/2$ with an ideal vertex: the $(2,3,\\infty)$ triangle group. Its Gram has
+    determinant $-1/4$ and signature $(2, 1)$, one dimension short of free, which is what an
+    acute-angled hyperbolic *triangle* in the hyperbolic plane looks like: $2 + 1 = 3$ walls.
+    """
+    from sage_extensions.rings import session_ring_objects
+
+    QQ = session_ring_objects()["QQ"]
+    card = WeightedGraph.model_validate(
+        frontmatter.load(ROOT / "graphs" / "hyperbolic-triangle-2-3-infinity.md").metadata
+    )
+    form = card._gram_form()
+    assert form is not None, "the card presents mirror normals with their Gram matrix"
+    gram = form.gram_tensor()
+    rank = gram.tensor_shape()[0]
+    assert rank == 3, "three walls"
+
+    # The stated Gram, entry by entry, as exact rationals of the owner's ring. Integer multiples are
+    # compared rather than fractions constructed, so the comparison needs no rational conversion.
+    assert all(gram[index, index] == QQ(1) for index in range(rank)), "every wall has norm 1"
+    position = {vertex.id: index for index, vertex in enumerate(card.vertices)}
+    wall1, wall2, wall3 = position["wall1"], position["wall2"], position["wall3"]
+    assert gram[wall1, wall2] * 2 == QQ(-1), "the (1,2) entry is -1/2, an angle of pi/3"
+    assert gram[wall2, wall3] == QQ(-1), "the (2,3) entry is -1, an ideal vertex"
+    assert gram[wall1, wall3] == QQ(0), "the (1,3) entries are 0, an angle of pi/2"
+    assert gram.is_symmetric(), "a Gram matrix is symmetric"
+
+    # The determinant and the signature the Gram has, not a number the card claims.
+    assert form.determinant() * 4 == QQ(-1), "the determinant is -1/4"
+    signature = form.signature_pair()
+    assert (signature.first(), signature.second()) == (2, 1), "signature (2, 1): an acute-angled polytope in H^2"
+    assert signature.first() + signature.second() == rank, "nonzero determinant, so no radical"
+
+    # The Coxeter data, read off the invariant matrix of the mirror pairs: 4 b^2 / (q q') is
+    # 1 for an angle of pi/3 and 3 for pi/2, and the entry is infinite for a negative product.
+    invariants = card.vinberg_invariant_matrix()
+    assert invariants is not None
+    coxeter = invariants.coxeter_matrix()
+    assert coxeter[wall1, wall2] == 3, "the angle pi/3 is the Coxeter entry 3"
+    assert coxeter[wall1, wall3] == 2, "the angle pi/2 is the Coxeter entry 2"
+    assert str(coxeter[wall2, wall3]) == "\u2135_0", "an ideal vertex is the infinite Coxeter entry"
+    assert not invariants.is_simply_laced(), "the diagram has a bond that is not 2 or 3"
+    assert invariants.is_acute_angled_hyperbolic_polytope_gram()
+    assert card.properties() == ("Coxeter", "hyperbolic Coxeter polytope")
+
+
+def test_the_hyperbolic_triangle_page_publishes_its_walls_and_gram(tmp_path: Path) -> None:
+    """The full page path for the triangle card: the site builds it and states what the card proves."""
+    link_cards_and_their_relations(tmp_path / "lattices", ("0001",))
+    (tmp_path / "families.yaml").symlink_to(ROOT / "families.yaml")
+    (tmp_path / "retired-tags.yaml").symlink_to(ROOT / "retired-tags.yaml")
+    (tmp_path / "graphs").symlink_to(ROOT / "graphs", target_is_directory=True)
+    site.build(tmp_path, tmp_path / "site")
+    page = (tmp_path / "site" / "graphs" / "hyperbolic-triangle-2-3-infinity.html").read_text()
+    assert "Hyperbolic triangle (2,3,infinity)" in page
+    assert "hyperbolic Coxeter polytope" in page, "the page names the diagram class the owner proves"
+    assert "hyperbolic-triangle-2-3-infinity" in page

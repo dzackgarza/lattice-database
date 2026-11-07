@@ -5,6 +5,7 @@ latex: \Lambda_{4}
 aliases: [U + U + E8(-1) + E8(-1) + <-4>]
 certifications:
   integral.primitive_orbits: eba45974e533209118987f193c471e877519717395fa1bdb2076d70e25f9b5e1
+  integral.discriminant_form: f369b5efb6c2e4ebfb69f69afc49d092f4112133018a8822961d066ed720e40b
 rank: 21
 gram_tensor:
 - [0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
@@ -48,8 +49,13 @@ integral:
       constant: 1
       reference:
         citation: J. Scattone, "On the compactification of moduli spaces for algebraic K3 surfaces", Mem. Amer. Math. Soc. 374 (1987), Theorem 4.0.1, p. 55 — the Baily–Borel compactification of D_k/Gamma_k has exactly floor((N+2)/2) boundary components of Type III, for k = k~ N^2 with k~ squarefree, which is one in degree 2k = 4 because N = 1. Section 1, p. 4, sets Gamma_k = O~(L_k) intersect O_-(L_k) and notes that it is also written O*(L_k) in Section 3.6, whose p. 51 has O*(L) = O_-(L) intersect O~(L); that is this card's Otilde+.
+  discriminant_form:
+    orthogonal_group_order: 2
+    isotropic_classes: 1
+    isotropic_orbits: 1
 indefinite:
   isotropic: true
+morphisms: []
 references:
 - citation: 'J. Scattone, "On the compactification of moduli spaces for algebraic K3 surfaces", Mem. Amer. Math. Soc. 374 (1987), Section 1.1, equation (1.1.1), p. 3: L_k = <-2k> + H^2 + E8^2, the two unimodular E8 summands introduced on p. 2.'
   url: https://doi.org/10.1090/memo/0374
