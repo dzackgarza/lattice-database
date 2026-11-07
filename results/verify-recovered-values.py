@@ -81,6 +81,7 @@ def main(directory: Path) -> int:
             # Apply only the card and certificate hunks. The ledger is applied to a separate copy under
             # tests/evidence that the ordinary reader covers, rather than a throwaway materialisation:
             # its reconstruction is the whole failure-persistence evidence.
+            subprocess.run(["git", "init", "--quiet"], cwd=work, check=True)
             subprocess.run(
                 ["git", "apply", "-p1",
                  f"--include=lattices/{tag}.md",
