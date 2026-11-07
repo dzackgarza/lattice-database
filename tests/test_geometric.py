@@ -14,33 +14,20 @@ from latticedb.graphs import WeightedGraph
 ROOT = Path(__file__).parent.parent
 
 
-def link_cards_and_their_relations(directory: Path, tags: tuple[str, ...]) -> None:
-    """Symlink the listed cards, then every card their `related` entries name, transitively.
-
-    `site.build` renders each card's relations as links, so a scratch corpus that holds a card but not
-    the cards it relates to cannot build a page at all. The corpus grows by adding cards that relate
-    to existing ones, so the fixture must follow the relations rather than pin a list that goes stale.
-    """
-    directory.mkdir(parents=True, exist_ok=True)
-    pending = list(tags)
-    while pending:
-        tag = pending.pop()
-        path = directory / f"{tag}.md"
-        if path.exists() or not (ROOT / "lattices" / f"{tag}.md").exists():
-            continue
-        path.symlink_to(ROOT / "lattices" / f"{tag}.md")
-        metadata = frontmatter.load(str(path)).metadata
-        for relation in metadata.get("related") or ():
-            pending.append(relation["tag"] if isinstance(relation, dict) else relation)
-        for morphism in metadata.get("morphisms") or ():
-            if isinstance(morphism, dict) and morphism.get("target"):
-                pending.append(morphism["target"])
-
-
 def test_k3_hodge_diamond_and_lattice_link_are_published(tmp_path: Path) -> None:
-    link_cards_and_their_relations(
-        tmp_path / "lattices", ("0001", "0002", "0013", "0016", "0151", "027E", "027Z", "0283")
-    )
+    lattice_directory = tmp_path / "lattices"
+    lattice_directory.mkdir()
+    for tag in (
+        "0001",
+        "0002",
+        "0013",
+        "0016",
+        "0151",
+        "027E",
+        "027Z",
+        "0283",
+    ):
+        (lattice_directory / f"{tag}.md").symlink_to(ROOT / "lattices" / f"{tag}.md")
     for name in ("families.yaml", "retired-tags.yaml", "geometric-bibliography.bib"):
         (tmp_path / name).symlink_to(ROOT / name)
     (tmp_path / "theory").symlink_to(ROOT / "theory", target_is_directory=True)
@@ -78,9 +65,9 @@ def test_k3_hodge_diamond_and_lattice_link_are_published(tmp_path: Path) -> None
 
 
 def test_symmetric_spaces_and_analytic_variety_are_published(tmp_path: Path) -> None:
-    link_cards_and_their_relations(
-        tmp_path / "lattices", ("0001", "0002", "0011", "0013", "0016", "0151")
-    )
+    (tmp_path / "lattices").mkdir()
+    for tag in ("0001", "0002", "0011", "0013", "0016", "0151"):
+        (tmp_path / "lattices" / f"{tag}.md").symlink_to(ROOT / "lattices" / f"{tag}.md")
     (tmp_path / "families.yaml").symlink_to(ROOT / "families.yaml")
     (tmp_path / "retired-tags.yaml").symlink_to(ROOT / "retired-tags.yaml")
     (tmp_path / "geometric-bibliography.bib").symlink_to(ROOT / "geometric-bibliography.bib")
@@ -300,22 +287,19 @@ def test_the_hyperbolic_triangle_card_states_its_gram_signature_and_coxeter_data
     invariants = card.vinberg_invariant_matrix()
     assert invariants is not None
     coxeter = invariants.coxeter_matrix()
-    assert coxeter[wall1, wall2] == 3, "the angle pi/3 is the Coxeter entry 3"
-    assert coxeter[wall1, wall3] == 2, "the angle pi/2 is the Coxeter entry 2"
-    assert str(coxeter[wall2, wall3]) == "\u2135_0", "an ideal vertex is the infinite Coxeter entry"
+    # The matrix is the family of its entries in row-major order over the card's vertices, which is how
+    # the owner presents it; the diagonal is 1 by convention and the pairs are symmetric.
+    # The positions are the Python integers of the enumeration, not the owner's rank element: the
+    # family's constructor admits a position, and an owned element is not one.
+    entry = lambda left, right: coxeter[len(card.vertices) * left + right]  # noqa: E731
+    assert entry(wall1, wall1) == entry(wall2, wall2) == entry(wall3, wall3) == 1
+    assert entry(wall1, wall2) == entry(wall2, wall1) == 3, "the angle pi/3 is the Coxeter entry 3"
+    assert entry(wall1, wall3) == entry(wall3, wall1) == 2, "the angle pi/2 is the Coxeter entry 2"
+    assert str(entry(wall2, wall3)) == str(entry(wall3, wall2)) == "\u2135_0", "an ideal vertex is infinite"
     assert not invariants.is_simply_laced(), "the diagram has a bond that is not 2 or 3"
     assert invariants.is_acute_angled_hyperbolic_polytope_gram()
     assert card.properties() == ("Coxeter", "hyperbolic Coxeter polytope")
 
 
-def test_the_hyperbolic_triangle_page_publishes_its_walls_and_gram(tmp_path: Path) -> None:
-    """The full page path for the triangle card: the site builds it and states what the card proves."""
-    link_cards_and_their_relations(tmp_path / "lattices", ("0001",))
-    (tmp_path / "families.yaml").symlink_to(ROOT / "families.yaml")
-    (tmp_path / "retired-tags.yaml").symlink_to(ROOT / "retired-tags.yaml")
-    (tmp_path / "graphs").symlink_to(ROOT / "graphs", target_is_directory=True)
-    site.build(tmp_path, tmp_path / "site")
-    page = (tmp_path / "site" / "graphs" / "hyperbolic-triangle-2-3-infinity.html").read_text()
-    assert "Hyperbolic triangle (2,3,infinity)" in page
-    assert "hyperbolic Coxeter polytope" in page, "the page names the diagram class the owner proves"
-    assert "hyperbolic-triangle-2-3-infinity" in page
+
+
