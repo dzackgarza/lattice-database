@@ -25,6 +25,7 @@ snapshot's own cards and certificate shards. This script checks presence, not pa
 """
 from __future__ import annotations
 
+import json
 import subprocess
 import sys
 from pathlib import Path
@@ -40,6 +41,8 @@ from recovery_comparison import MISSING, at, changed_leaves, same  # noqa: E402
 ROOT = Path(__file__).resolve().parent.parent
 BASE = "dde534ecd9d7c61af3800d20eb1635bc7541f38a"
 SUPERSESSIONS = ROOT / "results" / "evidence-20-supersessions.yaml"
+STATE = ROOT / ".scratch" / "completeness-state.json"
+"""Where each shard's verdicts are recorded, so a run that ends early resumes per shard."""
 SNAPSHOTS = [
     ("0", "794f18ea486199716478eba933de2af99e59a13d"), ("1", "402ec19330a9cdf29a430dc803f3588435902d3f"),
     ("2", "ca31ca0cfdde4e974fee2914571a8950cb40e213"), ("3", "ca10b320c1127eb1f58c2663a423db60071b99da"),
@@ -88,94 +91,149 @@ def mapping(document: str | None) -> dict:
     return (yaml.load(document, Loader=yaml.CSafeLoader) or {}) if document else {}
 
 
-def main() -> int:
+def main(argv: list[str]) -> int:
+    """One shard per process by default: the texts of a revision are not kept beyond it.
+
+    A process that walked all sixteen shards kept every revision's card and map text in `CACHE`, and
+    that process was killed (status 137) after fourteen shards. Bounding the work by shard bounds the
+    memory, and a shard's result is written to the state file before the next begins, so a run that
+    ends early resumes instead of starting again.
+    """
     from latticedb import failures
 
+    only = None
+    report_only = False
+    for argument in argv:
+        if argument == "--report":
+            report_only = True
+        elif argument.startswith("--state="):
+            global STATE
+            STATE = Path(argument.split("=", 1)[1])
+        else:
+            only = argument
     reviewed = mapping(SUPERSESSIONS.read_text()) if SUPERSESSIONS.exists() else {}
-    present = superseded = 0
-    absent: list[str] = []
-    unreviewed: list[str] = []
-    differing: list[str] = []
+    state: dict = json.loads(STATE.read_text()) if STATE.exists() else {}
+    if report_only:
+        return report(state)
     held = failures.load(ROOT)
     for shard, snapshot in SNAPSHOTS:
-        paths = subprocess.run(["git", "-C", str(ROOT), "diff", "--name-only", BASE, snapshot],
-                               capture_output=True, text=True, check=True).stdout.split()
-        fetch(snapshot, paths)
-        fetch(BASE, paths)
-        cards = [path for path in paths if path.startswith("lattices/") and path.endswith(".md")]
-        maps = [path for path in paths if path.startswith("certificates/") or path == "exceeded.yaml"]
-        shard_present = shard_superseded = 0
-        for path in cards:
-            after, before = text(snapshot, path), text(BASE, path)
-            if after is None:
-                continue
-            current_path = ROOT / path
-            if not current_path.exists():
-                absent.append(f"{path}: the card the run certified is gone")
-                continue
-            current = front_matter(current_path.read_text())
-            for field, wanted in changed_leaves(front_matter(before) if before else {}, front_matter(after)).items():
-                got = at(current, field)
-                key = f"{path}: {field}"
-                if got is MISSING:
-                    absent.append(key)
-                elif same(got, wanted):
-                    present += 1
-                    shard_present += 1
-                else:
-                    differing.append(f"{key} -- run: {str(wanted)[:70]!r} / main: {str(got)[:70]!r}")
-                    if key in reviewed:
-                        superseded += 1
-                        shard_superseded += 1
-                    else:
-                        unreviewed.append(key)
-        for path in maps:
-            after, before = mapping(text(snapshot, path)), mapping(text(BASE, path))
-            current = mapping((ROOT / path).read_text()) if (ROOT / path).exists() else {}
-            for name, wanted in changed_leaves(before, after).items():
-                got = at(current, name)
-                key = f"{path}: {name}"
-                if got is MISSING:
-                    absent.append(key)
-                elif same(got, wanted):
-                    present += 1
-                    shard_present += 1
-                else:
-                    differing.append(f"{key} -- run: {str(wanted)[:70]!r} / main: {str(got)[:70]!r}")
-                    if key in reviewed:
-                        superseded += 1
-                        shard_superseded += 1
-                    else:
-                        unreviewed.append(key)
-        run_entries = TypeAdapter(failures.Failures).validate_python(mapping(text(snapshot, "failures.yaml")))
-        base_entries = TypeAdapter(failures.Failures).validate_python(mapping(text(BASE, "failures.yaml")))
-        for name, wanted in run_entries.items():
-            if base_entries.get(name) == wanted:
-                continue
-            key = f"failures: {name}"
-            got = held.get(name)
-            if got is None:
-                absent.append(key)
-            elif got == wanted:
-                present += 1
-            else:
-                differing.append(f"{key} -- run: {wanted.disposition} / main: {got.disposition}")
-                if key in reviewed:
-                    superseded += 1
-                else:
-                    unreviewed.append(key)
-        print(f"shard {shard:>2}: {len(cards)} cards, {len(maps)} map files, "
-              f"{shard_present} present, {shard_superseded} superseded", flush=True)
+        if only is not None and shard != only:
+            continue
+        if only is None and shard in state:
+            done = state[shard]
+            print(f"shard {shard:>2}: {done['cards']} cards, {done['maps']} map files, "
+                  f"{done['present']} present, {done['superseded']} superseded (recorded)", flush=True)
+            continue
+        result = one_shard(shard, snapshot, reviewed, held)
+        state[shard] = result
+        STATE.parent.mkdir(parents=True, exist_ok=True)
+        STATE.write_text(json.dumps(state, indent=1, sort_keys=True))
+        print(f"shard {shard:>2}: {result['cards']} cards, {result['maps']} map files, "
+              f"{result['present']} present, {result['superseded']} superseded", flush=True)
+    if only is not None:
+        return 0
+    return report(state)
+
+
+def report(state: dict) -> int:
+    """The run's totals and every path that is not present, from the recorded shard results."""
+    present = superseded = 0
+    absent: list[str] = []
+    differing: list[str] = []
+    unreviewed: list[str] = []
+    for shard, _ in SNAPSHOTS:
+        result = state.get(shard)
+        if result is None:
+            absent.append(f"shard {shard}: never checked")
+            continue
+        present += result["present"]
+        superseded += result["superseded"]
+        absent.extend(result["absent"])
+        differing.extend(result["differing"])
+        unreviewed.extend(result["unreviewed"])
     for problem in absent:
         print("ABSENT:", problem)
     for problem in differing:
         print("DIFFERENT:", problem)
     for problem in unreviewed:
         print("UNREVIEWED:", problem)
-    print(f"\n{present} changed paths present exactly, {superseded} reviewed supersessions, "
+    print(f"{present} changed paths present exactly, {superseded} reviewed supersessions, "
           f"{len(differing)} differing ({len(unreviewed)} unreviewed), {len(absent)} absent")
     return 1 if absent or unreviewed else 0
 
 
+def one_shard(shard: str, snapshot: str, reviewed: dict, held: dict) -> dict:
+    """Every changed path of one snapshot, with the verdict for each."""
+    result = {"cards": 0, "maps": 0, "present": 0, "superseded": 0,
+              "absent": [], "differing": [], "unreviewed": []}
+    paths = subprocess.run(["git", "-C", str(ROOT), "diff", "--name-only", BASE, snapshot],
+                           capture_output=True, text=True, check=True).stdout.split()
+    fetch(snapshot, paths)
+    fetch(BASE, paths)
+    cards = [path for path in paths if path.startswith("lattices/") and path.endswith(".md")]
+    maps = [path for path in paths if path.startswith("certificates/") or path == "exceeded.yaml"]
+    result["cards"], result["maps"] = len(cards), len(maps)
+    for path in cards:
+        after, before = text(snapshot, path), text(BASE, path)
+        if after is None:
+            continue
+        current_path = ROOT / path
+        if not current_path.exists():
+            result["absent"].append(f"{path}: the card the run certified is gone")
+            continue
+        current = front_matter(current_path.read_text())
+        for field, wanted in changed_leaves(front_matter(before) if before else {}, front_matter(after)).items():
+            got = at(current, field)
+            key = f"{path}: {field}"
+            if got is MISSING:
+                result["absent"].append(key)
+            elif same(got, wanted):
+                result["present"] += 1
+            else:
+                result["differing"].append(f"{key} -- run: {str(wanted)[:70]!r} / main: {str(got)[:70]!r}")
+                if key in reviewed:
+                    result["superseded"] += 1
+                else:
+                    result["unreviewed"].append(key)
+    for path in maps:
+        after, before = mapping(text(snapshot, path)), mapping(text(BASE, path))
+        current = mapping((ROOT / path).read_text()) if (ROOT / path).exists() else {}
+        for name, wanted in changed_leaves(before, after).items():
+            got = at(current, name)
+            key = f"{path}: {name}"
+            if got is MISSING:
+                result["absent"].append(key)
+            elif same(got, wanted):
+                result["present"] += 1
+            else:
+                result["differing"].append(f"{key} -- run: {str(wanted)[:70]!r} / main: {str(got)[:70]!r}")
+                if key in reviewed:
+                    result["superseded"] += 1
+                else:
+                    result["unreviewed"].append(key)
+    from pydantic import TypeAdapter
+
+    from latticedb import failures
+
+    run_entries = TypeAdapter(failures.Failures).validate_python(mapping(text(snapshot, "failures.yaml")))
+    base_entries = TypeAdapter(failures.Failures).validate_python(mapping(text(BASE, "failures.yaml")))
+    for name, entry in run_entries.items():
+        if base_entries.get(name) == entry:
+            continue
+        key = f"failures: {name}"
+        current = held.get(name)
+        if current is None:
+            result["absent"].append(key)
+        elif current == entry:
+            result["present"] += 1
+        else:
+            result["differing"].append(f"{key} -- run: {entry.disposition} / main: {current.disposition}")
+            if key in reviewed:
+                result["superseded"] += 1
+            else:
+                result["unreviewed"].append(key)
+    return result
+
+
 if __name__ == "__main__":
-    raise SystemExit(main())
+    raise SystemExit(main(sys.argv[1:]))
