@@ -1,25 +1,19 @@
 name: Certification regression tests
-'on':
+on:
   push:
     branches:
     - main
     paths: &id001
-    - src/latticedb/genus.py
-    - src/latticedb/failures.py
-    - src/latticedb/exceeded.py
-    - src/latticedb/certificates.py
-    - src/latticedb/cli.py
-    - tests/test_genus.py
-    - tests/test_failures.py
-    - tests/test_persist.py
-    - .github/scripts/persist.sh
-    - .github/workflows/certify.yml
-    - .github/workflows/certification-tests.yml
+    - src/**
+    - tests/**
+    - .github/actions/**
+    - .github/scripts/**
+    - .github/workflows/**
     - .gitattributes
     - justfile
   pull_request:
     paths: *id001
-  workflow_dispatch: null
+  workflow_dispatch:
 permissions:
   contents: read
 jobs:
@@ -37,10 +31,13 @@ jobs:
         path: _ci-support/ai-review-ci
     - name: Provision the shared Sage environment
       uses: ./.github/actions/sage
-    - name: Exercise failure quarantine, successful retry and concurrent persistence
+    - name: Exercise failure quarantine, successful retry and concurrent 
+        persistence
       run: "docker exec -i --workdir \"$GITHUB_WORKSPACE\" \\\n  --env \"PYTHONPATH=$GITHUB_WORKSPACE/_ci-support/ai-review-ci/tool-artifacts/pytest_plugins:$GITHUB_WORKSPACE/research/src:$GITHUB_WORKSPACE/src\"\
-        \ \\\n  sage-env /sage/.venv/bin/python -c 'import sage.all, sys, pytest; sys.exit(pytest.main(sys.argv[1:]))' \\\n  -p qc_sage_session -p qc_unique_inventory \\\n  tests/test_genus.py tests/test_failures.py\
-        \ tests/test_persist.py -q\n"
+        \ \\\n  sage-env /sage/.venv/bin/python -c 'import sage.all, sys, pytest;
+        sys.exit(pytest.main(sys.argv[1:]))' \\\n  -p qc_sage_session -p qc_unique_inventory
+        \\\n  tests/test_genus.py tests/test_failures.py tests/test_persist.py tests/test_corpus.py
+        -q\n"
     - name: Stop the Sage environment
       if: always()
       run: docker rm --force sage-env
