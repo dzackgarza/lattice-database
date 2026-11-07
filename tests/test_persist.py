@@ -37,7 +37,7 @@ def shard(origin: Path, path: Path) -> Path:
     git(path.parent, "clone", "-q", str(origin), path.name)
     git(path, "config", "user.name", "test")
     git(path, "config", "user.email", "test@example.invalid")
-    git(path, "config", "merge.keyed-map.driver", f"{sys.executable} -m latticedb merge-keyed-map %O %A %B")
+    git(path, "config", "merge.keyed-map.driver", f"{sys.executable} -m latticedb.keyed_merge %O %A %B")
     return path
 
 
@@ -96,9 +96,10 @@ def test_shards_push_progress_repeatedly_without_touching_their_worktrees(tmp_pa
     assert yaml.safe_load((main / "exceeded.yaml").read_text()) == {"0002 genus": {"hash": "h", "seconds": 60}}
     assert set(failures.load(main)) == {"0001 integral.genus_symbol", "0002 integral.genus_symbol"}
     # Certification's worktree and index stay as it left them.
+    # A snapshot pushed by `persist` is integrated in git without altering this source worktree, so
+    # the merged ledger is no longer an outstanding local change. Only the computation completed after
+    # the last snapshot remains uncommitted in it.
     assert git(first, "status", "--porcelain", "--untracked-files=no").split() == [
         "M",
-        f"failures/{failures.group('0001 integral.genus_symbol')}.yaml",
-        "M",
         "lattices/0001.md",
-    ]
+    ], "exactly the new not-yet-pushed computation differs in the worktree"
