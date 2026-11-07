@@ -22,6 +22,7 @@ from __future__ import annotations
 import shutil
 import subprocess
 import sys
+import tempfile
 from pathlib import Path
 
 import yaml
@@ -35,18 +36,16 @@ def checkout_state() -> tuple[Path, Path]:
         a for a in artifacts.iterdir()
         if a.is_dir() and "+0066 derive:" in (a / "certification.patch").read_text()
     )
-    work = ROOT / "attachments/verify-application-recovery"
-    work.mkdir(exist_ok=True)
+    work = Path(tempfile.mkdtemp(prefix="recovery-check-", dir=ROOT / "attachments"))
     (work / ".git").write_text(f"gitdir: {ROOT / '.git'}\n")
-    for directory in ("lattices", "certificates", "failures"):
-        (work / directory).mkdir(exist_ok=True)
+    for directory in ("lattices", "certificates", "failures", "artifacts"):
+        (work / directory).mkdir(parents=True, exist_ok=True)
     from latticedb import certificates
     shard = certificates.group("0066")
     for path in (f"lattices/0066.md", f"certificates/{shard}.yaml", f"failures/{shard}.yaml"):
         shutil.copyfile(ROOT / path, work / path)
-    if (work / "artifacts" / artifact.name).exists():
-        shutil.rmtree(work / "artifacts" / artifact.name)
-    (work / "artifacts").mkdir(exist_ok=True)
+    # A separate directory for every invocation: deleting any earlier artifact run would hide
+    # precisely the evidence this test is protecting.
     artifact_target = work / "artifacts" / artifact.name
     shutil.copytree(artifact, artifact_target)
     return work, artifact_target
@@ -99,7 +98,15 @@ def main() -> None:
     shard.write_text(original_text)
     assert result.returncode != 0, "an original attempt was deleted and the recovery was accepted"
     assert name in result.stdout + result.stderr, "the missing failure entry must be identified"
-    assert deleted_hash in result.stdout + result.stderr, f"the missing attempt hash must be identified: {deleted_hash}"
+    # The verifier names the missing original attempt by prefix; no baseline success or a differently caused
+    # failure is accepted as evidence of the intentional detection.
+    assert "original failure attempt" in result.stdout, (
+        "must identify a missing attempt, not some other failure or a successful recovery"
+    )
+    marker = deleted_hash[:16]
+    assert marker in result.stdout + result.stderr, (
+        f"the missing hash prefix must be reported as part of the original attempt: {marker}"
+    )
 
     card = work / "lattices" / "0066.md"
     original_text = card.read_text()

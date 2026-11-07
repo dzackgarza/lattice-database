@@ -14,9 +14,10 @@ def test_recovery_with_a_retained_attempt_and_then_a_deletion_fails() -> None:
         # Supported acceptance requires the retained run's data and the owner runtime.
         import pytest
         pytest.skip("the retained run artifacts must be attached")
+    root = Path(__file__).resolve().parent.parent
+    verifier = root / "results" / "verify-recovered-values.py"
     subprocess.run(
-        [sys.executable, "results/regression-recovery-defects.py",
-         *sys.argv[1:]],
+        [sys.executable, str(root / "results" / "regression-recovery-defects.py"), str(verifier)],
         check=True,
-        cwd=Path(__file__).resolve().parent.parent,
+        cwd=root,
     )
