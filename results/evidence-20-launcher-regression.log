@@ -1,0 +1,6 @@
+case normal: launcher rc=0 (want 0), PYEXIT=0, results=2  [two results and the summary: the only case that may pass]
+case incomplete: launcher rc=1 (want 1), PYEXIT=0, results=2  [two results, no summary: a clean exit must still fail]
+case short: launcher rc=1 (want 1), PYEXIT=0, results=1  [one result of two: a clean exit must still fail]
+case raise: launcher rc=1 (want 1), PYEXIT=1, results=2  [a nonzero guest status must fail]
+case segv: launcher rc=1 (want 1), PYEXIT=139, results=2  [a signal death the wrapper reports as 0 must fail]
+REGRESSION PASS
