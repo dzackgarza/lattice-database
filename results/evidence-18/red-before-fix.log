@@ -1,0 +1,124 @@
+FFF                                                                      [100%]
+=================================== FAILURES ===================================
+__________ test_the_original_a2_su21_satake_page_constructs_its_form ___________
+tests/test_rational_forms.py:25: in test_the_original_a2_su21_satake_page_constructs_its_form
+    form = WeightedGraph.model_validate(graph)._gram_form()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src/latticedb/graphs.py:171: in _gram_form
+    return FormModules(ZZ)(module.bilinear_hom_space(_QQ_AS_ZZ_MODULE)(gram))
+                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/repos/sage-extensions/src/sage_extensions/categories/modules/module_morphisms/module_morphisms.py:3170: in __call__
+    return CategoricalMor.__call__(self, images)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/repos/sage-extensions/src/sage_extensions/categories/abstract_categories/mor_categories.py:996: in __call__
+    return OwnedMor.__call__(self, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/repos/sage-extensions/src/sage_extensions/categories/abstract_categories/mor_foundation.py:61: in __call__
+    return self._element_constructor_(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/repos/sage-extensions/src/sage_extensions/categories/modules/module_morphisms/module_morphisms.py:4124: in _element_constructor_
+    coordinates = defining_tensor if defining_tensor is not None else tuple(
+                                                                      ^^^^^
+/repos/sage-extensions/src/sage_extensions/categories/modules/module_morphisms/module_morphisms.py:4125: in <genexpr>
+    tuple(self.codomain()(entry) for entry in row) for row in images
+    ^^^^^
+/repos/sage-extensions/src/sage_extensions/categories/modules/module_morphisms/module_morphisms.py:4125: in <genexpr>
+    tuple(self.codomain()(entry) for entry in row) for row in images
+          ^^^^^^^^^^^^^^^^^^^^^^
+/repos/sage-extensions/src/sage_extensions/categories/abstract_categories/objects.py:417: in __call__
+    return self._element_constructor_(*arguments, **options)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/repos/sage-extensions/src/sage_extensions/categories/modules/pure/modules.py:5155: in _element_constructor_
+    return self.wrap(self.module_over_extension()(value))
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/repos/sage-extensions/src/sage_extensions/categories/modules/framed/framed_free_modules.py:329: in __call__
+    return self._element_constructor_(value)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/repos/sage-extensions/src/sage_extensions/categories/modules/framed/framed_free_modules.py:394: in _element_constructor_
+    raise TypeError(f"{value!r} does not describe an element of {self}")
+E   TypeError: Fraction(2, 1) does not describe an element of Free module on {[0]} over Fraction Field of Integer Ring
+_________ test_relational_admission_keeps_a_rational_card_gram_tensor __________
+tests/test_rational_forms.py:56: in test_relational_admission_keeps_a_rational_card_gram_tensor
+    assert records.relational_admission_problems(card, {card.tag: card}) == []
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src/latticedb/records.py:560: in relational_admission_problems
+    target = FormModules(ZZ)(integer_ring.free_module(lattice.rank).bilinear_hom_space(_QQ_AS_ZZ_MODULE)(lattice.gram_tensor))
+                             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/repos/sage-extensions/src/sage_extensions/categories/modules/module_morphisms/module_morphisms.py:3170: in __call__
+    return CategoricalMor.__call__(self, images)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/repos/sage-extensions/src/sage_extensions/categories/abstract_categories/mor_categories.py:996: in __call__
+    return OwnedMor.__call__(self, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/repos/sage-extensions/src/sage_extensions/categories/abstract_categories/mor_foundation.py:61: in __call__
+    return self._element_constructor_(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/repos/sage-extensions/src/sage_extensions/categories/modules/module_morphisms/module_morphisms.py:4124: in _element_constructor_
+    coordinates = defining_tensor if defining_tensor is not None else tuple(
+                                                                      ^^^^^
+/repos/sage-extensions/src/sage_extensions/categories/modules/module_morphisms/module_morphisms.py:4125: in <genexpr>
+    tuple(self.codomain()(entry) for entry in row) for row in images
+    ^^^^^
+/repos/sage-extensions/src/sage_extensions/categories/modules/module_morphisms/module_morphisms.py:4125: in <genexpr>
+    tuple(self.codomain()(entry) for entry in row) for row in images
+          ^^^^^^^^^^^^^^^^^^^^^^
+/repos/sage-extensions/src/sage_extensions/categories/abstract_categories/objects.py:417: in __call__
+    return self._element_constructor_(*arguments, **options)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/repos/sage-extensions/src/sage_extensions/categories/modules/pure/modules.py:5155: in _element_constructor_
+    return self.wrap(self.module_over_extension()(value))
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/repos/sage-extensions/src/sage_extensions/categories/modules/framed/framed_free_modules.py:329: in __call__
+    return self._element_constructor_(value)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/repos/sage-extensions/src/sage_extensions/categories/modules/framed/framed_free_modules.py:394: in _element_constructor_
+    raise TypeError(f"{value!r} does not describe an element of {self}")
+E   TypeError: Fraction(1, 2) does not describe an element of Free module on {[0]} over Fraction Field of Integer Ring
+____________ test_identity_is_a_valid_morphism_for_a_rational_card _____________
+tests/test_rational_forms.py:68: in test_identity_is_a_valid_morphism_for_a_rational_card
+    assert records.morphism_problems(morphism, card, card) == []
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src/latticedb/records.py:596: in morphism_problems
+    source_formed = FormModules(ZZ)(integer_ring.free_module(source.rank).bilinear_hom_space(_QQ_AS_ZZ_MODULE)(source.gram_tensor)).twist(morphism.scale)
+                                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/repos/sage-extensions/src/sage_extensions/categories/modules/module_morphisms/module_morphisms.py:3170: in __call__
+    return CategoricalMor.__call__(self, images)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/repos/sage-extensions/src/sage_extensions/categories/abstract_categories/mor_categories.py:996: in __call__
+    return OwnedMor.__call__(self, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/repos/sage-extensions/src/sage_extensions/categories/abstract_categories/mor_foundation.py:61: in __call__
+    return self._element_constructor_(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/repos/sage-extensions/src/sage_extensions/categories/modules/module_morphisms/module_morphisms.py:4124: in _element_constructor_
+    coordinates = defining_tensor if defining_tensor is not None else tuple(
+                                                                      ^^^^^
+/repos/sage-extensions/src/sage_extensions/categories/modules/module_morphisms/module_morphisms.py:4125: in <genexpr>
+    tuple(self.codomain()(entry) for entry in row) for row in images
+    ^^^^^
+/repos/sage-extensions/src/sage_extensions/categories/modules/module_morphisms/module_morphisms.py:4125: in <genexpr>
+    tuple(self.codomain()(entry) for entry in row) for row in images
+          ^^^^^^^^^^^^^^^^^^^^^^
+/repos/sage-extensions/src/sage_extensions/categories/abstract_categories/objects.py:417: in __call__
+    return self._element_constructor_(*arguments, **options)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/repos/sage-extensions/src/sage_extensions/categories/modules/pure/modules.py:5155: in _element_constructor_
+    return self.wrap(self.module_over_extension()(value))
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/repos/sage-extensions/src/sage_extensions/categories/modules/framed/framed_free_modules.py:329: in __call__
+    return self._element_constructor_(value)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/repos/sage-extensions/src/sage_extensions/categories/modules/framed/framed_free_modules.py:394: in _element_constructor_
+    raise TypeError(f"{value!r} does not describe an element of {self}")
+E   TypeError: Fraction(1, 2) does not describe an element of Free module on {[0]} over Fraction Field of Integer Ring
+=============================== warnings summary ===============================
+tests/test_rational_forms.py:37
+  /repo/tests/test_rational_forms.py:37: SyntaxWarning: "\l" is an invalid escape sequence. Such sequences will not work in the future. Did you mean "\\l"? A raw string is also an option.
+    "latex": "\langle 1/2 \rangle",
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+=========================== short test summary info ============================
+FAILED tests/test_rational_forms.py::test_the_original_a2_su21_satake_page_constructs_its_form
+FAILED tests/test_rational_forms.py::test_relational_admission_keeps_a_rational_card_gram_tensor
+FAILED tests/test_rational_forms.py::test_identity_is_a_valid_morphism_for_a_rational_card
+3 failed, 1 warning in 2.19s

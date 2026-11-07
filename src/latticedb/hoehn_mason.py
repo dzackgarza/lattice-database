@@ -34,6 +34,7 @@ from pydantic import BaseModel, ConfigDict, TypeAdapter
 from latticedb import corpus, hashimoto
 from latticedb.corpus import Matrix
 from latticedb.model import GramTensor, Lattice, Tag, rational
+from latticedb.records import rational_gram
 
 _SESSION_RINGS = session_ring_objects()
 _integers = _SESSION_RINGS["ZZ"]
@@ -107,7 +108,7 @@ def _formed(gram: GramTensor | None) -> FormModules.ParentMethods:
     if gram is None:
         raise ValueError("a Gram tensor must be stated before constructing the source module")
     module = integer_ring.free_module(len(gram))
-    return _formed_module(FormModules(ZZ)(module.bilinear_hom_space(_QQ_AS_ZZ_MODULE)(gram)))
+    return _formed_module(FormModules(ZZ)(module.bilinear_hom_space(_QQ_AS_ZZ_MODULE)(rational_gram(gram))))
 
 
 def _rows(target: Modules.ParentMethods, rows: Matrix) -> CategoricalMor.ElementMethods:

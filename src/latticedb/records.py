@@ -60,6 +60,19 @@ def _fraction_of(value: _OwnedRingElement) -> Fraction:
     return Fraction(int(value.numerator()), int(value.denominator()))
 
 
+def rational_gram(gram: GramTensor):
+    """Each stored rational entry as a member of the declared restricted regular module.
+
+    This is the value-object construction already present in `derive` before this change. An entry of
+    the restricted module is not a bare Sage `Fraction`; its constructor takes the appropriate value
+    element from the owned regular value object, not a coercion from an arbitrary scalar.
+    """
+    return tuple(
+        tuple(_QQ_AS_ZZ_MODULE.wrap(QQ(entry.numerator) / QQ(entry.denominator)) for entry in row)
+        for row in gram
+    )
+
+
 def _formed_norm_fraction(formed: FormModules.ParentMethods, element: tuple[int, ...]) -> Fraction:
     """Read a formed norm through its value-module and regular-module identifications."""
     norm = _value_from_module_element(formed, formed(element).q())
@@ -301,14 +314,7 @@ def derive(record: dict[str, Yaml]) -> dict[str, Yaml]:
     gram = gram_tensor(record["gram_tensor"])
     rank = len(gram)
     module = integer_ring.free_module(rank)
-    rational_gram = tuple(
-        tuple(
-            _QQ_AS_ZZ_MODULE.wrap(QQ(entry.numerator) / QQ(entry.denominator))
-            for entry in row
-        )
-        for row in gram
-    )
-    formed = FormModules(ZZ)(module.bilinear_hom_space(_QQ_AS_ZZ_MODULE)(rational_gram))
+    formed = FormModules(ZZ)(module.bilinear_hom_space(_QQ_AS_ZZ_MODULE)(rational_gram(gram)))
     # Inertia uses ordered scalar values on the rational extension; the original
     # ZZ-module retains the integral coordinates used by root and span operations.
     rational_lattice = Lattices(QQ)(gram)
@@ -557,7 +563,7 @@ def relational_admission_problems(lattice: Lattice, written: Mapping[str, Lattic
         missing = [summand.tag for summand in span.summands if summand.tag not in written]
         found.extend(f"root_span.summands: the tag {tag} is not in the corpus" for tag in missing)
         if not missing and span.summands:
-            target = FormModules(ZZ)(integer_ring.free_module(lattice.rank).bilinear_hom_space(_QQ_AS_ZZ_MODULE)(lattice.gram_tensor))
+            target = FormModules(ZZ)(integer_ring.free_module(lattice.rank).bilinear_hom_space(_QQ_AS_ZZ_MODULE)(rational_gram(lattice.gram_tensor)))
             offset = 0
             blocks = []
             valid = True
@@ -569,7 +575,7 @@ def relational_admission_problems(lattice: Lattice, written: Mapping[str, Lattic
                 if offset + source_record.rank > len(span.embedding):
                     valid = False
                     break
-                source = FormModules(ZZ)(integer_ring.free_module(source_record.rank).bilinear_hom_space(_QQ_AS_ZZ_MODULE)(source_record.gram_tensor)).twist(summand.scale)
+                source = FormModules(ZZ)(integer_ring.free_module(source_record.rank).bilinear_hom_space(_QQ_AS_ZZ_MODULE)(rational_gram(source_record.gram_tensor))).twist(summand.scale)
                 rows = span.embedding[offset : offset + source_record.rank]
                 images = tuple(target(row) for row in rows)
                 offset += source_record.rank
@@ -593,8 +599,8 @@ def morphism_problems(morphism: Morphism, source: Lattice, target: Lattice) -> l
         return [f"{morphism.name}: the matrix must have {target.rank} rows and {source.rank} columns"]
     if morphism.scale is None:
         raise ValueError("morphism scale must be stated before verifying the morphism")
-    source_formed = FormModules(ZZ)(integer_ring.free_module(source.rank).bilinear_hom_space(_QQ_AS_ZZ_MODULE)(source.gram_tensor)).twist(morphism.scale)
-    target_formed = FormModules(ZZ)(integer_ring.free_module(target.rank).bilinear_hom_space(_QQ_AS_ZZ_MODULE)(target.gram_tensor))
+    source_formed = FormModules(ZZ)(integer_ring.free_module(source.rank).bilinear_hom_space(_QQ_AS_ZZ_MODULE)(rational_gram(source.gram_tensor))).twist(morphism.scale)
+    target_formed = FormModules(ZZ)(integer_ring.free_module(target.rank).bilinear_hom_space(_QQ_AS_ZZ_MODULE)(rational_gram(target.gram_tensor)))
     found: list[str] = []
     if not _preserves_forms(
         source_formed,

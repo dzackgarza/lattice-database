@@ -1,0 +1,21 @@
+Traceback (most recent call last):
+  File "<stdin>", line 7, in <module>
+  File "/repo/src/latticedb/graphs.py", line 251, in properties
+    hyperbolic = self._presents_mirrors() and invariants.is_acute_angled_hyperbolic_polytope_gram()
+                                              ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "/repos/sage-extensions/src/sage_extensions/categories/vinberg_invariants.py", line 343, in is_acute_angled_hyperbolic_polytope_gram
+    if any(gram[i, i] <= 0 for i in positions):
+       ^^^
+  File "/repos/sage-extensions/src/sage_extensions/categories/vinberg_invariants.py", line 343, in <genexpr>
+    if any(gram[i, i] <= 0 for i in positions):
+           ^^^^^^^^^^^^^^^
+  File "sage/structure/element.pyx", line 1101, in sage.structure.element.Element.__richcmp__
+    return coercion_model.richcmp(self, other, op)
+  File "sage/structure/coerce.pyx", line 2045, in sage.structure.coerce.CoercionModel.richcmp
+    return PyObject_RichCompare(x, y, op)
+TypeError: '<=' not supported between instances of 'OwnedJoinCategory.element_class' and 'OwnedJoinCategory.element_class'
+a2-su21-satake PROPERTIES ('Coxeter', 'Dynkin', 'simply laced', 'Satake')
+b2-root-diagram PROPERTIES ('Coxeter', 'Dynkin')
+c2-root-diagram PROPERTIES ('Coxeter', 'Dynkin')
+hyperbolic-triangle-2-3-infinity FAILED TypeError '<=' not supported between instances of 'OwnedJoinCategory.element_class' and 'OwnedJoinCategory.element_class'
+nodes 3 mirror decorations [{'norm_squared': 1}, {'norm_squared': 1}, {'norm_squared': 1}] edges [{'gram': '-1/2', 'order': 3}, {'gram': '-1', 'order': 'infinity'}]

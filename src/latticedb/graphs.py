@@ -38,6 +38,7 @@ from pydantic import Field, TypeAdapter, ValidationError, model_validator
 from pydantic_core import PydanticCustomError
 
 from latticedb.model import GramTensor, Record, Slug, Yaml, rational
+from latticedb.records import rational_gram
 
 _CARTAN_PAIR = TypeAdapter(tuple[int, int])
 
@@ -168,7 +169,7 @@ class WeightedGraph(Record):
             case _:
                 return None
         module = integer_ring.free_module(len(gram))
-        return FormModules(ZZ)(module.bilinear_hom_space(_QQ_AS_ZZ_MODULE)(gram))
+        return FormModules(ZZ)(module.bilinear_hom_space(_QQ_AS_ZZ_MODULE)(rational_gram(gram)))
 
     def cartan_matrix(self) -> tuple[tuple[int, ...], ...] | None:
         """The generalized Cartan matrix the card states, or None when it states none."""

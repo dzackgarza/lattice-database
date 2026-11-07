@@ -26,7 +26,10 @@ def test_the_original_a2_su21_satake_page_constructs_its_form() -> None:
     assert form is not None
     # Both displayed simple roots have root_length_squared 2, while the Cartan pairing off the
     # diagonal is -1. Reproducing that form, not just invoking a constructor, is the acceptance.
-    assert form.gram_tensor() == ((Fraction(2), Fraction(-1)), (Fraction(-1), Fraction(2)))
+    # Ask the actual page form for its stored Gram data, reading coefficients as exact fractions.
+    gram = form.gram_tensor()
+    actual = tuple(tuple(Fraction(int(gram[row, column].numerator()), int(gram[row, column].denominator())) for column in (0, 1)) for row in (0, 1))
+    assert actual == ((Fraction(2), Fraction(-1)), (Fraction(-1), Fraction(2)))
 
 
 def rational_card() -> Lattice:
@@ -34,7 +37,7 @@ def rational_card() -> Lattice:
     return Lattice.model_validate({
         "tag": "00R1",
         "name": "An ordinary rational-valued lattice",
-        "latex": "\langle 1/2 \rangle",
+        "latex": r"\langle 1/2 \rangle",
         "rank": 1,
         "gram_tensor": [["1/2"]],
         "signature": [1, 0],
