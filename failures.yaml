@@ -1410289,3 +1410289,41 @@
     database_revision: 78ef8ce6285aef04059b2c35e88a0ae1a3f57a96
     research_revision: e94f00da5a9e4670e0480613dd6f5e3d87c75923
   notes: []
+6JRW integral.primitive_orbits:
+  disposition: open
+  attempts:
+  - hash: 8afaa7df4a23ec6b7d92c7c0312250a9b75a2294f60f4e267e92abab2ed0d81d
+    gram_tensor:
+    - - 0
+      - 1
+      - 0
+      - 0
+      - 0
+    - - 1
+      - 0
+      - 0
+      - 0
+      - 0
+    - - 0
+      - 0
+      - 0
+      - 1
+      - 0
+    - - 0
+      - 0
+      - 1
+      - 0
+      - 0
+    - - 0
+      - 0
+      - 0
+      - 0
+      - -72
+    reason: memory exhausted
+    stderr: ''
+    seconds: 835.1974076879999
+    recorded_at: 2026-11-07 04:30:42.336251+00:00
+    run_url: https://github.com/dzackgarza/lattice-database/actions/runs/42326648686/attempts/1
+    database_revision: 1c88196a9441e58984d75b1dd224c6bce3662f44
+    research_revision: 07e034b8a9302d3d325a89ddaa65f54767ca9ee5
+  notes: []
