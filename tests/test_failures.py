@@ -38,7 +38,7 @@ def test_worker_startup_failure_is_persisted_and_requires_explicit_retry(tmp_pat
     monkeypatch.setenv("LATTICEDB_RUN_URL", "https://github.com/dzackgarza/lattice-database/actions/runs/39753434335")
     with pytest.raises(ChildProcessError):
         genus.certify(tmp_path, loaded, {}, (), time.time() + 30)
-    assert (tmp_path / "failures.yaml").exists(), "worker failure was discarded instead of queued for triage"
+    assert (tmp_path / failures.DIRECTORY).is_dir(), "worker failure was discarded instead of queued for triage"
 
     from latticedb import failures
 
@@ -102,7 +102,7 @@ def test_a_worker_that_ended_before_reading_its_request_is_queued_not_raised(
     monkeypatch.setattr(genus.subprocess, "Popen", started_and_ended)
     with pytest.raises(ChildProcessError):
         genus.certify(tmp_path, loaded, {}, (), time.time() + 30)
-    assert (tmp_path / "failures.yaml").exists(), "the write's BrokenPipeError was raised instead of the failure queued"
+    assert (tmp_path / failures.DIRECTORY).is_dir(), "the write's BrokenPipeError was raised instead of the failure queued"
     queued = failures.load(tmp_path)["0012 worker"]
     assert queued.disposition == "open"
     assert "latticedb.unavailable_worker" in queued.attempts[-1].stderr

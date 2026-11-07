@@ -7,6 +7,8 @@ from pathlib import Path
 
 import yaml
 
+from latticedb import failures
+
 REPOSITORY = Path(__file__).resolve().parent.parent
 PERSIST = REPOSITORY / ".github" / "scripts" / "persist.sh"
 
@@ -42,7 +44,8 @@ def test_shards_push_progress_repeatedly_without_touching_their_worktrees(tmp_pa
     for tag in ("0001", "0002"):
         (seed / "lattices" / f"{tag}.md").write_text(f"{tag} underived\n")
     log(seed, {})
-    (seed / "failures.yaml").write_text("{}\n")
+    (seed / "failures").mkdir()
+    (seed / "failures" / "00.yaml").write_text("{}\n")
     git(tmp_path, "init", "-q", "-b", "main", "seed")
     git(seed, "-c", "user.name=test", "-c", "user.email=test@example.invalid", "commit", "-q", "--allow-empty", "-m", "base")
     git(seed, "add", ".")
@@ -53,11 +56,17 @@ def test_shards_push_progress_repeatedly_without_touching_their_worktrees(tmp_pa
 
     (first / "lattices" / "0001.md").write_text("0001 derived\n")
     log(first, {"0001 genus": 30})
-    (first / "failures.yaml").write_text(yaml.safe_dump({"0001 integral.genus_symbol": {"disposition": "open", "attempts": [{"reason": "memory exhausted"}]}}))
+    (first / "failures").mkdir(exist_ok=True)
+    (first / "failures" / f"{failures.group('0001 integral.genus_symbol')}.yaml").write_text(
+        yaml.safe_dump({"0001 integral.genus_symbol": {"disposition": "open", "attempts": [{"reason": "memory exhausted"}]}})
+    )
     persist(first, "0/2")
     (second / "lattices" / "0002.md").write_text("0002 derived\n")
     log(second, {"0002 genus": 60})
-    (second / "failures.yaml").write_text(yaml.safe_dump({"0002 integral.genus_symbol": {"disposition": "open", "attempts": [{"reason": "exit status 1"}]}}))
+    (second / "failures").mkdir(exist_ok=True)
+    (second / "failures" / f"{failures.group('0002 integral.genus_symbol')}.yaml").write_text(
+        yaml.safe_dump({"0002 integral.genus_symbol": {"disposition": "open", "attempts": [{"reason": "exit status 1"}]}})
+    )
     persist(second, "1/2")
     # The first shard keeps computing; its next push carries only what changed since.
     (first / "lattices" / "0001.md").write_text("0001 derived and certified\n")
@@ -69,6 +78,11 @@ def test_shards_push_progress_repeatedly_without_touching_their_worktrees(tmp_pa
     assert (main / "lattices" / "0001.md").read_text() == "0001 derived and certified\n"
     assert (main / "lattices" / "0002.md").read_text() == "0002 derived\n"
     assert yaml.safe_load((main / "exceeded.yaml").read_text()) == {"0002 genus": {"hash": "h", "seconds": 60}}
-    assert set(yaml.safe_load((main / "failures.yaml").read_text())) == {"0001 integral.genus_symbol", "0002 integral.genus_symbol"}
+    assert set(failures.load(main)) == {"0001 integral.genus_symbol", "0002 integral.genus_symbol"}
     # Certification's worktree and index stay as it left them.
-    assert git(first, "status", "--porcelain", "--untracked-files=no").split() == ["M", "failures.yaml", "M", "lattices/0001.md"]
+    assert git(first, "status", "--porcelain", "--untracked-files=no").split() == [
+        "M",
+        f"failures/{failures.group('0001 integral.genus_symbol')}.yaml",
+        "M",
+        "lattices/0001.md",
+    ]

@@ -10,10 +10,19 @@ from typing import Literal
 import yaml
 from pydantic import Field, TypeAdapter
 
-from latticedb import exceeded, storage
+from latticedb import certificates, exceeded, storage
 from latticedb.model import Lattice, Record
 
-FILE = "failures.yaml"
+DIRECTORY = "failures"
+"""The directory of failure shards: one YAML file per group of card tags, as `certificates/` has."""
+
+LEGACY = "failures.yaml"
+"""The single file the ledger was, read once by the migration and by nothing else."""
+
+
+def group(computation: str) -> str:
+    """The shard of the card a computation belongs to, by the same hash that groups certificates."""
+    return certificates.group(computation.split(" ", 1)[0])
 
 
 class Attempt(Record):
@@ -38,14 +47,44 @@ Failures = dict[str, Failure]
 
 
 def load(root: Path) -> Failures:
-    path = root / FILE
-    if not path.exists():
-        return {}
-    return TypeAdapter(Failures).validate_python(yaml.load(path.read_text(), Loader=yaml.CSafeLoader) or {})
+    """Every shard, merged: a computation is in the shard of its card's tag."""
+    entries: Failures = {}
+    directory = root / DIRECTORY
+    if directory.is_dir():
+        for path in sorted(directory.glob("*.yaml")):
+            shard = TypeAdapter(Failures).validate_python(yaml.load(path.read_text(), Loader=yaml.CSafeLoader) or {})
+            entries.update(shard)
+    legacy = root / LEGACY
+    if legacy.exists():
+        entries.update(TypeAdapter(Failures).validate_python(yaml.load(legacy.read_text(), Loader=yaml.CSafeLoader) or {}))
+    return entries
 
 
 def save(root: Path, entries: Failures) -> None:
-    storage.write_text(root / FILE, yaml.dump({key: value.model_dump() for key, value in sorted(entries.items())}, Dumper=yaml.CSafeDumper, sort_keys=False, allow_unicode=True))
+    """Write each shard, and remove a shard that no longer holds an entry.
+
+    A shard holds the computations of the cards of one group of tags, so a run that completes values
+    for one card rewrites one small file: the ledger publishes where a single file reached the file
+    size a Git host refuses, and two runs of disjoint cards never touch the same shard.
+    """
+    directory = root / DIRECTORY
+    directory.mkdir(parents=True, exist_ok=True)
+    shards: dict[str, Failures] = {}
+    for computation, failure in entries.items():
+        shards.setdefault(group(computation), {})[computation] = failure
+    for name, shard in shards.items():
+        storage.write_text(
+            directory / f"{name}.yaml",
+            yaml.dump(
+                {key: value.model_dump() for key, value in sorted(shard.items())},
+                Dumper=yaml.CSafeDumper,
+                sort_keys=False,
+                allow_unicode=True,
+            ),
+        )
+    for path in directory.glob("*.yaml"):
+        if path.stem not in shards:
+            path.unlink()
 
 
 def blocked(entries: Failures, computation: str, lattice: Lattice) -> bool:
