@@ -40,22 +40,3 @@ def merge_files(base: Path, ours: Path, theirs: Path) -> None:
     merged = merge(_load(base), _load(ours), _load(theirs))
     ours.write_text(yaml.dump(merged, Dumper=yaml.CSafeDumper, sort_keys=False, allow_unicode=True))
 
-
-def main(argv: list[str] | None = None) -> None:
-    """The merge-driver command, without importing the owner (the Sage import graph begins at `cli`).
-
-    This is the entry point keyed by `merge.keyed-map.driver` for stored ledgers and shards: `#17` needs
-    Git's persistence path to work even before the owner process can start, and this function has no
-    owner dependency.
-    """
-    import sys
-
-    arguments = sys.argv[1:] if argv is None else argv
-    if len(arguments) != 3:
-        raise SystemExit("usage: python -m latticedb.keyed_merge BASE OURS THEIRS")
-    base, ours, theirs = (Path(name) for name in arguments)
-    merge_files(base, ours, theirs)
-
-
-if __name__ == "__main__":
-    main()

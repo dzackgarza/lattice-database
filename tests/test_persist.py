@@ -37,7 +37,7 @@ def shard(origin: Path, path: Path) -> Path:
     git(path.parent, "clone", "-q", str(origin), path.name)
     git(path, "config", "user.name", "test")
     git(path, "config", "user.email", "test@example.invalid")
-    git(path, "config", "merge.keyed-map.driver", f"{sys.executable} -m latticedb.keyed_merge %O %A %B")
+    git(path, "config", "merge.keyed-map.driver", f"{sys.executable} -m latticedb merge-keyed-map %O %A %B")
     return path
 
 
