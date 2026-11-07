@@ -2,10 +2,123 @@
 tag: 3ICY
 name: Constructed lattice 3ICY
 latex: L_{\mathrm{3ICY}}
+certifications:
+  derive: 2cdb61d87a8152e0d444279df8a412c534d26291e3f1d87cd3f9e584c4c8bfbb
+  form.integer_valued: 889b0e956f1c3f6b4236288e0a6aeb1275e2e70dd670e7baa6a3ba0424a62615
+  integral.elementary_primes: 7e32f4a52bb8969371c976ffe2226d77e8a48da0ff3fe8576c84c27ce6efe2e5
+  integral.genus_symbol: 220c38c319884591d99d054707634304be351add567e1b010e9c8aa8eb795e68
+  integral.genus_class_count: ee8665ae9039fea07c6da1ef8dd336ff54f7c4d7b40d590dc883ec311af5517f
+  integral.overlattice_count: 0104850af37446f2f3d735f78ef060f9c4cb7a0df6945988fc4b53d775eba0d0
+  integral.hyperbolic_index: 3a8f3acbc40a3fe758fababd156eb5eaed2e95b4c359c835dc7a5591b83a9e33
+  automorphisms.automorphism_group_generator_morphisms: 188df42fa2c5bcc35766d11250c13fb2f264e6ae9b5d2f16f0f1c76f47f741f2
+  integral.discriminant_form: f82e1cda41d1dea81c733c7b39330b48eac0e9a3eef6e35e8596a5dfbd3db142
+  integral.primitive_orbits: fddd08e78b45d84805307df3b0bad10b249bd487aa4f3fd918bda1525f214741
+  integral.modular_scale: 7146011c7a86177967ce59a1cff76bc44d2947ecf1ee06329b539253043dd8b4
+  integral.anisotropic_primes: d3f49423a5a494d195496f224a9eb92a1a502f79a24d5656bf195cd5b5a2ea15
+  integral.local_representations: 95d12404723ba0bf10d0ad54ebc9e9847d9310437eb02e886b63a73827c42d37
+  integral.local_densities: f21dbf9468a3411cb64ab8dfba84eba1a957deb7d60fc056b4111a348ebd373d
 rank: 2
 gram_tensor:
 - [0, -1]
 - [-1, 0]
+signature: [1, 1]
+determinant: -1
+definiteness: indefinite
+dual_gram_tensor:
+- [0, -1]
+- [-1, 0]
+form:
+  integer_valued: true
+integral:
+  elementary_primes: []
+  parity: even
+  level: 1
+  modular_scale: 1
+  discriminant_group: []
+  overlattice_count: 1
+  delta: 0
+  bad_reduction_primes: [2]
+  quadratic_character: 1
+  genus_symbol: II_{1,1}
+  genus_class_count: 1
+  hyperbolic_index: 1
+  primitive_orbits:
+    O:
+      constant: 1
+      z: []
+      w: []
+    SO:
+      constant: 2
+      z: []
+      w: []
+    Otilde:
+      constant: 1
+      z: []
+      w: []
+    SOtilde:
+      constant: 2
+      z: []
+      w: []
+    O+:
+      constant: 1
+      z: []
+      w: []
+    SO+:
+      constant: 2
+      z: []
+      w: []
+    Otilde+:
+      constant: 1
+      z: []
+      w: []
+    SOtilde+:
+      constant: 2
+      z: []
+      w: []
+  discriminant_form:
+    orthogonal_group_order: 1
+    isotropic_classes: 1
+    isotropic_orbits: 1
+  anisotropic_primes: []
+  local_representations:
+  - prime: 2
+    classes:
+    - representative: 1
+      least_valuation: 2
+    - representative: 3
+      least_valuation: 2
+    - representative: 5
+      least_valuation: 2
+    - representative: 7
+      least_valuation: 2
+    - representative: 2
+      least_valuation: 1
+    - representative: 6
+      least_valuation: 1
+    - representative: 10
+      least_valuation: 1
+    - representative: 14
+      least_valuation: 1
+  local_densities:
+  - prime: 2
+    densities: [0, 1, 0, 2, 0, 1, 0, 3, 0, 1, 0, 2]
+automorphisms:
+  automorphism_group_generator_morphisms: [O(L) generator 1, O(L) generator 2]
+indefinite:
+  isotropic: true
+morphisms:
+- target: 3ICY
+  name: O(L) generator 1
+  matrix:
+  - [-1, 0]
+  - [0, -1]
+  scale: 1
+- target: 3ICY
+  name: O(L) generator 2
+  matrix:
+  - [0, 1]
+  - [1, 0]
+  scale: 1
 related:
 - tag: '0016'
   relation: This presentation is obtained by scaling the form by -1 of 0016.
