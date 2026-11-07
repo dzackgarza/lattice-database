@@ -31,6 +31,26 @@ def derived() -> certificates.Certificates:
     return held
 
 
+def without(tag: str, definiteness: str, metadata: dict, held: certificates.Certificates, *fields: str) -> None:
+    """Remove `fields` from a copied card and from `held`, so the test states its own missing values.
+
+    The corpus is certified by CI, so a field a card lacks today it holds tomorrow: 0016 now states
+    `integral.primitive_orbits`, `integral.discriminant_form` and its automorphism generators, and
+    0012 states its discriminant form. A test whose subject is "a missing field is requested and
+    certified" must create that missing field, or it silently stops exercising certification. The
+    field is given as its stored path, `<block>.<name>`; its value, its citation and its held
+    certificate all go, so the card, its shard and the request agree. The values computed below are
+    the mathematics, and they are unchanged.
+    """
+    for field in fields:
+        block_name, short = field.split(".", 1)
+        block = metadata.get(block_name)
+        if isinstance(block, dict):
+            block.pop(short, None)
+        metadata.get("certifications", {}).pop(field, None)
+        held.pop(genus.name(tag, short, definiteness), None)
+
+
 def test_sparse_cards_do_not_block_computable_cards(tmp_path: Path) -> None:
     (tmp_path / "lattices").mkdir()
     shutil.copy(REPOSITORY / corpus.FAMILIES_FILE, tmp_path / corpus.FAMILIES_FILE)
@@ -119,9 +139,13 @@ def test_an_indefinite_card_requests_and_stores_the_eight_primitive_orbit_rows(
     path = tmp_path / "lattices" / "0016.md"
     shutil.copy(REPOSITORY / "lattices" / "0016.md", path)
     document = frontmatter.load(str(path))
-    # U = I_{1,1}: indefinite, even and unimodular, so its eight groups are one group.
-    assert document.metadata["definiteness"] == "indefinite"
-    assert "primitive_orbits" not in document.metadata["integral"]
+    metadata = corpus.front_matter(document)
+    # U = I_{1,1}: indefinite, even and unimodular, so its eight groups are one group. The corpus
+    # certifies this field, so the test makes it missing in its own copy.
+    assert metadata["definiteness"] == "indefinite"
+    without("0016", "indefinite", metadata, certificates.Certificates(), "integral.primitive_orbits")
+    path.write_text(records.record_text(metadata, document.content))
+    assert "primitive_orbits" not in corpus.front_matter(corpus.read_card(path))["integral"]
     fields = [field for request in genus.requests(corpus.load(tmp_path), derived(), {}, ("0016",)) for field in request["fields"]]
     assert "primitive_orbits" in fields
     # One orbit of primitive isotropic vectors, e + f; U is even, so no vector of norm +-1.
@@ -509,6 +533,9 @@ def test_certification_stores_an_indefinite_card_automorphism_generators(tmp_pat
         held[computation] = certificates.Certificate(hash=digest, by="test")
         citations[f"{block_name}.{field}"] = digest
     metadata["certifications"] = citations
+    # The corpus certifies both fields this test is about, so the test removes them from its own copy:
+    # the generators and the discriminant form are the two it asks certify to compute.
+    without("0016", "indefinite", metadata, held, "integral.discriminant_form", "automorphisms.automorphism_group_generator_morphisms")
     path.write_text(records.record_text(metadata, document.content))
     loaded = corpus.load(tmp_path)
     # U is even and unimodular, so its discriminant form is trivial but stated: |O(q)| = 1, one
@@ -560,12 +587,13 @@ def test_certification_keeps_a_root_lattice_integer_valued(tmp_path: Path) -> No
     (tmp_path / corpus.RETIRED_FILE).write_text("{}\n")
     path = tmp_path / "lattices" / "0012.md"
     document = frontmatter.load(str(REPOSITORY / "lattices" / "0012.md"))
-    del document.metadata["form"]["integer_valued"]
-    del document.metadata["certifications"]["form.integer_valued"]
-    path.write_text(records.record_text(corpus.front_matter(document), document.content))
     stored = yaml.load((REPOSITORY / "certificates" / f"{certificates.group('0012')}.yaml").read_text(), Loader=yaml.CSafeLoader)
     held = {name: certificates.Certificate.model_validate(value) for name, value in stored.items() if name.startswith("0012 ")}
     del held[genus.name("0012", "integer_valued")]
+    # Both fields this test names are missing in its own copy: A_2's discriminant form is certified on
+    # the corpus's own card, so the test removes it and its held certificate here.
+    without("0012", "definite", document.metadata, held, "form.integer_valued", "integral.discriminant_form")
+    path.write_text(records.record_text(corpus.front_matter(document), document.content))
     loaded = corpus.load(tmp_path)
     # A_2 is even with three classes, so its discriminant form's three invariants are asked too.
     assert genus.requests(loaded, held, {}, ("0012",))[0]["fields"] == ["integer_valued", "discriminant_form"]

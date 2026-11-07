@@ -1,0 +1,18 @@
+=================================== FAILURES ===================================
+E   AssertionError: assert 'primitive_orbits' not in {'elementary_primes': [], 'parity': 'even', 'level': 1, 'modular_scale': 1, ...}
+/repo/tests/test_genus.py:124: AssertionError: assert 'primitive_orbits' not in {'elementary_primes': [], 'parity': 'even', 'level': 1, 'modular_scale': 1, ...}
+E   AssertionError: assert [] == ['automorphis...iminant_form']
+      
+      Right contains 2 more items, first extra item: 'automorphism_group_generator_morphisms'
+      Use -v to get more diff
+/repo/tests/test_genus.py:516: AssertionError: assert [] == ['automorphis...iminant_form']
+E   AssertionError: assert ['integer_valued'] == ['integer_val...iminant_form']
+      
+      Right contains one more item: 'discriminant_form'
+      Use -v to get more diff
+/repo/tests/test_genus.py:571: AssertionError: assert ['integer_valued'] == ['integer_val...iminant_form']
+=========================== short test summary info ============================
+FAILED tests/test_genus.py::test_an_indefinite_card_requests_and_stores_the_eight_primitive_orbit_rows
+FAILED tests/test_genus.py::test_certification_stores_an_indefinite_card_automorphism_generators
+FAILED tests/test_genus.py::test_certification_keeps_a_root_lattice_integer_valued
+3 failed, 29 passed in 64.93s (0:01:04)
