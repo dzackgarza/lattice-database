@@ -51,7 +51,10 @@ def patch_files(patch_path: Path) -> set[str]:
 
 
 def main() -> None:
-    verifier = Path(sys.argv[1]) if len(sys.argv) > 1 else ROOT / "results/verify-recovered-values.py"
+    if len(sys.argv) > 1 and sys.argv[1] != "--report":
+        verifier = ROOT / sys.argv[1]
+    else:
+        verifier = ROOT / "results/verify-recovered-values.py"
     target = None
     for artifact in sorted(BUNDLE.iterdir()):
         if not artifact.is_dir():
@@ -95,44 +98,84 @@ def main() -> None:
         raise SystemExit(f"baseline does not verify ({initial.returncode}), so this runner proves nothing yet")
 
     original = (work / "lattices" / f"{tag}.md").read_text()
-    metadata = yaml.safe_load(original.split("---")[1])
-    missing = metadata.pop(field)
-    print("omitted from this copy only:", field, "containing", len(missing) if hasattr(missing, "__len__") else 1)
-    write_record(work, tag, metadata)
-    report = run(work, verifier)
-    assert report.returncode, "the omitted stored field must not pass"
-    assert field in report.stdout, f"the omitted field must be reported: {field}"
-    print("PASS: a missing promised value is a reported defect")
+    outcome_file = ROOT / "attachments" / "outcome-recovery-coverage"
+    outcome_file.mkdir(exist_ok=True)
+    outcome_file = outcome_file / f"{verifier.stem}-{(__import__('os').getpid())}.log"
+    outcomes_file = outcome_file
+    cases = [
+        ("stored-field-omission", mutate_omission),
+        ("ordered-vector-reversal", mutate_ordered),
+        ("certificate-record-conflict", mutate_certificate),
+    ]
+    outcomes = []
+    for label, mutation in cases:
+        (work / "lattices" / f"{tag}.md").write_text(original)
+        mutation(work, tag, original)
+        result = run(work, verifier)
+        expected = expected_diagnostic(label, result.stdout, result.stderr)
+        outcomes.append((label, result.returncode, expected))
+        tofile(outcomes_file, f"CASE {label} exit={result.returncode} diagnostic={expected}\n{result.stdout[-5000:]}\n{result.stderr[-1500:]}\n")
 
-    # The ordered tensors/vectors are not unordered generator shorthand. Swap the first two rows of
-    # the retained card's Gram tensor in this copy only. A verifier that normalizes lists into sets
-    # might consider these identical, but its definition and its certificate cannot.
-    metadata = yaml.safe_load(original.split("---")[1])
-    metadata["gram_tensor"] = [row[:] for row in metadata["gram_tensor"]]
-    assert len(metadata["gram_tensor"]) > 1
-    metadata["gram_tensor"][0], metadata["gram_tensor"][1] = metadata["gram_tensor"][1], metadata["gram_tensor"][0]
-    write_record(work, tag, metadata)
-    report = run(work, verifier)
-    assert report.returncode, "a swapped pair of Gram rows must be refused as ordered data"
-    assert "Gram tensor" in report.stdout or "gram_tensor" in (report.stdout + report.stderr), (
-        "must explain that the actual ordered tensor is inconsistent with its artifact"
-    )
-    print("PASS: an ordered tensor's reordering is rejected")
+    for label, code, expected in outcomes:
+        print(f"RESULT {label}: exit={code}, expected={expected}")
+    if "--report" in sys.argv:
+        print("all cases completed; this report accepts no outcome")
+    else:
+        missing_cases = [name for name, code, expected in outcomes if code == 0 or not expected]
+        assert not missing_cases, "these deliberate mutations did not produce the required type of rejection: " + ", ".join(missing_cases)
+        print("PASS: the actual baseline passes and all three mutations are rejected")
 
-    # A real conflict is not presumed to be a valid superseding value. Keep `Lattice.model_validate`
-    # valid but alter an actually computed discriminant-form count in this copy, so full comparison
-    # must reach the retained base/proof/current conflict check.
-    metadata = yaml.safe_load(original.split("---")[1])
-    form = metadata["integral"]["discriminant_form"]
-    form["isotropic_classes"] = form["isotropic_classes"] + 1
-    write_record(work, tag, metadata)
-    report = run(work, verifier)
-    assert report.returncode, "the current/proof mismatch must not pass because it might be newer"
-    assert "conflict" in (report.stdout + report.stderr).lower(), (
-        "must report the unresolved current/proof conflict explicitly"
-    )
-    print("PASS: an unresolved current/artifact mismatch prevents acceptance")
 
+def expected_diagnostic(label: str, stdout: str, stderr: str) -> bool:
+    """Match the real comparison branch and its evidence, rather than any nonzero result."""
+    combined = stdout + stderr
+    if label == "stored-field-omission":
+        return "root_span" in stdout + stderr and ("missing" in stdout + stderr or "requires stored" in stdout + stderr)
+    if label == "ordered-vector-reversal":
+        return "root_span.norms" in stdout and ("unresolved conflict" in stdout or "never recovered" in stdout)
+    if label == "certificate-record-conflict":
+        return "derive" in stdout and "conflict" in stdout and "NameError" not in combined
+    return False
+
+
+def mutate_omission(work: Path, tag: str, original: str) -> None:
+    metadata = yaml.safe_load(original.split("---")[1])
+    # A true coverage omission: drop the dependent derived blocks together, so `model_validate`
+    # accepts this card. The formerly EXCLUDED-keyed verifier lets this real loss pass silently;
+    # the correct verifier must name it. A root_sublattice-only validation error would prove neither.
+    metadata.pop("root_span")
+    metadata.pop("root_sublattice", None)
+    write_record(work, tag, metadata)
+
+
+def mutate_ordered(work: Path, tag: str, original: str) -> None:
+    """Reverse a genuine ordered coefficients vector accepted through the actual owned schema."""
+    metadata = yaml.safe_load(original.split("---")[1])
+    metadata["root_span"]["norms"] = list(reversed(metadata["root_span"]["norms"]))
+    write_record(work, tag, metadata)
+
+
+def mutate_certificate(work: Path, tag: str, original: str) -> None:
+    """Only a recovered certificate record changes, exercising its conflict branch at its own assertion."""
+    from latticedb import certificates
+    certificate_path = work / "certificates" / f"{certificates.group(tag)}.yaml"
+    recovered = yaml.safe_load(certificate_path.read_text())
+    name = f"{tag} derive"
+    assert name in recovered
+    recovered[name]["by"] += "; unresolved conflicting certificate provenance in this copy only"
+    certificate_path.write_text(yaml.dump(recovered, Dumper=yaml.CSafeDumper, sort_keys=False, allow_unicode=True))
+
+
+def tofile(destination: Path, text: str) -> None:
+    from datetime import datetime, timezone
+    with destination.open("a", encoding="utf-8") as evidence:
+        evidence.write(datetime.now(timezone.utc).isoformat() + " " + text + "\n")
+
+
+def write_record(work: Path, tag: str, metadata: dict) -> None:
+    card = work / "lattices" / f"{tag}.md"
+    body = card.read_text().split("---")[2]
+    card.write_text("---\n" + yaml.dump(metadata, sort_keys=False, allow_unicode=True, width=100000) + "---" + body)
 
 def ledger_keys(patch_path: Path) -> set[str]:
     """Top-level computation entries in a real artifact's failure-ledger patch, including context."""
@@ -155,6 +198,18 @@ def write_record(work: Path, tag: str, metadata: dict) -> None:
     card.write_text(
         "---\n" + yaml.dump(metadata, sort_keys=False, allow_unicode=True, width=100000) + "---" + body
     )
+
+
+def run(work: Path, verifier: Path) -> subprocess.CompletedProcess:
+    """Invoke the real verifier itself on this temporary recovery checkout."""
+    import os
+    process = subprocess.run(
+        [os.environ.get("PYTHON", sys.executable), str(verifier), str(work / "artifacts")],
+        cwd=work, capture_output=True, text=True, timeout=600,
+    )
+    print(f"$ {process.args}\n{process.stdout[-6000:]}{process.stderr[-1500:]}")
+    return process
+
 
 
 if __name__ == "__main__":

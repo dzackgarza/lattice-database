@@ -26,7 +26,7 @@ from pathlib import Path
 
 import yaml
 
-from latticedb import certificates, failures, genus, records
+from latticedb import certificates, failures, genus, merge, records
 from latticedb.model import Lattice
 
 def coverage_problems(base, artifact, current, prefix: str = "") -> list[str]:
@@ -121,9 +121,17 @@ def main(directory: Path) -> int:
             # Reconcile exactly: a recovered certificate from main matching its own patch is not a
             # duplicate defect, but any later superseding card/certificate is named.
             if shard[name] != artifact_certificates[name]:
-                differ = compare_records(artifact_certificates[name], shard[name])
-                for detail in differ:
-                    problems.append(f"{name}: {detail}")
+                # Compare through the existing three-way record machinery, preserving current and
+                # retained candidates, with no generic `compare_records` reconstruction. Here the
+                # artifact is `base`, while current and recovered are the same retained value: every
+                # departure from that reference is a reported conflict, never silently overwritten.
+                _, differences = merge.merge(artifact_certificates[name], shard[name], shard[name])
+                for detail in differences:
+                    problems.append(f"{name}: unresolved certificate conflict at {detail}")
+                if not differences:
+                    problems.append(
+                        f"{name}: unresolved conflict, current certificate differs from the retained artifact"
+                    )
             if name.endswith(" derive"):
                 stored = records.derived_projection(current_card)
             else:
