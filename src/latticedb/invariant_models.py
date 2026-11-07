@@ -54,9 +54,12 @@ class PolarizationRow(Record):
     groups: Annotated[int, Field(ge=0)] = Field(
         alias="#Γ̄_h",
         description=(
-            "The number `#Γ̄_h` of conjugacy classes of the groups $\\bar\\Gamma_h = \\pi_M(O(M, h)) \\subset "
-            "O^+(\\mathbb{F}_2^{10})$ that the polarizations of this degree define (arXiv:2302.01679, (5) and "
-            "Question 2.1, p. 7; Table 4, p. 17): the modular groups, up to conjugacy."
+            "The number of conjugacy classes of the modular groups of this degree, which Table 4 of "
+            "arXiv:2302.01679, p. 17, prints as `#Γ_h` and defines in (5), p. 7, as the groups "
+            "$\\Gamma_h = \\pi_N^{-1}(\\pi_M(O(M, h))) \\subset O(N)$: this is that number, the same as the number of "
+            "conjugacy classes of their images $\\bar\\Gamma_h = \\pi_M(O(M, h)) \\subset O^+(\\mathbb{F}_2^{10})$, "
+            "because $\\pi_N$ is onto and its kernel lies in every $\\Gamma_h$ (Question 2.1, p. 7). Stored under the "
+            "key of the image, `#Γ̄_h`."
         ),
     )
     reference: Reference | None = Field(default=None, description="The source of the two counts, with its table and page.")
