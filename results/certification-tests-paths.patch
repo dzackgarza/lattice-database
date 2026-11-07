@@ -1,14 +1,15 @@
 diff --git a/.github/workflows/certification-tests.yml b/.github/workflows/certification-tests.yml
-index 05443cfc83..fcb8b4e9b3 100644
+index 05443cfc83..1e9cce1ccb 100644
 --- a/.github/workflows/certification-tests.yml
 +++ b/.github/workflows/certification-tests.yml
-@@ -3,20 +3,17 @@ name: Certification regression tests
+@@ -3,20 +3,18 @@ name: Certification regression tests
    push:
      branches:
      - main
-+    # Every file that can change what the certify runs do or how they are tested, rather than a list
-+    # of files kept by hand: #16, whose change to `src/latticedb/corpus.py` — the reader every certify
-+    # run starts with — was in none of the named files and did not run this gate.
++    # Every file that can change what the certify runs do or how they are tested, rather than a list of
++    # files kept by hand: #15's change to `src/latticedb/corpus.py` — the reader every certify run starts
++    # with — and to `tests/test_corpus.py`, the reproduction of that defect, was in none of the named
++    # files, so this gate did not run on it.
      paths: &id001
 -    - src/latticedb/genus.py
 -    - src/latticedb/failures.py
@@ -33,3 +34,12 @@ index 05443cfc83..fcb8b4e9b3 100644
    pull_request:
      paths: *id001
    workflow_dispatch: null
+@@ -40,7 +38,7 @@ jobs:
+     - name: Exercise failure quarantine, successful retry and concurrent persistence
+       run: "docker exec -i --workdir \"$GITHUB_WORKSPACE\" \\\n  --env \"PYTHONPATH=$GITHUB_WORKSPACE/_ci-support/ai-review-ci/tool-artifacts/pytest_plugins:$GITHUB_WORKSPACE/research/src:$GITHUB_WORKSPACE/src\"\
+         \ \\\n  sage-env /sage/.venv/bin/python -c 'import sage.all, sys, pytest; sys.exit(pytest.main(sys.argv[1:]))' \\\n  -p qc_sage_session -p qc_unique_inventory \\\n  tests/test_genus.py tests/test_failures.py\
+-        \ tests/test_persist.py -q\n"
++        \ tests/test_persist.py tests/test_corpus.py -q\n"
+     - name: Stop the Sage environment
+       if: always()
+       run: docker rm --force sage-env
