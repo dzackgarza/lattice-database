@@ -29,63 +29,34 @@ import yaml
 from latticedb import certificates, failures, genus, records
 from latticedb.model import Lattice
 
-def same_values(left, right) -> bool:
-    """Two lists describe the same stored collection, counting every element and not deduplicating.
+def coverage_problems(base, artifact, current, prefix: str = "") -> list[str]:
+    """Check every promised stored record; no generic multisets, no assumed later validity.
 
-    Stored generators and morphism presentations are not canonical orderings, so ordering alone is not
-    a loss. A changed matrix, vector or coefficient still differs.
-    """
-    if len(left) != len(right):
-        return False
-    import json
-    first = sorted((json.dumps(value, sort_keys=True, default=str) for value in left))
-    second = sorted((json.dumps(value, sort_keys=True, default=str) for value in right))
-    return first == second
-
-
-def coverage_problems(base, artifact, current, prefix: str = "") -> tuple[list[str], list[str]]:
-    """Every stated stored value must arrive, with any later differing value explicitly named.
-
-    No key is excluded because it is a morphism, a root-span record, a dual form or any other owned
-    block. The artifact is a patch result on the exact base, so what it adds or changes is known; the
-    new base value is not silently treated as a later superseding one.
+    Ordered schema data (Gram tensors, coordinate vectors, coefficient series) is compared exactly:
+    reordering changes the form or coordinates, not a generator presentation. Any conflict is an
+    explicit unresolved defect and never silently accepted as a later enrichment.
     """
     problems: list[str] = []
-    later: list[str] = []
     if artifact == current:
-        return problems, later
+        return problems
     if isinstance(artifact, dict) and isinstance(current, dict):
         for key, proof in artifact.items():
-            base_value = base.get(key) if isinstance(base, dict) else None
-            present = current.get(key, "__absent__")
-            if present == proof:
-                continue
-            label = f"{prefix}{key}"
-            if present == "__absent__":
-                problems.append(f"{label}: missing on main")
-                continue
-            if isinstance(proof, dict) and isinstance(present, dict):
-                lost, changed = coverage_problems(base_value or {}, proof, present, label + ".")
-                problems.extend(lost)
-                later.extend(changed)
-            elif isinstance(proof, list) and isinstance(present, list) and same_values(proof, present):
-                continue
-            elif present == base_value:
-                problems.append(f"{label}: retained base value, proof {proof!r} never recovered")
+            if key not in current:
+                problems.append(f"{prefix}{key}: missing on main")
+            elif current[key] == proof:
+                pass
+            elif isinstance(proof, dict) and isinstance(current[key], dict):
+                base_block = base.get(key) or {} if isinstance(base, dict) else {}
+                problems.extend(coverage_problems(base_block, proof, current[key], prefix=f"{prefix}{key}."))
+            elif isinstance(base, dict) and current[key] == base.get(key):
+                problems.append(f"{prefix}{key}: base retained, proof {proof!r} never recovered")
             else:
-                # This could be later valid enrichment, and is kept rather than overwritten, but it
-                # must be visible for review instead of hiding with the artifact's equality check.
-                later.append(f"{label}: current {present!r}, retained proof {proof!r}")
-        return problems, later
-    if artifact == current:
-        return problems, later
-    later.append(f"{prefix}: current {current!r}, retained proof {artifact!r}")
-    return problems, later
-
-
-def recursedifference_and_metric_additions(base: dict, artifact: dict, current: dict) -> tuple[list[str], list[str]]:
-    """All stored fields, including morphisms and root-span data, checked as full records."""
-    return coverage_problems(base, artifact, current)
+                problems.append(
+                    f"{prefix}{key}: unresolved conflict current {current[key]!r} != artifact proof {proof!r}"
+                )
+    else:
+        problems.append(f"{prefix}: unresolved conflict current {current!r} != artifact proof {artifact!r}")
+    return problems
 
 
 def show(revision: str, path: str) -> str:
@@ -130,12 +101,10 @@ def main(directory: Path) -> int:
             f"{tag}: recovered card's Gram tensor differs from the artifact's base"
         )
         previous_card = yaml.safe_load(show(base, f"lattices/{tag}.md").split("---")[1])
-        lost, superseding = coverage_problems(previous_card, artifact_card, current_card)
+        lost = coverage_problems(previous_card, artifact_card, current_card)
         problems.extend(f"{tag}: {problem}" for problem in lost)
-        if superseding:
-            print(f"{tag}: {len(superseding)} later change(s) from the retained proof to inspect (kept)")
-            for change in superseding[-12:]:
-                print(f"  {tag}: {change}"[:280])
+        if lost:
+            print(f"{tag}: {len(lost)} unresolved recovery defect(s)")
         # The recovered card validates as its own model, and its certifications block must agree with the
         # recovered certificate records the artifact says it has computed.
         expected = {name for name in artifact_certificates if name.startswith(f"{tag} ")}
