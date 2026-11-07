@@ -300,10 +300,253 @@
     run_url: https://github.com/dzackgarza/lattice-database/actions/runs/42326648686/attempts/1
     database_revision: 78ef8ce6285aef04059b2c35e88a0ae1a3f57a96
     research_revision: e94f00da5a9e4670e0480613dd6f5e3d87c75923
+  - hash: 6d3830320e26bf31ce971203f44b1a65421e4b1a5189abe9fa7c9c4f31e15d9e
+    gram_tensor:
+    - - 0
+      - 1
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+    - - 1
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+    - - 0
+      - 0
+      - -2
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+    - - 0
+      - 0
+      - 0
+      - -2
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+    - - 0
+      - 0
+      - 0
+      - 0
+      - -2
+      - 0
+      - 0
+      - 0
+      - 0
+    - - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - -2
+      - 0
+      - 0
+      - 0
+    - - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - -2
+      - 0
+      - 0
+    - - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - -2
+      - 0
+    - - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - -2
+    reason: worker or runner lost (recovered from exceeded.yaml)
+    stderr: ''
+    seconds: 1203.0
+    recorded_at: 2026-11-07 10:52:54.020675+00:00
+    run_url: https://github.com/dzackgarza/lattice-database/actions/runs/42363689427/attempts/1
+    database_revision: dde534ecd9d7c61af3800d20eb1635bc7541f38a
+    research_revision: d86c2e5d5f5b310513bf765b6c4ed7876d143d17
   notes: []
 026Z automorphisms.automorphism_group_generator_morphisms:
   disposition: resolved
   attempts:
+  - hash: 4dd08c38de832de3a1793517cff7d24e80977230bb1ecafd495979d9550b0448
+    gram_tensor:
+    - - 0
+      - 2
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+    - - 2
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+    - - 0
+      - 0
+      - -2
+      - 1
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+    - - 0
+      - 0
+      - 1
+      - -2
+      - 1
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+    - - 0
+      - 0
+      - 0
+      - 1
+      - -2
+      - 1
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+    - - 0
+      - 0
+      - 0
+      - 0
+      - 1
+      - -2
+      - 1
+      - 1
+      - 0
+      - 0
+      - 0
+      - 0
+    - - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 1
+      - -2
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+    - - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 1
+      - 0
+      - -2
+      - 0
+      - 0
+      - 0
+      - 0
+    - - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - -2
+      - 0
+      - 0
+      - 0
+    - - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - -2
+      - 0
+      - 0
+    - - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - -2
+      - 0
+    - - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - -2
+    reason: worker or runner lost (recovered from exceeded.yaml)
+    stderr: ''
+    seconds: 590.0
+    recorded_at: 2026-11-07 10:53:30.282150+00:00
+    run_url: https://github.com/dzackgarza/lattice-database/actions/runs/42363689427/attempts/1
+    database_revision: dde534ecd9d7c61af3800d20eb1635bc7541f38a
+    research_revision: d86c2e5d5f5b310513bf765b6c4ed7876d143d17
   - hash: 4dd08c38de832de3a1793517cff7d24e80977230bb1ecafd495979d9550b0448
     gram_tensor:
     - - 0

@@ -179,6 +179,184 @@
     run_url: https://github.com/dzackgarza/lattice-database/actions/runs/42326648686/attempts/1
     database_revision: dd38e9f725b548e41c5e5b1f7b295cc3bebfaae2
     research_revision: 07e034b8a9302d3d325a89ddaa65f54767ca9ee5
+  - hash: 34e22678627ba06af19a3e59ce0b7278b0e9fede0f76014933cb26fecb17c917
+    gram_tensor:
+    - - 0
+      - 1
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+    - - 1
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+    - - 0
+      - 0
+      - -2
+      - 1
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+    - - 0
+      - 0
+      - 1
+      - -2
+      - 1
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+    - - 0
+      - 0
+      - 0
+      - 1
+      - -2
+      - 1
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+    - - 0
+      - 0
+      - 0
+      - 0
+      - 1
+      - -2
+      - 1
+      - 1
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+    - - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 1
+      - -2
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+    - - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 1
+      - 0
+      - -2
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+    - - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - -2
+      - 0
+      - 0
+      - 0
+      - 0
+    - - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - -2
+      - 0
+      - 0
+      - 0
+    - - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - -2
+      - 0
+      - 0
+    - - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - -2
+      - 0
+    - - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - -2
+    reason: worker or runner lost (recovered from exceeded.yaml)
+    stderr: ''
+    seconds: 3122.0
+    recorded_at: 2026-11-07 10:52:31.115315+00:00
+    run_url: https://github.com/dzackgarza/lattice-database/actions/runs/42363689427/attempts/1
+    database_revision: dde534ecd9d7c61af3800d20eb1635bc7541f38a
+    research_revision: 8ef80cd0b704a288754fd4a4a3fc8d16d272434b
   notes: []
 1UZJ derive:
   disposition: open

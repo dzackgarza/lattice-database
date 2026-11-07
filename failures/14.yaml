@@ -182,6 +182,96 @@
     run_url: https://github.com/dzackgarza/lattice-database/actions/runs/42326648686/attempts/1
     database_revision: 78ef8ce6285aef04059b2c35e88a0ae1a3f57a96
     research_revision: e94f00da5a9e4670e0480613dd6f5e3d87c75923
+  - hash: f089cbb950acff28effd95c307bee09283ce078f7f82a38dad1549a0565bec08
+    gram_tensor:
+    - - 0
+      - 1
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+    - - 1
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+    - - 0
+      - 0
+      - -2
+      - 0
+      - 1
+      - 0
+      - 0
+      - 0
+      - 0
+    - - 0
+      - 0
+      - 0
+      - -2
+      - 0
+      - 1
+      - 0
+      - 0
+      - 0
+    - - 0
+      - 0
+      - 1
+      - 0
+      - -2
+      - 1
+      - 0
+      - 0
+      - 0
+    - - 0
+      - 0
+      - 0
+      - 1
+      - 1
+      - -2
+      - 1
+      - 0
+      - 0
+    - - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 1
+      - -2
+      - 1
+      - 0
+    - - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 1
+      - -2
+      - 1
+    - - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 1
+      - -2
+    reason: worker or runner lost (recovered from exceeded.yaml)
+    stderr: ''
+    seconds: 824.0
+    recorded_at: 2026-11-07 10:44:49.393501+00:00
+    run_url: https://github.com/dzackgarza/lattice-database/actions/runs/42363689427/attempts/1
+    database_revision: dde534ecd9d7c61af3800d20eb1635bc7541f38a
+    research_revision: 8ef80cd0b704a288754fd4a4a3fc8d16d272434b
   notes: []
 026O integral.primitive_orbits:
   disposition: open
@@ -316,6 +406,115 @@
     run_url: https://github.com/dzackgarza/lattice-database/actions/runs/42326648686/attempts/1
     database_revision: 78ef8ce6285aef04059b2c35e88a0ae1a3f57a96
     research_revision: e94f00da5a9e4670e0480613dd6f5e3d87c75923
+  - hash: 7dbc6f914f5d61c0a38d69ec23dfc16e91c4a46e09b5241a30fcfa0663feed9e
+    gram_tensor:
+    - - 0
+      - 1
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+    - - 1
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+    - - 0
+      - 0
+      - -2
+      - 1
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+    - - 0
+      - 0
+      - 1
+      - -2
+      - 1
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+    - - 0
+      - 0
+      - 0
+      - 1
+      - -2
+      - 1
+      - 0
+      - 0
+      - 0
+      - 0
+    - - 0
+      - 0
+      - 0
+      - 0
+      - 1
+      - -2
+      - 1
+      - 1
+      - 0
+      - 0
+    - - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 1
+      - -2
+      - 0
+      - 0
+      - 0
+    - - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 1
+      - 0
+      - -2
+      - 0
+      - 0
+    - - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - -2
+      - 0
+    - - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - -2
+    reason: worker or runner lost (recovered from exceeded.yaml)
+    stderr: ''
+    seconds: 2814.0
+    recorded_at: 2026-11-07 10:46:19.428498+00:00
+    run_url: https://github.com/dzackgarza/lattice-database/actions/runs/42363689427/attempts/1
+    database_revision: dde534ecd9d7c61af3800d20eb1635bc7541f38a
+    research_revision: 8ef80cd0b704a288754fd4a4a3fc8d16d272434b
   notes: []
 14GP integral.genus_class_count:
   disposition: open

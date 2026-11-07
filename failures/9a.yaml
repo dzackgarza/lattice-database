@@ -3958,6 +3958,40 @@
     reason: worker or runner lost (recovered from exceeded.yaml)
     stderr: ''
     seconds: 0.0
+    recorded_at: 2026-11-07 10:44:31.263795+00:00
+    run_url: https://github.com/dzackgarza/lattice-database/actions/runs/42363689427/attempts/1
+    database_revision: dde534ecd9d7c61af3800d20eb1635bc7541f38a
+    research_revision: 8ef80cd0b704a288754fd4a4a3fc8d16d272434b
+  - hash: bbdf81859a7c83b1f25fef66b09c19c7fe6e0bf6a4e65c21fe5aad8eca91aef1
+    gram_tensor:
+    - - 2
+      - 0
+      - 1
+      - 1
+      - 0
+    - - 0
+      - 2
+      - 0
+      - 0
+      - 1
+    - - 1
+      - 0
+      - 4
+      - 0
+      - 2
+    - - 1
+      - 0
+      - 0
+      - 4
+      - -2
+    - - 0
+      - 1
+      - 2
+      - -2
+      - 14
+    reason: worker or runner lost (recovered from exceeded.yaml)
+    stderr: ''
+    seconds: 0.0
     recorded_at: 2026-11-07 16:53:53.765736+00:00
     run_url: https://github.com/dzackgarza/lattice-database/actions/runs/42391523243/attempts/1
     database_revision: 18abc0744e1b63baf84d248d7fc8601a53dd30e2
