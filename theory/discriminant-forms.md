@@ -78,3 +78,27 @@ $O(A_L, q_L)$ acts on them, and a card states the number of orbits in `isotropic
 `latticedb certify` computes the three from the Gram tensor, at the discriminant quadratic form the owner builds for $L$: its `orthogonal_group().order()`, its `isotropic_elements()`, and its maintained orbit partition `orbits()`.
 $q_L$ is constant on an orbit of $O(A_L, q_L)$, so the orbits of isotropic classes are the orbits of that partition which lie inside the isotropic classes.
 The partition is of the classes of $A_L$ and $q_L$ is a quadratic form only on an even lattice, so the request is made on an even card where there are few classes, $|A_L| = |\det L| \leq 4096$.
+
+## Two discriminant forms with the same invariant counts {#equal-counts}
+
+The three counts are not a complete invariant of $(A_L, q_L)$, and two lattices of this corpus show
+it. The Enriques lattice $T_{En} = U \oplus U(2) \oplus E_8(-2)$ has $A_L \cong (\mathbb{Z}/2)^{10}$
+with $q_L$ integral-valued, and the Coble lattice $T_{Co} = \langle 2 \rangle \oplus U(2) \oplus E_8(-2)$
+is the same sum with the hyperbolic plane $U$ replaced by $\langle 2 \rangle$. Their discriminant
+forms are **not** isometric: $|A_L|$ is $2^{10}$ for one and $2^{11}$ for the other.
+
+Yet the computed counts agree: both have $|O(A_L, q_L)| = 46\,998\,591\,897\,600$, $528$ isotropic
+classes and $2$ orbits on them. The reason is the summand the Coble lattice adds. The discriminant
+form is taken termwise over an orthogonal decomposition, so
+$q_{T_{Co}} = q_{T_{En}} \oplus q_{\langle 2 \rangle}$ with $q_{\langle 2 \rangle}(1) = 1/2$. An
+isometry preserves $q$, and a class $(x, \epsilon)$ is isotropic exactly when
+$q_{T_{En}}(x) + \epsilon/2 = 0$ in $\mathbb{Q}/2\mathbb{Z}$; since $q_{T_{En}}$ takes integral values,
+that forces $\epsilon = 0$. So the isotropic classes of the Coble form are the isotropic classes of
+the Enriques form, and no isometry can move the extra coordinate: an element mapping $(0, 1)$ to
+$(u, 1)$ would need $q_{T_{En}}(x + u) = q_{T_{En}}(x)$ for every $x$, which holds only for $u = 0$
+because the form is nondegenerate. Hence the two groups have the same order and their isotropic
+orbits correspond, while the forms themselves are distinct.
+
+Equal counts are therefore evidence about $O(A_L, q_L)$, not about the form: an isometry claim needs
+the forms compared themselves, and §[Orthogonal group and isotropic classes](#discriminant-orthogonal-group)
+states only the counts.

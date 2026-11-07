@@ -3,6 +3,8 @@ tag: 6JRR
 name: T_Co
 latex: T_{\mathrm{Co}}
 aliases: [Coble lattice]
+certifications:
+  integral.discriminant_form: 0be391409303d25f25d126795ee881040661b4883ad7473272b34b60b8c414da
 rank: 11
 gram_tensor:
 - [2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
@@ -21,11 +23,15 @@ determinant: -2048
 definiteness: indefinite
 integral:
   parity: even
+  discriminant_form:
+    orthogonal_group_order: 46998591897600
+    isotropic_classes: 528
+    isotropic_orbits: 2
 indefinite:
   isotropic: true
+morphisms: []
 arithmetic_groups: [otilde-t-co, otilde-plus-t-co]
 ---
-
 
 The Coble lattice $T_{\mathrm{Co}} = \langle 2 \rangle \oplus U(2) \oplus E_8(-2)$, in the basis $e_{0}$ of the first summand, $e_{1}, f_{1}$ of $U(2)$ with $b(e_{1}, f_{1}) = 2$, and the simple roots of $E_{8}(-2)$: rank $11$, signature $(2, 9)$, determinant $-2048$, even.
 
