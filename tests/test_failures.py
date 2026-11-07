@@ -205,9 +205,12 @@ def test_a_ledger_entry_must_be_in_the_shard_of_its_own_tag(tmp_path: Path) -> N
     with pytest.raises(ValueError, match="belongs to the shard"):
         failures.load(tmp_path)
 
-    # A misplaced duplicate must also be rejected. Keep the original misplaced copy beside a lawful
-    # entry of the same computation of that tag: it is the duplicate that is abnormal, never its two
-    # keys, which are distinct computations of one card and so belong to the same shard.
+    # The lawful pair must not live beside the misplaced copy left by the rejection above: that stray
+    # shard correctly still raises. Drop that file and assert the two distinct computations share the
+    # proper shard, then restore the misplaced entry for its own separate rejection.
+    misplaced = tmp_path / failures.DIRECTORY / f"{other}.yaml"
+    rejected = misplaced.read_bytes()
+    misplaced.unlink()
     (tmp_path / failures.DIRECTORY / f"{owner}.yaml").write_text(
         yaml.safe_dump({"0012 integral.genus_symbol": entry, "0012 genus_symbol": entry})
     )
@@ -215,6 +218,9 @@ def test_a_ledger_entry_must_be_in_the_shard_of_its_own_tag(tmp_path: Path) -> N
         "two different computations of one card are both in its own shard"
     )
     (tmp_path / failures.DIRECTORY / f"{other}.yaml").write_text(yaml.safe_dump({"0012 integral.genus_symbol": entry}))
+    # Duplicate occurrence, not just a wrong owner: the misplaced entry still has to be refused as
+    # long as its correct copy sits in the other shard too.
+    misplaced.write_bytes(rejected)
     with pytest.raises(ValueError, match="belongs to the shard"):
         failures.load(tmp_path)
 

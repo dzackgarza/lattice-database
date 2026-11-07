@@ -9,11 +9,6 @@ import yaml
 
 from latticedb import failures
 
-from datetime import UTC, datetime
-from pathlib import Path as _Path
-
-from latticedb import failures
-
 REPOSITORY = Path(__file__).resolve().parent.parent
 
 
@@ -25,7 +20,7 @@ def failure_attempt(reason: str) -> dict:
         "reason": reason,
         "stderr": "",
         "seconds": 0.0,
-        "recorded_at": datetime(2026, 11, 7, tzinfo=UTC).isoformat(),
+        "recorded_at": datetime(2026, 11, 7, tzinfo=UTC),
         "run_url": None,
         "database_revision": None,
         "research_revision": None,
