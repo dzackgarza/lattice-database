@@ -789,10 +789,6 @@
   hash: 5216c19917c86ca8a3d9b1779748c03fde8b19ce9dfb221fc1e687bdc0003b5c
   seconds: 23
   lost: true
-2WPF integral.discriminant_form:
-  hash: 5438acedc8d5e522eb0818e4f90bdd25de7227ca7c46fe4cc4b845d6f0f4104b
-  seconds: 0
-  lost: true
 2WSH integral.discriminant_form:
   hash: 683119111420130b1ad318c37c327801e5646ecb26913c32fcc5a77846ee50eb
   seconds: 0
@@ -804,6 +800,10 @@
 2WVB integral.discriminant_form:
   hash: 0dc1e7fcfd970d57adb6186b306888c2802fd2cda5e49d13b8c32920bac64351
   seconds: 0
+  lost: true
+2X3G integral.discriminant_form:
+  hash: 8bb78c0a3069ba7e1936c1f3fedd29dc4bad09b69d0def591fc0f19170dc2a95
+  seconds: 38
   lost: true
 2X64 integral.discriminant_form:
   hash: 26f19544aa063949cae90d07e36f650661cb600a649b11bced0cb6d71e7913af
