@@ -20960,6 +20960,9 @@
 2WS9 integral.anisotropic_primes:
   hash: 33804f7513812252fe5ce678e4200f1b08ef0a4161bbb43cd2a377280a4d4f4a
   by: research preamble
+2WS9 integral.discriminant_form:
+  hash: be1b3cdc4776f4b7bdadcb62ac3079197fdd2dc0390a419990298b2c79d8b0fc
+  by: research preamble
 2WS9 integral.discriminant_sequence:
   hash: b272e2574fee8c114dc75c94339a84fc4d337854da859eda8bdbe960c7ac5330
   by: research preamble
@@ -26873,11 +26876,17 @@
 3I2K integral.spinor_genus_count:
   hash: 98f9864243d6c734c12b09ea7c95c2fb937df46129a6bce5371a33a075694251
   by: research preamble
+3IE6 automorphisms.automorphism_group_generator_morphisms:
+  hash: c3a27e3b155a93f0b54b81dd6a0315bfc1e2de6a2f07ebaac378923efb0a80a7
+  by: research preamble
 3IE6 derive:
   hash: cbcc8cc780d6a0a2ff861fa2bc1b32d5e2827831ebd6b96741be1f8a2ff01576
   by: research preamble
 3IE6 form.integer_valued:
   hash: f8c7a30969e0370cfc7fa48c413ce7351a56df390c635bb3226087db8795d8dd
+  by: research preamble
+3IE6 integral.anisotropic_primes:
+  hash: b9ec7486fea7edb8bc83fd79d7b4f289c22e31f69933217bbac40b1a71d963c7
   by: research preamble
 3IE6 integral.elementary_primes:
   hash: e4d9e51616e8cd0abf7eb9e2393bec64778009390a674e7d1a6fd8e7de19b02c
@@ -26888,8 +26897,20 @@
 3IE6 integral.genus_symbol:
   hash: a67ecbad51d6cea639bdd61e7802a8d168f3b2ad6acc35fe6c9e8e0f5b0850cd
   by: research preamble
+3IE6 integral.local_densities:
+  hash: 5a0c86415d7a44f40ac67e37d81136eec056040e7a91499d2d19fd8c5ce23ccc
+  by: research preamble
+3IE6 integral.local_representations:
+  hash: 5ab99e68a297d35b50153fd6f93f2cbfe52e617c6c50db5a39792a7e1c7131ba
+  by: research preamble
+3IE6 integral.modular_scale:
+  hash: 3aebbaf649c76d1c895c69410a896c19a50ab1de4a80b556614d03a72d05d478
+  by: research preamble
 3IE6 integral.overlattice_count:
   hash: fe0e635a3a3d505b0e49e22e980eed2e1267d6381e98354f232eea81186b4385
+  by: research preamble
+3IE6 integral.primitive_orbits:
+  hash: 40ae53c403b979cedcfae7017a90443a3a67fce7ffcd2135c2de438a25f49d51
   by: research preamble
 3IE6 integral.spinor_genera:
   hash: 5dd6b5d4ef09c43bd731c307804041fae13ecb3fa7816e5b1085bf86d9832361

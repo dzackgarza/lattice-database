@@ -28736,11 +28736,17 @@
 3HV9 integral.spinor_genus_count:
   hash: 3acfdb63fcf4c55bb45415dbfdcb7feca0aea903c21cc1f49a9fda81f8e64118
   by: research preamble
+3IDB automorphisms.automorphism_group_generator_morphisms:
+  hash: 246cceb34800e5caa048e182967e9c720afbe56c0ec93afcd9c37e9e8d794e68
+  by: research preamble
 3IDB derive:
   hash: ab9abb1f599938ba04742f705ba02be0e57aae0f13dcedc9780f12c85a5d4000
   by: research preamble
 3IDB form.integer_valued:
   hash: 4b2484f760945a857e30ff15f7ac29fc3ffe628de8fd00e3de4c099b0bb7650e
+  by: research preamble
+3IDB integral.anisotropic_primes:
+  hash: 9270bd18e5a489f4a0f161031ec5119ad36554589f8b9144923d60df1d1703bb
   by: research preamble
 3IDB integral.elementary_primes:
   hash: ea5c0c8e8110b94d6ab0ec81df8e95676306dc0d32d49d7a482dea08a7a05a75
@@ -28751,8 +28757,20 @@
 3IDB integral.genus_symbol:
   hash: 926aae2c1b16004a5c0ee1e59065bb3dfbfb001a4f8415861cd1087641108c4a
   by: research preamble
+3IDB integral.local_densities:
+  hash: eeafaa42bce6e3023a6e33e6bdc6a6c15380f58be48fa285b1369b43494309e9
+  by: research preamble
+3IDB integral.local_representations:
+  hash: 1caec72832667ba0682838c52577405c4ae662410c39e0777aac00c389640c78
+  by: research preamble
+3IDB integral.modular_scale:
+  hash: d9795a08156d39373ca376eb3a4c16c8843f19732acd8dfdc4a41ef178389a6c
+  by: research preamble
 3IDB integral.overlattice_count:
   hash: cf394e00ed51bc61db5fceef3784b570a78e11c7387710320da6239be288f9d8
+  by: research preamble
+3IDB integral.primitive_orbits:
+  hash: 1b828319a6e748256523e565f3a0b3354105b3bc10f1fb7bd0d0a8239141dc3d
   by: research preamble
 3IDB integral.spinor_genera:
   hash: 5dd8ea7041ed39d211f1ad48cee46071c562ee6d74a6db8e4b313fa1f6078de8

@@ -11,6 +11,12 @@ certifications:
   integral.overlattice_count: cf394e00ed51bc61db5fceef3784b570a78e11c7387710320da6239be288f9d8
   integral.spinor_genus_count: 114afba7a378129f846735b3199ec3d3d5fcc2f9daf387b537bf4afc87c83c17
   integral.spinor_genera: 5dd8ea7041ed39d211f1ad48cee46071c562ee6d74a6db8e4b313fa1f6078de8
+  automorphisms.automorphism_group_generator_morphisms: 246cceb34800e5caa048e182967e9c720afbe56c0ec93afcd9c37e9e8d794e68
+  integral.primitive_orbits: 1b828319a6e748256523e565f3a0b3354105b3bc10f1fb7bd0d0a8239141dc3d
+  integral.modular_scale: d9795a08156d39373ca376eb3a4c16c8843f19732acd8dfdc4a41ef178389a6c
+  integral.anisotropic_primes: 9270bd18e5a489f4a0f161031ec5119ad36554589f8b9144923d60df1d1703bb
+  integral.local_representations: 1caec72832667ba0682838c52577405c4ae662410c39e0777aac00c389640c78
+  integral.local_densities: eeafaa42bce6e3023a6e33e6bdc6a6c15380f58be48fa285b1369b43494309e9
 rank: 3
 gram_tensor:
 - [1, 0, 0]
@@ -29,6 +35,7 @@ integral:
   elementary_primes: [2]
   parity: odd
   level: 4
+  modular_scale: false
   discriminant_group: [2]
   overlattice_count: 1
   bad_reduction_primes: [2]
@@ -36,9 +43,77 @@ integral:
   genus_class_count: 1
   spinor_genus_count: 1
   spinor_genera: [1]
+  primitive_orbits:
+    O:
+      constant: 1
+      z: []
+      w: []
+    SO:
+      constant: 1
+      z: []
+      w: []
+    Otilde:
+      constant: 1
+      z: []
+      w: []
+    SOtilde:
+      constant: 1
+      z: []
+      w: []
+    O+:
+      constant: 1
+      z: []
+      w: []
+    SO+:
+      constant: 1
+      z: []
+      w: []
+    Otilde+:
+      constant: 1
+      z: []
+      w: []
+    SOtilde+:
+      constant: 1
+      z: []
+      w: []
+  anisotropic_primes: []
+  local_representations: []
+  local_densities:
+  - prime: 2
+    densities: [1, 2, 1, 1/2, 1, 1/2, 1, 2, 1, 1, 1, 1/2]
+automorphisms:
+  automorphism_group_generator_morphisms: [O(L) generator 1, O(L) generator 2, O(L) generator 3, O(L) generator 4]
 indefinite:
   isotropic: true
-morphisms: []
+morphisms:
+- target: 3IDB
+  name: O(L) generator 1
+  matrix:
+  - [1, 0, 0]
+  - [0, -1, 0]
+  - [0, 0, 1]
+  scale: 1
+- target: 3IDB
+  name: O(L) generator 2
+  matrix:
+  - [-8, -3, -12]
+  - [-3, 0, -4]
+  - [6, 2, 9]
+  scale: 1
+- target: 3IDB
+  name: O(L) generator 3
+  matrix:
+  - [0, 1, 0]
+  - [-3, 0, -4]
+  - [2, 0, 3]
+  scale: 1
+- target: 3IDB
+  name: O(L) generator 4
+  matrix:
+  - [-1, 0, 0]
+  - [0, -1, 0]
+  - [0, 0, -1]
+  scale: 1
 related:
 - tag: '0001'
   relation: This presentation is obtained by orthogonal sum of 0001, 0001, 3ICX.
