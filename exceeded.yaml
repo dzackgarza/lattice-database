@@ -805,10 +805,6 @@
   hash: 0dc1e7fcfd970d57adb6186b306888c2802fd2cda5e49d13b8c32920bac64351
   seconds: 0
   lost: true
-2X63 integral.discriminant_form:
-  hash: eaed8792768662ec9d62f719ee15194a6d113199b84308b49f842324781f6c7d
-  seconds: 57
-  lost: true
 2X64 integral.discriminant_form:
   hash: 26f19544aa063949cae90d07e36f650661cb600a649b11bced0cb6d71e7913af
   seconds: 0
@@ -824,6 +820,10 @@
 2XOC integral.discriminant_form:
   hash: 270314c5bdccc22b5fefe0abd06847cc820258464008a9b95ddcc8a4cc94e830
   seconds: 0
+  lost: true
+2XPB integral.discriminant_form:
+  hash: 59b3a4b899e26916612a009047765dec8f59fe7ab5c41a2bd8bf6a0ebba3288c
+  seconds: 17
   lost: true
 2XYD integral.discriminant_form:
   hash: 669c94455518391c1401e15a7805218ac554cf1cf71ded29f31756ec2cf22517
