@@ -69,3 +69,54 @@ def test_identity_is_a_valid_morphism_for_a_rational_card() -> None:
         "scale": 1,
     })
     assert records.morphism_problems(morphism, card, card) == []
+
+
+def rational_plane() -> Lattice:
+    """The rank-two rational-valued form with Gram (1, -1/2; -1/2, 1) and determinant 3/4.
+
+    This is the shape the triangle's mirror form has in its positive-definite part: two walls of
+    norm 1 meeting at the angle pi/3, whose Gram entry is -cos(pi/3) = -1/2. It is a genuine
+    rational-valued card -- three of its four entries are not integers -- so every form it presents
+    must be constructed in the declared value module rather than by coercing a scalar.
+    """
+    return Lattice.model_validate({
+        "tag": "00R2",
+        "name": "Two mirrors at an angle of pi/3",
+        "latex": r"\langle 1, -1/2; -1/2, 1 \rangle",
+        "rank": 2,
+        "gram_tensor": [["1", "-1/2"], ["-1/2", "1"]],
+        "signature": [2, 0],
+        "determinant": "3/4",
+        "definiteness": "positive_definite",
+        "integral": {"parity": "odd"},
+    })
+
+
+def test_a_nontrivial_isometry_of_a_rational_form_is_stored_and_admitted() -> None:
+    """The exchange of the two mirrors is an isometry of the rational form; a near miss is not.
+
+    $G = \\begin{pmatrix} 1 & -1/2 \\\\ -1/2 & 1 \\end{pmatrix}$ has equal diagonal entries and equal
+    off-diagonal entries, so the transposition of the two basis vectors, $P = \\begin{pmatrix}0&1\\\\1&0
+    \\end{pmatrix}$, satisfies $P^{\\mathsf T} G P = G$ exactly, and $-P$ and $2P$ satisfy it at scale 1
+    and 4 respectively. The matrix $\\begin{pmatrix}1&0\\\\1&1\\end{pmatrix}$ does not, and the checker
+    has to say so: an acceptance test that only ever tries the identity cannot tell a working
+    form-preserving check from one that answers "yes" to everything.
+
+    Each verdict is `records.morphism_problems`, the repository's own stored-morphism checker, over
+    the card's own Gram tensor read as exact rationals through `records.rational_gram`.
+    """
+    card = rational_plane()
+    isometry = Morphism.model_validate({"target": card.tag, "name": "exchange", "matrix": [[0, 1], [1, 0]], "scale": 1})
+    assert records.morphism_problems(isometry, card, card) == [], "P^T G P = G for the exchange"
+    negated = Morphism.model_validate({"target": card.tag, "name": "minus the exchange", "matrix": [[0, -1], [-1, 0]], "scale": 1})
+    assert records.morphism_problems(negated, card, card) == [], "(-P)^T G (-P) = G, so it is an isometry too"
+    scaled = Morphism.model_validate({"target": card.tag, "name": "the exchange scaled by 2", "matrix": [[0, 2], [2, 0]], "scale": 4})
+    assert records.morphism_problems(scaled, card, card) == [], "(2P)^T G (2P) = 4G, the stated scale"
+    shear = Morphism.model_validate({"target": card.tag, "name": "a shear", "matrix": [[1, 0], [1, 1]], "scale": 1})
+    assert records.morphism_problems(shear, card, card) == [
+        "a shear: the matrix does not define the stated form-preserving morphism"
+    ], "a shear of a rational-valued form is not an isometry, and the checker must reject it"
+    wrong_scale = Morphism.model_validate({"target": card.tag, "name": "the exchange at the wrong scale", "matrix": [[0, 1], [1, 0]], "scale": 2})
+    assert records.morphism_problems(wrong_scale, card, card) == [
+        "the exchange at the wrong scale: the matrix does not define the stated form-preserving morphism"
+    ], "the scale is part of the claim: G is not 2G"
