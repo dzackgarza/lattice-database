@@ -21534,6 +21534,9 @@
 30IF integral.anisotropic_primes:
   hash: 4a63de100baaf766f15295a0113142469cba8c47022ef134740df0becb599afd
   by: research preamble
+30IF integral.discriminant_form:
+  hash: a66b866db04b65110c61f3e5f0bc928d97fc65d2f6f10a4e1676b623b8f924bb
+  by: research preamble
 30IF integral.discriminant_sequence:
   hash: e21eea66f65bb6f7ebf9b8dff7cfd7c21e77e16f28f566cdfa91bbeb147154bd
   by: research preamble
