@@ -1,0 +1,18 @@
+diff --git a/.github/workflows/certify.yml b/.github/workflows/certify.yml
+index f5272148ad..52b072e636 100644
+--- a/.github/workflows/certify.yml
++++ b/.github/workflows/certify.yml
+@@ -57,8 +57,13 @@ jobs:
+     needs: plan
+     # Each shard is a runner with its own job budget. A computation that never ends
+     # spends one worker of one shard, so the corpus advances on every other worker.
++    # At most eight shards run at once (#28): sixteen held every runner of the account for the
++    # whole of the run, and the other repositories' CI waited hours for one. The shards, their
++    # budgets and the work each one certifies are unchanged; the second eight start as the first
++    # eight finish, so a run takes about twice as long and leaves half the runners available.
+     strategy:
+       fail-fast: false
++      max-parallel: 8
+       matrix: ${{ fromJSON(needs.plan.outputs.matrix) }}
+     env:
+       SHARDS: ${{ matrix.shards }}
