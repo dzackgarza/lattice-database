@@ -1,0 +1,59 @@
+# #5: the suite the tests workflow runs, in the image, on this VM
+
+The dispatched tests run 42823973007 (schedule-bypassing dispatch on 6f4784a604, the landed #5
+patch) reported, per the run's steps:
+
+    step 7 Run every lattice database test ...              completed failure
+    step 9 Validate preamble owner contracts                completed failure
+    step 8 Check out sage-extensions                        completed success
+    step 10 Stop the Sage environment                       completed success
+
+So the reordered workflow did what #5 asked of it: step 7 ran instead of being skipped (compare run
+42804774167, where step 9 of the old order was `completed skipped`). Its failure is not the workflow's
+any more. This is what the step meets, run here through the same image
+(`~/sage-image/run.sh`, the pinned rootfs, `PYTHONPATH=/repo/research/src:/repo/src`).
+
+## 1. Collection: six modules import a package research's preamble no longer has
+
+    $ run.sh ... pytest --collect-only -q tests
+    tests/validation/test_construction.py:11: in <module>
+        from dzack_research.preamble.categories.lattices import Lattices
+    E   ModuleNotFoundError: No module named 'dzack_research.preamble.categories'
+    ERROR tests/source_intake/test_hashimoto_source.py
+    ERROR tests/source_intake/test_nebe_sloane_source.py
+    ERROR tests/test_construction_corpus.py
+    ERROR tests/test_hashimoto.py
+    ERROR tests/test_owned_boundaries.py
+    ERROR tests/validation/test_construction.py
+    !!!!!!!!!!!!!!!!!!!! Interrupted: 6 errors during collection !!!!!!!!!!!!!!!!!!!!
+    244 tests collected, 6 errors in 1.58s
+
+`dzackgarza/research`'s `src/dzack_research/preamble/` holds `__init__.py` and `all.py` at main, and
+the checkout mounted here is the same: the preamble is the shim to sage-extensions that #5's own body
+describes. The six modules are stale against it, and pytest interrupts the run on a collection error,
+so the 244 modules that do collect never run — the record checks among them.
+
+## 2. The record checks report once collection is not fatal
+
+`--continue-on-collection-errors` is what the landed workflow needs; with it, pytest reports the
+error, runs what collected, and still exits nonzero:
+
+    $ run.sh ... pytest -q --continue-on-collection-errors \
+        tests/test_owned_boundaries.py tests/test_stored_records.py
+    E   ModuleNotFoundError: No module named 'dzack_research.preamble.categories'
+    ERROR tests/test_owned_boundaries.py
+    2 passed, 1 error in 219.40s (0:03:39)
+
+The two that pass are `tests/test_stored_records.py`, which is #21's check on 0021, 0024, 0026 and
+0268 through `checks.records.problems` and the real `certificates/`:
+
+    $ run.sh ... pytest -q tests/test_stored_records.py
+    ..                                                                       [100%]
+    2 passed in 216.52s (0:03:36)
+
+That is #21's acceptance: no contradiction on those four cards, inside the image, through the
+verifier's own module. The six stale imports are a separate defect — the modules name a package the
+shim moved to sage-extensions, and repairing an ownership assertion's import is not a workflow
+change — so this logs them rather than changing them.
+
+Patches: results/tests-workflow-continue-collection.patch (this repair).

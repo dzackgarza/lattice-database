@@ -1,0 +1,23 @@
+diff --git a/.github/workflows/tests.yml b/.github/workflows/tests.yml
+index 2eb7ac7520..3effa5ebf1 100644
+--- a/.github/workflows/tests.yml
++++ b/.github/workflows/tests.yml
+@@ -37,13 +37,17 @@ jobs:
+       # The database's own suite runs first, and without -x: this job is where the stored cards'
+       # certificate references are checked (`tests/test_stored_records.py`), and a step that fails
+       # before it must not hide a card that lost its references (#5, #21).
++      # `--continue-on-collection-errors`: six modules still import `dzack_research.preamble.categories`,
++      # which research's shim preamble no longer has, and pytest interrupts the whole run when a module
++      # fails to import — so those six, whose repair is theirs, would otherwise hide the checks of the
++      # 244 tests that do collect. The step is still red on them: pytest exits nonzero either way.
+       - name: Run every lattice database test, including Sage sessions and source intake
+         run: |
+           docker exec -i --workdir "$GITHUB_WORKSPACE" \
+             --env "PYTHONPATH=$GITHUB_WORKSPACE/_ci-support/ai-review-ci/tool-artifacts/pytest_plugins:$GITHUB_WORKSPACE/research/src:$GITHUB_WORKSPACE/src" \
+             sage-env /sage/.venv/bin/python \
+             -c 'import sage.all, sys, pytest; sys.exit(pytest.main(sys.argv[1:]))' \
+-            -p qc_sage_session -p qc_unique_inventory --durations=20 tests
++            -p qc_sage_session -p qc_unique_inventory --durations=20 --continue-on-collection-errors tests
+       # The owner contracts are the owner library's own suite, checked out at sage-extensions main;
+       # their first test starts the Julia bridge and is billed the owner's 60 s ceiling
+       # (sage-extensions#237). They report after the database's checks, and the job is red on either.
