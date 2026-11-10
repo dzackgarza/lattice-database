@@ -1,0 +1,65 @@
+# #5: the owner-contract step, before and after warming the bridge
+
+The failing step of tests run 42823973007 is step 9 "Validate preamble owner contracts": it runs
+sage-extensions' own `tests/lattices/test_lattice_database_owner_contracts.sage` and
+`tests/lattices/test_coordinate_diagonal_embeddings.py` from a checkout of that repository's main,
+with its own `pyproject.toml` `addopts`, which include `--timeout=60 --timeout-method=signal`.
+
+Reproduced here in the image, with the same command, the same two files, the same inifile and the
+same plugins (`-p qc_sage_session -p qc_unique_inventory`), against the sage-extensions copy the
+image bakes in at `/repos/sage-extensions` (`7b222e8621`):
+
+    $ run.sh -w /sage-ext ... pytest -p qc_sage_session -p qc_unique_inventory \
+        tests/lattices/test_lattice_database_owner_contracts.sage \
+        tests/lattices/test_coordinate_diagonal_embeddings.py
+    timeout: 60.0s
+    collected 13 items
+    ======================= 1 warning in 61.17s (0:01:01) =======================
+    ! _pytest.outcomes.Exit: ...::test_positive_a2_genus_and_orthogonal_group_are_owned_by_the_lattice:
+      Timeout (>60.0s) from pytest-timeout. !
+    PYEXIT=1
+
+One test, 61 s, and the run is over: the first contract that reaches the Julia bridge pays the
+session start, which the owner records as `61 s` on the first call and `0.0 s` on every later one
+(sage-extensions#237). The ceiling is the owner's; this repository does not raise it.
+
+## The change: start the bridge before pytest exists
+
+`results/tests-workflow-warm-owner-bridge.patch` prepends one call to the step's `-c` preamble:
+
+    from sage.all import ZZ; from sage_extensions.categories.lattices import Lattices;
+    Lattices(ZZ)([[2, -1], [-1, 2]]).orthogonal_group().order()
+
+That is the owner's own operation, done once outside any test's timer, exactly as a session warm-up
+does it. pytest's 60 s ceiling is untouched, the test still computes and asserts its order, and no
+assertion changes.
+
+The same invocation with the warm-up:
+
+    against sage-extensions main 38f8109:   1 failed, 12 passed in 6.60s   (contract run, both files)
+    against the image's 7b222e8621:         2 failed, 11 passed in 8.91s
+
+So the timeout is gone: thirteen items in seven seconds instead of one item in sixty-one.
+
+## What is still red, and why it is not this repository's
+
+At sage-extensions **main**, the single remaining failure is their own test:
+
+    tests/lattices/test_lattice_database_owner_contracts.sage:148:
+        series = lattice.primitive_orbit_series()
+    sage_extensions/categories/lattices.py:3305: in primitive_orbit_series
+        return primitive_orbit_series(self, bound=bound)
+    sage_extensions/categories/lattice_orbit_invariants.py:136:
+    E   ValueError: primitive bounded orbit series requires a definite lattice,
+        not Integral lattice of rank 5 and signature (2, 3)
+
+That is sage-extensions#286, open: their contract asks an indefinite lattice for its primitive orbit
+series and their own code refuses it. The same precondition is what blocks #16 in this repository, so
+the contract step cannot be green until #286 lands. Nothing here is narrowed, deselected or skipped
+to hide it.
+
+Against the image's baked `7b222e8621` a second owner defect shows as well, and it is green at main:
+`test_root_and_theta_catalogue_invariants_are_owned_by_the_lattice` fails with
+`AttributeError: 'int' object has no attribute 'parent'` at
+`sage_extensions/categories/definite_lattices.py:294`. It is the image's revision, not ours, and not
+main.
