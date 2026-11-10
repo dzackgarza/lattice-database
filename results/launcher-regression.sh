@@ -6,7 +6,7 @@
 # and asserts, per case, the launcher's own return code -- the anchored result line and the guest
 # child status it must see, exactly as research#749's launcher regression does.
 #
-# usage: results/launcher-regression.sh [WRAPPER]
+# usage: [LAUNCHER_LOG_DIR=DIR] results/launcher-regression.sh [WRAPPER]
 #   WRAPPER defaults to the repaired launcher. The *same* assertions run against any wrapper, which
 #   is how the unrepaired path is shown to fail: results/launcher-regression.sh
 #   results/verify-launcher-unrepaired.sh must fail on the incomplete, short and signal cases while
@@ -15,14 +15,17 @@ set -u
 REPO=$(cd "$(dirname "$0")/.." && pwd)
 LAUNCHER=${1:-$REPO/results/verify-launcher.sh}
 REPRO=$REPO/results/launcher-regression-repro.py
+# Where each case's log and output go; a caller keeps its own tree clean by naming another directory.
+LOG_DIR=${LAUNCHER_LOG_DIR:-$REPO/.scratch}
+mkdir -p "$LOG_DIR"
 fail=0
 
 # mode expected_rc what it proves
 run_case() {
   mode=$1; want=$2; why=$3
-  log=$REPO/.scratch/launcher-$mode.log
+  log=$LOG_DIR/launcher-$mode.log
   tag=$(basename "$LAUNCHER" .sh)
-  sh "$LAUNCHER" "$log" 2 "$REPRO" "$mode" > "$REPO/.scratch/$tag-$mode.out" 2>&1
+  sh "$LAUNCHER" "$log" 2 "$REPRO" "$mode" > "$LOG_DIR/$tag-$mode.out" 2>&1
   rc=$?
   pyexit=$(sed -n 's/^PYEXIT=//p' "$log" | tail -1)
   results=$(grep -Ec '^[0-9a-f]{7,}: [0-9]+ cards, [0-9]+ problems$' "$log")
