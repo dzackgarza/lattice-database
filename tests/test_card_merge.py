@@ -60,7 +60,9 @@ def repository(tmp_path: Path) -> Path:
     """A repository whose cards merge through the driver `.gitattributes` declares, as main does."""
     (tmp_path / ".gitattributes").write_text((REPOSITORY / ".gitattributes").read_text())
     (tmp_path / "lattices").mkdir()
-    driver = f"{sys.executable} -m latticedb.card_merge %O %A %B"
+    # Git runs a driver in the worktree it merges, so the interpreter needs the source tree by
+    # absolute path rather than the relative one this test session carries.
+    driver = f"env PYTHONPATH={REPOSITORY / 'src'} {sys.executable} -m latticedb.card_merge %O %A %B"
     git(tmp_path, "init", "-q", "-b", "main")
     git(tmp_path, "config", "user.name", "test")
     git(tmp_path, "config", "user.email", "test@example.invalid")
@@ -119,12 +121,17 @@ def test_a_card_keeps_a_value_the_overlapping_run_stored(tmp_path: Path) -> None
 
 
 def test_a_one_sided_change_is_taken_and_a_disagreement_is_the_incoming_run() -> None:
-    """Each key's change comes from the side that made one; a key both changed takes the incoming run."""
+    """Each key's change comes from the side that made one; a key both changed takes the incoming run.
+
+    A citation the incoming run no longer states is a disagreement, and it is taken: a run that
+    retracts a value it certified is the newer record of that key. This is not the defect — the
+    defect is a run that never had the key, which states nothing to disagree with.
+    """
     base = {"certifications": {"derive": "1", "root_span.roots": "2"}, "root_span": {"roots": [[1]], "norms": [1]}}
     ours = {"certifications": {"derive": "1", "root_span.roots": "9"}, "root_span": {"roots": [[1]], "norms": [1]}}
     theirs = {"certifications": {"derive": "1"}, "root_span": {"roots": [[2]], "norms": [2]}}
     assert card_merge.merge(base, ours, theirs) == {
-        "certifications": {"derive": "1", "root_span.roots": "9"},
+        "certifications": {"derive": "1"},
         "root_span": {"roots": [[2]], "norms": [2]},
     }
 

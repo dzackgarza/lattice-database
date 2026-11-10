@@ -1,3 +1,5 @@
 certificates/*.yaml merge=keyed-map
 exceeded.yaml merge=keyed-map
 failures/*.yaml merge=keyed-map
+# A card holds every field of one lattice, and the fields run and the searches run both write it.
+lattices/*.md merge=card-map

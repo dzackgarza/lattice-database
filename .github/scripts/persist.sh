@@ -13,6 +13,15 @@ label="$1"
 final="${2:-}"
 state="$GITHUB_WORKSPACE/.persist"
 mkdir -p "$state"
+# A card holds every field of one lattice, and the fields run and the searches run both hold fields
+# of it, so its citations must merge key by key: a whole-file resolution to either side drops the
+# other run's references, which leaves a certificate in `certificates/` that its card no longer
+# cites (#21). `.gitattributes` names both drivers; they run in the image, whose interpreter holds
+# the preamble and the schema.
+workspace="$(git rev-parse --show-toplevel)"
+python_path="$workspace/research/src:$workspace/src"
+git config merge.keyed-map.driver "docker exec -i --workdir \"\$PWD\" --env PYTHONPATH=$python_path sage-env /sage/.venv/bin/python -m latticedb merge-keyed-map %O %A %B"
+git config merge.card-map.driver "docker exec -i --workdir \"\$PWD\" --env PYTHONPATH=$python_path sage-env /sage/.venv/bin/python -m latticedb.card_merge %O %A %B"
 # A periodic push still running when certification ends finishes before the final one.
 exec 9>"$state/lock"
 flock 9
@@ -37,9 +46,10 @@ for attempt in $(seq 1 30); do
   git -C "$worktree" cherry-pick --abort 2>/dev/null || true
   git -C "$worktree" reset --quiet --hard FETCH_HEAD
   picked=""
-  # Shards own disjoint cards and certificate files; exceeded.yaml merges key by key.
-  # A card that an overlapping writer also changed keeps this shard's newer lines.
-  if ! git -C "$worktree" cherry-pick -X theirs "$snapshot" >/dev/null; then
+  # Shards own disjoint cards and certificate files; a card's lines, exceeded.yaml and the ledger
+  # merge key by key through the drivers above, so an overlapping writer's keys survive this push.
+  # A conflict the drivers cannot merge is a defect: the next snapshot retries it.
+  if ! git -C "$worktree" cherry-pick "$snapshot" >/dev/null; then
     git -C "$worktree" cherry-pick --abort
     echo "::error::Computed values conflict with main; the next snapshot retries them."
     break

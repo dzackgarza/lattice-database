@@ -511,6 +511,12 @@ The nightly workflow runs `--shard i/16` on sixteen runners; a card belongs to t
 Every half hour and at the end of its job, each shard pushes what it has certified since its last push onto `main` (`.github/scripts/persist.sh`), so a runner that dies loses at most half an hour.
 `.gitattributes` merges the files of `certificates/`, `exceeded.yaml` and `failures/`
 key by key with `latticedb merge-keyed-map`, since shards own disjoint tags.
+It merges a card key by key too, with `python -m latticedb.card_merge` (`latticedb/card_merge.py`):
+the fields run and the searches run reach the same card and each rewrites it from the copy it checked
+out, so a certification block is a map two runs add entries to, and a whole-file resolution would
+leave a certificate in `certificates/` that its card no longer cites.
+Each key's change comes from the side that made one, and a key both runs changed takes the incoming
+run — the one that computed it.
 
 ### Manual triage and retry
 

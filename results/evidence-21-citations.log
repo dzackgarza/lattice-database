@@ -4,84 +4,84 @@ certificates.load: 2447522 completed computations
     stored value   [1, -2]
     shard hash     a92340898fb8f749ae8ed59116a2e56270a12b71b736d5a7c495d2df7f778556
     hash of value  a92340898fb8f749ae8ed59116a2e56270a12b71b736d5a7c495d2df7f778556  == shard
-    card cites     nothing
-    is_certified   False
-    contradiction  True
+    card cites     a92340898fb8f749ae8ed59116a2e56270a12b71b736d5a7c495d2df7f778556
+    is_certified   True
+    contradiction  False
   root_span.roots
     stored value   [[-1, 0], [0, -1]]
     shard hash     071077e2653a40dcd962a7653b82cc1680d4a623a3e7670732ecdfcee1390628
     hash of value  071077e2653a40dcd962a7653b82cc1680d4a623a3e7670732ecdfcee1390628  == shard
-    card cites     nothing
-    is_certified   False
-    contradiction  True
+    card cites     071077e2653a40dcd962a7653b82cc1680d4a623a3e7670732ecdfcee1390628
+    is_certified   True
+    contradiction  False
 0024: certificate shard certificates/95.yaml
   hyperbolic.reflective
     stored value   true
 ...
     shard hash     d35bbf9aa3f58c725970189cad77fad401d2831e82d1af43eb9b60eaa982d7e2
     hash of value  d35bbf9aa3f58c725970189cad77fad401d2831e82d1af43eb9b60eaa982d7e2  == shard
-    card cites     nothing
-    is_certified   False
-    contradiction  True
+    card cites     d35bbf9aa3f58c725970189cad77fad401d2831e82d1af43eb9b60eaa982d7e2
+    is_certified   True
+    contradiction  False
   root_span.norms
     stored value   [-2, 4, -2]
     shard hash     6b9d474f5eb690c8ddf0a7d32a28fb94525f0a2f732c6f94389b062805d29af2
     hash of value  6b9d474f5eb690c8ddf0a7d32a28fb94525f0a2f732c6f94389b062805d29af2  == shard
-    card cites     nothing
-    is_certified   False
-    contradiction  True
+    card cites     6b9d474f5eb690c8ddf0a7d32a28fb94525f0a2f732c6f94389b062805d29af2
+    is_certified   True
+    contradiction  False
   root_span.roots
     stored value   [[0, 0, -1], [-1, -1, 0], [-1, 0, -1]]
     shard hash     92c5ad99282b041210f1d701ae4334723e44477b003a01fdac563cb9da7cdcec
     hash of value  92c5ad99282b041210f1d701ae4334723e44477b003a01fdac563cb9da7cdcec  == shard
-    card cites     nothing
-    is_certified   False
-    contradiction  True
+    card cites     92c5ad99282b041210f1d701ae4334723e44477b003a01fdac563cb9da7cdcec
+    is_certified   True
+    contradiction  False
 0026: certificate shard certificates/34.yaml
   hyperbolic.reflective
     stored value   true
 ...
     shard hash     cdb2911d3762f8d79e0ef7481321aefd9a4c7c05b6229c955f18514562a2457a
     hash of value  cdb2911d3762f8d79e0ef7481321aefd9a4c7c05b6229c955f18514562a2457a  == shard
-    card cites     nothing
-    is_certified   False
-    contradiction  True
+    card cites     cdb2911d3762f8d79e0ef7481321aefd9a4c7c05b6229c955f18514562a2457a
+    is_certified   True
+    contradiction  False
   root_span.norms
     stored value   [-2, 2, -2]
     shard hash     350b141850e37568cc774025167bbcee33bb850346d7c8e48451fae3ed54006e
     hash of value  350b141850e37568cc774025167bbcee33bb850346d7c8e48451fae3ed54006e  == shard
-    card cites     nothing
-    is_certified   False
-    contradiction  True
+    card cites     350b141850e37568cc774025167bbcee33bb850346d7c8e48451fae3ed54006e
+    is_certified   True
+    contradiction  False
   root_span.roots
     stored value   [[0, 0, -1], [-1, -1, 0], [-1, 0, -1]]
     shard hash     f15af09961370594f5b9afcc3f9bd05e999d2da7f0787712c27a3f5187a66769
     hash of value  f15af09961370594f5b9afcc3f9bd05e999d2da7f0787712c27a3f5187a66769  == shard
-    card cites     nothing
-    is_certified   False
-    contradiction  True
+    card cites     f15af09961370594f5b9afcc3f9bd05e999d2da7f0787712c27a3f5187a66769
+    is_certified   True
+    contradiction  False
 0268: certificate shard certificates/d0.yaml
   hyperbolic.reflective
     stored value   true
 ...
     shard hash     a7cac4fcfcd91dd46bf190e39ab8b123248445961266d9308e7aa19dae46c3d7
     hash of value  a7cac4fcfcd91dd46bf190e39ab8b123248445961266d9308e7aa19dae46c3d7  == shard
-    card cites     nothing
-    is_certified   False
-    contradiction  True
+    card cites     a7cac4fcfcd91dd46bf190e39ab8b123248445961266d9308e7aa19dae46c3d7
+    is_certified   True
+    contradiction  False
   root_span.norms
     stored value   [-1, -1, 3]
     shard hash     96cee5da58642e087fabcd1818bb79d01e3bdcade2d8d1f6ac9c2ac617696574
     hash of value  96cee5da58642e087fabcd1818bb79d01e3bdcade2d8d1f6ac9c2ac617696574  == shard
-    card cites     nothing
-    is_certified   False
-    contradiction  True
+    card cites     96cee5da58642e087fabcd1818bb79d01e3bdcade2d8d1f6ac9c2ac617696574
+    is_certified   True
+    contradiction  False
   root_span.roots
     stored value   [[-1, 0, 0], [0, -1, 0], [0, 0, -1]]
     shard hash     ea519209c02128603f46a37582cec02eab380789fbf9c26feb5607e6a1863e35
     hash of value  ea519209c02128603f46a37582cec02eab380789fbf9c26feb5607e6a1863e35  == shard
-    card cites     nothing
-    is_certified   False
-    contradiction  True
+    card cites     ea519209c02128603f46a37582cec02eab380789fbf9c26feb5607e6a1863e35
+    is_certified   True
+    contradiction  False
 
-11 contradictions of 11 reported fields
+0 contradictions of 11 reported fields

@@ -89,7 +89,7 @@ def main() -> int:
                 f"    contradiction  {decided}"
             )
     print(f"\n{contradictions} contradictions of {sum(len(fields) for fields in REPORTED.values())} reported fields")
-    return 1 if contradictions == 0 else 0
+    return 0 if contradictions == 0 else 1
 
 
 if __name__ == "__main__":

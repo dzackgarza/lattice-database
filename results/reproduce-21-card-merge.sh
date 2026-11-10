@@ -58,6 +58,7 @@ git commit -q -m "the card both runs read"
 git checkout -q -b searches
 python3 card.py searches base >lattices/0268.md
 git commit -q -am searches
+searches_tip="$(git rev-parse HEAD)"
 
 # The fields run, from the card as it was before that push, certifies a field of its own.
 git checkout -q main
@@ -86,3 +87,15 @@ python3 citations.py lattices/0268.md | sort >after
 echo "   citations after the push: $(wc -l <after)"
 echo "   dropped by a push that reported success:"
 comm -23 before after | sed 's/^/     -/'
+
+echo
+echo "3. the same push with the card driver of this repair, and no -X:"
+git reset --quiet --hard "$searches_tip"
+git config merge.card-map.driver "env PYTHONPATH=$repository/src ${PYTHON:-python3} -m latticedb.card_merge %O %A %B"
+git cherry-pick fields >/dev/null
+python3 citations.py lattices/0268.md | sort >repaired
+echo "   citations after the push: $(wc -l <repaired)"
+echo "   dropped:"
+comm -23 before repaired | sed 's/^/     -/'
+echo "   added by the fields run:"
+comm -13 before repaired | sed 's/^/     +/'
