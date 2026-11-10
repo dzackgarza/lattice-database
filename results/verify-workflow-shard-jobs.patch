@@ -1,8 +1,8 @@
 diff --git a/.github/workflows/verify.yml b/.github/workflows/verify.yml
-index d91be0c4ce..232ebd6147 100644
+index d91be0c4ce..91c8967e21 100644
 --- a/.github/workflows/verify.yml
 +++ b/.github/workflows/verify.yml
-@@ -2,14 +2,68 @@ name: verify
+@@ -2,14 +2,74 @@ name: verify
  'on':
    schedule:
      - cron: 17 3 * * *
@@ -18,6 +18,12 @@ index d91be0c4ce..232ebd6147 100644
  concurrency:
    group: verify
    cancel-in-progress: false
++env:
++  # One shard's process reads every card and then holds its own shard's preamble structures: about
++  # 7.5 GiB of validated cards and 1.9 GiB of certificates before the mathematics, on a runner whose
++  # memory the image and its Julia bridge also use. That is where the scheduled runs died (exit 137,
++  # #6), so every shard job states the ceiling it is given here and reports the peak it needed.
++  SWAP_GIB: 16
  jobs:
 +  plan:
 +    # Sixteen jobs, one per shard, so one shard of the corpus is one job's memory: a shard killed
@@ -72,7 +78,19 @@ index d91be0c4ce..232ebd6147 100644
      runs-on: ubuntu-latest
      timeout-minutes: 350
      defaults:
-@@ -22,10 +76,12 @@ jobs:
+@@ -18,14 +78,24 @@ jobs:
+     steps:
+       - name: Check out (actions/checkout v4)
+         uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
++      - name: State the memory ceiling and give this shard its swap
++        run: |
++          sudo fallocate -l "${SWAP_GIB}G" /swapfile || sudo dd if=/dev/zero of=/swapfile bs=1M count=$((SWAP_GIB * 1024))
++          sudo chmod 600 /swapfile
++          sudo mkswap -q /swapfile
++          sudo swapon /swapfile
++          echo "memory ceiling: ${SWAP_GIB} GiB swap on top of the runner's RAM"
++          free -h
+       - name: Provision the shared Sage environment
          uses: ./.github/actions/sage
        - name: Verify lattice cards and certificate hashes
          run: |
