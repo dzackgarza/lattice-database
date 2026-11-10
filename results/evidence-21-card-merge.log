@@ -1,0 +1,17 @@
+citations on main after the searches run's push (6):
+  derive
+  hyperbolic.reflective
+  integral.genus_class_count
+  integral.genus_symbol
+  root_span.norms
+  root_span.roots
+
+1. persist.sh's cherry-pick, without -X:
+   conflict: the card is not mergeable, so the shard's values never land (persist.sh aborts)
+
+2. persist.sh's cherry-pick as shipped, with -X theirs:
+   citations after the push: 4
+   dropped by a push that reported success:
+     -hyperbolic.reflective
+     -root_span.norms
+     -root_span.roots

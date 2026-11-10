@@ -96,7 +96,7 @@ tag:
 # Focused local model/schema gate. The preamble may be imported; lattice-db owns
 # database mechanics, not a preamble-free shadow mathematics layer.
 test:
-    PYTHONPATH="$HOME/research/src:src" "$(just -f ~/ai-review-ci/justfiles/sage.just -d . _sage-python)" -m pytest tests/test_model.py -q
+    PYTHONPATH="$HOME/research/src:src" "$(just -f ~/ai-review-ci/justfiles/sage.just -d . _sage-python)" -m pytest tests/test_model.py tests/test_card_merge.py -q
 
 # CI-only constructor/serialization/publication integration. Mathematical correctness lives in preamble tests.
 test-validation:
