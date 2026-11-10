@@ -1,0 +1,43 @@
+# #26: the verify shard job turns the runner's own swap off, then allocates and enables its own
+
+The step as landed (`6f4784a604`, corrected in `results/verify-workflow-swap-best-effort.patch` and
+rejected) fails on every hosted runner: they already have an **active** `/swapfile`, so
+`fallocate`/`dd` on that path return `Text file busy`. In verify run 42823977953 that is what ended
+14 of 16 shard jobs at the step, before the verification started.
+
+The rejected patch turned that failure into a warning and ran on the runner's RAM alone. That is a
+fallback, and the workflow would then not know the ceiling it had. This patch removes it and makes
+the step what the issue asks for:
+
+    free -h
+    sudo swapoff -a
+    sudo fallocate -l "${SWAP_GIB}G" /swapfile
+    sudo chmod 600 /swapfile
+    sudo mkswap /swapfile
+    sudo swapon /swapfile
+    echo "memory ceiling: ${SWAP_GIB} GiB swap on top of the runner's RAM"
+    free -h
+
+Every command must succeed: a runner that will not give the swap fails the job here rather than
+running the verification under a ceiling the workflow did not state. `SWAP_GIB` is 8 rather than 16,
+because a hosted runner has about fourteen gigabytes of free disk and its own swap file occupies
+part of it; 8 GiB is headroom on top of the runner's 16 GiB of RAM, which is where the 7.5 GiB of
+validated cards and 1.9 GiB of certificates go.
+
+## Control flow, with the step's script extracted from the patched YAML and run under `bash -e`
+
+`sudo` and the four utilities replaced by shims, `/swapfile` redirected to a scratch path:
+
+    (a) every command succeeds:            rc=0   "memory ceiling: 1 GiB swap on top of the runner's RAM"
+    (b) fallocate refuses (Text busy):     rc=1
+    (c) swapon refuses:                    rc=1
+    (d) swapoff refuses:                   rc=1
+    (e) mkswap refuses:                    rc=1
+
+So the only path to success is a swap the job actually got, and any refusal fails the job.
+
+`git apply --check results/verify-workflow-swap-active-file.patch` against main: clean. The workflow
+parses; the `cards` job's steps are checkout, this step, provisioning, verification, stop.
+
+Not checked here: a hosted runner, which is the dispatched run's evidence — the acceptance is that
+the step passes on all sixteen shards.
