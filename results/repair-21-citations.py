@@ -28,7 +28,20 @@ CITED: dict[str, tuple[str, ...]] = {
     "0026": ("hyperbolic.reflective", "root_span.roots", "root_span.norms"),
     "0268": ("hyperbolic.reflective", "root_span.roots", "root_span.norms"),
 }
-"""Each card and the block-qualified fields whose reference it lacks, in the order it had them."""
+"""The cards of #21, and the block-qualified fields whose reference each lacked."""
+
+RECURRED: dict[str, tuple[str, ...]] = {
+    "0269": ("hyperbolic.reflective", "root_span.roots", "root_span.norms"),
+    "026A": ("hyperbolic.reflective", "root_span.roots", "root_span.norms"),
+    "02AI": ("hyperbolic.reflective", "root_span.roots", "root_span.norms"),
+    "028L": ("hyperbolic.reflective", "root_span.roots", "root_span.norms"),
+    "02A4": ("hyperbolic.reflective",),
+    "02A9": ("hyperbolic.reflective", "root_span.roots", "root_span.norms"),
+}
+"""The same defect on cards certified by a run that pushed before the card merge driver landed.
+
+Each value hashes to its shard's entry, exactly as #21's did; the reference is the whole repair.
+"""
 
 
 def front_matter(path: Path) -> dict[str, Yaml]:
@@ -44,7 +57,7 @@ def certified_value(field: str, value: Yaml) -> Yaml:
 def main(write: bool) -> int:
     held = certificates.load(REPOSITORY)
     restored = 0
-    for tag, fields in CITED.items():
+    for tag, fields in {**CITED, **RECURRED}.items():
         path = REPOSITORY / "lattices" / f"{tag}.md"
         document = frontmatter.load(str(path), encoding="utf-8")
         metadata = front_matter(path)
