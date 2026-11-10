@@ -7,8 +7,8 @@ They are provenance checks, not mathematical certification of lattice records.
 from pathlib import Path
 
 import frontmatter
-from dzack_research.preamble.categories.lattices import Lattices
-from dzack_research.preamble.rings import session_ring_objects
+from sage_extensions.categories.lattices import Lattices
+from sage_extensions.rings import session_ring_objects
 
 from latticedb import hashimoto
 from latticedb.model import Lattice

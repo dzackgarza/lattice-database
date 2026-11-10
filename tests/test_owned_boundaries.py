@@ -2,11 +2,11 @@
 
 from fractions import Fraction
 
-from dzack_research.preamble.categories.abstract_categories.mor_categories import CategoricalMor
-from dzack_research.preamble.categories.lattices import Lattices
-from dzack_research.preamble.categories.modules.framed.formed.form_modules import FormModules
-from dzack_research.preamble.categories.modules.module_morphisms.module_morphisms import ModuleMorphismMethods
-from dzack_research.preamble.rings import session_ring_objects
+from sage_extensions.categories.abstract_categories.mor_categories import CategoricalMor
+from sage_extensions.categories.lattices import Lattices
+from sage_extensions.categories.modules.framed.formed.form_modules import FormModules
+from sage_extensions.categories.modules.module_morphisms.module_morphisms import ModuleMorphismMethods
+from sage_extensions.rings import session_ring_objects
 
 from latticedb import hoehn_mason, sage_genus
 
@@ -29,7 +29,7 @@ def test_coordinate_embeddings_are_owned_category_methods() -> None:
 
 
 def test_public_form_morphism_query_implements_its_declared_owner() -> None:
-    from dzack_research.preamble.categories.modules.framed.formed.form_modules import FormedModuleMor
+    from sage_extensions.categories.modules.framed.formed.form_modules import FormedModuleMor
 
     formed = hoehn_mason._formed(((Fraction(2),),))
     query = FormModules(formed.base_ring()).Mor(formed, formed)

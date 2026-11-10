@@ -1,7 +1,7 @@
 """Fast source-intake checks on the Hashimoto comparator that need no corpus."""
 
-from dzack_research.preamble.categories.lattices import Lattices
-from dzack_research.preamble.rings import session_ring_objects
+from sage_extensions.categories.lattices import Lattices
+from sage_extensions.rings import session_ring_objects
 
 from latticedb import hashimoto
 
