@@ -3,20 +3,36 @@
 from fractions import Fraction
 from pathlib import Path
 
-from flint import fmpz_mat
-
 from latticedb import brandt_intrau, nebe_sloane, nipp, records, regular_ternaries, watson
 from latticedb.model import Lattice
 
 SOURCES = Path(__file__).resolve().parent.parent / "sources"
 
 
+def _determinant(gram_tensor) -> int:
+    """The exact determinant of a Gram tensor, by the flint build this process already has.
+
+    `python-flint` and Sage each load their own `libflint` — 24.0.0 out of `python_flint.libs` and the
+    system 19.0.0 — and the first build's `fmpz_set` binds to the second build's symbol, so
+    `fmpz_mat(...).det()` in a process that has imported `sage.all` writes through a mismatched `fmpz`
+    and the interpreter dies of SIGSEGV (#29). Sage's own matrix is the flint the process loaded, so it
+    is used wherever Sage is importable; `python-flint` is imported only where Sage is not.
+    """
+    try:
+        from sage.all import ZZ, matrix
+    except ImportError:
+        from flint import fmpz_mat
+
+        return int(fmpz_mat(gram_tensor).det())
+    return int(matrix(ZZ, [list(row) for row in gram_tensor]).det())
+
+
 def test_nipp_tables_preserve_the_source_discriminants_and_group_orders() -> None:
     quaternary = nipp.quaternary(SOURCES / "nipp" / "d4to457.html")[0]
     quinary = nipp.quinary(SOURCES / "nipp" / "tbl.256.html")[0]
-    assert (quaternary.discriminant, int(fmpz_mat(quaternary.gram_tensor).det())) == (4, 4)
+    assert (quaternary.discriminant, _determinant(quaternary.gram_tensor)) == (4, 4)
     assert (quaternary.automorphism_group_order, quaternary.mass) == (1152, Fraction(1, 1152))
-    assert (quinary.discriminant, int(fmpz_mat(quinary.gram_tensor).det())) == (2, 4)
+    assert (quinary.discriminant, _determinant(quinary.gram_tensor)) == (2, 4)
     assert (quinary.automorphism_group_order, quinary.mass) == (3840, Fraction(1, 3840))
 
 
