@@ -820,12 +820,13 @@
 325I integral.discriminant_form:
   hash: 9568c621d279fe3b7391542fd0ca1b25d5ac453a10138280346b6d9794bd772e
   seconds: 25
-32L2 integral.discriminant_form:
-  hash: 5ef09f2721620cb03acf97c5216a225ccb4a57c02cf03ab667b9e6b53f59c310
-  seconds: 103
 32LP integral.discriminant_form:
   hash: 649e502802b4af36e76a9c2d66507099b29040b5368f3b12ae84cb60c62ec228
   seconds: 178
+  lost: true
+32O7 integral.discriminant_form:
+  hash: 42dc408c0f4f27f546ee9432f76cf747a5fb48f4e3a7ebff8f19781ec577f518
+  seconds: 99
   lost: true
 32T6 integral.discriminant_form:
   hash: 2ec1e44ca1c5ab2db7d1354973711f098009a0810fe545e0dfc598815526ffdd
