@@ -5,6 +5,7 @@ They are provenance/importer checks, not mathematical certification.
 """
 
 import shutil
+from fractions import Fraction
 from pathlib import Path
 
 from sage_extensions.categories.lattices import Lattices
@@ -117,4 +118,7 @@ def test_nebe_sloane_reads_the_full_matrix_of_shimada_86() -> None:
     # Inertia needs ordered scalar values, so it is read on the rational extension.
     signature = Lattices(rationals)(entry.gram_tensor).signature_pair()
     assert (int(signature.first()), int(signature.second()), 0) == (86, 0, 0)
-    assert int(formed.determinant()) == entry.determinant
+    # The owner's determinant is a rational element, not an int: read it the way `records.derive`
+    # reads the same value, through its own numerator and denominator.
+    determinant = formed.determinant()
+    assert Fraction(int(determinant.numerator()), int(determinant.denominator())) == entry.determinant
