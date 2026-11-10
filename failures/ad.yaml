@@ -32,6 +32,64 @@
     database_revision: 54ecc46bccb202a0a5f350e5be4c5c1e8f75199e
     research_revision: 4cc04120c71677ea67c18ed6613c96b83d0a763c
   notes: []
+02A4 root_span.norms:
+  disposition: open
+  attempts:
+  - hash: 7aa8f3884b58876a5dc80ffa089f36db637c10b477965d6999e19c884f8a55fa
+    gram_tensor:
+    - - 0
+      - -1
+      - 0
+      - 0
+    - - -1
+      - 0
+      - 0
+      - 0
+    - - 0
+      - 0
+      - -4
+      - 2
+    - - 0
+      - 0
+      - 2
+      - -4
+    reason: certification budget exhausted
+    stderr: ''
+    seconds: 18008.0
+    recorded_at: 2026-11-10 02:28:16.389439+00:00
+    run_url: https://github.com/dzackgarza/lattice-database/actions/runs/42696414078/attempts/1
+    database_revision: 62592b2121f3c55759bb57e14fde3c406a69ef0e
+    research_revision: 4cc04120c71677ea67c18ed6613c96b83d0a763c
+  notes: []
+02A4 root_span.roots:
+  disposition: open
+  attempts:
+  - hash: e2ca1e7013d839ff43e2d289572c32609b3f6893d831d7c5c768a82c4bedeadb
+    gram_tensor:
+    - - 0
+      - -1
+      - 0
+      - 0
+    - - -1
+      - 0
+      - 0
+      - 0
+    - - 0
+      - 0
+      - -4
+      - 2
+    - - 0
+      - 0
+      - 2
+      - -4
+    reason: certification budget exhausted
+    stderr: ''
+    seconds: 18018.0
+    recorded_at: 2026-11-10 02:28:24.381420+00:00
+    run_url: https://github.com/dzackgarza/lattice-database/actions/runs/42696414078/attempts/1
+    database_revision: 62592b2121f3c55759bb57e14fde3c406a69ef0e
+    research_revision: 4cc04120c71677ea67c18ed6613c96b83d0a763c
+  notes: []
 1JFV derive:
   disposition: open
   attempts:
