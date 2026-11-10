@@ -21,10 +21,12 @@ from __future__ import annotations
 import sys
 from collections.abc import Iterable, Mapping
 from pathlib import Path
+from typing import cast
 
 import yaml
 from pydantic import TypeAdapter, ValidationError
 
+from latticedb import storage
 from latticedb.card_serialization import KEYS, record_text
 from latticedb.model import Yaml
 
@@ -94,7 +96,7 @@ def merge(base: Mapping[str, Yaml], ours: Mapping[str, Yaml], theirs: Mapping[st
     for key in _order(ours, theirs, base):
         value = _merged_value(base.get(key, _ABSENT), ours.get(key, _ABSENT), theirs.get(key, _ABSENT))
         if value is not _ABSENT:
-            merged[key] = value
+            merged[key] = cast(Yaml, value)
     return merged
 
 
@@ -115,12 +117,11 @@ def merge_files(base: Path, ours: Path, theirs: Path) -> None:
     """Write the merge of `base`, `ours` and `theirs` to `ours`, as Git's merge driver protocol requires.
 
     The result is written only when the three sides read as cards: a driver that half-writes a card
-    would leave a file that no run wrote.
+    would leave a file that no run wrote, and `storage.write_text` keeps the old card if writing the
+    new one is interrupted.
     """
     merged = merge_text(base.read_text(), ours.read_text(), theirs.read_text())
-    temporary = ours.with_name(f".{ours.name}.merge")
-    temporary.write_text(merged)
-    temporary.replace(ours)
+    storage.write_text(ours, merged)
 
 
 def main(argv: list[str] | None = None) -> int:
