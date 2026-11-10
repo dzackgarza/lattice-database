@@ -31,6 +31,7 @@ run_case() {
 }
 
 run_case normal       0 "two results and the summary: the only case that may pass"
+run_case duplicate    1 "one item reported twice: the other item produced no result"
 run_case incomplete   1 "two results, no summary: a clean exit must still fail"
 run_case short        1 "one result of two: a clean exit must still fail"
 run_case raise        1 "a nonzero guest status must fail"
