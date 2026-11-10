@@ -1,0 +1,48 @@
+diff --git a/.github/workflows/tests.yml b/.github/workflows/tests.yml
+index 9db8ba9d44..2eb7ac7520 100644
+--- a/.github/workflows/tests.yml
++++ b/.github/workflows/tests.yml
+@@ -34,7 +34,21 @@ jobs:
+           just tensor-boundary
+       - name: Provision the shared Sage environment
+         uses: ./.github/actions/sage
++      # The database's own suite runs first, and without -x: this job is where the stored cards'
++      # certificate references are checked (`tests/test_stored_records.py`), and a step that fails
++      # before it must not hide a card that lost its references (#5, #21).
++      - name: Run every lattice database test, including Sage sessions and source intake
++        run: |
++          docker exec -i --workdir "$GITHUB_WORKSPACE" \
++            --env "PYTHONPATH=$GITHUB_WORKSPACE/_ci-support/ai-review-ci/tool-artifacts/pytest_plugins:$GITHUB_WORKSPACE/research/src:$GITHUB_WORKSPACE/src" \
++            sage-env /sage/.venv/bin/python \
++            -c 'import sage.all, sys, pytest; sys.exit(pytest.main(sys.argv[1:]))' \
++            -p qc_sage_session -p qc_unique_inventory --durations=20 tests
++      # The owner contracts are the owner library's own suite, checked out at sage-extensions main;
++      # their first test starts the Julia bridge and is billed the owner's 60 s ceiling
++      # (sage-extensions#237). They report after the database's checks, and the job is red on either.
+       - name: Check out sage-extensions (actions/checkout v4)
++        if: always()
+         uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+         with:
+           # The owner contracts run against sage-extensions itself, at main, which is what
+@@ -42,6 +56,7 @@ jobs:
+           repository: dzackgarza/sage-extensions
+           path: sage-extensions
+       - name: Validate preamble owner contracts
++        if: always()
+         run: |
+           docker exec -i --workdir "$GITHUB_WORKSPACE/sage-extensions" \
+             --env "PYTHONPATH=$GITHUB_WORKSPACE/_ci-support/ai-review-ci/tool-artifacts/pytest_plugins" \
+@@ -49,13 +64,6 @@ jobs:
+             -p qc_sage_session -p qc_unique_inventory \
+             tests/lattices/test_lattice_database_owner_contracts.sage \
+             tests/lattices/test_coordinate_diagonal_embeddings.py
+-      - name: Run every lattice database test, including Sage sessions and source intake
+-        run: |
+-          docker exec -i --workdir "$GITHUB_WORKSPACE" \
+-            --env "PYTHONPATH=$GITHUB_WORKSPACE/_ci-support/ai-review-ci/tool-artifacts/pytest_plugins:$GITHUB_WORKSPACE/research/src:$GITHUB_WORKSPACE/src" \
+-            sage-env /sage/.venv/bin/python \
+-            -c 'import sage.all, sys, pytest; sys.exit(pytest.main(sys.argv[1:]))' \
+-            -p qc_sage_session -p qc_unique_inventory --durations=20 -x tests
+       - name: Stop the Sage environment
+         if: always()
+         run: docker rm --force sage-env
