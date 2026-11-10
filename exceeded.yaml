@@ -291,7 +291,8 @@
   seconds: 18018
 02C9 definite.regular:
   hash: e6f71264c201136f5d15bf28043b254c1a0add6e960205d0c8d1f65b504edaa8
-  seconds: 6986
+  seconds: 480
+  lost: true
 02CA definite.regular:
   hash: 19f55fd396dd553659d07d97db9e76d92583413e3309ac197c1e6d59e81fb212
   seconds: 19684
@@ -801,70 +802,55 @@
   hash: c26c0660b92313a8f955e8e9b176d1f680afde39e4e94de5bdc61047a0cc2e72
   seconds: 33
   lost: true
-32IC integral.discriminant_form:
-  hash: 3a46bef0bbd0c1292cd16120030bc7ab97204132bef0d361306154d154e6635d
-  seconds: 13
+32Z6 integral.discriminant_form:
+  hash: 35ad739f0c54b6332beb0af73cbe82d1d7cc09f9ae959ec1b8d672c5b4dfc30c
+  seconds: 46
+332D integral.discriminant_form:
+  hash: a6b40eaee8a394c0ff6e714789b89301787ecabfe18bd9b511888660d176605a
+  seconds: 43
+33AI integral.discriminant_form:
+  hash: d8f1d51572778ebf74638e9ac4aee92fd105267257688bfa271f4bf09a94bd20
+  seconds: 25
+33LB integral.discriminant_form:
+  hash: b01294d05ff4651ffc37ab332672a2006f47743ab50307729257c4550cd6b363
+  seconds: 58
+33P9 integral.discriminant_form:
+  hash: 4ca4c12e973d6dbd3b2f2031433748dcec6e0e071572210f356281671d77ac3a
+  seconds: 25
+33RS integral.discriminant_form:
+  hash: 3f391298b8f0f537a18a0eff3d105be9015df5bcf8fb81cde590c4deb4b8838e
+  seconds: 55
+33ZA integral.discriminant_form:
+  hash: 945e0912fb52176aad2b3c1ba2b13e04695c5b6b16a1169a4f7d76b4a3e4dce6
+  seconds: 143
   lost: true
-32J6 integral.discriminant_form:
-  hash: 6ef51554aac023d5cbc57d167f539348e010d025bb74749c99df2d63b9727ce5
-  seconds: 60
-  lost: true
-32ZS integral.discriminant_form:
-  hash: a784b095e3c68639566cdb8dff65f0c2cb9977ec5bce3b243bd53db25cf7a46c
-  seconds: 108
-  lost: true
-337N integral.discriminant_form:
-  hash: 3ba37bb9fa67cdc8467a4d8a447617a4ed1d6c0bef92474c21e9dd1278f87086
-  seconds: 183
-  lost: true
-3380 integral.discriminant_form:
-  hash: bc665f7b698186f14081bc3c2fe2eda79f7046e2276dfa804a08c15e64d40e35
-  seconds: 0
-  lost: true
-33BQ integral.discriminant_form:
-  hash: ba7e4f690b71bae44d7247957e5c4ca90ca8345812e4e569a4727502a3fa3294
-  seconds: 34
-  lost: true
-33J7 integral.discriminant_form:
-  hash: b8c4f0d7aa7e1d2ea0c3f05d2f1e95429b22d22986fc92a5f39f5c3616e2d049
-  seconds: 133
-  lost: true
-33PT integral.discriminant_form:
-  hash: 2f43bbd3b680f1228d974a5c3b323122614c205b2c3617a95315d96cd747cb89
-  seconds: 0
-  lost: true
-33T1 integral.discriminant_form:
-  hash: 96d6b129c8fc845588747f1b5ca21e85a7d9334ce35affd153ec15583afc4569
-  seconds: 109
-  lost: true
-340O integral.discriminant_form:
-  hash: bddc3e4580c980ffeb3a156f33b3f9722fd4637f6984f8312998550d9a971ffc
-  seconds: 98
-  lost: true
-3486 integral.discriminant_form:
-  hash: d0abcf4132302a6b740ca0595e21234a168c6b7d7920d62e1e49084ebc34ba48
-  seconds: 0
-  lost: true
-34HA integral.discriminant_form:
-  hash: d499e284b11c767c2d4f696ed0c6cd239a3d491f1249ecdfd0402e4188c463df
-  seconds: 53
-  lost: true
-34L8 integral.discriminant_form:
-  hash: 6b6e15e61a4a7b42f0d23a9654f5ddad6474b00e6176752b1af9c5cd6bee32dd
-  seconds: 67
-  lost: true
-35OJ integral.discriminant_form:
-  hash: 5ce8602cbf9975a4201bee66b2c11c3b339e98751b12fcfac5f9a1b93f70f61a
+33ZB integral.discriminant_form:
+  hash: 7760ff264b9e4d39c4330ea39eec232d021e0472617155c8844f849a38b49c6b
+  seconds: 87
+343F integral.discriminant_form:
+  hash: 955ef480e083ceec25d50e42fd173f3709b02a2a6be6edd5d5b04dfb3e5a3270
+  seconds: 68
+34CA integral.discriminant_form:
+  hash: 9cec23ab8834b9e536b1398aea75493bf0652e1705fcccdc3a4a860f3c4629e9
+  seconds: 127
+34KP integral.discriminant_form:
+  hash: ddba9d77ff6045db5648fa1a8a488b9eeb967e7878a9fd808afe05bbc6c25089
+  seconds: 78
+34W2 integral.discriminant_form:
+  hash: 79a38f4ba237a0fd545e861dab7d4ebe120e447250096ad192b7c6ae78a40f9d
+  seconds: 112
+35FR integral.discriminant_form:
+  hash: 44deb5849fac2286551d610d84e0ff6f27b82cefc88b3aee7969a22b0c8e5199
+  seconds: 29
+36AM integral.discriminant_form:
+  hash: e3bfa3cb84e29f4c7284a8943789e2d0d739982d82b6038126649410895aa4df
+  seconds: 92
+36QH integral.discriminant_form:
+  hash: 4c3c47156ef71c1d2e680e006f9857cf4b9fc721ebb91b8079426d08145dec5b
   seconds: 57
-  lost: true
-36DG integral.discriminant_form:
-  hash: ac1ff7114bcd93c759b31db4517f79e17b1e70a45b90e31f96ec4314deca3390
-  seconds: 169
-  lost: true
-373A integral.discriminant_form:
-  hash: c203e2a652c83ec7c731fb1362adfe2f9083c66ae4eb006befe7b55e05b40e1c
-  seconds: 122
-  lost: true
+37IC integral.discriminant_form:
+  hash: 1a23763c1a054c62f10635b47c0ccb67527653f6a2cfbe6e28e827c9be68a7e4
+  seconds: 4
 3BV3 definite.siegel_eisenstein_coefficients:
   hash: 4be43fed87facb172ca082e1bbd69e4a81eca70025fe243420745dac788d942a
   seconds: 12
