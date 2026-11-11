@@ -27,8 +27,20 @@ def prepare_card(root: Path, tag: str) -> Path:
     return target
 
 
+def hold_certificates(root: Path, tag: str) -> None:
+    """Copy the certificates this corpus holds for `tag` into the fixture's root.
+
+    A copy of the card alone leaves every field of it pending, so the run recomputes
+    them all before it reaches a search; the fixture holds the card's certificates, as
+    `tests/test_catalogue_schemas.py` does (#34), and the searches are what is left.
+    """
+    held = {name: certificate for name, certificate in certificates.load(REPOSITORY, tags=[tag]).items() if name.split(" ", 1)[0] == tag}
+    certificates.save(root, held, tags=[tag])
+
+
 def test_an_early_termination_does_not_blacklist_a_computation_for_a_whole_job(tmp_path: Path) -> None:
     prepare_card(tmp_path, "0016")
+    hold_certificates(tmp_path, "0016")
     command = [sys.executable, "-m", "latticedb", "certify", "--minutes", "330", "--tag", "0016", "--root", str(tmp_path)]
     # The roots of U span an index-two sublattice. The preamble's semi-decision
     # for roots generating all of U therefore keeps searching until interrupted.
@@ -60,8 +72,10 @@ def test_an_early_termination_does_not_blacklist_a_computation_for_a_whole_job(t
     # The job ended it, not the death of its runner.
     assert not exceeded.was_lost(interruptions, computation, lattice)
     requested = genus.requests(loaded, certificates.load(tmp_path), interruptions, ("0016",))
-    assert "roots" in requested[0]["fields"]
-    assert "norms" in requested[0]["fields"]
+    # The semi-decisions are a request of their own, after the fields that every procedure
+    # returns (#14), so the search the job cut is the card's searches request.
+    searches = next(request for request in requested if request.get("searches"))
+    assert {"roots", "norms"} <= set(searches["fields"])
 
 
 def test_finishing_a_previously_interrupted_computation_clears_its_log(tmp_path: Path) -> None:
