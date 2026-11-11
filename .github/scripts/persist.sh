@@ -28,8 +28,28 @@ flock 9
 grep -qxF '/.persist/' .git/info/exclude || echo '/.persist/' >> .git/info/exclude
 pushed="$(cat "$state/pushed" 2>/dev/null || git rev-parse HEAD)"
 
+# A path main has retired cannot be merged from an older checkout. `failures.yaml` was replaced by
+# the sharded `failures/` ledger (#17), so a shard that started before that split stages a file main
+# no longer tracks: Git reports modify/delete, no merge driver can resolve it, and every later
+# attempt fails the same way (#20 — run 42363689427's sixteen persistence steps). The same holds in
+# the other direction for a checkout that predates a path main now tracks. Stage only the paths this
+# checkout holds *and* current main tracks, and name the ones skipped.
+git fetch --quiet origin main
+selection=()
+skipped=()
+for path in lattices certificates exceeded.yaml failures failures.yaml; do
+  [ -e "$path" ] || continue
+  if git rev-parse --quiet --verify "FETCH_HEAD:$path" >/dev/null; then
+    selection+=("$path")
+  else
+    skipped+=("$path")
+  fi
+done
+if [ "${#skipped[@]}" -gt 0 ]; then
+  echo "::warning::main no longer tracks ${skipped[*]}; this run started before it was retired, so the snapshot does not carry it."
+fi
 GIT_INDEX_FILE="$state/index" git read-tree "$pushed"
-GIT_INDEX_FILE="$state/index" git add -A -- lattices certificates exceeded.yaml failures
+GIT_INDEX_FILE="$state/index" git add -A -- "${selection[@]}"
 tree="$(GIT_INDEX_FILE="$state/index" git write-tree)"
 if [[ "$tree" == "$(git rev-parse "$pushed^{tree}")" ]]; then
   echo "No newly completed computations."
