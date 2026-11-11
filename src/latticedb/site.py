@@ -527,7 +527,9 @@ def build(root: Path, target: Path) -> int:
                 nullity=lattice.nullity,
                 prose=prose[index],
                 components_text=components.replace('"', ""),
-                related=[(by_tag[related.tag].lattice, related.relation) for related in lattice.related],
+                # A related tag the loaded corpus does not hold is no link; `checks.relations.problems`
+                # reports it against the whole corpus, and the build may be given a subset of the cards.
+                related=[(by_tag[related.tag].lattice, related.relation) for related in lattice.related if related.tag in by_tag],
                 span_name=root_span_name(lattice, lattices),
                 span_summands=span_summands(lattice, lattices),
                 span_images=summand_images(lattice, lattices),
