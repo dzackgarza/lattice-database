@@ -7,6 +7,22 @@
 0124 form.integer_valued:
   hash: e28c0752875a3e61722d92b66258c23b2313fbd69630dac5a9ee55278abcad69
   by: research preamble
+0124 integral.cusp_chambers:
+  hash: b41ae48d2742fcde316c138b37f747020d5545e73fa29ffdeb534c724ff37720
+  by: 'H. Sterk, "Compactifications of the period space of Enriques surfaces, Part
+    I", Math. Z. 207 (1991), 1-36, (4.3.4), p. 19, which identifies (e'')^perp/Z e''
+    with H + E8(-2) = U + E8(-2), and (4.3.6), p. 21, which prints the Coxeter diagram
+    of its reflection group as Fig. 6 — the nodes alpha_1, ..., alpha_8, alpha_9 =
+    bar_alpha_8 + 2f and alpha_10 = e - f, marked by Sterk''s legend "circle: (-4)-vector,
+    bullet: (-2)-vector" — and prints its two maximal parabolic subdiagrams as Fig.
+    7: "In the picture we see the two maximal parabolic subdiagrams". A maximal parabolic
+    subdiagram is a vertex at infinity of the chamber and the count of them is the
+    number of ideal vertices by Vinberg''s criterion, (4.3.3), p. 18 (E. B. Vinberg,
+    The groups of units of certain quadratic forms, Mat. Sb. 87 (1972)). The wall
+    count, the Gram matrix and the Coxeter diagram are what the card''s stored form
+    says about the printed walls: results/transcribe-36-sterk-ideal-vertices.py computed
+    them from the card''s Gram tensor, and ran no Vinberg search. The number of ideal
+    vertices is the source''s own count, read from Fig. 7.'
 0124 integral.discriminant_form:
   hash: 9d6a80a6262abc7c3a93efcaec379a31a08391c357804ff5797c290fd889ed25
   by: research preamble

@@ -392,7 +392,7 @@ def fields() -> Iterator[tuple[str, str | None, type[BaseModel]]]:
         PrimitiveOrbitSeries,
     )
     yield (
-        "Chamber at a cusp",
+        "Chamber of a reflection group",
         "integral.cusp_chambers.<group>[]",
         CuspChamber,
     )

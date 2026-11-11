@@ -203,13 +203,21 @@ class ChamberEdge(Record):
 
 
 class CuspChamber(Record):
-    """The chamber of a reflection subgroup at one $0$-cusp of an integral lattice of signature $(2, n)$.
+    """A fundamental chamber of a reflection group: at one $0$-cusp of an integral lattice of signature $(2, n)$, or of a lattice of signature $(1, n)$.
 
     Its walls are the source's vectors in the record basis; the Gram matrix, the Coxeter diagram
     and the wall count are computed from the card's Gram tensor (theory/orbits.md#chamber-at-a-cusp).
+    A lattice of signature $(1, n)$ has no $0$-cusp of a Baily–Borel boundary, so its row states no
+    `cusp`; it states the number of ideal vertices of the polyhedron when the source prints them.
     """
 
-    cusp: IntegerVector = Field(description="A primitive isotropic vector spanning the $0$-cusp, in the record basis.")
+    cusp: IntegerVector | None = Field(
+        default=None,
+        description=(
+            "A primitive isotropic vector spanning the $0$-cusp, in the record basis. Absent for the fundamental polyhedron of a "
+            "lattice of signature $(1, n)$, which is not a chamber at a cusp."
+        ),
+    )
     statement: Annotated[str, Field(min_length=1)] = Field(
         description="The source's numbered statement that prints the walls, such as `4.3.5`.",
     )
@@ -218,11 +226,16 @@ class CuspChamber(Record):
         default=None,
         description="The figure of the source that draws the diagram, when the statement has one.",
     )
-    walls: Annotated[tuple[ChamberWall, ...], Field(strict=False, min_length=1)] = Field(
+    walls: Annotated[tuple[ChamberWall, ...], Field(strict=False, min_length=1)] | None = Field(
+        default=None,
         description="The walls as the source prints them, each with the source's name for it.",
     )
-    wall_count: Annotated[int, Field(ge=1)] = Field(description="The number of walls, $\\\\#I$: the number of entries of `walls`.")
-    gram: Annotated[tuple[Annotated[tuple[Rational, ...], Field(strict=False)], ...], Field(strict=False)] = Field(
+    wall_count: Annotated[int, Field(ge=1)] | None = Field(
+        default=None,
+        description="The number of walls, $\\\\#I$: the number of entries of `walls`.",
+    )
+    gram: Annotated[tuple[Annotated[tuple[Rational, ...], Field(strict=False)], ...], Field(strict=False)] | None = Field(
+        default=None,
         description=(
             "The Gram matrix $b(w_i, w_j)$ of the walls, in the order of `walls`, computed from the card's "
             "Gram tensor. Its diagonal is negative: a wall is a vector of negative square."
@@ -232,24 +245,40 @@ class CuspChamber(Record):
         default=(),
         description="The edges of the Coxeter diagram of the chamber, one entry for each pair of walls that meets.",
     )
+    ideal_vertices: Annotated[int, Field(ge=0)] | None = Field(
+        default=None,
+        description=(
+            "The number of ideal vertices of the chamber: the vertices of the polyhedron that lie at infinity, on the light cone. "
+            "By Vinberg's criterion these are its maximal parabolic subdiagrams of rank $n - 1$, the subdiagrams each of whose "
+            "connected components is an extended Dynkin diagram and whose rank, the number of vertices minus the number of "
+            "components, is $n - 1$ (Vinberg 1972; Sterk 1991, (4.3.3), p. 18). $0$ is a cocompact chamber. A source that prints "
+            "the subdiagrams only modulo the symmetries of the diagram states a count of orbits, and the row states neither."
+        ),
+    )
     reference: Reference | None = Field(default=None, description="The source of the statement.")
 
     @model_validator(mode="after")
     def _chamber(self) -> Self:
         """The count, the Gram matrix and the diagram are of the walls this row states."""
-        count = len(self.walls)
-        if self.wall_count != count:
+        walls = () if self.walls is None else self.walls
+        if (self.walls is None) != (self.wall_count is None) or (self.walls is None) != (self.gram is None):
+            raise ValueError("a row states its walls, their count and their Gram matrix together")
+        if self.walls is None and self.ideal_vertices is None:
+            raise ValueError("a row states the walls of a chamber or the number of ideal vertices of its polyhedron")
+        count = len(walls)
+        if self.wall_count is not None and self.wall_count != count:
             raise ValueError(f"wall_count {self.wall_count} but {count} walls are stated")
-        names = [wall.name for wall in self.walls]
+        names = [wall.name for wall in walls]
         if len(set(names)) != count:
             raise ValueError("each wall of a chamber has one name")
-        if len(self.gram) != count or any(len(row) != count for row in self.gram):
+        gram = () if self.gram is None else self.gram
+        if len(gram) != count or any(len(row) != count for row in gram):
             raise ValueError("the Gram matrix of a chamber is square in its walls")
-        if any(self.gram[i][j] != self.gram[j][i] for i in range(count) for j in range(count)):
+        if any(gram[i][j] != gram[j][i] for i in range(count) for j in range(count)):
             raise ValueError("the Gram matrix of a chamber is symmetric")
-        if any(self.gram[i][i] >= 0 for i in range(count)):
+        if any(gram[i][i] >= 0 for i in range(count)):
             raise ValueError("a wall of a chamber has negative square")
-        if len(self.cusp) != len(self.walls[0].vector) or any(len(wall.vector) != len(self.cusp) for wall in self.walls):
+        if self.cusp is not None and any(len(wall.vector) != len(self.cusp) for wall in walls):
             raise ValueError("the cusp and every wall have one coordinate per basis vector")
         pairs: set[tuple[str, str]] = set()
         for edge in self.diagram:
@@ -647,11 +676,14 @@ class IntegralData(Record):
         description=(
             "For a group $\\Gamma \\subseteq O(L)$ and a $0$-cusp $\\mathbb{Z}v$ of its Baily–Borel boundary, the chamber of the reflection "
             "subgroup of the stabilizer of $v$ in the hyperbolic lattice $v^\\perp/\\mathbb{Z}v$: its walls as the source prints them, their Gram "
-            "matrix, the Coxeter diagram and the wall count (theory/orbits.md#chamber-at-a-cusp). "
+            "matrix, the Coxeter diagram and the wall count (theory/orbits.md#chamber-at-a-cusp). A lattice of signature $(1, n)$ has no such cusp: "
+            "its row is the fundamental polyhedron of the reflection group of $L$ itself, and states the number of its ideal vertices when the source "
+            "prints them, and the walls when the source prints those. "
             "The keys are `O`, `SO`, `O+`, `SO+`, `Otilde`, `SOtilde`, `Otilde+` and `SOtilde+`, and the slug of an arithmetic-group card of the "
             "same lattice for a named subgroup such as `gamma-en-2`, as in `primitive_orbits`. "
             "Certified by the citation of the statement that prints the walls together with the program that computed the Gram matrix, the "
-            "diagram and the count from the card's Gram tensor, so `latticedb certify` never recomputes it and never asks a Vinberg search for it."
+            "diagram and the count from the card's Gram tensor, so `latticedb certify` never recomputes it and never asks a Vinberg search for it. "
+            "A row that states only the ideal-vertex count is certified by the citation alone: that count is printed, not computed."
         ),
     )
     discriminant_orbits: dict[OrbitGroup, PrimitiveOrbitSeries] | None = Field(

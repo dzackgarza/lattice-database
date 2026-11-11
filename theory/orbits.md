@@ -201,3 +201,19 @@ A record states the chamber in `integral.cusp_chambers`, keyed by the subgroup a
 The walls are the source's transcription; the three invariants of them are what the card's Gram tensor says, computed once by the program the certificate names, and `latticedb certify` never requests the field, because no preamble operation searches for a chamber.
 A row whose wall has positive square, or whose walls do not span $v^\perp/\mathbb{Z}v$ over $\mathbb{Q}$, is a transcription defect and not a chamber.
 A source that prints a chamber only as a figure does not state it, and a card stores no row for that cusp.
+
+## The polyhedron of a lattice of signature (1, n) {#polyhedron}
+
+A lattice $L$ of signature $(1, n)$ has no $0$-cusp of a Baily–Borel boundary: the hyperbolic space is $\mathcal{H} = \mathcal{H}^n$ itself, and the reflection group $W(L)$ has a fundamental polyhedron $P \subset \mathcal{H}$ of finite volume.
+A vertex of $P$ is *ideal* when it lies at infinity, on the light cone of $L \otimes \mathbb{R}$.
+
+::: {.theorem data-name="Vinberg"}
+The ideal vertices of $P$ are its maximal parabolic subdiagrams of rank $n - 1$: the subdiagrams of the Coxeter diagram of $P$ whose connected components are extended Dynkin diagrams, and whose rank, the number of their vertices minus their number of connected components, is $n - 1$.
+:::
+
+(È. B. Vinberg, *The groups of units of certain quadratic forms*, Mat. Sb. 87 (1972), as stated by Sterk, (4.3.3), p. 18.)
+
+A card of such a lattice states the number of ideal vertices in `integral.cusp_chambers` under the reflection group, with the statement, printed page and figure that print the diagram — and no cusp, because there is none — and states the walls as well when the source prints them.
+The count is read from the printed diagram and certified by the citation alone; a wall, its square and an arrow towards the shorter of two adjacent walls are the source's markings, as in the chamber at a cusp.
+$0$ is a cocompact chamber, whose polyhedron has no ideal vertex.
+A source that prints the maximal parabolic subdiagrams only modulo the symmetries of the diagram states a count of orbits, which is not the number of its ideal vertices, and a card states neither in that case.

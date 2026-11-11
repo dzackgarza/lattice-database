@@ -619,6 +619,25 @@ def test_an_orbit_length_pair_that_agrees_with_neither_reading_of_planes_is_refu
         PrimitiveOrbitSeries.model_validate({"orbit_lengths": [527, 0]})
 
 
+def test_a_polyhedron_of_a_one_n_lattice_states_its_ideal_vertices() -> None:
+    """#36: a lattice of signature (1, n) has no cusp, so its row states the number of ideal vertices."""
+    row = {"statement": "4.3.6", "printed_page": 21, "figure": 6, "ideal_vertices": 2}
+    lattice = Lattice.model_validate(with_block(a2(), "integral", cusp_chambers={"O": [row]}))
+    assert lattice.integral is not None and lattice.integral.cusp_chambers is not None
+    polyhedron = lattice.integral.cusp_chambers["O"][0]
+    assert polyhedron.cusp is None and polyhedron.walls is None, "the polyhedron of a (1, n) lattice is not a chamber at a cusp"
+    assert polyhedron.ideal_vertices == 2
+    cocompact = Lattice.model_validate(with_block(a2(), "integral", cusp_chambers={"O": [{**row, "ideal_vertices": 0}]}))
+    assert cocompact.integral is not None and cocompact.integral.cusp_chambers is not None
+    assert cocompact.integral.cusp_chambers["O"][0].ideal_vertices == 0, "a cocompact chamber has no ideal vertex"
+    with pytest.raises(ValidationError, match="walls of a chamber or the number of ideal vertices"):
+        Lattice.model_validate(with_block(a2(), "integral", cusp_chambers={"O": [{"statement": "4.3.6", "printed_page": 21}]}))
+    with pytest.raises(ValidationError, match="together"):
+        Lattice.model_validate(with_block(a2(), "integral", cusp_chambers={"O": [{**row, "walls": [{"name": "\\alpha_1", "vector": [1, 0]}]}]}))
+    with pytest.raises(ValidationError):
+        Lattice.model_validate(with_block(a2(), "integral", cusp_chambers={"O": [{**row, "ideal_vertices": -1}]}))
+
+
 def test_a_chamber_at_a_cusp_states_its_walls_its_count_its_gram_and_its_diagram() -> None:
     """#33: a chamber row is the source's walls and the three invariants of them, and each must agree."""
     row = {

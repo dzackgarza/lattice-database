@@ -902,7 +902,7 @@ def _chamber_read_further(row: dict[str, Yaml], rows: list[dict[str, Yaml]]) -> 
     reading adds is further walls of the same chamber; a moved wall, a lost wall, or a changed cusp,
     statement, page or figure contradicts the card and is reported instead.
     """
-    same = [new for new in rows if new.get("cusp") == row.get("cusp")]
+    same = [new for new in rows if new.get("cusp") == row.get("cusp")] if row.get("cusp") is not None else [new for new in rows if new.get("statement") == row.get("statement")]
     if not same:
         return f"the row at the cusp {row.get('cusp')} is not among the rows proved now"
     read = same[0]
