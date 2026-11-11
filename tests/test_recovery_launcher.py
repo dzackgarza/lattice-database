@@ -16,8 +16,11 @@ and asserts that launcher's own return code per case:
   before the repair) fails the four incomplete and death cases, so the regression is not the assertion
   that a shell script can exit 0.
 
-Where the image wrapper is absent the tests skip: a CI runner has the container image, not this VM's
-proot launcher, and the launcher is not what those runners use.
+Where the launcher cannot start a guest the tests skip, and the launcher's own `--check` names the
+part that is missing (the wrapper, its rootfs or proot): a CI runner has the container image, not
+this VM's proot launcher, and the launcher is not what those runners use. `--check` also covers #41,
+where the suite ran inside the image with the wrapper present but `$HOME` unset, so the wrapper died
+at its own line 7 before proot and every case reported an absent status and no result.
 """
 
 from __future__ import annotations
@@ -29,8 +32,6 @@ from pathlib import Path
 import pytest
 
 REPOSITORY = Path(__file__).resolve().parent.parent
-IMAGE = Path(os.environ.get("SAGE_IMAGE", "/workspace/nucleus/work/home/sage-image/run.sh"))
-"""The image wrapper `results/verify-launcher.sh` launches a check through."""
 
 REPAIRED = REPOSITORY / "results" / "verify-launcher.sh"
 UNREPAIRED = REPOSITORY / "results" / "verify-launcher-unrepaired.sh"
@@ -38,10 +39,25 @@ REGRESSION = REPOSITORY / "results" / "launcher-regression.sh"
 
 CASES = ("normal", "duplicate", "incomplete", "short", "raise", "segv")
 
-requires_image = pytest.mark.skipif(
-    not (IMAGE.is_file() and os.access(IMAGE, os.X_OK)),
-    reason=f"the image wrapper is not present at {IMAGE}",
-)
+
+def launcher_refusal() -> str | None:
+    """Why `results/verify-launcher.sh` cannot start a guest here, or None when it can.
+
+    The launcher owns the rule, so the tests ask it rather than guessing from the wrapper's presence:
+    `--check` names the first part it needs and does not have (the wrapper, its rootfs or proot) and
+    launches nothing. A wrapper that is present but cannot start is not a test failure (#41).
+    """
+    checked = subprocess.run(
+        ["sh", str(REPAIRED), "--check"], capture_output=True, text=True, check=False
+    )
+    if checked.returncode == 0:
+        return None
+    return checked.stdout.strip() or f"launcher --check exited {checked.returncode}"
+
+
+REFUSAL = launcher_refusal()
+
+requires_image = pytest.mark.skipif(REFUSAL is not None, reason=REFUSAL or "")
 
 
 def run_regression(tmp_path: Path, launcher: Path | None = None) -> subprocess.CompletedProcess[str]:
