@@ -18,22 +18,31 @@ writes a FLINT 3 `fmpz` through FLINT 2 code. Measured: the expression succeeds 
 not imported `sage.all` (`det: 4`) and segfaults in one that has. Filed as **dzackgarza/sage#25** and
 repaired there.
 
-**Repair here.** `python-flint` is used by no library module and by no other test:
+**Repair here.** `python-flint` is used by no library module and by no other test. The whole search,
+run on the repaired tree:
 
-    $ rg -n "flint" src/
-    (none)
-    $ rg -ln "from flint|import flint|python-flint" --glob '!*.pyc' .
-    ./README.md   ./AGENTS.md   ./pyproject.toml   ./tests/test_bulk_sources.py
+    $ rg -n "flint" src/ --glob '!*.pyc'
+    (no flint in src/)
+    $ rg -n "flint" pyproject.toml
+    (no flint in pyproject.toml)
+    $ rg -n "^\s*(from|import)\s+flint" tests/ src/ .github/ --glob '!*.pyc'
+    (no module imports flint)
 
-so it is not a dependency of this repository any more: `python-flint>=0.9` is out of
-`pyproject.toml` (there is no lock file in the tree to update), and the test takes the determinant
-with Sage's own matrix — the FLINT the process loaded — for the same assertions:
+The only remaining mentions of the name in the tree are prose: the prohibition list of
+`tests/test_model.py` (`forbidden = ("sage", "cypari2", "flint", "fpylll")`, which asserts that no
+module under `src/` imports any of them), this file's explanation, and the `_determinant` docstring.
+
+So `python-flint>=0.9` is out of `pyproject.toml` — the tree holds no lock file to update — and the
+test takes the determinant from Sage's own matrix, which is the FLINT the process already loaded. One
+expression, no branch, because the image is the one environment these tests run in:
+
+    from sage.all import ZZ, matrix
 
     def _determinant(gram_tensor) -> int:
         return int(matrix(ZZ, [list(row) for row in gram_tensor]).det())
 
-Measured in the workflow's order: `6 passed in 41.30s`, where the first test previously killed the
-interpreter.
+Measured in the workflow's order, on this tree: `6 passed in 57.03s`, where the first test previously
+killed the interpreter with exit 139.
 
 ## 2. The Hoehn–Mason tests: 70 minutes in one owner call, and the repair
 
