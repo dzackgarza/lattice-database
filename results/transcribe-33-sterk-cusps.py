@@ -48,12 +48,14 @@ script asserts both.
 
 (4.3.9), p. 24 with Fig. 12, at the cusp v = 2e + 2f + bar_alpha_1: the basis of v^perp/Zv prints on
 p. 23 and the walls beside the figure on p. 24, where a tilde with a bar is the dual in the E8(-2)
-summand spanned by alpha-tilde_1, ..., alpha-tilde_8, as bar_alpha_i is for alpha_i. The nodes inside
-that summand are alpha-tilde_1, alpha_2, alpha_4, ..., alpha_7 and the dual of alpha-tilde_8, and the row
-shows why alpha-tilde_3 = f' + alpha_3 cannot be one of them: with it the pair alpha-tilde_3-alpha_14 has
-b = -4 against squares -4 and -2, so |g| = sqrt 2, which is no cos(pi/m) of Sterk's table. The span the
-page prints, Z{e-tilde + f-tilde, e-tilde - f-tilde, alpha-tilde_1, ..., alpha-tilde_8}, contains all
-thirteen walls.
+summand spanned by alpha-tilde_1, ..., alpha-tilde_8, as bar_alpha_i is for alpha_i. Fig. 12 holds
+fourteen nodes: the octagon alpha_2, alpha_4, alpha_5, alpha_6, alpha_7, alpha_8, alpha_10 and the dual
+of alpha-tilde_8, and inside it alpha-tilde_1, alpha_9, alpha_11, alpha_12, alpha_13 and alpha_14. Both
+alpha-tilde_8 (that is alpha_8) and its dual are nodes: the dual meets alpha_8 and alpha_10, and the
+pair alpha_7-alpha_8 closes the octagon. alpha-tilde_3 = f' + alpha_3 is not a node, and the row shows
+why: with it the pair alpha-tilde_3-alpha_14 has b = -4 against squares -4 and -2, so |g| = sqrt 2, which
+is no cos(pi/m) of Sterk's table. The span the page prints, Z{e-tilde + f-tilde, e-tilde - f-tilde,
+alpha-tilde_1, ..., alpha-tilde_8}, contains all fourteen walls.
 """
 
 from __future__ import annotations
@@ -319,8 +321,9 @@ def main() -> None:
     # (4.3.9), p. 24, Fig. 12: the cusp v = 2e + 2f + bar_alpha_1. Its quotient v^perp/Zv has the basis the
     # statement prints on p. 23, e~ = e + e' + f' - alpha_1, f~ = f + e' + f' - alpha_1, alpha~_1 = e' - f',
     # alpha~_2 = alpha_2, alpha~_3 = f' + alpha_3, alpha~_4 ... alpha~_8, and the span of its roots
-    # Z{e~ + f~, e~ - f~, alpha~_1, ..., alpha~_8}. The nodes inside the E8(-2) summand are alpha~_1, alpha_2,
-    # alpha_4, ..., alpha_7 and the dual of alpha~_8, and the six vectors beside the figure are
+    # Z{e~ + f~, e~ - f~, alpha~_1, ..., alpha~_8}. The figure's fourteen nodes are the octagon alpha_2,
+    # alpha_4, alpha_5, alpha_6, alpha_7, alpha_8, alpha_10 and the dual of alpha~_8, and inside it alpha~_1,
+    # alpha_9, alpha_11, alpha_12, alpha_13, alpha_14; the six vectors beside the figure are
     # alpha_9 = 2e~ - alpha~_1, alpha_10 = 2e~ + (dual alpha~_2 - dual alpha~_3), alpha_11 = f~ - e~,
     # alpha_12 = e~ + f~ + (dual alpha~_6 - dual alpha~_3),
     # alpha_13 = e~ + f~ + (dual alpha~_1 + dual alpha~_8 - dual alpha~_3), alpha_14 = e~ + f~ + alpha~_3.
@@ -353,7 +356,7 @@ def main() -> None:
     walls = [
         ("\\widetilde\\alpha_1", alpha_tilde[1]),
         ("\\alpha_2", alpha_tilde[2]),
-        *[(f"\\alpha_{i}", alpha_tilde[i]) for i in range(4, 8)],
+        *[(f"\\alpha_{i}", alpha_tilde[i]) for i in range(4, 9)],
         ("\\overline{\\widetilde\\alpha}_8", dual_tilde[8]),
         ("\\alpha_9", form.add((2, e_tilde), (-1, alpha_tilde[1]))),
         ("\\alpha_10", form.add((2, e_tilde), (1, dual_tilde[2]), (-1, dual_tilde[3]))),
@@ -362,6 +365,15 @@ def main() -> None:
         ("\\alpha_13", form.add((1, e_tilde), (1, f_tilde), (1, dual_tilde[1]), (1, dual_tilde[8]), (-1, dual_tilde[3]))),
         ("\\alpha_14", form.add((1, e_tilde), (1, f_tilde), (1, alpha_tilde[3]))),
     ]
+    # Fig. 12's fourteen nodes: the octagon closes on the pair alpha_7-alpha_8, and the dual of alpha~_8 meets
+    # alpha_8 and alpha_10, which is where the figure draws it.
+    octagon = {"\\alpha_2", "\\alpha_4", "\\alpha_5", "\\alpha_6", "\\alpha_7", "\\alpha_8", "\\alpha_10", "\\overline{\\widetilde\\alpha}_8"}
+    inside = {"\\widetilde\\alpha_1", "\\alpha_9", "\\alpha_11", "\\alpha_12", "\\alpha_13", "\\alpha_14"}
+    assert octagon | inside == {name for name, _ in walls}, "(4.3.9): the figure's fourteen nodes are not this row's walls"
+    named = dict(walls)
+    assert form.of(named["\\alpha_7"], named["\\alpha_8"]) == 2, "(4.3.9): alpha_7 and alpha_8 do not close the octagon"
+    assert form.of(named["\\alpha_8"], named["\\overline{\\widetilde\\alpha}_8"]) == 2, "(4.3.9): alpha_8 and the dual of alpha~_8 are not joined"
+    assert form.of(named["\\overline{\\widetilde\\alpha}_8"], named["\\alpha_10"]) == 2, "(4.3.9): the dual of alpha~_8 and alpha_10 are not joined"
     rows.append(wall_row("4.3.9", 24, 12, cusp, walls, span_439))
 
     # The card lists the cusps in the order the statements number them: (4.3.5), (4.3.6), (4.3.7), (4.3.8), (4.3.9).

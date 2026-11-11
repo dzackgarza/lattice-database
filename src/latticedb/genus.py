@@ -890,6 +890,32 @@ def cite_orbit_row(
     path.write_text(records.record_text(metadata, document.content))
 
 
+STATED_IN_A_CHAMBER_ROW = ("cusp", "statement", "printed_page", "figure")
+"""The fields of a chamber row that a re-reading of the same statement may not change."""
+
+
+def _chamber_read_further(row: dict[str, Yaml], rows: list[dict[str, Yaml]]) -> str | None:
+    """Why a stored chamber row is not kept by the rows now proved, or `None` when it is.
+
+    A figure of a source is read again, not replaced: the row on the card keeps its cusp, its statement,
+    its page and its figure, and every wall it states is still a wall of the row proved now. What a fuller
+    reading adds is further walls of the same chamber; a moved wall, a lost wall, or a changed cusp,
+    statement, page or figure contradicts the card and is reported instead.
+    """
+    same = [new for new in rows if new.get("cusp") == row.get("cusp")]
+    if not same:
+        return f"the row at the cusp {row.get('cusp')} is not among the rows proved now"
+    read = same[0]
+    for key in STATED_IN_A_CHAMBER_ROW:
+        if read.get(key) != row.get(key):
+            return f"the row at the cusp {row.get('cusp')} changes its {key} from {row.get(key)} to {read.get(key)}"
+    walls = {(wall.get("name"), tuple(wall.get("vector") or ())) for wall in read.get("walls") or []}
+    for wall in row.get("walls") or []:
+        if (wall.get("name"), tuple(wall.get("vector") or ())) not in walls:
+            return f"the wall {wall.get('name')} of the row at the cusp {row.get('cusp')} is dropped or moved"
+    return None
+
+
 def cite_cusp_chambers(
     path: Path,
     group: str,
@@ -904,9 +930,10 @@ def cite_cusp_chambers(
     Coxeter diagram and wall count are computed from the card's Gram tensor. The certificate is
     one per field, so its hash commits to every row of every subgroup and its provenance names
     the citation that prints the walls and the program that computed the invariants of them.
-    A stored row is neither dropped nor contradicted: the rows already on the card must be among
-    the rows the source proves, so a further statement of the same source adds its cusp's row to
-    the ones already stored and stops the writer only where the two disagree.
+    A stored row is neither dropped nor contradicted: the cusp, statement, page and figure of a row
+    already on the card stay, and every wall it states is still a wall of the row proved now, so a
+    fuller reading of the same statement adds walls and a further statement of the same source adds
+    its cusp's row. Anything else stops the writer, with the field that moved.
     """
     document = corpus.read_card(path)
     metadata = corpus.front_matter(document)
@@ -916,9 +943,8 @@ def cite_cusp_chambers(
     rows_of_group = dict(TypeAdapter(dict[str, Yaml]).validate_python(chambers or {}, strict=True))
     stored = TypeAdapter(list[Yaml]).validate_python(rows_of_group.get(group) or [], strict=True)
     for row in stored:
-        assert row in rows, (
-            f"{path}: {block_name}.cusp_chambers.{group} holds the row {row}, which is not among the rows the source proves {rows}"
-        )
+        problem = _chamber_read_further(dict(TypeAdapter(dict[str, Yaml]).validate_python(row, strict=True)), rows)
+        assert problem is None, f"{path}: {block_name}.cusp_chambers.{group}: {problem}"
     rows_of_group[group] = rows
     block["cusp_chambers"] = {key: rows_of_group[key] for key in sorted(rows_of_group)}
     metadata[block_name] = {key: block[key] for key in model.model_fields if key in block}

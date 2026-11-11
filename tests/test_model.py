@@ -690,7 +690,7 @@ def test_the_enriques_cusp_chambers_are_the_sources_walls_and_the_cards_own_form
         ("4.3.8", 23, 10),
         ("4.3.9", 24, 12),
     ]
-    assert [row.wall_count for row in rows] == [12, 10, 12, 11, 13]
+    assert [row.wall_count for row in rows] == [12, 10, 12, 11, 14]
     for row in rows:
         cusp = tuple(row.cusp)
         assert b(cusp, cusp) == 0, row.statement

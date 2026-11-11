@@ -63,7 +63,7 @@ vector ᾱ_1 of square −8 used in (4.3.8) and (4.3.9).
 | (4.3.6) | 21 | 6 | e′ | α_1 … α_8, α_9 = ᾱ_8+2f, α_10 = e−f | 10 |
 | (4.3.7) | 22 | 8 | e′+f′+ᾱ_8 | α_1 … α_7, α_9 = f−e, α_10 = 2f′+ᾱ_8, α_11 = 2e−2f′−ᾱ_8 = (e+f)−α_9−α_10, α_12 = 2e+(ᾱ_1−ᾱ_8), α_13 = (e+f)+(α_8−f′) | 12 |
 | (4.3.8) | 23 | 10 | 2e′+f′+ᾱ_1 | α_2 … α_8, α_9 = f−e, α_10 = ᾱ_8+2e′, α_11 = e+f+α_1−e′, α_12 = 2e−2e′+ᾱ_8−ᾱ_1 | 11 |
-| (4.3.9) | 24 | 12 | 2e+2f+ᾱ_1 | α̃_1, α_2, α_4 … α_7, the dual of α̃_8, α_9 = 2ẽ−α̃_1, α_10 = 2ẽ+(ᾱ̃_2−ᾱ̃_3), α_11 = f̃−ẽ, α_12 = ẽ+f̃+(ᾱ̃_6−ᾱ̃_3), α_13 = ẽ+f̃+(ᾱ̃_1+ᾱ̃_8−ᾱ̃_3), α_14 = ẽ+f̃+α̃_3 | 13 |
+| (4.3.9) | 24 | 12 | 2e+2f+ᾱ_1 | α̃_1, α_2, α_4 … α_8, the dual of α̃_8, α_9 = 2ẽ−α̃_1, α_10 = 2ẽ+(ᾱ̃_2−ᾱ̃_3), α_11 = f̃−ẽ, α_12 = ẽ+f̃+(ᾱ̃_6−ᾱ̃_3), α_13 = ẽ+f̃+(ᾱ̃_1+ᾱ̃_8−ᾱ̃_3), α_14 = ẽ+f̃+α̃_3 | 14 |
 
 All five rows are stored. (4.3.7) and (4.3.9) print their walls in the text beside their figures; the
 earlier version of this file took those two blocks to be unreadable, because its text layer renders
@@ -79,27 +79,50 @@ Each row is checked against the page's own cross-references rather than against 
   exactly those nine walls and to no other wall, so the parabolic subdiagram of Fig. 9 is the one the
   paper names. That pins α_9, α_11, α_12 and α_13, the four vectors of this statement that the two
   transcriptions do not render cleanly.
-- (4.3.9) prints the span ℤ{ẽ+f̃, ẽ−f̃, α̃_1, …, α̃_8}, and all thirteen walls lie in it; ẽ and f̃ span an
+- (4.3.9) prints the span ℤ{ẽ+f̃, ẽ−f̃, α̃_1, …, α̃_8}, and all fourteen walls lie in it; ẽ and f̃ span an
   H-summand (both isotropic, (ẽ, f̃) = 1) orthogonal to the E8(−2)-summand α̃_1 … α̃_8, as the statement
   says, and the Gram of α̃_1 … α̃_8 is −2 times the E8 Cartan matrix in Sterk's numbering. The duals
   ᾱ̃_i in α_10, α_12, α_13 are taken in that summand — (ᾱ̃_i, α̃_j) = 2δ_ij — computed from the card's
   own Gram tensor, not transcribed; they are integral combinations of the α̃_j, with squares
   −8, −16, −28, −60, −40, −24, −12, −4.
-- The nodes of Fig. 12 inside that summand are α̃_1, α_2, α_4, …, α_7 and the dual of α̃_8. **α̃_3 = f′+α_3
-  is not a node**, and that is not a preference: with it, (α̃_3, α_14) = (α̃_3, ẽ+f̃+α̃_3) = −4 against
-  squares −4 and −2, so |g| = √2, which is no cos(π/m) — the pair would not be an edge of any Coxeter
-  diagram. Of the two readings of the seventh node, that one is refuted by the diagram itself.
+- Fig. 12 has fourteen nodes: the octagon α_2, α_4, α_5, α_6, α_7, α_8, α_10 and the dual of α̃_8, and
+  inside it α̃_1, α_9, α_11, α_12, α_13, α_14. The octagon closes on the pair α_7–α_8, and the dual of
+  α̃_8 sits between α_8 and α_10: (α₈, ᾱ̃_8) = 2 and (ᾱ̃_8, α_10) = 2, so both edges are of order 3.
+  ᾱ̃_8 is the vector −2α̃_1 − 3α̃_2 − 4α̃_3 − 6α̃_4 − 5α̃_5 − 4α̃_6 − 3α̃_7 − 2α̃_8, that is
+  (0, 0, −2, −2, 0, −3, −4, −6, −5, −4, −3, −2) in the card's basis, of square −4.
+- **α̃_3 = f′+α_3 is not a node of Fig. 12**, and that is not a preference: with it,
+  (α̃_3, α_14) = (α̃_3, ẽ+f̃+α̃_3) = −4 against squares −4 and −2, so |g| = √2, which is no cos(π/m) — the
+  pair would not be an edge of any Coxeter diagram. The reading of Fig. 12 is fixed by the diagram itself.
 
-The counts are 12, 10, 12, 11 and 13. This does **not** match the consumer's expectation:
-sage-extensions#297 states that Sterk publishes the diagrams of the polarized cusps j = 2, …, 5 with
-10, 12, 11 and 14 walls, i.e. 12, 10, 11 and 14 in the order of the statements. The earlier version of
-this file inferred the 14 for (4.3.9) from that expectation; it is not what the page prints. The figure
-as read has the thirteen nodes listed above. A fourteenth node would be α_8 = α̃_8, which the read node
-list does not contain, and with it the walls still satisfy every check here (rank 10, wall Gram of
-signature (1, 9), all edges of order 3, 4, 6 or ∞, all walls in the printed span) — so the count is a
-reading of the figure and not a consequence of the arithmetic, and it is the reading that is stored.
-If #297's 14 is a count of this same figure, the node it counts is α_8 and the row should gain it; that
-is a question for the page image, which this transcription did not read.
+The counts are 12, 10, 12, 11 and **14**, which is the consumer's: sage-extensions#297 states that Sterk
+publishes the diagrams of the polarized cusps j = 2, …, 5 with 10, 12, 11 and 14 walls, i.e. 12, 10, 11 and
+14 in the order of the statements.
+
+## The fourteenth wall of (4.3.9) (#35)
+
+`e8a7f880dd` stored the (4.3.9) row with thirteen walls and wrote that the figure's seventh node inside the
+E₈(−2)-summand was the dual of α̃_8 "rather than α̃_3". The dual is one of the fourteen nodes; so is α̃_8
+itself, which that row did not hold. The row had α̃_1, α₂, α₄, α₅, α₆, α₇, ᾱ̃_8 and the six vectors α₉ … α₁₄:
+the octagon was broken at α₈, and the "cycle" reported for it was the path α₂–α₄–α₅–α₆–α₇ plus ᾱ̃_8–α₁₀.
+
+The orchestrator's reading of Fig. 12 on printed p. 24 gives fourteen nodes, the eight of the octagon being
+α₂, α₄, α₅, α₆, α₇, α₈, α₁₀ and the dual of α̃_8. Against that, the node the stored row lacked is α₈ — the
+dual was already stored, under the name `\overline{\widetilde\alpha}_8`, with the vector recomputed here
+from the card's form in the α̃ basis of p. 23. Its identity is not a guess: it is the unique vector of the
+E₈(−2)-summand with (ᾱ̃_8, α̃_j) = 2δ_j8, and it is the vector that occurs in α₁₃.
+
+Adding α₈ closes the octagon. Every check the field applies holds on the fourteen walls: each is orthogonal
+to the cusp 2e+2f+ᾱ₁ and of square −4 or −2; every non-orthogonal pair has |g_ij| = cos(π/m) with
+m ∈ {3, 4, 6} or |g_ij| = 1; the walls have rank 10 with the cusp outside their span, so they span
+v^⊥/ℤv; the Gram matrix of the fourteen has signature (1, 9) and rank 10; and all fourteen lie in the
+printed span ℤ{ẽ+f̃, ẽ−f̃, α̃_1, …, α̃_8}. The new wall's own edges are α₇ (order 3), ᾱ̃_8 (order 3) and α₁₃
+(order 4); ᾱ̃_8 gains its edge to α₈ (order 3) beside its existing edge to α₁₀ (order 3) — which is the
+node the figure draws between those two.
+
+`genus.cite_cusp_chambers` was refusing that write: a stored row had to be among the rows passed, so a
+fuller reading of the same statement contradicted the card. It now keeps a stored row's cusp, statement,
+page and figure and every wall it states, and accepts further walls of the same chamber; a lost or moved
+wall, or a changed cusp, statement, page or figure, still stops it.
 
 For (4.3.8) the text layer and the OCR disagree twice, and orthogonality to the cusp decides both:
 α_9 is f − e (not f′ − e′, which is not orthogonal to 2e′+f′+ᾱ_1), and α_10 is ᾱ_8 + 2e′ (not
@@ -115,13 +138,15 @@ and figure, and then the wall count, the Gram matrix b(w_i, w_j) and the Coxeter
 `results/transcribe-33-sterk-cusps.py` computed from the card's Gram tensor. The certificate is
 
     029J integral.cusp_chambers
-    hash 3d07d82fc2fb4bc5f2171e4d73ef7c6e534354d0d9e7ad2e55910f0a7ce25022
+    hash c67663ee2cb0aade7b4069583e0e73b87f8f86970ddec9f6835e4dfc65c19b34
 
 with the citation of the five statements and the computing program as its provenance. It supersedes
-`f546443699b5c3b377638ac85f9fe41ff4159cf9e1aba0762882909ad1a1db94`, which covered the three rows of
-`1224b1b184`. `genus.cite_cusp_chambers` no longer requires the rows on the card to be *equal* to the
-rows a source proves: it requires each stored row to be among them, so a statement of the same source
-adds its cusp's row and the writer still stops where a stored row is contradicted or silently dropped.
+`3d07d82fc2fb4bc5f2171e4d73ef7c6e534354d0d9e7ad2e55910f0a7ce25022` (#33, five rows, (4.3.9) with
+thirteen walls), which superseded `f546443699b5c3b377638ac85f9fe41ff4159cf9e1aba0762882909ad1a1db94`
+(the three rows of `1224b1b184`). `genus.cite_cusp_chambers` neither drops nor contradicts a stored row:
+it keeps the row's cusp, statement, page, figure and walls, so a further statement of the same source
+adds its cusp's row and a fuller reading of the same figure adds walls, while a lost or moved wall, or a
+changed cusp, statement, page or figure, stops the writer with the field that moved.
 No Vinberg search was run for any row: the walls are the source's, and the three invariants are the
 card's form on them.
 

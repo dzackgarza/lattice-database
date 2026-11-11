@@ -639,11 +639,12 @@ def test_a_primitive_orbit_row_is_stored_and_certified_by_its_citations(tmp_path
 
 
 def test_a_cusp_chamber_row_is_added_without_dropping_or_contradicting_a_stored_one(tmp_path: Path) -> None:
-    """#33: the chamber writer takes the rows a source proves on top of the ones the card holds.
+    """#33, #35: the chamber writer takes the rows a source proves on top of the ones the card holds.
 
-    Sterk's five statements are one source, and one of them was transcribed after three were stored.
-    A stored row must survive a later statement's write; a write that would drop it or state a
-    different page for the same cusp stops the writer instead of silently replacing the row.
+    Sterk's five statements are one source and were transcribed in two batches, and a figure of it was
+    read twice: the row at (4.3.9) gained its fourteenth wall when Fig. 12 was read again. A stored row
+    keeps its cusp, statement, page and figure and every wall it states, so a fuller reading may add a
+    wall; a lost wall, a changed page, or a dropped cusp stops the writer instead of replacing the row.
     """
     (tmp_path / "lattices").mkdir()
     shutil.copy(REPOSITORY / corpus.FAMILIES_FILE, tmp_path / corpus.FAMILIES_FILE)
@@ -653,6 +654,17 @@ def test_a_cusp_chamber_row_is_added_without_dropping_or_contradicting_a_stored_
     rows = corpus.front_matter(corpus.read_card(path))["integral"]["cusp_chambers"]["gamma-en-2"]
     reference = {"citation": "H. Sterk, \"Compactifications of the period space of Enriques surfaces, Part I\", Math. Z. 207 (1991), 1-36, Section 4.3."}
     by = f"{reference['citation']} The Gram matrix, the Coxeter diagram and the wall count are the card's form on those walls."
+
+    def read_further(row: dict, lost: str) -> dict:
+        """The same chamber row without one wall: its walls, Gram matrix and diagram shrink together."""
+        keep = [i for i, wall in enumerate(row["walls"]) if wall["name"] != lost]
+        return {
+            **row,
+            "walls": [row["walls"][i] for i in keep],
+            "wall_count": len(keep),
+            "gram": [[row["gram"][i][j] for j in keep] for i in keep],
+            "diagram": [edge for edge in row["diagram"] if lost not in (edge["a"], edge["b"])],
+        }
 
     document = frontmatter.load(str(path))
     held: certificates.Certificates = {}
@@ -676,12 +688,26 @@ def test_a_cusp_chamber_row_is_added_without_dropping_or_contradicting_a_stored_
     )
     assert lattice.certifications["integral.cusp_chambers"] == digest == held[computation].hash, "the one hash commits to both rows"
 
-    with pytest.raises(AssertionError, match="the source proves"):
-        genus.cite_cusp_chambers(path, "gamma-en-2", rows[1:], reference, by, held)
-    altered = {**rows[0], "printed_page": 25}
-    with pytest.raises(AssertionError, match="the source proves"):
-        genus.cite_cusp_chambers(path, "gamma-en-2", [altered, rows[1]], reference, by, held)
-    assert [row["statement"] for row in corpus.front_matter(corpus.read_card(path))["integral"]["cusp_chambers"]["gamma-en-2"]] == ["4.3.5", "4.3.6"], "a refused write leaves the card as it was"
+    # (4.3.9) as Fig. 12 is read now, and the same row as it read before its fourteenth wall was found.
+    full = next(row for row in rows if row["statement"] == "4.3.9")
+    short = read_further(full, "\\alpha_8")
+    assert short["wall_count"] == full["wall_count"] - 1
+    genus.cite_cusp_chambers(path, "gamma-en-2", [rows[0], rows[1], short], reference, by, held)
+    genus.cite_cusp_chambers(path, "gamma-en-2", [rows[0], rows[1], full], reference, by, held)
+    stored = {row["statement"]: row for row in corpus.front_matter(corpus.read_card(path))["integral"]["cusp_chambers"]["gamma-en-2"]}
+    assert stored["4.3.9"]["wall_count"] == full["wall_count"], "a fuller reading of the same figure adds its wall"
+    assert [wall["name"] for wall in stored["4.3.9"]["walls"]] == [wall["name"] for wall in full["walls"]]
+
+    with pytest.raises(AssertionError, match="dropped or moved"):
+        genus.cite_cusp_chambers(path, "gamma-en-2", [rows[0], rows[1], short], reference, by, held)
+    altered = {**full, "printed_page": 25}
+    with pytest.raises(AssertionError, match="changes its printed_page"):
+        genus.cite_cusp_chambers(path, "gamma-en-2", [rows[0], rows[1], altered], reference, by, held)
+    with pytest.raises(AssertionError, match="not among the rows proved now"):
+        genus.cite_cusp_chambers(path, "gamma-en-2", rows[1:2], reference, by, held)
+    assert [row["statement"] for row in corpus.front_matter(corpus.read_card(path))["integral"]["cusp_chambers"]["gamma-en-2"]] == ["4.3.5", "4.3.6", "4.3.9"], (
+        "a refused write leaves the card as it was"
+    )
 
 
 def test_the_queue_separates_the_terminating_fields_from_the_searches() -> None:
