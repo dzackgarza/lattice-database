@@ -17,6 +17,7 @@ from sage_extensions.categories.lattices import Lattices
 from sage_extensions.categories.modules.framed.formed.form_modules import FormModules
 from sage_extensions.categories.modules.pure.modules import Modules
 from sage_extensions.categories.rings.commutative_algebra import FormalPowerSeriesRings
+from sage_extensions.categories.sets.cardinals import Cardinal
 from sage_extensions.categories.rings.ring_foundation import LocalizationRings
 from sage_extensions.categories.rings.ring_foundation import _OwnedRingElement
 from sage_extensions.categories.rings.ring_foundation import OwnedRings
@@ -236,18 +237,23 @@ def _orbit_count(value: object) -> object:
     """One count of an orbit series, as a card states it.
 
     The owner answers the constant term of an orbit series with the cardinality of its set of orbits —
-    an element of Sage's `Cardinalities` category, whose class is that category's `parent_class` — and
-    not with an `int`, which `json` then refuses. The cardinality's own API is the conversion: `int` of a
-    finite cardinality is its number, and an infinite one has none, so the coefficient is `None`, which
-    `theory/orbits.md` states a coefficient that is not known to be. An infinite cardinality is the
-    count `aleph0`, which the schema states, so the owner's answer is never dropped.
+    a `Cardinalities` element, whose class is that category's `parent_class` — and not with an `int`,
+    which `json` then refuses (#16). The card states an exact count, so the cardinality's own API
+    decides what to write: `finite_value()` is "the ordinary nonnegative integer representing this
+    finite cardinal", and for a cardinal the owner states to be countably infinite the count is
+    `aleph0`, which the schema states. A cardinal beyond `aleph0` has no count this schema states —
+    `is_countably_infinite()` is False and `is_uncountable()` True — and is refused rather than
+    recorded as an `aleph0` the owner never stated.
     """
     if value is None or isinstance(value, int):
         return value
-    finite = getattr(value, "is_finite", None)
-    if callable(finite) and not finite():
+    if not isinstance(value, Cardinal):
+        raise TypeError(f"an orbit count is a cardinality or an int, not {type(value).__name__}")
+    if value.is_finite():
+        return value.finite_value()
+    if value.is_countably_infinite():
         return "aleph0"
-    return int(value)
+    raise ValueError(f"the owner states the count {value} is uncountable; a card states an exact count or aleph0")
 
 
 def _orbit_series(series: dict[str, object]) -> dict[str, object]:

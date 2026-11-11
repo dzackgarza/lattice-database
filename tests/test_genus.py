@@ -649,65 +649,32 @@ def test_the_queue_separates_the_terminating_fields_from_the_searches() -> None:
 
 
 def test_the_owner_s_orbit_counts_are_emitted_as_their_exact_cardinalities(capsys: pytest.CaptureFixture[str]) -> None:
-    """#17: `primitive_orbit_series` answers its constant term with a cardinality, not with an `int`.
+    """#16: the emitter writes the owner's own counts, on the owner's own series for 026E.
 
-    The 60-tag run of 01:00Z read one per-tag failure, on 026E: `TypeError: Object of type
-    Cardinalities.parent_class is not JSON serializable`, nested at `primitive_orbits -> O ->
-    constant`. The adapter asks the cardinality for its own number, and states no coefficient where the
-    cardinality is infinite, which no integer coefficient can carry.
+    The per-tag run of 01:00Z read `TypeError: Object of type Cardinalities.parent_class is not JSON
+    serializable` at `primitive_orbits -> O -> constant`. This asks the owner for that series and emits
+    it through the adapter's own `_emit` and `VALUES["primitive_orbits"]`: every group's constant is
+    the cardinality's `finite_value()`, which is what the card then stores.
     """
-
-    class Cardinality:
-        """Sage's cardinality element: `int` is its own number, and `json` cannot write it."""
-
-        def __init__(self, count: int) -> None:
-            self.count = count
-
-        def is_finite(self) -> bool:
-            return True
-
-        def __int__(self) -> int:
-            return self.count
-
-    class Infinite:
-        """An infinite cardinality: its own API says no integer describes it."""
-
-        def is_finite(self) -> bool:
-            return False
-
-        def __int__(self) -> int:
-            raise TypeError("an infinite cardinality has no integer")
-
-    class Owner:
-        """A lattice whose series answers, as the owner's does, with cardinality elements."""
-
-        def primitive_orbit_series(self) -> dict:
-            return {
-                "O": {
-                    "constant": Cardinality(2),
-                    "z": [Cardinality(1), Cardinality(0)],
-                    "w": [Cardinality(0)],
-                }
-            }
-
-    # The failure, at the emission that reads the owner's answer: the bare values are not JSON.
+    series = _cardinality_series()
     with pytest.raises(TypeError, match="not JSON serializable"):
-        sage_genus._emit("026E", {"primitive_orbits": Owner().primitive_orbit_series()})
+        sage_genus._emit("026E", {"primitive_orbits": series})
 
-    sage_genus._emit("026E", {"primitive_orbits": sage_genus.VALUES["primitive_orbits"](Owner())})
-    emitted = json.loads(capsys.readouterr().out.strip().splitlines()[-1])
-    assert emitted["primitive_orbits"]["O"]["constant"] == 2
-    assert emitted["primitive_orbits"]["O"]["z"] == [1, 0]
-    assert emitted["primitive_orbits"]["O"]["w"] == [0]
-    assert sage_genus._orbit_series({"O": {"constant": Infinite()}}) == {"O": {"constant": "aleph0"}}, "an infinite count is stated, not dropped"
+    sage_genus._emit("026E", {"primitive_orbits": sage_genus.VALUES["primitive_orbits"](_CardinalityLattice(series))})
+    emitted = json.loads(capsys.readouterr().out.strip().splitlines()[-1])["primitive_orbits"]
+    assert sorted(emitted) == sorted(series)
+    for group, row in series.items():
+        assert emitted[group]["constant"] == row["constant"].finite_value()
+        assert isinstance(emitted[group]["constant"], int)
 
 
 def test_the_converted_orbit_counts_are_what_the_card_stores_and_reads_back(tmp_path: Path) -> None:
-    """#16: the value the adapter emits is the value the card stores, finite or infinite, and a reader reads it.
+    """#16: the value the adapter emits is the value the card stores, and a reader reads it.
 
-    #15's lesson is that a stored value the reader refuses stops every certify job before a computation,
-    so the stored form of a converted count — an integer, or `aleph0` where the owner states an infinite
-    one — is asserted through `corpus.read_card`, and the certificate's projection of it too.
+    The counts come from the owner's own series for 026E — its `Cardinalities` element for each group —
+    and #15's lesson is that a stored value the reader refuses stops every certify job before a
+    computation, so the stored form is asserted through `corpus.read_card` and through the
+    certificate's projection of it.
     """
     (tmp_path / "lattices").mkdir()
     shutil.copy(REPOSITORY / corpus.FAMILIES_FILE, tmp_path / corpus.FAMILIES_FILE)
@@ -715,45 +682,16 @@ def test_the_converted_orbit_counts_are_what_the_card_stores_and_reads_back(tmp_
     shutil.copy(REPOSITORY / "lattices" / "026E.md", tmp_path / "lattices")
     path = tmp_path / "lattices" / "026E.md"
 
-    class Cardinality:
-        """Sage's cardinality element of a finite set of orbits."""
-
-        def __init__(self, count: int) -> None:
-            self.count = count
-
-        def is_finite(self) -> bool:
-            return True
-
-        def __int__(self) -> int:
-            return self.count
-
-    class Infinite:
-        """Sage's cardinality element of an infinite set of orbits."""
-
-        def is_finite(self) -> bool:
-            return False
-
-        def __int__(self) -> int:
-            raise TypeError("an infinite cardinality has no integer")
-
-    class Owner:
-        def primitive_orbit_series(self) -> dict:
-            return {
-                "O": {"constant": Cardinality(2), "z": [Cardinality(0)]},
-                "SO": {"constant": Infinite()},
-            }
-
-    genus.store(path, {"primitive_orbits": sage_genus.VALUES["primitive_orbits"](Owner())})
+    series = _cardinality_series()
+    genus.store(path, {"primitive_orbits": sage_genus.VALUES["primitive_orbits"](_CardinalityLattice(series))})
     stored = corpus.front_matter(corpus.read_card(path))
     lattice = Lattice.model_validate(stored)
     assert lattice.integral is not None and lattice.integral.primitive_orbits is not None
-    assert lattice.integral.primitive_orbits["O"].constant == 2
-    assert lattice.integral.primitive_orbits["O"].z == (0,)
-    assert lattice.integral.primitive_orbits["SO"].constant == "aleph0"
+    for group, row in series.items():
+        assert lattice.integral.primitive_orbits[group].constant == row["constant"].finite_value()
     projection = genus.certified_value("primitive_orbits", stored["integral"]["primitive_orbits"])
-    assert projection["O"]["constant"] == 2
-    assert projection["SO"]["constant"] == "aleph0", "the certificate commits to the stated infinite count"
-
+    for group, row in series.items():
+        assert projection[group]["constant"] == row["constant"].finite_value()
 
 def _regularity_card(tmp_path: Path) -> Path:
     """A card that states a semi-decision result and cites its certificate."""
@@ -798,6 +736,16 @@ def test_a_derivation_of_another_lattice_carries_nothing_over(tmp_path: Path) ->
     kept = genus.keep_other_computations(path, derived)
     assert kept["definite"] == {"minimum": 2}
     assert "definite.regular" not in kept["certifications"]
+
+
+class _CardinalityLattice:
+    """A lattice stand-in that answers with the owner's series already computed for 026E."""
+
+    def __init__(self, series: dict[str, object]) -> None:
+        self._series = series
+
+    def primitive_orbit_series(self, bound: int | None = None) -> dict[str, object]:
+        return self._series
 
 
 def _cardinality_series() -> dict[str, object]:
