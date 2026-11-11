@@ -63,5 +63,7 @@ def test_a_shard_reports_the_problems_of_its_own_cards_only(tmp_path: Path) -> N
     path.write_text(records.record_text(metadata, document.content))
     mine = certificates.tag_hash("0001") % 2
     assert any("contradicts its completed computation certificate" in problem for problem in checks.run(tmp_path, (mine, 2))[1])
-    assert checks.run(tmp_path, (1 - mine, 2))[1] == ()
+    # `checks.run` returns the problems as the list its annotation documents, so a shard
+    # with nothing to report returns none of them.
+    assert checks.run(tmp_path, (1 - mine, 2))[1] == []
     assert checks.run(tmp_path, (mine, 2))[0] == 1
