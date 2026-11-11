@@ -658,6 +658,36 @@ def test_a_computed_chamber_states_its_walls_and_its_count_and_no_source() -> No
         Lattice.model_validate(with_block(a2(), "integral", cusp_chambers={"O": [{**row, "printed_page": 21}]}))
 
 
+def test_a_chamber_states_the_orbits_of_its_maximal_parabolic_subdiagrams() -> None:
+    """#39: a source's classes are orbits of subdiagrams, not a count of vertices."""
+    row = {
+        "statement": "4.3.5",
+        "printed_page": 19,
+        "figure": 4,
+        "walls": [{"name": "\\alpha_1", "vector": [1, 0]}, {"name": "\\alpha_2", "vector": [1, 2]}, {"name": "\\alpha_3", "vector": [0, 1]}],
+        "wall_count": 3,
+        "gram": [["-4", "2", "0"], ["2", "-4", "2"], ["0", "2", "-4"]],
+        "parabolic_orbits": [{"subdiagrams": [["\\alpha_1", "\\alpha_2"]]}, {"subdiagrams": [["\\alpha_2", "\\alpha_3"], ["\\alpha_1", "\\alpha_3"]]}],
+    }
+    lattice = Lattice.model_validate(with_block(a2(), "integral", cusp_chambers={"g-e": [row]}))
+    assert lattice.integral is not None and lattice.integral.cusp_chambers is not None
+    chamber = lattice.integral.cusp_chambers["g-e"][0]
+    assert chamber.ideal_vertices is None, "orbits are not a count of the vertices themselves"
+    assert [len(orbit.subdiagrams) for orbit in chamber.parabolic_orbits] == [1, 2]
+    with pytest.raises(ValidationError, match="not a set of walls"):
+        Lattice.model_validate(with_block(a2(), "integral", cusp_chambers={"g-e": [{**row, "parabolic_orbits": [{"subdiagrams": [["\\alpha_1", "\\alpha_9"]]}]}]}))
+    with pytest.raises(ValidationError, match="one subdiagram"):
+        Lattice.model_validate(
+            with_block(
+                a2(),
+                "integral",
+                cusp_chambers={"g-e": [{**row, "parabolic_orbits": [{"subdiagrams": [["\\alpha_1", "\\alpha_2"]]}, {"subdiagrams": [["\\alpha_1", "\\alpha_2"]]}]}]},
+            )
+        )
+    with pytest.raises(ValidationError):
+        Lattice.model_validate(with_block(a2(), "integral", cusp_chambers={"g-e": [{**row, "parabolic_orbits": []}]}))
+
+
 def test_a_chamber_at_a_cusp_states_its_walls_its_count_its_gram_and_its_diagram() -> None:
     """#33: a chamber row is the source's walls and the three invariants of them, and each must agree."""
     row = {

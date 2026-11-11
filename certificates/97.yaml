@@ -8,19 +8,28 @@
   hash: 689b55d7e6f39babac1e1769fed810750f4f7b2448bdde92b7c29876c2ef701c
   by: research preamble
 0125 integral.cusp_chambers:
-  hash: 12a3571c1d15ae8e99771f894e0bdfbb928fe8aafe34da732287ea6f67917e13
-  by: 'computed, not cited: no source prints the chamber of the reflection part of
-    O(U(2) + E8(-2)) or its ideal-vertex count. HyperbolicLattices(ZZ)(Lattices(ZZ)(the
-    card''s gram_tensor)).fundamental_chamber(max_roots=20, max_decompositions=2000)
-    ran Vinberg''s algorithm at sage-extensions 5a9874e22ea18fb223ff53cf2a3e48dd63c022b4
-    and returned 10 wall_roots and 10 primitive_rays(), complete as is_complete_wall_set()
-    reports; 1 of the rays has square 0 and is therefore a vertex at infinity, an
-    ideal vertex. By Vinberg''s criterion the ideal vertices are the maximal parabolic
-    subdiagrams of rank n - 1, and the walls orthogonal to that ray are 9 in 1 component(s),
-    of rank 8 = n - 1 = 8 for n = 9 (Vinberg 1972, as stated by Sterk, (4.3.3), p.
-    18). The walls, their Gram matrix and the Coxeter diagram are what the card''s
-    stored form says about those vectors, and is_cocompact() is False. results/compute-36-0125-chamber.py
-    is the program.'
+  hash: 0430d4dde789760ff670bab6269cf5bf69ae312faa1ff13d935c83c5f5a4fce7
+  by: 'H. Sterk, "Compactifications of the period space of Enriques surfaces, Part
+    I", Math. Z. 207 (1991), 1-36, (4.3.4), p. 19, which identifies (e'')^perp/Z e''
+    with H(2) + E8(-2) = U(2) + E8(-2); (4.3.5), p. 19, which defines G_e as the subgroup
+    of O(M(2)) whose induced map on M(2)*/M(2) respects the decomposition, prints
+    the diagram of the reflection group W_e of G_e as Fig. 4 — the nodes alpha_1,
+    ..., alpha_8, alpha_9 = f'' - e'', alpha_10 = bar_alpha_8 + 2e'', alpha_11 = 2e''
+    + 2f'' + bar_alpha_1 + bar_alpha_8 and alpha_12 = 5e'' + 3f'' + 2 bar_alpha_2,
+    all of square -4 — and prints its maximal parabolic subdiagrams modulo the symmetries
+    S_e = Z/2 x Z/2 as Fig. 5; and p. 20, where the maximal parabolic subdiagrams
+    modulo symmetries are, in the paper''s words, four equivalence classes: "we do
+    not only find four equivalence classes in I_1(e^perp/Ze), but that we find four
+    labelled classes". A maximal parabolic subdiagram is a vertex at infinity of the
+    chamber by Vinberg''s criterion, (4.3.3), p. 18 (E. B. Vinberg, The groups of
+    units of certain quadratic forms, Mat. Sb. 87 (1972)). The wall count, the Gram
+    matrix and the Coxeter diagram are what the card''s stored form says about the
+    printed walls, and the maximal parabolic subdiagrams are the primitive rays of
+    the chamber on the light cone; the diagram and its automorphism group S_e are
+    the sage-extensions Coxeter-diagram owner''s (CoxeterDiagrams().from_roots and
+    Aut(), at sage-extensions 5a9874e22ea18fb223ff53cf2a3e48dd63c022b4), so no recognition
+    is repeated here and no Vinberg search was run on the subgroup. results/transcribe-39-sterk-we-chamber.py
+    computed them.'
 0125 integral.discriminant_form:
   hash: b298f9ee07553d1f6f93710a554da24a7f4bf0cdb2a69e7f03c4142e22dfb839
   by: research preamble

@@ -217,4 +217,5 @@ A card of such a lattice states the number of ideal vertices in `integral.cusp_c
 The count is read from the printed diagram and certified by the citation alone; a wall, its square and an arrow towards the shorter of two adjacent walls are the source's markings, as in the chamber at a cusp.
 A chamber that no source prints is [computed](records.html#computed) instead, by the preamble's Vinberg search: its walls are the returned roots, its ideal vertices are the returned primitive rays of square zero, and the certificate names the operation and its revision, because no citation proves it.
 $0$ is a cocompact chamber, whose polyhedron has no ideal vertex.
-A source that prints the maximal parabolic subdiagrams only modulo the symmetries of the diagram states a count of orbits, which is not the number of its ideal vertices, and a card states neither in that case.
+A source that prints the maximal parabolic subdiagrams only modulo the symmetries of the diagram states a count of orbits, which is not the number of its ideal vertices: the vertices of one class are different vertices of the chamber.
+A row states those classes in `parabolic_orbits`, each as the subdiagrams of the orbit, and states `ideal_vertices` only where the number of the vertices themselves is known.

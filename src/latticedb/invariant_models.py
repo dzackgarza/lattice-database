@@ -205,6 +205,21 @@ class ChamberEdge(Record):
     )
 
 
+class ParabolicOrbit(Record):
+    """One orbit of maximal parabolic subdiagrams of a chamber's Coxeter diagram.
+
+    A maximal parabolic subdiagram is a vertex at infinity of the chamber: a subdiagram each of whose
+    connected components is an extended Dynkin diagram and whose rank, the number of its vertices minus
+    the number of its components, is $n - 1$ (Vinberg 1972; Sterk 1991, (4.3.3), p. 18). A symmetry of
+    the diagram carries one to another, and an orbit under the symmetries a source or a computation
+    fixes is one class of them.
+    """
+
+    subdiagrams: Annotated[tuple[Annotated[tuple[str, ...], Field(strict=False)], ...], Field(strict=False, min_length=1)] = Field(
+        description="The subdiagrams of the orbit, each as the names of its walls, in the order the walls are stored.",
+    )
+
+
 class CuspChamber(Record):
     """A fundamental chamber of a reflection group: at one $0$-cusp of an integral lattice of signature $(2, n)$, or of a lattice of signature $(1, n)$.
 
@@ -267,6 +282,16 @@ class CuspChamber(Record):
             "the subdiagrams only modulo the symmetries of the diagram states a count of orbits, and the row states neither."
         ),
     )
+    parabolic_orbits: Annotated[tuple[ParabolicOrbit, ...], Field(strict=False, min_length=1)] | None = Field(
+        default=None,
+        description=(
+            "The orbits of maximal parabolic subdiagrams of the chamber, one entry per orbit, each listing the "
+            "subdiagrams in it as the names of their walls. A source states them modulo the symmetries of the "
+            "diagram, which is a count of classes and not a count of ideal vertices: the vertices of one class "
+            "are different vertices of the chamber. Absent where neither a source nor a computation states the "
+            "classes, and `ideal_vertices` states the number of the vertices themselves."
+        ),
+    )
     reference: Reference | None = Field(default=None, description="The source of the statement.")
 
     @model_validator(mode="after")
@@ -275,8 +300,8 @@ class CuspChamber(Record):
         walls = () if self.walls is None else self.walls
         if (self.walls is None) != (self.wall_count is None) or (self.walls is None) != (self.gram is None):
             raise ValueError("a row states its walls, their count and their Gram matrix together")
-        if self.walls is None and self.ideal_vertices is None:
-            raise ValueError("a row states the walls of a chamber or the number of ideal vertices of its polyhedron")
+        if self.walls is None and self.ideal_vertices is None and self.parabolic_orbits is None:
+            raise ValueError("a row states the walls of a chamber or the number of ideal vertices of its polyhedron or the orbits of its maximal parabolic subdiagrams")
         if (self.statement is None) != (self.printed_page is None):
             raise ValueError("a row states the statement that prints it and its page together, or neither")
         count = len(walls)
@@ -294,6 +319,14 @@ class CuspChamber(Record):
             raise ValueError("a wall of a chamber has negative square")
         if self.cusp is not None and any(len(wall.vector) != len(self.cusp) for wall in walls):
             raise ValueError("the cusp and every wall have one coordinate per basis vector")
+        for orbit in self.parabolic_orbits or ():
+            for subdiagram in orbit.subdiagrams:
+                if not subdiagram or set(subdiagram) - set(names):
+                    raise ValueError(f"the subdiagram {tuple(subdiagram)} is not a set of walls of this chamber")
+        if self.parabolic_orbits is not None:
+            stated = [frozenset(subdiagram) for orbit in self.parabolic_orbits for subdiagram in orbit.subdiagrams]
+            if len(set(stated)) != len(stated):
+                raise ValueError("a subdiagram of two orbits of a chamber is one subdiagram")
         pairs: set[tuple[str, str]] = set()
         for edge in self.diagram:
             if edge.a == edge.b or {edge.a, edge.b} - set(names):
