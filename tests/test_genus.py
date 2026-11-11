@@ -753,3 +753,48 @@ def test_the_converted_orbit_counts_are_what_the_card_stores_and_reads_back(tmp_
     projection = genus.certified_value("primitive_orbits", stored["integral"]["primitive_orbits"])
     assert projection["O"]["constant"] == 2
     assert projection["SO"]["constant"] == "aleph0", "the certificate commits to the stated infinite count"
+
+
+def _regularity_card(tmp_path: Path) -> Path:
+    """A card that states a semi-decision result and cites its certificate."""
+    (tmp_path / "lattices").mkdir()
+    shutil.copy(REPOSITORY / corpus.FAMILIES_FILE, tmp_path / corpus.FAMILIES_FILE)
+    (tmp_path / corpus.RETIRED_FILE).write_text("{}\n")
+    source = frontmatter.load(str(REPOSITORY / "lattices" / "0023.md"))
+    metadata = {key: value for key, value in source.metadata.items() if key in ("tag", "name", "latex", "gram_tensor", "rank", "definite", "certifications")}
+    metadata["definite"] = {**(metadata.get("definite") or {}), "regular": True, "spinor_regular": True}
+    metadata["certifications"] = {**(metadata.get("certifications") or {}), "definite.regular": "aa" * 32, "definite.spinor_regular": "bb" * 32}
+    path = tmp_path / "lattices" / "0023.md"
+    path.write_text(records.record_text(metadata, source.content))
+    return path
+
+
+def test_a_derivation_keeps_a_result_another_computation_wrote(tmp_path: Path) -> None:
+    """#23: the derivation writes its own blocks, and does not delete the fields of other computations.
+
+    The record a run derives from is its read of the card when the card was queued; a semi-decision
+    written during the run is not in it, and writing the derivation alone deleted the value while its
+    certificate stayed in `certificates/`.
+    """
+    path = _regularity_card(tmp_path)
+    stored = corpus.front_matter(corpus.read_card(path))
+    # the derivation as a stale run produces it: the blocks rebuilt, without the regularity results
+    derived = dict(stored)
+    derived["definite"] = {"minimum": 1, "kissing_number": 6}
+    derived["certifications"] = {"derive": "cc" * 32}
+    kept = genus.keep_other_computations(path, derived)
+    assert kept["definite"]["regular"] is True
+    assert kept["definite"]["spinor_regular"] is True
+    assert kept["definite"]["minimum"] == 1, "the derivation's own values win"
+    assert kept["certifications"]["definite.regular"] == "aa" * 32
+    assert kept["certifications"]["definite.spinor_regular"] == "bb" * 32
+    assert kept["certifications"]["derive"] == "cc" * 32
+
+
+def test_a_derivation_of_another_lattice_carries_nothing_over(tmp_path: Path) -> None:
+    """A derivation whose Gram tensor differs is another lattice, and its blocks are its own."""
+    path = _regularity_card(tmp_path)
+    derived = {**corpus.front_matter(corpus.read_card(path)), "gram_tensor": [[2, 0], [0, 2]], "definite": {"minimum": 2}, "certifications": {}}
+    kept = genus.keep_other_computations(path, derived)
+    assert kept["definite"] == {"minimum": 2}
+    assert "definite.regular" not in kept["certifications"]

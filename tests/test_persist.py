@@ -38,6 +38,9 @@ def shard(origin: Path, path: Path) -> Path:
     git(path, "config", "user.name", "test")
     git(path, "config", "user.email", "test@example.invalid")
     git(path, "config", "merge.keyed-map.driver", f"{sys.executable} -m latticedb merge-keyed-map %O %A %B")
+    # `.gitattributes` names both drivers: `certificates/` and the ledgers merge key by key, and a card
+    # merges key by key too, so the fields run and the searches run keep each other's values (#21).
+    git(path, "config", "merge.card-map.driver", f"{sys.executable} -m latticedb.card_merge %O %A %B")
     return path
 
 

@@ -20,8 +20,15 @@ mkdir -p "$state"
 # the preamble and the schema.
 workspace="$(git rev-parse --show-toplevel)"
 python_path="$workspace/research/src:$workspace/src"
-git config merge.keyed-map.driver "docker exec -i --workdir \"\$PWD\" --env PYTHONPATH=$python_path sage-env /sage/.venv/bin/python -m latticedb merge-keyed-map %O %A %B"
-git config merge.card-map.driver "docker exec -i --workdir \"\$PWD\" --env PYTHONPATH=$python_path sage-env /sage/.venv/bin/python -m latticedb.card_merge %O %A %B"
+# A configuration that already names a driver decides how the merge runs — the regression test drives
+# these files with the interpreter of the process it runs in — and this script supplies its own only
+# where there is none.
+if [ -z "$(git config --get merge.keyed-map.driver || true)" ]; then
+  git config merge.keyed-map.driver "docker exec -i --workdir \"\$PWD\" --env PYTHONPATH=$python_path sage-env /sage/.venv/bin/python -m latticedb merge-keyed-map %O %A %B"
+fi
+if [ -z "$(git config --get merge.card-map.driver || true)" ]; then
+  git config merge.card-map.driver "docker exec -i --workdir \"\$PWD\" --env PYTHONPATH=$python_path sage-env /sage/.venv/bin/python -m latticedb card_merge %O %A %B"
+fi
 # A periodic push still running when certification ends finishes before the final one.
 exec 9>"$state/lock"
 flock 9

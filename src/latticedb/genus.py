@@ -555,6 +555,47 @@ def _generator_morphisms(tag: str, morphisms: list[dict[str, Yaml]], matrices: l
     return names, morphisms
 
 
+DERIVED_BLOCKS = ("integral", "definite", "indefinite", "root_span", "root_sublattice")
+"""The blocks `records.derive` pops and rebuilds, and so the blocks a derivation can otherwise thin out."""
+
+
+def keep_other_computations(path: Path, derived: dict[str, Yaml]) -> dict[str, Yaml]:
+    """The derived card, carrying every stored field of `path` that the derivation does not state.
+
+    `records.derive` rebuilds the blocks it owns from the record it is given, and that record is the
+    run's read of the card from when the card was queued — up to a job's 350 minutes earlier. A field
+    another computation wrote in between, such as the semi-decision `definite.regular`, is in neither,
+    so writing the derivation alone deletes the value while `certificates/` keeps its certificate, and
+    the card and the ledger disagree (#23). Such a field belongs to a computation of its own, with its
+    own certificate, so the derivation does not decide it: a field the stored card states and the
+    derived card does not is carried over, the citation included. A derivation whose Gram tensor
+    differs from the stored card is another lattice and carries nothing over.
+    """
+    current = corpus.front_matter(corpus.read_card(path))
+    if current.get("gram_tensor") != derived.get("gram_tensor"):
+        return derived
+    kept = dict(derived)
+    carried: set[str] = set()
+    for block_name in DERIVED_BLOCKS:
+        stored = current.get(block_name)
+        if not isinstance(stored, dict):
+            continue
+        produced = kept.get(block_name)
+        produced = dict(produced) if isinstance(produced, dict) else {}
+        carried_fields = {field: value for field, value in stored.items() if value is not None and field not in produced}
+        carried |= {f"{block_name}.{field}" for field in carried_fields}
+        if carried_fields or produced:
+            kept[block_name] = {**carried_fields, **produced}
+    if carried:
+        citations = dict(kept.get("certifications") or {})
+        stored_citations = current.get("certifications") or {}
+        for local_name in sorted(carried):
+            if local_name in stored_citations:
+                citations[local_name] = stored_citations[local_name]
+        kept["certifications"] = citations
+    return kept
+
+
 def store(path: Path, values: dict[str, Yaml]) -> None:
     """Replace each computed scope on the card by the completed computation."""
     document = corpus.read_card(path)
@@ -732,7 +773,7 @@ def certify(
                         computation = name(stored_lattice.tag, "derive")
                         certificate_hash = certificates.certification_hash(computation, stored_lattice, records.derived_projection(derived))
                         derived["certifications"] = {**stored_lattice.certifications, "derive": certificate_hash}
-                        storage.write_text(entry.path, records.record_text(derived, entry.prose))
+                        storage.write_text(entry.path, records.record_text(keep_other_computations(entry.path, derived), entry.prose))
                         held[computation] = Certificate(hash=certificate_hash, by=str(values["by"]))
                         if computation in failed:
                             failures.resolve(root, computation, stored_lattice)
