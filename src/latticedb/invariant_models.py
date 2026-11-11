@@ -179,6 +179,89 @@ class PrimitiveOrbitSeries(Record):
         return range(-len(self.w), len(self.z) + 1)
 
 
+class ChamberWall(Record):
+    """One wall of the chamber at a cusp: its vector in the record basis, and the source's name for it."""
+
+    name: Annotated[str, Field(min_length=1)] = Field(
+        description="The wall's name as the source writes it, in TeX: `\\\\alpha_9`, `\\\\bar\\\\alpha_8`.",
+    )
+    vector: IntegerVector = Field(description="The wall in the record basis.")
+
+
+class ChamberEdge(Record):
+    """One edge of a chamber's Coxeter diagram: two walls, and the order of the product of their reflections."""
+
+    a: Annotated[str, Field(min_length=1)] = Field(description="The name of one wall of the pair.")
+    b: Annotated[str, Field(min_length=1)] = Field(description="The name of the other wall.")
+    order: Annotated[int, Field(ge=3)] | Literal["inf"] = Field(
+        description=(
+            "The $m$ with $g_{ab} = \\\\cos(\\\\pi/m)$, where $g_{ab} = b(w_a, w_b)/\\\\sqrt{b(w_a,w_a)\\\\,b(w_b,w_b)}$: "
+            "the order of the product of the two reflections, and `inf` when $|g_{ab}| = 1$. "
+            "A pair with $b(w_a, w_b) = 0$ is no edge and is not listed."
+        ),
+    )
+
+
+class CuspChamber(Record):
+    """The chamber of a reflection subgroup at one $0$-cusp of an integral lattice of signature $(2, n)$.
+
+    Its walls are the source's vectors in the record basis; the Gram matrix, the Coxeter diagram
+    and the wall count are computed from the card's Gram tensor (theory/orbits.md#chamber-at-a-cusp).
+    """
+
+    cusp: IntegerVector = Field(description="A primitive isotropic vector spanning the $0$-cusp, in the record basis.")
+    statement: Annotated[str, Field(min_length=1)] = Field(
+        description="The source's numbered statement that prints the walls, such as `4.3.5`.",
+    )
+    printed_page: Annotated[int, Field(ge=1)] = Field(description="The page of the source that prints the statement.")
+    figure: Annotated[int, Field(ge=1)] | None = Field(
+        default=None,
+        description="The figure of the source that draws the diagram, when the statement has one.",
+    )
+    walls: Annotated[tuple[ChamberWall, ...], Field(strict=False, min_length=1)] = Field(
+        description="The walls as the source prints them, each with the source's name for it.",
+    )
+    wall_count: Annotated[int, Field(ge=1)] = Field(description="The number of walls, $\\\\#I$: the number of entries of `walls`.")
+    gram: Annotated[tuple[Annotated[tuple[Rational, ...], Field(strict=False)], ...], Field(strict=False)] = Field(
+        description=(
+            "The Gram matrix $b(w_i, w_j)$ of the walls, in the order of `walls`, computed from the card's "
+            "Gram tensor. Its diagonal is negative: a wall is a vector of negative square."
+        ),
+    )
+    diagram: Annotated[tuple[ChamberEdge, ...], Field(strict=False)] = Field(
+        default=(),
+        description="The edges of the Coxeter diagram of the chamber, one entry for each pair of walls that meets.",
+    )
+    reference: Reference | None = Field(default=None, description="The source of the statement.")
+
+    @model_validator(mode="after")
+    def _chamber(self) -> Self:
+        """The count, the Gram matrix and the diagram are of the walls this row states."""
+        count = len(self.walls)
+        if self.wall_count != count:
+            raise ValueError(f"wall_count {self.wall_count} but {count} walls are stated")
+        names = [wall.name for wall in self.walls]
+        if len(set(names)) != count:
+            raise ValueError("each wall of a chamber has one name")
+        if len(self.gram) != count or any(len(row) != count for row in self.gram):
+            raise ValueError("the Gram matrix of a chamber is square in its walls")
+        if any(self.gram[i][j] != self.gram[j][i] for i in range(count) for j in range(count)):
+            raise ValueError("the Gram matrix of a chamber is symmetric")
+        if any(self.gram[i][i] >= 0 for i in range(count)):
+            raise ValueError("a wall of a chamber has negative square")
+        if len(self.cusp) != len(self.walls[0].vector) or any(len(wall.vector) != len(self.cusp) for wall in self.walls):
+            raise ValueError("the cusp and every wall have one coordinate per basis vector")
+        pairs: set[tuple[str, str]] = set()
+        for edge in self.diagram:
+            if edge.a == edge.b or {edge.a, edge.b} - set(names):
+                raise ValueError(f"the edge {edge.a}-{edge.b} is not a pair of walls of this chamber")
+            pair = tuple(sorted((edge.a, edge.b)))
+            if pair in pairs:
+                raise ValueError(f"the pair {edge.a}-{edge.b} is one edge of the diagram")
+            pairs.add(pair)
+        return self
+
+
 class StabilizedObject(Record):
     """The object a subgroup of $O(L)$ fixes, named by a card's slug."""
 
@@ -557,6 +640,18 @@ class IntegralData(Record):
             "number of conjugacy classes of the modular groups $\\bar\\Gamma_h$ those polarizations define. The "
             "table's two cumulative columns are not stored: each is the sum of these rows up to its degree. "
             "Certified by the table's citation, so `latticedb certify` never recomputes it."
+        ),
+    )
+    cusp_chambers: dict[Subgroup, Annotated[tuple[CuspChamber, ...], Field(strict=False)]] | None = Field(
+        default=None,
+        description=(
+            "For a group $\\Gamma \\subseteq O(L)$ and a $0$-cusp $\\mathbb{Z}v$ of its Baily–Borel boundary, the chamber of the reflection "
+            "subgroup of the stabilizer of $v$ in the hyperbolic lattice $v^\\perp/\\mathbb{Z}v$: its walls as the source prints them, their Gram "
+            "matrix, the Coxeter diagram and the wall count (theory/orbits.md#chamber-at-a-cusp). "
+            "The keys are `O`, `SO`, `O+`, `SO+`, `Otilde`, `SOtilde`, `Otilde+` and `SOtilde+`, and the slug of an arithmetic-group card of the "
+            "same lattice for a named subgroup such as `gamma-en-2`, as in `primitive_orbits`. "
+            "Certified by the citation of the statement that prints the walls together with the program that computed the Gram matrix, the "
+            "diagram and the count from the card's Gram tensor, so `latticedb certify` never recomputes it and never asks a Vinberg search for it."
         ),
     )
     discriminant_orbits: dict[OrbitGroup, PrimitiveOrbitSeries] | None = Field(

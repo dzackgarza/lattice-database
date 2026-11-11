@@ -1,6 +1,7 @@
 """A record validates exactly when its fields have the shapes of the schema and each block is present exactly when its hypothesis holds."""
 
 import ast
+import math
 from collections.abc import Callable
 from fractions import Fraction
 from pathlib import Path
@@ -616,3 +617,89 @@ def test_an_orbit_length_pair_that_agrees_with_neither_reading_of_planes_is_refu
         PrimitiveOrbitSeries.model_validate({"planes": 3, "orbit_lengths": [527, 23715]})
     with pytest.raises(ValidationError):
         PrimitiveOrbitSeries.model_validate({"orbit_lengths": [527, 0]})
+
+
+def test_a_chamber_at_a_cusp_states_its_walls_its_count_its_gram_and_its_diagram() -> None:
+    """#33: a chamber row is the source's walls and the three invariants of them, and each must agree."""
+    row = {
+        "cusp": [1, 0],
+        "statement": "4.3.5",
+        "printed_page": 19,
+        "figure": 4,
+        "walls": [{"name": "\\alpha_1", "vector": [1, 0]}, {"name": "\\alpha_2", "vector": [1, 2]}],
+        "wall_count": 2,
+        "gram": [["-2", "2"], ["2", "-2"]],
+        "diagram": [{"a": "\\alpha_1", "b": "\\alpha_2", "order": 4}],
+    }
+    lattice = Lattice.model_validate(with_block(a2(), "integral", cusp_chambers={"gamma-en-2": [row]}))
+    assert lattice.integral is not None and lattice.integral.cusp_chambers is not None
+    chamber = lattice.integral.cusp_chambers["gamma-en-2"][0]
+    assert chamber.wall_count == 2 and chamber.gram[0][1] == 2
+    assert chamber.diagram[0].order == 4
+    with pytest.raises(ValidationError, match="wall_count"):
+        Lattice.model_validate(with_block(a2(), "integral", cusp_chambers={"gamma-en-2": [{**row, "wall_count": 3}]}))
+    with pytest.raises(ValidationError, match="negative square"):
+        Lattice.model_validate(with_block(a2(), "integral", cusp_chambers={"gamma-en-2": [{**row, "gram": [["2", "2"], ["2", "-2"]]}]}))
+    with pytest.raises(ValidationError, match="symmetric"):
+        Lattice.model_validate(with_block(a2(), "integral", cusp_chambers={"gamma-en-2": [{**row, "gram": [["-2", "0"], ["2", "-2"]]}]}))
+    with pytest.raises(ValidationError, match="not a pair of walls"):
+        Lattice.model_validate(with_block(a2(), "integral", cusp_chambers={"gamma-en-2": [{**row, "diagram": [{"a": "\\alpha_1", "b": "\\alpha_9", "order": 3}]}]}))
+    with pytest.raises(ValidationError, match="one edge"):
+        Lattice.model_validate(with_block(a2(), "integral", cusp_chambers={"gamma-en-2": [{**row, "diagram": [{"a": "\\alpha_1", "b": "\\alpha_2", "order": 4}, {"a": "\\alpha_2", "b": "\\alpha_1", "order": 6}]}]}))
+    with pytest.raises(ValidationError):
+        Lattice.model_validate(with_block(a2(), "integral", cusp_chambers={"gamma-en-2": [{**row, "diagram": [{"a": "\\alpha_1", "b": "\\alpha_2", "order": 2}]}]}))
+
+
+def test_the_enriques_cusp_chambers_are_the_sources_walls_and_the_cards_own_form() -> None:
+    """#33: Sterk's three printed chambers on 029J recompute from the card, with no Vinberg search.
+
+    Each wall is orthogonal to its cusp and of negative square, the stored Gram matrix is the card's
+    form on those walls, the count is the number of them, the walls span v^perp/Zv over Q, and the
+    stored diagram is the pairs with |g_ij| = cos(pi/m) of the source's table (Sterk, Fig. 2, p. 18).
+    """
+    record = frontmatter.load(str(ROOT / "lattices" / "029J.md")).metadata
+    lattice = Lattice.model_validate(record)
+    assert lattice.integral is not None and lattice.integral.cusp_chambers is not None
+    gram = [[Fraction(entry) for entry in row] for row in lattice.gram_tensor]
+
+    def b(u: tuple[int, ...], v: tuple[int, ...]) -> Fraction:
+        return sum(Fraction(u[i]) * gram[i][j] * Fraction(v[j]) for i in range(len(gram)) for j in range(len(gram)))
+
+    def rank(vectors: list[tuple[int, ...]]) -> int:
+        rows = [[Fraction(entry) for entry in vector] for vector in vectors]
+        count = 0
+        for column in range(len(gram)):
+            pivot = next((row for row in range(count, len(rows)) if rows[row][column] != 0), None)
+            if pivot is None:
+                continue
+            rows[count], rows[pivot] = rows[pivot], rows[count]
+            rows[count] = [entry / rows[count][column] for entry in rows[count]]
+            for row in range(len(rows)):
+                if row != count and rows[row][column] != 0:
+                    factor = rows[row][column]
+                    rows[row] = [a - factor * c for a, c in zip(rows[row], rows[count], strict=True)]
+            count += 1
+        return count
+
+    orders = {Fraction(1, 4): 3, Fraction(-1, 4): 3, Fraction(1, 2): 4, Fraction(-1, 2): 4, Fraction(3, 4): 6, Fraction(-3, 4): 6}
+    rows = lattice.integral.cusp_chambers["gamma-en-2"]
+    assert [(row.statement, row.printed_page, row.figure) for row in rows] == [("4.3.5", 19, 4), ("4.3.6", 21, 6), ("4.3.8", 23, 10)]
+    assert [row.wall_count for row in rows] == [12, 10, 11]
+    for row in rows:
+        cusp = tuple(row.cusp)
+        assert b(cusp, cusp) == 0, row.statement
+        assert math.gcd(*[abs(entry) for entry in cusp]) == 1, row.statement
+        walls = [tuple(wall.vector) for wall in row.walls]
+        assert all(b(cusp, wall) == 0 for wall in walls), row.statement
+        assert all(b(wall, wall) < 0 for wall in walls), row.statement
+        assert [[b(u, v) for v in walls] for u in walls] == [[Fraction(entry) for entry in r] for r in row.gram], row.statement
+        assert rank(walls) == len(gram) - 2, row.statement
+        expected = {}
+        for i in range(len(walls)):
+            for j in range(i + 1, len(walls)):
+                product = b(walls[i], walls[j])
+                if product == 0:
+                    continue
+                square = product * product / (b(walls[i], walls[i]) * b(walls[j], walls[j]))
+                expected[frozenset((row.walls[i].name, row.walls[j].name))] = "inf" if square == 1 else orders[square]
+        assert {frozenset((edge.a, edge.b)): edge.order for edge in row.diagram} == expected, row.statement

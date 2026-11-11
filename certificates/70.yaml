@@ -46,6 +46,19 @@
 029J form.integer_valued:
   hash: cf9545519401f2ca83256aba81678812d17a9f538b001f6316d946d908e5d415
   by: research preamble
+029J integral.cusp_chambers:
+  hash: f546443699b5c3b377638ac85f9fe41ff4159cf9e1aba0762882909ad1a1db94
+  by: 'H. Sterk, "Compactifications of the period space of Enriques surfaces, Part
+    I", Math. Z. 207 (1991), 1-36, Section 4.3: the 0-cusps of Gamma_En,2 are the
+    five primitive isotropic vectors of Proposition 4.2.3, p. 16. (4.3.5), p. 19 with
+    Fig. 4, prints the walls of the chamber at the cusp e; (4.3.6), p. 21 with Fig.
+    6, those at e''; (4.3.8), p. 23 with Fig. 10, those at 2e'' + f'' + bar_alpha_1.
+    (4.3.7), p. 21-22 with Fig. 8, at e'' + f'' + bar_alpha_8, and (4.3.9), p. 23-24
+    with Fig. 12, at 2e + 2f + bar_alpha_1, print theirs only as figures, and those
+    two rows are not stored. The Gram matrix, the Coxeter diagram and the wall count
+    are what the card''s stored form says about those walls: results/transcribe-33-sterk-cusps.py
+    computed them from the card''s Gram tensor, and no Vinberg search was run for
+    them.'
 029J integral.discriminant_form:
   hash: bce264439806a4f908a076d08e75f8656202fdfd0b96e3eef66612d804c1fc0a
   by: research preamble
@@ -67,32 +80,33 @@
 029J integral.primitive_orbits:
   hash: 1cdbfedc2662caa0b3a346b949dc225caac4ac0ac5e691fb6fedf9397c39028d
   by: 'V. Alexeev, P. Engel, D. Z. Garza, L. Schaffler, "Compact moduli of Enriques
-    surfaces of degree 2", Nagoya Math. J. 259 (2025), 581–624. Section 2: the unique (-2)-vector
-    and the two (-4)-vectors modulo Gamma_En (from V. V. Nikulin, J. Soviet Math.
-    22 (1983), Theorems 2.13 and 2.15); the two 0-cusps of F_{(10,10,0)} are the primitive
-    isotropic lines modulo Gamma_En (Section 3.2, p. 589); the two orbits of primitive
-    isotropic lines and the two of primitive isotropic planes modulo O(T_En) are H.
-    Sterk, "Compactifications of the period space of Enriques surfaces, Part I", Math.
-    Z. 207 (1991), 1-36, Propositions 4.5 (p. 28) and 4.6 (p. 29). The two O(N)-orbits
-    of isotropic lines are spanned by L_1 = Ze_1 and L_2 = Ze_3, with images of their
-    stabilizers in the discriminant group of index 1 and 527 = 17*31, and the two
-    orbits of isotropic planes are P_1 = Ze_1 + Ze_3 and P_2 = Z(2e_1 + 2e_2 + w)
-    + Ze_3, w a vector of norm 4 in E_8, with images of index 527 and 23715 = 3^2*5*17*31:
-    D. Dutour Sikirić, K. Hulek, "Moduli of polarised Enriques surfaces — computational
-    aspects", J. London Math. Soc. 110 (2024), arXiv:2302.01679, Section 3.6 (The
-    Tits building), p. 22. D. Dutour Sikirić, K. Hulek, "Moduli of polarised Enriques
-    surfaces — computational aspects", J. London Math. Soc. 110 (2024), arXiv:2302.01679,
-    Section 3.6 (The Tits building), p. 22: the space M~_En = Otilde^+(N)\D_N, for
-    N = U + U(2) + E_8(-2), has 528 0-dimensional cusps (isotropic lines) and 24242
-    1-dimensional cusps (isotropic planes); under O^+_10(F_2) the 528 lines fall in
-    two orbits, of lengths 527 and 1, and the 24242 planes in two orbits, of lengths
-    527 and 23715. H. Sterk, "Compactifications of the period space of Enriques surfaces,
-    Part I", Math. Z. 207 (1991), 1-36, Proposition 4.2.3 with Remark 4.2.4, p. 16:
-    the five orbits of primitive isotropic lines of Gamma_En,2, the zero-dimensional
-    boundary components of the Satake-Baily-Borel compactification; V. Alexeev, P.
-    Engel, D. Z. Garza, L. Schaffler, "Compact moduli of Enriques surfaces of degree
-    2", Nagoya Math. J. 259 (2025), 581–624, Section 3.3, p. 590: "There are five 0-cusps for
-    which we use Sterk''s numbering 1, 2, 3, 4, 5. There are also 9 distinct 1-cusps."'
+    surfaces of degree 2", Nagoya Math. J. 259 (2025), 581–624. Section 2: the unique
+    (-2)-vector and the two (-4)-vectors modulo Gamma_En (from V. V. Nikulin, J. Soviet
+    Math. 22 (1983), Theorems 2.13 and 2.15); the two 0-cusps of F_{(10,10,0)} are
+    the primitive isotropic lines modulo Gamma_En (Section 3.2, p. 589); the two orbits
+    of primitive isotropic lines and the two of primitive isotropic planes modulo
+    O(T_En) are H. Sterk, "Compactifications of the period space of Enriques surfaces,
+    Part I", Math. Z. 207 (1991), 1-36, Propositions 4.5 (p. 28) and 4.6 (p. 29).
+    The two O(N)-orbits of isotropic lines are spanned by L_1 = Ze_1 and L_2 = Ze_3,
+    with images of their stabilizers in the discriminant group of index 1 and 527
+    = 17*31, and the two orbits of isotropic planes are P_1 = Ze_1 + Ze_3 and P_2
+    = Z(2e_1 + 2e_2 + w) + Ze_3, w a vector of norm 4 in E_8, with images of index
+    527 and 23715 = 3^2*5*17*31: D. Dutour Sikirić, K. Hulek, "Moduli of polarised
+    Enriques surfaces — computational aspects", J. London Math. Soc. 110 (2024), arXiv:2302.01679,
+    Section 3.6 (The Tits building), p. 22. D. Dutour Sikirić, K. Hulek, "Moduli of
+    polarised Enriques surfaces — computational aspects", J. London Math. Soc. 110
+    (2024), arXiv:2302.01679, Section 3.6 (The Tits building), p. 22: the space M~_En
+    = Otilde^+(N)\D_N, for N = U + U(2) + E_8(-2), has 528 0-dimensional cusps (isotropic
+    lines) and 24242 1-dimensional cusps (isotropic planes); under O^+_10(F_2) the
+    528 lines fall in two orbits, of lengths 527 and 1, and the 24242 planes in two
+    orbits, of lengths 527 and 23715. H. Sterk, "Compactifications of the period space
+    of Enriques surfaces, Part I", Math. Z. 207 (1991), 1-36, Proposition 4.2.3 with
+    Remark 4.2.4, p. 16: the five orbits of primitive isotropic lines of Gamma_En,2,
+    the zero-dimensional boundary components of the Satake-Baily-Borel compactification;
+    V. Alexeev, P. Engel, D. Z. Garza, L. Schaffler, "Compact moduli of Enriques surfaces
+    of degree 2", Nagoya Math. J. 259 (2025), 581–624, Section 3.3, p. 590: "There
+    are five 0-cusps for which we use Sterk''s numbering 1, 2, 3, 4, 5. There are
+    also 9 distinct 1-cusps."'
 029J integral.spinor_genera:
   hash: e9ddab999374f38d5df2789bd8354c69625543c7e768a436a23e2a88d3be900d
   by: research preamble

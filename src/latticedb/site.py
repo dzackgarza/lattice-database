@@ -34,6 +34,7 @@ from latticedb.corpus import Entry, load, read_card
 from latticedb.geometric import HermitianSymmetricSpace, ProjectiveComplexVariety, RiemannianSymmetricSpace
 from latticedb.model import (
     Automorphisms,
+    CuspChamber,
     DefiniteData,
     FormData,
     HyperbolicData,
@@ -389,6 +390,11 @@ def fields() -> Iterator[tuple[str, str | None, type[BaseModel]]]:
         "Series of orbits on the discriminant group",
         "integral.discriminant_orbits.<group>",
         PrimitiveOrbitSeries,
+    )
+    yield (
+        "Chamber at a cusp",
+        "integral.cusp_chambers.<group>[]",
+        CuspChamber,
     )
     yield "Definite lattice", "definite", DefiniteData
     yield (

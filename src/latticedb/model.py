@@ -28,6 +28,15 @@ from latticedb.invariant_models import (
     ChamberData as ChamberData,
 )
 from latticedb.invariant_models import (
+    ChamberEdge as ChamberEdge,
+)
+from latticedb.invariant_models import (
+    ChamberWall as ChamberWall,
+)
+from latticedb.invariant_models import (
+    CuspChamber as CuspChamber,
+)
+from latticedb.invariant_models import (
     DefiniteData as DefiniteData,
 )
 from latticedb.invariant_models import (

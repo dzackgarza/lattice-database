@@ -58,6 +58,7 @@ BLOCKS: dict[str, tuple[str, type[BaseModel]]] = {
     "discriminant_sequence": ("integral", IntegralData),
     "discriminant_form": ("integral", IntegralData),
     "primitive_orbits": ("integral", IntegralData),
+    "cusp_chambers": ("integral", IntegralData),
     "discriminant_orbits": ("integral", IntegralData),
     "reflective": ("hyperbolic", HyperbolicData),
     "modular_scale": ("integral", IntegralData),
@@ -137,6 +138,9 @@ def applies(field: str, lattice: Lattice) -> bool:
       lattice of hyperbolic index at least 2.
     - `polarization_counts`: no preamble operation presents a table of a source, and
       every count it holds is certified by the citation of that table.
+    - `cusp_chambers`: a chamber is the source's walls, and the Gram matrix, diagram
+      and wall count of them are what the card's form says; no preamble operation
+      searches for a chamber, and a Vinberg search is never run to fill a row.
     - `discriminant_form`: $q_L$ is a quadratic form only on an even lattice, and the owner
       partitions $A_L$, so the request is made on an even card whose classes of $A_L$ are few,
       $|A_L| = |\\det L| \\leq 4096$.
@@ -144,7 +148,7 @@ def applies(field: str, lattice: Lattice) -> bool:
     Everything else — including `integral.primitive_orbits` and the automorphism
     generators on an indefinite card — is asked on every card that can store it (#8).
     """
-    if field in {"cusp_form_coordinates", "polarization_counts"}:
+    if field in {"cusp_form_coordinates", "polarization_counts", "cusp_chambers"}:
         return False
     block_name, _model = stored_in(field, lattice.definiteness)
     match block_name:
@@ -883,6 +887,45 @@ def cite_orbit_row(
     certificate_hash = certificates.certification_hash(computation, lattice, certified_value("primitive_orbits", block["primitive_orbits"], lattice))
     metadata["certifications"] = {**lattice.certifications, f"{block_name}.primitive_orbits": certificate_hash}
     held[computation] = Certificate(hash=certificate_hash, by=_orbit_provenance(block["primitive_orbits"], reference))
+    path.write_text(records.record_text(metadata, document.content))
+
+
+def cite_cusp_chambers(
+    path: Path,
+    group: str,
+    rows: list[dict[str, Yaml]],
+    reference: dict[str, str],
+    by: str,
+    held: Certificates,
+) -> None:
+    """Store the chambers at the cusps of one subgroup and certify them.
+
+    A row is the chamber at one cusp: its walls are the source's vectors, and its Gram matrix,
+    Coxeter diagram and wall count are computed from the card's Gram tensor. The certificate is
+    one per field, so its hash commits to every row of every subgroup and its provenance names
+    the citation that prints the walls and the program that computed the invariants of them.
+    A different value already on the card contradicts this one and stops the writer.
+    """
+    document = corpus.read_card(path)
+    metadata = corpus.front_matter(document)
+    block_name, model = stored_in("cusp_chambers", metadata.get("definiteness"))
+    block = TypeAdapter(dict[str, Yaml]).validate_python(metadata.get(block_name) or {}, strict=True)
+    chambers = block.get("cusp_chambers")
+    rows_of_group = dict(TypeAdapter(dict[str, Yaml]).validate_python(chambers or {}, strict=True))
+    assert rows_of_group.get(group) in (None, rows), (
+        f"{path}: {block_name}.cusp_chambers.{group} is {rows_of_group.get(group)}, the source proves {rows}"
+    )
+    rows_of_group[group] = rows
+    block["cusp_chambers"] = {key: rows_of_group[key] for key in sorted(rows_of_group)}
+    metadata[block_name] = {key: block[key] for key in model.model_fields if key in block}
+    references = TypeAdapter(list[Yaml]).validate_python(metadata.get("references") or [], strict=True)
+    if reference not in references:
+        metadata["references"] = [*references, {key: value for key, value in reference.items()}]
+    lattice = Lattice.model_validate(metadata)
+    computation = name(lattice.tag, "cusp_chambers", lattice.definiteness)
+    certificate_hash = certificates.certification_hash(computation, lattice, certified_value("cusp_chambers", block["cusp_chambers"], lattice))
+    metadata["certifications"] = {**lattice.certifications, f"{block_name}.cusp_chambers": certificate_hash}
+    held[computation] = Certificate(hash=certificate_hash, by=by)
     path.write_text(records.record_text(metadata, document.content))
 
 
