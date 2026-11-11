@@ -10,6 +10,7 @@ by the preamble.
 
 import re
 from collections.abc import Mapping
+from fractions import Fraction
 from pathlib import Path
 
 from sage_extensions.categories.abstract_categories.mor_categories import CategoricalMor
@@ -20,7 +21,7 @@ from sage_extensions.categories.modules.pure.modules import Modules
 from sage_extensions.rings import session_ring_objects
 from pydantic import BaseModel, ConfigDict, TypeAdapter
 
-from latticedb import corpus
+from latticedb import corpus, records
 from latticedb.corpus import Matrix
 from latticedb.model import Lattice, Tag
 
@@ -142,19 +143,56 @@ def _module_parent(value: object) -> Modules.ParentMethods:
     return value
 
 
+def _gram_rows(formed: FormModules.ParentMethods) -> tuple[tuple[Fraction, ...], ...]:
+    """The Gram tensor of `formed` on its own generators, as the rational its values are."""
+    rank = int(formed.module_rank())
+    gram = formed.gram_tensor()
+    return tuple(tuple(_rational(gram[row, column]) for column in range(rank)) for row in range(rank))
+
+
+def _rational(value: object) -> Fraction:
+    """An owned ring element of the preamble, as a `Fraction`."""
+    numerator = getattr(value, "numerator", None)
+    denominator = getattr(value, "denominator", None)
+    if not callable(numerator) or not callable(denominator):
+        return Fraction(int(value))  # type: ignore[arg-type]
+    return Fraction(int(numerator()), int(denominator()))
+
+
+def _numerical_twin(formed: FormModules.ParentMethods) -> FormModules.ParentMethods:
+    """`formed`, rebuilt on its own Gram tensor: the same form, read from a stored tensor.
+
+    A formed module that is a subobject answers `b(x, y)` by expanding the restriction, which costs
+    about a hundred and fifty seconds for the first value at rank 19 and seconds for the rest;
+    `FormModules.Mor(...).preserves_forms` asks for every entry.  Its Gram tensor is the same form on
+    the same generators, and a module built on that tensor answers from the tensor directly, so the
+    same decision costs seconds (`results/evidence-29-hoehn-mason.md`).
+    """
+    rows = _gram_rows(formed)
+    rank = len(rows)
+    tensor = tuple(tuple(records.rational(value) for value in row) for row in rows)
+    values = formed.value_module()
+    return FormModules(formed.base_ring())(formed.base_ring().free_module(rank).bilinear_hom_space(values)(tensor))
+
+
 def basis_isometry(source: FormModules.ParentMethods, target: FormModules.ParentMethods, basis_rows: Matrix) -> CategoricalMor.ElementMethods | None:
     """The printed change of basis `P` as an isometry from `source` onto `target`, or `None`.
 
     The columns of `P` are the images of the generators of `source` in the
     coordinates of `target`.  The module map they define is an isometry when it
-    preserves the forms and is bijective.
+    preserves the forms and is bijective.  The form preservation is decided on the numerical rebuild of
+    `target`, which is the same form; the map itself, whose codomain is `target`, is what is returned
+    once that map is bijective.
     """
     images = tuple(target(column) for column in zip(*basis_rows, strict=True))
     module_map = _module_map(source.module_category().Mor(source, target)(images))
-    form_morphisms = FormModules(source.base_ring()).Mor(source, target)
+    numerical = _numerical_twin(target)
+    numerical_images = tuple(numerical(column) for column in zip(*basis_rows, strict=True))
+    form_morphisms = FormModules(source.base_ring()).Mor(source, numerical)
     if not isinstance(form_morphisms, FormedModuleMor):
         raise TypeError("the public form-module Mor must implement the owned form-preservation query")
-    if form_morphisms.preserves_forms(module_map) and _linear_map(module_map).is_injective() and _linear_map(module_map).is_surjective():
+    checked = _module_map(source.module_category().Mor(source, numerical)(numerical_images))
+    if form_morphisms.preserves_forms(checked) and _linear_map(module_map).is_injective() and _linear_map(module_map).is_surjective():
         return module_map
     return None
 

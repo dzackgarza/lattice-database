@@ -3,6 +3,8 @@
 from fractions import Fraction
 from pathlib import Path
 
+from sage.all import ZZ, matrix
+
 from latticedb import brandt_intrau, nebe_sloane, nipp, records, regular_ternaries, watson
 from latticedb.model import Lattice
 
@@ -10,20 +12,13 @@ SOURCES = Path(__file__).resolve().parent.parent / "sources"
 
 
 def _determinant(gram_tensor) -> int:
-    """The exact determinant of a Gram tensor, by the flint build this process already has.
+    """The exact determinant of a Gram tensor, by Sage.
 
-    `python-flint` and Sage each load their own `libflint` — 24.0.0 out of `python_flint.libs` and the
-    system 19.0.0 — and the first build's `fmpz_set` binds to the second build's symbol, so
-    `fmpz_mat(...).det()` in a process that has imported `sage.all` writes through a mismatched `fmpz`
-    and the interpreter dies of SIGSEGV (#29). Sage's own matrix is the flint the process loaded, so it
-    is used wherever Sage is importable; `python-flint` is imported only where Sage is not.
+    The suite runs in the image, whose Sage links its own `libflint`; `python-flint` ships a second
+    build, and a process holding both resolves `fmpz_set` to the other's symbol and dies of SIGSEGV
+    (#29, dzackgarza/sage#25). So the determinant is taken with Sage's matrix, and `python-flint` is
+    no longer a dependency of this repository.
     """
-    try:
-        from sage.all import ZZ, matrix
-    except ImportError:
-        from flint import fmpz_mat
-
-        return int(fmpz_mat(gram_tensor).det())
     return int(matrix(ZZ, [list(row) for row in gram_tensor]).det())
 
 

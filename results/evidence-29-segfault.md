@@ -1,77 +1,92 @@
-# #29: the segmentation fault, its cause, and what is still open
+# #29: three causes
 
-## The crash: two `libflint` builds in one process
+## 1. The segmentation fault: two `libflint` builds in one process
 
 `tests/test_bulk_sources.py` line 17 computed `int(fmpz_mat(quaternary.gram_tensor).det())`. In the
-image, with `import sage.all` first — which is how the `tests` workflow starts its interpreter —
-that call dies:
+image, after `import sage.all` — how the `tests` workflow starts its interpreter — that call dies:
 
     Fatal Python error: Segmentation fault
       File "/repo/tests/test_bulk_sources.py", line 17 in test_nipp_tables_preserve_the_source_discriminants_and_group_orders
-    ...
     /lib/x86_64-linux-gnu/libflint.so.19(fmpz_set+0x25)
     .../flint/types/fmpz_mat.cpython-314-x86_64-linux-gnu.so(+0x10d18)
 
-The two libraries:
+    python-flint 0.9.0 extension -> python_flint.libs/libflint-6839011d.so.24.0.0   (vendored FLINT 3)
+    Sage 11.0.beta5              -> /lib/x86_64-linux-gnu/libflint.so.19.0.0        (FLINT 2.9)
 
-    python-flint 0.9.0 extension  ->  python_flint.libs/libflint-6839011d.so.24.0.0   (FLINT 3 build)
-    Sage 11.0.beta5               ->  /lib/x86_64-linux-gnu/libflint.so.19.0.0      (FLINT 2.9 build)
+The vendored build's `fmpz_set` binds to the symbol the process already loaded, so `fmpz_mat.det()`
+writes a FLINT 3 `fmpz` through FLINT 2 code. Measured: the expression succeeds in a process that has
+not imported `sage.all` (`det: 4`) and segfaults in one that has. Filed as **dzackgarza/sage#25** and
+repaired there.
 
-`python-flint` ships its own FLINT under a mangled soname, but its `fmpz_set` resolves to the symbol
-the process already loaded — Sage's `libflint.so.19` — so `fmpz_mat.det()` writes an FLINT 3 `fmpz`
-through FLINT 2 code and the interpreter dies. Measured: the same expression succeeds in a process
-that has **not** imported `sage.all` (`det: 4`), and segfaults in one that has.
+**Repair here.** `python-flint` is used by no library module and by no other test:
 
-## The repair
+    $ rg -n "flint" src/
+    (none)
+    $ rg -ln "from flint|import flint|python-flint" --glob '!*.pyc' .
+    ./README.md   ./AGENTS.md   ./pyproject.toml   ./tests/test_bulk_sources.py
 
-`tests/test_bulk_sources.py` now takes the determinant from the FLINT build the process already has:
-Sage's own `matrix(ZZ, ...)` wherever `sage.all` is importable, `python-flint` only where it is not.
-The assertion is the same equality against the source's stated discriminant, `(4, 4)` and `(2, 4)`.
-`python-flint` is imported inside that branch, so the Sage process never loads the second build.
+so it is not a dependency of this repository any more: `python-flint>=0.9` is out of
+`pyproject.toml` (there is no lock file in the tree to update), and the test takes the determinant
+with Sage's own matrix — the FLINT the process loaded — for the same assertions:
 
-    $ python -c 'import sage.all, ...; pytest tests/test_bulk_sources.py'   # the workflow's order
-    ......                                                                   [100%]
-    6 passed in 25.66s                                       (before: exit 139 at the first test)
+    def _determinant(gram_tensor) -> int:
+        return int(matrix(ZZ, [list(row) for row in gram_tensor]).det())
 
-## The 70 minutes: named, not yet fixed
+Measured in the workflow's order: `6 passed in 41.30s`, where the first test previously killed the
+interpreter.
 
-`tests/source_intake/test_hoehn_mason_source.py` runs in 0.53 s for its first test; the second,
-`test_row_81_source_generators_are_the_seeded_self_isometries`, does not finish in 25 minutes. Its time
-is one call, `hoehn_mason.automorphisms(leech, entry, record)` for the rank-19 record 02AQ, and a stack
-dump after seven minutes puts it here:
+## 2. The Hoehn–Mason tests: 70 minutes in one owner call, and the repair
 
-    hoehn_mason._record_isometry -> hashimoto.basis_isometry -> FormModules...preserves_forms
-      -> _form_square_commutes -> b -> _evaluate_by_bilinearity
-      -> pure_tensor -> linear_combination -> _linear_combination_from_generator_coefficients
+`test_row_81_source_generators_are_the_seeded_self_isometries` alone did not finish in 25 minutes. Its
+time is in `hoehn_mason.automorphisms` → `hashimoto.basis_isometry` → the owner's
+`FormModules.Mor(...).preserves_forms`, which asks the target's form for every one of the 19×19 Gram
+entries. The target is a *subobject* (`A ⊂ leech[1]`, rank 19), and a subobject answers `b(x, y)` by
+expanding the restriction. Measured on row 81 in the image:
 
-`preserves_forms` asks the form for every one of the 19×19 Gram entries, and the form of the subobject
-`A ⊂ leech[1]` is a restriction/tensor presentation, so each entry is expanded through
-`pure_tensor` instead of being read: seconds per entry, about 361 entries.
+| | |
+| --- | --- |
+| `_leech_lattice` | 0.2 s |
+| `_sublattice` (rank 19) | 1.2 s |
+| `source = _formed(record.gram_tensor).twist(twist)` | 1.4 s |
+| **one `b(x, x)` on the subobject** | **156.65 s** |
+| one `b(x, x)` on the ambient Leech lattice | 0.014 s |
+| one `b(x, x)` on the source | 0.011 s |
+| `preserves_forms` against the ambient (249 s) | too slow to be the repair |
 
-Attempted and rejected this turn: deciding the same question on `_numerical_form(target)`, the same
-form rebuilt on its own Gram tensor. It did not shorten the run (still over 30 minutes), so the
-remaining cost is on the source's side as well — `_formed(record.gram_tensor).twist(twist)` — and the
-change was reverted rather than pushed unverified. A supporting defect: `sublattice.gram_matrix()`
+**Repair.** `hashimoto.basis_isometry` decides form preservation on `_numerical_twin(target)`: the same
+form rebuilt on the target's own Gram tensor (`_gram_rows` reads it, `_rational` converts the owned
+entries), which the preamble then answers from the tensor instead of expanding a restriction. The map
+that is returned is still the one into the real `target`, and bijectivity is still decided on it, so
+every assertion is unchanged:
+
+    $ pytest tests/source_intake/test_hoehn_mason_source.py     # three tests
+    3 passed in 117.38s          (80.59 s + 35.71 s + 0.01 s; before: 70 minutes)
+
+and with the neighbouring suites, in one run: `19 passed in 229.93s` for `tests/source_intake`,
+`tests/test_owned_boundaries.py` and `tests/test_bulk_sources.py`.
+
+The first twin costs what reading the Gram tensor costs; the check itself drops from minutes per
+entry to seconds for all 361. Supporting owner defect, for the report: `sublattice.gram_matrix()`
 raises `AttributeError: 'RestrictedScalarsModules.parent_class' object has no attribute
 'matrix_space'`, so the subobject's form cannot be read as a matrix at all.
 
-For the orchestrator to file against sage-extensions: `FormModules.Mor(...).preserves_forms` costs
-O(rank²) tensor expansions on a subobject's form where the same decision on the Gram tensor is
-immediate; and `gram_matrix()` fails on a formed module over restricted scalars.
+## 3. `13 passed` and exit 1: the owner's post-run performance gate
 
-## The preamble step: `13 passed`, exit 1
+`sage_extensions/testing/suite_budget.py`:
 
-The owner's suite is run as a two-file selection from this repository, with its own `pyproject.toml`
-`addopts`, which include `-p sage_extensions.testing.suite_budget`. That plugin grades the preamble
-import, collection and each test's call phase against baselines recorded for sage-extensions' own full
-suite, and ends the session nonzero when a gate fails after every test has passed — `13 passed in
-55.63s` followed by exit 1.
+    def pytest_sessionfinish(session, exitstatus):
+        del exitstatus
+        if _gated(session.config) and session.config.stash[_SLOW_CALLS]:
+            session.exitstatus = pytest.ExitCode.TESTS_FAILED
 
-`results/tests-workflow-owner-time-gates.patch` runs the contracts with `--no-time-gates`, the flag
-that plugin documents for a run that is not its own suite. The contracts still run and still decide
-the step. Verified here against sage-extensions main (32e116e) in the image: the selection runs in
-5.32 s, and the one failure it reports is the owner's own —
-`test_primitive_orbit_series_counts_primitive_isotropic_lines` raising
-`TypeError: int() argument must be ... not 'OwnedJoinCategory.element_class'` inside
-`sage_indefinite_port/indefinite/recursive.py:154` — so the step stays red until that is fixed
-upstream, and no gate of ours is hiding it.
+`_SLOW_CALLS` collects every selected test whose **call phase exceeded `TEST_CALL_CEILING = 20.0` s**,
+whether it passed or not, and the gate then overrides the session's exit status at the end. So a run
+of this two-file selection on a cold runner prints `13 passed` — every contract green — and exits 1.
+(The `test_lint` plugin is not this: it exits at collection, before any test runs.)
+
+`results/tests-workflow-owner-time-gates.patch` (clean under `git apply --check`) runs the contracts
+with `--no-time-gates`, the flag that plugin documents for a run that is not its own suite. The
+contracts still run and still decide the step. Verified against sage-extensions main (`32e116e`) in the
+image: the selection runs in 5.32–11.77 s, and the one failure it reports is the owner's own —
+`TypeError: int() argument must be ... not 'OwnedJoinCategory.element_class'` at
+`sage_indefinite_port/indefinite/recursive.py:154`.
