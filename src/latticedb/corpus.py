@@ -179,6 +179,11 @@ def _catalogue[Value: CatalogueRecord](root: Path, directory: str, schema: type[
     return tuple(entries)
 
 
+def tags(root: Path) -> tuple[str, ...]:
+    """Every stored tag, in order, without reading a card: a certification shard selects its own."""
+    return tuple(path.stem for path in sorted((root / "lattices").glob("*.md")))
+
+
 def cards(root: Path, tags: Iterable[str]) -> Corpus:
     """The cards of `tags` alone, as `load` would give them, without reading the rest of the corpus.
 
