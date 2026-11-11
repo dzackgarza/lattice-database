@@ -5,6 +5,7 @@ from __future__ import annotations
 from typing import Annotated, Literal, Self, get_args
 
 from pydantic import Field, model_validator
+from pydantic_core import PydanticCustomError
 
 from latticedb.record_types import (
     AdeType,
@@ -138,10 +139,32 @@ class PrimitiveOrbitSeries(Record):
         default=(),
         description="$c_\\Gamma(-1), c_\\Gamma(-2), \\dots$: the coefficients of $w, w^2, \\dots$",
     )
+    orbit_lengths: Annotated[tuple[Annotated[int, Field(ge=1)], ...], Field(strict=False)] | None = Field(
+        default=None,
+        description=(
+            "The sizes of the $\\Gamma$-orbits of primitive isotropic planes, in the order the citation names them, where "
+            "a source states the split and not only the count. Their sum is the number of such planes and their number is "
+            "the number of orbits, so a row that also states `planes` agrees with one of the two: a source that counts "
+            "orbits states the count, and a source that counts 1-cusps states the total."
+        ),
+    )
     reference: Reference | None = Field(
         default=None,
         description="The source of the coefficients; absent when `latticedb certify` computes them.",
     )
+
+    @model_validator(mode="after")
+    def check_orbit_lengths(self) -> Self:
+        lengths = self.orbit_lengths
+        if lengths is None or self.planes is None:
+            return self
+        if len(lengths) != self.planes and sum(lengths) != self.planes:
+            raise PydanticCustomError(
+                "orbit_lengths_total",
+                "the orbit lengths {lengths} sum to {total} and number {count}, so they agree with neither reading of planes = {planes}: a row states the number of orbits or the number of planes",
+                {"lengths": list(lengths), "total": sum(lengths), "count": len(lengths), "planes": self.planes},
+            )
+        return self
 
     def coefficient(self, n: int) -> int | None:
         """$c_\\Gamma(n)$, or None when it is not stated."""

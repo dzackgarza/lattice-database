@@ -5,6 +5,7 @@ from collections.abc import Callable
 from fractions import Fraction
 from pathlib import Path
 
+import frontmatter
 import pytest
 from pydantic import ValidationError
 
@@ -587,3 +588,31 @@ def test_a_discriminant_form_row_states_the_group_the_isotropic_classes_and_thei
         Lattice.model_validate(with_block(a2(), "integral", discriminant_form={"orthogonal_group_order": 2, "isotropic_classes": 1, "isotropic_orbits": 2}))
     with pytest.raises(ValidationError):
         Lattice.model_validate(with_block(a2(), "integral", discriminant_form={"orthogonal_group_order": 0, "isotropic_classes": 1, "isotropic_orbits": 1}))
+
+
+def test_the_enriques_plane_orbit_lengths_are_stated_and_sum_to_their_total() -> None:
+    """#31: 029J states the two lengths of its Õ⁺ plane orbits, and they are its 24242 planes.
+
+    The split of the source's sentence — 527 and 23715 — is a structured row now, so a library reads
+    each length by tag instead of parsing the citation.
+    """
+    record = frontmatter.load(str(ROOT / "lattices" / "029J.md")).metadata
+    orbits = Lattice.model_validate(record).integral.primitive_orbits
+    assert orbits["Otilde+"].orbit_lengths == (527, 23715)
+    assert sum(orbits["Otilde+"].orbit_lengths) == orbits["Otilde+"].planes == 24242
+    assert orbits["O"].orbit_lengths == (527, 23715)
+    assert "The set of 24242 isotropic planes also has 2 orbits, and these are of length 527 and 23715 respectively." in orbits["Otilde+"].reference.citation
+
+
+def test_an_orbit_length_pair_that_agrees_with_neither_reading_of_planes_is_refused() -> None:
+    """A row's `planes` is either the number of orbits or the number of planes; the lengths must match one."""
+    from pydantic import ValidationError
+
+    from latticedb.invariant_models import PrimitiveOrbitSeries
+
+    PrimitiveOrbitSeries.model_validate({"planes": 2, "orbit_lengths": [527, 23715]})
+    PrimitiveOrbitSeries.model_validate({"planes": 24242, "orbit_lengths": [527, 23715]})
+    with pytest.raises(ValidationError, match="neither reading of planes"):
+        PrimitiveOrbitSeries.model_validate({"planes": 3, "orbit_lengths": [527, 23715]})
+    with pytest.raises(ValidationError):
+        PrimitiveOrbitSeries.model_validate({"orbit_lengths": [527, 0]})
