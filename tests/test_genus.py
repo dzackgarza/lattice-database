@@ -798,3 +798,52 @@ def test_a_derivation_of_another_lattice_carries_nothing_over(tmp_path: Path) ->
     kept = genus.keep_other_computations(path, derived)
     assert kept["definite"] == {"minimum": 2}
     assert "definite.regular" not in kept["certifications"]
+
+
+def _cardinality_series() -> dict[str, object]:
+    """The owner's primitive-orbit series for 026E, computed as `certify` asks for it."""
+    from sage.all import ZZ
+    from sage_extensions.categories.lattices import Lattices
+
+    record = frontmatter.load(str(REPOSITORY / "lattices" / "026E.md")).metadata
+    return Lattices(ZZ)(Lattice.model_validate(record).gram_tensor).primitive_orbit_series()
+
+
+def test_the_owner_s_orbit_counts_are_cardinalities_that_json_refuses() -> None:
+    """#16: the value `certify` must store is a `Cardinalities` element, and `json` cannot emit it.
+
+    This is the reported failure, on the owner's own object for 026E: not a stub, and not a printed
+    form. The emitter's conversion is what turns it into the card's number.
+    """
+    from sage_extensions.categories.sets.cardinals import Cardinal
+
+    series = _cardinality_series()
+    constant = series["O"]["constant"]
+    assert isinstance(constant, Cardinal)
+    with pytest.raises(TypeError, match="Cardinalities"):
+        json.dumps(series)
+    assert constant.is_finite() is True
+    assert constant.finite_value() == 1
+
+
+def test_a_finite_cardinality_is_serialized_as_the_owner_s_exact_value() -> None:
+    """The count a card stores is the owner's `finite_value`, not a cast and not a printed form."""
+    from sage_extensions.categories.sets.cardinals import cardinal
+
+    assert sage_genus._orbit_count(cardinal(7)) == 7
+    assert sage_genus._orbit_count(cardinal(0)) == 0
+
+
+def test_a_countably_infinite_count_is_the_count_the_owner_states() -> None:
+    """`aleph0` is written where the owner says the cardinal is countably infinite."""
+    from sage_extensions.categories.sets.cardinals import aleph0
+
+    assert sage_genus._orbit_count(aleph0) == "aleph0"
+
+
+def test_a_cardinality_beyond_aleph0_is_not_recorded_as_aleph0() -> None:
+    """A cardinal the owner states to be uncountable has no count this schema states."""
+    from sage_extensions.categories.sets.cardinals import continuum
+
+    with pytest.raises(ValueError, match="uncountable"):
+        sage_genus._orbit_count(continuum)
