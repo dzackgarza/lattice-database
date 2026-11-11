@@ -8,7 +8,7 @@ import pytest
 import yaml
 from pydantic import TypeAdapter, ValidationError
 
-from latticedb import checks, corpus
+from latticedb import certificates, checks, corpus
 from latticedb.catalogues import ArithmeticGroup, LatticeFamily, LieGroup
 from latticedb.geometric import GeometricObject
 
@@ -111,16 +111,27 @@ def _arithmetic_group(generators: list[str] | None) -> dict[str, object]:
 def test_an_arithmetic_group_generator_is_one_scale_one_self_isometry_of_its_lattice(
     tmp_path: Path,
 ) -> None:
-    """Each name in `data.generator_morphisms` is one isometry L -> L on the card it names."""
+    """Each name in `data.generator_morphisms` is one isometry L -> L on the card it names.
+
+    #34: the fixture holds the certificates its copies cite. Without them `checks` reports every cited
+    value of 0012 as contradicting a completed certificate the corpus does not hold — the generator
+    morphisms among them — and the filter below would be testing that instead of the generator list.
+    0012's own generator row does agree with its certificate, which is what the second assertion keeps.
+    """
     (tmp_path / "lattices").mkdir()
     (tmp_path / "lattices" / "0012.md").symlink_to(ROOT / "lattices" / "0012.md")
     for name in ("families.yaml", "retired-tags.yaml"):
         (tmp_path / name).symlink_to(ROOT / name)
     (tmp_path / "lie-groups").mkdir()
     (tmp_path / "lie-groups" / "o-0-2.md").symlink_to(ROOT / "lie-groups" / "o-0-2.md")
+    # Only this corpus's own card is certified here, so only its certificates join the fixture.
+    held = {name: certificate for name, certificate in certificates.load(ROOT, tags=["0012"]).items() if name.split(" ", 1)[0] == "0012"}
+    certificates.save(tmp_path, held, tags=["0012"])
     path = tmp_path / "arithmetic-groups" / "a2-rotations.md"
     _record(path, _arithmetic_group(["O(L) generator 1"]))
-    assert [problem for problem in checks.report(tmp_path) if "generator" in problem] == []
+    problems = checks.report(tmp_path)
+    assert [problem for problem in problems if "contradicts its completed computation certificate" in problem] == []
+    assert [problem for problem in problems if "generator" in problem] == []
 
     _record(path, _arithmetic_group(["not an isometry", "O(L) generator 1", "O(L) generator 1"]))
     problems = checks.report(tmp_path)
@@ -152,15 +163,28 @@ def test_an_arithmetic_group_index_is_a_positive_integer_or_absent() -> None:
 
 
 def test_the_coble_card_and_its_group_cards_state_only_their_defining_data() -> None:
-    """#7: T_Co's fields wait on `certify` and on sage-extensions#286, so the card carries none of them."""
+    """#7, #34: T_Co states its defining data and whatever `certify` has certified, and nothing else.
+
+    CI certifies the fields of this card one at a time — #34 found `integral.discriminant_form` certified
+    on it — so the test does not pin which of them are present. It asserts the rule that holds either
+    way: no block of the card gains a field that is not certified, every certificate names a field the
+    card states, and the blocks that #7 leaves to `certify` and to sage-extensions#286 are still absent.
+    The certified value is not to be deleted to make this pass.
+    """
     card = frontmatter.load(str(ROOT / "lattices" / "6JRR.md")).metadata
     assert card["name"] == "T_Co"
     assert (card["rank"], card["signature"], card["determinant"], card["definiteness"]) == (11, [2, 9], -2048, "indefinite")
     assert card["gram_tensor"][0][0] == 2 and card["gram_tensor"][1][2] == 2 and card["gram_tensor"][3][3] == -4
-    assert "certifications" not in card
-    assert set(card["integral"]) == {"parity"}
-    assert set(card["indefinite"]) == {"isotropic"}
-    assert "definite" not in card and "root_span" not in card and "morphisms" not in card
+    defining = {"integral.parity", "indefinite.isotropic"}
+    stated = {
+        f"{block}.{field}"
+        for block in ("form", "integral", "automorphisms", "definite", "root_span", "root_sublattice", "indefinite", "hyperbolic")
+        for field in (card.get(block) or {})
+    }
+    certified = set(card.get("certifications") or {}) - {"derive"}
+    assert stated - defining == certified, "every field of T_Co beyond its defining data is one it certifies, and every certificate names a stated field"
+    assert "definite" not in card and "root_span" not in card and "root_sublattice" not in card
+    assert card["morphisms"] == []
     for slug in ("otilde-t-co", "otilde-plus-t-co"):
         group = ArithmeticGroup.model_validate(frontmatter.load(str(ROOT / "arithmetic-groups" / f"{slug}.md")).metadata)
         assert group.lattice == "6JRR"
