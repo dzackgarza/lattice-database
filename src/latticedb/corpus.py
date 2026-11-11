@@ -19,6 +19,7 @@ from __future__ import annotations
 
 import json
 import re
+from collections.abc import Iterable
 from dataclasses import dataclass
 from pathlib import Path
 
@@ -176,6 +177,32 @@ def _catalogue[Value: CatalogueRecord](root: Path, directory: str, schema: type[
             continue
         entries.append(CatalogueEntry(value, document.content, path))
     return tuple(entries)
+
+
+def cards(root: Path, tags: Iterable[str]) -> Corpus:
+    """The cards of `tags` alone, as `load` would give them, without reading the rest of the corpus.
+
+    A per-tag request needs one card's Gram tensor and what the preamble makes of it; reading the
+    other 302,503 cards costs 7.3 GiB and is killed on a 15 GiB runner before the first computation
+    (#30). The families, the retired tags and the catalogues are empty here, because a computation
+    neither reads nor writes them; a workflow that checks references uses `load`.
+    """
+    entries: list[Entry] = []
+    found: list[str] = []
+    for tag in sorted(set(tags)):
+        path = root / "lattices" / f"{tag}.md"
+        if not path.is_file():
+            found.append(f"{path}: no card for the requested tag {tag}")
+            continue
+        document = read_card(path)
+        try:
+            entries.append(Entry(Lattice.model_validate(document.metadata), document.content, path))
+        except ValidationError as error:
+            found.extend(_record_problems(path, error))
+    if found:
+        raise CorpusInvalid(tuple(found))
+    empty: tuple[()] = ()
+    return Corpus(tuple(entries), {}, {}, *(empty for _ in range(13)))
 
 
 def load(root: Path) -> Corpus:

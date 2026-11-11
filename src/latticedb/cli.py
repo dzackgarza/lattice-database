@@ -362,8 +362,12 @@ def deduplicate(root: Root = Path()) -> None:
     leave `certificates/`: a value it certified is already on the earliest
     card under that card's own certificate.
     """
-    loaded = corpus.load(root)
-    held = certificates.load(root)
+    # A tag request reads that card and the certificate groups it falls in; the whole corpus costs
+    # 7.3 GiB of cards and 1.8 GiB of certificates, which a 15 GiB runner kills before the first
+    # computation (#30). `certificates.save` is then given the same tags, so it writes only the groups
+    # it read in full.
+    loaded = corpus.cards(root, tag) if tag else corpus.load(root)
+    held = certificates.load(root, tag if tag else None)
     retired: corpus.Retired = {}
     for tags in corpus.duplicate_grams(loaded.entries).values():
         earliest, *later = sorted(tags)
@@ -466,8 +470,12 @@ def certify(
     index, count = (int(part) for part in shard.split("/"))
     if not 0 <= index < count:
         raise ValueError(f"shard {shard} names no shard of {count}")
-    loaded = corpus.load(root)
-    held = certificates.load(root)
+    # A tag request reads that card and the certificate groups it falls in; the whole corpus costs
+    # 7.3 GiB of cards and 1.8 GiB of certificates, which a 15 GiB runner kills before the first
+    # computation (#30). `certificates.save` is then given the same tags, so it writes only the groups
+    # it read in full.
+    loaded = corpus.cards(root, tag) if tag else corpus.load(root)
+    held = certificates.load(root, tag if tag else None)
     match phase:
         case "all":
             searches = None
