@@ -34,14 +34,26 @@ own note in (4.3.5): "(bar_alpha_i, alpha_i) = 2, because we are working in E8(-
 (4.3.5)'s printed check (alpha_i, e' + f')^2 / |(alpha_i, alpha_i)| = 4, 16, 64 hold for
 i = 10, 11, 12.
 
-Rows the source does not print are not written:
+The other two statements print their walls beside their figures as well, and both are transcribed.
 
-  (4.3.7) p. 21-22, cusp e' + f' + bar_alpha_8, Fig. 8: the statement prints the figure and the span
-  of its roots, not its walls as formulae, and the scan of Fig. 8 does not give them. The row stops.
+(4.3.7), p. 22 with Fig. 8, at the cusp v = e' + f' + bar_alpha_8: the nodes alpha_1, ..., alpha_7 of
+the figure and the five vectors printed beside it, alpha_9 = f - e, alpha_10 = 2f' + bar_alpha_8,
+alpha_11 = 2e - 2f' - bar_alpha_8 = (e + f) - alpha_9 - alpha_10, alpha_12 = 2e + (bar_alpha_1 -
+bar_alpha_8) and alpha_13 = (e + f) + (alpha_8 - f'). The paper checks its own reading twice: the span
+of the roots it prints, Z{alpha_1, ..., alpha_7, alpha_8 - f', e + f, e - f}, contains all twelve walls,
+and in (4.3.16), p. 27, it reads the primitive isotropic plane Z v + Z w off this diagram with
+w = alpha_9 + alpha_12 + alpha_1 + alpha_3 + alpha_4 + alpha_5 + alpha_6 + alpha_7 + alpha_13, which with
+these vectors is isotropic, primitive, orthogonal to exactly those nine walls, and in their span. The
+script asserts both.
 
-  (4.3.9) p. 23-24, cusp 2e + 2f + bar_alpha_1, Fig. 12: the basis prints, but the text layer and
-  the OCR disagree on four of the six vectors alpha_9, ..., alpha_14, and no reading of either has
-  walls orthogonal to the cusp whose Coxeter matrix is |g_ij| = cos(pi/m). The row stops as well.
+(4.3.9), p. 24 with Fig. 12, at the cusp v = 2e + 2f + bar_alpha_1: the basis of v^perp/Zv prints on
+p. 23 and the walls beside the figure on p. 24, where a tilde with a bar is the dual in the E8(-2)
+summand spanned by alpha-tilde_1, ..., alpha-tilde_8, as bar_alpha_i is for alpha_i. The nodes inside
+that summand are alpha-tilde_1, alpha_2, alpha_4, ..., alpha_7 and the dual of alpha-tilde_8, and the row
+shows why alpha-tilde_3 = f' + alpha_3 cannot be one of them: with it the pair alpha-tilde_3-alpha_14 has
+b = -4 against squares -4 and -2, so |g| = sqrt 2, which is no cos(pi/m) of Sterk's table. The span the
+page prints, Z{e-tilde + f-tilde, e-tilde - f-tilde, alpha-tilde_1, ..., alpha-tilde_8}, contains all
+thirteen walls.
 """
 
 from __future__ import annotations
@@ -200,13 +212,26 @@ def main() -> None:
             assert form.of(bar[i], alpha[j]) == (2 if i == j else 0), f"(bar_alpha_{i}, alpha_{j})"
     assert [form.norm(bar[i]) for i in range(1, 9)] == [-8, -16, -28, -60, -40, -24, -12, -4]
 
-    def wall_row(statement: str, page: int, figure: int, cusp: tuple[int, ...], walls: list[tuple[str, tuple[int, ...]]]) -> dict[str, object]:
+    def wall_row(
+        statement: str,
+        page: int,
+        figure: int,
+        cusp: tuple[int, ...],
+        walls: list[tuple[str, tuple[int, ...]]],
+        span: list[tuple[int, ...]] | None = None,
+    ) -> dict[str, object]:
         assert form.norm(cusp) == 0, f"{statement}: the cusp is not isotropic"
         assert math.gcd(*[abs(entry) for entry in cusp]) == 1, f"{statement}: the cusp is not primitive"
         for name, v in walls:
             assert form.of(cusp, v) == 0, f"{statement}: the wall {name} is not orthogonal to the cusp"
             assert form.norm(v) < 0, f"{statement}: the wall {name} has square {form.norm(v)}, so it is no wall"
+        if span is not None:
+            for name, v in walls:
+                assert form.rank([*span, v]) == form.rank(span), f"{statement}: the wall {name} is not in the span the page prints"
+            for u in span:
+                assert form.of(cusp, u) == 0, f"{statement}: the span the page prints is not in v^perp"
         assert form.rank([v for _, v in walls]) == RANK - 2, f"{statement}: the walls do not span v^perp/Zv over Q"
+        assert form.rank([*(v for _, v in walls), cusp]) == RANK - 1, f"{statement}: the cusp is in the span of the walls"
         gram = [[form.of(u, v) for _, v in walls] for _, u in walls]
         return {
             "cusp": list(cusp),
@@ -256,13 +281,99 @@ def main() -> None:
     ]
     rows.append(wall_row("4.3.8", 23, 10, cusp, walls))
 
+    # (4.3.7), p. 22, Fig. 8: the cusp v = e' + f' + bar_alpha_8. The statement's basis of v^perp/Zv is
+    # e, f, alpha_1, ..., alpha_7, -f' + bar_alpha_8, and the span of its roots Z{alpha_1, ..., alpha_7,
+    # alpha_8 - f', e + f, e - f}. The walls are the seven nodes alpha_1, ..., alpha_7 and the five vectors
+    # printed beside the figure: alpha_9 = f - e, alpha_10 = 2f' + bar_alpha_8,
+    # alpha_11 = 2e - 2f' - bar_alpha_8 = (e + f) - alpha_9 - alpha_10,
+    # alpha_12 = 2e + (bar_alpha_1 - bar_alpha_8), alpha_13 = (e + f) + (alpha_8 - f').
+    cusp = form.add((1, ep), (1, fp), (1, bar[8]))
+    span_437 = [
+        *[alpha[i] for i in range(1, 8)],
+        form.minus(alpha[8], fp),
+        form.add((1, e), (1, f)),
+        form.minus(e, f),
+    ]
+    walls = [(f"\\alpha_{i}", alpha[i]) for i in range(1, 8)]
+    walls += [
+        ("\\alpha_9", form.minus(f, e)),
+        ("\\alpha_10", form.add((2, fp), (1, bar[8]))),
+        ("\\alpha_11", form.add((2, e), (-2, fp), (-1, bar[8]))),
+        ("\\alpha_12", form.add((2, e), (1, bar[1]), (-1, bar[8]))),
+        ("\\alpha_13", form.add((1, e), (1, f), (1, alpha[8]), (-1, fp))),
+    ]
+    # alpha_11 is printed both as a formula and as (e + f) - alpha_9 - alpha_10.
+    assert walls[9][1] == form.add((1, e), (1, f), (-1, walls[7][1]), (-1, walls[8][1])), "(4.3.7): alpha_11 is not (e + f) - alpha_9 - alpha_10"
+    # (4.3.16), p. 27: the paper reads the isotropic plane Z v + Z w off this diagram with
+    # w = alpha_9 + alpha_12 + alpha_1 + alpha_3 + alpha_4 + alpha_5 + alpha_6 + alpha_7 + alpha_13.
+    assert [walls[k][0] for k in (7, 10, 0, 2, 3, 4, 5, 6, 11)] == [
+        "\\alpha_9", "\\alpha_12", "\\alpha_1", "\\alpha_3", "\\alpha_4", "\\alpha_5", "\\alpha_6", "\\alpha_7", "\\alpha_13",
+    ], "(4.3.7): the walls are not in the order this script numbers them"
+    w = form.add(*[(1, walls[k][1]) for k in (7, 10, 0, 2, 3, 4, 5, 6, 11)])
+    assert form.norm(w) == 0, "(4.3.7): the paper's w is not isotropic"
+    assert math.gcd(*[abs(entry) for entry in w]) == 1, "(4.3.7): the paper's w is not primitive"
+    assert form.of(w, cusp) == 0, "(4.3.7): the paper's w is not orthogonal to the cusp"
+    assert [name for name, v in walls if form.of(w, v) == 0] == ["\\alpha_1", "\\alpha_3", "\\alpha_4", "\\alpha_5", "\\alpha_6", "\\alpha_7", "\\alpha_9", "\\alpha_12", "\\alpha_13"], "(4.3.7): the paper's w is not orthogonal to the walls of its parabolic subdiagram"
+    rows.append(wall_row("4.3.7", 22, 8, cusp, walls, span_437))
+
+    # (4.3.9), p. 24, Fig. 12: the cusp v = 2e + 2f + bar_alpha_1. Its quotient v^perp/Zv has the basis the
+    # statement prints on p. 23, e~ = e + e' + f' - alpha_1, f~ = f + e' + f' - alpha_1, alpha~_1 = e' - f',
+    # alpha~_2 = alpha_2, alpha~_3 = f' + alpha_3, alpha~_4 ... alpha~_8, and the span of its roots
+    # Z{e~ + f~, e~ - f~, alpha~_1, ..., alpha~_8}. The nodes inside the E8(-2) summand are alpha~_1, alpha_2,
+    # alpha_4, ..., alpha_7 and the dual of alpha~_8, and the six vectors beside the figure are
+    # alpha_9 = 2e~ - alpha~_1, alpha_10 = 2e~ + (dual alpha~_2 - dual alpha~_3), alpha_11 = f~ - e~,
+    # alpha_12 = e~ + f~ + (dual alpha~_6 - dual alpha~_3),
+    # alpha_13 = e~ + f~ + (dual alpha~_1 + dual alpha~_8 - dual alpha~_3), alpha_14 = e~ + f~ + alpha~_3.
+    cusp = form.add((2, e), (2, f), (1, bar[1]))
+    e_tilde = form.add((1, e), (1, ep), (1, fp), (-1, alpha[1]))
+    f_tilde = form.add((1, f), (1, ep), (1, fp), (-1, alpha[1]))
+    alpha_tilde = {1: form.minus(ep, fp), 2: alpha[2], 3: form.add((1, fp), (1, alpha[3]))}
+    alpha_tilde |= {i: alpha[i] for i in range(4, 9)}
+    # e~ and f~ span an H-summand, alpha~_1 ... alpha~_8 an E8(-2)-summand, as the statement says.
+    assert form.norm(e_tilde) == form.norm(f_tilde) == 0 and form.of(e_tilde, f_tilde) == 1, "(4.3.9): e~, f~ are no H"
+    assert all(form.of(e_tilde, alpha_tilde[i]) == 0 and form.of(f_tilde, alpha_tilde[i]) == 0 for i in range(1, 9)), "(4.3.9): the summands are not orthogonal"
+    tilde_gram = [[form.of(alpha_tilde[i], alpha_tilde[j]) for j in range(1, 9)] for i in range(1, 9)]
+    assert tilde_gram == [[-2 * cartan()[i - 1][j - 1] for j in range(1, 9)] for i in range(1, 9)], (
+        "(4.3.9): alpha~_1 ... alpha~_8 are not E8(-2) in Sterk's numbering"
+    )
+    # the dual of alpha~_i in the E8(-2) summand: (dual alpha~_i, alpha~_j) = 2 delta_ij, an integral
+    # combination of the alpha~_j because the E8 Cartan matrix has determinant 1
+    inverted_tilde = inverse(tilde_gram)
+    for i in range(1, 9):
+        for j in range(8):
+            assert (2 * inverted_tilde[i - 1][j]).denominator == 1, f"(4.3.9): dual alpha~_{i} is not integral"
+    dual_tilde = {
+        i: form.add(*[(int(2 * inverted_tilde[i - 1][j]), alpha_tilde[j + 1]) for j in range(8) if inverted_tilde[i - 1][j] != 0])
+        for i in range(1, 9)
+    }
+    for i in range(1, 9):
+        assert [form.of(dual_tilde[i], alpha_tilde[j]) for j in range(1, 9)] == [2 if i == j else 0 for j in range(1, 9)], f"(4.3.9): dual alpha~_{i}"
+    assert [form.norm(dual_tilde[i]) for i in range(1, 9)] == [-8, -16, -28, -60, -40, -24, -12, -4], "(4.3.9): the duals of alpha~ are not the E8(-2) dual basis"
+    span_439 = [form.add((1, e_tilde), (1, f_tilde)), form.minus(e_tilde, f_tilde), *[alpha_tilde[i] for i in range(1, 9)]]
+    walls = [
+        ("\\widetilde\\alpha_1", alpha_tilde[1]),
+        ("\\alpha_2", alpha_tilde[2]),
+        *[(f"\\alpha_{i}", alpha_tilde[i]) for i in range(4, 8)],
+        ("\\overline{\\widetilde\\alpha}_8", dual_tilde[8]),
+        ("\\alpha_9", form.add((2, e_tilde), (-1, alpha_tilde[1]))),
+        ("\\alpha_10", form.add((2, e_tilde), (1, dual_tilde[2]), (-1, dual_tilde[3]))),
+        ("\\alpha_11", form.minus(f_tilde, e_tilde)),
+        ("\\alpha_12", form.add((1, e_tilde), (1, f_tilde), (1, dual_tilde[6]), (-1, dual_tilde[3]))),
+        ("\\alpha_13", form.add((1, e_tilde), (1, f_tilde), (1, dual_tilde[1]), (1, dual_tilde[8]), (-1, dual_tilde[3]))),
+        ("\\alpha_14", form.add((1, e_tilde), (1, f_tilde), (1, alpha_tilde[3]))),
+    ]
+    rows.append(wall_row("4.3.9", 24, 12, cusp, walls, span_439))
+
+    # The card lists the cusps in the order the statements number them: (4.3.5), (4.3.6), (4.3.7), (4.3.8), (4.3.9).
+    rows.sort(key=lambda row: str(row["statement"]))
+
     reference = {
         "citation": (
             f"{STERK}, Section 4.3: the 0-cusps of Gamma_En,2 are the five primitive isotropic vectors of "
             "Proposition 4.2.3, p. 16. (4.3.5), p. 19 with Fig. 4, prints the walls of the chamber at the cusp e; "
-            "(4.3.6), p. 21 with Fig. 6, those at e'; (4.3.8), p. 23 with Fig. 10, those at 2e' + f' + bar_alpha_1. "
-            "(4.3.7), p. 21-22 with Fig. 8, at e' + f' + bar_alpha_8, and (4.3.9), p. 23-24 with Fig. 12, at "
-            "2e + 2f + bar_alpha_1, print theirs only as figures, and those two rows are not stored."
+            "(4.3.6), p. 21 with Fig. 6, those at e'; (4.3.7), p. 22 with Fig. 8, those at e' + f' + bar_alpha_8; "
+            "(4.3.8), p. 23 with Fig. 10, those at 2e' + f' + bar_alpha_1; (4.3.9), pp. 23-24 with Fig. 12, those "
+            "at 2e + 2f + bar_alpha_1."
         )
     }
     by = (

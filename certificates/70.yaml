@@ -47,16 +47,15 @@
   hash: cf9545519401f2ca83256aba81678812d17a9f538b001f6316d946d908e5d415
   by: research preamble
 029J integral.cusp_chambers:
-  hash: f546443699b5c3b377638ac85f9fe41ff4159cf9e1aba0762882909ad1a1db94
+  hash: 3d07d82fc2fb4bc5f2171e4d73ef7c6e534354d0d9e7ad2e55910f0a7ce25022
   by: 'H. Sterk, "Compactifications of the period space of Enriques surfaces, Part
     I", Math. Z. 207 (1991), 1-36, Section 4.3: the 0-cusps of Gamma_En,2 are the
     five primitive isotropic vectors of Proposition 4.2.3, p. 16. (4.3.5), p. 19 with
     Fig. 4, prints the walls of the chamber at the cusp e; (4.3.6), p. 21 with Fig.
-    6, those at e''; (4.3.8), p. 23 with Fig. 10, those at 2e'' + f'' + bar_alpha_1.
-    (4.3.7), p. 21-22 with Fig. 8, at e'' + f'' + bar_alpha_8, and (4.3.9), p. 23-24
-    with Fig. 12, at 2e + 2f + bar_alpha_1, print theirs only as figures, and those
-    two rows are not stored. The Gram matrix, the Coxeter diagram and the wall count
-    are what the card''s stored form says about those walls: results/transcribe-33-sterk-cusps.py
+    6, those at e''; (4.3.7), p. 22 with Fig. 8, those at e'' + f'' + bar_alpha_8;
+    (4.3.8), p. 23 with Fig. 10, those at 2e'' + f'' + bar_alpha_1; (4.3.9), pp. 23-24
+    with Fig. 12, those at 2e + 2f + bar_alpha_1. The Gram matrix, the Coxeter diagram
+    and the wall count are what the card''s stored form says about those walls: results/transcribe-33-sterk-cusps.py
     computed them from the card''s Gram tensor, and no Vinberg search was run for
     them.'
 029J integral.discriminant_form:

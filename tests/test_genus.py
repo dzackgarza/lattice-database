@@ -638,6 +638,52 @@ def test_a_primitive_orbit_row_is_stored_and_certified_by_its_citations(tmp_path
         genus.cite_orbit_row(path, "O", {"constant": 3}, reference, held)
 
 
+def test_a_cusp_chamber_row_is_added_without_dropping_or_contradicting_a_stored_one(tmp_path: Path) -> None:
+    """#33: the chamber writer takes the rows a source proves on top of the ones the card holds.
+
+    Sterk's five statements are one source, and one of them was transcribed after three were stored.
+    A stored row must survive a later statement's write; a write that would drop it or state a
+    different page for the same cusp stops the writer instead of silently replacing the row.
+    """
+    (tmp_path / "lattices").mkdir()
+    shutil.copy(REPOSITORY / corpus.FAMILIES_FILE, tmp_path / corpus.FAMILIES_FILE)
+    (tmp_path / corpus.RETIRED_FILE).write_text("{}\n")
+    shutil.copy(REPOSITORY / "lattices" / "029J.md", tmp_path / "lattices")
+    path = tmp_path / "lattices" / "029J.md"
+    rows = corpus.front_matter(corpus.read_card(path))["integral"]["cusp_chambers"]["gamma-en-2"]
+    reference = {"citation": "H. Sterk, \"Compactifications of the period space of Enriques surfaces, Part I\", Math. Z. 207 (1991), 1-36, Section 4.3."}
+    by = f"{reference['citation']} The Gram matrix, the Coxeter diagram and the wall count are the card's form on those walls."
+
+    document = frontmatter.load(str(path))
+    held: certificates.Certificates = {}
+    without("029J", "integral", document.metadata, held, "integral.cusp_chambers")
+    path.write_text(records.record_text(corpus.front_matter(document), document.content))
+
+    genus.cite_cusp_chambers(path, "gamma-en-2", rows[:1], reference, by, held)
+    assert [row["statement"] for row in corpus.front_matter(corpus.read_card(path))["integral"]["cusp_chambers"]["gamma-en-2"]] == ["4.3.5"]
+
+    genus.cite_cusp_chambers(path, "gamma-en-2", rows[:2], reference, by, held)
+    metadata = corpus.front_matter(corpus.read_card(path))
+    assert [row["statement"] for row in metadata["integral"]["cusp_chambers"]["gamma-en-2"]] == ["4.3.5", "4.3.6"], (
+        "a further statement of the same source adds its row to the stored one"
+    )
+    lattice = Lattice.model_validate(metadata)
+    computation = genus.name("029J", "cusp_chambers", lattice.definiteness)
+    digest = certificates.certification_hash(
+        computation,
+        lattice,
+        genus.certified_value("cusp_chambers", metadata["integral"]["cusp_chambers"], lattice),
+    )
+    assert lattice.certifications["integral.cusp_chambers"] == digest == held[computation].hash, "the one hash commits to both rows"
+
+    with pytest.raises(AssertionError, match="the source proves"):
+        genus.cite_cusp_chambers(path, "gamma-en-2", rows[1:], reference, by, held)
+    altered = {**rows[0], "printed_page": 25}
+    with pytest.raises(AssertionError, match="the source proves"):
+        genus.cite_cusp_chambers(path, "gamma-en-2", [altered, rows[1]], reference, by, held)
+    assert [row["statement"] for row in corpus.front_matter(corpus.read_card(path))["integral"]["cusp_chambers"]["gamma-en-2"]] == ["4.3.5", "4.3.6"], "a refused write leaves the card as it was"
+
+
 def test_the_queue_separates_the_terminating_fields_from_the_searches() -> None:
     """#14: a run takes one phase, so a dispatched run does not wait on a schedule run's search."""
     terminating = {"tag": "0012", "fields": ["integer_valued"]}

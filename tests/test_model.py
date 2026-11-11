@@ -651,7 +651,7 @@ def test_a_chamber_at_a_cusp_states_its_walls_its_count_its_gram_and_its_diagram
 
 
 def test_the_enriques_cusp_chambers_are_the_sources_walls_and_the_cards_own_form() -> None:
-    """#33: Sterk's three printed chambers on 029J recompute from the card, with no Vinberg search.
+    """#33: Sterk's five printed chambers on 029J recompute from the card, with no Vinberg search.
 
     Each wall is orthogonal to its cusp and of negative square, the stored Gram matrix is the card's
     form on those walls, the count is the number of them, the walls span v^perp/Zv over Q, and the
@@ -683,8 +683,14 @@ def test_the_enriques_cusp_chambers_are_the_sources_walls_and_the_cards_own_form
 
     orders = {Fraction(1, 4): 3, Fraction(-1, 4): 3, Fraction(1, 2): 4, Fraction(-1, 2): 4, Fraction(3, 4): 6, Fraction(-3, 4): 6}
     rows = lattice.integral.cusp_chambers["gamma-en-2"]
-    assert [(row.statement, row.printed_page, row.figure) for row in rows] == [("4.3.5", 19, 4), ("4.3.6", 21, 6), ("4.3.8", 23, 10)]
-    assert [row.wall_count for row in rows] == [12, 10, 11]
+    assert [(row.statement, row.printed_page, row.figure) for row in rows] == [
+        ("4.3.5", 19, 4),
+        ("4.3.6", 21, 6),
+        ("4.3.7", 22, 8),
+        ("4.3.8", 23, 10),
+        ("4.3.9", 24, 12),
+    ]
+    assert [row.wall_count for row in rows] == [12, 10, 12, 11, 13]
     for row in rows:
         cusp = tuple(row.cusp)
         assert b(cusp, cusp) == 0, row.statement

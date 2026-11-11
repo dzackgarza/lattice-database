@@ -904,7 +904,9 @@ def cite_cusp_chambers(
     Coxeter diagram and wall count are computed from the card's Gram tensor. The certificate is
     one per field, so its hash commits to every row of every subgroup and its provenance names
     the citation that prints the walls and the program that computed the invariants of them.
-    A different value already on the card contradicts this one and stops the writer.
+    A stored row is neither dropped nor contradicted: the rows already on the card must be among
+    the rows the source proves, so a further statement of the same source adds its cusp's row to
+    the ones already stored and stops the writer only where the two disagree.
     """
     document = corpus.read_card(path)
     metadata = corpus.front_matter(document)
@@ -912,9 +914,11 @@ def cite_cusp_chambers(
     block = TypeAdapter(dict[str, Yaml]).validate_python(metadata.get(block_name) or {}, strict=True)
     chambers = block.get("cusp_chambers")
     rows_of_group = dict(TypeAdapter(dict[str, Yaml]).validate_python(chambers or {}, strict=True))
-    assert rows_of_group.get(group) in (None, rows), (
-        f"{path}: {block_name}.cusp_chambers.{group} is {rows_of_group.get(group)}, the source proves {rows}"
-    )
+    stored = TypeAdapter(list[Yaml]).validate_python(rows_of_group.get(group) or [], strict=True)
+    for row in stored:
+        assert row in rows, (
+            f"{path}: {block_name}.cusp_chambers.{group} holds the row {row}, which is not among the rows the source proves {rows}"
+        )
     rows_of_group[group] = rows
     block["cusp_chambers"] = {key: rows_of_group[key] for key in sorted(rows_of_group)}
     metadata[block_name] = {key: block[key] for key in model.model_fields if key in block}
