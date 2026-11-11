@@ -9,7 +9,7 @@ data:
   abstract_structure: O(T_En); this is Gamma_En = O(T_En) of Definition 2.6
   reference:
     citation: V. Alexeev, P. Engel, D. Z. Garza, L. Schaffler, "Compact moduli of
-      Enriques surfaces of degree 2", Nagoya Math. J. (2025). Definitions 2.6 and
+      Enriques surfaces of degree 2", Nagoya Math. J. 259 (2025), 581–624. Definitions 2.6 and
       2.7.
   orbits:
   - square: 0
