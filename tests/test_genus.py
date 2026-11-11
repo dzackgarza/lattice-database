@@ -638,6 +638,44 @@ def test_a_primitive_orbit_row_is_stored_and_certified_by_its_citations(tmp_path
         genus.cite_orbit_row(path, "O", {"constant": 3}, reference, held)
 
 
+def test_a_computed_chamber_is_certified_by_its_program_and_joins_no_reference(tmp_path: Path) -> None:
+    """#36: a chamber no source prints cites none; its certificate names the operation and its revision."""
+    (tmp_path / "lattices").mkdir()
+    shutil.copy(REPOSITORY / corpus.FAMILIES_FILE, tmp_path / corpus.FAMILIES_FILE)
+    (tmp_path / corpus.RETIRED_FILE).write_text("{}\n")
+    shutil.copy(REPOSITORY / "lattices" / "0125.md", tmp_path / "lattices")
+    path = tmp_path / "lattices" / "0125.md"
+    document = frontmatter.load(str(path))
+    held: certificates.Certificates = {}
+    without("0125", "integral", document.metadata, held, "integral.cusp_chambers")
+    path.write_text(records.record_text(corpus.front_matter(document), document.content))
+    references = list(corpus.front_matter(corpus.read_card(path))["references"])
+
+    row = {
+        "walls": [{"name": "w_1", "vector": [0, -1]}, {"name": "w_2", "vector": [1, -1]}],
+        "wall_count": 2,
+        "gram": [["-4", "2"], ["2", "-4"]],
+        "diagram": [{"a": "w_1", "b": "w_2", "order": 4}],
+        "ideal_vertices": 1,
+    }
+    by = "computed, not cited: fundamental_chamber(max_roots=20, max_decompositions=2000) at sage-extensions deadbeef."
+    genus.store_cusp_chambers(path, "O", [row], by, held)
+    metadata = corpus.front_matter(corpus.read_card(path))
+    stored = metadata["integral"]["cusp_chambers"]["O"][0]
+    assert (stored.get("statement"), stored.get("printed_page"), stored.get("reference")) == (None, None, None), (
+        "a computed chamber states no source"
+    )
+    assert metadata["references"] == references, "a computed row joins no citation to the card"
+    lattice = Lattice.model_validate(metadata)
+    computation = genus.name("0125", "cusp_chambers", lattice.definiteness)
+    digest = certificates.certification_hash(computation, lattice, genus.certified_value("cusp_chambers", metadata["integral"]["cusp_chambers"], lattice))
+    assert lattice.certifications["integral.cusp_chambers"] == digest == held[computation].hash
+    assert held[computation].by == by, "the certificate names the program, not a source"
+    assert genus.store_cusp_chambers(path, "O", [row], by, held) is None and corpus.front_matter(corpus.read_card(path))["certifications"]["integral.cusp_chambers"] == digest, (
+        "writing the same row twice is the same certificate"
+    )
+
+
 def test_a_cusp_chamber_row_is_added_without_dropping_or_contradicting_a_stored_one(tmp_path: Path) -> None:
     """#33, #35: the chamber writer takes the rows a source proves on top of the ones the card holds.
 

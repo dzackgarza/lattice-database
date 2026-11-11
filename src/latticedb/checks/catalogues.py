@@ -124,7 +124,7 @@ def reference_problems(loaded: Corpus) -> list[str]:
                 # A row of a lattice of signature (1, n) states no cusp, and need not print its walls.
                 vectors = ([row.cusp] if row.cusp is not None else []) + [wall.vector for wall in row.walls or ()]
                 if any(len(vector) != lattice.rank for vector in vectors):
-                    found.append(f"{lattice_entry.path}: cusp_chambers[{key}] {row.statement}: the cusp and its walls have one coordinate per basis vector")
+                    found.append(f"{lattice_entry.path}: cusp_chambers[{key}] {row.statement or 'a computed chamber'}: the cusp and its walls have one coordinate per basis vector")
                 if row.cusp is not None:
                     if tuple(row.cusp) in seen:
                         found.append(f"{lattice_entry.path}: cusp_chambers[{key}]: two rows state the chamber at the cusp {row.cusp}")

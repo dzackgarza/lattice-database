@@ -180,10 +180,13 @@ class PrimitiveOrbitSeries(Record):
 
 
 class ChamberWall(Record):
-    """One wall of the chamber at a cusp: its vector in the record basis, and the source's name for it."""
+    """One wall of a chamber: its vector in the record basis, and the source's name for it."""
 
     name: Annotated[str, Field(min_length=1)] = Field(
-        description="The wall's name as the source writes it, in TeX: `\\\\alpha_9`, `\\\\bar\\\\alpha_8`.",
+        description=(
+            "The wall's name as the source writes it, in TeX: `\\\\alpha_9`, `\\\\bar\\\\alpha_8`. A chamber a computation produced "
+            "has no source's names: its walls are `w_1`, ..., `w_n`, in the order the computation returns them."
+        ),
     )
     vector: IntegerVector = Field(description="The wall in the record basis.")
 
@@ -208,7 +211,9 @@ class CuspChamber(Record):
     Its walls are the source's vectors in the record basis; the Gram matrix, the Coxeter diagram
     and the wall count are computed from the card's Gram tensor (theory/orbits.md#chamber-at-a-cusp).
     A lattice of signature $(1, n)$ has no $0$-cusp of a Baily–Borel boundary, so its row states no
-    `cusp`; it states the number of ideal vertices of the polyhedron when the source prints them.
+    `cusp`; it states the number of ideal vertices of the polyhedron when the source prints them, or when
+    a computation of the chamber produced it, in which case the row states no `statement` either and its
+    certificate names the program.
     """
 
     cusp: IntegerVector | None = Field(
@@ -218,10 +223,17 @@ class CuspChamber(Record):
             "lattice of signature $(1, n)$, which is not a chamber at a cusp."
         ),
     )
-    statement: Annotated[str, Field(min_length=1)] = Field(
-        description="The source's numbered statement that prints the walls, such as `4.3.5`.",
+    statement: Annotated[str, Field(min_length=1)] | None = Field(
+        default=None,
+        description=(
+            "The source's numbered statement that prints the walls, such as `4.3.5`. Absent for a chamber that no source prints and that "
+            "a computation of the card's Gram tensor produced, whose certificate names the program and its revision."
+        ),
     )
-    printed_page: Annotated[int, Field(ge=1)] = Field(description="The page of the source that prints the statement.")
+    printed_page: Annotated[int, Field(ge=1)] | None = Field(
+        default=None,
+        description="The page of the source that prints the statement; absent with it.",
+    )
     figure: Annotated[int, Field(ge=1)] | None = Field(
         default=None,
         description="The figure of the source that draws the diagram, when the statement has one.",
@@ -265,6 +277,8 @@ class CuspChamber(Record):
             raise ValueError("a row states its walls, their count and their Gram matrix together")
         if self.walls is None and self.ideal_vertices is None:
             raise ValueError("a row states the walls of a chamber or the number of ideal vertices of its polyhedron")
+        if (self.statement is None) != (self.printed_page is None):
+            raise ValueError("a row states the statement that prints it and its page together, or neither")
         count = len(walls)
         if self.wall_count is not None and self.wall_count != count:
             raise ValueError(f"wall_count {self.wall_count} but {count} walls are stated")

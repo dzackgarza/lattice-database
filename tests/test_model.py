@@ -638,6 +638,26 @@ def test_a_polyhedron_of_a_one_n_lattice_states_its_ideal_vertices() -> None:
         Lattice.model_validate(with_block(a2(), "integral", cusp_chambers={"O": [{**row, "ideal_vertices": -1}]}))
 
 
+def test_a_computed_chamber_states_its_walls_and_its_count_and_no_source() -> None:
+    """#36: a chamber no source prints states no statement, and its certificate names the program."""
+    row = {
+        "walls": [{"name": "w_1", "vector": [1, 0]}, {"name": "w_2", "vector": [1, 2]}],
+        "wall_count": 2,
+        "gram": [["-2", "2"], ["2", "-2"]],
+        "diagram": [{"a": "w_1", "b": "w_2", "order": 4}],
+        "ideal_vertices": 1,
+    }
+    lattice = Lattice.model_validate(with_block(a2(), "integral", cusp_chambers={"O": [row]}))
+    assert lattice.integral is not None and lattice.integral.cusp_chambers is not None
+    computed = lattice.integral.cusp_chambers["O"][0]
+    assert (computed.statement, computed.printed_page, computed.figure) == (None, None, None)
+    assert computed.ideal_vertices == 1 and computed.wall_count == 2
+    with pytest.raises(ValidationError, match="statement that prints it and its page together"):
+        Lattice.model_validate(with_block(a2(), "integral", cusp_chambers={"O": [{**row, "statement": "4.3.6"}]}))
+    with pytest.raises(ValidationError, match="statement that prints it and its page together"):
+        Lattice.model_validate(with_block(a2(), "integral", cusp_chambers={"O": [{**row, "printed_page": 21}]}))
+
+
 def test_a_chamber_at_a_cusp_states_its_walls_its_count_its_gram_and_its_diagram() -> None:
     """#33: a chamber row is the source's walls and the three invariants of them, and each must agree."""
     row = {

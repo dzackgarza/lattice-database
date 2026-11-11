@@ -924,7 +924,7 @@ def cite_cusp_chambers(
     by: str,
     held: Certificates,
 ) -> None:
-    """Store the chambers at the cusps of one subgroup and certify them.
+    """Store the chambers at the cusps of one subgroup that a source prints, and certify them.
 
     A row is the chamber at one cusp: its walls are the source's vectors, and its Gram matrix,
     Coxeter diagram and wall count are computed from the card's Gram tensor. The certificate is
@@ -935,6 +935,36 @@ def cite_cusp_chambers(
     fuller reading of the same statement adds walls and a further statement of the same source adds
     its cusp's row. Anything else stops the writer, with the field that moved.
     """
+    _write_cusp_chambers(path, group, rows, reference, by, held)
+
+
+def store_cusp_chambers(
+    path: Path,
+    group: str,
+    rows: list[dict[str, Yaml]],
+    by: str,
+    held: Certificates,
+) -> None:
+    """Store the chambers of one subgroup that a computation produced, and certify them by it.
+
+    No source prints these rows, so none cites one: `by` names the operation and its revision, and
+    the row states no statement, page or figure. The Gram matrix, the diagram, the wall count and the
+    ideal-vertex count are what the operation returned and what the card's Gram tensor says about it —
+    `latticedb certify` never requests this field, so a computation that fills it is the caller's, and
+    its provenance is what keeps it checkable.
+    """
+    _write_cusp_chambers(path, group, rows, None, by, held)
+
+
+def _write_cusp_chambers(
+    path: Path,
+    group: str,
+    rows: list[dict[str, Yaml]],
+    reference: dict[str, str] | None,
+    by: str,
+    held: Certificates,
+) -> None:
+    """Store the rows of one subgroup on the loaded block and write the field's one certificate."""
     document = corpus.read_card(path)
     metadata = corpus.front_matter(document)
     block_name, model = stored_in("cusp_chambers", metadata.get("definiteness"))
@@ -948,9 +978,10 @@ def cite_cusp_chambers(
     rows_of_group[group] = rows
     block["cusp_chambers"] = {key: rows_of_group[key] for key in sorted(rows_of_group)}
     metadata[block_name] = {key: block[key] for key in model.model_fields if key in block}
-    references = TypeAdapter(list[Yaml]).validate_python(metadata.get("references") or [], strict=True)
-    if reference not in references:
-        metadata["references"] = [*references, {key: value for key, value in reference.items()}]
+    if reference is not None:
+        references = TypeAdapter(list[Yaml]).validate_python(metadata.get("references") or [], strict=True)
+        if reference not in references:
+            metadata["references"] = [*references, {key: value for key, value in reference.items()}]
     lattice = Lattice.model_validate(metadata)
     computation = name(lattice.tag, "cusp_chambers", lattice.definiteness)
     certificate_hash = certificates.certification_hash(computation, lattice, certified_value("cusp_chambers", block["cusp_chambers"], lattice))

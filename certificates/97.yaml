@@ -7,6 +7,20 @@
 0125 form.integer_valued:
   hash: 689b55d7e6f39babac1e1769fed810750f4f7b2448bdde92b7c29876c2ef701c
   by: research preamble
+0125 integral.cusp_chambers:
+  hash: 12a3571c1d15ae8e99771f894e0bdfbb928fe8aafe34da732287ea6f67917e13
+  by: 'computed, not cited: no source prints the chamber of the reflection part of
+    O(U(2) + E8(-2)) or its ideal-vertex count. HyperbolicLattices(ZZ)(Lattices(ZZ)(the
+    card''s gram_tensor)).fundamental_chamber(max_roots=20, max_decompositions=2000)
+    ran Vinberg''s algorithm at sage-extensions 5a9874e22ea18fb223ff53cf2a3e48dd63c022b4
+    and returned 10 wall_roots and 10 primitive_rays(), complete as is_complete_wall_set()
+    reports; 1 of the rays has square 0 and is therefore a vertex at infinity, an
+    ideal vertex. By Vinberg''s criterion the ideal vertices are the maximal parabolic
+    subdiagrams of rank n - 1, and the walls orthogonal to that ray are 9 in 1 component(s),
+    of rank 8 = n - 1 = 8 for n = 9 (Vinberg 1972, as stated by Sterk, (4.3.3), p.
+    18). The walls, their Gram matrix and the Coxeter diagram are what the card''s
+    stored form says about those vectors, and is_cocompact() is False. results/compute-36-0125-chamber.py
+    is the program.'
 0125 integral.discriminant_form:
   hash: b298f9ee07553d1f6f93710a554da24a7f4bf0cdb2a69e7f03c4142e22dfb839
   by: research preamble

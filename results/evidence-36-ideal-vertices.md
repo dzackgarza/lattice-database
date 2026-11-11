@@ -38,38 +38,40 @@ What the script checks about the printed data, without storing a claim it did no
 * the diagram the card stores is the ten walls' own Gram, nine edges, `α_9–α_10` of order 4 and the
   rest of order 3.
 
-## Card 0125 = U(2) ⊕ E8(−2), type (10, 10, 0) — stopped
+## Card 0125 = U(2) ⊕ E8(−2), type (10, 10, 0) — computed
 
-Sterk prints its diagram, and prints no number this card can hold:
+No source prints the chamber of the reflection part of `O(U(2) ⊕ E8(−2))`, so its `O` row is a
+computed value: `genus.store_cusp_chambers` writes it and its certificate names the operation and its
+revision instead of a citation.
 
-* (4.3.5), p. 19, is the case `v = e`, and `e^⊥/Ze ≅ H(2) ⊕ E8(−2)` by (4.3.4) — this lattice. The
-  printed statement is "The diagram of the reflection group `W_e ⊂ G_e`", where
-  `G_e = {g ∈ O(M(2)) : the induced map on M(2)*/M(2) respects the decomposition}`. Unlike (4.3.6),
-  which identifies `G_e'` with the whole `O(H ⊕ E8(−2))`, the paper does not identify `G_e` with
-  `O(U(2) ⊕ E8(−2))`: it is the subgroup defined by that discriminant decomposition. The chamber it
-  prints, Fig. 4, p. 19, has twelve walls (`α_1, …, α_8`, `α_9 = f' − e'`, `α_10 = ᾱ_8 + 2e'`,
-  `α_11 = 2e' + 2f' + ᾱ_1 + ᾱ_8`, `α_12 = 5e' + 3f' + 2ᾱ_2`), not ten.
-* The one number printed for its ideal vertices is a count of orbits, not of vertices: p. 19 ends "The
-  maximal parabolic subdiagrams (modulo symmetries) are indicated below", Fig. 5 on p. 20 draws them,
-  and p. 20 reads "we do not only find four equivalence classes in `I_1(e^⊥/Ze)`, but that we find four
-  labelled classes". The symmetry group is `S_e ≅ Z/2 × Z/2` (p. 19), so four *classes* is a lower
-  bound on the number of ideal vertices and is not that number.
+* The mathematics is the preamble's: `HyperbolicLattices(ZZ)(Lattices(ZZ)(the card's gram_tensor))`
+  `.fundamental_chamber(max_roots=20, max_decompositions=2000)` ran Vinberg's algorithm at
+  sage-extensions `5a9874e22ea18fb223ff53cf2a3e48dd63c022b4` and returned ten walls and ten primitive
+  rays, with `is_complete_wall_set()` true at those bounds.
+* The rays' squares are `(0, 36, 84, 60, 40, 24, 12, 20, 8, 4)` — exactly sage-extensions#299's
+  recorded measurement — so exactly one vertex is on the light cone: **one ideal vertex**, and
+  `is_cocompact()` is `False`.
+* By Vinberg's criterion that vertex is a maximal parabolic subdiagram of rank `n − 1`: the ideal ray is
+  `−f`, of coordinates `(0, −1, 0, …, 0)`, the walls orthogonal to it are nine in one connected
+  component, and `9 − 1 = 8 = n − 1` for `n = 9` ((4.3.3), p. 18; Vinberg 1972).
+* The row states the ten walls (`w_1, …, w_10`, in the order the operation returns them — no source's
+  names), their Gram matrix, their nine-edge Coxeter diagram and `ideal_vertices: 1`, with no statement,
+  page or figure. Certificate `12a3571c1d15ae8e99771f894e0bdfbb928fe8aafe34da732287ea6f67917e13` in
+  `certificates/97.yaml`. `results/compute-36-0125-chamber.py` is the program.
 
-Two further reasons not to write a number on the card:
+### Why Sterk's own chamber gets no row
 
-* sage-extensions#299's measurement (reported in its `results/issue299-chamber-vertex-rings.md`, and
-  restated as "every number in this table is recorded, not asserted") gives **1** ideal vertex for
-  `U(2) + E8(−2)`, from a chamber of **ten** walls computed by `vinberg_simple_roots`. That is a
-  different chamber from Sterk's twelve-walled one, and #36 says the computed values are not a source.
-* the reply to #36 in `sage-extensions`' test docstring (`905d34334c`) expects the card to carry a
-  count that its own computation can be compared with, which means the person's intended number for
-  this card is the computed 1 — a number no line of Sterk states.
+(4.3.5), p. 19, prints "the diagram of the reflection group `W_e ⊂ G_e`", with
+`G_e = {g ∈ O(M(2)) : the induced map on M(2)*/M(2) respects the decomposition}` — a finite-index
+subgroup that the paper never identifies with `O`, unlike (4.3.6) for 0124. That chamber has twelve
+walls (Fig. 4, p. 19), not the ten the lattice's own search returns, and the only count printed for its
+ideal vertices is a count of orbits: "The maximal parabolic subdiagrams (**modulo symmetries**) are
+indicated below" (p. 19, Fig. 5 on p. 20), and "we do not only find **four equivalence classes** in
+`I_1(e^⊥/Ze)`, but that we find four labelled classes" modulo `S_e ≅ Z/2 × Z/2` (p. 20).
 
-So the card is left without the row, pending one decision: whether `integral.cusp_chambers.O[0]` of
-0125 should state Sterk's four orbits of maximal parabolic subdiagrams of *his* twelve-walled chamber
-(with the row's text saying they are orbits modulo `S_e`), or the one ideal vertex of the lattice's own
-ten-walled chamber computed by the owner (which is not a cited value), or nothing until a source prints
-the count.
+`integral.cusp_chambers` keys a non-standard group by the slug of an `arithmetic-groups/` card of the
+same lattice (`checks.catalogues`), and card 0125 has no card defining `G_e`. So the key is missing and
+the row is not stored; the missing key is written up in `results/issue-36-ge-key.md` for filing.
 
 ## What was measured
 
