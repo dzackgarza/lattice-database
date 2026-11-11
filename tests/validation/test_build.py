@@ -117,20 +117,27 @@ def test_rows_render_only_stored_root_type_and_root_span_data(
     assert (e8["phi_type"], e8["root_span"]) == ("E8", "E8")
 
     i10 = rows["0120"]
+    # The row states ZΦ(I_{10,0}) as the orthogonal sum of the root lattices of the
+    # components of `definite.roots`: Φ(Z^10) is of type B10 with short roots of norm 1,
+    # so its scale is 1/2, and B10(1/2) ≅ Z^10(2 · 1/2) is I_{10,0} itself.
     assert (i10["root_system"], i10["phi_type"], i10["root_span"]) == (
         "D10",
         "B10",
-        "I_{10,0}",
+        "B10(1/2)",
     )
 
     laminated_9 = rows["0110"]
+    # Λ_9's Φ is D8(2) ⊕ A1(4), as the card's own `derive` certificate computed it;
+    # A1(4) is the rank-one lattice ⟨8⟩. The row names the components' root lattices.
     assert (
         laminated_9["root_system"],
         laminated_9["phi_type"],
         laminated_9["root_span"],
-    ) == ("", "D8 A1", "D8(2) + <8>")
+    ) == ("", "D8 A1", "D8(2) + A1(4)")
 
-    assert rows["0016"]["root_span"] == "<2> + <-2>"
+    # R(U) = ⟨2⟩ ⊕ ⟨−2⟩, which the card states as twists of the record ⟨1⟩ = `0001`,
+    # the form README gives for a summand ({tag: '0001', scale: 2} for ⟨1⟩(2)).
+    assert rows["0016"]["root_span"] == "<1>(2) + <1>(-2)"
     assert (rows["0151"]["phi_type"], rows["0151"]["root_span"]) == ("D12", "D12")
     assert rows["0150"]["root_span"] == "0"
 
