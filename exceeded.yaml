@@ -831,13 +831,13 @@
 34W2 integral.discriminant_form:
   hash: 79a38f4ba237a0fd545e861dab7d4ebe120e447250096ad192b7c6ae78a40f9d
   seconds: 112
-350N integral.discriminant_form:
-  hash: 5fbe60f137cd3f7439d2d9915602a9181e64e5be966b9118261d498feb2b8bd8
-  seconds: 120
-  lost: true
 353N integral.discriminant_form:
   hash: 13a84a55563e05ba3d25fded61cefd96cadb637b95d6b32c1a7d1a2e5525b42f
   seconds: 65
+  lost: true
+353W integral.discriminant_form:
+  hash: aba9d83213851d5bc4cef380a47c21afa0fd238b98f5e1b770647adbe66b01bd
+  seconds: 55
   lost: true
 35FR integral.discriminant_form:
   hash: 44deb5849fac2286551d610d84e0ff6f27b82cefc88b3aee7969a22b0c8e5199
