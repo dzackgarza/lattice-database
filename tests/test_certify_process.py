@@ -27,14 +27,22 @@ def prepare_card(root: Path, tag: str) -> Path:
     return target
 
 
-def hold_certificates(root: Path, tag: str) -> None:
+def hold_certificates(root: Path, tag: str, withhold: tuple[str, ...] = ()) -> None:
     """Copy the certificates this corpus holds for `tag` into the fixture's root.
 
     A copy of the card alone leaves every field of it pending, so the run recomputes
     them all before it reaches a search; the fixture holds the card's certificates, as
     `tests/test_catalogue_schemas.py` does (#34), and the searches are what is left.
+
+    `withhold` names computations whose certificates the fixture leaves out, which is the state
+    an interrupted run leaves: the card certified everywhere else and that computation uncomputed
+    (#42).
     """
-    held = {name: certificate for name, certificate in certificates.load(REPOSITORY, tags=[tag]).items() if name.split(" ", 1)[0] == tag}
+    held = {
+        name: certificate
+        for name, certificate in certificates.load(REPOSITORY, tags=[tag]).items()
+        if name.split(" ", 1)[0] == tag and name not in withhold
+    }
     certificates.save(root, held, tags=[tag])
 
 
@@ -79,12 +87,24 @@ def test_an_early_termination_does_not_blacklist_a_computation_for_a_whole_job(t
 
 
 def test_finishing_a_previously_interrupted_computation_clears_its_log(tmp_path: Path) -> None:
+    """An interruption record is cleared by the run that finishes its computation.
+
+    #42: the fixture is the state an interrupted run leaves — 0012 certified everywhere except the
+    one computation whose record `exceeded.yaml` holds — and the budget covers a worker's start plus
+    that computation, which is about 10 s here. With the card's other certificates absent the run
+    recomputes its 24 fields at about 5.5 s each; the budget then ends it inside a later field
+    (`integral.modular_scale` started at 89 s of a 60 s budget, measured), and that field's record
+    correctly stays, because the run did start it and did not finish it.
+    """
     prepare_card(tmp_path, "0012")
     loaded = corpus.load(tmp_path)
     lattice = loaded.entries[0].lattice
     computation = genus.name("0012", "genus_class_count")
+    hold_certificates(tmp_path, "0012", withhold=(computation,))
     exceeded.save(tmp_path, {computation: exceeded.Interruption(hash=exceeded.input_hash(computation, lattice), seconds=1)})
-    genus.certify(tmp_path, loaded, {}, ("0012",), time.time() + 60)
+    # The card's other values are certified and this one is pending, so the queue asks for it alone.
+    assert [request["fields"] for request in genus.requests(loaded, certificates.load(tmp_path), exceeded.load(tmp_path), ("0012",))] == [["genus_class_count"]]
+    genus.certify(tmp_path, loaded, certificates.load(tmp_path), ("0012",), time.time() + 300)
     assert exceeded.load(tmp_path) == {}
     assert computation in certificates.load(tmp_path)
 
