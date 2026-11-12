@@ -23550,6 +23550,9 @@
 33IF integral.anisotropic_primes:
   hash: 3a2a80e365e1a90b2d533464afddfcc73ffbd906b1b41d13cec63359b1b58798
   by: research preamble
+33IF integral.discriminant_form:
+  hash: 572ec302a0215c29109baaa97d26f234cf73e72c59f6fb0dfa7957acb6518649
+  by: research preamble
 33IF integral.discriminant_sequence:
   hash: 588d30eabcd274566e2646d268344aa07ed11a01eacea5b298ca43953d285654
   by: research preamble
