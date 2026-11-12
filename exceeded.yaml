@@ -834,10 +834,6 @@
 35DO integral.discriminant_form:
   hash: 31735932a659d927118303afc09a262c0b9d4f46eb0fd84125b9c3472de96efc
   seconds: 53
-35I3 integral.discriminant_form:
-  hash: 96df5ae93ce39e4db23b42b39f0bfb6aec031b36aa14d419cd13510cc6036608
-  seconds: 55
-  lost: true
 35IN integral.discriminant_form:
   hash: 476f8c5879a48a497b9c37678866c3dc1e39c36437eac79149f5576e4ecd073b
   seconds: 170
@@ -848,6 +844,10 @@
 35KT integral.discriminant_form:
   hash: a2c331308ed749db3160803d9bfb5f3ac43a0653de22974ffc9d8b0ae531be58
   seconds: 171
+35OH integral.discriminant_form:
+  hash: b76625b2b0ba7abbe580ea8187f2d8b73793cf36b35e8d69a76f68eae570d3b9
+  seconds: 70
+  lost: true
 35RS integral.discriminant_form:
   hash: 1e10df2299dfc2e56f6c2fdc2ffddd545c82f518550ed25c7d17f724175c3553
   seconds: 70
