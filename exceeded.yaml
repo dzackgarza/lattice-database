@@ -306,8 +306,7 @@
   seconds: 19607
 02HF definite.regular:
   hash: 0c237b1045eda280af634947bed6d7f1e6e920617a2a81e89cf67f7a5e2987c2
-  seconds: 11454
-  lost: true
+  seconds: 17975
 02HG definite.regular:
   hash: 61ebf6390a7271bed3e9e797c0d4ec5ea16c17470ae85ff25b30b1fbc8d519c7
   seconds: 7000
@@ -806,24 +805,20 @@
   hash: 945e0912fb52176aad2b3c1ba2b13e04695c5b6b16a1169a4f7d76b4a3e4dce6
   seconds: 143
   lost: true
-3461 integral.discriminant_form:
-  hash: af173d63d09f92a22a228aaf7c718e6f12d78b25b414c38a0a667d00fe8173c0
-  seconds: 0
-  lost: true
-346G integral.discriminant_form:
-  hash: 72577235f6153a30c9b0a84144ca7042c01f902eff37861e2d0e48db240c2938
-  seconds: 37
-  lost: true
-34CX integral.discriminant_form:
-  hash: cf61077709cfa75534525fbf97ac87a95377894ad38c4742f3302721c522026f
-  seconds: 10
-  lost: true
 34G6 integral.discriminant_form:
   hash: f9853e0c9dd8aa718b44be8fd05b0765d1d13a42dda3e764aee502ea3eaf5adb
   seconds: 176
-34NM integral.discriminant_form:
-  hash: 1596ef44da887a19a9344402980f8dfe0d85edd9e64629897a9b23badbab8bfc
-  seconds: 15
+34LQ integral.discriminant_form:
+  hash: 125dc06980fe9d5bcec26215f77dc44a361b5f749d1dd2987a80fca63934639d
+  seconds: 35
+  lost: true
+34MC integral.discriminant_form:
+  hash: 16804ad9fde7d15be07ca5c6d7970fa70f016d3f82de1735ed78a7db12428446
+  seconds: 80
+  lost: true
+34YS integral.discriminant_form:
+  hash: 26c0119d2d9fb2392023940da7a218a09635c702620c54a4dd05970c3afcdb8b
+  seconds: 40
   lost: true
 359S integral.discriminant_form:
   hash: 274f212634c67170c5b9eb8e582eebb087f7db1b4b31644fc77a7f6ac57d0393
@@ -831,10 +826,6 @@
 35DO integral.discriminant_form:
   hash: 31735932a659d927118303afc09a262c0b9d4f46eb0fd84125b9c3472de96efc
   seconds: 53
-35HY integral.discriminant_form:
-  hash: 16bdbfb6cf47becae7ff94cbebfdd6bfe7a3fa360f76ce4a65a6c7f476e12499
-  seconds: 120
-  lost: true
 35IN integral.discriminant_form:
   hash: 476f8c5879a48a497b9c37678866c3dc1e39c36437eac79149f5576e4ecd073b
   seconds: 170
@@ -845,21 +836,28 @@
 35KT integral.discriminant_form:
   hash: a2c331308ed749db3160803d9bfb5f3ac43a0653de22974ffc9d8b0ae531be58
   seconds: 171
-36CI integral.discriminant_form:
-  hash: 6b8f0111af82e69559c73893454204c1778ccbc988daece036abd86299e403b4
-  seconds: 36
+35KY integral.discriminant_form:
+  hash: 92bfcffae820fa904304561a2f755ec3e390ca723dc568dafd501c66b0dccbbe
+  seconds: 25
   lost: true
-36DJ integral.discriminant_form:
-  hash: 164493ebbeff2724efbbf630a6accc47e2fc920620427c1e738215ba437b861f
-  seconds: 110
+3623 integral.discriminant_form:
+  hash: 2c4d072b0fd28c66df641742c53c75ae50761e1fe43665da2b9fc71f282785fe
+  seconds: 20
   lost: true
-37E1 integral.discriminant_form:
-  hash: 7af4534359c41a28e83ae6b21b58b08be42d81cd4cac8381c984f59de4381455
-  seconds: 27
+36N7 integral.discriminant_form:
+  hash: 91f86fe76219b50d0937362179702908636e66b817c238ebea243c30e16d1129
+  seconds: 90
   lost: true
+377M integral.discriminant_form:
+  hash: 70f93f2f94752d3d2ac3dafe876dec65ec1bfb6f84fb779b12414cd35b814791
+  seconds: 43
 386E integral.discriminant_form:
   hash: 7445af1ee39c02c5047cce6c995e4e69ecee54181b9eb61356b59666ff757df9
   seconds: 183
+387P integral.discriminant_form:
+  hash: c110924b22ceaa09ef5dbb9bcaa000f85094d9c3054b69cfa9cfd0a7445a66f2
+  seconds: 95
+  lost: true
 39JK integral.discriminant_form:
   hash: a5e3e658c055db71f7d7578049a907accb5d9035a59494f7901c6cae5eeea2ba
   seconds: 41
