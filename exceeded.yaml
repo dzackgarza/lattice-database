@@ -834,10 +834,6 @@
 377M integral.discriminant_form:
   hash: 70f93f2f94752d3d2ac3dafe876dec65ec1bfb6f84fb779b12414cd35b814791
   seconds: 43
-37MW integral.discriminant_form:
-  hash: f59ba72fb4c2dab60153761ffcea308f82ca63de08dee145134d5fcea667b0a3
-  seconds: 50
-  lost: true
 37NJ integral.discriminant_form:
   hash: d0617525ec18b7964334f24ec488ed4ceac6e239ed0cf7471c46cab2d6596257
   seconds: 17
@@ -845,6 +841,10 @@
 37RL integral.discriminant_form:
   hash: 81a34a00f1e3a56fc6b191adb07d0c38254ff56ea1494b3f952fc8b8fb038e1b
   seconds: 5
+  lost: true
+37SX integral.discriminant_form:
+  hash: 18ca55aa79a44c312c7ab267cfefce68aa8294c7827bfad6aae0544c05dceba3
+  seconds: 110
   lost: true
 37XO integral.discriminant_form:
   hash: d25ca6227ddc4d52d0d11aa6772857de2fbe3cbc429ea77738facb71fbd2d0e2
