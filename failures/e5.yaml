@@ -668,6 +668,35 @@
     database_revision: dde534ecd9d7c61af3800d20eb1635bc7541f38a
     research_revision: 8ef80cd0b704a288754fd4a4a3fc8d16d272434b
   notes: []
+02HG definite.regular:
+  disposition: open
+  attempts:
+  - hash: 61ebf6390a7271bed3e9e797c0d4ec5ea16c17470ae85ff25b30b1fbc8d519c7
+    gram_tensor:
+    - - 1
+      - 0
+      - 0
+      - 0
+    - - 0
+      - 2
+      - 0
+      - 1
+    - - 0
+      - 0
+      - 2
+      - 0
+    - - 0
+      - 1
+      - 0
+      - 2
+    reason: certification budget exhausted
+    stderr: ''
+    seconds: 18693.0
+    recorded_at: 2026-11-14 22:15:47.087436+00:00
+    run_url: https://github.com/dzackgarza/lattice-database/actions/runs/43616623462/attempts/1
+    database_revision: 149093f2af860dc7c1ea3fdfbbf540cce3cf473f
+    research_revision: 53532ece9b156d955b20e1743a3bdad5e53f940e
+  notes: []
 1JLB integral.genus_class_count:
   disposition: open
   attempts:
