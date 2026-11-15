@@ -857,13 +857,13 @@
 39OF integral.discriminant_form:
   hash: 3f92f3daf33a5e3c3ce4e066549da3cf20e8638cbbc4036964cb5b7faeb489b2
   seconds: 128
-3BU8 integral.discriminant_form:
-  hash: dfda73e60fbe7bd4553c36d16aad8a429aede23d46ec2f175dda46e28d3a905e
-  seconds: 65
-  lost: true
 3BV3 definite.siegel_eisenstein_coefficients:
   hash: 4be43fed87facb172ca082e1bbd69e4a81eca70025fe243420745dac788d942a
   seconds: 12
+  lost: true
+3BZ8 integral.discriminant_form:
+  hash: c8e94ce8f27a56be89fd6cfae6d9da222cdbe986f56d455bc052b20717202dd3
+  seconds: 285
   lost: true
 3BZF integral.discriminant_form:
   hash: e6dd956ed813918ab335a50ac0cdfbe00bf7928353047b512438ce56af62d641
