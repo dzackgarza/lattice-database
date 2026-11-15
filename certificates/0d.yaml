@@ -23368,6 +23368,9 @@
 38IF integral.anisotropic_primes:
   hash: 31dde6e24e14ca060933ea2e7635ab7495217fcfc2ef6abcf6c86a571af868c5
   by: research preamble
+38IF integral.discriminant_form:
+  hash: f702110fd25aec5512a4a6ce3189540cec07f98a5c512e37a24d55f1e4b3273e
+  by: research preamble
 38IF integral.discriminant_sequence:
   hash: ce88227262aedfae3b3e5362f139438dd0d6ccf85c8356c6da858a0696627b0e
   by: research preamble
@@ -23427,6 +23430,9 @@
   by: research preamble
 38LO integral.anisotropic_primes:
   hash: 49f55ea59995ae22cc12672098de70bbf5d5d6ac56b98b2e086184c655d2b47a
+  by: research preamble
+38LO integral.discriminant_form:
+  hash: f52922b75a32dbbd1f383004282371673d30d2b612968ccc13b9da94982dfebc
   by: research preamble
 38LO integral.discriminant_sequence:
   hash: ede117e5ed3d7709f29a05e03e09f8d9bef1771846483667b9a21c365be1625a
