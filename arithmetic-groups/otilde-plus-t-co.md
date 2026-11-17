@@ -12,7 +12,7 @@ data:
 ---
 
 $\widetilde O^{+}(T_{\mathrm{Co}}) = \widetilde O(T_{\mathrm{Co}}) \cap O^{+}(T_{\mathrm{Co}})$, the subgroup of the discriminant kernel that also lies in the kernel of the real spinor norm (`theory/orbits.md`); the determinant-one subgroup is $SO(T_{\mathrm{Co}})$, which is a different subgroup, and the two are not interchanged here.
-It is countably infinite and of finite index in $O(T_{\mathrm{Co}})$; whether its index in $\widetilde O(T_{\mathrm{Co}})$ is $2$ is what the computed index below states, not an assumption of this card.
+It is countably infinite and of finite index in $O(T_{\mathrm{Co}})$; whether its index in $\widetilde O(T_{\mathrm{Co}})$ is $2$ is a value the computation below states when it returns, not an assumption of this card.
 
 `latticedb certify` asks the preamble for its index in $O(T_{\mathrm{Co}})$ and for the isometries of $T_{\mathrm{Co}}$ that generate it, at `L.stable_orthogonal_group().intersection(L.O_plus())`, and stores them as `data.index_in_orthogonal_group` and `data.generator_morphisms`, the generators as scale-$1$ `morphisms` entries of the card of [6JRR](../tag/6JRR.html).
 The two values are certified on that card under `arithmetic-group.otilde-plus-t-co.index_in_orthogonal_group` and `arithmetic-group.otilde-plus-t-co.generator_morphisms`; a value that computation has not returned is absent.
