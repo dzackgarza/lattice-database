@@ -624,10 +624,6 @@
   hash: 0be3133c97387b35ed7c98c806bf6c433208379e4ee49b2fe8de453c6446d9f3
   seconds: 0
   lost: true
-1C9J integral.discriminant_form:
-  hash: baef4c48e3c240c5044e7b684203da8fda64df8f5cff5020146de63e8aaa90ba
-  seconds: 0
-  lost: true
 1DRM integral.genus_class_count:
   hash: b9116a9b09223f453b6990f0efa48f8670ad40d65cb4f5c32b3f8b2cb30e031e
   seconds: 10
@@ -638,6 +634,10 @@
   lost: true
 1F6O integral.primitive_orbits:
   hash: aa9a82c8d21972721e8be9c08518da9a41ebe41fa9eafc96e77816086779ea31
+  seconds: 0
+  lost: true
+1GAX integral.discriminant_form:
+  hash: d833cc0a5fab2dbeb2e8e5ac3412743fcc7bf5047516c1679228b7a62bf01a4c
   seconds: 0
   lost: true
 1GRN integral.overlattice_count:
