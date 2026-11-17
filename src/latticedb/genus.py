@@ -301,8 +301,9 @@ def arithmetic_requests(lattice: Lattice, loaded: corpus.Corpus, held: Certifica
 
     An arithmetic-group card names one subgroup $\Gamma \leq O(L)$ and, when it has a
     `standard_name`, says which of the eight standard subgroups it is. Two of its fields are
-    computations about this card's Gram tensor: `index_in_orthogonal_group`, asked as `g.index()`
-    from the owner's group, and `generator_morphisms`, asked as the isometries `g.group_generators()`
+    computations about this card's Gram tensor: `index_in_orthogonal_group`, asked as the index
+    of the subgroup's finite character image `O(L)/Gamma` (its exact cardinality, not a coset
+    enumeration), and `generator_morphisms`, asked as the isometries `g.group_generators()`
     returns. A card that states neither an index nor generators is asked for both; a value that a
     matching completed certificate already covers is not requested again. A card without a
     `standard_name`, such as a named subgroup defined by a source, has no owner operation that

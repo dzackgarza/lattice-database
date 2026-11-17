@@ -19,6 +19,8 @@ certifications:
   integral.local_representations: 191495e75b2caffd9a835f11940c160e3ccf6ea2fded7b66c56eae2f9e9d9a00
   integral.local_densities: b5b425b999b8e6193a6940c9195da942df34656aa6e81f0c4b1f778232b70474
   integral.primitive_orbits: ed8a588feba9ac8f13ca410b7fdadc32da57e89b1ca3cc9daf4f53b47d5d1497
+  arithmetic-group.otilde-t-co.index_in_orthogonal_group: 682c595c52447cd1add71138601fe9259fd3e5e868e05a646a95e0b27c3225f1
+  arithmetic-group.otilde-plus-t-co.index_in_orthogonal_group: 326145ccf46247778eb506416cb6c6985eedf61029060ff4497597e2c3f8a3b0
 rank: 11
 gram_tensor:
 - [2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]

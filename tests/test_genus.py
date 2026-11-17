@@ -1039,10 +1039,12 @@ def test_a_computed_generator_is_stored_once_as_a_self_isometry_of_the_lattice(t
     stored = genus.store_arithmetic_group(root, "6JRR", "otilde-plus-t-co", {"index_in_orthogonal_group": 93997183795200, "generator_morphisms": [matrix]})
     lattice = Lattice.model_validate(corpus.front_matter(corpus.read_card(root / "lattices" / "6JRR.md")))
     self_isometries = [morphism for morphism in lattice.morphisms if morphism.target == "6JRR" and morphism.scale == 1]
-    assert len(self_isometries) == 1
-    assert self_isometries[0].matrix == tuple(tuple(row) for row in matrix)
+    # The card already states the 126 generators of O(L) that CI certified, so the test counts the
+    # matrix it stored once among them rather than the whole `morphisms` list.
+    stored_once = [morphism for morphism in self_isometries if morphism.matrix == tuple(tuple(row) for row in matrix)]
+    assert len(stored_once) == 1
     group = ArithmeticGroup.model_validate(corpus.front_matter(corpus.read_card(root / "arithmetic-groups" / "otilde-plus-t-co.md")))
-    assert group.data.generator_morphisms == (self_isometries[0].name,)
+    assert group.data.generator_morphisms == (stored_once[0].name,)
     assert group.data.index_in_orthogonal_group == 93997183795200
     assert dict(stored) == {"generator_morphisms": [matrix], "index_in_orthogonal_group": 93997183795200}
     # The name is what the certificate commits to indirectly: it commits to the matrix.
@@ -1060,3 +1062,24 @@ def test_a_stated_arithmetic_group_value_without_its_computation_is_a_verificati
     assert any("arithmetic group otilde-t-co: the stated index_in_orthogonal_group" in problem for problem in problems), problems
     held = certify_index(root, "otilde-t-co", 46998591897600)
     assert not any("arithmetic group otilde-t-co:" in problem for problem in checks.records.problems(corpus.load(root), held, frozenset({"6JRR"})))
+
+
+def test_the_arithmetic_group_index_is_the_order_of_the_finite_character_image() -> None:
+    r"""#7: `[O(L):Gamma]` is the owner's finite character image, not a coset enumeration.
+
+    Every standard subgroup is a kernel, or an intersection of kernels, of characters into finite
+    groups, so `O(L)/Gamma` embeds in the finite product of their images and the index is the
+    quotient of two finite orders. On a specimen whose discriminant group is small enough for the
+    owner to also walk the cosets, both answers agree; on 6JRR the coset space of
+    $\widetilde O(T_{\mathrm{Co}})$ has 46998591897600 points, which is exactly the finite order
+    $|O(A_L,q)|$ that answers without enumerating them.
+    """
+    from sage_extensions.categories.lattices import Lattices
+    from sage_extensions.rings import ZZ as owned_integers
+
+    lattice = Lattices(owned_integers)([[2, 1], [1, 2]])
+    assert int(lattice.discriminant_group().orthogonal_group().cardinality()) == 2
+    for standard, cosets in (("Otilde", 2), ("Otilde+", 4)):
+        group = sage_genus._standard_subgroup(lattice, standard)
+        assert int(group.index()) == cosets
+        assert sage_genus._arithmetic_group_value(group, "index_in_orthogonal_group") == cosets

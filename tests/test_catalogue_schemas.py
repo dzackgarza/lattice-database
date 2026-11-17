@@ -8,7 +8,7 @@ import pytest
 import yaml
 from pydantic import TypeAdapter, ValidationError
 
-from latticedb import certificates, checks, corpus
+from latticedb import certificates, checks, corpus, records
 from latticedb.catalogues import ArithmeticGroup, LatticeFamily, LieGroup
 from latticedb.geometric import GeometricObject
 
@@ -183,7 +183,16 @@ def test_the_coble_card_and_its_group_cards_state_only_their_defining_data() -> 
     }
     certified = {name for name in (card.get("certifications") or {}) if name != "derive"}
     card_fields = {name for name in certified if not name.startswith("arithmetic-group.")}
-    assert stated - defining == card_fields, "every field of T_Co beyond its defining data is one it certifies, and every certificate names a stated field"
+    # `derive` is one certificate over the preamble-derived fields it projects, so a field it
+    # supplies is certified although no per-field name cites it (`integral.discriminant_group`,
+    # `integral.level`, `integral.delta`, `integral.bad_reduction_primes` all arrive this way).
+    derived = {
+        f"{block}.{field}"
+        for block, values in records.derived_projection(card).items()
+        if isinstance(values, dict)
+        for field in values
+    }
+    assert stated - defining - derived == card_fields, "every field of T_Co beyond its defining data is one it certifies, and every certificate names a stated field"
     assert "definite" not in card and "root_span" not in card and "root_sublattice" not in card
     # A generator of one of the two group cards is a self-isometry of this card, so the card states it
     # as a `morphisms` entry; the group card states its name. Neither is a field of this card.

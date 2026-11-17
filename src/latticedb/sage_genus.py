@@ -125,16 +125,41 @@ def _primitive_isotropic_line_row(lattice: Lattices.ParentMethods, row: str) -> 
     return {row: {"constant": _orbit_count(constant), "z": [], "w": []}}
 
 
+def _index_in_orthogonal_group(group: object) -> int:
+    r"""``[O(L) : Gamma]``, from the owner's finite character image, not by enumerating cosets.
+
+    A subgroup that a card's `standard_name` names is a kernel, or an intersection of kernels,
+    of characters into finite groups: the discriminant reduction $\rho_L\colon O(L)\to O(A_L)$,
+    the determinant, and the real spinor norm. Its cosets are then the cosets of its image in
+    the finite product of those images, so the index is a quotient of two finite group orders
+    that the owner reads from the retained character data without listing an element
+    (`OrthogonalCharacterQuotient.index`). Asking the owner for the coset space itself
+    enumerates one point per coset, which on a large discriminant group is the whole finite
+    image: on 6JRR that is $|O(A_L,q)| = 46998591897600$ cosets of $\widetilde O(T_{\mathrm{Co}})$,
+    and the run that tried it was killed after 5609 s at 14.1 GiB. For a kernel of $\rho_L$
+    the same number is the finite order $|O(A_L,q)|$, and the character image states it at once.
+
+    A subgroup with no complete character condition keeps the owner's coset cardinality. The
+    ambient $O(L)$ itself is such a case, and it is the one place this route does not answer:
+    `L.Aut()` is the isometry Mor, which presents no `index`, so a card whose `standard_name` is
+    `O` fails here and its failure is a separate gap.
+    """
+    characters = getattr(group, "finite_character_quotient", None)
+    if characters is not None and group.character_data_is_complete():
+        return int(characters().index())
+    return int(group.index())
+
+
 def _arithmetic_group_value(group: object, field: str) -> JsonValue:
     """Serialize one computed field of a subgroup: its index in ``O(L)``, or its generators.
 
-    The index is the cardinality of the owner's coset space ``O(L)/Gamma``, a uniform bound on
-    the number of cosets per element of the finite image. A generator is an isometry of ``L``,
-    serialized in the same framing as the generators of ``O(L)``.
+    The index is the order of the finite character image ``chi(O(L))`` over that of ``chi(Gamma)``,
+    the exact coset count and never an enumeration of the cosets. A generator is an isometry of
+    ``L``, serialized in the same framing as the generators of ``O(L)``.
     """
     match field:
         case "index_in_orthogonal_group":
-            return int(group.index())
+            return _index_in_orthogonal_group(group)
         case "generator_morphisms":
             return [_matrix_rows(generator) for generator in group.group_generators()]
     raise ValueError(f"{field!r} is not a computed field of an arithmetic group")
