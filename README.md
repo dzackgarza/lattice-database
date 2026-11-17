@@ -529,6 +529,8 @@ A worker killed by any other signal is recorded the same way, with the signal th
 it; a container out-of-memory kill arrives as signal 9. Neither ends the run.
 The nightly workflow runs `--shard i/16` on sixteen runners; a card belongs to the shard given by a SHA-256 hash of its tag, so the shards partition the corpus.
 Every half hour and at the end of its job, each shard pushes what it has certified since its last push onto `main` (`.github/scripts/persist.sh`), so a runner that dies loses at most half an hour.
+The commit is made on the `main` it is pushed onto and pushed as a fast-forward, so the shard's change is never rebased onto a base that has moved; only the paths its run wrote are carried, so a worktree that lags `main` never reverts another shard's card.
+A path `main` also changed is merged by the driver `.gitattributes` names for it, one path at a time, and a path the drivers cannot merge — or a push `main` does not take — is reported as that shard's failure and named, with the run continuing.
 `.gitattributes` merges the files of `certificates/`, `exceeded.yaml` and `failures/`
 key by key with `latticedb merge-keyed-map`, since shards own disjoint tags.
 It merges a card key by key too, with `python -m latticedb.card_merge` (`latticedb/card_merge.py`):
