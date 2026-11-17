@@ -6769,7 +6769,7 @@
     research_revision: null
   notes: []
 6JRR arithmetic-group.otilde-plus-t-co.index_in_orthogonal_group:
-  disposition: resolved
+  disposition: open
   attempts:
   - hash: acad0e18f0c158ad5bda122e435bae4133bd93287223e2a8ce2c8b611148e2d3
     gram_tensor:
@@ -6894,18 +6894,14 @@
       - 0
       - 2
       - -4
-    reason: worker or runner lost (recovered from exceeded.yaml)
+    reason: certification budget exhausted
     stderr: ''
-    seconds: 5453.0
-    recorded_at: 2026-11-17 19:32:51.047684+00:00
-    run_url: https://github.com/dzackgarza/lattice-database/actions/runs/44156095627/attempts/1
-    database_revision: 3f1a2d6c934a3317e18464f93bd5e9dfd3f6934d
-    research_revision: 7038e6ab9faaa985d058cde088e427ed7c78182e
-  notes:
-  - '2026-11-17T20:24:50.376639+00:00: The index is now read from the subgroup''s
-    finite character image (2*|O(A_L,q)| = 93997183795200, the spinor sign being nontrivial
-    on the discriminant kernel) instead of enumerating the coset space that exhausted
-    14 GiB; recomputing.'
+    seconds: 19628.0
+    recorded_at: 2026-11-17 23:05:29.121335+00:00
+    run_url: https://github.com/dzackgarza/lattice-database/actions/runs/44079044175/attempts/1
+    database_revision: b046d46a13d33c1078b5d8a037bca2c462fabc72
+    research_revision: 32a89622d0e74b73a003c52c6e322d79232153f6
+  notes: []
 6JRR arithmetic-group.otilde-t-co.generator_morphisms:
   disposition: open
   attempts:
