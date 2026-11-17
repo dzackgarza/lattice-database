@@ -6628,6 +6628,146 @@
     database_revision: dea30614e6711ce0b908fff7519c3fa6a99a3365
     research_revision: null
   notes: []
+6JRR arithmetic-group.otilde-plus-t-co.generator_morphisms:
+  disposition: open
+  attempts:
+  - hash: dc67390293d0f7c002b886c52ed428057b9348818e490984cc275ede2312878c
+    gram_tensor:
+    - - 2
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+    - - 0
+      - 0
+      - 2
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+    - - 0
+      - 2
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+    - - 0
+      - 0
+      - 0
+      - -4
+      - 0
+      - 2
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+    - - 0
+      - 0
+      - 0
+      - 0
+      - -4
+      - 0
+      - 2
+      - 0
+      - 0
+      - 0
+      - 0
+    - - 0
+      - 0
+      - 0
+      - 2
+      - 0
+      - -4
+      - 2
+      - 0
+      - 0
+      - 0
+      - 0
+    - - 0
+      - 0
+      - 0
+      - 0
+      - 2
+      - 2
+      - -4
+      - 2
+      - 0
+      - 0
+      - 0
+    - - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 2
+      - -4
+      - 2
+      - 0
+      - 0
+    - - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 2
+      - -4
+      - 2
+      - 0
+    - - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 2
+      - -4
+      - 2
+    - - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 2
+      - -4
+    reason: 'did not return: the subgroup''s generating set is the Schreier family
+      over a transversal of the finite character image, 93997183795200 cosets, and
+      its enumeration does not finish'
+    stderr: 'measured at sage-extensions#597 (origin/main 2fb37d5) on 6JRR''s stored
+      Gram tensor: the same owner call the worker makes, g.group_generators() on L.stable_orthogonal_group().intersection(L.O_plus()),
+      did not return in 600 s, peak 4607 MiB and rising at 8 MB/s, ended by its own
+      timeout (exit 124). Not a worker traceback: recorded from that probe, as the
+      SOtilde+ row''s entry was. The generation clause is proved not supplied there'
+    seconds: 600.0
+    recorded_at: 2026-11-17 22:45:36.349719+00:00
+    run_url: null
+    database_revision: null
+    research_revision: null
+  notes: []
 6JRR arithmetic-group.otilde-plus-t-co.index_in_orthogonal_group:
   disposition: resolved
   attempts:
@@ -8144,7 +8284,7 @@
     pair where the row belonged, so the worker raised before computing; fixed in the
     driver and re-run'
 6JRR integral.primitive_orbits[SOtilde+]:
-  disposition: open
+  disposition: resolved
   attempts:
   - hash: 8f60c86c8bf02023cb69124914c7a2470e06a0bbcb18bc226955069de490fada
     gram_tensor:
@@ -8285,4 +8425,10 @@
     run_url: null
     database_revision: null
     research_revision: null
-  notes: []
+  notes:
+  - '2026-11-17T22:35:43.376437+00:00: Released after sage-extensions#596 was repaired
+    at dbf91e893d80 (origin/main 2fb37d5): the line stabilizer sign space is now certified
+    from its own exhibited elements, so SO~+ takes the splitting-isometries route
+    instead of the 9.2 GiB exact-stabilizer fallback. The owner measured that row
+    at 527 in 72.15 s, the eight rows in 307.2 s at 1019 MiB; this release asks the
+    database path for it on the stored Gram tensor.'

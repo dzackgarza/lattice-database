@@ -1,5 +1,10 @@
 # #7: the T_Co primitive isotropic line constants, measured
 
+> **Later, same day: the eighth row landed.** `SOtilde+` returned 527 through this database's own
+> `certify` on 2026-11-17 after sage-extensions#596 was repaired; the card states all eight rows under
+> `4282656a…`. See `results/evidence-7-eighth-row.md`. The measurement below stands as the seven-row
+> run it reports.
+
 **Outcome: the seven rows that returned are stored and certified — `O`, `SO`, `O+`, `SO+` at 1 and
 `Otilde`, `SOtilde`, `Otilde+` at 527 — and `SOtilde+` is quarantined in `failures/e1.yaml` with its
 measured cost and its owner issue (sage-extensions#596).** Everything below is measured in the certify

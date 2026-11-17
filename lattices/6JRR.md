@@ -18,7 +18,7 @@ certifications:
   integral.anisotropic_primes: 000a0cf69d40037137de8d1340ab9613d0fc02bfe7b5c79bddd0f5ff9cd831d3
   integral.local_representations: 191495e75b2caffd9a835f11940c160e3ccf6ea2fded7b66c56eae2f9e9d9a00
   integral.local_densities: b5b425b999b8e6193a6940c9195da942df34656aa6e81f0c4b1f778232b70474
-  integral.primitive_orbits: ed8a588feba9ac8f13ca410b7fdadc32da57e89b1ca3cc9daf4f53b47d5d1497
+  integral.primitive_orbits: 4282656a7d42a5489e900ad120e0f39897cca2d71dabca91e1874feee4fca7b9
   arithmetic-group.otilde-t-co.index_in_orthogonal_group: 682c595c52447cd1add71138601fe9259fd3e5e868e05a646a95e0b27c3225f1
   arithmetic-group.otilde-plus-t-co.index_in_orthogonal_group: 326145ccf46247778eb506416cb6c6985eedf61029060ff4497597e2c3f8a3b0
 rank: 11
@@ -90,6 +90,10 @@ integral:
       z: []
       w: []
     Otilde:
+      constant: 527
+      z: []
+      w: []
+    SOtilde+:
       constant: 527
       z: []
       w: []
@@ -2032,9 +2036,10 @@ $E_8$ is negative definite, in Dolgachev–Kondo's convention for $\mathbb{E}(2)
 `integral.primitive_orbits` states, for each of the eight standard subgroups, the constant term: the number of $\Gamma$-orbits of primitive isotropic *lines*, the $0$-cusps of the Baily–Borel boundary, and not a count of vectors (`theory/orbits.md`).
 The preamble returns it for an indefinite lattice as the constant term of `primitive_orbit_series`, which is `isotropic_orbit_representatives(1).cardinality()` of each subgroup; on an indefinite lattice nothing positive or negative is bounded, so the $z$ and $w$ coefficients are empty.
 The count is what the operation returned for the stored Gram tensor: no page's count is transcribed, and the observed isotropic classes of $A_{T_{\mathrm{Co}}}$ are not an orbit count.
-Seven rows are stated: $O$, $SO$, $O^{+}$, $SO^{+}$ are $1$ and $\widetilde{O}$, $S\widetilde{O}$, $\widetilde{O}^{+}$ are $527$, each the operation's answer for that subgroup.
-$S\widetilde{O}^{+}$ states no value: its line-orbit walk did not return on this lattice, so the row is quarantined in `failures/e1.yaml` as `6JRR integral.primitive_orbits[SOtilde+]` with its measured cost, and the defect is filed at sage-extensions#596 — the field is asked one row at a time, so that row costs itself and not the seven.
-A row that states nothing claims nothing, and the certificate over this block commits to the seven rows stated.
+All eight rows are stated: $O$, $SO$, $O^{+}$, $SO^{+}$ are $1$ and $\widetilde{O}$, $S\widetilde{O}$, $\widetilde{O}^{+}$, $S\widetilde{O}^{+}$ are $527$, each the operation's answer for that subgroup.
+$S\widetilde{O}^{+}$ arrived last and it arrived: the row was quarantined in `failures/e1.yaml` (`6JRR integral.primitive_orbits[SOtilde+]`) while its line-orbit walk did not return on this lattice, the owner then certified the stabilizer's sign space from the stabilizer's own exhibited elements (sage-extensions#596, `dbf91e89`), the row was released through `just retry-computation`, and this card's computation returned $527$ for the stored Gram tensor — the same count as the three subgroups above it, so the determinant and spinor restrictions split no primitive isotropic line here.
+The certificate over this block commits to all eight rows, and it is one certificate for the field rather than one per row.
 
 The arithmetic-group cards attached to this lattice are `otilde-t-co`, the discriminant kernel $\widetilde O(T_{\mathrm{Co}}) = \ker(O(T_{\mathrm{Co}}) \to O(A_{T_{\mathrm{Co}}}))$, and `otilde-plus-t-co`, its intersection with the kernel $O^{+}(T_{\mathrm{Co}})$ of the real spinor norm — not with the determinant-one subgroup, which is $SO$.
 Dolgachev–Kondo, Proposition 3.2, p. 513, describes $\mathcal{M}_{\mathrm{Co}}$ as an open subset of $\mathcal{D}(N)/O(N)$; that the group acting on this period domain is the image of $\widetilde O^{+}(T_{\mathrm{Co}})$, which the literature writes $\Gamma_{\mathrm{Co}}$, is a conjecture and not a result proved here or by that proposition, so it settles no count on this card.
+Neither arithmetic-group card states a generating set, so `data.generator_morphisms` is absent on both, and no certificate on this card claims one: sage-extensions#597 records the refusal as proved rather than met — $\widetilde O(T_{\mathrm{Co}})$ is the principal congruence subgroup of level $2$ and $\widetilde O^{+}(T_{\mathrm{Co}})$ is its intersection with the kernel of the real spinor norm, $\mathrm{rank}_2(T_{\mathrm{Co}}) = 0$ where Kneser's generation theorem needs $\mathrm{rank}_2 \ge 6$ and Gritsenko–Hulek–Sankaran's Proposition 3.4 needs two hyperbolic planes, Allcock's Bertini-involution family is stated for $\Lambda(2)$ of rank $10$ and not for this rank-eleven lattice, and the only remaining route, the Schreier family over a transversal of $O(A_{T_{\mathrm{Co}}})$, is $46998591897600$ cosets, whose enumeration did not return in $600$ s. The two indices above are unaffected; a reader looking for generators of either group finds none claimed here or on those two cards.
