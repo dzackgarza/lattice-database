@@ -22,6 +22,9 @@
 02GO integral.anisotropic_primes:
   hash: 846c533dcd4105b9973e6a79e3b868ccebc1f3b08683186a104c38351bcc4823
   by: research preamble
+02GO integral.discriminant_form:
+  hash: 469b1a9986698ba72a11f526d5e7725af730e54549e751dbfa67fb5033ff77a1
+  by: research preamble
 02GO integral.discriminant_sequence:
   hash: e4e9cc4b4e864d6ed8b9124454f01a8ace57fd1d74ed861547fd285680922ca5
   by: research preamble
@@ -81,6 +84,9 @@
   by: research preamble
 02LS integral.anisotropic_primes:
   hash: faa40644f9fa94b4b9b359fa9cd0a2f12a62ef11a89d757f479208eb04144818
+  by: research preamble
+02LS integral.discriminant_form:
+  hash: 5bf8fc5eca5dde9575647bb4ce8c6132000b28682382af19c631bbc4a7a8a761
   by: research preamble
 02LS integral.discriminant_sequence:
   hash: 8c983eea17272fdf60ab728042f5e30e70cdf6cc06ab3dec3dc4b35ca11b0c4a
@@ -29246,6 +29252,9 @@
 3EEJ integral.anisotropic_primes:
   hash: 0992a50b04df4eb04462c1df816d30bd9e17adb9bd08b3647bed828479701e79
   by: research preamble
+3EEJ integral.discriminant_form:
+  hash: 423c8123504c8a209592e32e06e837c661f6c4d2913df32824636d8b0b8ba830
+  by: research preamble
 3EEJ integral.discriminant_sequence:
   hash: 9fb5c05db0a9ce9e37f903231e964a6ef36e27fd74831d8aba22329fe5e0ddf9
   by: research preamble
@@ -29933,4 +29942,37 @@
   by: research preamble
 3I7J integral.spinor_genus_count:
   hash: 6d213089e671da402b6505b451c8b83e3e5bb484b03f48502047768fd27bbe6d
+  by: research preamble
+6GNV automorphisms.automorphism_group_generator_morphisms:
+  hash: 70a0d2cdbc480e30c84bc8a17505c74f419345e83e532fae685056e051a04425
+  by: research preamble
+6GNV derive:
+  hash: ab26c5e68b65e8cdfba34af852e40b58f6800a4f75da868d130566cf14929ebd
+  by: research preamble
+6GNV form.integer_valued:
+  hash: 6a4f3620323ca36a5f963c6c6b2e2ce24c14e9fa48d052fba5249430264c68b7
+  by: research preamble
+6GNV integral.discriminant_form:
+  hash: b6d8d419024c01ff90daca30c19c82c605ce63fe8ed49742e6c5decb306b8432
+  by: research preamble
+6GNV integral.elementary_primes:
+  hash: 54ff5580cffdabb579bd1f7512b9322f42e9a7d88533fb090f5d22c1430651c9
+  by: research preamble
+6GNV integral.genus_class_count:
+  hash: 4e56bd1b80bdcec90cb9b6d1f84e45a5aaec7c5f0014caf51eab4e3d0339e176
+  by: research preamble
+6GNV integral.genus_symbol:
+  hash: ce2ba1a7ab2879e0991e4fd2071ea991bd41a52c31bee27912ba7cb1af936c59
+  by: research preamble
+6GNV integral.hyperbolic_index:
+  hash: 2cf606f2c38d9917698ef3d324d2e21335ff7a4a92e641e701c55d493cee121e
+  by: research preamble
+6GNV integral.overlattice_count:
+  hash: bf337d20c9f8e7bb7137044a7fab9f1a8f5685897b733b1ebf5aadde6c0258fe
+  by: research preamble
+6GNV integral.spinor_genera:
+  hash: acbe683444c8f98954ce9298d7d268405111dea6afe3ff78188c5257cefd5a12
+  by: research preamble
+6GNV integral.spinor_genus_count:
+  hash: db76562a867a8ff5dbf7455b4d875d875d5dc94f8f65c23a0fd8a648d5cbe51a
   by: research preamble
