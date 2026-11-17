@@ -34,8 +34,8 @@ pinned image with sage-extensions `ba51bdf9` (origin/main) and this repository's
 
 The previous routes for the same two computations, from `exceeded.yaml`, are the evidence that the fix is
 the route and not the machine: the index of $\widetilde O$ ran 5609 s and was killed at
-14,061,043,712 bytes, and the index of $\widetilde O^{+}$ ran 7286 s on one run and 10,921 s on a later
-one, each time with its worker lost.
+14,061,043,712 bytes, and the index of $\widetilde O^{+}$ ran 7286 s, then 10,921 s and 12,723 s on later
+scheduled runs, each time with its worker lost.
 
 `checks.records.problems(corpus.cards(root, ("6JRR",)), certificates.load(root, ("6JRR",)), {"6JRR"})`
 reports 0 problems on the two cards and their two citations.
