@@ -1,3 +1,32 @@
+19UY integral.discriminant_form:
+  disposition: open
+  attempts:
+  - hash: ad0e944adfde4bfba7f6bc063985ff589d5bae53b56b4b8fa3c3e71901f07557
+    gram_tensor:
+    - - 4
+      - 2
+      - 0
+      - 2
+    - - 2
+      - 8
+      - 1
+      - 1
+    - - 0
+      - 1
+      - 8
+      - 4
+    - - 2
+      - 1
+      - 4
+      - 10
+    reason: memory exhausted
+    stderr: ''
+    seconds: 66.45278691199928
+    recorded_at: 2026-11-17 21:56:23.313205+00:00
+    run_url: https://github.com/dzackgarza/lattice-database/actions/runs/44079044175/attempts/1
+    database_revision: b046d46a13d33c1078b5d8a037bca2c462fabc72
+    research_revision: 0152e984c2d6fc0d56bca38e4ce425f029729927
+  notes: []
 1NWU derive:
   disposition: open
   attempts:
