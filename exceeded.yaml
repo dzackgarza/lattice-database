@@ -469,10 +469,6 @@
   hash: f5fc538a5e998bafa91162d5d447e6f18c6f43af9e9a91b6ab43f1ba995218d5
   seconds: 0
   lost: true
-0KDT integral.discriminant_form:
-  hash: 8445d0b06b4495a329737c2b39c6a490dd15fc65370baf4e1615e5ea98a422d4
-  seconds: 0
-  lost: true
 0LX3 definite.siegel_eisenstein_coefficients:
   hash: 2d7301207cc43bb763f03cfdecc163a5304ed8c19b18274a86dd376fd527f8b6
   seconds: 0
@@ -487,6 +483,10 @@
   lost: true
 0LXI integral.genus_class_count:
   hash: 59f3e860a26817f0ea30db37aed80596a35ce07a4da85a02788a9faac7b514cb
+  seconds: 0
+  lost: true
+0MYU integral.discriminant_form:
+  hash: 25c277bd966332d3b4ee0b13cc5908ddf665a0b5c4a3990cc14016b5eefb75ad
   seconds: 0
   lost: true
 0RVY integral.elementary_primes:
