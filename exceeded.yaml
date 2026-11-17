@@ -525,10 +525,6 @@
   hash: fa36a0215c9394768ad0dc5fc9ba6fa459b7390e1e92dba69508d3952353013e
   seconds: 0
   lost: true
-0WSE integral.discriminant_form:
-  hash: 0e7fe698ce5de03397f8af5399fe6023b09533b11216caddd4ed4e9783f6b3e4
-  seconds: 0
-  lost: true
 0WV9 definite.genus_theta_series:
   hash: e13a2e1c9c0e0605678506eff7d2d27210d07d37dd2f67a9637c75bbf5ce0833
   seconds: 0
@@ -551,6 +547,10 @@
   lost: true
 0YVT integral.elementary_primes:
   hash: e9a35b7da91dcd00dd2193b061e2e0619539524bab6b5805ec303e0514afa883
+  seconds: 0
+  lost: true
+0ZT5 integral.discriminant_form:
+  hash: 79611d348769fafb62a2bd2abac40ac3564f64a5aea0cd4e661cfded1bf45895
   seconds: 0
   lost: true
 112Y integral.discriminant_form:
