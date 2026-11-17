@@ -33,6 +33,7 @@ from pydantic import BaseModel, TypeAdapter
 from latticedb import card_serialization, certificates, corpus, exceeded, failures, records, storage
 from latticedb.catalogues import ArithmeticGroup
 from latticedb.certificates import Certificate, Certificates
+from latticedb.invariant_models import STANDARD_SUBGROUPS
 from latticedb.model import (
     Automorphisms,
     DefiniteData,
@@ -229,13 +230,42 @@ class Request(TypedDict):
     """A computation of these fields was cut short by an earlier job."""
 
 
+ORBIT_ROW_SEPARATORS = ("[", "]")
+
+
+def orbit_row(field: str, row: str) -> str:
+    """One subgroup's row of an orbit field, as a request names it: `primitive_orbits[Otilde]`.
+
+    A card stores the row inside its field's block; a request names it alone so that the
+    row is one computation, announced, stored and certified on its own. The eight rows of
+    `integral.primitive_orbits` on an indefinite card are the eight standard subgroups,
+    and one of them not returning then costs that row rather than the whole field (#7).
+    """
+    return f"{field}{ORBIT_ROW_SEPARATORS[0]}{row}{ORBIT_ROW_SEPARATORS[1]}"
+
+
+def orbit_row_of(field: str) -> tuple[str, str] | None:
+    """The orbit field a request's row name belongs to and the row, or None for a whole field."""
+    base, opener, rest = field.partition(ORBIT_ROW_SEPARATORS[0])
+    if not opener or not rest.endswith(ORBIT_ROW_SEPARATORS[1]):
+        return None
+    row = rest[: -len(ORBIT_ROW_SEPARATORS[1])]
+    return (base, row) if base and row else None
+
+
 def stored_in(field: str, definiteness: str | None = None) -> tuple[str, type[BaseModel]]:
     """The block that stores `field` on a card of `definiteness`, and that block's model.
 
     A definite card states the order of $O(L)$ with its generators in `definite`, where
     `BLOCKS` keeps every field. An indefinite lattice's $O(L)$ is infinite, so its data
     is the generators alone and lives in `automorphisms` (#8).
+
+    A row of an orbit series — `primitive_orbits[Otilde]` — is stored in the block of the
+    field it is a row of.
     """
+    row = orbit_row_of(field)
+    if row is not None:
+        return stored_in(row[0], definiteness)
     match (field, definiteness):
         case ("automorphism_group_generator_morphisms", "indefinite"):
             return AUTOMORPHISMS, Automorphisms
@@ -294,6 +324,36 @@ def arithmetic_requests(lattice: Lattice, loaded: corpus.Corpus, held: Certifica
             if stored is None or certificates.is_pending(held, computation, lattice.certifications.get(field), expected_hash):
                 chosen.append((field, {"slug": slug, "standard_name": card.standard_name}))
     return chosen
+
+
+def orbit_rows_to_ask(
+    lattice: Lattice,
+    field: str,
+    stored_value: Yaml,
+    triage: failures.Failures,
+    log: exceeded.Interruptions,
+    *,
+    only_missing: bool = True,
+) -> list[str]:
+    """The rows of an orbit field this run asks for, in the order the schema lists the subgroups.
+
+    A row whose series the card already states is not asked again, and a row a failure quarantines
+    — a subgroup that ran a whole job without returning — is not asked at all: it costs its own row
+    and not the seven that return (#7). `only_missing=False` asks every unquarantined row, which
+    re-mints the field's certificate over rows already stored.
+    """
+    stored = stored_value if isinstance(stored_value, dict) else {}
+    rows: list[str] = []
+    for row in STANDARD_SUBGROUPS:
+        if only_missing:
+            series = stored.get(row)
+            if isinstance(series, dict) and series.get("constant") is not None:
+                continue
+        computation = name(lattice.tag, orbit_row(field, row), lattice.definiteness)
+        if failures.blocked(triage, computation, lattice) or exceeded.is_exceeded(log, computation, lattice):
+            continue
+        rows.append(orbit_row(field, row))
+    return rows
 
 
 def requests(
@@ -355,7 +415,18 @@ def requests(
             if exceeded.is_exceeded(log, computation, lattice) or failures.blocked(triage, computation, lattice):
                 continue
             expected_hash = certificates.certification_hash(computation, lattice, certified_value(field, stored_value, lattice))
-            if stored_value is None or certificates.is_pending(held, computation, cited.get(f"{block_name}.{field}"), expected_hash):
+            pending = stored_value is None or certificates.is_pending(held, computation, cited.get(f"{block_name}.{field}"), expected_hash)
+            if field == "primitive_orbits" and lattice.definiteness == "indefinite":
+                # The eight rows are eight computations: one subgroup that does not return costs its
+                # own row, and the rows that do return are stored and certified without it (#7).
+                rows = orbit_rows_to_ask(lattice, field, stored_value, triage, log)
+                if not rows and pending:
+                    # Every row is stored and the certificate is stale: one row re-mints it over the
+                    # rows the card states, rather than the whole series being asked again.
+                    rows = orbit_rows_to_ask(lattice, field, stored_value, triage, log, only_missing=False)[:1]
+                fields.extend(rows)
+                continue
+            if pending:
                 fields.append(field)
         if needs_derive:
             fields.insert(0, "derive")
@@ -698,17 +769,34 @@ def keep_other_computations(path: Path, derived: dict[str, Yaml]) -> dict[str, Y
 
 
 def store(path: Path, values: dict[str, Yaml]) -> None:
-    """Replace each computed scope on the card by the completed computation."""
+    """Replace each computed scope on the card by the completed computation.
+
+    A value keyed by a row of an orbit series — `primitive_orbits[Otilde]` — is stored as that
+    row of its field's block, beside the rows stored before it, so a row computed alone lands
+    without the rows that did not return (#7).
+    """
     document = corpus.read_card(path)
     metadata = corpus.front_matter(document)
     morphisms = TypeAdapter(list[dict[str, Yaml]]).validate_python(metadata.get("morphisms", []), strict=True)
-    if "roots" in values:
-        # Computed roots generate L, so L = ZPhi(L) and the block has no summands or embedding.
-        metadata["root_span"] = {}
-    for field in BLOCKS:
-        value = values.get(field)
+    computed: dict[str, Yaml] = {}
+    for key, value in values.items():
         if value is None:
             continue
+        row = orbit_row_of(key)
+        field = row[0] if row is not None else key
+        if field not in BLOCKS:
+            continue
+        if row is None:
+            computed[field] = value
+        elif isinstance(value, dict):
+            earlier = computed.get(field)
+            computed[field] = {**(earlier if isinstance(earlier, dict) else {}), **value}
+        elif field not in computed:
+            computed[field] = value
+    if "roots" in computed:
+        # Computed roots generate L, so L = ZPhi(L) and the block has no summands or embedding.
+        metadata["root_span"] = {}
+    for field, value in computed.items():
         block_name, model = stored_in(field, metadata.get("definiteness"))
         if field == "automorphism_group_generator_morphisms":
             assert isinstance(value, list)
@@ -816,12 +904,16 @@ def certify(
     workers: int = 1,
     shard: tuple[int, int] = (0, 1),
     searches: bool | None = None,
+    fields: tuple[str, ...] = (),
 ) -> None:
     """Compute every uncertified value on `workers` processes, replace its card scope, and certify the result.
 
     `searches` takes one phase of the queue: `False` the terminating fields alone, `True` the
     semi-decision searches alone. A search can hold a worker for a whole job, so a dispatched run
     that only wants the fields does not wait for one, and the searches are a job of their own.
+    `fields` narrows the queue to the named computations, a field (`primitive_orbits`) taking the
+    rows of that field with it: a card whose other fields are expensive can be asked for the one
+    value a run is about, without a ledger entry standing in for the reason.
     `deadline` is the time, in seconds since the epoch, at which the job's timeout
     ends this run. A computation in progress is logged in `exceeded.yaml` until it
     finishes, checkpointing the seconds actually spent in this run. A worker that
@@ -884,7 +976,21 @@ def certify(
             exceeded.save(root, log)
 
     try:
-        with closing(computed(in_phase(requests(loaded, held, log, tags, shard, failed=failed), searches), deadline, workers)) as stream:
+        chosen = requests(loaded, held, log, tags, shard, failed=failed)
+        if fields:
+            # A filter names a computation, and a field's name takes its rows with it.
+            wanted = set(fields)
+            narrowed: list[Request] = []
+            for request in chosen:
+                kept = [
+                    field
+                    for field in request["fields"]
+                    if field in wanted or (orbit_row_of(field) or (field,))[0] in wanted
+                ]
+                if kept:
+                    narrowed.append({**request, "fields": kept})
+            chosen = narrowed
+        with closing(computed(in_phase(chosen, searches), deadline, workers)) as stream:
             for values in stream:
                 if "checkpoint" in values:
                     checkpoint()
@@ -955,7 +1061,8 @@ def certify(
                         print(stored_lattice.tag, "derive", flush=True)
                         continue
                 arithmetic_fields = [field for field in values if isinstance(field, str) and field.startswith(ARITHMETIC_PREFIX)]
-                for field in (*BLOCKS, *arithmetic_fields):
+                row_fields = [field for field in values if isinstance(field, str) and orbit_row_of(field) is not None]
+                for field in (*BLOCKS, *row_fields, *arithmetic_fields):
                     if field in values:
                         log.pop(name(entry.lattice.tag, field, entry.lattice.definiteness), None)
                         running.pop(name(entry.lattice.tag, field, entry.lattice.definiteness), None)
@@ -979,12 +1086,15 @@ def certify(
                     held[computation] = Certificate(hash=certificate_hash, by=str(values["by"]))
                     if computation in failed:
                         failures.resolve(root, computation, stored_lattice)
-                for field in BLOCKS:
-                    if field not in values or values[field] is None:
-                        continue
+                # A row of an orbit series certifies the field it belongs to, over the rows the card
+                # now stores: the certificate commits to what the card states, and a row that did
+                # not return is not part of it (#7).
+                certified_fields = [*BLOCKS, *(base for base in dict.fromkeys(orbit_row_of(row)[0] for row in row_fields) if base not in BLOCKS)]
+                for field in certified_fields:
                     block_name = stored_in(field, stored_lattice.definiteness)[0]
                     block = stored.get(block_name)
-                    assert isinstance(block, dict)
+                    if not isinstance(block, dict) or block.get(field) is None:
+                        continue
                     computation = name(entry.lattice.tag, field, stored_lattice.definiteness)
                     certificate_hash = certificates.certification_hash(
                         computation,
@@ -995,13 +1105,18 @@ def certify(
                     held[computation] = Certificate(hash=certificate_hash, by=str(values["by"]))
                     if computation in failed:
                         failures.resolve(root, computation, stored_lattice)
+                # A row that returned resolves the failure its own earlier attempt recorded.
+                for row_field in row_fields:
+                    row_computation = name(entry.lattice.tag, row_field, stored_lattice.definiteness)
+                    if row_computation in failed:
+                        failures.resolve(root, row_computation, stored_lattice)
                 stored["certifications"] = {name: certificate_hash for name, certificate_hash in card_certifications.items()}
                 document = corpus.read_card(entry.path)
                 storage.write_text(entry.path, records.record_text(stored, document.content))
                 unsaved.add(entry.lattice.tag)
                 print(
                     entry.lattice.tag,
-                    {field: values[field] for field in (*BLOCKS, *arithmetic_fields) if field in values},
+                    {field: values[field] for field in (*BLOCKS, *row_fields, *arithmetic_fields) if field in values},
                     flush=True,
                 )
     finally:

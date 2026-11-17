@@ -24,7 +24,7 @@ from sage_extensions.categories.rings.ring_foundation import OwnedRings
 from sage_extensions.rings import QQ, ZZ
 
 from latticedb import records
-from latticedb.genus import ARITHMETIC_PREFIX, Request, applies
+from latticedb.genus import ARITHMETIC_PREFIX, Request, applies, orbit_row_of
 from latticedb.model import Lattice
 
 OWNED_ZZ = ZZ
@@ -108,6 +108,21 @@ def _standard_subgroup(lattice: Lattices.ParentMethods, standard_name: str) -> o
         case "SOtilde+":
             return lattice.stable_orthogonal_group().intersection(lattice.SO()).intersection(lattice.O_plus())
     raise ValueError(f"{standard_name!r} is not one of the eight standard subgroups of O(L)")
+
+
+def _primitive_isotropic_line_row(lattice: Lattices.ParentMethods, row: str) -> dict[str, JsonValue]:
+    r"""One standard subgroup's constant term: its orbits of primitive isotropic **lines**.
+
+    This is the row `_orbit_series` would take from `lattice.primitive_orbit_series()` for $\Gamma$,
+    asked for on its own so that a subgroup that does not return costs its row and not the field:
+    the constant is `isotropic_orbit_representatives(1).cardinality()`, the owner's rank-one
+    primitive isotropic subobjects, and $z$ and $w$ are empty because no norm is bounded on an
+    indefinite lattice. The subgroup is the one `_standard_subgroup` names from `theory/orbits.md`,
+    which is the same eight the owner's series states.
+    """
+    subgroup = _standard_subgroup(lattice, row)
+    constant = subgroup.isotropic_orbit_representatives(1).cardinality()
+    return {row: {"constant": _orbit_count(constant), "z": [], "w": []}}
 
 
 def _arithmetic_group_value(group: object, field: str) -> JsonValue:
@@ -391,6 +406,12 @@ def _compute(request: Request) -> None:
             _run(tag, [asked for asked in sorted(fields) if asked in request["fields"]], lambda: compute(lattice))
             continue
         done.add(field)
+        row = orbit_row_of(field)
+        if row is not None:
+            # One subgroup's row of an orbit series is one computation: the eight are asked
+            # separately, so a subgroup that does not return costs its row (#7).
+            _run(tag, [field], lambda row=row[1], field=field: {field: _primitive_isotropic_line_row(lattice, row)})
+            continue
         _run(
             tag,
             [field],

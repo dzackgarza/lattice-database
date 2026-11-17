@@ -18,6 +18,7 @@ certifications:
   integral.anisotropic_primes: 000a0cf69d40037137de8d1340ab9613d0fc02bfe7b5c79bddd0f5ff9cd831d3
   integral.local_representations: 191495e75b2caffd9a835f11940c160e3ccf6ea2fded7b66c56eae2f9e9d9a00
   integral.local_densities: b5b425b999b8e6193a6940c9195da942df34656aa6e81f0c4b1f778232b70474
+  integral.primitive_orbits: ed8a588feba9ac8f13ca410b7fdadc32da57e89b1ca3cc9daf4f53b47d5d1497
 rank: 11
 gram_tensor:
 - [2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
@@ -61,6 +62,35 @@ integral:
   spinor_genus_count: 1
   spinor_genera: [1]
   hyperbolic_index: 0
+  primitive_orbits:
+    Otilde+:
+      constant: 527
+      z: []
+      w: []
+    SOtilde:
+      constant: 527
+      z: []
+      w: []
+    O:
+      constant: 1
+      z: []
+      w: []
+    O+:
+      constant: 1
+      z: []
+      w: []
+    SO:
+      constant: 1
+      z: []
+      w: []
+    SO+:
+      constant: 1
+      z: []
+      w: []
+    Otilde:
+      constant: 527
+      z: []
+      w: []
   discriminant_form:
     orthogonal_group_order: 46998591897600
     isotropic_classes: 528

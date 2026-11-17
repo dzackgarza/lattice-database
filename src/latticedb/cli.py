@@ -471,6 +471,10 @@ def certify(
         str,
         Parameter(help="`all` runs the terminating fields and then the semi-decision searches; `fields` leaves the searches to another run; `searches` takes only them."),
     ] = "all",
+    field: Annotated[
+        tuple[str, ...],
+        Parameter(help="Computation to run, such as `primitive_orbits`; repeat for each. Every field when absent."),
+    ] = (),
     root: Root = Path(),
 ) -> None:
     """Compute uncertified card values, replace disagreements, and certify the computed results."""
@@ -501,7 +505,7 @@ def certify(
             searches = True
         case _:
             raise ValueError(f"phase {phase} is not one of all, fields or searches")
-    genus.certify(root, loaded, held, tag, deadline, workers, (index, count), searches)
+    genus.certify(root, loaded, held, tag, deadline, workers, (index, count), searches, field)
 
 
 @app.command

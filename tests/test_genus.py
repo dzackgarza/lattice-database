@@ -15,7 +15,7 @@ import frontmatter
 import pytest
 import yaml
 
-from latticedb import certificates, checks, corpus, exceeded, genus, records, sage_genus
+from latticedb import certificates, checks, corpus, exceeded, failures, genus, records, sage_genus
 from latticedb.catalogues import ArithmeticGroup
 from latticedb.model import Lattice
 
@@ -148,7 +148,8 @@ def test_an_indefinite_card_requests_and_stores_the_eight_primitive_orbit_rows(
     path.write_text(records.record_text(metadata, document.content))
     assert "primitive_orbits" not in corpus.front_matter(corpus.read_card(path))["integral"]
     fields = [field for request in genus.requests(corpus.load(tmp_path), derived(), {}, ("0016",)) for field in request["fields"]]
-    assert "primitive_orbits" in fields
+    # The field is asked as its eight rows, one computation each (#7).
+    assert [field for field in fields if genus.orbit_row_of(field) is not None] == [genus.orbit_row("primitive_orbits", row) for row in genus.STANDARD_SUBGROUPS]
     # One orbit of primitive isotropic vectors, e + f; U is even, so no vector of norm +-1.
     series = {"constant": 1, "z": [0, 0, 0, 0], "w": [0, 0, 0, 0]}
     genus.store(path, {"primitive_orbits": {group: series for group in ("O", "SO", "O+", "SO+", "Otilde", "SOtilde", "Otilde+", "SOtilde+")}})
@@ -156,6 +157,42 @@ def test_an_indefinite_card_requests_and_stores_the_eight_primitive_orbit_rows(
     assert integral is not None and integral.primitive_orbits is not None
     assert set(integral.primitive_orbits) == {"O", "SO", "O+", "SO+", "Otilde", "SOtilde", "Otilde+", "SOtilde+"}
     assert integral.primitive_orbits["Otilde+"].constant == 1
+
+
+def test_an_indefinite_card_asks_for_each_orbit_row_alone(tmp_path: Path) -> None:
+    """#7: the eight rows are eight computations, so a subgroup that does not return costs its row.
+
+    A request names a row, the card stores the rows that returned inside the field's block, and a
+    row a failure quarantines is not asked again while the other rows still are.
+    """
+    (tmp_path / "lattices").mkdir()
+    shutil.copy(REPOSITORY / corpus.FAMILIES_FILE, tmp_path / corpus.FAMILIES_FILE)
+    (tmp_path / corpus.RETIRED_FILE).write_text("{}\n")
+    path = tmp_path / "lattices" / "0016.md"
+    shutil.copy(REPOSITORY / "lattices" / "0016.md", path)
+    document = frontmatter.load(str(path))
+    metadata = corpus.front_matter(document)
+    without("0016", "indefinite", metadata, certificates.Certificates(), "integral.primitive_orbits")
+    path.write_text(records.record_text(metadata, document.content))
+    lattice = corpus.load(tmp_path).entries[0].lattice
+    asked = [field for request in genus.requests(corpus.load(tmp_path), derived(), {}, ("0016",)) for field in request["fields"]]
+    assert [field for field in asked if genus.orbit_row_of(field) is not None] == [genus.orbit_row("primitive_orbits", row) for row in genus.STANDARD_SUBGROUPS]
+
+    # The rows that returned are the field's rows; the ones that did not are simply not there.
+    genus.store(path, {"primitive_orbits[O]": {"O": {"constant": 1, "z": [], "w": []}}})
+    genus.store(path, {"primitive_orbits[SO]": {"SO": {"constant": 1, "z": [], "w": []}}})
+    assert corpus.front_matter(corpus.read_card(path))["integral"]["primitive_orbits"] == {
+        "O": {"constant": 1, "z": [], "w": []},
+        "SO": {"constant": 1, "z": [], "w": []},
+    }
+
+    # A quarantined row is not asked; the rows that returned are not asked again either.
+    blocked = genus.orbit_row("primitive_orbits", "SOtilde+")
+    failures.record(tmp_path, genus.name("0016", blocked, "indefinite"), lattice, "did not return", "", 510.0)
+    remaining = genus.orbit_rows_to_ask(lattice, "primitive_orbits", corpus.front_matter(corpus.read_card(path))["integral"]["primitive_orbits"], failures.load(tmp_path), {})
+    assert blocked not in remaining
+    assert genus.orbit_row("primitive_orbits", "O") not in remaining, "a stored row is not asked again"
+    assert genus.orbit_row("primitive_orbits", "Otilde+") in remaining
 
 
 def test_the_database_asks_the_owner_on_every_card_of_the_operations_class() -> None:

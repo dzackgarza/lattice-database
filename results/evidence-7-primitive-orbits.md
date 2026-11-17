@@ -1,8 +1,9 @@
 # #7: the T_Co primitive isotropic line constants, measured
 
-**Outcome: seven of the eight constants returned; `SOtilde+` did not, so no card value and no certificate
-were written.** The field is one computation and the driver writes it only when the whole call returns.
-Everything below is measured in the certify image on the card's stored Gram tensor.
+**Outcome: the seven rows that returned are stored and certified — `O`, `SO`, `O+`, `SO+` at 1 and
+`Otilde`, `SOtilde`, `Otilde+` at 527 — and `SOtilde+` is quarantined in `failures/e1.yaml` with its
+measured cost and its owner issue (sage-extensions#596).** Everything below is measured in the certify
+image on the card's stored Gram tensor.
 
 ## The environment the measurement ran in
 
@@ -84,24 +85,61 @@ is 528, and the zero class is not realised by a primitive vector because every e
 tensor is even (so every divisibility is at least 2). 528 − 1 = 527 is the stable groups' constant, which
 the walk reproduced without using that count.
 
-## Why the card is unchanged
+## What was written, and how
 
-`integral.primitive_orbits` is one preamble computation, and `genus.store` writes a field only from a
-completed computation; the call did not complete. Two alternatives were rejected:
+The field is now askable per row. A request names a row — `primitive_orbits[Otilde]` in the request,
+the `certifications` and `failures` keys, and the `exceeded` log — and the row is stored as that row of
+`integral.primitive_orbits`, beside the rows stored before it. The field's certificate commits to the
+rows the card states, through the same `orbit_projection` as before, and is minted again as each row
+lands. A worker the run kills costs its own row, which is what `#46` already did for a field and what
+`failures/e1.yaml` already recorded; nothing new was needed for the cost.
 
-- writing the seven values with a `null` for `SOtilde+` would store a certified, partial field: the
-  certificate would commit to a value no run produced, `requests()` would then see a matching stored value and
-  a held certificate and never ask again, and the issue states the rule this breaks — *a pending computation
-  has no certificate*.
-- the finite discriminant route does not replace it: `integral.discriminant_orbits` does not apply to this
-  card (`integral.hyperbolic_index` is 0, and that field's Eichler hypothesis needs at least 2).
+The rows are `_standard_subgroup`'s eight subgroups — the database's own vocabulary, stated with its
+GHS citation — asked for `isotropic_orbit_representatives(1).cardinality()` through the owner. The
+owner's `primitive_orbit_series` still computes the whole field on a definite card, where it is a
+bounded search; the indefinite rows are asked one at a time.
 
-So `lattices/6JRR.md` keeps its fourteen certified fields, `integral.primitive_orbits` stays absent, and
-`failures/e1.yaml` keeps `6JRR integral.primitive_orbits` open, which is also why a dispatch of
-`certify --tag 6JRR` does not currently request the field at all.
+Asked for at `certify --tag 6JRR --field primitive_orbits --phase fields --workers 1`, in the certify
+image, on the stored Gram tensor, the seven unquarantined rows landed:
 
-## What the next dispatch knows
+| row | constant | certificate |
+| --- | --- | --- |
+| `O`, `SO`, `O+`, `SO+` | 1 | one field certificate, `ed8a588feba9ac8f13ca410b7fdadc32da57e89b1ca3cc9daf4f53b47d5d1497`, over the seven rows |
+| `Otilde`, `SOtilde`, `Otilde+` | 527 | as above |
+| `SOtilde+` | absent | quarantined in `failures/e1.yaml`, `6JRR integral.primitive_orbits[SOtilde+]` |
 
-- Seven rows: about 4 minutes and 1.03 GiB in one worker, on four cores.
-- Eighth row: unbounded on the current owner revision; expect the driver's 1.6 GiB memory floor.
-- The eight rows are one computation, so nothing lands until the eighth returns.
+The field's certificate is one hash over the row set, not one per row: the schema has one
+`certifications` key per field, and `certified_value` commits to the rows stored.
+
+## The row that did not return
+
+`6JRR integral.primitive_orbits[SOtilde+]` is `open` in `failures/e1.yaml`, with the measured cost
+(510 s, ≥ 9.2 GiB, killed) and the owner issue that carries the defect, **sage-extensions#596**:
+`isotropic_line_stabilizer_image` answers `None` for the ambient `O(L)` row, which sends that subgroup
+down the exact-stabilizer route. The entry was recorded from the measurement above rather than from a
+driver run; the row was not driven to the driver's 1.6 GiB floor.
+
+Because the row is quarantined, `requests()` does not ask it: a dispatch of `certify --tag 6JRR` costs
+the seven rows (about four minutes) and stops there. When #596 is repaired, `just retry-computation 6JRR
+'integral.primitive_orbits[SOtilde+]' --note ...` releases it, the field is missing an unblocked row, and
+the next run asks that row alone.
+
+## The request plan after the release
+
+`just retry-computation 6JRR integral.primitive_orbits` was run with the measurement as its note, so the
+field is asked again; the plan for `--phase fields` was
+
+```
+fields: ['primitive_orbits[O]', 'primitive_orbits[O+]', 'primitive_orbits[SO]', 'primitive_orbits[SO+]',
+         'primitive_orbits[Otilde]', 'primitive_orbits[Otilde+]', 'primitive_orbits[SOtilde]',
+         'arithmetic-group.otilde-plus-t-co.generator_morphisms']
+fields: ['arithmetic-group.otilde-plus-t-co.index_in_orthogonal_group']
+```
+
+and with `--field primitive_orbits` the seven rows alone. The arithmetic-group fields of
+`otilde-plus-t-co` are the ones that cost the run 44077055181 its budget; they are not part of this
+item, and `--field` is what lets a dispatch ask this field without them.
+
+Two rows' names carried a stale `exceeded` interruption from runs I stopped mid-flight; both were
+released through `just retry-computation`, which is the triage the ledger exists for, and neither was a
+mathematical failure.

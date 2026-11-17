@@ -6628,6 +6628,140 @@
     database_revision: dea30614e6711ce0b908fff7519c3fa6a99a3365
     research_revision: null
   notes: []
+6JRR arithmetic-group.otilde-plus-t-co.index_in_orthogonal_group:
+  disposition: open
+  attempts:
+  - hash: acad0e18f0c158ad5bda122e435bae4133bd93287223e2a8ce2c8b611148e2d3
+    gram_tensor:
+    - - 2
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+    - - 0
+      - 0
+      - 2
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+    - - 0
+      - 2
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+    - - 0
+      - 0
+      - 0
+      - -4
+      - 0
+      - 2
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+    - - 0
+      - 0
+      - 0
+      - 0
+      - -4
+      - 0
+      - 2
+      - 0
+      - 0
+      - 0
+      - 0
+    - - 0
+      - 0
+      - 0
+      - 2
+      - 0
+      - -4
+      - 2
+      - 0
+      - 0
+      - 0
+      - 0
+    - - 0
+      - 0
+      - 0
+      - 0
+      - 2
+      - 2
+      - -4
+      - 2
+      - 0
+      - 0
+      - 0
+    - - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 2
+      - -4
+      - 2
+      - 0
+      - 0
+    - - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 2
+      - -4
+      - 2
+      - 0
+    - - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 2
+      - -4
+      - 2
+    - - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 2
+      - -4
+    reason: worker or runner lost (recovered from exceeded.yaml)
+    stderr: ''
+    seconds: 3620.0
+    recorded_at: 2026-11-17 19:11:21.377046+00:00
+    run_url: null
+    database_revision: a92cf01c6a5888bcfa28f83e815110a0c143414b
+    research_revision: null
+  notes: []
 6JRR arithmetic-group.otilde-t-co.generator_morphisms:
   disposition: open
   attempts:
@@ -7084,7 +7218,7 @@
     research_revision: fd5938673ac26b6bca275b8435694f1298cee611
   notes: []
 6JRR integral.primitive_orbits:
-  disposition: open
+  disposition: resolved
   attempts:
   - hash: 275f2963e24b4faab5ca4624bc90e69d91ada1c29ec4aac2c63b2b3b6c09a520
     gram_tensor:
@@ -7251,4 +7385,896 @@
     run_url: https://github.com/dzackgarza/lattice-database/actions/runs/44077055181/attempts/1
     database_revision: 4c92ce1f891c155dc542d0bafa66a74f313efbc5
     research_revision: c0e414ccddba77cc9b3dd00428e4af08fc4ecc21
+  notes:
+  - '2026-11-17T19:10:50.164001+00:00: measured 2026-11-17 at sage-extensions 34c9be89:
+    seven of the eight rows return (O, SO, O+, SO+ = 1; Otilde, SOtilde, Otilde+ =
+    527) in 238.7 s at 1.03 GiB, and the field is now asked as its rows, so the seventh
+    subgroup''s row lands without the eighth. SOtilde+ stays quarantined above (sage-extensions#596).'
+6JRR integral.primitive_orbits[O+]:
+  disposition: resolved
+  attempts:
+  - hash: 2c41861cc92835bf97da80b58bcb9f6db814b6d2449f371bbb08b4b69e50322d
+    gram_tensor:
+    - - 2
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+    - - 0
+      - 0
+      - 2
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+    - - 0
+      - 2
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+    - - 0
+      - 0
+      - 0
+      - -4
+      - 0
+      - 2
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+    - - 0
+      - 0
+      - 0
+      - 0
+      - -4
+      - 0
+      - 2
+      - 0
+      - 0
+      - 0
+      - 0
+    - - 0
+      - 0
+      - 0
+      - 2
+      - 0
+      - -4
+      - 2
+      - 0
+      - 0
+      - 0
+      - 0
+    - - 0
+      - 0
+      - 0
+      - 0
+      - 2
+      - 2
+      - -4
+      - 2
+      - 0
+      - 0
+      - 0
+    - - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 2
+      - -4
+      - 2
+      - 0
+      - 0
+    - - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 2
+      - -4
+      - 2
+      - 0
+    - - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 2
+      - -4
+      - 2
+    - - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 2
+      - -4
+    reason: exit status 1
+    stderr: "Traceback (most recent call last):\n  File \"<frozen runpy>\", line 203,
+      in _run_module_as_main\n  File \"<frozen runpy>\", line 88, in _run_code\n  File
+      \"/repo/src/latticedb/sage_genus.py\", line 435, in <module>\n    main()\n    ~~~~^^\n
+      \ File \"/repo/src/latticedb/sage_genus.py\", line 430, in main\n    _compute(request)\n
+      \   ~~~~~~~~^^^^^^^^^\n  File \"/repo/src/latticedb/sage_genus.py\", line 413,
+      in _compute\n    _run(tag, [field], lambda row=row: _primitive_isotropic_line_row(lattice,
+      row))\n    ~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n
+      \ File \"/repo/src/latticedb/sage_genus.py\", line 351, in _run\n    values
+      = compute()\n  File \"/repo/src/latticedb/sage_genus.py\", line 413, in <lambda>\n
+      \   _run(tag, [field], lambda row=row: _primitive_isotropic_line_row(lattice,
+      row))\n                                       ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^\n
+      \ File \"/repo/src/latticedb/sage_genus.py\", line 123, in _primitive_isotropic_line_row\n
+      \   subgroup = _standard_subgroup(lattice, row)\n  File \"/repo/src/latticedb/sage_genus.py\",
+      line 110, in _standard_subgroup\n    raise ValueError(f\"{standard_name!r} is
+      not one of the eight standard subgroups of O(L)\")\nValueError: ('primitive_orbits',
+      'O+') is not one of the eight standard subgroups of O(L)\n"
+    seconds: 0.2190984039916657
+    recorded_at: 2026-11-17 19:11:34.623667+00:00
+    run_url: null
+    database_revision: a92cf01c6a5888bcfa28f83e815110a0c143414b
+    research_revision: null
+  notes:
+  - '2026-11-17T19:12:39.392563+00:00: the first row dispatch passed the (field, row)
+    pair where the row belonged, so the worker raised before computing; fixed in the
+    driver and re-run'
+6JRR integral.primitive_orbits[O]:
+  disposition: resolved
+  attempts:
+  - hash: 3dadfa127570e67b94eda8310bc9a9bae760203d205b3db3b3a8d09e66f71dc5
+    gram_tensor:
+    - - 2
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+    - - 0
+      - 0
+      - 2
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+    - - 0
+      - 2
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+    - - 0
+      - 0
+      - 0
+      - -4
+      - 0
+      - 2
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+    - - 0
+      - 0
+      - 0
+      - 0
+      - -4
+      - 0
+      - 2
+      - 0
+      - 0
+      - 0
+      - 0
+    - - 0
+      - 0
+      - 0
+      - 2
+      - 0
+      - -4
+      - 2
+      - 0
+      - 0
+      - 0
+      - 0
+    - - 0
+      - 0
+      - 0
+      - 0
+      - 2
+      - 2
+      - -4
+      - 2
+      - 0
+      - 0
+      - 0
+    - - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 2
+      - -4
+      - 2
+      - 0
+      - 0
+    - - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 2
+      - -4
+      - 2
+      - 0
+    - - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 2
+      - -4
+      - 2
+    - - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 2
+      - -4
+    reason: exit status 1
+    stderr: "Traceback (most recent call last):\n  File \"<frozen runpy>\", line 203,
+      in _run_module_as_main\n  File \"<frozen runpy>\", line 88, in _run_code\n  File
+      \"/repo/src/latticedb/sage_genus.py\", line 435, in <module>\n    main()\n    ~~~~^^\n
+      \ File \"/repo/src/latticedb/sage_genus.py\", line 430, in main\n    _compute(request)\n
+      \   ~~~~~~~~^^^^^^^^^\n  File \"/repo/src/latticedb/sage_genus.py\", line 413,
+      in _compute\n    _run(tag, [field], lambda row=row: _primitive_isotropic_line_row(lattice,
+      row))\n    ~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n
+      \ File \"/repo/src/latticedb/sage_genus.py\", line 351, in _run\n    values
+      = compute()\n  File \"/repo/src/latticedb/sage_genus.py\", line 413, in <lambda>\n
+      \   _run(tag, [field], lambda row=row: _primitive_isotropic_line_row(lattice,
+      row))\n                                       ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^\n
+      \ File \"/repo/src/latticedb/sage_genus.py\", line 123, in _primitive_isotropic_line_row\n
+      \   subgroup = _standard_subgroup(lattice, row)\n  File \"/repo/src/latticedb/sage_genus.py\",
+      line 110, in _standard_subgroup\n    raise ValueError(f\"{standard_name!r} is
+      not one of the eight standard subgroups of O(L)\")\nValueError: ('primitive_orbits',
+      'O') is not one of the eight standard subgroups of O(L)\n"
+    seconds: 0.21814677299698815
+    recorded_at: 2026-11-17 19:11:28.154337+00:00
+    run_url: null
+    database_revision: a92cf01c6a5888bcfa28f83e815110a0c143414b
+    research_revision: null
+  notes:
+  - '2026-11-17T19:12:29.311700+00:00: the first row dispatch passed the (field, row)
+    pair where the row belonged, so the worker raised before computing; fixed in the
+    driver and re-run'
+6JRR integral.primitive_orbits[Otilde]:
+  disposition: resolved
+  attempts:
+  - hash: a2a293157f981b83193d4b2bdbec3e010479acf53f72e9e09da5672c8b49e22e
+    gram_tensor:
+    - - 2
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+    - - 0
+      - 0
+      - 2
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+    - - 0
+      - 2
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+    - - 0
+      - 0
+      - 0
+      - -4
+      - 0
+      - 2
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+    - - 0
+      - 0
+      - 0
+      - 0
+      - -4
+      - 0
+      - 2
+      - 0
+      - 0
+      - 0
+      - 0
+    - - 0
+      - 0
+      - 0
+      - 2
+      - 0
+      - -4
+      - 2
+      - 0
+      - 0
+      - 0
+      - 0
+    - - 0
+      - 0
+      - 0
+      - 0
+      - 2
+      - 2
+      - -4
+      - 2
+      - 0
+      - 0
+      - 0
+    - - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 2
+      - -4
+      - 2
+      - 0
+      - 0
+    - - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 2
+      - -4
+      - 2
+      - 0
+    - - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 2
+      - -4
+      - 2
+    - - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 2
+      - -4
+    reason: worker or runner lost (recovered from exceeded.yaml)
+    stderr: ''
+    seconds: 0.0
+    recorded_at: 2026-11-17 19:15:01.048273+00:00
+    run_url: null
+    database_revision: a92cf01c6a5888bcfa28f83e815110a0c143414b
+    research_revision: null
+  notes:
+  - '2026-11-17T19:22:01.307213+00:00: the row was announced by a run I stopped while
+    it was still computing another row, so it never computed; released to finish the
+    seven'
+6JRR integral.primitive_orbits[SO+]:
+  disposition: resolved
+  attempts:
+  - hash: 0929360bb5454c53c91aff45243207fe1462ec4405d0052f7da9a39af1b62b3b
+    gram_tensor:
+    - - 2
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+    - - 0
+      - 0
+      - 2
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+    - - 0
+      - 2
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+    - - 0
+      - 0
+      - 0
+      - -4
+      - 0
+      - 2
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+    - - 0
+      - 0
+      - 0
+      - 0
+      - -4
+      - 0
+      - 2
+      - 0
+      - 0
+      - 0
+      - 0
+    - - 0
+      - 0
+      - 0
+      - 2
+      - 0
+      - -4
+      - 2
+      - 0
+      - 0
+      - 0
+      - 0
+    - - 0
+      - 0
+      - 0
+      - 0
+      - 2
+      - 2
+      - -4
+      - 2
+      - 0
+      - 0
+      - 0
+    - - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 2
+      - -4
+      - 2
+      - 0
+      - 0
+    - - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 2
+      - -4
+      - 2
+      - 0
+    - - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 2
+      - -4
+      - 2
+    - - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 2
+      - -4
+    reason: exit status 1
+    stderr: "Traceback (most recent call last):\n  File \"<frozen runpy>\", line 203,
+      in _run_module_as_main\n  File \"<frozen runpy>\", line 88, in _run_code\n  File
+      \"/repo/src/latticedb/sage_genus.py\", line 435, in <module>\n    main()\n    ~~~~^^\n
+      \ File \"/repo/src/latticedb/sage_genus.py\", line 430, in main\n    _compute(request)\n
+      \   ~~~~~~~~^^^^^^^^^\n  File \"/repo/src/latticedb/sage_genus.py\", line 413,
+      in _compute\n    _run(tag, [field], lambda row=row: _primitive_isotropic_line_row(lattice,
+      row))\n    ~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n
+      \ File \"/repo/src/latticedb/sage_genus.py\", line 351, in _run\n    values
+      = compute()\n  File \"/repo/src/latticedb/sage_genus.py\", line 413, in <lambda>\n
+      \   _run(tag, [field], lambda row=row: _primitive_isotropic_line_row(lattice,
+      row))\n                                       ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^\n
+      \ File \"/repo/src/latticedb/sage_genus.py\", line 123, in _primitive_isotropic_line_row\n
+      \   subgroup = _standard_subgroup(lattice, row)\n  File \"/repo/src/latticedb/sage_genus.py\",
+      line 110, in _standard_subgroup\n    raise ValueError(f\"{standard_name!r} is
+      not one of the eight standard subgroups of O(L)\")\nValueError: ('primitive_orbits',
+      'SO+') is not one of the eight standard subgroups of O(L)\n"
+    seconds: 0.2213827020023018
+    recorded_at: 2026-11-17 19:11:47.465878+00:00
+    run_url: null
+    database_revision: a92cf01c6a5888bcfa28f83e815110a0c143414b
+    research_revision: null
+  notes:
+  - '2026-11-17T19:12:44.378650+00:00: the first row dispatch passed the (field, row)
+    pair where the row belonged, so the worker raised before computing; fixed in the
+    driver and re-run'
+6JRR integral.primitive_orbits[SO]:
+  disposition: resolved
+  attempts:
+  - hash: b3eaf8163af5821974e5660ea061ff723bd8e74f91e22e54638febf9fdf055a7
+    gram_tensor:
+    - - 2
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+    - - 0
+      - 0
+      - 2
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+    - - 0
+      - 2
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+    - - 0
+      - 0
+      - 0
+      - -4
+      - 0
+      - 2
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+    - - 0
+      - 0
+      - 0
+      - 0
+      - -4
+      - 0
+      - 2
+      - 0
+      - 0
+      - 0
+      - 0
+    - - 0
+      - 0
+      - 0
+      - 2
+      - 0
+      - -4
+      - 2
+      - 0
+      - 0
+      - 0
+      - 0
+    - - 0
+      - 0
+      - 0
+      - 0
+      - 2
+      - 2
+      - -4
+      - 2
+      - 0
+      - 0
+      - 0
+    - - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 2
+      - -4
+      - 2
+      - 0
+      - 0
+    - - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 2
+      - -4
+      - 2
+      - 0
+    - - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 2
+      - -4
+      - 2
+    - - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 2
+      - -4
+    reason: exit status 1
+    stderr: "Traceback (most recent call last):\n  File \"<frozen runpy>\", line 203,
+      in _run_module_as_main\n  File \"<frozen runpy>\", line 88, in _run_code\n  File
+      \"/repo/src/latticedb/sage_genus.py\", line 435, in <module>\n    main()\n    ~~~~^^\n
+      \ File \"/repo/src/latticedb/sage_genus.py\", line 430, in main\n    _compute(request)\n
+      \   ~~~~~~~~^^^^^^^^^\n  File \"/repo/src/latticedb/sage_genus.py\", line 413,
+      in _compute\n    _run(tag, [field], lambda row=row: _primitive_isotropic_line_row(lattice,
+      row))\n    ~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n
+      \ File \"/repo/src/latticedb/sage_genus.py\", line 351, in _run\n    values
+      = compute()\n  File \"/repo/src/latticedb/sage_genus.py\", line 413, in <lambda>\n
+      \   _run(tag, [field], lambda row=row: _primitive_isotropic_line_row(lattice,
+      row))\n                                       ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^\n
+      \ File \"/repo/src/latticedb/sage_genus.py\", line 123, in _primitive_isotropic_line_row\n
+      \   subgroup = _standard_subgroup(lattice, row)\n  File \"/repo/src/latticedb/sage_genus.py\",
+      line 110, in _standard_subgroup\n    raise ValueError(f\"{standard_name!r} is
+      not one of the eight standard subgroups of O(L)\")\nValueError: ('primitive_orbits',
+      'SO') is not one of the eight standard subgroups of O(L)\n"
+    seconds: 0.22492564597632736
+    recorded_at: 2026-11-17 19:11:41.182316+00:00
+    run_url: null
+    database_revision: a92cf01c6a5888bcfa28f83e815110a0c143414b
+    research_revision: null
+  notes:
+  - '2026-11-17T19:12:34.434384+00:00: the first row dispatch passed the (field, row)
+    pair where the row belonged, so the worker raised before computing; fixed in the
+    driver and re-run'
+6JRR integral.primitive_orbits[SOtilde+]:
+  disposition: open
+  attempts:
+  - hash: 8f60c86c8bf02023cb69124914c7a2470e06a0bbcb18bc226955069de490fada
+    gram_tensor:
+    - - 2
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+    - - 0
+      - 0
+      - 2
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+    - - 0
+      - 2
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+    - - 0
+      - 0
+      - 0
+      - -4
+      - 0
+      - 2
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+    - - 0
+      - 0
+      - 0
+      - 0
+      - -4
+      - 0
+      - 2
+      - 0
+      - 0
+      - 0
+      - 0
+    - - 0
+      - 0
+      - 0
+      - 2
+      - 0
+      - -4
+      - 2
+      - 0
+      - 0
+      - 0
+      - 0
+    - - 0
+      - 0
+      - 0
+      - 0
+      - 2
+      - 2
+      - -4
+      - 2
+      - 0
+      - 0
+      - 0
+    - - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 2
+      - -4
+      - 2
+      - 0
+      - 0
+    - - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 2
+      - -4
+      - 2
+      - 0
+    - - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 2
+      - -4
+      - 2
+    - - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 2
+      - -4
+    reason: 'did not return: the line-orbit walk for this subgroup does not finish,
+      so the row is quarantined and the seven rows that do return are certified without
+      it (sage-extensions#596)'
+    stderr: 'measured in the certify image on 6JRR''s stored Gram tensor at sage-extensions
+      34c9be89: SOtilde+ = Otilde & SO & O+ exceeded 9.2 GiB RSS after 510 s and was
+      still growing about 1 GiB a minute, under both intersection orders; the ambient
+      O(L) row is one primitive isotropic line and isotropic_line_stabilizer_image
+      answers None for it, which sends this subgroup down the exact-stabilizer route.
+      Otilde, SOtilde and Otilde+ answer 527 in 31-52 s at <= 1.03 GiB. Recorded from
+      that measurement, not from a driver run: the row was not driven to the driver''s
+      1.6 GiB floor. results/evidence-7-primitive-orbits.md.'
+    seconds: 510.0
+    recorded_at: 2026-11-17 19:10:42.864688+00:00
+    run_url: null
+    database_revision: null
+    research_revision: null
   notes: []
