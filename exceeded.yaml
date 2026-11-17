@@ -493,10 +493,6 @@
   hash: 811175d5f9f1d0b028f2eb38f41a5672d3bdc0e8d0fb282d3f26fc4769b8f652
   seconds: 0
   lost: true
-0TLO integral.discriminant_form:
-  hash: fcd0556722a1f6f9b36882cc86f2e9dc5e41ef1578e6379f3092b978f010dd52
-  seconds: 0
-  lost: true
 0TTM integral.genus_class_count:
   hash: 8da2bd5496360cf93deb84821764f50cb5529b19fbfb442eea5076c8688de01a
   seconds: 35
@@ -547,6 +543,10 @@
   lost: true
 0WVO integral.discriminant_sequence:
   hash: 6b959587ca571125d0f6b15b3286ccfb4df34becee301c0a9863c99fd1716e4e
+  seconds: 0
+  lost: true
+0X0D integral.discriminant_form:
+  hash: 1cfc1ec6582b38dc672e4a6d3009b67e9ad3700aac2c532b95dd022b740517bc
   seconds: 0
   lost: true
 0YVT integral.elementary_primes:
