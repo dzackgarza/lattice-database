@@ -11,7 +11,7 @@ from pathlib import Path
 from sage_extensions.categories.lattices import Lattices
 from sage_extensions.categories.modules.framed.formed.form_modules import FormModules
 from sage_extensions.categories.modules.pure.modules import Modules
-from sage_extensions.rings import session_ring_objects
+from sage_extensions.rings import QQ, ZZ
 
 from latticedb import corpus, nebe_sloane, records
 from latticedb.model import Lattice, Yaml
@@ -109,9 +109,8 @@ def test_nebe_sloane_reads_the_full_matrix_of_shimada_86() -> None:
         entry.minimal_norm,
         entry.kissing_number,
     ) == (86, 196608, 8, 109421928)
-    rings = session_ring_objects()
-    integers = rings["ZZ"]
-    rationals = rings["QQ"]
+    integers = ZZ
+    rationals = QQ
     module = integers.free_module(entry.dimension)
     values = Modules(rationals).restriction_of_scalars(integers.fraction_field_map())(rationals)
     formed = FormModules(integers)(module.bilinear_hom_space(values)(entry.gram_tensor))

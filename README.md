@@ -695,6 +695,7 @@ The `justfile` calls it.
 
 `just test` runs `tests/test_model.py` with the preamble available.
 Its engine-import test states the boundary: no module under `src/latticedb` imports Sage, PARI/cypari2, python-flint or fpylll directly.
+A second test imports `latticedb.cli`, the entry point `latticedb certify` runs, and holds the session scalars the imported modules publish to the objects `sage_extensions.rings` binds itself: a name that the owner deletes or renames fails there, in this gate, instead of after a certification job has started a container (run 44031688787).
 Mathematical validation in CI is performed by construction of the corresponding preamble objects; underlying algorithms and constructor contracts are tested at their preamble owners.
 
 `just test-source-intake` exercises the Hashimoto and Höhn--Mason readers and their collation against the cards produced from those sources.

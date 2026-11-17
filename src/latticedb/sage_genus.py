@@ -21,15 +21,14 @@ from sage_extensions.categories.sets.cardinals import Cardinal
 from sage_extensions.categories.rings.ring_foundation import LocalizationRings
 from sage_extensions.categories.rings.ring_foundation import _OwnedRingElement
 from sage_extensions.categories.rings.ring_foundation import OwnedRings
-from sage_extensions.rings import session_ring_objects
+from sage_extensions.rings import QQ, ZZ
 
 from latticedb import records
 from latticedb.genus import ARITHMETIC_PREFIX, Request, applies
 from latticedb.model import Lattice
 
-_RINGS = session_ring_objects()
-OWNED_ZZ = _RINGS["ZZ"]
-OWNED_QQ = _RINGS["QQ"]
+OWNED_ZZ = ZZ
+OWNED_QQ = QQ
 
 
 JsonValue = object

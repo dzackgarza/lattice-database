@@ -30,16 +30,13 @@ import pytest
 from sage_extensions.categories.lattices import Lattices
 from sage_extensions.categories.modules.framed.formed.form_modules import FormModules
 from sage_extensions.categories.modules.pure.modules import Modules
-from sage_extensions.rings import session_ring_objects
+from sage_extensions.rings import QQ, ZZ
 
 from latticedb import corpus
 from latticedb.catalogues import IntegralLocalSystem
 from latticedb.model import Lattice, Yaml
 
 REPOSITORY = Path(__file__).resolve().parent.parent.parent
-_RINGS = session_ring_objects()
-ZZ = _RINGS["ZZ"]
-QQ = _RINGS["QQ"]
 _QQ_AS_ZZ_MODULE = Modules(QQ).restriction_of_scalars(ZZ.fraction_field_map())(QQ)
 
 

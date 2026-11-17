@@ -254,9 +254,7 @@ def test_the_hyperbolic_triangle_card_states_its_gram_signature_and_coxeter_data
     determinant $-1/4$ and signature $(2, 1)$, one dimension short of free, which is what an
     acute-angled hyperbolic *triangle* in the hyperbolic plane looks like: $2 + 1 = 3$ walls.
     """
-    from sage_extensions.rings import session_ring_objects
-
-    QQ = session_ring_objects()["QQ"]
+    from sage_extensions.rings import QQ
     card = WeightedGraph.model_validate(
         frontmatter.load(ROOT / "graphs" / "hyperbolic-triangle-2-3-infinity.md").metadata
     )

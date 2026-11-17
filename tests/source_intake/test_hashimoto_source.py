@@ -8,13 +8,12 @@ from pathlib import Path
 
 import frontmatter
 from sage_extensions.categories.lattices import Lattices
-from sage_extensions.rings import session_ring_objects
+from sage_extensions.rings import ZZ
 
 from latticedb import hashimoto
 from latticedb.model import Lattice
 
 REPOSITORY = Path(__file__).resolve().parent.parent.parent
-ZZ = session_ring_objects()["ZZ"]
 
 
 def _lattice(tag: str) -> Lattice:

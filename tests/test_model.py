@@ -29,6 +29,28 @@ def test_latticedb_has_no_direct_mathematical_engine_imports() -> None:
     assert not (ROOT / "src" / "latticedb" / "root_systems.py").exists()
 
 
+def test_the_certification_entry_point_imports_the_owner_names_it_uses() -> None:
+    """A name the owner deleted fails here, in the fast gate, and not once a certify job has started.
+
+    Certify run 44031688787 died two seconds into its first job with
+    `ImportError: cannot import name 'session_ring_objects' from 'sage_extensions.rings'`, raised
+    through `latticedb.cli` -> `bulk_index` -> `nebe_sloane` -> `corpus` -> `graphs`. That function
+    was deleted by sage-extensions#521 (`9eb6ee99a`), which binds each session scalar once as an
+    attribute of `sage_extensions.rings` instead; no test imported that module graph, so nothing
+    checked it before the container started. The object a module publishes is the owner's own, not
+    a copy of it: a caller that narrows the type it needs asserts the category of that object.
+    """
+    import latticedb.cli
+    from sage_extensions import rings
+
+    from latticedb import graphs, records, sage_genus
+
+    assert latticedb.cli.app is not None
+    assert graphs.ZZ is rings.ZZ and graphs.QQ is rings.QQ
+    assert records.ZZ is rings.ZZ and records.QQ is rings.QQ
+    assert sage_genus.OWNED_ZZ is rings.ZZ and sage_genus.OWNED_QQ is rings.QQ
+
+
 def test_model_does_not_recompute_authored_mathematical_invariants() -> None:
     """Mathematical truth is checked by CI validation, not by Pydantic construction."""
     record = e8()

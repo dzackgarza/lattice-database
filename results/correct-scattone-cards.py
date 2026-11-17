@@ -22,13 +22,13 @@ import frontmatter
 import yaml
 from sage.all import CartanMatrix, block_diagonal_matrix, matrix, ZZ
 from sage_extensions.categories.lattices import Lattices
-from sage_extensions.rings import session_ring_objects
+from sage_extensions.rings import ZZ as OWNED_ZZ
 
 from latticedb import certificates, genus, records
 from latticedb.model import Lattice
 
 ROOT = Path(__file__).resolve().parent.parent
-RING = session_ring_objects()["ZZ"]
+RING = OWNED_ZZ
 SCATTONE = {
     "citation": (
         "J. Scattone, \"On the compactification of moduli spaces for algebraic K3 surfaces\", "

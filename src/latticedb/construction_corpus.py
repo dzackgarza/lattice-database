@@ -15,14 +15,13 @@ from typing import Iterable
 
 from sage_extensions.categories.lattices import Lattices
 from sage_extensions.categories.lattice_morphisms import LatticeEmbeddingMethods
-from sage_extensions.rings import session_ring_objects
+from sage_extensions.rings import ZZ
 
 from latticedb import corpus, records
 from latticedb.model import Yaml
 
 
 _MIN_FREE_BYTES = 2 * 1024**3
-ZZ = session_ring_objects()["ZZ"]
 
 
 @dataclass(frozen=True)

@@ -97,18 +97,18 @@ def _l_factor_tex(factor: PartialLFactor) -> str:
 def cone_zeta_tex(lattice: Lattice) -> str:
     """Render the preamble-owned zeta factorization of the zero level."""
     from sage_extensions.categories.lattices import Lattices
-    from sage_extensions.rings import session_ring_objects
+    from sage_extensions.rings import ZZ
 
-    owned = Lattices(session_ring_objects()["ZZ"])(lattice.gram_tensor)
+    owned = Lattices(ZZ)(lattice.gram_tensor)
     return _zeta_factorization_tex(owned.quadratic_hypersurface_zeta_factorization(cone=True))
 
 
 def nonzero_zeta_tex(lattice: Lattice) -> str:
     """Render the preamble-owned zeta factorization of a nonzero level."""
     from sage_extensions.categories.lattices import Lattices
-    from sage_extensions.rings import session_ring_objects
+    from sage_extensions.rings import ZZ
 
-    owned = Lattices(session_ring_objects()["ZZ"])(lattice.gram_tensor)
+    owned = Lattices(ZZ)(lattice.gram_tensor)
     return _zeta_factorization_tex(owned.quadratic_hypersurface_zeta_factorization(cone=False))
 
 

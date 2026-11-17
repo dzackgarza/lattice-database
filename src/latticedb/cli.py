@@ -127,11 +127,11 @@ def populate_standard_sums(
 ) -> None:
     """Author Gram presentations of all canonical sums of known untwisted indecomposables and their small twists."""
     from sage_extensions.categories.lattices import Lattices
-    from sage_extensions.rings import session_ring_objects
+    from sage_extensions.rings import ZZ
 
     from latticedb import construction_corpus
 
-    category = Lattices(session_ring_objects()["ZZ"])
+    category = Lattices(ZZ)
     seeds = category.Untwisted().Indecomposable().known_objects(max_rank=max_rank)
     result = construction_corpus.populate_standard_sums(
         root, seeds, max_rank=max_rank, max_content=max_content
@@ -148,11 +148,11 @@ def populate_construction_prefix(
 ) -> None:
     """Store a prefix of known lattice constructions, including tensors and gluings."""
     from sage_extensions.categories.lattices import Lattices
-    from sage_extensions.rings import session_ring_objects
+    from sage_extensions.rings import ZZ
 
     from latticedb import construction_corpus
 
-    category = Lattices(session_ring_objects()["ZZ"])
+    category = Lattices(ZZ)
     seeds = category.Untwisted().Indecomposable().known_objects(max_rank=max_rank)
     result = construction_corpus.populate_construction_prefix(
         root, seeds, max_expressions=max_expressions, max_rank=max_rank, max_content=max_content
@@ -169,11 +169,11 @@ def populate_standard_products(
 ) -> None:
     """Author tensor products of all known small twists and their proper overlattices."""
     from sage_extensions.categories.lattices import Lattices
-    from sage_extensions.rings import session_ring_objects
+    from sage_extensions.rings import ZZ
 
     from latticedb import construction_corpus
 
-    category = Lattices(session_ring_objects()["ZZ"])
+    category = Lattices(ZZ)
     seeds = category.Untwisted().Indecomposable().known_objects(max_rank=max_rank)
     result = construction_corpus.populate_standard_products(
         root, seeds, max_rank=max_rank, max_content=max_content,

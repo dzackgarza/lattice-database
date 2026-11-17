@@ -28,7 +28,8 @@ from sage_extensions.categories.modules.framed.framed_free_modules import Framed
 from sage_extensions.categories.modules.pure.modules import Modules
 from sage_extensions.categories.rings.ring_foundation import _OwnedRingElement, _OwnedRingParent
 from sage_extensions.categories.rings.ring_foundation import OwnedRings
-from sage_extensions.rings import session_ring_objects
+from sage_extensions.rings import QQ as _OWNED_QQ
+from sage_extensions.rings import ZZ as _OWNED_ZZ
 from pydantic import BaseModel, ConfigDict, TypeAdapter
 
 from latticedb import corpus, hashimoto
@@ -36,17 +37,15 @@ from latticedb.corpus import Matrix
 from latticedb.model import GramTensor, Lattice, Tag, rational
 from latticedb.records import rational_gram
 
-_SESSION_RINGS = session_ring_objects()
-_integers = _SESSION_RINGS["ZZ"]
-assert isinstance(_integers, _OwnedRingParent)
-ZZ: _OwnedRingParent = _integers
-_ring = _SESSION_RINGS["ZZ"]
-assert isinstance(_ring, OwnedRings.ParentMethods)
-integer_ring: OwnedRings.ParentMethods = _ring
-_domain = _SESSION_RINGS["ZZ"]
-assert isinstance(_domain, OwnedRings.NoZeroDivisors.Commutative.Nontrivial.ParentMethods)
-integer_domain: OwnedRings.NoZeroDivisors.Commutative.Nontrivial.ParentMethods = _domain
-QQ = _SESSION_RINGS["QQ"]
+# The owner binds each session scalar once, in `sage_extensions.rings`; a caller that needs a
+# narrower static type asserts the category of that object rather than building a second one.
+assert isinstance(_OWNED_ZZ, _OwnedRingParent)
+ZZ: _OwnedRingParent = _OWNED_ZZ
+assert isinstance(_OWNED_ZZ, OwnedRings.ParentMethods)
+integer_ring: OwnedRings.ParentMethods = _OWNED_ZZ
+assert isinstance(_OWNED_ZZ, OwnedRings.NoZeroDivisors.Commutative.Nontrivial.ParentMethods)
+integer_domain: OwnedRings.NoZeroDivisors.Commutative.Nontrivial.ParentMethods = _OWNED_ZZ
+QQ = _OWNED_QQ
 _QQ_AS_ZZ_MODULE = Modules(QQ).restriction_of_scalars(integer_domain.fraction_field_map())(QQ.regular_module())
 LEECH_RANK = 24
 

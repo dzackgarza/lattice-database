@@ -17,9 +17,9 @@ from pathlib import Path
 import yaml
 
 from sage_extensions.categories.lattices import Lattices
-from sage_extensions.rings import session_ring_objects
+from sage_extensions.rings import ZZ
 
-ring = session_ring_objects()["ZZ"]
+ring = ZZ
 card = Path("lattices") / "026E.md"
 gram = yaml.safe_load(card.read_text().split("---")[1])["gram_tensor"]
 lattice = Lattices(ring)(gram)

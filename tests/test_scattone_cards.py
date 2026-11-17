@@ -11,13 +11,13 @@ import frontmatter
 import yaml
 from sage.all import CartanMatrix, block_diagonal_matrix, matrix, ZZ
 from sage_extensions.categories.lattices import Lattices
-from sage_extensions.rings import session_ring_objects
+from sage_extensions.rings import ZZ as OWNED_ZZ
 
 from latticedb import certificates, genus
 from latticedb.model import Lattice
 
 REPOSITORY = Path(__file__).resolve().parent.parent
-RING = session_ring_objects()["ZZ"]
+RING = OWNED_ZZ
 EXPECTED_ROWS = {
     "6JRX": {"O": {"planes": 4}, "O+": {"constant": 1, "planes": 4}, "Otilde+": {"constant": 1}},
     "6JRY": {"O": {"planes": 9}, "O+": {"constant": 1, "planes": 9}, "Otilde+": {"constant": 1}},

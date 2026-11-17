@@ -17,14 +17,13 @@ from sage_extensions.categories.lattices import Lattices
 from sage_extensions.categories.modules.framed.formed.form_modules import FormedModuleMor, FormModules
 from sage_extensions.categories.modules.module_morphisms.module_morphisms import ModuleMorphismMethods
 from sage_extensions.categories.modules.pure.modules import Modules
-from sage_extensions.rings import session_ring_objects
+from sage_extensions.rings import ZZ
 from pydantic import BaseModel, ConfigDict, TypeAdapter
 
 from latticedb import corpus
 from latticedb.corpus import Matrix
 from latticedb.model import Lattice, Tag
 
-ZZ = session_ring_objects()["ZZ"]
 K3_RANK = 22
 K3_RECORD = "027E"
 _SYMBOL = re.compile(r"(\d+)(?:_(?:II|\d))?\^\{([+-])(\d+)\}")
