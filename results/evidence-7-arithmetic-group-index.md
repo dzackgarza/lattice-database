@@ -32,9 +32,10 @@ pinned image with sage-extensions `ba51bdf9` (origin/main) and this repository's
     6JRR {'arithmetic-group.otilde-plus-t-co.index_in_orthogonal_group': 93997183795200}
     65 s wall, 0.6 GiB
 
-The previous routes for the same two computations, from `exceeded.yaml` at `c7836cba09`, are the evidence
-that the fix is the route and not the machine: the index of $\widetilde O$ ran 5609 s and was killed at
-14,061,043,712 bytes, and the index of $\widetilde O^{+}$ ran 7286 s and its worker was lost.
+The previous routes for the same two computations, from `exceeded.yaml`, are the evidence that the fix is
+the route and not the machine: the index of $\widetilde O$ ran 5609 s and was killed at
+14,061,043,712 bytes, and the index of $\widetilde O^{+}$ ran 7286 s on one run and 10,921 s on a later
+one, each time with its worker lost.
 
 `checks.records.problems(corpus.cards(root, ("6JRR",)), certificates.load(root, ("6JRR",)), {"6JRR"})`
 reports 0 problems on the two cards and their two citations.
