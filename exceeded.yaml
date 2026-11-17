@@ -597,10 +597,6 @@
   hash: 182a020bd256d7b9ee689e48b8cca285744e6713bd4e5c7b3dce7727fe1a7743
   seconds: 0
   lost: true
-170W integral.discriminant_form:
-  hash: 7a44130f7af5055be3684f4af1801206fc0fc7f4b7a72f71e0edbd96b866e042
-  seconds: 0
-  lost: true
 17G7 definite.genus_theta_series:
   hash: 1c18a16c88690648f868735bc840b2ded6a493875cc708a03cf84d33976bed01
   seconds: 11
@@ -624,6 +620,10 @@
   killed_by: memory
   peak_bytes: 13133455360
   limit_bytes: 1675943936
+1APA integral.discriminant_form:
+  hash: 0be3133c97387b35ed7c98c806bf6c433208379e4ee49b2fe8de453c6446d9f3
+  seconds: 0
+  lost: true
 1C9J integral.discriminant_form:
   hash: baef4c48e3c240c5044e7b684203da8fda64df8f5cff5020146de63e8aaa90ba
   seconds: 0
