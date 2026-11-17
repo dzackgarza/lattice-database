@@ -824,9 +824,6 @@
 39JB integral.discriminant_form:
   hash: c2fd1fd10d3e6530a7e21574363755a0bda8aca233831c9f7e3e587117c8f9f8
   seconds: 54
-39MM integral.discriminant_form:
-  hash: 3a6d2ee5892a7d399ac3d036f516aa15942b20fbddd2eb44d7a3234208143955
-  seconds: 87
 39OH integral.discriminant_form:
   hash: 88fa1d85aefc75d249d29f31e8c3862aacd1584623e2aa50f88892a5f013e345
   seconds: 237
@@ -854,6 +851,10 @@
 3BV3 definite.siegel_eisenstein_coefficients:
   hash: 4be43fed87facb172ca082e1bbd69e4a81eca70025fe243420745dac788d942a
   seconds: 12
+  lost: true
+3CKT integral.discriminant_form:
+  hash: 28130a05b6634c5ad6144ad96f9451a2a0f80647c643e46a94e733e66fc33249
+  seconds: 0
   lost: true
 3CM6 integral.discriminant_form:
   hash: 04ab421bdd7e70b91e716064e4e7402c11873898d68a5bb968a108962081a679
