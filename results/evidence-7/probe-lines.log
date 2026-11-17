@@ -1,0 +1,45 @@
+sage 11.0.beta5 python 3.14.10
+sage_extensions at /work/sext/src/sage_extensions/__init__.py
+sage_extensions commit 34c9be895206eb7756de3411eb4d8b0d1c53b059
+dzack_research at /repos/research/src/dzack_research/__init__.py
+>> construct
+  rank 11 det -2048 sig (2, 9) even True witt 2
+<< construct: 0.23s  peak 308 MiB
+>> O = L.Aut()
+<< O = L.Aut(): 0.00s  peak 308 MiB
+>> Otilde = L.stable_orthogonal_group()
+<< Otilde = L.stable_orthogonal_group(): 0.06s  peak 309 MiB
+>> O+ = L.O_plus()
+<< O+ = L.O_plus(): 0.01s  peak 310 MiB
+>> SO = L.SO()
+<< SO = L.SO(): 0.00s  peak 310 MiB
+>> SOtilde = Otilde & SO
+<< SOtilde = Otilde & SO: 0.00s  peak 310 MiB
+>> SO+ = O+ & SO
+<< SO+ = O+ & SO: 0.00s  peak 310 MiB
+>> Otilde+ = Otilde & O+
+<< Otilde+ = Otilde & O+: 0.00s  peak 310 MiB
+>> SOtilde+ = SOtilde & O+
+<< SOtilde+ = SOtilde & O+: 0.00s  peak 310 MiB
+>> constant O
+  O: 1  (1 representatives enumerated)
+<< constant O: 82.98s  peak 586 MiB
+>> constant SO
+  SO: 1  (1 representatives enumerated)
+<< constant SO: 0.02s  peak 586 MiB
+>> constant O+
+  O+: 1  (1 representatives enumerated)
+<< constant O+: 0.04s  peak 586 MiB
+>> constant SO+
+  SO+: 1  (1 representatives enumerated)
+<< constant SO+: 33.17s  peak 620 MiB
+>> constant Otilde
+  Otilde: 527  (527 representatives enumerated)
+<< constant Otilde: 30.94s  peak 845 MiB
+>> constant SOtilde
+  SOtilde: 527  (527 representatives enumerated)
+<< constant SOtilde: 39.17s  peak 922 MiB
+>> constant Otilde+
+  Otilde+: 527  (527 representatives enumerated)
+<< constant Otilde+: 52.42s  peak 1033 MiB
+>> constant SOtilde+
