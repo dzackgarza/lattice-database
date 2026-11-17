@@ -398,7 +398,7 @@ def test_smaller_cards_come_first_and_every_card_precedes_the_searches(tmp_path:
 
 
 FAKE_WORKER = """
-import json, sys, time
+import json, os, signal, sys, time
 for line in sys.stdin:
     request = json.loads(line)
     for field in request["fields"]:
@@ -407,6 +407,8 @@ for line in sys.stdin:
             sys.exit(1)
         if field == "grows":
             time.sleep(60)
+        if field == "dies":
+            os.kill(os.getpid(), signal.SIGKILL)
         print(json.dumps({"tag": request["tag"], field: True}), flush=True)
     print(json.dumps({"tag": request["tag"], "done": True}), flush=True)
 """
@@ -433,7 +435,19 @@ def test_the_largest_worker_is_killed_when_memory_runs_low(tmp_path: Path, monke
     monkeypatch.setattr(genus, "WORKER", [sys.executable, str(tmp_path / "worker.py")])
     # A reserve above the machine's memory is never available, so the worker is killed at once.
     monkeypatch.setattr(genus, "MEMORY_RESERVE", 2.0)
-    assert _pool(tmp_path, ["grows"]) == [{"tag": "0012", "failed": "memory exhausted"}]
+    [values] = _pool(tmp_path, ["grows"])
+    assert values["tag"] == "0012" and values["failed"] == "memory exhausted"
+    # A killed worker is reported with what the run observed of the kill, not as an error (#46).
+    killed = values["killed"]
+    assert isinstance(killed, dict) and killed["by"] == "memory"
+    assert killed["limit"] == int(2.0 * genus._meminfo("MemTotal"))
+    assert isinstance(killed["peak"], int) and killed["peak"] > 0
+
+
+def test_a_worker_killed_by_a_signal_is_reported_with_its_signal(tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> None:
+    """A container out-of-memory kill reaches the driver as SIGKILL and no traceback (#46)."""
+    monkeypatch.setattr(genus, "WORKER", [sys.executable, str(tmp_path / "worker.py")])
+    assert _pool(tmp_path, ["dies"]) == [{"tag": "0012", "failed": "killed by signal 9", "killed": {"by": "signal 9"}}]
 
 
 def test_a_worker_that_fails_before_computing_is_not_replaced(monkeypatch: pytest.MonkeyPatch) -> None:
