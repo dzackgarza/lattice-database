@@ -31,6 +31,7 @@ import frontmatter
 from pydantic import BaseModel, TypeAdapter
 
 from latticedb import card_serialization, certificates, corpus, exceeded, failures, records, storage
+from latticedb.catalogues import ArithmeticGroup
 from latticedb.certificates import Certificate, Certificates
 from latticedb.model import (
     Automorphisms,
@@ -86,10 +87,23 @@ generators; the order is a field of `definite` alone (#8).
 ORBIT_CERTIFIED_BOUND = card_serialization.ORBIT_CERTIFIED_BOUND
 """The z/w degree through which the preamble orbit computation certifies a series."""
 
+ARITHMETIC_PREFIX = "arithmetic-group."
+r"""The computation name of a field of an arithmetic-group card of this lattice.
+
+An arithmetic-group card states a subgroup $\Gamma \leq O(L)$ and its relation to $O(L)$: its index
+and the self-isometries of $L$ that generate it. Both are preamble results about this card's Gram
+tensor, so both are certified here, and neither is a field of this card: the generator matrices are
+`morphisms` entries of this card and the names are the group card's `data.generator_morphisms`.
+"""
+
+ARITHMETIC_FIELDS = ("index_in_orthogonal_group", "generator_morphisms")
+"""The fields of an arithmetic-group card that a computation fills, in the order it fills them."""
+
 
 def certified_value(field: str, value: Yaml, lattice: Lattice | None = None) -> Yaml:
     """The stored value committed to by one completed preamble computation."""
-    if field == "automorphism_group_generator_morphisms":
+    if field == "automorphism_group_generator_morphisms" or (field.startswith(ARITHMETIC_PREFIX) and field.endswith(".generator_morphisms")):
+        # The names a card lists are its own choice; the commitment is to the matrices they name.
         if lattice is None or not isinstance(value, list):
             return value
         by_name = {morphism.name: morphism for morphism in lattice.morphisms if morphism.target == lattice.tag and morphism.scale == 1}
@@ -209,6 +223,8 @@ class Request(TypedDict):
     fields: list[str]
     series_bound: int
     record: NotRequired[dict[str, Yaml]]
+    arithmetic_groups: NotRequired[list[dict[str, Yaml]]]
+    """The arithmetic-group cards whose fields this request computes, each by `slug` and `standard_name`."""
     resumed: NotRequired[bool]
     """A computation of these fields was cut short by an earlier job."""
 
@@ -231,14 +247,53 @@ def stored_in(field: str, definiteness: str | None = None) -> tuple[str, type[Ba
 
 
 def name(tag: str, field: str, definiteness: str | None = None) -> str:
-    """The name of the certificate of `field` of the record `tag`, in the block that stores it."""
-    return f"{tag} derive" if field == "derive" else f"{tag} {stored_in(field, definiteness)[0]}.{field}"
+    """The name of the certificate of `field` of the record `tag`, in the block that stores it.
+
+    An arithmetic-group field names the card the value is stored on, `<slug>`, because that value
+    is not a field of the lattice card: `6JRR arithmetic-group.otilde-t-co.index_in_orthogonal_group`
+    is the index of that subgroup, computed from this lattice's Gram tensor.
+    """
+    if field == "derive":
+        return f"{tag} derive"
+    if field.startswith(ARITHMETIC_PREFIX):
+        return f"{tag} {field}"
+    return f"{tag} {stored_in(field, definiteness)[0]}.{field}"
 
 
 def in_shard(tag: str, shard: tuple[int, int]) -> bool:
     """Whether the card `tag` belongs to shard `i` of `n`, by a hash that every job computes alike."""
     index, count = shard
     return certificates.tag_hash(tag) % count == index
+
+
+def arithmetic_requests(lattice: Lattice, loaded: corpus.Corpus, held: Certificates) -> list[tuple[str, dict[str, Yaml]]]:
+    r"""The uncertified fields of the arithmetic-group cards that this lattice states.
+
+    An arithmetic-group card names one subgroup $\Gamma \leq O(L)$ and, when it has a
+    `standard_name`, says which of the eight standard subgroups it is. Two of its fields are
+    computations about this card's Gram tensor: `index_in_orthogonal_group`, asked as `g.index()`
+    from the owner's group, and `generator_morphisms`, asked as the isometries `g.group_generators()`
+    returns. A card that states neither an index nor generators is asked for both; a value that a
+    matching completed certificate already covers is not requested again. A card without a
+    `standard_name`, such as a named subgroup defined by a source, has no owner operation that
+    presents it, and is left alone.
+    """
+    groups = {entry.value.slug: entry.value for entry in loaded.arithmetic_groups if entry.value.lattice == lattice.tag}
+    chosen: list[tuple[str, dict[str, Yaml]]] = []
+    for slug in lattice.arithmetic_groups:
+        card = groups.get(slug)
+        if card is None or card.standard_name is None:
+            continue
+        for short in ARITHMETIC_FIELDS:
+            field = f"{ARITHMETIC_PREFIX}{slug}.{short}"
+            computation = name(lattice.tag, field, lattice.definiteness)
+            stored = getattr(card.data, short)
+            # The group card states the generator names as a tuple; its commitment is the matrices.
+            value = list(stored) if isinstance(stored, tuple) else stored
+            expected_hash = certificates.certification_hash(computation, lattice, certified_value(field, value, lattice))
+            if stored is None or certificates.is_pending(held, computation, lattice.certifications.get(field), expected_hash):
+                chosen.append((field, {"slug": slug, "standard_name": card.standard_name}))
+    return chosen
 
 
 def requests(
@@ -304,6 +359,18 @@ def requests(
                 fields.append(field)
         if needs_derive:
             fields.insert(0, "derive")
+        # The arithmetic-group cards of this lattice state values computed from this card's Gram
+        # tensor, so they are requested with it, after its own fields — unless an earlier run of that
+        # computation is quarantined in triage, or outran a whole job.
+        arithmetic = [
+            (field, group)
+            for field, group in arithmetic_requests(lattice, loaded, held)
+            if not (
+                exceeded.is_exceeded(log, name(lattice.tag, field, lattice.definiteness), lattice)
+                or failures.blocked(triage, name(lattice.tag, field, lattice.definiteness), lattice)
+            )
+        ] if lattice.determinant else []
+        fields = [*fields, *(field for field, _group in arithmetic)]
         if needs_derive and exceeded.was_lost(log, derive_name, lattice):
             # Without its derivation the card has no hypotheses for its other fields.
             lost_fields, fields = fields, []
@@ -313,6 +380,8 @@ def requests(
         gram = [[int(value) if value.denominator == 1 else str(value) for value in row] for row in lattice.gram_tensor]
         if lost_fields:
             lost.append({"tag": lattice.tag, "gram": gram, "integral": lattice.integral is not None, "fields": lost_fields, "series_bound": series_bound(len(gram))})
+            if arithmetic:
+                lost[-1]["arithmetic_groups"] = [group for field, group in arithmetic if field in lost_fields]
             if needs_derive:
                 lost[-1]["record"] = metadata
             sizes[lattice.tag] = (len(gram), abs(lattice.determinant or Fraction(0)))
@@ -328,6 +397,8 @@ def requests(
                 "fields": fields,
                 "series_bound": series_bound(len(lattice.gram_tensor)),
             }
+            if arithmetic:
+                request["arithmetic_groups"] = [group for field, group in arithmetic if field in fields]
             if needs_derive:
                 request["record"] = metadata
                 # Derivation supplies the hypotheses even when another field was interrupted.
@@ -533,7 +604,7 @@ def computed(chosen: list[Request], deadline: float, workers: int) -> Generator[
                             raise
 
 
-def _generator_morphisms(tag: str, morphisms: list[dict[str, Yaml]], matrices: list[Yaml]) -> tuple[list[str], list[dict[str, Yaml]]]:
+def _generator_morphisms(tag: str, morphisms: list[dict[str, Yaml]], matrices: list[Yaml], prefix: str = "O(L)") -> tuple[list[str], list[dict[str, Yaml]]]:
     """Place computed generators of O(L) on the lattice card and return their names."""
     names: list[str] = []
     used_self_names = {morphism["name"] for morphism in morphisms if isinstance(morphism.get("name"), str)}
@@ -544,7 +615,7 @@ def _generator_morphisms(tag: str, morphisms: list[dict[str, Yaml]], matrices: l
             None,
         )
         if existing is None:
-            base = f"O(L) generator {index}"
+            base = f"{prefix} generator {index}"
             name = base
             suffix = 2
             while name in used_self_names:
@@ -655,6 +726,59 @@ def in_phase(requests: list[Request], searches: bool | None) -> list[Request]:
     if searches is None:
         return requests
     return [request for request in requests if bool(request.get("searches")) == searches]
+
+
+def store_arithmetic_group(
+    root: Path,
+    tag: str,
+    slug: str,
+    values: dict[str, Yaml],
+) -> list[tuple[str, Yaml]]:
+    """Store the computed fields of one arithmetic-group card, its generators as self-isometries of `tag`.
+
+    A generator is one isometry $L \to L$, so it is a `morphisms` entry of the lattice card with
+    `scale: 1`, and the group card lists the names of those entries: the matrices are stored once.
+    The two values are certified on the lattice card, whose Gram tensor is the input of both, under
+    the names `arithmetic-group.<slug>.<field>`; the group card states the values.
+    Returns each stored field with the value its certificate commits to.
+    """
+    lattice_path = root / "lattices" / f"{tag}.md"
+    document = corpus.read_card(lattice_path)
+    metadata = corpus.front_matter(document)
+    morphisms = TypeAdapter(list[dict[str, Yaml]]).validate_python(metadata.get("morphisms", []), strict=True)
+    group_path = root / "arithmetic-groups" / f"{slug}.md"
+    group_document = corpus.read_card(group_path)
+    group_metadata = corpus.front_matter(group_document)
+    data = TypeAdapter(dict[str, Yaml]).validate_python(group_metadata.get("data") or {}, strict=True)
+    stored: list[tuple[str, Yaml]] = []
+    matrices = values.get("generator_morphisms")
+    if isinstance(matrices, list):
+        names, morphisms = _generator_morphisms(tag, morphisms, matrices, prefix=str(group_metadata.get("name") or slug))
+        data["generator_morphisms"] = list(names)
+        stored.append(("generator_morphisms", [[[int(entry) for entry in row] for row in matrix] for matrix in sorted(matrices, key=_matrix_order)]))
+    index = values.get("index_in_orthogonal_group")
+    if isinstance(index, int) and not isinstance(index, bool):
+        data["index_in_orthogonal_group"] = index
+        stored.append(("index_in_orthogonal_group", index))
+    if not stored:
+        return stored
+    model = ArithmeticGroup.model_validate({**group_metadata, "data": data})
+    computed_data = model.data.model_dump(exclude_none=True, mode="json")
+    # The card keeps the order it states its fields in; a computed field it did not state is appended.
+    written = {**group_metadata, "data": {**{key: computed_data[key] for key in data if key in computed_data}, **{key: value for key, value in computed_data.items() if key not in data}}}
+    text = card_serialization.catalogue_text(written, group_document.content)
+    if text != group_path.read_text():
+        storage.write_text(group_path, text)
+    if morphisms:
+        metadata["morphisms"] = [morphism for morphism in morphisms]
+        storage.write_text(lattice_path, records.record_text(metadata, document.content))
+    return stored
+
+
+def _matrix_order(matrix: object) -> tuple[int, ...]:
+    """The order of the matrices a certificate commits to: entrywise, so the choice of names is not part of it."""
+    assert isinstance(matrix, list)
+    return tuple(int(entry) for row in matrix for entry in row)
 
 
 def certify(
@@ -787,15 +911,31 @@ def certify(
                         exceeded.save(root, log)
                         print(stored_lattice.tag, "derive", flush=True)
                         continue
-                for field in BLOCKS:
+                arithmetic_fields = [field for field in values if isinstance(field, str) and field.startswith(ARITHMETIC_PREFIX)]
+                for field in (*BLOCKS, *arithmetic_fields):
                     if field in values:
                         log.pop(name(entry.lattice.tag, field, entry.lattice.definiteness), None)
                         running.pop(name(entry.lattice.tag, field, entry.lattice.definiteness), None)
                 exceeded.save(root, log)
                 store(entry.path, values)
+                computed_groups: dict[str, dict[str, Yaml]] = {}
+                for field in arithmetic_fields:
+                    slug, short = str(field)[len(ARITHMETIC_PREFIX) :].rsplit(".", 1)
+                    computed_groups.setdefault(slug, {})[short] = values[field]
+                committed_by_group: dict[str, Yaml] = {}
+                for slug, group_values in computed_groups.items():
+                    for short, committed in store_arithmetic_group(root, entry.lattice.tag, slug, group_values):
+                        committed_by_group[f"{ARITHMETIC_PREFIX}{slug}.{short}"] = committed
                 stored = corpus.front_matter(corpus.read_card(entry.path))
                 stored_lattice = Lattice.model_validate(stored)
                 card_certifications = dict(stored_lattice.certifications)
+                for field, committed in committed_by_group.items():
+                    computation = name(entry.lattice.tag, field, stored_lattice.definiteness)
+                    certificate_hash = certificates.certification_hash(computation, stored_lattice, committed)
+                    card_certifications[field] = certificate_hash
+                    held[computation] = Certificate(hash=certificate_hash, by=str(values["by"]))
+                    if computation in failed:
+                        failures.resolve(root, computation, stored_lattice)
                 for field in BLOCKS:
                     if field not in values or values[field] is None:
                         continue
@@ -818,7 +958,7 @@ def certify(
                 unsaved.add(entry.lattice.tag)
                 print(
                     entry.lattice.tag,
-                    {field: values[field] for field in BLOCKS if field in values},
+                    {field: values[field] for field in (*BLOCKS, *arithmetic_fields) if field in values},
                     flush=True,
                 )
     finally:

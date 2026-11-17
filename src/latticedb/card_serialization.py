@@ -77,6 +77,11 @@ def record_text(record: dict[str, Yaml], prose: str) -> str:
     return "---\n" + yaml.dump(ordered, sort_keys=False, allow_unicode=True, width=100000) + "---\n" + _body(prose)
 
 
+def catalogue_text(record: dict[str, Yaml], prose: str) -> str:
+    """Return the text of the file of a catalogue record: its own keys, in the order it states them."""
+    return "---\n" + yaml.dump({key: _styled(value) for key, value in record.items()}, sort_keys=False, allow_unicode=True, width=100000) + "---\n" + _body(prose)
+
+
 def _body(prose: str) -> str:
     """The prose after the front matter, in the form the Markdown formatter flowmark keeps.
 

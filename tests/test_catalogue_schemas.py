@@ -181,17 +181,22 @@ def test_the_coble_card_and_its_group_cards_state_only_their_defining_data() -> 
         for block in ("form", "integral", "automorphisms", "definite", "root_span", "root_sublattice", "indefinite", "hyperbolic")
         for field in (card.get(block) or {})
     }
-    certified = set(card.get("certifications") or {}) - {"derive"}
-    assert stated - defining == certified, "every field of T_Co beyond its defining data is one it certifies, and every certificate names a stated field"
+    certified = {name for name in (card.get("certifications") or {}) if name != "derive"}
+    card_fields = {name for name in certified if not name.startswith("arithmetic-group.")}
+    assert stated - defining == card_fields, "every field of T_Co beyond its defining data is one it certifies, and every certificate names a stated field"
     assert "definite" not in card and "root_span" not in card and "root_sublattice" not in card
-    assert card["morphisms"] == []
+    # A generator of one of the two group cards is a self-isometry of this card, so the card states it
+    # as a `morphisms` entry; the group card states its name. Neither is a field of this card.
+    assert all(morphism["target"] == "6JRR" and morphism["scale"] == 1 for morphism in card["morphisms"])
     for slug in ("otilde-t-co", "otilde-plus-t-co"):
         group = ArithmeticGroup.model_validate(frontmatter.load(str(ROOT / "arithmetic-groups" / f"{slug}.md")).metadata)
         assert group.lattice == "6JRR"
         assert group.ambient_lie_group == "o-2-9"
-        assert group.data.index_in_orthogonal_group is None
-        assert group.data.generator_morphisms is None
-        assert group.data.reference is None
+        assert group.data.reference is None, "no source states these values; a computation does"
+        # A stated value is one a completed computation of this card establishes, and an absent one
+        # claims nothing: `latticedb certify --tag 6JRR` fills them, so neither state is pinned here.
+        for short in ("index_in_orthogonal_group", "generator_morphisms"):
+            assert (getattr(group.data, short) is None) != (f"arithmetic-group.{slug}.{short}" in certified), f"{slug} states {short} exactly when its certificate is cited"
     assert ArithmeticGroup.model_validate(frontmatter.load(str(ROOT / "arithmetic-groups" / "otilde-plus-t-co.md")).metadata).parent_group == "otilde-t-co"
 
 

@@ -24,7 +24,7 @@ from sage_extensions.categories.rings.ring_foundation import OwnedRings
 from sage_extensions.rings import session_ring_objects
 
 from latticedb import records
-from latticedb.genus import Request, applies
+from latticedb.genus import ARITHMETIC_PREFIX, Request, applies
 from latticedb.model import Lattice
 
 _RINGS = session_ring_objects()
@@ -81,6 +81,49 @@ def _orthogonal_group_data(lattice: Lattices.ParentMethods) -> dict[str, JsonVal
             return {"automorphism_group_order": int(group.cardinality()), "automorphism_group_generator_morphisms": generators}
         case _:
             return {"automorphism_group_generator_morphisms": generators}
+
+
+def _standard_subgroup(lattice: Lattices.ParentMethods, standard_name: str) -> object:
+    r"""The preamble's subgroup $\Gamma \leq O(L)$ that a card's `standard_name` names.
+
+    $S$ is the kernel of the determinant, $\widetilde O$ the kernel of the reduction to
+    $O(A_L)$, and $O^{+}$ the kernel of the real spinor norm; each further key is the
+    intersection of the two its name joins (Gritsenko--Hulek--Sankaran, *Abelianisation of
+    orthogonal groups and the fundamental group of modular varieties*, arXiv:0810.1614, §1).
+    """
+    match standard_name:
+        case "O":
+            return lattice.Aut()
+        case "SO":
+            return lattice.SO()
+        case "O+":
+            return lattice.O_plus()
+        case "SO+":
+            return lattice.O_plus().intersection(lattice.SO())
+        case "Otilde":
+            return lattice.stable_orthogonal_group()
+        case "SOtilde":
+            return lattice.stable_orthogonal_group().intersection(lattice.SO())
+        case "Otilde+":
+            return lattice.stable_orthogonal_group().intersection(lattice.O_plus())
+        case "SOtilde+":
+            return lattice.stable_orthogonal_group().intersection(lattice.SO()).intersection(lattice.O_plus())
+    raise ValueError(f"{standard_name!r} is not one of the eight standard subgroups of O(L)")
+
+
+def _arithmetic_group_value(group: object, field: str) -> JsonValue:
+    """Serialize one computed field of a subgroup: its index in ``O(L)``, or its generators.
+
+    The index is the cardinality of the owner's coset space ``O(L)/Gamma``, a uniform bound on
+    the number of cosets per element of the finite image. A generator is an isometry of ``L``,
+    serialized in the same framing as the generators of ``O(L)``.
+    """
+    match field:
+        case "index_in_orthogonal_group":
+            return int(group.index())
+        case "generator_morphisms":
+            return [_matrix_rows(generator) for generator in group.group_generators()]
+    raise ValueError(f"{field!r} is not a computed field of an arithmetic group")
 
 
 def _root_span_data(lattice: Lattices.ParentMethods) -> dict[str, JsonValue]:
@@ -314,13 +357,30 @@ def _compute(request: Request) -> None:
         if stored.determinant == 0:
             return
         request["integral"] = stored.integral is not None
-        request["fields"] = [field for field in request["fields"] if field != "derive" and applies(field, stored)]
+        # An arithmetic-group field is a value of another card, computed from this Gram tensor, so the
+        # derived hypotheses of this card do not select it.
+        request["fields"] = [field for field in request["fields"] if field != "derive" and (field.startswith(ARITHMETIC_PREFIX) or applies(field, stored))]
     ring = OWNED_ZZ if request["integral"] else OWNED_QQ
     lattice = Lattices(ring)(request["gram"])
     joint = {field: (fields, compute) for fields, compute in JOINT for field in fields}
+    named = {str(group["slug"]): str(group["standard_name"]) for group in request.get("arithmetic_groups", [])}
+    subgroups: dict[str, object] = {}
+
+    def subgroup(slug: str) -> object:
+        """The subgroup's own group, built once per request rather than once per field."""
+        if slug not in subgroups:
+            subgroups[slug] = _standard_subgroup(lattice, named[slug])
+        return subgroups[slug]
+
     done: set[str] = set()
     for field in request["fields"]:
         if field in done:
+            continue
+        if field.startswith(ARITHMETIC_PREFIX):
+            # One card's index and its generators are two fields of one group; each is certified alone.
+            slug, short = field[len(ARITHMETIC_PREFIX) :].rsplit(".", 1)
+            done.add(field)
+            _run(tag, [field], lambda: {field: _arithmetic_group_value(subgroup(slug), short)})
             continue
         if field in joint:
             # The answer is one computation, so every field of it that was asked for is

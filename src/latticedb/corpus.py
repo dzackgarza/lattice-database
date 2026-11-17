@@ -189,12 +189,16 @@ def cards(root: Path, tags: Iterable[str]) -> Corpus:
 
     A per-tag request needs one card's Gram tensor and what the preamble makes of it; reading the
     other 302,503 cards costs 7.3 GiB and is killed on a 15 GiB runner before the first computation
-    (#30). The families, the retired tags and the catalogues are empty here, because a computation
-    neither reads nor writes them; a workflow that checks references uses `load`.
+    (#30). The arithmetic-group cards of those lattices are read, because a certification request
+    computes their `data.index_in_orthogonal_group` and generator names from that Gram tensor; a
+    card of another lattice is skipped before it is validated. The families, the retired tags and
+    the other catalogues are empty here, because a computation neither reads nor writes them; a
+    workflow that checks references uses `load`.
     """
     entries: list[Entry] = []
     found: list[str] = []
-    for tag in sorted(set(tags)):
+    named = set(tags)
+    for tag in sorted(named):
         path = root / "lattices" / f"{tag}.md"
         if not path.is_file():
             found.append(f"{path}: no card for the requested tag {tag}")
@@ -204,10 +208,21 @@ def cards(root: Path, tags: Iterable[str]) -> Corpus:
             entries.append(Entry(Lattice.model_validate(document.metadata), document.content, path))
         except ValidationError as error:
             found.extend(_record_problems(path, error))
+    groups: list[CatalogueEntry[ArithmeticGroup]] = []
+    directory = root / "arithmetic-groups"
+    if directory.is_dir():
+        for path in sorted(directory.glob("*.md")):
+            document = read_card(path)
+            if document.metadata.get("lattice") not in named:
+                continue
+            try:
+                groups.append(CatalogueEntry(ArithmeticGroup.model_validate(document.metadata), document.content, path))
+            except ValidationError as error:
+                found.extend(_record_problems(path, error))
     if found:
         raise CorpusInvalid(tuple(found))
     empty: tuple[()] = ()
-    return Corpus(tuple(entries), {}, {}, *(empty for _ in range(13)))
+    return Corpus(tuple(entries), {}, {}, *(empty for _ in range(12)), tuple(groups))
 
 
 def load(root: Path) -> Corpus:

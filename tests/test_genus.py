@@ -15,7 +15,8 @@ import frontmatter
 import pytest
 import yaml
 
-from latticedb import certificates, corpus, exceeded, genus, records, sage_genus
+from latticedb import certificates, checks, corpus, exceeded, genus, records, sage_genus
+from latticedb.catalogues import ArithmeticGroup
 from latticedb.model import Lattice
 
 REPOSITORY = Path(__file__).resolve().parent.parent
@@ -905,3 +906,106 @@ def test_a_cardinality_beyond_aleph0_is_not_recorded_as_aleph0() -> None:
 
     with pytest.raises(ValueError, match="uncountable"):
         sage_genus._orbit_count(continuum)
+
+
+def coble_corpus(root: Path) -> Path:
+    """The Coble card with its two arithmetic-group cards, and nothing else."""
+    (root / "lattices").mkdir()
+    shutil.copy(REPOSITORY / corpus.FAMILIES_FILE, root / corpus.FAMILIES_FILE)
+    (root / corpus.RETIRED_FILE).write_text("{}\n")
+    shutil.copy(REPOSITORY / "lattices" / "6JRR.md", root / "lattices")
+    (root / "arithmetic-groups").mkdir()
+    for slug in ("otilde-t-co", "otilde-plus-t-co"):
+        shutil.copy(REPOSITORY / "arithmetic-groups" / f"{slug}.md", root / "arithmetic-groups")
+    return root
+
+
+def certify_index(root: Path, slug: str, index: int) -> certificates.Certificates:
+    """Store an index on the group card and its matching certificate on the lattice card."""
+    path = root / "arithmetic-groups" / f"{slug}.md"
+    document = frontmatter.load(str(path))
+    document.metadata["data"] = {**(document.metadata.get("data") or {}), "index_in_orthogonal_group": index}
+    path.write_text(frontmatter.dumps(document))
+    card = root / "lattices" / "6JRR.md"
+    lattice_document = frontmatter.load(str(card))
+    lattice = Lattice.model_validate(corpus.front_matter(lattice_document))
+    field = f"{genus.ARITHMETIC_PREFIX}{slug}.index_in_orthogonal_group"
+    computation = genus.name("6JRR", field, lattice.definiteness)
+    digest = certificates.certification_hash(computation, lattice, index)
+    lattice_document.metadata["certifications"] = {**(lattice_document.metadata.get("certifications") or {}), field: digest}
+    card.write_text(frontmatter.dumps(lattice_document))
+    return {computation: certificates.Certificate(hash=digest, by="test")}
+
+
+def requested_fields(root: Path, held: certificates.Certificates) -> set[str]:
+    # `corpus.cards` is what `latticedb certify --tag 6JRR` loads, so the request is built from it.
+    return {field for request in genus.requests(corpus.cards(root, ("6JRR",)), held, {}, ("6JRR",)) for field in request["fields"]}
+
+
+def test_a_per_tag_load_carries_the_arithmetic_group_cards_of_its_lattices(tmp_path: Path) -> None:
+    """The tag-scoped reader #30 introduced must give the group cards a certification request needs."""
+    root = coble_corpus(tmp_path)
+    other = root / "arithmetic-groups" / "gamma-en-2.md"
+    other.write_text(frontmatter.dumps(frontmatter.load(str(REPOSITORY / "arithmetic-groups" / "gamma-en-2.md"))))
+    loaded = corpus.cards(root, ("6JRR",))
+    assert [entry.value.slug for entry in loaded.arithmetic_groups] == ["otilde-plus-t-co", "otilde-t-co"]
+    assert corpus.cards(root, ("6JRR",)).families == {}
+
+
+def test_the_coble_card_requests_the_index_and_generators_of_its_group_cards(tmp_path: Path) -> None:
+    """#7: the two group cards state an index and generators, and both are asked from this card's Gram tensor."""
+    root = coble_corpus(tmp_path)
+    requested = genus.requests(corpus.cards(root, ("6JRR",)), {}, {}, ("6JRR",))
+    fields = {field for request in requested for field in request["fields"]}
+    assert {
+        "arithmetic-group.otilde-t-co.index_in_orthogonal_group",
+        "arithmetic-group.otilde-t-co.generator_morphisms",
+        "arithmetic-group.otilde-plus-t-co.index_in_orthogonal_group",
+        "arithmetic-group.otilde-plus-t-co.generator_morphisms",
+    } <= fields
+    groups = {(str(group["slug"]), str(group["standard_name"])) for request in requested for group in request.get("arithmetic_groups", [])}
+    assert groups == {("otilde-t-co", "Otilde"), ("otilde-plus-t-co", "Otilde+")}
+    assert genus.name("6JRR", "arithmetic-group.otilde-t-co.index_in_orthogonal_group") == "6JRR arithmetic-group.otilde-t-co.index_in_orthogonal_group"
+
+
+def test_a_completed_arithmetic_group_index_is_not_requested_again(tmp_path: Path) -> None:
+    """A matching completed certificate is reused, and a different stored index is computed again."""
+    root = coble_corpus(tmp_path)
+    held = certify_index(root, "otilde-t-co", 46998591897600)
+    fields = requested_fields(root, held)
+    assert "arithmetic-group.otilde-t-co.index_in_orthogonal_group" not in fields
+    assert "arithmetic-group.otilde-t-co.generator_morphisms" in fields
+    changed = frontmatter.load(str(root / "arithmetic-groups" / "otilde-t-co.md"))
+    changed.metadata["data"] = {**(changed.metadata.get("data") or {}), "index_in_orthogonal_group": 2}
+    (root / "arithmetic-groups" / "otilde-t-co.md").write_text(frontmatter.dumps(changed))
+    assert "arithmetic-group.otilde-t-co.index_in_orthogonal_group" in requested_fields(root, held)
+
+
+def test_a_computed_generator_is_stored_once_as_a_self_isometry_of_the_lattice(tmp_path: Path) -> None:
+    """The matrix is a `morphisms` entry of the lattice card; the group card states its name."""
+    root = coble_corpus(tmp_path)
+    matrix = [[1 if row == column else 0 for column in range(11)] for row in range(11)]
+    stored = genus.store_arithmetic_group(root, "6JRR", "otilde-plus-t-co", {"index_in_orthogonal_group": 93997183795200, "generator_morphisms": [matrix]})
+    lattice = Lattice.model_validate(corpus.front_matter(corpus.read_card(root / "lattices" / "6JRR.md")))
+    self_isometries = [morphism for morphism in lattice.morphisms if morphism.target == "6JRR" and morphism.scale == 1]
+    assert len(self_isometries) == 1
+    assert self_isometries[0].matrix == tuple(tuple(row) for row in matrix)
+    group = ArithmeticGroup.model_validate(corpus.front_matter(corpus.read_card(root / "arithmetic-groups" / "otilde-plus-t-co.md")))
+    assert group.data.generator_morphisms == (self_isometries[0].name,)
+    assert group.data.index_in_orthogonal_group == 93997183795200
+    assert dict(stored) == {"generator_morphisms": [matrix], "index_in_orthogonal_group": 93997183795200}
+    # The name is what the certificate commits to indirectly: it commits to the matrix.
+    assert genus.certified_value("arithmetic-group.otilde-plus-t-co.generator_morphisms", list(group.data.generator_morphisms or ()), lattice) == [matrix]
+
+
+def test_a_stated_arithmetic_group_value_without_its_computation_is_a_verification_problem(tmp_path: Path) -> None:
+    """A group card states what a completed computation returned, or it states nothing."""
+    root = coble_corpus(tmp_path)
+    path = root / "arithmetic-groups" / "otilde-t-co.md"
+    document = frontmatter.load(str(path))
+    document.metadata["data"] = {**(document.metadata.get("data") or {}), "index_in_orthogonal_group": 46998591897600}
+    path.write_text(frontmatter.dumps(document))
+    problems = checks.records.problems(corpus.load(root), {}, frozenset({"6JRR"}))
+    assert any("arithmetic group otilde-t-co: the stated index_in_orthogonal_group" in problem for problem in problems), problems
+    held = certify_index(root, "otilde-t-co", 46998591897600)
+    assert not any("arithmetic group otilde-t-co:" in problem for problem in checks.records.problems(corpus.load(root), held, frozenset({"6JRR"})))
