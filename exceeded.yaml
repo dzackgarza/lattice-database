@@ -1158,10 +1158,17 @@
   hash: e5378e409c24f7701e373876b32586a87eb5a9cf04b7ada7350ac466781f0804
   seconds: 0
   lost: true
+6JRR arithmetic-group.otilde-t-co.generator_morphisms:
+  hash: 835e87dc1e3a87479bc8a0df960b89c8b784d51c402ba78e88834ad5beb3b7e3
+  seconds: 1712
+  lost: true
 6JRR arithmetic-group.otilde-t-co.index_in_orthogonal_group:
   hash: 6bdd545a64d5a41709bec273f0f4ba85a419ae8647e58ae0b640b9638882d769
-  seconds: 5468
+  seconds: 5609
   lost: true
+  killed_by: memory
+  peak_bytes: 14061043712
+  limit_bytes: 1675943526
 6JRR integral.overlattice_count:
   hash: 617d08404ba267c03253a18f486ad8d4186eee4fd4a835bb198db26968211abb
   seconds: 3687

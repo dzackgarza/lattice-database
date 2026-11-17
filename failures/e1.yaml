@@ -6628,6 +6628,193 @@
     database_revision: dea30614e6711ce0b908fff7519c3fa6a99a3365
     research_revision: null
   notes: []
+6JRR arithmetic-group.otilde-t-co.index_in_orthogonal_group:
+  disposition: open
+  attempts:
+  - hash: 6bdd545a64d5a41709bec273f0f4ba85a419ae8647e58ae0b640b9638882d769
+    gram_tensor:
+    - - 2
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+    - - 0
+      - 0
+      - 2
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+    - - 0
+      - 2
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+    - - 0
+      - 0
+      - 0
+      - -4
+      - 0
+      - 2
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+    - - 0
+      - 0
+      - 0
+      - 0
+      - -4
+      - 0
+      - 2
+      - 0
+      - 0
+      - 0
+      - 0
+    - - 0
+      - 0
+      - 0
+      - 2
+      - 0
+      - -4
+      - 2
+      - 0
+      - 0
+      - 0
+      - 0
+    - - 0
+      - 0
+      - 0
+      - 0
+      - 2
+      - 2
+      - -4
+      - 2
+      - 0
+      - 0
+      - 0
+    - - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 2
+      - -4
+      - 2
+      - 0
+      - 0
+    - - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 2
+      - -4
+      - 2
+      - 0
+    - - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 2
+      - -4
+      - 2
+    - - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 2
+      - -4
+    reason: memory exhausted
+    stderr: "Traceback (most recent call last):\n  File \"<frozen runpy>\", line 203,
+      in _run_module_as_main\n  File \"<frozen runpy>\", line 88, in _run_code\n  File
+      \"/home/runner/work/lattice-database/lattice-database/src/latticedb/sage_genus.py\",
+      line 414, in <module>\n    main()\n    ~~~~^^\n  File \"/home/runner/work/lattice-database/lattice-database/src/latticedb/sage_genus.py\",
+      line 409, in main\n    _compute(request)\n    ~~~~~~~~^^^^^^^^^\n  File \"/home/runner/work/lattice-database/lattice-database/src/latticedb/sage_genus.py\",
+      line 382, in _compute\n    _run(tag, [field], lambda: {field: _arithmetic_group_value(subgroup(slug),
+      short)})\n    ~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n
+      \ File \"/home/runner/work/lattice-database/lattice-database/src/latticedb/sage_genus.py\",
+      line 336, in _run\n    values = compute()\n  File \"/home/runner/work/lattice-database/lattice-database/src/latticedb/sage_genus.py\",
+      line 382, in <lambda>\n    _run(tag, [field], lambda: {field: _arithmetic_group_value(subgroup(slug),
+      short)})\n                                       ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^\n
+      \ File \"/home/runner/work/lattice-database/lattice-database/src/latticedb/sage_genus.py\",
+      line 122, in _arithmetic_group_value\n    return int(group.index())\n               ~~~~~~~~~~~^^\n
+      \ File \"/sage/.venv/lib/python3.14/site-packages/sage_extensions/categories/group/groups.py\",
+      line 8636, in index\n    return self.supergroup().left_cosets(self).cardinality()\n
+      \          ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^\n  File \"/sage/.venv/lib/python3.14/site-packages/sage_extensions/categories/group/groups.py\",
+      line 6894, in left_cosets\n    return self._left_coset_construction(subgroup)\n
+      \          ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^\n  File \"sage/misc/cachefunc.pyx\",
+      line 1970, in sage.misc.cachefunc.CachedMethodCaller.__call__\n    w = self._instance_call(*args,
+      **kwds)\n  File \"sage/misc/cachefunc.pyx\", line 1848, in sage.misc.cachefunc.CachedMethodCaller._instance_call\n
+      \   return self.f(self._instance, *args, **kwds)\n  File \"/sage/.venv/lib/python3.14/site-packages/sage_extensions/categories/group/groups.py\",
+      line 6906, in _left_coset_construction\n    return _left_coset_g_set(self, subgroup)\n
+      \ File \"/sage/.venv/lib/python3.14/site-packages/sage_extensions/categories/group/g_sets.py\",
+      line 1932, in _left_coset_g_set\n    return subgroup.coset_space()\n           ~~~~~~~~~~~~~~~~~~~~^^\n
+      \ File \"/sage/.venv/lib/python3.14/site-packages/sage_extensions/categories/group/predicate_subgroups.py\",
+      line 1624, in coset_space\n    return _preimage_coset_space(\n        self,
+      self.preimage_morphism(), self.target_subgroup(), generators\n    )\n  File
+      \"/sage/.venv/lib/python3.14/site-packages/sage_extensions/categories/group/predicate_subgroups.py\",
+      line 77, in _preimage_coset_space\n    return FiniteGSets(subgroup.supergroup()).preimage_coset_space(\n
+      \          ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^\n        subgroup,
+      morphism, target, _free_cover(subgroup.supergroup(), generators),\n        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n
+      \   )\n    ^\n  File \"/sage/.venv/lib/python3.14/site-packages/sage_extensions/categories/group/g_sets.py\",
+      line 305, in preimage_coset_space\n    return self.pointed_orbit(\n           ~~~~~~~~~~~~~~~~~~^\n
+      \       subgroup, points(morphism.codomain().one()),\n        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n
+      \       lambda element, point: points(image(element) * point.representative()),\n
+      \       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n
+      \       augmentation,\n        ^^^^^^^^^^^^^\n    )\n    ^\n  File \"/sage/.venv/lib/python3.14/site-packages/sage_extensions/categories/group/g_sets.py\",
+      line 442, in pointed_orbit\n    points, words, transitions = self._orbit_words(\n
+      \                                ~~~~~~~~~~~~~~~~~^\n        (base,), action,
+      augmentation, retain_transitions=True,\n        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n
+      \   )\n    ^\n  File \"/sage/.venv/lib/python3.14/site-packages/sage_extensions/categories/group/g_sets.py\",
+      line 235, in _orbit_words\n    if image_key not in rank:\n       ^^^^^^^^^^^^^^^^^^^^^\n
+      \ File \"/sage/.venv/lib/python3.14/site-packages/sage_extensions/categories/group/g_sets.py\",
+      line 1862, in __hash__\n    return hash((id(self.parent()), self._canonical_key()))\n
+      \                                   ~~~~~~~~~~~~~~~~~~~^^\n  File \"sage/misc/cachefunc.pyx\",
+      line 2328, in sage.misc.cachefunc.CachedMethodCallerNoArgs.__call__\n    self.cache
+      = f(self._instance)\n  File \"/sage/.venv/lib/python3.14/site-packages/sage_extensions/categories/group/g_sets.py\",
+      line 1850, in _canonical_key\n    return None if key is None else key(self.representative())\n
+      \                                   ~~~^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/sage/.venv/lib/python3.14/site-packages/sage_extensions/categories/group/groups.py\",
+      line 693, in position_of\n    return int(libgap.PositionCanonical(self._transversal,
+      self._multiplier(element))) - 1\n               ~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n
+      \ File \"sage/libs/gap/element.pyx\", line 2757, in sage.libs.gap.element.GapElement_Function.__call__\n
+      \   GAP_Enter()\nsage.libs.gap.util.GAPError: Error, reached the pre-set memory
+      limit\n(change it with the -o command line option)\n"
+    seconds: 5609.902992101001
+    recorded_at: 2026-11-17 13:30:31.035019+00:00
+    run_url: https://github.com/dzackgarza/lattice-database/actions/runs/44077055181/attempts/1
+    database_revision: 4c92ce1f891c155dc542d0bafa66a74f313efbc5
+    research_revision: c0e414ccddba77cc9b3dd00428e4af08fc4ecc21
+  notes: []
 6JRR integral.overlattice_count:
   disposition: open
   attempts:
