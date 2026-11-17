@@ -6762,3 +6762,172 @@
     database_revision: 78f7de25079d8f172ddbefbc2e801f1f1f78565f
     research_revision: fd5938673ac26b6bca275b8435694f1298cee611
   notes: []
+6JRR integral.primitive_orbits:
+  disposition: open
+  attempts:
+  - hash: 275f2963e24b4faab5ca4624bc90e69d91ada1c29ec4aac2c63b2b3b6c09a520
+    gram_tensor:
+    - - 2
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+    - - 0
+      - 0
+      - 2
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+    - - 0
+      - 2
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+    - - 0
+      - 0
+      - 0
+      - -4
+      - 0
+      - 2
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+    - - 0
+      - 0
+      - 0
+      - 0
+      - -4
+      - 0
+      - 2
+      - 0
+      - 0
+      - 0
+      - 0
+    - - 0
+      - 0
+      - 0
+      - 2
+      - 0
+      - -4
+      - 2
+      - 0
+      - 0
+      - 0
+      - 0
+    - - 0
+      - 0
+      - 0
+      - 0
+      - 2
+      - 2
+      - -4
+      - 2
+      - 0
+      - 0
+      - 0
+    - - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 2
+      - -4
+      - 2
+      - 0
+      - 0
+    - - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 2
+      - -4
+      - 2
+      - 0
+    - - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 2
+      - -4
+      - 2
+    - - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 2
+      - -4
+    reason: exit status 1
+    stderr: "Traceback (most recent call last):\n  File \"<frozen runpy>\", line 203,
+      in _run_module_as_main\n  File \"<frozen runpy>\", line 88, in _run_code\n  File
+      \"/home/runner/work/lattice-database/lattice-database/src/latticedb/sage_genus.py\",
+      line 414, in <module>\n    main()\n    ~~~~^^\n  File \"/home/runner/work/lattice-database/lattice-database/src/latticedb/sage_genus.py\",
+      line 409, in main\n    _compute(request)\n    ~~~~~~~~^^^^^^^^^\n  File \"/home/runner/work/lattice-database/lattice-database/src/latticedb/sage_genus.py\",
+      line 394, in _compute\n    _run(\n    ~~~~^\n        tag,\n        ^^^^\n        [field],\n
+      \       ^^^^^^^^\n        lambda: {field: SERIES[field](lattice, request[\"series_bound\"])
+      if field in SERIES else VALUES[field](lattice)},\n        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n
+      \   )\n    ^\n  File \"/home/runner/work/lattice-database/lattice-database/src/latticedb/sage_genus.py\",
+      line 336, in _run\n    values = compute()\n  File \"/home/runner/work/lattice-database/lattice-database/src/latticedb/sage_genus.py\",
+      line 397, in <lambda>\n    lambda: {field: SERIES[field](lattice, request[\"series_bound\"])
+      if field in SERIES else VALUES[field](lattice)},\n                                                                                            ~~~~~~~~~~~~~^^^^^^^^^\n
+      \ File \"/home/runner/work/lattice-database/lattice-database/src/latticedb/sage_genus.py\",
+      line 250, in <lambda>\n    \"primitive_orbits\": lambda lattice: _orbit_series(lattice.primitive_orbit_series()),\n
+      \                                                     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^\n
+      \ File \"/sage/.venv/lib/python3.14/site-packages/sage_extensions/categories/lattices.py\",
+      line 4498, in primitive_orbit_series\n    return primitive_orbit_series(self,
+      bound=bound)\n  File \"/sage/.venv/lib/python3.14/site-packages/sage_extensions/categories/lattice_orbit_invariants.py\",
+      line 177, in primitive_orbit_series\n    return _primitive_isotropic_line_series(lattice)\n
+      \ File \"/sage/.venv/lib/python3.14/site-packages/sage_extensions/categories/lattice_orbit_invariants.py\",
+      line 141, in _primitive_isotropic_line_series\n    \"constant\": subgroup.isotropic_orbit_representatives(1).cardinality(),\n
+      \               ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^\n  File \"/sage/.venv/lib/python3.14/site-packages/sage_extensions/categories/lattice_morphisms.py\",
+      line 5403, in isotropic_orbit_representatives\n    return _isotropic_orbit_representatives(self,
+      rank, flag=flag)\n  File \"/sage/.venv/lib/python3.14/site-packages/sage_extensions/timing.py\",
+      line 392, in timed\n    with stage(name, input(*arguments, **keywords)):\n         ~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n
+      \ File \"/opt/uv-python/cpython-3.14.10-linux-x86_64-gnu/lib/python3.14/contextlib.py\",
+      line 141, in __enter__\n    return next(self.gen)\n  File \"/sage/.venv/lib/python3.14/site-packages/sage_extensions/timing.py\",
+      line 344, in stage\n    \"commit\": current_commit(),\n              ~~~~~~~~~~~~~~^^\n
+      \ File \"/sage/.venv/lib/python3.14/site-packages/sage_extensions/timing.py\",
+      line 248, in current_commit\n    (\"git\", \"-C\", str(_source_tree()), \"rev-parse\",
+      \"HEAD\"),\n                      ~~~~~~~~~~~~^^\n  File \"/sage/.venv/lib/python3.14/site-packages/sage_extensions/timing.py\",
+      line 214, in _source_tree\n    assert (tree / \"pyproject.toml\").is_file(),
+      (\n           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^\nAssertionError: the source
+      tree of /sage/.venv/lib/python3.14/site-packages/sage_extensions is /sage/.venv/lib/python3.14,
+      which holds no pyproject.toml: the timing record has no checkout to be written
+      into\n"
+    seconds: 0.7448973799999976
+    recorded_at: 2026-11-17 11:56:38.942339+00:00
+    run_url: https://github.com/dzackgarza/lattice-database/actions/runs/44077055181/attempts/1
+    database_revision: 4c92ce1f891c155dc542d0bafa66a74f313efbc5
+    research_revision: c0e414ccddba77cc9b3dd00428e4af08fc4ecc21
+  notes: []

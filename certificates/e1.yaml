@@ -31370,11 +31370,17 @@
 3I0G integral.spinor_genus_count:
   hash: 3bd380005b515e29653ca74fc0924b8bc77c96e9bfc499c37c6670aac0a10ef3
   by: research preamble
+6JRR automorphisms.automorphism_group_generator_morphisms:
+  hash: 785c8c9214c27bc75942a75a5b1bbdc1af9a8604d3e094e22dc69abea78e65a7
+  by: research preamble
 6JRR derive:
   hash: fc58a2a5c04d528184492c0ed5e2beed56005f6c9f7eff25662da9e6a88a34b0
   by: research preamble
 6JRR form.integer_valued:
   hash: 96d0bf04d04f3d6eaff79ab1f17cc3d72e23fe8fe95340378fda316b15c68df1
+  by: research preamble
+6JRR integral.anisotropic_primes:
+  hash: 000a0cf69d40037137de8d1340ab9613d0fc02bfe7b5c79bddd0f5ff9cd831d3
   by: research preamble
 6JRR integral.discriminant_form:
   hash: 0be391409303d25f25d126795ee881040661b4883ad7473272b34b60b8c414da
@@ -31387,4 +31393,22 @@
   by: research preamble
 6JRR integral.genus_symbol:
   hash: 7ae1183ff01d083ec5990da4a6fdb4f8a14882c2c8d52557470258e6b78493b8
+  by: research preamble
+6JRR integral.hyperbolic_index:
+  hash: bbb546b27447d2d196f6ab55ad05f083401cd0374444fbfd7897519a7f57853e
+  by: research preamble
+6JRR integral.local_densities:
+  hash: b5b425b999b8e6193a6940c9195da942df34656aa6e81f0c4b1f778232b70474
+  by: research preamble
+6JRR integral.local_representations:
+  hash: 191495e75b2caffd9a835f11940c160e3ccf6ea2fded7b66c56eae2f9e9d9a00
+  by: research preamble
+6JRR integral.modular_scale:
+  hash: a5655af60d2d483494c8162620b136155af562098fdb2bdb93a398645faf5199
+  by: research preamble
+6JRR integral.spinor_genera:
+  hash: 996405fa28d81289a0ee178c219695e2104fbabe6ec403a5ff4a73572423dcb2
+  by: research preamble
+6JRR integral.spinor_genus_count:
+  hash: 7adc1c4e5ebc12924eea747e2662f0b3798119f88256f41c456009de3a465ccd
   by: research preamble
