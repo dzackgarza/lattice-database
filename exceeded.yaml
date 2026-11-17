@@ -329,10 +329,6 @@
 02QY definite.regular:
   hash: 717ba66479235a6e9cf534d9678a763c715b54ef0e583c63c3ee7e15bb9159fd
   seconds: 7000
-02SZ integral.discriminant_form:
-  hash: 87eabd26e40ad833fa6e8db6d40d6b1938b8c8d964ce3f7b04cc92de71b0b523
-  seconds: 0
-  lost: true
 02TQ definite.regular:
   hash: 20e6a28c861ef03104834c52a671646d3ad68992aa0b1750a67913b8b09b64ee
   seconds: 6674
@@ -465,6 +461,10 @@
 077Q definite.regular:
   hash: 914902341abad2a39c8826f5252d6b055b15688bc1c8d16016333081f7fab22c
   seconds: 6640
+0874 integral.discriminant_form:
+  hash: 3f727b7d9a1be60e8ab3ce37cc471a85010e2bd6bea64dc18794d2098cf908f6
+  seconds: 0
+  lost: true
 0BD5 integral.discriminant_form:
   hash: 3b38334405df25d386c64c40caf741ea33097b10fc3cd6db77caef48724a968c
   seconds: 0
