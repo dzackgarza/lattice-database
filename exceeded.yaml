@@ -867,9 +867,6 @@
   hash: 1198cac64c9a933e830caab7bd6f3d6c5c82027c25fc865491035c3839b18532
   seconds: 0
   lost: true
-3D48 integral.discriminant_form:
-  hash: 156594de9fbda801027aa65b2894f9c63b2f302fe413a57b858ae87fd542f735
-  seconds: 37
 3EQJ integral.overlattice_count:
   hash: 52066d7af793638c57d3ece509269d08dd6799446070c618d0cd23ca318c4c3c
   seconds: 25
@@ -1166,7 +1163,8 @@
   lost: true
 6JRR arithmetic-group.otilde-plus-t-co.index_in_orthogonal_group:
   hash: acad0e18f0c158ad5bda122e435bae4133bd93287223e2a8ce2c8b611148e2d3
-  seconds: 9305
+  seconds: 1697
+  lost: true
 6JRR arithmetic-group.otilde-t-co.generator_morphisms:
   hash: 835e87dc1e3a87479bc8a0df960b89c8b784d51c402ba78e88834ad5beb3b7e3
   seconds: 4782
