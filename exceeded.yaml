@@ -848,10 +848,6 @@
   hash: be0f87342249181c63ab96ea45111efdebebd880e9e20d14fe5276fd4afcfa4e
   seconds: 0
   lost: true
-3D07 integral.discriminant_form:
-  hash: 1198cac64c9a933e830caab7bd6f3d6c5c82027c25fc865491035c3839b18532
-  seconds: 0
-  lost: true
 3D36 integral.discriminant_form:
   hash: ba7b95a28f4d55b79db27bb80161229f9f65c26f08f5ca68a67e01c95f14b11c
   seconds: 0
@@ -1157,6 +1153,10 @@
 58S6 integral.local_densities:
   hash: e5378e409c24f7701e373876b32586a87eb5a9cf04b7ada7350ac466781f0804
   seconds: 0
+  lost: true
+6DZV integral.hyperbolic_index:
+  hash: ca0d093d714ad70bb988982269bad8cb22c7a81676873bd73479ab3ceaf6f0bf
+  seconds: 10
   lost: true
 6GDZ integral.hyperbolic_index:
   hash: ed02ed6d047b000b8fc05065d50c800b2fd9143ed492530205f600fa79b6f59b
