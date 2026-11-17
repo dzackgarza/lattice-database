@@ -425,8 +425,9 @@ certificate makes the stored result reusable in subsequent certification runs.
 A consumer that needs one card's values certifies that card alone: `latticedb certify --tag 6JRR --minutes 30`, or from the checkout `just certify --tag 6JRR --minutes 30`, which runs the same command with the research preamble on `PYTHONPATH` and the repository's Sage Python.
 Run it from the checkout that holds `lattices/` and `certificates/`, repeat `--tag` to name several cards, and leave `--tag` off only for the CI phase, which takes the whole corpus and divides it with `--shard i/n`.
 It writes the card `lattices/<TAG>.md`, whose computed fields are replaced and whose `certifications` gain one entry per completed value, `certificates/<group>.yaml` with each certificate's hash and provenance, and `failures.yaml` for a computation whose worker died; a computation still running when `--minutes` ends stays in `exceeded.yaml` and certifies nothing.
-It prints each card's stored values as it stores them and exits 0 unless a worker died.
+It prints each card's stored values as it stores them and exits 0 unless a worker failed on an error.
 A preamble call that raises, or an owner value the database rejects (`_rational`, #4), ends that Sage worker and not the run: its input and stderr go to `failures.yaml`, every value completed before the raise is stored and certified, and the command then exits non-zero with `ChildProcessError: <path>/sage_genus.py failed on <TAG> (exit status 1)` and the worker's traceback on stderr, which quarantines that computation until `retry-computation` releases it.
+A worker that the run itself ended is not such an error. When the machine runs out of memory, or a signal kills the worker, the card is left as it was, the computation's cost is logged in `exceeded.yaml` with the memory the worker held and the floor the run was keeping (`peak_bytes`, `limit_bytes`) or with the signal, and the command continues with the rest of its queue and still exits 0.
 
 **Verify:** `just verify` is read-only.
 A Gram tensor determines its lattice, so two cards stating one Gram tensor are a verification error.
@@ -494,9 +495,10 @@ contributed to. Workflow conclusions describe execution status, while the commit
 card and certificate changes establish what the database retained.
 
 `exceeded.yaml` is the permanent log of computations that a certification job ended before they finished.
-An entry maps the computation name to a hash of that name and the Gram tensor, and to the seconds the computation had run when the job's timeout ended it.
+An entry maps the computation name — `<tag> <stage>`, or `<tag> worker` for a worker that died before it announced a stage — to a hash of that name and the Gram tensor, and to the seconds the computation had run when the job's timeout ended it.
 Certification starts the entry at zero elapsed seconds, checkpoints actual runtime every thirty seconds and on graceful termination, and deletes it when the computation finishes.
 A hard kill retains the latest checkpoint; an early interruption remains eligible for retry.
+An entry also says what ended the computation when the run killed it: `killed_by` is `memory` when the run killed the worker to keep its memory floor and otherwise the signal that killed it, with `peak_bytes` the memory the worker held when the run measured it and `limit_bytes` the floor the run keeps available.
 A computation that ran for at least five hours is held for manual triage and an
 explicit retry decision.
 A computation that ran for less is requested first in its phase by the next job, after any required derivation.
@@ -519,9 +521,12 @@ finishing and their results being persisted.
 The semi-decisions (`roots`, `norms`, `reflective`, `regular`, `spinor_regular`) of every card are queued after all the other fields of every card, since one that does not return holds its worker for the rest of the job.
 A cut search leads that phase: every job ends inside a search, and resuming it at the start of the next job would hold its workers through the fields that every procedure finishes.
 A card that still needs derivation carries its record into that later request, and the worker derives it again only to select the searches that apply.
-When less than a tenth of the machine's memory is available, certification kills the worker holding the most memory and reports that card as a failure, so a computation that outgrows the runner costs its own card and not the whole job.
+When less than a tenth of the machine's memory is available, certification kills the worker holding the most memory and reports that card as a cost, so a computation that outgrows the runner costs its own card and not the whole job.
 Its computation enters the manual triage ledger and stays out of automatic retries
-while its disposition is `open`.
+while its disposition is `open`, and its `exceeded.yaml` entry keeps the memory it held
+and the floor it crossed.
+A worker killed by any other signal is recorded the same way, with the signal that ended
+it; a container out-of-memory kill arrives as signal 9. Neither ends the run.
 The nightly workflow runs `--shard i/16` on sixteen runners; a card belongs to the shard given by a SHA-256 hash of its tag, so the shards partition the corpus.
 Every half hour and at the end of its job, each shard pushes what it has certified since its last push onto `main` (`.github/scripts/persist.sh`), so a runner that dies loses at most half an hour.
 `.gitattributes` merges the files of `certificates/`, `exceeded.yaml` and `failures/`

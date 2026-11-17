@@ -460,11 +460,20 @@ def computed(chosen: list[Request], deadline: float, workers: int) -> Generator[
     search that never returns holds back only its own worker. A worker that exits while
     holding a card yields `{"tag": tag, "failed": reason}`; another takes the remaining
     cards, beginning with the computations of that card that had not started.
+
+    The two ways a worker ends are told apart by what its exit reports, which is all the
+    parent can observe of it. A worker that returned has a non-negative `returncode` and
+    `exit status N`; one that raised has a positive one and its traceback on stderr. A
+    worker that was killed has a negative one, the negated signal, and no traceback: the
+    run's own memory kill is known from the reserve check that sent its SIGKILL, and
+    `killed` then carries the memory the worker held and the floor the run was keeping,
+    both measured at the kill. Any other signal is reported by its number, so a container
+    out-of-memory kill — which arrives as signal 9 — is recorded as one.
     """
     queue = deque(chosen)
     if not queue:
         return
-    reserve = MEMORY_RESERVE * _meminfo("MemTotal")
+    reserve = int(MEMORY_RESERVE * _meminfo("MemTotal"))
     holding: dict[subprocess.Popen[bytes], Request] = {}
 
     def next_request() -> Request:
@@ -480,6 +489,7 @@ def computed(chosen: list[Request], deadline: float, workers: int) -> Generator[
     started: dict[subprocess.Popen[bytes], set[str]] = {}
     pending: dict[subprocess.Popen[bytes], bytes] = {}
     exhausted: set[subprocess.Popen[bytes]] = set()
+    peaks: dict[subprocess.Popen[bytes], int] = {}
     errors: dict[subprocess.Popen[bytes], BinaryIO] = {}
     with ExitStack() as resources, selectors.DefaultSelector() as selector:
 
@@ -549,8 +559,12 @@ def computed(chosen: list[Request], deadline: float, workers: int) -> Generator[
                     yield {"checkpoint": True}
                 candidates = [process for process in holding if started[process] and process not in exhausted]
                 if candidates and _meminfo("MemAvailable") < reserve:
-                    largest = max(candidates, key=lambda process: _resident_bytes(process.pid))
+                    # The kill costs that card and not the runner, so its cost is measured here:
+                    # this is the only moment the memory the worker holds can be observed (#46).
+                    resident = {process: _resident_bytes(process.pid) for process in candidates}
+                    largest = max(candidates, key=resident.__getitem__)
                     exhausted.add(largest)
+                    peaks[largest] = resident[largest]
                     os.killpg(largest.pid, signal.SIGKILL)
                 for key, _ in selector.select(min(5, remaining)):
                     process = key.data
@@ -566,11 +580,23 @@ def computed(chosen: list[Request], deadline: float, workers: int) -> Generator[
                             unstarted = [field for field in request["fields"] if field not in begun]
                             if begun and unstarted and "derive" not in request["fields"]:
                                 queue.appendleft({**request, "fields": unstarted})
-                            reason = "memory exhausted" if process in exhausted else f"exit status {process.returncode}"
+                            signal_number = -process.returncode if process.returncode is not None and process.returncode < 0 else None
+                            kill: dict[str, Yaml] = {}
+                            if process in exhausted:
+                                reason = "memory exhausted"
+                                kill = {"by": "memory", "peak": peaks[process], "limit": reserve}
+                            elif signal_number is not None:
+                                # No traceback to read: the signal is all that ended it, and a
+                                # container out-of-memory kill arrives here as signal 9.
+                                reason = f"killed by signal {signal_number}"
+                                kill = {"by": f"signal {signal_number}"}
+                            else:
+                                reason = f"exit status {process.returncode}"
                             error = stderr(process)
-                            yield {"tag": request["tag"], "failed": reason, **({"stderr": error} if error else {})}
+                            yield {"tag": request["tag"], "failed": reason, **({"killed": kill} if kill else {}), **({"stderr": error} if error else {})}
                         errors.pop(process).close()
                         exhausted.discard(process)
+                        peaks.pop(process, None)
                         # A worker that ends before starting a computation would end its successor alike.
                         if queue and (request is None or begun):
                             spawn()
@@ -801,6 +827,10 @@ def certify(
     finishes, checkpointing the seconds actually spent in this run. A worker that
     fails on a card ends no other card's computations; the run raises after the
     queue is done, so the failure is reported with every completed value stored.
+    A worker the run ends rather than the card — killed because the machine ran out
+    of memory, or by a signal — costs only its own card: its computation is logged
+    in `exceeded.yaml` with what the run observed of the kill, and the card is left
+    as it was, so the run reports the cost and still exits 0 (#46).
     """
     by_tag = {entry.lattice.tag: entry for entry in loaded.entries}
     log = exceeded.load(root)
@@ -864,20 +894,33 @@ def certify(
                     break
                 if "failed" in values:
                     tag = str(values["tag"])
+                    lattice = by_tag[tag].lattice
+                    killed = values.get("killed")
+                    kill = killed if isinstance(killed, dict) else None
                     active = [computation for computation in running if computation.startswith(f"{tag} ")]
                     for computation in active or [f"{tag} worker"]:
-                        elapsed = time.monotonic() - running[computation] if computation in running else 0
-                        failed[computation] = failures.record(root, computation, by_tag[tag].lattice, str(values["failed"]), str(values.get("stderr", "")), elapsed)
-                    for computation in active:
-                        started_at = running.pop(computation)
-                        if values["failed"] == "memory exhausted":
-                            # Preserve its interruption evidence; triage quarantines the retry.
-                            log[computation] = exceeded.Interruption(hash=log[computation].hash, seconds=int(time.monotonic() - started_at), lost=True)
-                        else:
+                        started_at = running.pop(computation, None)
+                        elapsed = time.monotonic() - started_at if started_at is not None else 0.0
+                        failed[computation] = failures.record(root, computation, lattice, str(values["failed"]), str(values.get("stderr", "")), elapsed)
+                        if kill is None:
                             # A failure is a defect to repair, not a computation that outran its job.
                             log.pop(computation, None)
+                            continue
+                        # The run ended this worker, so what it cost is recorded, not raised: the
+                        # entry's key names the card and the stage, and the values are what the
+                        # run observed of the kill (#46).
+                        peak, limit = kill.get("peak"), kill.get("limit")
+                        log[computation] = exceeded.Interruption(
+                            hash=exceeded.input_hash(computation, lattice),
+                            seconds=int(elapsed),
+                            lost=True,
+                            killed_by=str(kill["by"]),
+                            peak_bytes=peak if isinstance(peak, int) else None,
+                            limit_bytes=limit if isinstance(limit, int) else None,
+                        )
                     exceeded.save(root, log)
-                    worker_failures.append(f"{tag} ({values['failed']})")
+                    if kill is None:
+                        worker_failures.append(f"{tag} ({values['failed']})")
                     continue
                 entry = by_tag[str(values["tag"])]
                 worker_name = f"{entry.lattice.tag} worker"

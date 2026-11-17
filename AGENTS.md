@@ -160,7 +160,10 @@ certification job without finishing is logged in `exceeded.yaml` and held for ma
 so later CI runs spend their budgets on other work until an explicit retry is justified.
 
 Worker errors and memory failures enter `failures/` with their input, stderr,
-runtime and CI provenance. Open entries quarantine the matching computation and input
+runtime and CI provenance. A worker the run itself ended — killed for memory or by a
+signal — is a cost, not an error: its computation is logged in `exceeded.yaml` with the
+memory it held and the floor it crossed, the card is left as it was, and the run
+continues. Open entries quarantine the matching computation and input
 for manual triage. An explicit retry records the repair or investigation, releases the
 computation and retains its evidence; a successful retry resolves it. Completed values
 and the triage ledger are persisted together. `README.md` owns the inspection and

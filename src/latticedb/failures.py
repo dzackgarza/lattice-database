@@ -161,6 +161,5 @@ def recover(root: Path, lattices: dict[str, Lattice], interruptions: exceeded.In
         entry = entries.get(computation)
         if entry is not None and entry.attempts[-1].hash == interruption.hash:
             continue
-        reason = "worker or runner lost" if interruption.lost else "certification budget exhausted"
-        entries[computation] = record(root, computation, lattice, f"{reason} (recovered from exceeded.yaml)", "", interruption.seconds)
+        entries[computation] = record(root, computation, lattice, f"{exceeded.reason(interruption)} (recovered from exceeded.yaml)", "", interruption.seconds)
     return entries
