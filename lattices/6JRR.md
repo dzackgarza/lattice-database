@@ -5,6 +5,11 @@ latex: T_{\mathrm{Co}}
 aliases: [Coble lattice]
 certifications:
   integral.discriminant_form: 0be391409303d25f25d126795ee881040661b4883ad7473272b34b60b8c414da
+  derive: fc58a2a5c04d528184492c0ed5e2beed56005f6c9f7eff25662da9e6a88a34b0
+  form.integer_valued: 96d0bf04d04f3d6eaff79ab1f17cc3d72e23fe8fe95340378fda316b15c68df1
+  integral.elementary_primes: 32545f4c763545bb5467152a650f6a22b4183d9aa45fdcd9da20dd7be1c474a7
+  integral.genus_symbol: 7ae1183ff01d083ec5990da4a6fdb4f8a14882c2c8d52557470258e6b78493b8
+  integral.genus_class_count: 7243bd5404f045797450584d7abd512e3f919fe3fcf446139f92118eae583f5c
 rank: 11
 gram_tensor:
 - [2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
@@ -21,8 +26,29 @@ gram_tensor:
 signature: [2, 9]
 determinant: -2048
 definiteness: indefinite
+dual_gram_tensor:
+- [1/2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+- [0, 0, 1/2, 0, 0, 0, 0, 0, 0, 0, 0]
+- [0, 1/2, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+- [0, 0, 0, -2, -5/2, -7/2, -5, -4, -3, -2, -1]
+- [0, 0, 0, -5/2, -4, -5, -15/2, -6, -9/2, -3, -3/2]
+- [0, 0, 0, -7/2, -5, -7, -10, -8, -6, -4, -2]
+- [0, 0, 0, -5, -15/2, -10, -15, -12, -9, -6, -3]
+- [0, 0, 0, -4, -6, -8, -12, -10, -15/2, -5, -5/2]
+- [0, 0, 0, -3, -9/2, -6, -9, -15/2, -6, -4, -2]
+- [0, 0, 0, -2, -3, -4, -6, -5, -4, -3, -3/2]
+- [0, 0, 0, -1, -3/2, -2, -3, -5/2, -2, -3/2, -1]
+form:
+  integer_valued: true
 integral:
+  elementary_primes: [2]
   parity: even
+  level: 4
+  discriminant_group: [2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2]
+  delta: 1
+  bad_reduction_primes: [2]
+  genus_symbol: 'II_{2,9} (2: [2^11]_1)'
+  genus_class_count: 1
   discriminant_form:
     orthogonal_group_order: 46998591897600
     isotropic_classes: 528
