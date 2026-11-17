@@ -836,9 +836,6 @@
 3A0P integral.discriminant_form:
   hash: d66d256e8c0a380fa21d69ff5318c6d79ca9ec0a17a009b79bca8213b61beee7
   seconds: 41
-3A1T integral.discriminant_form:
-  hash: 60c58c253cc121685bba5c1ec3b23319a4083ad861e107526be11dc42bdf68c8
-  seconds: 103
 3A5Q integral.discriminant_form:
   hash: 033bc57d3f1cdfb57071633f20031f65943a3b5fa81ef62634e7f0bc2f2bcd8c
   seconds: 88
@@ -857,6 +854,10 @@
 3BV3 definite.siegel_eisenstein_coefficients:
   hash: 4be43fed87facb172ca082e1bbd69e4a81eca70025fe243420745dac788d942a
   seconds: 12
+  lost: true
+3CM6 integral.discriminant_form:
+  hash: 04ab421bdd7e70b91e716064e4e7402c11873898d68a5bb968a108962081a679
+  seconds: 0
   lost: true
 3CSU integral.discriminant_form:
   hash: c5ae18a3e9f0f727fb2432c495e9b6a2c533758f201f2a1062529633acbd81f9
