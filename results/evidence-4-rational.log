@@ -1,0 +1,15 @@
+--- local_density(2, m): a localization element
+m=1 type=sage_extensions.owned_category.OwnedJoinCategory.element_class str='(3)/(2)' num=3 den=2 rational='3/2'
+   Fraction(str(value)) -> ValueError: Invalid literal for Fraction: '(3)/(2)'
+m=2 type=sage_extensions.owned_category.OwnedJoinCategory.element_class str='(3)/(2)' num=3 den=2 rational='3/2'
+   Fraction(str(value)) -> ValueError: Invalid literal for Fraction: '(3)/(2)'
+m=4 type=sage_extensions.owned_category.OwnedJoinCategory.element_class str='(3)/(4)' num=3 den=4 rational='3/4'
+   Fraction(str(value)) -> ValueError: Invalid literal for Fraction: '(3)/(4)'
+--- theta_series coefficients: an owned ring element
+q^0 type=sage_extensions.owned_category.OwnedJoinCategory.element_class str='1' rational=1
+q^1 type=sage_extensions.owned_category.OwnedJoinCategory.element_class str='6' rational=6
+q^2 type=sage_extensions.owned_category.OwnedJoinCategory.element_class str='12' rational=12
+q^3 type=sage_extensions.owned_category.OwnedJoinCategory.element_class str='8' rational=8
+_coefficients -> [1, 6, 12, 8]
+--- the real _local_densities path
+[{'prime': 2, 'densities': ['3/2', '3/2', 1, '3/4']}]
