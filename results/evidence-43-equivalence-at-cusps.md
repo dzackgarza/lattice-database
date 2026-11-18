@@ -134,3 +134,23 @@ So the 18 min 20 s non-return is not a slow computation: the entry point the amb
 upstream, and that is why (4.3.7), (4.3.8) and (4.3.9) cannot be decided here. The row's own acceptance says such an
 obligation "remain[s] open until their owning implementation supplies the stated result" — which is sage-extensions#72,
 not this card.
+
+## Four constructive families, all exhausted
+
+The exact decision being unavailable, every family this repository can construct was walked, each ending in breadth-first
+walk on the classes and each verified at the end by the exact membership test where a candidate was found:
+
+| family | depth | classes reached | transporter |
+| --- | --- | --- | --- |
+| the chamber's own walls' reflections (`results/probe-43-wv-orbits.py`) | 12 | 295 | none |
+| the stabilizer's generators and those reflections (`results/probe-43-seeded-transporter.py`) | 4 | 4956 | none |
+| a supergroup seed plus the stabilizer's generators | 4 | 4956 | none |
+| words in the parabolic, each composed with a supergroup witness (`results/probe-43-parabolic-transporter.py`) | 4 | 423317 | none |
+
+The last one is the sharpest test available: an `h` in the parabolic generators with `h(w(v)) = v` and `h(r') = r' + t v`
+would make `h w` fix the cusp and land the class, and `image.contains(image.reduction_image(h w), lift=h w)` — exact, and
+cheap — would have certified it. No such `h` occurs within four generators.
+
+So the row is not merely "not searched enough": the constructible part of `G_v` does not move the classes at any depth
+these families reach, and the exact decision is a disabled entry point upstream. That is the whole of the blockage, and it
+is not in this card.
