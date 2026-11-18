@@ -4533,7 +4533,7 @@
     research_revision: 791a3ac8ed7b2e6799d8e3e0a43e1fd34ad3aae5
   notes: []
 6JRT integral.primitive_orbits:
-  disposition: open
+  disposition: resolved
   attempts:
   - hash: ad2e302a2c686bd8b7a812a09590e5e1d6d223405af849c77b37d73e6cde9f8e
     gram_tensor:
@@ -4590,4 +4590,10 @@
     run_url: https://github.com/dzackgarza/lattice-database/actions/runs/42326648686/attempts/1
     database_revision: 78ef8ce6285aef04059b2c35e88a0ae1a3f57a96
     research_revision: e94f00da5a9e4670e0480613dd6f5e3d87c75923
-  notes: []
+  notes:
+  - '2026-11-18T00:42:25.133374+00:00: sage-extensions#286 landed: primitive_orbit_series
+    returns the primitive isotropic line series on an indefinite lattice, and certify
+    has asked it one row at a time (primitive_orbits[O], [Otilde], [Otilde+]) since
+    #7, so the whole-field computation this entry names is not the one a request asks;
+    the recorded defect is the Cardinal serialization fixed by _orbit_count (#16).
+    Released for lattice-database#13.'
