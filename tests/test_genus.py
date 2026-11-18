@@ -338,13 +338,14 @@ def test_a_certified_value_is_not_requested(tmp_path: Path) -> None:
     assert "genus_class_count" in genus.requests(loaded, held, {}, ("0012",))[0]["fields"]
 
 
-def test_a_definite_binary_lattice_requests_regularity_and_its_spinor_fields(
+def test_a_definite_binary_lattice_requests_regularity_and_no_spinor_field(
     tmp_path: Path,
 ) -> None:
-    """#8: a rank-2 definite card is asked for the spinor fields, and a refusal is asked once.
+    """#29: a rank-2 definite card is asked for `regular`, and for no spinor field.
 
-    The owner refuses these on a binary lattice. That refusal is the answer `applies` leaves to
-    it: `failures.record` quarantines the input, and the queue that follows no longer carries it.
+    The owner defines the spinor fields at rank at least three and raises on this card, and that
+    raise ends the worker and then the run, so the rank the card states is what withholds them and
+    the card's other searches are asked as they were.
     """
     (tmp_path / "lattices").mkdir()
     shutil.copy(REPOSITORY / corpus.FAMILIES_FILE, tmp_path / corpus.FAMILIES_FILE)
@@ -352,15 +353,9 @@ def test_a_definite_binary_lattice_requests_regularity_and_its_spinor_fields(
     shutil.copy(REPOSITORY / "lattices" / "0012.md", tmp_path / "lattices")
     fields = [field for request in genus.requests(corpus.load(tmp_path), derived(), {}, ()) for field in request["fields"]]
     assert "regular" in fields
-    assert "spinor_regular" in fields, "where spinor genera are defined is the owner's answer, not the database's"
-    assert "spinor_genus_count" in fields
-
-    lattice = Lattice.model_validate(corpus.front_matter(corpus.read_card(tmp_path / "lattices" / "0012.md")))
-    quarantined = genus.name("0012", "spinor_genus_count", "definite")
-    failures.record(tmp_path, quarantined, lattice, "the spinor-genus count is taken in rank at least three", "", 1.0)
-    after = [field for request in genus.requests(corpus.load(tmp_path), derived(), {}, (), failed=failures.load(tmp_path)) for field in request["fields"]]
-    assert "spinor_genus_count" not in after, "a recorded refusal is quarantined, so the next run does not ask it again"
-    assert "spinor_regular" in after, "and only that computation is quarantined"
+    assert not {"spinor_regular", "spinor_genus_count", "spinor_genera"} & set(fields), (
+        "the spinor fields are defined at rank at least three, and this card has rank 2"
+    )
 
 
 def test_a_definite_binary_lattice_requests_its_genus_series_siegel_product_and_local_conditions(
