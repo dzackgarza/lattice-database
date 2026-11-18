@@ -48,11 +48,14 @@ def hold_certificates(root: Path, tag: str, withhold: tuple[str, ...] = ()) -> N
 
 def test_an_early_termination_does_not_blacklist_a_computation_for_a_whole_job(tmp_path: Path) -> None:
     prepare_card(tmp_path, "0016")
-    hold_certificates(tmp_path, "0016")
-    command = [sys.executable, "-m", "latticedb", "certify", "--minutes", "330", "--tag", "0016", "--root", str(tmp_path)]
     # The roots of U span an index-two sublattice. The preamble's semi-decision
     # for roots generating all of U therefore keeps searching until interrupted.
     computation = genus.name("0016", "roots")
+    # The corpus certifies what it can, so the two searches this test cuts are withheld from the
+    # fixture: by 2026-11-18 the shard held both of them for 0016, and a run with nothing left to
+    # ask exits before it reaches the search the test interrupts (run 44392454284).
+    hold_certificates(tmp_path, "0016", withhold=(computation, genus.name("0016", "norms")))
+    command = [sys.executable, "-m", "latticedb", "certify", "--minutes", "330", "--tag", "0016", "--root", str(tmp_path)]
     with subprocess.Popen(command, stdout=subprocess.PIPE, stderr=subprocess.STDOUT, text=True, start_new_session=True) as process:
         try:
             wait_until = time.monotonic() + 60
