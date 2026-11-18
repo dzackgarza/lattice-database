@@ -17,6 +17,9 @@ certifications:
   integral.anisotropic_primes: d3f49423a5a494d195496f224a9eb92a1a502f79a24d5656bf195cd5b5a2ea15
   integral.local_representations: 95d12404723ba0bf10d0ad54ebc9e9847d9310437eb02e886b63a73827c42d37
   integral.local_densities: f21dbf9468a3411cb64ab8dfba84eba1a957deb7d60fc056b4111a348ebd373d
+  automorphisms.automorphism_group_order: 41460db594ca8fe7ef6f528dc8f1f662f67414ebb70598b4ae88b88698c3cf2b
+  integral.discriminant_sequence: 9643a29ad4b2bff0b93448d48a52ecf9f2560951be12e31788b14552d41ea378
+  integral.discriminant_orbits: fc22f7cbb2cc6957b3c7bec023c1a37c89b9cad6e56e6b920342c81e2cb7ac3e
 rank: 2
 gram_tensor:
 - [0, -1]
@@ -35,6 +38,24 @@ integral:
   level: 1
   modular_scale: 1
   discriminant_group: []
+  discriminant_sequence:
+    discriminant_factors: []
+    discriminant_basis_lifts: []
+    discriminant_quadratic_gram: []
+    discriminant_group_order: 1
+    discriminant_generators: []
+    image_generators:
+    - []
+    - []
+    image_order: 1
+    kernel_order: 4
+    coset_representatives:
+    - []
+    mm_trivial: true
+    image_normal: true
+    quotient_generator_cosets: []
+    quotient_multiplication:
+    - [0]
   overlattice_count: 1
   delta: 0
   bad_reduction_primes: [2]
@@ -79,6 +100,39 @@ integral:
     orthogonal_group_order: 1
     isotropic_classes: 1
     isotropic_orbits: 1
+  discriminant_orbits:
+    Otilde:
+      constant: 1
+      z: [0, 1, 0, 1]
+      w: [0, 1, 0, 1]
+    SOtilde:
+      constant: 1
+      z: [0, 1, 0, 1]
+      w: [0, 1, 0, 1]
+    Otilde+:
+      constant: 1
+      z: [0, 1, 0, 1]
+      w: [0, 1, 0, 1]
+    SOtilde+:
+      constant: 1
+      z: [0, 1, 0, 1]
+      w: [0, 1, 0, 1]
+    O:
+      constant: 1
+      z: [0, 1, 0, 1]
+      w: [0, 1, 0, 1]
+    SO:
+      constant: 1
+      z: [0, 1, 0, 1]
+      w: [0, 1, 0, 1]
+    O+:
+      constant: 1
+      z: [0, 1, 0, 1]
+      w: [0, 1, 0, 1]
+    SO+:
+      constant: 1
+      z: [0, 1, 0, 1]
+      w: [0, 1, 0, 1]
   anisotropic_primes: []
   local_representations:
   - prime: 2
@@ -103,6 +157,7 @@ integral:
   - prime: 2
     densities: [0, 1, 0, 2, 0, 1, 0, 3, 0, 1, 0, 2]
 automorphisms:
+  automorphism_group_order: 4
   automorphism_group_generator_morphisms: [O(L) generator 1, O(L) generator 2]
 indefinite:
   isotropic: true
