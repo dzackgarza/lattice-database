@@ -4,10 +4,12 @@ These tests exercise archived-source parsing and source-to-card transcription.
 They are provenance/importer checks, not mathematical certification.
 """
 
+import gzip
 import shutil
 from fractions import Fraction
 from pathlib import Path
 
+import pytest
 from sage_extensions.categories.lattices import Lattices
 from sage_extensions.categories.modules.framed.formed.form_modules import FormModules
 from sage_extensions.categories.modules.pure.modules import Modules
@@ -40,6 +42,72 @@ def _corpus(directory: Path) -> Path:
     record = _declared("I_{1,0}", [[1]]) | {"rank": 1}
     (lattices / "0001.md").write_text(records.record_text(record, ""))
     return directory
+
+
+def _archive(directory: Path, rows: str) -> Path:
+    """A union archive holding the standard-format rows of `rows`."""
+    directory.mkdir(parents=True, exist_ok=True)
+    path = directory / "union.gz"
+    path.write_bytes(gzip.compress(rows.encode("latin-1")))
+    return path
+
+
+@pytest.mark.parametrize(
+    ("printed", "value"),
+    [
+        ("48", 48),
+        ("2^18", 262144),
+        ("2^13*3^2", 73728),
+        ("2^13 * 3^2", 73728),
+        ("2^17 3^7 5 7 11 = 110361968640", 110361968640),
+        ("737280 = 2^14 * 3^2 * 5", 737280),
+        ("29376= 2^6*3^3*17", 29376),
+        ("<2 10> <3 4> <5 3> <7 1>", 72576000),
+        ("<2, 12>, <3, 4>", 331776),
+        ("[ <2, 9>, <3, 1> ]", 1536),
+        ("|Aut| = 336 * 24 = 2^7 * 3^2 * 7 = 8064", 8064),
+        ("5080320 = 2^8 * 3^4 * 5 * 7^2 */ >;", 5080320),
+    ],
+)
+def test_nebe_sloane_reads_each_printed_form_of_a_group_order(printed: str, value: int) -> None:
+    assert nebe_sloane.order(printed) == value
+
+
+def test_nebe_sloane_refuses_a_group_order_whose_forms_disagree() -> None:
+    with pytest.raises(AssertionError, match="do not give one order"):
+        nebe_sloane.order("48 = 2^5 * 3")
+
+
+def test_nebe_sloane_reads_a_determinant_and_a_group_order_from_the_archive(tmp_path: Path) -> None:
+    archive = _archive(
+        tmp_path,
+        "%NAME\nTwoByTwo\n%DIMENSION\n2\n%DETERMINANT\n5\n%MINIMAL_NORM\n2\n%KISSING_NUMBER\n4\n%GROUP_ORDER\n24 = 2^3 * 3\n%GRAM\n2\n2 1\n1 2\n",
+    )
+    entry = nebe_sloane.archive_entry(archive, "TwoByTwo")
+    assert (entry.dimension, entry.determinant, entry.minimal_norm, entry.kissing_number, entry.group_order) == (2, 5, 2, 4, 24)
+    declared, _ = nebe_sloane.record(entry, "TwoByTwo", "T", (), ())
+    assert declared["determinant"] == 5
+    assert declared["definite"] == {"minimum": 2, "kissing_number": 4, "automorphism_group_order": 24}
+
+
+def test_nebe_sloane_names_a_card_that_disagrees_with_its_archive_row(tmp_path: Path) -> None:
+    """The archived-source check has teeth: it reports the card, not only the absence of trouble."""
+    root = _corpus(tmp_path)
+    source = root / "sources" / "nebe_sloane"
+    archive = _archive(
+        source,
+        "%NAME\nLine\n%DIMENSION\n1\n%DET\n2\n%MINIMAL_NORM\n2\n%KISSING_NUMBER\n2\n%GROUP_ORDER\n12\n%GRAM\n1\n2\n",
+    )
+    entry = nebe_sloane.archive_entry(archive, "Line")
+    declared, prose = nebe_sloane.record(entry, "Line", "L", (), ())
+    (source / "Line.json").write_text(entry.model_dump_json() + "\n")
+    (root / "lattices" / "0002.md").write_text(records.record_text(declared | {"tag": "0002"}, prose))
+    assert nebe_sloane.stored_problems(root, corpus.load(root)) == []
+    disagreed = declared | {"tag": "0002", "definite": declared["definite"] | {"automorphism_group_order": 24}}
+    (root / "lattices" / "0002.md").write_text(records.record_text(disagreed, prose))
+    assert nebe_sloane.stored_problems(root, corpus.load(root)) == [
+        f"{source / 'Line.json'}: source-stated fields differ from record 0002"
+    ]
 
 
 def test_nebe_sloane_writes_the_record_of_a_stored_entry_with_its_reference(
