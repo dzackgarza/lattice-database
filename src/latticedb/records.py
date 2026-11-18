@@ -554,6 +554,11 @@ def local_admission_problems(lattice: Lattice) -> list[str]:
                 found.append("definite.perfect: the stated value differs from L.is_voronoi_perfect()")
         if definite.automorphism_group_order is not None and (definite.automorphism_group_order <= 0 or definite.automorphism_group_order % 2 == 1):
             found.append("definite.automorphism_group_order: x -> -x is an isometry of order 2, so the order is even")
+    automorphisms = lattice.automorphisms
+    if automorphisms is not None and isinstance(automorphisms.automorphism_group_order, int):
+        order = automorphisms.automorphism_group_order
+        if order <= 0 or order % 2 == 1:
+            found.append("automorphisms.automorphism_group_order: x -> -x is an isometry of order 2, so a finite order is even")
     span = lattice.root_span
     if span is not None:
         assert formed is not None

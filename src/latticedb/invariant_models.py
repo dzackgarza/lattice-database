@@ -934,13 +934,21 @@ class RootSystemComponent(Record):
 
 
 class Automorphisms(Record):
-    r"""The generators of $O(L)$ of a lattice whose group is infinite, as isometries of this card.
+    r"""The isometry group of a lattice whose `definite` block does not state it, with its order.
 
-    An indefinite lattice's $O(L)$ is infinite, so the card states no order: the group is
-    presented by the generators it stores, each an isometry $L \to L$ of this card's Gram
-    tensor. A definite lattice states the order with its generators in `definite`.
+    An indefinite lattice's $O(L)$ may be finite or infinite — $|O(U)| = 4$, and $|O(U \oplus U(2))| = \aleph_0$ —
+    so the order is a field of this block, and the group is presented by the generators it stores, each an
+    isometry $L \to L$ of this card's Gram tensor. A definite lattice states the order with its generators
+    in `definite`.
     """
 
+    automorphism_group_order: OrbitCount = Field(
+        default=None,
+        description=(
+            "Order of $O(L)$, computed by CI from the preamble operation `L.orthogonal_group()`: an integer where the group is finite, "
+            "and `aleph0` where the owner states a countably infinite group. $O(L)$ is a subgroup of $GL_n(\\mathbb{Z})$, so it is never uncountable."
+        ),
+    )
     automorphism_group_generator_morphisms: Annotated[tuple[str, ...], Field(strict=False)] | None = Field(
         default=None,
         description=(

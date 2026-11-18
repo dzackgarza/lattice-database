@@ -68,18 +68,19 @@ def _elementary_primes(lattice: Lattices.ParentMethods) -> list[int]:
 
 
 def _orthogonal_group_data(lattice: Lattices.ParentMethods) -> dict[str, JsonValue]:
-    """Serialize the preamble-owned ``O(L)``, its order when it has one, and its selected generators.
+    """Serialize the preamble-owned ``O(L)``: its order, as a count, and its selected generators.
 
-    $O(L)$ of an indefinite lattice is infinite, so that card states the group by its
-    generators and has no order to serialize (#8).
+    $O(L)$ of an indefinite lattice may be finite — $|O(U)| = 4$ — or countably infinite —
+    $|O(U \\oplus U(2))| = \\aleph_0$ — so the order is serialized on every card, through the same
+    cardinal conversion the orbit counts use, and a subgroup of $\\mathrm{GL}_n(\\mathbb{Z})$ is
+    never uncountable (#8).
     """
     group = lattice.orthogonal_group()
     generators = [_matrix_rows(generator) for generator in group.group_generators()]
-    match lattice.definiteness():
-        case "positive_definite" | "negative_definite":
-            return {"automorphism_group_order": int(group.cardinality()), "automorphism_group_generator_morphisms": generators}
-        case _:
-            return {"automorphism_group_generator_morphisms": generators}
+    return {
+        "automorphism_group_order": _orbit_count(group.cardinality()),
+        "automorphism_group_generator_morphisms": generators,
+    }
 
 
 def _standard_subgroup(lattice: Lattices.ParentMethods, standard_name: str) -> object:
