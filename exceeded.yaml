@@ -851,13 +851,13 @@
 3A94 integral.discriminant_form:
   hash: f67d224f1bb506f3f63b0cfc87bfaa6e86bd55a2a115019e957b0259fd6ea829
   seconds: 14
-3AOX integral.discriminant_form:
-  hash: 0926f1f6b235197b9e5088e33a2abad215fc01e768d0f35466aee2e10fee673d
-  seconds: 0
-  lost: true
 3BV3 definite.siegel_eisenstein_coefficients:
   hash: 4be43fed87facb172ca082e1bbd69e4a81eca70025fe243420745dac788d942a
   seconds: 12
+  lost: true
+3CDS integral.discriminant_form:
+  hash: 53db65fb09b5fb5f0f638dbbbb3a13a47f40b643586520b7f1832326e4a60580
+  seconds: 0
   lost: true
 3CLA integral.discriminant_form:
   hash: cc8ccae17573d20be2d87923cf9aa11c2c1870af106d78707d0b76d7f8a4caa7
