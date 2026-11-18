@@ -18,6 +18,7 @@ certifications:
   integral.anisotropic_primes: 69cf345e9b32349e9b417c6691c7afe1615a5d52c4f4c545412ee6de53559155
   integral.local_representations: 1b36d2c8ee4c519c4a0061922f2ecd86397e31249a35b088a4f0b86f2cb625b9
   integral.local_densities: 7ab2aee133b693e258a507af9ad7e38f1f1f807bece629445bf856bd18ce3d02
+  automorphisms.automorphism_group_order: bdac89b70699bb56fe33ea1965629761110a1ee2c975f6e2a6667d3013d42ea4
 rank: 3
 gram_tensor:
 - [-1, 0, 0]
@@ -102,6 +103,7 @@ integral:
   - prime: 2
     densities: [2, 1, 1, 2, 0, 1, 1, 1/2, 2, 1, 1, 1/2]
 automorphisms:
+  automorphism_group_order: aleph0
   automorphism_group_generator_morphisms: [O(L) generator 1, O(L) generator 2, O(L) generator 3, O(L) generator 4]
 indefinite:
   isotropic: true

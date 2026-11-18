@@ -20014,6 +20014,9 @@
 2MND integral.anisotropic_primes:
   hash: d0995d98a648d562c87748d079923f5aa9a7a22df89adc991b43f3723d9b6d55
   by: research preamble
+2MND integral.discriminant_sequence:
+  hash: f61e04b3cb7e7840fcccbf9af08a0d699fadae7391933f4585417a1931091baa
+  by: research preamble
 2MND integral.elementary_primes:
   hash: 0f7ec5333b2b96e5ca3bd62d0f4c6b07b881576bef06c9b733924f113bc39d92
   by: research preamble
@@ -20071,6 +20074,9 @@
 2MPC integral.anisotropic_primes:
   hash: 29f0cddeb4f4b24a0819f251f0135fb154b1cdd6fa37a455f330957a047abc44
   by: research preamble
+2MPC integral.discriminant_sequence:
+  hash: 5c181672124ce5c278531fe6e56503ebeae01a3b6cd84947c322dec2dc43932e
+  by: research preamble
 2MPC integral.elementary_primes:
   hash: 0032430ee18f22eab52c40d462bf0aaf38887f0c719f2a0715215f134c432925
   by: research preamble
@@ -20115,27 +20121,13 @@
   by: research preamble
 2MRF definite.regular:
   hash: 841ce684c7f261a0eb85c8e20676c3271e18f4fbbf57a59fcf94a56e1c054a88
-  by: 'W. C. Jagy, I. Kaplansky and A. Schiemann, There are 913 regular ternary forms,
-    Mathematika 44 (1997), 332-341, form 65, as tabulated in A. G. Doyle, B. Muskat,
-    K. Pehlivan and K. S. Williams, Positive integers represented by regular primitive
-    positive-definite integral ternary quadratic forms, Integers 19 (2019), #A45,
-    Tables 1 and 2; regular by W. C. Jagy, I. Kaplansky and A. Schiemann, There are
-    913 regular ternary forms, Mathematika 44 (1997), 332-341.'
+  by: research preamble
 2MRF definite.siegel_eisenstein_coefficients:
   hash: 9c1142ae6b7cdc4768d1723dc9fc8658988b0d0245664e63b32e2ed8ed62b495
   by: research preamble
 2MRF definite.spinor_regular:
   hash: ab94a85275c8aee85e396c9ac3aba4f0f4116dc4b7d4f9e0de0e5516854234de
-  by: 'W. C. Jagy, I. Kaplansky and A. Schiemann, There are 913 regular ternary forms,
-    Mathematika 44 (1997), 332-341, form 65, as tabulated in A. G. Doyle, B. Muskat,
-    K. Pehlivan and K. S. Williams, Positive integers represented by regular primitive
-    positive-definite integral ternary quadratic forms, Integers 19 (2019), #A45,
-    Tables 1 and 2; regular by W. C. Jagy, I. Kaplansky and A. Schiemann, There are
-    913 regular ternary forms, Mathematika 44 (1997), 332-341; hence spinor regular,
-    since a form is spinor regular if it represents all the positive integers represented
-    by its spinor genus (A. G. Earnest and A. Haensch, Completeness of the list of
-    spinor regular ternary quadratic forms, arXiv:1711.05811v2 (2018), Abstract) and
-    the spinor genus lies in the genus.'
+  by: research preamble
 2MRF definite.theta_series_cuspidal_component:
   hash: 7730bd2ba9880c90ee6a207ce1b3fb237b7ee8ad069500f66776f68fe12b78b9
   by: research preamble
@@ -20147,6 +20139,9 @@
   by: research preamble
 2MRF integral.anisotropic_primes:
   hash: 3a452073c58dec04b8ddd60b9a7336c20730f6f27d34d4ed0397317a5ba2d212
+  by: research preamble
+2MRF integral.discriminant_sequence:
+  hash: d60ce248f18f8e2746fb58306dba25998943a3d68812f0fa1fe3c9a3d7dc60fa
   by: research preamble
 2MRF integral.elementary_primes:
   hash: bb3bcb6a1ab7b5b15b022c45456d293ad9e73b7774668e9446b0ec94e008d170
@@ -20205,6 +20200,9 @@
 2MT0 integral.anisotropic_primes:
   hash: 7add77b6bc712b20ff477ad4f72e023596a4325e0d8ca745bdcf6183ed861906
   by: research preamble
+2MT0 integral.discriminant_sequence:
+  hash: 98cc3d680f969d66d97a41f9a7111c08677c1359ee5a15f082fccdf22cf8e714
+  by: research preamble
 2MT0 integral.elementary_primes:
   hash: b439ed6b1961b29a7e7d09c2de04b313b4337455e376a46cd06c65360678ede2
   by: research preamble
@@ -20261,6 +20259,9 @@
   by: research preamble
 2MTA integral.anisotropic_primes:
   hash: 7f196dbec058d2032a89eda5139ab3fff2a99f20aec39e91ab422c618caf3168
+  by: research preamble
+2MTA integral.discriminant_sequence:
+  hash: c8a8b12b7fd3898e8231d7da33b7148f46c45250dafa002e632be99f3992e65c
   by: research preamble
 2MTA integral.elementary_primes:
   hash: 6132e0c8f692eb46a9d03620a6a79c0a4630efff523af45b2b0de86de911f002
@@ -20319,6 +20320,9 @@
 2NB2 integral.anisotropic_primes:
   hash: 3792efdc9ed9611e9e694c3286b4c0ed72ceea271e76df9c386b624afe8c318e
   by: research preamble
+2NB2 integral.discriminant_sequence:
+  hash: b2e4074ac0e468f22a08c4080d22c87ca8260ae6adafaea10c6882110ae137f2
+  by: research preamble
 2NB2 integral.elementary_primes:
   hash: fc22249ac743e3d19144298d0ec68ca2acec8f80b1b95c273347c0a974201619
   by: research preamble
@@ -20375,6 +20379,9 @@
   by: research preamble
 2O34 integral.anisotropic_primes:
   hash: 05d8b226992cf8b77015359cfd7f20656aa23c3209ab35ad7493a8361c00ebbf
+  by: research preamble
+2O34 integral.discriminant_sequence:
+  hash: f68500af9b9e9a1ed9f020aca2cd94028c7fa062486303620cd5fd89a228d871
   by: research preamble
 2O34 integral.elementary_primes:
   hash: 7e76dee4bf1e74963c06ff77890967a58344bb823dd3867f80922925834414b7
@@ -28299,6 +28306,9 @@
 3EY3 integral.anisotropic_primes:
   hash: 7d0b3baedbd2b4f5a9a5363f9533d007234f90d8305a4651dfd302e0fc4cc20b
   by: research preamble
+3EY3 integral.discriminant_sequence:
+  hash: d32866e3a3cc68b9088897595485b8d6bbe1d9e508c36269683e69997fab91f5
+  by: research preamble
 3EY3 integral.elementary_primes:
   hash: f9589209728af07584334dd29bd86d1c2d9aaeff7309f639a952cb023bb0c123
   by: research preamble
@@ -28349,6 +28359,9 @@
   by: research preamble
 3F4D integral.anisotropic_primes:
   hash: 135db7f084fbd3857b3167255c9070578a9ef38465e92cf46e928b9ef4b85714
+  by: research preamble
+3F4D integral.discriminant_sequence:
+  hash: 3364996e07fe40f859b1487c47a2e3e229c59109fffcaf14891d0ffe49011e5c
   by: research preamble
 3F4D integral.elementary_primes:
   hash: 68d417d360db1a407d74dc28abb88f15d42b114f3880de99659b3069cf9190cd
@@ -28401,6 +28414,9 @@
 3FBD integral.anisotropic_primes:
   hash: b41a410601f7aa8e8cac03b65388b0da8273f4fe74664068859ca3c722bccda9
   by: research preamble
+3FBD integral.discriminant_sequence:
+  hash: 07be069d8fde00269ba436ef6a13a5203980608ff479d902b2297e7ca6c6850e
+  by: research preamble
 3FBD integral.elementary_primes:
   hash: ed4dfdf31c64ec23b181e16a39c5a52fe3800a3739264b72b25abcf3a968f735
   by: research preamble
@@ -28451,6 +28467,9 @@
   by: research preamble
 3FG7 integral.anisotropic_primes:
   hash: 7bae8392b839780f93da92c9974729c0b0ef758bbd7f4bb1b8d9b6ce80126bff
+  by: research preamble
+3FG7 integral.discriminant_sequence:
+  hash: d9d8201e2bd45e6251ccb6d122b025bdc6aa5b8d41439b0279d784a998cf8baf
   by: research preamble
 3FG7 integral.elementary_primes:
   hash: e61c861ccfcaec10982db5051fd64ca37a825f3e2240f89546957320ba1b715b
@@ -28503,6 +28522,9 @@
 3FHV integral.anisotropic_primes:
   hash: e6c382de8c2bcf02537cb9692553a29e96df26bb959d156b721a1caaed594130
   by: research preamble
+3FHV integral.discriminant_sequence:
+  hash: 377c67db71af08450a09d0552feeb20c269ff8f2ff602e5fa740e871ec74d85d
+  by: research preamble
 3FHV integral.elementary_primes:
   hash: 4760d47281f4a909ed8496a80a1d0a691b35321202edc4c3062819eb4fb18333
   by: research preamble
@@ -28553,6 +28575,9 @@
   by: research preamble
 3FSB integral.anisotropic_primes:
   hash: 749b91c1014ac43780cb073e88b42baf48f187555e30ea1755de019fec81694a
+  by: research preamble
+3FSB integral.discriminant_sequence:
+  hash: a9e71e3e470eb10795f40ad9588a9815864f87e8f35561d95f0588dde9009bea
   by: research preamble
 3FSB integral.elementary_primes:
   hash: f6575b2dc4f638276ba67ed61164b2e10d3d469e3e0073e2c624661418f4809e

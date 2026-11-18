@@ -11,12 +11,13 @@ certifications:
   integral.overlattice_count: 46b3f4109e383c7c9db7c3a0fb4e60af87a8c18dfa9f59c8335faa9d99bf4fb0
   integral.spinor_genus_count: 0962fc12fee47acd7a3a087a51813aafd5eb328cb1eb841f908b4a841f0c46f0
   integral.spinor_genera: 977b35dbc8785513a92ff2bd7f6600e8992f197d0f812c22c0417d6c82207d23
-  automorphisms.automorphism_group_generator_morphisms: f0d33c39905bebc22ee1b5ba1ba427db5bfda98cac0a5b30bba9f7b3e491b7cc
+  automorphisms.automorphism_group_generator_morphisms: 5fd95a6bae8558d6a84a23696d445da28825a8b82bb1433b8ebea1ca9a937a39
   integral.primitive_orbits: 7716924b48a50c2a83c0bf13ddc3b8a8e7560a1804f33c0b9c564f8ffec37f06
   integral.modular_scale: 1f76878a8ef3d983c81f92b4c1dba6c63283441da0219c647da28af78082d356
   integral.anisotropic_primes: 784776d9993b6aec2e269a760db724617c4342124a6e2b740cc2ec8ca035bd47
   integral.local_representations: 264b3e2b4cf37b3b621860ca8cadfbf77a045f306787e9d9dc9c02aa3c96f5cf
   integral.local_densities: 969193704a6955da33bf6afd4cd71dfe07ac6874b0e6f5c6e9595a24af8e0f88
+  automorphisms.automorphism_group_order: 56e7b36e6be53de143e227b6eb9d5090ee37b87c2e7458d6430c0504c8332bf5
 rank: 3
 gram_tensor:
 - [-1, 0, 0]
@@ -108,7 +109,8 @@ integral:
   - prime: 3
     densities: [4/3, 4/3, 0, 4/3, 4/3, 2/3, 4/3, 4/3, 4/9, 4/3, 4/3, 0]
 automorphisms:
-  automorphism_group_generator_morphisms: [O(L) generator 1, O(L) generator 2, O(L) generator 3, O(L) generator 4, O(L) generator 5]
+  automorphism_group_order: aleph0
+  automorphism_group_generator_morphisms: ['O(L) generator 1 #2', 'O(L) generator 2 #2', 'O(L) generator 3 #2', 'O(L) generator 4 #2', O(L) generator 5]
 indefinite:
   isotropic: false
 morphisms:
@@ -146,6 +148,34 @@ morphisms:
   - [-1, 0, 0]
   - [0, -1, 0]
   - [0, 0, -1]
+  scale: 1
+- target: 3IEA
+  name: 'O(L) generator 1 #2'
+  matrix:
+  - [1, 0, 0]
+  - [0, -1, 3]
+  - [0, 0, 1]
+  scale: 1
+- target: 3IEA
+  name: 'O(L) generator 2 #2'
+  matrix:
+  - [5, 0, 6]
+  - [-6, 1, -9]
+  - [-4, 0, -5]
+  scale: 1
+- target: 3IEA
+  name: 'O(L) generator 3 #2'
+  matrix:
+  - [3, 2, 0]
+  - [-4, -3, 0]
+  - [-2, -2, 1]
+  scale: 1
+- target: 3IEA
+  name: 'O(L) generator 4 #2'
+  matrix:
+  - [5, 0, 6]
+  - [-6, -1, -6]
+  - [-2, -1, -1]
   scale: 1
 related:
 - tag: 3ICW

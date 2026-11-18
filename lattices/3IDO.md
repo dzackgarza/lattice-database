@@ -11,12 +11,13 @@ certifications:
   integral.overlattice_count: 1e44dacdeba4c9e27287f87d06a6d9df830d56b16a9b521e4f390fbce5661dd3
   integral.spinor_genus_count: 8d30c7f1053e0ec993e6c6bcb1d8d3c1787a535c6c8c7bb8b963d1ac2a5b1058
   integral.spinor_genera: 1930fbb85075088483c1ca796cbdcfda2d8af97eb863fa0ca234bf741f778fdc
-  automorphisms.automorphism_group_generator_morphisms: e336f4d8e6e50e05d9c5f9fb1223a8c4c11997c0c7ea51e65d5215d202a7bdb2
+  automorphisms.automorphism_group_generator_morphisms: 3f06431b979bcb11532ff7cd3409d5d4bf637aa1231bdbea454148825b8d8b8e
   integral.primitive_orbits: d0c7ae8dd5893975b5789dbac1d98177156018b0dd1eca1a345088dc6b2c6fc5
   integral.modular_scale: 2c46b4e37cdd3e8e4fc591647c446dfcf1233320ad5efaa73ca084e7c2688285
   integral.anisotropic_primes: 0e6887093adae4c14e2d60f4b0c53e7d876fdec711a093754d35a6ae1b453341
   integral.local_representations: 538acb2ba35aee716126297e531f712d0f5c3c153d01ccfbed15c9b0e3a56ebe
   integral.local_densities: 68d382433e65fd2e72f8fd23edc43a87a0821691c5b5bccf489fd83fe35b3bf9
+  automorphisms.automorphism_group_order: 1729e6fb5abd2162f4c8131e68521769cc4f36e7b45641a77156bb38718e8a43
 rank: 3
 gram_tensor:
 - [1, 0, 0]
@@ -108,7 +109,8 @@ integral:
   - prime: 3
     densities: [4/3, 4/3, 2/3, 4/3, 4/3, 0, 4/3, 4/3, 4/9, 4/3, 4/3, 2/3]
 automorphisms:
-  automorphism_group_generator_morphisms: [O(L) generator 1, O(L) generator 2, O(L) generator 3, O(L) generator 4, O(L) generator 5]
+  automorphism_group_order: aleph0
+  automorphism_group_generator_morphisms: [O(L) generator 1, 'O(L) generator 2 #2', 'O(L) generator 3 #2', 'O(L) generator 4 #2', O(L) generator 5]
 indefinite:
   isotropic: false
 morphisms:
@@ -146,6 +148,27 @@ morphisms:
   - [-1, 0, 0]
   - [0, -1, 0]
   - [0, 0, -1]
+  scale: 1
+- target: 3IDO
+  name: 'O(L) generator 2 #2'
+  matrix:
+  - [5, 6, -12]
+  - [0, 1, 0]
+  - [2, 3, -5]
+  scale: 1
+- target: 3IDO
+  name: 'O(L) generator 3 #2'
+  matrix:
+  - [3, 2, -6]
+  - [2, 3, -6]
+  - [2, 2, -5]
+  scale: 1
+- target: 3IDO
+  name: 'O(L) generator 4 #2'
+  matrix:
+  - [5, 6, -12]
+  - [6, 8, -15]
+  - [4, 5, -10]
   scale: 1
 related:
 - tag: '0001'
