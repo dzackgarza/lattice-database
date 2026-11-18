@@ -69,3 +69,22 @@ counts are in any case blocked on the same non-returning equivalence call that s
 
 So the T_Co item is blocked twice, and neither blocker is mine: a published definition of $\Gamma_{\mathrm{Co},2}$, and
 the owner's exact equivalence returning at a cusp.
+
+## The definition exists, in the project's own paper draft
+
+The corpus's caution is about $\Gamma_{\mathrm{Co}} = \widetilde O^{+}(T_{\mathrm{Co}})$, not about
+$\Gamma_{\mathrm{Co},2}$. A definition of the latter, in the project's own paper, is:
+
+> D. Z. Garza, *Complete moduli spaces of Coble surfaces*, the summary of the moduli spaces:
+> $F_{\mathrm{Co},2} = D_{T_{\mathrm{Co}}}/\Gamma_{\mathrm{Co},2}$ with
+> $\Gamma_{\mathrm{Co},2} = \mathrm{Stab}_{O(T_{\mathrm{En}})}(T_{\mathrm{Co}}) \subseteq O(T_{\mathrm{En}})$,
+> alongside $\Gamma_{\mathrm{En},2} = O(T_{\mathrm{En}}) \cap O(T_{\mathbb{P}}) \subseteq O(\Lambda_{\mathrm{K3}})$,
+> with the embedding $\eta: T_{\mathrm{Co}} \hookrightarrow T_{\mathrm{En}}$, $(h, x) \mapsto (\tilde e + \tilde f, x)$
+> (`https://dzackgarza.com/rawnotes/Class_Notes/2024/Coble/CoblePaper.pdf`, the "summary of the relevant moduli
+> spaces" remark).
+
+That is a definition of the group, not the conjectural identification the corpus declines: it says which subgroup of
+$O(T_{\mathrm{En}})$ is meant, from the same paper whose Enriques-side group the card of `gamma-en-2` cites. What it is
+not is a published journal article — it is the author's own draft — so whether the corpus may key a card to it is a
+data-contract decision, not a computation. Nothing on 6JRR is changed by this note, and no value is invented for it:
+the index and the generators of $\Gamma_{\mathrm{Co},2}$ are absent.
