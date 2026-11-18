@@ -33125,29 +33125,13 @@
   by: research preamble
 3IBI definite.regular:
   hash: 1cea6d5993a18306d672dea89450f8a197bd1af04f46cd39bf68e6020f28738a
-  by: 'W. C. Jagy, I. Kaplansky and A. Schiemann, There are 913 regular ternary forms,
-    Mathematika 44 (1997), 332-341, form 884, as tabulated in A. G. Doyle, B. Muskat,
-    K. Pehlivan and K. S. Williams, Positive integers represented by regular primitive
-    positive-definite integral ternary quadratic forms, Integers 19 (2019), #A45,
-    Tables 1 and 2; regular under the generalized Riemann hypothesis by R. J. Lemke
-    Oliver, Representations by ternary quadratic forms, Bull. London Math. Soc. 46
-    (2014), 1237-1247, Theorem 1.1.'
+  by: research preamble
 3IBI definite.siegel_eisenstein_coefficients:
   hash: d9e8f5dcfbd44363dcdb36b87a95cfcabdceafd1ef39b27c90edf0a177a36b9c
   by: research preamble
 3IBI definite.spinor_regular:
   hash: 26565234dbdd064d33847b5a8e82226fbf5f9974d35ac10e2f7deefff3720ecf
-  by: 'W. C. Jagy, I. Kaplansky and A. Schiemann, There are 913 regular ternary forms,
-    Mathematika 44 (1997), 332-341, form 884, as tabulated in A. G. Doyle, B. Muskat,
-    K. Pehlivan and K. S. Williams, Positive integers represented by regular primitive
-    positive-definite integral ternary quadratic forms, Integers 19 (2019), #A45,
-    Tables 1 and 2; regular under the generalized Riemann hypothesis by R. J. Lemke
-    Oliver, Representations by ternary quadratic forms, Bull. London Math. Soc. 46
-    (2014), 1237-1247, Theorem 1.1; hence spinor regular, since a form is spinor regular
-    if it represents all the positive integers represented by its spinor genus (A.
-    G. Earnest and A. Haensch, Completeness of the list of spinor regular ternary
-    quadratic forms, arXiv:1711.05811v2 (2018), Abstract) and the spinor genus lies
-    in the genus.'
+  by: research preamble
 3IBI definite.theta_series_cuspidal_component:
   hash: 698678c565f0570bf9dbab64a497ae0d0932d09b64a1e3ce6af6be1c8688f765
   by: research preamble
@@ -33159,6 +33143,12 @@
   by: research preamble
 3IBI integral.anisotropic_primes:
   hash: f1f7b139af584132659dfbe36c99fdca3a794ddf1e9b43ff5ab407d076015062
+  by: research preamble
+3IBI integral.discriminant_form:
+  hash: 7b143a6a6840723cead1523894d4466de9284772fd918978291738e2332404b5
+  by: research preamble
+3IBI integral.discriminant_orbits:
+  hash: 00037c560223f83b1de4ad147b76ce410a0342fcd6c1ab463a05d29e3bfb7f57
   by: research preamble
 3IBI integral.discriminant_sequence:
   hash: 4d91ac6a358fdb177a172dc44b55fb99cf6d7215f03cce5e8a57a6576d3ffd0a
