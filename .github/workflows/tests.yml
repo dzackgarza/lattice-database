@@ -44,7 +44,7 @@ jobs:
       - name: Run every lattice database test, including Sage sessions and source intake
         run: |
           docker exec -i --workdir "$GITHUB_WORKSPACE" \
-            --env "PYTHONPATH=$GITHUB_WORKSPACE/_ci-support/ai-review-ci/tool-artifacts/pytest_plugins:$GITHUB_WORKSPACE/research/src:$GITHUB_WORKSPACE/src" \
+            --env "PYTHONPATH=$GITHUB_WORKSPACE/_ci-support/ai-review-ci/tool-artifacts/pytest_plugins:$GITHUB_WORKSPACE/research/src:$GITHUB_WORKSPACE/src:/repos/sage-extensions/src" \
             sage-env /sage/.venv/bin/python \
             -c 'import sage.all, sys, pytest; sys.exit(pytest.main(sys.argv[1:]))' \
             -p qc_sage_session -p qc_unique_inventory --durations=20 --continue-on-collection-errors tests
@@ -75,7 +75,7 @@ jobs:
           # baselines for its own full suite, not assertions about this repository; the contracts
           # still run and still decide the step.
           docker exec -i --workdir "$GITHUB_WORKSPACE/sage-extensions" \
-            --env "PYTHONPATH=$GITHUB_WORKSPACE/_ci-support/ai-review-ci/tool-artifacts/pytest_plugins" \
+            --env "PYTHONPATH=$GITHUB_WORKSPACE/_ci-support/ai-review-ci/tool-artifacts/pytest_plugins:$GITHUB_WORKSPACE/sage-extensions/src:/repos/sage-extensions/src" \
             sage-env /sage/.venv/bin/python -c 'import sage.all, sys, pytest; from sage.all import ZZ; from sage_extensions.categories.lattices import Lattices; Lattices(ZZ)([[2, -1], [-1, 2]]).orthogonal_group().order(); sys.exit(pytest.main(sys.argv[1:]))' \
             -p qc_sage_session -p qc_unique_inventory --no-time-gates \
             tests/lattices/test_lattice_database_owner_contracts.sage \
