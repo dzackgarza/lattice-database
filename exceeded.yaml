@@ -464,20 +464,12 @@
   hash: 6c6a09434f37e4c930476f5f9a27e1a7327c278278c894534876d89a6705c56e
   seconds: 0
   lost: true
-0FBX integral.discriminant_form:
-  hash: bdb1388205eacba096358334b293ed29d11179dba5311b037743795de8eb558a
+0IE5 integral.discriminant_form:
+  hash: 8590f7afccc0db491f2d5a06e9e01a1be0af1eb23023e65a62201c6f5fd6be92
   seconds: 0
   lost: true
-0IM6 integral.discriminant_form:
-  hash: 678f90dcf47fd73af9ad798c5041b78a9506bcd8d0bbb3621a83c552a3056c3c
-  seconds: 0
-  lost: true
-0K47 integral.discriminant_form:
-  hash: ba80eae54b677112936d58c219227a531fef16fbb507682d2350b99bd4561eb9
-  seconds: 0
-  lost: true
-0K61 integral.discriminant_form:
-  hash: 082c9980f663cdcb42d13fcef3a3479ef66a1b67314fa4966782a865c8554945
+0L9J integral.discriminant_form:
+  hash: 308eee020e6c279efb6517ca7ee207c0ff5a775bbd3285b10255663fdc35a1c5
   seconds: 0
   lost: true
 0LX3 definite.siegel_eisenstein_coefficients:
@@ -496,6 +488,14 @@
   hash: 59f3e860a26817f0ea30db37aed80596a35ce07a4da85a02788a9faac7b514cb
   seconds: 0
   lost: true
+0MRQ integral.discriminant_form:
+  hash: 1935558ee6f8b9616dc88d125f3469a9e0c9b2875150e6299a8f2dced805f47f
+  seconds: 0
+  lost: true
+0NCD integral.discriminant_form:
+  hash: 00a623178e649c62201356d973def8595beef09630eb5f9f44656dccec67b2bd
+  seconds: 6
+  lost: true
 0OTR integral.discriminant_form:
   hash: e0298c563c8fe791cfe501315d29a76ec9cb42202794e7691eadb73effc061f0
   seconds: 5
@@ -504,10 +504,6 @@
   seconds: 7
 0RVY integral.elementary_primes:
   hash: 811175d5f9f1d0b028f2eb38f41a5672d3bdc0e8d0fb282d3f26fc4769b8f652
-  seconds: 0
-  lost: true
-0T5P integral.discriminant_form:
-  hash: 8ccb1874692e308ca12d8756f6e1be4034c321606f555e574d1e8e2cdfce9250
   seconds: 0
   lost: true
 0TTM integral.genus_class_count:
@@ -544,6 +540,10 @@
   lost: true
 0WDK integral.genus_class_count:
   hash: fa36a0215c9394768ad0dc5fc9ba6fa459b7390e1e92dba69508d3952353013e
+  seconds: 0
+  lost: true
+0WJL integral.discriminant_form:
+  hash: a37a513bb77c312e62fd02dc3a7f395c2f59abcf45b9291f84b42ae894642386
   seconds: 0
   lost: true
 0WV9 definite.genus_theta_series:
