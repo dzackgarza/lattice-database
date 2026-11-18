@@ -40,3 +40,26 @@ What is already proved about those three rows, and does not depend on this call:
 
 So the three rows are decided by one question, `is [r_i] = [r_j]`, and the owner now has an exact test for it. What
 remains is whether that test returns inside a usable time at these cusps.
+
+## Why the call does not return: the route it is on
+
+Asked of the subgroup itself (a 3-second call, no isometry work), $\Gamma_{\mathrm{En},2}$ is
+`PreimageSubgroups.parent_class` with
+
+```
+contains_character_kernel True
+character_data_is_complete True
+has_finite_coset_space     True
+index                      67456
+```
+
+so `_subgroup_vector_equivalence_witness` takes its **second** route (`orthogonal_quotients.py:3403`–`:3423`): "the
+witnesses of `left |-> right` inside the supergroup form the coset of the supergroup's stabilizer of `right`, and that
+coset is walked through the images in the finite quotient". The supergroup is $O(T_{\mathrm{En}})$ and the stabilizer of
+a root in it is infinite, so the coset that gets walked is infinite; the finite quotient bounds the *images*, not the
+walk. That is the mechanism behind the eighteen-minute non-return, and it is the thing an orbit computation would have
+to replace with a double-coset computation on the finite quotient — what `isotropic_plane_orbits` already does for
+planes (`predicate_subgroups.py:645`–`:700`, step 3 there).
+
+So the rows (4.3.7)--(4.3.9) are blocked on that algorithm, not on this card's data: `K_J`, its root classes and the
+conflations are all computed and recorded above.
