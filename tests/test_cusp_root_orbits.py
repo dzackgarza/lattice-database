@@ -11,7 +11,7 @@ twice, and a key that is neither one of the eight nor an arithmetic-group card o
 
 The rows here are this file's fixture: card 029J's own cusp and its own two roots of $K_J$ at Sterk's (4.3.8),
 p. 23, with the orbit count as the shape of a row and not as a claim about the card, which states none
-(the cusp stabilizer's generators are not certified complete, sage-extensions#312).
+(the cusp stabilizer's generators are not certified complete, sage-extensions#603).
 """
 
 from fractions import Fraction
@@ -166,7 +166,7 @@ def test_the_chambers_own_reflections_do_not_move_the_root_classes() -> None:
     neighbour sets. Different sets are therefore a proof that no word in the walls carries one root class to the other
     --- which is why these counts are not a question a search can answer: the part of $\\Gamma_v$ that this card can
     construct provably cannot identify the classes, and the rest is what a primitive isotropic line withholds
-    (sage-extensions#312).
+    (sage-extensions#603).
     """
     lattice = Lattice.model_validate(corpus.front_matter(corpus.read_card(ROOT / "lattices" / "029J.md")))
     assert lattice.integral is not None and lattice.integral.cusp_chambers is not None

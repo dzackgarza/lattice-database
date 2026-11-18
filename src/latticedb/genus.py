@@ -151,7 +151,8 @@ def applies(field: str, lattice: Lattice) -> bool:
     - `cusp_root_orbits`: the orbits are of the cusp stabilizer's action, and the owner's orbit
       call identifies two classes only through the generators it is given: it is not certified
       to generate that stabilizer at a primitive isotropic line
-      (`generators_are_certified_complete` is `False`, sage-extensions#312), so a run of it
+      (`generators_are_certified_complete` is `False`; sage-extensions#603 is the owner's issue for
+      that family, #312 having supplied the image and its membership test), so a run of it
       counts identifications and not orbits, and no preamble operation states the count.
 
     Two rules below read the owner's domain off the card's own data, and they are exceptions because
@@ -1293,7 +1294,7 @@ def store_cusp_root_orbits(
 
     No source prints these rows: the count is the computation's own, and where the cusp's root family has one class
     the count is one orbit whatever the group is, which is the case a computation can decide without a generating
-    family of the cusp stabilizer (`genus.applies` refuses the field for the general case, sage-extensions#312).
+    family of the cusp stabilizer (`genus.applies` refuses the field for the general case, sage-extensions#603).
     `by` names the program and the revision that returned the rows, and the certificate's hash commits to every row
     of every subgroup of the card, in the manner of `store_cusp_chambers`.
 
