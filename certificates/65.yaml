@@ -19621,6 +19621,9 @@
 2PYC integral.anisotropic_primes:
   hash: a8908cb1748e183d65083851e099a8560b74cb9d8721f55ff6eec0df01ea1cff
   by: research preamble
+2PYC integral.discriminant_sequence:
+  hash: ab9baab8ebb77803fae52802d24a607b7a4a18c9084da2cd9add464a2ea479c5
+  by: research preamble
 2PYC integral.elementary_primes:
   hash: 5cea5848309e9d081029083f9c7414060574025c71008e4b3ed8c93271b5a233
   by: research preamble
@@ -19665,29 +19668,13 @@
   by: research preamble
 2Q3C definite.regular:
   hash: 15bd0fd6198250b07b3a6568e8ac56534e5932b9623406c2dbc113feecd0a1d8
-  by: 'W. C. Jagy, I. Kaplansky and A. Schiemann, There are 913 regular ternary forms,
-    Mathematika 44 (1997), 332-341, form 226, as tabulated in A. G. Doyle, B. Muskat,
-    K. Pehlivan and K. S. Williams, Positive integers represented by regular primitive
-    positive-definite integral ternary quadratic forms, Integers 19 (2019), #A45,
-    Tables 1 and 2; regular under the generalized Riemann hypothesis by R. J. Lemke
-    Oliver, Representations by ternary quadratic forms, Bull. London Math. Soc. 46
-    (2014), 1237-1247, Theorem 1.1.'
+  by: research preamble
 2Q3C definite.siegel_eisenstein_coefficients:
   hash: 7c7edf844efe2a637ae4ac2a5b70f36825df660a50bca2c1d140e52c6860f191
   by: research preamble
 2Q3C definite.spinor_regular:
   hash: 0562d40b29a61521235fe256d8f1ca2ce33ef0dce70317744ed2ec8f0ba67159
-  by: 'W. C. Jagy, I. Kaplansky and A. Schiemann, There are 913 regular ternary forms,
-    Mathematika 44 (1997), 332-341, form 226, as tabulated in A. G. Doyle, B. Muskat,
-    K. Pehlivan and K. S. Williams, Positive integers represented by regular primitive
-    positive-definite integral ternary quadratic forms, Integers 19 (2019), #A45,
-    Tables 1 and 2; regular under the generalized Riemann hypothesis by R. J. Lemke
-    Oliver, Representations by ternary quadratic forms, Bull. London Math. Soc. 46
-    (2014), 1237-1247, Theorem 1.1; hence spinor regular, since a form is spinor regular
-    if it represents all the positive integers represented by its spinor genus (A.
-    G. Earnest and A. Haensch, Completeness of the list of spinor regular ternary
-    quadratic forms, arXiv:1711.05811v2 (2018), Abstract) and the spinor genus lies
-    in the genus.'
+  by: research preamble
 2Q3C definite.theta_series_cuspidal_component:
   hash: 6c18a37628b423825fd2347f9e3a9d18bb19913e55066d058407207c88ee0916
   by: research preamble
@@ -19699,6 +19686,9 @@
   by: research preamble
 2Q3C integral.anisotropic_primes:
   hash: a5885d4d8a2a24424af41fcdef81fc32580a5b60113dc3e7817bb6d831fc274c
+  by: research preamble
+2Q3C integral.discriminant_sequence:
+  hash: 9956885c1eb5664bfe609e33858f778d63de699dc948fd630fc24139519cda40
   by: research preamble
 2Q3C integral.elementary_primes:
   hash: 350ad55db63b6e82a0f859d545c9f2291e335435b9f9427fb108846806931815
@@ -19757,6 +19747,9 @@
 2Q3N integral.anisotropic_primes:
   hash: b6c339ce68bbaf45df23e125f8c2a79c25bb386065b26667f3a246cc7669a04c
   by: research preamble
+2Q3N integral.discriminant_sequence:
+  hash: 5c00925231a790446813b3ed4c3f48e8b9a4a3372d964bf1eb61c692371c7a71
+  by: research preamble
 2Q3N integral.elementary_primes:
   hash: bf6c7d89de113bf376fd03065d3f6f9516c2837195b28194e55d6474057df6c4
   by: research preamble
@@ -19814,6 +19807,9 @@
 2QA1 integral.anisotropic_primes:
   hash: de3cefad38e9f88b40090de3bf0f197e79746fb9637ce46f485adc5d188320a5
   by: research preamble
+2QA1 integral.discriminant_sequence:
+  hash: 3e931e253f40a0fe5d8de51c5c9ec945425089bc9d114080fb60237b191775b0
+  by: research preamble
 2QA1 integral.elementary_primes:
   hash: bdb086d9de23813642bfb6934b6d9907eb65bb139deaef8899a18aba388d2519
   by: research preamble
@@ -19870,6 +19866,9 @@
   by: research preamble
 2QBM integral.anisotropic_primes:
   hash: 204bc9d1be25fd70d4940f77f26f3d0df42354af4633d5cf81a6f52e733a43ae
+  by: research preamble
+2QBM integral.discriminant_sequence:
+  hash: f80afcadb8861ec5679fe52c1634d09fee10105f2d9986cd51d14dd03a2ee034
   by: research preamble
 2QBM integral.elementary_primes:
   hash: 11a1c793a1203c95ef3650e31b4bb2f1741c9a6abfaee28066e77e6979b0e03f
@@ -20110,6 +20109,9 @@
   by: research preamble
 2RAK integral.discriminant_form:
   hash: 5fc71dc640d18c79a255a9d5bab66bc7cc16000780a6ca1a73f5806941823a1c
+  by: research preamble
+2RAK integral.discriminant_orbits:
+  hash: a491b7dcc577cde3b5c381fa11fd5a52de33f3795f61df42bf4dd8994d1676df
   by: research preamble
 2RAK integral.discriminant_sequence:
   hash: c6bfa02c14ef0ec0a7b4c346ac76ae97390bd03dee0f1abc2b460875040e50a4
