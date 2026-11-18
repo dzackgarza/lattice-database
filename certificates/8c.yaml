@@ -17785,6 +17785,9 @@
 2MSL integral.anisotropic_primes:
   hash: b5db000ad1538df59329e9bcf4abf2a5e2821b378865bd9cca94a99dd440cce0
   by: research preamble
+2MSL integral.discriminant_sequence:
+  hash: 016beabc07ffe5eef3d60129a5f60203d46b31dee85d0045393064305d84a795
+  by: research preamble
 2MSL integral.elementary_primes:
   hash: 6f397413be6ae9e6af6693c78bc810b6ab5de9dc717af85f414d7d45fae4ddc4
   by: research preamble
@@ -17841,6 +17844,9 @@
   by: research preamble
 2N25 integral.anisotropic_primes:
   hash: 23fe789ec4cbfa30f45f66bd06626cb2cb7b9b09247963cf054dd3e92fa44e9f
+  by: research preamble
+2N25 integral.discriminant_sequence:
+  hash: 48e09650eb348792966cbcca02c98b0143099900a01cac3f068c6cd22f4bbd70
   by: research preamble
 2N25 integral.elementary_primes:
   hash: 1f09a0442dd94ec708804c746801c7d4450aa9b8c5407e1450669125457c6cf5
@@ -17899,6 +17905,9 @@
 2N4S integral.anisotropic_primes:
   hash: fa7388a44a65bd4834eed747c48173bb10ceb48da5f0f5c1862f6f133248876f
   by: research preamble
+2N4S integral.discriminant_sequence:
+  hash: ef0722dd5cab836444cdb68b84947f691ee3dcfdd48e9d0f2339b5145adc91ff
+  by: research preamble
 2N4S integral.elementary_primes:
   hash: e7603b8030664ab494699658cd2ae61378128c76af1e01044fc2589e7917c579
   by: research preamble
@@ -17943,27 +17952,13 @@
   by: research preamble
 2NFL definite.regular:
   hash: 0a394484f20292cae490fa77f95c3fc54cd4406b9f78b41b87207b1774f0c1a2
-  by: 'W. C. Jagy, I. Kaplansky and A. Schiemann, There are 913 regular ternary forms,
-    Mathematika 44 (1997), 332-341, form 132, as tabulated in A. G. Doyle, B. Muskat,
-    K. Pehlivan and K. S. Williams, Positive integers represented by regular primitive
-    positive-definite integral ternary quadratic forms, Integers 19 (2019), #A45,
-    Tables 1 and 2; regular by W. C. Jagy, I. Kaplansky and A. Schiemann, There are
-    913 regular ternary forms, Mathematika 44 (1997), 332-341.'
+  by: research preamble
 2NFL definite.siegel_eisenstein_coefficients:
   hash: 6650edbc56df32fbfadd961753506c025aef13a6541935d7984dc895025cd676
   by: research preamble
 2NFL definite.spinor_regular:
   hash: 5522a257558bed2f00fad6d32e32b6d90e407d7921cf77528422977e406a78c8
-  by: 'W. C. Jagy, I. Kaplansky and A. Schiemann, There are 913 regular ternary forms,
-    Mathematika 44 (1997), 332-341, form 132, as tabulated in A. G. Doyle, B. Muskat,
-    K. Pehlivan and K. S. Williams, Positive integers represented by regular primitive
-    positive-definite integral ternary quadratic forms, Integers 19 (2019), #A45,
-    Tables 1 and 2; regular by W. C. Jagy, I. Kaplansky and A. Schiemann, There are
-    913 regular ternary forms, Mathematika 44 (1997), 332-341; hence spinor regular,
-    since a form is spinor regular if it represents all the positive integers represented
-    by its spinor genus (A. G. Earnest and A. Haensch, Completeness of the list of
-    spinor regular ternary quadratic forms, arXiv:1711.05811v2 (2018), Abstract) and
-    the spinor genus lies in the genus.'
+  by: research preamble
 2NFL definite.theta_series_cuspidal_component:
   hash: 6049efabeaf65f3613454fa0052f9247e57d4f706e6219bec8e00586cbe7f168
   by: research preamble
@@ -17975,6 +17970,9 @@
   by: research preamble
 2NFL integral.anisotropic_primes:
   hash: 95c0355ddef324cad0e98d7876f965ff2bc69eded02e9de3a611b361d655098a
+  by: research preamble
+2NFL integral.discriminant_sequence:
+  hash: f00fe1aed3b47391e9b929ee97fb35057238b4bfd7dc13b866b1e32ecc772efa
   by: research preamble
 2NFL integral.elementary_primes:
   hash: d9e6c0493347bfdfce852ef3b64a8413e4c521552287d55b16b9be7bd1c91630
@@ -18032,6 +18030,9 @@
   by: research preamble
 2NHU integral.anisotropic_primes:
   hash: 87127221885f7fe66cdb4e206766adf8f7c09f74a3a0d314eb4c6114a740aa49
+  by: research preamble
+2NHU integral.discriminant_sequence:
+  hash: 4656d7d93cb9aaa5247526eaaaacf974ce9dbd7cce341eb41ca37e221936e791
   by: research preamble
 2NHU integral.elementary_primes:
   hash: 054caa181f2b0fd805bdfb800d1ae76206efecc534ffb728d2e9631a52d6e7b0
@@ -18947,6 +18948,9 @@
   by: research preamble
 2QWI integral.discriminant_form:
   hash: f10c298be55cb6f27e09574985a765de5dbb46759453f458b8e42e8c1073182c
+  by: research preamble
+2QWI integral.discriminant_orbits:
+  hash: 06735ca0f4eff86769c78558aad36eb611224464955d691c6216462d7696cfe3
   by: research preamble
 2QWI integral.discriminant_sequence:
   hash: 4cdf810364a7369d9e3719ea2a28772b03caf060ee509ab49308eacd0461bb91
