@@ -61,6 +61,7 @@ BLOCKS: dict[str, tuple[str, type[BaseModel]]] = {
     "discriminant_form": ("integral", IntegralData),
     "primitive_orbits": ("integral", IntegralData),
     "cusp_chambers": ("integral", IntegralData),
+    "cusp_root_orbits": ("integral", IntegralData),
     "discriminant_orbits": ("integral", IntegralData),
     "reflective": ("hyperbolic", HyperbolicData),
     "modular_scale": ("integral", IntegralData),
@@ -156,6 +157,11 @@ def applies(field: str, lattice: Lattice) -> bool:
     - `cusp_chambers`: a chamber is the source's walls, and the Gram matrix, diagram
       and wall count of them are what the card's form says; no preamble operation
       searches for a chamber, and a Vinberg search is never run to fill a row.
+    - `cusp_root_orbits`: the orbits are of the cusp stabilizer's action, and the owner's
+      orbit call identifies two classes only through the generators it is given: it is not
+      certified to generate that stabilizer at a primitive isotropic line
+      (`generators_are_certified_complete` is `False`, sage-extensions#312), so a run of it
+      counts identifications and not orbits, and no preamble operation states the count.
     - `discriminant_form`: $q_L$ is a quadratic form only on an even lattice, and the owner
       partitions $A_L$, so the request is made on an even card whose classes of $A_L$ are few,
       $|A_L| = |\\det L| \\leq 4096$.
@@ -163,7 +169,7 @@ def applies(field: str, lattice: Lattice) -> bool:
     Everything else — including `integral.primitive_orbits` and the automorphism
     generators on an indefinite card — is asked on every card that can store it (#8).
     """
-    if field in {"cusp_form_coordinates", "polarization_counts", "cusp_chambers"}:
+    if field in {"cusp_form_coordinates", "polarization_counts", "cusp_chambers", "cusp_root_orbits"}:
         return False
     block_name, _model = stored_in(field, lattice.definiteness)
     match block_name:

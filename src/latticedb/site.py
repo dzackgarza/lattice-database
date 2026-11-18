@@ -35,6 +35,7 @@ from latticedb.geometric import HermitianSymmetricSpace, ProjectiveComplexVariet
 from latticedb.model import (
     Automorphisms,
     CuspChamber,
+    CuspRootOrbitRow,
     DefiniteData,
     FormData,
     HyperbolicData,
@@ -395,6 +396,11 @@ def fields() -> Iterator[tuple[str, str | None, type[BaseModel]]]:
         "Chamber of a reflection group",
         "integral.cusp_chambers.<group>[]",
         CuspChamber,
+    )
+    yield (
+        "Orbits of the root classes at a cusp",
+        "integral.cusp_root_orbits.<group>[]",
+        CuspRootOrbitRow,
     )
     yield "Definite lattice", "definite", DefiniteData
     yield (

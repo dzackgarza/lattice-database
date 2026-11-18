@@ -506,6 +506,26 @@ def local_admission_problems(lattice: Lattice) -> list[str]:
                         found.append("integral.delta: delta is defined only for an even 2-elementary lattice")
                     elif integral.delta != int(owned.delta()):
                         found.append(f"integral.delta: stated {integral.delta}, computed {int(owned.delta())}")
+    cusp_root_orbits = (integral.cusp_root_orbits or {}) if integral is not None else {}
+    if cusp_root_orbits and lattice.rank is not None:
+        # A root class at the cusp v is the class in v^perp/ZZ v of a vector of square -2 that is orthogonal
+        # to v: both are the preamble's form on the stored vectors, not this module's arithmetic.
+        formed_cusps = FormModules(ZZ)(integer_ring.free_module(lattice.rank).bilinear_hom_space(_QQ_AS_ZZ_MODULE)(rational_gram(gram)))
+        for key, rows in cusp_root_orbits.items():
+            for row in rows:
+                where = f"integral.cusp_root_orbits[{key}] at the cusp {list(row.cusp)}"
+                cusp_entries = tuple(int(entry) for entry in row.cusp)
+                if _formed_norm_fraction(formed_cusps, cusp_entries) != 0:
+                    found.append(f"{where}: the cusp is not isotropic")
+                for orbit in row.orbits:
+                    for vector in orbit.classes:
+                        entries = tuple(int(entry) for entry in vector)
+                        if not formed_cusps(entries).is_orthogonal_to(formed_cusps(cusp_entries)):
+                            found.append(f"{where}: the class {list(vector)} does not lie in the v^perp of the cusp")
+                            continue
+                        square = _formed_norm_fraction(formed_cusps, entries)
+                        if square != -2:
+                            found.append(f"{where}: the class {list(vector)} has square {square}, not -2, so it is no root")
     formed = (
         FormModules(ZZ)(
             integer_ring.free_module(lattice.rank).bilinear_hom_space(_QQ_AS_ZZ_MODULE)(

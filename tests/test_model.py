@@ -800,3 +800,117 @@ def test_the_enriques_cusp_chambers_are_the_sources_walls_and_the_cards_own_form
                 square = product * product / (b(walls[i], walls[i]) * b(walls[j], walls[j]))
                 expected[frozenset((row.walls[i].name, row.walls[j].name))] = "inf" if square == 1 else orders[square]
         assert {frozenset((edge.a, edge.b)): edge.order for edge in row.diagram} == expected, row.statement
+
+
+def test_the_orbits_of_a_cusps_root_classes_state_their_count_and_their_transporters() -> None:
+    """#43: a row states one representative per orbit, the count of them, and each orbit's transporter order."""
+    row = {
+        "cusp": [1, 0],
+        "statement": "4.3.8",
+        "printed_page": 23,
+        "orbits": [
+            {"representative": [0, 3], "classes": [[0, 3]], "transporter_order": 1},
+            {"representative": [1, 1], "classes": [[1, 1], [1, 2]], "transporter_order": 2},
+        ],
+        "orbit_count": 2,
+    }
+    lattice = Lattice.model_validate(with_block(a2(), "integral", cusp_root_orbits={"gamma-en-2": [row]}))
+    assert lattice.integral is not None and lattice.integral.cusp_root_orbits is not None
+    orbits = lattice.integral.cusp_root_orbits["gamma-en-2"][0]
+    assert orbits.orbit_count == 2
+    assert [len(orbit.classes) for orbit in orbits.orbits] == [1, 2]
+    assert [orbit.representative for orbit in orbits.orbits] == [(0, 3), (1, 1)]
+    assert orbits.orbits[1].transporter_order == 2, "an orbit of two classes has a transporter beyond the identity"
+
+
+def test_a_root_class_row_refuses_a_count_that_is_not_of_its_orbits() -> None:
+    """#43: the count is of the orbits stated, the classes are classes, and the source is stated with its page."""
+    row = {
+        "cusp": [1, 0],
+        "statement": "4.3.8",
+        "printed_page": 23,
+        "orbits": [
+            {"representative": [0, 3], "classes": [[0, 3]], "transporter_order": 1},
+            {"representative": [1, 1], "classes": [[1, 1]], "transporter_order": 1},
+        ],
+        "orbit_count": 2,
+    }
+    with pytest.raises(ValidationError, match="orbit_count"):
+        Lattice.model_validate(with_block(a2(), "integral", cusp_root_orbits={"gamma-en-2": [{**row, "orbit_count": 1}]}))
+    # A multiple of the cusp is the zero class of K_J, which is isotropic and not a root.
+    with pytest.raises(ValidationError, match="no multiple of the cusp"):
+        Lattice.model_validate(
+            with_block(
+                a2(),
+                "integral",
+                cusp_root_orbits={"gamma-en-2": [{**row, "orbits": [{"representative": [1, 0], "classes": [[1, 0]], "transporter_order": 1}], "orbit_count": 1}]},
+            )
+        )
+    # [1, 1] and [2, 1] differ by the cusp, so they are one class and not two orbits.
+    with pytest.raises(ValidationError, match="stated by two orbits"):
+        Lattice.model_validate(
+            with_block(
+                a2(),
+                "integral",
+                cusp_root_orbits={"gamma-en-2": [{**row, "orbits": [*row["orbits"], {"representative": [2, 1], "classes": [[2, 1]], "transporter_order": 1}], "orbit_count": 3}]},
+            )
+        )
+    with pytest.raises(ValidationError, match="representative first"):
+        Lattice.model_validate(
+            with_block(
+                a2(),
+                "integral",
+                cusp_root_orbits={"gamma-en-2": [{**row, "orbits": [{"representative": [0, 3], "classes": [[1, 1], [0, 3]], "transporter_order": 1}], "orbit_count": 1}]},
+            )
+        )
+    with pytest.raises(ValidationError, match="statement that prints its chamber and its page together"):
+        Lattice.model_validate(with_block(a2(), "integral", cusp_root_orbits={"gamma-en-2": [{**row, "printed_page": None}]}))
+    with pytest.raises(ValidationError):
+        Lattice.model_validate(with_block(a2(), "integral", cusp_root_orbits={"gamma-en-2": [{**row, "orbits": []}]}))
+
+
+def test_the_root_classes_of_the_enriques_cusps_are_the_walls_of_square_minus_two() -> None:
+    """#43: at Sterk's five cusps the roots of K_J among the walls are the (-2) walls, 0, 1, 2, 2 and 4 of them.
+
+    A wall $w$ of a chamber at the cusp $v$ lies in $v^\\perp$, so its class in $K_J = v^\\perp/\\mathbb{Z}v$ has
+    $q([w]) = b(w, w)$, and two walls give one class exactly when their difference is a rational multiple of
+    $v$. So the root classes of the cusp are computed from the card's Gram tensor alone, and this is the family
+    whose $\\Gamma_{\\mathrm{En},2}$-orbits the issue asks a row to count.
+    """
+    record = frontmatter.load(str(ROOT / "lattices" / "029J.md")).metadata
+    lattice = Lattice.model_validate(record)
+    assert lattice.integral is not None and lattice.integral.cusp_chambers is not None
+    gram = [[Fraction(entry) for entry in row] for row in lattice.gram_tensor]
+
+    def b(u: tuple[int, ...], v: tuple[int, ...]) -> Fraction:
+        return sum(Fraction(u[i]) * gram[i][j] * Fraction(v[j]) for i in range(len(gram)) for j in range(len(gram)))
+
+    def multiple(x: tuple[int, ...], v: tuple[int, ...]) -> Fraction | None:
+        """The same test the schema makes: the rational $t$ with $x = t v$, or `None`."""
+        ratio = None
+        for entry, coordinate in zip(x, v, strict=True):
+            if coordinate == 0:
+                if entry != 0:
+                    return None
+                continue
+            step = Fraction(entry, coordinate)
+            if ratio is None:
+                ratio = step
+            elif ratio != step:
+                return None
+        return ratio
+
+    counts = []
+    for row in lattice.integral.cusp_chambers["gamma-en-2"]:
+        cusp = tuple(row.cusp)
+        assert b(cusp, cusp) == 0, row.statement
+        walls = [tuple(wall.vector) for wall in row.walls]
+        assert all(b(cusp, wall) == 0 for wall in walls), row.statement
+        roots = [wall for wall in walls if b(wall, wall) == -2]
+        classes: list[tuple[int, ...]] = []
+        for wall in roots:
+            if all(multiple(tuple(a - c for a, c in zip(wall, seen, strict=True)), cusp) is None for seen in classes):
+                classes.append(wall)
+        assert len(classes) == len(roots), f"{row.statement}: two walls of square -2 give one root class"
+        counts.append(len(classes))
+    assert counts == [0, 1, 2, 2, 4], counts

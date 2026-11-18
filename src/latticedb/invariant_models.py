@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+from fractions import Fraction
 from typing import Annotated, Literal, Self, get_args
 
 from pydantic import Field, model_validator
@@ -335,6 +336,116 @@ class CuspChamber(Record):
             if pair in pairs:
                 raise ValueError(f"the pair {edge.a}-{edge.b} is one edge of the diagram")
             pairs.add(pair)
+        return self
+
+
+def _multiple_of(difference: IntegerVector, base: IntegerVector) -> Fraction | None:
+    """The rational $t$ with `difference` $= t$ `base`, or `None` when the entries decide against it."""
+    multiplier: Fraction | None = None
+    for entry, coordinate in zip(difference, base):
+        if coordinate == 0:
+            if entry != 0:
+                return None
+            continue
+        ratio = Fraction(entry, coordinate)
+        if multiplier is None:
+            multiplier = ratio
+        elif multiplier != ratio:
+            return None
+    return multiplier
+
+
+class RootClassOrbit(Record):
+    """One orbit of the root classes of a cusp's boundary lattice, with a representative and its transporter group.
+
+    A *root class* at the cusp $\\mathbb{Z}v$ is the class in $K_J = v^\\perp/\\mathbb{Z}v$ of a root $r$ of $v^\\perp$,
+    a vector of square $b(r, r) = -2$; the class has the same square, because $b(v, v) = 0$ and $b(r, v) = 0$.
+    Two lifts state one class exactly when their difference is a rational multiple of $v$, so a row states its
+    classes unambiguously without naming a basis of $K_J$.
+    """
+
+    representative: IntegerVector = Field(
+        description=(
+            "One class of the orbit, as a lift in the record basis: a root $r \\\\in v^\\\\perp$ of square $-2$ with "
+            "$v$'s own coordinates. The representative is the class the transporters carry to the others."
+        ),
+    )
+    classes: Annotated[tuple[IntegerVector, ...], Field(strict=False, min_length=1)] = Field(
+        description=(
+            "Every class of the orbit, as lifts in the record basis, the representative first. Two entries that differ by a "
+            "multiple of $v$ are one class and not two."
+        ),
+    )
+    transporter_order: Annotated[int, Field(ge=1)] = Field(
+        description=(
+            "The order of the group of transporters the row's proof exhibits: the isometries of $K_J$ that the cusp "
+            "stabilizer contains and that carry the representative to the orbit's classes. It is $1$ for an orbit of "
+            "one class, whose only transporter is the identity."
+        ),
+    )
+
+    @model_validator(mode="after")
+    def _orbit(self) -> Self:
+        """The representative is one of the orbit's classes, and they lie in one lattice."""
+        if self.classes[0] != self.representative:
+            raise ValueError("an orbit states its representative first among its classes")
+        if len({len(vector) for vector in (self.representative, *self.classes)}) != 1:
+            raise ValueError("the classes of an orbit have one coordinate per basis vector")
+        return self
+
+
+class CuspRootOrbitRow(Record):
+    """The orbits of the root classes of the boundary lattice at one $0$-cusp of a subgroup $\\Gamma \\leq O(L)$.
+
+    The cusp's root classes are those of the roots of $K_J = v^\\perp/\\mathbb{Z}v$ that the chamber at that cusp has a
+    wall in (theory/orbits.md#root-classes-at-a-cusp): the walls of square $-4$ are no roots, and a family that mixed
+    them would count the walls' orbits as the roots'. The orbits are the $\\Gamma_v$-orbits of them, $\\Gamma_v$ the
+    stabilizer of $v$ in $\\Gamma$.
+    """
+
+    cusp: IntegerVector = Field(
+        description="A primitive isotropic vector spanning the $0$-cusp, in the record basis, as in `cusp_chambers`.",
+    )
+    statement: Annotated[str, Field(min_length=1)] | None = Field(
+        default=None,
+        description=(
+            "The source's numbered statement that prints the chamber whose root classes these are, such as `4.3.8`. Absent "
+            "when no source prints that chamber, as in a `cusp_chambers` row that a computation produced."
+        ),
+    )
+    printed_page: Annotated[int, Field(ge=1)] | None = Field(
+        default=None,
+        description="The page of the source that prints the statement; absent with it.",
+    )
+    orbits: Annotated[tuple[RootClassOrbit, ...], Field(strict=False, min_length=1)] = Field(
+        description="The orbits of the root classes, one entry per orbit, each with its representative and its transporter group.",
+    )
+    orbit_count: Annotated[int, Field(ge=1)] = Field(
+        description=(
+            "The number of $\\\\Gamma_v$-orbits of the cusp's root classes: the number of entries of `orbits`. It is stored "
+            "only where a source or the certified generators of $\\\\Gamma_v$ decide it, for a family the certified "
+            "generators do not separate has no count here: a singleton orbit is not a proof of inequivalence."
+        ),
+    )
+    reference: Reference | None = Field(default=None, description="The source of the orbits, when a source states them.")
+
+    @model_validator(mode="after")
+    def _row(self) -> Self:
+        """The count is of the orbits stated, and the classes are classes of this cusp's boundary lattice."""
+        if (self.statement is None) != (self.printed_page is None):
+            raise ValueError("a row states the statement that prints its chamber and its page together, or neither")
+        if self.orbit_count != len(self.orbits):
+            raise ValueError(f"orbit_count {self.orbit_count} but {len(self.orbits)} orbits are stated")
+        classes = [vector for orbit in self.orbits for vector in orbit.classes]
+        if any(len(vector) != len(self.cusp) for vector in classes):
+            raise ValueError("the cusp and every class have one coordinate per basis vector")
+        # A lift that is a multiple of the cusp is the zero class of K_J, which is isotropic and not a root.
+        if any(_multiple_of(vector, self.cusp) is not None for vector in classes):
+            raise ValueError("a root class of K_J is no multiple of the cusp that defines it")
+        for index, vector in enumerate(classes):
+            for other in classes[:index]:
+                if _multiple_of(tuple(entry - rest for entry, rest in zip(vector, other)), self.cusp) is not None:
+                    raise ValueError(f"the class {vector} is stated by two orbits of the row at the cusp {self.cusp}")
         return self
 
 
@@ -731,6 +842,23 @@ class IntegralData(Record):
             "Certified by the citation of the statement that prints the walls together with the program that computed the Gram matrix, the "
             "diagram and the count from the card's Gram tensor, so `latticedb certify` never recomputes it and never asks a Vinberg search for it. "
             "A row that states only the ideal-vertex count is certified by the citation alone: that count is printed, not computed."
+        ),
+    )
+    cusp_root_orbits: dict[Subgroup, Annotated[tuple[CuspRootOrbitRow, ...], Field(strict=False)]] | None = Field(
+        default=None,
+        description=(
+            "For a group $\\\\Gamma \\\\subseteq O(L)$ and a $0$-cusp $\\\\mathbb{Z}v$, the orbits of the cusp's root classes "
+            "in the boundary lattice $K_J = v^\\\\perp/\\\\mathbb{Z}v$ under the cusp stabilizer $\\\\Gamma_v$: the orbit count, "
+            "one representative per orbit, and the order of the transporter group of each "
+            "(theory/orbits.md#root-classes-at-a-cusp). A root class is a class of square $-2$, and the class is a root "
+            "exactly when its lift is: the walls of the chamber at the cusp that are not roots are no part of the family. "
+            "The keys are `O`, `SO`, `O+`, `SO+`, `Otilde`, `SOtilde`, `Otilde+` and `SOtilde+`, and the slug of an "
+            "arithmetic-group card of the same lattice for a named subgroup such as `gamma-en-2`, as in "
+            "`cusp_chambers`: $S$ is the kernel of the determinant, $+$ the kernel of the real spinor norm, and "
+            "$\\\\widetilde{O}(L)$ the kernel of $O(L) \\\\to O(A_L)$. "
+            "A count is stated only where the certified generators of $\\\\Gamma_v$ or a source decide it: a family that those "
+            "generators do not separate has no count here, because a singleton orbit is not a proof of inequivalence, and "
+            "`latticedb certify` never requests the field."
         ),
     )
     discriminant_orbits: dict[OrbitGroup, PrimitiveOrbitSeries] | None = Field(

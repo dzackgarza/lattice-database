@@ -129,6 +129,23 @@ def reference_problems(loaded: Corpus) -> list[str]:
                     if tuple(row.cusp) in seen:
                         found.append(f"{lattice_entry.path}: cusp_chambers[{key}]: two rows state the chamber at the cusp {row.cusp}")
                     seen.add(tuple(row.cusp))
+        root_orbits = (lattice.integral.cusp_root_orbits or {}) if lattice.integral is not None else {}
+        for key, rows in root_orbits.items():
+            if key not in STANDARD_SUBGROUPS:
+                named = arithmetic_groups.get(key)
+                if named is None or named.lattice != lattice.tag:
+                    found.append(f"{lattice_entry.path}: cusp_root_orbits names {key}, which is not an arithmetic-group card of {lattice.tag}")
+            if lattice.rank is None:
+                continue
+            cusps: set[tuple[int, ...]] = set()
+            for row in rows:
+                where = f"cusp_root_orbits[{key}] at the cusp {list(row.cusp)}"
+                if len(row.cusp) != lattice.rank or any(len(vector) != lattice.rank for orbit in row.orbits for vector in orbit.classes):
+                    found.append(f"{lattice_entry.path}: {where}: the cusp and its classes have one coordinate per basis vector")
+                    continue
+                if tuple(row.cusp) in cusps:
+                    found.append(f"{lattice_entry.path}: cusp_root_orbits[{key}]: two rows state the orbits at the cusp {row.cusp}")
+                cusps.add(tuple(row.cusp))
 
     for genus_entry in loaded.genera:
         genus = genus_entry.value

@@ -37,6 +37,9 @@ from latticedb.invariant_models import (
     CuspChamber as CuspChamber,
 )
 from latticedb.invariant_models import (
+    CuspRootOrbitRow as CuspRootOrbitRow,
+)
+from latticedb.invariant_models import (
     DefiniteData as DefiniteData,
 )
 from latticedb.invariant_models import (

@@ -202,6 +202,14 @@ The walls are the source's transcription; the three invariants of them are what 
 A row whose wall has positive square, or whose walls do not span $v^\perp/\mathbb{Z}v$ over $\mathbb{Q}$, is a transcription defect and not a chamber.
 A source that prints a chamber only as a figure does not state it, and a card stores no row for that cusp.
 
+## The orbits of the root classes at a cusp {#root-classes-at-a-cusp}
+
+A *root class* at the cusp $\mathbb{Z}v$ is the class in the boundary lattice $K_J = v^\perp/\mathbb{Z}v$ of a root $r$ of $v^\perp$, a vector of square $b(r,r) = -2$; the class has the same square, because $b(v,v) = 0$ and $b(r,v) = 0$. Not every wall of the [chamber at that cusp](#chamber-at-a-cusp) is a root: a wall of square $-4$ is none, and a family that mixed them would count the orbits of the walls as the orbits of the roots. The stabilizer $\Gamma_v$ of $v$ in $\Gamma$ acts on $K_J$ through its image $G_v$, and the orbits of the root classes under it are what the restricted Enriques semifan is cut by.
+
+A record states them in `integral.cusp_root_orbits`, keyed by the subgroup and then by cusp, as `integral.cusp_chambers` is: the cusp $v$, the root classes as lifts in the record basis --- two lifts state one class exactly when their difference is a rational multiple of $v$, so a row names no basis of $K_J$ --- one representative per orbit, the number of orbits, and the order of each orbit's transporter group.
+
+A count here is a decided value or no value at all. Two classes that an exhibited isometry of $G_v$ carries one to the other are one orbit; a singleton is *not* a proof that the classes are inequivalent, because a generating family of $\Gamma_v$ is not known at a primitive isotropic line (sage-extensions#312), so the owner's orbit call identifies classes and does not decompose the family. A row therefore states a count only where a source proves it or where the certified generators of $\Gamma_v$ separate the family, and `latticedb certify` never requests the field.
+
 ## The polyhedron of a lattice of signature (1, n) {#polyhedron}
 
 A lattice $L$ of signature $(1, n)$ has no $0$-cusp of a Baily–Borel boundary: the hyperbolic space is $\mathcal{H} = \mathcal{H}^n$ itself, and the reflection group $W(L)$ has a fundamental polyhedron $P \subset \mathcal{H}$ of finite volume.
