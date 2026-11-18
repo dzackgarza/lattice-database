@@ -19,9 +19,16 @@ Measured this turn, in the pinned image with that clone bound over `/repos/sage-
   `vector_equivalence_witness(r, r' + t v)` for `t` in a window and checks the witness it gets: that it fixes the
   cusp line and carries `r` to the candidate.
 
-**Not yet measured.** One such call at (4.3.8), for the pair `\alpha_9`, `\alpha_{11}` and `t = 0`, was still running
-after ten minutes in this image and is left running; the per-call cost of the coset walk is the open measurement. So no
+**Measured, and the answer is a non-return.** One such call at (4.3.8), for the pair `\alpha_9`, `\alpha_{11}` and
+`t = 0`, was killed at its eighteen-minute-twenty-second limit with **no result**; the coset walk of the closed
+operation does not reach an answer at a cusp of `T_{En}` in this image inside any budget a card can wait for. So no
 verdict is stated here for (4.3.7), (4.3.8) or (4.3.9), and nothing is written to the card.
+
+A second route was attempted and also produced no result: walking the union of the two constructible families -- the
+owner's 25 stabilizer generators at (4.3.7), collected in 110 s, and the reflections in all of that chamber's walls --
+on `K_J` in its own integer coordinates. It stopped on the reduction object's API (`reduction.coordinates` does not
+exist on the reduction this owner returns), so the union was never walked; that is an unfinished probe and not a
+negative result, and no conclusion is drawn from it.
 
 What is already proved about those three rows, and does not depend on this call:
 
