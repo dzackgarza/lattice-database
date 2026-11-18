@@ -361,10 +361,6 @@
 03A8 definite.regular:
   hash: c602e1bd331dac1195db650e93f8ec98007cb641ea249cfc6f505b185d1412c5
   seconds: 6618
-03B1 integral.discriminant_form:
-  hash: a84b64e4bd97fafaec09691d4a1215b1171384ffbc838d9594df8a06e340bf59
-  seconds: 0
-  lost: true
 03E4 definite.regular:
   hash: 367ee6be7b1ae2324d2f8b84ed17807c44014151c93049ad1053aae3f816df83
   seconds: 6558
@@ -464,6 +460,10 @@
 077Q definite.regular:
   hash: 914902341abad2a39c8826f5252d6b055b15688bc1c8d16016333081f7fab22c
   seconds: 6640
+08SI integral.discriminant_form:
+  hash: 3cb94320e3706468b6326718809bf44fbc802c85e2958a95aced5dcd11ea533f
+  seconds: 0
+  lost: true
 09K0 integral.discriminant_form:
   hash: 47a627cb4958860269675697bbf626ba6db3e526eacb7d0fd0c910e6faaee6f0
   seconds: 0
