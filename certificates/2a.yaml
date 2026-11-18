@@ -70,6 +70,9 @@
 02CY integral.anisotropic_primes:
   hash: 94e2f6a86bdf472800f2636f63b430ac78793577b213815711783484306667bf
   by: research preamble
+02CY integral.discriminant_form:
+  hash: d25f3bb113dc273bdbc3e09761ca5c03e9e6f12defa1b002a92b13b87f9c081f
+  by: research preamble
 02CY integral.discriminant_sequence:
   hash: 51f3862abcb5b141cceb3908d973cd3641ef02acd68a86570a88c50695fae4aa
   by: research preamble
@@ -129,6 +132,9 @@
   by: research preamble
 02I8 integral.anisotropic_primes:
   hash: 7f1baa1996884b542995def79340c052b69f532aa60af6da0c530689e5bf605c
+  by: research preamble
+02I8 integral.discriminant_form:
+  hash: 599627948615e30eec78f354b8db3d57bbf852676b9b17e0f42c9743b761e6d9
   by: research preamble
 02I8 integral.discriminant_sequence:
   hash: d507b28f5f2887c49f49c55abc3fe150433b06f78acdcbac560ff033c51b8a12
@@ -190,6 +196,9 @@
 02Z5 integral.anisotropic_primes:
   hash: 0bf06a9d0950d5dcb184faeb96501e051f9c5c8c3292cee65bcaa0695156c5e4
   by: research preamble
+02Z5 integral.discriminant_form:
+  hash: 4a3b5f79c2d93e3fdf03d25100e154bd90a33dac3ff4fe1fee30f4cb92978bb5
+  by: research preamble
 02Z5 integral.discriminant_sequence:
   hash: e0e5e04c9dd37af873ad1749aeafa5891525757f5ccbe3530f79229a61e170f3
   by: research preamble
@@ -249,6 +258,9 @@
   by: research preamble
 036D integral.anisotropic_primes:
   hash: 10d405b4da0add873f64cc89344b9fd653f68acf620c6d0d79b294bd3199d5c2
+  by: research preamble
+036D integral.discriminant_form:
+  hash: c11fa18d84658a6318a5ad2af7e311538111efe9c10009412f537d9ae09725ef
   by: research preamble
 036D integral.discriminant_sequence:
   hash: f2dae5a43caeb8f94b91ef9449596f4bc93af9787ba5bf4ac7e7b12f713a149c
@@ -310,6 +322,9 @@
 037L integral.anisotropic_primes:
   hash: f0c212cb42bb32533eeb8101ee441d9fd2ab41c6d4189778835dbbcf7b3d5642
   by: research preamble
+037L integral.discriminant_form:
+  hash: 98381af5dd46f4260fe469892ce0aacb8af4d436e9137f5472b8380502527112
+  by: research preamble
 037L integral.discriminant_sequence:
   hash: 33d5abc68ccc43977c69de14c075fe48c6ba3780bfa621b7323db0bd61ce314b
   by: research preamble
@@ -369,6 +384,9 @@
   by: research preamble
 03A6 integral.anisotropic_primes:
   hash: 82a8b25ee4a0689aa469d4fd1b6f5c25b2e7a6bde09a6914932c8c4e41883f70
+  by: research preamble
+03A6 integral.discriminant_form:
+  hash: c1f2ba6c9e4a939e49f5fcd36a77574364ff2f241e204e2230e1ffb93221f09d
   by: research preamble
 03A6 integral.discriminant_sequence:
   hash: 27b85b88ac0bb5ccf4280d44c1248a61b21b4991cb36bae34be7bd0fafa8e09d
@@ -25156,4 +25174,37 @@
   by: research preamble
 3I84 integral.spinor_genus_count:
   hash: 45f003a3140d6fb602cd16e81b5447674ed80c5bdc4ebc092f2553b9b4db63dd
+  by: research preamble
+6BQZ automorphisms.automorphism_group_generator_morphisms:
+  hash: d42aa48fd71b000d7a6db7d9046861bfcbba548355f67274d6d4e2a9d56e2870
+  by: research preamble
+6BQZ derive:
+  hash: cf9b7179f3dece4187cc7cef7ab0a04e321697e378835cacd39dd68b982f8fd7
+  by: research preamble
+6BQZ form.integer_valued:
+  hash: e5938280993ab4c6b164e7bdde41f896d0edf1b70d643096fbacd11ee7aaea5d
+  by: research preamble
+6BQZ integral.discriminant_form:
+  hash: d3c8ec16893a7a3085649b4d7b1482fd03634a5e5ab8907e7fa55990bb630205
+  by: research preamble
+6BQZ integral.elementary_primes:
+  hash: 90ac1aa69a117bf5507fd48220dbdc3309bb38a48a9c31a7bad5f08a228eaff7
+  by: research preamble
+6BQZ integral.genus_class_count:
+  hash: d78d3c0f8290b09390c276e0bd127b3a3a0fd818be5d02f1c0665864df68d214
+  by: research preamble
+6BQZ integral.genus_symbol:
+  hash: ec4bd8bbb7fcc50e9f9675ea414940166a8ee2b9ed3d0aac818dfca13685b23f
+  by: research preamble
+6BQZ integral.hyperbolic_index:
+  hash: ad946236ed119cbb548d047195b942c776bf14921d768ecea50db10cb6c762d0
+  by: research preamble
+6BQZ integral.overlattice_count:
+  hash: c9411ccf5069fcf38fea0a7a5d334d69bc7443d3ee56dfe0e2e5301eaa60e56c
+  by: research preamble
+6BQZ integral.spinor_genera:
+  hash: f28168d682207a452099454b3cef4c719103cb8f53b9490f411765376f7e58f6
+  by: research preamble
+6BQZ integral.spinor_genus_count:
+  hash: 7153a7a77d51c7805f75dbe713369abeaf46673ba6873ee3827081d98805152d
   by: research preamble
