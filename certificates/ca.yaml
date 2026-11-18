@@ -22,6 +22,9 @@
 030A integral.anisotropic_primes:
   hash: 6d62cc705ed74f03d6e934c88528a7a6b00a368286eefefa797fe9221f7f06b8
   by: research preamble
+030A integral.discriminant_form:
+  hash: d2f0b64bfde2aaf1b2c33ae09f4ddf1a0a9395f793c1e0bd7d6562c6d4e5856e
+  by: research preamble
 030A integral.discriminant_sequence:
   hash: 3b74646390ebb4039daf89050ada7e60c655d3d5998572ed9b730f317a6692a9
   by: research preamble
@@ -24670,6 +24673,9 @@
 3EF8 integral.anisotropic_primes:
   hash: 4abf7449a7fab3b5ccbc8b7add4302e7152fd543b9e4c2aa32eb022a7fe75143
   by: research preamble
+3EF8 integral.discriminant_form:
+  hash: b8fa26dc0bc96ed09c9de01c9a51e94079c71e9dae762fcd5b8e49a9986cadd9
+  by: research preamble
 3EF8 integral.discriminant_sequence:
   hash: ea48f8065b0463ea50345f4a1c6d668959a269f34fac7432549f895f2db6ab94
   by: research preamble
@@ -25074,4 +25080,28 @@
   by: research preamble
 3G95 integral.spinor_genus_count:
   hash: 0f5218c4adf7bc4337c7b603d0a7639339636210ce405b3b2ace55c64548a337
+  by: research preamble
+4B2V derive:
+  hash: ce307737b6ed5547ddb4e8b577d36eb324c607bd69a2016c4d6d7a2d48a327d8
+  by: research preamble
+4B2V form.integer_valued:
+  hash: 12a402b5b0aa3a58996d1327ceef3a19b8c4bac7a27d268ce41c62122eba23d7
+  by: research preamble
+4B2V integral.elementary_primes:
+  hash: a0b191262a7e5c4dff54ceea8beb7d3105e35ff71bd7378f89bd74b761e22527
+  by: research preamble
+4B2V integral.genus_class_count:
+  hash: acee8751d652f91ce370e814d15be15227c2c20f5ae0c5179feb15987b82f0e1
+  by: research preamble
+4B2V integral.genus_symbol:
+  hash: a79631a592505519ad513cb662c6209d58bb05beb3141e60dd55fa14be4a8381
+  by: research preamble
+4B2V integral.overlattice_count:
+  hash: 02a04f4c1f5284898621be4801107456bb11b3dec49f201eae8a95b5df53ce9f
+  by: research preamble
+4B2V integral.spinor_genera:
+  hash: 19dfc42fe921b9ba7b872cb149dd8023b611789be692ecfe275340243f76bd5c
+  by: research preamble
+4B2V integral.spinor_genus_count:
+  hash: 8e7311355c9b1ca2dbab01eb26c6c45797ea1a2c5ac5efbb948769a935a1b1f7
   by: research preamble
