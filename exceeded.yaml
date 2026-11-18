@@ -460,24 +460,24 @@
 077Q definite.regular:
   hash: 914902341abad2a39c8826f5252d6b055b15688bc1c8d16016333081f7fab22c
   seconds: 6640
-0C5R integral.discriminant_form:
-  hash: 3d8db2122a1579f0c6f7e0c06ddec56b82a55d662430864ec8e253e7b967ee3c
-  seconds: 0
-  lost: true
 0EXT integral.primitive_orbits:
   hash: 6c6a09434f37e4c930476f5f9a27e1a7327c278278c894534876d89a6705c56e
   seconds: 0
   lost: true
-0FS6 integral.discriminant_form:
-  hash: a6c964f08a1a638f5b22ac864b8806e3fd9aa8b345bf261d0a4abdac53c47cde
+0FBX integral.discriminant_form:
+  hash: bdb1388205eacba096358334b293ed29d11179dba5311b037743795de8eb558a
   seconds: 0
   lost: true
-0HAB integral.discriminant_form:
-  hash: bf0a65c820e247360d1debbfd667b26c3a76b4518dc1f201e8ec2fb418133223
+0IM6 integral.discriminant_form:
+  hash: 678f90dcf47fd73af9ad798c5041b78a9506bcd8d0bbb3621a83c552a3056c3c
   seconds: 0
   lost: true
-0HCF integral.discriminant_form:
-  hash: beae8cafb20b6c705f81a14b7ae116e5fa8a02bc1962484a25e75ba8bbea258e
+0K47 integral.discriminant_form:
+  hash: ba80eae54b677112936d58c219227a531fef16fbb507682d2350b99bd4561eb9
+  seconds: 0
+  lost: true
+0K61 integral.discriminant_form:
+  hash: 082c9980f663cdcb42d13fcef3a3479ef66a1b67314fa4966782a865c8554945
   seconds: 0
   lost: true
 0LX3 definite.siegel_eisenstein_coefficients:
@@ -499,10 +499,6 @@
 0OTR integral.discriminant_form:
   hash: e0298c563c8fe791cfe501315d29a76ec9cb42202794e7691eadb73effc061f0
   seconds: 5
-0PCZ integral.discriminant_form:
-  hash: e783c068b8f9ba5592f2023830d07f8402e751311154d9dec80f29208ad1fab2
-  seconds: 0
-  lost: true
 0QYP integral.discriminant_form:
   hash: 2f604d30d5d58f738655152c008b9c0ffdd79cb3bb0c7f8f8cb1aaffae3e3ca3
   seconds: 0
@@ -512,6 +508,10 @@
   seconds: 7
 0RVY integral.elementary_primes:
   hash: 811175d5f9f1d0b028f2eb38f41a5672d3bdc0e8d0fb282d3f26fc4769b8f652
+  seconds: 0
+  lost: true
+0T5P integral.discriminant_form:
+  hash: 8ccb1874692e308ca12d8756f6e1be4034c321606f555e574d1e8e2cdfce9250
   seconds: 0
   lost: true
 0TTM integral.genus_class_count:
