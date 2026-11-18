@@ -9,7 +9,7 @@ respects the decomposition}`, with `M(2) = U(2) + E8(-2)` the card of `0125`. In
 
 `L.Aut().discriminant_point_stabilizer_image_generators(A_U(2))` is the call that returns the
 nine members named in the issue. On the stored Gram tensor of `0125`, at sage-extensions
-`2fb37d5a717fac890e9cbf239f63d3a97f487040` (origin/main, 2026-11-17), it was run five times:
+`2fb37d5a717fac890e9cbf239f63d3a97f487040` (origin/main, 2026-11-17), it was run six times:
 
 | run | reached the family | ended at | peak RSS | result |
 | --- | --- | --- | --- | --- |
@@ -18,6 +18,7 @@ nine members named in the issue. On the stored Gram tensor of `0125`, at sage-ex
 | C | 508.6 s | 2600 s | 2.55 GiB | exit 0, no value, no traceback |
 | D (`.scratch/nine-40.py`, the run of 2026-11-18 04:43) | — | 1404 s | 2.29 GiB | exit 0, no value, no traceback |
 | probe | — | still running at the 900 s cap | 2.37 GiB | killed by the run's own limit |
+| E (`.scratch/nine-scan.py`, the run of 2026-11-18 05:47, the loop copied out with progress lines) | did not finish building the family | stopped at 2662 s | 2.51 GiB | no value; `MemAvailable` fell from 4306 to 1270 MiB |
 
 In the pinned revision the loop is `src/sage_extensions/categories/lattice_morphisms.py:4047-4056`,
 over the family built at `:4041` from the preimage at `:4040`: the run returns at `:4056` when the
@@ -25,8 +26,17 @@ images' subgroup order reaches `|P|`, and otherwise raises at `:4057` after the 
 that ends without a value raises nothing, so no traceback names a line; the location recorded here
 is the loop the process was in when its status was written.
 
-All five were inside the selection loop over the Schreier family, which has `15 * 67456 - 67455 =
-944385` members. Nothing was written to the card by any of them; the `Morphisms` block and the
+Run E is the one that separates the two stages. It is the owner's own loop copied out with a progress
+line, and the first line it would print after `preimage.group_generators()` (`:4041`) never printed:
+the 2.5 GiB and the time of this call are the Schreier family's construction over the 67 456-point
+orbit, not the selection over it. In runs A–D that construction did return — their stamps after
+`L.Aut().discriminant_point_stabilizer(point)` (`:4040`) show it — and the loop then ran, to 2 600 s
+in C. So the call needs roughly 2.5 GiB resident for its family whether it reaches the loop or not,
+and this host spends most of its time with less than 2 GiB free (`MemAvailable` fell to 1270 MiB
+during E and to 178 MiB during D).
+
+Runs A, B, C, D and the probe were inside the selection loop over the Schreier family, which has
+`15 * 67456 - 67455 = 944385` members; run E never reached the loop. Nothing was written to the card by any of them; the `Morphisms` block and the
 ledger are unchanged by these runs. The host was shared and oversubscribed throughout (load
 average 11–27 on 4 cores, `/proc/vmstat` `oom_kill` 30 since boot), which is what the wall times
 show; the owner measured this call at 44.8 s natively.
