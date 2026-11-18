@@ -25950,27 +25950,13 @@
   by: research preamble
 3IBU definite.regular:
   hash: af6dcbb01f5c32e78a6a6948d714ef5b612929c342f16ed8a713333dc8b032e7
-  by: 'W. C. Jagy, I. Kaplansky and A. Schiemann, There are 913 regular ternary forms,
-    Mathematika 44 (1997), 332-341, form 897, as tabulated in A. G. Doyle, B. Muskat,
-    K. Pehlivan and K. S. Williams, Positive integers represented by regular primitive
-    positive-definite integral ternary quadratic forms, Integers 19 (2019), #A45,
-    Tables 1 and 2; regular by W. C. Jagy, I. Kaplansky and A. Schiemann, There are
-    913 regular ternary forms, Mathematika 44 (1997), 332-341.'
+  by: research preamble
 3IBU definite.siegel_eisenstein_coefficients:
   hash: 6842ab155d3f36a45a9afe16daad15c2ca943b78c82874b1b7118484c71fe08a
   by: research preamble
 3IBU definite.spinor_regular:
   hash: e8000d44444b212bc39943eae29eb5ace5cba02de0aeaad39aca26e9b75ff479
-  by: 'W. C. Jagy, I. Kaplansky and A. Schiemann, There are 913 regular ternary forms,
-    Mathematika 44 (1997), 332-341, form 897, as tabulated in A. G. Doyle, B. Muskat,
-    K. Pehlivan and K. S. Williams, Positive integers represented by regular primitive
-    positive-definite integral ternary quadratic forms, Integers 19 (2019), #A45,
-    Tables 1 and 2; regular by W. C. Jagy, I. Kaplansky and A. Schiemann, There are
-    913 regular ternary forms, Mathematika 44 (1997), 332-341; hence spinor regular,
-    since a form is spinor regular if it represents all the positive integers represented
-    by its spinor genus (A. G. Earnest and A. Haensch, Completeness of the list of
-    spinor regular ternary quadratic forms, arXiv:1711.05811v2 (2018), Abstract) and
-    the spinor genus lies in the genus.'
+  by: research preamble
 3IBU definite.theta_series_cuspidal_component:
   hash: 9e7c2889fc9f8297dcafc57358c09dc2c47fe86e1d98963b9a65332ef1ba8509
   by: research preamble
@@ -25982,6 +25968,9 @@
   by: research preamble
 3IBU integral.anisotropic_primes:
   hash: 2a9087a9b16c8eb1e46d0a9dd5bc3a4269309aa297696996b7b26e521990ae4f
+  by: research preamble
+3IBU integral.discriminant_form:
+  hash: 7bdb4af55d0537784fc41abccc419dabdf9630e2411de781bad19e2e967fc9fb
   by: research preamble
 3IBU integral.discriminant_sequence:
   hash: ecb9dd17ccb001b0bc26c9af9dc12c74c848373c0a50707a477796c555b667ab
