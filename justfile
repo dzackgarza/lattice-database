@@ -21,7 +21,7 @@ default:
 [private]
 [positional-arguments]
 _latticedb *ARGS:
-    PYTHONPATH="$HOME/research/src:src" "$(just -f ~/ai-review-ci/justfiles/sage.just -d . _sage-python)" -m latticedb "$@"
+    PYTHONPATH="$HOME/research/src:src:/repos/sage-extensions/src" "$(just -f ~/ai-review-ci/justfiles/sage.just -d . _sage-python)" -m latticedb "$@"
 
 # Author a lattice card from its Gram tensor: `just new --gram '[[2,1],[1,2]]' --name A2 --latex A_2`
 new *ARGS:
@@ -96,20 +96,20 @@ tag:
 # Focused local model/schema gate. The preamble may be imported; lattice-db owns
 # database mechanics, not a preamble-free shadow mathematics layer.
 test:
-    PYTHONPATH="$HOME/research/src:src" "$(just -f ~/ai-review-ci/justfiles/sage.just -d . _sage-python)" -m pytest tests/test_model.py tests/test_card_merge.py -q
+    PYTHONPATH="$HOME/research/src:src:/repos/sage-extensions/src" "$(just -f ~/ai-review-ci/justfiles/sage.just -d . _sage-python)" -m pytest tests/test_model.py tests/test_card_merge.py -q
 
 # CI-only constructor/serialization/publication integration. Mathematical correctness lives in preamble tests.
 test-validation:
-    PYTHONPATH="$HOME/research/src:src" "$(just -f ~/ai-review-ci/justfiles/sage.just -d . _sage-python)" -m pytest tests/test_catalogue_schemas.py tests/test_corpus.py tests/test_genus.py tests/test_ge_generators.py tests/test_geometric.py tests/test_hashimoto.py tests/test_records.py tests/validation
+    PYTHONPATH="$HOME/research/src:src:/repos/sage-extensions/src" "$(just -f ~/ai-review-ci/justfiles/sage.just -d . _sage-python)" -m pytest tests/test_catalogue_schemas.py tests/test_corpus.py tests/test_genus.py tests/test_ge_generators.py tests/test_geometric.py tests/test_hashimoto.py tests/test_records.py tests/validation
 
 # Certification scheduling, failure triage and persistence on small specimens
 [positional-arguments]
 test-certification *ARGS:
-    PYTHONPATH="$HOME/research/src:src" "$(just -f ~/ai-review-ci/justfiles/sage.just -d . _sage-python)" -m pytest tests/test_genus.py tests/test_failures.py tests/test_persist.py "$@"
+    PYTHONPATH="$HOME/research/src:src:/repos/sage-extensions/src" "$(just -f ~/ai-review-ci/justfiles/sage.just -d . _sage-python)" -m pytest tests/test_genus.py tests/test_failures.py tests/test_persist.py "$@"
 
 # Exercise archived-source importers and source-to-card collation; provenance only, not mathematical validation
 test-source-intake:
-    PYTHONPATH="$HOME/research/src:src" "$(just -f ~/ai-review-ci/justfiles/sage.just -d . _sage-python)" -m pytest tests/test_bulk_sources.py tests/source_intake
+    PYTHONPATH="$HOME/research/src:src:/repos/sage-extensions/src" "$(just -f ~/ai-review-ci/justfiles/sage.just -d . _sage-python)" -m pytest tests/test_bulk_sources.py tests/source_intake
 
 # List the tags that share a Gram tensor
 duplicates:

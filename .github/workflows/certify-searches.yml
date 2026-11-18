@@ -45,7 +45,7 @@ jobs:
         git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
         # Shards own disjoint tags, so `exceeded.yaml` merges key by key (.gitattributes).
         # Git runs the driver in the worktree being merged, so its directory is "$PWD".
-        git config merge.keyed-map.driver 'docker exec -i --workdir "$PWD" --env PYTHONPATH='"$GITHUB_WORKSPACE/research/src:$GITHUB_WORKSPACE/src"' sage-env /sage/.venv/bin/python -m latticedb merge-keyed-map %O %A %B'
+        git config merge.keyed-map.driver 'docker exec -i --workdir "$PWD" --env PYTHONPATH='"$GITHUB_WORKSPACE/research/src:$GITHUB_WORKSPACE/src:/repos/sage-extensions/src"' sage-env /sage/.venv/bin/python -m latticedb merge-keyed-map %O %A %B'
     - name: Run the semi-decision searches
       env:
         LATTICEDB_TAG: ${{ matrix.tag }}
@@ -70,7 +70,7 @@ jobs:
             --env "LATTICEDB_RUN_URL=$GITHUB_SERVER_URL/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID/attempts/$GITHUB_RUN_ATTEMPT" \
             --env "LATTICEDB_REVISION=$(git rev-parse HEAD)" \
             --env "LATTICEDB_RESEARCH_REVISION=$(git -C research rev-parse HEAD)" \
-          --env "PYTHONPATH=$GITHUB_WORKSPACE/research/src:$GITHUB_WORKSPACE/src" \
+          --env "PYTHONPATH=$GITHUB_WORKSPACE/research/src:$GITHUB_WORKSPACE/src:/repos/sage-extensions/src" \
           --workdir "$GITHUB_WORKSPACE" \
           sage-env timeout "${minutes}m" /sage/.venv/bin/python -m latticedb certify "${args[@]}" || status=$?
         kill "$persister" || true

@@ -213,6 +213,35 @@ minutes, far inside the step's `timeout-minutes: 350`. A segfault needs no ceili
 enables `faulthandler`, and the crash this issue opened with was reported that way — `File
 "/repo/tests/test_bulk_sources.py", line 17 in test_nipp_tables_preserve_the_source_discriminants_and_group_orders`.
 
+**What the ceiling catches first on this tree.** The same selection run locally with a 300 s ceiling
+(`--timeout=300 --timeout-method=thread`, `results/probe-29-timeout-sweep.log`) ended 14m26s in and
+named one test:
+
+    File "/repo/tests/test_corpus.py", line 371, in test_the_stored_corpus_loads_through_the_reader_that_every_workflow_starts_with
+      loaded = corpus.load(ROOT)
+    File "/repo/src/latticedb/corpus.py", line 253, in load
+      document = read_card(path)
+    File "/repo/src/latticedb/corpus.py", line 63, in read_card
+      return frontmatter.load(path, handler=_CARD_YAML)
+
+That is the whole-corpus read — 7.29 GiB, measured at 421 s when the VM is quiet — not a hang, and it is
+why the committed ceiling is 1800 s and not the 300 s this probe used: the step's non-termination is
+most plausibly this same memory-bound read thrashing inside a 16 GB runner that already holds the
+suite's other loads, and a ceiling below the read's cost would fail the suite on a slow runner instead
+of naming a hang.
+
+**The ceiling in CI.** Run `44284006493` (`workflow_dispatch`, head `193234cebe`, the commit that adds
+the ceiling) entered step 7 at 10:27:10Z and **ended it at 11:26:17Z — 59 minutes, exit code 1** — with
+the job completing at 11:26:37Z, well inside its `timeout-minutes: 350`. The run before it, without the
+ceiling, sat 88 minutes inside the same step with steps 8–10 `pending` and was cancelled with no
+verdict. The step now terminates and hands pytest's own exit status up.
+
+What that exit status contains is not readable from this connection: the run has **0 artifacts**, and
+the run-log, the job-log and the job's own log endpoint each answer **403** anonymously. `exit code 1`
+is what pytest reports for failing tests and also what the thread method's `os._exit(1)` produces
+(`pytest_timeout.py:542`), so which tests failed — or whether the ceiling itself fired — is in that log
+and needs `actions: read`. The first failing frame of this run is therefore not quoted here.
+
 ## 2. The Hoehn–Mason tests run in the time of an ordinary unit test
 
 The 70 minutes were one owner call: `hoehn_mason.automorphisms` (`src/latticedb/hoehn_mason.py:195`)
