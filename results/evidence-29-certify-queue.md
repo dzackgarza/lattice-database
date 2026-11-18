@@ -62,14 +62,14 @@ The venue is the pinned image (`dzackgarza/sage` config `332aebe9…`, revision 
 The tree under test is `main`'s own bytes with the four files of this commit applied, so it is the
 tree this lands, not a working copy.
 
-    before, the three tests, on main before b2ac28d8bd:  3 failed in 180.34s
-    after,  the three tests:                            3 passed (measured below)
-    after,  tests/test_certify_process.py tests/test_failures.py, whole files:
-                                                        measured below
+    before, the three tests, on main before the fix:  3 failed in 180.34s
+    after,  the three tests:                          3 passed in 213.06s
+    after,  tests/test_certify_process.py and tests/test_failures.py, whole files:
+                                                      17 passed in 219.33s
     after,  tests/test_genus.py, the applies/queue/worker selection:
-                                                        measured below
+                                                      11 passed, 39 deselected in 33.64s
     after,  tests/test_model.py tests/test_card_merge.py:
-                                                        76 passed, 2 failed
+                                                      76 passed, 2 failed
 
 The last two failures are the scratch tree's, not the code's: `tests/test_card_merge.py` reads
 `.gitattributes`, which a tree assembled from `git archive` of selected paths does not carry, and the
