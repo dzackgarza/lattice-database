@@ -4252,236 +4252,6 @@
     database_revision: 8a7d3bbea5729a0ed3a35effd703a7aa7fd8c25e
     research_revision: 507b6871abca4e8157fd6e612bc95c60c6b634fd
   notes: []
-2OZL integral.discriminant_form:
-  disposition: open
-  attempts:
-  - hash: fee5f93c9c2cb5a24c7fb189d4e3fedbf2ecbcaf7e860b33a11e167e81ec16e1
-    gram_tensor:
-    - - 3
-      - 0
-      - 0
-    - - 0
-      - 3
-      - 0
-    - - 0
-      - 0
-      - 20
-    reason: exit status 1
-    stderr: "Traceback (most recent call last):\n  File \"<frozen runpy>\", line 203,
-      in _run_module_as_main\n  File \"<frozen runpy>\", line 88, in _run_code\n  File
-      \"/home/runner/work/lattice-database/lattice-database/src/latticedb/sage_genus.py\",
-      line 461, in <module>\n    main()\n    ~~~~^^\n  File \"/home/runner/work/lattice-database/lattice-database/src/latticedb/sage_genus.py\",
-      line 456, in main\n    _compute(request)\n    ~~~~~~~~^^^^^^^^^\n  File \"/home/runner/work/lattice-database/lattice-database/src/latticedb/sage_genus.py\",
-      line 441, in _compute\n    _run(\n    ~~~~^\n        tag,\n        ^^^^\n        [field],\n
-      \       ^^^^^^^^\n        lambda: {field: SERIES[field](lattice, request[\"series_bound\"])
-      if field in SERIES else VALUES[field](lattice)},\n        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n
-      \   )\n    ^\n  File \"/home/runner/work/lattice-database/lattice-database/src/latticedb/sage_genus.py\",
-      line 377, in _run\n    values = compute()\n  File \"/home/runner/work/lattice-database/lattice-database/src/latticedb/sage_genus.py\",
-      line 444, in <lambda>\n    lambda: {field: SERIES[field](lattice, request[\"series_bound\"])
-      if field in SERIES else VALUES[field](lattice)},\n                                                                                            ~~~~~~~~~~~~~^^^^^^^^^\n
-      \ File \"/home/runner/work/lattice-database/lattice-database/src/latticedb/sage_genus.py\",
-      line 292, in <lambda>\n    \"discriminant_form\": lambda lattice: _discriminant_form(lattice),\n
-      \                                        ~~~~~~~~~~~~~~~~~~^^^^^^^^^\n  File
-      \"/home/runner/work/lattice-database/lattice-database/src/latticedb/sage_genus.py\",
-      line 309, in _discriminant_form\n    form = lattice.discriminant_quadratic_form()\n
-      \ File \"sage/misc/cachefunc.pyx\", line 2328, in sage.misc.cachefunc.CachedMethodCallerNoArgs.__call__\n
-      \   self.cache = f(self._instance)\n  File \"/repos/sage-extensions/src/sage_extensions/categories/lattices.py\",
-      line 8146, in discriminant_quadratic_form\n    raise ValueError(\n        f\"{self!r}
-      has no discriminant quadratic form: q_L: A_L -> Q/2Z is defined only for an
-      even lattice, and {self!r} is odd; use discriminant_bilinear_form\"\n    )\nValueError:
-      Integral lattice of rank 3 and signature (3, 0) has no discriminant quadratic
-      form: q_L: A_L -> Q/2Z is defined only for an even lattice, and Integral lattice
-      of rank 3 and signature (3, 0) is odd; use discriminant_bilinear_form\n"
-    seconds: 0.42832003200055624
-    recorded_at: 2026-11-18 19:57:32.862778+00:00
-    run_url: https://github.com/dzackgarza/lattice-database/actions/runs/44298677709/attempts/1
-    database_revision: 8a7d3bbea5729a0ed3a35effd703a7aa7fd8c25e
-    research_revision: 507b6871abca4e8157fd6e612bc95c60c6b634fd
-  notes: []
-2OZT integral.discriminant_form:
-  disposition: open
-  attempts:
-  - hash: f275af0af0a6803b4162d52364c24aee9e901eb59a42ddb4e8cc11caf0ecb25f
-    gram_tensor:
-    - - 4
-      - 2
-      - 0
-    - - 2
-      - 6
-      - 0
-    - - 0
-      - 0
-      - 9
-    reason: exit status 1
-    stderr: "Traceback (most recent call last):\n  File \"<frozen runpy>\", line 203,
-      in _run_module_as_main\n  File \"<frozen runpy>\", line 88, in _run_code\n  File
-      \"/home/runner/work/lattice-database/lattice-database/src/latticedb/sage_genus.py\",
-      line 461, in <module>\n    main()\n    ~~~~^^\n  File \"/home/runner/work/lattice-database/lattice-database/src/latticedb/sage_genus.py\",
-      line 456, in main\n    _compute(request)\n    ~~~~~~~~^^^^^^^^^\n  File \"/home/runner/work/lattice-database/lattice-database/src/latticedb/sage_genus.py\",
-      line 441, in _compute\n    _run(\n    ~~~~^\n        tag,\n        ^^^^\n        [field],\n
-      \       ^^^^^^^^\n        lambda: {field: SERIES[field](lattice, request[\"series_bound\"])
-      if field in SERIES else VALUES[field](lattice)},\n        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n
-      \   )\n    ^\n  File \"/home/runner/work/lattice-database/lattice-database/src/latticedb/sage_genus.py\",
-      line 377, in _run\n    values = compute()\n  File \"/home/runner/work/lattice-database/lattice-database/src/latticedb/sage_genus.py\",
-      line 444, in <lambda>\n    lambda: {field: SERIES[field](lattice, request[\"series_bound\"])
-      if field in SERIES else VALUES[field](lattice)},\n                                                                                            ~~~~~~~~~~~~~^^^^^^^^^\n
-      \ File \"/home/runner/work/lattice-database/lattice-database/src/latticedb/sage_genus.py\",
-      line 292, in <lambda>\n    \"discriminant_form\": lambda lattice: _discriminant_form(lattice),\n
-      \                                        ~~~~~~~~~~~~~~~~~~^^^^^^^^^\n  File
-      \"/home/runner/work/lattice-database/lattice-database/src/latticedb/sage_genus.py\",
-      line 309, in _discriminant_form\n    form = lattice.discriminant_quadratic_form()\n
-      \ File \"sage/misc/cachefunc.pyx\", line 2328, in sage.misc.cachefunc.CachedMethodCallerNoArgs.__call__\n
-      \   self.cache = f(self._instance)\n  File \"/repos/sage-extensions/src/sage_extensions/categories/lattices.py\",
-      line 8146, in discriminant_quadratic_form\n    raise ValueError(\n        f\"{self!r}
-      has no discriminant quadratic form: q_L: A_L -> Q/2Z is defined only for an
-      even lattice, and {self!r} is odd; use discriminant_bilinear_form\"\n    )\nValueError:
-      Integral lattice of rank 3 and signature (3, 0) has no discriminant quadratic
-      form: q_L: A_L -> Q/2Z is defined only for an even lattice, and Integral lattice
-      of rank 3 and signature (3, 0) is odd; use discriminant_bilinear_form\n"
-    seconds: 0.3973903349997272
-    recorded_at: 2026-11-18 19:58:25.870339+00:00
-    run_url: https://github.com/dzackgarza/lattice-database/actions/runs/44298677709/attempts/1
-    database_revision: 8a7d3bbea5729a0ed3a35effd703a7aa7fd8c25e
-    research_revision: 507b6871abca4e8157fd6e612bc95c60c6b634fd
-  notes: []
-2P9W integral.discriminant_form:
-  disposition: open
-  attempts:
-  - hash: ca9588570c31e826697c01efc48056b7af9c31db92d8926fc2d7d559a9ddd77c
-    gram_tensor:
-    - - 2
-      - 0
-      - 1
-    - - 0
-      - 2
-      - 1
-    - - 1
-      - 1
-      - 49
-    reason: exit status 1
-    stderr: "Traceback (most recent call last):\n  File \"<frozen runpy>\", line 203,
-      in _run_module_as_main\n  File \"<frozen runpy>\", line 88, in _run_code\n  File
-      \"/home/runner/work/lattice-database/lattice-database/src/latticedb/sage_genus.py\",
-      line 461, in <module>\n    main()\n    ~~~~^^\n  File \"/home/runner/work/lattice-database/lattice-database/src/latticedb/sage_genus.py\",
-      line 456, in main\n    _compute(request)\n    ~~~~~~~~^^^^^^^^^\n  File \"/home/runner/work/lattice-database/lattice-database/src/latticedb/sage_genus.py\",
-      line 441, in _compute\n    _run(\n    ~~~~^\n        tag,\n        ^^^^\n        [field],\n
-      \       ^^^^^^^^\n        lambda: {field: SERIES[field](lattice, request[\"series_bound\"])
-      if field in SERIES else VALUES[field](lattice)},\n        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n
-      \   )\n    ^\n  File \"/home/runner/work/lattice-database/lattice-database/src/latticedb/sage_genus.py\",
-      line 377, in _run\n    values = compute()\n  File \"/home/runner/work/lattice-database/lattice-database/src/latticedb/sage_genus.py\",
-      line 444, in <lambda>\n    lambda: {field: SERIES[field](lattice, request[\"series_bound\"])
-      if field in SERIES else VALUES[field](lattice)},\n                                                                                            ~~~~~~~~~~~~~^^^^^^^^^\n
-      \ File \"/home/runner/work/lattice-database/lattice-database/src/latticedb/sage_genus.py\",
-      line 292, in <lambda>\n    \"discriminant_form\": lambda lattice: _discriminant_form(lattice),\n
-      \                                        ~~~~~~~~~~~~~~~~~~^^^^^^^^^\n  File
-      \"/home/runner/work/lattice-database/lattice-database/src/latticedb/sage_genus.py\",
-      line 309, in _discriminant_form\n    form = lattice.discriminant_quadratic_form()\n
-      \ File \"sage/misc/cachefunc.pyx\", line 2328, in sage.misc.cachefunc.CachedMethodCallerNoArgs.__call__\n
-      \   self.cache = f(self._instance)\n  File \"/repos/sage-extensions/src/sage_extensions/categories/lattices.py\",
-      line 8146, in discriminant_quadratic_form\n    raise ValueError(\n        f\"{self!r}
-      has no discriminant quadratic form: q_L: A_L -> Q/2Z is defined only for an
-      even lattice, and {self!r} is odd; use discriminant_bilinear_form\"\n    )\nValueError:
-      Integral lattice of rank 3 and signature (3, 0) has no discriminant quadratic
-      form: q_L: A_L -> Q/2Z is defined only for an even lattice, and Integral lattice
-      of rank 3 and signature (3, 0) is odd; use discriminant_bilinear_form\n"
-    seconds: 0.397406779999983
-    recorded_at: 2026-11-18 20:04:53.775818+00:00
-    run_url: https://github.com/dzackgarza/lattice-database/actions/runs/44298677709/attempts/1
-    database_revision: 8a7d3bbea5729a0ed3a35effd703a7aa7fd8c25e
-    research_revision: 507b6871abca4e8157fd6e612bc95c60c6b634fd
-  notes: []
-2PMX integral.discriminant_form:
-  disposition: open
-  attempts:
-  - hash: 0c5e84e8c5deb48959577e7484f4cf6c1c285a8a5f92610e76165c2efecf56e7
-    gram_tensor:
-    - - 2
-      - 1
-      - 0
-    - - 1
-      - 2
-      - 0
-    - - 0
-      - 0
-      - 69
-    reason: exit status 1
-    stderr: "Traceback (most recent call last):\n  File \"<frozen runpy>\", line 203,
-      in _run_module_as_main\n  File \"<frozen runpy>\", line 88, in _run_code\n  File
-      \"/home/runner/work/lattice-database/lattice-database/src/latticedb/sage_genus.py\",
-      line 461, in <module>\n    main()\n    ~~~~^^\n  File \"/home/runner/work/lattice-database/lattice-database/src/latticedb/sage_genus.py\",
-      line 456, in main\n    _compute(request)\n    ~~~~~~~~^^^^^^^^^\n  File \"/home/runner/work/lattice-database/lattice-database/src/latticedb/sage_genus.py\",
-      line 441, in _compute\n    _run(\n    ~~~~^\n        tag,\n        ^^^^\n        [field],\n
-      \       ^^^^^^^^\n        lambda: {field: SERIES[field](lattice, request[\"series_bound\"])
-      if field in SERIES else VALUES[field](lattice)},\n        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n
-      \   )\n    ^\n  File \"/home/runner/work/lattice-database/lattice-database/src/latticedb/sage_genus.py\",
-      line 377, in _run\n    values = compute()\n  File \"/home/runner/work/lattice-database/lattice-database/src/latticedb/sage_genus.py\",
-      line 444, in <lambda>\n    lambda: {field: SERIES[field](lattice, request[\"series_bound\"])
-      if field in SERIES else VALUES[field](lattice)},\n                                                                                            ~~~~~~~~~~~~~^^^^^^^^^\n
-      \ File \"/home/runner/work/lattice-database/lattice-database/src/latticedb/sage_genus.py\",
-      line 292, in <lambda>\n    \"discriminant_form\": lambda lattice: _discriminant_form(lattice),\n
-      \                                        ~~~~~~~~~~~~~~~~~~^^^^^^^^^\n  File
-      \"/home/runner/work/lattice-database/lattice-database/src/latticedb/sage_genus.py\",
-      line 309, in _discriminant_form\n    form = lattice.discriminant_quadratic_form()\n
-      \ File \"sage/misc/cachefunc.pyx\", line 2328, in sage.misc.cachefunc.CachedMethodCallerNoArgs.__call__\n
-      \   self.cache = f(self._instance)\n  File \"/repos/sage-extensions/src/sage_extensions/categories/lattices.py\",
-      line 8146, in discriminant_quadratic_form\n    raise ValueError(\n        f\"{self!r}
-      has no discriminant quadratic form: q_L: A_L -> Q/2Z is defined only for an
-      even lattice, and {self!r} is odd; use discriminant_bilinear_form\"\n    )\nValueError:
-      Integral lattice of rank 3 and signature (3, 0) has no discriminant quadratic
-      form: q_L: A_L -> Q/2Z is defined only for an even lattice, and Integral lattice
-      of rank 3 and signature (3, 0) is odd; use discriminant_bilinear_form\n"
-    seconds: 0.5597141529997316
-    recorded_at: 2026-11-18 20:13:24.033061+00:00
-    run_url: https://github.com/dzackgarza/lattice-database/actions/runs/44298677709/attempts/1
-    database_revision: 8a7d3bbea5729a0ed3a35effd703a7aa7fd8c25e
-    research_revision: 507b6871abca4e8157fd6e612bc95c60c6b634fd
-  notes: []
-2PNR integral.discriminant_form:
-  disposition: open
-  attempts:
-  - hash: 0dce88b493ee5f1f8de411da78b7bf434864a931ac111f6a14f12a243700823c
-    gram_tensor:
-    - - 5
-      - 2
-      - 2
-    - - 2
-      - 7
-      - -1
-    - - 2
-      - -1
-      - 8
-    reason: exit status 1
-    stderr: "Traceback (most recent call last):\n  File \"<frozen runpy>\", line 203,
-      in _run_module_as_main\n  File \"<frozen runpy>\", line 88, in _run_code\n  File
-      \"/home/runner/work/lattice-database/lattice-database/src/latticedb/sage_genus.py\",
-      line 461, in <module>\n    main()\n    ~~~~^^\n  File \"/home/runner/work/lattice-database/lattice-database/src/latticedb/sage_genus.py\",
-      line 456, in main\n    _compute(request)\n    ~~~~~~~~^^^^^^^^^\n  File \"/home/runner/work/lattice-database/lattice-database/src/latticedb/sage_genus.py\",
-      line 441, in _compute\n    _run(\n    ~~~~^\n        tag,\n        ^^^^\n        [field],\n
-      \       ^^^^^^^^\n        lambda: {field: SERIES[field](lattice, request[\"series_bound\"])
-      if field in SERIES else VALUES[field](lattice)},\n        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n
-      \   )\n    ^\n  File \"/home/runner/work/lattice-database/lattice-database/src/latticedb/sage_genus.py\",
-      line 377, in _run\n    values = compute()\n  File \"/home/runner/work/lattice-database/lattice-database/src/latticedb/sage_genus.py\",
-      line 444, in <lambda>\n    lambda: {field: SERIES[field](lattice, request[\"series_bound\"])
-      if field in SERIES else VALUES[field](lattice)},\n                                                                                            ~~~~~~~~~~~~~^^^^^^^^^\n
-      \ File \"/home/runner/work/lattice-database/lattice-database/src/latticedb/sage_genus.py\",
-      line 292, in <lambda>\n    \"discriminant_form\": lambda lattice: _discriminant_form(lattice),\n
-      \                                        ~~~~~~~~~~~~~~~~~~^^^^^^^^^\n  File
-      \"/home/runner/work/lattice-database/lattice-database/src/latticedb/sage_genus.py\",
-      line 309, in _discriminant_form\n    form = lattice.discriminant_quadratic_form()\n
-      \ File \"sage/misc/cachefunc.pyx\", line 2328, in sage.misc.cachefunc.CachedMethodCallerNoArgs.__call__\n
-      \   self.cache = f(self._instance)\n  File \"/repos/sage-extensions/src/sage_extensions/categories/lattices.py\",
-      line 8146, in discriminant_quadratic_form\n    raise ValueError(\n        f\"{self!r}
-      has no discriminant quadratic form: q_L: A_L -> Q/2Z is defined only for an
-      even lattice, and {self!r} is odd; use discriminant_bilinear_form\"\n    )\nValueError:
-      Integral lattice of rank 3 and signature (3, 0) has no discriminant quadratic
-      form: q_L: A_L -> Q/2Z is defined only for an even lattice, and Integral lattice
-      of rank 3 and signature (3, 0) is odd; use discriminant_bilinear_form\n"
-    seconds: 0.5326978670000244
-    recorded_at: 2026-11-18 20:14:00.930729+00:00
-    run_url: https://github.com/dzackgarza/lattice-database/actions/runs/44298677709/attempts/1
-    database_revision: 8a7d3bbea5729a0ed3a35effd703a7aa7fd8c25e
-    research_revision: 507b6871abca4e8157fd6e612bc95c60c6b634fd
-  notes: []
 2PT9 integral.discriminant_form:
   disposition: open
   attempts:
@@ -4793,6 +4563,23 @@
     run_url: https://github.com/dzackgarza/lattice-database/actions/runs/44298677709/attempts/1
     database_revision: 8a7d3bbea5729a0ed3a35effd703a7aa7fd8c25e
     research_revision: 507b6871abca4e8157fd6e612bc95c60c6b634fd
+  notes: []
+3F3V integral.discriminant_form:
+  disposition: open
+  attempts:
+  - hash: a2ec5407b9cd03968f0578fd37055b9f43e84584c5c0690c6c6c6f3f4aca8f46
+    gram_tensor:
+    - - 74
+      - 23
+    - - 23
+      - 106
+    reason: worker or runner lost (recovered from exceeded.yaml)
+    stderr: ''
+    seconds: 25.0
+    recorded_at: 2026-11-18 19:09:29.264413+00:00
+    run_url: https://github.com/dzackgarza/lattice-database/actions/runs/44374448321/attempts/1
+    database_revision: d389cfb7d09693c53bb148f38a56447bf1c072ff
+    research_revision: fca008555b7d468c4fbb26bcff5cd2ca7b057e18
   notes: []
 3FSQ integral.discriminant_form:
   disposition: open
