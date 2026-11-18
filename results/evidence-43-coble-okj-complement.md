@@ -47,3 +47,25 @@ generating family) are exactly what #312 withholds.
 
 So item 3 of #43 is blocked twice: no key for the group, and the same #312 collapse behind it. Nothing on 6JRR is
 changed by this probe.
+
+## Why the T_Co row cannot be keyed here, in the corpus's own words
+
+The field's key for a named subgroup is the slug of an arithmetic-group card of the same lattice, so the T_Co row needs
+a $\Gamma_{\mathrm{Co},2}$ card on 6JRR. The corpus records, twice, that the group of the Coble period domain is not
+identified in the literature it rests on:
+
+- `arithmetic-groups/otilde-plus-t-co.md:23`: "That this subgroup is the group $\Gamma_{\mathrm{Co}}$ acting on the Coble
+  period domain is **conjectural**." and `:24`: "Dolgachev–Kondo, Proposition 3.2, p. 513, … does not name the subgroup
+  of $O(N)$ that acts; the identification … belongs to the family group of the research project, not to this database,
+  and no count on the card of 6JRR rests on it."
+- `lattices/6JRR.md:2031` and `:2044` repeat it: $\Gamma_{\mathrm{Co}} = \widetilde O^{+}(T_{\mathrm{Co}})$ is a
+  conjecture, and Prop. 3.2 settles no count on that card.
+
+$\Gamma_{\mathrm{Co},2} = R_{\Gamma_{\mathrm{En},2}}$ is a finer group still, and the only support this repository holds
+for it is the construction in sage-extensions' own test (`#354`, `#358`, research `prop:gamma-co-images`) — an internal
+family object, not a published definition and not a value this corpus certifies. Authoring the card would mint exactly
+what the data contract forbids: a group asserted on the strength of an unpublished construction, to key rows whose
+counts are in any case blocked on the same non-returning equivalence call that stops (4.3.7)--(4.3.9).
+
+So the T_Co item is blocked twice, and neither blocker is mine: a published definition of $\Gamma_{\mathrm{Co},2}$, and
+the owner's exact equivalence returning at a cusp.
