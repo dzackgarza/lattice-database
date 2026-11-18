@@ -629,6 +629,9 @@
   killed_by: memory
   peak_bytes: 13133455360
   limit_bytes: 1675943936
+1CZ4 integral.discriminant_form:
+  hash: d9ace81ff310c9f2d93545001a6c2ebae53abd4735fbdf0278f88049ec4bcdb9
+  seconds: 4
 1DRM integral.genus_class_count:
   hash: b9116a9b09223f453b6990f0efa48f8670ad40d65cb4f5c32b3f8b2cb30e031e
   seconds: 10
@@ -792,16 +795,16 @@
   hash: 2723bf8d5e7456ad55f098a55dc293966e7560858a806c56ab2094c9cb33f9aa
   seconds: 0
   lost: true
-2ONX integral.discriminant_orbits:
-  hash: 12e960e3c258a9b5cb5d4a8b98e017922c8ca3c637638e623db40926b1a00352
-  seconds: 0
-  lost: true
 2PKI integral.discriminant_form:
   hash: 75f03e0e51ee7f21904f171d6bd4cb5b10db802f92f0448c1e693d2cd05ecab9
   seconds: 0
   lost: true
 2POA integral.discriminant_form:
   hash: 70ec94a21cf2fd242c29dc458d167e4e1a375e2579a990079c119adbf150f03a
+  seconds: 0
+  lost: true
+2PT0 integral.discriminant_form:
+  hash: 353576859385e2d0a5ef17377a1c4fd8107c58791aa90539182334e1844bbe24
   seconds: 0
   lost: true
 2RSZ integral.discriminant_form:
