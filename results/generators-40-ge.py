@@ -68,10 +68,11 @@ TARGET = 696729600
 """The order of the subgroup the stored generators generate: 2 * 348364800 = |O(A_L)| / |orbit(A_U(2))| = 696729600."""
 
 MEASURED_RUNS = (
-    "The greedy subfamily call the issue names was run six times on this machine and none returned: four runs "
+    "The greedy subfamily call the issue names was run seven times on this machine and none returned. Four runs "
     "ended inside its selection loop over the 944385-member Schreier family with no value and no traceback, at "
-    "845 s, 1075 s, 1404 s and 2600 s, one was still running at a 900 s cap, and a sixth had not finished "
-    "building that family after 2662 s at 2.51 GiB"
+    "845 s, 1075 s, 1404 s and 2600 s; one was still running at a 900 s cap; one had not finished building that "
+    "family after 2662 s at 2.51 GiB; and one ran to a 5400 s cap at 3.26 GiB with 4-7 GiB of the host free, "
+    "so its end was the cap and not a kill"
 )
 """What the call the issue names did on the machine this was computed on, in results/evidence-40-ge-generators.md."""
 

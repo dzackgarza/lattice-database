@@ -14,7 +14,6 @@ from fractions import Fraction
 from pathlib import Path
 
 import frontmatter
-import pytest
 
 from latticedb import certificates, corpus, genus
 from latticedb.catalogues import ArithmeticGroup
@@ -116,12 +115,13 @@ def test_the_certificate_commits_to_the_stored_matrices() -> None:
     assert re.search(r"\b[0-9a-f]{40}\b", held[computation].by), "the provenance names the owner revision the computation ran at"
 
 
-@pytest.mark.parametrize("name", ["H_e generator 1", "H_e generator 2", "O(L) generator 8"])
-def test_a_stored_generator_is_an_isometry_of_the_card(name: str) -> None:
+def test_every_stored_generator_is_an_isometry_of_the_card() -> None:
+    """Each name the subgroup card lists denotes an isometry, whatever set of members is stored."""
     card = _lattice()
-    stored = list(_group(SLUG)[0].data.generator_morphisms or ())
-    if name not in stored:
-        pytest.skip(f"{name} is not a stored generator of {SLUG}")
-    matrix = [[int(entry) for entry in row] for row in _named(card, [name])[0].matrix]
-    assert _preserves(matrix, [[int(entry) for entry in row] for row in card.gram_tensor]), f"{name} does not preserve the form"
-    assert abs(_determinant(matrix)) == 1, f"{name} is not unimodular"
+    names = list(_group(SLUG)[0].data.generator_morphisms or ())
+    gram = [[int(entry) for entry in row] for row in card.gram_tensor]
+    assert names, "the subgroup card states its generators"
+    for morphism in _named(card, names):
+        matrix = [[int(entry) for entry in row] for row in morphism.matrix]
+        assert _preserves(matrix, gram), f"{morphism.name} does not preserve the form"
+        assert abs(_determinant(matrix)) == 1, f"{morphism.name} is not unimodular"

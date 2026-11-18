@@ -9,7 +9,7 @@ respects the decomposition}`, with `M(2) = U(2) + E8(-2)` the card of `0125`. In
 
 `L.Aut().discriminant_point_stabilizer_image_generators(A_U(2))` is the call that returns the
 nine members named in the issue. On the stored Gram tensor of `0125`, at sage-extensions
-`2fb37d5a717fac890e9cbf239f63d3a97f487040` (origin/main, 2026-11-17), it was run six times:
+`2fb37d5a717fac890e9cbf239f63d3a97f487040` (origin/main, 2026-11-17), it was run seven times:
 
 | run | reached the family | ended at | peak RSS | result |
 | --- | --- | --- | --- | --- |
@@ -19,12 +19,19 @@ nine members named in the issue. On the stored Gram tensor of `0125`, at sage-ex
 | D (`.scratch/nine-40.py`, the run of 2026-11-18 04:43) | — | 1404 s | 2.29 GiB | exit 0, no value, no traceback |
 | probe | — | still running at the 900 s cap | 2.37 GiB | killed by the run's own limit |
 | E (`.scratch/nine-scan.py`, the run of 2026-11-18 05:47, the loop copied out with progress lines) | did not finish building the family | stopped at 2662 s | 2.51 GiB | no value; `MemAvailable` fell from 4306 to 1270 MiB |
+| F (`.scratch/nine-40.py`, the run of 2026-11-18 07:20, started in a 5.3 GiB window) | did not return | ended at the 5 400 s cap | 3.26 GiB | no value; `MemAvailable` between 1080 and 6960 MiB, so not a kill |
 
 In the pinned revision the loop is `src/sage_extensions/categories/lattice_morphisms.py:4047-4056`,
 over the family built at `:4041` from the preimage at `:4040`: the run returns at `:4056` when the
 images' subgroup order reaches `|P|`, and otherwise raises at `:4057` after the last member. A run
 that ends without a value raises nothing, so no traceback names a line; the location recorded here
 is the loop the process was in when its status was written.
+
+Run F rules out the memory kill as the only cause. It began in the largest window this host has
+offered (5.3 GiB free), kept 4–7 GiB free through its second half, and grew from 2.4 to 3.26 GiB
+resident while working: it was not killed, and it had still not returned when the 90-minute cap
+ended it. So the call does not need 44.8 s of this machine's time at 2.5 GiB; it needs more than
+90 minutes of a four-core host at ~3 GiB, which is more than this session can hold.
 
 Run E is the one that separates the two stages. It is the owner's own loop copied out with a progress
 line, and the first line it would print after `preimage.group_generators()` (`:4041`) never printed:
