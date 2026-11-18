@@ -1,3 +1,15 @@
+0125 arithmetic-group.h-e.generator_morphisms:
+  hash: 109baa7b52f6a78ce3c30bb0f36c91c17ded27c8317c6bdf0d3fb466a2cbbc4a
+  by: 'the owner''s lifts along rho_L: P = Stab_{O(A_L)}(A_U(2)) from O(A_L).stabilizer_of_classes,
+    and L.Aut().discriminant_lift of each of its generators (a word in O(L)''s selected
+    generators, checked against rho_L), at sage-extensions 2fb37d5a717fac890e9cbf239f63d3a97f487040.
+    |P| = 696729600 is the engine stabilizer''s order, |O(A_L)|/|orbit| = 46998591897600/67456,
+    and 2 * 348364800 from the two summands; the images of the stored matrices generate
+    P, so they generate H <= G_e with rho_L(H) = P. They do not generate G_e: G_e
+    = Otilde(L) . H and no generating set of Otilde(L) exists (sage-extensions#597).
+    The greedy subfamily call discriminant_point_stabilizer_image_generators returns
+    no value on this machine (three runs, results/evidence-40-ge-generators.md). results/generators-40-ge.py
+    computed the matrices and these checks.'
 0125 automorphisms.automorphism_group_generator_morphisms:
   hash: 2d973672e4876d2edf16f3e43659f12a7b5e0e0d35eb9d2b8f3ee59186fc9c03
   by: research preamble
