@@ -93,3 +93,25 @@ two *classes* of `K_J = v^\perp/\mathbb{Z}v`, returning a witness in `G_v` or a 
 exact membership test and the exact ambient equivalence; nothing joins them at the quotient. With it the three rows
 would be one call each; without it the counts stay between 1 and the number of classes, as the two proved bounds above
 say.
+
+## The seeded walk, with membership used correctly
+
+`image.contains(image.reduction_image(g), lift=g)` — membership on the reduced isometry with its lift — is the call
+that works, and it is what the earlier refusals at `isotropic_orbits.py:3111` were missing. With it,
+`results/probe-43-seeded-transporter.py` at (4.3.8) kept **14 maps**: one seed from the supergroup (a witness
+`r -> r'` composed with one carrying the image cusp back, both found in under 40 s) and 13 of the stabilizer's own
+generators.
+
+Walking the images of the first root class through those maps, breadth first on classes:
+
+| depth | ball | transporter to the second class |
+| --- | --- | --- |
+| 1 | 8 | none |
+| 2 | 64 | none |
+| 3 | 545 | none |
+| 4 | 4956 | none |
+
+So the seeded family does not carry one class to the other either; and since the exact equivalence does not return,
+neither the constructive nor the decision route closes the row. What would: a call that decides two *classes* of
+$K_J$ — `IsotropicVectorReductionImage.vectors_are_equivalent`, named above — or, equivalently, the double-coset orbit
+computation at the finite quotient that `isotropic_plane_orbits` already performs for planes.
