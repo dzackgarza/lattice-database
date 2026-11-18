@@ -14,6 +14,7 @@ p. 23, with the orbit count as the shape of a row and not as a claim about the c
 (the cusp stabilizer's generators are not certified complete, sage-extensions#312).
 """
 
+from fractions import Fraction
 from pathlib import Path
 
 import pytest
@@ -153,3 +154,41 @@ def test_a_second_row_at_one_cusp_is_refused_when_it_changes_the_first() -> None
     with pytest.raises(AssertionError, match="is stated twice, differently"):
         genus.store_cusp_root_orbits(path, "gamma-en-2", [changed], "a test that changes the row", held)
     assert corpus.front_matter(corpus.read_card(path))["integral"]["cusp_root_orbits"] == metadata["integral"]["cusp_root_orbits"]
+
+
+def test_the_chambers_own_reflections_do_not_move_the_root_classes() -> None:
+    """#43: at every cusped row the root walls have different orthogonal neighbour sets, so no word in the walls moves one to another.
+
+    The chamber's walls generate the reflection subgroup $W_v$ of the cusp stabilizer, and every wall is orthogonal to
+    the cusp, so every reflection in one of them fixes the cusp: $W_v \\subseteq \\Gamma_v$. In a Coxeter system
+    conjugate standard parabolics are equal, and the setwise stabilizer of a wall's mirror is the parabolic generated
+    by that wall together with the walls orthogonal to it, so two walls in one $W_v$-orbit have equal orthogonal
+    neighbour sets. Different sets are therefore a proof that no word in the walls carries one root class to the other
+    --- which is why these counts are not a question a search can answer: the part of $\\Gamma_v$ that this card can
+    construct provably cannot identify the classes, and the rest is what a primitive isotropic line withholds
+    (sage-extensions#312).
+    """
+    lattice = Lattice.model_validate(corpus.front_matter(corpus.read_card(ROOT / "lattices" / "029J.md")))
+    assert lattice.integral is not None and lattice.integral.cusp_chambers is not None
+    gram = [[Fraction(entry) for entry in row] for row in lattice.gram_tensor]
+
+    def pairing(left: tuple[int, ...], right: tuple[int, ...]):
+        return sum((Fraction(left[i]) * gram[i][j] * Fraction(right[j]) for i in range(len(gram)) for j in range(len(gram))), Fraction(0))
+
+    root_counts = []
+    for row in lattice.integral.cusp_chambers["gamma-en-2"]:
+        walls = [tuple(wall.vector) for wall in row.walls]
+        roots = [index for index in range(len(walls)) if pairing(walls[index], walls[index]) == -2]
+        root_counts.append(len(roots))
+        neighbours = {
+            index: frozenset(j for j in range(len(walls)) if j != index and pairing(walls[index], walls[j]) == 0)
+            for index in roots
+        }
+        assert len(set(neighbours.values())) == len(roots), f"{row.statement}: two root walls share their orthogonal neighbour set"
+        for earlier in range(len(roots)):
+            for later in range(earlier + 1, len(roots)):
+                left, right = neighbours[roots[earlier]], neighbours[roots[later]]
+                assert left != right, f"{row.statement}: {row.walls[roots[earlier]].name} and {row.walls[roots[later]].name} agree"
+                shown = sorted(left.symmetric_difference(right))
+                assert shown, f"{row.statement}: no wall tells {row.walls[roots[earlier]].name} from {row.walls[roots[later]].name}"
+    assert root_counts == [0, 1, 2, 2, 4], root_counts
