@@ -359,3 +359,34 @@ decided by the two runs above.
   decision waits for the schedule.
 - The owner's failing contract test above has no issue number from this session (no issue-creation
   permission); it is named by file and line so it can be filed where it belongs.
+
+## 1d. The dispatched run after the build fix: still red, and what could not be read
+
+Run `44304988129` (`workflow_dispatch`, head `0ab2ba44`, one commit above `dc80815d70`, 2026-11-18T12:33Z)
+completed **failure** at 13:49:14Z:
+
+| step | from | to | conclusion |
+| --- | --- | --- | --- |
+| 6 Provision the shared Sage environment | 12:44:40Z | 12:50:29Z | success |
+| 7 Run every lattice database test… | 12:50:29Z | 13:48:56Z | **failure, exit 1** |
+| 9 Validate preamble owner contracts | 13:48:59Z | 13:49:09Z | failure, exit 1 |
+
+Step 7 again ended inside the job's 350-minute budget — 58 minutes, against 59 for the run before the
+build fix — so the step terminates, but it is not green and its content is not readable here: **0
+artifacts**, and the run-log, job-log and job-log-by-id endpoints each answer **403** anonymously.
+
+What that leaves open is item 1's "every collected test reported", and it is not decidable from
+outside: `exit 1` is pytest's status for failing tests and the thread method's `os._exit(1)`
+(`pytest_timeout.py:542`) alike, and the frame that would distinguish them is in that log. Two readings
+fit the numbers, and the evidence does not separate them:
+
+- the suite ran to the end in 58 minutes and reported genuine failures — item 1 met as written;
+- the 1800 s ceiling fired on a test reached about 28 minutes in, so the step ended 58 minutes in with
+  one test named and the tests after it unreported — item 1 narrowed to that test.
+
+The build is not that test: after `dc80815d70` the site build is 70 s (`results/probe-29-build-bounded.log`),
+and `tests/validation/test_build.py` no longer carries a whole-corpus fixture. The remaining
+memory-bound candidates, both measured on this tree before, are the whole-corpus reads —
+`tests/test_corpus.py:363` (`corpus.load(ROOT)`, 7.29 GiB, 421 s quiet) and
+`tests/test_stored_records.py:58` (`certificates.load(REPOSITORY)`, 9.08 GiB, 556 s) — which on a
+16 GB runner already holding the suite's other loads can take far longer than they do on a quiet one.
