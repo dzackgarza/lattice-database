@@ -19188,27 +19188,13 @@
   by: research preamble
 2N16 definite.regular:
   hash: edfb2ecb55d77e64881288b0364102f90a7dd00f00828bfcabd90d30bb6c9485
-  by: 'W. C. Jagy, I. Kaplansky and A. Schiemann, There are 913 regular ternary forms,
-    Mathematika 44 (1997), 332-341, form 109, as tabulated in A. G. Doyle, B. Muskat,
-    K. Pehlivan and K. S. Williams, Positive integers represented by regular primitive
-    positive-definite integral ternary quadratic forms, Integers 19 (2019), #A45,
-    Tables 1 and 2; regular by W. C. Jagy, I. Kaplansky and A. Schiemann, There are
-    913 regular ternary forms, Mathematika 44 (1997), 332-341.'
+  by: research preamble
 2N16 definite.siegel_eisenstein_coefficients:
   hash: 34104ae2177627e37dd8c1baf9d7db90f6d80c9f7ba089591418ed31a013c470
   by: research preamble
 2N16 definite.spinor_regular:
   hash: 34e63fc1ea9c4a490db8ca5e233d3f7eb71fb54bdc219fcdc4f347defc690854
-  by: 'W. C. Jagy, I. Kaplansky and A. Schiemann, There are 913 regular ternary forms,
-    Mathematika 44 (1997), 332-341, form 109, as tabulated in A. G. Doyle, B. Muskat,
-    K. Pehlivan and K. S. Williams, Positive integers represented by regular primitive
-    positive-definite integral ternary quadratic forms, Integers 19 (2019), #A45,
-    Tables 1 and 2; regular by W. C. Jagy, I. Kaplansky and A. Schiemann, There are
-    913 regular ternary forms, Mathematika 44 (1997), 332-341; hence spinor regular,
-    since a form is spinor regular if it represents all the positive integers represented
-    by its spinor genus (A. G. Earnest and A. Haensch, Completeness of the list of
-    spinor regular ternary quadratic forms, arXiv:1711.05811v2 (2018), Abstract) and
-    the spinor genus lies in the genus.'
+  by: research preamble
 2N16 definite.theta_series_cuspidal_component:
   hash: 27ea78f7a8bfa0b76479df124f1645fb6379161e9053ae96a6c3e6b7f02555c5
   by: research preamble
@@ -19220,6 +19206,9 @@
   by: research preamble
 2N16 integral.anisotropic_primes:
   hash: 67e2576a5123dbd5e9884f07b6b4a8817538745d87c2e49e26bd460433332856
+  by: research preamble
+2N16 integral.discriminant_sequence:
+  hash: 3600944379fd1254f4ba41486fe49b6bfdb7851e6329515eee5a7b13f2d51f86
   by: research preamble
 2N16 integral.elementary_primes:
   hash: 19e64c4e6419e04dffba9914b451a7b66643d8ef8135d3633342bfe0f2080281
@@ -19278,6 +19267,9 @@
 2N2O integral.anisotropic_primes:
   hash: 77fac2ccc113e808d27d92f4c496e1efbe8049e884e45d7b73fd19cc031380ef
   by: research preamble
+2N2O integral.discriminant_sequence:
+  hash: 0d06503d10d7920a9821ab2fd1e9b07368b4ef6df2fa8c4b7df8ca597035e21d
+  by: research preamble
 2N2O integral.elementary_primes:
   hash: c9551c582bbb5ee1bc3d0b255ae6bb9f7f6620a2e3c2da247544b9d7a4ebfd81
   by: research preamble
@@ -19334,6 +19326,9 @@
   by: research preamble
 2NBU integral.anisotropic_primes:
   hash: 9581cd126b5934575c4c0566d6a6cf95f297aea5b363353618b68224276baf2a
+  by: research preamble
+2NBU integral.discriminant_sequence:
+  hash: 18be8bbc6f7d6a1dc2d6969ae136db00dee59523230d02a93e5ac05311b4f019
   by: research preamble
 2NBU integral.elementary_primes:
   hash: a88273250f57bad76becd28a9ca32feffea6d9c04a8c81104c1c764314b195f7
@@ -19392,6 +19387,9 @@
 2NDG integral.anisotropic_primes:
   hash: 926552ed439f88260a22369b1de2eee92e75eb0c62b68b0c38f6caf1bcb39236
   by: research preamble
+2NDG integral.discriminant_sequence:
+  hash: 7b060cd2985df2b32997b1a1d3551080a3b35084a8cb5df17fbe054da1ef0395
+  by: research preamble
 2NDG integral.elementary_primes:
   hash: 8ce70abd3c2f1fd2958da8a4b558df73c74abda82df8cc8492db17b4f00361f7
   by: research preamble
@@ -19448,6 +19446,9 @@
   by: research preamble
 2NGI integral.anisotropic_primes:
   hash: d4ef818d1d52bbfeb7195560ee524ddd843339ae840ad61059d16eea5583c9cb
+  by: research preamble
+2NGI integral.discriminant_sequence:
+  hash: 5c5b992ecd9d24bd7dc918de3b58c2c15b5d3a3f1e178d00c97d2af122813267
   by: research preamble
 2NGI integral.elementary_primes:
   hash: 33cec71439f49ca476df96caf7ede580a8240048da33fba828d7b717fe4ded8b
