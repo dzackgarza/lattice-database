@@ -1295,6 +1295,52 @@ def _write_cusp_chambers(
     path.write_text(records.record_text(metadata, document.content))
 
 
+def store_cusp_root_orbits(
+    path: Path,
+    group: str,
+    rows: list[dict[str, Yaml]],
+    by: str,
+    held: Certificates,
+) -> None:
+    """Store the orbits of the root classes at the cusps of one subgroup that a computation decided, and certify them.
+
+    No source prints these rows: the count is the computation's own, and where the cusp's root family has one class
+    the count is one orbit whatever the group is, which is the case a computation can decide without a generating
+    family of the cusp stabilizer (`genus.applies` refuses the field for the general case, sage-extensions#312).
+    `by` names the program and the revision that returned the rows, and the certificate's hash commits to every row
+    of every subgroup of the card, in the manner of `store_cusp_chambers`.
+
+    A row already stored at one of these cusps is neither dropped nor changed: a second computation that states that
+    cusp differently stops the writer, and one that states a further cusp adds that row and keeps the rest.
+    """
+    document = corpus.read_card(path)
+    metadata = corpus.front_matter(document)
+    block_name, model = stored_in("cusp_root_orbits", metadata.get("definiteness"))
+    block = TypeAdapter(dict[str, Yaml]).validate_python(metadata.get(block_name) or {}, strict=True)
+    stated = block.get("cusp_root_orbits")
+    rows_of_group = dict(TypeAdapter(dict[str, Yaml]).validate_python(stated or {}, strict=True))
+    stored = TypeAdapter(list[Yaml]).validate_python(rows_of_group.get(group) or [], strict=True)
+    cusps: dict[tuple[int, ...], dict[str, Yaml]] = {}
+    for row in stored:
+        cusp = tuple(TypeAdapter(list[int]).validate_python(row.get("cusp") or [], strict=True))
+        cusps[cusp] = dict(TypeAdapter(dict[str, Yaml]).validate_python(row, strict=True))
+    for row in rows:
+        cusp = tuple(TypeAdapter(list[int]).validate_python(row.get("cusp") or [], strict=True))
+        if cusp in cusps:
+            assert cusps[cusp] == row, f"{path}: {block_name}.cusp_root_orbits.{group}: the row at the cusp {list(cusp)} is stated twice, differently"
+        else:
+            cusps[cusp] = row
+    rows_of_group[group] = [cusp for _, cusp in sorted(cusps.items())]
+    block["cusp_root_orbits"] = {key: rows_of_group[key] for key in sorted(rows_of_group)}
+    metadata[block_name] = {key: block[key] for key in model.model_fields if key in block}
+    lattice = Lattice.model_validate(metadata)
+    computation = name(lattice.tag, "cusp_root_orbits", lattice.definiteness)
+    certificate_hash = certificates.certification_hash(computation, lattice, certified_value("cusp_root_orbits", block["cusp_root_orbits"], lattice))
+    metadata["certifications"] = {**lattice.certifications, f"{block_name}.cusp_root_orbits": certificate_hash}
+    held[computation] = Certificate(hash=certificate_hash, by=by)
+    path.write_text(records.record_text(metadata, document.content))
+
+
 def _orbit_provenance(series_of_group: dict[str, Yaml], reference: dict[str, str]) -> str:
     """The citations of the rows a certificate commits to, this row's own first."""
     citations = [reference["citation"]]

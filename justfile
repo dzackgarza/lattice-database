@@ -100,7 +100,7 @@ test:
 
 # CI-only constructor/serialization/publication integration. Mathematical correctness lives in preamble tests.
 test-validation:
-    PYTHONPATH="$HOME/research/src:src" "$(just -f ~/ai-review-ci/justfiles/sage.just -d . _sage-python)" -m pytest tests/test_catalogue_schemas.py tests/test_corpus.py tests/test_genus.py tests/test_geometric.py tests/test_hashimoto.py tests/test_records.py tests/validation
+    PYTHONPATH="$HOME/research/src:src" "$(just -f ~/ai-review-ci/justfiles/sage.just -d . _sage-python)" -m pytest tests/test_catalogue_schemas.py tests/test_corpus.py tests/test_genus.py tests/test_ge_generators.py tests/test_geometric.py tests/test_hashimoto.py tests/test_records.py tests/validation
 
 # Certification scheduling, failure triage and persistence on small specimens
 [positional-arguments]

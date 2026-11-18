@@ -58,6 +58,11 @@
     and the wall count are what the card''s stored form says about those walls: results/transcribe-33-sterk-cusps.py
     computed them from the card''s Gram tensor, and no Vinberg search was run for
     them.'
+029J integral.cusp_root_orbits:
+  hash: 2e158f6bf6a8ec4e6276ae3baf3355ae85bdbaf7e12ffaec9441003515479055
+  by: 'results/store-43-cusp-root-orbits.py: the cusp''s root family has one class,
+    so one orbit under any group (the walls of 4.3.6 orthogonal to the cusp and of
+    square -2, one per class modulo the cusp, computed from the card''s Gram tensor)'
 029J integral.discriminant_form:
   hash: bce264439806a4f908a076d08e75f8656202fdfd0b96e3eef66612d804c1fc0a
   by: research preamble

@@ -5,20 +5,27 @@ Math. Z. 207 (1991), 1–36, (4.3.5), p. 19: `G_e = {g in O(M(2)) : the induced 
 respects the decomposition}`, with `M(2) = U(2) + E8(-2)` the card of `0125`. In the owner's terms
 `sage-extensions`#354 gives `G_e = rho_L^{-1}(P)`, `P = Stab_{O(A_L)}(A_U(2))`.
 
-## The greedy subfamily call does not return here: four runs
+## The greedy subfamily call does not return here: five runs
 
 `L.Aut().discriminant_point_stabilizer_image_generators(A_U(2))` is the call that returns the
 nine members named in the issue. On the stored Gram tensor of `0125`, at sage-extensions
-`2fb37d5a717fac890e9cbf239f63d3a97f487040` (origin/main, 2026-11-17), it was run four times:
+`2fb37d5a717fac890e9cbf239f63d3a97f487040` (origin/main, 2026-11-17), it was run five times:
 
-| run | reached `rho_L^-1(P)` at | ended at | peak RSS | result |
+| run | reached the family | ended at | peak RSS | result |
 | --- | --- | --- | --- | --- |
 | A | 256.5 s | 1075 s | 2.37 GiB | exit 0, no value, no traceback |
 | B | 100.9 s | 845 s | 2.35 GiB | exit 0, no value, no traceback |
 | C | 508.6 s | 2600 s | 2.55 GiB | exit 0, no value, no traceback |
+| D (`.scratch/nine-40.py`, the run of 2026-11-18 04:43) | — | 1404 s | 2.29 GiB | exit 0, no value, no traceback |
 | probe | — | still running at the 900 s cap | 2.37 GiB | killed by the run's own limit |
 
-Each ended inside the selection loop over the Schreier family, which has `15 * 67456 - 67455 =
+In the pinned revision the loop is `src/sage_extensions/categories/lattice_morphisms.py:4047-4056`,
+over the family built at `:4041` from the preimage at `:4040`: the run returns at `:4056` when the
+images' subgroup order reaches `|P|`, and otherwise raises at `:4057` after the last member. A run
+that ends without a value raises nothing, so no traceback names a line; the location recorded here
+is the loop the process was in when its status was written.
+
+All five were inside the selection loop over the Schreier family, which has `15 * 67456 - 67455 =
 944385` members. Nothing was written to the card by any of them; the `Morphisms` block and the
 ledger are unchanged by these runs. The host was shared and oversubscribed throughout (load
 average 11–27 on 4 cores, `/proc/vmstat` `oom_kill` 30 since boot), which is what the wall times
@@ -92,7 +99,11 @@ matrix as a self-isometry and asks the owner for its discriminant action:
 The repository's gate, in the shared Sage image (`/sage/.venv/bin/python`, `PYTHONPATH` = the
 preamble's `src` and this repository's `src`):
 
-* `pytest tests/test_model.py tests/test_card_merge.py -q` — `78 passed in 8.55s`.
+* `pytest tests/test_model.py tests/test_card_merge.py tests/test_ge_generators.py tests/test_catalogue_schemas.py -q`
+  — `101 passed in 84.27s`. `tests/test_ge_generators.py` is this change's own test: it pins the
+  stored names, the relation the subgroup card states, the absent `data.generator_morphisms` on the
+  card of $G_e$, the cited hash against the one the stored matrices recompute, and the provenance
+  naming an owner revision; `just test-validation` runs it.
 * the checks of the four cards the change touches, run on the scoped corpus `corpus.cards(root,
   ["0125", "0153", "029J", "029L"])` with the `lie-groups` catalogue added, since `checks.one_shard`
   reads all 302,504 cards (about 7.5 GiB, more than this VM has free):
@@ -101,3 +112,13 @@ preamble's `src` and this repository's `src`):
   checked by the preamble's form-preservation; the `h-e` card's generator names resolve to exactly
   one `scale: 1` self-morphism each; and the cited hash `109baa7b…c4a` matches the one this card's
   value recomputes, which is what `checks.records.arithmetic_problems` requires.
+
+## The acceptance, item by item
+
+| Item of the issue | Where it is decided | Verdict |
+| --- | --- | --- |
+| the card stores a generating set of $G_e$ as self-isometries, or — until generators of $\widetilde O(L)$ exist — the subfamily members in a row that names $H$ and states $\rho_L(H) = P$ | `lattices/0125.md` `morphisms`; `arithmetic-groups/h-e.md` | met in its fallback form, with the lifts of $P$'s own generators in place of the nine members, which the owner call does not return here (above) |
+| the `arithmetic-groups/` card of $G_e$ names them | `arithmetic-groups/g-e.md` | met: it names all three and states no `data.generator_morphisms` of its own |
+| it does not name them as generators of $G_e$ | `arithmetic-groups/g-e.md`, `arithmetic-groups/h-e.md` | met: `Parent_group: g-e`, the relation $\rho_L(H_e) = P$, and `data.generator_morphisms is None` on `g-e` |
+| the card certifies the computation, the Gram tensor and the result, with the program revision in `certificates/` | `certificates/97.yaml`, `lattices/0125.md` `certifications` | met: hash over the computation name, the Gram tensor and the sorted matrices, `by` naming sage-extensions `2fb37d5a717` and `results/generators-40-ge.py` |
+| the repository's gate passes | `tests/`, `justfile` | met: `101 passed`; the scoped `records`/`relations`/`catalogues` checks report no problem |

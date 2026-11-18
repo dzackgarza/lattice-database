@@ -16,7 +16,9 @@ p. 23, with the orbit count as the shape of a row and not as a claim about the c
 
 from pathlib import Path
 
-from latticedb import checks, corpus, records
+import pytest
+
+from latticedb import certificates, checks, corpus, records
 from latticedb.model import Lattice
 
 ROOT = Path(__file__).resolve().parent.parent
@@ -116,3 +118,38 @@ def test_a_key_that_names_no_arithmetic_group_card_of_this_lattice_is_reported()
     assert problems(row()) == []
     found = problems(row(), key="gamma-en-2")
     assert any("cusp_root_orbits names gamma-en-2, which is not an arithmetic-group card" in problem for problem in found), found
+
+
+def test_the_decided_row_of_card_029j_reads_back_and_certifies() -> None:
+    """#43: the one cusp whose root family is a single class carries its count, and its certificate is on the shard.
+
+    Sterk's (4.3.6), p. 21, has exactly one wall of square $-2$ among its ten, so the cusp's root family is one class
+    and its orbits are one orbit whatever the group acting is. The row is the card's own statement of that, and
+    `checks.records.problems` is what decides the card's reference, its value and the shard agree.
+    """
+    lattice = Lattice.model_validate(corpus.front_matter(corpus.read_card(ROOT / "lattices" / "029J.md")))
+    assert lattice.integral is not None and lattice.integral.cusp_root_orbits is not None
+    rows = lattice.integral.cusp_root_orbits["gamma-en-2"]
+    assert [(row.statement, row.printed_page, row.orbit_count) for row in rows] == [("4.3.6", 21, 1)]
+    row = rows[0]
+    assert row.cusp == (0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0), "the cusp is e'"
+    assert [orbit.representative for orbit in row.orbits] == [(1, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)], "alpha_10 = e - f"
+    assert [orbit.transporter_order for orbit in row.orbits] == [1]
+
+
+def test_a_second_row_at_one_cusp_is_refused_when_it_changes_the_first() -> None:
+    """The writer adds a cusp's row and never rewrites one: a different row at a stored cusp stops it."""
+    from latticedb import genus
+
+    held = certificates.load(ROOT, tags=("029J",))
+    document = corpus.read_card(ROOT / "lattices" / "029J.md")
+    metadata = corpus.front_matter(document)
+    stored = metadata["integral"]["cusp_root_orbits"]["gamma-en-2"][0]
+    changed = {
+        **stored,
+        "orbits": [{**stored["orbits"][0], "transporter_order": 2}],
+    }
+    path = ROOT / "lattices" / "029J.md"
+    with pytest.raises(AssertionError, match="is stated twice, differently"):
+        genus.store_cusp_root_orbits(path, "gamma-en-2", [changed], "a test that changes the row", held)
+    assert corpus.front_matter(corpus.read_card(path))["integral"]["cusp_root_orbits"] == metadata["integral"]["cusp_root_orbits"]

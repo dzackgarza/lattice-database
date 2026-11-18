@@ -7,8 +7,10 @@
     and 2 * 348364800 from the two summands; the images of the stored matrices generate
     P, so they generate H <= G_e with rho_L(H) = P. They do not generate G_e: G_e
     = Otilde(L) . H and no generating set of Otilde(L) exists (sage-extensions#597).
-    The greedy subfamily call discriminant_point_stabilizer_image_generators returns
-    no value on this machine (three runs, results/evidence-40-ge-generators.md). results/generators-40-ge.py
+    The greedy subfamily call the issue names was run five times on this machine,
+    and each run ended inside its selection loop over the 944385-member Schreier family
+    with no value and no traceback: at 845 s, 1075 s, 1404 s and 2600 s, and one still
+    running at a 900 s cap (results/evidence-40-ge-generators.md). results/generators-40-ge.py
     computed the matrices and these checks.'
 0125 automorphisms.automorphism_group_generator_morphisms:
   hash: 2d973672e4876d2edf16f3e43659f12a7b5e0e0d35eb9d2b8f3ee59186fc9c03

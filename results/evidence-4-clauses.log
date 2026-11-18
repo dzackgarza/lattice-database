@@ -1,8 +1,0 @@
---- no guard and no fallback: a non-rational raises, in the serializer it reaches first
-  1.5: AttributeError: 'float' object has no attribute 'numerator'
-  '3/2': AttributeError: 'str' object has no attribute 'numerator'
-  None: AttributeError: 'NoneType' object has no attribute 'numerator'
-  [1]: AttributeError: 'list' object has no attribute 'numerator'
---- an undecided value stores nothing
-  integral keys after storing two Nones: ['anisotropic_primes', 'bad_reduction_primes', 'discriminant_group', 'elementary_primes', 'genus_class_count', 'genus_symbol', 'hyperbolic_index', 'level', 'local_representations', 'modular_scale', 'overlattice_count', 'parity', 'primitive_orbits', 'spinor_genera', 'spinor_genus_count']
-  local_densities still absent: True

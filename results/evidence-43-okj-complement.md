@@ -76,3 +76,42 @@ class number 1 det 512
 
 Two implementations agree, so "one class in the genus" is not one library's opinion: each complement at that cusp is
 the unique class of its genus, and the two are then isometric.
+
+## The one decided row, landed
+
+Of the five cusps, (4.3.5) has no root class, (4.3.6) has one, and (4.3.7)--(4.3.9) have 2, 2 and 4 that the whole of
+$O(K_J)$ identifies. The one-class cusp needs no group: a one-element family has one orbit whatever acts, so its
+count is decided by the computation that finds the family. That row is now on the card.
+
+`results/store-43-cusp-root-orbits.py` computes it from the card alone --- the walls of (4.3.6), p. 21, orthogonal to
+the cusp $e'$ and of square $-2$, one per class modulo the cusp; there is exactly one, $\alpha_{10} = e - f$ --- and
+writes it with `genus.store_cusp_root_orbits` (`src/latticedb/genus.py:1292`), which certifies the field the way
+`store_cusp_chambers` does: one hash over every row of every subgroup, and `by` naming the program and what it
+computed. What the card now states (`lattices/029J.md:491`):
+
+```yaml
+  cusp_root_orbits:
+    gamma-en-2:
+    - cusp: [0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+      statement: 4.3.6
+      printed_page: 21
+      orbits:
+      - representative: [1, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+        classes: …
+        transporter_order: 1
+      orbit_count: 1
+```
+
+with `integral.cusp_root_orbits: 2e158f6bf6a8ec4e6276ae3baf3355ae85bdbaf7e12ffaec9441003515479055` in the card's
+`certifications` and the same entry in `certificates/70.yaml`.
+
+The card's own verification (`checks.records.problems` over 029J's entry, with the certificate group read by tag)
+reports no problem naming the field: the card's reference, the value and the shard agree. The whole-repository
+`latticedb verify` is not run here: `checks.one_shard` loads the entire corpus and the entire certificate store
+(7.3 GiB and 9 Gib of the measurements in `results/evidence-30-verify-read.md`), and this VM has about 4 GiB free
+with other work running.
+
+The other three rows are not stored, and the code says why where a reader will look for it: `genus.applies` refuses
+the field (`src/latticedb/genus.py:172`) and its docstring gives the reason at `:160` --- the owner's orbit call
+identifies classes only through the generators it is given, and those do not generate the stabilizer at a primitive
+isotropic line.
