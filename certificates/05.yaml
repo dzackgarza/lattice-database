@@ -18957,27 +18957,13 @@
   by: research preamble
 2MPU definite.regular:
   hash: 81076c2b20044d79ea8b87c11236f537c3971e6612f16b01f662a8481f06dffb
-  by: 'W. C. Jagy, I. Kaplansky and A. Schiemann, There are 913 regular ternary forms,
-    Mathematika 44 (1997), 332-341, form 49, as tabulated in A. G. Doyle, B. Muskat,
-    K. Pehlivan and K. S. Williams, Positive integers represented by regular primitive
-    positive-definite integral ternary quadratic forms, Integers 19 (2019), #A45,
-    Tables 1 and 2; regular by W. C. Jagy, I. Kaplansky and A. Schiemann, There are
-    913 regular ternary forms, Mathematika 44 (1997), 332-341.'
+  by: research preamble
 2MPU definite.siegel_eisenstein_coefficients:
   hash: 794dbff654e59d2b7bf8f6f1a11c8e0d158c7b0eaa9630367c6eecfedff13f7c
   by: research preamble
 2MPU definite.spinor_regular:
   hash: cf358b2c132e5337c17572bd8a22dd1df98d6d3320455ff51b469c499f98baa5
-  by: 'W. C. Jagy, I. Kaplansky and A. Schiemann, There are 913 regular ternary forms,
-    Mathematika 44 (1997), 332-341, form 49, as tabulated in A. G. Doyle, B. Muskat,
-    K. Pehlivan and K. S. Williams, Positive integers represented by regular primitive
-    positive-definite integral ternary quadratic forms, Integers 19 (2019), #A45,
-    Tables 1 and 2; regular by W. C. Jagy, I. Kaplansky and A. Schiemann, There are
-    913 regular ternary forms, Mathematika 44 (1997), 332-341; hence spinor regular,
-    since a form is spinor regular if it represents all the positive integers represented
-    by its spinor genus (A. G. Earnest and A. Haensch, Completeness of the list of
-    spinor regular ternary quadratic forms, arXiv:1711.05811v2 (2018), Abstract) and
-    the spinor genus lies in the genus.'
+  by: research preamble
 2MPU definite.theta_series_cuspidal_component:
   hash: 59a596c0370e8336b7d48f9af50cd634019303e5e637aad901e323bdd4a07185
   by: research preamble
@@ -18989,6 +18975,9 @@
   by: research preamble
 2MPU integral.anisotropic_primes:
   hash: 4a1274d55ad99d437c5aa26b7b7f748af96cf95614b07db8fe1abcd7780c37fe
+  by: research preamble
+2MPU integral.discriminant_sequence:
+  hash: 50fc76cc7eb5bd304413c76b720fcbe3bcfc8c437165aa647a1a03ba8fd88e6b
   by: research preamble
 2MPU integral.elementary_primes:
   hash: 19b0d9849d3e44247c1409caf1602a194830651191f1ef2d61845b1924a058a9
