@@ -55,8 +55,9 @@ The owner does answer the order on indefinite cards, so the field has a block no
     0016 indefinite rank 2 cardinality 4    type Cardinalities.parent_class finite True  1.0s
     0024 indefinite rank 3 cardinality ℵ_0  type Cardinalities.parent_class finite False 1.4s
 
-- `src/latticedb/invariant_models.py:936` — `Automorphisms.automorphism_group_order: OrbitCount`:
-  an integer where $O(L)$ is finite, `aleph0` where the owner states a countably infinite group.
+- `src/latticedb/invariant_models.py:945` — `Automorphisms.automorphism_group_order: OrbitCount`
+  (the block's model at `:936`): an integer where $O(L)$ is finite, `aleph0` where the owner states
+  a countably infinite group.
 - `src/latticedb/genus.py:277` — `stored_in` sends both automorphism fields to `automorphisms` on an
   indefinite card, so `applies` has no definiteness case to answer and the request carries both.
 - `src/latticedb/sage_genus.py:70` — `_orthogonal_group_data` serializes the order for every lattice,
@@ -148,7 +149,9 @@ Test runs: `python -m pytest tests/test_genus.py -q` in the image, three times �
     49 passed in 487.12s (0:08:07)   # after the order field landed
 
 and `python -m pytest tests/test_model.py -q`: 73 passed in 15.97s — including
-`tests/test_model.py:93`, which states an indefinite card's order as `4` and as `aleph0`.
+`tests/test_model.py:93`, which states an indefinite card's order as `4` and as `aleph0` — and
+`python -m pytest tests/test_records.py -q`: 16 passed in 581.67s, which is the card-admission
+path the odd-order refusal lives in.
 
 including `tests/test_genus.py:594` `test_certification_stores_an_indefinite_card_automorphism_generators`,
 which runs `certify` for the generator field on a copy of U and checks that the stored generators are
@@ -158,18 +161,39 @@ No `applies` assertion for a `definite`-block field on an indefinite card surviv
 `tests/`: the remaining ones (`tests/test_genus.py:239-253`, `:260`) are on the definite card, on
 `integral`- or `root_span`-block fields, or on a card with no `integral` block.
 
-## Left undone, and why
+## The body's Fix: the domain cases
 
 The body's **Fix** also says to delete the domain cases from `applies`, not only the definiteness
-cases. Five of them remain, each answering from the owner's stated domain:
+cases. The five that remained — rank ≥ 3 for `reflective` and the three spinor fields, rank ≥ 2 for
+`siegel_eisenstein_coefficients`, a definite even card for `discriminant_sequence`, hyperbolic index
+≥ 2 for `discriminant_orbits`, and `|det L| ≤ 4096` for `discriminant_form` — are gone.
 
-- `src/latticedb/genus.py:201-204` rank ≥ 3 for `reflective`, `spinor_regular`, `spinor_genus_count`, `spinor_genera`
-- `src/latticedb/genus.py:205-208` rank ≥ 2 for `siegel_eisenstein_coefficients`
-- `src/latticedb/genus.py:209-210` a definite even card for `discriminant_sequence`
-- `src/latticedb/genus.py:211-212` an even card of hyperbolic index ≥ 2 for `discriminant_orbits`
-- `src/latticedb/genus.py:192-200` `|det L| ≤ 4096` for `discriminant_form`
+### Closed: the domain cases are gone
 
-They are not touched here: no acceptance item asks for them, and deleting them makes every
-rank-2 card raise four owner errors per run (the failure `36221922f9` was written to repair, and
-the four raises above show what a raise costs a worker). Removing them is a corpus-wide cost change
-that wants a measured run, not a silent edit.
+The body's **Fix** also says to delete the domain cases from `applies`, not only the definiteness
+cases. They are deleted — `src/latticedb/genus.py:126` now withholds a field only where the card has
+no block for it, or where the owner presents no such operation.
+
+Measured on A2 (`0012`, definite, rank 2), whose queue now carries `spinor_genera`,
+`spinor_genus_count`, `discriminant_orbits` and, in the searches phase, `spinor_regular`:
+
+    Error: the spinor-genus count of Genus of even integral lattices of signature (2, 0) and
+    determinant 3 is taken here in rank at least three, and the rank is 2
+    Error: spinor genera of Integral lattice of rank 2 and signature (2, 0) require a
+    nondegenerate lattice of finite rank at least three
+
+the second raised at `sage_extensions/categories/lattices.py:6729` through `is_spinor_regular`
+(`:10173`), reached from `src/latticedb/sage_genus.py:210`. The three refusals are recorded in the
+copy's failure ledger with `disposition: open` — `0012 definite.spinor_regular`,
+`0012 integral.spinor_genera`, `0012 integral.spinor_genus_count` — and the first run ends non-zero at
+`src/latticedb/genus.py:1094`, which is the exit contract README.md:435 already states.
+
+That red is bounded: `failures.blocked` (`src/latticedb/failures.py:97-99`) quarantines a recorded
+refusal, so the *next* run of the same command on the same copy asks nothing and exits 0 (measured:
+empty output, `third run exit=0`, ledger still `disposition: open`). One run per card records a
+refusal; every run after it is green until someone runs `retry-computation`.
+
+Tests that decide it: `tests/test_genus.py:229` asserts every one of those fields is applied to A2 and
+U and that only the schema facts withhold; `tests/test_genus.py:334` asserts the rank-2 card's queue
+carries `spinor_regular` and `spinor_genus_count`, and that recording a refusal removes exactly that
+computation from the next queue.
