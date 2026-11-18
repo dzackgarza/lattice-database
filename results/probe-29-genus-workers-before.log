@@ -1,0 +1,24 @@
+/sage/.venv/lib/python3.14/site-packages/pytest_asyncio/plugin.py:306: PytestDeprecationWarning: The configuration option "asyncio_default_fixture_loop_scope" is unset.
+The event loop scope for asynchronous fixtures will default to the fixture scope. Future versions of pytest-asyncio will default the loop scope for asynchronous fixtures to "function" scope. Set the default fixture loop scope explicitly in order to avoid unexpected behavior in the future. Valid fixture loop scopes are: "function", "class", "module", "package", "session". Set it to "fixture-scope" to keep the current behavior.
+
+  warnings.warn(PytestDeprecationWarning(_DEFAULT_FIXTURE_LOOP_SCOPE_UNSET))
+FF.                                                                      [100%]
+=================================== FAILURES ===================================
+______ test_a_card_continues_on_a_new_worker_after_one_computation_fails _______
+tests/test_genus.py:491: in test_a_card_continues_on_a_new_worker_after_one_computation_fails
+    assert _pool(tmp_path, ["genus_symbol", "raises", "regular"]) == [
+E   AssertionError: assert [{'tag': '001...gular': True}] == [{'tag': '001...gular': True}]
+E     
+E     At index 1 diff: {'tag': '0012', 'failed': 'memory exhausted', 'killed': {'by': 'memory', 'peak': 65966080, 'limit': 1676462899}} != {'tag': '0012', 'failed': 'exit status 1'}
+E     Use -v to get more diff
+_________ test_a_worker_killed_by_a_signal_is_reported_with_its_signal _________
+tests/test_genus.py:514: in test_a_worker_killed_by_a_signal_is_reported_with_its_signal
+    assert _pool(tmp_path, ["dies"]) == [{"tag": "0012", "failed": "killed by signal 9", "killed": {"by": "signal 9"}}]
+E   AssertionError: assert [{'tag': '001... 1676462899}}] == [{'tag': '001... 'signal 9'}}]
+E     
+E     At index 0 diff: {'tag': '0012', 'failed': 'memory exhausted', 'killed': {'by': 'memory', 'peak': 0, 'limit': 1676462899}} != {'tag': '0012', 'failed': 'killed by signal 9', 'killed': {'by': 'signal 9'}}
+E     Use -v to get more diff
+=========================== short test summary info ============================
+FAILED tests/test_genus.py::test_a_card_continues_on_a_new_worker_after_one_computation_fails
+FAILED tests/test_genus.py::test_a_worker_killed_by_a_signal_is_reported_with_its_signal
+2 failed, 1 passed, 46 deselected in 91.44s (0:01:31)

@@ -488,6 +488,11 @@ def _pool(tmp_path: Path, fields: list[str]) -> list[dict[str, object]]:
 
 def test_a_card_continues_on_a_new_worker_after_one_computation_fails(tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> None:
     monkeypatch.setattr(genus, "WORKER", [sys.executable, str(tmp_path / "worker.py")])
+    # The run's own reserve kill (`genus.computed`, `MEMORY_RESERVE` of the machine's total) would
+    # preempt the failure this test is about on a machine with little memory free, and report it as
+    # "memory exhausted" instead (#29). That kill is the next test's subject; here the reserve is
+    # pinned out of the way so the assertion does not depend on how loaded the runner is.
+    monkeypatch.setattr(genus, "MEMORY_RESERVE", 0.0)
     assert _pool(tmp_path, ["genus_symbol", "raises", "regular"]) == [
         {"tag": "0012", "genus_symbol": True},
         {"tag": "0012", "failed": "exit status 1"},
@@ -511,11 +516,17 @@ def test_the_largest_worker_is_killed_when_memory_runs_low(tmp_path: Path, monke
 def test_a_worker_killed_by_a_signal_is_reported_with_its_signal(tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> None:
     """A container out-of-memory kill reaches the driver as SIGKILL and no traceback (#46)."""
     monkeypatch.setattr(genus, "WORKER", [sys.executable, str(tmp_path / "worker.py")])
+    # Pinned as above: on a loaded runner the run's reserve kill fires first and the worker is
+    # reported as "memory exhausted" with `peak: 0`, not as the signal that ended it (#29).
+    monkeypatch.setattr(genus, "MEMORY_RESERVE", 0.0)
     assert _pool(tmp_path, ["dies"]) == [{"tag": "0012", "failed": "killed by signal 9", "killed": {"by": "signal 9"}}]
 
 
 def test_a_worker_that_fails_before_computing_is_not_replaced(monkeypatch: pytest.MonkeyPatch) -> None:
     monkeypatch.setattr(genus, "WORKER", [sys.executable, "-c", "raise SystemExit(3)"])
+    # Pinned as above: the run's reserve kill would report "memory exhausted" instead of the exit
+    # status this test is about, on a machine with little memory free (#29).
+    monkeypatch.setattr(genus, "MEMORY_RESERVE", 0.0)
     requests: list[genus.Request] = [{"tag": tag, "gram": [[2]], "integral": True, "fields": ["genus_symbol"], "series_bound": 1} for tag in ("0011", "0012")]
     stream = genus.computed(requests, time.time() + 60, 1)
     assert [values for values in stream if "checkpoint" not in values] == [{"tag": "0011", "failed": "exit status 3"}]
@@ -659,7 +670,10 @@ def test_certification_stores_an_indefinite_card_automorphism_generators(tmp_pat
     assert genus.name("0016", "automorphism_group_generator_morphisms", "indefinite") in certificates.load(tmp_path)
 
 
-def test_certification_keeps_a_root_lattice_integer_valued(tmp_path: Path) -> None:
+def test_certification_keeps_a_root_lattice_integer_valued(tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> None:
+    # Pinned as above: on a machine with little memory free the run's reserve kill ends the worker
+    # that would have written `integer_valued`, and the read below finds no such field (#29).
+    monkeypatch.setattr(genus, "MEMORY_RESERVE", 0.0)
     # A2 has Gram tensor [[2, -1], [-1, 2]]: every entry is an integer, so its form is integer-valued.
     (tmp_path / "lattices").mkdir()
     shutil.copy(REPOSITORY / corpus.FAMILIES_FILE, tmp_path / corpus.FAMILIES_FILE)
