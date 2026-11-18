@@ -23262,27 +23262,13 @@
   by: research preamble
 3G1K definite.regular:
   hash: 1709f4a00bf9c14134dfc6f2144f59f481f20598e4c312d61576214dd780ebe4
-  by: 'W. C. Jagy, I. Kaplansky and A. Schiemann, There are 913 regular ternary forms,
-    Mathematika 44 (1997), 332-341, form 610, as tabulated in A. G. Doyle, B. Muskat,
-    K. Pehlivan and K. S. Williams, Positive integers represented by regular primitive
-    positive-definite integral ternary quadratic forms, Integers 19 (2019), #A45,
-    Tables 1 and 2; regular by W. C. Jagy, I. Kaplansky and A. Schiemann, There are
-    913 regular ternary forms, Mathematika 44 (1997), 332-341.'
+  by: research preamble
 3G1K definite.siegel_eisenstein_coefficients:
   hash: 0d49b395db4aff2a6b68e484e7895834407852fea3800e7768703efa3fd51f4b
   by: research preamble
 3G1K definite.spinor_regular:
   hash: f85aa52af5b52d1f7180b674527bd891a4401cea6bc78d98860848c9f53e437e
-  by: 'W. C. Jagy, I. Kaplansky and A. Schiemann, There are 913 regular ternary forms,
-    Mathematika 44 (1997), 332-341, form 610, as tabulated in A. G. Doyle, B. Muskat,
-    K. Pehlivan and K. S. Williams, Positive integers represented by regular primitive
-    positive-definite integral ternary quadratic forms, Integers 19 (2019), #A45,
-    Tables 1 and 2; regular by W. C. Jagy, I. Kaplansky and A. Schiemann, There are
-    913 regular ternary forms, Mathematika 44 (1997), 332-341; hence spinor regular,
-    since a form is spinor regular if it represents all the positive integers represented
-    by its spinor genus (A. G. Earnest and A. Haensch, Completeness of the list of
-    spinor regular ternary quadratic forms, arXiv:1711.05811v2 (2018), Abstract) and
-    the spinor genus lies in the genus.'
+  by: research preamble
 3G1K definite.theta_series_cuspidal_component:
   hash: 1a7235c95bb8f05d2a6cfb192e16d2d1b5549792ac5e0faaf24eb51a7189545f
   by: research preamble
@@ -23294,6 +23280,9 @@
   by: research preamble
 3G1K integral.anisotropic_primes:
   hash: a09c587b0a636eb174ff6232e12d085afb783b0395aff297fd198e7bc99f5a9c
+  by: research preamble
+3G1K integral.discriminant_sequence:
+  hash: 552ec2e0bcecd8f05214c861ab350725e6d318a1b2f82cca584bbec2843f3a21
   by: research preamble
 3G1K integral.elementary_primes:
   hash: b9cab7ac939549fba92264cdc264cffaf5c8aab9b32d846e64f7a9fba54a81d7
