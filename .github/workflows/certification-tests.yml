@@ -33,7 +33,7 @@ jobs:
       uses: ./.github/actions/sage
     - name: Exercise failure quarantine, successful retry and concurrent 
         persistence
-      run: "docker exec -i --workdir \"$GITHUB_WORKSPACE\" \\\n  --env \"PYTHONPATH=$GITHUB_WORKSPACE/_ci-support/ai-review-ci/tool-artifacts/pytest_plugins:$GITHUB_WORKSPACE/research/src:$GITHUB_WORKSPACE/src\"\
+      run: "docker exec -i --workdir \"$GITHUB_WORKSPACE\" \\\n  --env \"PYTHONPATH=$GITHUB_WORKSPACE/_ci-support/ai-review-ci/tool-artifacts/pytest_plugins:$GITHUB_WORKSPACE/research/src:$GITHUB_WORKSPACE/src:/repos/sage-extensions/src\"\
         \ \\\n  sage-env /sage/.venv/bin/python -c 'import sage.all, sys, pytest;
         sys.exit(pytest.main(sys.argv[1:]))' \\\n  -p qc_sage_session -p qc_unique_inventory
         \\\n  tests/test_genus.py tests/test_failures.py tests/test_persist.py tests/test_corpus.py
