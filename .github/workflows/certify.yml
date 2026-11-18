@@ -97,7 +97,9 @@ jobs:
       env:
         LATTICEDB_TAG: ${{ matrix.tag }}
       run: |
-        # Push progress every half hour, so a runner that dies loses at most that much.
+        # Push progress every half hour, so a runner that dies loses at most that much. A tick that
+        # cannot integrate annotates this shard itself (::error::shard N/M), so `|| true` keeps the
+        # next tick alive without hiding the loss (#47).
         ( while sleep 1800; do .github/scripts/persist.sh "${{ matrix.shard }}/$SHARDS" || true; done ) &
         persister=$!
         # Include provisioning in the job budget and reserve ten minutes for persistence.
@@ -156,10 +158,24 @@ jobs:
           ${{ runner.temp }}/certification.patch
           ${{ runner.temp }}/certification-base.txt
         if-no-files-found: error
+    # Progress main did not take is this shard's loss, not the computation's: the step fails and is
+    # annotated with the shard and the values it kept off main, and the job — and so the run — reports
+    # what it computed. A certify run that died because its bookkeeping could not push would lose the
+    # certification too (#47).
     - name: Commit completed computations to main
+      id: persist
       if: ${{ always() && steps.checkout.outcome == 'success' }}
+      continue-on-error: true
       shell: bash --noprofile --norc -e -o pipefail {0}
       run: .github/scripts/persist.sh "${{ matrix.shard }}/$SHARDS" final
+    - name: Report progress this shard kept off main
+      if: ${{ always() && steps.persist.outcome == 'failure' }}
+      shell: bash --noprofile --norc -e -o pipefail {0}
+      run: |
+        message="Shard ${{ matrix.shard }}/$SHARDS: main did not take the values this shard certified after its last push."
+        echo "::error::${message} They are on this job's certify- branch and in its uploaded certification artifact; the run continues."
+        echo "### ${message}" >> "$GITHUB_STEP_SUMMARY"
+        echo "Recover them from branch \`certify-${{ github.run_id }}-${{ github.run_attempt }}-${{ matrix.shard }}\` or from this job's \`certification-\` artifact." >> "$GITHUB_STEP_SUMMARY"
     - name: Stop the Sage environment
       if: always()
       shell: bash --noprofile --norc -e -o pipefail {0}
