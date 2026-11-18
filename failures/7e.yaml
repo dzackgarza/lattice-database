@@ -6869,6 +6869,23 @@
     database_revision: a012c301048893319e66606e76ab2c47dae62a3a
     research_revision: 507b6871abca4e8157fd6e612bc95c60c6b634fd
   notes: []
+3EWA integral.discriminant_form:
+  disposition: open
+  attempts:
+  - hash: 51b89eaf80de4090a705ff2b912b09f20005859c672db7509a1aac663167bf60
+    gram_tensor:
+    - - 110
+      - 25
+    - - 25
+      - 314
+    reason: worker or runner lost (recovered from exceeded.yaml)
+    stderr: ''
+    seconds: 115.0
+    recorded_at: 2026-11-18 19:09:21.631454+00:00
+    run_url: https://github.com/dzackgarza/lattice-database/actions/runs/44374448321/attempts/1
+    database_revision: d389cfb7d09693c53bb148f38a56447bf1c072ff
+    research_revision: fca008555b7d468c4fbb26bcff5cd2ca7b057e18
+  notes: []
 3EWA integral.overlattice_count:
   disposition: open
   attempts:
