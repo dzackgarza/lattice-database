@@ -213,6 +213,86 @@ minutes, far inside the step's `timeout-minutes: 350`. A segfault needs no ceili
 enables `faulthandler`, and the crash this issue opened with was reported that way — `File
 "/repo/tests/test_bulk_sources.py", line 17 in test_nipp_tables_preserve_the_source_discriminants_and_group_orders`.
 
+**What the ceiling catches first on this tree.** The same selection run locally with a 300 s ceiling
+(`--timeout=300 --timeout-method=thread`, `results/probe-29-timeout-sweep.log`) ended 14m26s in and
+named one test:
+
+    File "/repo/tests/test_corpus.py", line 371, in test_the_stored_corpus_loads_through_the_reader_that_every_workflow_starts_with
+      loaded = corpus.load(ROOT)
+    File "/repo/src/latticedb/corpus.py", line 253, in load
+      document = read_card(path)
+    File "/repo/src/latticedb/corpus.py", line 63, in read_card
+      return frontmatter.load(path, handler=_CARD_YAML)
+
+That is the whole-corpus read — 7.29 GiB, measured at 421 s when the VM is quiet — not a hang, and it is
+why the committed ceiling is 1800 s and not the 300 s this probe used: the step's non-termination is
+most plausibly this same memory-bound read thrashing inside a 16 GB runner that already holds the
+suite's other loads, and a ceiling below the read's cost would fail the suite on a slow runner instead
+of naming a hang.
+
+**The ceiling in CI.** Run `44284006493` (`workflow_dispatch`, head `193234cebe`, the commit that adds
+the ceiling) entered step 7 at 10:27:10Z and **ended it at 11:26:17Z — 59 minutes, exit code 1** — with
+the job completing at 11:26:37Z, well inside its `timeout-minutes: 350`. The run before it, without the
+ceiling, sat 88 minutes inside the same step with steps 8–10 `pending` and was cancelled with no
+verdict. The step now terminates and hands pytest's own exit status up.
+
+What that exit status contains is not readable from this connection: the run has **0 artifacts**, and
+the run-log, the job-log and the job's own log endpoint each answer **403** anonymously. `exit code 1`
+is what pytest reports for failing tests and also what the thread method's `os._exit(1)` produces
+(`pytest_timeout.py:542`), so which tests failed — or whether the ceiling itself fired — is in that log
+and needs `actions: read`. The first failing frame of this run is therefore not quoted here.
+
+## 1c. The frame, from the repository owner's reading of that log, and the three costs behind it
+
+The frame, quoted from the job log: the run did not fail on a test's assertion but on the ceiling,
+inside the pandoc call of the site build —
+
+    tests/validation/test_build.py:28  built -> site.build(ROOT, target)
+    src/latticedb/site.py:520          markdown_to_html([... entries, pages, theory])
+    src/latticedb/site.py:377          [convert(text) for text in texts]
+    src/latticedb/site.py:374          subprocess.run(command, input=text, capture_output=True, text=True, check=True)
+                                       ++++++++++++++++++ Timeout ++++++++++++++++++
+
+Measured on this tree, in the pinned image:
+
+| | |
+| --- | --- |
+| texts `build` converts | 302,504 cards + 8 pages + 11 theory = **302,523** |
+| one pandoc call | **12.0 ms** bare, **11.8 ms** over 200 real cards |
+| the whole corpus, one process per text | **59 minutes** of process starts alone |
+| the build's marginal cost per card | **35.75 ms** (500 cards 54.1 s, 2,000 cards 107.7 s; fixed overhead 36 s) |
+| the whole site at that rate | **≈181 minutes** |
+
+A profile of the 2,000-card build splits the marginal cost: `corpus.read_card` 26 ms per card; the
+page's Jinja render 41 ms, of which 16 ms is the owner's
+`quadratic_hypersurface_zeta_factorization` (sage-extensions `lattice_zeta_invariants.py:36`, called
+3,988 times for 2,000 cards); `site.broken_links` 36 ms per page. So the count is the problem and no
+ceiling value fixes it: the whole-corpus build is hours, not minutes.
+
+**It could not finish at all, at any speed.** `site.build` refuses a page whose link reaches nothing,
+and one card wrote its links to the wrong directory: `lattices/0125.md` said
+`../arithmetic-groups/g-e.html` and `../arithmetic-groups/h-e.html` where the builder writes
+`arithmetic-group/` (singular, `site.py:508`). Its first frame was
+`tag/0125.html: ../arithmetic-groups/g-e.html`. Repaired at `lattices/0125.md:567`, `:569`, `:571`.
+
+**The fixture now builds a bounded corpus** (`tests/validation/test_build.py`): the twelve tags the
+module asserts on, every lattice their morphisms reach, every lattice an arithmetic-group or lie-group
+card names, the two collection pages it asserts on (`even-unimodular.md`, `root-lattices.md`), and the
+small content directories — instead of all 302,504 cards. Every assertion is unchanged; only the corpus
+the builder is given shrinks.
+
+    $ pytest tests/validation/test_build.py
+    17 passed in 70.80s
+
+`results/probe-29-build-bounded.log`. The 1800 s ceiling is now two and a half orders of magnitude away
+from what this fixture costs.
+
+**What was tried and reverted.** Converting the texts in chunks (one pandoc process per 512 texts,
+joined by an HTML comment, split on the same comment) is 30× faster — 0.08 s for 200 texts against
+2.55 s — but pandoc deduplicates heading identifiers within one document, so `morphism-provenance-to-027e`
+came back as `…-027e-2`, `…-3`: the site's anchors would change. The change is not in this tree; with
+the bounded corpus the 59 minutes never arises here.
+
 ## 2. The Hoehn–Mason tests run in the time of an ordinary unit test
 
 The 70 minutes were one owner call: `hoehn_mason.automorphisms` (`src/latticedb/hoehn_mason.py:195`)

@@ -1,14 +1,21 @@
 """The site that `build` writes from the corpus of this repository.
 
-Validation subtree: every test here builds the full site from the full corpus,
-so this module runs only as `just test-validation` and in CI, never as
-`just test`. Fast coverage of the same site logic on fixtures lives in
-`tests/test_geometric.py` and `tests/test_catalogue_schemas.py`.
+Validation subtree. The build costs about 35 ms per card on this tree — a card's read, its page's render
+(which asks the owner for the quadratic hypersurface zeta factorization, 16 ms of the 35) and the link
+check over the page — so the full corpus of 302,504 cards is some four and a half hours, which no
+per-test ceiling and no job budget holds (#29: the `built` fixture below ran past the 30-minute ceiling
+inside `site.markdown_to_html`). So the module builds a *bounded* corpus: the tags these tests name,
+every lattice those cards' morphisms reach, and every lattice an arithmetic-group or lie-group card
+names. Every assertion stays an assertion about the site the builder makes; what shrinks is the corpus.
+Fast coverage of the same site logic on fixtures lives in `tests/test_geometric.py` and
+`tests/test_catalogue_schemas.py`.
 """
 
 import json
+import shutil
 from pathlib import Path
 
+import frontmatter
 import pytest
 from markupsafe import escape
 
@@ -16,16 +23,63 @@ from latticedb import corpus, site
 
 ROOT = Path(__file__).resolve().parent.parent.parent
 
+# The tags this module asserts on, by number: E8, U, U ⊕ U(2), Λ_9, Z^10, U(3), U ⊕ ⟨-2⟩ ⊕ E8, K12,
+# Z^12(2), D12, Λ_23 and T_En. Everything else in the corpus is out of scope here.
+NAMED = {"0001", "0016", "0036", "0094", "0110", "0120", "0124", "0128", "0150", "0151", "0233", "029J"}
+
+# The directories the builder reads besides `lattices/`, all of them small. `pages/` is not copied whole:
+# the builder refuses a collection page no card satisfies, and a bounded corpus holds no degenerate
+# lattice, so the two pages this module asserts on are copied by name below.
+DIRECTORIES = ("theory", "arithmetic-groups", "lie-groups", "geometric-objects", "geometric-families", "graphs", "lattice-families")
+PAGES = ("even-unimodular.md", "root-lattices.md")
+FILES = (corpus.FAMILIES_FILE, corpus.RETIRED_FILE, "geometric-bibliography.bib")
+
+
+def _bounded_tags() -> set[str]:
+    """The cards the bounded corpus holds: the named ones, what their morphisms reach, and the group cards' lattices."""
+    tags = {tag for tag in NAMED if (ROOT / "lattices" / f"{tag}.md").exists()}
+    for directory in ("arithmetic-groups", "lie-groups"):
+        for card in (ROOT / directory).glob("*.md"):
+            named = frontmatter.load(str(card)).metadata.get("lattice")
+            if isinstance(named, str) and (ROOT / "lattices" / f"{named}.md").exists():
+                tags.add(named)
+    pending = list(tags)
+    while pending:
+        metadata = frontmatter.load(str(ROOT / "lattices" / f"{pending.pop()}.md")).metadata
+        for morphism in metadata.get("morphisms") or ():
+            target = morphism.get("target")
+            if isinstance(target, str) and target not in tags and (ROOT / "lattices" / f"{target}.md").exists():
+                tags.add(target)
+                pending.append(target)
+    return tags
+
 
 @pytest.fixture(scope="module")
-def loaded() -> corpus.Corpus:
-    return corpus.load(ROOT)
+def root(tmp_path_factory: pytest.TempPathFactory) -> Path:
+    """A corpus holding the cards this module's assertions need, and the parts of the tree they link to."""
+    directory = tmp_path_factory.mktemp("corpus")
+    (directory / "lattices").mkdir()
+    for tag in sorted(_bounded_tags()):
+        shutil.copy(ROOT / "lattices" / f"{tag}.md", directory / "lattices")
+    for name in FILES:
+        shutil.copy(ROOT / name, directory / name)
+    (directory / "pages").mkdir()
+    for name in PAGES:
+        shutil.copy(ROOT / "pages" / name, directory / "pages" / name)
+    for name in DIRECTORIES:
+        shutil.copytree(ROOT / name, directory / name)
+    return directory
 
 
 @pytest.fixture(scope="module")
-def built(tmp_path_factory: pytest.TempPathFactory) -> Path:
+def loaded(root: Path) -> corpus.Corpus:
+    return corpus.load(root)
+
+
+@pytest.fixture(scope="module")
+def built(root: Path, tmp_path_factory: pytest.TempPathFactory) -> Path:
     target = tmp_path_factory.mktemp("site") / "_site"
-    site.build(ROOT, target)
+    site.build(root, target)
     return target
 
 
