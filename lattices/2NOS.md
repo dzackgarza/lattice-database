@@ -23,6 +23,7 @@ certifications:
   integral.anisotropic_primes: 906bdca90fc15646b3904cc3c80f20647b2ad89cbc45b8b69ef125c0385f7a4a
   integral.local_representations: 3301fb4935e81457e28873683f971ed0dfc6a616b32d0ed439bd2416f2aab849
   integral.local_densities: 2ea41a2fda4fe212138bf562973cf6de435845dc7bfbe52bbbc9f8dbceecf6f5
+  integral.discriminant_sequence: 7b0f2498c73a9a7f138d8cacdc70e4b6d08d550d6d9da29d82243ed178fc6910
 rank: 3
 gram_tensor:
 - [3, 0, 1]
@@ -43,6 +44,26 @@ integral:
   level: 226
   modular_scale: false
   discriminant_group: [113]
+  discriminant_sequence:
+    discriminant_factors: [113]
+    discriminant_basis_lifts:
+    - [-38/113, -85/113, 1/113]
+    discriminant_quadratic_gram:
+    - [66/113]
+    discriminant_group_order: 2
+    discriminant_generators:
+    - - [112]
+    image_generators:
+    - - [112]
+    image_order: 2
+    kernel_order: 1
+    coset_representatives:
+    - - [1]
+    mm_trivial: true
+    image_normal: true
+    quotient_generator_cosets: [0]
+    quotient_multiplication:
+    - [0]
   overlattice_count: 1
   bad_reduction_primes: [2, 113]
   genus_symbol: 'I_{3,0} (2: [1^3]_7; 113: 1^-2 113^-1)'

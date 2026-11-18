@@ -22294,6 +22294,9 @@
 2NGV integral.anisotropic_primes:
   hash: b1c5f9ecf6a21e1a7f2f26a4add86fd1b413b9186b8d815c78dfc3adf9dcaf01
   by: research preamble
+2NGV integral.discriminant_sequence:
+  hash: 9687b6b1d36490dab195a05331fc284ae197071ffc488659286c83b447c6e8f9
+  by: research preamble
 2NGV integral.elementary_primes:
   hash: 0acc3578f021ed5b14c210a9cbcaf3bcf8d5c2929ea81df237e87ae468b5f75a
   by: research preamble
@@ -22341,9 +22344,7 @@
   by: research preamble
 2NLG definite.spinor_regular:
   hash: 485332523a47fd147a7b5f0bc966ea3eb8441c93caf3b03b8c2d7cc32faf1c1a
-  by: A. G. Earnest and A. Haensch, Completeness of the list of spinor regular ternary
-    quadratic forms, arXiv:1711.05811v2 (2018), Table 1, row 10; its spinor genus
-    has one class.
+  by: research preamble
 2NLG definite.theta_series_cuspidal_component:
   hash: f5282222f765b8b1abe8d1e50d67ae947207619ed13053bd26bb576f3da3f50c
   by: research preamble
@@ -22355,6 +22356,9 @@
   by: research preamble
 2NLG integral.anisotropic_primes:
   hash: 88a6703741d265687f9a4e3bbe5b7459bda712c9e05f296968aa3bd1aca9a779
+  by: research preamble
+2NLG integral.discriminant_sequence:
+  hash: f8afd5dd7df956eaaa1c0e3d560863511c20777eb6da3f8cb2bd6d04d7ccb448
   by: research preamble
 2NLG integral.elementary_primes:
   hash: 8be666f54f8d8bbba32ea01e187c9c76140f0a31366bedfe291c39c86ef1f21b
@@ -22412,6 +22416,9 @@
   by: research preamble
 2NWP integral.anisotropic_primes:
   hash: 2aecb08e9c04f27dcd9b55e6b6ef659d0ee0da81b35bca66c90bbd1317964ee1
+  by: research preamble
+2NWP integral.discriminant_sequence:
+  hash: 55e4c1e392053bc35bab1a3bed17c8c25a51a777837ab63adf736e12094bf4b5
   by: research preamble
 2NWP integral.elementary_primes:
   hash: f343ccbb9344480d3efe047b0762e4ab770c7f705558d4d64b5e0baab83b85db
@@ -31510,6 +31517,9 @@
   by: research preamble
 3GKN integral.discriminant_form:
   hash: 17436a783574aee891515eb716d1f022aefb5e7655d1c44fc662c799fe8ec8df
+  by: research preamble
+3GKN integral.discriminant_orbits:
+  hash: e8a85f2c69c66eee14765f1b2fd9d0bba9267ac80dde609c13368ed8fb8025b6
   by: research preamble
 3GKN integral.discriminant_sequence:
   hash: 46c316bdded9c1103934de49d7a3df96387986c6f32edfdfcbd3e19528a9fdfb
