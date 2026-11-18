@@ -35,45 +35,53 @@ and its `derive` certificate current. Queue read from `genus.requests`, which is
 
 Where each step is decided:
 
-- `src/latticedb/genus.py:125` `applies` — no definiteness case remains for these fields.
-- `src/latticedb/genus.py:276` `stored_in` — the generators of an indefinite card go to
+- `src/latticedb/genus.py:126` `applies` — no definiteness case remains for these fields.
+- `src/latticedb/genus.py:277` `stored_in` — the generators of an indefinite card go to
   `automorphisms`, not to `definite`.
-- `src/latticedb/genus.py:426` `requests` — an indefinite card's `primitive_orbits` leaves as one
-  request per standard subgroup (`orbit_rows_to_ask`, `src/latticedb/genus.py:336`).
-- `src/latticedb/sage_genus.py:401` — the worker re-filters the request with the same predicate and
+- `src/latticedb/genus.py:427` `requests` — an indefinite card's `primitive_orbits` leaves as one
+  request per standard subgroup (`orbit_rows_to_ask`, `src/latticedb/genus.py:337`).
+- `src/latticedb/sage_genus.py:402` — the worker re-filters the request with the same predicate and
   keeps both.
 
-`automorphism_group_order` is **not** requested on an indefinite card. That is not an owner-domain
-guard and not an assumption: it was measured. With the block gate opened by hand so the queue
-carries the field (`.scratch/probe8/order_probe.py`, card 0016 with every value certified):
+`automorphism_group_order` used to be withheld by the schema rather than by the owner: `Automorphisms`
+had no order field and README said "there is no order field to fill". Opening the block gate by hand
+showed what that cost — the field was queued, the worker answered the generator field of the same
+computation, the run returned normally, and the card gained no value and no certificate while
+`exceeded.yaml` held `0016 definite.automorphism_group_order` for 13 s.
 
-    queue with the gate opened: ['automorphism_group_order', 'roots', 'norms']
-    stored_in(order, indefinite) = definite
-    0016 {'automorphism_group_generator_morphisms': [[[-1, 0], [0, -1]], [[0, -1], [-1, 0]]]}
-    certify returned normally
-    card automorphisms block: {'automorphism_group_generator_morphisms': ['O(L) generator 1', 'O(L) generator 2']}
-    card certifications has the order: False
-    exceeded.yaml: 0016 definite.automorphism_group_order:
-      hash: b3827d6184a979b96951484f729460822f3299a93d5aa6fbdcf90b0c70dee9d3
-      seconds: 13
+The owner does answer the order on indefinite cards, so the field has a block now
+(`.scratch/probe8/order_cardinality.py`):
 
-The field is requested, the worker answers the generator field of the same computation and no
-order, the run ends normally, and the card gains neither a value nor a certificate while
-`exceeded.yaml` holds `0016 definite.automorphism_group_order` — a block the card does not have —
-for every run that asks it. Three lines make that the only possible outcome:
+    0016 indefinite rank 2 cardinality 4    type Cardinalities.parent_class finite True  1.0s
+    0024 indefinite rank 3 cardinality ℵ_0  type Cardinalities.parent_class finite False 1.4s
 
-- `src/latticedb/sage_genus.py:76-80` — `_orthogonal_group_data` serializes no order for an
-  indefinite lattice, so the owner never returns one for this field.
-- `src/latticedb/invariant_models.py:936` — `Automorphisms` has no order field; `BLOCKS`
-  (`src/latticedb/genus.py:58`) files the field under `definite`, and the block gate
-  (`src/latticedb/genus.py:179`) therefore rejects it on a card with no `definite` block.
-- README.md:255 — "there is no order field to fill", the design this encodes.
+- `src/latticedb/invariant_models.py:945` — `Automorphisms.automorphism_group_order: OrbitCount`
+  (the block's model at `:936`): an integer where $O(L)$ is finite, `aleph0` where the owner states
+  a countably infinite group.
+- `src/latticedb/genus.py:277` — `stored_in` sends both automorphism fields to `automorphisms` on an
+  indefinite card, so `applies` has no definiteness case to answer and the request carries both.
+- `src/latticedb/sage_genus.py:70` — `_orthogonal_group_data` serializes the order for every lattice,
+  through the same cardinal conversion the orbit counts use, so an uncountable answer is refused
+  rather than recorded.
+- `src/latticedb/records.py:561` — a finite order that is odd or non-positive is refused.
+- README.md:229, :245, :255 and `theory/indefinite-lattices.md` state the order as a field of
+  `automorphisms`, and `src/latticedb/templates/lattice.html.j2:188` renders it.
 
-**Verdict on item 1:** met for `primitive_orbits` and for the automorphism generators, which is
-every automorphism field an indefinite card has a block for. The order is **blocked** with the
-evidence above; making it requestable means adding a field (an `aleph0` value, `|O(L)|` infinite
-for an indefinite lattice) and an adapter branch, which is a schema decision this issue's Fix does
-not authorize ("keep only the database's own facts — a field the schema has no block for").
+`certify --tag 0016 --root <copy> --field automorphism_group_order` on the stripped card of U:
+
+    0016 {'automorphism_group_order': 4,
+          'automorphism_group_generator_morphisms': [[[-1, 0], [0, -1]], [[0, -1], [-1, 0]]]}
+
+The copy's card states `automorphisms.automorphism_group_order: 4`, the certificate
+`0016 automorphisms.automorphism_group_order` is written, and `exceeded.yaml` stays `{}`. The
+infinite leg converts the same way (`.scratch/probe8/aleph0_probe.py`):
+`0024 |O(L)| = ℵ_0 -> stored as 'aleph0'`.
+
+**Verdict on item 1:** met — `primitive_orbits` and both automorphism fields are requested on an
+indefinite card, and each has an answer (`constant 1` rows and their raises, `4` for the generators
+and the order of U).
+
+Probe: `.scratch/probe8/request_probe2.py` (git-ignored).
 
 Probe: `.scratch/probe8/request_probe2.py` (git-ignored).
 
@@ -93,10 +101,10 @@ Probe: `.scratch/probe8/request_probe2.py` (git-ignored).
 
 Four rows answered (constant 1, as the card states), four raised — `SO`, `SO+`, `SOtilde`,
 `SOtilde+` — at `sage_extensions/categories/orthogonal_quotients.py:1807`, reached from
-`src/latticedb/sage_genus.py:124`. The four raises are the owner's refusal, recorded by the
+`src/latticedb/sage_genus.py:125`. The four raises are the owner's refusal, recorded by the
 existing triage as `0016 integral.primitive_orbits[SO+]` … with `disposition: open` in the copy's
 `failures/ad.yaml`; the run reports them and exits 1, which is the path
-`src/latticedb/genus.py:1132` documents.
+`src/latticedb/genus.py:1133` documents.
 
 `certify --tag 0016 --minutes 3 --workers 1 --field automorphism_group_generator_morphisms` on a
 fresh copy:
@@ -134,12 +142,18 @@ The new test is sensitive to the defect: with `applies` restored to its pre-#8 a
 `primitive_orbits[...]` row and no generator field, so the test fails. Probe:
 `.scratch/probe8/red_probe.py`.
 
-Test runs: `python -m pytest tests/test_genus.py -q` in the image, twice —
+Test runs: `python -m pytest tests/test_genus.py -q` in the image, three times —
 
     49 passed in 213.10s (0:03:33)
     49 passed in 529.48s (0:08:49)   # same suite, run alongside other sessions' jobs
+    49 passed in 487.12s (0:08:07)   # after the order field landed
 
-including `tests/test_genus.py:586` `test_certification_stores_an_indefinite_card_automorphism_generators`,
+and `python -m pytest tests/test_model.py -q`: 73 passed in 15.97s — including
+`tests/test_model.py:93`, which states an indefinite card's order as `4` and as `aleph0` — and
+`python -m pytest tests/test_records.py -q`: 16 passed in 581.67s, which is the card-admission
+path the odd-order refusal lives in.
+
+including `tests/test_genus.py:594` `test_certification_stores_an_indefinite_card_automorphism_generators`,
 which runs `certify` for the generator field on a copy of U and checks that the stored generators are
 isometries spanning a group of order $|O(U)| = 4$.
 
@@ -152,13 +166,40 @@ No `applies` assertion for a `definite`-block field on an indefinite card surviv
 The body's **Fix** also says to delete the domain cases from `applies`, not only the definiteness
 cases. Five of them remain, each answering from the owner's stated domain:
 
-- `src/latticedb/genus.py:200-203` rank ≥ 3 for `reflective`, `spinor_regular`, `spinor_genus_count`, `spinor_genera`
-- `src/latticedb/genus.py:204-207` rank ≥ 2 for `siegel_eisenstein_coefficients`
-- `src/latticedb/genus.py:208-209` a definite even card for `discriminant_sequence`
-- `src/latticedb/genus.py:210-211` an even card of hyperbolic index ≥ 2 for `discriminant_orbits`
-- `src/latticedb/genus.py:191-199` `|det L| ≤ 4096` for `discriminant_form`
+- `src/latticedb/genus.py:201-204` rank ≥ 3 for `reflective`, `spinor_regular`, `spinor_genus_count`, `spinor_genera`
+- `src/latticedb/genus.py:205-208` rank ≥ 2 for `siegel_eisenstein_coefficients`
+- `src/latticedb/genus.py:209-210` a definite even card for `discriminant_sequence`
+- `src/latticedb/genus.py:211-212` an even card of hyperbolic index ≥ 2 for `discriminant_orbits`
+- `src/latticedb/genus.py:192-200` `|det L| ≤ 4096` for `discriminant_form`
 
 They are not touched here: no acceptance item asks for them, and deleting them makes every
 rank-2 card raise four owner errors per run (the failure `36221922f9` was written to repair, and
 the four raises above show what a raise costs a worker). Removing them is a corpus-wide cost change
 that wants a measured run, not a silent edit.
+
+### Measured: deleting them works, and then every certify job fails
+
+Deleting the five cases was tried and reverted. On A2 (`0012`, definite, rank 2) the queue then
+carries `spinor_genera`, `spinor_genus_count`, `discriminant_orbits` and, in the searches phase,
+`spinor_regular`, and the owner refuses each in its own words:
+
+    Error: the spinor-genus count of Genus of even integral lattices of signature (2, 0) and
+    determinant 3 is taken here in rank at least three, and the rank is 2
+    Error: spinor genera of Integral lattice of rank 2 and signature (2, 0) require a
+    nondegenerate lattice of finite rank at least three
+
+the second raised at `sage_extensions/categories/lattices.py:6729` through
+`is_spinor_regular` (`:10173`), reached from `src/latticedb/sage_genus.py:210`. Three of them are
+recorded in the copy's failure ledger with `disposition: open` — `0012 definite.spinor_regular`,
+`0012 integral.spinor_genera`, `0012 integral.spinor_genus_count` — which is exactly the triage the
+issue's Fix names.
+
+What stops it being kept: a recorded refusal still ends the run nonzero. `src/latticedb/genus.py:997`
+appends the worker failure and `:1092-1093` raises `ChildProcessError`, and
+`.github/workflows/certify.yml:127` (`*) exit "$status" ;;`) fails the job on every status but 0 and
+124. With the domain cases gone, every certify shard holds rank-2 cards and so fails on every run.
+
+Closing it needs a maintainer decision this session does not hold: whether a refusal the triage has
+recorded with a disposition should end the run nonzero — `genus.certify` reporting recorded refusals
+and exiting 0, or the workflow tolerating that status. Either changes what a red certify run means,
+so the edit was reverted instead of landed; the working tree keeps only this record.

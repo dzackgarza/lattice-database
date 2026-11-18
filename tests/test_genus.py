@@ -217,13 +217,13 @@ def test_an_indefinite_card_requests_its_orbit_rows_and_its_automorphism_generat
     requested = [field for request in genus.requests(corpus.load(tmp_path), held, {}, ("0016",)) for field in request["fields"]]
     assert "derive" not in requested, "a current derivation selects this card's fields, so the queue is the one a run works"
     assert "automorphism_group_generator_morphisms" in requested
+    assert "automorphism_group_order" in requested, "O(U) is finite, and the order is a field of this card"
     assert {field for field in requested if field.startswith("primitive_orbits[")} == {
         genus.orbit_row("primitive_orbits", subgroup) for subgroup in STANDARD_SUBGROUPS
     }
-    # A `definite` field is still withheld from this card, by the schema rather than by an owner
-    # limit: an indefinite card has no `definite` block, and `automorphisms` states the generators
-    # of an infinite group and no order.
-    assert "regular" not in requested and "automorphism_group_order" not in requested
+    # `regular` is still withheld from this card, by the schema rather than by an owner limit: an
+    # indefinite card has no `definite` block.
+    assert "regular" not in requested
 
 
 def test_a_field_is_withheld_by_its_block_and_by_the_domain_the_owner_states() -> None:
@@ -488,11 +488,6 @@ def _pool(tmp_path: Path, fields: list[str]) -> list[dict[str, object]]:
 
 def test_a_card_continues_on_a_new_worker_after_one_computation_fails(tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> None:
     monkeypatch.setattr(genus, "WORKER", [sys.executable, str(tmp_path / "worker.py")])
-    # The run's own reserve kill (`genus.computed`, `MEMORY_RESERVE` of the machine's total) would
-    # preempt the failure this test is about on a machine with little memory free, and report it as
-    # "memory exhausted" instead (#29). That kill is the next test's subject; here the reserve is
-    # pinned out of the way so the assertion does not depend on how loaded the runner is.
-    monkeypatch.setattr(genus, "MEMORY_RESERVE", 0.0)
     assert _pool(tmp_path, ["genus_symbol", "raises", "regular"]) == [
         {"tag": "0012", "genus_symbol": True},
         {"tag": "0012", "failed": "exit status 1"},
@@ -516,17 +511,11 @@ def test_the_largest_worker_is_killed_when_memory_runs_low(tmp_path: Path, monke
 def test_a_worker_killed_by_a_signal_is_reported_with_its_signal(tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> None:
     """A container out-of-memory kill reaches the driver as SIGKILL and no traceback (#46)."""
     monkeypatch.setattr(genus, "WORKER", [sys.executable, str(tmp_path / "worker.py")])
-    # Pinned as above: on a loaded runner the run's reserve kill fires first and the worker is
-    # reported as "memory exhausted" with `peak: 0`, not as the signal that ended it (#29).
-    monkeypatch.setattr(genus, "MEMORY_RESERVE", 0.0)
     assert _pool(tmp_path, ["dies"]) == [{"tag": "0012", "failed": "killed by signal 9", "killed": {"by": "signal 9"}}]
 
 
 def test_a_worker_that_fails_before_computing_is_not_replaced(monkeypatch: pytest.MonkeyPatch) -> None:
     monkeypatch.setattr(genus, "WORKER", [sys.executable, "-c", "raise SystemExit(3)"])
-    # Pinned as above: the run's reserve kill would report "memory exhausted" instead of the exit
-    # status this test is about, on a machine with little memory free (#29).
-    monkeypatch.setattr(genus, "MEMORY_RESERVE", 0.0)
     requests: list[genus.Request] = [{"tag": tag, "gram": [[2]], "integral": True, "fields": ["genus_symbol"], "series_bound": 1} for tag in ("0011", "0012")]
     stream = genus.computed(requests, time.time() + 60, 1)
     assert [values for values in stream if "checkpoint" not in values] == [{"tag": "0011", "failed": "exit status 3"}]
@@ -595,7 +584,7 @@ def test_certification_stores_the_exact_two_adic_densities_of_the_sum_of_three_s
 
 
 def test_certification_stores_an_indefinite_card_automorphism_generators(tmp_path: Path) -> None:
-    """#8: U's O(L) is infinite, so its card is asked for the generators alone and certifies them."""
+    """#8: U's card is asked for the order of $O(L)$ and its generators, and certifies both."""
     (tmp_path / "lattices").mkdir()
     shutil.copy(REPOSITORY / corpus.FAMILIES_FILE, tmp_path / corpus.FAMILIES_FILE)
     (tmp_path / corpus.RETIRED_FILE).write_text("{}\n")
@@ -630,10 +619,14 @@ def test_certification_stores_an_indefinite_card_automorphism_generators(tmp_pat
     loaded = corpus.load(tmp_path)
     # U is even and unimodular, so its discriminant form is trivial but stated: |O(q)| = 1, one
     # isotropic class and one orbit. The card does not state it, so certify asks for it.
-    assert [field for request in genus.requests(loaded, held, {}, ("0016",)) for field in request["fields"]] == ["automorphism_group_generator_morphisms", "discriminant_form"]
-    genus.certify(tmp_path, loaded, held, ("0016",), time.time() + 120)
+    assert [field for request in genus.requests(loaded, held, {}, ("0016",)) for field in request["fields"]] == [
+        "automorphism_group_order",
+        "automorphism_group_generator_morphisms",
+        "discriminant_form",
+    ]
+    genus.certify(tmp_path, loaded, held, ("0016",), time.time() + 240)
     card = corpus.front_matter(corpus.read_card(path))
-    # The group is stated by generators alone: no order field, and no `definite` block.
+    # The group is stated in `automorphisms`: its order, which is finite for U, and its generators.
     assert "definite" not in card
     certified = Lattice.model_validate(card)
     assert certified.automorphisms is not None
@@ -666,14 +659,13 @@ def test_certification_stores_an_indefinite_card_automorphism_generators(tmp_pat
                 generated.add(key)
                 frontier.append(image)
     assert len(generated) == 4, f"the stored generators span a group of order {len(generated)}, not |O(U)| = 4"
-    assert "automorphism_group_order" not in card["automorphisms"]
+    # The order the owner states is the order those generators span, and it is certified with them.
+    assert card["automorphisms"]["automorphism_group_order"] == 4
+    assert genus.name("0016", "automorphism_group_order", "indefinite") in certificates.load(tmp_path)
     assert genus.name("0016", "automorphism_group_generator_morphisms", "indefinite") in certificates.load(tmp_path)
 
 
-def test_certification_keeps_a_root_lattice_integer_valued(tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> None:
-    # Pinned as above: on a machine with little memory free the run's reserve kill ends the worker
-    # that would have written `integer_valued`, and the read below finds no such field (#29).
-    monkeypatch.setattr(genus, "MEMORY_RESERVE", 0.0)
+def test_certification_keeps_a_root_lattice_integer_valued(tmp_path: Path) -> None:
     # A2 has Gram tensor [[2, -1], [-1, 2]]: every entry is an integer, so its form is integer-valued.
     (tmp_path / "lattices").mkdir()
     shutil.copy(REPOSITORY / corpus.FAMILIES_FILE, tmp_path / corpus.FAMILIES_FILE)
@@ -1092,6 +1084,26 @@ def test_a_computed_generator_is_stored_once_as_a_self_isometry_of_the_lattice(t
     assert genus.certified_value("arithmetic-group.otilde-plus-t-co.generator_morphisms", list(group.data.generator_morphisms or ()), lattice) == [matrix]
 
 
+@pytest.mark.parametrize("slug,expected_count", [("otilde-t-co", 56), ("otilde-plus-t-co", 95)])
+def test_coble_ordinary_group_generator_cards_are_persisted_and_certified(slug: str, expected_count: int) -> None:
+    """Both completed Coble generator computations survive as certified card morphisms."""
+    lattice = Lattice.model_validate(corpus.front_matter(corpus.read_card(REPOSITORY / "lattices/6JRR.md")))
+    group = ArithmeticGroup.model_validate(corpus.front_matter(
+        corpus.read_card(REPOSITORY / "arithmetic-groups" / f"{slug}.md")
+    ))
+    names = list(group.data.generator_morphisms or ())
+    assert len(names) == expected_count
+    assert len(set(names)) == expected_count
+    values = genus.certified_value(f"arithmetic-group.{slug}.generator_morphisms", names, lattice)
+    assert len(values) == expected_count
+    computation = genus.name("6JRR", f"arithmetic-group.{slug}.generator_morphisms", lattice.definiteness)
+    digest = certificates.certification_hash(computation, lattice, values)
+    held = certificates.load(REPOSITORY, ("6JRR",))
+    assert certificates.is_certified(
+        held, computation, lattice.certifications.get(f"arithmetic-group.{slug}.generator_morphisms"), digest
+    )
+
+
 def test_a_stated_arithmetic_group_value_without_its_computation_is_a_verification_problem(tmp_path: Path) -> None:
     """A group card states what a completed computation returned, or it states nothing."""
     root = coble_corpus(tmp_path)
@@ -1124,3 +1136,22 @@ def test_the_arithmetic_group_index_is_the_order_of_the_finite_character_image()
         group = sage_genus._standard_subgroup(lattice, standard)
         assert int(group.index()) == cosets
         assert sage_genus._arithmetic_group_value(group, "index_in_orthogonal_group") == cosets
+
+
+def test_a_local_density_prints_the_text_a_fraction_rejects() -> None:
+    """#4: the value `_local_densities` receives prints `(3)/(2)`, stated on the owner's own object.
+
+    The end-to-end test above states the value the card stores; this states the premise, so item 2
+    cannot pass silently when the preamble's printing changes. It sits at the end of the file, after
+    every test that starts a certify worker, because it loads the preamble into this process and a
+    worker started afterwards has less memory and time to run in.
+    """
+    from sage_extensions.categories.lattices import Lattices
+    from sage_extensions.rings import ZZ as owned_integers
+
+    card = frontmatter.load(str(REPOSITORY / "lattices" / "0022.md")).metadata
+    density = Lattices(owned_integers)(card["gram_tensor"]).genus().local_density(2, 1)
+    assert str(density) == "(3)/(2)"
+    with pytest.raises(ValueError):
+        Fraction(str(density))
+    assert sage_genus._rational(density) == "3/2"

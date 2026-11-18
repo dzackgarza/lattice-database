@@ -145,12 +145,31 @@ assertion: no test in the file asserts the reserve's message except the one that
 - `tests/validation/test_construction.py` was still running (20 minutes, no test reported) when the
   sweep was stopped by hand; not measured.
 
-**The run itself.** The `tests` workflow is `schedule` and `workflow_dispatch` only and this connection
-cannot dispatch, so the end-to-end decision is the next scheduled run. The last one is `44077175689`
-(schedule, 2026-11-17T11:47:31Z, head `4c92ce1f89`), red at step 7 ("Run every lattice database
-test…") and step 9 ("Validate preamble owner contracts"). Its log needs an authenticated fetch, so the
-cause of that red is not read here; it is not the crash, because that commit already carried
-`tests/test_bulk_sources.py:16` and the fast Hoehn–Mason path, both measured green above.
+**The run itself.** The `tests` workflow is `schedule` and `workflow_dispatch` only
+(`.github/workflows/tests.yml:2-5`) and this connection has no dispatch, so the end-to-end decision is
+the next scheduled run. The last `tests` run is `44077175689` (schedule, 2026-11-17T11:47:31Z, head
+`4c92ce1f89`), red at step 7 ("Run every lattice database test…") and step 9 ("Validate preamble owner
+contracts").
+
+On the pushed commit `86bc85f9d4` there is no `tests` run; the only runs on it are `pages`
+(`44251285303`, cancelled by its own concurrency group) and **Certification regression tests**
+(`44251285213`, push, 2026-11-18T06:26:00Z, **failure**), whose single suite step runs
+`.github/workflows/certification-tests.yml:34-39`:
+
+    tests/test_genus.py tests/test_failures.py tests/test_persist.py tests/test_corpus.py
+
+in one process, in 22m42s (06:27:40-06:50:22), on the same image and the same collector as the `tests`
+workflow. Its failure is not this change's: every run of that workflow on 2026-11-18 is red — the
+twelve newest are `44206527418`, `44206530392`, `44217873313`, `44221212515` (cancelled),
+`44235241685`, `44243823221`, `44245524701`, `44246820134`, `44247491925`, `44247706774`,
+`44251285213`, and one still running — across commits `39f5a36843` to `86bc85f9d4`, several of them
+older than the pins above installed here today.
+
+What that run failed on cannot be read from this connection: the run has **0 artifacts**, the job log
+(`/actions/jobs/{id}/logs`) answers **403** anonymously, and its check-run annotations carry only the
+exit status (`Process completed with exit code 1`, step 5). Reading it needs `actions: read` on the
+repository; making the `tests` workflow itself run needs `actions: write` (dispatch). Neither is held
+here, so neither the cause of that red nor item 1's end-to-end decision is decided in this file.
 
 ## 2. The Hoehn–Mason tests run in the time of an ordinary unit test
 

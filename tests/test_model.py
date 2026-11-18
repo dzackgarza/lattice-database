@@ -90,19 +90,25 @@ def test_definite_group_generators_name_scale_one_self_morphisms() -> None:
         Lattice.model_validate(bad)
 
 
-def test_an_indefinite_card_states_its_generators_and_no_order() -> None:
-    """The block of an infinite $O(L)$: generators that name self-isometries, and no order field."""
+def test_an_indefinite_card_states_its_generators_and_its_order() -> None:
+    """The block of an indefinite $O(L)$: the order, finite or `aleph0`, and generators that name self-isometries."""
     record = u()
     swap, minus = [[0, 1], [1, 0]], [[-1, 0], [0, -1]]
     record["morphisms"] = [
         {"target": "0016", "name": "the swap", "matrix": swap, "scale": 1},
         {"target": "0016", "name": "minus the identity", "matrix": minus, "scale": 1},
     ]
-    record["automorphisms"] = {"automorphism_group_generator_morphisms": ["the swap", "minus the identity"]}
+    record["automorphisms"] = {"automorphism_group_order": 4, "automorphism_group_generator_morphisms": ["the swap", "minus the identity"]}
     lattice = Lattice.model_validate(record)
     assert lattice.automorphisms is not None
     assert lattice.automorphisms.automorphism_group_generator_morphisms == ("the swap", "minus the identity")
-    assert "automorphism_group_order" not in type(lattice.automorphisms).model_fields
+    assert lattice.automorphisms.automorphism_group_order == 4
+
+    # |O(U)| is finite, and the order of an indefinite lattice where it is not is the owner's
+    # countably infinite cardinal, which the schema states as `aleph0`.
+    infinite = record | {"automorphisms": {"automorphism_group_order": "aleph0"}}
+    validated = Lattice.model_validate(infinite)
+    assert validated.automorphisms is not None and validated.automorphisms.automorphism_group_order == "aleph0"
 
     missing = record | {"automorphisms": {"automorphism_group_generator_morphisms": ["missing"]}}
     with pytest.raises(ValidationError, match="each generator name occurs once"):
