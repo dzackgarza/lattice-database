@@ -67,6 +67,15 @@ part of the run's API response, so the next scheduled run's per-shard peaks are 
 log is not. Test: `tests/test_verification.py:62`, which asserts the notice under Actions and its
 absence without.
 
+**That channel is still unproven in this repository.** No run here carries a step-emitted
+annotation: the annotations of run `44079044175`'s failing certify jobs, and of runs `44051874247`
+and `44031688787`, are the runner's own (`Process completed with exit code …`, the Node 20 warning,
+the ubuntu-latest notice). `.github/workflows/certify.yml:176` and `certify-searches.yml:127` do
+emit `::error::`, but the step that emits it never reached them — those jobs ended at exit 125 and
+exit 1 first. The `::notice` line is emitted correctly and GitHub's syntax is documented, yet this
+repository has not shown it captured, which is the reason the number itself belongs in the file,
+where no runner is needed to read it.
+
 **The number itself** is a comment in the workflow, recorded from run `42844490886` with its
 provenance and with the 403 that stopped it being re-read from the logs:
 
