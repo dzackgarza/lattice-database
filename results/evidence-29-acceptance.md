@@ -171,6 +171,48 @@ exit status (`Process completed with exit code 1`, step 5). Reading it needs `ac
 repository; making the `tests` workflow itself run needs `actions: write` (dispatch). Neither is held
 here, so neither the cause of that red nor item 1's end-to-end decision is decided in this file.
 
+## 1b. The suite step must terminate: a per-test ceiling, thread method
+
+Run `44268649907` (`workflow_dispatch`, head `3e233c6c9b`, 2026-11-18T08:37:49Z — `main`, with both of
+this issue's commits as ancestors) entered step 7, "Run every lattice database test, including Sage
+sessions and source intake", at 08:46:53Z and **was still inside it 88 minutes later** with steps 8–10
+`pending`; it was cancelled at 10:08:38Z having produced no verdict. A step that never returns is the
+same defect class as the segfault this issue names — the run does not terminate — and it leaves item 1
+with nothing to read.
+
+**Repair** (`pyproject.toml`, `[tool.pytest.ini_options]`): every test is bounded.
+
+    timeout = 1800
+    timeout_method = "thread"
+
+and `pytest-timeout>=2.4` is now declared in this repository's own `dev` group; before this it reached
+the image only through `research`'s dev group, so nothing here said the option was supported.
+
+*Why the thread method.* The signal method raises inside the test, which only helps code that returns
+to Python — the case that hangs is a call that never does (Sage/FLINT/pari inside a worker). The thread
+method cannot interrupt either, but on the ceiling it dumps every thread's stack and ends the run, so
+the log carries the test that hung, by name, and the step ends inside its budget instead of being
+killed by the job timeout with no output.
+
+Proven on a test that never returns, ceiling 5 s:
+
+    $ pytest -q --timeout=5 --timeout-method=thread .scratch/test_hang_demo.py
+    +++++++++++++++++++++++++++++++++++ Timeout ++++++++++++++++++++++++++++++++++++
+    ...
+      File "/repo/.scratch/test_hang_demo.py", line 5, in test_this_one_never_returns
+        time.sleep(600)
+    +++++++++++++++++++++++++++++++++++ Timeout ++++++++++++++++++++++++++++++++++++
+    EXIT=1
+
+`results/probe-29-timeout-demo.log`. The ceiling does not disturb the selection: `--collect-only` on
+`tests/test_card_merge.py` collects 5 tests with no "Unknown config option" warning.
+
+*Why 1800 s.* Above the slowest legitimate test measured on this tree (1343 s,
+`tests/test_verify_recovery.py`, on a loaded 4-core VM with other projects holding ~6 GiB) and 30
+minutes, far inside the step's `timeout-minutes: 350`. A segfault needs no ceiling to be named: pytest
+enables `faulthandler`, and the crash this issue opened with was reported that way — `File
+"/repo/tests/test_bulk_sources.py", line 17 in test_nipp_tables_preserve_the_source_discriminants_and_group_orders`.
+
 ## 2. The Hoehn–Mason tests run in the time of an ordinary unit test
 
 The 70 minutes were one owner call: `hoehn_mason.automorphisms` (`src/latticedb/hoehn_mason.py:195`)
