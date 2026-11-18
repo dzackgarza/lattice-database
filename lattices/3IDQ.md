@@ -12,12 +12,13 @@ certifications:
   integral.spinor_genus_count: 7f996c9da6bb99946f2fa0143406bab08ebd2d5e9227f0c25b6914ad784c2c5d
   integral.spinor_genera: b76f532d73c0628902aade1814c6652a9941a8d384126b25e82adeed716b48a6
   integral.hyperbolic_index: 1d44c98878dfc83e099c4c4fd2a1119b9191a8520cac592e7f819d7c11fa84f5
-  automorphisms.automorphism_group_generator_morphisms: 9a490ac97fc507c6536c42391621b3e26bb4e99d6e26d6e65ff27cedd176a0f3
+  automorphisms.automorphism_group_generator_morphisms: fc2df9b582ae6bf68af8cedd86eb94994148b3c994d6c3350e61ad974684cf24
   integral.primitive_orbits: 6300a72c22eec6ec9cef8d71fe88fb7149fe523d4a402ab2940e42b66579eff7
   integral.modular_scale: ed75e561a2e56a81b9d12f23b189cbe515019c133958ce92e621d859757f28a5
   integral.anisotropic_primes: 72c828ddac3d98c5b22d7882973a668e1170e9e63b26e7a9ea63c0f7301a6d89
   integral.local_representations: 8a2926609f6e0b9af4b6a345c944837d6cfb01ba87cad5661e1d6a5755c06ae6
   integral.local_densities: 1e535f915c4a766ad0f1d576fdcdcb00eba125916493b69d29af9df284d8624a
+  automorphisms.automorphism_group_order: 5cde09c097f5bb88868575f528d9b9ae843ac694f3a0717691ce9cbdbdcae10d
 rank: 3
 gram_tensor:
 - [1, 0, 0]
@@ -104,7 +105,8 @@ integral:
   - prime: 3
     densities: [2/3, 2/3, 4/3, 2/3, 2/3, 2, 2/3, 2/3, 14/9, 2/3, 2/3, 4/3]
 automorphisms:
-  automorphism_group_generator_morphisms: [O(L) generator 1, O(L) generator 2, O(L) generator 3, O(L) generator 4]
+  automorphism_group_order: aleph0
+  automorphism_group_generator_morphisms: ['O(L) generator 1 #2', 'O(L) generator 2 #2', 'O(L) generator 3 #2', O(L) generator 4]
 indefinite:
   isotropic: true
 morphisms:
@@ -135,6 +137,27 @@ morphisms:
   - [-1, 0, 0]
   - [0, -1, 0]
   - [0, 0, -1]
+  scale: 1
+- target: 3IDQ
+  name: 'O(L) generator 1 #2'
+  matrix:
+  - [1, 0, 0]
+  - [0, -1, 0]
+  - [0, -1, 1]
+  scale: 1
+- target: 3IDQ
+  name: 'O(L) generator 2 #2'
+  matrix:
+  - [1, 0, 0]
+  - [0, 2, -3]
+  - [0, 1, -1]
+  scale: 1
+- target: 3IDQ
+  name: 'O(L) generator 3 #2'
+  matrix:
+  - [7, 12, -24]
+  - [0, 1, 0]
+  - [2, 4, -7]
   scale: 1
 related:
 - tag: '0001'
