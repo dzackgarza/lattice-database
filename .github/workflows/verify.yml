@@ -103,7 +103,7 @@ jobs:
           # The command reports `memory: ... peak for this process` before it refuses its problems,
           # so this shard's log carries the ceiling the shard needed.
           docker exec -i --workdir "$GITHUB_WORKSPACE" \
-            --env "PYTHONPATH=$GITHUB_WORKSPACE/research/src:$GITHUB_WORKSPACE/src" \
+            --env "PYTHONPATH=$GITHUB_WORKSPACE/research/src:$GITHUB_WORKSPACE/src:/repos/sage-extensions/src" \
             sage-env /sage/.venv/bin/python -m latticedb verify --shard "${{ matrix.shard }}/$SHARDS"
       - name: Stop the Sage environment
         if: always()
