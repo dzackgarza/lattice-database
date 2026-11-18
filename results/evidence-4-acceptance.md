@@ -181,3 +181,23 @@ test passes — `tests/test_genus.py::test_certification_stores_an_indefinite_ca
 
 The same binding was used to re-check this unit's two acceptance tests at the pushed revisions rather
 than in the working tree: `2 passed, 48 deselected in 21.56s`.
+
+## The removed test's subject: the owner refuses, so this stops at sage-extensions#597
+
+The generating family that test wanted is #7's clause, and the owner's answer is a refusal rather than a
+computation. Asked on the card's own Gram tensor, `lattice.stable_orthogonal_group_generators()` raises
+in 0.2 s (`results/evidence-4-generators-597.log`, probe `results/probe-4-597.py`):
+
+> no published generation statement gives a finite generating set of the stable orthogonal group of
+> Integral lattice of rank 11 and signature (2, 9). Allcock's theorem 1.1 … is stated for
+> Lambda(2) = U(2) + E8(-2), rank 10, signature (1,9), |A_L| = 1024 (card 0125); this lattice has
+> rank 11, signature (2, 9), even True, 2-elementary True, |A_L| = 2048, rank_2 = 0 and rank_3 = 11.
+> Kneser's generation theorem … needs rank_2 >= 6, and Gritsenko–Hulek–Sankaran's proposition 3.4 …
+> needs two hyperbolic planes … The remaining route the library can state is the Schreier family over a
+> transversal of O(A_L) …
+
+So no database change supplies it. What is missing is a generation statement for a rank-11, level-two
+congruence subgroup with $\mathrm{rank}_2 = 0$, and that is filed as
+dzackgarza/sage-extensions#597. Making one up here would be the two things the corpus forbids: asserting
+a family the owner refused, or enumerating 46,998,591,897,600 cosets, which `otilde-t-co.md:21` records as
+not returning in 600 s. That is where this stops.
