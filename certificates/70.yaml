@@ -55,6 +55,17 @@
 0013 root_span.roots:
   hash: 23b0fe21eec989827fb2864aea4544379c0ea104c1cd453ebd13467397e975fa
   by: research preamble
+029J arithmetic-group.gamma-en-2.index_in_orthogonal_group:
+  hash: 41ae84a7a265c27c7252d0d625ad1b97e07e6db6aafef8552944909736785143
+  by: 'H. Sterk, "Compactifications of the period space of Enriques surfaces, Part
+    I", Math. Z. 207 (1991), 1-36, Remark 2.12, p. 8: [O(L_-):Gamma] = (2^21 3^5 5^2
+    7 17 31)/(2 2^13 3^5 5^2 7) = 2^7 17 31 = 67456, Gamma being the image in O(L_-)
+    of the isometries of the K3 lattice that commute with the Enriques involution
+    and fix the polarization, identified with the congruence condition of Proposition
+    2.7, pp. 6-7. The number is reproduced by results/certify-43-gamma-en2-index.py,
+    which returns the same index from the library (`group.index()`, sage-extensions
+    d667a7c, research ec1333eeb0) on an ambient lattice whose Gram tensor is card
+    029J''s'
 029J derive:
   hash: 17f85cdd20480fe26d5dccf2d491a7b504e5cfead34c5e13268ba610f8e00348
   by: research preamble

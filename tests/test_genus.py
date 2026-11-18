@@ -37,7 +37,8 @@ def without(tag: str, definiteness: str, metadata: dict, held: certificates.Cert
     """Remove `fields` from a copied card and from `held`, so the test states its own missing values.
 
     The corpus is certified by CI, so a field a card lacks today it holds tomorrow: 0016 now states
-    `integral.primitive_orbits`, `integral.discriminant_form` and its automorphism generators, and
+    `integral.primitive_orbits`, `integral.discriminant_form`, its automorphism generators and its
+    automorphism group order, and
     0012 states its discriminant form. A test whose subject is "a missing field is requested and
     certified" must create that missing field, or it silently stops exercising certification. The
     field is given as its stored path, `<block>.<name>`; its value, its citation and its held
@@ -640,7 +641,16 @@ def test_certification_stores_an_indefinite_card_automorphism_generators(tmp_pat
     metadata["certifications"] = citations
     # The corpus certifies both fields this test is about, so the test removes them from its own copy:
     # the generators and the discriminant form are the two it asks certify to compute.
-    without("0016", "indefinite", metadata, held, "integral.discriminant_form", "automorphisms.automorphism_group_generator_morphisms")
+    without(
+        "0016",
+        "indefinite",
+        metadata,
+        held,
+        "integral.discriminant_form",
+        "automorphisms.automorphism_group_generator_morphisms",
+        # `8474ec98` certified the order on card 0016, so the test creates the missing value it asks for.
+        "automorphisms.automorphism_group_order",
+    )
     path.write_text(records.record_text(metadata, document.content))
     loaded = corpus.load(tmp_path)
     # U is even and unimodular, so its discriminant form is trivial but stated: |O(q)| = 1, one
@@ -1161,6 +1171,33 @@ def test_the_arithmetic_group_index_is_the_order_of_the_finite_character_image()
         group = sage_genus._standard_subgroup(lattice, standard)
         assert int(group.index()) == cosets
         assert sage_genus._arithmetic_group_value(group, "index_in_orthogonal_group") == cosets
+
+
+def test_the_enriques_group_states_the_index_its_certificate_establishes() -> None:
+    r"""#43: card 029J's `gamma-en-2` index is established, not merely stated.
+
+    `genus.arithmetic_requests` cannot ask the owner for this one: the group is defined by a source,
+    has no `standard_name`, and "has no owner operation that presents it" (`genus.py:293`), so
+    `certify` never requests it while `checks.records.arithmetic_problems` reports a stated value
+    nothing establishes. The value is the library's own answer --- the index in $O(T_{\mathrm{En}})$
+    of the coinvariant extension subgroup of the Enriques involution --- and
+    `results/certify-43-gamma-en2-index.py` is the computation that returns it, with the certificate's
+    hash committing to the index and to this card's Gram tensor. This test states that the card and
+    the certificate still agree, so a changed value must bring a new hash.
+    """
+    root = Path(__file__).resolve().parent.parent
+    held = certificates.load(root, tags=("029J",))
+    loaded = corpus.cards(root, ("029J",))
+    entry = next(entry for entry in loaded.entries if entry.lattice.tag == "029J")
+    assert checks.records.arithmetic_problems(loaded, held, entry) == []
+    group = next(card.value for card in loaded.arithmetic_groups if card.value.slug == "gamma-en-2")
+    assert group.data.index_in_orthogonal_group == 67456
+    field = "arithmetic-group.gamma-en-2.index_in_orthogonal_group"
+    computation = genus.name("029J", field, entry.lattice.definiteness)
+    certificate = held[computation]
+    assert entry.lattice.certifications[field] == certificate.hash
+    assert certificate.by is not None
+    assert "Remark 2.12, p. 8" in certificate.by and "2^7 17 31" in certificate.by
 
 
 def test_a_local_density_prints_the_text_a_fraction_rejects() -> None:
