@@ -20785,6 +20785,9 @@
 2N06 integral.anisotropic_primes:
   hash: 8618fca3dc0e822a5c949e140ac8f9245bd701e9eb733e65c6681fc3e20093ed
   by: research preamble
+2N06 integral.discriminant_sequence:
+  hash: 4c6328c5e8c4c3671361137a08eaeada351e7b9d1d03ca6452e6a46effc9a6fb
+  by: research preamble
 2N06 integral.elementary_primes:
   hash: 90d46a6b991a0c732cc12edb5fe2f785c19d1ae5ac4bc76f5022503db239f55d
   by: research preamble
@@ -20842,6 +20845,9 @@
 2N41 integral.anisotropic_primes:
   hash: 6dbd3d27c5c883db9ade6f7a2fc9a1aa2e040e97935f1e96e0d413e948b4736c
   by: research preamble
+2N41 integral.discriminant_sequence:
+  hash: 96405e25d62bd1b0a57e790a3a0cd7a520e116e6fc0382641447123331e1f449
+  by: research preamble
 2N41 integral.elementary_primes:
   hash: c57a2f6890600dfe87237d283ff51e780efa3d108280733bd58a8a2d76684503
   by: research preamble
@@ -20898,6 +20904,9 @@
   by: research preamble
 2NDJ integral.anisotropic_primes:
   hash: beb7e7a6fc094c32a9150ef504450bbb643baf823bf8fdab31ea2d68ae1a8196
+  by: research preamble
+2NDJ integral.discriminant_sequence:
+  hash: f965460e9ab11c674d3d355fd4b935b4cd73064a0bb144047734b16b4b692e88
   by: research preamble
 2NDJ integral.elementary_primes:
   hash: 48ee2c0a0a0a39886d1f895c4ef83cc1c241abcc02832adaf44426bd5f9ef2d9
@@ -22461,6 +22470,9 @@
 2QV0 integral.discriminant_form:
   hash: fb1390392f9788ef9a2918ef27a3bbfa95a55367dd136a9c12f6faed1fbfc8ec
   by: research preamble
+2QV0 integral.discriminant_orbits:
+  hash: accb286fd7f73661ec59622f27338f983d504ec563fca06074b69be67a3b309b
+  by: research preamble
 2QV0 integral.discriminant_sequence:
   hash: 40110d1b1c6eef866859170d041bff5f88289c472c826212d713a33d397b7917
   by: research preamble
@@ -22508,27 +22520,13 @@
   by: research preamble
 2QVW definite.regular:
   hash: 09daaea1336c556dd6e9d3cc080ec3d12b9e6e40724323ef9ab20e42c8c52009
-  by: 'W. C. Jagy, I. Kaplansky and A. Schiemann, There are 913 regular ternary forms,
-    Mathematika 44 (1997), 332-341, form 700, as tabulated in A. G. Doyle, B. Muskat,
-    K. Pehlivan and K. S. Williams, Positive integers represented by regular primitive
-    positive-definite integral ternary quadratic forms, Integers 19 (2019), #A45,
-    Tables 1 and 2; regular by W. C. Jagy, I. Kaplansky and A. Schiemann, There are
-    913 regular ternary forms, Mathematika 44 (1997), 332-341.'
+  by: research preamble
 2QVW definite.siegel_eisenstein_coefficients:
   hash: cc6947587fbe0686a70cc32b1f3433f6238b1b63796f16229464a4feff3848f9
   by: research preamble
 2QVW definite.spinor_regular:
   hash: 64ab44e91bcbebee53e7c1088b031ce3a2be833a6a793f215f92b96c4d3b2f4e
-  by: 'W. C. Jagy, I. Kaplansky and A. Schiemann, There are 913 regular ternary forms,
-    Mathematika 44 (1997), 332-341, form 700, as tabulated in A. G. Doyle, B. Muskat,
-    K. Pehlivan and K. S. Williams, Positive integers represented by regular primitive
-    positive-definite integral ternary quadratic forms, Integers 19 (2019), #A45,
-    Tables 1 and 2; regular by W. C. Jagy, I. Kaplansky and A. Schiemann, There are
-    913 regular ternary forms, Mathematika 44 (1997), 332-341; hence spinor regular,
-    since a form is spinor regular if it represents all the positive integers represented
-    by its spinor genus (A. G. Earnest and A. Haensch, Completeness of the list of
-    spinor regular ternary quadratic forms, arXiv:1711.05811v2 (2018), Abstract) and
-    the spinor genus lies in the genus.'
+  by: research preamble
 2QVW definite.theta_series_cuspidal_component:
   hash: 8ed7ca95ee7e216d2db9ed74909fadb947247e50efd2b21f70d090253c5ee4a6
   by: research preamble
@@ -22543,6 +22541,9 @@
   by: research preamble
 2QVW integral.discriminant_form:
   hash: fdbb7facb40f72ba77918a4908618ecbf58074f426d9e0d4f578320f1781c54f
+  by: research preamble
+2QVW integral.discriminant_orbits:
+  hash: 715c83000c860cdcb4496d5454ef062a0d15c90c503dcab652c5878e89e73c97
   by: research preamble
 2QVW integral.discriminant_sequence:
   hash: cb8cf91ac4d95227b7fe7c592d980b07f979ea27104a65a8d99a3278ca50f4e8

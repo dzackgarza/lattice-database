@@ -12,12 +12,13 @@ certifications:
   integral.spinor_genus_count: 5dcae05ae38a95be0fa035bfb3614ec807daeab1cc64b620a27c9bea3cd9d789
   integral.spinor_genera: 3dff3bdf2f572ba77ce0210b500ec38554e776e334698fe7f1861e2a16ebfcf4
   integral.hyperbolic_index: b6062ba2057b78427172a8a2fd5e120258c17b506fdcb549649da6252afa26fa
-  automorphisms.automorphism_group_generator_morphisms: 3d771956cc435832403ce1cd781dea55075f7883b9c7e3166b75e67876eba61e
+  automorphisms.automorphism_group_generator_morphisms: ddf629e4e28503afcb5e4361d049b899b283c2783640c527e520223925172926
   integral.primitive_orbits: b9af8d6b865e4297d518cb471289339d8477ca3b6ec743c163acad256a59011c
   integral.modular_scale: dbfec2af7cd2b872618769322f226ab579555aa458a29e25fd70c8816a631791
   integral.anisotropic_primes: f959c2b1e91358f576e33c2d84c5e1f8de44e6d1458dfb90d45e8f2d809edcad
   integral.local_representations: 9074b35a351eda94dd836f29ce7b99b363317dafe1a38af01c2a89b09f637fe3
   integral.local_densities: 3637e023704dcdc30830ebeeb426744f59e51bcd752186b843005ef4571192ef
+  automorphisms.automorphism_group_order: 60f9dea84584c1564cc6f170421a4728377ca3be06a906df6eeb71b9b1d1166c
 rank: 3
 gram_tensor:
 - [-1, 0, 0]
@@ -104,7 +105,8 @@ integral:
   - prime: 3
     densities: [2/3, 2/3, 2, 2/3, 2/3, 4/3, 2/3, 2/3, 14/9, 2/3, 2/3, 2]
 automorphisms:
-  automorphism_group_generator_morphisms: [O(L) generator 1, O(L) generator 2, O(L) generator 3, O(L) generator 4]
+  automorphism_group_order: aleph0
+  automorphism_group_generator_morphisms: ['O(L) generator 1 #2', 'O(L) generator 2 #2', 'O(L) generator 3 #2', O(L) generator 4]
 indefinite:
   isotropic: true
 morphisms:
@@ -135,6 +137,27 @@ morphisms:
   - [-1, 0, 0]
   - [0, -1, 0]
   - [0, 0, -1]
+  scale: 1
+- target: 3IEC
+  name: 'O(L) generator 1 #2'
+  matrix:
+  - [1, 0, 0]
+  - [0, -1, 0]
+  - [0, -1, 1]
+  scale: 1
+- target: 3IEC
+  name: 'O(L) generator 2 #2'
+  matrix:
+  - [1, 0, 0]
+  - [0, -1, 3]
+  - [0, -1, 2]
+  scale: 1
+- target: 3IEC
+  name: 'O(L) generator 3 #2'
+  matrix:
+  - [7, 12, -24]
+  - [0, 1, 0]
+  - [2, 4, -7]
   scale: 1
 related:
 - tag: 3ICW
