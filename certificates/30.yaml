@@ -18772,6 +18772,9 @@
 2MU3 integral.anisotropic_primes:
   hash: 1e8fb1cdbb574737dfd01667f39a594b4e25272bf4b441e38ce16c95fdc871a0
   by: research preamble
+2MU3 integral.discriminant_sequence:
+  hash: 4d882e19213bdf9fdb7a5dca4502a23c7c6e779e6dc609af77e472158281eedf
+  by: research preamble
 2MU3 integral.elementary_primes:
   hash: 548c3b9021ce96f8f92e1f39a443fe52de01b319b8248be1770007e9b94984e7
   by: research preamble
@@ -18828,6 +18831,9 @@
   by: research preamble
 2MV7 integral.anisotropic_primes:
   hash: 33c90f4ad159bbfdc1388e526970d77b831e99d04ecebd35121effe5349f1ee8
+  by: research preamble
+2MV7 integral.discriminant_sequence:
+  hash: d4bcfb6541ea53053d95b17886ff9afc7e1b82a91eade9dedbc532406c6aa738
   by: research preamble
 2MV7 integral.elementary_primes:
   hash: 78ef11fbf0a0957dbdb45068226b3486639a75d7ca6c78e6094dc61b1bc238d4
@@ -18886,6 +18892,9 @@
 2MWR integral.anisotropic_primes:
   hash: 77fe8554cb61db216038508f68d57efb6f13f2ee74ed5131fb8ecb70734b936e
   by: research preamble
+2MWR integral.discriminant_sequence:
+  hash: 27785058d30cab223e089c4af72516f900779380674318990434db965958fd65
+  by: research preamble
 2MWR integral.elementary_primes:
   hash: 7ea9911cdca5f2728136dd47d45a66945280f186d95ab05bbe83fadeb60efc2e
   by: research preamble
@@ -18942,6 +18951,9 @@
   by: research preamble
 2MZ9 integral.anisotropic_primes:
   hash: 70f23ca0424e5a2ea9022310a31d04299c21d0025d0fb6cb6463dcbc37c5aba7
+  by: research preamble
+2MZ9 integral.discriminant_sequence:
+  hash: 3c19fbac33a910924108238e24d71cc07ade7ef8f1a6e77570748248b4ca78cc
   by: research preamble
 2MZ9 integral.elementary_primes:
   hash: bcf4e063d6465fe0e337fa6dd414ab1b9fd0b65d969da4ae92f7287771996a09
@@ -19000,6 +19012,9 @@
 2MZD integral.anisotropic_primes:
   hash: 0586f1737cd602bc1b18ff3551e364f6d799b7662825eee59884befb8f45606e
   by: research preamble
+2MZD integral.discriminant_sequence:
+  hash: 74684fc98aa60e8ed0bfcaf0d5a0b4e972694656d84c27262870c25bd95153ed
+  by: research preamble
 2MZD integral.elementary_primes:
   hash: e8bebaf61eb1f34810bae11be0ea48566783db689a4e05f4873f3a5c9befb074
   by: research preamble
@@ -19056,6 +19071,9 @@
   by: research preamble
 2N1P integral.anisotropic_primes:
   hash: 5c710d165b04ef8c4bcbde311584816a43574350788ce6e8ee9b91cc3d99b6cd
+  by: research preamble
+2N1P integral.discriminant_sequence:
+  hash: b270bd4c9c9c18fb29e276ded2e7b1fca633a32a462ca7fdf90f068bcae5fcbd
   by: research preamble
 2N1P integral.elementary_primes:
   hash: 1de9edb936217d28cbab1e4beccd89be8b4dd5e1b578d55571a3cf2f57192d73
@@ -19114,6 +19132,9 @@
 2N64 integral.anisotropic_primes:
   hash: 9af593cd8d6952d869bd3220d7c4eec3a2e53912664349a8c86bdb48e15d92ad
   by: research preamble
+2N64 integral.discriminant_sequence:
+  hash: 47a9376065ff287cba35733e80ed6656fb0eac34561173f70f61f7a51bfe003b
+  by: research preamble
 2N64 integral.elementary_primes:
   hash: a506f61c0abf51eaa70f007b8f6f197e2b4e4420dadde4ac030e8f0f89bfeca2
   by: research preamble
@@ -19170,6 +19191,9 @@
   by: research preamble
 2NAP integral.anisotropic_primes:
   hash: f22c3dcc2e0d0f9dd2ec9c775450958ae0457dcbd87ca5221840de44c956a9a3
+  by: research preamble
+2NAP integral.discriminant_sequence:
+  hash: 56e09e9fd7f8545ccb61ef0876a0a65fdb310e9f70fb69d51a427d72f414043c
   by: research preamble
 2NAP integral.elementary_primes:
   hash: 26d21fe5cde06a0b881501f140afd5e34d7ca986c09a1e8141e78ea498f35d1e
@@ -20199,6 +20223,9 @@
   by: research preamble
 2QWW integral.discriminant_form:
   hash: 87202e346ba4fdcc3dd6c4940543795752fe89c733768a6f97ae610b4be659f6
+  by: research preamble
+2QWW integral.discriminant_orbits:
+  hash: a566a4549fd02f910da3920cbbe35dc12f995eae0c88112af70a240e75e90b37
   by: research preamble
 2QWW integral.discriminant_sequence:
   hash: cd680602385442dda91bb8d258eb1bb581eb87f8d02eed81a84a7bcbe9c2f8c1
@@ -27432,6 +27459,12 @@
 3F9X integral.anisotropic_primes:
   hash: 296187c7dbe03caaa44d371d96c6848d00fe2bc843580087fcf29ef404c8f7cb
   by: research preamble
+3F9X integral.discriminant_form:
+  hash: cc3a52d9cca43445f8508927b0df2bd5c6de24d63b3a0403764d7d5b9034b8c6
+  by: research preamble
+3F9X integral.discriminant_orbits:
+  hash: 67c069cce2f65a58e58b989a050f1503176ac0c1558545cc8c2280cb34897b97
+  by: research preamble
 3F9X integral.discriminant_sequence:
   hash: d37225128c837f5583a9c8282ecb0a442f91823d866e293116f70599d563bd1a
   by: research preamble
@@ -27651,6 +27684,9 @@
 3GB8 integral.anisotropic_primes:
   hash: 6c628bb71d0993f9d0c1f96d3533dff06638b114be20327b2d3b29ee8aee407b
   by: research preamble
+3GB8 integral.discriminant_sequence:
+  hash: 6d4c1f6540ec5210e1876102dc479f7194ce348568dcf4771638b3bd45e3365d
+  by: research preamble
 3GB8 integral.elementary_primes:
   hash: b6b36dc9ef8ca0202154da9f46375a0b2d6299638007f13e46e29e45f657c6b4
   by: research preamble
@@ -27760,6 +27796,9 @@
   by: research preamble
 3IDY automorphisms.automorphism_group_generator_morphisms:
   hash: aa366503879218a74275043fef4d974936b5cf27f8671dad91879f9cd8e83afd
+  by: research preamble
+3IDY automorphisms.automorphism_group_order:
+  hash: 03f79692b4fefd3f055479a577f3636cb1f6788ec3d0b6d7d2fa48e334f485a9
   by: research preamble
 3IDY derive:
   hash: 8f95996fd866bd79e871f68a6b77067f7e1b01f5dab3f3258131f06fdfa30c00
