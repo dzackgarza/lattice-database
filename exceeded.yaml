@@ -489,6 +489,9 @@
   hash: 52f2df5d3e50422e9094aaba642361454f3f0553243c3e075e8ffa9f8b70baec
   seconds: 6
   lost: true
+0OTR integral.discriminant_form:
+  hash: e0298c563c8fe791cfe501315d29a76ec9cb42202794e7691eadb73effc061f0
+  seconds: 5
 0PDI integral.discriminant_form:
   hash: 721243039dbc88c969b949f6205bccf432459c7dc343430aa6037ddff9c34a4f
   seconds: 0
@@ -776,12 +779,12 @@
   hash: acd15b0ade4de3b1c874f94bf7a5e62f816c4f781d3cb9fb40337e357f3360f3
   seconds: 0
   lost: true
-2PZC integral.discriminant_orbits:
-  hash: 5427d6aa1ee2b8a258ce8691367cac6fe8a53b41e62340c70c5d04492252677d
-  seconds: 0
-  lost: true
 2Q1K integral.discriminant_form:
   hash: 665a8c413a3337cabec1dcf6e6aa6e5b78299b9f94359ca3987eba54a86fd117
+  seconds: 0
+  lost: true
+2QS8 integral.discriminant_orbits:
+  hash: 542bd10547bd2c04a80ccc7a088d6d001219e08ddf61d45642e4024250f58454
   seconds: 0
   lost: true
 2RSZ integral.discriminant_form:
@@ -870,6 +873,9 @@
 3A94 integral.discriminant_form:
   hash: f67d224f1bb506f3f63b0cfc87bfaa6e86bd55a2a115019e957b0259fd6ea829
   seconds: 14
+3BAL integral.discriminant_form:
+  hash: 309e2199653ba0aba2b81cd0ae6936c32a672c770fccea7858c123fc07ff85cd
+  seconds: 5
 3BV3 definite.siegel_eisenstein_coefficients:
   hash: 4be43fed87facb172ca082e1bbd69e4a81eca70025fe243420745dac788d942a
   seconds: 12
@@ -1061,9 +1067,6 @@
   hash: 75b98a72eb3d3314b6fd55e345ca2d1ed9bc31c3e559ecc31215d5b9823c122a
   seconds: 8
   lost: true
-3GEV integral.discriminant_sequence:
-  hash: 12edd0a7086edebc9ba93e7ecfaec5d69fbc849b0a4bbe44917cfe89bad2ea35
-  seconds: 1994
 3GGB integral.discriminant_sequence:
   hash: e3f836ce32c283cc217c60ddc784040bfd323e06388ae09ef1dcb3e6b895db28
   seconds: 5377
