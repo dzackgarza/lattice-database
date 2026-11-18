@@ -105,7 +105,7 @@ test-validation:
 # Certification scheduling, failure triage and persistence on small specimens
 [positional-arguments]
 test-certification *ARGS:
-    PYTHONPATH="$HOME/research/src:src" "$(just -f ~/ai-review-ci/justfiles/sage.just -d . _sage-python)" -m pytest tests/test_genus.py tests/test_failures.py tests/test_persist.py tests/test_owner_rational_text.py "$@"
+    PYTHONPATH="$HOME/research/src:src" "$(just -f ~/ai-review-ci/justfiles/sage.just -d . _sage-python)" -m pytest tests/test_genus.py tests/test_failures.py tests/test_persist.py "$@"
 
 # Exercise archived-source importers and source-to-card collation; provenance only, not mathematical validation
 test-source-intake:

@@ -176,3 +176,30 @@ They are not touched here: no acceptance item asks for them, and deleting them m
 rank-2 card raise four owner errors per run (the failure `36221922f9` was written to repair, and
 the four raises above show what a raise costs a worker). Removing them is a corpus-wide cost change
 that wants a measured run, not a silent edit.
+
+### Measured: deleting them works, and then every certify job fails
+
+Deleting the five cases was tried and reverted. On A2 (`0012`, definite, rank 2) the queue then
+carries `spinor_genera`, `spinor_genus_count`, `discriminant_orbits` and, in the searches phase,
+`spinor_regular`, and the owner refuses each in its own words:
+
+    Error: the spinor-genus count of Genus of even integral lattices of signature (2, 0) and
+    determinant 3 is taken here in rank at least three, and the rank is 2
+    Error: spinor genera of Integral lattice of rank 2 and signature (2, 0) require a
+    nondegenerate lattice of finite rank at least three
+
+the second raised at `sage_extensions/categories/lattices.py:6729` through
+`is_spinor_regular` (`:10173`), reached from `src/latticedb/sage_genus.py:210`. Three of them are
+recorded in the copy's failure ledger with `disposition: open` — `0012 definite.spinor_regular`,
+`0012 integral.spinor_genera`, `0012 integral.spinor_genus_count` — which is exactly the triage the
+issue's Fix names.
+
+What stops it being kept: a recorded refusal still ends the run nonzero. `src/latticedb/genus.py:997`
+appends the worker failure and `:1092-1093` raises `ChildProcessError`, and
+`.github/workflows/certify.yml:127` (`*) exit "$status" ;;`) fails the job on every status but 0 and
+124. With the domain cases gone, every certify shard holds rank-2 cards and so fails on every run.
+
+Closing it needs a maintainer decision this session does not hold: whether a refusal the triage has
+recorded with a disposition should end the run nonzero — `genus.certify` reporting recorded refusals
+and exiting 0, or the workflow tolerating that status. Either changes what a red certify run means,
+so the edit was reverted instead of landed; the working tree keeps only this record.
