@@ -20,7 +20,7 @@ $(-2)$-walls.
 | --- | --- | --- | --- |
 | (4.3.7) p.22 | $\alpha_9$, $\alpha_{13}$ | different | no word within depth 12 |
 | (4.3.8) p.23 | $\alpha_9$, $\alpha_{11}$ | different | no word within depth 12 |
-| (4.3.9) p.24 | $\alpha_{11}$, $\alpha_{12}$, $\alpha_{13}$, $\alpha_{14}$ | different, every pair | the walk was still running at the time of writing; the invariant is what decides the claim, and the test below asserts it for all six pairs |
+| (4.3.9) p.24 | $\alpha_{11}$, $\alpha_{12}$, $\alpha_{13}$, $\alpha_{14}$ | different, every pair | no word within depth 12, each of the three pairs from $\alpha_{11}$ |
 
 The search is complete at each depth it reaches — it walks the orbit of one class, so the whole ball is enumerated,
 and the ball is a few hundred classes at depth 12 — and the diagram invariant says why no greater depth can help:
