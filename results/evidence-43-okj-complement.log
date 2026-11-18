@@ -1,0 +1,13 @@
+  4.3.5 p.19  det K_J -1024  no root class: no row
+  4.3.6 p.21  det K_J  -256  root classes 1  complement det 512  deltas [1]
+        genus of each complement: [(-7, 512, [Genus symbol at 2:    [2^9]_1])]
+        classes in each genus [1]  distinct genera 1  -> O(K_J)-orbits on the row: one, all 1 classes O(K_J)-equivalent
+  4.3.7 p.22  det K_J  -256  root classes 2  complement det 512  deltas [1, 1]
+        genus of each complement: [(-7, 512, [Genus symbol at 2:    [2^9]_1]), (-7, 512, [Genus symbol at 2:    [2^9]_1])]
+        classes in each genus [1, 1]  distinct genera 1  -> O(K_J)-orbits on the row: one, all 2 classes O(K_J)-equivalent
+  4.3.8 p.23  det K_J  -256  root classes 2  complement det 512  deltas [1, 1]
+        genus of each complement: [(-7, 512, [Genus symbol at 2:    [2^9]_1]), (-7, 512, [Genus symbol at 2:    [2^9]_1])]
+        classes in each genus [1, 1]  distinct genera 1  -> O(K_J)-orbits on the row: one, all 2 classes O(K_J)-equivalent
+  4.3.9 p.24  det K_J  -256  root classes 4  complement det 512  deltas [1, 1, 1, 1]
+        genus of each complement: [(-7, 512, [Genus symbol at 2:    [2^9]_1]), (-7, 512, [Genus symbol at 2:    [2^9]_1]), (-7, 512, [Genus symbol at 2:    [2^9]_1]), (-7, 512, [Genus symbol at 2:    [2^9]_1])]
+        classes in each genus [1, 1, 1, 1]  distinct genera 1  -> O(K_J)-orbits on the row: one, all 4 classes O(K_J)-equivalent
