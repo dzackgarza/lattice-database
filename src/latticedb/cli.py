@@ -329,10 +329,12 @@ def verify(
         print("\n".join(invalid.problems), file=sys.stderr)
         print(f"{len(invalid.problems)} problems", file=sys.stderr)
         sys.exit(1)
-    # Each verification process reports the peak memory it needed. This one's peak is
-    # that ceiling when it verified a single shard; it is reported before the run
-    # refuses its problems, so a run that finds one still records what it needed.
-    print(f"memory: {checks.peak()} peak for this process", flush=True)
+    # Each verification process reports the peak memory it needed, and, when it verified one
+    # shard, that shard and how many cards it read: a run's log then says which cards were
+    # verified and what they cost. It is reported before the run refuses its problems, so a
+    # shard that finds one still records both (#6).
+    held = "" if selected is None else f" for {verified} cards in shard {selected[0]}/{selected[1]}"
+    print(f"memory: {checks.peak()} peak{held}", flush=True)
     _refuse(problems)
     print(f"{verified} lattice cards structurally verified")
 
