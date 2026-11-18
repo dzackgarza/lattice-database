@@ -78,10 +78,16 @@ env:
 ```
 
 That comment is `results/verify-peak-annotation.patch`; `git apply --check` succeeds against
-`.github/workflows/verify.yml` on `main`. It travels as a patch because pushes that carry a
-`.github/workflows` change have not landed through this connection: `8055ad42a7` removes exactly such
-a change from `main`, and the same change arrives later as `70eedd9d65`, authored by the owner rather
-than by the connection's identity.
+`.github/workflows/verify.yml` on `main`. Pushing it is refused, not merely unusual: commit
+`b1f516379f` carried it and GitHub answered
+
+    remote rejected (refusing to allow a GitHub App to create or update workflow
+    `.github/workflows/verify.yml` without `workflows` permission)
+
+which is why the same kind of change sits on `main` as `70eedd9d65`, authored by the owner rather
+than by this connection. No person-approved site token for GitHub exists in this environment
+(`platform_request` lists no sites), so the comment lands only through a credential carrying
+`workflows` permission: the owner's own push, or that permission granted to the App installation.
 
 ## The ceiling has no scaling law, so none is offered
 
