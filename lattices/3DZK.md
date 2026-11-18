@@ -25,6 +25,7 @@ certifications:
   integral.local_representations: f30f2bd8ee275945f73818a13e38ebac2027ec47306f10a72224ffe6c8523b5e
   integral.local_densities: 9601cf35ba3144964727c7a4cd833491908cd243c319064ae44757295a67a53f
   integral.discriminant_form: d05443b5c411d6b3c0fe99d970ac1852acc46f8c93be030d2e449ed582b2f576
+  integral.discriminant_orbits: 84038924b14b19bea6ddb7a7914fa23e4bd8be15fb6df7e3a904a90259b0b601
 rank: 3
 gram_tensor:
 - [2, 1, 1]
@@ -118,6 +119,39 @@ integral:
     orthogonal_group_order: 8
     isotropic_classes: 2
     isotropic_orbits: 2
+  discriminant_orbits:
+    Otilde:
+      constant: 2
+      z: [0, 1, 0, 1]
+      w: [0, 1, 0, 1]
+    SOtilde:
+      constant: 2
+      z: [0, 1, 0, 1]
+      w: [0, 1, 0, 1]
+    Otilde+:
+      constant: 2
+      z: [0, 1, 0, 1]
+      w: [0, 1, 0, 1]
+    SOtilde+:
+      constant: 2
+      z: [0, 1, 0, 1]
+      w: [0, 1, 0, 1]
+    O:
+      constant: 2
+      z: [0, 1, 0, 1]
+      w: [0, 1, 0, 1]
+    SO:
+      constant: 2
+      z: [0, 1, 0, 1]
+      w: [0, 1, 0, 1]
+    O+:
+      constant: 2
+      z: [0, 1, 0, 1]
+      w: [0, 1, 0, 1]
+    SO+:
+      constant: 2
+      z: [0, 1, 0, 1]
+      w: [0, 1, 0, 1]
   anisotropic_primes: [41]
   local_representations:
   - prime: 2
