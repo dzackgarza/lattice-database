@@ -60,7 +60,7 @@ The 50 unreadable Gram sections are the exact failure of this item, with its lin
 - 9 print a matrix program rather than components (`B45`, `P60q`, `dim52min5`, `dim56min6`, `dim68min6`,
   `mcc`, `((5+sqrt(5))/2)*P48n`, `(4+sqrt(5))*P48n`, `Z2P48n`): `components` reads those rows at
   `src/latticedb/nebe_sloane.py:124-131` and only `GRAM_MATRIX` gets the Maple reader
-  (`src/latticedb/nebe_sloane.py:197`).
+  (`src/latticedb/nebe_sloane.py:198`).
 - 16 sections hold a token `Decimal` refuses (`KAPPA10`, `36MIN3`, `dim11kis308.std` … `dim15kis1872.std`).
 - 2 fit neither layout (`E7*`, `OBW16*`): the count assert at `src/latticedb/nebe_sloane.py:130`.
 
@@ -139,7 +139,7 @@ a certificate for `definite.automorphism_group_order` and `lattices/0110.md:59` 
 (`src/latticedb/invariant_models.py:964`) and `certify` asks for it (`README.md:225`).
 
 One more gap with a line: `stored()` writes a transcription from the archive when the archive is present and
-from the network otherwise (`src/latticedb/nebe_sloane.py:202-209`); 41 of the 45 stored entries are page-sourced
+from the network otherwise (`src/latticedb/nebe_sloane.py:202-210`); 41 of the 45 stored entries are page-sourced
 (`url` ends `.html`), and `stored_problems` returns early for those (`src/latticedb/nebe_sloane.py:250`). So the
 only source↔card agreement check in the module **never runs for the 41 entries transcribed from entry pages**, which
 are exactly the Lambda, Kappa, Niemeier and BW16 cards this epic is about.
@@ -184,7 +184,7 @@ one agreement mechanism it has is scoped to the four archive-sourced cards. An e
 - `archive_entry` reads `DETERMINANT` when `DET` is absent (`src/latticedb/nebe_sloane.py:186`), which `fetch`
   already did at `src/latticedb/nebe_sloane.py:154`; 465 of 823 rows now yield a determinant instead of 434.
 
-Tests: `tests/source_intake/test_nebe_sloane_source.py:63-110` (12 printed forms, the disagreement refusal, one
+Tests: `tests/source_intake/test_nebe_sloane_source.py:47-110` (12 printed forms, the disagreement refusal, one
 synthetic archive read, and the negative `stored_problems` case). `pytest tests/source_intake/test_nebe_sloane_source.py`
 → 19 passed; `pytest tests/test_bulk_sources.py` → 8 passed, in the research image with a current
 `sage-extensions` bound over `/repos/sage-extensions`.
