@@ -499,6 +499,9 @@
   hash: e75904bde8ae71175b947e54e046fc2e518c21d801f3a97a4a74324f0bf14e5a
   seconds: 0
   lost: true
+0R9U integral.discriminant_form:
+  hash: 3992a41007619ddd0b037a61095fb0fff2115f2a4bee93e162b5b8d1872ccc5f
+  seconds: 7
 0RVY integral.elementary_primes:
   hash: 811175d5f9f1d0b028f2eb38f41a5672d3bdc0e8d0fb282d3f26fc4769b8f652
   seconds: 0
@@ -947,10 +950,6 @@
   hash: a1a21c7d432841ff722fe5ffd231b018bf36dcfeba5a21670dd8235e1a3a893d
   seconds: 5
   lost: true
-3F15 integral.spinor_genera:
-  hash: ad024e85f033a1f8d7ac9676efe803117ff00d62884c5035b71316576d880fab
-  seconds: 0
-  lost: true
 3F22 integral.spinor_genera:
   hash: 55dc185aba7071aac90d79d3c0922c0c148a00a62a9349e546382c1a64630b51
   seconds: 0
@@ -994,6 +993,10 @@
 3F9X integral.overlattice_count:
   hash: ab37867b5589db0dec799d09c2f601ff6c6e178a7b0257e006ebdbf42cc1ee75
   seconds: 10
+  lost: true
+3FMH integral.spinor_genus_count:
+  hash: c133282cfdd69d37fdc4d121a982caded70e8fe842f3696f14bf50a9146183f4
+  seconds: 0
   lost: true
 3FMP integral.overlattice_count:
   hash: 93eff831ad0264a91d19a54c9e0288e80a41d054f0582f6a37d6e9a608ed2262
