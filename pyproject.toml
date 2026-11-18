@@ -32,6 +32,7 @@ allow-direct-references = true
 [dependency-groups]
 dev = [
     "pytest>=8",
+    "pytest-timeout>=2.4",
     "types-PyYAML>=6",
 ]
 
@@ -39,6 +40,16 @@ dev = [
 testpaths = ["tests"]
 # Keep diagnostics from evaluating representations of lazy preamble objects.
 addopts = "--tb=short"
+# A test that never returns holds the whole `tests` step and reports nothing: run 44268649907 sat 88
+# minutes inside step 7 ("Run every lattice database test…") and reached no verdict (#29), which is the
+# same failure as the segfault this issue names -- the run does not terminate. So every test is bounded.
+# The thread method is the one that helps here: it cannot interrupt a call that never returns to
+# Python, so on the ceiling it dumps every thread's stack and ends the run, leaving the test that hung
+# in the log by name; the signal method can only raise into code that is still running Python.
+# 1800 s is 30 minutes: above the slowest legitimate test measured on this tree (1343 s for
+# tests/test_verify_recovery.py, on a loaded 4-core VM) and far inside the step's 350-minute budget.
+timeout = 1800
+timeout_method = "thread"
 
 # Project category providers are the research preamble consumed by lookup.sage.
 [tool.sage-mypy-category-plugin]
