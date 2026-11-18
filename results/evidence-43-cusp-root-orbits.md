@@ -74,3 +74,24 @@ the number of $\Gamma_v$-orbits is at least the number of $O(K_J)$-orbits on the
 components the certified family gives, so a genus-level invariant that separates two root classes (the genus of
 $r^\perp$ in $K_J$) closes the gap whenever the two numbers meet. That is a new computation in the preamble, not a
 card edit, and it is not what this change does.
+
+## The fields page renders the new row
+
+`tests/validation/test_build.py` builds the whole site from the whole corpus (~10 min and several GiB), and in this
+VM it was killed before its summary line. The one code path this change feeds there is the fields page's model list,
+`site.fields()` -> `templates/fields.html.j2`, and that renders on its own, in 5.8 s, with the environment `site.build`
+sets up (in the pinned image):
+
+```
+cusp_root_orbits True
+orbits True
+orbit_count True
+representative False
+classes False
+transporter_order False
+```
+
+The three `True` are the fields of the row this change adds; the three `False` are the fields of the nested
+`RootClassOrbit`, which the page does not list — as it does not list `ChamberWall`'s `name` and `vector` for a
+`cusp_chambers` row. `test_the_fields_page_documents_every_field_of_a_record` walks the models `site.fields()`
+yields, so it sees the row's fields and not the nested record's, and each of them is on the page.
