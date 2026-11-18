@@ -1,95 +1,75 @@
-# #40: lifts of Sterk's discriminant stabilizer as self-isometries of card 0125
+# #40: the nine members that generate H <= G_e, and the call that returns them
 
 Source of the group: H. Sterk, *Compactifications of the period space of Enriques surfaces, Part I*,
 Math. Z. 207 (1991), 1–36, (4.3.5), p. 19: `G_e = {g in O(M(2)) : the induced map on M(2)*/M(2)
 respects the decomposition}`, with `M(2) = U(2) + E8(-2)` the card of `0125`. In the owner's terms
-`sage-extensions`#354 gives `G_e = rho_L^{-1}(P)`, `P = Stab_{O(A_L)}(A_U(2))`.
+`sage-extensions`#354 gives `G_e = rho_L^{-1}(P)`, `P = Stab_{O(A_L)}(A_U(2))`, and the call the issue
+names is `L.Aut().discriminant_point_stabilizer_image_generators(A_U(2))`.
 
-## The greedy subfamily call does not return here: five runs
+## The call returns: nine members, 93 s (sage-extensions#459)
 
-`L.Aut().discriminant_point_stabilizer_image_generators(A_U(2))` is the call that returns the
-nine members named in the issue. On the stored Gram tensor of `0125`, at sage-extensions
-`2fb37d5a717fac890e9cbf239f63d3a97f487040` (origin/main, 2026-11-17), it was run seven times:
+At sage-extensions `b501886b` — `origin/main` after #459 closed — the call returns on the stored Gram
+tensor of `0125`:
 
-| run | reached the family | ended at | peak RSS | result |
+| What | Value |
+| --- | --- |
+| members returned | **9** |
+| time to the members | 93 s |
+| peak resident, whole run | 1 175 MiB (1 009 MiB at the members) |
+| `|O(A_L)|` | 46998591897600 |
+| `|orbit(A_U(2))|` = `[O(A_L) : P]` | 67456 |
+| `|P|` = `|O(A_L)|/|orbit|` = engine stabilizer order = `2 * 348364800` | 696729600 |
+| `|`images of the nine`|` | 696729600 |
+
+Each member was checked to lie in `rho_L^-1(P)` and to preserve the four classes of `A_U(2)` under the
+preimage's own morphism; each matrix is integral, unimodular and satisfies `M^t G M = G`.
+
+`T_Co`'s call was measured by the owner at 11 members in 231.2 s with the same image order, which is
+the scale this agrees with.
+
+## Why it needed #459: seven runs at `2fb37d5a717`
+
+At the previous revision the same call never returned, and `discriminant_point_stabilizer` did:
+the table records what each run reached and how it ended.
+
+| run | reached the preimage | ended at | peak RSS | result |
 | --- | --- | --- | --- | --- |
 | A | 256.5 s | 1075 s | 2.37 GiB | exit 0, no value, no traceback |
 | B | 100.9 s | 845 s | 2.35 GiB | exit 0, no value, no traceback |
 | C | 508.6 s | 2600 s | 2.55 GiB | exit 0, no value, no traceback |
-| D (`.scratch/nine-40.py`, the run of 2026-11-18 04:43) | — | 1404 s | 2.29 GiB | exit 0, no value, no traceback |
-| probe | — | still running at the 900 s cap | 2.37 GiB | killed by the run's own limit |
-| E (`.scratch/nine-scan.py`, the run of 2026-11-18 05:47, the loop copied out with progress lines) | did not finish building the family | stopped at 2662 s | 2.51 GiB | no value; `MemAvailable` fell from 4306 to 1270 MiB |
-| F (`.scratch/nine-40.py`, the run of 2026-11-18 07:20, started in a 5.3 GiB window) | did not return | ended at the 5 400 s cap | 3.26 GiB | no value; `MemAvailable` between 1080 and 6960 MiB, so not a kill |
+| D | 100.9 s | 1404 s | 2.29 GiB | exit 0, no value, no traceback |
+| probe | — | still running at a 900 s cap | 2.37 GiB | killed by the run's own limit |
+| E (the loop copied out with progress lines) | — | stopped at 2662 s | 2.51 GiB | no value; the line after `preimage.group_generators()` never printed |
+| F | — | ended at a 5400 s cap | 3.26 GiB | no value; `MemAvailable` between 1080 and 6960 MiB, so not a kill |
 
-In the pinned revision the loop is `src/sage_extensions/categories/lattice_morphisms.py:4047-4056`,
-over the family built at `:4041` from the preimage at `:4040`: the run returns at `:4056` when the
-images' subgroup order reaches `|P|`, and otherwise raises at `:4057` after the last member. A run
-that ends without a value raises nothing, so no traceback names a line; the location recorded here
-is the loop the process was in when its status was written.
+In the pinned revision the loop was `src/sage_extensions/categories/lattice_morphisms.py:4047-4056`,
+over the family built at `:4041` from the preimage at `:4040`. Run E showed which of the two stages
+carried the cost: the first line after `preimage.group_generators()` (`:4041`) never printed, so the
+Schreier family's construction over the 67 456-point orbit — `15 * 67456 - 67455 = 944385` members —
+was the part that did not return. Run F ruled out a kill: with 4–7 GiB of the host free it kept
+working to the cap.
 
-Run F rules out the memory kill as the only cause. It began in the largest window this host has
-offered (5.3 GiB free), kept 4–7 GiB free through its second half, and grew from 2.4 to 3.26 GiB
-resident while working: it was not killed, and it had still not returned when the 90-minute cap
-ended it. So the call does not need 44.8 s of this machine's time at 2.5 GiB; it needs more than
-90 minutes of a four-core host at ~3 GiB, which is more than this session can hold.
-
-Run E is the one that separates the two stages. It is the owner's own loop copied out with a progress
-line, and the first line it would print after `preimage.group_generators()` (`:4041`) never printed:
-the 2.5 GiB and the time of this call are the Schreier family's construction over the 67 456-point
-orbit, not the selection over it. In runs A–D that construction did return — their stamps after
-`L.Aut().discriminant_point_stabilizer(point)` (`:4040`) show it — and the loop then ran, to 2 600 s
-in C. So the call needs roughly 2.5 GiB resident for its family whether it reaches the loop or not,
-and this host spends most of its time with less than 2 GiB free (`MemAvailable` fell to 1270 MiB
-during E and to 178 MiB during D).
-
-Runs A, B, C, D and the probe were inside the selection loop over the Schreier family, which has
-`15 * 67456 - 67455 = 944385` members; run E never reached the loop. Nothing was written to the card by any of them; the `Morphisms` block and the
-ledger are unchanged by these runs. The host was shared and oversubscribed throughout (load
-average 11–27 on 4 cores, `/proc/vmstat` `oom_kill` 30 since boot), which is what the wall times
-show; the owner measured this call at 44.8 s natively.
-
-So the card does not hold the nine members. It holds the owner's other route to the same
-mathematical content, in three members.
-
-## The route stored: lifts of `P`'s own generators along `rho_L`
-
-`rho_L` is onto `O(A_L)` — `|rho_L(O(L))| = |O(A_L)| = 46998591897600` — so every element of `P` has
-a lift in `O(L)`, and `L.Aut().discriminant_lift(h)` returns one: it factors `h` as a word in the
-images of `O(L)`'s own selected generators and evaluates that word in `O(L)`, then checks the lift
-against `rho_L` and raises rather than return a wrong element.
-
-Measured by `results/generators-40-ge.py` (peak RSS 971 MiB):
-
-| What | Value | Cost |
-| --- | --- | --- |
-| `|O(A_L)|` | 46998591897600 | — |
-| `|P|` = `O(A_L).stabilizer_of_classes(A_U(2)).cardinality()` | 696729600 | 322 s |
-| generators of `P` | 3 | in that call |
-| lifts `L.Aut().discriminant_lift(h)` | 3 | 40 s |
-| `|orbit(A_U(2))|` = `[O(A_L) : P]` | 67456 | — |
-| `|O(A_L)| / 67456` | 696729600 | agrees |
-| `|O(A_U(2))| * |O(A_E8(-2))|` = `2 * 348364800` | 696729600 | agrees |
-| `|`images of the three`|` in `O(A_L)` | 696729600 | subgroup order |
-
-The checks the program makes before it writes: each matrix is integral, unimodular and satisfies
-`M^t G M = G` for the card's stored Gram; each image preserves the set of four classes of
-`A_U(2)`; the images' subgroup has `P`'s order; and that order equals the index–stabilizer quotient
-and the two summands' product, read from the two diagonal blocks of the card's own Gram.
-
-One of the three lifts is the isometry `O(L)` already stores as `O(L) generator 8`, so it is stored
-once and named there; the other two are new entries `H_e generator 1` and `H_e generator 2`.
+#459's repair, at `b501886b`, is the lazy family: `_discriminant_point_orbit_and_section` records the
+orbit and its transversal words and no transition table (the table is one entry per point-letter
+pair, `2.3e7` of them on `T_Co`), and `_discriminant_point_stabilizer_members` evaluates a member's
+letter image when the member asks for it. The family is then as cheap to read a prefix of as the
+selection needs.
 
 ## What is stored where
 
 | What | Where |
 | --- | --- |
-| the three self-isometries | `lattices/0125.md`, `morphisms` entries with `target: '0125'`, `scale: 1` |
-| the subgroup they generate | `arithmetic-groups/h-e.md`: `name: H_e`, `parent_group: g-e`, `data.generator_morphisms` = the three names, prose stating `rho_L(H_e) = P` and that they are not generators of `G_e` |
+| the nine self-isometries | `lattices/0125.md`, `morphisms` entries with `target: '0125'`, `scale: 1` |
+| the subgroup they generate | `arithmetic-groups/h-e.md`: `name: H_e`, `parent_group: g-e`, `data.generator_morphisms` = the nine names, prose stating `rho_L(H_e) = P` and that they are not generators of `G_e` |
 | the card's own statement of it | `lattices/0125.md` prose, and `arithmetic_groups: [o-u2-e8, g-e, h-e]` |
 | the group `G_e`'s naming of them | `arithmetic-groups/g-e.md` prose |
-| the certificate | `certificates/97.yaml`, `0125 arithmetic-group.h-e.generator_morphisms`, hash `109baa7b52f6a78ce3c30bb0f36c91c17ded27c8317c6bdf0d3fb466a2cbbc4a`, whose `by` names the owner revision `2fb37d5a717` and the program; and the same hash cited in `lattices/0125.md` `certifications` |
+| the certificate | `certificates/97.yaml`, `0125 arithmetic-group.h-e.generator_morphisms`, whose `by` names the owner revision `b501886b` and the program; and the hash cited in `lattices/0125.md` `certifications` |
 
-The hash commits to the computation name, the card's Gram tensor and the three matrices sorted
+All nine members turn out to be isometries the card already stored: the family's selected members are
+`O(L) generator 1` … `O(L) generator 8` and `O(L) generator 10`, so each is stored once and the `h-e`
+card names those entries.
+
+The hash commits to the computation name, the card's Gram tensor and the nine matrices sorted
 entrywise, as `genus.certified_value` and `genus._matrix_order` define it — not to the chosen names.
 
 ## Not stored, and why
@@ -104,38 +84,16 @@ entrywise, as `genus.certified_value` and `genus._matrix_order` define it — no
 ## Verification of what is stored
 
 `results/check-40-stored-generators.py` reads the card and the `h-e` card alone, builds each stored
-matrix as a self-isometry and asks the owner for its discriminant action:
-
-```
-3 stored generators, each preserving the four classes of A_U(2)
-|their image subgroup| = 696729600
-|P| = 696729600
-|O(A_L)| = 46998591897600
-```
-
-The repository's gate, in the shared Sage image (`/sage/.venv/bin/python`, `PYTHONPATH` = the
-preamble's `src` and this repository's `src`):
-
-* `pytest tests/test_model.py tests/test_card_merge.py tests/test_ge_generators.py tests/test_catalogue_schemas.py -q`
-  — `101 passed in 84.27s`. `tests/test_ge_generators.py` is this change's own test: it pins the
-  stored names, the relation the subgroup card states, the absent `data.generator_morphisms` on the
-  card of $G_e$, the cited hash against the one the stored matrices recompute, and the provenance
-  naming an owner revision; `just test-validation` runs it.
-* the checks of the four cards the change touches, run on the scoped corpus `corpus.cards(root,
-  ["0125", "0153", "029J", "029L"])` with the `lie-groups` catalogue added, since `checks.one_shard`
-  reads all 302,504 cards (about 7.5 GiB, more than this VM has free):
-  `records.problems(loaded, held, {"0125"})` and `relations.morphism_problems(loaded, {"0125"})`
-  report `[]`, and `catalogues.problems(loaded)` reports `[]`. The 17 self-morphisms of `0125` are
-  checked by the preamble's form-preservation; the `h-e` card's generator names resolve to exactly
-  one `scale: 1` self-morphism each; and the cited hash `109baa7b…c4a` matches the one this card's
-  value recomputes, which is what `checks.records.arithmetic_problems` requires.
+matrix as a self-isometry and asks the owner for its discriminant action; the repository's own checks
+(`results/verify-40-scoped-cards.py`) report no problem for `records`, `morphisms` or `catalogues`;
+and `tests/test_ge_generators.py` pins the same state in the gate.
 
 ## The acceptance, item by item
 
 | Item of the issue | Where it is decided | Verdict |
 | --- | --- | --- |
-| the card stores a generating set of $G_e$ as self-isometries, or — until generators of $\widetilde O(L)$ exist — the subfamily members in a row that names $H$ and states $\rho_L(H) = P$ | `lattices/0125.md` `morphisms`; `arithmetic-groups/h-e.md` | met in its fallback form, with the lifts of $P$'s own generators in place of the nine members, which the owner call does not return here (above) |
-| the `arithmetic-groups/` card of $G_e$ names them | `arithmetic-groups/g-e.md` | met: it names all three and states no `data.generator_morphisms` of its own |
-| it does not name them as generators of $G_e$ | `arithmetic-groups/g-e.md`, `arithmetic-groups/h-e.md` | met: `Parent_group: g-e`, the relation $\rho_L(H_e) = P$, and `data.generator_morphisms is None` on `g-e` |
-| the card certifies the computation, the Gram tensor and the result, with the program revision in `certificates/` | `certificates/97.yaml`, `lattices/0125.md` `certifications` | met: hash over the computation name, the Gram tensor and the sorted matrices, `by` naming sage-extensions `2fb37d5a717` and `results/generators-40-ge.py` |
-| the repository's gate passes | `tests/`, `justfile` | met: `101 passed`; the scoped `records`/`relations`/`catalogues` checks report no problem |
+| the card stores a generating set of $G_e$ as self-isometries, or — until generators of $\\widetilde O(L)$ exist — the nine members in a row that names $H$, stating $\\rho_L(H) = P$ | `lattices/0125.md` `morphisms`; `arithmetic-groups/h-e.md` | met: the nine members of the delivered call |
+| the `arithmetic-groups/` card of $G_e$ names them | `arithmetic-groups/g-e.md` | met |
+| it does not name them as generators of $G_e$ | `arithmetic-groups/g-e.md`, `arithmetic-groups/h-e.md` | met: `parent_group: g-e`, the relation, and no `data.generator_morphisms` on `g-e` |
+| the card certifies the computation, the Gram tensor and the result, with the program revision in `certificates/` | `certificates/97.yaml`, `lattices/0125.md` `certifications` | met |
+| the repository's gate passes | `tests/`, `justfile` | met |
