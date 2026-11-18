@@ -318,8 +318,7 @@
   seconds: 18248
 02JI definite.regular:
   hash: 607797e74ff2116823e8a1dab4ff6f7b703315078b72342b139d09cc2b2fcdab
-  seconds: 17003
-  lost: true
+  seconds: 18251
 02QU definite.regular:
   hash: b87cd54b7165b8b63245895517e87d36f682bcfd9996bd76adc72bca3291a871
   seconds: 6674
@@ -463,6 +462,10 @@
   seconds: 6640
 08CQ integral.discriminant_form:
   hash: d353e24203285835adab6e4c0dfe2f3290f1daff4f09b96d03cd8ffba24df9b4
+  seconds: 0
+  lost: true
+09XM integral.discriminant_form:
+  hash: 80e29420fe8ebc9f3d1c2d690fd7009c662ebb41bc321d0605ef2d0261681376
   seconds: 0
   lost: true
 0EXT integral.primitive_orbits:
@@ -1160,10 +1163,6 @@
 4AQJ integral.hyperbolic_index:
   hash: 9b23c16e246c2344c6c4800e26ad852b6f5427c5e17211267b3f741506b3eebd
   seconds: 107
-  lost: true
-522N integral.hyperbolic_index:
-  hash: 1d017bddb9798941e421c7a93d71c0a82945cac9071f44b28326c6f5e66a3459
-  seconds: 90
   lost: true
 58S6 integral.local_densities:
   hash: e5378e409c24f7701e373876b32586a87eb5a9cf04b7ada7350ac466781f0804
