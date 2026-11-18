@@ -373,6 +373,10 @@
 03EJ definite.regular:
   hash: 7af40f916149e607ecc0c92c685bdf56139cdbf7b5ae4627ebb20ba4f3ef21ce
   seconds: 6618
+03FU integral.discriminant_form:
+  hash: d4567b97a8088b99810fa19a2862bb36de0f7a98620a881a816006eab4722267
+  seconds: 0
+  lost: true
 03IM definite.regular:
   hash: 4de40df77ffd9e2073b0575474729de12b6fb6d4a521740faa519fb7af52b997
   seconds: 6545
@@ -869,10 +873,6 @@
 3BV3 definite.siegel_eisenstein_coefficients:
   hash: 4be43fed87facb172ca082e1bbd69e4a81eca70025fe243420745dac788d942a
   seconds: 12
-  lost: true
-3ELY integral.discriminant_form:
-  hash: 174320c348388619f4477e2f5cce4fc46d1420162200b8d0c4c21e95d67756d9
-  seconds: 0
   lost: true
 3EQJ integral.overlattice_count:
   hash: 52066d7af793638c57d3ece509269d08dd6799446070c618d0cd23ca318c4c3c
