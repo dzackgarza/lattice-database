@@ -629,6 +629,9 @@
   killed_by: memory
   peak_bytes: 13133455360
   limit_bytes: 1675943936
+1CZ4 integral.discriminant_form:
+  hash: d9ace81ff310c9f2d93545001a6c2ebae53abd4735fbdf0278f88049ec4bcdb9
+  seconds: 4
 1DRM integral.genus_class_count:
   hash: b9116a9b09223f453b6990f0efa48f8670ad40d65cb4f5c32b3f8b2cb30e031e
   seconds: 10
@@ -922,6 +925,10 @@
   hash: fce110031073db602b33d438d214af3920d48cdee426ee72e2a9a656b21cd183
   seconds: 25
   lost: true
+3EW9 integral.discriminant_form:
+  hash: e85c62e3807b30892c0ff442950932a46c5d4da7f03fd748a9f4c21b3e82df70
+  seconds: 25
+  lost: true
 3EW9 integral.overlattice_count:
   hash: c8052093d39aea98d382f33e9df6ff7f586d47332485f99f801e293c96a1cd2b
   seconds: 10
@@ -993,10 +1000,6 @@
 3FQ9 integral.overlattice_count:
   hash: 713868d4d89831b73b6548d82c96c6c9ac8ea7d3773b093a672225295c5fa075
   seconds: 26
-  lost: true
-3FRQ integral.spinor_genera:
-  hash: aad7cd5c6b07f118a4431a2076283f7ba85a39a6ae36598857ec677222d3a50b
-  seconds: 0
   lost: true
 3FWV integral.discriminant_orbits:
   hash: 7b00b77934786a90cb3d541372f89183d4a1dcf8a4cdc04e6fa71f4754c332d0
