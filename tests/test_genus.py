@@ -226,31 +226,41 @@ def test_an_indefinite_card_requests_its_orbit_rows_and_its_automorphism_generat
     assert "regular" not in requested
 
 
-def test_a_field_is_withheld_by_its_block_and_by_the_domain_the_owner_states() -> None:
-    """The filters #8 keeps: the block a card cannot carry, and the domain the owner states.
+def test_a_field_is_withheld_by_its_block_and_by_nothing_the_owner_could_answer() -> None:
+    """#8: the database withholds a field by the block the card cannot carry, and by no other rule.
 
-    A2 is definite, even, rank 2; U is indefinite, even, rank 2 with hyperbolic index 1. Spinor
-    genera need rank at least three, the discriminant sequence a definite even card, the
-    discriminant orbits an even card of hyperbolic index at least two, and |A_L| keeps a
-    discriminant form's class partition inside the owner's bound.
+    A2 is definite, even, rank 2; U is indefinite, even, rank 2 with hyperbolic index 1. The
+    owner's own domains — spinor genera of rank at least three, the discriminant sequence of a
+    definite even card, the Eichler hypothesis of the discriminant orbits, the class count of a
+    discriminant form — no longer withhold a request. An operation that refuses the card raises,
+    `failures.record` quarantines that input, and the next run does not ask it again.
     """
     definite = Lattice.model_validate(frontmatter.load(str(REPOSITORY / "lattices" / "0012.md")).metadata)
     indefinite = Lattice.model_validate(frontmatter.load(str(REPOSITORY / "lattices" / "0016.md")).metadata)
-    assert genus.applies("primitive_orbits", definite)
-    assert genus.applies("automorphism_group_generator_morphisms", definite)
-    assert genus.applies("siegel_eisenstein_coefficients", definite)
-    assert genus.applies("discriminant_sequence", definite)
-    assert not genus.applies("spinor_regular", definite), "spinor regularity needs rank at least three"
-    assert not genus.applies("spinor_genus_count", definite), "spinor genera need rank at least three"
-    assert not genus.applies("discriminant_sequence", indefinite), "a definite even card is the domain"
-    assert not genus.applies("discriminant_orbits", indefinite), "hyperbolic index 1 is outside the Eichler hypothesis"
-    assert not genus.applies("roots", definite), "a definite card states its roots in `definite.roots`"
-    assert not genus.applies("cusp_form_coordinates", definite), "the owner does not present it"
-    assert not genus.applies("cusp_root_orbits", definite), "the owner identifies root classes, and its generators are not certified at a line"
+    for field in (
+        "primitive_orbits",
+        "automorphism_group_generator_morphisms",
+        "siegel_eisenstein_coefficients",
+        "discriminant_sequence",
+        "spinor_regular",
+        "spinor_genus_count",
+        "spinor_genera",
+        "discriminant_form",
+    ):
+        assert genus.applies(field, definite), field
+    assert genus.applies("discriminant_sequence", indefinite), "the owner refuses a definite-only operation by raising"
+    assert genus.applies("discriminant_orbits", indefinite), "hyperbolic index 1 is the owner's to refuse"
     assert genus.applies("discriminant_form", indefinite), "the hyperbolic plane's discriminant group is trivial"
-    assert not genus.applies("discriminant_form", Lattice.model_validate(frontmatter.load(str(REPOSITORY / "lattices" / "3F4F.md")).metadata)), "|A_L| = 4323 is above the owner's bound of 4096"
+    assert genus.applies("discriminant_form", Lattice.model_validate(frontmatter.load(str(REPOSITORY / "lattices" / "3F4F.md")).metadata)), "|A_L| = 4323 is a cost of the call, not a block the card lacks"
     assert genus.applies("discriminant_form", Lattice.model_validate(frontmatter.load(str(REPOSITORY / "lattices" / "6JRX.md")).metadata)), "the corrected period lattice of degree 2 has |A_L| = 2"
-    assert genus.applies("discriminant_form", definite), "A_2 has three classes to partition"
+
+    # The database's own facts still withhold: a block this card cannot carry, a field the owner
+    # does not present, and the two orbit fields whose generators are not certified to generate a
+    # cusp stabilizer.
+    assert not genus.applies("roots", definite), "a definite card states its roots in `definite.roots`"
+    assert not genus.applies("regular", indefinite), "an indefinite card has no `definite` block"
+    for field in ("cusp_form_coordinates", "cusp_chambers", "cusp_root_orbits", "polarization_counts"):
+        assert not genus.applies(field, definite), field
 
 
 def test_a_card_without_an_integral_block_requests_no_primitive_orbits() -> None:
@@ -321,16 +331,29 @@ def test_a_certified_value_is_not_requested(tmp_path: Path) -> None:
     assert "genus_class_count" in genus.requests(loaded, held, {}, ("0012",))[0]["fields"]
 
 
-def test_a_definite_binary_lattice_requests_regularity_and_no_spinor_regularity(
+def test_a_definite_binary_lattice_requests_regularity_and_its_spinor_fields(
     tmp_path: Path,
 ) -> None:
+    """#8: a rank-2 definite card is asked for the spinor fields, and a refusal is asked once.
+
+    The owner refuses these on a binary lattice. That refusal is the answer `applies` leaves to
+    it: `failures.record` quarantines the input, and the queue that follows no longer carries it.
+    """
     (tmp_path / "lattices").mkdir()
     shutil.copy(REPOSITORY / corpus.FAMILIES_FILE, tmp_path / corpus.FAMILIES_FILE)
     (tmp_path / corpus.RETIRED_FILE).write_text("{}\n")
     shutil.copy(REPOSITORY / "lattices" / "0012.md", tmp_path / "lattices")
     fields = [field for request in genus.requests(corpus.load(tmp_path), derived(), {}, ()) for field in request["fields"]]
     assert "regular" in fields
-    assert "spinor_regular" not in fields
+    assert "spinor_regular" in fields, "where spinor genera are defined is the owner's answer, not the database's"
+    assert "spinor_genus_count" in fields
+
+    lattice = Lattice.model_validate(corpus.front_matter(corpus.read_card(tmp_path / "lattices" / "0012.md")))
+    quarantined = genus.name("0012", "spinor_genus_count", "definite")
+    failures.record(tmp_path, quarantined, lattice, "the spinor-genus count is taken in rank at least three", "", 1.0)
+    after = [field for request in genus.requests(corpus.load(tmp_path), derived(), {}, (), failed=failures.load(tmp_path)) for field in request["fields"]]
+    assert "spinor_genus_count" not in after, "a recorded refusal is quarantined, so the next run does not ask it again"
+    assert "spinor_regular" in after, "and only that computation is quarantined"
 
 
 def test_a_definite_binary_lattice_requests_its_genus_series_siegel_product_and_local_conditions(
@@ -574,8 +597,9 @@ def test_certification_stores_the_exact_two_adic_densities_of_the_sum_of_three_s
     held = {name: certificates.Certificate.model_validate(value) for name, value in stored.items() if name.startswith("0022 ")}
     del held["0022 integral.local_densities"]
     loaded = corpus.load(tmp_path)
-    assert genus.requests(loaded, held, {}, ("0022",))[0]["fields"] == ["local_densities"]
-    genus.certify(tmp_path, loaded, held, ("0022",), time.time() + 120)
+    # The queue carries every field of an odd ternary card; this test's subject is the density.
+    assert "local_densities" in genus.requests(loaded, held, {}, ("0022",))[0]["fields"]
+    genus.certify(tmp_path, loaded, held, ("0022",), time.time() + 120, fields=("local_densities",))
     # Oracle: the density of t at 2 for x^2 + y^2 + z^2 is #{x in (Z/2^k)^3 : x.x = t mod 2^k} / 2^(2k),
     # counted for k = 6; the count is constant from k = 5 on.
     expected = ["3/2", "3/2", 1, "3/4", "3/2", "3/2", 0, "3/4", "3/2", "3/2", 1, "1/2"]
@@ -619,12 +643,19 @@ def test_certification_stores_an_indefinite_card_automorphism_generators(tmp_pat
     loaded = corpus.load(tmp_path)
     # U is even and unimodular, so its discriminant form is trivial but stated: |O(q)| = 1, one
     # isotropic class and one orbit. The card does not state it, so certify asks for it.
-    assert [field for request in genus.requests(loaded, held, {}, ("0016",)) for field in request["fields"]] == [
+    assert {
         "automorphism_group_order",
         "automorphism_group_generator_morphisms",
         "discriminant_form",
-    ]
-    genus.certify(tmp_path, loaded, held, ("0016",), time.time() + 240)
+    } <= {field for request in genus.requests(loaded, held, {}, ("0016",)) for field in request["fields"]}
+    genus.certify(
+        tmp_path,
+        loaded,
+        held,
+        ("0016",),
+        time.time() + 240,
+        fields=("automorphism_group_order", "automorphism_group_generator_morphisms", "discriminant_form"),
+    )
     card = corpus.front_matter(corpus.read_card(path))
     # The group is stated in `automorphisms`: its order, which is finite for U, and its generators.
     assert "definite" not in card
@@ -665,7 +696,7 @@ def test_certification_stores_an_indefinite_card_automorphism_generators(tmp_pat
     assert genus.name("0016", "automorphism_group_generator_morphisms", "indefinite") in certificates.load(tmp_path)
 
 
-def test_certification_keeps_a_root_lattice_integer_valued(tmp_path: Path) -> None:
+def test_certification_keeps_a_root_lattice_integer_valued(tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> None:
     # A2 has Gram tensor [[2, -1], [-1, 2]]: every entry is an integer, so its form is integer-valued.
     (tmp_path / "lattices").mkdir()
     shutil.copy(REPOSITORY / corpus.FAMILIES_FILE, tmp_path / corpus.FAMILIES_FILE)
@@ -681,8 +712,8 @@ def test_certification_keeps_a_root_lattice_integer_valued(tmp_path: Path) -> No
     path.write_text(records.record_text(corpus.front_matter(document), document.content))
     loaded = corpus.load(tmp_path)
     # A_2 is even with three classes, so its discriminant form's three invariants are asked too.
-    assert genus.requests(loaded, held, {}, ("0012",))[0]["fields"] == ["integer_valued", "discriminant_form"]
-    genus.certify(tmp_path, loaded, held, ("0012",), time.time() + 120)
+    assert {"integer_valued", "discriminant_form"} <= set(genus.requests(loaded, held, {}, ("0012",))[0]["fields"])
+    genus.certify(tmp_path, loaded, held, ("0012",), time.time() + 120, fields=("integer_valued", "discriminant_form"))
     assert frontmatter.load(str(path)).metadata["form"]["integer_valued"] is True
     assert genus.name("0012", "integer_valued") in certificates.load(tmp_path)
 

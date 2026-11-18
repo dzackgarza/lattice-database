@@ -77,7 +77,7 @@ $O(A_L, q_L)$ acts on them, and a card states the number of orbits in `isotropic
 
 `latticedb certify` computes the three from the Gram tensor, at the discriminant quadratic form the owner builds for $L$: its `orthogonal_group().order()`, its `isotropic_elements()`, and its maintained orbit partition `orbits()`.
 $q_L$ is constant on an orbit of $O(A_L, q_L)$, so the orbits of isotropic classes are the orbits of that partition which lie inside the isotropic classes.
-The partition is of the classes of $A_L$ and $q_L$ is a quadratic form only on an even lattice, so the request is made on an even card where there are few classes, $|A_L| = |\det L| \leq 4096$.
+The partition is of the classes of $A_L$ and $q_L$ is a quadratic form only on an even lattice, so the request is made on every even card, whatever the size of $A_L$: the partition is the owner's call, and a card whose classes outrun the job is recorded in `exceeded.yaml`.
 
 ## Two discriminant forms with the same invariant counts {#equal-counts}
 

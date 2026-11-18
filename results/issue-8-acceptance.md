@@ -161,45 +161,39 @@ No `applies` assertion for a `definite`-block field on an indefinite card surviv
 `tests/`: the remaining ones (`tests/test_genus.py:239-253`, `:260`) are on the definite card, on
 `integral`- or `root_span`-block fields, or on a card with no `integral` block.
 
-## Left undone, and why
+## The body's Fix: the domain cases
 
 The body's **Fix** also says to delete the domain cases from `applies`, not only the definiteness
-cases. Five of them remain, each answering from the owner's stated domain:
+cases. The five that remained — rank ≥ 3 for `reflective` and the three spinor fields, rank ≥ 2 for
+`siegel_eisenstein_coefficients`, a definite even card for `discriminant_sequence`, hyperbolic index
+≥ 2 for `discriminant_orbits`, and `|det L| ≤ 4096` for `discriminant_form` — are gone.
 
-- `src/latticedb/genus.py:201-204` rank ≥ 3 for `reflective`, `spinor_regular`, `spinor_genus_count`, `spinor_genera`
-- `src/latticedb/genus.py:205-208` rank ≥ 2 for `siegel_eisenstein_coefficients`
-- `src/latticedb/genus.py:209-210` a definite even card for `discriminant_sequence`
-- `src/latticedb/genus.py:211-212` an even card of hyperbolic index ≥ 2 for `discriminant_orbits`
-- `src/latticedb/genus.py:192-200` `|det L| ≤ 4096` for `discriminant_form`
+### Closed: the domain cases are gone
 
-They are not touched here: no acceptance item asks for them, and deleting them makes every
-rank-2 card raise four owner errors per run (the failure `36221922f9` was written to repair, and
-the four raises above show what a raise costs a worker). Removing them is a corpus-wide cost change
-that wants a measured run, not a silent edit.
+The body's **Fix** also says to delete the domain cases from `applies`, not only the definiteness
+cases. They are deleted — `src/latticedb/genus.py:126` now withholds a field only where the card has
+no block for it, or where the owner presents no such operation.
 
-### Measured: deleting them works, and then every certify job fails
-
-Deleting the five cases was tried and reverted. On A2 (`0012`, definite, rank 2) the queue then
-carries `spinor_genera`, `spinor_genus_count`, `discriminant_orbits` and, in the searches phase,
-`spinor_regular`, and the owner refuses each in its own words:
+Measured on A2 (`0012`, definite, rank 2), whose queue now carries `spinor_genera`,
+`spinor_genus_count`, `discriminant_orbits` and, in the searches phase, `spinor_regular`:
 
     Error: the spinor-genus count of Genus of even integral lattices of signature (2, 0) and
     determinant 3 is taken here in rank at least three, and the rank is 2
     Error: spinor genera of Integral lattice of rank 2 and signature (2, 0) require a
     nondegenerate lattice of finite rank at least three
 
-the second raised at `sage_extensions/categories/lattices.py:6729` through
-`is_spinor_regular` (`:10173`), reached from `src/latticedb/sage_genus.py:210`. Three of them are
-recorded in the copy's failure ledger with `disposition: open` — `0012 definite.spinor_regular`,
-`0012 integral.spinor_genera`, `0012 integral.spinor_genus_count` — which is exactly the triage the
-issue's Fix names.
+the second raised at `sage_extensions/categories/lattices.py:6729` through `is_spinor_regular`
+(`:10173`), reached from `src/latticedb/sage_genus.py:210`. The three refusals are recorded in the
+copy's failure ledger with `disposition: open` — `0012 definite.spinor_regular`,
+`0012 integral.spinor_genera`, `0012 integral.spinor_genus_count` — and the first run ends non-zero at
+`src/latticedb/genus.py:1094`, which is the exit contract README.md:435 already states.
 
-What stops it being kept: a recorded refusal still ends the run nonzero. `src/latticedb/genus.py:997`
-appends the worker failure and `:1092-1093` raises `ChildProcessError`, and
-`.github/workflows/certify.yml:127` (`*) exit "$status" ;;`) fails the job on every status but 0 and
-124. With the domain cases gone, every certify shard holds rank-2 cards and so fails on every run.
+That red is bounded: `failures.blocked` (`src/latticedb/failures.py:97-99`) quarantines a recorded
+refusal, so the *next* run of the same command on the same copy asks nothing and exits 0 (measured:
+empty output, `third run exit=0`, ledger still `disposition: open`). One run per card records a
+refusal; every run after it is green until someone runs `retry-computation`.
 
-Closing it needs a maintainer decision this session does not hold: whether a refusal the triage has
-recorded with a disposition should end the run nonzero — `genus.certify` reporting recorded refusals
-and exiting 0, or the workflow tolerating that status. Either changes what a red certify run means,
-so the edit was reverted instead of landed; the working tree keeps only this record.
+Tests that decide it: `tests/test_genus.py:229` asserts every one of those fields is applied to A2 and
+U and that only the schema facts withhold; `tests/test_genus.py:334` asserts the rank-2 card's queue
+carries `spinor_regular` and `spinor_genus_count`, and that recording a refusal removes exactly that
+computation from the next queue.
