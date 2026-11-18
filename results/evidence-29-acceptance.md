@@ -213,6 +213,23 @@ minutes, far inside the step's `timeout-minutes: 350`. A segfault needs no ceili
 enables `faulthandler`, and the crash this issue opened with was reported that way — `File
 "/repo/tests/test_bulk_sources.py", line 17 in test_nipp_tables_preserve_the_source_discriminants_and_group_orders`.
 
+**What the ceiling catches first on this tree.** The same selection run locally with a 300 s ceiling
+(`--timeout=300 --timeout-method=thread`, `results/probe-29-timeout-sweep.log`) ended 14m26s in and
+named one test:
+
+    File "/repo/tests/test_corpus.py", line 371, in test_the_stored_corpus_loads_through_the_reader_that_every_workflow_starts_with
+      loaded = corpus.load(ROOT)
+    File "/repo/src/latticedb/corpus.py", line 253, in load
+      document = read_card(path)
+    File "/repo/src/latticedb/corpus.py", line 63, in read_card
+      return frontmatter.load(path, handler=_CARD_YAML)
+
+That is the whole-corpus read — 7.29 GiB, measured at 421 s when the VM is quiet — not a hang, and it is
+why the committed ceiling is 1800 s and not the 300 s this probe used: the step's non-termination is
+most plausibly this same memory-bound read thrashing inside a 16 GB runner that already holds the
+suite's other loads, and a ceiling below the read's cost would fail the suite on a slow runner instead
+of naming a hang.
+
 ## 2. The Hoehn–Mason tests run in the time of an ordinary unit test
 
 The 70 minutes were one owner call: `hoehn_mason.automorphisms` (`src/latticedb/hoehn_mason.py:195`)
