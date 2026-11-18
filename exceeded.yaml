@@ -861,9 +861,6 @@
 39OH integral.discriminant_form:
   hash: 88fa1d85aefc75d249d29f31e8c3862aacd1584623e2aa50f88892a5f013e345
   seconds: 237
-3A94 integral.discriminant_form:
-  hash: f67d224f1bb506f3f63b0cfc87bfaa6e86bd55a2a115019e957b0259fd6ea829
-  seconds: 14
 3BV3 definite.siegel_eisenstein_coefficients:
   hash: 4be43fed87facb172ca082e1bbd69e4a81eca70025fe243420745dac788d942a
   seconds: 12
@@ -1002,6 +999,10 @@
   lost: true
 3FU2 integral.discriminant_orbits:
   hash: de83a412e88bad5e51d741ca9ccb7eec10cb7ac9ee6f3aeb0b66a126f85eb74f
+  seconds: 0
+  lost: true
+3FX6 integral.discriminant_sequence:
+  hash: d00f7838fddfa4d2375261533564c11e2373082d6c963958209d7a12382fefc4
   seconds: 0
   lost: true
 3G18 integral.overlattice_count:
