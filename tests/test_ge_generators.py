@@ -125,3 +125,23 @@ def test_every_stored_generator_is_an_isometry_of_the_card() -> None:
         matrix = [[int(entry) for entry in row] for row in morphism.matrix]
         assert _preserves(matrix, gram), f"{morphism.name} does not preserve the form"
         assert abs(_determinant(matrix)) == 1, f"{morphism.name} is not unimodular"
+
+
+def test_the_stated_cardinality_is_the_certified_one() -> None:
+    """The `h-e` card's cardinality is cited on `0125`, and that citation is the certificate's hash.
+
+    The value itself is not asserted here: what the gate can decide without running the computation
+    is that the card cites a completed certificate over the value it states, so a value edited away
+    from its certificate fails here. `results/check-40-h-e-cardinality.py` recomputes the value from
+    the stored matrices and the card's Gram tensor.
+    """
+    card = _lattice()
+    subgroup, _prose = _group(SLUG)
+    field = f"arithmetic-group.{SLUG}.cardinality"
+    computation = genus.name(TAG, field, card.definiteness)
+    value = genus.certified_value(field, subgroup.data.cardinality, card)
+    expected = certificates.certification_hash(computation, card, value)
+    assert card.certifications.get(field) == expected, "the card does not cite the hash of its stated cardinality"
+    held = certificates.load(ROOT, tags=[TAG])
+    assert computation in held and held[computation].hash == expected
+    assert isinstance(subgroup.data.cardinality, int), "the nine stored reflections generate a finite group"

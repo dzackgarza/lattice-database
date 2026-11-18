@@ -63,7 +63,7 @@ selection needs.
 | the subgroup they generate | `arithmetic-groups/h-e.md`: `name: H_e`, `parent_group: g-e`, `data.generator_morphisms` = the nine names, prose stating `rho_L(H_e) = P` and that they are not generators of `G_e` |
 | the card's own statement of it | `lattices/0125.md` prose, and `arithmetic_groups: [o-u2-e8, g-e, h-e]` |
 | the group `G_e`'s naming of them | `arithmetic-groups/g-e.md` prose |
-| the certificate | `certificates/97.yaml`, `0125 arithmetic-group.h-e.generator_morphisms`, whose `by` names the owner revision `b501886b` and the program; and the hash cited in `lattices/0125.md` `certifications` |
+| the certificates | `certificates/97.yaml`, `0125 arithmetic-group.h-e.generator_morphisms`, whose `by` names the owner revision `b501886b` and the program, and `0125 arithmetic-group.h-e.cardinality`; both hashes are cited in `lattices/0125.md` `certifications` |
 
 All nine members turn out to be isometries the card already stored: the family's selected members are
 `O(L) generator 1` … `O(L) generator 8` and `O(L) generator 10`, so each is stored once and the `h-e`
@@ -71,6 +71,38 @@ card names those entries.
 
 The hash commits to the computation name, the card's Gram tensor and the nine matrices sorted
 entrywise, as `genus.certified_value` and `genus._matrix_order` define it — not to the chosen names.
+
+## The cardinality of $H_e$: computed, finite, and certified
+
+The nine stored isometries are reflections, so the group they generate is finite, and the order is a
+computation on the card's own stored data, not a guess. `results/check-40-h-e-cardinality.py` (pure
+Python and sympy: it builds no preamble object) reads the card of `0125` and the `h-e` card and
+decides it:
+
+| Step | What the computation found |
+| --- | --- |
+| each member preserves the Gram tensor, is unimodular, and is an involution | 9 of 9 |
+| characteristic polynomial of each | $(x-1)^9(x+1)$, so each is a reflection |
+| the primitive vector $v$ of the line each negates | $b(v,v) = -4$ for all nine |
+| the pairings $b(v_i,v_j)$ | $0$ or $2$, so the Cartan matrix $2b(v_i,v_j)/b(v_j,v_j)$ is $2$ on the diagonal and $-1$ or $0$ off it |
+| the diagram | $E_8 \oplus A_1$: arms of length 1, 2 and 4 at `O(L) generator 3`, and `O(L) generator 8` orthogonal to the other eight |
+| positive definite? | yes: leading principal minors 2, 4, 4, 4, 4, 4, 4, 8, 2 |
+| $\lvert W(E_8)\rvert$, computed as the order of the permutation group the eight $E_8$ reflections induce on the 240 roots of their span | 696729600 |
+| the isolated reflection | fixes all 240 roots and negates its own root: a direct factor |
+| $\lvert H_e\rvert$ | $2 \cdot 696729600 = 1393459200$ |
+
+The reflections of a positive definite diagram generate exactly their Coxeter group (Tits, so no
+quotient is taken), and $|\rho_L(H_e)| = 696729600$ is the image order the `generator_morphisms`
+certificate states, so the isolated reflection is $\ker \rho_L \cap H_e$ and the two factors agree.
+The card states `cardinality: 1393459200` and `0125` cites `arithmetic-group.h-e.cardinality`
+(hash `94ad3696…7f13a`) for it; `tests/test_ge_generators.py` checks in the gate that the citation is
+the hash of the value the card states.
+
+The card's first version stated `cardinality: aleph0` with no citation and no certificate — the one
+stored value on the card that nothing established, and false: `H_e` is finite. The corpus has no
+`certify` step for the cardinality of a named subgroup (`genus.ARITHMETIC_FIELDS` is the index and
+the generators), so the certificate names the program, as the seeded citation certificates do, rather
+than an owner call this lattice has no operation for.
 
 ## Not stored, and why
 
@@ -95,5 +127,5 @@ and `tests/test_ge_generators.py` pins the same state in the gate.
 | the card stores a generating set of $G_e$ as self-isometries, or — until generators of $\\widetilde O(L)$ exist — the nine members in a row that names $H$, stating $\\rho_L(H) = P$ | `lattices/0125.md` `morphisms`; `arithmetic-groups/h-e.md` | met: the nine members of the delivered call |
 | the `arithmetic-groups/` card of $G_e$ names them | `arithmetic-groups/g-e.md` | met |
 | it does not name them as generators of $G_e$ | `arithmetic-groups/g-e.md`, `arithmetic-groups/h-e.md` | met: `parent_group: g-e`, the relation, and no `data.generator_morphisms` on `g-e` |
-| the card certifies the computation, the Gram tensor and the result, with the program revision in `certificates/` | `certificates/97.yaml`, `lattices/0125.md` `certifications` | met |
+| the card certifies the computation, the Gram tensor and the result, with the program revision in `certificates/` | `certificates/97.yaml` (`...generator_morphisms` at the owner revision; `...cardinality` by the program), `lattices/0125.md` `certifications`, `tests/test_ge_generators.py` | met |
 | the repository's gate passes | `tests/`, `justfile` | met |

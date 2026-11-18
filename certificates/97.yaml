@@ -1,3 +1,20 @@
+0125 arithmetic-group.h-e.cardinality:
+  hash: 94ad369645d74b45a3f45462bb1941db9545bb326e0430344bb521c45297f13a
+  by: 'the nine stored self-isometries of 0125 are reflections: each has characteristic
+    polynomial (x-1)^9(x+1), and the primitive vector v of the line it negates has
+    b(v,v) = -4, with b(v_i,v_j) in {0, 2}. The Cartan matrix 2 b(v_i,v_j)/b(v_j,v_j)
+    is positive definite, every leading principal minor being positive, and its diagram
+    is E_8 + A_1: arms of length 1, 2 and 4 at O(L) generator 3, and O(L) generator 8
+    orthogonal to the other eight. The reflections of a positive definite diagram
+    generate their Coxeter group (Tits), so H_e = W(E_8) x Z/2. |W(E_8)| = 696729600
+    is computed here, as the order of the permutation group the eight E_8 reflections
+    induce on the 240 vectors of norm -4 in their span; |rho_L(H_e)| = 696729600 is the
+    image order the generator_morphisms certificate states, so the isolated reflection
+    is the kernel of rho_L on H_e. |H_e| = 2 * 696729600 = 1393459200.
+    results/check-40-h-e-cardinality.py computed the root vectors, the Cartan matrix,
+    its diagram, the 240 roots and that order from the stored matrices and the Gram
+    tensor of the card. No owner operation returns this value, so its provenance is the
+    program, not a library call.'
 0125 arithmetic-group.h-e.generator_morphisms:
   hash: bbeac11159ecaf612447c2069422beebc013640db4c22f261a4e9ada205f9ee2
   by: 'the owner''s own selection: L.Aut().discriminant_point_stabilizer_image_generators(A_U(2))
