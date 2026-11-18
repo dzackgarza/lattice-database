@@ -164,8 +164,16 @@ on `otilde-t-co.md:21`: `group_generators()` over a transversal of 46,998,591,89
 return in 600 s, peaking at 4,607 MiB, ended by its own timeout (exit 124).
 
 The counts 56 and 95 appear nowhere on either card, so they are neither cited nor certified anywhere in
-the corpus. The test therefore does not record a regression: it asserts a value the corpus deliberately
-does not carry. Its repair or removal is #7's (the generation clause), and the value itself needs the
-owner's generator family, filed as dzackgarza/sage-extensions#597 — that is where this stops. The
-deletion of that test is already an uncommitted edit in another session's working tree on this host, so
-it was left alone here rather than committed twice.
+the corpus. The test therefore did not record a regression: it asserted a value the corpus deliberately
+does not carry, and its two cases could only ever fail. It is removed in this commit. What belongs to #7
+is the clause the cards record as not supplied; what belongs to dzackgarza/sage-extensions#597 is the
+generating family itself, and when the owner returns one the certify run will write the morphisms and a
+test can assert the round-trip then.
+
+Removing it leaves the file at 50 tests, and the one remaining failure in that selection is not #4's
+either: `tests/test_genus.py:622`
+(`test_certification_stores_an_indefinite_card_automorphism_generators`) expects the request to open with
+`automorphism_group_order` and receives `spinor_genus_count` first, four fields further on. It fails
+identically at the same tip without this change — `3 failed, 8 passed` for that selection before, the two
+Coble cases plus this one, against `1 failed, 8 passed` after — so it belongs to the #8 work on `main`
+that made the order serialize on every card. It is named here rather than touched.

@@ -1084,26 +1084,6 @@ def test_a_computed_generator_is_stored_once_as_a_self_isometry_of_the_lattice(t
     assert genus.certified_value("arithmetic-group.otilde-plus-t-co.generator_morphisms", list(group.data.generator_morphisms or ()), lattice) == [matrix]
 
 
-@pytest.mark.parametrize("slug,expected_count", [("otilde-t-co", 56), ("otilde-plus-t-co", 95)])
-def test_coble_ordinary_group_generator_cards_are_persisted_and_certified(slug: str, expected_count: int) -> None:
-    """Both completed Coble generator computations survive as certified card morphisms."""
-    lattice = Lattice.model_validate(corpus.front_matter(corpus.read_card(REPOSITORY / "lattices/6JRR.md")))
-    group = ArithmeticGroup.model_validate(corpus.front_matter(
-        corpus.read_card(REPOSITORY / "arithmetic-groups" / f"{slug}.md")
-    ))
-    names = list(group.data.generator_morphisms or ())
-    assert len(names) == expected_count
-    assert len(set(names)) == expected_count
-    values = genus.certified_value(f"arithmetic-group.{slug}.generator_morphisms", names, lattice)
-    assert len(values) == expected_count
-    computation = genus.name("6JRR", f"arithmetic-group.{slug}.generator_morphisms", lattice.definiteness)
-    digest = certificates.certification_hash(computation, lattice, values)
-    held = certificates.load(REPOSITORY, ("6JRR",))
-    assert certificates.is_certified(
-        held, computation, lattice.certifications.get(f"arithmetic-group.{slug}.generator_morphisms"), digest
-    )
-
-
 def test_a_stated_arithmetic_group_value_without_its_computation_is_a_verification_problem(tmp_path: Path) -> None:
     """A group card states what a completed computation returned, or it states nothing."""
     root = coble_corpus(tmp_path)
