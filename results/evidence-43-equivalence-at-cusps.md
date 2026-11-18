@@ -115,3 +115,22 @@ So the seeded family does not carry one class to the other either; and since the
 neither the constructive nor the decision route closes the row. What would: a call that decides two *classes* of
 $K_J$ — `IsotropicVectorReductionImage.vectors_are_equivalent`, named above — or, equivalently, the double-coset orbit
 computation at the finite quotient that `isotropic_plane_orbits` already performs for planes.
+
+## The owner's record of it: sage-extensions#72, open
+
+The search for an open issue naming this operation returns one, open and unassigned:
+**dzackgarza/sage-extensions#72**, "Preamble lattice capabilities: explicit defects, disabled computations, and domain
+restrictions". Its inventory contains the line that is this file's subject:
+
+> **Indefinite vector-equivalence entry point disabled** | Distinct vectors of equal norm in an indefinite lattice |
+> `vector_equivalence_witness` and therefore `vectors_are_equivalent` call the disabled marked-isometry entry point.
+
+with its source evidence given there as `src/dzack_research/preamble/categories/lattice_morphisms.py:2980`
+(the vector-equivalence dispatch), the disabled port entry points in
+`sage-indefinite-port/src/sage_indefinite_port/indefinite/marked_lattices.py:64`, and the decorator that rejects them
+in `readiness.py:22`.
+
+So the 18 min 20 s non-return is not a slow computation: the entry point the ambient route reaches is **disabled**
+upstream, and that is why (4.3.7), (4.3.8) and (4.3.9) cannot be decided here. The row's own acceptance says such an
+obligation "remain[s] open until their owning implementation supplies the stated result" — which is sage-extensions#72,
+not this card.
