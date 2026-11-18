@@ -30849,27 +30849,13 @@
   by: research preamble
 3GBW definite.regular:
   hash: ef00621c97599a8ccf86f6f430c66775791389ea1d58123a7f227d569d10657d
-  by: 'W. C. Jagy, I. Kaplansky and A. Schiemann, There are 913 regular ternary forms,
-    Mathematika 44 (1997), 332-341, form 615, as tabulated in A. G. Doyle, B. Muskat,
-    K. Pehlivan and K. S. Williams, Positive integers represented by regular primitive
-    positive-definite integral ternary quadratic forms, Integers 19 (2019), #A45,
-    Tables 1 and 2; regular by W. C. Jagy, I. Kaplansky and A. Schiemann, There are
-    913 regular ternary forms, Mathematika 44 (1997), 332-341.'
+  by: research preamble
 3GBW definite.siegel_eisenstein_coefficients:
   hash: 32da00806f06304e56ef553427533409fb63d6591077cf0a399b1dfc4e145c15
   by: research preamble
 3GBW definite.spinor_regular:
   hash: eced2cde09ed8a4a8d042e8261c2a05f06b9332d479ab495fbd755a02ce2840a
-  by: 'W. C. Jagy, I. Kaplansky and A. Schiemann, There are 913 regular ternary forms,
-    Mathematika 44 (1997), 332-341, form 615, as tabulated in A. G. Doyle, B. Muskat,
-    K. Pehlivan and K. S. Williams, Positive integers represented by regular primitive
-    positive-definite integral ternary quadratic forms, Integers 19 (2019), #A45,
-    Tables 1 and 2; regular by W. C. Jagy, I. Kaplansky and A. Schiemann, There are
-    913 regular ternary forms, Mathematika 44 (1997), 332-341; hence spinor regular,
-    since a form is spinor regular if it represents all the positive integers represented
-    by its spinor genus (A. G. Earnest and A. Haensch, Completeness of the list of
-    spinor regular ternary quadratic forms, arXiv:1711.05811v2 (2018), Abstract) and
-    the spinor genus lies in the genus.'
+  by: research preamble
 3GBW definite.theta_series_cuspidal_component:
   hash: 33453a1c4e4213239090b36a13bde5fe0867d7dd5ea490e23624170d7eae6ae2
   by: research preamble
@@ -30881,6 +30867,9 @@
   by: research preamble
 3GBW integral.anisotropic_primes:
   hash: ab05f6caeaa7fa288b9879cef3d5a4ddb25b12abd48e8c34ba050b8933c1fd56
+  by: research preamble
+3GBW integral.discriminant_sequence:
+  hash: 59a922b41ad3d7a9cde2f5066805bc6ff4932e8b053105a2d3a824c1cbdfc50d
   by: research preamble
 3GBW integral.elementary_primes:
   hash: 76870a746c9901450c7ba8b1a24c9a47ae195f0a980e9b1dec3c1f821f05a867

@@ -29062,6 +29062,12 @@
 3G92 integral.anisotropic_primes:
   hash: 5ef4911d62795a010aa6652117b38900cc757a28ea10746d7a2181e468d22ad1
   by: research preamble
+3G92 integral.discriminant_form:
+  hash: 0f27be13946dde0541c9a8cded59c857e017768afb328aba8cc123677d1ce92d
+  by: research preamble
+3G92 integral.discriminant_orbits:
+  hash: ba90ceab9624d9e0676df5f09ca102bf4c196b3a58323c5e732436a69ca644f6
+  by: research preamble
 3G92 integral.discriminant_sequence:
   hash: 723926b4d2fd551a6e2c09d54897414e73aaf20438487fd60af84fea9427d3b0
   by: research preamble
@@ -29478,9 +29484,7 @@
   by: research preamble
 3ICQ definite.spinor_regular:
   hash: c50936212434b5489427f59d45f36139c069a85895fda5288c9fc89ade3b97d1
-  by: A. G. Earnest and A. Haensch, Completeness of the list of spinor regular ternary
-    quadratic forms, arXiv:1711.05811v2 (2018), Table 1, row 28; its spinor genus
-    has one class.
+  by: research preamble
 3ICQ definite.theta_series_cuspidal_component:
   hash: 56114f4480828b775e05c789b8d85741bae387454b929cdffc51464cfb9efda9
   by: research preamble
@@ -29492,6 +29496,9 @@
   by: research preamble
 3ICQ integral.anisotropic_primes:
   hash: bcf1bd7c4f93dfb52aeebdde25ce2ee4f13a915b8309e2e9baadb4850a5f2efc
+  by: research preamble
+3ICQ integral.discriminant_sequence:
+  hash: 39a74c71a65ab3e778f07acbdd19b17defe31e7c69ddfe296a709fc93a40a89e
   by: research preamble
 3ICQ integral.elementary_primes:
   hash: b802345a12eef54c5224ac5a0582a001032b7c730c6b85763349583e99db6b8e
