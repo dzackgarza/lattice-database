@@ -563,6 +563,9 @@
 11TK integral.discriminant_form:
   hash: 08b1484e514eeb4a4581806c9bb58b5e1ff436fd1bb21e589980beb8e834f185
   seconds: 3
+124R integral.discriminant_form:
+  hash: a201d7474bd27c640852bd514ae0cbf2530f1030e6c70ebd0123b788c9dec385
+  seconds: 2
 135Y integral.genus_class_count:
   hash: 689494ca5adb8488fc95a4f406d1751e6e84acc6252b85cb91dbc6cd8b4d2b92
   seconds: 0
@@ -779,16 +782,16 @@
   hash: b3188b122f0d1eddeed9c87d029f446de2fc82227cd6434d301e5f27666e8e56
   seconds: 0
   lost: true
-2NFJ integral.discriminant_orbits:
-  hash: 3a998c7321ae0f22d3241e6757d4a543ce72929656245bbb16ad98d2fb2f1a2d
-  seconds: 0
-  lost: true
 2O9Q integral.discriminant_form:
   hash: 567809602dabd253b4d013449d2374f9dfc8b4484876ea43ad3bb9cfacf1e639
   seconds: 0
   lost: true
 2OCZ integral.discriminant_orbits:
   hash: 41ab5da030ae3d2a0e9d480b83289ae409da6e587988d4873db2e4169f93ca3e
+  seconds: 0
+  lost: true
+2OGL integral.discriminant_orbits:
+  hash: 57f455e3131cfb4605f113349fc40fab1f5bb1a78a5f968276f2dfa60e15bbd4
   seconds: 0
   lost: true
 2OMV integral.discriminant_orbits:
