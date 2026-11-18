@@ -18996,27 +18996,13 @@
   by: research preamble
 2MVJ definite.regular:
   hash: 04bd73a9823f525c4015061fdf6c7c0c3664d1508d6b3505c320df1369f19e7b
-  by: 'W. C. Jagy, I. Kaplansky and A. Schiemann, There are 913 regular ternary forms,
-    Mathematika 44 (1997), 332-341, form 89, as tabulated in A. G. Doyle, B. Muskat,
-    K. Pehlivan and K. S. Williams, Positive integers represented by regular primitive
-    positive-definite integral ternary quadratic forms, Integers 19 (2019), #A45,
-    Tables 1 and 2; regular by W. C. Jagy, I. Kaplansky and A. Schiemann, There are
-    913 regular ternary forms, Mathematika 44 (1997), 332-341.'
+  by: research preamble
 2MVJ definite.siegel_eisenstein_coefficients:
   hash: 644e98e10ad6c381ab5a113508307e531561a27f01c5b55199d826b912ec74aa
   by: research preamble
 2MVJ definite.spinor_regular:
   hash: 22fa8b2ffad0003b84c76ca7fc85da3f5f7e49c226429603a4c8db7d6d0db120
-  by: 'W. C. Jagy, I. Kaplansky and A. Schiemann, There are 913 regular ternary forms,
-    Mathematika 44 (1997), 332-341, form 89, as tabulated in A. G. Doyle, B. Muskat,
-    K. Pehlivan and K. S. Williams, Positive integers represented by regular primitive
-    positive-definite integral ternary quadratic forms, Integers 19 (2019), #A45,
-    Tables 1 and 2; regular by W. C. Jagy, I. Kaplansky and A. Schiemann, There are
-    913 regular ternary forms, Mathematika 44 (1997), 332-341; hence spinor regular,
-    since a form is spinor regular if it represents all the positive integers represented
-    by its spinor genus (A. G. Earnest and A. Haensch, Completeness of the list of
-    spinor regular ternary quadratic forms, arXiv:1711.05811v2 (2018), Abstract) and
-    the spinor genus lies in the genus.'
+  by: research preamble
 2MVJ definite.theta_series_cuspidal_component:
   hash: 799c97780c2c91d1db58644cb2bd2ae82c4f9a3ff7a79e535bb1bfdcf074aea5
   by: research preamble
@@ -19028,6 +19014,9 @@
   by: research preamble
 2MVJ integral.anisotropic_primes:
   hash: 09de8647290722c12c0bc5916a3e657b8334a721e8fc409fb8801333c432289c
+  by: research preamble
+2MVJ integral.discriminant_sequence:
+  hash: e107e251ba5902a2344bf802ca3132931d94f1130df12fe2eff2723e7c1707e8
   by: research preamble
 2MVJ integral.elementary_primes:
   hash: 9802deaeaf9cf7f6cbbc1b69977b6572d618df8d68236adbe38e0c448cd40573

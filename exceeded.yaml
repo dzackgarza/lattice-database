@@ -496,9 +496,6 @@
   hash: e75904bde8ae71175b947e54e046fc2e518c21d801f3a97a4a74324f0bf14e5a
   seconds: 0
   lost: true
-0R9U integral.discriminant_form:
-  hash: 3992a41007619ddd0b037a61095fb0fff2115f2a4bee93e162b5b8d1872ccc5f
-  seconds: 7
 0RVY integral.elementary_primes:
   hash: 811175d5f9f1d0b028f2eb38f41a5672d3bdc0e8d0fb282d3f26fc4769b8f652
   seconds: 0
@@ -769,6 +766,10 @@
   hash: acd15b0ade4de3b1c874f94bf7a5e62f816c4f781d3cb9fb40337e357f3360f3
   seconds: 0
   lost: true
+2N7M integral.discriminant_sequence:
+  hash: b3188b122f0d1eddeed9c87d029f446de2fc82227cd6434d301e5f27666e8e56
+  seconds: 0
+  lost: true
 2N8U integral.discriminant_form:
   hash: b14274ba32b32617d1766bbbe0aa47efa58323be55bbdc57fa6891b9730c6eca
   seconds: 0
@@ -923,10 +924,6 @@
 3EW5 integral.overlattice_count:
   hash: c5a976ee15be79ef150aa33eb5f8f2acce06a174ffa43ca1925c4be1b0b1380f
   seconds: 13
-  lost: true
-3EW6 integral.discriminant_form:
-  hash: 12ceb6487e100e5243f8216f509921cfa1d1a272cbe6eeb4fa098c7026d7cbde
-  seconds: 90
   lost: true
 3EW6 integral.overlattice_count:
   hash: 6a516084ebf246f531d8ff3a3d9ff3e5ee2426b8d78d26d0dd5ba957e45c5414
