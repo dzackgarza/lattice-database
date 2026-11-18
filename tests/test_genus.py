@@ -17,6 +17,7 @@ import yaml
 
 from latticedb import certificates, checks, corpus, exceeded, failures, genus, records, sage_genus
 from latticedb.catalogues import ArithmeticGroup
+from latticedb.invariant_models import STANDARD_SUBGROUPS
 from latticedb.model import Lattice
 
 REPOSITORY = Path(__file__).resolve().parent.parent
@@ -195,33 +196,58 @@ def test_an_indefinite_card_asks_for_each_orbit_row_alone(tmp_path: Path) -> Non
     assert genus.orbit_row("primitive_orbits", "Otilde+") in remaining
 
 
-def test_the_database_asks_the_owner_on_every_card_of_the_operations_class() -> None:
-    """#8: a request is withheld by the schema's block and by the domain the owner states.
+def test_an_indefinite_card_requests_its_orbit_rows_and_its_automorphism_generators(tmp_path: Path) -> None:
+    """#8: the request carries an owner extension to a card, and `applies` is one filter on it.
 
-    A2 is definite, even, rank 2; U is indefinite, even, rank 2 with hyperbolic index 1. What
-    the database withheld by a guess at the owner's power rather than by its stated domain is
-    asked: the automorphism generators on the indefinite card, in `automorphisms`, and
-    `primitive_orbits` on both. The owner's stated limits still hold — spinor genera need rank
-    at least three, the discriminant sequence a definite even card, the discriminant orbits an
-    even card of hyperbolic index at least two — and a definite block field is not asked on an
-    indefinite card, which cannot store it.
+    U is indefinite, even, rank 2, hyperbolic index 1. Its automorphism generators are a field of
+    `definite` in `BLOCKS` and are stored in `automorphisms` on this card, and its primitive orbit
+    series is stored a row at a time in `integral`; the card states neither, so `certify` asks the
+    owner for both. The queue a run works is `genus.requests`, so that is what this asserts: a
+    predicate that answers True does not by itself put a field on the wire, and the acceptance of
+    #8 is that the owner is asked.
+    """
+    (tmp_path / "lattices").mkdir()
+    shutil.copy(REPOSITORY / corpus.FAMILIES_FILE, tmp_path / corpus.FAMILIES_FILE)
+    (tmp_path / corpus.RETIRED_FILE).write_text("{}\n")
+    source = frontmatter.load(str(REPOSITORY / "lattices" / "0016.md"))
+    metadata = corpus.front_matter(source)
+    held = derived()
+    without("0016", "indefinite", metadata, held, "integral.primitive_orbits", "automorphisms.automorphism_group_generator_morphisms")
+    (tmp_path / "lattices" / "0016.md").write_text(records.record_text(metadata, source.content))
+    requested = [field for request in genus.requests(corpus.load(tmp_path), held, {}, ("0016",)) for field in request["fields"]]
+    assert "derive" not in requested, "a current derivation selects this card's fields, so the queue is the one a run works"
+    assert "automorphism_group_generator_morphisms" in requested
+    assert {field for field in requested if field.startswith("primitive_orbits[")} == {
+        genus.orbit_row("primitive_orbits", subgroup) for subgroup in STANDARD_SUBGROUPS
+    }
+    # A `definite` field is still withheld from this card, by the schema rather than by an owner
+    # limit: an indefinite card has no `definite` block, and `automorphisms` states the generators
+    # of an infinite group and no order.
+    assert "regular" not in requested and "automorphism_group_order" not in requested
+
+
+def test_a_field_is_withheld_by_its_block_and_by_the_domain_the_owner_states() -> None:
+    """The filters #8 keeps: the block a card cannot carry, and the domain the owner states.
+
+    A2 is definite, even, rank 2; U is indefinite, even, rank 2 with hyperbolic index 1. Spinor
+    genera need rank at least three, the discriminant sequence a definite even card, the
+    discriminant orbits an even card of hyperbolic index at least two, and |A_L| keeps a
+    discriminant form's class partition inside the owner's bound.
     """
     definite = Lattice.model_validate(frontmatter.load(str(REPOSITORY / "lattices" / "0012.md")).metadata)
     indefinite = Lattice.model_validate(frontmatter.load(str(REPOSITORY / "lattices" / "0016.md")).metadata)
-    assert genus.applies("primitive_orbits", definite) and genus.applies("primitive_orbits", indefinite)
-    assert genus.applies("automorphism_group_generator_morphisms", definite) and genus.applies("automorphism_group_generator_morphisms", indefinite)
+    assert genus.applies("primitive_orbits", definite)
+    assert genus.applies("automorphism_group_generator_morphisms", definite)
     assert genus.applies("siegel_eisenstein_coefficients", definite)
     assert genus.applies("discriminant_sequence", definite)
     assert not genus.applies("spinor_regular", definite), "spinor regularity needs rank at least three"
     assert not genus.applies("spinor_genus_count", definite), "spinor genera need rank at least three"
     assert not genus.applies("discriminant_sequence", indefinite), "a definite even card is the domain"
     assert not genus.applies("discriminant_orbits", indefinite), "hyperbolic index 1 is outside the Eichler hypothesis"
-    assert not genus.applies("regular", indefinite), "an indefinite card cannot carry the definite block"
-    assert not genus.applies("automorphism_group_order", indefinite)
     assert not genus.applies("roots", definite), "a definite card states its roots in `definite.roots`"
     assert not genus.applies("cusp_form_coordinates", definite), "the owner does not present it"
     assert not genus.applies("cusp_root_orbits", definite), "the owner identifies root classes, and its generators are not certified at a line"
-    assert genus.applies("discriminant_form", Lattice.model_validate(frontmatter.load(str(REPOSITORY / "lattices" / "0016.md")).metadata)), "the hyperbolic plane's discriminant group is trivial"
+    assert genus.applies("discriminant_form", indefinite), "the hyperbolic plane's discriminant group is trivial"
     assert not genus.applies("discriminant_form", Lattice.model_validate(frontmatter.load(str(REPOSITORY / "lattices" / "3F4F.md")).metadata)), "|A_L| = 4323 is above the owner's bound of 4096"
     assert genus.applies("discriminant_form", Lattice.model_validate(frontmatter.load(str(REPOSITORY / "lattices" / "6JRX.md")).metadata)), "the corrected period lattice of degree 2 has |A_L| = 2"
     assert genus.applies("discriminant_form", definite), "A_2 has three classes to partition"
