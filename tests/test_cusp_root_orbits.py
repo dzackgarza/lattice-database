@@ -10,8 +10,10 @@ $-4$ --- no root --- is reported rather than counted. Two rows for one subgroup 
 twice, and a key that is neither one of the eight nor an arithmetic-group card of this lattice names no group.
 
 The rows here are this file's fixture: card 029J's own cusp and its own two roots of $K_J$ at Sterk's (4.3.8),
-p. 23, with the orbit count as the shape of a row and not as a claim about the card, which states none
-(the cusp stabilizer's generators are not certified complete, sage-extensions#603).
+p. 23, with the orbit count as the shape of a row. The card itself states the four rows it can decide: one cusp whose
+root family is a single class, and the three whose chamber carries a symmetry that Sterk states is realized in
+$\\Gamma_v$ --- an isometry of $\\Gamma_v$ carrying one root wall to the other is a proof of one orbit, which a
+singleton under the certified generators is not.
 """
 
 from fractions import Fraction
@@ -121,21 +123,108 @@ def test_a_key_that_names_no_arithmetic_group_card_of_this_lattice_is_reported()
     assert any("cusp_root_orbits names gamma-en-2, which is not an arithmetic-group card" in problem for problem in found), found
 
 
-def test_the_decided_row_of_card_029j_reads_back_and_certifies() -> None:
-    """#43: the one cusp whose root family is a single class carries its count, and its certificate is on the shard.
+def test_the_decided_rows_of_card_029j_read_back_and_certify() -> None:
+    r"""#43: the four cusps the card can decide carry their counts, and its certificate is on the shard.
 
     Sterk's (4.3.6), p. 21, has exactly one wall of square $-2$ among its ten, so the cusp's root family is one class
-    and its orbits are one orbit whatever the group acting is. The row is the card's own statement of that, and
-    `checks.records.problems` is what decides the card's reference, its value and the shard agree.
+    and its orbits are one orbit whatever the group acting is. The other three cusps have two, two and four root
+    classes, and each chamber's diagram carries a symmetry that Sterk states is realized in $\Gamma_v$: at (4.3.7)
+    it exchanges $\alpha_9$ and $\alpha_{13}$, at (4.3.8) $\alpha_9$ and $\alpha_{11}$, and at (4.3.9) it is
+    transitive on $\alpha_{11}$, $\alpha_{12}$, $\alpha_{13}$, $\alpha_{14}$. One orbit each, so each row's count is
+    1 and its single orbit states every one of those classes with its transporter.
     """
     lattice = Lattice.model_validate(corpus.front_matter(corpus.read_card(ROOT / "lattices" / "029J.md")))
     assert lattice.integral is not None and lattice.integral.cusp_root_orbits is not None
     rows = lattice.integral.cusp_root_orbits["gamma-en-2"]
-    assert [(row.statement, row.printed_page, row.orbit_count) for row in rows] == [("4.3.6", 21, 1)]
-    row = rows[0]
-    assert row.cusp == (0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0), "the cusp is e'"
-    assert [orbit.representative for orbit in row.orbits] == [(1, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)], "alpha_10 = e - f"
-    assert [orbit.transporter_order for orbit in row.orbits] == [1]
+    assert [(row.statement, row.printed_page, row.orbit_count) for row in rows] == [
+        ("4.3.6", 21, 1),
+        ("4.3.7", 22, 1),
+        ("4.3.8", 23, 1),
+        ("4.3.9", 24, 1),
+    ]
+    assert [len(row.orbits) for row in rows] == [1, 1, 1, 1]
+    assert [len(row.orbits[0].classes) for row in rows] == [1, 2, 2, 4]
+    assert [row.orbits[0].transporter_order for row in rows] == [1, 2, 2, 4]
+    single = rows[0]
+    assert single.cusp == (0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0), "the cusp is e'"
+    assert single.orbits[0].representative == (1, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0), "alpha_10 = e - f"
+
+
+def test_the_three_cusped_rows_are_one_orbit_because_the_chamber_is_symmetric() -> None:
+    r"""#43: what decides the counts is a symmetry of the chamber, recomputed from the shipped card.
+
+    Sterk prints the chamber at each cusp and its Coxeter diagram, and states that the diagram's symmetry is
+    realized in the cusp stabilizer: (4.3.7), p. 22, "the symmetry of the diagram comes from an element in
+    $\Gamma_v$" with $G_v = \{\pm1\}W_v \rtimes \mathbb{Z}/2$; (4.3.8), p. 23, "the symmetry is induced by an
+    element of $\Gamma_v$"; (4.3.9), p. 24, "Symmetries of the graph can be lifted to $\Gamma_v$". So a permutation of
+    the chamber's walls that preserves their squares and pairings carries each root class to its image under an
+    element of $\Gamma_v$, and one orbit is what this test recomputes from the card's own Gram tensor. A row whose
+    classes were split would have no such symmetry, and this test would say which root walls the diagram does not join.
+    """
+    lattice = Lattice.model_validate(corpus.front_matter(corpus.read_card(ROOT / "lattices" / "029J.md")))
+    assert lattice.integral is not None and lattice.integral.cusp_chambers is not None
+    assert lattice.integral.cusp_root_orbits is not None
+    gram = [[Fraction(entry) for entry in row] for row in lattice.gram_tensor]
+    size = len(gram)
+
+    def pairing(left, right):
+        return sum(
+            (Fraction(left[i]) * gram[i][j] * Fraction(right[j]) for i in range(size) for j in range(size)),
+            Fraction(0),
+        )
+
+    def wall_permutations(walls):
+        """The permutations of the walls that preserve their squares and their pairings, by extension from a seed."""
+        squares = [pairing(wall, wall) for wall in walls]
+        count = len(walls)
+        found = []
+
+        def extend(partial):
+            if len(partial) == count:
+                found.append(dict(partial))
+                return
+            index = len(partial)
+            for image in range(count):
+                if image in partial.values() or squares[image] != squares[index]:
+                    continue
+                if all(
+                    pairing(walls[index], walls[other]) == pairing(walls[image], walls[seen])
+                    for other, seen in partial.items()
+                ):
+                    partial[index] = image
+                    extend(partial)
+                    del partial[index]
+
+        extend({})
+        return found
+
+    rows = {row.statement: row for row in lattice.integral.cusp_root_orbits["gamma-en-2"]}
+    checked = []
+    for chamber in lattice.integral.cusp_chambers["gamma-en-2"]:
+        walls = [tuple(wall.vector) for wall in chamber.walls]
+        roots = [index for index in range(len(walls)) if pairing(walls[index], walls[index]) == -2]
+        if len(roots) < 2:
+            continue
+        row = rows[chamber.statement]
+        assert len(row.orbits) == 1, f"{chamber.statement}: the card states {len(row.orbits)} orbits"
+        assert sorted(tuple(entry) for entry in row.orbits[0].classes) == sorted(walls[index] for index in roots), (
+            f"{chamber.statement}: the row's classes are not the chamber's root walls"
+        )
+        permutations = wall_permutations(walls)
+        reached = {min(roots)}
+        frontier = [min(roots)]
+        while frontier:
+            current = frontier.pop()
+            for permutation in permutations:
+                image = permutation[current]
+                if image in roots and image not in reached:
+                    reached.add(image)
+                    frontier.append(image)
+        assert reached == set(roots), (
+            f"{chamber.statement}: the diagram's symmetries reach {sorted(reached)} of the root walls {roots}"
+        )
+        checked.append((chamber.statement, len(roots)))
+    assert checked == [("4.3.7", 2), ("4.3.8", 2), ("4.3.9", 4)], checked
 
 
 def test_a_second_row_at_one_cusp_is_refused_when_it_changes_the_first() -> None:
