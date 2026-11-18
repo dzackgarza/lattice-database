@@ -63,6 +63,25 @@ def test_a_shard_states_the_cards_it_verified_with_its_peak(tmp_path: Path, caps
     assert f"for 1 cards in shard {mine}/2" in capsys.readouterr().out
 
 
+def test_a_shard_on_a_runner_annotates_the_peak_a_log_alone_would_not_expose(
+    tmp_path: Path, capsys: pytest.CaptureFixture[str], monkeypatch: pytest.MonkeyPatch
+) -> None:
+    """#6: under Actions the peak line is also an annotation, which reads back where a job log does not."""
+    write_card(tmp_path, {})
+    mine = certificates.tag_hash("0001") % 2
+    arguments = ["verify", "--shard", f"{mine}/2", "--root", str(tmp_path)]
+    monkeypatch.delenv("GITHUB_ACTIONS", raising=False)
+    app(arguments, result_action="return_value")
+    plain = capsys.readouterr().out
+    assert "::notice" not in plain
+    assert f"memory: " in plain and f"for 1 cards in shard {mine}/2" in plain
+    monkeypatch.setenv("GITHUB_ACTIONS", "true")
+    app(arguments, result_action="return_value")
+    annotated = capsys.readouterr().out
+    assert f"::notice title=shard {mine}/2::memory: " in annotated
+    assert f"for 1 cards in shard {mine}/2" in annotated
+
+
 def test_a_shard_reports_the_problems_of_its_own_cards_only(tmp_path: Path) -> None:
     """#6: the shards partition the cards, and each run checks the cards of its own shard."""
     path = write_card(tmp_path, {"gram_tensor": [[2]], "rank": 1})

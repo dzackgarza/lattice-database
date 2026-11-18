@@ -334,7 +334,14 @@ def verify(
     # verified and what they cost. It is reported before the run refuses its problems, so a
     # shard that finds one still records both (#6).
     held = "" if selected is None else f" for {verified} cards in shard {selected[0]}/{selected[1]}"
-    print(f"memory: {checks.peak()} peak{held}", flush=True)
+    line = f"memory: {checks.peak()} peak{held}"
+    print(line, flush=True)
+    # On a workflow runner the same line is also an annotation. A job log needs
+    # repository-admin rights to download and an annotation is part of the run's own API
+    # response, so a scheduled run's per-shard peaks are readable where they were not (#6).
+    if os.environ.get("GITHUB_ACTIONS") == "true":
+        title = "verify" if selected is None else f"shard {selected[0]}/{selected[1]}"
+        print(f"::notice title={title}::{line}", flush=True)
     _refuse(problems)
     print(f"{verified} lattice cards structurally verified")
 

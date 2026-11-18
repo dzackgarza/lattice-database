@@ -1,5 +1,5 @@
 diff --git a/.github/workflows/verify.yml b/.github/workflows/verify.yml
-index 2617b63ac6..ba64c7174d 100644
+index 2617b63ac6..8b95ff8a17 100644
 --- a/.github/workflows/verify.yml
 +++ b/.github/workflows/verify.yml
 @@ -17,9 +17,15 @@ env:
@@ -13,34 +13,11 @@ index 2617b63ac6..ba64c7174d 100644
 +  # The ceiling a shard needs is recorded here, because its job log is not readable to everyone: run
 +  # 42844490886, the first verify run to complete over every card, reported peaks of 14.2-14.6 GiB
 +  # (the range its closing note on #6 records; `/actions/jobs/{id}/logs` answers `403 Must have
-+  # admin rights to Repository`, so the peaks cannot be re-read from there). Each shard's `memory:`
-+  # line states its own peak and its card count, and the verify step re-emits that line as a job
-+  # annotation, which the run's API response carries without those rights.
++  # admin rights to Repository`, so the peaks cannot be re-read from there). `latticedb verify`
++  # prints that line and, under Actions, emits it as a `::notice` annotation, which the run's API
++  # response carries without those rights: the per-shard ceiling is readable from every run.
 +  # Eight gibibytes of swap on top of the runner's own memory, and not sixteen: a hosted runner has
 +  # about fourteen gigabytes of free disk, and its own swap file already occupies part of that (#26).
    SWAP_GIB: 8
  jobs:
    plan:
-@@ -100,11 +106,19 @@ jobs:
-         uses: ./.github/actions/sage
-       - name: Verify lattice cards and certificate hashes
-         run: |
--          # The command reports `memory: ... peak for this process` before it refuses its problems,
--          # so this shard's log carries the ceiling the shard needed.
-+          # The command reports `memory: <x> GiB peak for <n> cards in shard i/16` before it refuses
-+          # its problems, so this shard's log carries the peak it needed and the cards it read. A job
-+          # log needs repository-admin rights to download, so the line is re-emitted as an annotation,
-+          # which the run's API response carries. The step exits with the command's own status, so a
-+          # shard that reports contradictions still fails its job, and one killed for memory still
-+          # fails it as 137 (#6).
-+          status=0
-           docker exec -i --workdir "$GITHUB_WORKSPACE" \
-             --env "PYTHONPATH=$GITHUB_WORKSPACE/research/src:$GITHUB_WORKSPACE/src" \
--            sage-env /sage/.venv/bin/python -m latticedb verify --shard "${{ matrix.shard }}/$SHARDS"
-+            sage-env /sage/.venv/bin/python -m latticedb verify --shard "${{ matrix.shard }}/$SHARDS" \
-+            2>&1 | tee shard.log || status=${PIPESTATUS[0]}
-+          grep -E '^memory: ' shard.log | sed "s|^|::notice title=shard ${{ matrix.shard }}/$SHARDS::|" || true
-+          exit "$status"
-       - name: Stop the Sage environment
-         if: always()
-         run: docker rm --force sage-env

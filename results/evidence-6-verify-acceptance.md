@@ -7,79 +7,81 @@ with the memory ceiling it needed recorded in the workflow.*
 
 The Actions API answers without a token on this public repository: runs, jobs, steps and check-run
 annotations. Job **logs** do not — `/repos/…/actions/jobs/{id}/logs` and `/actions/runs/{id}/logs`
-both answer `403 Must have admin rights to Repository`. So a shard's exit code is readable from here
-and its printed peak is not, which is exactly the distinction item 2 turns on.
+both answer `403 Must have admin rights to Repository`. A shard's exit code is therefore readable
+from here and the peak it printed in its log was not, which is what item 2 turns on.
 
 ## Item 1 — a run completes over every card: **holds**
 
-**The split covers the corpus.** `lattices/` holds 302,504 cards, and
-`genus.in_shard` (`src/latticedb/genus.py:299`) is `certificates.tag_hash(tag) % count == index`.
-Each card's tag matched exactly one of the sixteen shards; the shards hold 18,626–19,009 cards each
-and 302,504 together.
+**The split covers the corpus.** `lattices/` holds 302,504 cards and `genus.in_shard` is
+`certificates.tag_hash(tag) % count == index` (`src/latticedb/genus.py:299`). Every tag matched
+exactly one of sixteen shards; the shards hold 18,626–19,009 cards each and 302,504 together.
 
-**The dispatch rule is the same rule.** The `plan` job computes a tag's shard with the same
-SHA-256 prefix modulo 16 (`.github/workflows/verify.yml:57`); it agrees with
-`certificates.tag_hash(tag) % 16` on every tag tried, including `6JRR`, `029J`, `0268`, `0021`,
-`5989`, `58S6`, `6JRS` and `00R2`.
+**The dispatch rule is the same rule.** The `plan` job computes a tag's shard from the same SHA-256
+prefix modulo 16 (`.github/workflows/verify.yml:57`), and it agrees with
+`certificates.tag_hash(tag) % 16` on every tag tried (`6JRR`, `029J`, `0268`, `0021`, `5989`, `58S6`,
+`6JRS`, `00R2`).
 
-**The runs.** Run `44078051011` (schedule, head `4c92ce1f89`, 2026-11-17, the newest `verify` run):
-`plan` succeeded and **16 of 16** shard jobs ran *Verify lattice cards and certificate hashes* to
-completion, each annotated `Process completed with exit code 1.` — no `137`, none cancelled. Run
-`42844490886` (dispatch, `188412a150`) reads the same way. Exit 1 is the verifier refusing the
-contradictions it found (`src/latticedb/cli.py:55`), which is what the acceptance asks for: the run
-reports, it does not die.
+**The runs.** Run `44078051011` (schedule, head `4c92ce1f89`, 2026-11-17; still the newest `verify`
+run when re-read on 2026-11-18): `plan` succeeded, and **16 of 16** shard jobs ran *Verify lattice
+cards and certificate hashes* to completion with the annotation `Process completed with exit code
+1.` — no `137` and none cancelled. Run `42844490886` (dispatch, `188412a150`) reads the same way.
+Exit 1 is the verifier refusing the contradictions it found (`src/latticedb/cli.py:56`), which is
+what the acceptance asks for: the run reports, it does not die.
 
-**The gap this turn closed.** A shard's run could not say how many cards it read. `--shard i/n` runs
-in the command's own process (`src/latticedb/checks/__init__.py:48`), and the line it printed named
-neither the shard nor a count (`memory: … peak for this process`, cli.py:335 before), while the line
-that carries the count (`… lattice cards structurally verified`, now `src/latticedb/cli.py:339`) is
-never reached when a shard reports problems — and every shard of this tree has problems to report.
-Probed on a fixture of sixteen cards, one from each shard, through the same command: all sixteen runs
-printed exactly `memory: 0.4 GiB peak for this process` and nothing naming their cards. Now
-(`src/latticedb/cli.py:332-337`):
+**What a shard's run could not say, now fixed.** `--shard i/n` runs in the command's own process
+(`src/latticedb/checks/__init__.py:48`), and its line named neither the shard nor a card count
+(`memory: … peak for this process`), while the line that carries the count
+(`src/latticedb/cli.py:345`) is never reached when a shard reports problems — and every shard of this
+tree reports some. Sixteen shard runs over a sixteen-card fixture printed that line and nothing
+naming their cards. Now (`src/latticedb/cli.py:336`):
 
 ```
-memory: 0.4 GiB peak for 1 cards in shard 0/16
+memory: 0.3 GiB peak for 1 cards in shard 3/16
 ```
 
-which the workflow's own log line and the new annotation carry. Test:
-`tests/test_verification.py:57` (`test_a_shard_states_the_cards_it_verified_with_its_peak`).
-The fixture reports eight `the related tag … is not in the corpus` problems, identically in every
-shard, because those checks are corpus-wide (`src/latticedb/checks/__init__.py:67`); they are the
-fixture's, not the cards'.
+against the fixture, one card per shard. Test: `tests/test_verification.py:57`
+(`test_a_shard_states_the_cards_it_verified_with_its_peak`). The fixture also reports eight
+`the related tag … is not in the corpus` problems, identically in every shard, because those checks
+are corpus-wide (`src/latticedb/checks/__init__.py:67`); they are the fixture's, not the cards'.
 
-## Item 2 — the ceiling recorded in the workflow: **not met on `main`; the change is written but unlanded**
+## Item 2 — the ceiling recorded in the workflow: the per-run record is now in the code; the number travels as a comment
 
 What stood: the workflow gave each shard 8 GiB of swap on top of the runner's memory
-(`.github/workflows/verify.yml:23`) and said in a comment that each shard "reports the peak it
-needed" (`:20`). The peak it *needed* was recorded nowhere in the repository: the only number is the
-closing note on #6 — 14.2–14.6 GiB — and the logs that would carry it per shard answer 403 above.
+(`.github/workflows/verify.yml:23`) and its comment claimed each shard "reports the peak it needed"
+(`:20`). The peak it *needed* was recorded nowhere: the only number is the closing note on #6
+(14.2–14.6 GiB), and the logs that would carry it per shard answer 403 above.
 
-`results/verify-peak-annotation.patch` records it and makes each run state its own:
-
-- the `env:` comment now records the measured ceiling with its provenance
-  (run `42844490886`, 14.2–14.6 GiB, and why the log could not be re-read);
-- the verify step keeps the command's exit status (`1` for contradictions, `137` for a memory kill)
-  and re-emits the shard's `memory:` line as a **job annotation**, which the run's API response
-  carries without admin rights — so the next run's per-shard peaks are readable, and the number in
-  the workflow can be checked instead of remembered.
-
-`results/probe-6-verify-step.sh` runs that step's own shell, taken out of the workflow file, with the
-Sage command replaced by a stub:
+**The record now comes from the command, so it needs no workflow change to land.** Under Actions
+(`GITHUB_ACTIONS=true`, which every runner sets) `latticedb verify` prints the peak line *and* emits
+it as a workflow annotation (`src/latticedb/cli.py:339`), before it refuses its problems, so a shard
+that finds contradictions still records what it needed:
 
 ```
-stub=reporting exit=1 notices=1
-stub=clean exit=0 notices=1
-stub=killed exit=137 notices=1
+memory: 0.3 GiB peak for 1 cards in shard 3/16
+::notice title=shard 3/16::memory: 0.3 GiB peak for 1 cards in shard 3/16
 ```
 
-`::notice title=shard 3/16::memory: 14.6 GiB peak for 18958 cards in shard 3/16` is what the runner
-would read. Against the unpatched file the probe reports `notices=0`, which is the gap itself.
+from two real shard runs of the fixture (shards `0/16` and `3/16`, `GITHUB_ACTIONS=true`), on the
+workflow as it stands — the plain `docker exec` step passes the annotation through. An annotation is
+part of the run's API response, so the next scheduled run's per-shard peaks are readable where a job
+log is not. Test: `tests/test_verification.py:62`, which asserts the notice under Actions and its
+absence without.
 
-**The workflow file is not on `main`.** This connection's GitHub App cannot push
-`.github/workflows/verify.yml` (the same boundary that put `8055ad42a7` and `6f4784a604` on `main` as
-patches), so the change travels as the patch above, to be landed by whoever holds that permission.
-Until it lands, item 2 is recorded in the patch and in this file, not in the workflow.
+**The number itself** is a comment in the workflow, recorded from run `42844490886` with its
+provenance and with the 403 that stopped it being re-read from the logs:
+
+```
+env:
+  # The ceiling a shard needs is recorded here, because its job log is not readable to everyone:
+  # run 42844490886 … reported peaks of 14.2-14.6 GiB …
+  SWAP_GIB: 8
+```
+
+That comment is `results/verify-peak-annotation.patch`; `git apply --check` succeeds against
+`.github/workflows/verify.yml` on `main`. It travels as a patch because pushes that carry a
+`.github/workflows` change have not landed through this connection: `8055ad42a7` removes exactly such
+a change from `main`, and the same change arrives later as `70eedd9d65`, authored by the owner rather
+than by the connection's identity.
 
 ## The ceiling has no scaling law, so none is offered
 
@@ -100,9 +102,7 @@ fourteen GiB and it has six. So the workflow records the run's own peaks, not a 
 
 ## Not done here
 
-- No run was dispatched by this turn; the evidence is read from runs already in the repository's
-  Actions history.
+- No run was dispatched by this turn; the run evidence is read from the repository's Actions history.
 - The full shard command was never run against `lattices/` from this VM — 14.6 GiB of peak against
   6 GiB available, the same wall as the runner's. The sixteen-card fixture is the smallest input that
-  decides completion, the peak line and the status, and it is what was run.
-- `.github/workflows/verify.yml` is unmodified on `main`.
+  decides completion, the peak line and the annotation.
