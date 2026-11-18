@@ -10,12 +10,13 @@ certifications:
   integral.genus_class_count: 688f614af3d7799ede466851a2bf2b69b31b7c53ffc43093b9fff03039721802
   integral.overlattice_count: 68764f158e582d4da42daaf30f7dbfd421a5c7a48eb52c6e1bb9ec86f17157af
   integral.hyperbolic_index: 57e7b790192bffad21a28e9801c6e57101bf9ddf332dbcef9f8e347b9c97801b
-  automorphisms.automorphism_group_generator_morphisms: ba9a66b9167b99ac47e20f89e672962995c92c8b1ea7db69aeae5b0718545ff0
+  automorphisms.automorphism_group_generator_morphisms: c56cbe203cb6eef87983f5ed56270eb4397ebf3218d4719ffc2f813e2c8eef89
   integral.primitive_orbits: 8ab1b0326bb90cb06add2fa5eb537c8dc90bc4437a9e0756868caa93aba5dfdc
   integral.modular_scale: 3022265b1f3d5fb99bc04501b28a541293553314de8122f1861887d1e9b232a2
   integral.anisotropic_primes: 835d3ac3bc3fba7f5fba7bc6ac0e6ffebb0cfaea0e3d9f5c1f24c6ef1d6993f7
   integral.local_representations: d4095f5f3ea8bb7be8b06ce30ffbf73be5532c4b57e2f21af86098e99486c9e8
   integral.local_densities: 62b67ca7e60341b85908dc00ba67be13f1203b7ef379218e258b022ae1b0e9b5
+  automorphisms.automorphism_group_order: c8c8a54799de6e494e23d13b9bfb7e76b7bd5ea26d157d036acd4cde9fa25f97
 rank: 2
 gram_tensor:
 - [-1, 0]
@@ -89,7 +90,8 @@ integral:
   - prime: 2
     densities: [2, 2, 0, 2, 0, 0, 2, 2, 2, 0, 0, 0]
 automorphisms:
-  automorphism_group_generator_morphisms: [O(L) generator 1, O(L) generator 2, O(L) generator 3]
+  automorphism_group_order: aleph0
+  automorphism_group_generator_morphisms: [O(L) generator 1, 'O(L) generator 2 #2', O(L) generator 3]
 indefinite:
   isotropic: false
 morphisms:
@@ -110,6 +112,12 @@ morphisms:
   matrix:
   - [-1, 0]
   - [0, -1]
+  scale: 1
+- target: 3IDW
+  name: 'O(L) generator 2 #2'
+  matrix:
+  - [3, -4]
+  - [-2, 3]
   scale: 1
 related:
 - tag: 3ICW
