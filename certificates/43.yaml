@@ -20950,6 +20950,9 @@
 2MPJ integral.anisotropic_primes:
   hash: 55c813d9521fb4caf10dde8bd061ea2acecf8d0af71542e94a764587f427bc5e
   by: research preamble
+2MPJ integral.discriminant_sequence:
+  hash: a567f0a77dcbbd05ea38fcfcb79fcea2aeb96588858a6f53016a00304ba028e1
+  by: research preamble
 2MPJ integral.elementary_primes:
   hash: 54965513a41215bacc7f8cbb82abc35c8e792ed80d37e13e82dbbe5c147ce2f8
   by: research preamble
@@ -21007,6 +21010,9 @@
 2MVR integral.anisotropic_primes:
   hash: 54066132f9e734498c4aae709257518d79f478eaf1f4f9606e675dd9634d0270
   by: research preamble
+2MVR integral.discriminant_sequence:
+  hash: 875902aba608c4009548e9433d1273dc56d6397b925699f11f9b40e309c236ae
+  by: research preamble
 2MVR integral.elementary_primes:
   hash: b071f3f557f6821a6dbd419d12c062634aa36e763d4f061a63786f62d103edbd
   by: research preamble
@@ -21063,6 +21069,9 @@
   by: research preamble
 2N0X integral.anisotropic_primes:
   hash: 1942f7c10317e4bd8e63b87163fe6404dc00c26e7204ed360c02c006406ef940
+  by: research preamble
+2N0X integral.discriminant_sequence:
+  hash: 4001ecd61cde10f10a94951875a1aee264400f391e746ae2fa4265e8eb38f049
   by: research preamble
 2N0X integral.elementary_primes:
   hash: 3a258be86b24ce321a29f894708d31e028b3102267bdd152f12516392ce5fe57
@@ -32655,6 +32664,9 @@
 3IEW automorphisms.automorphism_group_generator_morphisms:
   hash: 0718f58e2a200cb2eb058886a95d4704521e0f20885d5e926d51234e2023bd9c
   by: research preamble
+3IEW automorphisms.automorphism_group_order:
+  hash: 08e362a4cba1101fc43770b0d83280809a205bb093be4bb11e4efa4829e5fd85
+  by: research preamble
 3IEW derive:
   hash: 5427aad8757a511919038acca51ff1d99a3149cc59b10036773715bf19308640
   by: research preamble
@@ -32666,6 +32678,9 @@
   by: research preamble
 3IEW integral.discriminant_form:
   hash: 49ff291a2418c844257b66376d8bc60998e5093301daf90c3709dbb4e904ce19
+  by: research preamble
+3IEW integral.discriminant_orbits:
+  hash: 836926d043d5fdec04e43e34f89abb48773450df4d738ac58ed02171df6d0c28
   by: research preamble
 3IEW integral.elementary_primes:
   hash: 7a10a3c34ea06a62591d567e959af0ce86af697ab098d655ae97cb8c4944facc
