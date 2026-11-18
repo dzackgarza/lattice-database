@@ -63,3 +63,33 @@ planes (`predicate_subgroups.py:645`–`:700`, step 3 there).
 
 So the rows (4.3.7)--(4.3.9) are blocked on that algorithm, not on this card's data: `K_J`, its root classes and the
 conflations are all computed and recorded above.
+
+## The call that does not exist, with the expressions it fails at
+
+The closed operation supplies two cheap parts, both measured this turn
+(`results/probe-43-transporter-supergroup.py`, pinned image, owner `main` `7753092`):
+
+- `supergroup.vector_equivalence_witness(r, r')` — the ambient witness — returned in **under 15 s**;
+- `supergroup.vector_equivalence_witness(w(v), v)` — a witness carrying the image cusp back — in **2.5 s**, and the
+  composite fixes the cusp exactly (`candidate(cusp) == cusp` is `True`).
+
+What does not exist is the class-level step. The three expressions that would carry it, and what each does:
+
+1. `image.contains(candidate)` raises
+   `ValueError: cannot decide membership of Morphism from Integral lattice of rank 12 … in the image of the stabilizer
+   at 2*e_2 + e_3 - 4*e_4 - … : it is not an isometry of the reduction Integral lattice of rank 10 and signature (1, 9)`
+   at `sage_extensions/categories/isotropic_orbits.py:3111`: membership needs the *reduced* isometry, and nothing
+   returns that reduction for a transporter built outside the image.
+2. `image.root_class_orbits(roots, stabilizer_generators=stabilizer)` returns **2 components of sizes [1, 1]** at
+   (4.3.8), because `image.generators()` is empty at a line — `generation_obstruction()` at
+   `isotropic_orbits.py:3785`, whose `parabolic_generators` still delegates to a family "stated for a primitive
+   isotropic plane and refuses rank one".
+3. `gamma.vector_equivalence_witness(r, r' + t v)` — the ambient predicate route — does not return (killed at
+   18 min 20 s), because with complete character data it walks the coset of an infinite stabilizer
+   (`orthogonal_quotients.py:3403`-`:3423`).
+
+**The missing call, named:** `IsotropicVectorReductionImage.vectors_are_equivalent(left, right)` — an exact decision for
+two *classes* of `K_J = v^\perp/\mathbb{Z}v`, returning a witness in `G_v` or a proof that none exists. The owner has the
+exact membership test and the exact ambient equivalence; nothing joins them at the quotient. With it the three rows
+would be one call each; without it the counts stay between 1 and the number of classes, as the two proved bounds above
+say.
