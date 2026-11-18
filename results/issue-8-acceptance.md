@@ -148,7 +148,9 @@ Test runs: `python -m pytest tests/test_genus.py -q` in the image, three times �
     49 passed in 487.12s (0:08:07)   # after the order field landed
 
 and `python -m pytest tests/test_model.py -q`: 73 passed in 15.97s — including
-`tests/test_model.py:93`, which states an indefinite card's order as `4` and as `aleph0`.
+`tests/test_model.py:93`, which states an indefinite card's order as `4` and as `aleph0` — and
+`python -m pytest tests/test_records.py -q`: 16 passed in 581.67s, which is the card-admission
+path the odd-order refusal lives in.
 
 including `tests/test_genus.py:594` `test_certification_stores_an_indefinite_card_automorphism_generators`,
 which runs `certify` for the generator field on a copy of U and checks that the stored generators are
