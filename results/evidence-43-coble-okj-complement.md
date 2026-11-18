@@ -83,8 +83,9 @@ $\Gamma_{\mathrm{Co},2}$. A definition of the latter, in the project's own paper
 > (`https://dzackgarza.com/rawnotes/Class_Notes/2024/Coble/CoblePaper.pdf`, the "summary of the relevant moduli
 > spaces" remark).
 
-That is a definition of the group, not the conjectural identification the corpus declines: it says which subgroup of
-$O(T_{\mathrm{En}})$ is meant, from the same paper whose Enriques-side group the card of `gamma-en-2` cites. What it is
-not is a published journal article — it is the author's own draft — so whether the corpus may key a card to it is a
-data-contract decision, not a computation. Nothing on 6JRR is changed by this note, and no value is invented for it:
-the index and the generators of $\Gamma_{\mathrm{Co},2}$ are absent.
+**Decided, and not in the draft's favour: a draft certifies nothing.** A page or a draft written by an agent is not a
+citation (AGENTS.md: no bare assertions); a card value is cited from a published source or certified by computation.
+So this passage records what the draft says, and keys nothing to it: there is no `gamma-co-2` card, the T_Co rows at
+cusps 3--5 stay empty and claim nothing, and they will be filled by a computation or not at all. The computation they
+would need is the one below, `IsotropicVectorReductionImage.vectors_are_equivalent`, so in practice they wait on the
+same missing operation as the three `T_{En}` rows.
