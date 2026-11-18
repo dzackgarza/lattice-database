@@ -33,7 +33,7 @@ jobs:
           docker exec -i sage-env apt-get update
           docker exec -i sage-env apt-get install --yes "$GITHUB_WORKSPACE/pandoc.deb"
           docker exec -i \
-            --env "PYTHONPATH=$GITHUB_WORKSPACE/research/src:$GITHUB_WORKSPACE/src" \
+            --env "PYTHONPATH=$GITHUB_WORKSPACE/research/src:$GITHUB_WORKSPACE/src:/repos/sage-extensions/src" \
             sage-env /sage/.venv/bin/python -m latticedb build
       - uses: actions/configure-pages@983d7736d9b0ae728b81ab479565c72886d7745b
       - uses: actions/upload-pages-artifact@56afc609e74202658d3ffba0e8f6dda462b719fa
