@@ -153,6 +153,12 @@ def applies(field: str, lattice: Lattice) -> bool:
       to generate that stabilizer at a primitive isotropic line
       (`generators_are_certified_complete` is `False`, sage-extensions#312), so a run of it
       counts identifications and not orbits, and no preamble operation states the count.
+
+    Two rules below read the owner's domain off the card's own data, and they are exceptions because
+    that refusal does not survive: a field whose computation raises ends its worker, and `certify`
+    raises `ChildProcessError` once the queue is done, so a card asked for a field the owner does not
+    define for it makes the run red. Every other field is still asked on every card that can store
+    it, and an owner that refuses one of those is recorded by `failures.record` and reported once.
     """
     if field in {"cusp_form_coordinates", "polarization_counts", "cusp_chambers", "cusp_root_orbits"}:
         return False
@@ -171,6 +177,25 @@ def applies(field: str, lattice: Lattice) -> bool:
     match field:
         case "roots" | "norms":
             return lattice.definite is None
+        case "spinor_regular" | "spinor_genus_count" | "spinor_genera":
+            # The owner defines the spinor fields in rank at least three and states the rank in its
+            # own refusal: `spinor_genus_count` raises "the spinor-genus count of Genus of even
+            # integral lattices of signature (2, 0) and determinant 3 is taken here in rank at least
+            # three, and the rank is 2", and `spinor_genus_class_numbers` — which `spinor_genera`
+            # and `is_spinor_regular` both reach — raises "spinor genera of Integral lattice of rank
+            # 2 and signature (2, 0) require a nondegenerate lattice of finite rank at least three".
+            # The rank is the card's own datum, so the threshold is read from the card and not
+            # copied from the owner's code, and a card of rank three or more is asked as before.
+            return lattice.rank is not None and lattice.rank >= 3
+        case "discriminant_orbits":
+            # `theory/orbits.md` gives the two orbit series to two kinds of card: $F_{L,\Gamma}$ is
+            # enumerated from a definite card's vectors and stored in `integral.primitive_orbits`,
+            # while $F_{A_L,\Gamma}$ is the series on the discriminant group of an even lattice whose
+            # hyperbolic index is at least two, and it is stored in `integral.discriminant_orbits`.
+            # No definite card carries the second series — the corpus's only two, 0040 and 0283, are
+            # indefinite — and asking one leaves an uncertified `integral.discriminant_orbits` in the
+            # queue of every run over A2.
+            return lattice.integral is not None and lattice.definite is None
         case _:
             return True
 

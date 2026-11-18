@@ -226,14 +226,18 @@ def test_an_indefinite_card_requests_its_orbit_rows_and_its_automorphism_generat
     assert "regular" not in requested
 
 
-def test_a_field_is_withheld_by_its_block_and_by_nothing_the_owner_could_answer() -> None:
-    """#8: the database withholds a field by the block the card cannot carry, and by no other rule.
+def test_a_field_is_withheld_by_its_block_and_by_the_two_domains_the_board_states() -> None:
+    """#8, #29: the block a card cannot carry withholds a field, and so do two domains the board states.
 
-    A2 is definite, even, rank 2; U is indefinite, even, rank 2 with hyperbolic index 1. The
-    owner's own domains — spinor genera of rank at least three, the discriminant sequence of a
-    definite even card, the Eichler hypothesis of the discriminant orbits, the class count of a
-    discriminant form — no longer withhold a request. An operation that refuses the card raises,
-    `failures.record` quarantines that input, and the next run does not ask it again.
+    A2 is definite, even, rank 2; U is indefinite, even, rank 2 with hyperbolic index 1. The owner's
+    domains — the discriminant sequence of a definite even card, the Eichler hypothesis of the
+    discriminant orbits, the class count of a discriminant form — no longer withhold a request: an
+    operation that refuses the card raises, `failures.record` quarantines that input, and the next run
+    does not ask it again. Two rules do withhold. The spinor fields, because the refusal there is not
+    survivable: the owner's own check ends the worker and then the run on a rank-2 card (#29), so the
+    card is not asked outside that rank. And the discriminant-orbit series, because `theory/orbits.md`
+    gives a definite card the other series: its orbits of primitive vectors are what `primitive_orbits`
+    enumerates, and `discriminant_orbits` is asked of an indefinite card.
     """
     definite = Lattice.model_validate(frontmatter.load(str(REPOSITORY / "lattices" / "0012.md")).metadata)
     indefinite = Lattice.model_validate(frontmatter.load(str(REPOSITORY / "lattices" / "0016.md")).metadata)
@@ -242,12 +246,15 @@ def test_a_field_is_withheld_by_its_block_and_by_nothing_the_owner_could_answer(
         "automorphism_group_generator_morphisms",
         "siegel_eisenstein_coefficients",
         "discriminant_sequence",
-        "spinor_regular",
-        "spinor_genus_count",
-        "spinor_genera",
         "discriminant_form",
     ):
         assert genus.applies(field, definite), field
+    for field in ("spinor_regular", "spinor_genus_count", "spinor_genera"):
+        assert not genus.applies(field, definite), f"{field} is defined at rank at least 3, and 0012 has rank 2"
+    assert not genus.applies("discriminant_orbits", definite), (
+        "a definite card's orbits are the primitive vectors `primitive_orbits` enumerates, and the "
+        "discriminant group's series is the indefinite card's"
+    )
     assert genus.applies("discriminant_sequence", indefinite), "the owner refuses a definite-only operation by raising"
     assert genus.applies("discriminant_orbits", indefinite), "hyperbolic index 1 is the owner's to refuse"
     assert genus.applies("discriminant_form", indefinite), "the hyperbolic plane's discriminant group is trivial"
