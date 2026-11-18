@@ -30962,6 +30962,9 @@
 3EBR integral.anisotropic_primes:
   hash: 45f55ffbd10cda4c1c87bd3c117721750fb7bfddbd4f1c9ad516517ba20a8c3d
   by: research preamble
+3EBR integral.discriminant_form:
+  hash: 1dc14732fab7a75c9654ed1cec77d0813a937bf6cb056b93e77310c5678ee202
+  by: research preamble
 3EBR integral.discriminant_sequence:
   hash: ffe616fab74a4134367b5fff330bac7143b72e1db84014305dea644c79c38b6a
   by: research preamble
@@ -31021,6 +31024,9 @@
   by: research preamble
 3EEX integral.anisotropic_primes:
   hash: edf3432d39c15f12d5b74dfd4fe2c84caaa8664d441f5165ddaa29ebef1f8aef
+  by: research preamble
+3EEX integral.discriminant_form:
+  hash: 39365c6a5544328091a495abe22e9a69dc5d54cf8fd62e85883b361b6ef851d7
   by: research preamble
 3EEX integral.discriminant_sequence:
   hash: 38c86ff9e58720d13a48bee94f15574db9190bdfc1ce966cc98d969e7d43f92e
@@ -31805,4 +31811,28 @@
   by: research preamble
 3I9N integral.spinor_genus_count:
   hash: 86f7da0b6a788d19a37147def121ca385aab16272344da3b5f76e9bba1c276f2
+  by: research preamble
+3S0F derive:
+  hash: 82dce8eef53fe4f133e7ad8bb9dccf2dbf99517c6556efb0511c90ddfde40e2d
+  by: research preamble
+3S0F form.integer_valued:
+  hash: 589a76c224b307b866d643ed03f4641fddb4d42065f582c39a7e833d8e5e0554
+  by: research preamble
+3S0F integral.elementary_primes:
+  hash: fb727b86afe8ec24fbb7fe4020f51439ad6a114ca37dbf2c8708faf027fe7905
+  by: research preamble
+3S0F integral.genus_class_count:
+  hash: 4a5c385ec5aa24940bb522132e45523edf715dde7a3563daf9546759fb06b135
+  by: research preamble
+3S0F integral.genus_symbol:
+  hash: 755eafd9febece974c54d2b01417f8c65bf5cfaea9ebba4f70dad999c13b4b73
+  by: research preamble
+3S0F integral.overlattice_count:
+  hash: 5c10940ee8fcf54e50471e81d461c1e0cf7bee9be26d97610439c13d98fb0a47
+  by: research preamble
+3S0F integral.spinor_genera:
+  hash: 2e3919e887d8508b13ec4cbab9a1d950de7ae7f985ed5fca5ba28d41a8abb20c
+  by: research preamble
+3S0F integral.spinor_genus_count:
+  hash: daa3745664ad272ae1580441d0b066509b97ef6526f358d51ff71722bab00760
   by: research preamble
