@@ -80,10 +80,11 @@ BLOCKS: dict[str, tuple[str, type[BaseModel]]] = {
 """Each preamble-computed field, with the card block that stores it."""
 
 AUTOMORPHISMS = "automorphisms"
-"""The block of an indefinite card's automorphism data: the generators of $O(L)$, no order.
+"""The block of an indefinite card's automorphism data: the order of $O(L)$ and its generators.
 
-$O(L)$ of an indefinite lattice is infinite, so the card states the group by its
-generators; the order is a field of `definite` alone (#8).
+An indefinite lattice's $O(L)$ may be finite or countably infinite, so the card states the order
+here — an integer, or `aleph0` — and presents the group by its generators. A definite card states
+the order with its generators in `definite` (#8).
 """
 
 ORBIT_CERTIFIED_BOUND = card_serialization.ORBIT_CERTIFIED_BOUND
@@ -125,57 +126,40 @@ def certified_value(field: str, value: Yaml, lattice: Lattice | None = None) -> 
 def applies(field: str, lattice: Lattice) -> bool:
     """Whether `certify` asks the preamble for `field` of this stored lattice.
 
-    The database asks for a field when two things hold: the card can store the value,
-    and the card lies in the domain the owner states for the operation. Neither is a
-    guess at what the owner can compute — the owner says where it is defined, in its
-    own errors ("spinor genera of Integral lattice of rank 2 and signature (2, 0)
-    require a nondegenerate lattice of finite rank at least three") and in the schema,
-    and a card outside a domain gets no field rather than a failure queued every run.
+    The database asks for a field when the card can store its value, and for no other reason.
+    Where an operation is defined is the owner's to say: an operation that refuses this card
+    raises, the raise is its refusal, `failures.record` quarantines that input
+    (`failures.blocked`), and the run reports it once with `ChildProcessError` (#8). A
+    database-side copy of the owner's domain withholds the call from a card the owner has since
+    learned to answer — which is what this predicate did to `integral.primitive_orbits` and to
+    the automorphism fields of an indefinite card — and the copy goes stale every time the owner
+    extends an operation.
 
-    The database's own facts:
+    The database's own facts, which are not the owner's domain:
     - `cusp_form_coordinates`: the owner does not present it.
     - The block a value is stored in names its hypothesis, so a field of `definite`,
-      `indefinite`, `hyperbolic` or `integral` is asked only on a card that satisfies
-      it; a value written into `definite` on an indefinite card would contradict the
-      card's `definiteness`.
-    - `roots` and `norms` are stored in `root_span`, which the schema refuses on a
-      definite card, whose roots are `definite.roots`.
-
-    The owner's stated domain:
-    - `spinor_regular`, `spinor_genus_count` and `spinor_genera`: rank at least 3, as
-      the owner's error states.
-    - `siegel_eisenstein_coefficients`: rank at least 2, Siegel's Hauptsatz requiring
-      more than one variable.
-    - `reflective`: rank at least 3, signature (1, 1) being a half-line where no
-      polyhedron criterion applies.
-    - `discriminant_sequence`: a definite even card, its discriminant form being the
-      quadratic form of an even lattice.
-    - `discriminant_orbits`: the Eichler hypothesis of `theory/orbits.md`, an even
-      lattice of hyperbolic index at least 2.
-    - `polarization_counts`: no preamble operation presents a table of a source, and
-      every count it holds is certified by the citation of that table.
-    - `cusp_chambers`: a chamber is the source's walls, and the Gram matrix, diagram
-      and wall count of them are what the card's form says; no preamble operation
-      searches for a chamber, and a Vinberg search is never run to fill a row.
-    - `cusp_root_orbits`: the orbits are of the cusp stabilizer's action, and the owner's
-      orbit call identifies two classes only through the generators it is given: it is not
-      certified to generate that stabilizer at a primitive isotropic line
+      `indefinite`, `hyperbolic` or `integral` is asked only on a card that satisfies it; a
+      value written into `definite` on an indefinite card would contradict the card's
+      `definiteness`.
+    - `roots` and `norms` are stored in `root_span`, which the schema refuses on a definite
+      card, whose roots are `definite.roots`.
+    - `polarization_counts`: no preamble operation presents a table of a source, and every
+      count it holds is certified by the citation of that table.
+    - `cusp_chambers`: a chamber is the source's walls, and the Gram matrix, diagram and wall
+      count of them are what the card's form says; no preamble operation searches for one, and
+      a Vinberg search is never run to fill a row.
+    - `cusp_root_orbits`: the orbits are of the cusp stabilizer's action, and the owner's orbit
+      call identifies two classes only through the generators it is given: it is not certified
+      to generate that stabilizer at a primitive isotropic line
       (`generators_are_certified_complete` is `False`, sage-extensions#312), so a run of it
       counts identifications and not orbits, and no preamble operation states the count.
-    - `discriminant_form`: $q_L$ is a quadratic form only on an even lattice, and the owner
-      partitions $A_L$, so the request is made on an even card whose classes of $A_L$ are few,
-      $|A_L| = |\\det L| \\leq 4096$.
-
-    Everything else — including `integral.primitive_orbits` and the automorphism
-    generators on an indefinite card — is asked on every card that can store it (#8).
     """
     if field in {"cusp_form_coordinates", "polarization_counts", "cusp_chambers", "cusp_root_orbits"}:
         return False
     block_name, _model = stored_in(field, lattice.definiteness)
     match block_name:
-        # The block gate only rejects: a field it admits still has to pass the
-        # operation's own domain below, which is how a definite card of rank 2 is
-        # refused for spinor regularity.
+        # The block gate only rejects: a field it admits is requested, whatever the operation's
+        # own domain turns out to be, and the owner's raise is what answers for that domain.
         case "definite" if lattice.definite is None:
             return False
         case "indefinite" if lattice.indefinite is None:
@@ -184,31 +168,9 @@ def applies(field: str, lattice: Lattice) -> bool:
             return False
         case "integral" if lattice.integral is None:
             return False
-    rank = lattice.rank
     match field:
         case "roots" | "norms":
             return lattice.definite is None
-        case "discriminant_form":
-            # q_L is a quadratic form only on an even lattice, and the orbit partition is of the
-            # classes of A_L, so the request is made on an even card with |A_L| = |det L| small.
-            return (
-                lattice.integral is not None
-                and lattice.integral.parity == "even"
-                and lattice.determinant is not None
-                and abs(lattice.determinant) <= 4096
-            )
-        case "reflective" | "spinor_regular" | "spinor_genus_count" | "spinor_genera":
-            if rank is None:
-                raise ValueError(f"{field} requires a stored source rank")
-            return rank >= 3
-        case "siegel_eisenstein_coefficients":
-            if rank is None:
-                raise ValueError(f"{field} requires a stored source rank")
-            return rank >= 2
-        case "discriminant_sequence":
-            return lattice.definite is not None and lattice.integral.parity == "even"
-        case "discriminant_orbits":
-            return lattice.definite is None and lattice.integral.parity == "even" and (lattice.integral.hyperbolic_index or 0) >= 2
         case _:
             return True
 
@@ -263,8 +225,8 @@ def stored_in(field: str, definiteness: str | None = None) -> tuple[str, type[Ba
     """The block that stores `field` on a card of `definiteness`, and that block's model.
 
     A definite card states the order of $O(L)$ with its generators in `definite`, where
-    `BLOCKS` keeps every field. An indefinite lattice's $O(L)$ is infinite, so its data
-    is the generators alone and lives in `automorphisms` (#8).
+    `BLOCKS` keeps every field. An indefinite lattice's $O(L)$ may be finite or countably
+    infinite, so its order and its generators both live in `automorphisms` (#8).
 
     A row of an orbit series — `primitive_orbits[Otilde]` — is stored in the block of the
     field it is a row of.
@@ -273,7 +235,7 @@ def stored_in(field: str, definiteness: str | None = None) -> tuple[str, type[Ba
     if row is not None:
         return stored_in(row[0], definiteness)
     match (field, definiteness):
-        case ("automorphism_group_generator_morphisms", "indefinite"):
+        case ("automorphism_group_order" | "automorphism_group_generator_morphisms", "indefinite"):
             return AUTOMORPHISMS, Automorphisms
         case ("polarization_counts", _):
             # Outside BLOCKS: the preamble does not compute it, and a cited count is never requested.
