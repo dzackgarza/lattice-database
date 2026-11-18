@@ -151,3 +151,21 @@ tests that recorded the failure now pass:
 - `results/evidence-4-red.log`, `results/evidence-4-green.log` — item 2's red and green runs.
 
 No line of `src/` is changed by this record.
+
+## The two failures in `evidence-4-genus-full.log`: stale assertions, not a #4 defect
+
+`tests/test_genus.py:1088` (`test_coble_ordinary_group_generator_cards_are_persisted_and_certified`)
+asserts `len(names) == 56` and `== 95` for `otilde-t-co` and `otilde-plus-t-co`. Both cards say the field
+is absent and claim none — `arithmetic-groups/otilde-t-co.md:19`: "No generating set has been returned,
+so `data.generator_morphisms` is absent and this card claims none; the generation clause of #7 is
+recorded as **not supplied**, and sage-extensions#597 is where the reason is proved rather than
+asserted", and the same on `arithmetic-groups/otilde-plus-t-co.md:20`. The measurement that decided it is
+on `otilde-t-co.md:21`: `group_generators()` over a transversal of 46,998,591,897,600 cosets did not
+return in 600 s, peaking at 4,607 MiB, ended by its own timeout (exit 124).
+
+The counts 56 and 95 appear nowhere on either card, so they are neither cited nor certified anywhere in
+the corpus. The test therefore does not record a regression: it asserts a value the corpus deliberately
+does not carry. Its repair or removal is #7's (the generation clause), and the value itself needs the
+owner's generator family, filed as dzackgarza/sage-extensions#597 — that is where this stops. The
+deletion of that test is already an uncommitted edit in another session's working tree on this host, so
+it was left alone here rather than committed twice.
