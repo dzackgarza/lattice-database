@@ -60,3 +60,19 @@ would state 029J's cusp orbits as complete when four are missing; it can be land
 
 The T_Co card's rows at cusps 3--5 have not been touched: they are the same question in $K_I$ under
 $\Gamma_{\mathrm{Co},2}$, and this finding is about the $T_{En}$ side.
+
+## Second opinion, in the pinned runtime
+
+The genus in the table above is Sage's own (`IntegralLattice(gram).genus()`), computed on host Sage 10.8. The
+repository's own operation for this number is `integral.genus_class_count`, whose owner is
+`Lattices(ZZ)(gram).genus_class_number()` in `sage_extensions.categories.lattices`. That operation, in the pinned
+image (Sage 11.0.beta5, sage-extensions `main` bound over `/repos/sage-extensions`), on the two complements at
+(4.3.8):
+
+```
+class number 1 det 512
+class number 1 det 512
+```
+
+Two implementations agree, so "one class in the genus" is not one library's opinion: each complement at that cusp is
+the unique class of its genus, and the two are then isometric.
