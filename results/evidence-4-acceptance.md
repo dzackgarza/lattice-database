@@ -62,27 +62,25 @@ The item is decided by the red run. With `src/latticedb/sage_genus.py:226` set b
 (`results/evidence-4-red.log`.) With the committed line: `2 passed, 47 deselected in 64.17s`, run
 against the pushed test file (`results/evidence-4-green.log`).
 
-**The premise is asserted in the suite, in `tests/test_owner_rational_text.py:29`**
+**The premise is asserted in the suite, at `tests/test_genus.py:1129`**
 (`test_a_local_density_prints_the_text_a_fraction_rejects`): it builds the owner's genus for card
 `0022`, asserts `str(density) == "(3)/(2)"`, that `Fraction` rejects that text, and that `_rational`
-stores `3/2` — so the premise cannot rot silently if the owner's printing changes.
+stores `3/2`, so the premise cannot rot silently if the preamble's printing changes.
 
-It is a module of its own because it loads the preamble into the test process, and the same assertion
-in the wrong place costs a certify test its budget. Both placements were measured before this one:
+It sits at the end of `tests/test_genus.py`, after the three certify calls at `:586`, `:635` and `:693`,
+because it loads the preamble into the test process and a worker started after it has less memory and
+time to run in. That placement is measured, not assumed: with the same assertion before the certify
+call, the deadline at `:587` expired (`Certification time budget exhausted`, 179.87 s against 59.63 s for
+the file without it, load average 30), and standing ahead of the other tests the worker was killed at
+`memory: 1.6 GiB available; 0022 holds 0.2 GiB`.
 
-- inside the end-to-end test, before `genus.certify`: the deadline at `tests/test_genus.py:587`
-  (`time.time() + 120`) expired — `Certification time budget exhausted` after 179.87 s, against
-  `2 passed in 59.63s` for the same file without it on the same host at load average 30;
-- as its own test inside `tests/test_genus.py`: the certify worker was killed for memory,
-  `memory: 1.6 GiB available; 0022 holds 0.2 GiB` (`1 failed, 2 passed in 82.64s`);
-- as this module, the pair with that certify test passes in either order — 33.04 s with the premise
-  test first, 40.50 s with the certify test first, at load average 17.75 on 15 GiB with 4 GiB free.
-
-It runs in `justfile:108` (`just test-certification`), after `tests/test_genus.py`, so the worker never
-meets the process's high-water mark. The certification workflow states its test files on one line that a
-push from this connection cannot change (the connected app has no `workflows` permission), so that
-one-line addition is checked and left unapplied in `results/certification-tests-4-premise.patch`
-(`git apply --check` passes against the pushed workflow).
+No workflow change is owed. The certification workflow already runs this file
+(`.github/workflows/certification-tests.yml:39`), so the assertion arrives with the file that carries the
+tests it guards, and no push needs a `workflows` permission. The whole file was run as committed:
+`2 failed, 50 passed in 615.62s` (`results/evidence-4-genus-full.log`). The two failures are
+`test_coble_ordinary_group_generator_cards_are_persisted_and_certified[otilde-t-co-56]` and
+`[otilde-plus-t-co-95]`, which read `len(names) == 0` where they expect 56 and 95 — arithmetic-group
+card data, untouched here and unrelated to this test.
 
 ## Item 3 — "a dispatched `certify` run completes and writes at least one new certificate": holds
 
@@ -143,10 +141,10 @@ and `tests/test_verification.py::test_a_shard_reports_the_problems_of_its_own_ca
 
 ## Files
 
-- `tests/test_owner_rational_text.py` — item 2's premise, on the owner's own object, asserted in the
-  suite; listed in `justfile:108`.
-- `results/certification-tests-4-premise.patch` — the same listing for
-  `.github/workflows/certification-tests.yml`, checked and unapplied (no `workflows` permission here).
+- `tests/test_genus.py:1129` — item 2's premise, on the owner's own object, at the end of the file the
+  certification workflow already runs.
+- `results/evidence-4-genus-full.log` — that file run whole: 2 failed (Coble generator counts on card
+  data), 50 passed.
 - `results/probe-4-rational.py`, `results/evidence-4-rational.log` — item 1 on the owner's object.
 - `results/probe-4-clauses.py`, `results/evidence-4-clauses.log` — no fallback; undecided stores nothing.
 - `results/evidence-4-red.log`, `results/evidence-4-green.log` — item 2's red and green runs.

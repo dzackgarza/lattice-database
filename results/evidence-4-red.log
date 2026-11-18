@@ -9,4 +9,4 @@ ValueError: Invalid literal for Fraction: '(3)/(2)'
 =========================== short test summary info ============================
 FAILED tests/test_genus.py::test_a_rational_is_serialized_from_its_numerator_and_denominator_never_its_text
 FAILED tests/test_genus.py::test_certification_stores_the_exact_two_adic_densities_of_the_sum_of_three_squares
-2 failed, 46 deselected in 3.88s
+2 failed, 47 deselected in 54.67s
