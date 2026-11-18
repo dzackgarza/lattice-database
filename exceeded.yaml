@@ -866,10 +866,6 @@
   hash: a28dda54dc7199f07ba96f97bfe5a95cb703e887ffa455ef6c23d2133112b5ec
   seconds: 0
   lost: true
-3EAY integral.discriminant_form:
-  hash: beff62876a9aed4e5a095ff3ccff9c55d0df5a0fbd2c6d96fd0a3cf812e3b1aa
-  seconds: 0
-  lost: true
 3ECY integral.discriminant_form:
   hash: a9e702044ec86116f4a47c166e1a26aa7f6d431aa8df66141efc5901409c20f4
   seconds: 0
@@ -1167,6 +1163,10 @@
 58S6 integral.local_densities:
   hash: e5378e409c24f7701e373876b32586a87eb5a9cf04b7ada7350ac466781f0804
   seconds: 0
+  lost: true
+6DEN integral.hyperbolic_index:
+  hash: b5cc3b80e3ba3a13a947cfd457f6ea7b30b31fc4e52cffe4ec2a03ab80923bed
+  seconds: 160
   lost: true
 6JRR arithmetic-group.otilde-plus-t-co.index_in_orthogonal_group:
   hash: acad0e18f0c158ad5bda122e435bae4133bd93287223e2a8ce2c8b611148e2d3
