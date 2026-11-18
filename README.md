@@ -226,7 +226,7 @@ A person writes `name`, `latex`, `aliases`, `families`, `related`, `references` 
 Lattice-db contains no implementation of these operations.
 For a definite integral lattice, CI consumes `L.orthogonal_group()`: the preamble computes and frames $O(L)$, and lattice-db only serializes its cardinality and generator isometries.
 Generator matrices are stored once, as isometries $L\to L$ (morphism entries from the card to itself with `scale: 1`), and the `definite` field stores their names.
-On an indefinite lattice the same operation returns generators of an infinite $O(L)$: the card stores them, and only them, in `automorphisms`, because the group has no order to state.
+On an indefinite lattice the same operation returns the order and the generators of $O(L)$: the card stores both in `automorphisms`, the order as an integer where the group is finite ($|O(U)| = 4$) and as `aleph0` where the owner states a countably infinite group.
 The discriminant sequence and the two orbit series are likewise computed by lattice methods and serialized by the certification adapter.
 A completed computation replaces any disagreeing authored value in the scope it computes and then certifies the resulting card value.
 A computation has no time limit of its own: it runs until it finishes or the CI job ends.
@@ -242,7 +242,7 @@ The block itself is stored data: the schema validates its shape, while mathemati
 | --- | --- | --- |
 | `form` | a stored bilinear form | `integer_valued` |
 | `integral` | every $b(e_i, e_j)$ is an integer | `parity`, `elementary_primes`, `level`, `modular_scale`, `discriminant_group`, `discriminant_sequence`, `overlattice_count`, `delta`, `bad_reduction_primes`, `quadratic_character`, `genus_symbol`, `genus_class_count`, `spinor_genus_count`, `spinor_genera`, `hyperbolic_index`, `primitive_orbits`, `cusp_chambers`, `cusp_root_orbits`, `polarization_counts`, `discriminant_form`, `anisotropic_primes`, `local_representations`, `local_densities` |
-| `automorphisms` | $b$ is not definite, so $O(L)$ is infinite: the group is stated by generators and has no order | `automorphism_group_generator_morphisms` |
+| `automorphisms` | $b$ is not definite: $O(L)$ is stated by its order — an integer, or `aleph0` — with the names of its generators | `automorphism_group_order`, `automorphism_group_generator_morphisms` |
 | `definite` | $b$ is positive or negative definite | `minimum`, `kissing_number`, `minimal_vectors`, `perfect`, `regular`, `spinor_regular`, `automorphism_group_order`, `automorphism_group_generator_morphisms`, `theta_series`, `genus_theta_series`, `theta_series_cuspidal_component`, `cusp_form_coordinates`, `siegel_eisenstein_coefficients`, `root_system`, `roots` |
 | `root_span` | $b$ is not definite | `roots`, `norms`, `summands`, `embedding` |
 | `root_sublattice` | $b$ is definite, or the record has `root_span` | `invariant_factors`, `norms` |
@@ -252,7 +252,7 @@ The block itself is stored data: the schema validates its shape, while mathemati
 All invariant blocks and computed fields may be absent on a sparse card.
 A populated field is either authored/source-stated or the serialized result of a preamble operation.
 `definite.automorphism_group_generator_morphisms` and `automorphisms.automorphism_group_generator_morphisms` are lists of names of isometries $L\to L$ on the same card (morphism entries with `scale: 1`); their certificates commit to the corresponding matrices, not to the chosen names.
-An indefinite lattice's $O(L)$ is infinite, so its card states the group in `automorphisms`, by generators alone: `latticedb certify` asks the preamble operation `L.orthogonal_group()` for them, and there is no order field to fill (`theory/indefinite-lattices.md`).
+An indefinite lattice's $O(L)$ may be finite — $|O(U)| = 4$ — or countably infinite, so its card states the group in `automorphisms` by its order and its generators: `latticedb certify` asks the preamble operation `L.orthogonal_group()` for both, and the order is an integer where the group is finite and `aleph0` where the owner states a countably infinite group (`theory/indefinite-lattices.md`).
 `integral.primitive_orbits` maps each of `O`, `SO`, `O+`, `SO+`, `Otilde`, `SOtilde`, `Otilde+` and `SOtilde+` to the coefficients `constant`, `z` and `w` of the series $F_{L,\Gamma}(z, w)$, null where a coefficient is not known and `aleph0` where the owner states a countably infinite count (`theory/orbits.md`).
 `z` and `w` count the $\Gamma$-orbits of primitive vectors of norm $n$ and $-n$; `constant` counts the $\Gamma$-orbits of primitive isotropic **lines**, the rank-one isotropic sublattices, and not of vectors: the primitive vectors of a line $\mathbb{Z}v$ are its two generators $v$ and $-v$ and no others, because $kv$ is imprimitive for $|k| \geq 2$, so the vector count is twice the line count unless an orbit is its own negative.
 The two counts differ where a vector orbit is not its own negative — the orbits of $v$ and of $-v$ are one line orbit unless $-v = \gamma v$ — and agree on a definite card, where both are 0.

@@ -80,10 +80,11 @@ BLOCKS: dict[str, tuple[str, type[BaseModel]]] = {
 """Each preamble-computed field, with the card block that stores it."""
 
 AUTOMORPHISMS = "automorphisms"
-"""The block of an indefinite card's automorphism data: the generators of $O(L)$, no order.
+"""The block of an indefinite card's automorphism data: the order of $O(L)$ and its generators.
 
-$O(L)$ of an indefinite lattice is infinite, so the card states the group by its
-generators; the order is a field of `definite` alone (#8).
+An indefinite lattice's $O(L)$ may be finite or countably infinite, so the card states the order
+here — an integer, or `aleph0` — and presents the group by its generators. A definite card states
+the order with its generators in `definite` (#8).
 """
 
 ORBIT_CERTIFIED_BOUND = card_serialization.ORBIT_CERTIFIED_BOUND
@@ -263,8 +264,8 @@ def stored_in(field: str, definiteness: str | None = None) -> tuple[str, type[Ba
     """The block that stores `field` on a card of `definiteness`, and that block's model.
 
     A definite card states the order of $O(L)$ with its generators in `definite`, where
-    `BLOCKS` keeps every field. An indefinite lattice's $O(L)$ is infinite, so its data
-    is the generators alone and lives in `automorphisms` (#8).
+    `BLOCKS` keeps every field. An indefinite lattice's $O(L)$ may be finite or countably
+    infinite, so its order and its generators both live in `automorphisms` (#8).
 
     A row of an orbit series — `primitive_orbits[Otilde]` — is stored in the block of the
     field it is a row of.
@@ -273,7 +274,7 @@ def stored_in(field: str, definiteness: str | None = None) -> tuple[str, type[Ba
     if row is not None:
         return stored_in(row[0], definiteness)
     match (field, definiteness):
-        case ("automorphism_group_generator_morphisms", "indefinite"):
+        case ("automorphism_group_order" | "automorphism_group_generator_morphisms", "indefinite"):
             return AUTOMORPHISMS, Automorphisms
         case ("polarization_counts", _):
             # Outside BLOCKS: the preamble does not compute it, and a cited count is never requested.

@@ -217,13 +217,13 @@ def test_an_indefinite_card_requests_its_orbit_rows_and_its_automorphism_generat
     requested = [field for request in genus.requests(corpus.load(tmp_path), held, {}, ("0016",)) for field in request["fields"]]
     assert "derive" not in requested, "a current derivation selects this card's fields, so the queue is the one a run works"
     assert "automorphism_group_generator_morphisms" in requested
+    assert "automorphism_group_order" in requested, "O(U) is finite, and the order is a field of this card"
     assert {field for field in requested if field.startswith("primitive_orbits[")} == {
         genus.orbit_row("primitive_orbits", subgroup) for subgroup in STANDARD_SUBGROUPS
     }
-    # A `definite` field is still withheld from this card, by the schema rather than by an owner
-    # limit: an indefinite card has no `definite` block, and `automorphisms` states the generators
-    # of an infinite group and no order.
-    assert "regular" not in requested and "automorphism_group_order" not in requested
+    # `regular` is still withheld from this card, by the schema rather than by an owner limit: an
+    # indefinite card has no `definite` block.
+    assert "regular" not in requested
 
 
 def test_a_field_is_withheld_by_its_block_and_by_the_domain_the_owner_states() -> None:
@@ -595,7 +595,7 @@ def test_certification_stores_the_exact_two_adic_densities_of_the_sum_of_three_s
 
 
 def test_certification_stores_an_indefinite_card_automorphism_generators(tmp_path: Path) -> None:
-    """#8: U's O(L) is infinite, so its card is asked for the generators alone and certifies them."""
+    """#8: U's card is asked for the order of $O(L)$ and its generators, and certifies both."""
     (tmp_path / "lattices").mkdir()
     shutil.copy(REPOSITORY / corpus.FAMILIES_FILE, tmp_path / corpus.FAMILIES_FILE)
     (tmp_path / corpus.RETIRED_FILE).write_text("{}\n")
@@ -630,10 +630,14 @@ def test_certification_stores_an_indefinite_card_automorphism_generators(tmp_pat
     loaded = corpus.load(tmp_path)
     # U is even and unimodular, so its discriminant form is trivial but stated: |O(q)| = 1, one
     # isotropic class and one orbit. The card does not state it, so certify asks for it.
-    assert [field for request in genus.requests(loaded, held, {}, ("0016",)) for field in request["fields"]] == ["automorphism_group_generator_morphisms", "discriminant_form"]
-    genus.certify(tmp_path, loaded, held, ("0016",), time.time() + 120)
+    assert [field for request in genus.requests(loaded, held, {}, ("0016",)) for field in request["fields"]] == [
+        "automorphism_group_order",
+        "automorphism_group_generator_morphisms",
+        "discriminant_form",
+    ]
+    genus.certify(tmp_path, loaded, held, ("0016",), time.time() + 240)
     card = corpus.front_matter(corpus.read_card(path))
-    # The group is stated by generators alone: no order field, and no `definite` block.
+    # The group is stated in `automorphisms`: its order, which is finite for U, and its generators.
     assert "definite" not in card
     certified = Lattice.model_validate(card)
     assert certified.automorphisms is not None
@@ -666,7 +670,9 @@ def test_certification_stores_an_indefinite_card_automorphism_generators(tmp_pat
                 generated.add(key)
                 frontier.append(image)
     assert len(generated) == 4, f"the stored generators span a group of order {len(generated)}, not |O(U)| = 4"
-    assert "automorphism_group_order" not in card["automorphisms"]
+    # The order the owner states is the order those generators span, and it is certified with them.
+    assert card["automorphisms"]["automorphism_group_order"] == 4
+    assert genus.name("0016", "automorphism_group_order", "indefinite") in certificates.load(tmp_path)
     assert genus.name("0016", "automorphism_group_generator_morphisms", "indefinite") in certificates.load(tmp_path)
 
 
@@ -1090,6 +1096,26 @@ def test_a_computed_generator_is_stored_once_as_a_self_isometry_of_the_lattice(t
     assert dict(stored) == {"generator_morphisms": [matrix], "index_in_orthogonal_group": 93997183795200}
     # The name is what the certificate commits to indirectly: it commits to the matrix.
     assert genus.certified_value("arithmetic-group.otilde-plus-t-co.generator_morphisms", list(group.data.generator_morphisms or ()), lattice) == [matrix]
+
+
+@pytest.mark.parametrize("slug,expected_count", [("otilde-t-co", 56), ("otilde-plus-t-co", 95)])
+def test_coble_ordinary_group_generator_cards_are_persisted_and_certified(slug: str, expected_count: int) -> None:
+    """Both completed Coble generator computations survive as certified card morphisms."""
+    lattice = Lattice.model_validate(corpus.front_matter(corpus.read_card(REPOSITORY / "lattices/6JRR.md")))
+    group = ArithmeticGroup.model_validate(corpus.front_matter(
+        corpus.read_card(REPOSITORY / "arithmetic-groups" / f"{slug}.md")
+    ))
+    names = list(group.data.generator_morphisms or ())
+    assert len(names) == expected_count
+    assert len(set(names)) == expected_count
+    values = genus.certified_value(f"arithmetic-group.{slug}.generator_morphisms", names, lattice)
+    assert len(values) == expected_count
+    computation = genus.name("6JRR", f"arithmetic-group.{slug}.generator_morphisms", lattice.definiteness)
+    digest = certificates.certification_hash(computation, lattice, values)
+    held = certificates.load(REPOSITORY, ("6JRR",))
+    assert certificates.is_certified(
+        held, computation, lattice.certifications.get(f"arithmetic-group.{slug}.generator_morphisms"), digest
+    )
 
 
 def test_a_stated_arithmetic_group_value_without_its_computation_is_a_verification_problem(tmp_path: Path) -> None:
