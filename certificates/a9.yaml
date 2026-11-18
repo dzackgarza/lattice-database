@@ -21855,9 +21855,7 @@
   by: research preamble
 2N1H definite.spinor_regular:
   hash: d1304de4a2f35c62f3e904d37092212dfd450965bde352bfdcb438d252afb3a7
-  by: A. G. Earnest and A. Haensch, Completeness of the list of spinor regular ternary
-    quadratic forms, arXiv:1711.05811v2 (2018), Table 1, row 5; its spinor genus has
-    one class.
+  by: research preamble
 2N1H definite.theta_series_cuspidal_component:
   hash: fdf0e47fafce5df471d9d609c5591f95f82e75f957d4c77e934466cb0a0b7fc2
   by: research preamble
@@ -21869,6 +21867,9 @@
   by: research preamble
 2N1H integral.anisotropic_primes:
   hash: 5a5f9ebb15365c42a961c5dfe38ebcdc271e64b74fe483f5baf62ad05174d130
+  by: research preamble
+2N1H integral.discriminant_sequence:
+  hash: 8f66e53e3ae7124de694aa72781ce413f10f09fb19311ce5a1b7b77b5d066daf
   by: research preamble
 2N1H integral.elementary_primes:
   hash: cfc937e1e3b30c7473626329bd940cd7a965678e651397ec61ff53ea1ec5d8c1
@@ -21927,6 +21928,9 @@
 2N2M integral.anisotropic_primes:
   hash: 153a9020194f17d073dc90ae23916f84601cd6eaaf9f3f3c34ed76d4c2648796
   by: research preamble
+2N2M integral.discriminant_sequence:
+  hash: f7cffca8ef6ef00bf65116de19bce914d28aeee13587872fb3c823dd526b9983
+  by: research preamble
 2N2M integral.elementary_primes:
   hash: 4ccf120500bfa0faaac580e6d0554f5833b4a5cbbeda6388b3822025ceeb5a13
   by: research preamble
@@ -21983,6 +21987,9 @@
   by: research preamble
 2N5R integral.anisotropic_primes:
   hash: 7157a12e7fcf410f5f2bf5a24dd1acf9fd0cd7c92180580e7529a913b4ae7ed5
+  by: research preamble
+2N5R integral.discriminant_sequence:
+  hash: ec23537aa6f42de146b19637f6763b8855eacd8fad59b36ad7fdbd41dbc3d9f8
   by: research preamble
 2N5R integral.elementary_primes:
   hash: 79d37b1af18d749ba3b5b3d80d4986954fa4d77cf19ab5327ae2f4c654c3bf1a
