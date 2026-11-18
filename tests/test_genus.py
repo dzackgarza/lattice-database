@@ -1109,8 +1109,20 @@ def test_a_stated_arithmetic_group_value_without_its_computation_is_a_verificati
     root = coble_corpus(tmp_path)
     path = root / "arithmetic-groups" / "otilde-t-co.md"
     document = frontmatter.load(str(path))
-    document.metadata["data"] = {**(document.metadata.get("data") or {}), "index_in_orthogonal_group": 46998591897600}
+    data = dict(document.metadata.get("data") or {})
+    # This test isolates the index certificate.  The fixture's real card also
+    # carries generator_morphisms, whose independent certificate is deliberately
+    # not copied into this temporary corpus.
+    data.pop("generator_morphisms", None)
+    data["index_in_orthogonal_group"] = 46998591897600
+    document.metadata["data"] = data
     path.write_text(frontmatter.dumps(document))
+    card = root / "lattices" / "6JRR.md"
+    lattice_document = frontmatter.load(str(card))
+    certifications = dict(lattice_document.metadata.get("certifications") or {})
+    certifications.pop("arithmetic-group.otilde-t-co.generator_morphisms", None)
+    lattice_document.metadata["certifications"] = certifications
+    card.write_text(frontmatter.dumps(lattice_document))
     problems = checks.records.problems(corpus.load(root), {}, frozenset({"6JRR"}))
     assert any("arithmetic group otilde-t-co: the stated index_in_orthogonal_group" in problem for problem in problems), problems
     held = certify_index(root, "otilde-t-co", 46998591897600)
