@@ -55,8 +55,9 @@ The owner does answer the order on indefinite cards, so the field has a block no
     0016 indefinite rank 2 cardinality 4    type Cardinalities.parent_class finite True  1.0s
     0024 indefinite rank 3 cardinality ℵ_0  type Cardinalities.parent_class finite False 1.4s
 
-- `src/latticedb/invariant_models.py:936` — `Automorphisms.automorphism_group_order: OrbitCount`:
-  an integer where $O(L)$ is finite, `aleph0` where the owner states a countably infinite group.
+- `src/latticedb/invariant_models.py:945` — `Automorphisms.automorphism_group_order: OrbitCount`
+  (the block's model at `:936`): an integer where $O(L)$ is finite, `aleph0` where the owner states
+  a countably infinite group.
 - `src/latticedb/genus.py:277` — `stored_in` sends both automorphism fields to `automorphisms` on an
   indefinite card, so `applies` has no definiteness case to answer and the request carries both.
 - `src/latticedb/sage_genus.py:70` — `_orthogonal_group_data` serializes the order for every lattice,
