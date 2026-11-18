@@ -11,6 +11,9 @@ certifications:
   integral.overlattice_count: 65f625b62bcec6d44ec5b291773cbefa07c5beac408438d9e1b990e9fd2b3524
   integral.spinor_genus_count: 252aec05e0618e1e49a163ed287d3c5bb580faf3846e0b725f5bc20411a6ec86
   integral.spinor_genera: 8616132430980c82f472fa12fee92ced06be1b9a4cb44df95f4e9b4f448f0693
+  integral.hyperbolic_index: a0385ace2ec53eec80515143f1a21ef67efe5bb834d7838d42e0386f4ef9d7cb
+  automorphisms.automorphism_group_generator_morphisms: 4079818b3869aa14143672c9d9da27e3bb1322f7aceca387b8a710d68c1def21
+  integral.discriminant_form: f18e32fff2843cb788a3febe7f80e74233f5b82b8a13a3f4e47e065a3f8de4f7
 rank: 4
 gram_tensor:
 - [0, 2, 0, 0]
@@ -39,9 +42,56 @@ integral:
   genus_class_count: 1
   spinor_genus_count: 1
   spinor_genera: [1]
+  hyperbolic_index: 0
+  discriminant_form:
+    orthogonal_group_order: 4
+    isotropic_classes: 3
+    isotropic_orbits: 2
+automorphisms:
+  automorphism_group_generator_morphisms: [O(L) generator 1, O(L) generator 2, O(L) generator 3, O(L) generator 4, O(L) generator 5]
 indefinite:
   isotropic: true
-morphisms: []
+morphisms:
+- target: 6DEN
+  name: O(L) generator 1
+  matrix:
+  - [1, 0, 0, 0]
+  - [0, 1, 0, 0]
+  - [0, 0, -1, 0]
+  - [0, 0, -1, 1]
+  scale: 1
+- target: 6DEN
+  name: O(L) generator 2
+  matrix:
+  - [2, -1, -1, 3]
+  - [-1, 2, 1, -3]
+  - [-2, 2, 3, -6]
+  - [-2, 2, 2, -5]
+  scale: 1
+- target: 6DEN
+  name: O(L) generator 3
+  matrix:
+  - [1, -2, -2, 3]
+  - [0, 1, 0, 0]
+  - [0, -2, -1, 3]
+  - [0, 0, 0, 1]
+  scale: 1
+- target: 6DEN
+  name: O(L) generator 4
+  matrix:
+  - [1, -2, -1, 3]
+  - [-6, 7, 6, -15]
+  - [0, 2, 2, -3]
+  - [-2, 4, 3, -7]
+  scale: 1
+- target: 6DEN
+  name: O(L) generator 5
+  matrix:
+  - [-1, 0, 0, 0]
+  - [0, -1, 0, 0]
+  - [0, 0, -1, 0]
+  - [0, 0, 0, -1]
+  scale: 1
 related:
 - tag: '0013'
   relation: This presentation is obtained by orthogonal sum of 0013, 3ID4.
