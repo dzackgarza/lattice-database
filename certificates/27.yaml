@@ -21382,6 +21382,9 @@
 2PN7 integral.anisotropic_primes:
   hash: 64b06a25f6c1e993bdc6f9708adee9034016c4b464c3fedd0ef13b30521d99ca
   by: research preamble
+2PN7 integral.discriminant_sequence:
+  hash: 7c94fa779f8c88ea48fc9e28160f40e2a735ddeecd024a9dbe54615dc00447fd
+  by: research preamble
 2PN7 integral.elementary_primes:
   hash: 264a74f3212e41eaad33169d410eec2240728e4d045a157efe8b211821101774
   by: research preamble
@@ -21438,6 +21441,9 @@
   by: research preamble
 2PYW integral.anisotropic_primes:
   hash: 1738367d1b1ea50e0fb4feafce7e5c1e82a5cccdd5e9e8aa0f4299db672d9404
+  by: research preamble
+2PYW integral.discriminant_sequence:
+  hash: 7680d6419824e1baeacd2e0aee19620e0555695da082102c43325484a93ce4d3
   by: research preamble
 2PYW integral.elementary_primes:
   hash: 4a5084219dd8787ac76415c8ba10ed73246c8377f91c142b2fbc1a839231dafd
@@ -21496,6 +21502,9 @@
 2PZS integral.anisotropic_primes:
   hash: 6a1bbd7cc9930786d889ec7d9485a41b36bd70ef1816df05fa0f6884737a8ccf
   by: research preamble
+2PZS integral.discriminant_sequence:
+  hash: 040d89c79d4aeffa355926fd0c112802aaf4b53c1bea238c2f09f582efb28f93
+  by: research preamble
 2PZS integral.elementary_primes:
   hash: 48b46ceec1fdefc76d2ca5abeeb7de20d1618f8b0f70161c348f2818f5ca880c
   by: research preamble
@@ -21553,6 +21562,9 @@
 2Q8S integral.anisotropic_primes:
   hash: 2d47209de87091030bd29f6ca043a87b62aa8865f606fc6583f24a7cd6a56bc1
   by: research preamble
+2Q8S integral.discriminant_sequence:
+  hash: 21b407c41b4d0abc45a9af4b15698ebfff9859cf03fb37c9ab3bc1ce004dc614
+  by: research preamble
 2Q8S integral.elementary_primes:
   hash: 6c5a48fe3f54f81eb4e6c55a4e1fdeac71895b44c7df4fd59a9248857316c0bd
   by: research preamble
@@ -21609,6 +21621,9 @@
   by: research preamble
 2QDE integral.anisotropic_primes:
   hash: dfcbbb83f97c4ce4f08d46fac4d9b3757736153bb05cb39b57972ecdca470117
+  by: research preamble
+2QDE integral.discriminant_sequence:
+  hash: 294ed9b5f9d150eff0d666c2055243febc537dfb721f68d08ff20c4bc601a7fc
   by: research preamble
 2QDE integral.elementary_primes:
   hash: b03fdb55d1a525db8e6a5fbe8cbeb9762ddee7ff144d487e6e8555ba079facbe
@@ -21852,9 +21867,7 @@
   by: research preamble
 2R9Q definite.spinor_regular:
   hash: 06bbde234e89ca1b7076f4ed36899eb55334f12dc086944c52cf05f6aca55f71
-  by: A. G. Earnest and A. Haensch, Completeness of the list of spinor regular ternary
-    quadratic forms, arXiv:1711.05811v2 (2018), Table 1, row 3; its spinor genus has
-    one class.
+  by: research preamble
 2R9Q definite.theta_series_cuspidal_component:
   hash: 4e362e3ff9ff773a8b1da92fd7f497e610d1e65ede16ee4b9756fb6f85e2af1b
   by: research preamble
@@ -21869,6 +21882,9 @@
   by: research preamble
 2R9Q integral.discriminant_form:
   hash: 4847676fbd8d5c8c0682ac93c18860fa1a0dd8158dafb4cb2e85a5b3ad34ad2f
+  by: research preamble
+2R9Q integral.discriminant_orbits:
+  hash: b5bdc7ef701763199c8028b81cd4a82302ac01ca74097f8d60d3fc26bc806917
   by: research preamble
 2R9Q integral.discriminant_sequence:
   hash: e19a622c66d980a1e685cb5ba7c6da12ae35aa933764e02f759347080dc05adc
