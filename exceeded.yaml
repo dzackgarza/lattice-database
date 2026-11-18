@@ -608,9 +608,6 @@
   hash: 76b6a86797d8fb044b36341c2c8b05e92c61c97eb02230e4fed2019c2cc239a2
   seconds: 0
   lost: true
-166K integral.discriminant_form:
-  hash: 93b87b3936f717ff0eebfa4731c541590478e4ff928855999269f471dec67389
-  seconds: 3
 16KU integral.genus_class_count:
   hash: 182a020bd256d7b9ee689e48b8cca285744e6713bd4e5c7b3dce7727fe1a7743
   seconds: 0
@@ -941,6 +938,10 @@
 3EWB integral.overlattice_count:
   hash: a1a21c7d432841ff722fe5ffd231b018bf36dcfeba5a21670dd8235e1a3a893d
   seconds: 5
+  lost: true
+3F6J integral.spinor_genera:
+  hash: ccda1264079c48f47bca32759c58a730c75c7fdffd296c3d3c9095e856bc22f8
+  seconds: 0
   lost: true
 3F9Q integral.overlattice_count:
   hash: c5f530c5933b2f8155ff85d53c9efdebc3ee7d36aed05b5044677883143bdfec
