@@ -23,6 +23,7 @@ certifications:
   integral.anisotropic_primes: d25f81b5f4683006a97016ed4ac12a2f588ece426fa3c9ad6aed72c873a8d2e9
   integral.local_representations: c8aa91ba4ba78ad7c8770c3accfff5277266ac930610e7f7cf08d8c918d29c6b
   integral.local_densities: e1d63d8140ee7b17a557226b956c328153d5c958496e116009f11b8ff339a82d
+  integral.discriminant_sequence: c1b73f663fbfe37d5ee4eb318253b61b47f1a5014c2ef300ac91a65474405b99
 rank: 3
 gram_tensor:
 - [1, 0, 0]
@@ -43,6 +44,70 @@ integral:
   level: 110
   modular_scale: false
   discriminant_group: [2, 110]
+  discriminant_sequence:
+    discriminant_factors: [2, 110]
+    discriminant_basis_lifts:
+    - ['0', 1/2, '0']
+    - ['0', -7/55, 1/110]
+    discriminant_quadratic_gram:
+    - ['0', 1/2]
+    - [1/2, 7/55]
+    discriminant_group_order: 24
+    discriminant_generators:
+    - - [1, 55]
+      - [1, 76]
+    - - [1, 55]
+      - [0, 1]
+    - - [1, 55]
+      - [0, 89]
+    image_generators:
+    - - [1, 0]
+      - [0, 109]
+    - - [1, 0]
+      - [0, 109]
+    image_order: 2
+    kernel_order: 2
+    coset_representatives:
+    - - [1, 0]
+      - [0, 1]
+    - - [0, 55]
+      - [1, 1]
+    - - [0, 55]
+      - [1, 21]
+    - - [0, 55]
+      - [1, 34]
+    - - [0, 55]
+      - [1, 54]
+    - - [1, 0]
+      - [0, 21]
+    - - [1, 0]
+      - [1, 1]
+    - - [1, 0]
+      - [1, 21]
+    - - [1, 55]
+      - [0, 1]
+    - - [1, 55]
+      - [0, 21]
+    - - [1, 55]
+      - [1, 34]
+    - - [1, 55]
+      - [1, 54]
+    mm_trivial: false
+    image_normal: true
+    quotient_generator_cosets: [10, 8, 9]
+    quotient_multiplication:
+    - [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]
+    - [1, 11, 10, 7, 6, 2, 8, 9, 4, 3, 5, 0]
+    - [2, 10, 11, 6, 7, 1, 9, 8, 3, 4, 0, 5]
+    - [3, 9, 8, 0, 5, 4, 10, 11, 2, 1, 6, 7]
+    - [4, 8, 9, 5, 0, 3, 11, 10, 1, 2, 7, 6]
+    - [5, 2, 1, 4, 3, 0, 7, 6, 9, 8, 11, 10]
+    - [6, 4, 3, 2, 1, 7, 0, 5, 11, 10, 9, 8]
+    - [7, 3, 4, 1, 2, 6, 5, 0, 10, 11, 8, 9]
+    - [8, 6, 7, 10, 11, 9, 1, 2, 0, 5, 3, 4]
+    - [9, 7, 6, 11, 10, 8, 2, 1, 5, 0, 4, 3]
+    - [10, 5, 0, 8, 9, 11, 3, 4, 7, 6, 1, 2]
+    - [11, 0, 5, 9, 8, 10, 4, 3, 6, 7, 2, 1]
   overlattice_count: 4
   bad_reduction_primes: [2, 5, 11]
   genus_symbol: 'I_{3,0} (2: [1^1]_1 2^2; 5: 1^-2 5^-1; 11: 1^-2 11^-1)'
