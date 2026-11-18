@@ -170,10 +170,14 @@ is the clause the cards record as not supplied; what belongs to dzackgarza/sage-
 generating family itself, and when the owner returns one the certify run will write the morphisms and a
 test can assert the round-trip then.
 
-Removing it leaves the file at 50 tests, and the one remaining failure in that selection is not #4's
-either: `tests/test_genus.py:622`
-(`test_certification_stores_an_indefinite_card_automorphism_generators`) expects the request to open with
-`automorphism_group_order` and receives `spinor_genus_count` first, four fields further on. It fails
-identically at the same tip without this change — `3 failed, 8 passed` for that selection before, the two
-Coble cases plus this one, against `1 failed, 8 passed` after — so it belongs to the #8 work on `main`
-that made the order serialize on every card. It is named here rather than touched.
+Removing it leaves the file at 50 tests. The one other failure in that selection is not a defect on
+`main` at all, and the attribution in the previous version of this section was wrong: it was measured
+against the shared working tree, whose `src/latticedb/genus.py` carries another session's uncommitted
+edit (89 lines). With the pushed `src/` and `tests/` exported from `main` and bound over the tree, the
+test passes — `tests/test_genus.py::test_certification_stores_an_indefinite_card_automorphism_generators`,
+`1 passed in 70.63s`. That is the failure that read
+`At index 0 diff: 'spinor_genus_count' != 'automorphism_group_order'`. Nothing is owed on it, here or by
+#8.
+
+The same binding was used to re-check this unit's two acceptance tests at the pushed revisions rather
+than in the working tree: `2 passed, 48 deselected in 21.56s`.
