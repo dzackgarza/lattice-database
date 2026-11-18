@@ -5160,6 +5160,84 @@
     database_revision: 6309a32ea317923b5a896c666767b831c6503f62
     research_revision: 3fd2ddb52d64fcb8c37a7074c9b668b7a436009d
   notes: []
+3F1O integral.spinor_genera:
+  disposition: open
+  attempts:
+  - hash: d67756ee6443b1bca96ab9ccfb5d4e5910a005bc17085b9963f4ba2aa265213c
+    gram_tensor:
+    - - 86
+      - 25
+    - - 25
+      - 110
+    reason: exit status 1
+    stderr: "Traceback (most recent call last):\n  File \"<frozen runpy>\", line 203,
+      in _run_module_as_main\n  File \"<frozen runpy>\", line 88, in _run_code\n  File
+      \"/home/runner/work/lattice-database/lattice-database/src/latticedb/sage_genus.py\",
+      line 461, in <module>\n    main()\n    ~~~~^^\n  File \"/home/runner/work/lattice-database/lattice-database/src/latticedb/sage_genus.py\",
+      line 456, in main\n    _compute(request)\n    ~~~~~~~~^^^^^^^^^\n  File \"/home/runner/work/lattice-database/lattice-database/src/latticedb/sage_genus.py\",
+      line 441, in _compute\n    _run(\n    ~~~~^\n        tag,\n        ^^^^\n        [field],\n
+      \       ^^^^^^^^\n        lambda: {field: SERIES[field](lattice, request[\"series_bound\"])
+      if field in SERIES else VALUES[field](lattice)},\n        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n
+      \   )\n    ^\n  File \"/home/runner/work/lattice-database/lattice-database/src/latticedb/sage_genus.py\",
+      line 377, in _run\n    values = compute()\n  File \"/home/runner/work/lattice-database/lattice-database/src/latticedb/sage_genus.py\",
+      line 444, in <lambda>\n    lambda: {field: SERIES[field](lattice, request[\"series_bound\"])
+      if field in SERIES else VALUES[field](lattice)},\n                                                                                            ~~~~~~~~~~~~~^^^^^^^^^\n
+      \ File \"/home/runner/work/lattice-database/lattice-database/src/latticedb/sage_genus.py\",
+      line 288, in <lambda>\n    \"spinor_genera\": lambda lattice: [int(value) for
+      value in lattice.spinor_genus_class_numbers()],\n                                                              ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^\n
+      \ File \"/repos/sage-extensions/src/sage_extensions/categories/lattices.py\",
+      line 6551, in spinor_genus_class_numbers\n    self.module_rank().is_finite()\n
+      \   and int(self.module_rank()) >= 3\n    and self.is_nondegenerate()\nAssertionError:
+      spinor genera of Integral lattice of rank 2 and signature (2, 0) require a nondegenerate
+      lattice of finite rank at least three\n"
+    seconds: 0.405496292000862
+    recorded_at: 2026-11-18 18:53:36.567158+00:00
+    run_url: https://github.com/dzackgarza/lattice-database/actions/runs/44298677709/attempts/1
+    database_revision: 6309a32ea317923b5a896c666767b831c6503f62
+    research_revision: 3fd2ddb52d64fcb8c37a7074c9b668b7a436009d
+  notes: []
+3F1O integral.spinor_genus_count:
+  disposition: open
+  attempts:
+  - hash: d3a47ec60f67e5ede9ac945e3ea554126533682e36b41506bd4b67afe8b27952
+    gram_tensor:
+    - - 86
+      - 25
+    - - 25
+      - 110
+    reason: exit status 1
+    stderr: "Traceback (most recent call last):\n  File \"sage/misc/cachefunc.pyx\",
+      line 1965, in sage.misc.cachefunc.CachedMethodCaller.__call__\n    return cache[k]\nKeyError:
+      ((True,), ())\n\nDuring handling of the above exception, another exception occurred:\n\nTraceback
+      (most recent call last):\n  File \"<frozen runpy>\", line 203, in _run_module_as_main\n
+      \ File \"<frozen runpy>\", line 88, in _run_code\n  File \"/home/runner/work/lattice-database/lattice-database/src/latticedb/sage_genus.py\",
+      line 461, in <module>\n    main()\n    ~~~~^^\n  File \"/home/runner/work/lattice-database/lattice-database/src/latticedb/sage_genus.py\",
+      line 456, in main\n    _compute(request)\n    ~~~~~~~~^^^^^^^^^\n  File \"/home/runner/work/lattice-database/lattice-database/src/latticedb/sage_genus.py\",
+      line 441, in _compute\n    _run(\n    ~~~~^\n        tag,\n        ^^^^\n        [field],\n
+      \       ^^^^^^^^\n        lambda: {field: SERIES[field](lattice, request[\"series_bound\"])
+      if field in SERIES else VALUES[field](lattice)},\n        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n
+      \   )\n    ^\n  File \"/home/runner/work/lattice-database/lattice-database/src/latticedb/sage_genus.py\",
+      line 377, in _run\n    values = compute()\n  File \"/home/runner/work/lattice-database/lattice-database/src/latticedb/sage_genus.py\",
+      line 444, in <lambda>\n    lambda: {field: SERIES[field](lattice, request[\"series_bound\"])
+      if field in SERIES else VALUES[field](lattice)},\n                                                                                            ~~~~~~~~~~~~~^^^^^^^^^\n
+      \ File \"/home/runner/work/lattice-database/lattice-database/src/latticedb/sage_genus.py\",
+      line 287, in <lambda>\n    \"spinor_genus_count\": lambda lattice: int(lattice.spinor_genus_count()),\n
+      \                                             ~~~~~~~~~~~~~~~~~~~~~~~~~~^^\n
+      \ File \"/repos/sage-extensions/src/sage_extensions/categories/lattices.py\",
+      line 6542, in spinor_genus_count\n    return ring(self.genus().spinor_genus_count())\n
+      \               ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^\n  File \"sage/misc/cachefunc.pyx\",
+      line 1970, in sage.misc.cachefunc.CachedMethodCaller.__call__\n    w = self._instance_call(*args,
+      **kwds)\n  File \"sage/misc/cachefunc.pyx\", line 1848, in sage.misc.cachefunc.CachedMethodCaller._instance_call\n
+      \   return self.f(self._instance, *args, **kwds)\n  File \"/repos/sage-extensions/src/sage_extensions/categories/lattices.py\",
+      line 756, in spinor_genus_count\n    assert rank >= 3, (\n           ^^^^^^^^^\nAssertionError:
+      the spinor-genus count of Genus of even integral lattices of signature (2, 0)
+      and determinant 8835 is taken here in rank at least three, and the rank is 2\n"
+    seconds: 0.6669382520003637
+    recorded_at: 2026-11-18 18:53:25.355277+00:00
+    run_url: https://github.com/dzackgarza/lattice-database/actions/runs/44298677709/attempts/1
+    database_revision: 6309a32ea317923b5a896c666767b831c6503f62
+    research_revision: 3fd2ddb52d64fcb8c37a7074c9b668b7a436009d
+  notes: []
 3FO3 integral.discriminant_form:
   disposition: open
   attempts:
@@ -5313,6 +5391,164 @@
       and determinant 2520 is taken here in rank at least three, and the rank is 2\n"
     seconds: 0.43313578800007235
     recorded_at: 2026-11-18 18:34:05.258448+00:00
+    run_url: https://github.com/dzackgarza/lattice-database/actions/runs/44298677709/attempts/1
+    database_revision: 6309a32ea317923b5a896c666767b831c6503f62
+    research_revision: 3fd2ddb52d64fcb8c37a7074c9b668b7a436009d
+  notes: []
+3FQ3 integral.discriminant_form:
+  disposition: open
+  attempts:
+  - hash: 467bf8b747cf1424701a33fb7b67cc55f9d76313f7ac3934e4cb16b0bcc95b51
+    gram_tensor:
+    - - 96
+      - -12
+    - - -12
+      - 229
+    reason: exit status 1
+    stderr: "Traceback (most recent call last):\n  File \"<frozen runpy>\", line 203,
+      in _run_module_as_main\n  File \"<frozen runpy>\", line 88, in _run_code\n  File
+      \"/home/runner/work/lattice-database/lattice-database/src/latticedb/sage_genus.py\",
+      line 461, in <module>\n    main()\n    ~~~~^^\n  File \"/home/runner/work/lattice-database/lattice-database/src/latticedb/sage_genus.py\",
+      line 456, in main\n    _compute(request)\n    ~~~~~~~~^^^^^^^^^\n  File \"/home/runner/work/lattice-database/lattice-database/src/latticedb/sage_genus.py\",
+      line 441, in _compute\n    _run(\n    ~~~~^\n        tag,\n        ^^^^\n        [field],\n
+      \       ^^^^^^^^\n        lambda: {field: SERIES[field](lattice, request[\"series_bound\"])
+      if field in SERIES else VALUES[field](lattice)},\n        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n
+      \   )\n    ^\n  File \"/home/runner/work/lattice-database/lattice-database/src/latticedb/sage_genus.py\",
+      line 377, in _run\n    values = compute()\n  File \"/home/runner/work/lattice-database/lattice-database/src/latticedb/sage_genus.py\",
+      line 444, in <lambda>\n    lambda: {field: SERIES[field](lattice, request[\"series_bound\"])
+      if field in SERIES else VALUES[field](lattice)},\n                                                                                            ~~~~~~~~~~~~~^^^^^^^^^\n
+      \ File \"/home/runner/work/lattice-database/lattice-database/src/latticedb/sage_genus.py\",
+      line 292, in <lambda>\n    \"discriminant_form\": lambda lattice: _discriminant_form(lattice),\n
+      \                                        ~~~~~~~~~~~~~~~~~~^^^^^^^^^\n  File
+      \"/home/runner/work/lattice-database/lattice-database/src/latticedb/sage_genus.py\",
+      line 309, in _discriminant_form\n    form = lattice.discriminant_quadratic_form()\n
+      \ File \"sage/misc/cachefunc.pyx\", line 2328, in sage.misc.cachefunc.CachedMethodCallerNoArgs.__call__\n
+      \   self.cache = f(self._instance)\n  File \"/repos/sage-extensions/src/sage_extensions/categories/lattices.py\",
+      line 8146, in discriminant_quadratic_form\n    raise ValueError(\n        f\"{self!r}
+      has no discriminant quadratic form: q_L: A_L -> Q/2Z is defined only for an
+      even lattice, and {self!r} is odd; use discriminant_bilinear_form\"\n    )\nValueError:
+      Integral lattice of rank 2 and signature (2, 0) has no discriminant quadratic
+      form: q_L: A_L -> Q/2Z is defined only for an even lattice, and Integral lattice
+      of rank 2 and signature (2, 0) is odd; use discriminant_bilinear_form\n"
+    seconds: 0.3490070360003301
+    recorded_at: 2026-11-18 19:03:49.933042+00:00
+    run_url: https://github.com/dzackgarza/lattice-database/actions/runs/44298677709/attempts/1
+    database_revision: 6309a32ea317923b5a896c666767b831c6503f62
+    research_revision: 3fd2ddb52d64fcb8c37a7074c9b668b7a436009d
+  notes: []
+3FQ3 integral.discriminant_orbits:
+  disposition: open
+  attempts:
+  - hash: 280deffe20cc2177cbb2cee9688d1cb38cd9617048c18d2139952b3bf14094cc
+    gram_tensor:
+    - - 96
+      - -12
+    - - -12
+      - 229
+    reason: exit status 1
+    stderr: "Traceback (most recent call last):\n  File \"<frozen runpy>\", line 203,
+      in _run_module_as_main\n  File \"<frozen runpy>\", line 88, in _run_code\n  File
+      \"/home/runner/work/lattice-database/lattice-database/src/latticedb/sage_genus.py\",
+      line 461, in <module>\n    main()\n    ~~~~^^\n  File \"/home/runner/work/lattice-database/lattice-database/src/latticedb/sage_genus.py\",
+      line 456, in main\n    _compute(request)\n    ~~~~~~~~^^^^^^^^^\n  File \"/home/runner/work/lattice-database/lattice-database/src/latticedb/sage_genus.py\",
+      line 441, in _compute\n    _run(\n    ~~~~^\n        tag,\n        ^^^^\n        [field],\n
+      \       ^^^^^^^^\n        lambda: {field: SERIES[field](lattice, request[\"series_bound\"])
+      if field in SERIES else VALUES[field](lattice)},\n        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n
+      \   )\n    ^\n  File \"/home/runner/work/lattice-database/lattice-database/src/latticedb/sage_genus.py\",
+      line 377, in _run\n    values = compute()\n  File \"/home/runner/work/lattice-database/lattice-database/src/latticedb/sage_genus.py\",
+      line 444, in <lambda>\n    lambda: {field: SERIES[field](lattice, request[\"series_bound\"])
+      if field in SERIES else VALUES[field](lattice)},\n                                                                                            ~~~~~~~~~~~~~^^^^^^^^^\n
+      \ File \"/home/runner/work/lattice-database/lattice-database/src/latticedb/sage_genus.py\",
+      line 293, in <lambda>\n    \"discriminant_orbits\": lambda lattice: _orbit_series(lattice.discriminant_orbit_series()),\n
+      \                                                        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^\n
+      \ File \"/repos/sage-extensions/src/sage_extensions/categories/lattices.py\",
+      line 4506, in discriminant_orbit_series\n    return discriminant_orbit_series(self,
+      bound=bound)\n  File \"/repos/sage-extensions/src/sage_extensions/categories/lattice_orbit_invariants.py\",
+      line 273, in discriminant_orbit_series\n    raise ValueError(f\"discriminant
+      orbit series requires an even lattice, not {lattice}\")\nValueError: discriminant
+      orbit series requires an even lattice, not Integral lattice of rank 2 and signature
+      (2, 0)\n"
+    seconds: 0.36502599800041935
+    recorded_at: 2026-11-18 19:04:00.831516+00:00
+    run_url: https://github.com/dzackgarza/lattice-database/actions/runs/44298677709/attempts/1
+    database_revision: 6309a32ea317923b5a896c666767b831c6503f62
+    research_revision: 3fd2ddb52d64fcb8c37a7074c9b668b7a436009d
+  notes: []
+3FQ3 integral.spinor_genera:
+  disposition: open
+  attempts:
+  - hash: 39313de6ed20cc60c945ffbadb0604fdbb8f61f0a6d976963b678589d91ca230
+    gram_tensor:
+    - - 96
+      - -12
+    - - -12
+      - 229
+    reason: exit status 1
+    stderr: "Traceback (most recent call last):\n  File \"<frozen runpy>\", line 203,
+      in _run_module_as_main\n  File \"<frozen runpy>\", line 88, in _run_code\n  File
+      \"/home/runner/work/lattice-database/lattice-database/src/latticedb/sage_genus.py\",
+      line 461, in <module>\n    main()\n    ~~~~^^\n  File \"/home/runner/work/lattice-database/lattice-database/src/latticedb/sage_genus.py\",
+      line 456, in main\n    _compute(request)\n    ~~~~~~~~^^^^^^^^^\n  File \"/home/runner/work/lattice-database/lattice-database/src/latticedb/sage_genus.py\",
+      line 441, in _compute\n    _run(\n    ~~~~^\n        tag,\n        ^^^^\n        [field],\n
+      \       ^^^^^^^^\n        lambda: {field: SERIES[field](lattice, request[\"series_bound\"])
+      if field in SERIES else VALUES[field](lattice)},\n        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n
+      \   )\n    ^\n  File \"/home/runner/work/lattice-database/lattice-database/src/latticedb/sage_genus.py\",
+      line 377, in _run\n    values = compute()\n  File \"/home/runner/work/lattice-database/lattice-database/src/latticedb/sage_genus.py\",
+      line 444, in <lambda>\n    lambda: {field: SERIES[field](lattice, request[\"series_bound\"])
+      if field in SERIES else VALUES[field](lattice)},\n                                                                                            ~~~~~~~~~~~~~^^^^^^^^^\n
+      \ File \"/home/runner/work/lattice-database/lattice-database/src/latticedb/sage_genus.py\",
+      line 288, in <lambda>\n    \"spinor_genera\": lambda lattice: [int(value) for
+      value in lattice.spinor_genus_class_numbers()],\n                                                              ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^\n
+      \ File \"/repos/sage-extensions/src/sage_extensions/categories/lattices.py\",
+      line 6551, in spinor_genus_class_numbers\n    self.module_rank().is_finite()\n
+      \   and int(self.module_rank()) >= 3\n    and self.is_nondegenerate()\nAssertionError:
+      spinor genera of Integral lattice of rank 2 and signature (2, 0) require a nondegenerate
+      lattice of finite rank at least three\n"
+    seconds: 0.3505241479997494
+    recorded_at: 2026-11-18 19:03:34.029858+00:00
+    run_url: https://github.com/dzackgarza/lattice-database/actions/runs/44298677709/attempts/1
+    database_revision: 6309a32ea317923b5a896c666767b831c6503f62
+    research_revision: 3fd2ddb52d64fcb8c37a7074c9b668b7a436009d
+  notes: []
+3FQ3 integral.spinor_genus_count:
+  disposition: open
+  attempts:
+  - hash: d2e7cd924f87d5f9516117ede7515934a8d0199e1c901a5d9f90848abcbc8810
+    gram_tensor:
+    - - 96
+      - -12
+    - - -12
+      - 229
+    reason: exit status 1
+    stderr: "Traceback (most recent call last):\n  File \"sage/misc/cachefunc.pyx\",
+      line 1965, in sage.misc.cachefunc.CachedMethodCaller.__call__\n    return cache[k]\nKeyError:
+      ((True,), ())\n\nDuring handling of the above exception, another exception occurred:\n\nTraceback
+      (most recent call last):\n  File \"<frozen runpy>\", line 203, in _run_module_as_main\n
+      \ File \"<frozen runpy>\", line 88, in _run_code\n  File \"/home/runner/work/lattice-database/lattice-database/src/latticedb/sage_genus.py\",
+      line 461, in <module>\n    main()\n    ~~~~^^\n  File \"/home/runner/work/lattice-database/lattice-database/src/latticedb/sage_genus.py\",
+      line 456, in main\n    _compute(request)\n    ~~~~~~~~^^^^^^^^^\n  File \"/home/runner/work/lattice-database/lattice-database/src/latticedb/sage_genus.py\",
+      line 441, in _compute\n    _run(\n    ~~~~^\n        tag,\n        ^^^^\n        [field],\n
+      \       ^^^^^^^^\n        lambda: {field: SERIES[field](lattice, request[\"series_bound\"])
+      if field in SERIES else VALUES[field](lattice)},\n        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n
+      \   )\n    ^\n  File \"/home/runner/work/lattice-database/lattice-database/src/latticedb/sage_genus.py\",
+      line 377, in _run\n    values = compute()\n  File \"/home/runner/work/lattice-database/lattice-database/src/latticedb/sage_genus.py\",
+      line 444, in <lambda>\n    lambda: {field: SERIES[field](lattice, request[\"series_bound\"])
+      if field in SERIES else VALUES[field](lattice)},\n                                                                                            ~~~~~~~~~~~~~^^^^^^^^^\n
+      \ File \"/home/runner/work/lattice-database/lattice-database/src/latticedb/sage_genus.py\",
+      line 287, in <lambda>\n    \"spinor_genus_count\": lambda lattice: int(lattice.spinor_genus_count()),\n
+      \                                             ~~~~~~~~~~~~~~~~~~~~~~~~~~^^\n
+      \ File \"/repos/sage-extensions/src/sage_extensions/categories/lattices.py\",
+      line 6542, in spinor_genus_count\n    return ring(self.genus().spinor_genus_count())\n
+      \               ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^\n  File \"sage/misc/cachefunc.pyx\",
+      line 1970, in sage.misc.cachefunc.CachedMethodCaller.__call__\n    w = self._instance_call(*args,
+      **kwds)\n  File \"sage/misc/cachefunc.pyx\", line 1848, in sage.misc.cachefunc.CachedMethodCaller._instance_call\n
+      \   return self.f(self._instance, *args, **kwds)\n  File \"/repos/sage-extensions/src/sage_extensions/categories/lattices.py\",
+      line 756, in spinor_genus_count\n    assert rank >= 3, (\n           ^^^^^^^^^\nAssertionError:
+      the spinor-genus count of Genus of odd integral lattices of signature (2, 0)
+      and determinant 21840 is taken here in rank at least three, and the rank is
+      2\n"
+    seconds: 0.39220397400004003
+    recorded_at: 2026-11-18 19:03:23.480823+00:00
     run_url: https://github.com/dzackgarza/lattice-database/actions/runs/44298677709/attempts/1
     database_revision: 6309a32ea317923b5a896c666767b831c6503f62
     research_revision: 3fd2ddb52d64fcb8c37a7074c9b668b7a436009d
