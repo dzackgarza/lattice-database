@@ -139,6 +139,28 @@ only the key. The third row is undecided: the elements of $\Gamma_{\mathrm{En},2
 repository can construct and that preserve $T_{\mathrm{Co}}$ carry no class to another, and a non-merge is not a proof
 of inequivalence.
 
+### The rows' data, in card 6JRR's own basis
+
+A row of `cusp_root_orbits` states its cusp and its classes as lifts in *its own card's* record basis, and the chambers
+above were read in 029J's. `results/probe-43-coble-row-coordinates.py` carries them across, and the carry is exact
+rather than an isometry search: the library's own `delta^\perp`, written in $T_{\mathrm{En}}$'s coordinates, has
+card 6JRR's Gram tensor entry for entry, so the two bases are identified by coordinates.
+
+It also settles which of Sterk's five cusps are cusps of $T_{\mathrm{Co}}$ at all, by the pairing with $\delta$ rather
+than by the projection (a projection is integral whenever $b(v,\delta)$ is even, which is not the same thing): (4.3.5)
+and (4.3.6) are not — at (4.3.6) the one root class of the 029J row is $\alpha_{10} = e - f = \delta$ itself, which is
+not orthogonal to $\delta$.
+
+| cusp | statement | cusp in 6JRR's basis | walls in $T_{\mathrm{Co}}$ | root classes, in 6JRR's basis |
+| --- | --- | --- | --- | --- |
+| 3 | (4.3.7) | `[0, 1, 1, -2, -3, -4, -6, -5, -4, -3, -2]` | 9 | $\alpha_{13}$ = `[1, 0, -1, 0, 0, 0, 0, 0, 0, 0, 1]` |
+| 4 | (4.3.8) | `[0, 2, 1, -4, -5, -7, -10, -8, -6, -4, -2]` | 9 | $\alpha_{11}$ = `[1, -1, 0, 1, 0, 0, 0, 0, 0, 0, 0]` |
+| 5 | (4.3.9) | `[2, 0, 0, -4, -5, -7, -10, -8, -6, -4, -2]` | 11 | $\alpha_{12}$ = `[1, 3, 3, -2, 1, 2, 2, 1, 0, 0, 0]`, $\alpha_{13}$ = `[1, 3, 4, -2, 2, 3, 4, 3, 2, 1, 0]`, $\alpha_{14}$ = `[1, 2, 3, -2, 0, 1, 0, 0, 0, 0, 0]` |
+
+Each cusp has square $0$ and each class square $-2$ in card 6JRR's Gram tensor, checked as the row is built. So the two
+decided rows of the table above are now rows in the card's own coordinates, $\mathrm{orbit\_count} = 1$ with one class
+each, and nothing but the key is missing.
+
 ### The index is infinite, so no card can state one
 
 The two constructions above answer no exact index because there is no finite one to answer. $T_{\mathrm{Co}} =
