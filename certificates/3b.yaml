@@ -29079,27 +29079,13 @@
   by: research preamble
 3G6U definite.regular:
   hash: 1cc6fea060a4383c40f4d6318f0c51346d11d61c2127e62080d843a1d4fb2c98
-  by: 'W. C. Jagy, I. Kaplansky and A. Schiemann, There are 913 regular ternary forms,
-    Mathematika 44 (1997), 332-341, form 640, as tabulated in A. G. Doyle, B. Muskat,
-    K. Pehlivan and K. S. Williams, Positive integers represented by regular primitive
-    positive-definite integral ternary quadratic forms, Integers 19 (2019), #A45,
-    Tables 1 and 2; regular by W. C. Jagy, I. Kaplansky and A. Schiemann, There are
-    913 regular ternary forms, Mathematika 44 (1997), 332-341.'
+  by: research preamble
 3G6U definite.siegel_eisenstein_coefficients:
   hash: 040fbcdcf143e23d7abed890d6631188b77f94ca91a5401cb53d726cdc3142f8
   by: research preamble
 3G6U definite.spinor_regular:
   hash: 98d6d9a0b44037574127a25eeacaa9b8a023429fcad0215a9daf25c71ba224a7
-  by: 'W. C. Jagy, I. Kaplansky and A. Schiemann, There are 913 regular ternary forms,
-    Mathematika 44 (1997), 332-341, form 640, as tabulated in A. G. Doyle, B. Muskat,
-    K. Pehlivan and K. S. Williams, Positive integers represented by regular primitive
-    positive-definite integral ternary quadratic forms, Integers 19 (2019), #A45,
-    Tables 1 and 2; regular by W. C. Jagy, I. Kaplansky and A. Schiemann, There are
-    913 regular ternary forms, Mathematika 44 (1997), 332-341; hence spinor regular,
-    since a form is spinor regular if it represents all the positive integers represented
-    by its spinor genus (A. G. Earnest and A. Haensch, Completeness of the list of
-    spinor regular ternary quadratic forms, arXiv:1711.05811v2 (2018), Abstract) and
-    the spinor genus lies in the genus.'
+  by: research preamble
 3G6U definite.theta_series_cuspidal_component:
   hash: c48c98a68193165d68c4065bc9487577ea5fa1a1983990bfe5542922cb4e8b86
   by: research preamble
@@ -29111,6 +29097,9 @@
   by: research preamble
 3G6U integral.anisotropic_primes:
   hash: 1f9a6ce31b2f746308932dda3d374a496aaf49595942a423f15788765935c3c1
+  by: research preamble
+3G6U integral.discriminant_sequence:
+  hash: da6f8171d3e7547a1cd6c6276c99edc87d6917f1dae8bcf62a56fa1580327cff
   by: research preamble
 3G6U integral.elementary_primes:
   hash: efce8cce9f5dcbf802f0d73b6b27bb323a5106632aebeca13778437769ca72db
