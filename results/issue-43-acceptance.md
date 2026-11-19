@@ -1,7 +1,7 @@
 # #43, item by item, at `main`
 
 The issue states two things: what the card must carry when it closes ("card 029J (T_En) carries, per Sterk cusp under
-`gamma-en-2`, the orbits of the cusp's root classes … The T_Co card carries the same row at its cusps 3–5"), and what
+`gamma-en-2`, the orbits of the cusp's root classes … The T_Co card carries the same row at its $\Gamma_{\mathrm{Co},2}$-cusps"), and what
 accepts it ("**Accepted when** the 029J rows hold certified or cited values and the repository's gate passes"). This
 file states each item against the tree, with the line that carries it.
 
@@ -74,33 +74,27 @@ printed page it rests on.
 | `issue-43-lemma-sterk-4310.md` | Sterk's (4.3.10)–(4.3.13), pp. 25–26, are stated for $A = H\oplus E_8(-2)$ and never mention $\delta$: the general transport to $T_{\mathrm{Co}}$ is unavailable. |
 | `issue-43-lemma-alpha13-alpha14.md` | The one diagram symmetry exchanging $\alpha_{13}$ and $\alpha_{14}$ and fixing $\alpha_{11},\alpha_{12}$ fixes $\delta$ on the rank-10 span, so those two classes are one orbit: the count is at most 2. |
 | `issue-43-lemma-parity-refuted.md` | Refuted: no congruence separates the classes — every difference among the root walls is odd, and $\Gamma_{\mathrm{En},2}$ cannot be trivial on $L/2L$ because the stored $T_{En}$ row has them in one orbit. |
-| `issue-43-lemma-reflections-fix-delta.md` | Every reflection in a $T_{\mathrm{Co}}$ wall fixes $\delta$, so $W_v$ is inside the Coble cusp stabilizer and moves no class. |
+| `issue-43-lemma-reflections-fix-delta.md` | Every reflection in a $T_{\mathrm{Co}}$ wall fixes $\delta$, so $W_v$ is inside the $\Gamma_{\mathrm{Co},2}$-cusp stabilizer and moves no class. |
 | `issue-43-lemma-coble-image.md` | The Coble image is the $\delta$-preserving part of Sterk's $G_v$, with orbits $\{\alpha_{12}\}$ and $\{\alpha_{13},\alpha_{14}\}$: count 2 — conditional. |
 | `issue-43-lemma-gv-not-stated.md` | Sterk states $G_v$'s shape only at (4.3.6) and (4.3.7); a count of one needs only a subgroup, a count of two needs the whole image, so the conditional above cannot be closed from his §4. |
 | `issue-43-lemma-sterk-gamma-is-en2.md` | Sterk's $\Gamma$ is the corpus's $\Gamma_{\mathrm{En},2}$ — same definition, same index $67456$ at Remark 2.12, p. 8 — so the stored 029J rows are cited for the group they name. |
-| `issue-43-lemma-no-source.md` | No source this repository holds prints the Coble cusp root-class orbits, so row 5 cannot be cited at all. |
+| `issue-43-lemma-no-source.md` | No source this repository holds prints the $\Gamma_{\mathrm{Co},2}$-cusp root-class orbits, so the 135-orbit row cannot be cited at all. |
 
-## 3. The T_Co rows at cusps 3-5 — met, all three
+## 3. The T_Co rows at the four $\Gamma_{\mathrm{Co},2}$-cusps
 
-Card 6JRR carries `integral.cusp_root_orbits['gamma-co-2']` at `lattices/6JRR.md:118` with Sterk's three cusps:
+| $\Gamma_{\mathrm{Co},2}$-cusp: orbit of $[v/2]$ | $v$ | line | chamber at the $T_{\mathrm{En}}$ cusp of $v$ | orbits |
+| ---: | --- | --- | --- | ---: |
+| 2 | $e_1$ | `lattices/6JRR.md:121` | Sterk (4.3.6), p. 21 | 1 |
+| 120 | $[0,1,1,-2,-3,-4,-6,-5,-4,-3,-2]$ | `:127` | Sterk (4.3.7), p. 22 | 3 |
+| 135 | $[2,0,0,-4,-5,-7,-10,-8,-6,-4,-2]$ | `:139` | Sterk (4.3.9), p. 24 | 4 |
+| 270 | $[0,2,1,-4,-5,-7,-10,-8,-6,-4,-2]$ | `:155` | Sterk (4.3.8), p. 23 | 2 |
 
-| cusp | statement | page | line | classes | orbits |
-| --- | --- | --- | --- | --- | --- |
-| 3 | (4.3.7) | 22 | `lattices/6JRR.md:120` | 1 | 1 |
-| 4 | (4.3.8) | 23 | `:129` | 1 | 1 |
-| 5 | (4.3.9) | 24 | `:138` | 3 | 2 |
-
-The first two are decided by triviality — a one-class family has one orbit under every subgroup — and the third by the
-class of $\delta$ in $K_I$: every element of $W_v$ fixes the cusp and so preserves that class, two of the eight diagram
-symmetries carry $\delta$ to $\pm\delta$ and the six others do not, so the Coble image is $\langle W_v,\sigma\rangle$,
-with orbits $\{\alpha_{12}\}$ and $\{\alpha_{13},\alpha_{14}\}$
-(`results/issue-43-lemma-coble-class-invariant.md`). The field's certificate is
-`6JRR integral.cusp_root_orbits` `d2e682f6...` in `certificates/e1.yaml`, cited on the card, and the rows are read back at
-`tests/test_cusp_root_orbits.py::test_card_6jrr_states_the_two_decided_coble_cusps` and
-`::test_card_6jrr_states_the_coble_cusp_of_three_classes_as_two_orbits`.
-
-The two-orbit row replaces one that was withdrawn: its argument had claimed $W_v$ fixes $\delta$, which is false, and
-the class invariant is what replaces that step rather than patching it.
+Sterk's cusps are $\Gamma_{\mathrm{En},2}$-cusps of $T_{\mathrm{En}}$, not cusps of $F_{\mathrm{Co}}$; they are provenance only.
+`results/probe-49-gamma-co-2-cusps.py` (log beside it) computes the orbit of each $[v/2]$ under $P_0 = \mathrm{Stab}(A_{U(2)})$
+and the root-class orbits by the centralizer of $s_\delta$ (`results/issue-49-transporters-and-coble-cusp5.md`).
+`results/store-49-gamma-co-2-cusps.py` writes the rows; `tests/test_cusp_root_orbits.py::test_card_6jrr_states_the_root_class_orbits_at_each_of_the_four_gamma_co_2_cusps`
+recomputes them from the Gram tensors. The earlier rows with 1, 1 and 2 orbits omitted the roots $\beta_u = \alpha_u + \delta$
+and had no row at the 2-orbit cusp.
 
 ### What the card would be built from, and what it would cost
 
@@ -108,7 +102,7 @@ The owner's library has since identified the two *restricted stabilizers* on thi
 (`sage-extensions` `results/issue359-tco-restricted-stabilizers.md`, rows 1 and 2, and #286's item 1):
 $R_{\Gamma_{\mathrm{En}}} = \widetilde O^{+}(T_{\mathrm{Co}})$ and $R_{\Gamma^{K}_{\mathrm{En}}} = O(T_{\mathrm{Co}})$,
 with the indices $93997183795200 = 2|O(A_{T_{\mathrm{Co}}}, q)|$ and $1$ computed from the images of the constructed
-generators. So the group of the Coble cusps is $\Gamma_{\mathrm{Co},2} = R_{\Gamma_{\mathrm{En},2}}$, an index-$k$
+generators. So the group of the $\Gamma_{\mathrm{Co},2}$-cusps is $\Gamma_{\mathrm{Co},2} = R_{\Gamma_{\mathrm{En},2}}$, an index-$k$
 subgroup of $\widetilde O^{+}(T_{\mathrm{Co}})$ — the card [`otilde-plus-t-co`](../arithmetic-groups/otilde-plus-t-co.md)
 that 6JRR already carries, whose index $93997183795200$ and 95 generator matrices are certified on this card. A
 `gamma-co-2` card therefore has a parent to name and a value to compute:
@@ -141,7 +135,7 @@ the card and is green after.
 The cost is why this is a scheduled run rather than a turn's work: the owner measures the ambient stabilizer's family at
 **330 generators in 352 s**, their restrictions to $T_{\mathrm{Co}}$ at 40 s, and `rho` on them at 25 s
 (`issue359-tco-restricted-stabilizers.md`, row 1). A card certified by computation needs that run plus the filter to
-$\Gamma_{\mathrm{En},2}$, and the cusp-5 row needs, on top of it, an orbit decision with the resulting family (or the
+$\Gamma_{\mathrm{En},2}$, and the row at the 135-orbit $\Gamma_{\mathrm{Co},2}$-cusp needs, on top of it, an orbit decision with the resulting family (or the
 owner's class-level equivalence).
 
 ### The rows' data, in card 6JRR's own basis

@@ -1,4 +1,4 @@
-# #49: the transporter orders at Sterk's cusps, and the Coble cusp (4.3.9)
+# #49: the transporter orders at Sterk's cusps, and the 135-orbit $\Gamma_{\mathrm{Co},2}$-cusp (chamber of Sterk (4.3.9))
 
 Record: `results/probe-49-cusp-symmetries.py`, run output `results/probe-49-cusp-symmetries.log`, both on card 029J's
 stored chambers (`integral.cusp_chambers['gamma-en-2']`). Writer: `results/store-49-transporters-and-coble-cusp5.py`.
@@ -23,7 +23,7 @@ $\Gamma_v$: (4.3.7), p. 22; (4.3.8), p. 23; (4.3.9), p. 24.
 At (4.3.9) the stored value 4 was wrong. The group is transitive on four walls and contains the symmetry that exchanges
 $\alpha_{13}$ and $\alpha_{14}$ and fixes $\alpha_{11}$ and $\alpha_{12}$, so the group is not regular and its order is 8.
 
-## (b) The Coble cusp (4.3.9): four orbits
+## (b) The 135-orbit $\Gamma_{\mathrm{Co},2}$-cusp (chamber of Sterk (4.3.9)): four orbits
 
 $T_{\mathrm{Co}} = \delta^\perp$ with $\delta = e - f = -\alpha_{11}$, which is a wall of the chamber $C$.
 

@@ -1,11 +1,11 @@
-# #43, one lemma: no source this repository holds prints the Coble cusp root-class orbits
+# #43, one lemma: no source this repository holds prints the $\Gamma_{\mathrm{Co},2}$-cusp root-class orbits
 
-**Lemma.** The cusp-5 row of the $T_{\mathrm{Co}}$ side cannot be *cited*: none of the printed sources in this
-repository's holdings states the orbits of a Coble cusp's root classes, so the value can only be certified by computation.
+**Lemma.** The row at the 135-orbit $\Gamma_{\mathrm{Co},2}$-cusp cannot be *cited*: none of the printed sources in this
+repository's holdings states the orbits of a $\Gamma_{\mathrm{Co},2}$-cusp's root classes, so the value can only be certified by computation.
 
 **Checked, source by source.**
 
-| source | what it treats | Coble cusp orbits? |
+| source | what it treats | $\Gamma_{\mathrm{Co},2}$-cusp orbits? |
 | --- | --- | --- |
 | H. Sterk, Math. Z. 207 (1991), §4, pp. 16–26 | the five 0-cusps of $\Gamma_{\mathrm{En},2}$ on $T_{\mathrm{En}}$: chambers, diagrams, symmetries | no — every lattice in §4 is $L_- = T_{\mathrm{En}}$ or $H \oplus E_8(-2)$ |
 | V. Alexeev, P. Engel, D. Z. Garza, L. Schaffler, Nagoya Math. J. 259 (2025) | $F_{\mathrm{En},2}$: its cusps, folded diagrams (§3.3–3.9, pp. 590–596), stable pairs | no — the word "Coble" appears twice in the paper, both times for Coble *surfaces* arising at torus-fixed points, and the period lattice treated throughout is $T_{\mathrm{En}}$ |
@@ -18,8 +18,8 @@ material sits; the last two are about other lattices entirely.
 
 **Why this is worth recording.** The issue's rule is that a value is "cited from a source that proves it, or certified by
 computation", and the corpus's own practice is to leave a field absent rather than guessed. This lemma closes the first
-half of that disjunction for the Coble cusps: there is nothing to cite. So the cusp-5 row is not waiting on more
-reading — it is waiting on the exact orbit computation at a Coble cusp, which is the owner's
+half of that disjunction for the $\Gamma_{\mathrm{Co},2}$-cusps: there is nothing to cite. So the row at the 135-orbit $\Gamma_{\mathrm{Co},2}$-cusp is not waiting on more
+reading — it is waiting on the exact orbit computation at a $\Gamma_{\mathrm{Co},2}$-cusp, which is the owner's
 `_double_coset_adjustment` returning (`results/probe-43-coble-cusp5-equivalence.py`) or a certified generating family at
 that cusp.
 

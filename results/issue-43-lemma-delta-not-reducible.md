@@ -1,4 +1,4 @@
-# #43, one lemma: $\delta$ is not reducible into the chamber, so the cusp-5 question is a word problem
+# #43, one lemma: $\delta$ is not reducible into the chamber, so the 135-orbit $\Gamma_{\mathrm{Co},2}$-cusp question is a word problem
 
 **Lemma.** At Sterk's `(4.3.9)` the vector $\delta = e - f$ has a *positive* pairing, $+2$, with one wall of the chamber
 and $-2$ with two others, so it does not lie in the closed chamber up to sign, and Vinberg's reduction — reflect in any

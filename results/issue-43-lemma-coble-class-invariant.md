@@ -1,11 +1,11 @@
-# #43, one lemma: the class of $\delta$ in $K_I$ settles the Coble cusp of three classes
+# #43, one lemma: the class of $\delta$ in $K_I$ settles the 135-orbit $\Gamma_{\mathrm{Co},2}$-cusp
 
 **Refuted (#49).** The step "every element of $W_v$ ... preserves the class there of any vector of $v^\perp$" is
 false: fixing $v$ preserves $K_I$ as a whole, not each class. On card 029J the wall $\alpha_9$ of `(4.3.9)` has square
 $-4$, pairs $0$ with the cusp and $-2$ with $\delta$, so its reflection, an element of $W_v$, sends $\delta$ to
 $\delta - \alpha_9$, a different class. The row this lemma supported is withdrawn from card 6JRR.
 
-**Lemma.** At Sterk's `(4.3.9)` the Coble cusp stabilizer acts on the three root classes with exactly two orbits,
+**Lemma.** At Sterk's `(4.3.9)` the $\Gamma_{\mathrm{Co},2}$-cusp stabilizer acts on the three root classes with exactly two orbits,
 $\{\alpha_{12}\}$ and $\{\alpha_{13},\alpha_{14}\}$.
 
 **Proof.** Write $G_v = W_v \rtimes S$ — Sterk `(4.3.3)`, p. 18, for the shape, `(4.3.9)`, p. 24, that the symmetries of
@@ -28,7 +28,7 @@ survives: the $W_v$-part cannot change it, so the six symmetries that move $\del
 excluded even though they can be multiplied by reflections. The false step is replaced, not patched.
 
 **What is still not claimed.** This is a proof from Sterk's algorithm plus a computation of one invariant, not a printed
-count and not a run of the owner's group code, which does not return at a Coble cusp
+count and not a run of the owner's group code, which does not return at a $\Gamma_{\mathrm{Co},2}$-cusp
 (`results/probe-43-coble-cusp5-equivalence.py`, 300 s and 1500 s). The certificate says so.
 
 **Sources by printed page.** H. Sterk, *Compactifications of the period space of Enriques surfaces, Part I*,

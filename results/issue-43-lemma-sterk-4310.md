@@ -25,7 +25,7 @@ So the lemma holds: Sterk's lifting statement is an Enriques statement.
 p. 22), "the symmetry is induced by an element of $\Gamma_v$" ((4.3.8), p. 23) and "Symmetries of the graph can be lifted
 to $\Gamma_v$" ((4.3.9), p. 24) as a statement that also settles the $T_{\mathrm{Co}}$ rows. It settles the $T_{En}$
 rows, which are stored; it does not settle the Coble ones. That is consistent with the measurement: of the owner's
-family at the Coble cusp, 22 of 27 members preserve $T_{\mathrm{Co}}$ and none of the 22 carries one root class to
+family at the 135-orbit $\Gamma_{\mathrm{Co},2}$-cusp, 22 of 27 members preserve $T_{\mathrm{Co}}$ and none of the 22 carries one root class to
 another (`results/probe-43-coble-classes.py`), and the exact equivalence does not return there
 (`results/probe-43-coble-cusp5-equivalence.py`, killed in `_double_coset_adjustment`, `orthogonal_quotients.py:234`).
 
@@ -42,7 +42,7 @@ Careful with what the computation states: a symmetry preserves the *wall set* of
 for the isometry realising it to preserve $T_{\mathrm{Co}}$ and not sufficient; the graph does not determine the
 isometry.
 
-**Consequence for the issue.** Cusp 5 of the $T_{\mathrm{Co}}$ side cannot be decided from Sterk, and it is not decided
+**Consequence for the issue.** The 135-orbit $\Gamma_{\mathrm{Co},2}$-cusp of $T_{\mathrm{Co}}$ cannot be decided from Sterk, and it is not decided
 by anything the owner's library returns today. The row stays empty; the two cusps whose family is one class stay
 stored, because their count needs no symmetry at all.
 

@@ -23,7 +23,7 @@ claim: it says the image has **no** element identifying $\alpha_{12}$ with the o
 `(4.3.9)`, and this repository has no other printed source for it.
 
 **Consequence.** The count-of-2 lemma (`results/issue-43-lemma-coble-image.md`) is a conditional whose hypothesis is not
-in print, and the cusp-5 row stays empty. What the lemma above does settle is the *asymmetry* of the two sides: the
+in print, and the row at the 135-orbit $\Gamma_{\mathrm{Co},2}$-cusp stays empty. What the lemma above does settle is the *asymmetry* of the two sides: the
 $T_{En}$ rows are cited correctly because a subgroup suffices for one orbit, and no amount of further reading of Sterk's
 §4 will certify two.
 

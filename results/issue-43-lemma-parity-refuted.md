@@ -29,10 +29,10 @@ in $\Gamma$, not in $\Gamma_{\mathrm{En},2}$. So the row's key is a *statement a
 names*, which is the same weakening the Coble side runs into and cannot use: for $T_{\mathrm{Co}}$ there is no printed
 statement at all.
 
-**Where that leaves cusp 5.** The count is $1$ or $2$ — $\alpha_{13}$ and $\alpha_{14}$ are joined by the symmetry fixed
+**Where that leaves the 135-orbit $\Gamma_{\mathrm{Co},2}$-cusp.** The count is $1$ or $2$ — $\alpha_{13}$ and $\alpha_{14}$ are joined by the symmetry fixed
 in `results/issue-43-lemma-alpha13-alpha14.md`, and the question is whether $\alpha_{12}$ joins them. No congruence
 separates them (this file), no diagram symmetry joins $\alpha_{12}$ to the others while fixing $\delta$ (that file), and
-the owner's exact equivalence does not return at a Coble cusp
+the owner's exact equivalence does not return at a $\Gamma_{\mathrm{Co},2}$-cusp
 (`results/probe-43-coble-cusp5-equivalence.py`). What is left is a word in the group's generators, which is the walk the
 earlier probes ran to depth four without a hit.
 

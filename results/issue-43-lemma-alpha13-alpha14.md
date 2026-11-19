@@ -3,7 +3,7 @@
 **Lemma.** Of the two symmetries of the chamber diagram at `(4.3.9)` that exchange $\alpha_{13}$ with $\alpha_{14}$,
 the one fixing $\alpha_{11}$ and $\alpha_{12}$ sends $\delta = e - f$ to $\delta$ as an isometry of the lattice the walls
 span. Every realisation of it therefore preserves $T_{\mathrm{Co}} = \delta^\perp$, so it lies in
-$\mathrm{Stab}_{O(T_{\mathrm{En}})}(\delta)$, and the two root classes are one orbit under the Coble cusp stabilizer.
+$\mathrm{Stab}_{O(T_{\mathrm{En}})}(\delta)$, and the two root classes are one orbit under the $\Gamma_{\mathrm{Co},2}$-cusp stabilizer.
 The count at that cusp is therefore **at most 2**.
 
 **Proof.** Card 029J's Gram tensor gives the fourteen walls of the `(4.3.9)` chamber, their squares and their pairings.

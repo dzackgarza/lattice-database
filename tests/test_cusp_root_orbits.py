@@ -247,7 +247,7 @@ def test_a_second_row_at_one_cusp_is_refused_when_it_changes_the_first() -> None
 
 
 def test_the_coble_group_card_states_the_index_its_computation_certifies() -> None:
-    """#43: `gamma-co-2` exists because the library builds the group, and its index is a computation.
+    r"""#43: `gamma-co-2` exists because the library builds the group, and its index is a computation.
 
     The `gamma-co-2` rows of card 6JRR's `cusp_root_orbits` need this card, which is certified by computation from the
     library's own construction of $\Gamma_{\mathrm{Co},2} = R_{\Gamma_{\mathrm{En},2}}$ — never authored from the
