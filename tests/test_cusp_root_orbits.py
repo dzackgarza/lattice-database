@@ -324,6 +324,33 @@ def test_card_6jrr_states_the_two_decided_coble_cusps() -> None:
     assert not [problem for problem in problems if "cusp_root_orbits" in problem], problems
 
 
+def test_the_coble_group_card_states_the_index_its_computation_certifies() -> None:
+    """#43: `gamma-co-2` exists because the library builds the group, and its index is a computation.
+
+    The decision of 2026-11-19 holds the cusp-5 row until this card exists and is certified by computation from the
+    library's own construction of $\Gamma_{\mathrm{Co},2} = R_{\Gamma_{\mathrm{En},2}}$ — never authored from the
+    project's draft. The card states the parent it restricts inside, the index, and no value it does not compute; this
+    test states that, and that 6JRR cites the certificate its shard holds.
+    """
+    from latticedb.catalogues import ArithmeticGroup
+
+    root = ROOT
+    card = ArithmeticGroup.model_validate(corpus.front_matter(corpus.read_card(root / "arithmetic-groups" / "gamma-co-2.md")))
+    assert card.lattice == "6JRR" and card.parent_group == "otilde-plus-t-co"
+    assert card.data.index_in_orthogonal_group == 93997183795200 * 46998591897600
+    assert card.data.cardinality == "aleph0"
+    assert card.standard_name is None, "the group is named by construction, not one of the eight"
+    loaded = corpus.cards(root, ("6JRR",))
+    held = certificates.load(root, tags=("6JRR",))
+    lattice = next(entry.lattice for entry in loaded.entries if entry.lattice.tag == "6JRR")
+    field = "arithmetic-group.gamma-co-2.index_in_orthogonal_group"
+    cited = lattice.certifications.get(field)
+    assert cited is not None and held.get("6JRR " + field) is not None
+    assert held["6JRR " + field].hash == cited
+    entry = next(entry for entry in loaded.entries if entry.lattice.tag == "6JRR")
+    assert [problem for problem in checks.records.arithmetic_problems(loaded, held, entry) if "gamma-co-2" in problem] == []
+
+
 def test_the_chambers_own_reflections_do_not_move_the_root_classes() -> None:
     """#43: at every cusped row the root walls have different orthogonal neighbour sets, so no word in the walls moves one to another.
 

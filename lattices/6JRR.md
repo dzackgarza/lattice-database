@@ -27,6 +27,7 @@ certifications:
   arithmetic-group.otilde-t-co.line_orbits: 74de7eedb7def6700e21deb1eb039b36a1bc82862c6f781a74645be43d9191a8
   arithmetic-group.otilde-plus-t-co.line_orbits: c474a4bfa977a5e62604598b3a25344aa537369cda112a03b88838e4813495d6
   integral.cusp_root_orbits: 241d3a4680a1b6255646ceeb37fc3a93e21a860e4f93a07c82d6ec3e439db318
+  arithmetic-group.gamma-co-2.index_in_orthogonal_group: ff6667b1ebc3d93c0e7cf5a8451cb9fd6d57f596453c6f1a1026e30210e5da7e
 rank: 11
 gram_tensor:
 - [2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
@@ -6714,7 +6715,7 @@ morphisms:
   - [76, -825, -49, -89, -88, 51, -23, 77, 145, -61, -297]
   - [84, -984, -59, -108, -109, 61, -22, 85, 175, -70, -356]
   scale: 1
-arithmetic_groups: [otilde-t-co, otilde-plus-t-co]
+arithmetic_groups: [otilde-t-co, otilde-plus-t-co, gamma-co-2]
 references:
 - citation: 'I. Dolgachev, S. Kondo, "The rationality of the moduli spaces of Coble surfaces and of nodal Enriques surfaces", Izv. Math. 77:3 (2013), 507-524, Section 2, p. 510: the conventions ($\mathbb{E} = E_8 \oplus U$ with $E_8$ the even negative definite lattice of the Cartan matrix, $L(2)$ the form $2b$, $\langle m \rangle$ the rank-one lattice of a vector of norm $m$, $A_L = L^*/L$ with its quadratic form $q_L$), and Section 3, equation (3.6) with Proposition 3.2, p. 513: the Coble lattice is $N = \langle 2 \rangle \oplus \mathbb{E}(2) = \langle 2 \rangle \oplus U(2) \oplus E_8(-2)$, of signature $(2, 9)$, and the moduli space of Coble surfaces is an open subset of $\mathcal{D}(N)/O(N)$.'
 ---
