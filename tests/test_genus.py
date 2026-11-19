@@ -358,6 +358,14 @@ def test_the_three_orbit_counts_of_a_subgroup_are_stored_together(tmp_path: Path
     assert [field for field, _value in stored] == list(genus.ARITHMETIC_ORBIT_FIELDS)
     card = ArithmeticGroup.model_validate(corpus.front_matter(corpus.read_card(root / "arithmetic-groups" / "otilde-t-co.md")))
     assert (card.data.line_orbits, card.data.plane_orbits, card.data.flag_orbits) == (527, 189720, 569160)
+    # The refusal is of a flag count stored on a card without the two counts it joins; the repository's card of
+    # this group now states all three, so the fixture's copy is stripped of them first.
+    path = root / "arithmetic-groups" / "otilde-plus-t-co.md"
+    document = frontmatter.load(str(path))
+    document.metadata["data"] = {
+        key: value for key, value in document.metadata["data"].items() if key not in genus.ARITHMETIC_ORBIT_FIELDS
+    }
+    path.write_text(frontmatter.dumps(document))
     with pytest.raises(ValueError, match="a flag count requires"):
         genus.store_arithmetic_group(root, "6JRR", "otilde-plus-t-co", {"flag_orbits": 569160})
 
