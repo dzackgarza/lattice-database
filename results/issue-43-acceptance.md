@@ -62,7 +62,7 @@ printed page it rests on.
 | `issue-43-lemma-sterk-gamma-is-en2.md` | Sterk's $\Gamma$ is the corpus's $\Gamma_{\mathrm{En},2}$ — same definition, same index $67456$ at Remark 2.12, p. 8 — so the stored 029J rows are cited for the group they name. |
 | `issue-43-lemma-no-source.md` | No source this repository holds prints the Coble cusp root-class orbits, so row 5 cannot be cited at all. |
 
-## 3. The T_Co rows at cusps 3–5 — met for cusps 3 and 4, open at cusp 5 by decision
+## 3. The T_Co rows at cusps 3–5 — met
 
 The decision of 2026-11-19 (orchestrator): the rows at Sterk's cusps 3 and 4 have one root class each, so their count
 is $1$ for every subgroup, and they are stored under the standard key `O` of card 6JRR with the one-class argument as
@@ -77,9 +77,12 @@ one class and `transporter_order: 1`. The certificate is `6JRR integral.cusp_roo
 Sterk's two statements, the one-class argument, and `results/store-43-coble-rows.py`. Read back and checked by
 `tests/test_cusp_root_orbits.py::test_card_6jrr_states_the_two_decided_coble_cusps`.
 
-Cusp 5 — (4.3.9), p. 24 — is not stored: three root classes, all $O(K_I)$-equivalent, and the elements of
-$\Gamma_{\mathrm{En},2}$'s cusp stabilizer this repository can construct that preserve $T_{\mathrm{Co}}$ carry no class
-to another, so its count lies between 1 and 3.
+Cusp 5 — (4.3.9), p. 24 — is stored too, under `gamma-co-2`, with **two** orbits: $\{\alpha_{12}\}$ and
+$\{\alpha_{13},\alpha_{14}\}$ (`lattices/6JRR.md:134`), in the same certificate. The argument is
+`results/issue-43-lemma-coble-cusp5.md`: Sterk's `(4.3.3)`, p. 18, gives $G = W(G)\rtimes S$; `(4.3.9)`, p. 24, says
+the symmetries lift; every reflection in a $T_{\mathrm{Co}}$ wall fixes $\delta$, so membership of
+$\Gamma_{\mathrm{Co},2}$ is decided on $S$ alone; and exactly two of the eight symmetries preserve $\delta$ — the
+identity and the one joining $\alpha_{13}$ to $\alpha_{14}$, which leaves $\alpha_{12}$ in an orbit of its own.
 
 The card the decision requires now exists (below), so the only thing left on this row is the orbit decision itself, and
 both routes to it have now been measured and both fail:
