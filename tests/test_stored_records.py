@@ -10,9 +10,10 @@ certificate-contradiction report names, against their own shards, so the suite t
 The cards are the reported four: 0268 is #21's own case, and the report adds 0021, 0024 and 0026.
 """
 
+import re
 from pathlib import Path
 
-from latticedb import certificates, checks, corpus
+from latticedb import certificates, checks, corpus, genus
 from latticedb.model import Lattice
 
 REPOSITORY = Path(__file__).resolve().parent.parent
@@ -119,3 +120,50 @@ def test_the_cards_state_the_fields_the_report_names() -> None:
             assert isinstance(block, dict) and block.get(qualified.split(".", 1)[1]) is not None, f"{tag} {qualified} is not stated"
             assert held.get(f"{tag} {qualified}") is not None, f"{tag} {qualified} has no certificate"
             assert lattice.certifications.get(qualified) is not None, f"{tag} {qualified} is not cited"
+
+
+SEARCH_CERTIFICATE = re.compile(r"^([0-9A-Za-z]{4}) (\S+):\n  hash: ([0-9a-f]{64})\n", re.MULTILINE)
+"""A certificate of a search: `genus.SEMI_DECISIONS` names the fields a job may stop inside."""
+
+
+def search_certificates() -> dict[str, dict[str, str]]:
+    """Every certificate in `certificates/` of a field a job may stop inside, by card."""
+    found: dict[str, dict[str, str]] = {}
+    for path in sorted((REPOSITORY / "certificates").glob("*.yaml")):
+        for matched in SEARCH_CERTIFICATE.finditer(path.read_text()):
+            tag, field, digest = matched.groups()
+            if field.rsplit(".", 1)[-1] in genus.SEMI_DECISIONS:
+                found.setdefault(tag, {})[field] = digest
+    return found
+
+
+def test_a_search_certificate_is_stated_by_the_card_it_names() -> None:
+    """#50: a search's certificate is evidence only while the card states the result it commits to.
+
+    A derivation rebuilds the blocks it owns from the record a job read when it queued the card, and
+    a search written during that job is not in the record; before #23 the derivation's write deleted
+    the value and `certificates/`, which merges key by key, kept the entry. `genus.keep_other_computations`
+    stops a later derivation doing it again, and this test holds the ledger itself: every certificate
+    of a field a job may stop inside names a value its card states, at that card's Gram tensor.
+    """
+    found = search_certificates()
+    assert len(found) > 1000, f"the scan found {len(found)} cards, not the corpus's search certificates"
+    problems: list[str] = []
+    for tag, fields in sorted(found.items()):
+        path = REPOSITORY / "lattices" / f"{tag}.md"
+        if not path.is_file():
+            problems.append(f"{tag}: {len(fields)} search certificates and no card")
+            continue
+        metadata = corpus.front_matter(corpus.read_card(path))
+        lattice = Lattice.model_validate(metadata)
+        for field, digest in sorted(fields.items()):
+            block_name, _, short = field.partition(".")
+            block = metadata.get(block_name)
+            value = block.get(short) if isinstance(block, dict) else None
+            if value is None:
+                problems.append(f"{tag} {field}: the shard holds {digest[:12]} and the card states no value")
+            elif certificates.certification_hash(f"{tag} {field}", lattice, genus.certified_value(short, value, lattice)) != digest:
+                problems.append(f"{tag} {field}: the card states {value!r}, which is not the certificate's value")
+            elif lattice.certifications.get(field) != digest:
+                problems.append(f"{tag} {field}: the card states the value and does not cite {digest[:12]}")
+    assert problems == [], "\n".join(problems)

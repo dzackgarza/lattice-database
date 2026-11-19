@@ -25,6 +25,7 @@ certifications:
   integral.local_representations: 8e7f8db46992524d6ec943ece5b0c8a9b11ce224f645cad29cf817a600dcdce0
   integral.local_densities: 71c3b62fc89a321e7020014151ee62bfa45cc64feb10f405643f196a7211ea46
   integral.discriminant_sequence: c01ba6fcd89e8606c78149a4918d4bfe45e1f4937a771c73f1cc2a1435ca5310
+  definite.regular: 5546b04ebf5fc14e97aea7c916fea6aa913f35b66dc8e3277f571be15402b452
 rank: 3
 gram_tensor:
 - [4, 0, 0]
@@ -185,6 +186,7 @@ definite:
   - [-1, 0, 0]
   - [1, 0, 0]
   perfect: false
+  regular: false
   spinor_regular: true
   theta_series: [1, 0, 0, 0, 2, 0, 0, 0, 0, 2, 0, 0, 2]
   genus_theta_series: [1, 1, 0, 0, 2, 0, 0, 0, 0, 2, 0, 0, 2]
