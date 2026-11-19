@@ -26,7 +26,7 @@ certifications:
   automorphisms.automorphism_group_order: ef7109402ccd54cf65ca0a3b9ed8e6efceb44094eac624eb8aa798f1ac23dd2c
   arithmetic-group.otilde-t-co.line_orbits: 74de7eedb7def6700e21deb1eb039b36a1bc82862c6f781a74645be43d9191a8
   arithmetic-group.otilde-plus-t-co.line_orbits: c474a4bfa977a5e62604598b3a25344aa537369cda112a03b88838e4813495d6
-  integral.cusp_root_orbits: 241d3a4680a1b6255646ceeb37fc3a93e21a860e4f93a07c82d6ec3e439db318
+  integral.cusp_root_orbits: d55e604b504b2b7bce0e41054fa4d4fcf95168e18e77a1c471557bc71b7140b8
   arithmetic-group.gamma-co-2.index_in_orthogonal_group: ff6667b1ebc3d93c0e7cf5a8451cb9fd6d57f596453c6f1a1026e30210e5da7e
 rank: 11
 gram_tensor:
@@ -112,7 +112,7 @@ integral:
     isotropic_classes: 528
     isotropic_orbits: 2
   cusp_root_orbits:
-    O:
+    gamma-co-2:
     - cusp: [0, 1, 1, -2, -3, -4, -6, -5, -4, -3, -2]
       statement: 4.3.7
       printed_page: 22
