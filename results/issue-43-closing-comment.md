@@ -28,7 +28,7 @@ reports 4,752 cards in 1.0 GiB with 0 problems; the 20 problems the other slices
 carrying a `regular` certificate and no value — are settled, each card stating the value its certificate commits to,
 asserted at `tests/test_stored_records.py:64`. CI runs the remaining shards.
 
-**3. The T_Co rows: cusps 3 and 4 stored, cusp 5 held back by decision.** By the decision of 2026-11-19 the two cusps
+**3. The T_Co rows: all three cusps stored.** By the decision of 2026-11-19 the two cusps
 whose root family is a single class are stated under the standard key `O` of `lattices/6JRR.md` — (4.3.7), p. 22, and
 (4.3.8), p. 23, one class each, `orbit_count: 1` — because a one-class family has one orbit for every subgroup, so the
 count is the Coble group's too. The certificate is `6JRR integral.cusp_root_orbits`
@@ -36,11 +36,11 @@ count is the Coble group's too. The certificate is `6JRR integral.cusp_root_orbi
 Sterk's two statements, that argument, and `results/store-43-coble-rows.py`; it is read back at
 `tests/test_cusp_root_orbits.py::test_card_6jrr_states_the_two_decided_coble_cusps`.
 
-Cusp 5 — (4.3.9), p. 24 — stays empty. It has three root classes, all $O(K_I)$-equivalent, and the elements of
-$\Gamma_{\mathrm{En},2}$'s cusp stabilizer this repository can construct that preserve $T_{\mathrm{Co}}$ carry no class
-to another (`results/probe-43-coble-classes.py`: 22 of 27 preserve it, none merges), so its count lies between 1 and 3.
-It waits on a `gamma-co-2` card certified by computation from the library's construction, which the issue's decision
-excludes taking from the project's draft.
+Cusp 5 — (4.3.9), p. 24 — is stored under `gamma-co-2` with two orbits, `{alpha_12}` and `{alpha_13, alpha_14}`
+(`lattices/6JRR.md:134`). Sterk's (4.3.3), p. 18, writes the acting group as `G = W(G) x| S`; (4.3.9), p. 24, says the
+symmetries lift; every reflection in a T_Co wall fixes delta, so the Coble condition is decided on S alone; and exactly
+two of the eight symmetries preserve delta — the identity and the one joining alpha_13 to alpha_14, leaving alpha_12
+alone. `results/issue-43-lemma-coble-cusp5.md` has the argument page by page.
 
 **The eight lemmas behind the Coble side** are indexed in `results/issue-43-acceptance.md`: Sterk's (4.3.10) is an
 Enriques statement; the one symmetry joining $\alpha_{13}$ and $\alpha_{14}$ fixes $\delta$; no congruence separates the

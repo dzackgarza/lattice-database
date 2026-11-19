@@ -378,9 +378,11 @@ class RootClassOrbit(Record):
     )
     transporter_order: Annotated[int, Field(ge=1)] = Field(
         description=(
-            "The order of the group of transporters the row's proof exhibits: the isometries of $K_J$ that the cusp "
-            "stabilizer contains and that carry the representative to the orbit's classes. It is $1$ for an orbit of "
-            "one class, whose only transporter is the identity."
+            "The order of the cyclic group that the row's proof exhibits acting on the orbit: one transporter carried "
+            "to each class of the orbit, taken as a permutation of the orbit's classes, and its order is the length of "
+            "the cycle it induces. It is $1$ for an orbit of one class, whose exhibited transporter is the identity. "
+            "It is not the size of the cusp stabilizer, which is infinite here, and not the orbit's class count unless "
+            "the exhibited transporter is a single cycle over the whole orbit."
         ),
     )
 

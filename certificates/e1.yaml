@@ -31938,8 +31938,19 @@
   hash: 000a0cf69d40037137de8d1340ab9613d0fc02bfe7b5c79bddd0f5ff9cd831d3
   by: research preamble
 6JRR integral.cusp_root_orbits:
-  hash: 241d3a4680a1b6255646ceeb37fc3a93e21a860e4f93a07c82d6ec3e439db318
-  by: research preamble
+  hash: d55e604b504b2b7bce0e41054fa4d4fcf95168e18e77a1c471557bc71b7140b8
+  by: 'H. Sterk, "Compactifications of the period space of Enriques surfaces, Part
+    I", Math. Z. 207 (1991), 1-36: (4.3.7), p. 22, prints the chamber at e'' + f''
+    + bar_alpha_8 and (4.3.8), p. 23, the chamber at 2e'' + f'' + bar_alpha_1. T_Co
+    is delta^perp for delta = e - f, so a wall of a chamber is a wall of T_Co exactly
+    when it is orthogonal to delta; of the walls that are, exactly one at each cusp
+    is orthogonal to the cusp and of square -2, so the cusp''s root family in K_I
+    = v^perp/Zv is a single class and its orbits are one orbit under every subgroup.
+    The rows are keyed to gamma-co-2, the group those cusps belong to, whose values
+    are certified on this card. transporter_order is the order of the cyclic group
+    the row''s proof exhibits acting on the orbit: 1 for a one-class orbit, whose
+    exhibited transporter is the identity. results/store-43-coble-rows.py writes the
+    rows and results/rekey-43-coble-rows.py keys them here'
 6JRR integral.discriminant_form:
   hash: 0be391409303d25f25d126795ee881040661b4883ad7473272b34b60b8c414da
   by: research preamble
