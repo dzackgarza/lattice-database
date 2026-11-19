@@ -1,3 +1,32 @@
+02QU definite.regular:
+  disposition: open
+  attempts:
+  - hash: b87cd54b7165b8b63245895517e87d36f682bcfd9996bd76adc72bca3291a871
+    gram_tensor:
+    - - 1
+      - 0
+      - 0
+      - 0
+    - - 0
+      - 2
+      - 0
+      - 0
+    - - 0
+      - 0
+      - 2
+      - 1
+    - - 0
+      - 0
+      - 1
+      - 3
+    reason: certification budget exhausted
+    stderr: ''
+    seconds: 18470.0
+    recorded_at: 2026-11-19 00:30:27.533796+00:00
+    run_url: https://github.com/dzackgarza/lattice-database/actions/runs/44374448321/attempts/1
+    database_revision: d389cfb7d09693c53bb148f38a56447bf1c072ff
+    research_revision: fca008555b7d468c4fbb26bcff5cd2ca7b057e18
+  notes: []
 233F derive:
   disposition: open
   attempts:
