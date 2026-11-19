@@ -30399,29 +30399,13 @@
   by: research preamble
 3IC9 definite.regular:
   hash: 7f7e7c6475872d77fce1f19d1b20c5e41f8f84e2cbd70304e036c66ed34145e7
-  by: 'W. C. Jagy, I. Kaplansky and A. Schiemann, There are 913 regular ternary forms,
-    Mathematika 44 (1997), 332-341, form 913, as tabulated in A. G. Doyle, B. Muskat,
-    K. Pehlivan and K. S. Williams, Positive integers represented by regular primitive
-    positive-definite integral ternary quadratic forms, Integers 19 (2019), #A45,
-    Tables 1 and 2; regular under the generalized Riemann hypothesis by R. J. Lemke
-    Oliver, Representations by ternary quadratic forms, Bull. London Math. Soc. 46
-    (2014), 1237-1247, Theorem 1.1.'
+  by: research preamble
 3IC9 definite.siegel_eisenstein_coefficients:
   hash: 9bbcf652222a5fab4c2390f520cc21430e9f7b09b4857c593ca77564fb858415
   by: research preamble
 3IC9 definite.spinor_regular:
   hash: ceeae307eca4207effc44e51c97c242a324282562ed6b37f6359f5195e9d7991
-  by: 'W. C. Jagy, I. Kaplansky and A. Schiemann, There are 913 regular ternary forms,
-    Mathematika 44 (1997), 332-341, form 913, as tabulated in A. G. Doyle, B. Muskat,
-    K. Pehlivan and K. S. Williams, Positive integers represented by regular primitive
-    positive-definite integral ternary quadratic forms, Integers 19 (2019), #A45,
-    Tables 1 and 2; regular under the generalized Riemann hypothesis by R. J. Lemke
-    Oliver, Representations by ternary quadratic forms, Bull. London Math. Soc. 46
-    (2014), 1237-1247, Theorem 1.1; hence spinor regular, since a form is spinor regular
-    if it represents all the positive integers represented by its spinor genus (A.
-    G. Earnest and A. Haensch, Completeness of the list of spinor regular ternary
-    quadratic forms, arXiv:1711.05811v2 (2018), Abstract) and the spinor genus lies
-    in the genus.'
+  by: research preamble
 3IC9 definite.theta_series_cuspidal_component:
   hash: e2b4c1d36a53173a968ea3507b89e588b31eeb9d9daa7ed61d754f1e3a768466
   by: research preamble
@@ -30433,6 +30417,9 @@
   by: research preamble
 3IC9 integral.anisotropic_primes:
   hash: a950c3c5bce07470548f995d0039375041caa15972f63c6cf98dfcfd99730bc6
+  by: research preamble
+3IC9 integral.discriminant_form:
+  hash: 759a7f46382e1ada07f680e04ad6fb105877d7b8acdf8af19f61b908ee10c3c9
   by: research preamble
 3IC9 integral.discriminant_sequence:
   hash: bf9969d6a63c88e206d9fa201cc9557d25a339bc81425ff0199fa107abea1353
