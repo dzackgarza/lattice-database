@@ -519,3 +519,68 @@ def test_card_6jrr_states_the_root_class_orbits_at_each_of_the_four_gamma_co_2_c
     assert records.local_admission_problems(co) == []
     held = certificates.load(ROOT, tags=("6JRR",))
     assert held["6JRR integral.cusp_root_orbits"].hash == co.certifications["integral.cusp_root_orbits"]
+
+
+def test_card_6jrr_states_the_chamber_symmetries_of_each_gamma_co_2_cusp_face_with_exhibited_isometries() -> None:
+    r"""#49: at each $\Gamma_{\mathrm{Co},2}$-cusp, $S$ is the whole symmetry group of the face's diagram, and each generator is realized.
+
+    The stored face chamber is recomputed from card 029J: the walls of Sterk's chamber orthogonal to $\delta$ and
+    $\alpha_u + \delta$ for the order-4 neighbours $u$, written in 6JRR's basis. The Gram-preserving permutations of its
+    walls form a group, and the stored $S$ has that group's order. Each stored generator is checked against the morphism
+    that realizes it. That morphism is an integral isometry of $T_{\mathrm{Co}}$ fixing the cusp, it carries wall $i$ to
+    wall $\sigma(i)$ modulo $\mathbb{Q}v$, and mod 2 it stabilizes $\mathrm{span}(e_1, f_1) = A_{U(2)}$. So it lies in
+    $\Gamma_{\mathrm{Co},2} = \rho^{-1}(\mathrm{Stab}\,A_{U(2)})$, and no lifting statement is needed.
+    """
+    from sage.all import QQ, matrix, vector
+
+    en = Lattice.model_validate(corpus.front_matter(corpus.read_card(ROOT / "lattices" / "029J.md")))
+    co = Lattice.model_validate(corpus.front_matter(corpus.read_card(ROOT / "lattices" / "6JRR.md")))
+    assert en.integral is not None and en.integral.cusp_chambers is not None
+    assert co.integral is not None and co.integral.cusp_chambers is not None and co.integral.cusp_root_orbits is not None
+    form = matrix(QQ, [[QQ(x) for x in r] for r in en.gram_tensor])
+    gram = matrix(QQ, [[QQ(x) for x in r] for r in co.gram_tensor])
+    delta = vector(QQ, [1, -1] + [0] * 10)
+    faces = {}
+    for chamber in en.integral.cusp_chambers["gamma-en-2"]:
+        v = vector(QQ, chamber.cusp)
+        if v * form * delta != 0:
+            continue
+        walls = [vector(QQ, w.vector) for w in chamber.walls]
+        (s,) = [i for i, w in enumerate(walls) if w in (delta, -delta)]
+        nbrs = [j for j in range(len(walls)) if j != s and walls[s] * form * walls[j] != 0]
+        face = [walls[j] for j in range(len(walls)) if j != s and j not in nbrs] + [walls[j] + walls[s] for j in nbrs]
+        drop = lambda x: tuple(int(c) for c in [x[0]] + list(x[2:]))
+        faces[drop(v)] = [drop(w) for w in face]
+    stored = {tuple(row.cusp): row for row in co.integral.cusp_chambers["gamma-co-2"]}
+    assert sorted(stored) == sorted(faces)
+    morphisms = {m.name: m for m in co.morphisms}
+    for row in co.integral.cusp_root_orbits["gamma-co-2"]:
+        cusp = tuple(row.cusp)
+        walls = [tuple(w.vector) for w in stored[cusp].walls]
+        assert walls == faces[cusp], cusp
+        w = [vector(QQ, x) for x in walls]
+        g = [[w[i] * gram * w[j] for j in range(len(w))] for i in range(len(w))]
+        assert [[QQ(x) for x in r] for r in stored[cusp].gram] == g
+        symmetries = []
+
+        def extend(p):
+            i = len(p)
+            if i == len(w):
+                symmetries.append(tuple(p))
+                return
+            for t in range(len(w)):
+                if t not in p and g[t][t] == g[i][i] and all(g[i][o] == g[t][p[o]] for o in range(i)):
+                    p.append(t)
+                    extend(p)
+                    p.pop()
+
+        extend([])
+        assert row.chamber_symmetries is not None
+        assert row.chamber_symmetries.order == len(symmetries), cusp
+        v = vector(QQ, cusp)
+        for index, sigma in enumerate(row.chamber_symmetries.generators):
+            assert tuple(sigma) in symmetries
+            m = matrix(QQ, [list(r) for r in morphisms[f"Gamma_Co,2 cusp-face symmetry {list(cusp)} #{index + 1}"].matrix])
+            assert m.transpose() * gram * m == gram and m * v == v
+            assert all(matrix(QQ, [v, m * w[i] - w[sigma[i]]]).rank() <= 1 for i in range(len(w)))
+            assert all(m[i, j] % 2 == 0 for j in (1, 2) for i in range(11) if i not in (1, 2)), "in Gamma_Co,2"

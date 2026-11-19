@@ -31937,8 +31937,18 @@
 6JRR integral.anisotropic_primes:
   hash: 000a0cf69d40037137de8d1340ab9613d0fc02bfe7b5c79bddd0f5ff9cd831d3
   by: research preamble
+6JRR integral.cusp_chambers:
+  hash: 03b9a9ce87f4f4f9edf96657d6134c0dd8564ad63ad162b795e0131d136aaee8
+  by: 'The chamber at each Gamma_Co,2-cusp v of T_Co: the face C cap delta^perp of
+    the chamber C that card 029J stores at the T_En cusp of v (H. Sterk, Math. Z.
+    207 (1991), (4.3.6)-(4.3.9), pp. 21-24), through T_Co = delta^perp, delta = e
+    - f. It is the chamber of W_perp in C_W(s_delta) = <s_delta> x W_perp (Allcock,
+    arXiv:1106.3822v2, Thm. 5, Cor. 6): the walls of C orthogonal to delta and alpha_u
+    + delta for the order-4 neighbours u of delta. results/probe-49-gamma-co-2-chamber-symmetries.py
+    computes the walls, the Gram matrix and the diagram from the two cards'' Gram
+    tensors'
 6JRR integral.cusp_root_orbits:
-  hash: a84282b30666b4e8454569fc37297e1a884c8132ef7387e386a846e60547885e
+  hash: cc5e9bc13db1841a138a2853ece0b301cd311429ada10f11f4cdb20790b934af
   by: 'Rows at the four Gamma_Co,2-cusps of T_Co, each named by the orbit size (2,
     120, 135, 270) of [v/2] under P_0 = Stab(A_U(2)), the image of Gamma_Co,2 = rho^-1(P_0)
     (sage-extensions results/issue607-gamma-co-2-rows-by-the-polar-space.md); results/probe-49-gamma-co-2-cusps.py
@@ -31952,7 +31962,24 @@
     are its simple roots of square -2, no two joined by an odd path, and the diagram
     symmetries fixing delta join them: only alpha_13 <-> alpha_14 at (4.3.9), realized
     in Gamma_v by (4.3.9), p. 24. The same program computes the rows from card 029J''s
-    chambers; results/issue-49-transporters-and-coble-cusp5.md is the proof'
+    chambers; results/issue-49-transporters-and-coble-cusp5.md is the proof. chamber_symmetries:
+    S is the image of the Gamma_Co,2 stabilizer of v among the Gram-preserving permutations
+    of the face walls (in the order of the cusp''s cusp_chambers row). Each permutation
+    is realized as a rational isometry g0 of T_Co fixing v, and the lifts E(v, a)
+    g0 range over the Eichler transvections of v (Gritsenko-Hulek-Sankaran, arXiv:0810.1614,
+    Sect. 3.1, eq. (4)). The permutation is in S exactly when some integral lift has
+    discriminant image, its matrix mod 2, in P_0 = Stab(A_U(2)). results/probe-49-gamma-co-2-chamber-symmetries.py
+    decides this; |S| = 1, 1, 2, 1 at the 2-, 120-, 135- and 270-orbit cusps. The
+    (4.3.9) swap alpha_13 <-> alpha_14 is exhibited, not taken from a lifting statement.
+    chamber_symmetries: S is the image of the Gamma_Co,2 stabilizer of v among the
+    Gram-preserving permutations of the face walls (in the order of the cusp''s cusp_chambers
+    row). Each permutation is realized as a rational isometry g0 of T_Co fixing v,
+    and the lifts E(v, a) g0 range over the Eichler transvections of v (Gritsenko-Hulek-Sankaran,
+    arXiv:0810.1614, Sect. 3.1, eq. (4)). The permutation is in S exactly when some
+    integral lift has discriminant image, its matrix mod 2, in P_0 = Stab(A_U(2)).
+    results/probe-49-gamma-co-2-chamber-symmetries.py decides this; |S| = 1, 1, 2,
+    1 at the 2-, 120-, 135- and 270-orbit cusps. The (4.3.9) swap alpha_13 <-> alpha_14
+    is exhibited, not taken from a lifting statement'
 6JRR integral.discriminant_form:
   hash: 0be391409303d25f25d126795ee881040661b4883ad7473272b34b60b8c414da
   by: research preamble

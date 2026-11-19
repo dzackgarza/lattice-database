@@ -26,8 +26,9 @@ certifications:
   automorphisms.automorphism_group_order: ef7109402ccd54cf65ca0a3b9ed8e6efceb44094eac624eb8aa798f1ac23dd2c
   arithmetic-group.otilde-t-co.line_orbits: 74de7eedb7def6700e21deb1eb039b36a1bc82862c6f781a74645be43d9191a8
   arithmetic-group.otilde-plus-t-co.line_orbits: c474a4bfa977a5e62604598b3a25344aa537369cda112a03b88838e4813495d6
-  integral.cusp_root_orbits: a84282b30666b4e8454569fc37297e1a884c8132ef7387e386a846e60547885e
+  integral.cusp_root_orbits: cc5e9bc13db1841a138a2853ece0b301cd311429ada10f11f4cdb20790b934af
   arithmetic-group.gamma-co-2.index_in_orthogonal_group: ff6667b1ebc3d93c0e7cf5a8451cb9fd6d57f596453c6f1a1026e30210e5da7e
+  integral.cusp_chambers: 03b9a9ce87f4f4f9edf96657d6134c0dd8564ad63ad162b795e0131d136aaee8
 rank: 11
 gram_tensor:
 - [2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
@@ -116,6 +117,289 @@ integral:
     orthogonal_group_order: 46998591897600
     isotropic_classes: 528
     isotropic_orbits: 2
+  cusp_chambers:
+    gamma-co-2:
+    - cusp: [0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+      walls:
+      - name: \alpha_1
+        vector: [0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0]
+      - name: \alpha_2
+        vector: [0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0]
+      - name: \alpha_3
+        vector: [0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0]
+      - name: \alpha_4
+        vector: [0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0]
+      - name: \alpha_5
+        vector: [0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0]
+      - name: \alpha_6
+        vector: [0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0]
+      - name: \alpha_7
+        vector: [0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0]
+      - name: \alpha_8
+        vector: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1]
+      - name: \alpha_9 + \alpha_10
+        vector: [1, 0, 0, -2, -3, -4, -6, -5, -4, -3, -2]
+      wall_count: 9
+      gram:
+      - ['-4', '0', '2', '0', '0', '0', '0', '0', '0']
+      - ['0', '-4', '0', '2', '0', '0', '0', '0', '0']
+      - ['2', '0', '-4', '2', '0', '0', '0', '0', '0']
+      - ['0', '2', '2', '-4', '2', '0', '0', '0', '0']
+      - ['0', '0', '0', '2', '-4', '2', '0', '0', '0']
+      - ['0', '0', '0', '0', '2', '-4', '2', '0', '0']
+      - ['0', '0', '0', '0', '0', '2', '-4', '2', '0']
+      - ['0', '0', '0', '0', '0', '0', '2', '-4', '2']
+      - ['0', '0', '0', '0', '0', '0', '0', '2', '-2']
+      diagram:
+      - a: \alpha_1
+        b: \alpha_3
+        order: 3
+      - a: \alpha_2
+        b: \alpha_4
+        order: 3
+      - a: \alpha_3
+        b: \alpha_4
+        order: 3
+      - a: \alpha_4
+        b: \alpha_5
+        order: 3
+      - a: \alpha_5
+        b: \alpha_6
+        order: 3
+      - a: \alpha_6
+        b: \alpha_7
+        order: 3
+      - a: \alpha_7
+        b: \alpha_8
+        order: 3
+      - a: \alpha_8
+        b: \alpha_9 + \alpha_10
+        order: 4
+    - cusp: [0, 1, 1, -2, -3, -4, -6, -5, -4, -3, -2]
+      walls:
+      - name: \alpha_1
+        vector: [0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0]
+      - name: \alpha_2
+        vector: [0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0]
+      - name: \alpha_3
+        vector: [0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0]
+      - name: \alpha_4
+        vector: [0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0]
+      - name: \alpha_5
+        vector: [0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0]
+      - name: \alpha_6
+        vector: [0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0]
+      - name: \alpha_7
+        vector: [0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0]
+      - name: \alpha_10
+        vector: [0, 0, 2, -2, -3, -4, -6, -5, -4, -3, -2]
+      - name: \alpha_13
+        vector: [1, 0, -1, 0, 0, 0, 0, 0, 0, 0, 1]
+      - name: \alpha_11 + \alpha_9
+        vector: [1, 0, -2, 2, 3, 4, 6, 5, 4, 3, 2]
+      - name: \alpha_12 + \alpha_9
+        vector: [1, 0, 0, -2, -2, -3, -4, -3, -2, -1, 0]
+      wall_count: 11
+      gram:
+      - ['-4', '0', '2', '0', '0', '0', '0', '0', '0', '0', '2']
+      - ['0', '-4', '0', '2', '0', '0', '0', '0', '0', '0', '0']
+      - ['2', '0', '-4', '2', '0', '0', '0', '0', '0', '0', '0']
+      - ['0', '2', '2', '-4', '2', '0', '0', '0', '0', '0', '0']
+      - ['0', '0', '0', '2', '-4', '2', '0', '0', '0', '0', '0']
+      - ['0', '0', '0', '0', '2', '-4', '2', '0', '0', '0', '0']
+      - ['0', '0', '0', '0', '0', '2', '-4', '0', '2', '0', '0']
+      - ['0', '0', '0', '0', '0', '0', '0', '-4', '2', '4', '0']
+      - ['0', '0', '0', '0', '0', '0', '2', '2', '-2', '0', '0']
+      - ['0', '0', '0', '0', '0', '0', '0', '4', '0', '-2', '2']
+      - ['2', '0', '0', '0', '0', '0', '0', '0', '0', '2', '-2']
+      diagram:
+      - a: \alpha_1
+        b: \alpha_3
+        order: 3
+      - a: \alpha_1
+        b: \alpha_12 + \alpha_9
+        order: 4
+      - a: \alpha_2
+        b: \alpha_4
+        order: 3
+      - a: \alpha_3
+        b: \alpha_4
+        order: 3
+      - a: \alpha_4
+        b: \alpha_5
+        order: 3
+      - a: \alpha_5
+        b: \alpha_6
+        order: 3
+      - a: \alpha_6
+        b: \alpha_7
+        order: 3
+      - a: \alpha_7
+        b: \alpha_13
+        order: 4
+      - a: \alpha_10
+        b: \alpha_13
+        order: 4
+      - a: \alpha_10
+        b: \alpha_11 + \alpha_9
+        order: inf
+      - a: \alpha_11 + \alpha_9
+        b: \alpha_12 + \alpha_9
+        order: inf
+    - cusp: [2, 0, 0, -4, -5, -7, -10, -8, -6, -4, -2]
+      walls:
+      - name: \widetilde\alpha_1
+        vector: [0, 1, -1, 0, 0, 0, 0, 0, 0, 0, 0]
+      - name: \alpha_2
+        vector: [0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0]
+      - name: \alpha_4
+        vector: [0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0]
+      - name: \alpha_5
+        vector: [0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0]
+      - name: \alpha_6
+        vector: [0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0]
+      - name: \alpha_7
+        vector: [0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0]
+      - name: \alpha_8
+        vector: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1]
+      - name: \overline{\widetilde\alpha}_8
+        vector: [0, -2, -2, 0, -3, -4, -6, -5, -4, -3, -2]
+      - name: \alpha_12
+        vector: [1, 3, 3, -2, 1, 2, 2, 1, 0, 0, 0]
+      - name: \alpha_13
+        vector: [1, 3, 4, -2, 2, 3, 4, 3, 2, 1, 0]
+      - name: \alpha_14
+        vector: [1, 2, 3, -2, 0, 1, 0, 0, 0, 0, 0]
+      - name: \alpha_9 + \alpha_11
+        vector: [1, 1, 3, -2, 0, 0, 0, 0, 0, 0, 0]
+      - name: \alpha_10 + \alpha_11
+        vector: [1, 4, 4, -2, 2, 4, 5, 4, 3, 2, 1]
+      wall_count: 13
+      gram:
+      - ['-4', '0', '0', '0', '0', '0', '0', '0', '0', '2', '2', '4', '0']
+      - ['0', '-4', '2', '0', '0', '0', '0', '0', '0', '0', '0', '0', '2']
+      - ['0', '2', '-4', '2', '0', '0', '0', '0', '0', '0', '2', '0', '0']
+      - ['0', '0', '2', '-4', '2', '0', '0', '0', '0', '0', '0', '0', '0']
+      - ['0', '0', '0', '2', '-4', '2', '0', '0', '2', '0', '0', '0', '0']
+      - ['0', '0', '0', '0', '2', '-4', '2', '0', '0', '0', '0', '0', '0']
+      - ['0', '0', '0', '0', '0', '2', '-4', '2', '0', '2', '0', '0', '0']
+      - ['0', '0', '0', '0', '0', '0', '2', '-4', '0', '0', '0', '0', '2']
+      - ['0', '0', '0', '0', '2', '0', '0', '0', '-2', '0', '0', '2', '0']
+      - ['2', '0', '0', '0', '0', '0', '2', '0', '0', '-2', '0', '0', '0']
+      - ['2', '0', '2', '0', '0', '0', '0', '0', '0', '0', '-2', '0', '0']
+      - ['4', '0', '0', '0', '0', '0', '0', '0', '2', '0', '0', '-2', '2']
+      - ['0', '2', '0', '0', '0', '0', '0', '2', '0', '0', '0', '2', '-2']
+      diagram:
+      - a: \widetilde\alpha_1
+        b: \alpha_13
+        order: 4
+      - a: \widetilde\alpha_1
+        b: \alpha_14
+        order: 4
+      - a: \widetilde\alpha_1
+        b: \alpha_9 + \alpha_11
+        order: inf
+      - a: \alpha_2
+        b: \alpha_4
+        order: 3
+      - a: \alpha_2
+        b: \alpha_10 + \alpha_11
+        order: 4
+      - a: \alpha_4
+        b: \alpha_5
+        order: 3
+      - a: \alpha_4
+        b: \alpha_14
+        order: 4
+      - a: \alpha_5
+        b: \alpha_6
+        order: 3
+      - a: \alpha_6
+        b: \alpha_7
+        order: 3
+      - a: \alpha_6
+        b: \alpha_12
+        order: 4
+      - a: \alpha_7
+        b: \alpha_8
+        order: 3
+      - a: \alpha_8
+        b: \overline{\widetilde\alpha}_8
+        order: 3
+      - a: \alpha_8
+        b: \alpha_13
+        order: 4
+      - a: \overline{\widetilde\alpha}_8
+        b: \alpha_10 + \alpha_11
+        order: 4
+      - a: \alpha_12
+        b: \alpha_9 + \alpha_11
+        order: inf
+      - a: \alpha_9 + \alpha_11
+        b: \alpha_10 + \alpha_11
+        order: inf
+    - cusp: [0, 2, 1, -4, -5, -7, -10, -8, -6, -4, -2]
+      walls:
+      - name: \alpha_2
+        vector: [0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0]
+      - name: \alpha_3
+        vector: [0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0]
+      - name: \alpha_4
+        vector: [0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0]
+      - name: \alpha_5
+        vector: [0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0]
+      - name: \alpha_6
+        vector: [0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0]
+      - name: \alpha_7
+        vector: [0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0]
+      - name: \alpha_8
+        vector: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1]
+      - name: \alpha_10
+        vector: [0, 2, 0, -2, -3, -4, -6, -5, -4, -3, -2]
+      - name: \alpha_11
+        vector: [1, -1, 0, 1, 0, 0, 0, 0, 0, 0, 0]
+      - name: \alpha_12 + \alpha_9
+        vector: [1, -2, 0, 2, 2, 3, 4, 3, 2, 1, 0]
+      wall_count: 10
+      gram:
+      - ['-4', '0', '2', '0', '0', '0', '0', '0', '0', '0']
+      - ['0', '-4', '2', '0', '0', '0', '0', '0', '2', '0']
+      - ['2', '2', '-4', '2', '0', '0', '0', '0', '0', '0']
+      - ['0', '0', '2', '-4', '2', '0', '0', '0', '0', '0']
+      - ['0', '0', '0', '2', '-4', '2', '0', '0', '0', '0']
+      - ['0', '0', '0', '0', '2', '-4', '2', '0', '0', '0']
+      - ['0', '0', '0', '0', '0', '2', '-4', '2', '0', '2']
+      - ['0', '0', '0', '0', '0', '0', '2', '-4', '0', '0']
+      - ['0', '2', '0', '0', '0', '0', '0', '0', '-2', '0']
+      - ['0', '0', '0', '0', '0', '0', '2', '0', '0', '-2']
+      diagram:
+      - a: \alpha_2
+        b: \alpha_4
+        order: 3
+      - a: \alpha_3
+        b: \alpha_4
+        order: 3
+      - a: \alpha_3
+        b: \alpha_11
+        order: 4
+      - a: \alpha_4
+        b: \alpha_5
+        order: 3
+      - a: \alpha_5
+        b: \alpha_6
+        order: 3
+      - a: \alpha_6
+        b: \alpha_7
+        order: 3
+      - a: \alpha_7
+        b: \alpha_8
+        order: 3
+      - a: \alpha_8
+        b: \alpha_10
+        order: 3
+      - a: \alpha_8
+        b: \alpha_12 + \alpha_9
+        order: 4
   cusp_root_orbits:
     gamma-co-2:
     - cusp: [0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0]
@@ -124,6 +408,9 @@ integral:
         classes:
         - [1, 0, 0, -2, -3, -4, -6, -5, -4, -3, -2]
       orbit_count: 1
+      chamber_symmetries:
+        order: 1
+        generators: []
     - cusp: [0, 1, 1, -2, -3, -4, -6, -5, -4, -3, -2]
       orbits:
       - representative: [1, 0, -1, 0, 0, 0, 0, 0, 0, 0, 1]
@@ -136,6 +423,9 @@ integral:
         classes:
         - [1, 0, 0, -2, -2, -3, -4, -3, -2, -1, 0]
       orbit_count: 3
+      chamber_symmetries:
+        order: 1
+        generators: []
     - cusp: [2, 0, 0, -4, -5, -7, -10, -8, -6, -4, -2]
       orbits:
       - representative: [1, 1, 3, -2, 0, 0, 0, 0, 0, 0, 0]
@@ -152,6 +442,10 @@ integral:
         - [1, 3, 4, -2, 2, 3, 4, 3, 2, 1, 0]
         - [1, 2, 3, -2, 0, 1, 0, 0, 0, 0, 0]
       orbit_count: 4
+      chamber_symmetries:
+        order: 2
+        generators:
+        - [0, 7, 6, 5, 4, 3, 2, 1, 8, 10, 9, 11, 12]
     - cusp: [0, 2, 1, -4, -5, -7, -10, -8, -6, -4, -2]
       orbits:
       - representative: [1, -1, 0, 1, 0, 0, 0, 0, 0, 0, 0]
@@ -161,6 +455,9 @@ integral:
         classes:
         - [1, -2, 0, 2, 2, 3, 4, 3, 2, 1, 0]
       orbit_count: 2
+      chamber_symmetries:
+        order: 1
+        generators: []
   anisotropic_primes: []
   local_representations:
   - prime: 2
@@ -6744,6 +7041,22 @@ morphisms:
   - [64, -661, -39, -70, -69, 40, -21, 65, 116, -50, -237]
   - [76, -825, -49, -89, -88, 51, -23, 77, 145, -61, -297]
   - [84, -984, -59, -108, -109, 61, -22, 85, 175, -70, -356]
+  scale: 1
+- target: 6JRR
+  name: 'Gamma_Co,2 cusp-face symmetry [2, 0, 0, -4, -5, -7, -10, -8, -6, -4, -2] #1'
+  description: 'An element of Gamma_Co,2 that fixes the cusp [2, 0, 0, -4, -5, -7, -10, -8, -6, -4, -2] and permutes the walls of its cusp_chambers row by [0, 7, 6, 5, 4, 3, 2, 1, 8, 10, 9, 11, 12]: an integral isometry whose matrix mod 2 stabilizes span(e_1, f_1). results/probe-49-gamma-co-2-chamber-symmetries.py computes it'
+  matrix:
+  - [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+  - [0, 4, 3, 6, -2, -2, 0, 0, 0, 0, 0]
+  - [0, 3, 4, 6, -2, -2, 0, 0, 0, 0, 0]
+  - [0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0]
+  - [0, 6, 6, 12, -3, -4, 0, 0, 0, 0, 0]
+  - [0, 6, 6, 12, -4, -3, 0, 0, 0, 0, 0]
+  - [0, 10, 10, 20, -6, -6, 0, 0, 0, 0, 1]
+  - [0, 8, 8, 16, -5, -5, 0, 0, 0, 1, 0]
+  - [0, 6, 6, 12, -4, -4, 0, 0, 1, 0, 0]
+  - [0, 4, 4, 8, -3, -3, 0, 1, 0, 0, 0]
+  - [0, 2, 2, 4, -2, -2, 1, 0, 0, 0, 0]
   scale: 1
 arithmetic_groups: [otilde-t-co, otilde-plus-t-co, gamma-co-2]
 references:
