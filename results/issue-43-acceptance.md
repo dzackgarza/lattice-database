@@ -65,6 +65,25 @@ Cusp 5 — (4.3.9), p. 24 — is not stored: three root classes, all $O(K_I)$-eq
 $\Gamma_{\mathrm{En},2}$'s cusp stabilizer this repository can construct that preserve $T_{\mathrm{Co}}$ carry no class
 to another, so its count lies between 1 and 3. It waits on a `gamma-co-2` card certified by computation.
 
+### What the card would be built from, and what it would cost
+
+The owner's library has since identified the two *restricted stabilizers* on this lattice
+(`sage-extensions` `results/issue359-tco-restricted-stabilizers.md`, rows 1 and 2, and #286's item 1):
+$R_{\Gamma_{\mathrm{En}}} = \widetilde O^{+}(T_{\mathrm{Co}})$ and $R_{\Gamma^{K}_{\mathrm{En}}} = O(T_{\mathrm{Co}})$,
+with the indices $93997183795200 = 2|O(A_{T_{\mathrm{Co}}}, q)|$ and $1$ computed from the images of the constructed
+generators. So the group of the Coble cusps is $\Gamma_{\mathrm{Co},2} = R_{\Gamma_{\mathrm{En},2}}$, an index-$k$
+subgroup of $\widetilde O^{+}(T_{\mathrm{Co}})$ — the card [`otilde-plus-t-co`](../arithmetic-groups/otilde-plus-t-co.md)
+that 6JRR already carries, whose index $93997183795200$ and 95 generator matrices are certified on this card. A
+`gamma-co-2` card therefore has a parent to name and a value to compute:
+`index_in_orthogonal_group = 93997183795200 · k` with $k = [\widetilde O^{+}(T_{\mathrm{Co}}) : \Gamma_{\mathrm{Co},2}]$
+the order of the image of the $T_{\mathrm{En}}$-side discriminant character on it.
+
+The cost is the part that keeps this out of a turn's work: the owner's own record measures the ambient stabilizer's
+family at **330 generators in 352 s**, their restrictions to $T_{\mathrm{Co}}$ at 40 s, and `rho` on them at 25 s
+(`issue359-tco-restricted-stabilizers.md`, row 1). A card certified by computation needs that run plus the filter to
+$\Gamma_{\mathrm{En},2}$, and the cusp-5 row needs, on top of it, an orbit decision with the resulting family (or the
+owner's class-level equivalence). That is a scheduled run, not a turn's probe.
+
 ### The rows' data, in card 6JRR's own basis
 
 A row of `cusp_root_orbits` states its cusp and its classes as lifts in *its own card's* record basis, and the chambers
