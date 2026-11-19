@@ -549,9 +549,6 @@
   hash: 6b959587ca571125d0f6b15b3286ccfb4df34becee301c0a9863c99fd1716e4e
   seconds: 0
   lost: true
-0XOO integral.discriminant_form:
-  hash: 476aced5663916b7f8f865b6345d570a24e72593ffa6fa157fe5c805b687f225
-  seconds: 5
 0YVT integral.elementary_primes:
   hash: e9a35b7da91dcd00dd2193b061e2e0619539524bab6b5805ec303e0514afa883
   seconds: 0
@@ -1028,9 +1025,6 @@
   hash: 5a44397e49a4a862203a3ddfa51f2c629317c5c0175b84e7b640522bd3424541
   seconds: 5
   lost: true
-3G5T integral.discriminant_sequence:
-  hash: 3b971f9733bce44acad06d5c355e15716483a19c113f499b7c2db70ea2996c30
-  seconds: 19630
 3G5X integral.overlattice_count:
   hash: ee1f4a7d0b377a9993b77fa3d6444c4907d5e97372afcb9c9258c478112eb3e4
   seconds: 6
@@ -1047,14 +1041,13 @@
   hash: 54d00cf6ae7a28dc51fc442844c6b5b472ed58ead63bcd3bbd214246be8d3c7f
   seconds: 15
   lost: true
-3G7G integral.discriminant_sequence:
-  hash: d731b69a8408ffec651598eb8a49a54c8cb76df9b6c9d59512710401bbc28f7b
-  seconds: 250
-  lost: true
 3G8K integral.discriminant_sequence:
   hash: 4152cb42565b89dc4c1f337699fceb522af5c05dc43445b3a496cba841abca35
   seconds: 10
   lost: true
+3G94 integral.discriminant_sequence:
+  hash: 79931b195ff4bafa3314cc349c4c64f406510d6c755c88b8211d6d3cd3ee66b6
+  seconds: 5379
 3G9X integral.discriminant_sequence:
   hash: a190fa390831ac391ed251a76ebac20f78365c9a9778afb1de1b0fd4292592bc
   seconds: 811
@@ -1065,7 +1058,8 @@
   lost: true
 3GEH integral.discriminant_sequence:
   hash: 78b74fd0aa8dade51a57d29bcbcb3e2a0c7308d693e9a2aa1ccf74cb00fd2112
-  seconds: 5641
+  seconds: 4145
+  lost: true
 3GEH integral.overlattice_count:
   hash: 75b98a72eb3d3314b6fd55e345ca2d1ed9bc31c3e559ecc31215d5b9823c122a
   seconds: 8
@@ -1150,6 +1144,10 @@
 3I86 integral.discriminant_sequence:
   hash: 8d7dc743866af06ecaf15d2e221954e0f07221efe9e4f10d716ac2a89d53a385
   seconds: 220
+  lost: true
+3I9F integral.discriminant_sequence:
+  hash: 6f7cab93e0d890ea95c57270c71d23d62160dfa17f537a3f87efa85463594608
+  seconds: 496
   lost: true
 3I9Z integral.discriminant_sequence:
   hash: 7dbc0ada5ff76a2987b5d86e04984e775f24298fc19f497059ec85b07a744194
