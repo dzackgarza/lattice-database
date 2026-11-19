@@ -66,6 +66,28 @@ stand:
 The record is `results/evidence-43-coble-okj-complement.md`; the numbers there (walls in $T_{Co}$ 9, 9, 11; $K_I$ rank 9,
 det 512, signature (1,8); root classes 1, 1, 3) are the probe's, and nothing on 6JRR claims them.
 
-Three inputs would close it, and each is someone else's to give: a published definition of
-$\Gamma_{\mathrm{Co},2} = \mathrm{Stab}_{O(T_{\mathrm{En}})}(T_{\mathrm{Co}})$ to cite, or a decision to key the card
-to the group's own draft, or the owner's class-level equivalence returning at a Coble cusp.
+### The card's values are not computable either, measured
+
+The definition by construction gives one more route to a card — compute the group's index and generators, certify them,
+and key the rows to it with no citation at all. `results/probe-43-co2-key.py` asks the owner for exactly that on `main`
+at sage-extensions `41b75d7`, and it does not answer:
+
+| call | result |
+| --- | --- |
+| `O(T_En).setwise_stabilizer(T_Co.inclusion())` | returns, in 0.1 s, as a membership predicate `{g in O(rank 12, sig (2,10)) : g(im T_Co) = im T_Co}` |
+| `stabilizer.index()` | `AssertionError`: "cannot compute the cardinality of … with O(…)-action: its construction supplies no exact value or decided finite enumeration" |
+| `stabilizer.has_finite_coset_space()` | `False` |
+| `stabilizer.contains_character_kernel()` | `False` |
+| `stabilizer.finite_character_quotient()` | `ValueError` — the subgroup is not a character kernel |
+| `stabilizer.discriminant_image()` | `ValueError` (the same) |
+
+So the group of the T_Co cusps is a setwise stabilizer of a **non-degenerate** sublattice, and the library's exact
+index route — the finite character quotient a standard subgroup has, and the one every certified index on this corpus
+comes from — does not apply to it: the index is a coset-space question the library declines to answer exactly. That is
+a capability fact about the owner's library, not a property of this card, and it is worth naming on its own: an
+arithmetic subgroup given by a stabilizer condition has no exact index here, only the enumeration the assertion refuses.
+
+Three inputs would close the item, and each is someone else's to give: a published definition of
+$\Gamma_{\mathrm{Co},2} = \mathrm{Stab}_{O(T_{\mathrm{En}})}(T_{\mathrm{Co}})$ to cite, or a decision to key the
+card to the group's own draft, or an exact index for the setwise stabilizer of a non-degenerate sublattice from the
+owner, plus the owner's class-level equivalence returning at a Coble cusp for the (4.3.9) count.
