@@ -12159,12 +12159,147 @@
     run_url: null
     database_revision: null
     research_revision: null
+  - hash: 4e2794fba6aaa08f355c52afdfb399d7d531caad8047d98d12e6c90093cd32a2
+    gram_tensor:
+    - - 2
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+    - - 0
+      - 0
+      - 2
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+    - - 0
+      - 2
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+    - - 0
+      - 0
+      - 0
+      - -4
+      - 0
+      - 2
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+    - - 0
+      - 0
+      - 0
+      - 0
+      - -4
+      - 0
+      - 2
+      - 0
+      - 0
+      - 0
+      - 0
+    - - 0
+      - 0
+      - 0
+      - 2
+      - 0
+      - -4
+      - 2
+      - 0
+      - 0
+      - 0
+      - 0
+    - - 0
+      - 0
+      - 0
+      - 0
+      - 2
+      - 2
+      - -4
+      - 2
+      - 0
+      - 0
+      - 0
+    - - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 2
+      - -4
+      - 2
+      - 0
+      - 0
+    - - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 2
+      - -4
+      - 2
+      - 0
+    - - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 2
+      - -4
+      - 2
+    - - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 2
+      - -4
+    reason: memory exhausted
+    stderr: ''
+    seconds: 1054.4968089979957
+    recorded_at: 2026-11-19 03:37:50.487501+00:00
+    run_url: null
+    database_revision: null
+    research_revision: null
   notes:
   - '2026-11-19T00:23:18.252566+00:00: released for the dispatched certify run: this
     VM ran the plane walk at 1236606976 B peak and the run ended it at the 1676462899
     B reserve floor while other projects held the machine at 1.9 GiB available; a
     runner of its own is what the owner record measured the row on (3554 MiB, 1812.8
     s)'
+  - '2026-11-19T04:01:21.186164+00:00: released for the dispatched certify run: a
+    local attempt ran this row''s plane walk for 1054 s to a 1065508864 B worker peak,
+    and the run ended the worker at its 1676462899 B reserve floor while other projects
+    held this machine at 1.5 GiB available; the owner''s own record measured the same
+    row at 3476 MiB and 2171.0 s on a runner of its own (sage-extensions#286)'
 6JRR integral.primitive_orbits[SO+]:
   disposition: resolved
   attempts:
@@ -12952,3 +13087,145 @@
     instead of the 9.2 GiB exact-stabilizer fallback. The owner measured that row
     at 527 in 72.15 s, the eight rows in 307.2 s at 1019 MiB; this release asks the
     database path for it on the stored Gram tensor.'
+6JRR integral.primitive_orbits[SOtilde+].planes:
+  disposition: open
+  attempts:
+  - hash: d171bd1817ae3eceea1ea97ff5b00062c68ac53cea2f6fedd2e49bdb1fcaa185
+    gram_tensor:
+    - - 2
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+    - - 0
+      - 0
+      - 2
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+    - - 0
+      - 2
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+    - - 0
+      - 0
+      - 0
+      - -4
+      - 0
+      - 2
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+    - - 0
+      - 0
+      - 0
+      - 0
+      - -4
+      - 0
+      - 2
+      - 0
+      - 0
+      - 0
+      - 0
+    - - 0
+      - 0
+      - 0
+      - 2
+      - 0
+      - -4
+      - 2
+      - 0
+      - 0
+      - 0
+      - 0
+    - - 0
+      - 0
+      - 0
+      - 0
+      - 2
+      - 2
+      - -4
+      - 2
+      - 0
+      - 0
+      - 0
+    - - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 2
+      - -4
+      - 2
+      - 0
+      - 0
+    - - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 2
+      - -4
+      - 2
+      - 0
+    - - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 2
+      - -4
+      - 2
+    - - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 2
+      - -4
+    reason: 'did not return: the subgroup''s finite character quotient, the data its
+      plane route''s guard reads, does not return on this host'
+    stderr: 'measured in the certify image on 6JRR''s stored Gram tensor at sage-extensions
+      0bbf022b6b: Lattices(ZZ)(gram).stable_orthogonal_group().intersection(SO()).intersection(O_plus()).finite_character_quotient()
+      was killed after 594 s alone in a fresh process, and after 676 s as the fourth
+      quotient of one process; an earlier measurement at the #596 epoch saw this subgroup
+      exceed 9.2 GiB RSS after 510 s and still growing about 1 GiB a minute under
+      both intersection orders. The three sibling rows answer the same guard: Otilde
+      has_discriminant true and no sign kernel, SOtilde a determinant kernel only,
+      Otilde+ a spinor kernel only, none of them refused by the parabolic route.'
+    seconds: 594.0
+    recorded_at: 2026-11-19 04:01:32.849079+00:00
+    run_url: null
+    database_revision: null
+    research_revision: null
+  notes: []

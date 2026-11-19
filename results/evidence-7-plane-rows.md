@@ -234,3 +234,41 @@ arithmetic-group.otilde-plus-t-co.{line,plane,flag}_orbits
 ```
 
 four kernel plane walks and two kernel incidence walks, against the same 330-minute budget.
+
+## The four kernel rows: which the walk can decide, and the two local stops (2026-11-19)
+
+The guard `_plane_orbit_from_parabolic_stabilizer` reads before it walks is the subgroup's finite
+character quotient, so the walkable class is decidable without paying a walk. Measured on the stored
+Gram tensor at sage-extensions `0bbf022b6b`, one process:
+
+| row | index | `_has_discriminant` | det kernel | spinor kernel | parabolic route refuses | probe |
+| --- | ---: | --- | --- | --- | --- | ---: |
+| `Otilde` | 46998591897600 | true | no | no | no | 1.5 s |
+| `SOtilde` | 93997183795200 | true | **yes** | no | no | 32.0 s |
+| `Otilde+` | 93997183795200 | true | no | **yes** | no | 6.7 s |
+| `SOtilde+` | — | — | — | — | unreachable | killed at 676 s |
+
+`SOtilde+` did not reach the guard: its quotient was killed as the fourth quotient of that same
+process, so the probe was repeated alone, in a fresh process, and killed again after **594 s**. That
+is not accumulation, and an earlier measurement at the #596 epoch saw the subgroup pass 9.2 GiB RSS
+after 510 s and keep growing. The row is now `open` in `failures/e1.yaml` with this measurement, so
+neither a nightly nor a dispatch pays it.
+
+## The two local stops on `Otilde`'s walk
+
+`certify --tag 6JRR --field 'primitive_orbits[Otilde].planes' --phase fields --workers 1`,
+`--minutes 100`, image run of this turn:
+
+| attempt | wall | worker peak | the run's reserve floor | free memory on this VM | outcome |
+| --- | ---: | ---: | ---: | ---: | --- |
+| earlier turn | 677 s | 1236606976 B | 1676462899 B | 1.9 GiB available | worker ended, card untouched, exit 0 |
+| this turn | 1054 s | 1065508864 B | 1676462899 B | 1.5 GiB available | worker ended, card untouched, exit 0 |
+
+Both are `killed_by: memory` in `exceeded.yaml`, and both were released with
+`just retry-computation` and a note carrying the measurement, so the row is `disposition: retry` and
+a dispatched run asks it. The stop is the host's and not the row's: the owner's record measures this
+row at 3476 MiB and 2171.0 s alone on a runner, and this VM had three other projects' jobs holding
+between 4 and 15 GiB throughout.
+
+**What is left for the dispatch, then, is three plane parts and six group counts** — not four plane
+parts: `SOtilde+` is now quarantined for a reason that is not a walk.
