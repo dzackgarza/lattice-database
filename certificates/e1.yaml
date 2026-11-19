@@ -31938,19 +31938,19 @@
   hash: 000a0cf69d40037137de8d1340ab9613d0fc02bfe7b5c79bddd0f5ff9cd831d3
   by: research preamble
 6JRR integral.cusp_root_orbits:
-  hash: d55e604b504b2b7bce0e41054fa4d4fcf95168e18e77a1c471557bc71b7140b8
+  hash: d2e682f617c425a5fec56d1044e5ead7bb4e7a373b7fc77df8c8be5d0f5b5050
   by: 'H. Sterk, "Compactifications of the period space of Enriques surfaces, Part
-    I", Math. Z. 207 (1991), 1-36: (4.3.7), p. 22, prints the chamber at e'' + f''
-    + bar_alpha_8 and (4.3.8), p. 23, the chamber at 2e'' + f'' + bar_alpha_1. T_Co
-    is delta^perp for delta = e - f, so a wall of a chamber is a wall of T_Co exactly
-    when it is orthogonal to delta; of the walls that are, exactly one at each cusp
-    is orthogonal to the cusp and of square -2, so the cusp''s root family in K_I
-    = v^perp/Zv is a single class and its orbits are one orbit under every subgroup.
-    The rows are keyed to gamma-co-2, the group those cusps belong to, whose values
-    are certified on this card. transporter_order is the order of the cyclic group
-    the row''s proof exhibits acting on the orbit: 1 for a one-class orbit, whose
-    exhibited transporter is the identity. results/store-43-coble-rows.py writes the
-    rows and results/rekey-43-coble-rows.py keys them here'
+    I", Math. Z. 207 (1991), 1-36: (4.3.3), p. 18, writes the acting group as G =
+    W(G) x| S with S the diagram symmetries realised in G; (4.3.9), p. 24, "Symmetries
+    of the graph can be lifted to Gamma_v"; (4.3.10)-(4.3.12), p. 25, realise them
+    on A = H + E8(-2). T_Co is delta^perp for delta = e - f. Every element of W_v
+    fixes the cusp, so it acts on K_I = v^perp/Zv and preserves the class of delta
+    there; of the eight symmetries exactly two carry delta to +-delta (the identity
+    and the one exchanging alpha_13 with alpha_14) and the six others land in a different
+    class of K_I, so no product w s with w in W_v fixes delta unless s already does.
+    The Coble image is therefore <W_v, sigma>, whose orbits are {alpha_12} and {alpha_13,
+    alpha_14}. results/store-43-coble-cusp5.py checks the cusp, the classes and their
+    pairings in card 6JRR Gram tensor and writes the row there (results/issue-43-lemma-coble-class-invariant.md)'
 6JRR integral.discriminant_form:
   hash: 0be391409303d25f25d126795ee881040661b4883ad7473272b34b60b8c414da
   by: research preamble

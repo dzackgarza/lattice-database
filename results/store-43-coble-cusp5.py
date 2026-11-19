@@ -77,14 +77,14 @@ print(f"{TAG}: one row at (4.3.9) with {row['orbit_count']} orbits, sizes {[len(
 
 BY = (
     'H. Sterk, "Compactifications of the period space of Enriques surfaces, Part I", Math. Z. 207 (1991), 1-36: '
-    '(4.3.3), p. 18, writes the acting group as G = W(G) x| S with S the diagram symmetries realised in G; (4.3.9), '
-    'p. 24, "Symmetries of the graph can be lifted to Gamma_v"; (4.3.10), p. 25, and (4.3.12), p. 25, realise them on '
-    'A = H + E8(-2). T_Co is delta^perp for delta = e - f, and every reflection in a wall of T_Co fixes delta, so an '
-    'element of G_v preserves T_Co exactly when its symmetry class does: of the eight symmetries of the (4.3.9) diagram '
-    'exactly two carry delta to +-delta, the identity and the one exchanging alpha_13 with alpha_14. The Coble image is '
-    'therefore <W_v, sigma>, whose orbits are {alpha_12} and {alpha_13, alpha_14}. '
-    'results/store-43-coble-cusp5.py checks the cusp, the classes and their pairings in card 6JRR Gram tensor and '
-    'writes the row there (results/issue-43-lemma-coble-cusp5.md)'
+    "(4.3.3), p. 18, writes the acting group as G = W(G) x| S with S the diagram symmetries realised in G; (4.3.9), "
+    'p. 24, "Symmetries of the graph can be lifted to Gamma_v"; (4.3.10)-(4.3.12), p. 25, realise them on '
+    'A = H + E8(-2). T_Co is delta^perp for delta = e - f. Every element of W_v fixes the cusp, so it acts on '
+    'K_I = v^perp/Zv and preserves the class of delta there; of the eight symmetries exactly two carry delta to +-delta '
+    '(the identity and the one exchanging alpha_13 with alpha_14) and the six others land in a different class of K_I, so '
+    'no product w s with w in W_v fixes delta unless s already does. The Coble image is therefore <W_v, sigma>, whose '
+    'orbits are {alpha_12} and {alpha_13, alpha_14}. results/store-43-coble-cusp5.py checks the cusp, the classes and '
+    'their pairings in card 6JRR Gram tensor and writes the row there (results/issue-43-lemma-coble-class-invariant.md)'
 )
 
 if "--write" not in sys.argv[1:]:
