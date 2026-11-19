@@ -6754,6 +6754,28 @@
     database_revision: 8a7d3bbea5729a0ed3a35effd703a7aa7fd8c25e
     research_revision: 507b6871abca4e8157fd6e612bc95c60c6b634fd
   notes: []
+3G9X integral.discriminant_sequence:
+  disposition: open
+  attempts:
+  - hash: a190fa390831ac391ed251a76ebac20f78365c9a9778afb1de1b0fd4292592bc
+    gram_tensor:
+    - - 16
+      - 4
+      - -4
+    - - 4
+      - 31
+      - -11
+    - - -4
+      - -11
+      - 71
+    reason: certification budget exhausted
+    stderr: ''
+    seconds: 18761.0
+    recorded_at: 2026-11-19 23:11:16.728135+00:00
+    run_url: https://github.com/dzackgarza/lattice-database/actions/runs/44518237111/attempts/1
+    database_revision: d89cb8e941670ef4d4d12210b4c9859b78dc2c90
+    research_revision: e5543cb8149ba9d7ae456dd39dd58418f51274a8
+  notes: []
 3G9X integral.overlattice_count:
   disposition: open
   attempts:
