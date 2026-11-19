@@ -84,10 +84,22 @@ so the card would state
 
 $$[O(T_{\mathrm{Co}}) : \Gamma_{\mathrm{Co},2}] = 93997183795200 \cdot 46998591897600 = 4417735280714304737771520000 .$$
 
-That number is a *derivation* — the index of $\widetilde O^{+}(T_{\mathrm{Co}})$ from the owner's own row, times the
-order of the character's image computed here — and not a call the library makes for $\Gamma_{\mathrm{Co},2}$ itself, so
-no card states it yet. It is the value such a card must reproduce when the owner's construction is asked for the index
-directly, and it is what I will check that call against.
+The second factor is now computed from the owner's construction rather than from the order of $O(A,q)$ alone:
+`results/probe-43-co2-family.py` asks for `Stab_{O(T_En)}(delta).group_generators()` — **290 generators in 67 s** —
+restricts every one of them to $T_{\mathrm{Co}}$ (all 290 restrictions integral in $T_{\mathrm{Co}}$'s own coordinates)
+and maps them by `rho`, whose images generate a subgroup of order **46998591897600**. The product is therefore computed,
+not assumed, and the card is authored from it.
+
+`arithmetic-groups/gamma-co-2.md` now exists: `lattice: 6JRR`, `parent_group: otilde-plus-t-co`,
+`ambient_lie_group: o2-9`'s slug, `cardinality: aleph0`, `index_in_orthogonal_group = 4417735280714304737771520000`,
+and an `abstract_structure` that names the construction ("the image in $O(T_{\mathrm{Co}})$ of the isometries of
+$T_{\mathrm{En}}$ that lie in $\Gamma_{\mathrm{En},2}$ and preserve $T_{\mathrm{Co}}$") without claiming the Coble
+period identification, which the corpus records as conjectural for $\widetilde O^{+}(T_{\mathrm{Co}})$ itself. Its
+citation says exactly that: the construction is sage-extensions' own record and issue (#286 item 1), not a definition in
+print. The index is certified on 6JRR as `arithmetic-group.gamma-co-2.index_in_orthogonal_group`
+`ff6667b1ebc3d93c0e7cf5a8451cb9fd6d57f596453c6f1a1026e30210e5da7e`, and
+`tests/test_cusp_root_orbits.py::test_the_coble_group_card_states_the_index_its_computation_certifies` was red before
+the card and is green after.
 
 The cost is why this is a scheduled run rather than a turn's work: the owner measures the ambient stabilizer's family at
 **330 generators in 352 s**, their restrictions to $T_{\mathrm{Co}}$ at 40 s, and `rho` on them at 25 s
@@ -123,7 +135,7 @@ The rows are also pinned where the corpus can check them: `tests/test_cusp_root_
 square $-2$ — so the arithmetic of the row cannot be what stops the storage when the key is decided. The fixture holds
 them under a standard subgroup, which is a test's device and not a claim about which group the card must name.
 
-### The index is infinite, so no card can state one
+### Why the stabilizer-of-a-vector route has no index (and why the card's index is a different number)
 
 The two constructions above answer no exact index because there is no finite one to answer. $T_{\mathrm{Co}} =
 \langle 2\rangle \oplus U(2) \oplus E_8(-2)$, so a vector $(a, (c, d), w)$ has
@@ -136,7 +148,12 @@ $\Theta_{E_8} = 1 + \sum_{W \ge 1} 240\sigma_3(W) q^W$ with every coefficient po
 infinitely many vectors of square $-2$, and $[O(T_{\mathrm{Co}}) : \mathrm{Stab}(v)]$ is countably infinite for each of
 them. The same count with the $U$ summand of $T_{\mathrm{En}}$ gives infinitely many there too.
 
-So `index_in_orthogonal_group` — `Annotated[int, Field(gt=0)] | None` at `src/latticedb/invariant_models.py:496` —
-cannot hold this group's index at all, and a $\Gamma_{\mathrm{Co},2}$ card would state none. (An enumeration of the
-square $-2$ vectors, `vectors_of_square(-2)`, was attempted as the direct count and had not finished after twenty
-minutes when it was stopped, which is consistent with the set being infinite.)
+That is the index of $\mathrm{Stab}_{O(T_{\mathrm{Co}})}(v)$ — the subgroup a vector's stabilizer names — and it is
+countably infinite, which is why the two predicate constructions of the previous paragraphs answer no exact index and
+why `index_in_orthogonal_group` (`Annotated[int, Field(gt=0)] | None`, `src/latticedb/invariant_models.py:496`) could
+not hold *that* number. It is not the number the Coble card states: $\Gamma_{\mathrm{Co},2}$ is the restriction of
+$\Gamma_{\mathrm{En},2}$ to $T_{\mathrm{Co}}$, not the stabilizer of a vector, and its index in $O(T_{\mathrm{Co}})$ is
+finite — $93997183795200 \cdot 46998591897600$, computed below. The correction matters: conflating the two was the
+reason the earlier turns concluded no card could state an index at all. (An enumeration of the square $-2$ vectors,
+`vectors_of_square(-2)`, was attempted as the direct count and had not finished after twenty minutes when it was
+stopped, which is consistent with the set being infinite.)
