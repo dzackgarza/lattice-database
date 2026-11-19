@@ -326,17 +326,23 @@ def in_shard(tag: str, shard: tuple[int, int]) -> bool:
     return certificates.tag_hash(tag) % count == index
 
 
-def arithmetic_orbit_siblings(field: str) -> frozenset[str]:
-    r"""The arithmetic-group orbit counts of one group card, which a run asks and stores together.
+def arithmetic_orbit_dependencies(field: str) -> frozenset[str]:
+    r"""The group-card orbit counts a run must ask for, given one that it named.
 
-    A flag count is stored with the line and plane counts it joins (`GroupData._orbit_counts`), so
-    the three are one computation's worth of work in one worker: the plane row is retained and the
-    incidence reads it. `frozenset()` for a field that is not one of the three.
+    The relation is the schema's and not a cost decision: a flag count is stored only beside the two
+    counts it joins (`GroupData._orbit_counts`), so naming `flag_orbits` asks `line_orbits` and
+    `plane_orbits` with it. The converse does not hold, and treating the three as one bundle did hold
+    it: the counts are three computations of very different cost on $T_{\mathrm{Co}}$'s kernel
+    groups — the line row is 31--52 s at 1.03 GiB, the plane row 1813--2171 s at 3.5 GiB, and the
+    incidence 6132--7973 s (sage-extensions#286) — so a run that named the line count was paying for
+    the other two and could lose all three to one kill.
+    `frozenset()` for a field that is not one of the three.
     """
     slug, _, short = field.rpartition(".")
     if not slug.startswith(ARITHMETIC_PREFIX) or short not in ARITHMETIC_ORBIT_FIELDS:
         return frozenset()
-    return frozenset(f"{slug}.{count}" for count in ARITHMETIC_ORBIT_FIELDS)
+    asked = {"line_orbits", "plane_orbits"} if short == "flag_orbits" else set()
+    return frozenset(f"{slug}.{count}" for count in (asked or {short}))
 
 
 def arithmetic_requests(
@@ -381,10 +387,19 @@ def arithmetic_requests(
             expected_hash = certificates.certification_hash(computation, lattice, certified_value(field, value, lattice))
             if stored is None or certificates.is_pending(held, computation, lattice.certifications.get(field), expected_hash):
                 chosen.append((field, {"slug": slug, "standard_name": card.standard_name}))
-        if any(f"{ARITHMETIC_PREFIX}{slug}.{short}" in wanted for short in ARITHMETIC_ORBIT_FIELDS) or (named and not wanted):
-            for short in ARITHMETIC_ORBIT_FIELDS:
-                if getattr(card.data, short) is None:
-                    chosen.append((f"{ARITHMETIC_PREFIX}{slug}.{short}", {"slug": slug, "standard_name": card.standard_name}))
+        # A named count takes the counts the schema makes it depend on, and no others; a run that
+        # names its cards and no computation asks for all three, since nothing else ever asks.
+        named_counts = {
+            short
+            for short in ARITHMETIC_ORBIT_FIELDS
+            if short in wanted or f"{ARITHMETIC_PREFIX}{slug}.{short}" in wanted
+        }
+        if named and not wanted:
+            named_counts = set(ARITHMETIC_ORBIT_FIELDS)
+        joined = {"line_orbits", "plane_orbits"} if "flag_orbits" in named_counts else set()
+        for short in ARITHMETIC_ORBIT_FIELDS:
+            if short in named_counts | joined and getattr(card.data, short) is None:
+                chosen.append((f"{ARITHMETIC_PREFIX}{slug}.{short}", {"slug": slug, "standard_name": card.standard_name}))
     return chosen
 
 
@@ -1111,7 +1126,7 @@ def certify(
                     for field in request["fields"]
                     if field in wanted
                     or (orbit_row_of(field) or (field,))[0] in wanted
-                    or (field.startswith(ARITHMETIC_PREFIX) and bool(arithmetic_orbit_siblings(field) & wanted))
+                    or (field.startswith(ARITHMETIC_PREFIX) and bool(arithmetic_orbit_dependencies(field) & wanted))
                 ]
                 if kept:
                     narrowed.append({**request, "fields": kept})

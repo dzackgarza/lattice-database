@@ -302,25 +302,51 @@ def test_a_subgroup_orbit_count_comes_from_the_owner_s_cusp_rows_and_its_inciden
     assert sage_genus._arithmetic_group_value(group, "flag_orbits") == 1
 
 
-def test_a_group_card_orbit_count_is_asked_only_when_a_run_names_it(tmp_path: Path) -> None:
-    """#7: the incidence walk is 6132--7973 s a kernel row, so a scheduled run does not ask for it.
+def test_a_group_card_orbit_count_takes_only_the_counts_the_schema_makes_it_depend_on(tmp_path: Path) -> None:
+    """#7: the line count is 31--52 s and the plane count 1813--2171 s, so a run buys one, not three.
 
-    A run names one of a group card's three orbit counts and gets all three, because a flag count
-    is stored with the two counts it joins and the three are one walk of one subgroup. The sharded
-    nightly names no card and asks none of them.
+    A flag count is the schema's one dependency — it is stored only beside the two counts it joins
+    (`GroupData._orbit_counts`) — so naming `flag_orbits` asks the line and plane counts with it.
+    Naming a line count asks the line count: bundling the three meant paying a 30-minute walk for a
+    30-second value and losing all three to one kill. The sharded nightly names no card and asks
+    none of them.
     """
     root = coble_corpus(tmp_path)
+    # The corpus certifies what it stores, so the test makes the counts missing in its own copy: a
+    # count the card states is one a run does not ask, which is the other half of this contract.
+    for slug in ("otilde-t-co", "otilde-plus-t-co"):
+        path = root / "arithmetic-groups" / f"{slug}.md"
+        document = frontmatter.load(str(path))
+        document.metadata["data"] = {key: value for key, value in (document.metadata.get("data") or {}).items() if key not in genus.ARITHMETIC_ORBIT_FIELDS}
+        path.write_text(frontmatter.dumps(document))
+    card = root / "lattices" / "6JRR.md"
+    lattice_document = frontmatter.load(str(card))
+    lattice_document.metadata["certifications"] = {
+        name: digest
+        for name, digest in (lattice_document.metadata.get("certifications") or {}).items()
+        if not (name.startswith(genus.ARITHMETIC_PREFIX) and name.rsplit(".", 1)[-1] in genus.ARITHMETIC_ORBIT_FIELDS)
+    }
+    card.write_text(frontmatter.dumps(lattice_document))
     counts = {f"{genus.ARITHMETIC_PREFIX}{slug}.{short}" for slug in ("otilde-t-co", "otilde-plus-t-co") for short in genus.ARITHMETIC_ORBIT_FIELDS}
+
+    def named(*wanted: str) -> set[str]:
+        return {
+            field
+            for request in genus.requests(corpus.cards(root, ("6JRR",)), {}, {}, ("6JRR",), wanted=wanted)
+            for field in request["fields"]
+        }
+
     nightly = {field for request in genus.requests(corpus.cards(root, ("6JRR",)), certificates.Certificates(), {}, ()) for field in request["fields"]}
     assert not counts & nightly, "the sharded nightly asks no orbit count"
     assert counts <= requested_fields(root, certificates.Certificates()), "a run that names its card asks them"
-    named = {
-        field
-        for request in genus.requests(corpus.cards(root, ("6JRR",)), {}, {}, ("6JRR",), wanted=("arithmetic-group.otilde-plus-t-co.flag_orbits",))
-        for field in request["fields"]
-    }
-    assert {f"{genus.ARITHMETIC_PREFIX}otilde-plus-t-co.{short}" for short in genus.ARITHMETIC_ORBIT_FIELDS} <= named
-    assert not {field for field in named if field.startswith(f"{genus.ARITHMETIC_PREFIX}otilde-t-co.") and field.rsplit(".", 1)[-1] in genus.ARITHMETIC_ORBIT_FIELDS}, "one group card's counts are not another's"
+
+    line = named("arithmetic-group.otilde-plus-t-co.line_orbits")
+    assert "arithmetic-group.otilde-plus-t-co.line_orbits" in line
+    assert not {field for field in line if field.rsplit(".", 1)[-1] in {"plane_orbits", "flag_orbits"}}, "a named line count does not buy the plane walk"
+
+    flag = named("arithmetic-group.otilde-plus-t-co.flag_orbits")
+    assert {f"{genus.ARITHMETIC_PREFIX}otilde-plus-t-co.{short}" for short in genus.ARITHMETIC_ORBIT_FIELDS} <= flag, "a flag count asks the two counts it joins"
+    assert not {field for field in flag if field.startswith(f"{genus.ARITHMETIC_PREFIX}otilde-t-co.") and field.rsplit(".", 1)[-1] in genus.ARITHMETIC_ORBIT_FIELDS}, "one group card's counts are not another's"
 
 
 def test_the_three_orbit_counts_of_a_subgroup_are_stored_together(tmp_path: Path) -> None:

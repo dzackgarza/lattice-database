@@ -272,3 +272,48 @@ between 4 and 15 GiB throughout.
 
 **What is left for the dispatch, then, is three plane parts and six group counts** — not four plane
 parts: `SOtilde+` is now quarantined for a reason that is not a walk.
+
+## The two group cards' line counts, and why the three counts are not a bundle (2026-11-19)
+
+Two of the group-card counts were computed this turn, and the first attempt showed a defect in my
+own wiring rather than in the owner's cost.
+
+| run | field | instrument | outcome |
+| --- | --- | --- | --- |
+| 1st | `arithmetic-group.otilde-t-co.line_orbits` | `g.cusps(1)` (span row) | **527**, stored |
+| 1st | `arithmetic-group.otilde-plus-t-co.line_orbits` | `g.cusps(1)` | killed at 55 s, 636657664 B peak, reserve floor |
+| 2nd | `arithmetic-group.otilde-plus-t-co.line_orbits` | `g.isotropic_orbit_representatives(1)` | **527**, stored |
+
+A **line** is one vector and its span, so the gathered row is the cheap instrument and the span row
+is the expensive one — the mirror image of the plane case, where the span row is cheap because a
+plane's construction and retention is what costs. The lattice card's own line row already used the
+gathered route; my `line_orbits` used `g.cusps(1)` and paid for it on the second subgroup. Fixed in
+`sage_genus._arithmetic_group_value`, and the two stored values stand either way: a certificate
+commits to the computation's name, Gram tensor and value, not to the instrument inside it.
+
+**The dependency is the schema's, and only the schema's.** A flag count is stored only beside the
+two counts it joins (`GroupData._orbit_counts`), so naming `flag_orbits` asks `line_orbits` and
+`plane_orbits`. Naming a line count asks the line count. Until this turn the three were one bundle in
+`genus.requests`, which meant a 31–52 s value could not be had without paying a 1813–2171 s walk, and
+one kill lost all three; `arithmetic_orbit_dependencies` now states the dependency that exists.
+
+**Where the two cards stand:** `line_orbits: 527` on both, certified
+(`arithmetic-group.otilde-t-co.line_orbits`, `arithmetic-group.otilde-plus-t-co.line_orbits`) — the
+theorem's number and the lattice card's row. `plane_orbits` and `flag_orbits` remain unstated for
+both, and are the two kernel plane walks plus the two incidence walks of the dispatch.
+
+## The kernel plane walk, third attempt
+
+`Otilde`'s plane row, `--minutes 120`, at load 2.1 with 10 GiB available when it started:
+
+| attempt | wall | worker peak | reserve floor | free memory at the end |
+| --- | ---: | ---: | ---: | ---: |
+| 1 | 677 s | 1236606976 B | 1676462899 B | 1.9 GiB |
+| 2 | 1054 s | 1065508864 B | 1676462899 B | 1.5 GiB |
+| 3 | 426 s | 1295683584 B | 1676462899 B | 1.8 GiB |
+
+Three attempts, three ends at the run's own reserve floor, never by the row: the worker's peak never
+approached the owner's 3476 MiB because the host's *available* memory was taken by other projects
+before the walk reached it. The row is released again with this measurement and stays for the
+dispatch; I will not attempt it a fourth time on this VM, because the stop is now measured three ways
+and repeating it spends the VM to learn nothing.

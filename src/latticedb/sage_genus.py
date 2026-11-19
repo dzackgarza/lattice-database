@@ -216,8 +216,13 @@ def _arithmetic_group_value(group: object, field: str) -> JsonValue:
     the exact coset count and never an enumeration of the cosets. A generator is an isometry of
     ``L``, serialized in the same framing as the generators of ``O(L)``. The three orbit counts are
     the subgroup's own counts of primitive isotropic lines, of primitive isotropic planes and of
-    isotropic flags — the first two are the lattice card's row counts read through `g.cusps(1)` and
-    `g.cusps(2)`, and the third is the cardinality of the incidence relation those rows carry.
+    isotropic flags, each read from the instrument that is cheap for its rank: a **line** is one
+    vector and its span, so the gathered `g.isotropic_orbit_representatives(1)` is the cheap row —
+    it is what the lattice card's own line row asks, 122--172 s on these kernel groups — where the
+    span instrument `g.cusps(1)` walks the same 527 orbits far more slowly; a **plane** is a rank-two
+    subobject whose construction and retention is what costs, so the span instrument `g.cusps(2)` is
+    the cheap row there, 1813--2171 s against 13.9 GiB gathered (sage-extensions#286). The flag count
+    is the cardinality of the incidence relation those two rows carry.
     """
     match field:
         case "index_in_orthogonal_group":
@@ -225,7 +230,7 @@ def _arithmetic_group_value(group: object, field: str) -> JsonValue:
         case "generator_morphisms":
             return [_matrix_rows(generator) for generator in group.group_generators()]
         case "line_orbits":
-            return _finite_count(group.cusps(1).cardinality(), "the number of line orbits of this subgroup,")
+            return _finite_count(group.isotropic_orbit_representatives(1).cardinality(), "the number of line orbits of this subgroup,")
         case "plane_orbits":
             return _finite_count(group.cusps(2).cardinality(), "the number of plane orbits of this subgroup,")
         case "flag_orbits":

@@ -10680,6 +10680,145 @@
     database_revision: b046d46a13d33c1078b5d8a037bca2c462fabc72
     research_revision: 32a89622d0e74b73a003c52c6e322d79232153f6
   notes: []
+6JRR arithmetic-group.otilde-plus-t-co.line_orbits:
+  disposition: resolved
+  attempts:
+  - hash: 38671d32d5b8083a7bd3f10e0402179873436f6cbc6b3ea2b4881302ac41d29a
+    gram_tensor:
+    - - 2
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+    - - 0
+      - 0
+      - 2
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+    - - 0
+      - 2
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+    - - 0
+      - 0
+      - 0
+      - -4
+      - 0
+      - 2
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+    - - 0
+      - 0
+      - 0
+      - 0
+      - -4
+      - 0
+      - 2
+      - 0
+      - 0
+      - 0
+      - 0
+    - - 0
+      - 0
+      - 0
+      - 2
+      - 0
+      - -4
+      - 2
+      - 0
+      - 0
+      - 0
+      - 0
+    - - 0
+      - 0
+      - 0
+      - 0
+      - 2
+      - 2
+      - -4
+      - 2
+      - 0
+      - 0
+      - 0
+    - - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 2
+      - -4
+      - 2
+      - 0
+      - 0
+    - - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 2
+      - -4
+      - 2
+      - 0
+    - - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 2
+      - -4
+      - 2
+    - - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 2
+      - -4
+    reason: memory exhausted
+    stderr: ''
+    seconds: 55.29800663003698
+    recorded_at: 2026-11-19 05:22:48.419543+00:00
+    run_url: null
+    database_revision: null
+    research_revision: null
+  notes:
+  - '2026-11-19T05:37:44.010910+00:00: released for a re-run with the cheap instrument:
+    this row was killed at 55 s at a 636657664 B worker peak, when the run''s 1676462899
+    B reserve floor fired on a host at 2.1 GiB available. The row now reads the gathered
+    isotropic_orbit_representatives(1) that the lattice card''s own line row uses
+    (122-172 s on these groups, sage-extensions#286) instead of the span instrument.'
 6JRR arithmetic-group.otilde-t-co.generator_morphisms:
   disposition: open
   attempts:
@@ -12289,6 +12428,136 @@
     run_url: null
     database_revision: null
     research_revision: null
+  - hash: 4e2794fba6aaa08f355c52afdfb399d7d531caad8047d98d12e6c90093cd32a2
+    gram_tensor:
+    - - 2
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+    - - 0
+      - 0
+      - 2
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+    - - 0
+      - 2
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+    - - 0
+      - 0
+      - 0
+      - -4
+      - 0
+      - 2
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+    - - 0
+      - 0
+      - 0
+      - 0
+      - -4
+      - 0
+      - 2
+      - 0
+      - 0
+      - 0
+      - 0
+    - - 0
+      - 0
+      - 0
+      - 2
+      - 0
+      - -4
+      - 2
+      - 0
+      - 0
+      - 0
+      - 0
+    - - 0
+      - 0
+      - 0
+      - 0
+      - 2
+      - 2
+      - -4
+      - 2
+      - 0
+      - 0
+      - 0
+    - - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 2
+      - -4
+      - 2
+      - 0
+      - 0
+    - - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 2
+      - -4
+      - 2
+      - 0
+    - - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 2
+      - -4
+      - 2
+    - - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 2
+      - -4
+    reason: memory exhausted
+    stderr: ''
+    seconds: 426.04713675001403
+    recorded_at: 2026-11-19 04:55:35.256613+00:00
+    run_url: null
+    database_revision: null
+    research_revision: null
   notes:
   - '2026-11-19T00:23:18.252566+00:00: released for the dispatched certify run: this
     VM ran the plane walk at 1236606976 B peak and the run ended it at the 1676462899
@@ -12300,6 +12569,11 @@
     and the run ended the worker at its 1676462899 B reserve floor while other projects
     held this machine at 1.5 GiB available; the owner''s own record measured the same
     row at 3476 MiB and 2171.0 s on a runner of its own (sage-extensions#286)'
+  - '2026-11-19T05:37:54.532515+00:00: released for the dispatched certify run: a
+    third local attempt ran this row''s plane walk for 426 s to a 1295683584 B worker
+    peak and was ended at the run''s 1676462899 B reserve floor on a host at 1.8 GiB
+    available. Three attempts on this VM have each been ended by other tenants'' memory,
+    never by the row; the owner measures it at 3476 MiB and 2171.0 s alone on a runner.'
 6JRR integral.primitive_orbits[SO+]:
   disposition: resolved
   attempts:
