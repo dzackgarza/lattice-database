@@ -758,3 +758,54 @@ line and this proof as the citation.
 kernel case is the separate sign lemma (`results/verify-7-plane-sign-witnesses.py`). The two
 determinant-cutting kernel rows remain empty, and `results/issue-draft-7-kernel-rows-without-record.md`
 now covers two rows rather than four.
+
+## The kernel transport lemma: all eight rows state a plane count (2026-11-19)
+
+**Lemma.** Let `K = ker ρ_{T_Co}`. If `Stab_K(P_0)` contains isometries whose `(det, sn_R)` pairs
+generate `{±1}²`, then `K`, `K ∩ SO`, `K ∩ O⁺` and `K ∩ SO ∩ O⁺` are each transitive on every
+`K`-orbit of primitive isotropic planes, so all four have `K`'s number of them.
+
+**Proof.** For `g ∈ K` with `gP_0 = P` and a prescribed pair there is `s ∈ Stab_K(P_0)` with the same
+pair; `s^{-1}g` carries `P_0` to `P` with `(+1,+1)` and lies in all four. ∎
+
+**Sources, by printed page.** Dolgachev–Kondō, Izv. Math. **77**:3 (2013), §2 p. 510 and §3 (3.6) with
+Prop. 3.2 p. 513; Dutour Sikirić–Hulek, J. London Math. Soc. **110** (2024), arXiv:2302.01679,
+Lemma 3.6, p. 22; Gritsenko–Hulek–Sankaran, arXiv:0810.1614, §1 and §3.1 eq. (4), p. 8.
+
+**The check** (`results/verify-7-kernel-plane-transport.py`, on the card's stored Gram at
+sage-extensions `0bbf022b6b`, with the owner's membership predicates):
+
+| witness | image of `e_2`, `e_3` | fixes the plane | `K` | `K∩SO` | `K∩O⁺` | `K∩SO⁺` | `(det, sn_R)` |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| negate `⟨2⟩` | `e_2`, `e_3` | yes | ✓ | – | – | – | `(-1,-1)` |
+| negate `U(2)` | `-e_2`, `-e_3` | yes | ✓ | ✓ | – | – | `(+1,-1)` |
+| negate `E8(-2)` | `e_2`, `e_3` | yes | ✓ | ✓ | ✓ | ✓ | `(+1,+1)` |
+
+The plane-fixing test is computed on the image vectors — both lie in `span(e_2,e_3)` and their 2×2
+block is invertible — not assumed from diagonality. The three pairs generate all four signs
+(`generated: [[-1,-1],[-1,1],[1,-1],[1,1]]`), and all three witnesses lie in `K`.
+
+**The base rows are the record's.** `results/issue286-the-stage-1-call.md` at
+`47865446a7c37c85d873f91ac9d74cea472e208c`: `:275` and `:285` print 189720 plane cusps for
+`K` and for `K ∩ O⁺`; `:372` and `:373` print the incidence, 569160 edges over 527 line and 189720
+plane cusps. So `SOtilde` and `SOtilde+` state `planes: 189720`, certified with those lines and this
+proof as the citation.
+
+## All eight rows, and where each plane count comes from
+
+| row | `planes` | provenance |
+| --- | ---: | --- |
+| `O` | 1 | computed here, 208.4 s at 546 MiB (ambient plane row) |
+| `O+` | 1 | computed here (odd-stabilizer route, one witness) |
+| `SO` | 1 | record's `O` row (`:99`) + transport lemma |
+| `SO+` | 1 | same |
+| `Otilde` | 189720 | record (`:275`, `:372`), cited |
+| `Otilde+` | 189720 | computed here (2000 s at 3.3 GiB), matching `:285`/`:373` |
+| `SOtilde` | 189720 | record's `K` row (`:275`, `:372`) + kernel transport lemma |
+| `SOtilde+` | 189720 | record's `K ∩ O⁺` row (`:285`, `:373`) + kernel transport lemma |
+
+What is still missing is a **route**, not a value: this card's worker cannot compute a kernel plane
+row on this host — the parabolic walk costs 1813–2171 s at 3.3–3.5 GiB and every attempt was ended at
+the run's 1676462899 B reserve floor — and `SOtilde+`'s character quotient does not build at all
+(594 s, killed). That is `results/issue-draft-7-kernel-rows-without-record.md`, re-scoped from values
+to routes. Scoped checks on 6JRR: records 0, relations 0.
