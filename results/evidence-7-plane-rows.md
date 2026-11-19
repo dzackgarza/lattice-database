@@ -349,3 +349,32 @@ The earlier statement that this could not be run is now stale in one specific wa
 18910 cards cost 3.6 GiB here rather than the 7.5 GiB the whole corpus cost in the runs that died.
 The dispatch named for a wider check is still `verify.yml` with `tags=6JRR`, which verifies that shard
 in CI.
+
+## `Otilde+`'s kernel plane row returns: 189720 (2026-11-19)
+
+```
+latticedb certify --minutes 120 --tag 6JRR --field 'primitive_orbits[Otilde+].planes' \
+  --phase fields --workers 1
+6JRR {'primitive_orbits[Otilde+].planes': {'Otilde+': {'planes': 189720}}}
+```
+
+Started 07:12:26 UTC at load 0.98 with 10.7 GiB available — the quietest window this VM has offered —
+and the value was stored by 07:47:51, so about 2000 s, at a 3.3 GiB card footprint (the owner's own
+record: 1812.8 s at 3554 MiB on a runner). `integral.primitive_orbits` now states `planes: 189720` on
+row `Otilde+` under field certificate `a3371f82…`, superseding `f0a9d428…`; the eight line constants,
+`O`'s 1 and `O+`'s 1 were not recomputed.
+
+The value is the theorem's `thm:coble-plane-orbit-counts` (2) for `K ∩ O⁺` and the count image run
+`44392429173` reports for `Õ⁺(T_Co)`, and it is the computation, not the comparison, that put it on
+the card.
+
+**Why this one returned where three attempts at `Otilde` did not.** Nothing about the row: the walk
+never exceeded 3.3 GiB either. The host had 6.9–7.3 GiB available throughout, so the run's own
+1676462899 B reserve floor never fired. The three `Otilde` attempts were each killed when *other
+projects* took the machine down to 1.5–1.9 GiB available, and the walks were at 1.0–1.3 GiB at the
+time in every case. Same row, same machine, different tenant load.
+
+**What this leaves in the field:** `planes` on `Otilde` and `SOtilde` (both reachable, both 189720 by
+the theorem, neither computed here), `planes` on `SOtilde+` (unreachable: its character quotient
+alone does not return), and `plane_orbits` and `flag_orbits` on the two group cards. `SOtilde` is now
+the row worth one attempt in a quiet window, being the same walk that just returned.

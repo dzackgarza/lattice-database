@@ -31930,17 +31930,7 @@
   by: research preamble
 6JRR integral.cusp_root_orbits:
   hash: 241d3a4680a1b6255646ceeb37fc3a93e21a860e4f93a07c82d6ec3e439db318
-  by: 'H. Sterk, "Compactifications of the period space of Enriques surfaces, Part
-    I", Math. Z. 207 (1991), 1-36: (4.3.7), p. 22, prints the chamber at the cusp
-    e'' + f'' + bar_alpha_8 and (4.3.8), p. 23, the chamber at 2e'' + f'' + bar_alpha_1.
-    T_Co is delta^perp for delta = e - f, so a wall of such a chamber is a wall of
-    T_Co exactly when it is orthogonal to delta; of the walls that are, exactly one
-    at each cusp is orthogonal to the cusp and of square -2, so the cusp''s root family
-    in K_I = v^perp/Zv is a single class. A one-class family has one orbit under every
-    subgroup, which is why the row is keyed to the standard subgroup O: the count
-    is the same for O and for the Coble group the cusps belong to. results/store-43-coble-rows.py
-    checks the cusp, the class and their pairing in card 6JRR''s Gram tensor and writes
-    the row there'
+  by: research preamble
 6JRR integral.discriminant_form:
   hash: 0be391409303d25f25d126795ee881040661b4883ad7473272b34b60b8c414da
   by: research preamble
@@ -31966,7 +31956,7 @@
   hash: a5655af60d2d483494c8162620b136155af562098fdb2bdb93a398645faf5199
   by: research preamble
 6JRR integral.primitive_orbits:
-  hash: f0a9d4283ce37453ddcb42aa2ec8691339889dbdfcfc84b1169bec6a04102453
+  hash: a3371f825e4462bc386860cd56a64d49b4ac5baf279e8ab92b0052b070739bb1
   by: research preamble
 6JRR integral.spinor_genera:
   hash: 996405fa28d81289a0ee178c219695e2104fbabe6ec403a5ff4a73572423dcb2
