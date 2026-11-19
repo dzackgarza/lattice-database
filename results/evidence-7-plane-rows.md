@@ -522,3 +522,40 @@ between orbit sets and not a count of flags inside a fixed plane.
 explained the `3` by three lines inside a plane would hand the next reader a false statement about
 the geometry. The card now states the correct reading and cites the measurement that refuted the
 wrong one.
+
+## The line degree 1080 = 135 · 8, counted on the form (2026-11-19)
+
+**Lemma.** With $A = A_{T_{\mathrm{Co}}} = (\mathbb{Z}/2)^{11}$ and its quadratic form $q$, exactly
+`23715` subgroups $J \le A$ of order four are totally isotropic, and exactly `135` of them contain a
+given nonzero isotropic class. With the `8` stars of a $J$ that makes the line degree `1080`.
+
+**Sources, by printed page.** Dutour Sikirić–Hulek, J. London Math. Soc. **110** (2024),
+arXiv:2302.01679, Lemma 3.6, printed p. 22 (the double-coset reduction) and §3.6 printed p. 22 (the
+finite orbit counts of the same construction, including the eight stars of a plane's isotropic
+subgroup); Dolgachev–Kondō, Izv. Math. **77**:3 (2013), §2 printed p. 510 and §3 (3.6) with
+Proposition 3.2, printed p. 513 (the lattice and its discriminant kernel).
+
+**The count** (`results/probe-7-line-degree.py`, on the card's stored Gram at sage-extensions
+`0bbf022b6b`, through the owner's `discriminant_quadratic_form()` — its element set, its
+`isotropic_elements()` and its addition; no lattice algorithm is reimplemented here, and on isotropic
+elements the polar form is $q(x+y)$, so a plane $\{0,x,y,x+y\}$ is totally isotropic exactly when
+$x+y$ is isotropic):
+
+```
+elements               2048
+isotropic classes       528   (the card states isotropic_classes: 528)
+nonzero isotropic       527   (the card's constant term)
+ordered pairs        142290
+planes                23715   = 142290 / 6
+through a fixed class   135
+line degree            1080   = 135 * 8
+edges                569160   = 527 * 1080
+```
+
+So the two factors of `1080` are counted here rather than taken from a page, and the count agrees
+with the source's; `528` and `527` agreeing with the card's own certified values is the check that
+the form being counted is the card's form.
+
+**What it does not establish.** The `8` stars per $J$ is the source's number and is not recounted
+here, and the equality of the edge count with the flag-orbit count still needs the injectivity of the
+forgetful map (previous section). Neither group card therefore stores `flag_orbits`.
