@@ -356,7 +356,7 @@ def _multiple_of(difference: IntegerVector, base: IntegerVector) -> Fraction | N
 
 
 class RootClassOrbit(Record):
-    """One orbit of the root classes of a cusp's boundary lattice, with a representative and its transporter group.
+    """One orbit of the root classes of a cusp's boundary lattice, with a representative.
 
     A *root class* at the cusp $\\mathbb{Z}v$ is the class in $K_J = v^\\perp/\\mathbb{Z}v$ of a root $r$ of $v^\\perp$,
     a vector of square $b(r, r) = -2$; the class has the same square, because $b(v, v) = 0$ and $b(r, v) = 0$.
@@ -367,7 +367,7 @@ class RootClassOrbit(Record):
     representative: IntegerVector = Field(
         description=(
             "One class of the orbit, as a lift in the record basis: a root $r \\\\in v^\\\\perp$ of square $-2$ with "
-            "$v$'s own coordinates. The representative is the class the transporters carry to the others."
+            "$v$'s own coordinates."
         ),
     )
     classes: Annotated[tuple[IntegerVector, ...], Field(strict=False, min_length=1)] = Field(
@@ -376,16 +376,6 @@ class RootClassOrbit(Record):
             "multiple of $v$ are one class and not two."
         ),
     )
-    transporter_order: Annotated[int, Field(ge=1)] = Field(
-        description=(
-            "The order of the permutation group that the chamber stabilizer $S \\\\le G_v$ induces on the orbit's root "
-            "walls of the cusp's chamber. $S$ embeds in the symmetry group of the chamber's Coxeter diagram, wall squares "
-            "kept, because the walls span $K_J \\\\otimes \\\\mathbb{Q}$; the order is that of the image of the realized "
-            "symmetries restricted to the orbit's walls. It is $1$ for an orbit of one class. It is not the size of the "
-            "cusp stabilizer, which is infinite, and it can exceed the orbit's class count."
-        ),
-    )
-
     @model_validator(mode="after")
     def _orbit(self) -> Self:
         """The representative is one of the orbit's classes, and they lie in one lattice."""
@@ -393,6 +383,41 @@ class RootClassOrbit(Record):
             raise ValueError("an orbit states its representative first among its classes")
         if len({len(vector) for vector in (self.representative, *self.classes)}) != 1:
             raise ValueError("the classes of an orbit have one coordinate per basis vector")
+        return self
+
+
+class ChamberSymmetries(Record):
+    """The image of the cusp stabilizer in the symmetry group of the chamber's Coxeter diagram.
+
+    Sterk, "Compactifications of the period space of Enriques surfaces, Part I", Math. Z. 207 (1991): for a group $G$
+    whose reflection subgroup $W(G)$ has finite index, $G = W(G) \\rtimes S$ with $S$ a subgroup of the symmetries of the
+    fundamental polyhedron $P$ of $W(G)$ ((4.3.2), p. 17), and $S$ is identified with a subgroup of the symmetry group
+    of the Coxeter diagram $\\Sigma(G)$ ((4.3.3), p. 18). At the cusps (4.3.7)-(4.3.9) Sterk states that the diagram's
+    symmetries are realized in $\\Gamma_v$ (pp. 22-24), and prints $G_v = \\{\\pm 1\\} W_v \\rtimes \\mathbf{Z}/2$
+    at (4.3.7), p. 22.
+    """
+
+    order: Annotated[int, Field(ge=1)] = Field(
+        description="The order of $S$, the image of the cusp stabilizer in the symmetry group of the chamber's Coxeter diagram.",
+    )
+    generators: Annotated[tuple[IntegerVector, ...], Field(strict=False)] = Field(
+        description=(
+            "Generators of $S$ as permutations of the chamber's walls, in the order the cusp's `cusp_chambers` row lists "
+            "them: entry $i$ of a generator is the index, from $0$, of the wall that wall $i$ goes to. Empty when $S$ is "
+            "trivial."
+        ),
+    )
+
+    @model_validator(mode="after")
+    def _permutations(self) -> Self:
+        """Each generator is a permutation of one wall set."""
+        if len({len(generator) for generator in self.generators}) > 1:
+            raise ValueError("the generators permute one set of walls")
+        for generator in self.generators:
+            if sorted(generator) != list(range(len(generator))):
+                raise ValueError(f"{generator} is not a permutation of the walls")
+        if (self.order == 1) != (not self.generators):
+            raise ValueError("a trivial group has no generators, and a nontrivial one has some")
         return self
 
 
@@ -420,13 +445,22 @@ class CuspRootOrbitRow(Record):
         description="The page of the source that prints the statement; absent with it.",
     )
     orbits: Annotated[tuple[RootClassOrbit, ...], Field(strict=False, min_length=1)] = Field(
-        description="The orbits of the root classes, one entry per orbit, each with its representative and its transporter group.",
+        description="The orbits of the root classes, one entry per orbit, each with its representative.",
     )
     orbit_count: Annotated[int, Field(ge=1)] = Field(
         description=(
             "The number of $\\\\Gamma_v$-orbits of the cusp's root classes: the number of entries of `orbits`. It is stored "
             "only where a source or the certified generators of $\\\\Gamma_v$ decide it, for a family the certified "
             "generators do not separate has no count here: a singleton orbit is not a proof of inequivalence."
+        ),
+    )
+    chamber_symmetries: ChamberSymmetries | None = Field(
+        default=None,
+        description=(
+            "The image $S$ of the cusp stabilizer in the symmetry group of the chamber's Coxeter diagram (Sterk 1991, "
+            "(4.3.2)-(4.3.3), pp. 17-18), computed from the card's Gram tensor as the permutations of the chamber's walls "
+            "that keep their Gram matrix, each checked to be an isometry of $K_J$. Stored where a source states that "
+            "every diagram symmetry is realized in $\\Gamma_v$; absent elsewhere."
         ),
     )
     reference: Reference | None = Field(default=None, description="The source of the orbits, when a source states them.")
@@ -851,7 +885,7 @@ class IntegralData(Record):
         description=(
             "For a group $\\\\Gamma \\\\subseteq O(L)$ and a $0$-cusp $\\\\mathbb{Z}v$, the orbits of the cusp's root classes "
             "in the boundary lattice $K_J = v^\\\\perp/\\\\mathbb{Z}v$ under the cusp stabilizer $\\\\Gamma_v$: the orbit count, "
-            "one representative per orbit, and the order of the transporter group of each "
+            "one representative per orbit, and the symmetries of the cusp's chamber that the stabilizer realizes "
             "(theory/orbits.md#root-classes-at-a-cusp). A root class is a class of square $-2$, and the class is a root "
             "exactly when its lift is: the walls of the chamber at the cusp that are not roots are no part of the family. "
             "The keys are `O`, `SO`, `O+`, `SO+`, `Otilde`, `SOtilde`, `Otilde+` and `SOtilde+`, and the slug of an "

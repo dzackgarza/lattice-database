@@ -26,7 +26,7 @@ certifications:
   automorphisms.automorphism_group_order: ef7109402ccd54cf65ca0a3b9ed8e6efceb44094eac624eb8aa798f1ac23dd2c
   arithmetic-group.otilde-t-co.line_orbits: 74de7eedb7def6700e21deb1eb039b36a1bc82862c6f781a74645be43d9191a8
   arithmetic-group.otilde-plus-t-co.line_orbits: c474a4bfa977a5e62604598b3a25344aa537369cda112a03b88838e4813495d6
-  integral.cusp_root_orbits: 66bc2529a661769b3b5f276ff9bb322ad886cb08b1d7c32f2febdec3f9cb04be
+  integral.cusp_root_orbits: e2744652d1d37d733a1113eccdff4869c9084cb5a4cdf85b0e6ea9045ecd32a3
   arithmetic-group.gamma-co-2.index_in_orthogonal_group: ff6667b1ebc3d93c0e7cf5a8451cb9fd6d57f596453c6f1a1026e30210e5da7e
 rank: 11
 gram_tensor:
@@ -125,7 +125,6 @@ integral:
       - representative: [1, 0, -1, 0, 0, 0, 0, 0, 0, 0, 1]
         classes:
         - [1, 0, -1, 0, 0, 0, 0, 0, 0, 0, 1]
-        transporter_order: 1
       orbit_count: 1
     - cusp: [0, 2, 1, -4, -5, -7, -10, -8, -6, -4, -2]
       statement: 4.3.8
@@ -134,7 +133,6 @@ integral:
       - representative: [1, -1, 0, 1, 0, 0, 0, 0, 0, 0, 0]
         classes:
         - [1, -1, 0, 1, 0, 0, 0, 0, 0, 0, 0]
-        transporter_order: 1
       orbit_count: 1
     - cusp: [2, 0, 0, -4, -5, -7, -10, -8, -6, -4, -2]
       statement: 4.3.9
@@ -143,20 +141,16 @@ integral:
       - representative: [1, 1, 3, -2, 0, 0, 0, 0, 0, 0, 0]
         classes:
         - [1, 1, 3, -2, 0, 0, 0, 0, 0, 0, 0]
-        transporter_order: 1
       - representative: [1, 4, 4, -2, 2, 4, 5, 4, 3, 2, 1]
         classes:
         - [1, 4, 4, -2, 2, 4, 5, 4, 3, 2, 1]
-        transporter_order: 1
       - representative: [1, 3, 3, -2, 1, 2, 2, 1, 0, 0, 0]
         classes:
         - [1, 3, 3, -2, 1, 2, 2, 1, 0, 0, 0]
-        transporter_order: 1
       - representative: [1, 3, 4, -2, 2, 3, 4, 3, 2, 1, 0]
         classes:
         - [1, 3, 4, -2, 2, 3, 4, 3, 2, 1, 0]
         - [1, 2, 3, -2, 0, 1, 0, 0, 0, 0, 0]
-        transporter_order: 2
       orbit_count: 4
   anisotropic_primes: []
   local_representations:
@@ -6783,5 +6777,3 @@ Each count is asked for by its own name and read from the instrument that is che
 Both group cards state their line count: $527$ each, this card's computation for the stored Gram tensor, certified under `arithmetic-group.otilde-t-co.line_orbits` and `arithmetic-group.otilde-plus-t-co.line_orbits`. That is the lattice card's own row read through the subgroup, and the theorem's $527$ lines as well.
 Their plane counts and the incidence are stated, carried from the same record: `plane_orbits: 189720` and `flag_orbits: 569160` each (`results/issue286-the-stage-1-call.md:372`, `:373` at `47865446a7c37c85d873f91ac9d74cea472e208c`), whose incidence rows returned in $6132.2$ s and $7973.4$ s in image run `44392429173` with the complete $(1080,3)$ degree sequence, not only the product. The third group card, `gamma-co-2`, states $4$, $7$ and $13$ from the proof and GAP record at the same commit (`results/issue607-gamma-co-2-rows-by-the-polar-space.md`, `results/issue607-the-levi-candidate.log`).
 The comparison they will be read against is research `cor:coble-eight-standard-line-counts`: $527$ lines, $189720$ planes and $569160$ flags for $\widetilde O$ and for $\widetilde O^{+}$, the incidence being $(1080,3)$-biregular because $527 \cdot 1080 = 189720 \cdot 3 = 569160$, and $1$, $1$ and $1$ for each of $O$, $SO$, $O^{+}$ and $SO^{+}$.
-
-The `transporter_order` values in `integral.cusp_root_orbits` are ungrounded, for the reason stated on card 029J: no published statement defines the order of an orbit's transporter group. The orbit counts and classes do not depend on them (lattice-database#49, #43).

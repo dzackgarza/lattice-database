@@ -808,17 +808,18 @@ def test_the_enriques_cusp_chambers_are_the_sources_walls_and_the_cards_own_form
         assert {frozenset((edge.a, edge.b)): edge.order for edge in row.diagram} == expected, row.statement
 
 
-def test_the_orbits_of_a_cusps_root_classes_state_their_count_and_their_transporters() -> None:
-    """#43: a row states one representative per orbit, the count of them, and each orbit's transporter order."""
+def test_the_orbits_of_a_cusps_root_classes_state_their_count_and_the_chamber_symmetries() -> None:
+    """#43: a row states one representative per orbit, the count of them, and the image of the stabilizer in the chamber's diagram symmetries."""
     row = {
         "cusp": [1, 0],
         "statement": "4.3.8",
         "printed_page": 23,
         "orbits": [
-            {"representative": [0, 3], "classes": [[0, 3]], "transporter_order": 1},
-            {"representative": [1, 1], "classes": [[1, 1], [1, 2]], "transporter_order": 2},
+            {"representative": [0, 3], "classes": [[0, 3]]},
+            {"representative": [1, 1], "classes": [[1, 1], [1, 2]]},
         ],
         "orbit_count": 2,
+        "chamber_symmetries": {"order": 2, "generators": [[1, 0, 2]]},
     }
     lattice = Lattice.model_validate(with_block(a2(), "integral", cusp_root_orbits={"gamma-en-2": [row]}))
     assert lattice.integral is not None and lattice.integral.cusp_root_orbits is not None
@@ -826,7 +827,15 @@ def test_the_orbits_of_a_cusps_root_classes_state_their_count_and_their_transpor
     assert orbits.orbit_count == 2
     assert [len(orbit.classes) for orbit in orbits.orbits] == [1, 2]
     assert [orbit.representative for orbit in orbits.orbits] == [(0, 3), (1, 1)]
-    assert orbits.orbits[1].transporter_order == 2, "an orbit of two classes has a transporter beyond the identity"
+    assert orbits.chamber_symmetries is not None and orbits.chamber_symmetries.generators == ((1, 0, 2),)
+    with pytest.raises(ValidationError, match="not a permutation"):
+        Lattice.model_validate(
+            with_block(a2(), "integral", cusp_root_orbits={"gamma-en-2": [{**row, "chamber_symmetries": {"order": 2, "generators": [[1, 1, 2]]}}]})
+        )
+    with pytest.raises(ValidationError, match="trivial group has no generators"):
+        Lattice.model_validate(
+            with_block(a2(), "integral", cusp_root_orbits={"gamma-en-2": [{**row, "chamber_symmetries": {"order": 1, "generators": [[1, 0, 2]]}}]})
+        )
 
 
 def test_a_root_class_row_refuses_a_count_that_is_not_of_its_orbits() -> None:
@@ -836,8 +845,8 @@ def test_a_root_class_row_refuses_a_count_that_is_not_of_its_orbits() -> None:
         "statement": "4.3.8",
         "printed_page": 23,
         "orbits": [
-            {"representative": [0, 3], "classes": [[0, 3]], "transporter_order": 1},
-            {"representative": [1, 1], "classes": [[1, 1]], "transporter_order": 1},
+            {"representative": [0, 3], "classes": [[0, 3]]},
+            {"representative": [1, 1], "classes": [[1, 1]]},
         ],
         "orbit_count": 2,
     }
@@ -849,7 +858,7 @@ def test_a_root_class_row_refuses_a_count_that_is_not_of_its_orbits() -> None:
             with_block(
                 a2(),
                 "integral",
-                cusp_root_orbits={"gamma-en-2": [{**row, "orbits": [{"representative": [1, 0], "classes": [[1, 0]], "transporter_order": 1}], "orbit_count": 1}]},
+                cusp_root_orbits={"gamma-en-2": [{**row, "orbits": [{"representative": [1, 0], "classes": [[1, 0]]}], "orbit_count": 1}]},
             )
         )
     # [1, 1] and [2, 1] differ by the cusp, so they are one class and not two orbits.
@@ -858,7 +867,7 @@ def test_a_root_class_row_refuses_a_count_that_is_not_of_its_orbits() -> None:
             with_block(
                 a2(),
                 "integral",
-                cusp_root_orbits={"gamma-en-2": [{**row, "orbits": [*row["orbits"], {"representative": [2, 1], "classes": [[2, 1]], "transporter_order": 1}], "orbit_count": 3}]},
+                cusp_root_orbits={"gamma-en-2": [{**row, "orbits": [*row["orbits"], {"representative": [2, 1], "classes": [[2, 1]]}], "orbit_count": 3}]},
             )
         )
     with pytest.raises(ValidationError, match="representative first"):
@@ -866,7 +875,7 @@ def test_a_root_class_row_refuses_a_count_that_is_not_of_its_orbits() -> None:
             with_block(
                 a2(),
                 "integral",
-                cusp_root_orbits={"gamma-en-2": [{**row, "orbits": [{"representative": [0, 3], "classes": [[1, 1], [0, 3]], "transporter_order": 1}], "orbit_count": 1}]},
+                cusp_root_orbits={"gamma-en-2": [{**row, "orbits": [{"representative": [0, 3], "classes": [[1, 1], [0, 3]]}], "orbit_count": 1}]},
             )
         )
     with pytest.raises(ValidationError, match="statement that prints its chamber and its page together"):

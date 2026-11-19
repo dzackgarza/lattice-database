@@ -2,7 +2,7 @@
 
 A row of `integral.cusp_root_orbits` states, at one 0-cusp $\\mathbb{Z}v$ of a subgroup and for one of the
 eight standard subgroups or a named one, the $\\Gamma_v$-orbits of the root classes of $K_J = v^\\perp/\\mathbb{Z}v$:
-their count, one representative per orbit, and the order of each orbit's transporter group. The schema decides
+their count, one representative per orbit, and the image of $\\Gamma_v$ in the symmetry group of the chamber's diagram. The schema decides
 what a row states; the preamble's admission check decides the arithmetic, which is the card's own Gram tensor and
 nothing else:
 the cusp is isotropic, every class lies in its $v^\\perp$, and every class has square $-2$, so a wall of square
@@ -13,8 +13,8 @@ The rows here are this file's fixture: card 029J's own cusp and its own two root
 p. 23, with the orbit count as the shape of a row. The card itself states the four rows it can decide: one cusp whose
 root family is a single class, and the three whose chamber carries a symmetry that Sterk states is realized in
 $\\Gamma_v$ --- an isometry of $\\Gamma_v$ carrying one root wall to the other is a proof of one orbit, which a
-singleton under the certified generators is not. A row's `transporter_order` is the order of the group the row exhibits
-acting on its orbit, checked here as a single cycle of an exhibited symmetry.
+singleton under the certified generators is not. A row's `chamber_symmetries` is that image (Sterk 1991, (4.3.2)-(4.3.3),
+pp. 17-18), recomputed here from the card's Gram tensor.
 """
 
 from fractions import Fraction
@@ -42,14 +42,14 @@ EP = (0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0)
 
 
 def row(**changes) -> dict:
-    """One row at Sterk's fourth cusp: two orbits of one root class each, with the identity transporter."""
+    """One row at Sterk's fourth cusp: two orbits of one root class each."""
     stated = {
         "cusp": list(CUSP),
         "statement": "4.3.8",
         "printed_page": 23,
         "orbits": [
-            {"representative": list(ALPHA_9), "classes": [list(ALPHA_9)], "transporter_order": 1},
-            {"representative": list(ALPHA_11), "classes": [list(ALPHA_11)], "transporter_order": 1},
+            {"representative": list(ALPHA_9), "classes": [list(ALPHA_9)]},
+            {"representative": list(ALPHA_11), "classes": [list(ALPHA_11)]},
         ],
         "orbit_count": 2,
     }
@@ -99,14 +99,14 @@ def admissions(*rows: dict) -> list[str]:
 def test_a_wall_that_is_no_root_of_the_boundary_lattice_is_reported() -> None:
     """A $-4$-wall of the chamber lies in $v^\\perp$ and is no root: a row that counted its orbit would report."""
     assert admissions(row()) == []
-    stated = row(orbit_count=1, orbits=[{"representative": list(ALPHA_2), "classes": [list(ALPHA_2)], "transporter_order": 1}])
+    stated = row(orbit_count=1, orbits=[{"representative": list(ALPHA_2), "classes": [list(ALPHA_2)]}])
     found = admissions(stated)
     assert len(found) == 1 and "has square -4, not -2, so it is no root" in found[0], found
 
 
 def test_a_class_outside_the_cusp_orthogonal_is_reported() -> None:
     """A vector that pairs with the cusp is no class of $K_J = v^\\perp/\\mathbb{Z}v$."""
-    stated = row(orbit_count=1, orbits=[{"representative": list(EP), "classes": [list(EP)], "transporter_order": 1}])
+    stated = row(orbit_count=1, orbits=[{"representative": list(EP), "classes": [list(EP)]}])
     found = admissions(stated)
     assert len(found) == 1 and "does not lie in the v^perp of the cusp" in found[0], found
 
@@ -132,7 +132,7 @@ def test_the_decided_rows_of_card_029j_read_back_and_certify() -> None:
     classes, and each chamber's diagram carries a symmetry that Sterk states is realized in $\Gamma_v$: at (4.3.7)
     it exchanges $\alpha_9$ and $\alpha_{13}$, at (4.3.8) $\alpha_9$ and $\alpha_{11}$, and at (4.3.9) it is
     transitive on $\alpha_{11}$, $\alpha_{12}$, $\alpha_{13}$, $\alpha_{14}$. One orbit each, so each row's count is
-    1 and its single orbit states every one of those classes with its transporter.
+    1 and its single orbit states every one of those classes.
     """
     lattice = Lattice.model_validate(corpus.front_matter(corpus.read_card(ROOT / "lattices" / "029J.md")))
     assert lattice.integral is not None and lattice.integral.cusp_root_orbits is not None
@@ -145,7 +145,7 @@ def test_the_decided_rows_of_card_029j_read_back_and_certify() -> None:
     ]
     assert [len(row.orbits) for row in rows] == [1, 1, 1, 1]
     assert [len(row.orbits[0].classes) for row in rows] == [1, 2, 2, 4]
-    assert [row.orbits[0].transporter_order for row in rows] == [1, 2, 2, 8]
+    assert [row.chamber_symmetries.order for row in rows if row.chamber_symmetries is not None] == [1, 2, 2, 8]
     single = rows[0]
     assert single.cusp == (0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0), "the cusp is e'"
     assert single.orbits[0].representative == (1, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0), "alpha_10 = e - f"
@@ -238,7 +238,7 @@ def test_a_second_row_at_one_cusp_is_refused_when_it_changes_the_first() -> None
     stored = metadata["integral"]["cusp_root_orbits"]["gamma-en-2"][0]
     changed = {
         **stored,
-        "orbits": [{**stored["orbits"][0], "transporter_order": 2}],
+        "orbits": [{**stored["orbits"][0]}],
     }
     path = ROOT / "lattices" / "029J.md"
     with pytest.raises(AssertionError, match="is stated twice, differently"):
@@ -287,7 +287,7 @@ def test_the_coble_cusps_rows_are_admissible_values_of_the_field() -> None:
             "cusp": cusp,
             "statement": statement,
             "printed_page": page,
-            "orbits": [{"representative": classes[0], "classes": classes, "transporter_order": len(classes)}],
+            "orbits": [{"representative": classes[0], "classes": classes}],
             "orbit_count": 1,
         }
         for statement, page, cusp, classes in COBLE_CUSPS
@@ -434,15 +434,17 @@ def test_only_one_delta_preserving_symmetry_moves_a_coble_class() -> None:
     assert all(symmetry[twelve] == twelve for symmetry in preserving), "a delta-preserving symmetry moves alpha_12"
 
 
-def test_each_stored_transporter_order_is_the_group_the_chamber_symmetries_induce_on_the_orbit() -> None:
-    r"""#43: a row's `transporter_order` is the order of the group it exhibits, not its class count.
+def test_each_stored_chamber_symmetry_group_is_the_diagram_symmetries_of_the_chamber_and_agrees_with_sterk() -> None:
+    r"""#49: `chamber_symmetries` is the group of Gram-preserving permutations of the chamber's walls.
 
-    For every stored orbit this computes, from card 029J's Gram tensor, the permutations of the chamber's walls that
-    keep the wall Gram matrix, and the group they induce on the orbit's root walls; that group is transitive and its
-    order is `transporter_order`. At (4.3.9) it is $8$ on four walls, since a symmetry exchanges $\\alpha_{13}$ and
-    $\\alpha_{14}$ and fixes $\\alpha_{11}$, $\\alpha_{12}$. A one-class orbit's group is trivial.
+    Sterk 1991, (4.3.2), p. 17: $G = W(G) \rtimes S$ with $S$ a group of symmetries of the chamber, identified with a
+    subgroup of the symmetries of its Coxeter diagram ((4.3.3), p. 18); every symmetry is realized in $\Gamma_v$ at
+    (4.3.7)-(4.3.9), pp. 22-24. This recomputes, from card 029J's Gram tensor, every permutation of each chamber's
+    walls that keeps their Gram matrix, and checks that the stored generators generate exactly that group and that its
+    order is the stored one. At (4.3.7) the order is the $\mathbf{Z}/2$ of Sterk's printed
+    $G_v = \{\pm1\}W_v \rtimes \mathbf{Z}/2$, p. 22.
     """
-    from sage.all import QQ, matrix
+    from sage.all import QQ, PermutationGroup, matrix
 
     lattice = Lattice.model_validate(corpus.front_matter(corpus.read_card(ROOT / "lattices" / "029J.md")))
     assert lattice.integral is not None and lattice.integral.cusp_chambers is not None
@@ -454,37 +456,37 @@ def test_each_stored_transporter_order_is_the_group_the_chamber_symmetries_induc
         return (matrix(QQ, 1, size, list(left)) * gram * matrix(QQ, size, 1, list(right)))[0, 0]
 
     chambers = {row.statement: row for row in lattice.integral.cusp_chambers["gamma-en-2"]}
-    checked = []
+    orders = {}
     for row in lattice.integral.cusp_root_orbits["gamma-en-2"]:
-        chamber = chambers[row.statement]
-        walls = [tuple(QQ(entry) for entry in wall.vector) for wall in chamber.walls]
-        squares = [pairing(wall, wall) for wall in walls]
-        symmetries: list[dict[int, int]] = []
+        assert row.chamber_symmetries is not None, row.statement
+        walls = [tuple(QQ(entry) for entry in wall.vector) for wall in chambers[row.statement].walls]
+        count = len(walls)
+        wall_gram = [[pairing(walls[i], walls[j]) for j in range(count)] for i in range(count)]
+        symmetries: list[list[int]] = []
 
-        def extend(partial: dict[int, int]) -> None:
-            if len(partial) == len(walls):
-                symmetries.append(dict(partial))
-                return
+        def extend(partial: list[int]) -> None:
             index = len(partial)
-            for image in range(len(walls)):
-                if image in partial.values() or squares[image] != squares[index]:
+            if index == count:
+                symmetries.append(list(partial))
+                return
+            for image in range(count):
+                if image in partial or wall_gram[image][image] != wall_gram[index][index]:
                     continue
-                if all(pairing(walls[index], walls[other]) == pairing(walls[image], walls[seen]) for other, seen in partial.items()):
-                    partial[index] = image
+                if all(wall_gram[index][other] == wall_gram[image][partial[other]] for other in range(index)):
+                    partial.append(image)
                     extend(partial)
-                    del partial[index]
+                    partial.pop()
 
-        extend({})
-        for orbit in row.orbits:
-            classes = [tuple(QQ(entry) for entry in entry_values) for entry_values in orbit.classes]
-            positions = [walls.index(entry) for entry in classes]
-            induced = {tuple(symmetry[p] for p in positions) for symmetry in symmetries if {symmetry[p] for p in positions} == set(positions)}
-            reached = {image[0] for image in induced}
-            assert reached == set(positions), f"{row.statement}: the symmetries are not transitive on the orbit's walls"
-            assert len(induced) == orbit.transporter_order, (row.statement, len(induced), orbit.transporter_order)
-            checked.append((row.statement, orbit.transporter_order))
-    assert checked == [("4.3.6", 1), ("4.3.7", 2), ("4.3.8", 2), ("4.3.9", 8)], checked
-
+        extend([])
+        domain = list(range(1, count + 1))
+        full = PermutationGroup([[i + 1 for i in p] for p in symmetries], domain=domain)
+        stored = PermutationGroup([[i + 1 for i in g] for g in row.chamber_symmetries.generators], domain=domain)
+        assert full.order() == len(symmetries), row.statement
+        assert stored == full, f"{row.statement}: the stored generators do not generate the diagram's symmetries"
+        assert stored.order() == row.chamber_symmetries.order, row.statement
+        orders[row.statement] = row.chamber_symmetries.order
+    assert orders == {"4.3.6": 1, "4.3.7": 2, "4.3.8": 2, "4.3.9": 8}, orders
+    assert orders["4.3.7"] == 2, "Sterk (4.3.7), p. 22: G_v = {+-1} W_v x| Z/2"
 
 def test_the_chambers_own_reflections_do_not_move_the_root_classes() -> None:
     """#43: at every cusped row the root walls have different orthogonal neighbour sets, so no word in the walls moves one to another.
