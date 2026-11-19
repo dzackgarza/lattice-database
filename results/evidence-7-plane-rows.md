@@ -156,7 +156,7 @@ presents no divided class.
 | the plane counts | `O` certified at 1; the other seven named for dispatch |
 | the incidence field | field and computation landed; no value, named for dispatch |
 | the unconditional `Γ_Co = Õ⁺(T_Co)` identification corrected | met before this change (`lattices/6JRR.md`, the conjecture paragraph) |
-| `latticedb verify` on the affected cards | not run: `checks.one_shard` loads the whole corpus (7.3 GiB of cards and 9 GiB of certificates) and this VM does not have it — the scoped component checks are 0/0, and the dispatch is `verify.yml` with `tags=6JRR` |
+| `latticedb verify` on the affected cards | **run**, 2026-11-19: `latticedb verify --shard 1/16`, the shard holding 6JRR, 18910 cards at a 3.6 GiB peak; no problem on 6JRR or either group card, and the shard's twelve problems are `definite.regular` contradictions on seven other cards (see below) |
 
 ## The named dispatch, and why a tag-named run is the surface that reaches it
 
@@ -317,3 +317,35 @@ approached the owner's 3476 MiB because the host's *available* memory was taken 
 before the walk reached it. The row is released again with this measurement and stays for the
 dispatch; I will not attempt it a fourth time on this VM, because the stop is now measured three ways
 and repeating it spends the VM to learn nothing.
+
+## `latticedb verify` on the cards #7 changed (2026-11-19)
+
+```
+/sage/.venv/bin/python -m latticedb verify --shard 1/16
+memory: 3.6 GiB peak for 18910 cards in shard 1/16
+```
+
+`sage-extensions` `0bbf022b6b`, the image's `/repos/research/src` as the preamble, the repository at
+`a79c8b5a1b`. Shard `1/16` is the shard `6JRR` falls in (`certificates.tag_hash("6JRR") % 16 == 1`),
+so the run covers 6JRR, `arithmetic-groups/otilde-t-co.md`, `arithmetic-groups/otilde-plus-t-co.md`
+and every card they name, through `records.problems`, `relations.problems`, the duplicate-Gram index
+and the catalogue checks.
+
+**On the cards #7 changed: no problem.** The run's twelve problems are all one class on seven other
+cards, all `definite`:
+
+| card | problem |
+| --- | --- |
+| `02XN`, `03EP`, `05VD`, `06NV`, `06O4` | `definite.regular` **and** `definite.spinor_regular` each contradict its completed computation certificate |
+| `3ICJ`, `3ICR` | `definite.regular` contradicts its completed computation certificate |
+
+Those are the class the #7 comments already name on `02C3`, `02DC`, `02EI` and `0394`; they are not
+this issue's cards and nothing here changes them. The run therefore exits 1 on the shard, and the
+shard's redness is theirs — the affected cards' clause of #7 is what this run establishes, and it
+holds.
+
+The earlier statement that this could not be run is now stale in one specific way: `checks.one_shard`
+**does** read only the shard's closure (`corpus.load(root, tags=shard_closure(...))`), which is why
+18910 cards cost 3.6 GiB here rather than the 7.5 GiB the whole corpus cost in the runs that died.
+The dispatch named for a wider check is still `verify.yml` with `tags=6JRR`, which verifies that shard
+in CI.
