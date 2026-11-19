@@ -1,4 +1,12 @@
-"""#43: store the Coble cusp of three classes as two orbits on card 6JRR.
+"""#43: SUPERSEDED — this program stored a row that has since been withdrawn.
+
+Its row rested on the claim that the Coble condition is decided on the diagram symmetries alone, which fails because the
+reflection subgroup does not fix delta. `results/withdraw-43-coble-cusp5.py` removed the row; this file is kept only as
+the record of what was written and why it was wrong.
+
+Original docstring follows.
+
+#43: store the Coble cusp of three classes as two orbits on card 6JRR.
 
 The argument is printed, and each step of it is a page: Sterk `(4.3.3)`, p. 18, writes the acting group as
 $G = W(G) \\rtimes S$ with $S$ the diagram symmetries realised in $G$; `(4.3.9)`, p. 24, says the symmetries at this
