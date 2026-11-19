@@ -6747,7 +6747,7 @@ The Coble lattice $T_{\mathrm{Co}} = \langle 2 \rangle \oplus U(2) \oplus E_8(-2
 
 $T_{\mathrm{Co}}$ is twice the odd unimodular lattice $I_{2,9} = \langle 1 \rangle \oplus U \oplus E_{8}(-1)$, so $T_{\mathrm{Co}} \cong I_{2,9}(2)$; $b(e_{1}, e_{1}) = 0$, so it is isotropic.
 Its discriminant group is $A_{T_{\mathrm{Co}}} = (T_{\mathrm{Co}})^{*}/T_{\mathrm{Co}}$, of order $2048$.
-The groups studied with it are the discriminant kernel $\widetilde O(T_{\mathrm{Co}})$ and $\Gamma_{\mathrm{Co}} = \widetilde O^{+}(T_{\mathrm{Co}})$, which have their own arithmetic-group cards `otilde-t-co` and `otilde-plus-t-co`.
+The groups studied with it are the discriminant kernel $\widetilde O(T_{\mathrm{Co}})$, which has its own arithmetic-group card `otilde-t-co`, and the family monodromy group $\Gamma_{\mathrm{Co}}$, which is **not** stated here to be $\widetilde O^{+}(T_{\mathrm{Co}})$: that identification is a conjecture (research#753 owns the family group; `conj:gamma-co-stable` is the statement, not a result), so no count and no group on this card rests on it. The proved discriminant preimage is $\Gamma_{\mathrm{Co},2} = R_{\Gamma_{\mathrm{En},2}}$, which has its own card `gamma-co-2`, and $\widetilde O^{+}(T_{\mathrm{Co}})$ keeps its card `otilde-plus-t-co` under its own name only.
 
 No invariant of this card is transcribed from a source: `latticedb certify` computes each from the Gram tensor above and certifies it, so a field is absent until its computation runs.
 $E_8$ is negative definite, in Dolgachev–Kondo's convention for $\mathbb{E}(2) = (E_8 \oplus U)(2)$ and in the Gram tensor above, whose third summand has $-4$ on its diagonal and $-2$ off it.
