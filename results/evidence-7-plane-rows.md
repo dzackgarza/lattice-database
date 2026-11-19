@@ -629,3 +629,29 @@ row that has returned consistent with the line side: `23715 · 8 = 189720 = 527 
 **What is still not a computation here.** The stars themselves are not enumerated — only their number
 per subgroup — and the three-dimensional statement behind `3` is the previous section's. The two
 group cards still store no `plane_orbits` or `flag_orbits`, because those are the walks.
+
+## `Gamma_Co,2`'s three counts, carried from the record (2026-11-19)
+
+sage-extensions#286 closed on main `47865446a7c37c85d873f91ac9d74cea472e208c`, and the stage-1 row this
+card could not compute now exists there as a proof plus a computation. `arithmetic-groups/gamma-co-2.md`
+states `line_orbits: 4`, `plane_orbits: 7`, `flag_orbits: 13`, carried from
+
+* `results/issue607-gamma-co-2-rows-by-the-polar-space.md` at that commit — the proof: orbits of
+  `Stab(p)`, of `R_P` and of `R_P ∩ Stab(p)` on the 67456 hyperbolic lines of `O(q) = O^+_10(2)`, with
+  `4 = 34560 + 17280 + 15360 + 256` lines and `7 = 26880 + 24576 + 8064 + 3360 + 2688 + 1120 + 768` planes;
+* `results/issue607-the-levi-candidate.log` and `.py` — the GAP computation, 3 s a row after 335 s of
+  building `O(q)`;
+* and sage-extensions#391's image run `43556671111`, the public call's own row: 4 line cusps, 7 plane
+  cusps, 13 edges — the agreement between the proof and the call.
+
+**Why a citation and not this database's certificate.** `latticedb certify` builds a subgroup only from a
+card's `standard_name`, and $\Gamma_{\mathrm{Co},2}$ is a named subgroup rather than one of the eight, so
+there is no computation route here for these three fields; the corpus's rule for a value a source
+establishes applies, the card's `data.reference` carries the citation, and
+`checks.records.arithmetic_problems` exempts a count stated beside it — the exemption this branch added
+for the 87 polarisation cards, here in its second use.
+
+**What this does not do.** It does not touch the two standard subgroups' `plane_orbits` and
+`flag_orbits`: those the database can compute, their walks are the dispatch's, and citing a record for
+them would pre-empt the computation #7's acceptance asks for. Scoped to 6JRR after the change:
+records 0, relations 0.
