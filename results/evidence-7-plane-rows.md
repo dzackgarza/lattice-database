@@ -491,3 +491,34 @@ The four kernel rows now have four attempts between them and one returned: `Otil
 | `Otilde` | 3 | ended at 677 s, 1054 s, 426 s; 1.0–1.3 GiB peak |
 | `SOtilde` | 1 | ended at 566 s, 1.1 GiB peak |
 | `SOtilde+` | 0 | no route: its character quotient does not build |
+
+## Refuted: "three isotropic lines in a plane" (2026-11-19)
+
+The previous section justified the plane degree `3` as "the three nonzero divided classes of a plane,
+whose nonzero elements are exactly the classes of the plane's primitive vectors". Read as three
+isotropic lines inside one plane, that is **false**, and this card's basis shows it immediately.
+
+**The measurement** (`results/probe-7-plane-lines.py`, on the stored Gram at sage-extensions
+`0bbf022b6b`). The card's second and third generators span a *scaled* hyperbolic plane, and
+
+```
+(a, b)  =  (1,0)  (0,1)  (1,1)  (2,1)  (1,2)  (3,2)
+norm    =    0      0      4      8      8      24
+```
+
+so $(a e_2 + b e_3)^2 = 4ab$ and the only primitive isotropic lines in that plane are the two
+coordinate ones. A plane of `T_Co` therefore contains **two** isotropic lines, not three.
+
+**What survives, and what the `3` is.** The degree `3` is
+$|J(P)| - 1$ for $J(P) = \mathrm{im}(P/2) \cong (\mathbb{Z}/2)^2$: the three nonzero *classes*. They
+name three distinct line cusps because `K`'s line cusps are indexed by the nonzero isotropic classes of
+$A_{T_{\mathrm{Co}}}$ (this card's `constant = 527`, and the identification is
+Dutour Sikirić–Hulek, Lemma 3.6, printed p. 22, with Dolgachev–Kondō §2 p. 510 and §3 (3.6) with
+Proposition 3.2, p. 513 for the lattice and its kernel). The line realizing the third class lies in
+another plane of the same `K`-orbit, not in this one — which is why the incidence is a relation
+between orbit sets and not a count of flags inside a fixed plane.
+
+**Why this is worth a commit.** The count `569160 = 189720 · 3` is unaffected, but a card that
+explained the `3` by three lines inside a plane would hand the next reader a false statement about
+the geometry. The card now states the correct reading and cites the measurement that refuted the
+wrong one.
