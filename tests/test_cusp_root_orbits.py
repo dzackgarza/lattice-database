@@ -434,35 +434,6 @@ def test_only_one_delta_preserving_symmetry_moves_a_coble_class() -> None:
     assert all(symmetry[twelve] == twelve for symmetry in preserving), "a delta-preserving symmetry moves alpha_12"
 
 
-def test_card_6jrr_states_the_coble_cusp_of_three_classes_as_two_orbits() -> None:
-    r"""#43: Sterk's (4.3.9) on the Coble card is two orbits, $\{\alpha_{12}\}$ and $\{\alpha_{13},\alpha_{14}\}$.
-
-    The proof is the class of $\delta$ in $K_I$: every element of $W_v$ fixes the cusp, so it preserves that class, and
-    of the eight diagram symmetries exactly two carry $\delta$ to $\pm\delta$ — the identity and the one exchanging
-    $\alpha_{13}$ with $\alpha_{14}$ — while the six others land in a different class. No product $ws$ can therefore
-    fix $\delta$ unless $s$ does. This test states the row that follows.
-    """
-    lattice = Lattice.model_validate(corpus.front_matter(corpus.read_card(ROOT / "lattices" / "6JRR.md")))
-    assert lattice.integral is not None and lattice.integral.cusp_root_orbits is not None
-    rows = lattice.integral.cusp_root_orbits["gamma-co-2"]
-    assert [(row.statement, row.printed_page, row.orbit_count) for row in rows] == [
-        ("4.3.7", 22, 1),
-        ("4.3.8", 23, 1),
-        ("4.3.9", 24, 2),
-    ]
-    row = rows[-1]
-    assert [len(orbit.classes) for orbit in row.orbits] == [1, 2]
-    assert [orbit.transporter_order for orbit in row.orbits] == [1, 2]
-    assert [orbit.representative for orbit in row.orbits] == [
-        (1, 3, 3, -2, 1, 2, 2, 1, 0, 0, 0),
-        (1, 3, 4, -2, 2, 3, 4, 3, 2, 1, 0),
-    ]
-    assert sorted(tuple(entry) for entry in row.orbits[1].classes) == sorted(
-        [(1, 3, 4, -2, 2, 3, 4, 3, 2, 1, 0), (1, 2, 3, -2, 0, 1, 0, 0, 0, 0, 0)]
-    )
-    assert records.local_admission_problems(lattice) == []
-
-
 def test_each_stored_transporter_order_is_a_cycle_of_an_exhibited_symmetry() -> None:
     r"""#43: a row's `transporter_order` is the order of the group it exhibits, not its class count.
 

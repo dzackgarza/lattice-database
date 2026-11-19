@@ -1,5 +1,10 @@
 # #43, one lemma: the class of $\delta$ in $K_I$ settles the Coble cusp of three classes
 
+**Refuted (#49).** The step "every element of $W_v$ ... preserves the class there of any vector of $v^\perp$" is
+false: fixing $v$ preserves $K_I$ as a whole, not each class. On card 029J the wall $\alpha_9$ of `(4.3.9)` has square
+$-4$, pairs $0$ with the cusp and $-2$ with $\delta$, so its reflection, an element of $W_v$, sends $\delta$ to
+$\delta - \alpha_9$, a different class. The row this lemma supported is withdrawn from card 6JRR.
+
 **Lemma.** At Sterk's `(4.3.9)` the Coble cusp stabilizer acts on the three root classes with exactly two orbits,
 $\{\alpha_{12}\}$ and $\{\alpha_{13},\alpha_{14}\}$.
 
