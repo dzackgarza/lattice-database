@@ -75,6 +75,13 @@ does not return at a Coble cusp any more than at an Enriques one. And the constr
 (`results/probe-43-coble-classes.py`: 22 of 27 family members preserve $T_{\mathrm{Co}}$, none moves a class). A
 non-merge is no proof of inequivalence, so the row stays empty and claims nothing.
 
+`results/issue-43-lemma-sterk-4310.md` narrows it: of the eight symmetries of the (4.3.9) diagram, exactly two preserve the
+$T_{\mathrm{Co}}$ wall set, and the one that is not the identity exchanges $\alpha_{13}$ with $\alpha_{14}$ and fixes
+$\alpha_{12}$ — so the count is $1$ or $2$ once that symmetry is known to be realised in $\Gamma_{\mathrm{Co},2}$, and
+the open question is only whether $\alpha_{12}$ joins them. The same file proves from pp. 25–26 that Sterk's lifting
+argument `(4.3.10)`–`(4.3.13)` is about $A = H \oplus E_8(-2)$ and never fixes $\delta = e - f$, so it cannot be
+transported to the Coble group.
+
 ### What the card would be built from, and what it would cost
 
 The owner's library has since identified the two *restricted stabilizers* on this lattice
