@@ -812,6 +812,8 @@ to routes. Scoped checks on 6JRR: records 0, relations 0.
 
 ## The affected cards verified again, on the current content (2026-11-19)
 
+**Re-run at `265e49e9a8`** (the revision this file's commit lands on): the same command, the same closure, `memory: 1.9 GiB peak for 4810 cards in shard 33/64`, and one problem — `3ICR`'s `definite.regular`. No problem on `6JRR`, `otilde-t-co`, `otilde-plus-t-co` or `gamma-co-2`. The first run below was at `ff6f781895` and remains in the record as the earlier reading.
+
 A review of `b54cc004aafe` correctly found the earlier verify run (`--shard 1/16` at `a79c8b5a1b`)
 stale: it predated the plane and incidence values, the third group card, and the `#49` hash
 recomputation. This is the run on the current content, at repository revision `ff6f781895`:

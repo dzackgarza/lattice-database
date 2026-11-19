@@ -69,11 +69,11 @@ paragraph (`:6774`) already said the identification is a conjecture and settles 
 
 ## 6. `latticedb verify` on the affected cards
 
-Run on the current content, at repository revision `ff6f781895`:
+Run on the current content, at repository revision `265e49e9a8`:
 
 ```
 latticedb verify --shard 33/64
-memory: 2.0 GiB peak for 4810 cards in shard 33/64
+memory: 1.9 GiB peak for 4810 cards in shard 33/64
 lattices/3ICR.md: definite.regular contradicts its completed computation certificate
 ```
 
