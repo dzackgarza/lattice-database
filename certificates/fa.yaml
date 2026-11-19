@@ -26305,6 +26305,9 @@
 3G1C integral.anisotropic_primes:
   hash: b7fda0f0353a422fbc412bbcf32661ee27faa3072ae93e81d16e9ca9394a2963
   by: research preamble
+3G1C integral.discriminant_sequence:
+  hash: d25137e73be45ad327cfe0108b9e9fec7a47bf40ce5ce07f5c85fe013beb904e
+  by: research preamble
 3G1C integral.elementary_primes:
   hash: d0d50489c9c5b7f556c9a7fa4e49841a48be46274e6f4317be5ba5a24949b909
   by: research preamble
@@ -26409,27 +26412,13 @@
   by: research preamble
 3I57 definite.regular:
   hash: f6e3909c92e835a72d5bcf43b0ee149b84077e2df236ab45a076b48186a89a86
-  by: 'W. C. Jagy, I. Kaplansky and A. Schiemann, There are 913 regular ternary forms,
-    Mathematika 44 (1997), 332-341, form 398, as tabulated in A. G. Doyle, B. Muskat,
-    K. Pehlivan and K. S. Williams, Positive integers represented by regular primitive
-    positive-definite integral ternary quadratic forms, Integers 19 (2019), #A45,
-    Tables 1 and 2; regular by W. C. Jagy, I. Kaplansky and A. Schiemann, There are
-    913 regular ternary forms, Mathematika 44 (1997), 332-341.'
+  by: research preamble
 3I57 definite.siegel_eisenstein_coefficients:
   hash: ff66d08a979ca9f29681c6db26dbb3905cb0ebc76be1cf939696733f5a9cd92a
   by: research preamble
 3I57 definite.spinor_regular:
   hash: c844061d9e0b14adb82d85c02044cfe44b60d82f4073b5db6245fc706de1ceff
-  by: 'W. C. Jagy, I. Kaplansky and A. Schiemann, There are 913 regular ternary forms,
-    Mathematika 44 (1997), 332-341, form 398, as tabulated in A. G. Doyle, B. Muskat,
-    K. Pehlivan and K. S. Williams, Positive integers represented by regular primitive
-    positive-definite integral ternary quadratic forms, Integers 19 (2019), #A45,
-    Tables 1 and 2; regular by W. C. Jagy, I. Kaplansky and A. Schiemann, There are
-    913 regular ternary forms, Mathematika 44 (1997), 332-341; hence spinor regular,
-    since a form is spinor regular if it represents all the positive integers represented
-    by its spinor genus (A. G. Earnest and A. Haensch, Completeness of the list of
-    spinor regular ternary quadratic forms, arXiv:1711.05811v2 (2018), Abstract) and
-    the spinor genus lies in the genus.'
+  by: research preamble
 3I57 definite.theta_series_cuspidal_component:
   hash: 6d95416275952d9f8fb6903f5605725daef2db1cf30fe7f696302e8db58dec27
   by: research preamble
@@ -26441,6 +26430,9 @@
   by: research preamble
 3I57 integral.anisotropic_primes:
   hash: f08e8e040524f4121f0b97462ca34699cabd6de6765c297784e613afd1868fbe
+  by: research preamble
+3I57 integral.discriminant_sequence:
+  hash: 03c66fae39da47621898e6740295d53ae61c9ade785b97939b78ec5e4d6de361
   by: research preamble
 3I57 integral.elementary_primes:
   hash: d1e9caf51611978e90ca5f8e899cdf274b407f2e333bac89f9864c171eb0222b
