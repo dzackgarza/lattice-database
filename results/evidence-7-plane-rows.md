@@ -378,3 +378,49 @@ time in every case. Same row, same machine, different tenant load.
 the theorem, neither computed here), `planes` on `SOtilde+` (unreachable: its character quotient
 alone does not return), and `plane_orbits` and `flag_orbits` on the two group cards. `SOtilde` is now
 the row worth one attempt in a quiet window, being the same walk that just returned.
+
+## The lemma behind the four kernel plane counts, decided on this card (2026-11-19)
+
+**Lemma.** Let `K = ker rho_{T_Co}`. For every primitive isotropic plane `P` of `T_Co` the stabilizer
+of `P` in `K` maps onto `{±1}²` under `(det, sn_R)`. Hence `K`, `K ∩ SO`, `K ∩ O⁺` and `K ∩ SO⁺`
+have the same orbits of primitive isotropic planes, and the four kernel rows of
+`integral.primitive_orbits` have one plane count between them.
+
+**Sources, by printed page.**
+
+- D. Dolgachev, S. Kondō, *The rationality of the moduli spaces of Coble surfaces and of nodal
+  Enriques surfaces*, Izv. Math. **77**:3 (2013): §2, printed p. 510 — the conventions (the lattice,
+  its signature, the discriminant kernel $\widetilde O$); §3 eq. (3.6) with Proposition 3.2, printed
+  p. 513 — `N = ⟨2⟩ ⊕ E(2)` and the moduli space.
+- D. Dutour Sikirić, K. Hulek, *Moduli of polarised Enriques surfaces — computational aspects*,
+  J. London Math. Soc. **110** (2024), arXiv:2302.01679, Lemma 3.6, printed p. 22 — the double-coset
+  reduction through the finite image, which is what lets a character kernel's orbits be read as the
+  ambient orbit's split.
+- The two sign pairs are the ones research's `cor:coble-eight-standard-line-counts` proof exhibits for
+  the line case; this is the plane case of the same character argument.
+
+**The check.** `results/verify-7-plane-sign-witnesses.py`, on `lattices/6JRR.md`'s stored Gram tensor
+at sage-extensions `0bbf022b6b`, with the owner's own membership predicates for every subgroup:
+
+| witness (card's basis) | fixes the standard plane | `O` | `SO` | `O⁺` | `Õ = K` | `SÕ` | `Õ⁺` |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| negate ⟨2⟩ | yes | ✓ | – | – | ✓ | – | – |
+| negate `U(2)` | yes | ✓ | ✓ | – | ✓ | ✓ | – |
+| negate `E8(−2)` | yes | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
+
+All three are diagonal with ±1 entries, so each fixes the hyperbolic block's span as a set; each is
+in `Õ`, so each lies in the stabilizer inside `K` of that plane. Their character pairs are
+`(−1,−1)`, `(+1,−1)` and `(+1,+1)`, and `(−1,−1)·(+1,−1) = (−1,+1)`, so the three generate all four
+pairs — inside `K ∩ Stab(P₀)` for the standard plane `P₀`.
+
+**Why that is every plane and not one.** `O(T_Co)` is transitive on the primitive isotropic planes of
+`T_Co`, which this card's own computation returns as the ambient row `O.planes = 1` (208.4 s on the
+stored Gram). For any plane `P` pick `g ∈ O(T_Co)` with `gP₀ = P`; then
+`g K g⁻¹ = K` and `g Stab_K(P₀) g⁻¹ = Stab_K(P)`, so the conjugated witnesses exhibit the same four
+pairs at `P`.
+
+**What it settles and what it does not.** It settles that the four kernel rows have one plane count
+between them, so `SOtilde`'s walk, when it runs, must return `Otilde+`'s 189720 — and it explains why
+the card's `SOtilde+` row can stay empty for a reason that is not the arithmetic (its character
+quotient does not build here) while the count itself is not in doubt. It does not put a value on any
+row: a card states what its own computation returned, and only `Otilde+`'s walk has returned.
