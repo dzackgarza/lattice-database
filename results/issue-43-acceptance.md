@@ -161,6 +161,12 @@ Each cusp has square $0$ and each class square $-2$ in card 6JRR's Gram tensor, 
 decided rows of the table above are now rows in the card's own coordinates, $\mathrm{orbit\_count} = 1$ with one class
 each, and nothing but the key is missing.
 
+The rows are also pinned where the corpus can check them: `tests/test_cusp_root_orbits.py` holds these coordinates as
+`COBLE_CUSPS` and `test_the_coble_cusps_rows_are_admissible_values_of_the_field` states them on card 6JRR and asks
+`records.local_admission_problems` for a verdict — every cusp isotropic, every class in its cusp's perpendicular of
+square $-2$ — so the arithmetic of the row cannot be what stops the storage when the key is decided. The fixture holds
+them under a standard subgroup, which is a test's device and not a claim about which group the card must name.
+
 ### The index is infinite, so no card can state one
 
 The two constructions above answer no exact index because there is no finite one to answer. $T_{\mathrm{Co}} =
