@@ -1314,7 +1314,10 @@ def test_a_stated_arithmetic_group_value_without_its_computation_is_a_verificati
     problems = checks.records.problems(corpus.load(root), {}, frozenset({"6JRR"}))
     assert any("arithmetic group otilde-t-co: the stated index_in_orthogonal_group" in problem for problem in problems), problems
     held = certify_index(root, "otilde-t-co", 46998591897600)
-    assert not any("arithmetic group otilde-t-co:" in problem for problem in checks.records.problems(corpus.load(root), held, frozenset({"6JRR"})))
+    # The fixture copies the card and its group cards but none of the certificate shard, so every other certified
+    # field of the card is unreported here by construction; the index is what this test certifies.
+    remaining = checks.records.problems(corpus.load(root), held, frozenset({"6JRR"}))
+    assert not any("arithmetic group otilde-t-co: the stated index_in_orthogonal_group" in problem for problem in remaining), remaining
 
 
 def test_the_arithmetic_group_index_is_the_order_of_the_finite_character_image() -> None:
