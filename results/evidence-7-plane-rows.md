@@ -200,3 +200,37 @@ follow-up is `just retry-computation 6JRR '<computation>' --note '<why>'` and a 
 the same run. `results/certify-fields-input.patch` is the finer option — a `fields` input that the
 workflow passes as `--field` — and it needs the workflows permission this connection does not have,
 so it is a patch and not a change.
+
+## The two sign-kernel rows and the two determinant-kernel rows (2026-11-19)
+
+`certify --tag 6JRR --field 'primitive_orbits[SO].planes' --field 'primitive_orbits[O+].planes'
+--field 'primitive_orbits[SO+].planes' --phase fields --workers 1`, `--minutes 45`, image run of this
+turn at sage-extensions `0bbf022b6b`, exit 1:
+
+| row | outcome | the call |
+| --- | --- | --- |
+| `O+` | **1**, stored | `L.O_plus().cusps(2).cardinality()` |
+| `SO` | refused by the owner | `L.SO().cusps(2).cardinality()` raises `ValueError` at `orthogonal_quotients.py:4237` |
+| `SO+` | refused by the owner | `(L.O_plus() & SO()).cusps(2).cardinality()` raises the same |
+
+So `integral.primitive_orbits` on `6JRR` now states `planes` on two rows, `O` and `O+`, both 1, under
+field certificate `f0a9d428…` (superseding `15dcbad2…`). The two refusals are in `failures/e1.yaml`
+with the owner's traceback, so neither a dispatch nor a nightly asks them again; the finding and the
+repair it suggests are in `results/issue-286-so-plane-row-refusal.md`.
+
+The cause is one guard, and it is the owner's: `_plane_orbit_from_odd_stabilizer` is admitted only
+for `spinor_kernel and not determinant_kernel and not _has_discriminant`, so `O+` is decided by a
+one-witness route and `SO`/`SO+` fall through to `_plane_orbit_from_parabolic_stabilizer`, which
+refuses every sign-only subgroup. `SO` is `O+`'s mirror and the same one-witness answer is available
+to it from the determinant image.
+
+**The queue a `tags=6JRR` dispatch asks now** (the two refusals quarantined, so skipped):
+
+```
+primitive_orbits[Otilde].planes   primitive_orbits[Otilde+].planes
+primitive_orbits[SOtilde].planes  primitive_orbits[SOtilde+].planes
+arithmetic-group.otilde-t-co.{line,plane,flag}_orbits
+arithmetic-group.otilde-plus-t-co.{line,plane,flag}_orbits
+```
+
+four kernel plane walks and two kernel incidence walks, against the same 330-minute budget.

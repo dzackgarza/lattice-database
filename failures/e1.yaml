@@ -11005,6 +11005,140 @@
     finite character image (|chi(O(L))|/|chi(Gamma)| = |O(A_L,q)| = 46998591897600)
     instead of enumerating the 46998591897600-element coset space that exhausted 14.1
     GiB; recomputing.'
+6JRR integral.discriminant_sequence:
+  disposition: open
+  attempts:
+  - hash: 392c9e82c3f26a624b6f51590436c2e557dc0a3c6ea7a0504585295b9ef8fff9
+    gram_tensor:
+    - - 2
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+    - - 0
+      - 0
+      - 2
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+    - - 0
+      - 2
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+    - - 0
+      - 0
+      - 0
+      - -4
+      - 0
+      - 2
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+    - - 0
+      - 0
+      - 0
+      - 0
+      - -4
+      - 0
+      - 2
+      - 0
+      - 0
+      - 0
+      - 0
+    - - 0
+      - 0
+      - 0
+      - 2
+      - 0
+      - -4
+      - 2
+      - 0
+      - 0
+      - 0
+      - 0
+    - - 0
+      - 0
+      - 0
+      - 0
+      - 2
+      - 2
+      - -4
+      - 2
+      - 0
+      - 0
+      - 0
+    - - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 2
+      - -4
+      - 2
+      - 0
+      - 0
+    - - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 2
+      - -4
+      - 2
+      - 0
+    - - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 2
+      - -4
+      - 2
+    - - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 2
+      - -4
+    reason: worker or runner lost (recovered from exceeded.yaml)
+    stderr: ''
+    seconds: 6578.0
+    recorded_at: 2026-11-19 02:40:26.793184+00:00
+    run_url: null
+    database_revision: null
+    research_revision: null
+  notes: []
 6JRR integral.overlattice_count:
   disposition: open
   attempts:
@@ -12183,6 +12317,173 @@
   - '2026-11-17T19:12:44.378650+00:00: the first row dispatch passed the (field, row)
     pair where the row belonged, so the worker raised before computing; fixed in the
     driver and re-run'
+6JRR integral.primitive_orbits[SO+].planes:
+  disposition: open
+  attempts:
+  - hash: 20170bb11f36ea26ac35b8841151d5961ad6bfc6ba32f579e55ffcb99a7a7a74
+    gram_tensor:
+    - - 2
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+    - - 0
+      - 0
+      - 2
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+    - - 0
+      - 2
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+    - - 0
+      - 0
+      - 0
+      - -4
+      - 0
+      - 2
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+    - - 0
+      - 0
+      - 0
+      - 0
+      - -4
+      - 0
+      - 2
+      - 0
+      - 0
+      - 0
+      - 0
+    - - 0
+      - 0
+      - 0
+      - 2
+      - 0
+      - -4
+      - 2
+      - 0
+      - 0
+      - 0
+      - 0
+    - - 0
+      - 0
+      - 0
+      - 0
+      - 2
+      - 2
+      - -4
+      - 2
+      - 0
+      - 0
+      - 0
+    - - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 2
+      - -4
+      - 2
+      - 0
+      - 0
+    - - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 2
+      - -4
+      - 2
+      - 0
+    - - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 2
+      - -4
+      - 2
+    - - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 2
+      - -4
+    reason: exit status 1
+    stderr: "Traceback (most recent call last):\n  File \"sage/misc/cachefunc.pyx\",
+      line 1965, in sage.misc.cachefunc.CachedMethodCaller.__call__\n    return cache[k]\nKeyError:
+      ((2,), ())\n\nDuring handling of the above exception, another exception occurred:\n\nTraceback
+      (most recent call last):\n  File \"<frozen runpy>\", line 203, in _run_module_as_main\n
+      \ File \"<frozen runpy>\", line 88, in _run_code\n  File \"/work/src/latticedb/sage_genus.py\",
+      line 531, in <module>\n    main()\n    ~~~~^^\n  File \"/work/src/latticedb/sage_genus.py\",
+      line 526, in main\n    _compute(request)\n    ~~~~~~~~^^^^^^^^^\n  File \"/work/src/latticedb/sage_genus.py\",
+      line 509, in _compute\n    _run(tag, [field], lambda row=row, field=field, compute=compute:
+      {field: compute(lattice, row)})\n    ~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n
+      \ File \"/work/src/latticedb/sage_genus.py\", line 444, in _run\n    values
+      = compute()\n  File \"/work/src/latticedb/sage_genus.py\", line 509, in <lambda>\n
+      \   _run(tag, [field], lambda row=row, field=field, compute=compute: {field:
+      compute(lattice, row)})\n                                                                             ~~~~~~~^^^^^^^^^^^^^^\n
+      \ File \"/work/src/latticedb/sage_genus.py\", line 158, in _primitive_isotropic_plane_row\n
+      \   subgroup.cusps(2).cardinality(),\n    ~~~~~~~~~~~~~~^^^\n  File \"sage/misc/cachefunc.pyx\",
+      line 1970, in sage.misc.cachefunc.CachedMethodCaller.__call__\n    w = self._instance_call(*args,
+      **kwds)\n  File \"sage/misc/cachefunc.pyx\", line 1848, in sage.misc.cachefunc.CachedMethodCaller._instance_call\n
+      \   return self.f(self._instance, *args, **kwds)\n  File \"/repos/sage-extensions/src/sage_extensions/categories/group/predicate_subgroups.py\",
+      line 803, in cusps\n    return _distinct_finite_ordered_set(\n        _arithmetic_cusp(self,
+      representative)\n    ...<2 lines>...\n        )\n    )\n  File \"/repos/sage-extensions/src/sage_extensions/categories/sets/finite_ordered_sets.py\",
+      line 1119, in _distinct_finite_ordered_set\n    admitted = tuple(points)\n  File
+      \"/repos/sage-extensions/src/sage_extensions/categories/group/predicate_subgroups.py\",
+      line 805, in <genexpr>\n    for representative in _yield_subgroup_isotropic_orbit_representatives(\n
+      \                         ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^\n
+      \       self, rank\n        ^^^^^^^^^^\n    )\n    ^\n  File \"/repos/sage-extensions/src/sage_extensions/categories/orthogonal_quotients.py\",
+      line 4636, in _yield_subgroup_isotropic_orbit_representatives\n    from_parabolic
+      = _plane_orbit_from_parabolic_stabilizer(subgroup, representative)\n  File \"/repos/sage-extensions/src/sage_extensions/categories/orthogonal_quotients.py\",
+      line 4237, in _plane_orbit_from_parabolic_stabilizer\n    raise ValueError(\n
+      \   ...<4 lines>...\n    )\nValueError: the plane row of Integral lattice of
+      rank 2 and signature (0, 0) under {g in Orthogonal group O(Integral lattice
+      of rank 11 and signature (2, 9)) : g lies in every selected subgroup} cannot
+      be computed by the coset walk of the discriminant image: the subgroup cuts no
+      discriminant condition, or both a determinant and a spinor kernel at once, and
+      the walk's kernel-sign witness machinery lifts one sign coset only\n"
+    seconds: 122.26863085199147
+    recorded_at: 2026-11-19 02:45:04.054316+00:00
+    run_url: null
+    database_revision: null
+    research_revision: null
+  notes: []
 6JRR integral.primitive_orbits[SO]:
   disposition: resolved
   attempts:
@@ -12335,6 +12636,173 @@
   - '2026-11-17T19:12:34.434384+00:00: the first row dispatch passed the (field, row)
     pair where the row belonged, so the worker raised before computing; fixed in the
     driver and re-run'
+6JRR integral.primitive_orbits[SO].planes:
+  disposition: open
+  attempts:
+  - hash: ad6bd4632add66ef0942cddbc9471aa01d6887bb4869e0ead2547584851c9730
+    gram_tensor:
+    - - 2
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+    - - 0
+      - 0
+      - 2
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+    - - 0
+      - 2
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+    - - 0
+      - 0
+      - 0
+      - -4
+      - 0
+      - 2
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+    - - 0
+      - 0
+      - 0
+      - 0
+      - -4
+      - 0
+      - 2
+      - 0
+      - 0
+      - 0
+      - 0
+    - - 0
+      - 0
+      - 0
+      - 2
+      - 0
+      - -4
+      - 2
+      - 0
+      - 0
+      - 0
+      - 0
+    - - 0
+      - 0
+      - 0
+      - 0
+      - 2
+      - 2
+      - -4
+      - 2
+      - 0
+      - 0
+      - 0
+    - - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 2
+      - -4
+      - 2
+      - 0
+      - 0
+    - - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 2
+      - -4
+      - 2
+      - 0
+    - - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 2
+      - -4
+      - 2
+    - - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 2
+      - -4
+    reason: exit status 1
+    stderr: "Traceback (most recent call last):\n  File \"sage/misc/cachefunc.pyx\",
+      line 1965, in sage.misc.cachefunc.CachedMethodCaller.__call__\n    return cache[k]\nKeyError:
+      ((2,), ())\n\nDuring handling of the above exception, another exception occurred:\n\nTraceback
+      (most recent call last):\n  File \"<frozen runpy>\", line 203, in _run_module_as_main\n
+      \ File \"<frozen runpy>\", line 88, in _run_code\n  File \"/work/src/latticedb/sage_genus.py\",
+      line 531, in <module>\n    main()\n    ~~~~^^\n  File \"/work/src/latticedb/sage_genus.py\",
+      line 526, in main\n    _compute(request)\n    ~~~~~~~~^^^^^^^^^\n  File \"/work/src/latticedb/sage_genus.py\",
+      line 509, in _compute\n    _run(tag, [field], lambda row=row, field=field, compute=compute:
+      {field: compute(lattice, row)})\n    ~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n
+      \ File \"/work/src/latticedb/sage_genus.py\", line 444, in _run\n    values
+      = compute()\n  File \"/work/src/latticedb/sage_genus.py\", line 509, in <lambda>\n
+      \   _run(tag, [field], lambda row=row, field=field, compute=compute: {field:
+      compute(lattice, row)})\n                                                                             ~~~~~~~^^^^^^^^^^^^^^\n
+      \ File \"/work/src/latticedb/sage_genus.py\", line 158, in _primitive_isotropic_plane_row\n
+      \   subgroup.cusps(2).cardinality(),\n    ~~~~~~~~~~~~~~^^^\n  File \"sage/misc/cachefunc.pyx\",
+      line 1970, in sage.misc.cachefunc.CachedMethodCaller.__call__\n    w = self._instance_call(*args,
+      **kwds)\n  File \"sage/misc/cachefunc.pyx\", line 1848, in sage.misc.cachefunc.CachedMethodCaller._instance_call\n
+      \   return self.f(self._instance, *args, **kwds)\n  File \"/repos/sage-extensions/src/sage_extensions/categories/group/predicate_subgroups.py\",
+      line 803, in cusps\n    return _distinct_finite_ordered_set(\n        _arithmetic_cusp(self,
+      representative)\n    ...<2 lines>...\n        )\n    )\n  File \"/repos/sage-extensions/src/sage_extensions/categories/sets/finite_ordered_sets.py\",
+      line 1119, in _distinct_finite_ordered_set\n    admitted = tuple(points)\n  File
+      \"/repos/sage-extensions/src/sage_extensions/categories/group/predicate_subgroups.py\",
+      line 805, in <genexpr>\n    for representative in _yield_subgroup_isotropic_orbit_representatives(\n
+      \                         ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^\n
+      \       self, rank\n        ^^^^^^^^^^\n    )\n    ^\n  File \"/repos/sage-extensions/src/sage_extensions/categories/orthogonal_quotients.py\",
+      line 4636, in _yield_subgroup_isotropic_orbit_representatives\n    from_parabolic
+      = _plane_orbit_from_parabolic_stabilizer(subgroup, representative)\n  File \"/repos/sage-extensions/src/sage_extensions/categories/orthogonal_quotients.py\",
+      line 4237, in _plane_orbit_from_parabolic_stabilizer\n    raise ValueError(\n
+      \   ...<4 lines>...\n    )\nValueError: the plane row of Integral lattice of
+      rank 2 and signature (0, 0) under {g in Orthogonal group O(Integral lattice
+      of rank 11 and signature (2, 9)) : det(g)=1} cannot be computed by the coset
+      walk of the discriminant image: the subgroup cuts no discriminant condition,
+      or both a determinant and a spinor kernel at once, and the walk's kernel-sign
+      witness machinery lifts one sign coset only\n"
+    seconds: 10.672456245985813
+    recorded_at: 2026-11-19 02:42:50.648723+00:00
+    run_url: null
+    database_revision: null
+    research_revision: null
+  notes: []
 6JRR integral.primitive_orbits[SOtilde+]:
   disposition: resolved
   attempts:
