@@ -809,3 +809,25 @@ row on this host — the parabolic walk costs 1813–2171 s at 3.3–3.5 GiB and
 the run's 1676462899 B reserve floor — and `SOtilde+`'s character quotient does not build at all
 (594 s, killed). That is `results/issue-draft-7-kernel-rows-without-record.md`, re-scoped from values
 to routes. Scoped checks on 6JRR: records 0, relations 0.
+
+## The affected cards verified again, on the current content (2026-11-19)
+
+A review of `b54cc004aafe` correctly found the earlier verify run (`--shard 1/16` at `a79c8b5a1b`)
+stale: it predated the plane and incidence values, the third group card, and the `#49` hash
+recomputation. This is the run on the current content, at repository revision `ff6f781895`:
+
+```
+latticedb verify --shard 33/64
+memory: 2.0 GiB peak for 4810 cards in shard 33/64
+lattices/3ICR.md: definite.regular contradicts its completed computation certificate
+```
+
+`6JRR` falls in shard `33` of `64` (`certificates.tag_hash("6JRR") % 64 == 33`), so the run covers
+`lattices/6JRR.md`, all three of its arithmetic-group cards — `otilde-t-co`, `otilde-plus-t-co` and
+`gamma-co-2` — and every card they name, through `records.duplicate_gram_problems`,
+`records.problems`, `relations.problems` and `catalogues.problems`. It reports **no problem on any of
+the four cards**; its single problem is `3ICR`'s `definite.regular`, which is another stream's.
+
+The shard is `33/64` rather than `1/16` because the `1/16` shard was killed for memory on this VM at
+2.5 GiB available — 18910 cards peak near 3.6 GiB — while `1/64` holds 4810 cards at a 2.0 GiB peak
+and contains the same closure. The shard's own redness is `3ICR`'s and is not this issue's.
