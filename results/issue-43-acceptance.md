@@ -84,7 +84,7 @@ to another, so its count lies between 1 and 3.
 The card the decision requires now exists (below), so the only thing left on this row is the orbit decision itself, and
 both routes to it have now been measured and both fail:
 `results/probe-43-coble-cusp5-equivalence.py` asks $\Gamma_{\mathrm{En},2}$ for an exact witness carrying $\alpha_{12}$
-to $\alpha_{13}$, $\alpha_{12}$ to $\alpha_{14}$ and $\alpha_{13}$ to $\alpha_{14}$, each bounded at 300 s, and every
+to $\alpha_{13}$, $\alpha_{12}$ to $\alpha_{14}$ and $\alpha_{13}$ to $\alpha_{14}$, each bounded at 300 s — and the two pairs with $\alpha_{12}$ retried at 1500 s each on a later library main — and every
 call is killed inside `_double_coset_adjustment`
 (`orthogonal_quotients.py:234`, the `libgap.DoubleCoset` membership) exactly as at (4.3.8) — so the owner's equivalence
 does not return at a Coble cusp any more than at an Enriques one. And the constructive route merges nothing
