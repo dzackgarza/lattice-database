@@ -986,10 +986,6 @@
   hash: 2db418f17fe06a4467cff018e78b69eed7c9c9c8387f6e9de60c4a616ca6fc1c
   seconds: 5
   lost: true
-3G19 integral.discriminant_sequence:
-  hash: 06c75b153f170d4257d8bbdaac7f9c5ba048ef2373883b0e3c4daef431451326
-  seconds: 2553
-  lost: true
 3G19 integral.overlattice_count:
   hash: 85dd3c9eeaaf9ed6fc3f16d83ae0ec9ab30091e8fdc6b8a60b9112c7bad9e76b
   seconds: 11
@@ -1006,9 +1002,6 @@
   hash: e24fd77ac5a892c1b1c1007b498edfbddf61a344ea67b0f93576a4eea8f0b3f8
   seconds: 12
   lost: true
-3G4A integral.discriminant_sequence:
-  hash: 6f4c7c89b3c826b631b4ff1a613cdf4b6849a5566ce77843191afa00b2d5723e
-  seconds: 41
 3G4B integral.overlattice_count:
   hash: 7478913d16a759e4acf4265ed2c613ff3be21397e3dc8ab82c11b27914e18efb
   seconds: 3
@@ -1070,7 +1063,7 @@
   lost: true
 3GFX integral.discriminant_sequence:
   hash: 4155cb3c411bdf6c9ac3d0c8d356d13dcf6991f12731ad50c3aa62577fcde782
-  seconds: 1597
+  seconds: 3400
   lost: true
 3GO8 integral.overlattice_count:
   hash: 73f92e88dc3c41f09fe3d704e2bb6eec69c13383e23ff0521b2c623891c8c865
