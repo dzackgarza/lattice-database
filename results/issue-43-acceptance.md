@@ -29,7 +29,25 @@ one root wall to another carries its class in $K_J$ to the other's. The symmetry
 tensor by `results/store-43-cusp-orbits.py` and re-asserted from the shipped card by
 `tests/test_cusp_root_orbits.py:153`; the counts are read back at `tests/test_cusp_root_orbits.py:126`.
 
-## 2. The repository's gate passes — met, as far as this repository can be run here
+## 2. The gate: the certification selection, measured
+
+The acceptance clause names the gate, and the review measured it on a queued `verify` and a failing
+`Certification regression tests` run. Two causes of that failure were found and repaired: the fixture at
+`tests/test_genus.py:1319`, and `checks.records.duplicate_gram_problems`' fallback, which saw only the shard's closure
+and so missed a duplicate Gram tensor whose cards sat in different shards (`src/latticedb/checks/records.py`).
+
+On `6723df729b`, running the workflow's own selection (`.github/workflows/certification-tests.yml:39`) in this VM:
+
+| file | result |
+| --- | --- |
+| `tests/test_genus.py` | **57 passed in 194.96 s** |
+| `tests/test_failures.py` | 9 passed in 25.43 s |
+| `tests/test_persist.py` | 5 passed in 18.84 s |
+| `tests/test_corpus.py` | the first twenty tests pass (the file previously failed at its fourteenth); its last test ends the process without a summary here, so the file as a whole is unverified in this VM |
+
+So the certification selection is no longer a known failure of this issue's making; what remains is CI's verdict on a
+head that carries the repairs. The `verify` shards are likewise CI's — measured here on the shards that fit (4,752 cards,
+1.0 GiB, 0 problems), not corpus-wide.
 
 `latticedb verify` could not complete in this environment at all before this issue's last turns: `checks.one_shard`
 read the whole corpus and every certificate (7.29 + 9.08 GiB on a 15 GB VM). It now reads a shard's closure —
