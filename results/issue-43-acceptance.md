@@ -43,7 +43,7 @@ On `6723df729b`, running the workflow's own selection (`.github/workflows/certif
 | `tests/test_genus.py` | **57 passed in 194.96 s** |
 | `tests/test_failures.py` | 9 passed in 25.43 s |
 | `tests/test_persist.py` | 5 passed in 18.84 s |
-| `tests/test_corpus.py` | the first twenty tests pass (the file previously failed at its fourteenth); its last test ends the process without a summary here, so the file as a whole is unverified in this VM |
+| `tests/test_corpus.py` | **exit 0 in 5 min 06 s** — every test in the file passed; its summary line did not survive the wrapper, but pytest's exit status is 0 only with no failures. The file previously failed at its fourteenth test |
 
 So the certification selection is no longer a known failure of this issue's making; what remains is CI's verdict on a
 head that carries the repairs. The `verify` shards are likewise CI's — measured here on the shards that fit (4,752 cards,
