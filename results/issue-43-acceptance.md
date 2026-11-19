@@ -106,7 +106,8 @@ stabilizes.
 
 Two decisions and one computation would close the item, and none of them is this repository's:
 
-1. **the key** — either a published definition of
+1. **the key** — two of the three rows below need nothing else, their count being one whatever the group is. Either a
+   published definition of
    $\Gamma_{\mathrm{Co},2} = \mathrm{Stab}_{O(T_{\mathrm{En}})}(T_{\mathrm{Co}})$ to cite, so the card can be
    authored as `otilde-plus-t-co` was, or a decision to author it from the project's draft (which the standing decision
    on this issue excludes), or a decision that the row's group is one of the eight standard subgroups and the row is
@@ -117,6 +118,26 @@ Two decisions and one computation would close the item, and none of them is this
    return at a vector generates the stabilizer;
 3. **the (4.3.9) count** — the owner's class-level equivalence returning at a Coble cusp, without which the three
    root classes there lie between one orbit and three.
+
+### Two of the three rows are decided; the third is not, measured
+
+`results/probe-43-coble-classes.py` asks the row's question at each of the three T_Co cusps with the family the owner
+does return. Since $\Gamma_{\mathrm{Co},2} = \mathrm{Stab}_{O(T_{\mathrm{En}})}(T_{\mathrm{Co}}) \cap
+\Gamma_{\mathrm{En},2}$ and $T_{\mathrm{Co}} = \delta^\perp$, a generator of the Enriques cusp stabilizer that
+carries $\delta$ to $\pm\delta$ lies in $\Gamma_{\mathrm{Co},2}$ and fixes the cusp, so a class it carries to
+another is a proof of one orbit:
+
+| cusp | statement | walls | walls in $T_{\mathrm{Co}}$ of square $-2$ | of the cusp stabilizer's family, those preserving $T_{\mathrm{Co}}$ | merges | verdict |
+| --- | --- | --- | --- | --- | --- | --- |
+| 3 | (4.3.7), p. 22 | 12 | 1 ($\alpha_{13}$) | 22 of 26 | — | **one orbit**, one class |
+| 4 | (4.3.8), p. 23 | 11 | 1 ($\alpha_{11}$) | 9 of 28 | — | **one orbit**, one class |
+| 5 | (4.3.9), p. 24 | 14 | 3 ($\alpha_{12}$, $\alpha_{13}$, $\alpha_{14}$) | 22 of 27 | none found | undecided, between 1 and 3 |
+
+So two of the three rows carry a decided count of $1$ — not by any group's action but because a one-class family has
+one orbit whatever the group is, the same reason the (4.3.6) row of 029J is decided. What keeps them off the card is
+only the key. The third row is undecided: the elements of $\Gamma_{\mathrm{En},2}$'s cusp stabilizer that this
+repository can construct and that preserve $T_{\mathrm{Co}}$ carry no class to another, and a non-merge is not a proof
+of inequivalence.
 
 ### The index is infinite, so no card can state one
 
