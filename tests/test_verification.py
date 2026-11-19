@@ -95,3 +95,80 @@ def test_a_shard_reports_the_problems_of_its_own_cards_only(tmp_path: Path) -> N
     # with nothing to report returns none of them.
     assert checks.run(tmp_path, (1 - mine, 2))[1] == []
     assert checks.run(tmp_path, (mine, 2))[0] == 1
+
+
+def write_named_card(root: Path, tag: str, fields: dict[str, Yaml]) -> Path:
+    """A card of `tag`, in a corpus that already has `families.yaml` and `retired-tags.yaml`."""
+    (root / "lattices").mkdir(exist_ok=True)
+    (root / corpus.FAMILIES_FILE).write_text("{}\n") if not (root / corpus.FAMILIES_FILE).exists() else None
+    (root / corpus.RETIRED_FILE).write_text("{}\n") if not (root / corpus.RETIRED_FILE).exists() else None
+    path = root / "lattices" / f"{tag}.md"
+    path.write_text(records.record_text({"tag": tag, "name": f"Card {tag}", "latex": tag, **fields}, "A source claim."))
+    return path
+
+
+SHARDING = (0, 2)
+"""Two shards, so that a fixture can put a card and the card it names on different sides."""
+
+
+def in_shard(tag: str, shard: tuple[int, int]) -> bool:
+    from latticedb import genus
+
+    return genus.in_shard(tag, shard)
+
+
+def test_a_shard_reads_the_cards_its_own_cards_name(tmp_path: Path) -> None:
+    """#6: the narrowed read is closed under naming, so a reference is never read as an absent card."""
+    plain = {"rank": 1, "gram_tensor": [[2]], "integral": {"parity": "even"}}
+    write_named_card(
+        tmp_path, "0001", {**plain, "morphisms": [{"target": "0002", "name": "identity", "scale": 1, "matrix": [[1]]}]}
+    )
+    write_named_card(tmp_path, "0002", plain)
+    tags = frozenset(corpus.tags(tmp_path))
+    shard = next(s for s in (SHARDING, (1, 2)) if in_shard("0001", s))
+    closure = checks.shard_closure(tmp_path, tags, ("0001",))
+    assert "0002" in closure, closure
+    loaded = corpus.load(tmp_path, tags=closure)
+    assert {entry.lattice.tag for entry in loaded.entries} == set(closure)
+    problems = checks.one_shard(tmp_path, shard)[1]
+    assert not any("is not in the corpus" in problem for problem in problems), problems
+
+
+def test_a_related_tag_outside_the_read_is_read_from_the_cards_on_disk(tmp_path: Path) -> None:
+    """A card may be related to thousands, so a related tag is checked against the corpus, not against the read."""
+    plain = {"rank": 1, "gram_tensor": [[2]], "integral": {"parity": "even"}}
+    write_named_card(tmp_path, "0001", {**plain, "related": [{"tag": "0002", "relation": "the same form at scale two"}]})
+    write_named_card(tmp_path, "0002", {**plain, "gram_tensor": [[4]]})
+    tags = frozenset(corpus.tags(tmp_path))
+    closure = checks.shard_closure(tmp_path, tags, ("0001",))
+    assert "0002" not in closure, "a related tag is not read for its model"
+    shard = next(s for s in (SHARDING, (1, 2)) if in_shard("0001", s))
+    problems = checks.one_shard(tmp_path, shard)[1]
+    assert not any("related tag 0002 is not in the corpus" in problem for problem in problems), problems
+    write_named_card(tmp_path, "0003", plain)
+    (tmp_path / "lattices" / "0002.md").unlink()
+    (tmp_path / "retired-tags.yaml").write_text("{}\n")
+    problems = checks.one_shard(tmp_path, shard)[1]
+    assert any("related tag 0002 is not in the corpus" in problem for problem in problems), problems
+
+
+def test_a_duplicate_gram_tensor_is_reported_across_shards_from_the_index(tmp_path: Path) -> None:
+    """The one corpus-wide check a narrowed read would lose is read from the durable index instead."""
+    plain = {"rank": 1, "gram_tensor": [[2]], "integral": {"parity": "even"}}
+    write_named_card(tmp_path, "0001", plain)
+    write_named_card(tmp_path, "0002", plain)
+    loaded = corpus.load(tmp_path)
+    assert checks.records.duplicate_gram_problems(tmp_path, loaded, frozenset({"0001"})) == [
+        "cards 0001, 0002 state one Gram tensor; a lattice has one card"
+    ]
+    assert checks.records.duplicate_gram_problems(tmp_path, loaded, frozenset({"0003"})) == []
+    # A read-only check may not build or repair the index, and the fallback is the cards it was given.
+    assert corpus.stored_gram_index(tmp_path) is None or isinstance(corpus.stored_gram_index(tmp_path), dict)
+    index = tmp_path / "gram-index.json"
+    if index.exists():
+        index.unlink()
+    assert corpus.stored_gram_index(tmp_path) is None
+    assert checks.records.duplicate_gram_problems(tmp_path, loaded, frozenset({"0001"})) == [
+        "cards 0001, 0002 state one Gram tensor; a lattice has one card"
+    ]
+    assert not index.exists(), "a verification check wrote the durable index"

@@ -59,18 +59,114 @@ def run(root: Path, shard: tuple[int, int] | None = None) -> tuple[int, list[str
     return verified, list(found)
 
 
+PROSE_KEYS = frozenset(
+    {
+        "references",
+        "certifications",
+        "aliases",
+        "name",
+        "latex",
+        "citation",
+        "abstract_structure",
+        "description",
+        "statement",
+        "note",
+        "related",
+    }
+)
+"""The fields of a front matter whose strings are prose, a hash or a name, and never a tag, and `related`, which is
+read without the other card: a card may be related to thousands and the check is only that each tag is a card.
+
+A citation prints years and theorem numbers, and a tag is four characters from `0-9A-Z`, so reading a citation as a
+reference would drag a card in for every numeral that happens to be a tag. Everything else is read as data, so a field
+the schemas add later is read too: over-reading a card into a shard costs its memory, and under-reading it would make
+its absence read as a reference problem.
+"""
+
+
+def referenced_tags(metadata: dict[str, object], tags: frozenset[str]) -> frozenset[str]:
+    """Every lattice tag a record's front matter names, in any field but the prose ones."""
+    found: set[str] = set()
+    stack: list[object] = [metadata]
+    while stack:
+        value = stack.pop()
+        if isinstance(value, str):
+            if value in tags:
+                found.add(value)
+        elif isinstance(value, dict):
+            stack.extend(item for key, item in value.items() if key not in PROSE_KEYS)
+        elif isinstance(value, (list, tuple)):
+            stack.extend(value)
+    return frozenset(found)
+
+
+CATALOGUE_DIRECTORIES = (
+    "arithmetic-groups",
+    "geometric-objects",
+    "geometric-families",
+    "graphs",
+    "genera",
+    "lattice-polytopes",
+    "toric-varieties",
+    "geometric-maps",
+    "integral-local-systems",
+    "picard-fuchs-operators",
+    "moduli-problems",
+    "lattice-families",
+    "lie-groups",
+)
+"""Every catalogue `corpus.load` reads, in the order it reads them: each is read whole in every shard."""
+
+
+def shard_closure(root: Path, tags: frozenset[str], cards: tuple[str, ...]) -> tuple[str, ...]:
+    """Every card a shard's checks read: its own, and what they and the catalogues name, transitively.
+
+    The checks compare records with the records they name, so a narrowed read has to be closed under naming or the
+    absence of a named card reads as a reference problem. The catalogues are read whole in every shard and name the
+    lattices they belong to (`arithmetic-groups/`, `geometric-objects/`, `graphs/`, `lattice-families/`), so their
+    targets are part of the closure of every shard; a card's own references are read from its front matter, which is
+    the same read `corpus.tags` makes. The closure is transitive: a named card naming a third one is loaded, and its
+    own references are then checked by this shard as well, harmlessly and in every shard that reads it.
+    """
+    reached = set(cards)
+    frontier = list(cards)
+    for directory in CATALOGUE_DIRECTORIES:
+        for path in sorted((root / directory).glob("*.md")):
+            reached |= referenced_tags(corpus.front_matter(corpus.read_card(path)), tags)
+    while frontier:
+        tag = frontier.pop()
+        path = root / "lattices" / f"{tag}.md"
+        if not path.exists():
+            continue
+        for named in referenced_tags(corpus.front_matter(corpus.read_card(path)), tags):
+            if named not in reached:
+                reached.add(named)
+                frontier.append(named)
+    return tuple(sorted(reached & tags))
+
+
 def one_shard(root: Path, shard: tuple[int, int]) -> tuple[int, list[str]]:
-    """Verify the cards whose tag falls in `shard` of the corpus, in this process."""
-    loaded = corpus.load(root)
-    held = certificates.load(root)
-    cards = frozenset(entry.lattice.tag for entry in loaded.entries if genus.in_shard(entry.lattice.tag, shard))
+    """Verify the cards whose tag falls in `shard` of the corpus, in this process.
+
+    The read is the shard's closure (`shard_closure`) rather than the corpus: those cards, the cards they and the
+    catalogues name, and the certificates of those tags. What the union of the shards therefore checks is what one
+    corpus-wide run checks, with two exceptions stated here rather than silently lost: a duplicate *Gram tensor* is
+    still corpus-wide, read from the durable index (`records.duplicate_gram_problems`), while a duplicate *name* and
+    a `hyperbolic_index` bound a morphism of another shard's card would supply are seen only within a shard's closure.
+    """
+    tags = frozenset(corpus.tags(root))
+    cards = tuple(sorted(tag for tag in tags if genus.in_shard(tag, shard)))
+    closure = shard_closure(root, tags, cards)
+    loaded = corpus.load(root, tags=closure)
+    held = certificates.load(root, tags=closure)
+    selected = frozenset(cards)
     problems = [
-        *records.shared_gram_problems(loaded),
-        *records.problems(loaded, held, cards),
-        *relations.problems(loaded, root, cards),
+        *records.duplicate_gram_problems(root, loaded, selected),
+        *records.problems(loaded, held, selected),
+        *relations.problems(loaded, root, selected, tags),
         *catalogues.problems(loaded),
     ]
-    return len(cards), problems
+    return len(selected), problems
 
 
 def in_its_own_process(root: Path, index: int, count: int) -> tuple[int, list[str]]:

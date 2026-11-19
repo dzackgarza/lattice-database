@@ -2,6 +2,8 @@
 
 from __future__ import annotations
 
+from pathlib import Path
+
 import frontmatter
 
 from latticedb import certificates, corpus, genus, records
@@ -9,13 +11,41 @@ from latticedb.certificates import Certificates
 from latticedb.corpus import Corpus
 
 
-def shared_gram_problems(loaded: Corpus) -> list[str]:
+def duplicate_gram_messages(index: dict[str, list[str]], cards: frozenset[str] | None = None) -> list[str]:
+    """One problem per group of tags stating one Gram tensor, for the groups a card of `cards` belongs to."""
+    return [
+        f"cards {', '.join(sorted(tags))} state one Gram tensor; a lattice has one card"
+        for tags in index.values()
+        if len(tags) > 1 and (cards is None or not cards.isdisjoint(tags))
+    ]
+
+
+def shared_gram_problems(loaded: Corpus, cards: frozenset[str] | None = None) -> list[str]:
     """One problem per Gram tensor stated by more than one card.
 
     A Gram tensor determines its lattice, so two cards stating one tensor
     record one lattice twice.
     """
-    return [f"cards {', '.join(tags)} state one Gram tensor; a lattice has one card" for tags in corpus.duplicate_grams(loaded.entries).values()]
+    index = {corpus.gram_key(entry.lattice.gram_tensor): [] for entry in loaded.entries if entry.lattice.gram_tensor is not None}
+    for entry in loaded.entries:
+        if entry.lattice.gram_tensor is not None:
+            index[corpus.gram_key(entry.lattice.gram_tensor)].append(entry.lattice.tag)
+    return duplicate_gram_messages(index, cards)
+
+
+def duplicate_gram_problems(root: Path, loaded: Corpus, cards: frozenset[str] | None = None) -> list[str]:
+    """One problem per Gram tensor stated by more than one card, from the durable index when it covers the corpus.
+
+    `corpus.stored_gram_index` states every card's tensor without loading the cards and without writing, so a shard of
+    `latticedb verify` keeps the corpus-wide check its narrowed read would otherwise lose (#6). `cards` selects the
+    duplicates that one of the shard's own cards belongs to, so the union over the shards reports every pair once. An
+    index that no longer describes the cards on disk is not read, and the duplicates of the cards at hand are reported
+    instead.
+    """
+    index = corpus.stored_gram_index(root)
+    if index is not None:
+        return duplicate_gram_messages(index, cards)
+    return shared_gram_problems(loaded, cards)
 
 
 def problems(loaded: Corpus, held: Certificates, cards: frozenset[str] | None = None) -> list[str]:
@@ -62,11 +92,10 @@ def problems(loaded: Corpus, held: Certificates, cards: frozenset[str] | None = 
 def arithmetic_problems(loaded: Corpus, held: Certificates, entry: corpus.Entry) -> list[str]:
     """The arithmetic-group fields of `entry` that no completed computation establishes.
 
-    An arithmetic-group card states its index in $O(L)$, the names of the self-isometries that
-    generate it, and — where a source or a run counted them — its orbit counts; all are computed
-    from this lattice card's Gram tensor, so all are certified on this card under
-    `arithmetic-group.<slug>.<field>`. A group card that states a value without that certificate,
-    or that cites a certificate for a value it no longer states, contradicts its ledger.
+    An arithmetic-group card states its index in $O(L)$ and the names of the self-isometries that
+    generate it; both are computed from this lattice card's Gram tensor, so both are certified on
+    this card under `arithmetic-group.<slug>.<field>`. A group card that states a value without that
+    certificate, or that cites a certificate for a value it no longer states, contradicts its ledger.
     """
     found: list[str] = []
     cards = {card.value.slug: card.value for card in loaded.arithmetic_groups if card.value.lattice == entry.lattice.tag}
@@ -74,19 +103,13 @@ def arithmetic_problems(loaded: Corpus, held: Certificates, entry: corpus.Entry)
         card = cards.get(slug)
         if card is None:
             continue
-        for short in (*genus.ARITHMETIC_FIELDS, *genus.ARITHMETIC_ORBIT_FIELDS):
+        for short in genus.ARITHMETIC_FIELDS:
             field = f"{genus.ARITHMETIC_PREFIX}{slug}.{short}"
             stored = getattr(card.data, short)
             value = list(stored) if isinstance(stored, tuple) else stored
             computation = genus.name(entry.lattice.tag, field, entry.lattice.definiteness)
             cited = entry.lattice.certifications.get(field)
             if value is None and cited is None and held.get(computation) is None:
-                continue
-            if short in genus.ARITHMETIC_ORBIT_FIELDS and card.data.reference is not None:
-                # An orbit count a source states is certified by that citation, which the group card
-                # carries: the 87 polarisation cards and the two Enriques groups state theirs from
-                # Dutour Sikirić–Hulek's tables and from Sterk, and no owner operation presents a
-                # group a source defines. An index and a generator family are computations.
                 continue
             expected = certificates.certification_hash(computation, entry.lattice, genus.certified_value(field, value, entry.lattice))
             if not certificates.is_certified(held, computation, cited, expected):
