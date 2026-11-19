@@ -482,7 +482,7 @@ def certify(
     ] = "all",
     field: Annotated[
         tuple[str, ...],
-        Parameter(help="Computation to run, such as `primitive_orbits`; repeat for each. Every field when absent."),
+        Parameter(help="Computation to run, such as `primitive_orbits` or one part of a row such as `primitive_orbits[Otilde].planes`; repeat for each. Every field when absent."),
     ] = (),
     root: Root = Path(),
 ) -> None:

@@ -24,7 +24,7 @@ from sage_extensions.categories.rings.ring_foundation import OwnedRings
 from sage_extensions.rings import QQ, ZZ
 
 from latticedb import records
-from latticedb.genus import ARITHMETIC_PREFIX, Request, applies, orbit_row_of
+from latticedb.genus import ARITHMETIC_PREFIX, Request, applies, orbit_row_parts
 from latticedb.model import Lattice
 
 OWNED_ZZ = ZZ
@@ -126,6 +126,41 @@ def _primitive_isotropic_line_row(lattice: Lattices.ParentMethods, row: str) -> 
     return {row: {"constant": _orbit_count(constant), "z": [], "w": []}}
 
 
+def _finite_count(value: object, what: str) -> int:
+    """A finite count the owner states, as a card states it, or a refusal naming the count.
+
+    `_orbit_count` decides what a count is; the fields that state a finite count — a plane count, a
+    subgroup's orbit counts — refuse anything else by name instead of writing it into a field that
+    has no `aleph0`.
+    """
+    count = _orbit_count(value)
+    if not isinstance(count, int):
+        raise ValueError(f"the owner states {what} {count}, and the card states a finite count")
+    return count
+
+
+def _primitive_isotropic_plane_row(lattice: Lattices.ParentMethods, row: str) -> dict[str, JsonValue]:
+    r"""One standard subgroup's plane count: its orbits of primitive isotropic **planes**.
+
+    The count is the owner's retained cusp row of rank two, `cusps(2)`, which is the same orbit
+    row read as spans: it keeps a span per orbit and constructs the plane only when a reader asks
+    for its representative. The gathered row, `isotropic_orbit_representatives(2)`, returns one
+    constructed plane per orbit and holds them all — 189720 planes at about 68 KiB each on
+    $T_{\mathrm{Co}}$'s kernel rows, 13.9 GiB that no runner of this size gives (sage-extensions
+    #286) — while the span row answers the same count at about 3.5 GiB. A plane count is not a
+    series: the lattice has signature $(2, n)$, so planes have no coefficient of $z$ or $w$.
+
+    The subgroup is the one `_standard_subgroup` names from `theory/orbits.md`, as for the line
+    count beside it, so the two counts of one row are counts for one group.
+    """
+    subgroup = _standard_subgroup(lattice, row)
+    planes = _finite_count(
+        subgroup.cusps(2).cardinality(),
+        f"the plane count of {row}, a lattice of signature (2, n) whose orbits of primitive isotropic planes are finite,",
+    )
+    return {row: {"planes": planes}}
+
+
 def _index_in_orthogonal_group(group: object) -> int:
     r"""``[O(L) : Gamma]``, from the owner's finite character image, not by enumerating cosets.
 
@@ -151,18 +186,50 @@ def _index_in_orthogonal_group(group: object) -> int:
     return int(group.index())
 
 
+def _incidence(group: object) -> object:
+    r"""A subgroup's line/plane building incidence, by the route the owner presents for it.
+
+    The owner presents two routes to one relation: `tits_building_incidence_by_divided_classes`,
+    which decides an edge from the divided class data of its line and refuses *by name* — raising,
+    and naming the other route — where a subgroup cuts no discriminant condition or is not
+    invariant under conjugation, and `tits_building_incidence`, which decides every edge from a
+    flag and two transporters and never refuses. The divided-class route is the affordable one:
+    on $T_{\mathrm{Co}}$'s kernel rows it returned the relation in 6132 s and 7973 s, at about
+    1.65 ms a plane, where the certificate route's records cost 13.68 KiB and 249016 B a plane
+    (sage-extensions#286, image run 44392429173). This is the owner's own `auto`, which takes the
+    class route wherever it applies: a group object that does not present the class route — the
+    ambient $O(L)$ presents the certificate route alone — is asked for the certificate route.
+    """
+    route = getattr(group, "tits_building_incidence_by_divided_classes", None)
+    if route is None:
+        return group.tits_building_incidence()
+    try:
+        return route()
+    except ValueError:
+        return group.tits_building_incidence()
+
+
 def _arithmetic_group_value(group: object, field: str) -> JsonValue:
-    """Serialize one computed field of a subgroup: its index in ``O(L)``, or its generators.
+    """Serialize one computed field of a subgroup: its index in ``O(L)``, its generators, or an orbit count.
 
     The index is the order of the finite character image ``chi(O(L))`` over that of ``chi(Gamma)``,
     the exact coset count and never an enumeration of the cosets. A generator is an isometry of
-    ``L``, serialized in the same framing as the generators of ``O(L)``.
+    ``L``, serialized in the same framing as the generators of ``O(L)``. The three orbit counts are
+    the subgroup's own counts of primitive isotropic lines, of primitive isotropic planes and of
+    isotropic flags — the first two are the lattice card's row counts read through `g.cusps(1)` and
+    `g.cusps(2)`, and the third is the cardinality of the incidence relation those rows carry.
     """
     match field:
         case "index_in_orthogonal_group":
             return _index_in_orthogonal_group(group)
         case "generator_morphisms":
             return [_matrix_rows(generator) for generator in group.group_generators()]
+        case "line_orbits":
+            return _finite_count(group.cusps(1).cardinality(), "the number of line orbits of this subgroup,")
+        case "plane_orbits":
+            return _finite_count(group.cusps(2).cardinality(), "the number of plane orbits of this subgroup,")
+        case "flag_orbits":
+            return _finite_count(_incidence(group).cardinality(), "the number of isotropic flag orbits of this subgroup,")
     raise ValueError(f"{field!r} is not a computed field of an arithmetic group")
 
 
@@ -432,11 +499,14 @@ def _compute(request: Request) -> None:
             _run(tag, [asked for asked in sorted(fields) if asked in request["fields"]], lambda: compute(lattice))
             continue
         done.add(field)
-        row = orbit_row_of(field)
-        if row is not None:
-            # One subgroup's row of an orbit series is one computation: the eight are asked
-            # separately, so a subgroup that does not return costs its row (#7).
-            _run(tag, [field], lambda row=row[1], field=field: {field: _primitive_isotropic_line_row(lattice, row)})
+        parts = orbit_row_parts(field)
+        if parts is not None:
+            # One subgroup's row of an orbit series is one computation, and one part of it is
+            # one computation: the eight rows and their plane counts are asked separately, so a
+            # subgroup that does not return costs only the part that did not (#7).
+            _, row, axis = parts
+            compute = _primitive_isotropic_plane_row if axis == "planes" else _primitive_isotropic_line_row
+            _run(tag, [field], lambda row=row, field=field, compute=compute: {field: compute(lattice, row)})
             continue
         _run(
             tag,
