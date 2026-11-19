@@ -246,89 +246,10 @@ def test_a_second_row_at_one_cusp_is_refused_when_it_changes_the_first() -> None
     assert corpus.front_matter(corpus.read_card(path))["integral"]["cusp_root_orbits"] == metadata["integral"]["cusp_root_orbits"]
 
 
-COBLE_CUSPS = (
-    # (statement, page, cusp in 6JRR's basis, the root classes in 6JRR's basis)
-    ("4.3.7", 22, [0, 1, 1, -2, -3, -4, -6, -5, -4, -3, -2], [[1, 0, -1, 0, 0, 0, 0, 0, 0, 0, 1]]),
-    ("4.3.8", 23, [0, 2, 1, -4, -5, -7, -10, -8, -6, -4, -2], [[1, -1, 0, 1, 0, 0, 0, 0, 0, 0, 0]]),
-    (
-        "4.3.9",
-        24,
-        [2, 0, 0, -4, -5, -7, -10, -8, -6, -4, -2],
-        [
-            [1, 3, 3, -2, 1, 2, 2, 1, 0, 0, 0],
-            [1, 3, 4, -2, 2, 3, 4, 3, 2, 1, 0],
-            [1, 2, 3, -2, 0, 1, 0, 0, 0, 0, 0],
-        ],
-    ),
-)
-"""The T_Co side of #43: Sterk's cusps 3--5 and their root classes, in card 6JRR's own basis.
-
-`results/probe-43-coble-row-coordinates.py` carries them there from the chambers stored on 029J: the library's
-`delta^perp`, written in $T_{\\mathrm{En}}$'s coordinates, has card 6JRR's Gram tensor entry for entry, so the two
-bases are identified by coordinates and no isometry search is needed. What decides membership of
-$T_{\\mathrm{Co}} = \\delta^\\perp$ is the pairing with $\\delta$ and not the projection: a projection is integral
-whenever $b(v, \\delta)$ is even, and taking that as the test admits walls that are not in the sublattice at all.
-"""
-
-
-def test_the_coble_cusps_rows_are_admissible_values_of_the_field() -> None:
-    """#43: the T_Co rows are arithmetic before they are a question of keys.
-
-    Card 6JRR states no `cusp_root_orbits` row, because the field's key must name a subgroup this corpus has a card
-    for and there is none for the Coble group. That is a question about *naming* the group; the rows themselves are
-    arithmetic on 6JRR's Gram tensor, and this test decides that arithmetic: each cusp is isotropic, each class lies
-    in its cusp's perpendicular and has square $-2$, and the row passes the admission check the corpus applies to any
-    row of the field. The rows are held under a standard subgroup here, which is a fixture and not a claim about which
-    group the card must name.
-    """
-    metadata = corpus.front_matter(corpus.read_card(ROOT / "lattices" / "6JRR.md"))
-    rows = [
-        {
-            "cusp": cusp,
-            "statement": statement,
-            "printed_page": page,
-            "orbits": [{"representative": classes[0], "classes": classes}],
-            "orbit_count": 1,
-        }
-        for statement, page, cusp, classes in COBLE_CUSPS
-    ]
-    metadata["integral"] = {**metadata["integral"], "cusp_root_orbits": {"O": rows}}
-    lattice = Lattice.model_validate(metadata)
-    assert [len(row.orbits[0].classes) for row in lattice.integral.cusp_root_orbits["O"]] == [1, 1, 3]
-    assert records.local_admission_problems(lattice) == []
-
-
-def test_card_6jrr_states_the_two_decided_coble_cusps() -> None:
-    """#43: the two T_Co cusps whose root family is one class each are on the card, under the standard key `O`.
-
-    The decision recorded on the issue: the rows at Sterk's cusps 3 and 4 are stored under the standard subgroup `O`,
-    because their root family has one class and a one-class family has one orbit for every subgroup, so the row states
-    the same count for `O` and for the Coble group the cusps belong to. The cusp-5 row is not stored: with three
-    classes its count depends on the group, which has no card.
-    """
-    lattice = Lattice.model_validate(corpus.front_matter(corpus.read_card(ROOT / "lattices" / "6JRR.md")))
-    assert lattice.integral is not None and lattice.integral.cusp_root_orbits is not None
-    rows = [row for row in lattice.integral.cusp_root_orbits["gamma-co-2"] if row.statement != "4.3.9"]
-    assert [(row.statement, row.printed_page, row.orbit_count) for row in rows] == [("4.3.7", 22, 1), ("4.3.8", 23, 1)]
-    assert [len(row.orbits[0].classes) for row in rows] == [1, 1]
-    assert [row.orbits[0].representative for row in rows] == [
-        (1, 0, -1, 0, 0, 0, 0, 0, 0, 0, 1),
-        (1, -1, 0, 1, 0, 0, 0, 0, 0, 0, 0),
-    ]
-    assert records.local_admission_problems(lattice) == []
-    # The certificate is cited on the card and held by its shard; nothing in the field's own checks contradicts.
-    cited = lattice.certifications.get("integral.cusp_root_orbits")
-    assert cited is not None
-    loaded = corpus.cards(ROOT, ("6JRR",))
-    held = certificates.load(ROOT, tags=("6JRR",))
-    problems = checks.records.problems(loaded, held, frozenset({"6JRR"}))
-    assert not [problem for problem in problems if "cusp_root_orbits" in problem], problems
-
-
 def test_the_coble_group_card_states_the_index_its_computation_certifies() -> None:
     """#43: `gamma-co-2` exists because the library builds the group, and its index is a computation.
 
-    The decision of 2026-11-19 holds the cusp-5 row until this card exists and is certified by computation from the
+    The `gamma-co-2` rows of card 6JRR's `cusp_root_orbits` need this card, which is certified by computation from the
     library's own construction of $\Gamma_{\mathrm{Co},2} = R_{\Gamma_{\mathrm{En},2}}$ — never authored from the
     project's draft. The card states the parent it restricts inside, the index, and no value it does not compute; this
     test states that, and that 6JRR cites the certificate its shard holds.
@@ -358,7 +279,7 @@ def test_only_one_delta_preserving_symmetry_moves_a_coble_class() -> None:
     $T_{\mathrm{Co}} = \delta^\perp$ with $\delta = e - f$, so a symmetry of the chamber can be an element of the Coble
     cusp stabilizer only if it carries $\delta$ to $\pm\delta$. This states, from the shipped card, that exactly two of
     the eight do — the identity and one exchanging $\alpha_{13}$ with $\alpha_{14}$ — and that neither carries
-    $\alpha_{12}$ to another of the three, which is the question the cusp-5 row waits on
+    $\alpha_{12}$ to another of the three, which the row at the 135-orbit $\Gamma_{\mathrm{Co},2}$-cusp uses
     (`results/issue-43-lemma-coble-image.md`). A change to the card's walls or Gram tensor that moved either fact would
     fail here rather than silently in a lemma.
     """
@@ -526,43 +447,75 @@ def test_the_chambers_own_reflections_do_not_move_the_root_classes() -> None:
     assert root_counts == [0, 1, 2, 2, 4], root_counts
 
 
-def test_the_coble_cusp_at_4_3_9_has_four_orbits_by_the_centralizer_of_alpha_11() -> None:
-    r"""#49: card 6JRR's (4.3.9) row has four orbits, recomputed from the chamber stored on card 029J.
+def test_card_6jrr_states_the_root_class_orbits_at_each_of_the_four_gamma_co_2_cusps() -> None:
+    r"""#49: one row at each $\Gamma_{\mathrm{Co},2}$-cusp of $T_{\mathrm{Co}}$, recomputed from the Gram tensors.
 
-    $\delta = e - f = -\alpha_{11}$ is a wall of the chamber. An element $ws$ of $G_v \subseteq \{\pm1\}W_v \rtimes
-    \mathrm{Aut}$ fixes $\pm\delta$ only if $s(\alpha_{11})$ is $W_v$-conjugate to $\pm\alpha_{11}$, that is joined to it
-    by a path of odd edges; $\alpha_{11}$ has none, so $s$ fixes $\alpha_{11}$. The centralizer of $s_{11}$ is then
-    $\langle s_{11}\rangle \times W_\perp$ (Allcock, arXiv:1106.3822v2, Thm. 5, Cor. 6), whose chamber has the walls
-    orthogonal to $\alpha_{11}$ and $\alpha_k + \alpha_{11}$ for the two order-4 edges. Its five root walls are joined
-    by no odd edge, and the one symmetry fixing $\alpha_{11}$ exchanges $\alpha_{13}$ and $\alpha_{14}$: four orbits.
+    $\Gamma_{\mathrm{Co},2} = \rho^{-1}(P_0)$, $P_0 = \mathrm{Stab}(A_{U(2)})$, so the cusp of a primitive isotropic $v$ is
+    the $P_0$-orbit of $p = [v/2] = a + b$; its size is decided by whether $a \in A_{U(2)}$ and $b \in A_{E_8(2)}$ are
+    zero, singular or nonsingular (2, 120, 135, 270). Each cusp vector of card 029J that lies in $\delta^\perp$,
+    $\delta = e - f$, has $\delta$ as a wall with only order-4 edges, and the root classes there are the square $-2$
+    simple roots of $W_\perp$ (Allcock, arXiv:1106.3822v2, Thm. 5, Cor. 6): the walls orthogonal to $\delta$ and
+    $\alpha_u + \delta$ for its neighbours $u$. No two are joined by an odd edge, and the diagram symmetries fixing
+    $\delta$ join classes. This recomputes the four rows and checks the card states them.
     """
-    from sage.all import QQ
-
     en = Lattice.model_validate(corpus.front_matter(corpus.read_card(ROOT / "lattices" / "029J.md")))
-    assert en.integral is not None and en.integral.cusp_chambers is not None
-    chamber = next(row for row in en.integral.cusp_chambers["gamma-en-2"] if row.statement == "4.3.9")
-    names = [wall.name for wall in chamber.walls]
-    gram = [[QQ(entry) for entry in row] for row in chamber.gram]
-    s = names.index("\\alpha_11")
-
-    ratio = {j: gram[s][j] ** 2 / (gram[s][s] * gram[j][j]) for j in range(len(names)) if j != s and gram[s][j] != 0}
-    assert {names[j]: r for j, r in ratio.items()} == {"\\alpha_9": QQ(1) / 2, "\\alpha_10": QQ(1) / 2}, "alpha_11 has only order-4 edges"
-    vectors = [tuple(QQ(x) for x in wall.vector) for wall in chamber.walls]
-    form = [[QQ(entry) for entry in row] for row in en.gram_tensor]
+    co = Lattice.model_validate(corpus.front_matter(corpus.read_card(ROOT / "lattices" / "6JRR.md")))
+    assert en.integral is not None and en.integral.cusp_chambers is not None and en.integral.cusp_root_orbits is not None
+    assert co.integral is not None and co.integral.cusp_root_orbits is not None
+    form = [[Fraction(x) for x in row] for row in en.gram_tensor]
+    half = [[Fraction(x) / 2 for x in row] for row in co.gram_tensor]
 
     def pair(a, b):
-        return sum(a[i] * form[i][j] * b[j] for i in range(len(a)) for j in range(len(b)))
+        return sum((Fraction(a[i]) * form[i][j] * Fraction(b[j]) for i in range(12) for j in range(12)), Fraction(0))
 
-    perp = [vectors[j] for j in range(len(names)) if j != s and gram[s][j] == 0]
-    perp += [tuple(vectors[j][i] + vectors[s][i] for i in range(len(vectors[s]))) for j in ratio]
-    assert all(pair(b, vectors[s]) == 0 for b in perp)
-    roots = [b for b in perp if pair(b, b) == -2]
-    assert len(roots) == 5
-    assert all(pair(a, b) ** 2 / (pair(a, a) * pair(b, b)) != QQ(1) / 4 for a in roots for b in roots if a != b), "no odd edge"
-    co = Lattice.model_validate(corpus.front_matter(corpus.read_card(ROOT / "lattices" / "6JRR.md")))
-    assert co.integral is not None and co.integral.cusp_root_orbits is not None
-    row = next(row for row in co.integral.cusp_root_orbits["gamma-co-2"] if row.statement == "4.3.9")
-    assert row.orbit_count == 4
-    assert sorted(len(orbit.classes) for orbit in row.orbits) == [1, 1, 1, 2]
-    stated = {tuple(c) for orbit in row.orbits for c in orbit.classes}
-    assert stated == {tuple(int(x) for x in b[1:]) for b in roots}, "the row's classes are the W_perp root walls in 6JRR coordinates"
+    def cusp_orbit_size(v) -> int:
+        def square(x):
+            return int(sum(x[i] * half[i + 1][j + 1] * x[j] for i in range(10) for j in range(10))) // 2 % 2
+
+        p = [c % 2 for c in v[1:]]
+        a, b = p[:2] + [0] * 8, [0, 0] + p[2:]
+        kind = ("0" if not any(a) else "s" if square(a) == 0 else "n", "0" if not any(b) else "s" if square(b) == 0 else "n")
+        return {("0", "s"): 135, ("s", "0"): 2, ("s", "s"): 270, ("n", "n"): 120}[kind]
+
+    delta = (1, -1) + (0,) * 10
+    symmetries = {row.statement: row.chamber_symmetries for row in en.integral.cusp_root_orbits["gamma-en-2"]}
+    computed = {}
+    for chamber in en.integral.cusp_chambers["gamma-en-2"]:
+        if pair(chamber.cusp, delta) != 0:
+            continue
+        walls = [tuple(wall.vector) for wall in chamber.walls]
+        (s,) = [i for i, wall in enumerate(walls) if wall in (delta, tuple(-x for x in delta))]
+        edges = [j for j in range(len(walls)) if j != s and pair(walls[s], walls[j]) != 0]
+        assert all(pair(walls[s], walls[j]) ** 2 / (pair(walls[s], walls[s]) * pair(walls[j], walls[j])) == Fraction(1, 2) for j in edges)
+        simple = {j: walls[j] for j in range(len(walls)) if j != s and j not in edges}
+        simple |= {j: tuple(x + y for x, y in zip(walls[j], walls[s])) for j in edges}
+        roots = [j for j, x in simple.items() if pair(x, x) == -2]
+        assert all(pair(simple[i], simple[j]) ** 2 != 1 for i in roots for j in roots if i != j), "no odd edge"
+        generators = symmetries[chamber.statement].generators
+        group = {tuple(range(len(walls)))}
+        frontier = list(group)
+        while frontier:
+            g = frontier.pop()
+            for h in generators:
+                k = tuple(h[g[i]] for i in range(len(walls)))
+                if k not in group:
+                    group.add(k)
+                    frontier.append(k)
+        fixing = [g for g in group if g[s] == s]
+        orbits = {frozenset(g[j] for g in fixing) for j in roots}
+        assert chamber.cusp[0] == chamber.cusp[1]
+        cusp = (chamber.cusp[0],) + tuple(chamber.cusp[2:])
+        computed[cusp_orbit_size(cusp)] = (
+            cusp,
+            sorted(sorted((simple[j][0],) + simple[j][2:] for j in orbit) for orbit in orbits),
+        )
+    stored = {
+        cusp_orbit_size(row.cusp): (tuple(row.cusp), sorted(sorted(tuple(c) for c in orbit.classes) for orbit in row.orbits))
+        for row in co.integral.cusp_root_orbits["gamma-co-2"]
+    }
+    assert sorted(stored) == [2, 120, 135, 270], "one row at each Gamma_Co,2-cusp"
+    assert stored == computed
+    assert {size: len(orbits) for size, (_, orbits) in stored.items()} == {2: 1, 120: 3, 135: 4, 270: 2}
+    assert records.local_admission_problems(co) == []
+    held = certificates.load(ROOT, tags=("6JRR",))
+    assert held["6JRR integral.cusp_root_orbits"].hash == co.certifications["integral.cusp_root_orbits"]
