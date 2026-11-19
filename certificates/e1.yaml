@@ -31976,8 +31976,13 @@
   hash: a5655af60d2d483494c8162620b136155af562098fdb2bdb93a398645faf5199
   by: research preamble
 6JRR integral.primitive_orbits:
-  hash: a3371f825e4462bc386860cd56a64d49b4ac5baf279e8ab92b0052b070739bb1
-  by: research preamble
+  hash: ac99dcc0dfb8887f38309ef1a054405fdaa08f555d6d15900070ffc7dc441bcc
+  by: 'sage-extensions `main` 47865446a7c37c85d873f91ac9d74cea472e208c, `results/issue286-the-stage-1-call.md`:
+    the section "The kernel plane rows, measured on `7753092`" prints "[Otilde cusps]
+    built in 2171.0 s, peak 3476.4 MiB" and "[Otilde cusps] counted 189720 cusps"
+    (`:275`), and the two kernel incidence rows decided in image run 44392429173 print
+    527 line cusps, 189720 plane cusps and 569160 edges for `Otilde(T_Co) = ker rho`
+    (`:372`). The count is the row''s plane cusps, not its line cusps (`:371`).'
 6JRR integral.spinor_genera:
   hash: 996405fa28d81289a0ee178c219695e2104fbabe6ec403a5ff4a73572423dcb2
   by: research preamble

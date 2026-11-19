@@ -683,3 +683,40 @@ p. 510 with §3 (3.6)/Prop. 3.2, printed p. 513.
 `SOtilde` and `SOtilde+` rows are neither computed here nor covered by a record, and `SOtilde+`'s own
 route — its finite character quotient — still does not build on this host (594 s, killed). `#286`'s
 closure does not weaken that claim; it does not touch it.
+
+## The record's values entered on the cards (2026-11-19)
+
+By decision, a full-scale plane row is long tail and never an acceptance (AGENTS.md, 2026-11-19), so
+the values sage-extensions#286's records already certify are carried onto the cards with their
+citations, and a row with no record is left empty and filed.
+
+sage-extensions `main` `47865446a7c37c85d873f91ac9d74cea472e208c`,
+`results/issue286-the-stage-1-call.md`:
+
+| line | what it records | where it went |
+| ---: | --- | --- |
+| `:275` | `[Otilde cusps] built in 2171.0 s, peak 3476.4 MiB`, `counted 189720 cusps` | row `Otilde`'s `planes: 189720` |
+| `:285` | `[Otilde+ cusps] built in 1812.8 s, peak 3554.3 MiB`, `189720` | row `Otilde+` (already computed here at 2000 s) |
+| `:372` | `Otilde(T_Co) = ker rho`: 569160 edges, 527 line cusps, 189720 plane cusps | `arithmetic-groups/otilde-t-co.md`: `plane_orbits: 189720`, `flag_orbits: 569160` |
+| `:373` | `Otilde+(T_Co) = ker(rho, sn_RR)`: 569160 edges, 527, 189720 | `arithmetic-groups/otilde-plus-t-co.md`: the same two |
+
+The route is the repository's own cited-value route: `genus.store` for the value, then
+`genus.cite_orbit_row` with the reference, so `integral.primitive_orbits` is re-certified under
+`ac99dcc0…` with the **citation as its provenance** (`certificates/e1.yaml:31980`, `by:` naming the
+commit and the lines). The two group cards take the counts under `data.reference`, which is the
+exemption `checks.records.arithmetic_problems` makes for a source-stated count — its third use.
+
+Rows left empty, each for a stated reason, all four in
+`results/issue-draft-7-kernel-rows-without-record.md` (drafted, not filed: this connection cannot
+create issues):
+
+| row | reason |
+| --- | --- |
+| `SO` | refused by the owner at `orthogonal_quotients.py:4237`; the odd-stabilizer route is guarded to the spinor kernel alone |
+| `SO+` | same, and it cuts both sign kernels |
+| `SOtilde` | reachable, needs one ~40-minute run on a host with 4 GiB free |
+| `SOtilde+` | its character quotient does not build here (594 s, killed) |
+
+Final row state, from the card after the change: `O (1, 1)`, `O+ (1, 1)`, `Otilde (527, 189720)`,
+`Otilde+ (527, 189720)`, and `SO`, `SO+`, `SOtilde`, `SOtilde+` with no plane count. Scoped checks:
+records 0, relations 0.
