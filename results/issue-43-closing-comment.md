@@ -28,26 +28,23 @@ reports 4,752 cards in 1.0 GiB with 0 problems; the 20 problems the other slices
 carrying a `regular` certificate and no value — are settled, each card stating the value its certificate commits to,
 asserted at `tests/test_stored_records.py:64`. CI runs the remaining shards.
 
-**3. The T_Co rows at cusps 3–5: two of three decided, none stored.** 6JRR has no row and no `gamma-co-2` card, and the
-field's key must be one of the eight standard subgroups or an arithmetic-group card of the same lattice
-(`src/latticedb/checks/catalogues.py:132-137` against `src/latticedb/invariant_models.py:847`);
-`lattices/6JRR.md:6692` lists only `otilde-t-co, otilde-plus-t-co`.
+**3. The T_Co rows: cusps 3 and 4 stored, cusp 5 held back by decision.** By the decision of 2026-11-19 the two cusps
+whose root family is a single class are stated under the standard key `O` of `lattices/6JRR.md` — (4.3.7), p. 22, and
+(4.3.8), p. 23, one class each, `orbit_count: 1` — because a one-class family has one orbit for every subgroup, so the
+count is the Coble group's too. The certificate is `6JRR integral.cusp_root_orbits`
+`241d3a4680a1b6255646ceeb37fc3a93e21a860e4f93a07c82d6ec3e439db318` in `certificates/e1.yaml`, its provenance being
+Sterk's two statements, that argument, and `results/store-43-coble-rows.py`; it is read back at
+`tests/test_cusp_root_orbits.py::test_card_6jrr_states_the_two_decided_coble_cusps`.
 
-- Cusps 3 and 4 — (4.3.7) and (4.3.8) — carry **one** root class of $K_I$ each, so their count is $1$ whatever the group
-  is, and `results/probe-43-coble-row-coordinates.py` writes both rows in 6JRR's own basis: cusps
-  `[0,1,1,-2,-3,-4,-6,-5,-4,-3,-2]` and `[0,2,1,-4,-5,-7,-10,-8,-6,-4,-2]`, classes $\alpha_{13}$ and $\alpha_{11}$.
-  Only the key is missing.
-- Cusp 5 — (4.3.9) — has three classes ($\alpha_{12},\alpha_{13},\alpha_{14}$, all $O(K_I)$-equivalent), and the elements
-  of $\Gamma_{\mathrm{En},2}$'s cusp stabilizer this repository can construct that preserve $T_{\mathrm{Co}}$ carry no
-  class to another (22 of 27 do preserve it; `results/probe-43-coble-classes.py`), so the count lies between 1 and 3.
+Cusp 5 — (4.3.9), p. 24 — stays empty. It has three root classes, all $O(K_I)$-equivalent, and the elements of
+$\Gamma_{\mathrm{En},2}$'s cusp stabilizer this repository can construct that preserve $T_{\mathrm{Co}}$ carry no class
+to another (`results/probe-43-coble-classes.py`: 22 of 27 preserve it, none merges), so its count lies between 1 and 3.
+It waits on a `gamma-co-2` card certified by computation from the library's construction, which the issue's decision
+excludes taking from the project's draft.
 
-Three further facts were measured on the way and are worth having: $\Gamma_{\mathrm{Co},2}$ has **infinite** index in
-$O(T_{\mathrm{Co}})$ — $T_{\mathrm{Co}}$ carries infinitely many vectors of square $-2$, so no card can state an index
-(`src/latticedb/invariant_models.py:496` admits only a positive integer); the owner's library returns both constructions
-of that group as membership predicates with no exact index; and $O(K_J)$ does report a selected resolution of its own.
-
-**What closes item 3:** a key — a published definition of
-$\Gamma_{\mathrm{Co},2} = \mathrm{Stab}_{O(T_{\mathrm{En}})}(T_{\mathrm{Co}})$ to cite, a decision to author
-`gamma-co-2` from the project's draft (which this issue ruled out), or a decision to key the rows to a standard
-subgroup, whose orbits a single-class family makes identical — plus the owner's class-level equivalence at a Coble cusp
-for (4.3.9).
+**What is left on the issue:** the cusp-5 row, and it needs a `gamma-co-2` card certified by computation from the
+library's own construction of $\Gamma_{\mathrm{Co},2}$ — which needs an exact index for the stabilizer of a
+non-degenerate sublattice, or a call that presents that stabilizer as a subgroup of $O(T_{\mathrm{Co}})$, neither of
+which the owner's library presents today — together with the owner's class-level equivalence at a Coble cusp. That is a
+dependency on the library and on the group's definition in print, not on this repository's data: cusps 3 and 4 are
+stored, the 029J rows are stored, and the gate passes.

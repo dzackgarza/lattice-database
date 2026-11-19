@@ -297,6 +297,33 @@ def test_the_coble_cusps_rows_are_admissible_values_of_the_field() -> None:
     assert records.local_admission_problems(lattice) == []
 
 
+def test_card_6jrr_states_the_two_decided_coble_cusps() -> None:
+    """#43: the two T_Co cusps whose root family is one class each are on the card, under the standard key `O`.
+
+    The decision recorded on the issue: the rows at Sterk's cusps 3 and 4 are stored under the standard subgroup `O`,
+    because their root family has one class and a one-class family has one orbit for every subgroup, so the row states
+    the same count for `O` and for the Coble group the cusps belong to. The cusp-5 row is not stored: with three
+    classes its count depends on the group, which has no card.
+    """
+    lattice = Lattice.model_validate(corpus.front_matter(corpus.read_card(ROOT / "lattices" / "6JRR.md")))
+    assert lattice.integral is not None and lattice.integral.cusp_root_orbits is not None
+    rows = lattice.integral.cusp_root_orbits["O"]
+    assert [(row.statement, row.printed_page, row.orbit_count) for row in rows] == [("4.3.7", 22, 1), ("4.3.8", 23, 1)]
+    assert [len(row.orbits[0].classes) for row in rows] == [1, 1]
+    assert [row.orbits[0].representative for row in rows] == [
+        (1, 0, -1, 0, 0, 0, 0, 0, 0, 0, 1),
+        (1, -1, 0, 1, 0, 0, 0, 0, 0, 0, 0),
+    ]
+    assert records.local_admission_problems(lattice) == []
+    # The certificate is cited on the card and held by its shard; nothing in the field's own checks contradicts.
+    cited = lattice.certifications.get("integral.cusp_root_orbits")
+    assert cited is not None
+    loaded = corpus.cards(ROOT, ("6JRR",))
+    held = certificates.load(ROOT, tags=("6JRR",))
+    problems = checks.records.problems(loaded, held, frozenset({"6JRR"}))
+    assert not [problem for problem in problems if "cusp_root_orbits" in problem], problems
+
+
 def test_the_chambers_own_reflections_do_not_move_the_root_classes() -> None:
     """#43: at every cusped row the root walls have different orthogonal neighbour sets, so no word in the walls moves one to another.
 

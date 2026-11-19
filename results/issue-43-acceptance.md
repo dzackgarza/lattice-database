@@ -46,98 +46,24 @@ to, with the certificate's hash as the citation (`results/evidence-43-regular-va
 
 The remaining gate work is CI's: 64 slices are what this VM would need six hours for, and `verify.yml` runs them.
 
-## 3. The T_Co rows at cusps 3–5 — not met, and the missing input is not this repository's
+## 3. The T_Co rows at cusps 3–5 — met for cusps 3 and 4, open at cusp 5 by decision
 
-Card 6JRR carries no `integral.cusp_root_orbits` and no `integral.cusp_chambers`, and neither can be keyed as things
-stand:
+The decision of 2026-11-19 (orchestrator): the rows at Sterk's cusps 3 and 4 have one root class each, so their count
+is $1$ for every subgroup, and they are stored under the standard key `O` of card 6JRR with the one-class argument as
+the certificate text. The cusp-5 row depends on the group and stays empty until `gamma-co-2` has a card certified by
+computation from the library's own construction, never authored from the draft.
 
-- the field's key is one of the eight standard subgroups or the slug of an arithmetic-group card **of the same
-  lattice** (`src/latticedb/checks/catalogues.py:132-137`, against `invariant_models.py:847`'s `Subgroup` key), and
-  `lattices/6JRR.md:6692` lists `arithmetic_groups: [otilde-t-co, otilde-plus-t-co]` — there is no `gamma-co-2` card,
-  which is the group whose cusps these are;
-- authoring that card would assert a definition that is not published: the corpus records twice that the identification
-  of the Coble group is conjectural in the literature it rests on (`arithmetic-groups/otilde-plus-t-co.md:23-24`), and
-  the one definition of $\Gamma_{\mathrm{Co},2}$ this project holds is its own paper draft, which the standing decision
-  of this issue rules out as a citation — so the card would have to be certified by computation;
-- the computation that would decide the (4.3.9) row (three root classes, all $O(K_I)$-equivalent, so the count lies
-  between 1 and 3) is the class-level equivalence `IsotropicVectorReductionImage.vectors_are_equivalent` the earlier
-  turns named, which the owner does not present.
+Stored: `lattices/6JRR.md` `integral.cusp_root_orbits[O]`, two rows — (4.3.7), p. 22, cusp
+`[0, 1, 1, -2, -3, -4, -6, -5, -4, -3, -2]` with the class `[1, 0, -1, 0, 0, 0, 0, 0, 0, 0, 1]`, and (4.3.8), p. 23, cusp
+`[0, 2, 1, -4, -5, -7, -10, -8, -6, -4, -2]` with `[1, -1, 0, 1, 0, 0, 0, 0, 0, 0, 0]`, each `orbit_count: 1` with its
+one class and `transporter_order: 1`. The certificate is `6JRR integral.cusp_root_orbits`
+`241d3a4680a1b6255646ceeb37fc3a93e21a860e4f93a07c82d6ec3e439db318` in `certificates/e1.yaml`, whose provenance is
+Sterk's two statements, the one-class argument, and `results/store-43-coble-rows.py`. Read back and checked by
+`tests/test_cusp_root_orbits.py::test_card_6jrr_states_the_two_decided_coble_cusps`.
 
-The record is `results/evidence-43-coble-okj-complement.md`; the numbers there (walls in $T_{Co}$ 9, 9, 11; $K_I$ rank 9,
-det 512, signature (1,8); root classes 1, 1, 3) are the probe's, and nothing on 6JRR claims them.
-
-### The card's values are not computable either, measured
-
-The definition by construction gives one more route to a card — compute the group's index and generators, certify them,
-and key the rows to it with no citation at all. `results/probe-43-co2-key.py` asks the owner for exactly that on `main`
-at sage-extensions `41b75d7`, and it does not answer:
-
-| call | result |
-| --- | --- |
-| `O(T_En).setwise_stabilizer(T_Co.inclusion())` | returns, in 0.1 s, as a membership predicate `{g in O(rank 12, sig (2,10)) : g(im T_Co) = im T_Co}` |
-| `stabilizer.index()` | `AssertionError`: "cannot compute the cardinality of … with O(…)-action: its construction supplies no exact value or decided finite enumeration" |
-| `stabilizer.has_finite_coset_space()` | `False` |
-| `stabilizer.contains_character_kernel()` | `False` |
-| `stabilizer.finite_character_quotient()` | `ValueError` — the subgroup is not a character kernel |
-| `stabilizer.discriminant_image()` | `ValueError` (the same) |
-
-The second construction is the one the library *does* attest for this case — `T_Co = \delta^\perp` with
-$\delta = e - f$ primitive of square $-2$, so the stabilizer of the sublattice is the setwise stabilizer of the line
-$\mathbb{Z}\delta$, which the dispatch of `_marked_automorphism_generators` describes as "the same gluing
-construction with the sign on the line allowed". `results/probe-43-co2-index.py` asks for that subgroup
-($O(T_{\mathrm{En}}).\mathrm{stabilizer}(\delta)$ pointwise and setwise) and it answers no better:
-
-| call | result |
-| --- | --- |
-| `O(T_En).stabilizer(delta)` | `{g : g fixes e_e - e_f}`, a predicate, in 0.1 s |
-| `stabilizer(delta, action="setwise")` | the same predicate |
-| `has_finite_coset_space()` on either | `False` |
-| `contains_character_kernel()` on either | `False` |
-| `index()` on either | `AssertionError`, the same "no exact value" |
-
-So both constructions of the group of the T_Co cusps — the stabilizer of the sublattice and of the vector up to sign —
-come back as membership predicates, and the finite character quotient every certified index on this corpus comes from
-does not apply to either: $\delta$ has divisibility $1$, its class in $A_L$ is trivial, and the discriminant carries
-no condition to cut the group out by. What the owner does present at a vector is the generator family
-(`vector_stabilizer_generators`, 27 members in 7.7 s at an Enriques cusp), which is a family of isometries of
-$T_{\mathrm{En}}$ — the wrong side of the embedding for a card of 6JRR, whose `generator_morphisms` must be isometries
-of $T_{\mathrm{Co}}$, and the library has no call that maps a stabilizer into the orthogonal group of the sublattice it
-stabilizes.
-
-Two decisions and one computation would close the item, and none of them is this repository's:
-
-1. **the key** — two of the three rows below need nothing else, their count being one whatever the group is. Either a
-   published definition of
-   $\Gamma_{\mathrm{Co},2} = \mathrm{Stab}_{O(T_{\mathrm{En}})}(T_{\mathrm{Co}})$ to cite, so the card can be
-   authored as `otilde-plus-t-co` was, or a decision to author it from the project's draft (which the standing decision
-   on this issue excludes), or a decision that the row's group is one of the eight standard subgroups and the row is
-   keyed to that instead — which states a different group's orbits and the earlier evidence declined to do;
-2. **the card's values** — there is no index to compute, and this is now settled rather than open: see below. What a
-   card could still carry is a generating family, and that needs a call that presents the stabilizer as a subgroup of
-   $O(T_{\mathrm{Co}})$ so its generators can be stored on 6JRR — or the owner's certificate that the family it does
-   return at a vector generates the stabilizer;
-3. **the (4.3.9) count** — the owner's class-level equivalence returning at a Coble cusp, without which the three
-   root classes there lie between one orbit and three.
-
-### Two of the three rows are decided; the third is not, measured
-
-`results/probe-43-coble-classes.py` asks the row's question at each of the three T_Co cusps with the family the owner
-does return. Since $\Gamma_{\mathrm{Co},2} = \mathrm{Stab}_{O(T_{\mathrm{En}})}(T_{\mathrm{Co}}) \cap
-\Gamma_{\mathrm{En},2}$ and $T_{\mathrm{Co}} = \delta^\perp$, a generator of the Enriques cusp stabilizer that
-carries $\delta$ to $\pm\delta$ lies in $\Gamma_{\mathrm{Co},2}$ and fixes the cusp, so a class it carries to
-another is a proof of one orbit:
-
-| cusp | statement | walls | walls in $T_{\mathrm{Co}}$ of square $-2$ | of the cusp stabilizer's family, those preserving $T_{\mathrm{Co}}$ | merges | verdict |
-| --- | --- | --- | --- | --- | --- | --- |
-| 3 | (4.3.7), p. 22 | 12 | 1 ($\alpha_{13}$) | 22 of 26 | — | **one orbit**, one class |
-| 4 | (4.3.8), p. 23 | 11 | 1 ($\alpha_{11}$) | 9 of 28 | — | **one orbit**, one class |
-| 5 | (4.3.9), p. 24 | 14 | 3 ($\alpha_{12}$, $\alpha_{13}$, $\alpha_{14}$) | 22 of 27 | none found | undecided, between 1 and 3 |
-
-So two of the three rows carry a decided count of $1$ — not by any group's action but because a one-class family has
-one orbit whatever the group is, the same reason the (4.3.6) row of 029J is decided. What keeps them off the card is
-only the key. The third row is undecided: the elements of $\Gamma_{\mathrm{En},2}$'s cusp stabilizer that this
-repository can construct and that preserve $T_{\mathrm{Co}}$ carry no class to another, and a non-merge is not a proof
-of inequivalence.
+Cusp 5 — (4.3.9), p. 24 — is not stored: three root classes, all $O(K_I)$-equivalent, and the elements of
+$\Gamma_{\mathrm{En},2}$'s cusp stabilizer this repository can construct that preserve $T_{\mathrm{Co}}$ carry no class
+to another, so its count lies between 1 and 3. It waits on a `gamma-co-2` card certified by computation.
 
 ### The rows' data, in card 6JRR's own basis
 
