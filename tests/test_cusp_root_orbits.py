@@ -238,7 +238,7 @@ def test_a_second_row_at_one_cusp_is_refused_when_it_changes_the_first() -> None
     stored = metadata["integral"]["cusp_root_orbits"]["gamma-en-2"][0]
     changed = {
         **stored,
-        "orbits": [{**stored["orbits"][0]}],
+        "chamber_symmetries": {"order": 2, "generators": [list(range(10))[::-1]]},  # (4.3.6) has ten walls
     }
     path = ROOT / "lattices" / "029J.md"
     with pytest.raises(AssertionError, match="is stated twice, differently"):
