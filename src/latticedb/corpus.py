@@ -225,8 +225,13 @@ def cards(root: Path, tags: Iterable[str]) -> Corpus:
     return Corpus(tuple(entries), {}, {}, *(empty for _ in range(12)), tuple(groups))
 
 
-def load(root: Path) -> Corpus:
-    """The families, the retired tags, every entry of `root/lattices` in tag order, and every file of `root/morphisms`.
+def load(root: Path, tags: Iterable[str] | None = None) -> Corpus:
+    """The families, the retired tags, every entry of `root/lattices` in tag order, and every catalogue record.
+
+    `tags` reads only those lattice cards and leaves the catalogues, the families and the retired tags whole, so that
+    a shard of `latticedb verify` costs the cards it checks rather than the corpus (#6). It is the caller's business
+    to read every card those cards and those catalogues name: a card that is absent is a reference problem, and
+    `checks.shard_closure` is the closure that makes one shard's read closed under naming.
 
     Raises `CorpusInvalid` with all problems when a file does not have the shape of its schema.
     """
@@ -247,7 +252,12 @@ def load(root: Path) -> Corpus:
         found.extend(_record_problems(retired_path, error))
     directory = root / "lattices"
     paths = sorted(directory.glob("*.md"))
-    if not paths:
+    if tags is not None:
+        chosen = frozenset(tags)
+        paths = [path for path in paths if path.stem in chosen]
+        if sorted(chosen - {path.stem for path in paths}):
+            found.append(f"{directory}: no card of {sorted(chosen - {path.stem for path in paths})}")
+    elif not paths:
         found.append(f"{directory}: no records")
     for path in paths:
         document = read_card(path)
@@ -449,6 +459,22 @@ def append_index(root: Path, tag: str, gram: GramTensor) -> None:
         assert data is not None
     data.grams.setdefault(gram_key(gram), []).append(tag)
     save_index(root, data)
+
+
+def stored_gram_index(root: Path) -> dict[str, list[str]] | None:
+    """Gram key -> tags, from the durable index file, or ``None`` when it does not cover the corpus.
+
+    `gram_index` promotes a card that gained a tensor and rebuilds the file when the card set has changed, which a
+    read-only check may not do: verification reports and never writes (`checks`). This reads the same file and answers
+    ``None`` for a file that no longer describes the cards on disk, so the caller falls back to the cards it holds.
+    """
+    paths = {path.stem for path in (root / "lattices").glob("*.md")}
+    data = _read_index(root)
+    if data is None:
+        return None
+    if ({tag for tags in data.grams.values() for tag in tags} | set(data.without)) != paths:
+        return None
+    return data.grams
 
 
 def gram_index(root: Path) -> dict[str, list[str]]:

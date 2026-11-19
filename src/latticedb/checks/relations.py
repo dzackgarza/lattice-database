@@ -30,19 +30,23 @@ SOURCE_DIRECTORY = "lattices/source"
 """Where `seed` reads rows that have not yet become permanent cards."""
 
 
-def lattice_problems(loaded: Corpus, root: Path, cards: frozenset[str] | None = None) -> list[str]:
+def lattice_problems(
+    loaded: Corpus, root: Path, cards: frozenset[str] | None = None, known: frozenset[str] | None = None
+) -> list[str]:
     """The problems that concern more than one lattice record.
 
     A file name that is not its tag, a tag that a source row also reserves, a retired tag,
     a repeated name or Gram tensor, a family that `families.yaml` does not list, and a
     related or summand tag that is not in the corpus. The checks that construct a
     preamble object run for the cards `cards`, the shard of one `latticedb verify`
-    run (#6); the reference checks need every card and run in each shard.
+    run (#6). `known` is every tag the corpus holds on disk, which a shard passes so that a related tag outside its
+    read is read as a card rather than as a missing one.
     """
     entries = loaded.entries
     retired = loaded.retired
     found: list[str] = []
     by_tag = {entry.lattice.tag: entry.lattice for entry in entries}
+    present = frozenset(by_tag) if known is None else known
     source_paths = sorted((root / SOURCE_DIRECTORY).glob("*.md"))
     reserved = {path.stem for path in source_paths}
     found.extend(f"{path}: source card has not been seeded to a permanent lattice card" for path in source_paths)
@@ -67,7 +71,7 @@ def lattice_problems(loaded: Corpus, root: Path, cards: frozenset[str] | None = 
         for related in lattice.related:
             if related.tag == lattice.tag:
                 found.append(f"{entry.path}: a record cannot be related to itself")
-            elif related.tag not in by_tag:
+            elif related.tag not in present:
                 found.append(f"{entry.path}: the related tag {related.tag} is not in the corpus")
         if cards is None or lattice.tag in cards:
             found.extend(f"{entry.path}: {problem}" for problem in records.relational_admission_problems(lattice, by_tag))
@@ -197,10 +201,12 @@ def geometric_problems(loaded: Corpus) -> list[str]:
     return found
 
 
-def problems(loaded: Corpus, root: Path, cards: frozenset[str] | None = None) -> list[str]:
+def problems(
+    loaded: Corpus, root: Path, cards: frozenset[str] | None = None, known: frozenset[str] | None = None
+) -> list[str]:
     """Every problem of the references that run between the records, for the cards `cards`."""
     return [
-        *lattice_problems(loaded, root, cards),
+        *lattice_problems(loaded, root, cards, known),
         *morphism_problems(loaded, cards),
         *geometric_problems(loaded),
         *bond_order_problems(loaded),
