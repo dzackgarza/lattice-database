@@ -46,6 +46,22 @@ to, with the certificate's hash as the citation (`results/evidence-43-regular-va
 
 The remaining gate work is CI's: 64 slices are what this VM would need six hours for, and `verify.yml` runs them.
 
+## The lemmas, indexed
+
+Eight lemmas bound the one open row. Each is a file of its own, each states what it proves or refutes and quotes the
+printed page it rests on.
+
+| file | what it settles |
+| --- | --- |
+| `issue-43-lemma-sterk-4310.md` | Sterk's (4.3.10)–(4.3.13), pp. 25–26, are stated for $A = H\oplus E_8(-2)$ and never mention $\delta$: the general transport to $T_{\mathrm{Co}}$ is unavailable. |
+| `issue-43-lemma-alpha13-alpha14.md` | The one diagram symmetry exchanging $\alpha_{13}$ and $\alpha_{14}$ and fixing $\alpha_{11},\alpha_{12}$ fixes $\delta$ on the rank-10 span, so those two classes are one orbit: the count is at most 2. |
+| `issue-43-lemma-parity-refuted.md` | Refuted: no congruence separates the classes — every difference among the root walls is odd, and $\Gamma_{\mathrm{En},2}$ cannot be trivial on $L/2L$ because the stored $T_{En}$ row has them in one orbit. |
+| `issue-43-lemma-reflections-fix-delta.md` | Every reflection in a $T_{\mathrm{Co}}$ wall fixes $\delta$, so $W_v$ is inside the Coble cusp stabilizer and moves no class. |
+| `issue-43-lemma-coble-image.md` | The Coble image is the $\delta$-preserving part of Sterk's $G_v$, with orbits $\{\alpha_{12}\}$ and $\{\alpha_{13},\alpha_{14}\}$: count 2 — conditional. |
+| `issue-43-lemma-gv-not-stated.md` | Sterk states $G_v$'s shape only at (4.3.6) and (4.3.7); a count of one needs only a subgroup, a count of two needs the whole image, so the conditional above cannot be closed from his §4. |
+| `issue-43-lemma-sterk-gamma-is-en2.md` | Sterk's $\Gamma$ is the corpus's $\Gamma_{\mathrm{En},2}$ — same definition, same index $67456$ at Remark 2.12, p. 8 — so the stored 029J rows are cited for the group they name. |
+| `issue-43-lemma-no-source.md` | No source this repository holds prints the Coble cusp root-class orbits, so row 5 cannot be cited at all. |
+
 ## 3. The T_Co rows at cusps 3–5 — met for cusps 3 and 4, open at cusp 5 by decision
 
 The decision of 2026-11-19 (orchestrator): the rows at Sterk's cusps 3 and 4 have one root class each, so their count

@@ -42,6 +42,12 @@ to another (`results/probe-43-coble-classes.py`: 22 of 27 preserve it, none merg
 It waits on a `gamma-co-2` card certified by computation from the library's construction, which the issue's decision
 excludes taking from the project's draft.
 
+**The eight lemmas behind the Coble side** are indexed in `results/issue-43-acceptance.md`: Sterk's (4.3.10) is an
+Enriques statement; the one symmetry joining $\alpha_{13}$ and $\alpha_{14}$ fixes $\delta$; no congruence separates the
+classes; every $T_{\mathrm{Co}}$ wall reflection fixes $\delta$; the $\delta$-preserving part of $G_v$ gives two orbits;
+Sterk states $G_v$'s shape only at (4.3.6) and (4.3.7); his $\Gamma$ is this corpus's $\Gamma_{\mathrm{En},2}$; and no
+source here prints the Coble orbits. Each is a file of its own with the page it rests on.
+
 **What is left on the issue:** the cusp-5 row, and it needs a `gamma-co-2` card certified by computation from the
 library's own construction of $\Gamma_{\mathrm{Co},2}$ — which needs an exact index for the stabilizer of a
 non-degenerate sublattice, or a call that presents that stabilizer as a subgroup of $O(T_{\mathrm{Co}})$, neither of
