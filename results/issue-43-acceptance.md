@@ -96,47 +96,14 @@ and the root-class orbits by the centralizer of $s_\delta$ (`results/issue-49-tr
 recomputes them from the Gram tensors. The earlier rows with 1, 1 and 2 orbits omitted the roots $\beta_u = \alpha_u + \delta$
 and had no row at the 2-orbit cusp.
 
-### What the card would be built from, and what it would cost
+### The group card `gamma-co-2`
 
-The owner's library has since identified the two *restricted stabilizers* on this lattice
-(`sage-extensions` `results/issue359-tco-restricted-stabilizers.md`, rows 1 and 2, and #286's item 1):
-$R_{\Gamma_{\mathrm{En}}} = \widetilde O^{+}(T_{\mathrm{Co}})$ and $R_{\Gamma^{K}_{\mathrm{En}}} = O(T_{\mathrm{Co}})$,
-with the indices $93997183795200 = 2|O(A_{T_{\mathrm{Co}}}, q)|$ and $1$ computed from the images of the constructed
-generators. So the group of the $\Gamma_{\mathrm{Co},2}$-cusps is $\Gamma_{\mathrm{Co},2} = R_{\Gamma_{\mathrm{En},2}}$, an index-$k$
-subgroup of $\widetilde O^{+}(T_{\mathrm{Co}})$ — the card [`otilde-plus-t-co`](../arithmetic-groups/otilde-plus-t-co.md)
-that 6JRR already carries, whose index $93997183795200$ and 95 generator matrices are certified on this card. A
-`gamma-co-2` card therefore has a parent to name and a value to compute:
-`index_in_orthogonal_group = 93997183795200 · k` with $k = [\widetilde O^{+}(T_{\mathrm{Co}}) : \Gamma_{\mathrm{Co},2}]$
-the order of the image of the $T_{\mathrm{En}}$-side discriminant character on it.
-
-The two factors of that index are computable now: `results/probe-43-co2-index-value.py` reads card 6JRR's Gram tensor,
-asks the library for its discriminant orthogonal group, and gets $|O(A_{T_{\mathrm{Co}}}, q)| = 46998591897600$ in 5 s,
-so the card would state
-
-$$[O(T_{\mathrm{Co}}) : \Gamma_{\mathrm{Co},2}] = 93997183795200 \cdot 46998591897600 = 4417735280714304737771520000 .$$
-
-The second factor is now computed from the owner's construction rather than from the order of $O(A,q)$ alone:
-`results/probe-43-co2-family.py` asks for `Stab_{O(T_En)}(delta).group_generators()` — **290 generators in 67 s** —
-restricts every one of them to $T_{\mathrm{Co}}$ (all 290 restrictions integral in $T_{\mathrm{Co}}$'s own coordinates)
-and maps them by `rho`, whose images generate a subgroup of order **46998591897600**. The product is therefore computed,
-not assumed, and the card is authored from it.
-
-`arithmetic-groups/gamma-co-2.md` now exists: `lattice: 6JRR`, `parent_group: otilde-plus-t-co`,
-`ambient_lie_group: o2-9`'s slug, `cardinality: aleph0`, `index_in_orthogonal_group = 4417735280714304737771520000`,
-and an `abstract_structure` that names the construction ("the image in $O(T_{\mathrm{Co}})$ of the isometries of
-$T_{\mathrm{En}}$ that lie in $\Gamma_{\mathrm{En},2}$ and preserve $T_{\mathrm{Co}}$") without claiming the Coble
-period identification, which the corpus records as conjectural for $\widetilde O^{+}(T_{\mathrm{Co}})$ itself. Its
-citation says exactly that: the construction is sage-extensions' own record and issue (#286 item 1), not a definition in
-print. The index is certified on 6JRR as `arithmetic-group.gamma-co-2.index_in_orthogonal_group`
-`ff6667b1ebc3d93c0e7cf5a8451cb9fd6d57f596453c6f1a1026e30210e5da7e`, and
-`tests/test_cusp_root_orbits.py::test_the_coble_group_card_states_the_index_its_computation_certifies` was red before
-the card and is green after.
-
-The cost is why this is a scheduled run rather than a turn's work: the owner measures the ambient stabilizer's family at
-**330 generators in 352 s**, their restrictions to $T_{\mathrm{Co}}$ at 40 s, and `rho` on them at 25 s
-(`issue359-tco-restricted-stabilizers.md`, row 1). A card certified by computation needs that run plus the filter to
-$\Gamma_{\mathrm{En},2}$, and the row at the 135-orbit $\Gamma_{\mathrm{Co},2}$-cusp needs, on top of it, an orbit decision with the resulting family (or the
-owner's class-level equivalence).
+$\Gamma_{\mathrm{Co},2} := R_{\Gamma_{\mathrm{En},2}}$, the image in $O(T_{\mathrm{Co}})$ of $\mathrm{Stab}_{\Gamma_{\mathrm{En},2}}(\delta)$
+(research def:gamma-co-groups(5)). It equals $\rho^{-1}(P_0)$ with $P_0 = \mathrm{Stab}_{O(q)}(A_{U(2)})$
+(sage-extensions `results/issue286-gamma-co-2-is-the-discriminant-preimage.md`). So it contains
+$\ker\rho = \widetilde O(T_{\mathrm{Co}})$, and its index in $O(T_{\mathrm{Co}})$ is $[O(q) : P_0] = 67456$, the number of
+hyperbolic lines of $[h/2]^\perp$. `results/fix-49-gamma-co-2-card.py` counts these lines and checks that $O(q)$ is
+transitive on them. The card names no parent below $O(T_{\mathrm{Co}})$.
 
 ### The rows' data, in card 6JRR's own basis
 

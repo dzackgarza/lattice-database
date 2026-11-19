@@ -247,19 +247,25 @@ def test_a_second_row_at_one_cusp_is_refused_when_it_changes_the_first() -> None
 
 
 def test_the_coble_group_card_states_the_index_its_computation_certifies() -> None:
-    r"""#43: `gamma-co-2` exists because the library builds the group, and its index is a computation.
+    r"""#49: `gamma-co-2` is $\Gamma_{\mathrm{Co},2} = R_{\Gamma_{\mathrm{En},2}} = \rho^{-1}(\mathrm{Stab}\,A_{U(2)})$, of index 67456 in $O(T_{\mathrm{Co}})$.
 
-    The `gamma-co-2` rows of card 6JRR's `cusp_root_orbits` need this card, which is certified by computation from the
-    library's own construction of $\Gamma_{\mathrm{Co},2} = R_{\Gamma_{\mathrm{En},2}}$ — never authored from the
-    project's draft. The card states the parent it restricts inside, the index, and no value it does not compute; this
-    test states that, and that 6JRR cites the certificate its shard holds.
+    The group contains $\ker\rho = \widetilde O(T_{\mathrm{Co}})$, so its card names no parent below $O(T_{\mathrm{Co}})$.
+    Its index is $[O(q) : P_0]$, the number of hyperbolic lines of $[h/2]^\perp$. This recounts them from card 6JRR's
+    Gram tensor: each line holds exactly two singular points with $B = 1$. It also checks that 6JRR cites the
+    certificate its shard holds.
     """
     from latticedb.catalogues import ArithmeticGroup
 
     root = ROOT
+    metadata = corpus.front_matter(corpus.read_card(root / "lattices" / "6JRR.md"))
+    half = [[x // 2 for x in row[1:]] for row in metadata["gram_tensor"][1:]]
+    points = [x for x in __import__("itertools").product((0, 1), repeat=10) if any(x)]
+    form = lambda x, y: sum(x[i] * half[i][j] * y[j] for i in range(10) for j in range(10))
+    singular = [x for x in points if form(x, x) // 2 % 2 == 0]
+    lines = sum(1 for x in singular for y in singular if form(x, y) % 2 == 1) // 2
     card = ArithmeticGroup.model_validate(corpus.front_matter(corpus.read_card(root / "arithmetic-groups" / "gamma-co-2.md")))
-    assert card.lattice == "6JRR" and card.parent_group == "otilde-plus-t-co"
-    assert card.data.index_in_orthogonal_group == 93997183795200 * 46998591897600
+    assert card.lattice == "6JRR" and card.parent_group is None
+    assert card.data.index_in_orthogonal_group == lines == 67456
     assert card.data.cardinality == "aleph0"
     assert card.standard_name is None, "the group is named by construction, not one of the eight"
     loaded = corpus.cards(root, ("6JRR",))

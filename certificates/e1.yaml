@@ -31892,14 +31892,12 @@
   hash: 3bd380005b515e29653ca74fc0924b8bc77c96e9bfc499c37c6670aac0a10ef3
   by: research preamble
 6JRR arithmetic-group.gamma-co-2.index_in_orthogonal_group:
-  hash: ff6667b1ebc3d93c0e7cf5a8451cb9fd6d57f596453c6f1a1026e30210e5da7e
-  by: 'results/author-43-gamma-co-2.py: the index of Gamma_Co,2 in O(T_Co) as the
-    product of the certified index of Otilde+(T_Co), 93997183795200, with the order
-    46998591897600 of the T_En-side discriminant character''s image on the restricted
-    family, which results/probe-43-co2-family.py computes from 290 generators of Stab_{O(T_En)}(delta)
-    (sage-extensions 6ae2108). The construction is sage-extensions'' R_{Gamma_En}
-    = Otilde+(T_Co) identification (results/issue359-tco-restricted-stabilizers.md,
-    rows 1-2); no published source defines the group and none is claimed'
+  hash: 2c70cef5720877c67d939d6dc1f474391afcb6ced20a6521d7c566c7adcb882e
+  by: 'results/fix-49-gamma-co-2-card.py: [O(T_Co) : Gamma_Co,2] = [O(q) : Stab(A_U(2))]
+    = 67456, the number of hyperbolic lines of [h/2]^perp counted on this card''s
+    Gram tensor; Gamma_Co,2 = R_{Gamma_En,2} = rho^{-1}(P_0) by sage-extensions results/issue286-gamma-co-2-is-the-discriminant-preimage.md,
+    rho onto by Nikulin 1980 Thm. 3.6.3, O(q) transitive on hyperbolic lines, checked
+    by the orbit of A_U(2) under the transvections of [h/2]^perp'
 6JRR arithmetic-group.otilde-plus-t-co.generator_morphisms:
   hash: 648cd8af277cd894a520d2ec7416c5fdd54555fc8427e6d47fb481715d5a09e7
   by: dzackgarza/research@d77e0deae2; thm:coble-fifty-six-ordinary-full-kernel-generation
