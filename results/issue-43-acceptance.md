@@ -78,11 +78,22 @@ that 6JRR already carries, whose index $93997183795200$ and 95 generator matrice
 `index_in_orthogonal_group = 93997183795200 · k` with $k = [\widetilde O^{+}(T_{\mathrm{Co}}) : \Gamma_{\mathrm{Co},2}]$
 the order of the image of the $T_{\mathrm{En}}$-side discriminant character on it.
 
-The cost is the part that keeps this out of a turn's work: the owner's own record measures the ambient stabilizer's
-family at **330 generators in 352 s**, their restrictions to $T_{\mathrm{Co}}$ at 40 s, and `rho` on them at 25 s
+The two factors of that index are computable now: `results/probe-43-co2-index-value.py` reads card 6JRR's Gram tensor,
+asks the library for its discriminant orthogonal group, and gets $|O(A_{T_{\mathrm{Co}}}, q)| = 46998591897600$ in 5 s,
+so the card would state
+
+$$[O(T_{\mathrm{Co}}) : \Gamma_{\mathrm{Co},2}] = 93997183795200 \cdot 46998591897600 = 4417735280714304737771520000 .$$
+
+That number is a *derivation* — the index of $\widetilde O^{+}(T_{\mathrm{Co}})$ from the owner's own row, times the
+order of the character's image computed here — and not a call the library makes for $\Gamma_{\mathrm{Co},2}$ itself, so
+no card states it yet. It is the value such a card must reproduce when the owner's construction is asked for the index
+directly, and it is what I will check that call against.
+
+The cost is why this is a scheduled run rather than a turn's work: the owner measures the ambient stabilizer's family at
+**330 generators in 352 s**, their restrictions to $T_{\mathrm{Co}}$ at 40 s, and `rho` on them at 25 s
 (`issue359-tco-restricted-stabilizers.md`, row 1). A card certified by computation needs that run plus the filter to
 $\Gamma_{\mathrm{En},2}$, and the cusp-5 row needs, on top of it, an orbit decision with the resulting family (or the
-owner's class-level equivalence). That is a scheduled run, not a turn's probe.
+owner's class-level equivalence).
 
 ### The rows' data, in card 6JRR's own basis
 
