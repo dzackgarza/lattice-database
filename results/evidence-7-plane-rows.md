@@ -655,3 +655,31 @@ for the 87 polarisation cards, here in its second use.
 `flag_orbits`: those the database can compute, their walks are the dispatch's, and citing a record for
 them would pre-empt the computation #7's acceptance asks for. Scoped to 6JRR after the change:
 records 0, relations 0.
+
+## The 8 in `189720 = 23715 · 8` is the index, and the star count is the same number (2026-11-19)
+
+Last section derived the 8 as `189720 / 23715`. The closed `#286` record derives `189720` from the
+same 8 as an **index**: `[Stab_{O(q)}(J) : ρ(Stab_{O(T_Co)}(P))] = |Stab(J)| / |ρ(Stab P)| =
+1981808640 / 247726080` (sage-extensions `47865446a7c37c85d873f91ac9d74cea472e208c`,
+`results/issue607-gamma-co-2-rows-by-the-polar-space.md:98`, with `:113` for
+`247726080 = |ρ(Stab P)|`; `1981808640 = |O(q)|/23715` is `results/issue286-acceptance.md:78` and
+`results/issue286-the-base-point-is-not-a-plane-class.md:16`). `results/probe-7-the-eight.py` asserts
+every identity that makes them one number:
+
+```
+|O(q)| / 23715          = 1981808640   true
+1981808640 / 247726080  = 8            true
+189720 / 23715          = 8            true   (the star count)
+23715 * 8               = 189720       true   (the card's computed plane count)
+527 * 135 * 8           = 569160       true
+```
+
+The card now names the index the 8 is and keeps the star count as the independent route to it.
+Printed pages behind the index: Dutour Sikirić–Hulek, Lemma 3.6, printed p. 22; Dolgachev–Kondō §2
+p. 510 with §3 (3.6)/Prop. 3.2, printed p. 513.
+
+**What the closed record does not contain.** Its four groups are `O`, `Õ`, `Õ⁺` and `Γ_{Co,2}`
+(`results/issue286-acceptance-final.md`, item 1). It has no row for `K ∩ SO` or `K ∩ SO ∩ O⁺`, so the
+`SOtilde` and `SOtilde+` rows are neither computed here nor covered by a record, and `SOtilde+`'s own
+route — its finite character quotient — still does not build on this host (594 s, killed). `#286`'s
+closure does not weaken that claim; it does not touch it.
