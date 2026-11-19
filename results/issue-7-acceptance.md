@@ -50,6 +50,8 @@ each, as scale-1 self-isometries among this card's `morphisms`, and the two fiel
 lattice card as `arithmetic-group.<slug>.index_in_orthogonal_group` (`682c595c…`, `326145cc…`) and
 `arithmetic-group.<slug>.generator_morphisms` (`3b6b6031…`, `648cd8af…`).
 
+Each name is checked against the card itself: `results/probe-7-generators-are-self-isometries.py` reads the 437 scale-one self-isometries stored in `lattices/6JRR.md`'s `morphisms`, resolves all 56 and all 95 names to exactly one of them, and verifies $M^{T}GM = G$ in integers for every one — `all_resolve: true`, `all_are_isometries: true` for both cards, and `gamma-co-2` names none of its own, as it should not.
+
 ## 4. The incidence field
 
 `flag_orbits` on the three group cards — `569160` on each standard kernel card, carried from the
