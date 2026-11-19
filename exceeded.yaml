@@ -610,6 +610,10 @@
   hash: 182a020bd256d7b9ee689e48b8cca285744e6713bd4e5c7b3dce7727fe1a7743
   seconds: 0
   lost: true
+17DA integral.discriminant_form:
+  hash: 0ff337d51226842705d666ad59ba462fd2c0b478e6ef16a3840871a6b6933f1b
+  seconds: 0
+  lost: true
 17G7 definite.genus_theta_series:
   hash: 1c18a16c88690648f868735bc840b2ded6a493875cc708a03cf84d33976bed01
   seconds: 11
@@ -1025,10 +1029,6 @@
   hash: 5a44397e49a4a862203a3ddfa51f2c629317c5c0175b84e7b640522bd3424541
   seconds: 5
   lost: true
-3G5T integral.discriminant_sequence:
-  hash: 3b971f9733bce44acad06d5c355e15716483a19c113f499b7c2db70ea2996c30
-  seconds: 16111
-  lost: true
 3G5X integral.overlattice_count:
   hash: ee1f4a7d0b377a9993b77fa3d6444c4907d5e97372afcb9c9258c478112eb3e4
   seconds: 6
@@ -1167,10 +1167,6 @@
 3IAC integral.overlattice_count:
   hash: 515a93ce92ba527fc2f26325a66a09d17f46aeccec254f141d6e9f9c53cece3d
   seconds: 10
-  lost: true
-3IAN integral.discriminant_sequence:
-  hash: 0e4c1ba6b381b6895dd7024371941edaa9c476e490d33d4530574bf71ffaf8e6
-  seconds: 5286
   lost: true
 3IC9 integral.overlattice_count:
   hash: 05d572f4585d4e11a569f58a0f8f94553738c10eaaa518d52a7f28e8902c52b8
