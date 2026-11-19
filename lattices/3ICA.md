@@ -25,6 +25,7 @@ certifications:
   integral.local_representations: 6c3a04cdc62e692f5fdab11d7438357a5af6d69fa594c7b2ea00e8f7626717e4
   integral.local_densities: 89540b9340d9382ff82cda776f683eae4e38dbb8631c76c0f08bfccc7551fc2b
   integral.discriminant_sequence: e2c5c52c1975ca46ccc4d4cd2c892d3cb7c6e323c010f50ac8d9df06bd69c6ea
+  definite.regular: 04318eebb055514ab946a3a72f943e7ed17c8bad519ff967361ec890d9095a0f
 rank: 3
 gram_tensor:
 - [4, 2, 2]
@@ -181,6 +182,7 @@ definite:
     scale: 2
     simple_roots:
     - [1, 0, 0]
+  regular: false
 root_sublattice:
   invariant_factors: [1, 1, 2]
 morphisms:
