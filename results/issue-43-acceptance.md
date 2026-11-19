@@ -81,13 +81,57 @@ at sage-extensions `41b75d7`, and it does not answer:
 | `stabilizer.finite_character_quotient()` | `ValueError` — the subgroup is not a character kernel |
 | `stabilizer.discriminant_image()` | `ValueError` (the same) |
 
-So the group of the T_Co cusps is a setwise stabilizer of a **non-degenerate** sublattice, and the library's exact
-index route — the finite character quotient a standard subgroup has, and the one every certified index on this corpus
-comes from — does not apply to it: the index is a coset-space question the library declines to answer exactly. That is
-a capability fact about the owner's library, not a property of this card, and it is worth naming on its own: an
-arithmetic subgroup given by a stabilizer condition has no exact index here, only the enumeration the assertion refuses.
+The second construction is the one the library *does* attest for this case — `T_Co = \delta^\perp` with
+$\delta = e - f$ primitive of square $-2$, so the stabilizer of the sublattice is the setwise stabilizer of the line
+$\mathbb{Z}\delta$, which the dispatch of `_marked_automorphism_generators` describes as "the same gluing
+construction with the sign on the line allowed". `results/probe-43-co2-index.py` asks for that subgroup
+($O(T_{\mathrm{En}}).\mathrm{stabilizer}(\delta)$ pointwise and setwise) and it answers no better:
 
-Three inputs would close the item, and each is someone else's to give: a published definition of
-$\Gamma_{\mathrm{Co},2} = \mathrm{Stab}_{O(T_{\mathrm{En}})}(T_{\mathrm{Co}})$ to cite, or a decision to key the
-card to the group's own draft, or an exact index for the setwise stabilizer of a non-degenerate sublattice from the
-owner, plus the owner's class-level equivalence returning at a Coble cusp for the (4.3.9) count.
+| call | result |
+| --- | --- |
+| `O(T_En).stabilizer(delta)` | `{g : g fixes e_e - e_f}`, a predicate, in 0.1 s |
+| `stabilizer(delta, action="setwise")` | the same predicate |
+| `has_finite_coset_space()` on either | `False` |
+| `contains_character_kernel()` on either | `False` |
+| `index()` on either | `AssertionError`, the same "no exact value" |
+
+So both constructions of the group of the T_Co cusps — the stabilizer of the sublattice and of the vector up to sign —
+come back as membership predicates, and the finite character quotient every certified index on this corpus comes from
+does not apply to either: $\delta$ has divisibility $1$, its class in $A_L$ is trivial, and the discriminant carries
+no condition to cut the group out by. What the owner does present at a vector is the generator family
+(`vector_stabilizer_generators`, 27 members in 7.7 s at an Enriques cusp), which is a family of isometries of
+$T_{\mathrm{En}}$ — the wrong side of the embedding for a card of 6JRR, whose `generator_morphisms` must be isometries
+of $T_{\mathrm{Co}}$, and the library has no call that maps a stabilizer into the orthogonal group of the sublattice it
+stabilizes.
+
+Two decisions and one computation would close the item, and none of them is this repository's:
+
+1. **the key** — either a published definition of
+   $\Gamma_{\mathrm{Co},2} = \mathrm{Stab}_{O(T_{\mathrm{En}})}(T_{\mathrm{Co}})$ to cite, so the card can be
+   authored as `otilde-plus-t-co` was, or a decision to author it from the project's draft (which the standing decision
+   on this issue excludes), or a decision that the row's group is one of the eight standard subgroups and the row is
+   keyed to that instead — which states a different group's orbits and the earlier evidence declined to do;
+2. **the card's values** — there is no index to compute, and this is now settled rather than open: see below. What a
+   card could still carry is a generating family, and that needs a call that presents the stabilizer as a subgroup of
+   $O(T_{\mathrm{Co}})$ so its generators can be stored on 6JRR — or the owner's certificate that the family it does
+   return at a vector generates the stabilizer;
+3. **the (4.3.9) count** — the owner's class-level equivalence returning at a Coble cusp, without which the three
+   root classes there lie between one orbit and three.
+
+### The index is infinite, so no card can state one
+
+The two constructions above answer no exact index because there is no finite one to answer. $T_{\mathrm{Co}} =
+\langle 2\rangle \oplus U(2) \oplus E_8(-2)$, so a vector $(a, (c, d), w)$ has
+
+$$q = 2a^2 + 4cd - 2W, \qquad W = \tfrac{1}{2}(w, w)_{E_8},$$
+
+and $q = -2$ forces $W = a^2 + 2cd + 1$. Take $a = 0$ and $cd = k$ for $k = 0, 1, 2, \dots$: every odd $W = 2k+1$
+occurs, and every $W \ge 0$ is represented by $E_8$, whose theta series is
+$\Theta_{E_8} = 1 + \sum_{W \ge 1} 240\sigma_3(W) q^W$ with every coefficient positive. So $T_{\mathrm{Co}}$ carries
+infinitely many vectors of square $-2$, and $[O(T_{\mathrm{Co}}) : \mathrm{Stab}(v)]$ is countably infinite for each of
+them. The same count with the $U$ summand of $T_{\mathrm{En}}$ gives infinitely many there too.
+
+So `index_in_orthogonal_group` — `Annotated[int, Field(gt=0)] | None` at `src/latticedb/invariant_models.py:496` —
+cannot hold this group's index at all, and a $\Gamma_{\mathrm{Co},2}$ card would state none. (An enumeration of the
+square $-2$ vectors, `vectors_of_square(-2)`, was attempted as the direct count and had not finished after twenty
+minutes when it was stopped, which is consistent with the set being infinite.)
