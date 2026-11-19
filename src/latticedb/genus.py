@@ -102,6 +102,18 @@ tensor, so both are certified here, and neither is a field of this card: the gen
 ARITHMETIC_FIELDS = ("index_in_orthogonal_group", "generator_morphisms")
 """The fields of an arithmetic-group card that a computation fills, in the order it fills them."""
 
+ARITHMETIC_ORBIT_FIELDS = ("line_orbits", "plane_orbits", "flag_orbits")
+"""The orbit counts of an arithmetic-group card, which a run asks for by name, in the order it stores them.
+
+A group card may state how many orbits of primitive isotropic lines, of primitive isotropic planes
+and of isotropic flags its subgroup has. The plane count repeats the lattice card's row, and the
+flag count is the incidence of the two strata, which the owner decides by walking the plane cusps:
+6132 s and 7973 s per $T_{\\mathrm{Co}}$-kernel row on a runner of its own (sage-extensions#286,
+image run 44392429173), where the index of the same subgroup is read off its finite character image
+in a second. So a run does not ask these of every group card: it names them, and it names all three,
+because a flag count is stored with the two counts it joins.
+"""
+
 
 def certified_value(field: str, value: Yaml, lattice: Lattice | None = None) -> Yaml:
     """The stored value committed to by one completed preamble computation."""
@@ -226,6 +238,15 @@ class Request(TypedDict):
 
 ORBIT_ROW_SEPARATORS = ("[", "]")
 
+ORBIT_ROW_AXES = ("constant", "planes")
+"""The parts of a row that a run can ask for on their own: its line count and its plane count.
+
+A row states both, and the owner answers them from two operations with costs three orders of
+magnitude apart — on $T_{\\mathrm{Co}}$'s kernel rows the line count is 122--172 s and the plane
+count is 1813--2171 s (sage-extensions#286) — so a run names the part it is about rather than
+paying for both, exactly as a run names a row rather than the whole field (#7).
+"""
+
 
 def orbit_row(field: str, row: str) -> str:
     """One subgroup's row of an orbit field, as a request names it: `primitive_orbits[Otilde]`.
@@ -238,13 +259,28 @@ def orbit_row(field: str, row: str) -> str:
     return f"{field}{ORBIT_ROW_SEPARATORS[0]}{row}{ORBIT_ROW_SEPARATORS[1]}"
 
 
+def orbit_row_parts(field: str) -> tuple[str, str, str | None] | None:
+    """The orbit field a request's row name belongs to, the row, and the part of it, if any.
+
+    `primitive_orbits[Otilde]` is a row and `primitive_orbits[Otilde].planes` is its plane
+    count alone. `None` for a request that names no row: a whole field, or any other computation.
+    """
+    base, opener, rest = field.partition(ORBIT_ROW_SEPARATORS[0])
+    if not opener:
+        return None
+    row, closer, tail = rest.partition(ORBIT_ROW_SEPARATORS[1])
+    if not closer or not base or not row:
+        return None
+    if not tail:
+        return (base, row, None)
+    axis = tail.removeprefix(".")
+    return (base, row, axis) if tail != axis and axis in ORBIT_ROW_AXES else None
+
+
 def orbit_row_of(field: str) -> tuple[str, str] | None:
     """The orbit field a request's row name belongs to and the row, or None for a whole field."""
-    base, opener, rest = field.partition(ORBIT_ROW_SEPARATORS[0])
-    if not opener or not rest.endswith(ORBIT_ROW_SEPARATORS[1]):
-        return None
-    row = rest[: -len(ORBIT_ROW_SEPARATORS[1])]
-    return (base, row) if base and row else None
+    parts = orbit_row_parts(field)
+    return None if parts is None else (parts[0], parts[1])
 
 
 def stored_in(field: str, definiteness: str | None = None) -> tuple[str, type[BaseModel]]:
@@ -290,7 +326,25 @@ def in_shard(tag: str, shard: tuple[int, int]) -> bool:
     return certificates.tag_hash(tag) % count == index
 
 
-def arithmetic_requests(lattice: Lattice, loaded: corpus.Corpus, held: Certificates) -> list[tuple[str, dict[str, Yaml]]]:
+def arithmetic_orbit_siblings(field: str) -> frozenset[str]:
+    r"""The arithmetic-group orbit counts of one group card, which a run asks and stores together.
+
+    A flag count is stored with the line and plane counts it joins (`GroupData._orbit_counts`), so
+    the three are one computation's worth of work in one worker: the plane row is retained and the
+    incidence reads it. `frozenset()` for a field that is not one of the three.
+    """
+    slug, _, short = field.rpartition(".")
+    if not slug.startswith(ARITHMETIC_PREFIX) or short not in ARITHMETIC_ORBIT_FIELDS:
+        return frozenset()
+    return frozenset(f"{slug}.{count}" for count in ARITHMETIC_ORBIT_FIELDS)
+
+
+def arithmetic_requests(
+    lattice: Lattice,
+    loaded: corpus.Corpus,
+    held: Certificates,
+    wanted: tuple[str, ...] = (),
+) -> list[tuple[str, dict[str, Yaml]]]:
     r"""The uncertified fields of the arithmetic-group cards that this lattice states.
 
     An arithmetic-group card names one subgroup $\Gamma \leq O(L)$ and, when it has a
@@ -302,6 +356,11 @@ def arithmetic_requests(lattice: Lattice, loaded: corpus.Corpus, held: Certifica
     matching completed certificate already covers is not requested again. A card without a
     `standard_name`, such as a named subgroup defined by a source, has no owner operation that
     presents it, and is left alone.
+
+    Its three orbit counts are asked only where a run names one of them
+    (`arithmetic-group.<slug>.flag_orbits`), and then all three together: a flag count is stored
+    with the two counts it joins, and the three are one walk of the same subgroup — the plane row
+    is retained and the incidence reads it — so a run that names one pays for them once.
     """
     groups = {entry.value.slug: entry.value for entry in loaded.arithmetic_groups if entry.value.lattice == lattice.tag}
     chosen: list[tuple[str, dict[str, Yaml]]] = []
@@ -318,6 +377,10 @@ def arithmetic_requests(lattice: Lattice, loaded: corpus.Corpus, held: Certifica
             expected_hash = certificates.certification_hash(computation, lattice, certified_value(field, value, lattice))
             if stored is None or certificates.is_pending(held, computation, lattice.certifications.get(field), expected_hash):
                 chosen.append((field, {"slug": slug, "standard_name": card.standard_name}))
+        if any(f"{ARITHMETIC_PREFIX}{slug}.{short}" in wanted for short in ARITHMETIC_ORBIT_FIELDS):
+            for short in ARITHMETIC_ORBIT_FIELDS:
+                if getattr(card.data, short) is None:
+                    chosen.append((f"{ARITHMETIC_PREFIX}{slug}.{short}", {"slug": slug, "standard_name": card.standard_name}))
     return chosen
 
 
@@ -351,6 +414,42 @@ def orbit_rows_to_ask(
     return rows
 
 
+def orbit_plane_rows_to_ask(
+    lattice: Lattice,
+    field: str,
+    stored_value: Yaml,
+    triage: failures.Failures,
+    log: exceeded.Interruptions,
+    wanted: tuple[str, ...],
+) -> list[str]:
+    r"""The plane parts of the orbit rows a run names, in the order the schema lists the subgroups.
+
+    A row states two counts, and its plane count is the expensive one: it is the owner's orbit
+    walk over the primitive isotropic planes, 1813--2171 s on $T_{\mathrm{Co}}$'s kernel rows,
+    where the line count of the same row is 122--172 s (sage-extensions#286). Every indefinite
+    card that stores a row would pay that walk, and most of them get their plane count from a
+    source rather than from a computation, so a scheduled run does not ask this part of a row: a
+    run asks it by naming it, `--field 'primitive_orbits[Otilde].planes'`, and the row's line
+    count is asked for as it always was. A part the card already states is not asked again, and a
+    part a failure or an interrupted run quarantines is not asked at all.
+    """
+    stored = stored_value if isinstance(stored_value, dict) else {}
+    parts: list[str] = []
+    for row in STANDARD_SUBGROUPS:
+        part = f"{orbit_row(field, row)}.planes"
+        if part not in wanted:
+            continue
+        series = stored.get(row)
+        if isinstance(series, dict) and series.get("planes") is not None:
+            continue
+        if failures.blocked(triage, name(lattice.tag, part, lattice.definiteness), lattice):
+            continue
+        if exceeded.is_exceeded(log, name(lattice.tag, part, lattice.definiteness), lattice):
+            continue
+        parts.append(part)
+    return parts
+
+
 def requests(
     loaded: corpus.Corpus,
     held: Certificates,
@@ -359,6 +458,7 @@ def requests(
     shard: tuple[int, int] = (0, 1),
     *,
     failed: failures.Failures | None = None,
+    wanted: tuple[str, ...] = (),
 ) -> list[Request]:
     """For each nondegenerate record in `shard`, the uncertified applicable preamble computations.
 
@@ -420,6 +520,8 @@ def requests(
                     # rows the card states, rather than the whole series being asked again.
                     rows = orbit_rows_to_ask(lattice, field, stored_value, triage, log, only_missing=False)[:1]
                 fields.extend(rows)
+                # The plane count of a row is its own computation, and a run asks for it by name.
+                fields.extend(orbit_plane_rows_to_ask(lattice, field, stored_value, triage, log, wanted))
                 continue
             if pending:
                 fields.append(field)
@@ -430,7 +532,7 @@ def requests(
         # computation is quarantined in triage, or outran a whole job.
         arithmetic = [
             (field, group)
-            for field, group in arithmetic_requests(lattice, loaded, held)
+            for field, group in arithmetic_requests(lattice, loaded, held, wanted)
             if not (
                 exceeded.is_exceeded(log, name(lattice.tag, field, lattice.definiteness), lattice)
                 or failures.blocked(triage, name(lattice.tag, field, lattice.definiteness), lattice)
@@ -847,8 +949,10 @@ def store_arithmetic_group(
 
     A generator is one isometry $L \to L$, so it is a `morphisms` entry of the lattice card with
     `scale: 1`, and the group card lists the names of those entries: the matrices are stored once.
-    The two values are certified on the lattice card, whose Gram tensor is the input of both, under
-    the names `arithmetic-group.<slug>.<field>`; the group card states the values.
+    The values are certified on the lattice card, whose Gram tensor is the input of every one of
+    them, under the names `arithmetic-group.<slug>.<field>`; the group card states the values. The
+    three orbit counts of a subgroup are stored together, because a flag count is schema-checked
+    against the two counts it joins.
     Returns each stored field with the value its certificate commits to.
     """
     lattice_path = root / "lattices" / f"{tag}.md"
@@ -869,6 +973,11 @@ def store_arithmetic_group(
     if isinstance(index, int) and not isinstance(index, bool):
         data["index_in_orthogonal_group"] = index
         stored.append(("index_in_orthogonal_group", index))
+    for short in ARITHMETIC_ORBIT_FIELDS:
+        count = values.get(short)
+        if isinstance(count, int) and not isinstance(count, bool):
+            data[short] = count
+            stored.append((short, count))
     if not stored:
         return stored
     model = ArithmeticGroup.model_validate({**group_metadata, "data": data})
@@ -908,7 +1017,9 @@ def certify(
     that only wants the fields does not wait for one, and the searches are a job of their own.
     `fields` narrows the queue to the named computations, a field (`primitive_orbits`) taking the
     rows of that field with it: a card whose other fields are expensive can be asked for the one
-    value a run is about, without a ledger entry standing in for the reason.
+    value a run is about, without a ledger entry standing in for the reason. A row's plane count
+    is the one value a row does not carry by naming the row, because it costs the owner's plane
+    walk rather than its line walk: a run asks for it as `primitive_orbits[Otilde].planes`.
     `deadline` is the time, in seconds since the epoch, at which the job's timeout
     ends this run. A computation in progress is logged in `exceeded.yaml` until it
     finishes, checkpointing the seconds actually spent in this run. A worker that
@@ -971,16 +1082,21 @@ def certify(
             exceeded.save(root, log)
 
     try:
-        chosen = requests(loaded, held, log, tags, shard, failed=failed)
+        chosen = requests(loaded, held, log, tags, shard, failed=failed, wanted=fields)
         if fields:
-            # A filter names a computation, and a field's name takes its rows with it.
+            # A filter names a computation, and a field's name takes its rows with it. A row's
+            # plane count is asked for only by its own name, so it is named and not inherited. An
+            # arithmetic-group orbit count is one of three the run asks together, so naming one
+            # keeps the three.
             wanted = set(fields)
             narrowed: list[Request] = []
             for request in chosen:
                 kept = [
                     field
                     for field in request["fields"]
-                    if field in wanted or (orbit_row_of(field) or (field,))[0] in wanted
+                    if field in wanted
+                    or (orbit_row_of(field) or (field,))[0] in wanted
+                    or (field.startswith(ARITHMETIC_PREFIX) and bool(arithmetic_orbit_siblings(field) & wanted))
                 ]
                 if kept:
                     narrowed.append({**request, "fields": kept})
