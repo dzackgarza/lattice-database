@@ -31938,16 +31938,17 @@
   hash: 000a0cf69d40037137de8d1340ab9613d0fc02bfe7b5c79bddd0f5ff9cd831d3
   by: research preamble
 6JRR integral.cusp_root_orbits:
-  hash: d55e604b504b2b7bce0e41054fa4d4fcf95168e18e77a1c471557bc71b7140b8
-  by: 'H. Sterk, "Compactifications of the period space of Enriques surfaces, Part
-    I", Math. Z. 207 (1991), 1-36: (4.3.7), p. 22, and (4.3.8), p. 23, print the chambers
-    at those cusps; T_Co is delta^perp for delta = e - f, and of each chamber''s walls
-    exactly one that lies in T_Co is orthogonal to the cusp and of square -2, so the
-    cusp''s root family in K_I is a single class and its orbits are one orbit under
-    every subgroup. results/store-43-coble-rows.py writes these two rows. The (4.3.9)
-    row is withdrawn (#49): its count of two rested on W_v preserving the class of
-    delta in K_I, which the wall alpha_9 of card 029J refutes (square -4, orthogonal
-    to the cusp, pairing -2 with delta, so its reflection sends delta to delta - alpha_9)'
+  hash: 66bc2529a661769b3b5f276ff9bb322ad886cb08b1d7c32f2febdec3f9cb04be
+  by: delta = e - f = -alpha_11 is a wall of Sterk's (4.3.9) chamber (p. 24) with
+    no odd edge, so by Allcock, Reflection centralizers in Coxeter groups, arXiv:1106.3822v2,
+    Theorem 5 and Corollary 6, C_W(s_11) = <s_11> x W_perp with W_perp the Coxeter
+    group whose simple roots are the walls orthogonal to alpha_11 and beta_k = alpha_k
+    + alpha_11 for the order-4 edges k = 9, 10; no symmetry other than sigma (alpha_13
+    <-> alpha_14) fixes alpha_11 and no odd path joins distinct root walls of W_perp,
+    so with G_v in {+-1} W_v x| Aut(diagram) the root classes fall in four orbits
+    under Gamma_Co,2, sigma being realized by (4.3.9), p. 24. results/probe-49-cusp-symmetries.py
+    on card 029J computes it; results/issue-49-transporters-and-coble-cusp5.md is
+    the proof
 6JRR integral.discriminant_form:
   hash: 0be391409303d25f25d126795ee881040661b4883ad7473272b34b60b8c414da
   by: research preamble

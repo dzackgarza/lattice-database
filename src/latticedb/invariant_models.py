@@ -378,11 +378,11 @@ class RootClassOrbit(Record):
     )
     transporter_order: Annotated[int, Field(ge=1)] = Field(
         description=(
-            "The order of the cyclic group that the row's proof exhibits acting on the orbit: one transporter carried "
-            "to each class of the orbit, taken as a permutation of the orbit's classes, and its order is the length of "
-            "the cycle it induces. It is $1$ for an orbit of one class, whose exhibited transporter is the identity. "
-            "It is not the size of the cusp stabilizer, which is infinite here, and not the orbit's class count unless "
-            "the exhibited transporter is a single cycle over the whole orbit."
+            "The order of the permutation group that the chamber stabilizer $S \\\\le G_v$ induces on the orbit's root "
+            "walls of the cusp's chamber. $S$ embeds in the symmetry group of the chamber's Coxeter diagram, wall squares "
+            "kept, because the walls span $K_J \\\\otimes \\\\mathbb{Q}$; the order is that of the image of the realized "
+            "symmetries restricted to the orbit's walls. It is $1$ for an orbit of one class. It is not the size of the "
+            "cusp stabilizer, which is infinite, and it can exceed the orbit's class count."
         ),
     )
 

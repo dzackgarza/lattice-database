@@ -145,7 +145,7 @@ def test_the_decided_rows_of_card_029j_read_back_and_certify() -> None:
     ]
     assert [len(row.orbits) for row in rows] == [1, 1, 1, 1]
     assert [len(row.orbits[0].classes) for row in rows] == [1, 2, 2, 4]
-    assert [row.orbits[0].transporter_order for row in rows] == [1, 2, 2, 4]
+    assert [row.orbits[0].transporter_order for row in rows] == [1, 2, 2, 8]
     single = rows[0]
     assert single.cusp == (0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0), "the cusp is e'"
     assert single.orbits[0].representative == (1, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0), "alpha_10 = e - f"
@@ -434,12 +434,13 @@ def test_only_one_delta_preserving_symmetry_moves_a_coble_class() -> None:
     assert all(symmetry[twelve] == twelve for symmetry in preserving), "a delta-preserving symmetry moves alpha_12"
 
 
-def test_each_stored_transporter_order_is_a_cycle_of_an_exhibited_symmetry() -> None:
+def test_each_stored_transporter_order_is_the_group_the_chamber_symmetries_induce_on_the_orbit() -> None:
     r"""#43: a row's `transporter_order` is the order of the group it exhibits, not its class count.
 
-    For every stored orbit this exhibits a symmetry of the chamber acting on the orbit's classes as a single cycle of
-    length `transporter_order` — computed from card 029J's Gram tensor — so the number is the order of a group the proof
-    really exhibits. A one-class orbit's transporter is the identity, and its order is $1$.
+    For every stored orbit this computes, from card 029J's Gram tensor, the permutations of the chamber's walls that
+    keep the wall Gram matrix, and the group they induce on the orbit's root walls; that group is transitive and its
+    order is `transporter_order`. At (4.3.9) it is $8$ on four walls, since a symmetry exchanges $\\alpha_{13}$ and
+    $\\alpha_{14}$ and fixes $\\alpha_{11}$, $\\alpha_{12}$. A one-class orbit's group is trivial.
     """
     from sage.all import QQ, matrix
 
@@ -476,19 +477,13 @@ def test_each_stored_transporter_order_is_a_cycle_of_an_exhibited_symmetry() -> 
         extend({})
         for orbit in row.orbits:
             classes = [tuple(QQ(entry) for entry in entry_values) for entry_values in orbit.classes]
-            assert len(classes) == orbit.transporter_order, (row.statement, len(classes), orbit.transporter_order)
-            if len(classes) == 1:
-                checked.append((row.statement, 1))
-                continue
             positions = [walls.index(entry) for entry in classes]
-            start = positions[0]
-            found = any(
-                [symmetry[start]] == [positions[1]] and len({symmetry[position] for position in positions}) == len(positions)
-                for symmetry in symmetries
-            )
-            assert found, f"{row.statement}: no symmetry carries the representative to the orbit's next class"
+            induced = {tuple(symmetry[p] for p in positions) for symmetry in symmetries if {symmetry[p] for p in positions} == set(positions)}
+            reached = {image[0] for image in induced}
+            assert reached == set(positions), f"{row.statement}: the symmetries are not transitive on the orbit's walls"
+            assert len(induced) == orbit.transporter_order, (row.statement, len(induced), orbit.transporter_order)
             checked.append((row.statement, orbit.transporter_order))
-    assert checked == [("4.3.6", 1), ("4.3.7", 2), ("4.3.8", 2), ("4.3.9", 4)], checked
+    assert checked == [("4.3.6", 1), ("4.3.7", 2), ("4.3.8", 2), ("4.3.9", 8)], checked
 
 
 def test_the_chambers_own_reflections_do_not_move_the_root_classes() -> None:
@@ -527,3 +522,45 @@ def test_the_chambers_own_reflections_do_not_move_the_root_classes() -> None:
                 shown = sorted(left.symmetric_difference(right))
                 assert shown, f"{row.statement}: no wall tells {row.walls[roots[earlier]].name} from {row.walls[roots[later]].name}"
     assert root_counts == [0, 1, 2, 2, 4], root_counts
+
+
+def test_the_coble_cusp_at_4_3_9_has_four_orbits_by_the_centralizer_of_alpha_11() -> None:
+    r"""#49: card 6JRR's (4.3.9) row has four orbits, recomputed from the chamber stored on card 029J.
+
+    $\delta = e - f = -\alpha_{11}$ is a wall of the chamber. An element $ws$ of $G_v \subseteq \{\pm1\}W_v \rtimes
+    \mathrm{Aut}$ fixes $\pm\delta$ only if $s(\alpha_{11})$ is $W_v$-conjugate to $\pm\alpha_{11}$, that is joined to it
+    by a path of odd edges; $\alpha_{11}$ has none, so $s$ fixes $\alpha_{11}$. The centralizer of $s_{11}$ is then
+    $\langle s_{11}\rangle \times W_\perp$ (Allcock, arXiv:1106.3822v2, Thm. 5, Cor. 6), whose chamber has the walls
+    orthogonal to $\alpha_{11}$ and $\alpha_k + \alpha_{11}$ for the two order-4 edges. Its five root walls are joined
+    by no odd edge, and the one symmetry fixing $\alpha_{11}$ exchanges $\alpha_{13}$ and $\alpha_{14}$: four orbits.
+    """
+    from sage.all import QQ
+
+    en = Lattice.model_validate(corpus.front_matter(corpus.read_card(ROOT / "lattices" / "029J.md")))
+    assert en.integral is not None and en.integral.cusp_chambers is not None
+    chamber = next(row for row in en.integral.cusp_chambers["gamma-en-2"] if row.statement == "4.3.9")
+    names = [wall.name for wall in chamber.walls]
+    gram = [[QQ(entry) for entry in row] for row in chamber.gram]
+    s = names.index("\\alpha_11")
+
+    ratio = {j: gram[s][j] ** 2 / (gram[s][s] * gram[j][j]) for j in range(len(names)) if j != s and gram[s][j] != 0}
+    assert {names[j]: r for j, r in ratio.items()} == {"\\alpha_9": QQ(1) / 2, "\\alpha_10": QQ(1) / 2}, "alpha_11 has only order-4 edges"
+    vectors = [tuple(QQ(x) for x in wall.vector) for wall in chamber.walls]
+    form = [[QQ(entry) for entry in row] for row in en.gram_tensor]
+
+    def pair(a, b):
+        return sum(a[i] * form[i][j] * b[j] for i in range(len(a)) for j in range(len(b)))
+
+    perp = [vectors[j] for j in range(len(names)) if j != s and gram[s][j] == 0]
+    perp += [tuple(vectors[j][i] + vectors[s][i] for i in range(len(vectors[s]))) for j in ratio]
+    assert all(pair(b, vectors[s]) == 0 for b in perp)
+    roots = [b for b in perp if pair(b, b) == -2]
+    assert len(roots) == 5
+    assert all(pair(a, b) ** 2 / (pair(a, a) * pair(b, b)) != QQ(1) / 4 for a in roots for b in roots if a != b), "no odd edge"
+    co = Lattice.model_validate(corpus.front_matter(corpus.read_card(ROOT / "lattices" / "6JRR.md")))
+    assert co.integral is not None and co.integral.cusp_root_orbits is not None
+    row = next(row for row in co.integral.cusp_root_orbits["gamma-co-2"] if row.statement == "4.3.9")
+    assert row.orbit_count == 4
+    assert sorted(len(orbit.classes) for orbit in row.orbits) == [1, 1, 1, 2]
+    stated = {tuple(c) for orbit in row.orbits for c in orbit.classes}
+    assert stated == {tuple(int(x) for x in b[1:]) for b in roots}, "the row's classes are the W_perp root walls in 6JRR coordinates"

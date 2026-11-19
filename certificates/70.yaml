@@ -85,16 +85,15 @@
     computed them from the card''s Gram tensor, and no Vinberg search was run for
     them.'
 029J integral.cusp_root_orbits:
-  hash: 1491eec6cdfb74d658ea0afe48e1d44637d55068cdf1460e23ae5239fafd709f
+  hash: ce59b95f3d36751a137cb0f4f26b50ed899fa12177695ea16d81de0c9cfc8f2e
   by: 'H. Sterk, "Compactifications of the period space of Enriques surfaces, Part
-    I", Math. Z. 207 (1991), 1-36: (4.3.7), p. 22, "the symmetry of the diagram comes
-    from an element in Gamma_v" with G_v = {+-1}W_v x Z/2; (4.3.8), p. 23, "the symmetry
-    is induced by an element of Gamma_v"; (4.3.9), p. 24, "Symmetries of the graph
-    can be lifted to Gamma_v"; each with (4.3.10). results/store-43-cusp-orbits.py
-    computes the diagram''s symmetry from the card''s Gram tensor and finds one orbit
-    at each of the three cusps, carrying alpha_9 to alpha_13 at (4.3.7), alpha_9 to
-    alpha_11 at (4.3.8), and alpha_11, alpha_12, alpha_13, alpha_14 transitively at
-    (4.3.9)'
+    I", Math. Z. 207 (1991), 1-36: (4.3.6), p. 21, has one root wall; (4.3.7), p.
+    22, (4.3.8), p. 23, and (4.3.9), p. 24, state that the diagram symmetries are
+    realized in Gamma_v. The transporter order is the order of the permutation group
+    the realized symmetries induce on the orbit''s root walls: results/probe-49-cusp-symmetries.py
+    computes the Gram-preserving permutations of each chamber''s walls from this card,
+    checks each is an isometry of K_J = v^perp/Zv, and prints the orders 1, 2, 2,
+    8'
 029J integral.discriminant_form:
   hash: bce264439806a4f908a076d08e75f8656202fdfd0b96e3eef66612d804c1fc0a
   by: research preamble
