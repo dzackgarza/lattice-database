@@ -61,6 +61,46 @@ def test_the_reported_cards_cite_the_certificates_their_shards_hold() -> None:
     assert contradictions == [], "\n".join(problems)
 
 
+def test_the_regular_values_a_certificate_commits_to_are_on_their_cards() -> None:
+    """#43: a certificate with no value on its card is a contradiction, and the value is not a guess.
+
+    Eight definite cards carry a completed `definite.regular` or `definite.spinor_regular` certificate and state
+    neither the value nor the citation, which `latticedb verify` reports as a contradiction -- the first problem the
+    gate has been able to report on this corpus (#6). The field is a `bool | "true under GRH"`, so the certificate's
+    hash commits to one of three values and the value is *read out of the certificate* rather than chosen: this test
+    does that reading, and states that the card says what the certificate says.
+    """
+    root = REPOSITORY
+    tags = ("02LP", "3ICA", "02BW", "02O9", "02YE", "0353", "03UB", "04R0")
+    held = certificates.load(root, tags=tags)
+    candidates = (True, False, "true under GRH")
+    stated = 0
+    for tag in tags:
+        metadata = corpus.front_matter(corpus.read_card(root / "lattices" / f"{tag}.md"))
+        lattice = Lattice.model_validate(metadata)
+        for short in ("regular", "spinor_regular"):
+            field = f"definite.{short}"
+            certificate = held.get(f"{tag} {field}")
+            if certificate is None or certificate.hash is None:
+                continue
+            matches = [
+                value
+                for value in candidates
+                if certificates.certification_hash(f"{tag} {field}", lattice, value) == certificate.hash
+            ]
+            assert len(matches) == 1, f"{tag} {field}: the certificate commits to {matches}"
+            value = matches[0]
+            assert (metadata.get("definite") or {}).get(short) == value, (
+                f"{tag}: the certificate commits to {value!r} and the card states "
+                f"{(metadata.get('definite') or {}).get(short)!r}"
+            )
+            assert metadata.get("certifications", {}).get(field) == certificate.hash, (
+                f"{tag}: the card does not cite the certificate of {field}"
+            )
+            stated += 1
+    assert stated == 16, stated
+
+
 def test_the_cards_state_the_fields_the_report_names() -> None:
     """The check above is not vacuous: each card states the fields, and its shard certifies them."""
     held = certificates.load(REPOSITORY)
