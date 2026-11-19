@@ -111,7 +111,27 @@ Two decisions and one computation would close the item, and none of them is this
    authored as `otilde-plus-t-co` was, or a decision to author it from the project's draft (which the standing decision
    on this issue excludes), or a decision that the row's group is one of the eight standard subgroups and the row is
    keyed to that instead — which states a different group's orbits and the earlier evidence declined to do;
-2. **the card's values** — an exact index of the setwise stabilizer of a non-degenerate sublattice, or a call that
-   presents the stabilizer as a subgroup of $O(T_{\mathrm{Co}})$ so that its generators can be stored on 6JRR;
+2. **the card's values** — there is no index to compute, and this is now settled rather than open: see below. What a
+   card could still carry is a generating family, and that needs a call that presents the stabilizer as a subgroup of
+   $O(T_{\mathrm{Co}})$ so its generators can be stored on 6JRR — or the owner's certificate that the family it does
+   return at a vector generates the stabilizer;
 3. **the (4.3.9) count** — the owner's class-level equivalence returning at a Coble cusp, without which the three
    root classes there lie between one orbit and three.
+
+### The index is infinite, so no card can state one
+
+The two constructions above answer no exact index because there is no finite one to answer. $T_{\mathrm{Co}} =
+\langle 2\rangle \oplus U(2) \oplus E_8(-2)$, so a vector $(a, (c, d), w)$ has
+
+$$q = 2a^2 + 4cd - 2W, \qquad W = \tfrac{1}{2}(w, w)_{E_8},$$
+
+and $q = -2$ forces $W = a^2 + 2cd + 1$. Take $a = 0$ and $cd = k$ for $k = 0, 1, 2, \dots$: every odd $W = 2k+1$
+occurs, and every $W \ge 0$ is represented by $E_8$, whose theta series is
+$\Theta_{E_8} = 1 + \sum_{W \ge 1} 240\sigma_3(W) q^W$ with every coefficient positive. So $T_{\mathrm{Co}}$ carries
+infinitely many vectors of square $-2$, and $[O(T_{\mathrm{Co}}) : \mathrm{Stab}(v)]$ is countably infinite for each of
+them. The same count with the $U$ summand of $T_{\mathrm{En}}$ gives infinitely many there too.
+
+So `index_in_orthogonal_group` — `Annotated[int, Field(gt=0)] | None` at `src/latticedb/invariant_models.py:496` —
+cannot hold this group's index at all, and a $\Gamma_{\mathrm{Co},2}$ card would state none. (An enumeration of the
+square $-2$ vectors, `vectors_of_square(-2)`, was attempted as the direct count and had not finished after twenty
+minutes when it was stopped, which is consistent with the set being infinite.)
