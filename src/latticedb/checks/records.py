@@ -45,7 +45,15 @@ def duplicate_gram_problems(root: Path, loaded: Corpus, cards: frozenset[str] | 
     index = corpus.stored_gram_index(root)
     if index is not None:
         return duplicate_gram_messages(index, cards)
-    return shared_gram_problems(loaded, cards)
+    # No durable index covers the cards on disk — a fixture corpus, or a stale file. The check is corpus-wide, so it
+    # reads every card's Gram tensor from the front matter rather than only the cards this shard happens to hold: a
+    # duplicate whose two cards sit in different shards would otherwise be reported by neither.
+    scanned: dict[str, list[str]] = {}
+    for path in sorted((root / "lattices").glob("*.md")):
+        gram = corpus.front_matter(corpus.read_card(path)).get("gram_tensor")
+        if gram is not None:
+            scanned.setdefault(corpus.gram_key(gram), []).append(path.stem)
+    return duplicate_gram_messages(scanned, cards)
 
 
 def problems(loaded: Corpus, held: Certificates, cards: frozenset[str] | None = None) -> list[str]:
