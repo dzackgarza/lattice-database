@@ -245,6 +245,58 @@ def test_a_second_row_at_one_cusp_is_refused_when_it_changes_the_first() -> None
     assert corpus.front_matter(corpus.read_card(path))["integral"]["cusp_root_orbits"] == metadata["integral"]["cusp_root_orbits"]
 
 
+COBLE_CUSPS = (
+    # (statement, page, cusp in 6JRR's basis, the root classes in 6JRR's basis)
+    ("4.3.7", 22, [0, 1, 1, -2, -3, -4, -6, -5, -4, -3, -2], [[1, 0, -1, 0, 0, 0, 0, 0, 0, 0, 1]]),
+    ("4.3.8", 23, [0, 2, 1, -4, -5, -7, -10, -8, -6, -4, -2], [[1, -1, 0, 1, 0, 0, 0, 0, 0, 0, 0]]),
+    (
+        "4.3.9",
+        24,
+        [2, 0, 0, -4, -5, -7, -10, -8, -6, -4, -2],
+        [
+            [1, 3, 3, -2, 1, 2, 2, 1, 0, 0, 0],
+            [1, 3, 4, -2, 2, 3, 4, 3, 2, 1, 0],
+            [1, 2, 3, -2, 0, 1, 0, 0, 0, 0, 0],
+        ],
+    ),
+)
+"""The T_Co side of #43: Sterk's cusps 3--5 and their root classes, in card 6JRR's own basis.
+
+`results/probe-43-coble-row-coordinates.py` carries them there from the chambers stored on 029J: the library's
+`delta^perp`, written in $T_{\\mathrm{En}}$'s coordinates, has card 6JRR's Gram tensor entry for entry, so the two
+bases are identified by coordinates and no isometry search is needed. What decides membership of
+$T_{\\mathrm{Co}} = \\delta^\\perp$ is the pairing with $\\delta$ and not the projection: a projection is integral
+whenever $b(v, \\delta)$ is even, and taking that as the test admits walls that are not in the sublattice at all.
+"""
+
+
+def test_the_coble_cusps_rows_are_admissible_values_of_the_field() -> None:
+    """#43: the T_Co rows are arithmetic before they are a question of keys.
+
+    Card 6JRR states no `cusp_root_orbits` row, because the field's key must name a subgroup this corpus has a card
+    for and there is none for the Coble group. That is a question about *naming* the group; the rows themselves are
+    arithmetic on 6JRR's Gram tensor, and this test decides that arithmetic: each cusp is isotropic, each class lies
+    in its cusp's perpendicular and has square $-2$, and the row passes the admission check the corpus applies to any
+    row of the field. The rows are held under a standard subgroup here, which is a fixture and not a claim about which
+    group the card must name.
+    """
+    metadata = corpus.front_matter(corpus.read_card(ROOT / "lattices" / "6JRR.md"))
+    rows = [
+        {
+            "cusp": cusp,
+            "statement": statement,
+            "printed_page": page,
+            "orbits": [{"representative": classes[0], "classes": classes, "transporter_order": len(classes)}],
+            "orbit_count": 1,
+        }
+        for statement, page, cusp, classes in COBLE_CUSPS
+    ]
+    metadata["integral"] = {**metadata["integral"], "cusp_root_orbits": {"O": rows}}
+    lattice = Lattice.model_validate(metadata)
+    assert [len(row.orbits[0].classes) for row in lattice.integral.cusp_root_orbits["O"]] == [1, 1, 3]
+    assert records.local_admission_problems(lattice) == []
+
+
 def test_the_chambers_own_reflections_do_not_move_the_root_classes() -> None:
     """#43: at every cusped row the root walls have different orthogonal neighbour sets, so no word in the walls moves one to another.
 
