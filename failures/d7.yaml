@@ -210,6 +210,35 @@
     database_revision: 5925910795e6d29b82effaf0f8d1feb7b7404cdc
     research_revision: fcec349098c0850021574c5abc9f509b159246e0
   notes: []
+0S7C integral.discriminant_form:
+  disposition: resolved
+  attempts:
+  - hash: e5fefe1748d305a26897427326b9e2bda5ab19730357e70db3ac84c037c3a9ef
+    gram_tensor:
+    - - 2
+      - 1
+      - 0
+      - 1
+    - - 1
+      - 6
+      - 2
+      - 1
+    - - 0
+      - 2
+      - 8
+      - 2
+    - - 1
+      - 1
+      - 2
+      - 16
+    reason: worker or runner lost (recovered from exceeded.yaml)
+    stderr: ''
+    seconds: 0.0
+    recorded_at: 2026-11-19 19:21:32.969598+00:00
+    run_url: https://github.com/dzackgarza/lattice-database/actions/runs/44593898317/attempts/1
+    database_revision: 3e4b1884193a47c83bd86fa42587245e82ade064
+    research_revision: 9684580d1a4c23cf65674cd84316953d2c6ccd0a
+  notes: []
 0VW5 integral.discriminant_form:
   disposition: open
   attempts:
