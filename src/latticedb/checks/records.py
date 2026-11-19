@@ -92,10 +92,16 @@ def problems(loaded: Corpus, held: Certificates, cards: frozenset[str] | None = 
 def arithmetic_problems(loaded: Corpus, held: Certificates, entry: corpus.Entry) -> list[str]:
     """The arithmetic-group fields of `entry` that no completed computation establishes.
 
-    An arithmetic-group card states its index in $O(L)$ and the names of the self-isometries that
-    generate it; both are computed from this lattice card's Gram tensor, so both are certified on
-    this card under `arithmetic-group.<slug>.<field>`. A group card that states a value without that
-    certificate, or that cites a certificate for a value it no longer states, contradicts its ledger.
+    An arithmetic-group card states its index in $O(L)$, the names of the self-isometries that
+    generate it, and — where a source or a run counted them — its orbit counts; all are computed from
+    this lattice card's Gram tensor, so all are certified on this card under
+    `arithmetic-group.<slug>.<field>`. A group card that states a value without that certificate, or
+    that cites a certificate for a value it no longer states, contradicts its ledger.
+
+    A count a card states beside its own `data.reference` is the exception, and it is the schema's
+    own: a source-stated count is certified by that citation (`genus.cite`), never by a computation,
+    which is how the 87 polarisation cards state `#I_1`, `#I_2` and `#I_12` from
+    Dutour Sikirić–Hulek's tables and how the two Enriques groups state theirs from Sterk.
     """
     found: list[str] = []
     cards = {card.value.slug: card.value for card in loaded.arithmetic_groups if card.value.lattice == entry.lattice.tag}
@@ -103,13 +109,16 @@ def arithmetic_problems(loaded: Corpus, held: Certificates, entry: corpus.Entry)
         card = cards.get(slug)
         if card is None:
             continue
-        for short in genus.ARITHMETIC_FIELDS:
+        for short in (*genus.ARITHMETIC_FIELDS, *genus.ARITHMETIC_ORBIT_FIELDS):
             field = f"{genus.ARITHMETIC_PREFIX}{slug}.{short}"
             stored = getattr(card.data, short)
             value = list(stored) if isinstance(stored, tuple) else stored
             computation = genus.name(entry.lattice.tag, field, entry.lattice.definiteness)
             cited = entry.lattice.certifications.get(field)
             if value is None and cited is None and held.get(computation) is None:
+                continue
+            if short in genus.ARITHMETIC_ORBIT_FIELDS and card.data.reference is not None:
+                # A count the group card's own source states is certified by that citation.
                 continue
             expected = certificates.certification_hash(computation, entry.lattice, genus.certified_value(field, value, entry.lattice))
             if not certificates.is_certified(held, computation, cited, expected):
