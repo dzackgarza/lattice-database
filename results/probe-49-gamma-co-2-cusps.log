@@ -1,0 +1,24 @@
+A. P_0-orbits on the 527 singular points: [2, 120, 135, 270]
+   size 135: types [('0', 'singular')]
+   size   2: types [('singular', '0')]
+   size 270: types [('singular', 'singular')]
+   size 120: types [('nonsingular', 'nonsingular')]
+   stored row [0, 1, 1, -2, -3, -4, -6, -5, -4, -3, -2] (labelled 4.3.7): Gamma_Co,2-cusp of orbit size 120, (a, b) = ('nonsingular', 'nonsingular')
+   stored row [0, 2, 1, -4, -5, -7, -10, -8, -6, -4, -2] (labelled 4.3.8): Gamma_Co,2-cusp of orbit size 270, (a, b) = ('singular', 'singular')
+   stored row [2, 0, 0, -4, -5, -7, -10, -8, -6, -4, -2] (labelled 4.3.9): Gamma_Co,2-cusp of orbit size 135, (a, b) = ('0', 'singular')
+B. root-class orbits at the four Gamma_Co,2-cusps
+   (4.3.5): cusp not in delta^perp
+   chamber (4.3.6) -> T_Co cusp [0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0]: Gamma_Co,2-cusp of orbit size 2 ('singular', '0'); 1 symmetries fix delta; 1 root walls of W_perp, 1 orbits
+      orbit: [('beta(\\alpha_9)', [1, 0, 0, -2, -3, -4, -6, -5, -4, -3, -2])]
+   chamber (4.3.7) -> T_Co cusp [0, 1, 1, -2, -3, -4, -6, -5, -4, -3, -2]: Gamma_Co,2-cusp of orbit size 120 ('nonsingular', 'nonsingular'); 1 symmetries fix delta; 3 root walls of W_perp, 3 orbits
+      orbit: [('\\alpha_13', [1, 0, -1, 0, 0, 0, 0, 0, 0, 0, 1])]
+      orbit: [('beta(\\alpha_11)', [1, 0, -2, 2, 3, 4, 6, 5, 4, 3, 2])]
+      orbit: [('beta(\\alpha_12)', [1, 0, 0, -2, -2, -3, -4, -3, -2, -1, 0])]
+   chamber (4.3.8) -> T_Co cusp [0, 2, 1, -4, -5, -7, -10, -8, -6, -4, -2]: Gamma_Co,2-cusp of orbit size 270 ('singular', 'singular'); 1 symmetries fix delta; 2 root walls of W_perp, 2 orbits
+      orbit: [('\\alpha_11', [1, -1, 0, 1, 0, 0, 0, 0, 0, 0, 0])]
+      orbit: [('beta(\\alpha_12)', [1, -2, 0, 2, 2, 3, 4, 3, 2, 1, 0])]
+   chamber (4.3.9) -> T_Co cusp [2, 0, 0, -4, -5, -7, -10, -8, -6, -4, -2]: Gamma_Co,2-cusp of orbit size 135 ('0', 'singular'); 2 symmetries fix delta; 5 root walls of W_perp, 4 orbits
+      orbit: [('\\alpha_12', [1, 3, 3, -2, 1, 2, 2, 1, 0, 0, 0])]
+      orbit: [('\\alpha_13', [1, 3, 4, -2, 2, 3, 4, 3, 2, 1, 0]), ('\\alpha_14', [1, 2, 3, -2, 0, 1, 0, 0, 0, 0, 0])]
+      orbit: [('beta(\\alpha_9)', [1, 1, 3, -2, 0, 0, 0, 0, 0, 0, 0])]
+      orbit: [('beta(\\alpha_10)', [1, 4, 4, -2, 2, 4, 5, 4, 3, 2, 1])]
