@@ -559,3 +559,37 @@ the form being counted is the card's form.
 **What it does not establish.** The `8` stars per $J$ is the source's number and is not recounted
 here, and the equality of the edge count with the flag-orbit count still needs the injectivity of the
 forgetful map (previous section). Neither group card therefore stores `flag_orbits`.
+
+## The injectivity link, tested on a specimen (2026-11-19)
+
+The `569160` chain has one link that is a theorem and not a count: the forgetful map from isotropic-flag
+orbits to pairs of (line cusp, plane cusp) is injective, so the incidence relation's edge count equals
+the flag-orbit count. `T_Co`'s kernel rows cannot be walked here, so the test is the smallest specimen
+with more than one orbit on each side: **`T_En`'s stored Gram from `lattices/029J.md` under
+`O(T_En)`**, whose rows are 2 lines and 2 planes.
+
+`results/probe-7-injectivity-specimen.py`, at sage-extensions `0bbf022b6b`, both sides the owner's
+own calls:
+
+| row | call | value | wall |
+| --- | --- | ---: | ---: |
+| lines | `Aut().cusps(1).cardinality()` | 2 | 28.9 s |
+| planes | `Aut().cusps(2).cardinality()` | 2 | 52.0 s |
+| edges | `Aut().tits_building_incidence().cardinality()` | **3** | 1446.5 s |
+| flag orbits | `Aut().isotropic_orbit_representatives(2, flag=True).cardinality()` | **3** | 1712.0 s |
+
+Equal, and `3` is the informative value: on a $2 \times 2$ grid of orbit sets the incidence could
+have 2, 3 or 4 edges, and both sides return 3.
+
+Sources for the statement being tested: Dutour Sikirić–Hulek, Lemma 3.6, printed p. 22 and §3.6
+printed p. 22; Dolgachev–Kondō §2 p. 510 and §3 (3.6) with Proposition 3.2, printed p. 513.
+
+**Scope.** This is a specimen check and not a proof for `T_Co`: it is the repository's own standard for
+a mathematical contract (a test computes on one small specimen, the general statement stays the
+owner's). What it rules out is the failure mode that would matter here — an incidence relation that
+collapses distinct flag orbits onto one edge — in a case where both sides are computed by different
+calls. Neither group card stores `flag_orbits` on the strength of it.
+
+**Cost datum.** The incidence walk on this *small* lattice under the *full* group took 1446.5 s for
+three edges, which is the same machinery that costs 6132–7973 s on `T_Co`'s kernel rows: the cost is
+per plane cusp walked, not per edge returned.
