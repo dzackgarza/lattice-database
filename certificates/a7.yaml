@@ -30692,7 +30692,10 @@
   hash: 6d213089e671da402b6505b451c8b83e3e5bb484b03f48502047768fd27bbe6d
   by: research preamble
 6GNV automorphisms.automorphism_group_generator_morphisms:
-  hash: 70a0d2cdbc480e30c84bc8a17505c74f419345e83e532fae685056e051a04425
+  hash: ab8c5c7fca2204d206f860cc6caf9459474781ec663af86aa5499caef32eab5a
+  by: research preamble
+6GNV automorphisms.automorphism_group_order:
+  hash: f33b5648566e5ea7b3dc16eac7ae27c2fe66ae3cc9bcfcd64821e67bf91d3151
   by: research preamble
 6GNV derive:
   hash: ab26c5e68b65e8cdfba34af852e40b58f6800a4f75da868d130566cf14929ebd
@@ -30700,8 +30703,14 @@
 6GNV form.integer_valued:
   hash: 6a4f3620323ca36a5f963c6c6b2e2ce24c14e9fa48d052fba5249430264c68b7
   by: research preamble
+6GNV integral.anisotropic_primes:
+  hash: f593c277a602997a576509e114384a73d637aaac021beae84bfff776ef5a4071
+  by: research preamble
 6GNV integral.discriminant_form:
   hash: b6d8d419024c01ff90daca30c19c82c605ce63fe8ed49742e6c5decb306b8432
+  by: research preamble
+6GNV integral.discriminant_orbits:
+  hash: 332184cb8564bb78c4f26f4926e1add049a50c449e317b0e2d6c51e83de4f045
   by: research preamble
 6GNV integral.elementary_primes:
   hash: 54ff5580cffdabb579bd1f7512b9322f42e9a7d88533fb090f5d22c1430651c9
@@ -30714,6 +30723,15 @@
   by: research preamble
 6GNV integral.hyperbolic_index:
   hash: 2cf606f2c38d9917698ef3d324d2e21335ff7a4a92e641e701c55d493cee121e
+  by: research preamble
+6GNV integral.local_densities:
+  hash: f223b772c7a8f9a8880993dc13fd2c2084cb79493da5ada3433f6ec1162cb142
+  by: research preamble
+6GNV integral.local_representations:
+  hash: 1aa9fd51514f561d4b50ded46a1ad7a47a8376b8d9ac0cba86a1de0d8501a1ae
+  by: research preamble
+6GNV integral.modular_scale:
+  hash: cbac4880e26bbab799d78fe4bb389c98966ee992e9940b45f9ad8ad1227bf256
   by: research preamble
 6GNV integral.overlattice_count:
   hash: bf337d20c9f8e7bb7137044a7fab9f1a8f5685897b733b1ebf5aadde6c0258fe

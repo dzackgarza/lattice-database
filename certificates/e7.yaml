@@ -31774,11 +31774,17 @@
 58LC automorphisms.automorphism_group_generator_morphisms:
   hash: b5c6882050dd4d55732e57384ce29db7550fe2f8be692d3ffa28c4873e40ae42
   by: research preamble
+58LC automorphisms.automorphism_group_order:
+  hash: 514747339a1b337c9b5237fd45807ea9757a02345792282fc901439c757986c5
+  by: research preamble
 58LC derive:
   hash: 0eff88ea7f78dcfa38ec4daba5fd92ba8291af59dfb58a62aaecd25ee2e8b740
   by: research preamble
 58LC form.integer_valued:
   hash: f8f5a6050bd6461db14ae70e9fb38613aeaa8a83c6fdd264b41264f46ce6b68f
+  by: research preamble
+58LC integral.anisotropic_primes:
+  hash: 2029635492c6e017539470b35e4ba209fc1d85c3d942ad868ddb4bc0f950ab0e
   by: research preamble
 58LC integral.elementary_primes:
   hash: 1f4cdbb630a96a7d456684e555b3bdcc9405bd27fdcf6c723aedcb7436552204
@@ -31791,6 +31797,15 @@
   by: research preamble
 58LC integral.hyperbolic_index:
   hash: c0c11439a077099eb3435fae0da2ede72bc34c6fc7ccdb743eb61a617b6eb3c9
+  by: research preamble
+58LC integral.local_densities:
+  hash: 12502f5703b036ef0b9d5054a61353ef56c85ea1e051a72d8f9d7c18db0a011a
+  by: research preamble
+58LC integral.local_representations:
+  hash: ad9c094bc53fe914d41ae763f9f17bccc075aaa752bab7202741430f0a0953cc
+  by: research preamble
+58LC integral.modular_scale:
+  hash: fa91c4e460395e7fb9fbbdfd693fd822ec69af02c0bd869e7cd4afc2e875cfc1
   by: research preamble
 58LC integral.overlattice_count:
   hash: 11cd75ffb011b08f45224e5318ac829e52827e267984940f046a9073acc177a1
@@ -31807,6 +31822,9 @@
 5DCZ form.integer_valued:
   hash: 27e110fc36c5f963d107aa7b6b348df2d6d97a26afa2a99d945711a43704e494
   by: research preamble
+5DCZ integral.anisotropic_primes:
+  hash: 36d045fe279cca175216a28e56a1a39d69f3acf3c594774ec8762f55b88cd2cf
+  by: research preamble
 5DCZ integral.elementary_primes:
   hash: e51f7a2875b65d0385ed561fadb26092eaa7f572db95c8d87b05f31ea0aca79a
   by: research preamble
@@ -31818,6 +31836,15 @@
   by: research preamble
 5DCZ integral.hyperbolic_index:
   hash: 8a59743aef94e548ce3701849921af7e0a2b7259c54767a8498c52c91bc2d4fb
+  by: research preamble
+5DCZ integral.local_densities:
+  hash: fd0241e73a2e912c18f526f26d5f27016ea881f0eeedbf41416e61eb34982076
+  by: research preamble
+5DCZ integral.local_representations:
+  hash: 7ca790c8684f80521aebed2205d8a768fca8fe19f8c3666ac5d2412ff8674632
+  by: research preamble
+5DCZ integral.modular_scale:
+  hash: 537f5c0ec4c80512779219a3634befefc17dd9a8dfef2df0f335b88025147c2f
   by: research preamble
 5DCZ integral.overlattice_count:
   hash: eee8779b7cc16b7b796e569b1f76171bf3bb94811e3ba2afaf452dfd731b4cbe

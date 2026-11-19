@@ -29528,7 +29528,10 @@
   hash: 15013b04d98019b7034d1674bfaa966a27b1938ed7d2c341bee8da1d6be1b0e8
   by: research preamble
 5QUA automorphisms.automorphism_group_generator_morphisms:
-  hash: c2f454d2183d0647d76361d3a538e6345dc46b28c4aac785161b72736604b4e9
+  hash: f8f8c7b89eae7d85382ca601e0747704b2dc293092650b12bfe505c64784e7d4
+  by: research preamble
+5QUA automorphisms.automorphism_group_order:
+  hash: d08d7ba3c991a46bc425818c39412c2b13a1ca9adf203e650d10a50de768898c
   by: research preamble
 5QUA derive:
   hash: ebe4c3af9865612187087d1ba752f9f878bb576b0faa5948f497c6f90a458985
@@ -29536,8 +29539,14 @@
 5QUA form.integer_valued:
   hash: 3ac2e9360f72ffb950d3947ee8c816990d85c0d40ae2ec96f8d23e2763f0be34
   by: research preamble
+5QUA integral.anisotropic_primes:
+  hash: 90c7463c6be60facf34616142fbba4894e781d4ff1889351063fe66a0156d435
+  by: research preamble
 5QUA integral.discriminant_form:
   hash: 23c124f0a169c5ef7239c233bf6e0b3f13656032e5a3a6b1dfceed6c75970415
+  by: research preamble
+5QUA integral.discriminant_orbits:
+  hash: 4030d394fe9216d9e43453b86fcfab49f4b6897e8060a8da8e2c2eba942dcf77
   by: research preamble
 5QUA integral.elementary_primes:
   hash: 698caa33a6d0270cab8e368333b935ae2c2a7b83276cceb509fae5cb4f4713b5
@@ -29550,6 +29559,15 @@
   by: research preamble
 5QUA integral.hyperbolic_index:
   hash: 8ad09e748d0bb73321e1d97d926d739f679afa37c587c6412cb39cc1476a2a3f
+  by: research preamble
+5QUA integral.local_densities:
+  hash: 7e7c9d150b919b7454dbece37cc3e1195aeee11fa6bdd73a398f1ff79994433d
+  by: research preamble
+5QUA integral.local_representations:
+  hash: f7cf46a537a5f393ae8d3cfe598cb561f318f48927258fd60679de4b1d4f9d45
+  by: research preamble
+5QUA integral.modular_scale:
+  hash: 6af679f711e07d3526da42264e76094c2b51de3b051342425c32e2a5e3751883
   by: research preamble
 5QUA integral.overlattice_count:
   hash: 6451569c213096afae974c5b9638369f525ff198160c1f7aeb6728372b71492d

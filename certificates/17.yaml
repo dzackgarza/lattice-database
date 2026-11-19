@@ -32728,14 +32728,23 @@
 60PM automorphisms.automorphism_group_generator_morphisms:
   hash: a88038202fbad549850f058a2e25a53faa34e1d41409574c239602c4f327ff2f
   by: research preamble
+60PM automorphisms.automorphism_group_order:
+  hash: a55d0703d6e066bc777b2240ff951122e2db2ccf8b2436c834d607fff7bce773
+  by: research preamble
 60PM derive:
   hash: ea0ad5c6bd10a2b85bb34ff670bfa910364a67757d9cf41dbdb0d01f775d9c77
   by: research preamble
 60PM form.integer_valued:
   hash: 9d8ba334e04dd22d7e751ff0f7d81642965afb77f07982a243a5230ca103ee53
   by: research preamble
+60PM integral.anisotropic_primes:
+  hash: f658bf09a54cf17f538c06fe38ed8b7ccfc2d48a9068140fd45d149249772df3
+  by: research preamble
 60PM integral.discriminant_form:
   hash: 51523437f9aaa9574ffba31e38769e0c7b152d67591f8ea91785da01c77c993b
+  by: research preamble
+60PM integral.discriminant_orbits:
+  hash: d1fac38cd4ed96dced9906ae433c88a59fcb48f847ca0fee337f12701215bdd7
   by: research preamble
 60PM integral.elementary_primes:
   hash: 338de8b6ca6b1a3130f23209b29e3f395a3f9e3427bde950e2f7a6923feed802
@@ -32748,6 +32757,15 @@
   by: research preamble
 60PM integral.hyperbolic_index:
   hash: 658889b3826b164d55759654a91cda715425ef9d0e27eb7ceb64c38efa8a3305
+  by: research preamble
+60PM integral.local_densities:
+  hash: 59019cb12c74f0b0afd4ebd9b6768f8a43112c18224c67c14e74b0cf1a48e66d
+  by: research preamble
+60PM integral.local_representations:
+  hash: b21903a2b20c99466b1ba9a5087e77303a64d1d46bf9f65391ed81e11f56c300
+  by: research preamble
+60PM integral.modular_scale:
+  hash: 11a982c8694ddb4d1c7fb28b68ffca652bfe6072cb86ec640909ea596887b018
   by: research preamble
 60PM integral.overlattice_count:
   hash: 60f2f021187c678b66b117db0d8449dde0c6cd6dc1fce2c083d3732ebd69c540

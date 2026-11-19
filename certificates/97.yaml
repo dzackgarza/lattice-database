@@ -4,17 +4,16 @@
     polynomial (x-1)^9(x+1), and the primitive vector v of the line it negates has
     b(v,v) = -4, with b(v_i,v_j) in {0, 2}. The Cartan matrix 2 b(v_i,v_j)/b(v_j,v_j)
     is positive definite, every leading principal minor being positive, and its diagram
-    is E_8 + A_1: arms of length 1, 2 and 4 at O(L) generator 3, and O(L) generator 8
-    orthogonal to the other eight. The reflections of a positive definite diagram
+    is E_8 + A_1: arms of length 1, 2 and 4 at O(L) generator 3, and O(L) generator
+    8 orthogonal to the other eight. The reflections of a positive definite diagram
     generate their Coxeter group (Tits), so H_e = W(E_8) x Z/2. |W(E_8)| = 696729600
     is computed here, as the order of the permutation group the eight E_8 reflections
-    induce on the 240 vectors of norm -4 in their span; |rho_L(H_e)| = 696729600 is the
-    image order the generator_morphisms certificate states, so the isolated reflection
-    is the kernel of rho_L on H_e. |H_e| = 2 * 696729600 = 1393459200.
-    results/check-40-h-e-cardinality.py computed the root vectors, the Cartan matrix,
-    its diagram, the 240 roots and that order from the stored matrices and the Gram
-    tensor of the card. No owner operation returns this value, so its provenance is the
-    program, not a library call.'
+    induce on the 240 vectors of norm -4 in their span; |rho_L(H_e)| = 696729600 is
+    the image order the generator_morphisms certificate states, so the isolated reflection
+    is the kernel of rho_L on H_e. |H_e| = 2 * 696729600 = 1393459200. results/check-40-h-e-cardinality.py
+    computed the root vectors, the Cartan matrix, its diagram, the 240 roots and that
+    order from the stored matrices and the Gram tensor of the card. No owner operation
+    returns this value, so its provenance is the program, not a library call.'
 0125 arithmetic-group.h-e.generator_morphisms:
   hash: bbeac11159ecaf612447c2069422beebc013640db4c22f261a4e9ada205f9ee2
   by: 'the owner''s own selection: L.Aut().discriminant_point_stabilizer_image_generators(A_U(2))
@@ -31116,13 +31115,19 @@
   hash: a5b4f29fd9b404560b9f10795474e413256be7ab385a7a8f8c49b8d6539a51e7
   by: research preamble
 595J automorphisms.automorphism_group_generator_morphisms:
-  hash: 41cd95bf99122e1500e4bc3c52aafbe4dc398dc2d75c3992f5604a6d441778b3
+  hash: 3651dd3e62e66e78c8e1600c39a105a661b2709a3975b722e7b6a8c5959db992
+  by: research preamble
+595J automorphisms.automorphism_group_order:
+  hash: a65ab0f9081440091f21b3a2f4c4782f66a271ee75ee47e5c179cc83413024a6
   by: research preamble
 595J derive:
   hash: 5e7c49a390cc7211f46e7167af88e3184e400ba43a5b8609ce1f94c5ac59a6c8
   by: research preamble
 595J form.integer_valued:
   hash: 2c8eb35aa839dfa220ec397296718ef0d978d8fbf0c29ab0783afaa53e8210b6
+  by: research preamble
+595J integral.anisotropic_primes:
+  hash: 1fd8613e9713ed85eb88e20e2a689e3ee252fd21fbcbeee98e8bb80644f2f19f
   by: research preamble
 595J integral.elementary_primes:
   hash: 75af86b234b0c12385518aacbe4a3b3c4909cc519a0aa66b4184ce66bf2add97
@@ -31135,6 +31140,15 @@
   by: research preamble
 595J integral.hyperbolic_index:
   hash: 3df44ffb1c23402e93167006004e20dbdcb17f9b98ffed1ee9d87367052e420c
+  by: research preamble
+595J integral.local_densities:
+  hash: adfba75b9dc02f1dcf6f239aab0317144eae59e238f3dcdf2697012974e278c6
+  by: research preamble
+595J integral.local_representations:
+  hash: 529be6a6dbf02dc4d0865e866c2eb877b89ef9947d6a731acb07688550e19f9c
+  by: research preamble
+595J integral.modular_scale:
+  hash: 434b2768e7191d94653d42ed4462d4ebb4936a9a4abe16c89c7235e601e9e78f
   by: research preamble
 595J integral.overlattice_count:
   hash: ed0fe5fd83265bdc42f86b786562ff4f0500757ba568a11267a2cffa0684d87e

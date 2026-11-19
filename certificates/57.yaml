@@ -1264,6 +1264,9 @@
 05NK integral.anisotropic_primes:
   hash: cad6f0fde1ebb974e89846b9877b482812101482e4a1910ae251286c283b3bd6
   by: research preamble
+05NK integral.discriminant_sequence:
+  hash: 8cc735814a4e9d7d158cf864047a4af63d8e110b817bbb7e1a2d8633f80e6cb0
+  by: research preamble
 05NK integral.elementary_primes:
   hash: 3805dc825df0a1351927f9d9d205638c586d757a0c7d365d288788cfcb86d1f8
   by: research preamble
@@ -28240,14 +28243,23 @@
 5MN1 automorphisms.automorphism_group_generator_morphisms:
   hash: cd666db729ca042388e0bd4872e73e766e3d995c7b366a6c44f8dbf976963215
   by: research preamble
+5MN1 automorphisms.automorphism_group_order:
+  hash: 462637070f54804ed8878be16c1b4e2f549474d94573a65c2618e2e751b62542
+  by: research preamble
 5MN1 derive:
   hash: d44aa8d11bab7341195733a46e43ee5c190d547e50ada60cc1e3465207c0e775
   by: research preamble
 5MN1 form.integer_valued:
   hash: ecc69c747d91e84434ddfa8333c02ada01c5434e7472824f680374c0c8d61dc3
   by: research preamble
+5MN1 integral.anisotropic_primes:
+  hash: c75f1cd43dbb21452fe4ed3e5cfa7f959b95d18d70634fdb14a18997a2786a10
+  by: research preamble
 5MN1 integral.discriminant_form:
   hash: 56ac21b08d93f42875f3f6c6105d5a7ded94985bca525e8fbcfb03f25fc3f652
+  by: research preamble
+5MN1 integral.discriminant_orbits:
+  hash: 00c5172bdc723e20abad4da4b005cab75bfe0215b8ecbe2466f48afcab9e1c54
   by: research preamble
 5MN1 integral.elementary_primes:
   hash: 1e44c1099e1959b8147bd482f7dd6fbdb56479142262c323299b7b62e000d3ed
@@ -28260,6 +28272,15 @@
   by: research preamble
 5MN1 integral.hyperbolic_index:
   hash: acee4548d2cd9270aa386e727b532f3c0f594c42863022c0a367e0556bbe2dff
+  by: research preamble
+5MN1 integral.local_densities:
+  hash: ec23e3f576aaf146a7c358b841a9e01d5dfdbf50a398c069270accc3a5111c6a
+  by: research preamble
+5MN1 integral.local_representations:
+  hash: 79e6ce051f93b35eadeb16df1c383c23d189fad312662c6d12ef790a063bf508
+  by: research preamble
+5MN1 integral.modular_scale:
+  hash: ca721ee3a89d37c08fa5a204e5eaf4fbc2b5a4f2001e7da8d1179c4dc6367d2c
   by: research preamble
 5MN1 integral.overlattice_count:
   hash: bec7cd0d57863b10de179e979465a3b5d565348a1b47461e0f519a8e9b68748e

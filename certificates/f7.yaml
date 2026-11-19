@@ -223,6 +223,9 @@
 03A9 integral.anisotropic_primes:
   hash: d64f91299e841d68b4374a3048f3e50a5b3f5ab0bc58e6f4ba676db27e9caf05
   by: research preamble
+03A9 integral.discriminant_sequence:
+  hash: 94882c7a03fc7da77de932f3a59cb65b40500b379be1820ddfb074bb838f64c9
+  by: research preamble
 03A9 integral.elementary_primes:
   hash: 342a27f0e50c13599b2f4f1449cc600919394ecd508ecbc6f03d6655aac26812
   by: research preamble
@@ -600,6 +603,9 @@
   by: research preamble
 045O integral.anisotropic_primes:
   hash: b9445566e79527317da3067bd8e9c62ffc3eae1d12a23f4077b39a945f2da14c
+  by: research preamble
+045O integral.discriminant_sequence:
+  hash: 81d28a739f31885d4c008c3ed1704af7eb243ec137865bc36b5b0ec2a2eece00
   by: research preamble
 045O integral.elementary_primes:
   hash: eebbf14466e52483c0d2faaf68546d9369b6e896aabb89b7c381bc35d6121eae
@@ -29581,11 +29587,17 @@
 4H2R automorphisms.automorphism_group_generator_morphisms:
   hash: 4947eb1a44c5940e236f0a1b157234bbede07d83e81fa732f91a285a5cc32979
   by: research preamble
+4H2R automorphisms.automorphism_group_order:
+  hash: 40ccac59aa5112763d9a799c0850233c874c96a031cd2c25d6e7b3d6f28b2f34
+  by: research preamble
 4H2R derive:
   hash: 3a8980d4562d1ff69e7034ec235aedd3989a4031a899d7b886b02eb411a37f0b
   by: research preamble
 4H2R form.integer_valued:
   hash: 7566ab48948c88096436f1041142fafda62833d1090ebecf558e114631f16e7a
+  by: research preamble
+4H2R integral.anisotropic_primes:
+  hash: ba8fb94e85661cea823a4da8549b6a550cbb393e28a54405ecfd8b3df04ec907
   by: research preamble
 4H2R integral.elementary_primes:
   hash: af517794a0849aa78415e55dadc8fb523d3b307d29d0a29646f985a49e8719e2
@@ -29599,6 +29611,15 @@
 4H2R integral.hyperbolic_index:
   hash: 721d06657252056e61c13730af6944e4c58b24b033cc2b30d11fa2d68f0bd7c4
   by: research preamble
+4H2R integral.local_densities:
+  hash: e3f91bea39dd592ae2018440c2983eecae47128fa1e7903515a0093ec1d693a4
+  by: research preamble
+4H2R integral.local_representations:
+  hash: 0959de1d20c4040b3bf897f1ca2e5918cf0419e2e692679ae5769631aad179d1
+  by: research preamble
+4H2R integral.modular_scale:
+  hash: 1bcf3f3892fb2da64d28fd376d8073f0f1bfc819c719c57d3d7a0340d695d444
+  by: research preamble
 4H2R integral.overlattice_count:
   hash: 0a7480a631e7310e02af92505cad008cd6acda21b2ed7234421046f5a8ffe6b2
   by: research preamble
@@ -29608,11 +29629,20 @@
 4H2R integral.spinor_genus_count:
   hash: 7186f14fc5f8a2ec01c5b7220c1fd72088d0b84ae02737e4c78c34886af2c850
   by: research preamble
+5I7V automorphisms.automorphism_group_generator_morphisms:
+  hash: 3a861f37f7bb5dbeae1715790d7fcf5ed4a8479079bbf7901747c153b03973bc
+  by: research preamble
+5I7V automorphisms.automorphism_group_order:
+  hash: cdeb4479570d78ca2df86adc327018e34b918190012c71192a36d06393186893
+  by: research preamble
 5I7V derive:
   hash: 3941560f347be92e9ec2047766ec9d6118c657b1157f0687651ae0720e15f00d
   by: research preamble
 5I7V form.integer_valued:
   hash: a42028377dd4c668528812ed39e66e75433e704fd3225bb27847e29eb77d1806
+  by: research preamble
+5I7V integral.anisotropic_primes:
+  hash: 6497e0c2915258a7ef2519258d52b0cd68235b942705cacf9348e4c5735e46c9
   by: research preamble
 5I7V integral.elementary_primes:
   hash: 2397915a2a99a1c3a11a63c85e3e7e24cc0ccc51a8a11ff818f6b139a0d87e4c
@@ -29623,8 +29653,20 @@
 5I7V integral.genus_symbol:
   hash: dfd9b35c9f591030882f4637c7975081fe1f602acc31c9bf0680a11917e6f42f
   by: research preamble
+5I7V integral.local_densities:
+  hash: be1db96a8aa1ba76d4eb2c083738f76e93a626be8da1e58e17ddbd068ce9bd9a
+  by: research preamble
+5I7V integral.local_representations:
+  hash: 8a8976ee4215985884db0c5dd9f28476cbd78bd6f8b0126763fe179c5578dbc2
+  by: research preamble
+5I7V integral.modular_scale:
+  hash: 389ddf5be20ebd3dd43a3fd14d80fe18c23087d1bf5190e184b363a1594b18df
+  by: research preamble
 5I7V integral.overlattice_count:
   hash: 8f9632b5382b6dd6cbd6c715d25f8e0d8b4b7fbf2ac4546441f096e8a2fa9df9
+  by: research preamble
+5I7V integral.primitive_orbits:
+  hash: 7afd29be66056c3e230ed05bf23987044582691d613da98dc2c73387e067392f
   by: research preamble
 5I7V integral.spinor_genera:
   hash: b42f4473a548546535b376369bd30a1917c54759f4d6e9071c955725526869f6

@@ -12,6 +12,10 @@ certifications:
   integral.spinor_genus_count: 46567cc99f95df3aaec86e4681be0104e92cce567dcbd8049c3dd6c5685bcb87
   integral.spinor_genera: 6224b501383d4b64c3898d11b6547bad2c69864a88f0dce609d27b5404176b1e
   integral.hyperbolic_index: 7cf383d232b58a327e725486eb0c00ad6d044eb15e5063624a785f11b1fdc5d4
+  integral.modular_scale: 7c8998f9d9570d758e72e273b05324df0e1f0b696cc487466a65de1f689d8fc9
+  integral.anisotropic_primes: 8264a7db93290d3daa1b87aba5743a5d8fd2633087750e82a10e4e8419cba001
+  integral.local_representations: b72c6c8fb7caab834bc2d54cee08f89de705fb868da278e51f1b97a207a97a74
+  integral.local_densities: 3b824b83c1bff8f9023ccd703f5bb3d9cb16796f8fbe5bb9eb390608afbfe42f
 rank: 4
 gram_tensor:
 - [-1, 0, 0, 0]
@@ -32,6 +36,7 @@ integral:
   elementary_primes: []
   parity: odd
   level: 12
+  modular_scale: false
   discriminant_group: [6]
   overlattice_count: 1
   bad_reduction_primes: [2, 3]
@@ -41,6 +46,13 @@ integral:
   spinor_genus_count: 1
   spinor_genera: [1]
   hyperbolic_index: 1
+  anisotropic_primes: []
+  local_representations: []
+  local_densities:
+  - prime: 2
+    densities: [3/4, 9/8, 3/4, 15/16, 5/4, 9/8, 5/4, 33/32, 3/4, 7/8, 3/4, 15/16]
+  - prime: 3
+    densities: [2/3, 4/3, 8/9, 2/3, 4/3, 10/9, 2/3, 4/3, 26/27, 2/3, 4/3, 8/9]
 indefinite:
   isotropic: true
 morphisms: []
