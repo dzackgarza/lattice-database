@@ -31976,13 +31976,15 @@
   hash: a5655af60d2d483494c8162620b136155af562098fdb2bdb93a398645faf5199
   by: research preamble
 6JRR integral.primitive_orbits:
-  hash: ac99dcc0dfb8887f38309ef1a054405fdaa08f555d6d15900070ffc7dc441bcc
-  by: 'sage-extensions `main` 47865446a7c37c85d873f91ac9d74cea472e208c, `results/issue286-the-stage-1-call.md`:
-    the section "The kernel plane rows, measured on `7753092`" prints "[Otilde cusps]
-    built in 2171.0 s, peak 3476.4 MiB" and "[Otilde cusps] counted 189720 cusps"
-    (`:275`), and the two kernel incidence rows decided in image run 44392429173 print
-    527 line cusps, 189720 plane cusps and 569160 edges for `Otilde(T_Co) = ker rho`
-    (`:372`). The count is the row''s plane cusps, not its line cusps (`:371`).'
+  hash: ef3cd7c8374eead4fb88237d80fc2f48cb51c981fc71d9879f0ed26efc1861fe
+  by: 'sage-extensions `main` 47865446a7c37c85d873f91ac9d74cea472e208c, `results/issue286-the-stage-1-call.md:99`:
+    `Tco.Aut().isotropic_orbit_representatives(2)` returns **1 orbit**, a rank-2 primitive
+    isotropic plane, in 4.4 s — the plane row of `O(T_Co)`. This subgroup''s row is
+    that row: `results/verify-7-plane-transport.py` exhibits, on the stored Gram tensor,
+    three isometries of `T_Co` that fix the standard plane `span(e_2, e_3)` and whose
+    (det, sn_R) pairs (-1,-1), (+1,-1) and (+1,+1) generate all four signs, so `SO`,
+    `O^+` and `SO^+` act transitively on each `O(T_Co)`-orbit of primitive isotropic
+    planes; the lemma is stated and its sources given in results/evidence-7-plane-rows.md.'
 6JRR integral.spinor_genera:
   hash: 996405fa28d81289a0ee178c219695e2104fbabe6ec403a5ff4a73572423dcb2
   by: research preamble

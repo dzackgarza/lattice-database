@@ -720,3 +720,41 @@ create issues):
 Final row state, from the card after the change: `O (1, 1)`, `O+ (1, 1)`, `Otilde (527, 189720)`,
 `Otilde+ (527, 189720)`, and `SO`, `SO+`, `SOtilde`, `SOtilde+` with no plane count. Scoped checks:
 records 0, relations 0.
+
+## The transport lemma: SO and SO+ share O's plane orbit (2026-11-19)
+
+**Lemma.** If `Stab_{O(T_Co)}(P_0)` contains isometries whose `(det, sn_R)` pairs generate `{±1}²`,
+then `SO`, `O^+` and `SO^+` are each transitive on every `O(T_Co)`-orbit of primitive isotropic
+planes, so each has exactly the number of plane orbits `O(T_Co)` has.
+
+**Proof.** For `g ∈ O(T_Co)` with `gP_0 = P` and any prescribed signs there is `s` in that stabilizer
+with the same pair; then `s^{-1}g` sends `P_0` to `P` with `(det, sn_R) = (+1,+1)`, so it lies in all
+three subgroups. ∎
+
+**Sources, by printed page.** Dolgachev–Kondō, Izv. Math. **77**:3 (2013), §2 printed p. 510 (the
+conventions: lattice, signature, discriminant kernel) and §3 (3.6) with Prop. 3.2, printed p. 513;
+Dutour Sikirić–Hulek, J. London Math. Soc. **110** (2024), arXiv:2302.01679, Lemma 3.6, printed p. 22;
+the reflection and spinor-norm conventions are Gritsenko–Hulek–Sankaran, arXiv:0810.1614, §1 and §3.1
+eq. (4), printed p. 8.
+
+**The check** (`results/verify-7-plane-transport.py`, on the card's stored Gram at sage-extensions
+`0bbf022b6b`, with the owner's membership predicates):
+
+| witness | image of `e_2`, `e_3` | in `O` | in `SO` | in `O⁺` | in `SO⁺` | `(det, sn_R)` |
+| --- | --- | --- | --- | --- | --- | --- |
+| negate `⟨2⟩` | `e_2`, `e_3` | ✓ | – | – | – | `(-1,-1)` |
+| negate `U(2)` | `-e_2`, `-e_3` | ✓ | ✓ | – | – | `(+1,-1)` |
+| negate `E8(-2)` | `e_2`, `e_3` | ✓ | ✓ | ✓ | ✓ | `(+1,+1)` |
+
+The images are the calls' own output: each witness fixes `span(e_2, e_3)` and lies in `O(T_Co)`, and
+the three pairs generate all four signs (`generated: [[-1,-1],[-1,1],[1,-1],[1,1]]`).
+
+**The base row is the record's.** `results/issue286-the-stage-1-call.md:99` at
+`47865446a7c37c85d873f91ac9d74cea472e208c`: `Tco.Aut().isotropic_orbit_representatives(2)` returns one
+rank-2 primitive isotropic plane in 4.4 s. So `SO` and `SO⁺` state `planes: 1`, certified with that
+line and this proof as the citation.
+
+**What it does not do.** It says nothing about the kernel rows: `K = ker ρ` is not `O(T_Co)`, and the
+kernel case is the separate sign lemma (`results/verify-7-plane-sign-witnesses.py`). The two
+determinant-cutting kernel rows remain empty, and `results/issue-draft-7-kernel-rows-without-record.md`
+now covers two rows rather than four.
