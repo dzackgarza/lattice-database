@@ -424,3 +424,70 @@ between them, so `SOtilde`'s walk, when it runs, must return `Otilde+`'s 189720 
 the card's `SOtilde+` row can stay empty for a reason that is not the arithmetic (its character
 quotient does not build here) while the count itself is not in doubt. It does not put a value on any
 row: a card states what its own computation returned, and only `Otilde+`'s walk has returned.
+
+## The flag count's arithmetic, and what it rests on (2026-11-19)
+
+**Lemma.** The incidence relation between `K`'s line cusps and its plane cusps is $(1080,3)$-biregular,
+so it has $527 \cdot 1080 = 189720 \cdot 3 = 569160$ edges, and the number of isotropic-flag orbits of
+`K` is `569160`.
+
+**Sources, by printed page.**
+
+- D. Dutour Sikirić, K. Hulek, *Moduli of polarised Enriques surfaces — computational aspects*,
+  J. London Math. Soc. **110** (2024), arXiv:2302.01679, Lemma 3.6, printed p. 22 — the double-coset
+  reduction of a character kernel's orbits to the finite image, which is what makes the line and
+  plane orbits countable at all.
+- D. Dolgachev, S. Kondō, *The rationality of the moduli spaces of Coble surfaces and of nodal
+  Enriques surfaces*, Izv. Math. **77**:3 (2013), §2 printed p. 510 and §3 eq. (3.6) with
+  Proposition 3.2, printed p. 513 — `T_Co`, its signature, and its discriminant kernel `K`.
+
+**The arithmetic, checked against the card's own numbers** (`results/probe-flag-arithmetic.py`,
+`results/evidence-7-plane-rows.md` above holds the run):
+
+```
+isotropic_subgroups     23715  = 527 * 270 / 6
+line_degree              1080  = 135 * 8 stars per plane
+plane_degree                3  = the three nonzero divided classes of a plane (F2^2)
+527 * 1080            = 569160
+189720 * 3            = 569160
+edges_close              true
+```
+
+The two degrees are the sources' numbers, not this run's: `135` is the number of order-four isotropic
+subgroups of `A_{T_Co}` through a given nonzero isotropic class, `8` is the number of stars of such a
+subgroup, and `3` is immediate because a primitive isotropic plane's divided classes are `P/2P ≅ F₂²`,
+whose nonzero elements are exactly the classes of the plane's primitive vectors.
+
+**What this does not establish.** The edge count is a count of *pairs of orbits*; that it equals the
+number of *flag orbits* needs the injectivity of the forgetful map — distinct `K`-flag orbits have
+distinct endpoint pairs, because a flag orbit is named by its divided class data (plane decorated plus
+one nonzero class) — and that is the source's statement, not a computation here. Nor is `flag_orbits`
+a card value on either group card: the incidence walk is 6132–7973 s per kernel row and has not run
+here.
+
+**Why it is worth recording anyway.** It fixes what the two group cards' `flag_orbits` must be when
+their walks return — `569160` — and it double-checks `189720` from the line side, so a returned plane
+count that did not close against `527 \cdot 1080` would be a disagreement worth reporting rather than
+a value to store.
+
+## `SOtilde`'s plane row: attempted once, ended by the host (2026-11-19)
+
+```
+latticedb certify --minutes 120 --tag 6JRR --field 'primitive_orbits[SOtilde].planes' \
+  --phase fields --workers 1
+```
+
+Started 08:41 UTC with 9.4 GiB available. The worker reached 1.1 GiB and the run ended it at
+`seconds: 566`, `peak_bytes: 1130909696`, `limit_bytes: 1676462899` — the reserve floor again, with
+the host at 2.9 GiB available after other projects took the machine. Released with that measurement
+so a dispatched run asks it; the count it must return is 189720 by the sign lemma above.
+
+The four kernel rows now have four attempts between them and one returned: `Otilde+` in 2000 s, at
+3.3 GiB, on a host that kept 6.9–7.3 GiB free.
+
+| row | attempts | outcome |
+| --- | ---: | --- |
+| `Otilde+` | 1 | **189720**, 2000 s, 3.3 GiB |
+| `Otilde` | 3 | ended at 677 s, 1054 s, 426 s; 1.0–1.3 GiB peak |
+| `SOtilde` | 1 | ended at 566 s, 1.1 GiB peak |
+| `SOtilde+` | 0 | no route: its character quotient does not build |

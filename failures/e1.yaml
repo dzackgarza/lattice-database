@@ -12450,3 +12450,144 @@
     instead of the 9.2 GiB exact-stabilizer fallback. The owner measured that row
     at 527 in 72.15 s, the eight rows in 307.2 s at 1019 MiB; this release asks the
     database path for it on the stored Gram tensor.'
+6JRR integral.primitive_orbits[SOtilde].planes:
+  disposition: retry
+  attempts:
+  - hash: 63fbddf52ef94ea7b6c7def8920838635350cd88b60aa8ef0fbc29e58a306c6c
+    gram_tensor:
+    - - 2
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+    - - 0
+      - 0
+      - 2
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+    - - 0
+      - 2
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+    - - 0
+      - 0
+      - 0
+      - -4
+      - 0
+      - 2
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+    - - 0
+      - 0
+      - 0
+      - 0
+      - -4
+      - 0
+      - 2
+      - 0
+      - 0
+      - 0
+      - 0
+    - - 0
+      - 0
+      - 0
+      - 2
+      - 0
+      - -4
+      - 2
+      - 0
+      - 0
+      - 0
+      - 0
+    - - 0
+      - 0
+      - 0
+      - 0
+      - 2
+      - 2
+      - -4
+      - 2
+      - 0
+      - 0
+      - 0
+    - - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 2
+      - -4
+      - 2
+      - 0
+      - 0
+    - - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 2
+      - -4
+      - 2
+      - 0
+    - - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 2
+      - -4
+      - 2
+    - - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 2
+      - -4
+    reason: memory exhausted
+    stderr: ''
+    seconds: 566.316985834972
+    recorded_at: 2026-11-19 08:51:47.457829+00:00
+    run_url: null
+    database_revision: null
+    research_revision: null
+  notes:
+  - '2026-11-19T09:53:10.758037+00:00: released for the dispatched certify run: this
+    row''s first local attempt ran for 566 s at a 1130909696 B worker peak and the
+    run ended the worker at its 1676462899 B reserve floor with 2.9 GiB available
+    on the host. The sign lemma is proved (results/verify-7-plane-sign-witnesses.py),
+    so the count this row must return is 189720; the stop was the host''s memory,
+    as with the three attempts at Otilde and unlike the Otilde+ attempt that returned
+    189720 in 2000 s at 3.3 GiB.'
