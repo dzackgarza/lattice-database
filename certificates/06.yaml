@@ -31347,27 +31347,13 @@
   by: research preamble
 3I9R definite.regular:
   hash: c537170f92a1ad936d9ddb3eca2f8598f3e6a5847bbd4b28a2c7fb1bc244283e
-  by: 'W. C. Jagy, I. Kaplansky and A. Schiemann, There are 913 regular ternary forms,
-    Mathematika 44 (1997), 332-341, form 609, as tabulated in A. G. Doyle, B. Muskat,
-    K. Pehlivan and K. S. Williams, Positive integers represented by regular primitive
-    positive-definite integral ternary quadratic forms, Integers 19 (2019), #A45,
-    Tables 1 and 2; regular by B.-K. Oh, Regular positive ternary quadratic forms,
-    Acta Arith. 147 (2011), 233-243.'
+  by: research preamble
 3I9R definite.siegel_eisenstein_coefficients:
   hash: 636055664f6dc2056906dd222c5a043662857e8cad0caaa0827b809869313fe5
   by: research preamble
 3I9R definite.spinor_regular:
   hash: 89afa86802b9b414decd942b66b93170811d46c84b2b467a6b878879e0b6d0e7
-  by: 'W. C. Jagy, I. Kaplansky and A. Schiemann, There are 913 regular ternary forms,
-    Mathematika 44 (1997), 332-341, form 609, as tabulated in A. G. Doyle, B. Muskat,
-    K. Pehlivan and K. S. Williams, Positive integers represented by regular primitive
-    positive-definite integral ternary quadratic forms, Integers 19 (2019), #A45,
-    Tables 1 and 2; regular by B.-K. Oh, Regular positive ternary quadratic forms,
-    Acta Arith. 147 (2011), 233-243; hence spinor regular, since a form is spinor
-    regular if it represents all the positive integers represented by its spinor genus
-    (A. G. Earnest and A. Haensch, Completeness of the list of spinor regular ternary
-    quadratic forms, arXiv:1711.05811v2 (2018), Abstract) and the spinor genus lies
-    in the genus.'
+  by: research preamble
 3I9R definite.theta_series_cuspidal_component:
   hash: 22c5b614ddf762f2e172befceaa2b50bf254248512bc53d119b4c4df720e9a8f
   by: research preamble
@@ -31379,6 +31365,9 @@
   by: research preamble
 3I9R integral.anisotropic_primes:
   hash: fb54267654396da36a3162ac5d266d87dd5becde44f8f75d35e7eb8ed68d55fe
+  by: research preamble
+3I9R integral.discriminant_sequence:
+  hash: b49af219b50af6e4406cbdf6c2073118e2da967573e888328649eb75f8027356
   by: research preamble
 3I9R integral.elementary_primes:
   hash: ea3d4c5ca3602ebabde46553e6defacfb7aa555f8706cc0c42734271eda8a471
