@@ -1,6 +1,12 @@
 """#7: the sign subgroups share O(T_Co)'s plane orbit, so SO and SO+ have one plane orbit each.
 
-The lemma. Let `P_0 = span(e_2, e_3)` be the standard primitive isotropic plane of `T_Co`, in the
+The statement used is the published reduction through the finite character image — D. Dutour
+Sikirić, K. Hulek, Lemma 3.6, printed p. 22 — with the lattice and discriminant kernel of
+D. Dolgachev, S. Kondō, §2 printed p. 510 and §3 (3.6) with Proposition 3.2, printed p. 513.
+What this script does is decide that statement's hypothesis on this card's Gram tensor; it
+introduces no statement of its own.
+
+Let `P_0 = span(e_2, e_3)` be the standard primitive isotropic plane of `T_Co`, in the
 card's own basis. If `Stab_{O(T_Co)}(P_0)` contains elements whose (det, sn_R) pairs generate
 `{+-1}^2`, then for any `g` in `O(T_Co)` carrying `P_0` to a plane `P` and any prescribed pair of
 signs there is `s` in that stabilizer with the same pair, so `s^-1 g` carries `P_0` to `P` with

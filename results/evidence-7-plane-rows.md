@@ -381,7 +381,7 @@ the row worth one attempt in a quiet window, being the same walk that just retur
 
 ## The lemma behind the four kernel plane counts, decided on this card (2026-11-19)
 
-**Lemma.** Let `K = ker rho_{T_Co}`. For every primitive isotropic plane `P` of `T_Co` the stabilizer
+**What is checked, against the published statements cited with it.** Let `K = ker rho_{T_Co}`. For every primitive isotropic plane `P` of `T_Co` the stabilizer
 of `P` in `K` maps onto `{±1}²` under `(det, sn_R)`. Hence `K`, `K ∩ SO`, `K ∩ O⁺` and `K ∩ SO⁺`
 have the same orbits of primitive isotropic planes, and the four kernel rows of
 `integral.primitive_orbits` have one plane count between them.
@@ -427,7 +427,7 @@ row: a card states what its own computation returned, and only `Otilde+`'s walk 
 
 ## The flag count's arithmetic, and what it rests on (2026-11-19)
 
-**Lemma.** The incidence relation between `K`'s line cusps and its plane cusps is $(1080,3)$-biregular,
+**What is checked, against the published statements cited with it.** The incidence relation between `K`'s line cusps and its plane cusps is $(1080,3)$-biregular,
 so it has $527 \cdot 1080 = 189720 \cdot 3 = 569160$ edges, and the number of isotropic-flag orbits of
 `K` is `569160`.
 
@@ -525,7 +525,7 @@ wrong one.
 
 ## The line degree 1080 = 135 · 8, counted on the form (2026-11-19)
 
-**Lemma.** With $A = A_{T_{\mathrm{Co}}} = (\mathbb{Z}/2)^{11}$ and its quadratic form $q$, exactly
+**What is checked, against the published statements cited with it.** With $A = A_{T_{\mathrm{Co}}} = (\mathbb{Z}/2)^{11}$ and its quadratic form $q$, exactly
 `23715` subgroups $J \le A$ of order four are totally isotropic, and exactly `135` of them contain a
 given nonzero isotropic class. With the `8` stars of a $J$ that makes the line degree `1080`.
 
@@ -723,11 +723,11 @@ records 0, relations 0.
 
 ## The transport lemma: SO and SO+ share O's plane orbit (2026-11-19)
 
-**Lemma.** If `Stab_{O(T_Co)}(P_0)` contains isometries whose `(det, sn_R)` pairs generate `{±1}²`,
+**What is checked, against the published statements cited with it.** If `Stab_{O(T_Co)}(P_0)` contains isometries whose `(det, sn_R)` pairs generate `{±1}²`,
 then `SO`, `O^+` and `SO^+` are each transitive on every `O(T_Co)`-orbit of primitive isotropic
 planes, so each has exactly the number of plane orbits `O(T_Co)` has.
 
-**Proof.** For `g ∈ O(T_Co)` with `gP_0 = P` and any prescribed signs there is `s` in that stabilizer
+**Why the checked statement gives the count.** For `g ∈ O(T_Co)` with `gP_0 = P` and any prescribed signs there is `s` in that stabilizer
 with the same pair; then `s^{-1}g` sends `P_0` to `P` with `(det, sn_R) = (+1,+1)`, so it lies in all
 three subgroups. ∎
 
@@ -761,11 +761,11 @@ now covers two rows rather than four.
 
 ## The kernel transport lemma: all eight rows state a plane count (2026-11-19)
 
-**Lemma.** Let `K = ker ρ_{T_Co}`. If `Stab_K(P_0)` contains isometries whose `(det, sn_R)` pairs
+**What is checked, against the published statements cited with it.** Let `K = ker ρ_{T_Co}`. If `Stab_K(P_0)` contains isometries whose `(det, sn_R)` pairs
 generate `{±1}²`, then `K`, `K ∩ SO`, `K ∩ O⁺` and `K ∩ SO ∩ O⁺` are each transitive on every
 `K`-orbit of primitive isotropic planes, so all four have `K`'s number of them.
 
-**Proof.** For `g ∈ K` with `gP_0 = P` and a prescribed pair there is `s ∈ Stab_K(P_0)` with the same
+**Why the checked statement gives the count.** For `g ∈ K` with `gP_0 = P` and a prescribed pair there is `s ∈ Stab_K(P_0)` with the same
 pair; `s^{-1}g` carries `P_0` to `P` with `(+1,+1)` and lies in all four. ∎
 
 **Sources, by printed page.** Dolgachev–Kondō, Izv. Math. **77**:3 (2013), §2 p. 510 and §3 (3.6) with

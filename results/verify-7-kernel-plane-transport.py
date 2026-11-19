@@ -1,6 +1,12 @@
 """#7: the four kernel subgroups share K's plane orbits, so SOtilde and SOtilde+ have 189720.
 
-The lemma. Let `K = ker rho_{T_Co}` and `P_0 = span(e_2, e_3)` the standard primitive isotropic plane
+The statement used is the published reduction through the finite character image — D. Dutour
+Sikirić, K. Hulek, Lemma 3.6, printed p. 22 — with the lattice and discriminant kernel of
+D. Dolgachev, S. Kondō, §2 printed p. 510 and §3 (3.6) with Proposition 3.2, printed p. 513.
+What this script does is decide that statement's hypothesis on this card's Gram tensor; it
+introduces no statement of its own.
+
+Let `K = ker rho_{T_Co}` and `P_0 = span(e_2, e_3)` the standard primitive isotropic plane
 of `T_Co` in this card's basis. If `Stab_K(P_0)` contains isometries whose `(det, sn_R)` pairs
 generate `{+-1}^2`, then `K`, `K & SO`, `K & O^+` and `K & SO & O^+` are each transitive on every
 `K`-orbit of primitive isotropic planes, so all four have `K`'s number of them.

@@ -1,6 +1,12 @@
 """#7: the sign isometries that fix the standard primitive isotropic plane of T_Co.
 
-The lemma these decide, with its sources by printed page: for every primitive isotropic plane `P`
+The statement used is the published reduction through the finite character image — D. Dutour
+Sikirić, K. Hulek, Lemma 3.6, printed p. 22 — with the lattice and discriminant kernel of
+D. Dolgachev, S. Kondō, §2 printed p. 510 and §3 (3.6) with Proposition 3.2, printed p. 513.
+What this script does is decide that statement's hypothesis on this card's Gram tensor; it
+introduces no statement of its own.
+
+for every primitive isotropic plane `P`
 of `T_Co`, the stabilizer of `P` inside `K = ker rho_{T_Co}` maps onto `{+-1}^2` under the pair
 (determinant, real spinor norm), so none of `K`, `K & SO`, `K & O+`, `K & SO+` splits another's
 plane orbits and all four have the same 189720 of them.

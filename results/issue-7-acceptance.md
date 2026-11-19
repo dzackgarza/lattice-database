@@ -29,7 +29,7 @@ record with a proof:
 | `O` | 1 | computed here, 208.4 s at 546 MiB |
 | `O+` | 1 | computed here, the owner's odd-stabilizer route |
 | `Otilde+` | 189720 | computed here, 2000 s at 3.3 GiB |
-| `SO`, `SO+` | 1 | record's `O` row (`results/issue286-the-stage-1-call.md:99`) + `results/verify-7-plane-transport.py` |
+| `SO`, `SO+` | 1 | record's `O` row (`results/issue286-the-stage-1-call.md:99`) + the hypothesis check in `results/verify-7-plane-transport.py` for Dutour Sikirić–Hulek, Lemma 3.6, printed p. 22 |
 | `Otilde`, `SOtilde`, `SOtilde+` | 189720 | record (`:275`, `:285`, `:372`, `:373`) + `results/verify-7-kernel-plane-transport.py` |
 
 The record is sage-extensions `main` `47865446a7c37c85d873f91ac9d74cea472e208c`. What this card still
