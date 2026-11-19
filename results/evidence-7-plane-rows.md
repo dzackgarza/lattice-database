@@ -157,3 +157,46 @@ presents no divided class.
 | the incidence field | field and computation landed; no value, named for dispatch |
 | the unconditional `Γ_Co = Õ⁺(T_Co)` identification corrected | met before this change (`lattices/6JRR.md`, the conjecture paragraph) |
 | `latticedb verify` on the affected cards | not run: `checks.one_shard` loads the whole corpus (7.3 GiB of cards and 9 GiB of certificates) and this VM does not have it — the scoped component checks are 0/0, and the dispatch is `verify.yml` with `tags=6JRR` |
+
+## The named dispatch, and why a tag-named run is the surface that reaches it
+
+`certify.yml` on main has one input, `tags`, and passes no `--field`, so the workflow's dispatch
+surface cannot name a computation — only cards. A rule under which these values are reachable only
+by `--field` would therefore have left them reachable by nothing the orchestrator can dispatch, which
+is how the first cut of this change read. The rule is now:
+
+| run | what it names | plane parts asked | group orbit counts asked |
+| --- | --- | --- | --- |
+| sharded nightly (`certify.yml` on schedule, `--shard i/16`) | no card | no | no |
+| dispatched (`certify.yml`, `tags=6JRR`) | its cards | every missing part of those cards | every group card of those cards |
+| dispatched with `--field` | computations | only the parts named | only the three of the group named |
+
+`genus.requests` reads `named=bool(tags)`, so the sharded nightly is unchanged and a card-named run
+pays for the card it named. The probe, on this tree with the card's own `exceeded.yaml` and
+`failures/e1.yaml` (so `overlattice_count`, which is quarantined, is not in either queue):
+
+```
+nightly shard:        discriminant_orbits, roots, norms
+dispatched --tag 6JRR: primitive_orbits[O+].planes, primitive_orbits[SO].planes,
+                      primitive_orbits[SO+].planes, primitive_orbits[Otilde].planes,
+                      primitive_orbits[Otilde+].planes, primitive_orbits[SOtilde].planes,
+                      primitive_orbits[SOtilde+].planes, discriminant_orbits,
+                      arithmetic-group.otilde-t-co.{line,plane,flag}_orbits,
+                      arithmetic-group.otilde-plus-t-co.{line,plane,flag}_orbits,
+                      roots, norms
+```
+
+`roots`, `norms` and `discriminant_orbits` are the semi-decisions, which `--phase fields` — the
+workflow's own argument — excludes. So the dispatched run's fields phase is exactly the seven plane
+parts and the six group counts.
+
+**The run to dispatch, then.** `.github/workflows/certify.yml`, `workflow_dispatch`,
+`tags=6JRR`, no other input; the workflow runs
+`latticedb certify --minutes N --shard 0/1 --workers 1 --phase fields --tag 6JRR`.
+Budget: the two kernel plane rows are 1813–2171 s and the two kernel incidence rows 6132–7973 s on
+the owner's own record, about 300 minutes of the 330 the job gives, so expect the budget to cut the
+last rows; what it cuts is logged in `exceeded.yaml` and quarantined in `failures/e1.yaml`, and the
+follow-up is `just retry-computation 6JRR '<computation>' --note '<why>'` and a second dispatch of
+the same run. `results/certify-fields-input.patch` is the finer option — a `fields` input that the
+workflow passes as `--field` — and it needs the workflows permission this connection does not have,
+so it is a patch and not a change.

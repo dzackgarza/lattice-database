@@ -344,6 +344,8 @@ def arithmetic_requests(
     loaded: corpus.Corpus,
     held: Certificates,
     wanted: tuple[str, ...] = (),
+    *,
+    named: bool = False,
 ) -> list[tuple[str, dict[str, Yaml]]]:
     r"""The uncertified fields of the arithmetic-group cards that this lattice states.
 
@@ -357,10 +359,12 @@ def arithmetic_requests(
     `standard_name`, such as a named subgroup defined by a source, has no owner operation that
     presents it, and is left alone.
 
-    Its three orbit counts are asked only where a run names one of them
-    (`arithmetic-group.<slug>.flag_orbits`), and then all three together: a flag count is stored
-    with the two counts it joins, and the three are one walk of the same subgroup — the plane row
-    is retained and the incidence reads it — so a run that names one pays for them once.
+    Its three orbit counts are asked where a run names one of them
+    (`arithmetic-group.<slug>.flag_orbits`) and then all three together — a flag count is stored
+    with the two counts it joins, and the three are one walk of the same subgroup, the plane row
+    retained and the incidence reading it — or where a run names its cards (`certify --tag 6JRR`,
+    a dispatch's own choice of cards) and asks no field at all. The sharded nightly does neither
+    and pays nothing for them.
     """
     groups = {entry.value.slug: entry.value for entry in loaded.arithmetic_groups if entry.value.lattice == lattice.tag}
     chosen: list[tuple[str, dict[str, Yaml]]] = []
@@ -377,7 +381,7 @@ def arithmetic_requests(
             expected_hash = certificates.certification_hash(computation, lattice, certified_value(field, value, lattice))
             if stored is None or certificates.is_pending(held, computation, lattice.certifications.get(field), expected_hash):
                 chosen.append((field, {"slug": slug, "standard_name": card.standard_name}))
-        if any(f"{ARITHMETIC_PREFIX}{slug}.{short}" in wanted for short in ARITHMETIC_ORBIT_FIELDS):
+        if any(f"{ARITHMETIC_PREFIX}{slug}.{short}" in wanted for short in ARITHMETIC_ORBIT_FIELDS) or (named and not wanted):
             for short in ARITHMETIC_ORBIT_FIELDS:
                 if getattr(card.data, short) is None:
                     chosen.append((f"{ARITHMETIC_PREFIX}{slug}.{short}", {"slug": slug, "standard_name": card.standard_name}))
@@ -421,23 +425,26 @@ def orbit_plane_rows_to_ask(
     triage: failures.Failures,
     log: exceeded.Interruptions,
     wanted: tuple[str, ...],
+    *,
+    named: bool,
 ) -> list[str]:
-    r"""The plane parts of the orbit rows a run names, in the order the schema lists the subgroups.
+    r"""The plane parts of the orbit rows this run asks for, in the order the schema lists the subgroups.
 
-    A row states two counts, and its plane count is the expensive one: it is the owner's orbit
-    walk over the primitive isotropic planes, 1813--2171 s on $T_{\mathrm{Co}}$'s kernel rows,
-    where the line count of the same row is 122--172 s (sage-extensions#286). Every indefinite
-    card that stores a row would pay that walk, and most of them get their plane count from a
-    source rather than from a computation, so a scheduled run does not ask this part of a row: a
-    run asks it by naming it, `--field 'primitive_orbits[Otilde].planes'`, and the row's line
-    count is asked for as it always was. A part the card already states is not asked again, and a
-    part a failure or an interrupted run quarantines is not asked at all.
+    A row states two counts, and its plane count is the expensive one: it is the owner's orbit walk
+    over the primitive isotropic planes, 1813--2171 s on $T_{\mathrm{Co}}$'s kernel rows, where the
+    line count of the same row is 122--172 s (sage-extensions#286). The sharded nightly run must not
+    pay that walk on every indefinite card that stores a row, so it asks this part only where a run
+    names a part with `--field`. A run that names its cards — `certify --tag 6JRR`, which is what a
+    dispatched run does — asks the parts of those cards and of no others: the cards are the run's own
+    choice, and a part left unasked there is a value only another such run can produce.
+    A part the card already states is not asked again, and a part a failure or an interrupted run
+    quarantines is not asked at all.
     """
     stored = stored_value if isinstance(stored_value, dict) else {}
     parts: list[str] = []
     for row in STANDARD_SUBGROUPS:
         part = f"{orbit_row(field, row)}.planes"
-        if part not in wanted:
+        if not (part in wanted or (named and not wanted)):
             continue
         series = stored.get(row)
         if isinstance(series, dict) and series.get("planes") is not None:
@@ -460,7 +467,7 @@ def requests(
     failed: failures.Failures | None = None,
     wanted: tuple[str, ...] = (),
 ) -> list[Request]:
-    """For each nondegenerate record in `shard`, the uncertified applicable preamble computations.
+    r"""For each nondegenerate record in `shard`, the uncertified applicable preamble computations.
 
     A computation that ran for a whole job without finishing is not requested. One
     that a job ended after a shorter time is requested first in its phase, so it runs
@@ -470,6 +477,13 @@ def requests(
     hold its workers through the fields that every procedure finishes. A computation
     that was running when a runner died comes after everything else, so a computation
     that ends its runner cannot end the next job early.
+
+    `tags` is what the run names: the sharded nightly names no card, and a dispatched run names
+    the cards it is about. The two costly parts of this queue — a row's plane count and a group
+    card's three orbit counts, 1813--2171 s and 6132--7973 s a kernel row on
+    $T_{\mathrm{Co}}$ (sage-extensions#286) — are asked where a run names one of them with
+    `wanted`, and, when it names none, where it names its cards: a sharded nightly asks neither,
+    and a `certify --tag` dispatch asks both of the cards it named.
     """
     resumed: list[Request] = []
     chosen: list[Request] = []
@@ -520,8 +534,9 @@ def requests(
                     # rows the card states, rather than the whole series being asked again.
                     rows = orbit_rows_to_ask(lattice, field, stored_value, triage, log, only_missing=False)[:1]
                 fields.extend(rows)
-                # The plane count of a row is its own computation, and a run asks for it by name.
-                fields.extend(orbit_plane_rows_to_ask(lattice, field, stored_value, triage, log, wanted))
+                # The plane count of a row is its own computation: a run asks for it by name, or
+                # for the cards it named rather than for a shard.
+                fields.extend(orbit_plane_rows_to_ask(lattice, field, stored_value, triage, log, wanted, named=bool(tags)))
                 continue
             if pending:
                 fields.append(field)
@@ -532,7 +547,7 @@ def requests(
         # computation is quarantined in triage, or outran a whole job.
         arithmetic = [
             (field, group)
-            for field, group in arithmetic_requests(lattice, loaded, held, wanted)
+            for field, group in arithmetic_requests(lattice, loaded, held, wanted, named=bool(tags))
             if not (
                 exceeded.is_exceeded(log, name(lattice.tag, field, lattice.definiteness), lattice)
                 or failures.blocked(triage, name(lattice.tag, field, lattice.definiteness), lattice)

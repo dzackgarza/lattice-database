@@ -149,7 +149,8 @@ def test_an_indefinite_card_requests_and_stores_the_eight_primitive_orbit_rows(
     without("0016", "indefinite", metadata, certificates.Certificates(), "integral.primitive_orbits")
     path.write_text(records.record_text(metadata, document.content))
     assert "primitive_orbits" not in corpus.front_matter(corpus.read_card(path))["integral"]
-    fields = [field for request in genus.requests(corpus.load(tmp_path), derived(), {}, ("0016",)) for field in request["fields"]]
+    # A sharded nightly names no card, which is the run whose queue this is.
+    fields = [field for request in genus.requests(corpus.load(tmp_path), derived(), {}, ()) for field in request["fields"]]
     # The field is asked as its eight rows, one computation each (#7).
     assert [field for field in fields if genus.orbit_row_of(field) is not None] == [genus.orbit_row("primitive_orbits", row) for row in genus.STANDARD_SUBGROUPS]
     # One orbit of primitive isotropic vectors, e + f; U is even, so no vector of norm +-1.
@@ -177,7 +178,7 @@ def test_an_indefinite_card_asks_for_each_orbit_row_alone(tmp_path: Path) -> Non
     without("0016", "indefinite", metadata, certificates.Certificates(), "integral.primitive_orbits")
     path.write_text(records.record_text(metadata, document.content))
     lattice = corpus.load(tmp_path).entries[0].lattice
-    asked = [field for request in genus.requests(corpus.load(tmp_path), derived(), {}, ("0016",)) for field in request["fields"]]
+    asked = [field for request in genus.requests(corpus.load(tmp_path), derived(), {}, ()) for field in request["fields"]]
     assert [field for field in asked if genus.orbit_row_of(field) is not None] == [genus.orbit_row("primitive_orbits", row) for row in genus.STANDARD_SUBGROUPS]
 
     # The rows that returned are the field's rows; the ones that did not are simply not there.
@@ -197,13 +198,14 @@ def test_an_indefinite_card_asks_for_each_orbit_row_alone(tmp_path: Path) -> Non
     assert genus.orbit_row("primitive_orbits", "Otilde+") in remaining
 
 
-def test_a_row_names_its_parts_and_a_plane_count_is_asked_only_by_its_name(tmp_path: Path) -> None:
-    """#7: a row states a line count and a plane count, and the expensive one is asked for by name.
+def test_a_row_names_its_parts_and_a_plane_count_reaches_a_named_run(tmp_path: Path) -> None:
+    """#7: a row states a line count and a plane count, and the sharded nightly asks only the line.
 
     A row's plane count is the owner's plane walk, which on `6JRR` is 1813--2171 s where the same
-    row's line count is 122--172 s (sage-extensions#286). Seventy-five indefinite cards store a
-    row, so the scheduled run must not pay that walk for every one of them: `certify --field`
-    names the part, and the queue carries it only when it is named.
+    row's line count is 122--172 s (sage-extensions#286). Every indefinite card that stores a row
+    would pay that walk, so the sharded nightly asks no part of a row and a run that names its
+    cards asks them: `certify --tag` is how a dispatched run reaches a value, and `--field` is how
+    it reaches one part of one row.
     """
     assert genus.orbit_row_parts("primitive_orbits[Otilde].planes") == ("primitive_orbits", "Otilde", "planes")
     assert genus.orbit_row_parts("primitive_orbits[Otilde]") == ("primitive_orbits", "Otilde", None)
@@ -224,8 +226,14 @@ def test_a_row_names_its_parts_and_a_plane_count_is_asked_only_by_its_name(tmp_p
     # The store states the row without its plane count, so the part is what a run can still ask for.
     genus.store(path, {"primitive_orbits[O]": {"O": {"constant": 1, "z": [], "w": []}}})
     loaded = corpus.load(tmp_path)
-    scheduled = [field for request in genus.requests(loaded, derived(), {}, ("0016",)) for field in request["fields"]]
-    assert not [field for field in scheduled if (genus.orbit_row_parts(field) or (None, None, None))[2] is not None], "a scheduled run does not ask a row's plane count"
+    def parts_named_by(**request) -> set[str]:
+        fields = [field for entry in genus.requests(loaded, derived(), {}, **request) for field in entry["fields"]]
+        return {field for field in fields if (genus.orbit_row_parts(field) or (None, None, None))[2] is not None}
+
+    assert parts_named_by(tags=()) == set(), "the sharded nightly names no card, so it asks no row's plane count"
+    tagged = parts_named_by(tags=("0016",))
+    assert tagged == {f"{genus.orbit_row('primitive_orbits', row)}.planes" for row in genus.STANDARD_SUBGROUPS}, "a run that names its card asks every row's plane count, and the row O already states its line count"
+    assert genus.orbit_row("primitive_orbits", "O") not in parts_named_by(tags=("0016",)), "a stored line count is not asked again"
     asked = [field for request in genus.requests(loaded, derived(), {}, ("0016",), wanted=("primitive_orbits[O].planes",)) for field in request["fields"]]
     assert "primitive_orbits[O].planes" in asked
     assert "primitive_orbits[SO].planes" not in asked, "a part is asked for the row it names and not for the eight"
@@ -298,11 +306,14 @@ def test_a_group_card_orbit_count_is_asked_only_when_a_run_names_it(tmp_path: Pa
     """#7: the incidence walk is 6132--7973 s a kernel row, so a scheduled run does not ask for it.
 
     A run names one of a group card's three orbit counts and gets all three, because a flag count
-    is stored with the two counts it joins and the three are one walk of one subgroup.
+    is stored with the two counts it joins and the three are one walk of one subgroup. The sharded
+    nightly names no card and asks none of them.
     """
     root = coble_corpus(tmp_path)
     counts = {f"{genus.ARITHMETIC_PREFIX}{slug}.{short}" for slug in ("otilde-t-co", "otilde-plus-t-co") for short in genus.ARITHMETIC_ORBIT_FIELDS}
-    assert not counts & requested_fields(root, certificates.Certificates()), "a scheduled run asks no orbit count"
+    nightly = {field for request in genus.requests(corpus.cards(root, ("6JRR",)), certificates.Certificates(), {}, ()) for field in request["fields"]}
+    assert not counts & nightly, "the sharded nightly asks no orbit count"
+    assert counts <= requested_fields(root, certificates.Certificates()), "a run that names its card asks them"
     named = {
         field
         for request in genus.requests(corpus.cards(root, ("6JRR",)), {}, {}, ("6JRR",), wanted=("arithmetic-group.otilde-plus-t-co.flag_orbits",))
@@ -343,7 +354,7 @@ def test_an_indefinite_card_requests_its_orbit_rows_and_its_automorphism_generat
     held = derived()
     without("0016", "indefinite", metadata, held, "integral.primitive_orbits", "automorphisms.automorphism_group_generator_morphisms")
     (tmp_path / "lattices" / "0016.md").write_text(records.record_text(metadata, source.content))
-    requested = [field for request in genus.requests(corpus.load(tmp_path), held, {}, ("0016",)) for field in request["fields"]]
+    requested = [field for request in genus.requests(corpus.load(tmp_path), held, {}, ()) for field in request["fields"]]
     assert "derive" not in requested, "a current derivation selects this card's fields, so the queue is the one a run works"
     assert "automorphism_group_generator_morphisms" in requested
     assert "automorphism_group_order" in requested, "O(U) is finite, and the order is a field of this card"
