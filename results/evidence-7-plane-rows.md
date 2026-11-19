@@ -593,3 +593,39 @@ calls. Neither group card stores `flag_orbits` on the strength of it.
 **Cost datum.** The incidence walk on this *small* lattice under the *full* group took 1446.5 s for
 three edges, which is the same machinery that costs 6132–7973 s on `T_Co`'s kernel rows: the cost is
 per plane cusp walked, not per edge returned.
+
+## The eight stars per subgroup, as a quotient of two computations (2026-11-19)
+
+The last factor in `1080 = 135 · 8` was being **cited** and not counted. It is now derived, because a
+plane cusp is a pair `(J, s)` with `s` a star of `J` (Dutour Sikirić–Hulek, Lemma 3.6, printed p. 22;
+Dolgachev–Kondō §2 p. 510 and §3 (3.6) with Proposition 3.2, printed p. 513), so
+
+```
+plane cusps of K  =  (order-four isotropic subgroups) x (stars per subgroup)
+```
+
+and both factors are computed on this card, by different instruments:
+
+| factor | value | where it is computed |
+| --- | ---: | --- |
+| order-four isotropic subgroups of $A_{T_{\mathrm{Co}}}$ | 23715 | `results/probe-7-line-degree.py`, on the owner's discriminant form |
+| plane cusps of `K` | 189720 | `integral.primitive_orbits[Otilde+].planes`, row computed from the stored Gram |
+
+`results/probe-7-star-count.py` divides them:
+
+```
+stars_per_subgroup  8   remainder 0
+line_degree      1080   = 135 * 8
+edges          569160   = 527 * 1080
+closes            true
+```
+
+**Why the quotient is the check and not a coincidence.** The 23715 is a count on the discriminant
+group and the 189720 is an orbit count on the lattice; they agree on a whole number of stars only if
+the structure `(J, s)` is what the plane cusps are — the two computations are independent, and a
+remainder or a different quotient would refute the reading. It also makes the plane count of the one
+row that has returned consistent with the line side: `23715 · 8 = 189720 = 527 · 1080 / 3`.
+
+**What is still not a computation here.** The stars themselves are not enumerated — only their number
+per subgroup — and the three-dimensional statement behind `3` is the previous section's. The two
+group cards still store no `plane_orbits` or `flag_orbits`, because those are the walks.
