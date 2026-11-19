@@ -63,7 +63,17 @@ Sterk's two statements, the one-class argument, and `results/store-43-coble-rows
 
 Cusp 5 — (4.3.9), p. 24 — is not stored: three root classes, all $O(K_I)$-equivalent, and the elements of
 $\Gamma_{\mathrm{En},2}$'s cusp stabilizer this repository can construct that preserve $T_{\mathrm{Co}}$ carry no class
-to another, so its count lies between 1 and 3. It waits on a `gamma-co-2` card certified by computation.
+to another, so its count lies between 1 and 3.
+
+The card the decision requires now exists (below), so the only thing left on this row is the orbit decision itself, and
+both routes to it have now been measured and both fail:
+`results/probe-43-coble-cusp5-equivalence.py` asks $\Gamma_{\mathrm{En},2}$ for an exact witness carrying $\alpha_{12}$
+to $\alpha_{13}$, $\alpha_{12}$ to $\alpha_{14}$ and $\alpha_{13}$ to $\alpha_{14}$, each bounded at 300 s, and every
+call is killed inside `_double_coset_adjustment`
+(`orthogonal_quotients.py:234`, the `libgap.DoubleCoset` membership) exactly as at (4.3.8) — so the owner's equivalence
+does not return at a Coble cusp any more than at an Enriques one. And the constructive route merges nothing
+(`results/probe-43-coble-classes.py`: 22 of 27 family members preserve $T_{\mathrm{Co}}$, none moves a class). A
+non-merge is no proof of inequivalence, so the row stays empty and claims nothing.
 
 ### What the card would be built from, and what it would cost
 
