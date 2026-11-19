@@ -351,6 +351,88 @@ def test_the_coble_group_card_states_the_index_its_computation_certifies() -> No
     assert [problem for problem in checks.records.arithmetic_problems(loaded, held, entry) if "gamma-co-2" in problem] == []
 
 
+def test_only_one_delta_preserving_symmetry_moves_a_coble_class() -> None:
+    r"""#43: of the (4.3.9) diagram's symmetries, two preserve $\delta$ up to sign, and only one moves a class.
+
+    $T_{\mathrm{Co}} = \delta^\perp$ with $\delta = e - f$, so a symmetry of the chamber can be an element of the Coble
+    cusp stabilizer only if it carries $\delta$ to $\pm\delta$. This states, from the shipped card, that exactly two of
+    the eight do — the identity and one exchanging $\alpha_{13}$ with $\alpha_{14}$ — and that neither carries
+    $\alpha_{12}$ to another of the three, which is the question the cusp-5 row waits on
+    (`results/issue-43-lemma-coble-image.md`). A change to the card's walls or Gram tensor that moved either fact would
+    fail here rather than silently in a lemma.
+    """
+    from sage.all import QQ, matrix
+
+    lattice = Lattice.model_validate(corpus.front_matter(corpus.read_card(ROOT / "lattices" / "029J.md")))
+    assert lattice.integral is not None and lattice.integral.cusp_chambers is not None
+    gram = matrix(QQ, [[Fraction(entry) for entry in row] for row in lattice.gram_tensor])
+    size = gram.nrows()
+
+    def pairing(left, right):
+        return (matrix(QQ, 1, size, list(left)) * gram * matrix(QQ, size, 1, list(right)))[0, 0]
+
+    chamber = next(row for row in lattice.integral.cusp_chambers["gamma-en-2"] if row.statement == "4.3.9")
+    walls = [tuple(wall.vector) for wall in chamber.walls]
+    names = [wall.name for wall in chamber.walls]
+    from sage.all import QQ, vector
+
+    delta = vector(QQ, [1, -1] + [0] * (size - 2))
+    squares = [pairing(wall, wall) for wall in walls]
+
+    symmetries: list[dict[int, int]] = []
+
+    def extend(partial: dict[int, int]) -> None:
+        if len(partial) == len(walls):
+            symmetries.append(dict(partial))
+            return
+        index = len(partial)
+        for image in range(len(walls)):
+            if image in partial.values() or squares[image] != squares[index]:
+                continue
+            if all(pairing(walls[index], walls[other]) == pairing(walls[image], walls[seen]) for other, seen in partial.items()):
+                partial[index] = image
+                extend(partial)
+                del partial[index]
+
+    extend({})
+    assert len(symmetries) == 8, len(symmetries)
+    independent, chosen = [], []
+    for index, wall in enumerate(walls):
+        if matrix(QQ, independent + [list(wall)]).rank() > len(independent):
+            independent.append(list(wall))
+            chosen.append(index)
+    basis = matrix(QQ, independent)
+    coefficients = (basis * basis.transpose()).inverse() * basis * matrix(QQ, size, 1, list(delta))
+
+    def image_of_delta(symmetry: dict[int, int]):
+        from sage.all import QQ, vector
+
+        return vector(
+            QQ,
+            [
+                sum(
+                    (coefficients[position, 0] * walls[symmetry[chosen[position]]][row] for position in range(len(independent))),
+                    QQ(0),
+                )
+                for row in range(size)
+            ],
+        )
+
+    preserving = [symmetry for symmetry in symmetries if image_of_delta(symmetry) in (delta, -delta)]
+    assert len(preserving) == 2, len(preserving)
+    moved = {
+        names[index]: names[symmetry[index]]
+        for symmetry in preserving
+        for index in range(len(names))
+        if symmetry[index] != index
+    }
+    assert sorted(moved) == sorted(
+        ["\\alpha_2", "\\alpha_4", "\\alpha_5", "\\alpha_7", "\\alpha_8", "\\overline{\\widetilde\\alpha}_8", "\\alpha_13", "\\alpha_14"]
+    ), sorted(moved)
+    twelve = names.index("\\alpha_12")
+    assert all(symmetry[twelve] == twelve for symmetry in preserving), "a delta-preserving symmetry moves alpha_12"
+
+
 def test_the_chambers_own_reflections_do_not_move_the_root_classes() -> None:
     """#43: at every cusped row the root walls have different orthogonal neighbour sets, so no word in the walls moves one to another.
 
