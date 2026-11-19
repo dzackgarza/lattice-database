@@ -71,20 +71,23 @@ paragraph (`:6774`) already said the identification is a conjecture and settles 
 
 ## 6. `latticedb verify` on the affected cards
 
-Run on the current content, at repository revision `265e49e9a8`:
+CI `verify` run [44624851354](https://github.com/dzackgarza/lattice-database/actions/runs/44624851354), dispatched with tags `6JRR 029J` at revision `ff3a497ebf`, verified the two shards that hold the affected cards:
 
 ```
-latticedb verify --shard 33/64
-memory: 1.9 GiB peak for 4810 cards in shard 33/64
-lattices/3ICR.md: definite.regular contradicts its completed computation certificate
+shard 1/16 (6JRR, otilde-t-co, otilde-plus-t-co, gamma-co-2 and every card they name)
+memory: 5.7 GiB peak for 18910 cards in shard 1/16
+12 problems, each `definite.regular` or `definite.spinor_regular` of 02XN, 03EP, 05VD, 06NV, 06O4, 3ICJ, 3ICR
+shard 0/16 (029J)
+memory: 5.8 GiB peak for 18988 cards in shard 0/16
+3 problems, `definite.regular` / `definite.spinor_regular` of 02U9 and 3ICK
 ```
 
-`6JRR` falls in shard `33` of `64` (`certificates.tag_hash("6JRR") % 64 == 33`), so this run covers
-`lattices/6JRR.md`, all three of its arithmetic-group cards — `otilde-t-co`, `otilde-plus-t-co` and
-`gamma-co-2` — and every card they name. It reports no problem on any of the four; its one problem is
-`3ICR`'s `definite.regular`, which belongs to another stream. Recorded in
-`results/evidence-7-plane-rows.md`.
+Neither shard reports a problem on `6JRR`, `029J`, `otilde-t-co`, `otilde-plus-t-co` or `gamma-co-2`. The content verified includes the
+relabelled and recounted `cusp_root_orbits` rows, the `gamma-co-2` face chambers, their `chamber_symmetries` and the morphism that realizes one,
+and the corrected `gamma-co-2` index and parent. The shards are red only on the definite cards' `regular` certificates, which belong to another
+stream and are not touched here.
 
+The earlier readings at `265e49e9a8` and `ff6f781895` (`--shard 33/64`) predate these changes and are superseded.
 The earlier `--shard 1/16` run at `a79c8b5a1b` is superseded: it predated the plane and incidence
 values, the third group card and the `#49` hash recomputation, as a review of `b54cc004aafe` noted.
 The `1/16` shard could not be repeated on this VM — 18910 cards peak near 3.6 GiB and it was killed at

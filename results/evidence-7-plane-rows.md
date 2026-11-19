@@ -812,6 +812,24 @@ to routes. Scoped checks on 6JRR: records 0, relations 0.
 
 ## The affected cards verified again, on the current content (2026-11-19)
 
+**Re-run at `ff3a497ebf`**: CI `verify` run [44624851354](https://github.com/dzackgarza/lattice-database/actions/runs/44624851354), dispatched with tags `6JRR 029J` at revision `ff3a497ebf`, verified the two shards that hold the affected cards:
+
+```
+shard 1/16 (6JRR, otilde-t-co, otilde-plus-t-co, gamma-co-2 and every card they name)
+memory: 5.7 GiB peak for 18910 cards in shard 1/16
+12 problems, each `definite.regular` or `definite.spinor_regular` of 02XN, 03EP, 05VD, 06NV, 06O4, 3ICJ, 3ICR
+shard 0/16 (029J)
+memory: 5.8 GiB peak for 18988 cards in shard 0/16
+3 problems, `definite.regular` / `definite.spinor_regular` of 02U9 and 3ICK
+```
+
+Neither shard reports a problem on `6JRR`, `029J`, `otilde-t-co`, `otilde-plus-t-co` or `gamma-co-2`. The content verified includes the
+relabelled and recounted `cusp_root_orbits` rows, the `gamma-co-2` face chambers, their `chamber_symmetries` and the morphism that realizes one,
+and the corrected `gamma-co-2` index and parent. The shards are red only on the definite cards' `regular` certificates, which belong to another
+stream and are not touched here.
+
+The two readings below predate the #49 changes to 6JRR and gamma-co-2.
+
 **Re-run at `265e49e9a8`** (the revision this file's commit lands on): the same command, the same closure, `memory: 1.9 GiB peak for 4810 cards in shard 33/64`, and one problem — `3ICR`'s `definite.regular`. No problem on `6JRR`, `otilde-t-co`, `otilde-plus-t-co` or `gamma-co-2`. The first run below was at `ff6f781895` and remains in the record as the earlier reading.
 
 A review of `b54cc004aafe` correctly found the earlier verify run (`--shard 1/16` at `a79c8b5a1b`)
