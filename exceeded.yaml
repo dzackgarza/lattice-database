@@ -637,10 +637,6 @@
   killed_by: memory
   peak_bytes: 13133455360
   limit_bytes: 1675943936
-1BOI integral.discriminant_form:
-  hash: 1ef4a89288bd8129bad21026a6231003ba6e986af6666eabc57f2f9cb0cb1f8e
-  seconds: 0
-  lost: true
 1CZ4 integral.discriminant_form:
   hash: d9ace81ff310c9f2d93545001a6c2ebae53abd4735fbdf0278f88049ec4bcdb9
   seconds: 4
@@ -651,6 +647,10 @@
 1E4M definite.genus_theta_series:
   hash: d7c64037632fee89953decdc013e161f16f25e3ddeb85d56b82be0231cf40d1f
   seconds: 27
+  lost: true
+1EY1 integral.discriminant_form:
+  hash: 3b1ef95c53b9b3b83f7fd3b45789ced34ab76bb89f9ad1970f14f509b8c0a9b3
+  seconds: 0
   lost: true
 1F6O integral.primitive_orbits:
   hash: aa9a82c8d21972721e8be9c08518da9a41ebe41fa9eafc96e77816086779ea31
