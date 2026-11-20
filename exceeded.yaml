@@ -1057,7 +1057,7 @@
   seconds: 673
 3G72 integral.discriminant_sequence:
   hash: 30d3d2d311f9fdc461962e69eb4e61be747cd6ead522701cd8e929e69754f0e6
-  seconds: 5227
+  seconds: 7031
   lost: true
 3G83 integral.discriminant_sequence:
   hash: 38cc9282b8039f67ea26194365dfd97600aec000f9cef11d6658e79098ced2c8
@@ -1078,9 +1078,6 @@
   hash: 75b98a72eb3d3314b6fd55e345ca2d1ed9bc31c3e559ecc31215d5b9823c122a
   seconds: 8
   lost: true
-3GK0 integral.discriminant_sequence:
-  hash: ba1d028d24b09981cc34d6d45bbe0ff0eaebd1250cef2c2fe4370898280196e0
-  seconds: 9303
 3GO8 integral.overlattice_count:
   hash: 73f92e88dc3c41f09fe3d704e2bb6eec69c13383e23ff0521b2c623891c8c865
   seconds: 5
@@ -1155,6 +1152,10 @@
   hash: 836db517473faaeaa34246fe1f1fa761d816846114d210a46b13530d6de2d5f8
   seconds: 5
   lost: true
+3GXF integral.discriminant_sequence:
+  hash: 1c34e97f8ca251bc1bca9b6e467130be3f9747376f9934e323a1144eea80b7db
+  seconds: 981
+  lost: true
 3GXO integral.overlattice_count:
   hash: 8392a80454dd1af739e9d6163b1538aaafd76392d9cca73846c1dc3e312e9aa8
   seconds: 10
@@ -1163,20 +1164,12 @@
   hash: eb2ef6f7d13c3b8094b54382ecbc300217a306e104a8479eddfca97bb4545580
   seconds: 763
   lost: true
-3I9F integral.discriminant_sequence:
-  hash: 6f7cab93e0d890ea95c57270c71d23d62160dfa17f537a3f87efa85463594608
-  seconds: 496
-  lost: true
 3I9Z integral.discriminant_sequence:
   hash: 7dbc0ada5ff76a2987b5d86e04984e775f24298fc19f497059ec85b07a744194
   seconds: 655
 3IA0 integral.discriminant_sequence:
   hash: 288f12f016f1eab88cfa079d40cdb3679e08a7cedc3b52674f7c8c7a313c7b76
   seconds: 4713
-3IA7 integral.discriminant_sequence:
-  hash: 7f75db1694bda5e36f8576e2e7374996dbf6d9e5af537f5943ec608d68e53dfa
-  seconds: 3394
-  lost: true
 3IA8 integral.discriminant_sequence:
   hash: 9b703d789573b868a64a17542b99b57760495a5dc28716de5b9b4aef38919550
   seconds: 12086
@@ -1211,8 +1204,7 @@
   lost: true
 3IAM integral.discriminant_sequence:
   hash: cf4bab4542f104f8c4165bdb7118ddabd0e6dc338c2711c37eb5312384892827
-  seconds: 9824
-  lost: true
+  seconds: 11442
 3IAQ integral.discriminant_sequence:
   hash: 9c12e28836ec3c1bd7a0e6834f13290af00a0e327bf65b38f5d8886bfbccbbd1
   seconds: 5287
