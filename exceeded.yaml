@@ -1010,13 +1010,13 @@
   hash: 9b0f7055726930e8c3b1556dba465a40b991a4c305463b21256f59b942c28b12
   seconds: 260
   lost: true
-3G3L integral.discriminant_sequence:
-  hash: 76ebb5238a42c9f1c93bcd777d902df376330b1ca665f1f2e3bd4860b71a8e08
-  seconds: 3454
-  lost: true
 3G4B integral.overlattice_count:
   hash: 7478913d16a759e4acf4265ed2c613ff3be21397e3dc8ab82c11b27914e18efb
   seconds: 3
+  lost: true
+3G4C integral.discriminant_sequence:
+  hash: dedacbe543a4b0b23b0c09338be35287efb52b1dced2118ae25819836945f450
+  seconds: 5306
   lost: true
 3G5C integral.local_densities:
   hash: 9c3997e11fbd178f2442405bde59614974dcdf6cda8e0a1dc15004705f641eb7
