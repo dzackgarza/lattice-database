@@ -61,6 +61,12 @@
 0024 root_span.roots:
   hash: 92c5ad99282b041210f1d701ae4334723e44477b003a01fdac563cb9da7cdcec
   by: research preamble
+02AI automorphisms.automorphism_group_generator_morphisms:
+  hash: a98c6d5b60681c9d36df3f2628066d4f0c0d48e977bf6c0f19790678f89f5f5c
+  by: research preamble
+02AI automorphisms.automorphism_group_order:
+  hash: 2fa913cf777f99794943703e93286b9138b51fe338d83cc399d5b5e3678728cb
+  by: research preamble
 02AI derive:
   hash: 764b0c0512d4f98cbac809f843bde5320cb9b0ba339a46f294c27f5eddd38a68
   by: research preamble
@@ -72,6 +78,12 @@
   by: research preamble
 02AI integral.anisotropic_primes:
   hash: ea8cce01029d2344f10be9852f28622bc0f7a1524f394b4c9d53ccd602dfe73e
+  by: research preamble
+02AI integral.discriminant_form:
+  hash: d12f77f5c6caf3d1f06c4442e3968a630330b17776d2d098d9d65aebb74186b3
+  by: research preamble
+02AI integral.discriminant_orbits:
+  hash: 7c60845c01f9eaa77568e0be9c19c0c93b3daa7775b50cc0ef04fff76575f2c0
   by: research preamble
 02AI integral.elementary_primes:
   hash: 9879abb3d88e1b8295665f40b4555c9dbd4be97b563498e99b1b1a3f90b8d874
@@ -96,6 +108,9 @@
   by: research preamble
 02AI integral.overlattice_count:
   hash: f60abdcab679ab21ae70378c571016d38d7500c0c0a2d3d0bd80f08f3dd3cf1a
+  by: research preamble
+02AI integral.primitive_orbits:
+  hash: be32ea57d843673504e3abd5389f504462a2a9892ec17042e3d8860365b1a51f
   by: research preamble
 02AI integral.spinor_genera:
   hash: 74d0b8f8f8c65d291150da34631cb247ecdff47caed5ac96cdf7a2fdb88b42ed
@@ -252,6 +267,9 @@
   by: research preamble
 02QY integral.anisotropic_primes:
   hash: 9f89910d80a206ef830a0d849384321feb0a07ba3555234982db6d8754b22dfb
+  by: research preamble
+02QY integral.discriminant_sequence:
+  hash: 52f2d46009331180909909f8b110b9edd6bf6ea9604d02bb40439e92fcd590cc
   by: research preamble
 02QY integral.elementary_primes:
   hash: 34cb00db34a3abc1fad306b87da8eb24ef3dfbad9eefc657c7f634ef377bc95f
