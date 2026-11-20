@@ -2164,6 +2164,9 @@
 09WE integral.anisotropic_primes:
   hash: ef238b076a129162aecdf7c1a4c21d92d61a99474799192167e901426f19a7b0
   by: research preamble
+09WE integral.discriminant_sequence:
+  hash: 18c704f88ba422cade2d0089b95124786973d5691be3b306da0700c97cf47a7b
+  by: research preamble
 09WE integral.elementary_primes:
   hash: 93fe59d92745a8955c233aa3564866b8b14e6b49480db7067a6c078a48cbdb85
   by: research preamble
@@ -3543,6 +3546,9 @@
   by: research preamble
 0FMB integral.anisotropic_primes:
   hash: 970738e79c4b0bc3a03e329bcc04fe857a65db3d491558914b774bc3be51340f
+  by: research preamble
+0FMB integral.discriminant_sequence:
+  hash: 8d33cb69327a257bee8e2c3147ae34943ce166ca907c6a2fe4cced3806f6b1fe
   by: research preamble
 0FMB integral.elementary_primes:
   hash: 5b3fb338d94e497f20471de0f64224bf9806fa2f2cbee3ba37ecee303027c857
@@ -32984,7 +32990,10 @@
   hash: f7c81816cfe871e147ef233fdc0733453a8e80c40d829e06ab53d8447b02e979
   by: research preamble
 5T93 automorphisms.automorphism_group_generator_morphisms:
-  hash: 94d24294e685127fca042de2d2008580c4d5e21f054202100103fc1232675aca
+  hash: b0a4027609ae263f3ada8f88e54deee8b7665b6ab4a772189d152a84e822061e
+  by: research preamble
+5T93 automorphisms.automorphism_group_order:
+  hash: 570705535e0dac4e231868821019b52cdb26376a6885225d87f735fc15acf211
   by: research preamble
 5T93 derive:
   hash: 6d3af789f53b1c111aeaa2a9f2928204639ad93c9cc658ccee1bdbf7f14a6e9c
@@ -32992,8 +33001,14 @@
 5T93 form.integer_valued:
   hash: 9f8b42f15a77978e5b1675e98f192ececfe9bccfe6d168675ae82416055eecf3
   by: research preamble
+5T93 integral.anisotropic_primes:
+  hash: a8cbf0f9ccfa4ba371628134c34037570bcb1c0503a70c20820b4bb83404b7ec
+  by: research preamble
 5T93 integral.discriminant_form:
   hash: 404c68a9911871dad1a30315e6f2fa2de3f9dae47be1082220f6dba86a2064ea
+  by: research preamble
+5T93 integral.discriminant_orbits:
+  hash: 89a80e356c22db948ecea285a2f59ae4e16a9037dcce2cae2989eb8769adade4
   by: research preamble
 5T93 integral.elementary_primes:
   hash: fafb1e9ce5bcacd5175b00c81c10eebce06fea8094fbb7b9c5565c912ddc054c
@@ -33006,6 +33021,15 @@
   by: research preamble
 5T93 integral.hyperbolic_index:
   hash: dd40aaa86a8f4e46d06681443923dabac1f0005cfc335c4bb3cf74af53342cd7
+  by: research preamble
+5T93 integral.local_densities:
+  hash: e4791b100b96b7eb3a094dfc465115e4746ff519e90115217f62047b4b67f687
+  by: research preamble
+5T93 integral.local_representations:
+  hash: becd124eaa9229ddeae725d3ed0ffe77eb04df7656243ab8d947e1a1f6407c7b
+  by: research preamble
+5T93 integral.modular_scale:
+  hash: e370169581e78ad70fc54a369694826d9dfd7258967e019ede0f59499fb16301
   by: research preamble
 5T93 integral.overlattice_count:
   hash: ec2920fdca0e386d2c5a2ca6cdfeb2ddebb06c68833ee130b9ce23fa04705133
@@ -33022,6 +33046,15 @@
 629S form.integer_valued:
   hash: a22a1fe33ec5be862c1f131c739d10c602e1d81832349136f0cdf83fd6956c65
   by: research preamble
+629S integral.anisotropic_primes:
+  hash: 8edeee488c34c6dcae642e7ba9ac452e47079f2e3167a35100be7893c3355571
+  by: research preamble
+629S integral.discriminant_form:
+  hash: e8ea8c4c322b857dea2588d41643a3b13c523214f7232b6552f89fada6de739c
+  by: research preamble
+629S integral.discriminant_orbits:
+  hash: d795147e0f5b69610e3943a5b43bb879fe461fafa6b72bbf269cd59e978e7f89
+  by: research preamble
 629S integral.elementary_primes:
   hash: 143f03d7997854aa7143b25be4f25708c9b18a0ae2b85aed562365cf950eb1d6
   by: research preamble
@@ -33033,6 +33066,15 @@
   by: research preamble
 629S integral.hyperbolic_index:
   hash: 3f956be1c59ce1f539f8a5c4384aa62978d1f37b686c2a336dabcf4d0c893e8a
+  by: research preamble
+629S integral.local_densities:
+  hash: c3296aa4f81734fd72c8f4062e79459166c0784500904c8ed44e3ae58ecd9530
+  by: research preamble
+629S integral.local_representations:
+  hash: 0a978d7229dc9a55bd0a61f5520279356185f746eefb1c90cfcfcc613f8fa037
+  by: research preamble
+629S integral.modular_scale:
+  hash: 4fec8da13bd31aa0bb883a4c327a631e27913f38c0d0db0593614e3a5dab5846
   by: research preamble
 629S integral.overlattice_count:
   hash: 2f0b5c57dba2e552106788bc40dfa020b2595dce26169489dde0f163b9e4d3b6
