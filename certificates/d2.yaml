@@ -33625,11 +33625,20 @@
 3I8F integral.spinor_genus_count:
   hash: 2cb12a204bb6b3ab5e31ecdbb730bac33ead2e552db971516ad7152b3b1d7e09
   by: research preamble
+45U1 automorphisms.automorphism_group_generator_morphisms:
+  hash: a90e0ff28bd7538f8bd63439c4c3093a197d33a42b02e92f4edb79b1dd36fbed
+  by: research preamble
+45U1 automorphisms.automorphism_group_order:
+  hash: cd8d974a74d4d96e35d4ca97531070d3f447b89586ffe701b8e4ab934c6a20ac
+  by: research preamble
 45U1 derive:
   hash: c4a524623f195d5898ace8e0a137726506c99db1174be3f15b549f69aef91f24
   by: research preamble
 45U1 form.integer_valued:
   hash: deb75caaa0ae9039f8c7e978dfc775991177a14d8d7b39f9c9d37522068085b3
+  by: research preamble
+45U1 integral.anisotropic_primes:
+  hash: b803cbec1ebac1a9ffcbdebace4be337f6608ad41404f236d9eaa7ebcde8440e
   by: research preamble
 45U1 integral.elementary_primes:
   hash: 546c94dd833a3bf293ae96071d8e94b8e43f7e03661cb67e46a55e8e7ca88683
@@ -33639,6 +33648,15 @@
   by: research preamble
 45U1 integral.genus_symbol:
   hash: d53dc3469c020abdc10a7efe0ca6a4a1c37342b9b4752a54a99663a2453e8030
+  by: research preamble
+45U1 integral.local_densities:
+  hash: a6b9f6c049a19854fd14c776065e1d5bc0800887b97232bddc33cd207e35533f
+  by: research preamble
+45U1 integral.local_representations:
+  hash: 301efadec2bee38973e5238b19725f469fc36815190b6b1f113a3fcc2a96d6a2
+  by: research preamble
+45U1 integral.modular_scale:
+  hash: 111febdb96c865d7bf3110b64e2300ab235b8c11bb2e779a5bc4a1f4d8c8b4e7
   by: research preamble
 45U1 integral.overlattice_count:
   hash: 3ff58a4b1311211c9d42235eb0d60add365ab0374f4d8dfd270c4394b668bd49
