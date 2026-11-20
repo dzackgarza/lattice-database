@@ -14,6 +14,12 @@ certifications:
   integral.hyperbolic_index: 7794b54ac57a8f7bd84f9272c3bc275ea3847b914f357a575d89e0f3faad3829
   automorphisms.automorphism_group_generator_morphisms: 9d3c4c738573924ae33288bcc9badf805d9615b55755e1a7db3cedeca434de9e
   integral.discriminant_form: 9ff747da6aac3195fb7de6932b132bd2115d15b80b20dc6d389442eb185bf9c2
+  automorphisms.automorphism_group_order: 1f6352ab879da4875c8f9531878b98b582fdd8bb64e7d8eb829709369cb759d6
+  integral.discriminant_orbits: e0f64b826cf979c8f669f3015bb3c39f64de1c087925fd58abbc95a3409264b4
+  integral.modular_scale: 51f85c986b51dd2e88d87138a089fc0d685e4fb96be03e6e571b8f9c3603e291
+  integral.anisotropic_primes: 510156fad36ac4a87d86665565b119bcad9c84a1f6d5d3b5452e89c1beab6d63
+  integral.local_representations: 4c0b419a945ddfcaae3b311c123530fa0d4d7c4878edd7e234b4daa604f29e58
+  integral.local_densities: 13992894e96631d951af2a35a8f114943527861770a84729680dded46ce1a018
 rank: 4
 gram_tensor:
 - [0, -1, 0, 0]
@@ -34,6 +40,7 @@ integral:
   elementary_primes: [3]
   parity: even
   level: 3
+  modular_scale: false
   discriminant_group: [3]
   overlattice_count: 1
   bad_reduction_primes: [2, 3]
@@ -47,7 +54,66 @@ integral:
     orthogonal_group_order: 2
     isotropic_classes: 1
     isotropic_orbits: 1
+  discriminant_orbits:
+    Otilde:
+      constant: 1
+      z: [0, 1, 0, 1]
+      w: [0, 1, 0, 1]
+    SOtilde:
+      constant: 1
+      z: [0, 1, 0, 1]
+      w: [0, 1, 0, 1]
+    Otilde+:
+      constant: 1
+      z: [0, 1, 0, 1]
+      w: [0, 1, 0, 1]
+    SOtilde+:
+      constant: 1
+      z: [0, 1, 0, 1]
+      w: [0, 1, 0, 1]
+    O:
+      constant: 1
+      z: [0, 1, 0, 1]
+      w: [0, 1, 0, 1]
+    SO:
+      constant: 1
+      z: [0, 1, 0, 1]
+      w: [0, 1, 0, 1]
+    O+:
+      constant: 1
+      z: [0, 1, 0, 1]
+      w: [0, 1, 0, 1]
+    SO+:
+      constant: 1
+      z: [0, 1, 0, 1]
+      w: [0, 1, 0, 1]
+  anisotropic_primes: []
+  local_representations:
+  - prime: 2
+    classes:
+    - representative: 1
+      least_valuation: 2
+    - representative: 3
+      least_valuation: 2
+    - representative: 5
+      least_valuation: 2
+    - representative: 7
+      least_valuation: 2
+    - representative: 2
+      least_valuation: 1
+    - representative: 6
+      least_valuation: 1
+    - representative: 10
+      least_valuation: 1
+    - representative: 14
+      least_valuation: 1
+  local_densities:
+  - prime: 2
+    densities: [0, 5/2, 0, 5/4, 0, 5/2, 0, 15/8, 0, 5/2, 0, 5/4]
+  - prime: 3
+    densities: [4/3, 2/3, 10/9, 4/3, 2/3, 8/9, 4/3, 2/3, 28/27, 4/3, 2/3, 10/9]
 automorphisms:
+  automorphism_group_order: aleph0
   automorphism_group_generator_morphisms: [O(L) generator 1, O(L) generator 2, O(L) generator 3, O(L) generator 4, O(L) generator 5]
 indefinite:
   isotropic: true

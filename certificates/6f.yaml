@@ -904,6 +904,9 @@
 07JA integral.anisotropic_primes:
   hash: b8e242bca4e7aea799bec03e6b8e0cccc406c34cc951badbe28b2516640bc48e
   by: research preamble
+07JA integral.discriminant_sequence:
+  hash: a267773a4f8df3ded75b23b3490e1c16c8c183d41ee804a8bf421472656c9d26
+  by: research preamble
 07JA integral.elementary_primes:
   hash: f8166fd211a801c334bc16a30e035b851556472ab158b6a8edf932336384757c
   by: research preamble
@@ -27580,6 +27583,9 @@
 3G85 integral.anisotropic_primes:
   hash: e33377b1465e2aca968bd9e0fb6b176610ea1fa2f510207e5de97229a20bd2ba
   by: research preamble
+3G85 integral.discriminant_sequence:
+  hash: 8d099c43ecf4e572bb998bab4ddef1033d1bdcb6772ecc31a17203fcfa23a464
+  by: research preamble
 3G85 integral.elementary_primes:
   hash: 2f31bfaea4d7b2c2216345a8defb79ef037234f32c7631940d1e8748ace4bd95
   by: research preamble
@@ -27982,14 +27988,23 @@
 6AVO automorphisms.automorphism_group_generator_morphisms:
   hash: 9d3c4c738573924ae33288bcc9badf805d9615b55755e1a7db3cedeca434de9e
   by: research preamble
+6AVO automorphisms.automorphism_group_order:
+  hash: 1f6352ab879da4875c8f9531878b98b582fdd8bb64e7d8eb829709369cb759d6
+  by: research preamble
 6AVO derive:
   hash: 8c8e57f0ce81c65590dbc8132becb835a8386803444854fb9a5516dd0f194d31
   by: research preamble
 6AVO form.integer_valued:
   hash: 439b48779382433df2f1e92613544ca9c9102b95aea6ae981d96a8c636ba8e5d
   by: research preamble
+6AVO integral.anisotropic_primes:
+  hash: 510156fad36ac4a87d86665565b119bcad9c84a1f6d5d3b5452e89c1beab6d63
+  by: research preamble
 6AVO integral.discriminant_form:
   hash: 9ff747da6aac3195fb7de6932b132bd2115d15b80b20dc6d389442eb185bf9c2
+  by: research preamble
+6AVO integral.discriminant_orbits:
+  hash: e0f64b826cf979c8f669f3015bb3c39f64de1c087925fd58abbc95a3409264b4
   by: research preamble
 6AVO integral.elementary_primes:
   hash: 410570e665297758cd8d38252998efa8bef671685a3558de8e8bf9b83e9f7c57
@@ -28002,6 +28017,15 @@
   by: research preamble
 6AVO integral.hyperbolic_index:
   hash: 7794b54ac57a8f7bd84f9272c3bc275ea3847b914f357a575d89e0f3faad3829
+  by: research preamble
+6AVO integral.local_densities:
+  hash: 13992894e96631d951af2a35a8f114943527861770a84729680dded46ce1a018
+  by: research preamble
+6AVO integral.local_representations:
+  hash: 4c0b419a945ddfcaae3b311c123530fa0d4d7c4878edd7e234b4daa604f29e58
+  by: research preamble
+6AVO integral.modular_scale:
+  hash: 51f85c986b51dd2e88d87138a089fc0d685e4fb96be03e6e571b8f9c3603e291
   by: research preamble
 6AVO integral.overlattice_count:
   hash: 6c633d667972d51200272ddb836cb7a6ffffa0d9144bc5e5d2c6b3538528757f
