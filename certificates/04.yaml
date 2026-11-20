@@ -31948,6 +31948,12 @@
 44QR integral.spinor_genus_count:
   hash: e2db49ca4d703d74f5d1459ed10e87c7a9924554801626e03df47e4e020e0b1f
   by: research preamble
+48YN automorphisms.automorphism_group_generator_morphisms:
+  hash: 10b54c087c32cbf7332e32e355eaff08a8298220a9a6e1f48fc1c363a00bab8c
+  by: research preamble
+48YN automorphisms.automorphism_group_order:
+  hash: bf344defc632be062ea12bca35f92e42278383256813816f80888f809daeaa76
+  by: research preamble
 48YN derive:
   hash: c3dff80bdffb0b22825cc3b1bb3fbbc3ab38cc085464b80ca7a4457c4b241f55
   by: research preamble
@@ -31965,6 +31971,9 @@
   by: research preamble
 48YN integral.overlattice_count:
   hash: 5ce817152a22c17e128afb643790c04247e6b11ec946810ea229f381af4f26e1
+  by: research preamble
+48YN integral.primitive_orbits:
+  hash: e29a629dfa9338e88bdc8e257845d7e86358ff08e52d88817eac92fcd9179c5f
   by: research preamble
 48YN integral.spinor_genera:
   hash: e8caee076940ae1e39bacd6503af6d87eeba0f5905686c3985449663612600f3
