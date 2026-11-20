@@ -618,10 +618,6 @@
   hash: 1c18a16c88690648f868735bc840b2ded6a493875cc708a03cf84d33976bed01
   seconds: 11
   lost: true
-186D integral.discriminant_form:
-  hash: 06735bbe3cb22ae711fdb1d412cdd3f1c8b41b13842c42ef87719075d1523a7a
-  seconds: 0
-  lost: true
 18TJ integral.discriminant_sequence:
   hash: 85ce9c836f2df8b9f9faf8ba5f38041ee9f9d52c2168f83014abc0f89fd4302a
   seconds: 52
@@ -641,6 +637,10 @@
   killed_by: memory
   peak_bytes: 13133455360
   limit_bytes: 1675943936
+1BOI integral.discriminant_form:
+  hash: 1ef4a89288bd8129bad21026a6231003ba6e986af6666eabc57f2f9cb0cb1f8e
+  seconds: 0
+  lost: true
 1CZ4 integral.discriminant_form:
   hash: d9ace81ff310c9f2d93545001a6c2ebae53abd4735fbdf0278f88049ec4bcdb9
   seconds: 4
