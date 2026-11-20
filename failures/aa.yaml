@@ -8246,13 +8246,13 @@
     - - 12
       - -6
       - 84
-    reason: worker or runner lost (recovered from exceeded.yaml)
+    reason: certification budget exhausted
     stderr: ''
-    seconds: 1652.0
-    recorded_at: 2026-11-20 19:06:03.405286+00:00
-    run_url: https://github.com/dzackgarza/lattice-database/actions/runs/44794561897/attempts/1
-    database_revision: 69c0b6ce202da6d7edb26853271d11556bfbeacc
-    research_revision: 9b6327f5ef3bded00cf364ecdd21dd0aa5cbd45a
+    seconds: 19612.0
+    recorded_at: 2026-11-20 23:10:25.023376+00:00
+    run_url: https://github.com/dzackgarza/lattice-database/actions/runs/44730883597/attempts/1
+    database_revision: 5e3e9ae95407aba6206a313b4316d0bc562e2b76
+    research_revision: a7d19ef291af950e9556e65bc430121b077b46a5
   notes: []
 3IAQ integral.overlattice_count:
   disposition: open
