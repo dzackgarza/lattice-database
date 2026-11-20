@@ -637,6 +637,9 @@
   killed_by: memory
   peak_bytes: 13133455360
   limit_bytes: 1675943936
+1B81 integral.discriminant_form:
+  hash: 2e97f34c29771dcf3456ab6a309528a063ed4b9b96c69ae38be9da3aa12e0c59
+  seconds: 3
 1CZ4 integral.discriminant_form:
   hash: d9ace81ff310c9f2d93545001a6c2ebae53abd4735fbdf0278f88049ec4bcdb9
   seconds: 4
@@ -683,10 +686,6 @@
   hash: 2996dac438b3ce2f8f9b9042cdcd682f5d508e13e2ea9a3f88c496eb5b7962e8
   seconds: 13
   lost: true
-1KCI integral.discriminant_form:
-  hash: 75d89e11ea2acd84ed94c090bbf8d7b82ec2b5bfdb5bac7f2712b483c2de9446
-  seconds: 0
-  lost: true
 1L3B integral.overlattice_count:
   hash: 5ec02122782c5210f413bb8d16db30dd35f3f8c8d17fdfa2b2f8245b12d1685c
   seconds: 0
@@ -699,6 +698,9 @@
   hash: c2d56853c688ca548dd50df42dc26996cbe6f8a73e77d63b9dc95c2c53e7aeb5
   seconds: 0
   lost: true
+1MBH integral.discriminant_form:
+  hash: f148feec246fded529e478524f2eabfd0863b244ff80536b622088c1524201e3
+  seconds: 5
 1UJ2 derive:
   hash: 67d45b33429de41171f34effa19d2ece2d8e00962b8167d9e182f44fc0c1a8b9
   seconds: 0
@@ -998,13 +1000,6 @@
   hash: 85dd3c9eeaaf9ed6fc3f16d83ae0ec9ab30091e8fdc6b8a60b9112c7bad9e76b
   seconds: 11
   lost: true
-3G21 integral.discriminant_sequence:
-  hash: ca43c9ed45854a3dc4679618990d32a8ea41bf57a5f1e090ec93e9a73118672b
-  seconds: 9484
-3G29 integral.discriminant_sequence:
-  hash: 58462882257754422eb6b362d0c8053b416faf3473ee6eacd3d82895b3ffbd1a
-  seconds: 1592
-  lost: true
 3G2C integral.overlattice_count:
   hash: 25b27fea9e8a5e9e17935f186d225267c4ac2c2f6362f9c4072aa656d94fff30
   seconds: 32
@@ -1064,10 +1059,6 @@
 3G83 integral.discriminant_sequence:
   hash: 38cc9282b8039f67ea26194365dfd97600aec000f9cef11d6658e79098ced2c8
   seconds: 3132
-3G85 integral.discriminant_sequence:
-  hash: 38bd0d058c367e498ecd73289fe7d22ca9c9b867453fb4a02a1fd8d8d2d51484
-  seconds: 1667
-  lost: true
 3G8K integral.discriminant_sequence:
   hash: 4152cb42565b89dc4c1f337699fceb522af5c05dc43445b3a496cba841abca35
   seconds: 10
@@ -1086,10 +1077,6 @@
 3GEH integral.overlattice_count:
   hash: 75b98a72eb3d3314b6fd55e345ca2d1ed9bc31c3e559ecc31215d5b9823c122a
   seconds: 8
-  lost: true
-3GEW integral.discriminant_sequence:
-  hash: fb24acfcd25a662860c17c6e19093be52352e2671f3118836df99551ca778e0b
-  seconds: 1351
   lost: true
 3GK0 integral.discriminant_sequence:
   hash: ba1d028d24b09981cc34d6d45bbe0ff0eaebd1250cef2c2fe4370898280196e0
@@ -1168,9 +1155,6 @@
   hash: 8392a80454dd1af739e9d6163b1538aaafd76392d9cca73846c1dc3e312e9aa8
   seconds: 10
   lost: true
-3GY6 integral.discriminant_sequence:
-  hash: eb2ef6f7d13c3b8094b54382ecbc300217a306e104a8479eddfca97bb4545580
-  seconds: 1735
 3I9F integral.discriminant_sequence:
   hash: 6f7cab93e0d890ea95c57270c71d23d62160dfa17f537a3f87efa85463594608
   seconds: 496
@@ -1185,9 +1169,6 @@
 3IA0 integral.discriminant_sequence:
   hash: 288f12f016f1eab88cfa079d40cdb3679e08a7cedc3b52674f7c8c7a313c7b76
   seconds: 4713
-3IA8 integral.discriminant_sequence:
-  hash: 9b703d789573b868a64a17542b99b57760495a5dc28716de5b9b4aef38919550
-  seconds: 13763
 3IA8 integral.overlattice_count:
   hash: e36916caf7fbebcd996ca951c96c9cd4f2638c87b2d08177090d866ce130a952
   seconds: 10
@@ -1212,10 +1193,6 @@
   hash: 499754c43f1b9937e1698d878412d8d818df6d7cdb7910ffa5112304cddabbc4
   seconds: 3074
   lost: true
-3IAN integral.discriminant_sequence:
-  hash: 0e4c1ba6b381b6895dd7024371941edaa9c476e490d33d4530574bf71ffaf8e6
-  seconds: 17904
-  lost: true
 3IAQ integral.discriminant_sequence:
   hash: 9c12e28836ec3c1bd7a0e6834f13290af00a0e327bf65b38f5d8886bfbccbbd1
   seconds: 19612
@@ -1237,14 +1214,6 @@
 4AQJ integral.hyperbolic_index:
   hash: 9b23c16e246c2344c6c4800e26ad852b6f5427c5e17211267b3f741506b3eebd
   seconds: 107
-  lost: true
-4I8D automorphisms.automorphism_group_generator_morphisms:
-  hash: fefe280e08614f488bc3b85eac04d3ac651fdb52cd97b555b085630b55337829
-  seconds: 0
-  lost: true
-4I8D automorphisms.automorphism_group_order:
-  hash: 8cb7ef7d73079f6dab7c15c2d594218d65ca768f8f835504e1350a5324ea9dc6
-  seconds: 0
   lost: true
 58S6 integral.local_densities:
   hash: e5378e409c24f7701e373876b32586a87eb5a9cf04b7ada7350ac466781f0804
