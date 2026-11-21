@@ -557,10 +557,6 @@
   hash: e9a35b7da91dcd00dd2193b061e2e0619539524bab6b5805ec303e0514afa883
   seconds: 0
   lost: true
-0ZOE integral.discriminant_form:
-  hash: 679b41468946f53f3ea87fbbbd3e31896d60cb25fd4acfef2f6152cb1fbfa2ed
-  seconds: 0
-  lost: true
 0ZPQ integral.discriminant_form:
   hash: 96e3f18e7259ad61f0c4a2c1c217071e35487d2bc8b41c9380de6910a22e9dd2
   seconds: 0
@@ -577,6 +573,10 @@
   seconds: 2
 135Y integral.genus_class_count:
   hash: 689494ca5adb8488fc95a4f406d1751e6e84acc6252b85cb91dbc6cd8b4d2b92
+  seconds: 0
+  lost: true
+13TY integral.discriminant_form:
+  hash: ce56038b4bfcd717bd5888cd8b08ab123f59ca2e85eadfeeaa795f8c7d56e904
   seconds: 0
   lost: true
 14GP integral.genus_class_count:
@@ -1241,8 +1241,7 @@
   lost: true
 48YN integral.primitive_orbits[SOtilde]:
   hash: 9e1c166422b378d94310bb7b61abeb33d8e2cd6ec2a08cf2b0a62e00dcdedc04
-  seconds: 12497
-  lost: true
+  seconds: 15073
 4AI4 integral.hyperbolic_index:
   hash: cfd02157630c5b87965c89728ada3348a270c6686e306a7ba5471217e9f942d0
   seconds: 152
