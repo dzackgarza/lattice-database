@@ -501,8 +501,8 @@
   hash: e75904bde8ae71175b947e54e046fc2e518c21d801f3a97a4a74324f0bf14e5a
   seconds: 0
   lost: true
-0PX0 integral.discriminant_form:
-  hash: b20ecf7fa09d193c1af34acf58c700e8f67f22f95d517791d57a104469741652
+0QY6 integral.discriminant_form:
+  hash: f5e45f2138eab0ca8df462c99b77a16f8eae3eca6d44fffdf7e53b41bfd300d5
   seconds: 0
   lost: true
 0RVY integral.elementary_primes:
@@ -557,9 +557,10 @@
   hash: 6b959587ca571125d0f6b15b3286ccfb4df34becee301c0a9863c99fd1716e4e
   seconds: 0
   lost: true
-0YHQ integral.discriminant_form:
-  hash: fc22d75309e895f7dfeaa7d46ee22c0c92570fcc75f9900e582869526b2488e7
-  seconds: 5
+0X3P integral.discriminant_form:
+  hash: 8c3a63672fa760b6870be34b71eaf655f09b378131e89fc230bf6850d07435bd
+  seconds: 0
+  lost: true
 0YVT integral.elementary_primes:
   hash: e9a35b7da91dcd00dd2193b061e2e0619539524bab6b5805ec303e0514afa883
   seconds: 0
@@ -647,6 +648,10 @@
 1CZ4 integral.discriminant_form:
   hash: d9ace81ff310c9f2d93545001a6c2ebae53abd4735fbdf0278f88049ec4bcdb9
   seconds: 4
+1DN1 integral.discriminant_form:
+  hash: 284b08765772a90a5de76dac946be36cb3d40420a07ae1c089e22f21d18cbf01
+  seconds: 0
+  lost: true
 1DRM integral.genus_class_count:
   hash: b9116a9b09223f453b6990f0efa48f8670ad40d65cb4f5c32b3f8b2cb30e031e
   seconds: 10
@@ -659,9 +664,6 @@
   hash: aa9a82c8d21972721e8be9c08518da9a41ebe41fa9eafc96e77816086779ea31
   seconds: 0
   lost: true
-1FHM integral.discriminant_form:
-  hash: 923cd0cf786d8f0aa9bb64d26998459a65f7f1bb59ae1f34cfe52a01c5ed7faa
-  seconds: 5
 1GRN integral.overlattice_count:
   hash: 2d69994bb46caf54ef5fc24bfc85749b4e47e08c0890c0841e7baa197fa96e52
   seconds: 0
@@ -1147,9 +1149,10 @@
 3GRU integral.discriminant_sequence:
   hash: 0873c77aea247747beee5f6503d4678ca0c393ad59c2a14ff0e34fd7c44871c6
   seconds: 18241
-3GTS integral.discriminant_sequence:
-  hash: 26a906b9d9d22e2f60644bcb66ee493b586d333a3d2e8d30e57e85387eee4009
-  seconds: 19661
+3GSS integral.discriminant_sequence:
+  hash: 1ab4cb27ac8324d3b55f87b49fe2d9638523863e9f43a210eb9460be1973101d
+  seconds: 6204
+  lost: true
 3GVS integral.overlattice_count:
   hash: 08ed3d3d97ba6ede8efea82cce0080d3ea5206f140bdd1239f06276842783102
   seconds: 10
@@ -1237,7 +1240,8 @@
   lost: true
 48YN integral.primitive_orbits[SOtilde]:
   hash: 9e1c166422b378d94310bb7b61abeb33d8e2cd6ec2a08cf2b0a62e00dcdedc04
-  seconds: 15073
+  seconds: 17936
+  lost: true
 4AI4 integral.hyperbolic_index:
   hash: cfd02157630c5b87965c89728ada3348a270c6686e306a7ba5471217e9f942d0
   seconds: 152
@@ -1258,6 +1262,9 @@
   hash: e5378e409c24f7701e373876b32586a87eb5a9cf04b7ada7350ac466781f0804
   seconds: 0
   lost: true
+5RR1 integral.primitive_orbits[SOtilde]:
+  hash: 2b2f37ca731c7f2c974be88ea8d147c4f3c85c99adec5cb66a320253d297072a
+  seconds: 17707
 6JRR arithmetic-group.otilde-plus-t-co.index_in_orthogonal_group:
   hash: acad0e18f0c158ad5bda122e435bae4133bd93287223e2a8ce2c8b611148e2d3
   seconds: 19628
