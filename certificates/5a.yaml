@@ -18769,6 +18769,9 @@
 1KQV integral.anisotropic_primes:
   hash: d3f9cc93d90d7e52f4d7f99f3175318636518c493b46459c83498776d29b1aa7
   by: research preamble
+1KQV integral.discriminant_form:
+  hash: 55ac0904c0729743cc6a0b70ac17f25bff3f4a1ca96a5a853d8b949ee3fd2c60
+  by: research preamble
 1KQV integral.discriminant_sequence:
   hash: 625265cf6b4483b6dd65214f4bbaefd69dee7ed1ca159dc4deb9c3233885c748
   by: research preamble
@@ -18829,6 +18832,9 @@
 1KZL integral.anisotropic_primes:
   hash: 4f04683fed072db48963467e803b3a019d177384c20a9bb06f4191cdd9d79ff2
   by: research preamble
+1KZL integral.discriminant_form:
+  hash: fcb3b14b2d4dbc37ea8904ede52fdaa86c9c7d238cfe95763c1a77830ecfd1ac
+  by: research preamble
 1KZL integral.discriminant_sequence:
   hash: eb7193a3db6a9cbc1955ceea68abc2880b5b071c740802de463da7eaae2664d7
   by: research preamble
@@ -18888,6 +18894,9 @@
   by: research preamble
 1L1Y integral.anisotropic_primes:
   hash: 558b827a3dc5681f980af2e20d62c02dad5381a6de802c7fb8c70c63b3e5c735
+  by: research preamble
+1L1Y integral.discriminant_form:
+  hash: 752abb8ae41b0fba7aef45e8c8373b3ffac58e375e72539f3615e97780458e0d
   by: research preamble
 1L1Y integral.discriminant_sequence:
   hash: 6df86ffa830f10db4d568de18d177e96bd25f2aab1232a686fa17a90fe29255b
@@ -27981,4 +27990,28 @@
   by: research preamble
 4FTK integral.spinor_genus_count:
   hash: 124167d6b1ad029a70af29f872ba8b8b9f85cfe9747e7f8d6035afe28c1e9579
+  by: research preamble
+4QP1 derive:
+  hash: f697cce8a1b128948dd1731d53d83e613c4506ef40ce9ab8271b41d846b474f2
+  by: research preamble
+4QP1 form.integer_valued:
+  hash: 0a621876447f078b30cb12218eaaa345c290eaff8dd675ff1641f0e13241b7de
+  by: research preamble
+4QP1 integral.elementary_primes:
+  hash: 58933eaaca5c893132de7e5b24c034ab7f5c36a6a069db53d755d3cdf2943d58
+  by: research preamble
+4QP1 integral.genus_class_count:
+  hash: 04ede7ceb9655d3cacd2b21898be0bf004ef293a3655d504d3f5136597bb3351
+  by: research preamble
+4QP1 integral.genus_symbol:
+  hash: a25fbe111100947b551afc586cbc726c0926cc115f9a521ed89bc009a715c9bd
+  by: research preamble
+4QP1 integral.overlattice_count:
+  hash: 9c0d260e8a29a17ffbc49d1848e328e845b6e81186a0646feb326baf60dbd334
+  by: research preamble
+4QP1 integral.spinor_genera:
+  hash: 3ce109ef6dbfe71ef0a5bbf611b788b1d228aaca4696581b4a1f7b7a8b082814
+  by: research preamble
+4QP1 integral.spinor_genus_count:
+  hash: d106e25f7413860e9fc695b7b062570a36882ba2596691f9d3d4a4ffc1c59d31
   by: research preamble

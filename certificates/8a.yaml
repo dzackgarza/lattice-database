@@ -18385,6 +18385,9 @@
 1KXY integral.anisotropic_primes:
   hash: 69bfaec9d81364b239ed7380f4950a8d3530c59092aff24b704fc8fbf0830a02
   by: research preamble
+1KXY integral.discriminant_form:
+  hash: fb279c910b158c1c22b6cbb7501ecdb29ee9cbb038324d5b39a3dd521de720dd
+  by: research preamble
 1KXY integral.discriminant_sequence:
   hash: 5c3d9f5ac16b09282f32dbdf545a41a4e4710b95681737bc59466482cf701f0b
   by: research preamble
@@ -18444,6 +18447,9 @@
   by: research preamble
 1L34 integral.anisotropic_primes:
   hash: e1eb3dd89cdea47013af3c3d3ec0d3d39e73da81efb29786e99ac06f7e865d18
+  by: research preamble
+1L34 integral.discriminant_form:
+  hash: 7b1cd694ca8681301be4bb6e7b547570917ab716c12f1d31c5e35d9827ddea45
   by: research preamble
 1L34 integral.discriminant_sequence:
   hash: 1958c5a2a513b8b41ea4208fa9d1468f067d397c186706e5d62d8e47343c4b0a
@@ -28200,6 +28206,30 @@
   by: research preamble
 3GUM integral.spinor_genus_count:
   hash: 1aa1224e495ad9bea92f783992d1c285193faaf13f52fd3acd875d9f9548a9b0
+  by: research preamble
+475Z derive:
+  hash: 1253929f9c2aa2cecf8ace1018c654112f7b7c678072ad4336b4c0afde2e2dc4
+  by: research preamble
+475Z form.integer_valued:
+  hash: b36359c8243281f942111a935841ad7cb9380fe225f16f712733e5a859ae6a6b
+  by: research preamble
+475Z integral.elementary_primes:
+  hash: f05e630c69b6c69fbe50959f4b59124032e6c954970f7816a8d657991c6897dc
+  by: research preamble
+475Z integral.genus_class_count:
+  hash: 6ae307bc163676aeb8ccd229ecbac6151c03e786ce7425056f5e704a38811b17
+  by: research preamble
+475Z integral.genus_symbol:
+  hash: 2aae0c04b05cfc62918ef4f0c14e6d310473ffcb97197875ce780b06b930081e
+  by: research preamble
+475Z integral.overlattice_count:
+  hash: c0cc33196d396316bffed6a1080ffc1bfc0908ec4dbd08474472cd87b1091ed2
+  by: research preamble
+475Z integral.spinor_genera:
+  hash: 1cd9f43f356e1a459383de5c91ba29cc82b03a7a69fa90f5a2cf7c6a418ff972
+  by: research preamble
+475Z integral.spinor_genus_count:
+  hash: 0cd886db5b47a962e84851d2fd17dd179b779dedb19a7ea8f0ea9bd674b39ba3
   by: research preamble
 6IT3 definite.automorphism_group_generator_morphisms:
   hash: 8a78b617cd6278a690ee80afd2181bf47befb0cafe7857980199d29c04b21ed1

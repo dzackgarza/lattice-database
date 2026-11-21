@@ -16318,6 +16318,9 @@
 1KSY integral.anisotropic_primes:
   hash: 4408b09cd9525947c8ac3f725f574ff31b2ba12dce918e8d830d2db25c16683a
   by: research preamble
+1KSY integral.discriminant_form:
+  hash: 44906010f5cf44a7b6ebdb8a48d09dc1392097f284682457899ae8f386968bf3
+  by: research preamble
 1KSY integral.discriminant_sequence:
   hash: 7ceb5a9b029c4f50955655896e690473f069c166792b67da0dd3389d6d79c75f
   by: research preamble
@@ -16378,6 +16381,9 @@
 1L61 integral.anisotropic_primes:
   hash: 1954832837e56719f77cd91cf6746ba453e1eed043f7d766e6cb9a681864a756
   by: research preamble
+1L61 integral.discriminant_form:
+  hash: 0e26c12fb11ec2cbfcc5e9e665f6f083b03dc90d95206914cdfed0c5c32359b0
+  by: research preamble
 1L61 integral.discriminant_sequence:
   hash: abf52d809791843c75912b7d7370e9d855d4a1164fa8b4cddb2afb2510cf9eb3
   by: research preamble
@@ -16437,6 +16443,9 @@
   by: research preamble
 1L7M integral.anisotropic_primes:
   hash: 6353502f7fbd150e5a7f48237693d1b96379946ab244925cceb2661f3df88d44
+  by: research preamble
+1L7M integral.discriminant_form:
+  hash: 1718b59135c3b5487e0caa1d3ba8043b211ad6e20511c401248b3771a7c61df0
   by: research preamble
 1L7M integral.discriminant_sequence:
   hash: 47db797583350f9a9b0f47797be0457be05624d8198433c9cc9d4ead70531530
@@ -26310,4 +26319,28 @@
   by: research preamble
 4B2V integral.spinor_genus_count:
   hash: 8e7311355c9b1ca2dbab01eb26c6c45797ea1a2c5ac5efbb948769a935a1b1f7
+  by: research preamble
+4BIU derive:
+  hash: 6576267843932d2ab46f458cdb47afa7f9e735e818b05abdeafc2d48ff3b9590
+  by: research preamble
+4BIU form.integer_valued:
+  hash: 99786cfe134a83437071564533371f23f12cc3ae13ca0e6a46dbd16c27b776ab
+  by: research preamble
+4BIU integral.elementary_primes:
+  hash: f9b4d80120942680043e5151692236a278a88551b045ea5d33ab5202fab7d7d8
+  by: research preamble
+4BIU integral.genus_class_count:
+  hash: 4ecd6afbb9aea5221e9073f26a9d97dea5b3f8c663d0c32ee763164c54e99487
+  by: research preamble
+4BIU integral.genus_symbol:
+  hash: 84d85823ffee8c8395d49b37b8ffb969c00fbfb2076ee26d4214e5d38147f242
+  by: research preamble
+4BIU integral.overlattice_count:
+  hash: fe96d2fc4a2ec3ec5491fb7396f4eb5fdd4ae39a6a3e8135ace78fc6a9606a76
+  by: research preamble
+4BIU integral.spinor_genera:
+  hash: 8a29865f902b8060f7a09c1337b1fd52b98689ef21dc4ea3edcf7402f48cb177
+  by: research preamble
+4BIU integral.spinor_genus_count:
+  hash: f7c9c99797fe1abc3cd485498cac5df1998fd2c37313864f447a0c655324bafc
   by: research preamble
