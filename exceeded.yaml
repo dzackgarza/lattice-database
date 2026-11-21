@@ -328,8 +328,7 @@
   seconds: 18244
 02QY definite.regular:
   hash: 717ba66479235a6e9cf534d9678a763c715b54ef0e583c63c3ee7e15bb9159fd
-  seconds: 4656
-  lost: true
+  seconds: 17458
 02TQ definite.regular:
   hash: 20e6a28c861ef03104834c52a671646d3ad68992aa0b1750a67913b8b09b64ee
   seconds: 6674
@@ -617,6 +616,10 @@
   seconds: 3
 16KU integral.genus_class_count:
   hash: 182a020bd256d7b9ee689e48b8cca285744e6713bd4e5c7b3dce7727fe1a7743
+  seconds: 0
+  lost: true
+16UD integral.discriminant_form:
+  hash: 659bb6ecbf2fed0afa74e651663c8049e76527d22733d81e3220dcddb4ffb81d
   seconds: 0
   lost: true
 17G7 definite.genus_theta_series:
