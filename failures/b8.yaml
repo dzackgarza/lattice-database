@@ -1,3 +1,162 @@
+08VL integral.discriminant_form:
+  disposition: open
+  attempts:
+  - hash: 83f506b4bdc03bbb2803dc93875eca64ba4d2fce8728940350ec952888e55949
+    gram_tensor:
+    - - 2
+      - 1
+      - 1
+      - 1
+    - - 1
+      - 3
+      - 0
+      - 0
+    - - 1
+      - 0
+      - 3
+      - 0
+    - - 1
+      - 0
+      - 0
+      - 4
+    reason: exit status 1
+    stderr: "Traceback (most recent call last):\n  File \"<frozen runpy>\", line 203,
+      in _run_module_as_main\n  File \"<frozen runpy>\", line 88, in _run_code\n  File
+      \"/home/runner/work/lattice-database/lattice-database/src/latticedb/sage_genus.py\",
+      line 536, in <module>\n    main()\n    ~~~~^^\n  File \"/home/runner/work/lattice-database/lattice-database/src/latticedb/sage_genus.py\",
+      line 531, in main\n    _compute(request)\n    ~~~~~~~~^^^^^^^^^\n  File \"/home/runner/work/lattice-database/lattice-database/src/latticedb/sage_genus.py\",
+      line 516, in _compute\n    _run(\n    ~~~~^\n        tag,\n        ^^^^\n        [field],\n
+      \       ^^^^^^^^\n        lambda: {field: SERIES[field](lattice, request[\"series_bound\"])
+      if field in SERIES else VALUES[field](lattice)},\n        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n
+      \   )\n    ^\n  File \"/home/runner/work/lattice-database/lattice-database/src/latticedb/sage_genus.py\",
+      line 449, in _run\n    values = compute()\n  File \"/home/runner/work/lattice-database/lattice-database/src/latticedb/sage_genus.py\",
+      line 519, in <lambda>\n    lambda: {field: SERIES[field](lattice, request[\"series_bound\"])
+      if field in SERIES else VALUES[field](lattice)},\n                                                                                            ~~~~~~~~~~~~~^^^^^^^^^\n
+      \ File \"/home/runner/work/lattice-database/lattice-database/src/latticedb/sage_genus.py\",
+      line 364, in <lambda>\n    \"discriminant_form\": lambda lattice: _discriminant_form(lattice),\n
+      \                                        ~~~~~~~~~~~~~~~~~~^^^^^^^^^\n  File
+      \"/home/runner/work/lattice-database/lattice-database/src/latticedb/sage_genus.py\",
+      line 381, in _discriminant_form\n    form = lattice.discriminant_quadratic_form()\n
+      \ File \"sage/misc/cachefunc.pyx\", line 2328, in sage.misc.cachefunc.CachedMethodCallerNoArgs.__call__\n
+      \   self.cache = f(self._instance)\n  File \"/repos/sage-extensions/src/sage_extensions/categories/lattices.py\",
+      line 8146, in discriminant_quadratic_form\n    raise ValueError(\n        f\"{self!r}
+      has no discriminant quadratic form: q_L: A_L -> Q/2Z is defined only for an
+      even lattice, and {self!r} is odd; use discriminant_bilinear_form\"\n    )\nValueError:
+      Integral lattice of rank 4 and signature (4, 0) has no discriminant quadratic
+      form: q_L: A_L -> Q/2Z is defined only for an even lattice, and Integral lattice
+      of rank 4 and signature (4, 0) is odd; use discriminant_bilinear_form\n"
+    seconds: 0.3925112640001771
+    recorded_at: 2026-11-21 17:28:30.026028+00:00
+    run_url: https://github.com/dzackgarza/lattice-database/actions/runs/44898427386/attempts/1
+    database_revision: ec35f64a5534ce52e9ca390f7dde8740813a1586
+    research_revision: b9d91213ecc4ce7395c571461bacfe3d80e36d0f
+  notes: []
+0ANS integral.discriminant_form:
+  disposition: open
+  attempts:
+  - hash: 5559165d95cba9f122739801c16bc2d280a3576bb7f0ab91da2807c735cacdf3
+    gram_tensor:
+    - - 1
+      - 0
+      - 0
+      - 0
+    - - 0
+      - 1
+      - 0
+      - 0
+    - - 0
+      - 0
+      - 3
+      - 1
+    - - 0
+      - 0
+      - 1
+      - 15
+    reason: exit status 1
+    stderr: "Traceback (most recent call last):\n  File \"<frozen runpy>\", line 203,
+      in _run_module_as_main\n  File \"<frozen runpy>\", line 88, in _run_code\n  File
+      \"/home/runner/work/lattice-database/lattice-database/src/latticedb/sage_genus.py\",
+      line 536, in <module>\n    main()\n    ~~~~^^\n  File \"/home/runner/work/lattice-database/lattice-database/src/latticedb/sage_genus.py\",
+      line 531, in main\n    _compute(request)\n    ~~~~~~~~^^^^^^^^^\n  File \"/home/runner/work/lattice-database/lattice-database/src/latticedb/sage_genus.py\",
+      line 516, in _compute\n    _run(\n    ~~~~^\n        tag,\n        ^^^^\n        [field],\n
+      \       ^^^^^^^^\n        lambda: {field: SERIES[field](lattice, request[\"series_bound\"])
+      if field in SERIES else VALUES[field](lattice)},\n        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n
+      \   )\n    ^\n  File \"/home/runner/work/lattice-database/lattice-database/src/latticedb/sage_genus.py\",
+      line 449, in _run\n    values = compute()\n  File \"/home/runner/work/lattice-database/lattice-database/src/latticedb/sage_genus.py\",
+      line 519, in <lambda>\n    lambda: {field: SERIES[field](lattice, request[\"series_bound\"])
+      if field in SERIES else VALUES[field](lattice)},\n                                                                                            ~~~~~~~~~~~~~^^^^^^^^^\n
+      \ File \"/home/runner/work/lattice-database/lattice-database/src/latticedb/sage_genus.py\",
+      line 364, in <lambda>\n    \"discriminant_form\": lambda lattice: _discriminant_form(lattice),\n
+      \                                        ~~~~~~~~~~~~~~~~~~^^^^^^^^^\n  File
+      \"/home/runner/work/lattice-database/lattice-database/src/latticedb/sage_genus.py\",
+      line 381, in _discriminant_form\n    form = lattice.discriminant_quadratic_form()\n
+      \ File \"sage/misc/cachefunc.pyx\", line 2328, in sage.misc.cachefunc.CachedMethodCallerNoArgs.__call__\n
+      \   self.cache = f(self._instance)\n  File \"/repos/sage-extensions/src/sage_extensions/categories/lattices.py\",
+      line 8146, in discriminant_quadratic_form\n    raise ValueError(\n        f\"{self!r}
+      has no discriminant quadratic form: q_L: A_L -> Q/2Z is defined only for an
+      even lattice, and {self!r} is odd; use discriminant_bilinear_form\"\n    )\nValueError:
+      Integral lattice of rank 4 and signature (4, 0) has no discriminant quadratic
+      form: q_L: A_L -> Q/2Z is defined only for an even lattice, and Integral lattice
+      of rank 4 and signature (4, 0) is odd; use discriminant_bilinear_form\n"
+    seconds: 0.37961060399993585
+    recorded_at: 2026-11-21 17:30:28.182438+00:00
+    run_url: https://github.com/dzackgarza/lattice-database/actions/runs/44898427386/attempts/1
+    database_revision: ec35f64a5534ce52e9ca390f7dde8740813a1586
+    research_revision: b9d91213ecc4ce7395c571461bacfe3d80e36d0f
+  notes: []
+0D69 integral.discriminant_form:
+  disposition: open
+  attempts:
+  - hash: 45df34808cce384708ddbf40c75d614369c57d7aa2ee49976d10bbcf666bf542
+    gram_tensor:
+    - - 1
+      - 0
+      - 0
+      - 0
+    - - 0
+      - 3
+      - 1
+      - 1
+    - - 0
+      - 1
+      - 4
+      - 1
+    - - 0
+      - 1
+      - 1
+      - 5
+    reason: exit status 1
+    stderr: "Traceback (most recent call last):\n  File \"<frozen runpy>\", line 203,
+      in _run_module_as_main\n  File \"<frozen runpy>\", line 88, in _run_code\n  File
+      \"/home/runner/work/lattice-database/lattice-database/src/latticedb/sage_genus.py\",
+      line 536, in <module>\n    main()\n    ~~~~^^\n  File \"/home/runner/work/lattice-database/lattice-database/src/latticedb/sage_genus.py\",
+      line 531, in main\n    _compute(request)\n    ~~~~~~~~^^^^^^^^^\n  File \"/home/runner/work/lattice-database/lattice-database/src/latticedb/sage_genus.py\",
+      line 516, in _compute\n    _run(\n    ~~~~^\n        tag,\n        ^^^^\n        [field],\n
+      \       ^^^^^^^^\n        lambda: {field: SERIES[field](lattice, request[\"series_bound\"])
+      if field in SERIES else VALUES[field](lattice)},\n        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n
+      \   )\n    ^\n  File \"/home/runner/work/lattice-database/lattice-database/src/latticedb/sage_genus.py\",
+      line 449, in _run\n    values = compute()\n  File \"/home/runner/work/lattice-database/lattice-database/src/latticedb/sage_genus.py\",
+      line 519, in <lambda>\n    lambda: {field: SERIES[field](lattice, request[\"series_bound\"])
+      if field in SERIES else VALUES[field](lattice)},\n                                                                                            ~~~~~~~~~~~~~^^^^^^^^^\n
+      \ File \"/home/runner/work/lattice-database/lattice-database/src/latticedb/sage_genus.py\",
+      line 364, in <lambda>\n    \"discriminant_form\": lambda lattice: _discriminant_form(lattice),\n
+      \                                        ~~~~~~~~~~~~~~~~~~^^^^^^^^^\n  File
+      \"/home/runner/work/lattice-database/lattice-database/src/latticedb/sage_genus.py\",
+      line 381, in _discriminant_form\n    form = lattice.discriminant_quadratic_form()\n
+      \ File \"sage/misc/cachefunc.pyx\", line 2328, in sage.misc.cachefunc.CachedMethodCallerNoArgs.__call__\n
+      \   self.cache = f(self._instance)\n  File \"/repos/sage-extensions/src/sage_extensions/categories/lattices.py\",
+      line 8146, in discriminant_quadratic_form\n    raise ValueError(\n        f\"{self!r}
+      has no discriminant quadratic form: q_L: A_L -> Q/2Z is defined only for an
+      even lattice, and {self!r} is odd; use discriminant_bilinear_form\"\n    )\nValueError:
+      Integral lattice of rank 4 and signature (4, 0) has no discriminant quadratic
+      form: q_L: A_L -> Q/2Z is defined only for an even lattice, and Integral lattice
+      of rank 4 and signature (4, 0) is odd; use discriminant_bilinear_form\n"
+    seconds: 0.36936776299990015
+    recorded_at: 2026-11-21 17:33:52.230515+00:00
+    run_url: https://github.com/dzackgarza/lattice-database/actions/runs/44898427386/attempts/1
+    database_revision: ec35f64a5534ce52e9ca390f7dde8740813a1586
+    research_revision: b9d91213ecc4ce7395c571461bacfe3d80e36d0f
+  notes: []
 1NL3 derive:
   disposition: open
   attempts:
@@ -9014,6 +9173,217 @@
     database_revision: a5eb7b15ae5225d078f8ce55bb620c331b489ecc
     research_revision: e5543cb8149ba9d7ae456dd39dd58418f51274a8
   notes: []
+5271 integral.discriminant_form:
+  disposition: open
+  attempts:
+  - hash: 41cbc8b4503a91c3831f01550fffa8a5976a6bd963343007613f2f4a136f1e77
+    gram_tensor:
+    - - -1
+      - 0
+      - 0
+      - 0
+    - - 0
+      - -1
+      - 0
+      - 0
+    - - 0
+      - 0
+      - -2
+      - 3
+    - - 0
+      - 0
+      - 3
+      - -6
+    reason: exit status 1
+    stderr: "Traceback (most recent call last):\n  File \"<frozen runpy>\", line 203,
+      in _run_module_as_main\n  File \"<frozen runpy>\", line 88, in _run_code\n  File
+      \"/home/runner/work/lattice-database/lattice-database/src/latticedb/sage_genus.py\",
+      line 536, in <module>\n    main()\n    ~~~~^^\n  File \"/home/runner/work/lattice-database/lattice-database/src/latticedb/sage_genus.py\",
+      line 531, in main\n    _compute(request)\n    ~~~~~~~~^^^^^^^^^\n  File \"/home/runner/work/lattice-database/lattice-database/src/latticedb/sage_genus.py\",
+      line 516, in _compute\n    _run(\n    ~~~~^\n        tag,\n        ^^^^\n        [field],\n
+      \       ^^^^^^^^\n        lambda: {field: SERIES[field](lattice, request[\"series_bound\"])
+      if field in SERIES else VALUES[field](lattice)},\n        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n
+      \   )\n    ^\n  File \"/home/runner/work/lattice-database/lattice-database/src/latticedb/sage_genus.py\",
+      line 449, in _run\n    values = compute()\n  File \"/home/runner/work/lattice-database/lattice-database/src/latticedb/sage_genus.py\",
+      line 519, in <lambda>\n    lambda: {field: SERIES[field](lattice, request[\"series_bound\"])
+      if field in SERIES else VALUES[field](lattice)},\n                                                                                            ~~~~~~~~~~~~~^^^^^^^^^\n
+      \ File \"/home/runner/work/lattice-database/lattice-database/src/latticedb/sage_genus.py\",
+      line 364, in <lambda>\n    \"discriminant_form\": lambda lattice: _discriminant_form(lattice),\n
+      \                                        ~~~~~~~~~~~~~~~~~~^^^^^^^^^\n  File
+      \"/home/runner/work/lattice-database/lattice-database/src/latticedb/sage_genus.py\",
+      line 381, in _discriminant_form\n    form = lattice.discriminant_quadratic_form()\n
+      \ File \"sage/misc/cachefunc.pyx\", line 2328, in sage.misc.cachefunc.CachedMethodCallerNoArgs.__call__\n
+      \   self.cache = f(self._instance)\n  File \"/repos/sage-extensions/src/sage_extensions/categories/lattices.py\",
+      line 8146, in discriminant_quadratic_form\n    raise ValueError(\n        f\"{self!r}
+      has no discriminant quadratic form: q_L: A_L -> Q/2Z is defined only for an
+      even lattice, and {self!r} is odd; use discriminant_bilinear_form\"\n    )\nValueError:
+      Integral lattice of rank 4 and signature (0, 4) has no discriminant quadratic
+      form: q_L: A_L -> Q/2Z is defined only for an even lattice, and Integral lattice
+      of rank 4 and signature (0, 4) is odd; use discriminant_bilinear_form\n"
+    seconds: 0.36742277999996986
+    recorded_at: 2026-11-21 17:13:18.767900+00:00
+    run_url: https://github.com/dzackgarza/lattice-database/actions/runs/44898427386/attempts/1
+    database_revision: ec35f64a5534ce52e9ca390f7dde8740813a1586
+    research_revision: b9d91213ecc4ce7395c571461bacfe3d80e36d0f
+  notes: []
+6IQZ automorphisms.automorphism_group_generator_morphisms:
+  disposition: open
+  attempts:
+  - hash: 5b2ce69750de32d22011f84669bb68f29baaafe5c2e3b0e058fdcfb5e531dbfc
+    gram_tensor:
+    - - 2
+      - -3
+      - 0
+      - 0
+    - - -3
+      - 6
+      - 0
+      - 0
+    - - 0
+      - 0
+      - -4
+      - 6
+    - - 0
+      - 0
+      - 6
+      - -12
+    reason: exit status 1
+    stderr: "Traceback (most recent call last):\n  File \"<frozen runpy>\", line 203,
+      in _run_module_as_main\n  File \"<frozen runpy>\", line 88, in _run_code\n  File
+      \"/home/runner/work/lattice-database/lattice-database/src/latticedb/sage_genus.py\",
+      line 536, in <module>\n    main()\n    ~~~~^^\n  File \"/home/runner/work/lattice-database/lattice-database/src/latticedb/sage_genus.py\",
+      line 531, in main\n    _compute(request)\n    ~~~~~~~~^^^^^^^^^\n  File \"/home/runner/work/lattice-database/lattice-database/src/latticedb/sage_genus.py\",
+      line 504, in _compute\n    _run(tag, [asked for asked in sorted(fields) if asked
+      in request[\"fields\"]], lambda: compute(lattice))\n    ~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n
+      \ File \"/home/runner/work/lattice-database/lattice-database/src/latticedb/sage_genus.py\",
+      line 449, in _run\n    values = compute()\n  File \"/home/runner/work/lattice-database/lattice-database/src/latticedb/sage_genus.py\",
+      line 504, in <lambda>\n    _run(tag, [asked for asked in sorted(fields) if asked
+      in request[\"fields\"]], lambda: compute(lattice))\n                                                                                         ~~~~~~~^^^^^^^^^\n
+      \ File \"/home/runner/work/lattice-database/lattice-database/src/latticedb/sage_genus.py\",
+      line 79, in _orthogonal_group_data\n    generators = [_matrix_rows(generator)
+      for generator in group.group_generators()]\n                                                           ~~~~~~~~~~~~~~~~~~~~~~^^\n
+      \ File \"/repos/sage-extensions/src/sage_extensions/categories/group/groups.py\",
+      line 6073, in group_generators\n    self.selected_group_resolution().generators(name=\"Group
+      generators\"),\n    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^\n  File \"/repos/sage-extensions/src/sage_extensions/categories/group/groups.py\",
+      line 6036, in selected_group_resolution\n    return self.selected_resolution(OwnedGroups())\n
+      \          ~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^\n  File \"/repos/sage-extensions/src/sage_extensions/categories/abstract_categories/objects.py\",
+      line 383, in selected_resolution\n    resolution = selected.realize()\n  File
+      \"/repos/sage-extensions/src/sage_extensions/categories/abstract_categories/objects.py\",
+      line 116, in realize\n    return self._resolution_factory()\n           ~~~~~~~~~~~~~~~~~~~~~~~~^^\n
+      \ File \"/repos/sage-extensions/src/sage_extensions/categories/group/groups.py\",
+      line 1198, in selected_resolution\n    generators = generating_set()\n  File
+      \"/repos/sage-extensions/src/sage_extensions/categories/abstract_categories/arrow_categories.py\",
+      line 2475, in <lambda>\n    lambda: self.core_category().base_category()._core_automorphism_generators(self)\n
+      \           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^\n
+      \ File \"/repos/sage-extensions/src/sage_extensions/categories/lattices.py\",
+      line 2763, in _core_automorphism_generators\n    return core_mor._computed_group_generators()\n
+      \          ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^\n  File \"sage/misc/cachefunc.pyx\",
+      line 2328, in sage.misc.cachefunc.CachedMethodCallerNoArgs.__call__\n    self.cache
+      = f(self._instance)\n  File \"/repos/sage-extensions/src/sage_extensions/categories/lattice_morphisms.py\",
+      line 4690, in _computed_group_generators\n    for generator in automorphism_group_generators(category,
+      lattice)\n                     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^\n
+      \ File \"/repos/sage-indefinite-port/src/sage_indefinite_port/indefinite/marked_lattices.py\",
+      line 176, in automorphism_group_generators\n    generators = RECURSION.orthogonal_group_generators(marked)\n
+      \ File \"/repos/sage-indefinite-port/src/sage_indefinite_port/indefinite/recursive.py\",
+      line 1105, in orthogonal_group_generators\n    generators = self._generation_step(profile.signed_view)\n
+      \ File \"/repos/sage-indefinite-port/src/sage_indefinite_port/indefinite/recursive.py\",
+      line 1118, in _generation_step\n    model = self._model(lattice)\n  File \"/repos/sage-indefinite-port/src/sage_indefinite_port/indefinite/recursive.py\",
+      line 1114, in _model\n    self._models[lattice] = OrbitCoverModel(lattice)\n
+      \                           ~~~~~~~~~~~~~~~^^^^^^^^^\n  File \"/repos/sage-indefinite-port/src/sage_indefinite_port/indefinite/eichler.py\",
+      line 904, in __init__\n    self.envelope = EichlerEnvelope(lattice)\n                    ~~~~~~~~~~~~~~~^^^^^^^^^\n
+      \ File \"/repos/sage-indefinite-port/src/sage_indefinite_port/indefinite/eichler.py\",
+      line 390, in __init__\n    first, first_partner = _source_hyperbolic_pair(construction_lattice)\n
+      \                          ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^\n  File
+      \"/repos/sage-indefinite-port/src/sage_indefinite_port/indefinite/eichler.py\",
+      line 255, in _source_hyperbolic_pair\n    candidate = insert_vector()\n  File
+      \"/repos/sage-indefinite-port/src/sage_indefinite_port/indefinite/eichler.py\",
+      line 244, in insert_vector\n    raise ValueError(\"the source isotropic search
+      found no vector\")\nValueError: the source isotropic search found no vector\n"
+    seconds: 0.950414794000153
+    recorded_at: 2026-11-21 17:26:51.612003+00:00
+    run_url: https://github.com/dzackgarza/lattice-database/actions/runs/44898427386/attempts/1
+    database_revision: ec35f64a5534ce52e9ca390f7dde8740813a1586
+    research_revision: b9d91213ecc4ce7395c571461bacfe3d80e36d0f
+  notes: []
+6IQZ automorphisms.automorphism_group_order:
+  disposition: open
+  attempts:
+  - hash: 49a4cfcf9a5bd13e0d9c987fcbcb91fa7c06d96223001c743e7829af933e234a
+    gram_tensor:
+    - - 2
+      - -3
+      - 0
+      - 0
+    - - -3
+      - 6
+      - 0
+      - 0
+    - - 0
+      - 0
+      - -4
+      - 6
+    - - 0
+      - 0
+      - 6
+      - -12
+    reason: exit status 1
+    stderr: "Traceback (most recent call last):\n  File \"<frozen runpy>\", line 203,
+      in _run_module_as_main\n  File \"<frozen runpy>\", line 88, in _run_code\n  File
+      \"/home/runner/work/lattice-database/lattice-database/src/latticedb/sage_genus.py\",
+      line 536, in <module>\n    main()\n    ~~~~^^\n  File \"/home/runner/work/lattice-database/lattice-database/src/latticedb/sage_genus.py\",
+      line 531, in main\n    _compute(request)\n    ~~~~~~~~^^^^^^^^^\n  File \"/home/runner/work/lattice-database/lattice-database/src/latticedb/sage_genus.py\",
+      line 504, in _compute\n    _run(tag, [asked for asked in sorted(fields) if asked
+      in request[\"fields\"]], lambda: compute(lattice))\n    ~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n
+      \ File \"/home/runner/work/lattice-database/lattice-database/src/latticedb/sage_genus.py\",
+      line 449, in _run\n    values = compute()\n  File \"/home/runner/work/lattice-database/lattice-database/src/latticedb/sage_genus.py\",
+      line 504, in <lambda>\n    _run(tag, [asked for asked in sorted(fields) if asked
+      in request[\"fields\"]], lambda: compute(lattice))\n                                                                                         ~~~~~~~^^^^^^^^^\n
+      \ File \"/home/runner/work/lattice-database/lattice-database/src/latticedb/sage_genus.py\",
+      line 79, in _orthogonal_group_data\n    generators = [_matrix_rows(generator)
+      for generator in group.group_generators()]\n                                                           ~~~~~~~~~~~~~~~~~~~~~~^^\n
+      \ File \"/repos/sage-extensions/src/sage_extensions/categories/group/groups.py\",
+      line 6073, in group_generators\n    self.selected_group_resolution().generators(name=\"Group
+      generators\"),\n    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^\n  File \"/repos/sage-extensions/src/sage_extensions/categories/group/groups.py\",
+      line 6036, in selected_group_resolution\n    return self.selected_resolution(OwnedGroups())\n
+      \          ~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^\n  File \"/repos/sage-extensions/src/sage_extensions/categories/abstract_categories/objects.py\",
+      line 383, in selected_resolution\n    resolution = selected.realize()\n  File
+      \"/repos/sage-extensions/src/sage_extensions/categories/abstract_categories/objects.py\",
+      line 116, in realize\n    return self._resolution_factory()\n           ~~~~~~~~~~~~~~~~~~~~~~~~^^\n
+      \ File \"/repos/sage-extensions/src/sage_extensions/categories/group/groups.py\",
+      line 1198, in selected_resolution\n    generators = generating_set()\n  File
+      \"/repos/sage-extensions/src/sage_extensions/categories/abstract_categories/arrow_categories.py\",
+      line 2475, in <lambda>\n    lambda: self.core_category().base_category()._core_automorphism_generators(self)\n
+      \           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^\n
+      \ File \"/repos/sage-extensions/src/sage_extensions/categories/lattices.py\",
+      line 2763, in _core_automorphism_generators\n    return core_mor._computed_group_generators()\n
+      \          ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^\n  File \"sage/misc/cachefunc.pyx\",
+      line 2328, in sage.misc.cachefunc.CachedMethodCallerNoArgs.__call__\n    self.cache
+      = f(self._instance)\n  File \"/repos/sage-extensions/src/sage_extensions/categories/lattice_morphisms.py\",
+      line 4690, in _computed_group_generators\n    for generator in automorphism_group_generators(category,
+      lattice)\n                     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^\n
+      \ File \"/repos/sage-indefinite-port/src/sage_indefinite_port/indefinite/marked_lattices.py\",
+      line 176, in automorphism_group_generators\n    generators = RECURSION.orthogonal_group_generators(marked)\n
+      \ File \"/repos/sage-indefinite-port/src/sage_indefinite_port/indefinite/recursive.py\",
+      line 1105, in orthogonal_group_generators\n    generators = self._generation_step(profile.signed_view)\n
+      \ File \"/repos/sage-indefinite-port/src/sage_indefinite_port/indefinite/recursive.py\",
+      line 1118, in _generation_step\n    model = self._model(lattice)\n  File \"/repos/sage-indefinite-port/src/sage_indefinite_port/indefinite/recursive.py\",
+      line 1114, in _model\n    self._models[lattice] = OrbitCoverModel(lattice)\n
+      \                           ~~~~~~~~~~~~~~~^^^^^^^^^\n  File \"/repos/sage-indefinite-port/src/sage_indefinite_port/indefinite/eichler.py\",
+      line 904, in __init__\n    self.envelope = EichlerEnvelope(lattice)\n                    ~~~~~~~~~~~~~~~^^^^^^^^^\n
+      \ File \"/repos/sage-indefinite-port/src/sage_indefinite_port/indefinite/eichler.py\",
+      line 390, in __init__\n    first, first_partner = _source_hyperbolic_pair(construction_lattice)\n
+      \                          ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^\n  File
+      \"/repos/sage-indefinite-port/src/sage_indefinite_port/indefinite/eichler.py\",
+      line 255, in _source_hyperbolic_pair\n    candidate = insert_vector()\n  File
+      \"/repos/sage-indefinite-port/src/sage_indefinite_port/indefinite/eichler.py\",
+      line 244, in insert_vector\n    raise ValueError(\"the source isotropic search
+      found no vector\")\nValueError: the source isotropic search found no vector\n"
+    seconds: 17.86300617500001
+    recorded_at: 2026-11-21 17:27:08.480472+00:00
+    run_url: https://github.com/dzackgarza/lattice-database/actions/runs/44898427386/attempts/1
+    database_revision: ec35f64a5534ce52e9ca390f7dde8740813a1586
+    research_revision: b9d91213ecc4ce7395c571461bacfe3d80e36d0f
+  notes: []
 6IQZ definite.automorphism_group_generator_morphisms:
   disposition: open
   attempts:
@@ -9092,4 +9462,90 @@
     run_url: https://github.com/dzackgarza/lattice-database/actions/runs/44079044175/attempts/1
     database_revision: b046d46a13d33c1078b5d8a037bca2c462fabc72
     research_revision: 0152e984c2d6fc0d56bca38e4ce425f029729927
+  notes: []
+6IQZ integral.discriminant_sequence:
+  disposition: open
+  attempts:
+  - hash: e5051c01760d33227386759ee7af5e66eabf6a209f46cf27513544a0c6cd96fd
+    gram_tensor:
+    - - 2
+      - -3
+      - 0
+      - 0
+    - - -3
+      - 6
+      - 0
+      - 0
+    - - 0
+      - 0
+      - -4
+      - 6
+    - - 0
+      - 0
+      - 6
+      - -12
+    reason: exit status 1
+    stderr: "Traceback (most recent call last):\n  File \"<frozen runpy>\", line 203,
+      in _run_module_as_main\n  File \"<frozen runpy>\", line 88, in _run_code\n  File
+      \"/home/runner/work/lattice-database/lattice-database/src/latticedb/sage_genus.py\",
+      line 536, in <module>\n    main()\n    ~~~~^^\n  File \"/home/runner/work/lattice-database/lattice-database/src/latticedb/sage_genus.py\",
+      line 531, in main\n    _compute(request)\n    ~~~~~~~~^^^^^^^^^\n  File \"/home/runner/work/lattice-database/lattice-database/src/latticedb/sage_genus.py\",
+      line 516, in _compute\n    _run(\n    ~~~~^\n        tag,\n        ^^^^\n        [field],\n
+      \       ^^^^^^^^\n        lambda: {field: SERIES[field](lattice, request[\"series_bound\"])
+      if field in SERIES else VALUES[field](lattice)},\n        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n
+      \   )\n    ^\n  File \"/home/runner/work/lattice-database/lattice-database/src/latticedb/sage_genus.py\",
+      line 449, in _run\n    values = compute()\n  File \"/home/runner/work/lattice-database/lattice-database/src/latticedb/sage_genus.py\",
+      line 519, in <lambda>\n    lambda: {field: SERIES[field](lattice, request[\"series_bound\"])
+      if field in SERIES else VALUES[field](lattice)},\n                                                                                            ~~~~~~~~~~~~~^^^^^^^^^\n
+      \ File \"/home/runner/work/lattice-database/lattice-database/src/latticedb/sage_genus.py\",
+      line 362, in <lambda>\n    \"discriminant_sequence\": lambda lattice: lattice.discriminant_sequence_data(),\n
+      \                                            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^\n
+      \ File \"/repos/sage-extensions/src/sage_extensions/categories/lattices.py\",
+      line 4490, in discriminant_sequence_data\n    return discriminant_sequence_data(self)\n
+      \ File \"/repos/sage-extensions/src/sage_extensions/categories/lattice_orbit_invariants.py\",
+      line 298, in discriminant_sequence_data\n    lattice_generators = _orthogonal_generator_matrices(lattice)\n
+      \ File \"/repos/sage-extensions/src/sage_extensions/categories/lattice_orbit_invariants.py\",
+      line 63, in _orthogonal_generator_matrices\n    for generator in lattice.orthogonal_group().group_generators()\n
+      \                    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^\n  File \"/repos/sage-extensions/src/sage_extensions/categories/group/groups.py\",
+      line 6073, in group_generators\n    self.selected_group_resolution().generators(name=\"Group
+      generators\"),\n    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^\n  File \"/repos/sage-extensions/src/sage_extensions/categories/group/groups.py\",
+      line 6036, in selected_group_resolution\n    return self.selected_resolution(OwnedGroups())\n
+      \          ~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^\n  File \"/repos/sage-extensions/src/sage_extensions/categories/abstract_categories/objects.py\",
+      line 383, in selected_resolution\n    resolution = selected.realize()\n  File
+      \"/repos/sage-extensions/src/sage_extensions/categories/abstract_categories/objects.py\",
+      line 116, in realize\n    return self._resolution_factory()\n           ~~~~~~~~~~~~~~~~~~~~~~~~^^\n
+      \ File \"/repos/sage-extensions/src/sage_extensions/categories/group/groups.py\",
+      line 1198, in selected_resolution\n    generators = generating_set()\n  File
+      \"/repos/sage-extensions/src/sage_extensions/categories/abstract_categories/arrow_categories.py\",
+      line 2475, in <lambda>\n    lambda: self.core_category().base_category()._core_automorphism_generators(self)\n
+      \           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^\n
+      \ File \"/repos/sage-extensions/src/sage_extensions/categories/lattices.py\",
+      line 2763, in _core_automorphism_generators\n    return core_mor._computed_group_generators()\n
+      \          ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^\n  File \"sage/misc/cachefunc.pyx\",
+      line 2328, in sage.misc.cachefunc.CachedMethodCallerNoArgs.__call__\n    self.cache
+      = f(self._instance)\n  File \"/repos/sage-extensions/src/sage_extensions/categories/lattice_morphisms.py\",
+      line 4690, in _computed_group_generators\n    for generator in automorphism_group_generators(category,
+      lattice)\n                     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^\n
+      \ File \"/repos/sage-indefinite-port/src/sage_indefinite_port/indefinite/marked_lattices.py\",
+      line 176, in automorphism_group_generators\n    generators = RECURSION.orthogonal_group_generators(marked)\n
+      \ File \"/repos/sage-indefinite-port/src/sage_indefinite_port/indefinite/recursive.py\",
+      line 1105, in orthogonal_group_generators\n    generators = self._generation_step(profile.signed_view)\n
+      \ File \"/repos/sage-indefinite-port/src/sage_indefinite_port/indefinite/recursive.py\",
+      line 1118, in _generation_step\n    model = self._model(lattice)\n  File \"/repos/sage-indefinite-port/src/sage_indefinite_port/indefinite/recursive.py\",
+      line 1114, in _model\n    self._models[lattice] = OrbitCoverModel(lattice)\n
+      \                           ~~~~~~~~~~~~~~~^^^^^^^^^\n  File \"/repos/sage-indefinite-port/src/sage_indefinite_port/indefinite/eichler.py\",
+      line 904, in __init__\n    self.envelope = EichlerEnvelope(lattice)\n                    ~~~~~~~~~~~~~~~^^^^^^^^^\n
+      \ File \"/repos/sage-indefinite-port/src/sage_indefinite_port/indefinite/eichler.py\",
+      line 390, in __init__\n    first, first_partner = _source_hyperbolic_pair(construction_lattice)\n
+      \                          ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^\n  File
+      \"/repos/sage-indefinite-port/src/sage_indefinite_port/indefinite/eichler.py\",
+      line 255, in _source_hyperbolic_pair\n    candidate = insert_vector()\n  File
+      \"/repos/sage-indefinite-port/src/sage_indefinite_port/indefinite/eichler.py\",
+      line 244, in insert_vector\n    raise ValueError(\"the source isotropic search
+      found no vector\")\nValueError: the source isotropic search found no vector\n"
+    seconds: 0.9282836580000549
+    recorded_at: 2026-11-21 17:27:29.602952+00:00
+    run_url: https://github.com/dzackgarza/lattice-database/actions/runs/44898427386/attempts/1
+    database_revision: ec35f64a5534ce52e9ca390f7dde8740813a1586
+    research_revision: b9d91213ecc4ce7395c571461bacfe3d80e36d0f
   notes: []

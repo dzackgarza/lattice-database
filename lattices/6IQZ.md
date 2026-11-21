@@ -12,6 +12,13 @@ certifications:
   integral.spinor_genus_count: 38e172c980055d2b30936fda1edd1ee9c3a88c33db599a2fcb667dc4c3db6a42
   integral.spinor_genera: b282328ce436fab254fb7c64b13c2ba65f811e6cef6601d5cfaefe1dcf36c01d
   integral.hyperbolic_index: 96e6416d870ddf05f177901ac2b97f3298d72ec3a3edff5df57f172750379353
+  integral.discriminant_form: 6b1e15a672f495d1db8518e8e2b66553423b1579a6573986021857b6dd3f08c8
+  integral.primitive_orbits: 8d5f01dac5c16ec5b3d1840dddf84a3e4ad1a2d7b083234710336809f010018b
+  integral.discriminant_orbits: 00def2360564cee2a9890d52b90e09c328b260dc0c7fa2c833485a7d3414e024
+  integral.modular_scale: 6c8c564c31cf8d8c382ad063fee5f4a9e71f5a0a21f263cadd47068579554adb
+  integral.anisotropic_primes: dcd7e581316496995b80c4390f38b608b524e9e9ea091d9251ced247f62429b3
+  integral.local_representations: 435361067db38df8fdf48819fa78d35cb6a88e421874c8503dcf4c06b79167f0
+  integral.local_densities: 86c453976bab10119abc30739bfbe2e4ec5088c1498034cf67c8a7af50e594f2
 rank: 4
 gram_tensor:
 - [2, -3, 0, 0]
@@ -32,6 +39,7 @@ integral:
   elementary_primes: []
   parity: even
   level: 6
+  modular_scale: 6
   discriminant_group: [6, 6]
   overlattice_count: 4
   bad_reduction_primes: [2, 3]
@@ -41,6 +49,101 @@ integral:
   spinor_genus_count: 1
   spinor_genera: [1]
   hyperbolic_index: 0
+  primitive_orbits:
+    O:
+      constant: 0
+      z: []
+      w: []
+    O+:
+      constant: 0
+      z: []
+      w: []
+    SO:
+      constant: 0
+      z: []
+      w: []
+    SO+:
+      constant: 0
+      z: []
+      w: []
+    Otilde:
+      constant: 0
+      z: []
+      w: []
+    Otilde+:
+      constant: 0
+      z: []
+      w: []
+    SOtilde:
+      constant: 0
+      z: []
+      w: []
+    SOtilde+:
+      constant: 0
+      z: []
+      w: []
+  discriminant_form:
+    orthogonal_group_order: 48
+    isotropic_classes: 1
+    isotropic_orbits: 1
+  discriminant_orbits:
+    Otilde:
+      constant: 1
+      z: [0, 1, 0, 4]
+      w: [0, 1, 0, 4]
+    SOtilde:
+      constant: 1
+      z: [0, 1, 0, 4]
+      w: [0, 1, 0, 4]
+    Otilde+:
+      constant: 1
+      z: [0, 1, 0, 4]
+      w: [0, 1, 0, 4]
+    SOtilde+:
+      constant: 1
+      z: [0, 1, 0, 4]
+      w: [0, 1, 0, 4]
+    O:
+      constant: 1
+      z: [0, 1, 0, 2]
+      w: [0, 1, 0, 2]
+    SO:
+      constant: 1
+      z: [0, 1, 0, 2]
+      w: [0, 1, 0, 2]
+    O+:
+      constant: 1
+      z: [0, 1, 0, 2]
+      w: [0, 1, 0, 2]
+    SO+:
+      constant: 1
+      z: [0, 1, 0, 2]
+      w: [0, 1, 0, 2]
+  anisotropic_primes: [2, 3]
+  local_representations:
+  - prime: 2
+    classes:
+    - representative: 1
+      least_valuation: 2
+    - representative: 3
+      least_valuation: 2
+    - representative: 5
+      least_valuation: 2
+    - representative: 7
+      least_valuation: 2
+    - representative: 2
+      least_valuation: 1
+    - representative: 6
+      least_valuation: 1
+    - representative: 10
+      least_valuation: 1
+    - representative: 14
+      least_valuation: 1
+  local_densities:
+  - prime: 2
+    densities: [0, 3, 0, 3/2, 0, 3, 0, 3/4, 0, 3, 0, 3/2]
+  - prime: 3
+    densities: [4/3, 4/3, 4/9, 4/3, 4/3, 4/9, 4/3, 4/3, 4/27, 4/3, 4/3, 4/9]
 indefinite:
   isotropic: false
 morphisms: []

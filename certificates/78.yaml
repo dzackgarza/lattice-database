@@ -88,6 +88,9 @@
 02AD automorphisms.automorphism_group_generator_morphisms:
   hash: 1e824daae723ab84252ae68667396112a29b52b6d4db77a69d00a5d56cc408bb
   by: research preamble
+02AD automorphisms.automorphism_group_order:
+  hash: 1c9828301d15e92b8e564acbd50869364747c8a5fe31e75f324d0c6cbffd0d26
+  by: research preamble
 02AD derive:
   hash: d68f2928a176abcf7625aa37b7be88e5b7083b1ac5edfd2af1168a4da79fc1bc
   by: research preamble
@@ -102,6 +105,9 @@
   by: research preamble
 02AD integral.discriminant_form:
   hash: 8e33f957f9f4f04baa28563b83a32dcc2a7588c16a2552b539eabef05b7f9b21
+  by: research preamble
+02AD integral.discriminant_orbits:
+  hash: b15fee0b7fcb2d76a0f5cb203a242c7b175c5f68655b969b9bbdb80aefd07785
   by: research preamble
 02AD integral.elementary_primes:
   hash: d8795f1c3418eb83471eb37810c7ede8714db3099a9b9df94f9da267cc1f7f60
@@ -26462,6 +26468,9 @@
   by: research preamble
 3GO0 integral.anisotropic_primes:
   hash: 5feb6bc753c6547c52755608dcdda62a7d96affc7f83127dad45e4966fdcf5e0
+  by: research preamble
+3GO0 integral.discriminant_sequence:
+  hash: 6e28fb968f508d7de5efe24deee9b791d314389f352baa7003277cccaedcf478
   by: research preamble
 3GO0 integral.elementary_primes:
   hash: 0c0a20aca607366dcc88472bb0f5f6bbac5371f1f69fc0ae4c083313c8405146
