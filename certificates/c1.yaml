@@ -31228,6 +31228,9 @@
 5T2W form.integer_valued:
   hash: e230f92530fbf4bbe658d6cdf978331fb1718373395dab51de58271c15c9fe82
   by: research preamble
+5T2W integral.discriminant_form:
+  hash: 1d3017d5af6ce8e0c802467a976e7edc60eaad3767baea05c974865bd0e55621
+  by: research preamble
 5T2W integral.elementary_primes:
   hash: ecd710a61eedcc251a10956eb591fbe70aca247f553198399ccfa5a6ef271809
   by: research preamble
@@ -31242,6 +31245,9 @@
   by: research preamble
 5T2W integral.overlattice_count:
   hash: f3da9f1eb2c8ba639ed2ee5d883beab6d5bf0ae0acfa50af6050c346dfc3e8b7
+  by: research preamble
+5T2W integral.primitive_orbits:
+  hash: 9215452cc25f31af27efce07e50cad199b264834df772fa0108dd2e45e2c97dd
   by: research preamble
 5T2W integral.spinor_genera:
   hash: ad527a692bf5fc15abaf48f1785a7083fc05b47efe3f820552423a01005b3ab4
@@ -31261,6 +31267,15 @@
 6BKS form.integer_valued:
   hash: d591371b9f815f50a94aee4a7d29cfe80fa5cdbb5f279f613f489ac5417b505c
   by: research preamble
+6BKS integral.anisotropic_primes:
+  hash: ffd0f7d40ec33f1eeb8092640f65dde0cb05e09c346a0a53b920d1a2527e3adf
+  by: research preamble
+6BKS integral.discriminant_form:
+  hash: 97eee7249a57c243b205fbc9df37f60a3e62ec1b006d9b11c246697b2c63c2a0
+  by: research preamble
+6BKS integral.discriminant_orbits:
+  hash: 90647baaf57449a02a7886cd9f48635d6c16cb4029c98579dc7d8978262b8538
+  by: research preamble
 6BKS integral.elementary_primes:
   hash: 37cbf2b6ac4397540c8cefe8dceeeb45fba53104633952982df60a79cf146d13
   by: research preamble
@@ -31273,8 +31288,20 @@
 6BKS integral.hyperbolic_index:
   hash: d8044bf030db29561a55047db38bc6c48e2dca92cd81c9bc0208dea35ef47b2a
   by: research preamble
+6BKS integral.local_densities:
+  hash: b3ed06a17c0bbd1ec8b57ecbab9544f283ef84dad6c71c439748ee04613ffee2
+  by: research preamble
+6BKS integral.local_representations:
+  hash: dcb203816ca68b01e40ca1ffbc5281a62570d87f2e170271a5abdf180a340c71
+  by: research preamble
+6BKS integral.modular_scale:
+  hash: d54ad841afbbeb8f273c5afe0149d78a51f43a7225e6eabaef27525149d48894
+  by: research preamble
 6BKS integral.overlattice_count:
   hash: 17920077a2acd81d4f0333afaf3eb097aa732ebc5a60e000b853ab57af5ac8da
+  by: research preamble
+6BKS integral.primitive_orbits:
+  hash: 064e99df3814b371233dc4c9eeae89b8d13dd87ac595c0026d5bc2f30f943e71
   by: research preamble
 6BKS integral.spinor_genera:
   hash: d06f0d100f44cb633d0dc2326f8dbc3d80ed662a991ec6d28ae830cd7fa23ca4

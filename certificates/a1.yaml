@@ -33280,6 +33280,9 @@
 4GBD form.integer_valued:
   hash: 61d2096a3262444755c8a01cf463f490befcb03f98ff9ef708a18362b81cbf17
   by: research preamble
+4GBD integral.anisotropic_primes:
+  hash: 87f4de4b4defd6f740a8254c7677cb9d75a09069d123d2e4ce14e00a5a5ac249
+  by: research preamble
 4GBD integral.elementary_primes:
   hash: 1f151351efd09c19b3ab5c5c7ace3a8b83ee34e8868a7ca659e46b3cb9a6feac
   by: research preamble
@@ -33292,8 +33295,20 @@
 4GBD integral.hyperbolic_index:
   hash: 8d892060bba83129a5913b58942490b0d815eeffb2428133006e507d26786c1a
   by: research preamble
+4GBD integral.local_densities:
+  hash: 6238dbb635a7220f52a7996e229a7b44dd4a5bb90da47a3724c57e6e7ceaa184
+  by: research preamble
+4GBD integral.local_representations:
+  hash: 84d8675ac4b1127b146317d6c7e6a9ffb8ed63f8abde6112958ea9ffe956c91d
+  by: research preamble
+4GBD integral.modular_scale:
+  hash: d18636061b1fa818a91ceed30bd70dcaa8435b77b5c7590b51f7e3828e32b1b3
+  by: research preamble
 4GBD integral.overlattice_count:
   hash: e8f750bf57db6a33087b6f356c7877ff71fde54c378bb4db1e1fb1f0fb5e9340
+  by: research preamble
+4GBD integral.primitive_orbits:
+  hash: 6b0ef4a4598885fa037f03d68b9b2e8da2867d712f760ce737dd67954b001029
   by: research preamble
 4GBD integral.spinor_genera:
   hash: 3d276896662f4c429e1cf4fada7203e4c9ed702795bec871016fa3be6f94169c

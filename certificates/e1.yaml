@@ -32431,6 +32431,9 @@
 4ZYF form.integer_valued:
   hash: d2592c5ee0b249df86805312db9a3678b7bd2d171ebb6a5984026bdb8892ab09
   by: research preamble
+4ZYF integral.anisotropic_primes:
+  hash: 1665bf5469d9c997231838b478641c24d2d17b3fe4e35b26112bd22e8e9bfdf6
+  by: research preamble
 4ZYF integral.elementary_primes:
   hash: b01b4de10ca163a87f742fd48069997b0dd4ac7f71583169178f59fee66d1558
   by: research preamble
@@ -32443,8 +32446,20 @@
 4ZYF integral.hyperbolic_index:
   hash: 4f19abf6da5c19d4b37b417b470b17af4f74baa2c6742361dec8568ff86da474
   by: research preamble
+4ZYF integral.local_densities:
+  hash: 0091cd2b68a2a9e24f640ef39c6cd0c20eab68d52f6ec66213523cda52490ee3
+  by: research preamble
+4ZYF integral.local_representations:
+  hash: 108702a057667654230ab8df0cc3220f1a4391b7d1e9d1ebc5ea2e47bcf45c53
+  by: research preamble
+4ZYF integral.modular_scale:
+  hash: 54cc3507f1e1e71f28de03be4c1474a7a36a38b64509e7639901b4bc433ed96c
+  by: research preamble
 4ZYF integral.overlattice_count:
   hash: 1d5d888fe6285908deb22dc9a1301f3c8da51ae7320b7cdab7de95b4d5761f0b
+  by: research preamble
+4ZYF integral.primitive_orbits:
+  hash: f51f7bd366e3e78e55c7f5ca640c41ec0e8f7c6dd57458e4c7cfe68f001e5e5e
   by: research preamble
 4ZYF integral.spinor_genera:
   hash: dcedd8f83777b59a5a3179ad36613ce17e9aef7ac58e747e9af90d838145e67b
@@ -32458,6 +32473,9 @@
 56TG form.integer_valued:
   hash: 68826824e3a263d0b3f47ec5ce47ca4e7635047c79e148ce90fd46855854ad4b
   by: research preamble
+56TG integral.anisotropic_primes:
+  hash: ec22745ddd326d7021f1ec554cf89436cd7d1af0207ebbc16f7d463f03ceedde
+  by: research preamble
 56TG integral.elementary_primes:
   hash: 4368f778bb367864951181424f0532620a5ef7c150df05beafc08df4694a2076
   by: research preamble
@@ -32469,6 +32487,15 @@
   by: research preamble
 56TG integral.hyperbolic_index:
   hash: 89dec371cd875ad418873d54ab5e1621a1b22c7fc3998c6fb7e87ed876795ac3
+  by: research preamble
+56TG integral.local_densities:
+  hash: 825ec6bc1a8094852a45de3f2d21259d218f5a9a6d00974103df04bb7263fc22
+  by: research preamble
+56TG integral.local_representations:
+  hash: c4b3b88949954a334799c71ea2479bab8c95fc621bee31d1ba433fb31d3c06b1
+  by: research preamble
+56TG integral.modular_scale:
+  hash: 0a93ed5fd2cc6ca016205b82c9f0d41192d33c8fac15fe40b0f90c7d4406fc3b
   by: research preamble
 56TG integral.overlattice_count:
   hash: 6f744dce3f47820755fa0e0e1faf8ee6aa52aa3aa723802606e0340a9d5c143a

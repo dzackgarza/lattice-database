@@ -33087,6 +33087,9 @@
 3ZC0 form.integer_valued:
   hash: a823c8dfef54a4b3d510dbcbc9a11a1bb10fa0f7bfc16c56cd88d08faf5464ac
   by: research preamble
+3ZC0 integral.anisotropic_primes:
+  hash: 7ef8fbd3e41165d4796da3d1d4992e3f6b28d410c5b44fc9f448eac5f0b464a2
+  by: research preamble
 3ZC0 integral.elementary_primes:
   hash: 67c712779cd58fad046d07bec98417de340eeeeb139f187f70d97d4129bf624b
   by: research preamble
@@ -33098,6 +33101,15 @@
   by: research preamble
 3ZC0 integral.hyperbolic_index:
   hash: 1bbf0da028a153b346b1e2eb70eec4e1f9c79636d71698484de4ca90d572b27f
+  by: research preamble
+3ZC0 integral.local_densities:
+  hash: 3c4dd2cdf956f3286ded404594d928899ff7414b3c13bb7125ae8a2b8e0a5497
+  by: research preamble
+3ZC0 integral.local_representations:
+  hash: b7866ebd5f67448634a25c86cab8e0d0fe871ad4c1c5b5a619380cdd390e3040
+  by: research preamble
+3ZC0 integral.modular_scale:
+  hash: 56bb84517d2de998927e7292522f6e0adda84f2bdbbf46fd11ceb7adca4c86d3
   by: research preamble
 3ZC0 integral.overlattice_count:
   hash: 8e50c88563588a17ca134d88733615a71b2ce735630801922e3b3b4d0f8f680b
@@ -33120,6 +33132,15 @@
 6FBY form.integer_valued:
   hash: b3e59ad007a9a702950fdfdd88f11167b606ec99021042a1a3e3c03e2c02c72c
   by: research preamble
+6FBY integral.anisotropic_primes:
+  hash: e5966056fa66f904385d4df5632507e0a464c23b0fa0b1cfa51137f92d830ab8
+  by: research preamble
+6FBY integral.discriminant_form:
+  hash: 91a745c3a6402579a2c06bd42287d83d06540f0551a01896fd4f00064979f371
+  by: research preamble
+6FBY integral.discriminant_orbits:
+  hash: 0e45d2110c7c0bbf959c73a77d256a21c4e9ae55f3d677b20d0b97f2d5f1576c
+  by: research preamble
 6FBY integral.elementary_primes:
   hash: ae6367a4468eea4683a6d381d6523d5d2eec3811f0e2d6485874b26741949f02
   by: research preamble
@@ -33132,8 +33153,20 @@
 6FBY integral.hyperbolic_index:
   hash: 89f514fecdf303e1f2d3ac8c4659eb803f9dc0266531276bafbe822ad1106edb
   by: research preamble
+6FBY integral.local_densities:
+  hash: 2b0de31c9c498e944c85fe68d5bbae7e59cec0c25a31523c4aabddde3f0ff52a
+  by: research preamble
+6FBY integral.local_representations:
+  hash: bbd46c7cbf541de8967385221fb8f88ad36ba7b658067ef5fbd691074a929fd4
+  by: research preamble
+6FBY integral.modular_scale:
+  hash: c0434c3c79c7e03cd9dd10415a234071aa5d37d7a4349bd4f327c1afb841f0a0
+  by: research preamble
 6FBY integral.overlattice_count:
   hash: 5095a6b5aec0fefe9b0b4be1372f06b0dc19f51bc0144bca74dde810e6141b10
+  by: research preamble
+6FBY integral.primitive_orbits:
+  hash: 9b722f0f932a51c05e676d265e06609d9b7708946f57e78ee6cf02217c37d497
   by: research preamble
 6FBY integral.spinor_genera:
   hash: 267b777841d47dae97578271fab56958fd735745356ec81989bc00033e4fe242
