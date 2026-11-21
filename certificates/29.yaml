@@ -1112,6 +1112,9 @@
 05EI integral.anisotropic_primes:
   hash: c92124c7ca08add4df81f2d91335167bc526ce6c1a3542de5aa47a6f0608ce50
   by: research preamble
+05EI integral.discriminant_sequence:
+  hash: 2b4d4b9052d1ea3c3aa2fef7522ac166bc62517aa2af954d8c256a0c03a2c4e3
+  by: research preamble
 05EI integral.elementary_primes:
   hash: e767692d97f9c570d4db159b1c07e91de70a68b889525f911c0caac28d1805b1
   by: research preamble
@@ -3626,6 +3629,9 @@
 0E6H integral.anisotropic_primes:
   hash: 8151d1dc7f2ce9d88d7660c4430725d46e72a261ccda6ed0f39b93ea8a4cdc3a
   by: research preamble
+0E6H integral.discriminant_sequence:
+  hash: e46a1480f31a01e0a217ee7c486621759a69623f2a27fe2d085cd453def29050
+  by: research preamble
 0E6H integral.elementary_primes:
   hash: 09d632db1d5b2fb83533c64bf1747d9c87cc899e395ec667e135148b230e08c1
   by: research preamble
@@ -3997,6 +4003,9 @@
   by: research preamble
 0FOM integral.anisotropic_primes:
   hash: 37275c3b4ef6dcdf0da5befea20d9163b3aca358be756b3183a70a872d323ae7
+  by: research preamble
+0FOM integral.discriminant_sequence:
+  hash: 1f18a1571264ee5db969b86a581c05e0d6143ee20027e97fa1c6d878b296c3bc
   by: research preamble
 0FOM integral.elementary_primes:
   hash: f5ba86882b467759779c588e244c0f02513914b7ff054dac37d5791237cd5133
@@ -28976,6 +28985,12 @@
 4HLG form.integer_valued:
   hash: 12d5435c516606485e4c2d95185e8d4a9e96657c576503671a6894ab7d88f2b7
   by: research preamble
+4HLG integral.anisotropic_primes:
+  hash: ecb940bc0c7c3f16640f0475dac15401ef67454cee54bab112330640600bf92b
+  by: research preamble
+4HLG integral.discriminant_sequence:
+  hash: 8653704ac58976a3288a12f0d905fc4008cffdabacce9f06e3344aa35409a775
+  by: research preamble
 4HLG integral.elementary_primes:
   hash: 98d369edc38cc027bcca9b85d33677eeec2f221c948e54448c65b657a71d43ec
   by: research preamble
@@ -28987,6 +29002,12 @@
   by: research preamble
 4HLG integral.hyperbolic_index:
   hash: 1189deec9397b661b4560e616133060a7bbf2fc4e900cfe70969fe339442d5aa
+  by: research preamble
+4HLG integral.local_densities:
+  hash: e303ccb27b5fb24567e60720c9b271405e5cfec62319942ef519698299bbca25
+  by: research preamble
+4HLG integral.local_representations:
+  hash: 083741a55880bfdca16f1a4d82a7d4847d54575e0d0bbb5b73086f53b4db66a7
   by: research preamble
 4HLG integral.modular_scale:
   hash: 2fcc5d1708a86ad2dffa67dd5a97f2e146bbc97ce753a7c5a466e87809cd2f60

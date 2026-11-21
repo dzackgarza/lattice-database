@@ -18,6 +18,10 @@ certifications:
   integral.modular_scale: 8a5d32724aba5e079fbc1d4a618ce5d6d7de35c28d987b9ab8bdca3f36ebffa8
   definite.genus_theta_series: 6bcd31b8f2574382d0d0a452543a33080f22ab8c56da06a2d29e1abe24556282
   definite.theta_series_cuspidal_component: 794fdff591fd030d1a243d5d976513952e7f630988d3a6d7b0c1e0128ada8124
+  integral.discriminant_sequence: 796d32d7f153cc0e87fd7d1311e1d9c9b01bfc47d3c8f43a647af89a4a47339e
+  integral.anisotropic_primes: ec065615c9574fd1101408858d09b2d45fb4affee654dcd43d0fd3b613812209
+  integral.local_representations: eaf9e70f87d6f95b3416f7ebdcaf5b5aad00c8d179c56ca3db0dc2f38c671269
+  integral.local_densities: e08e99610254853caa14f5220d572c9b8e4f04855e927807b0311026507087a9
 rank: 4
 gram_tensor:
 - [1, 0, 0, 0]
@@ -40,6 +44,51 @@ integral:
   level: 12
   modular_scale: false
   discriminant_group: [2, 2, 6]
+  discriminant_sequence:
+    discriminant_factors: [2, 2, 6]
+    discriminant_basis_lifts:
+    - ['0', 1/2, '0', '0']
+    - ['0', '0', 1/2, '0']
+    - ['0', '0', -1/6, 1/6]
+    discriminant_quadratic_gram:
+    - [1/2, '0', '0']
+    - ['0', '0', 1/2]
+    - ['0', 1/2, 1/3]
+    discriminant_group_order: 12
+    discriminant_generators:
+    - - [1, 0, 0]
+      - [0, 1, 3]
+      - [0, 1, 4]
+    - - [1, 0, 0]
+      - [0, 1, 3]
+      - [0, 0, 1]
+    - - [1, 0, 0]
+      - [0, 1, 3]
+      - [0, 0, 5]
+    image_generators:
+    - - [1, 0, 0]
+      - [0, 1, 0]
+      - [0, 0, 1]
+    - - [1, 0, 0]
+      - [0, 1, 0]
+      - [0, 0, 1]
+    - - [1, 0, 0]
+      - [0, 0, 3]
+      - [0, 1, 5]
+    - - [1, 0, 0]
+      - [0, 1, 0]
+      - [0, 1, 5]
+    image_order: 12
+    kernel_order: 4
+    coset_representatives:
+    - - [1, 0, 0]
+      - [0, 1, 0]
+      - [0, 0, 1]
+    mm_trivial: true
+    image_normal: true
+    quotient_generator_cosets: [0, 0, 0]
+    quotient_multiplication:
+    - [0]
   overlattice_count: 4
   bad_reduction_primes: [2, 3]
   quadratic_character: 24
@@ -81,6 +130,13 @@ integral:
       constant: 0
       z: [1, 1, 2, 6]
       w: [0, 0, 0, 0]
+  anisotropic_primes: []
+  local_representations: []
+  local_densities:
+  - prime: 2
+    densities: [1/2, 5/4, 1/2, 7/8, 3/2, 5/4, 3/2, 17/16, 1/2, 3/4, 1/2, 7/8]
+  - prime: 3
+    densities: [4/3, 2/3, 10/9, 4/3, 2/3, 8/9, 4/3, 2/3, 28/27, 4/3, 2/3, 10/9]
 definite:
   minimum: 1
   kissing_number: 2

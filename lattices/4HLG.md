@@ -18,6 +18,10 @@ certifications:
   integral.modular_scale: 2fcc5d1708a86ad2dffa67dd5a97f2e146bbc97ce753a7c5a466e87809cd2f60
   definite.genus_theta_series: aebb852b65a9358b09e31545b986005d571cada5a6603107d4b4a6c267542b49
   definite.theta_series_cuspidal_component: ab4cc57a7a26c4cb3cc305dbd743a67ea926bb466af26f8be959d7f9a6b2379d
+  integral.discriminant_sequence: 8653704ac58976a3288a12f0d905fc4008cffdabacce9f06e3344aa35409a775
+  integral.anisotropic_primes: ecb940bc0c7c3f16640f0475dac15401ef67454cee54bab112330640600bf92b
+  integral.local_representations: 083741a55880bfdca16f1a4d82a7d4847d54575e0d0bbb5b73086f53b4db66a7
+  integral.local_densities: e303ccb27b5fb24567e60720c9b271405e5cfec62319942ef519698299bbca25
 rank: 4
 gram_tensor:
 - [1, 0, 0, 0]
@@ -40,6 +44,29 @@ integral:
   level: 12
   modular_scale: false
   discriminant_group: [6]
+  discriminant_sequence:
+    discriminant_factors: [6]
+    discriminant_basis_lifts:
+    - ['0', -1/2, 1/3, -1/3]
+    discriminant_quadratic_gram:
+    - [1/6]
+    discriminant_group_order: 2
+    discriminant_generators:
+    - - [5]
+    image_generators:
+    - - [1]
+    - - [5]
+    - - [5]
+    - - [1]
+    image_order: 2
+    kernel_order: 24
+    coset_representatives:
+    - - [1]
+    mm_trivial: true
+    image_normal: true
+    quotient_generator_cosets: [0]
+    quotient_multiplication:
+    - [0]
   overlattice_count: 1
   bad_reduction_primes: [2, 3]
   quadratic_character: 24
@@ -81,6 +108,13 @@ integral:
       constant: 0
       z: [1, 2, 2, 1]
       w: [0, 0, 0, 0]
+  anisotropic_primes: []
+  local_representations: []
+  local_densities:
+  - prime: 2
+    densities: [5/4, 7/8, 5/4, 17/16, 3/4, 7/8, 3/4, 31/32, 5/4, 9/8, 5/4, 17/16]
+  - prime: 3
+    densities: [2/3, 4/3, 8/9, 2/3, 4/3, 10/9, 2/3, 4/3, 26/27, 2/3, 4/3, 8/9]
 definite:
   minimum: 1
   kissing_number: 2
