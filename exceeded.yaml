@@ -699,10 +699,6 @@
   hash: c2d56853c688ca548dd50df42dc26996cbe6f8a73e77d63b9dc95c2c53e7aeb5
   seconds: 0
   lost: true
-1MS1 integral.discriminant_form:
-  hash: ea4cc167bde64ab870470076958cab82818bede26195d7d2c4960d00165e9550
-  seconds: 0
-  lost: true
 1UJ2 derive:
   hash: 67d45b33429de41171f34effa19d2ece2d8e00962b8167d9e182f44fc0c1a8b9
   seconds: 0
@@ -1145,6 +1141,10 @@
 3GRU integral.discriminant_sequence:
   hash: 0873c77aea247747beee5f6503d4678ca0c393ad59c2a14ff0e34fd7c44871c6
   seconds: 18241
+3GSS integral.discriminant_sequence:
+  hash: 1ab4cb27ac8324d3b55f87b49fe2d9638523863e9f43a210eb9460be1973101d
+  seconds: 766
+  lost: true
 3GTS integral.discriminant_sequence:
   hash: 26a906b9d9d22e2f60644bcb66ee493b586d333a3d2e8d30e57e85387eee4009
   seconds: 12481
