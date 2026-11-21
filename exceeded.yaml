@@ -641,10 +641,6 @@
   killed_by: memory
   peak_bytes: 13133455360
   limit_bytes: 1675943936
-1C0U integral.discriminant_form:
-  hash: bdfbe1509cba753e1d441a91378f56262ea1065da32fbc6eaf9f227898065329
-  seconds: 0
-  lost: true
 1CZ4 integral.discriminant_form:
   hash: d9ace81ff310c9f2d93545001a6c2ebae53abd4735fbdf0278f88049ec4bcdb9
   seconds: 4
@@ -662,6 +658,17 @@
   lost: true
 1F6O integral.primitive_orbits:
   hash: aa9a82c8d21972721e8be9c08518da9a41ebe41fa9eafc96e77816086779ea31
+  seconds: 0
+  lost: true
+1G21 integral.discriminant_form:
+  hash: 2b1eddda132f6b001be00b3e71b9447058f89bc860b307ff8f151bc4ec111bdf
+  seconds: 1
+  lost: true
+  killed_by: memory
+  peak_bytes: 12792479744
+  limit_bytes: 1675943116
+1GKJ integral.discriminant_form:
+  hash: 02a9715291710be3a782a6978258c87b90e5476b36424da8e698ec2a3163c77e
   seconds: 0
   lost: true
 1GRN integral.overlattice_count:
