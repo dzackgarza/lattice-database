@@ -33328,6 +33328,15 @@
 6BGE form.integer_valued:
   hash: ea5167abab8e373b1da5bd0fc414021afa0fb4c3a8468b8ccf6abdcb568eb7a9
   by: research preamble
+6BGE integral.anisotropic_primes:
+  hash: 0ee7163c2199e46d8cbac96c6e275b951f9ad85501e8bcc6e9c3bb9476c18389
+  by: research preamble
+6BGE integral.discriminant_form:
+  hash: 87b1b23d06ca02ca05485983138b74aa26f6ac36ea6520db75dc59ee2f891bfe
+  by: research preamble
+6BGE integral.discriminant_orbits:
+  hash: d9d251d6f1689a6f48e6cbb0fbbe906b2298eb19bb339539e0f3e431a9b2ea42
+  by: research preamble
 6BGE integral.elementary_primes:
   hash: bce11dd65f4e59eb98a384b81c5b4c7cb2d716d9ca7e1c610d2b59479ed4f596
   by: research preamble
@@ -33340,8 +33349,20 @@
 6BGE integral.hyperbolic_index:
   hash: b8d7d5cb6d6d7941ee3d6ee77816192d80049a7cb99c4a86ca8b8439221c8221
   by: research preamble
+6BGE integral.local_densities:
+  hash: d083470a544da009b11b653319d519569fd512dafa270377bda62623743def34
+  by: research preamble
+6BGE integral.local_representations:
+  hash: 16af71bb71d22eb46fb4301145c2bc315d7c0a682e739cd11c243ec9cc5531ab
+  by: research preamble
+6BGE integral.modular_scale:
+  hash: 7b3e70a776a520add2d4c6cb085a393c8a2d4be5e850ce959b9f4c3efd4bff94
+  by: research preamble
 6BGE integral.overlattice_count:
   hash: b80297e9d36ff910cadef7e1d318cd8a7be45cac739cb9c83c94ae82cbeae2ec
+  by: research preamble
+6BGE integral.primitive_orbits:
+  hash: 6f5f735bf55fc9d1b9e7317a6c6fa96ceab47519cd0033887b60290e5263a42c
   by: research preamble
 6BGE integral.spinor_genera:
   hash: fa38e50ab01b008c3061b98af92adfc3abe6f87c5eaafc01782c7326106f8662
