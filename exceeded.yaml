@@ -461,6 +461,9 @@
 077Q definite.regular:
   hash: 914902341abad2a39c8826f5252d6b055b15688bc1c8d16016333081f7fab22c
   seconds: 6640
+0AS5 integral.discriminant_form:
+  hash: 3cd83924adfb7f22ef4ca3f19b97c5ef34841d378946bec8e7811d8669b53cc3
+  seconds: 1
 0EXT integral.primitive_orbits:
   hash: 6c6a09434f37e4c930476f5f9a27e1a7327c278278c894534876d89a6705c56e
   seconds: 0
@@ -549,9 +552,10 @@
   hash: 6b959587ca571125d0f6b15b3286ccfb4df34becee301c0a9863c99fd1716e4e
   seconds: 0
   lost: true
-0YHQ integral.discriminant_form:
-  hash: fc22d75309e895f7dfeaa7d46ee22c0c92570fcc75f9900e582869526b2488e7
-  seconds: 5
+0X3P integral.discriminant_form:
+  hash: 8c3a63672fa760b6870be34b71eaf655f09b378131e89fc230bf6850d07435bd
+  seconds: 0
+  lost: true
 0YVT integral.elementary_primes:
   hash: e9a35b7da91dcd00dd2193b061e2e0619539524bab6b5805ec303e0514afa883
   seconds: 0
@@ -639,6 +643,10 @@
 1CZ4 integral.discriminant_form:
   hash: d9ace81ff310c9f2d93545001a6c2ebae53abd4735fbdf0278f88049ec4bcdb9
   seconds: 4
+1DN1 integral.discriminant_form:
+  hash: 284b08765772a90a5de76dac946be36cb3d40420a07ae1c089e22f21d18cbf01
+  seconds: 0
+  lost: true
 1DRM integral.genus_class_count:
   hash: b9116a9b09223f453b6990f0efa48f8670ad40d65cb4f5c32b3f8b2cb30e031e
   seconds: 10
@@ -1214,9 +1222,6 @@
   hash: fb24acfcd25a662860c17c6e19093be52352e2671f3118836df99551ca778e0b
   seconds: 1351
   lost: true
-3GO8 integral.discriminant_sequence:
-  hash: c2756ef175cba01bf2a3c92053b3ac0df1f5678f15bed0887b2720462944cd84
-  seconds: 10420
 3GO8 integral.overlattice_count:
   hash: 73f92e88dc3c41f09fe3d704e2bb6eec69c13383e23ff0521b2c623891c8c865
   seconds: 5
@@ -1267,6 +1272,9 @@
 3GRU integral.discriminant_sequence:
   hash: 0873c77aea247747beee5f6503d4678ca0c393ad59c2a14ff0e34fd7c44871c6
   seconds: 18241
+3GSS integral.discriminant_sequence:
+  hash: 1ab4cb27ac8324d3b55f87b49fe2d9638523863e9f43a210eb9460be1973101d
+  seconds: 7442
 3GTS integral.discriminant_sequence:
   hash: 26a906b9d9d22e2f60644bcb66ee493b586d333a3d2e8d30e57e85387eee4009
   seconds: 19661
