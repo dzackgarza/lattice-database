@@ -497,6 +497,10 @@
   hash: e75904bde8ae71175b947e54e046fc2e518c21d801f3a97a4a74324f0bf14e5a
   seconds: 0
   lost: true
+0Q1R integral.discriminant_form:
+  hash: 22d5e959da470166341421653728936c8914f03c1b09d2c2e9db2e55a665056a
+  seconds: 0
+  lost: true
 0RVY integral.elementary_primes:
   hash: 811175d5f9f1d0b028f2eb38f41a5672d3bdc0e8d0fb282d3f26fc4769b8f652
   seconds: 0
@@ -1229,8 +1233,7 @@
   lost: true
 48YN integral.primitive_orbits[SOtilde]:
   hash: 9e1c166422b378d94310bb7b61abeb33d8e2cd6ec2a08cf2b0a62e00dcdedc04
-  seconds: 5257
-  lost: true
+  seconds: 15073
 4AI4 integral.hyperbolic_index:
   hash: cfd02157630c5b87965c89728ada3348a270c6686e306a7ba5471217e9f942d0
   seconds: 152
