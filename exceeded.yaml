@@ -1137,6 +1137,10 @@
 3GRU integral.discriminant_sequence:
   hash: 0873c77aea247747beee5f6503d4678ca0c393ad59c2a14ff0e34fd7c44871c6
   seconds: 18241
+3GTS integral.discriminant_sequence:
+  hash: 26a906b9d9d22e2f60644bcb66ee493b586d333a3d2e8d30e57e85387eee4009
+  seconds: 5272
+  lost: true
 3GVS integral.overlattice_count:
   hash: 08ed3d3d97ba6ede8efea82cce0080d3ea5206f140bdd1239f06276842783102
   seconds: 10
@@ -1249,10 +1253,6 @@
 58S6 integral.local_densities:
   hash: e5378e409c24f7701e373876b32586a87eb5a9cf04b7ada7350ac466781f0804
   seconds: 0
-  lost: true
-5RR1 integral.primitive_orbits[SOtilde]:
-  hash: 2b2f37ca731c7f2c974be88ea8d147c4f3c85c99adec5cb66a320253d297072a
-  seconds: 3324
   lost: true
 69U0 integral.discriminant_sequence:
   hash: 07501d22fda8a2cbf8673d93dd7c5ab6ad1004edb675938c8861b988d78c3170
