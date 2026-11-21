@@ -9943,6 +9943,9 @@
 0VZW integral.anisotropic_primes:
   hash: 93c9b176f1b295364908986edd7ea24c3f6b159174f1ed48b23b5dc73ec15fd0
   by: research preamble
+0VZW integral.discriminant_sequence:
+  hash: 448e07c8fe16f0be65ec0f9ce866b2b21d31ff1d256e41489ea569ae6e7357c7
+  by: research preamble
 0VZW integral.elementary_primes:
   hash: e18be01590401980544bd706f880aa397fd43742efdca155fc12ae4615048b76
   by: research preamble
@@ -13839,6 +13842,9 @@
   by: research preamble
 1B9B integral.anisotropic_primes:
   hash: 80fb5a65e6239f1e9f345a402b0d3c71bf71a533bd6d67e651cb7b66327328f8
+  by: research preamble
+1B9B integral.discriminant_sequence:
+  hash: 96ee79beab1a7b0488d8563a29efa17559b109db96e6b26d721e480d75a0312c
   by: research preamble
 1B9B integral.elementary_primes:
   hash: c9443e9537e6d445b22c09ae5e5fa6d933c50a9e73997a23fd3e60d32e242070
@@ -29306,7 +29312,10 @@
   hash: d5d140015866e48e60e781b5ddb5d5899d18cf6a644f392d50e3e1f4784c824b
   by: research preamble
 6H7W automorphisms.automorphism_group_generator_morphisms:
-  hash: e7bd43b8567d8e0af165ab24aeaed8fdc762b888d9d187e4b14e8a42a680279e
+  hash: efec759011e46c9453981265f2bdedcb47d5e5c516451480445a0dc3521e4379
+  by: research preamble
+6H7W automorphisms.automorphism_group_order:
+  hash: e31c8b5893c8c0d2c5ede8e761f179dbc41df6b7d1b35d4d8d340f68f6b1cb20
   by: research preamble
 6H7W derive:
   hash: 85e73dbec0c2e1c8dacca1288d67667713963adcea2d35dff3b9863525d7762c
@@ -29314,8 +29323,14 @@
 6H7W form.integer_valued:
   hash: 7595346644c9014b8b50af615f36ca5783061bd67902516b59cf0885459ddc66
   by: research preamble
+6H7W integral.anisotropic_primes:
+  hash: 7550c5a9f834bf5c2c9d117fce9af0f3130d6ae61dcb0206033dd222d67ac4cb
+  by: research preamble
 6H7W integral.discriminant_form:
   hash: faa4f136920e9b9649613b54e6d023ad5df168a7a7a725e31adf0541fde4f176
+  by: research preamble
+6H7W integral.discriminant_orbits:
+  hash: 61bbd6a134ac220eb42db8021d316af700da42a1bba2925b2461a7323ed33fae
   by: research preamble
 6H7W integral.elementary_primes:
   hash: d1db31c0adeb832f4f4b73c07a5e9c90057e5f4c4df68645ebd63e776b0cb044
@@ -29328,6 +29343,15 @@
   by: research preamble
 6H7W integral.hyperbolic_index:
   hash: 42b0c22fbda958893b6ceb7562b3eb240c996aa0b4dc53683c0cce3350591fab
+  by: research preamble
+6H7W integral.local_densities:
+  hash: 9a3bd4a7073a23f12cce044be5eb7d11d380a0f93e1b9adc77bb1b490f46dc83
+  by: research preamble
+6H7W integral.local_representations:
+  hash: 0592af80cd0b4475c2b9e32f0bc1a33e4d0552c89a1135c37a3e3baf6bbf4cfb
+  by: research preamble
+6H7W integral.modular_scale:
+  hash: cd98277899523cd2a0029c608ad832e13bb98e3c8233c44773dfdc67026dd05c
   by: research preamble
 6H7W integral.overlattice_count:
   hash: 4fb940898fd34b65808d2d1930e96dc2615a9262f058329b1a0fc53a8f2fcf86

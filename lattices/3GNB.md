@@ -23,6 +23,7 @@ certifications:
   integral.anisotropic_primes: 6df15c5f244e9d16eaac3306e5f96721a70ea6d8ad0d957d4cf4bb4150a084f0
   integral.local_representations: 23472a2994d9a42040d5a9d00c47626cfe1e3218924a2f7f39d93ba1d332291a
   integral.local_densities: 003bef14d6d2a547d273498ddf3df13b29d29a28cb8ba83c55ab4507a74398b5
+  integral.discriminant_sequence: afd00f26dd6a5806f079e4de85a0bdda103021cdfc5524cacb77007aef53222d
 rank: 4
 gram_tensor:
 - [4, 0, 2, -2]
@@ -45,6 +46,71 @@ integral:
   level: 16
   modular_scale: false
   discriminant_group: [4, 4, 8]
+  discriminant_sequence:
+    discriminant_factors: [4, 4, 8]
+    discriminant_basis_lifts:
+    - [-1/4, 1/4, '0', '0']
+    - [-1/4, '0', 1/2, '0']
+    - [1/8, -1/8, -1/8, 1/8]
+    discriminant_quadratic_gram:
+    - [1/2, 1/4, 3/4]
+    - [1/4, '0', 1/2]
+    - [3/4, 1/2, 3/8]
+    discriminant_group_order: 768
+    discriminant_generators:
+    - - [3, 3, 6]
+      - [1, 2, 2]
+      - [3, 2, 7]
+    - - [3, 3, 6]
+      - [3, 0, 6]
+      - [1, 0, 5]
+    - - [3, 3, 6]
+      - [3, 0, 6]
+      - [1, 0, 7]
+    - - [3, 3, 6]
+      - [2, 1, 0]
+      - [0, 1, 7]
+    image_generators:
+    - - [0, 3, 6]
+      - [3, 0, 6]
+      - [0, 0, 1]
+    - - [2, 3, 2]
+      - [3, 3, 4]
+      - [2, 1, 5]
+    - - [1, 0, 0]
+      - [2, 1, 4]
+      - [0, 0, 1]
+    image_order: 96
+    kernel_order: 1
+    coset_representatives:
+    - - [1, 0, 0]
+      - [0, 1, 0]
+      - [0, 0, 1]
+    - - [0, 1, 2]
+      - [1, 0, 2]
+      - [0, 0, 3]
+    - - [0, 1, 2]
+      - [1, 0, 2]
+      - [2, 0, 1]
+    - - [0, 1, 2]
+      - [1, 0, 2]
+      - [2, 0, 5]
+    - - [0, 1, 6]
+      - [1, 0, 2]
+      - [0, 0, 1]
+    - - [0, 1, 6]
+      - [1, 0, 2]
+      - [0, 0, 5]
+    - - [0, 1, 6]
+      - [1, 0, 2]
+      - [2, 0, 3]
+    - - [0, 1, 6]
+      - [1, 0, 2]
+      - [2, 0, 7]
+    mm_trivial: false
+    image_normal: false
+    quotient_generator_cosets: null
+    quotient_multiplication: null
   overlattice_count: 34
   bad_reduction_primes: [2]
   quadratic_character: 8
