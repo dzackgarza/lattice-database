@@ -1,3 +1,9 @@
+02A6 automorphisms.automorphism_group_generator_morphisms:
+  hash: 8741f16e2988be715be7835d626446ef8981ff93050abb870ccf90bff6c9ee32
+  by: research preamble
+02A6 automorphisms.automorphism_group_order:
+  hash: 1e4d5ef6695c8c86ed3370606624aeafeccd9042a7b2bffa5985a580354f2a6f
+  by: research preamble
 02A6 derive:
   hash: 71547c8ad3cd41405daf96aee6572d47ff1af9aaf3bd3ecfb76cfc7085074ef7
   by: research preamble
@@ -6,6 +12,12 @@
   by: research preamble
 02A6 integral.anisotropic_primes:
   hash: 538a139152be097471f14d672f11239a2b4f7abded6efc94ce0796cfa960de28
+  by: research preamble
+02A6 integral.discriminant_form:
+  hash: 9e01c052fe154bd1e58802f0a4fb3ff574dd0377880e17b3e284b346d147dc0f
+  by: research preamble
+02A6 integral.discriminant_orbits:
+  hash: 5404426fe336d4faf5a24b83a38f912c66ab85ab8b7dbad716d0fcdb9aabedbb
   by: research preamble
 02A6 integral.elementary_primes:
   hash: deb4ab59a6527974763b518a23f085b0b01d71837075f57891c1d53346e773f0
@@ -31,11 +43,20 @@
 02A6 integral.overlattice_count:
   hash: 0aa73166940d6885bf4d7f18758130ac08ea15320865ef5912927c57214a83f8
   by: research preamble
+02A6 integral.primitive_orbits:
+  hash: e21850098d8447d7d33e1c6d6c101bcf6bdea6198378083e820486ec42a364f1
+  by: research preamble
 02A6 integral.spinor_genera:
   hash: ffcac1e3c9479e8f6480e3ca30e48ca6c5c61ba9db00001486f0df635f35f1de
   by: research preamble
 02A6 integral.spinor_genus_count:
   hash: 16e14c05b2c538cbd017456e84f2a1cd764219d84866c545439da36c724e5f34
+  by: research preamble
+02A6 root_span.norms:
+  hash: 38343be5dce262e1c952ed9b222935b0ccdff66baf9b054d92223c09755a1f3c
+  by: research preamble
+02A6 root_span.roots:
+  hash: 1fefc6263e7f15d058261b4aa26277c703d9fc5ad797f6fe57e144c2bf5626f4
   by: research preamble
 02HA definite.automorphism_group_generator_morphisms:
   hash: 3eacf3d9fd9de2b8ecc77b4778b79e01a4a52e39ecdd702db15311054fe367ba
@@ -840,6 +861,9 @@
   by: research preamble
 05LE integral.anisotropic_primes:
   hash: 81ed3e649eb73f5102bb95696571a22317a4c83f084e2f760e9324151abedb97
+  by: research preamble
+05LE integral.discriminant_sequence:
+  hash: dbd3322cc64653c07d4c937be74eb7e4f1154e2d8b4c9767a3c252ad3fee79bc
   by: research preamble
 05LE integral.elementary_primes:
   hash: 4abbef6c22110381cab4ccd1bc147acca2dfc204a6c34806508009f712857440
@@ -1857,6 +1881,9 @@
   by: research preamble
 09K9 integral.anisotropic_primes:
   hash: ce9fa6b8f2efca69895c2987c99cf824c8df358dd270229c1b0c35d7374eb1a9
+  by: research preamble
+09K9 integral.discriminant_sequence:
+  hash: 65ee78957b53cd1c35c8b438ffd3529887d8db8aee255433a4ed33c011382e8c
   by: research preamble
 09K9 integral.elementary_primes:
   hash: 4cfa85ebcee22f801dd30b829197a88cb40d1d3c4c3d984960a39630d67385ee

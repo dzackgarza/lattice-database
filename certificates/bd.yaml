@@ -58,6 +58,12 @@
 0275 integral.spinor_genus_count:
   hash: fccb400fe225d6e600cfc74dc76a400597c1d4adecf1733cea7f4c6cb6562b12
   by: research preamble
+02A9 automorphisms.automorphism_group_generator_morphisms:
+  hash: 3c6167221199d92f41652704b9fe279e1b1d03b5dbf2244b85f29ed2d4b498b6
+  by: research preamble
+02A9 automorphisms.automorphism_group_order:
+  hash: 01f345d5c7dc9efc55b3045abd570c0dc2774766da7d57b92d2390b1638f1260
+  by: research preamble
 02A9 derive:
   hash: fa1f117e1cf4741928870bec165fc44ab94a58880ccbbe55c146af38c96b1c9c
   by: research preamble
@@ -94,6 +100,9 @@
 02A9 integral.overlattice_count:
   hash: 7cb6c089662baa21ca578740fa9e10c146e777e38c9505f80774a8f46ed1bc6e
   by: research preamble
+02A9 integral.primitive_orbits:
+  hash: 6fcd973eecd8fdd917d6b192178fa6471c10dcd5eef3af512d304e88c9e27425
+  by: research preamble
 02A9 integral.spinor_genera:
   hash: 25c9f5ce856d27fa086582c27769b4524b7f1b36d73ea6a7211fa86a836ccdda
   by: research preamble
@@ -129,6 +138,9 @@
   by: research preamble
 02DK integral.anisotropic_primes:
   hash: 72a884c472a18654530c01ab95d5d894adcfe27a8ea0864ccddaa596157e15cd
+  by: research preamble
+02DK integral.discriminant_form:
+  hash: a3d791841b9aa6498e4e12a502d9cd046b6f40f63a4446891ce11325462dfd8c
   by: research preamble
 02DK integral.discriminant_sequence:
   hash: 4256bbe86a8a85f09cf3f8f2a245f8cb7471a2004629eaf823cc76cd02005d92
@@ -2710,6 +2722,9 @@
 0ANX integral.anisotropic_primes:
   hash: fb3601a4089001e1f22962d502a19018be8cf9dd9e5ba08988b5492420584506
   by: research preamble
+0ANX integral.discriminant_sequence:
+  hash: 7e4db61bf7e2c01bb1e79a953ff747111bf40f55e93ea3484044f00f81a208ec
+  by: research preamble
 0ANX integral.elementary_primes:
   hash: f402ac6ae3306eea0bd7e125bdf45eecd50d1e89488264f0b844be4cd7c4a721
   by: research preamble
@@ -2886,6 +2901,9 @@
   by: research preamble
 0CFR integral.anisotropic_primes:
   hash: fcc44bbe7e15c69f5d37457ae235ccc62388e05bb2d9b09502444acfc404bfd7
+  by: research preamble
+0CFR integral.discriminant_sequence:
+  hash: 3b84a724e192795cfbc0e54568d74052ba00a9eba4ad37cfd7a561cd5f67dc02
   by: research preamble
 0CFR integral.elementary_primes:
   hash: a54199b1dd7cd606b9c263c9a0c5d99488858506351f0d9822234e7100f3bad9

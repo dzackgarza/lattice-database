@@ -11,6 +11,9 @@ certifications:
   integral.overlattice_count: f535fb3358380ed338a08fc51172d643c57730d065a8fffc40152e6409c0d231
   integral.spinor_genus_count: 13d9c4444022a5c30b11bed7ec5cfdb486a07d62306ad651158aff5899df0363
   integral.spinor_genera: 10858d9ef5b7b30d4585da1e395dac3ef517b66dc0f39a0a7cc928718862d372
+  integral.hyperbolic_index: 94bd5cf8ac37997a4e46c08091723a4fe7ee0cbf5b0ccd8a186960f72fa2331e
+  automorphisms.automorphism_group_order: e3b3e932f65acea2d75abab6ed709020aceb452eed2467897996540f5d1147bf
+  automorphisms.automorphism_group_generator_morphisms: 3b538b2871f998f138e6173467c696c207fa96c042d237754b5e6c41a55bfc71
 rank: 4
 gram_tensor:
 - [0, -2, 0, 0]
@@ -39,9 +42,61 @@ integral:
   genus_class_count: 1
   spinor_genus_count: 1
   spinor_genera: [1]
+  hyperbolic_index: 0
+automorphisms:
+  automorphism_group_order: aleph0
+  automorphism_group_generator_morphisms: [O(L) generator 1, O(L) generator 2, O(L) generator 3, O(L) generator 4, O(L) generator 5, O(L) generator 6]
 indefinite:
   isotropic: true
-morphisms: []
+morphisms:
+- target: 6ESH
+  name: O(L) generator 1
+  matrix:
+  - [0, 1, 0, 0]
+  - [1, 0, 0, 0]
+  - [0, 0, 1, 0]
+  - [0, 0, 0, 1]
+  scale: 1
+- target: 6ESH
+  name: O(L) generator 2
+  matrix:
+  - [1, 0, 0, 0]
+  - [0, 1, 0, 0]
+  - [0, 0, 2, -3]
+  - [0, 0, 1, -2]
+  scale: 1
+- target: 6ESH
+  name: O(L) generator 3
+  matrix:
+  - [2, 1, 1, 0]
+  - [1, 2, 1, 0]
+  - [-4, -4, -3, 0]
+  - [-2, -2, -2, 1]
+  scale: 1
+- target: 6ESH
+  name: O(L) generator 4
+  matrix:
+  - [1, 0, 0, 0]
+  - [2, 1, 1, 0]
+  - [-4, 0, -1, 0]
+  - [-2, 0, -1, 1]
+  scale: 1
+- target: 6ESH
+  name: O(L) generator 5
+  matrix:
+  - [0, 1, 0, 0]
+  - [1, 2, 1, 0]
+  - [0, 2, 2, -3]
+  - [0, 2, 1, -1]
+  scale: 1
+- target: 6ESH
+  name: O(L) generator 6
+  matrix:
+  - [-1, 0, 0, 0]
+  - [0, -1, 0, 0]
+  - [0, 0, -1, 0]
+  - [0, 0, 0, -1]
+  scale: 1
 related:
 - tag: 3ICZ
   relation: This presentation is obtained by orthogonal sum of 3ICZ, 3ID4.
