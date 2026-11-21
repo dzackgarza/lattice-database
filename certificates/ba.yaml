@@ -43,6 +43,9 @@
 028L automorphisms.automorphism_group_generator_morphisms:
   hash: d811a3d0c25d05c0994f7771ce8cbbbbc91ced5898d3612d47e93259c250042d
   by: research preamble
+028L automorphisms.automorphism_group_order:
+  hash: 527bd8db0c0df6f211ab44bc5f46a724acdf2a0287e5b05082a0b808f5c6c4ed
+  by: research preamble
 028L derive:
   hash: 06a916f31b09b61134fb6e20b65dfb1ff047f7ce45aea00602d6639532b8246d
   by: research preamble
@@ -57,6 +60,9 @@
   by: research preamble
 028L integral.discriminant_form:
   hash: 45ba0c9f2764dfa157e2adefa883ff4ae4912172889c1d71f89d1cc051347764
+  by: research preamble
+028L integral.discriminant_orbits:
+  hash: 7a1e0926f63c8459e9ba97b6a00a09b8be4d00964d7cb9c439fe5ef7c3933616
   by: research preamble
 028L integral.elementary_primes:
   hash: 9e391e30c331dd1c2a80524d37bb05b54e7908561f8cc94fd1dc38dd5f25751c
@@ -1188,6 +1194,9 @@
   by: research preamble
 054T integral.anisotropic_primes:
   hash: ec6a27b3cd5f33888aeec2c3d6dc2df07a4dbb66d4c47af488ab1f4ce08e440a
+  by: research preamble
+054T integral.discriminant_sequence:
+  hash: a430d60caa98ce0174f2450cca4b932958b0217ca2fbec2701e2d7b0aa07cad6
   by: research preamble
 054T integral.elementary_primes:
   hash: 93a1e4523d11e8e2e23e7435197ef439da2564a7401048aca4742bf6db390bdd
@@ -3766,6 +3775,9 @@
 0D6B integral.anisotropic_primes:
   hash: f170fb16db7acaf91ea590bc3722fd77ef59fd31b494ecf0f997cec340b2f27b
   by: research preamble
+0D6B integral.discriminant_sequence:
+  hash: b6781dcb70e957d8579beba0fd5ce574ed105c1a6b8df74d23d8bd25abbabb54
+  by: research preamble
 0D6B integral.elementary_primes:
   hash: 3ab8df16527cca85a7a18cc44cc4005693c3b755db7c94e7ecefbb41c4f48155
   by: research preamble
@@ -3885,6 +3897,9 @@
   by: research preamble
 0D8A integral.anisotropic_primes:
   hash: 30ae01dde262b0e704c520c657d36e247bd488de8b7b03b74698d99f75d397f3
+  by: research preamble
+0D8A integral.discriminant_sequence:
+  hash: e523549a101d9deda0b4c76b9737f50384020ab12375ac0cc05647e653ac08ad
   by: research preamble
 0D8A integral.elementary_primes:
   hash: 07ba22e04473d68f16d3e0bc5db41e4013ef3d032c8c7ce05c30c7fb5f56c52a

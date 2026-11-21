@@ -1141,6 +1141,9 @@
 05TV integral.anisotropic_primes:
   hash: 403deec4697346fd13f3d9277b33aedd058e6aa2dd9546e3824d5787ef402713
   by: research preamble
+05TV integral.discriminant_sequence:
+  hash: b0f6c008226f729cfc74251f9575bcdfd407f7c2e7245c65540e5df8615f1cb2
+  by: research preamble
 05TV integral.elementary_primes:
   hash: a735ccd2b6d22cea2358ebb5a7f9093ecbd9f9b770acf7dc7e936914c76276f7
   by: research preamble
@@ -27403,6 +27406,9 @@
 4KIT form.integer_valued:
   hash: 2cb8f10bffb4954c11817e5922017599160ff2bbaf56d569bcf861730d7ce626
   by: research preamble
+4KIT integral.anisotropic_primes:
+  hash: 7f06f6d4b530dc0944b3774d915e59760cc4334accb2a583e755646ce7e06869
+  by: research preamble
 4KIT integral.elementary_primes:
   hash: 85071d0b0c04af8bf306bcb274ed9ae6765483cd97f6ebec485af018139ea729
   by: research preamble
@@ -27414,6 +27420,15 @@
   by: research preamble
 4KIT integral.hyperbolic_index:
   hash: 3d5cb85b9d0eed5dd7ed8f97926c20aa1b2e84e41cb1a2f010639c97aeb4121d
+  by: research preamble
+4KIT integral.local_densities:
+  hash: 8a4f5aee0c452f08c2e50f968e3e331615a42a311450ae28b62e2088d6d102f3
+  by: research preamble
+4KIT integral.local_representations:
+  hash: 655f077ad4a82d2eeeed603f3014ba359e742710bdacb6fce66e40a0715e8d77
+  by: research preamble
+4KIT integral.modular_scale:
+  hash: 06edc99f226e5ea9e8755723e7430df955587df2effd2fbe21ee142d4de53547
   by: research preamble
 4KIT integral.overlattice_count:
   hash: 454786ed3f53787c2e86c93de52807933d2c2ad9076badd03b186b417cd9f565

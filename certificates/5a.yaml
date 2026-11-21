@@ -6070,6 +6070,9 @@
 0JJI integral.anisotropic_primes:
   hash: 57c408fcf89d0f7a74eeec6e57c11dd5f00b391e7d148408fb833cd7b7d20468
   by: research preamble
+0JJI integral.discriminant_sequence:
+  hash: 90f7fb54e16417263b2b0ee2871a69ef84eaab383481e1261d4236e73d1a3ae0
+  by: research preamble
 0JJI integral.elementary_primes:
   hash: a893fbc6dec21001116e01397066df3f2fe46dfc4d3b8228e70bd024f4d3b2f4
   by: research preamble
@@ -6252,6 +6255,9 @@
   by: research preamble
 0K4Z integral.anisotropic_primes:
   hash: 2c13f4ba134ccec00e84fda5a9201f0abd7e261ecf7dae96c5d7ae91c2e67d92
+  by: research preamble
+0K4Z integral.discriminant_sequence:
+  hash: 6f70f9795d1064c623d9ccb7ba96849019b60bdde3a876d61a3811fcf49b3d93
   by: research preamble
 0K4Z integral.elementary_primes:
   hash: ab5325536749935910c0dd589a0a6f9427b9f199aa1e8c6388a2cb4ae1ccfe89
@@ -27379,11 +27385,17 @@
 4FTK automorphisms.automorphism_group_generator_morphisms:
   hash: c918e41c2936ef55d19bcb7aadfae517923f3c6fe929914bcc74acd2096f7fd7
   by: research preamble
+4FTK automorphisms.automorphism_group_order:
+  hash: da987546bd80262458963ede973c8aec71c4ed7e341567de7a498fd4d43c5d04
+  by: research preamble
 4FTK derive:
   hash: 23f40778c13dab35494a642a8069882a5c75b201160932da7c9abb51cb39dd20
   by: research preamble
 4FTK form.integer_valued:
   hash: 71e86a69faf0cc90e0149263feef404adc6aabe1e0a3795e220db79f803b6093
+  by: research preamble
+4FTK integral.anisotropic_primes:
+  hash: 3d62a975e126d94023c1484b36a9b59ec29e35af1a6c26a00bd158763663499c
   by: research preamble
 4FTK integral.elementary_primes:
   hash: 82cfcb81107d2824e094862be2a3473c09c5d75d9deec0b3d27808d17cb5bd16
@@ -27396,6 +27408,15 @@
   by: research preamble
 4FTK integral.hyperbolic_index:
   hash: c31bf19a45c8f2fe84a12a33739250a6089c2248901d7dd72bd01bc04a2534f8
+  by: research preamble
+4FTK integral.local_densities:
+  hash: f34924c7145e0d838867576ef01472ef237ded16b80e4041e81a03b7b034b3bc
+  by: research preamble
+4FTK integral.local_representations:
+  hash: c4e124afa2d3ebf56a4eca192ddcd13ef1ff9f79d4a3eca7c615d42d0a9c1301
+  by: research preamble
+4FTK integral.modular_scale:
+  hash: aa0a45bf8fbe999e24197155ab3f912a50bc5e6a802e538eede03b83c0abab36
   by: research preamble
 4FTK integral.overlattice_count:
   hash: 56d061b63da945bd4b4254fd902851934e9569b9d0a64cf59b60e2b40234a287
