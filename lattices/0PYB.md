@@ -23,6 +23,7 @@ certifications:
   integral.anisotropic_primes: 833b7d94c0a5427b5ed02f668e20599ea41d43c6c8c3a32be86a067120d3413c
   integral.local_representations: 3fbb2738620830a40cb16400ccb6fbdd1bd0ffb06d39f9e7d79d97565dffc925
   integral.local_densities: afa5a1f03b6a5cad04fa50f3cc8ae7389ac184f2a69a8ba243ab3229e341c67d
+  integral.discriminant_sequence: 5ddee47f33bbf1ab5194916ce4cac32cb223e2d9c4db3355c15a547bd52a6713
 rank: 4
 gram_tensor:
 - [2, 1, 0, 0]
@@ -45,6 +46,35 @@ integral:
   level: 144
   modular_scale: false
   discriminant_group: [72]
+  discriminant_sequence:
+    discriminant_factors: [72]
+    discriminant_basis_lifts:
+    - [-11/24, -1/12, -11/36, 1/72]
+    discriminant_quadratic_gram:
+    - [61/72]
+    discriminant_group_order: 8
+    discriminant_generators:
+    - - [17]
+    - - [35]
+    - - [71]
+    image_generators:
+    - - [71]
+    - - [71]
+    image_order: 2
+    kernel_order: 2
+    coset_representatives:
+    - - [1]
+    - - [17]
+    - - [19]
+    - - [35]
+    mm_trivial: false
+    image_normal: true
+    quotient_generator_cosets: [1, 3, 0]
+    quotient_multiplication:
+    - [0, 1, 2, 3]
+    - [1, 0, 3, 2]
+    - [2, 3, 0, 1]
+    - [3, 2, 1, 0]
   overlattice_count: 4
   bad_reduction_primes: [2, 3]
   quadratic_character: 8

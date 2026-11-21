@@ -238,6 +238,9 @@
 02GP integral.anisotropic_primes:
   hash: aa826ba484626595e912125c4ddfb41276d583a697c07501377d003ec44cb610
   by: research preamble
+02GP integral.discriminant_form:
+  hash: 1ec2574f10f812534073b1037ea7a7abe8ba4c35f4ce8d850dce1f935fb7750a
+  by: research preamble
 02GP integral.discriminant_sequence:
   hash: e3280fb3a92e22b22022750085c3a13870e0719ec8d25c7fbb9fea305bbbd2fc
   by: research preamble
@@ -5578,6 +5581,9 @@
 0M0K integral.anisotropic_primes:
   hash: 78a6c58e6b0911ca4ea995b785b337c06d0d02acc713f79bf2d1495e05c1001e
   by: research preamble
+0M0K integral.discriminant_sequence:
+  hash: b55a922e2f84dd22c6383d168d70d0813c31a5dc41a534240902966716017a3f
+  by: research preamble
 0M0K integral.elementary_primes:
   hash: 6aa0bff9bdaef662a0264ed6aca97fe34108c9804c39980392a6147872d9e1c0
   by: research preamble
@@ -5875,6 +5881,9 @@
 0N9U integral.anisotropic_primes:
   hash: 6f972cf9341d36e188740b39b8d6455efd65fd0b823bf651d94a09db3cbd7a24
   by: research preamble
+0N9U integral.discriminant_sequence:
+  hash: af66669f362513b31333282d32c34c2fafa925cea186f10889c028ad7be3c307
+  by: research preamble
 0N9U integral.elementary_primes:
   hash: c398cf33026efe006ebcd1c95b66c8b1b18bec5d293202eb1beef7d497fa09f8
   by: research preamble
@@ -6171,6 +6180,9 @@
   by: research preamble
 0PA2 integral.anisotropic_primes:
   hash: dc83f4b8882621b52bc12e232813ec94fa2dea3e7b174f8193226a5012b2ccac
+  by: research preamble
+0PA2 integral.discriminant_sequence:
+  hash: 9754e7736719bcb2025893ce51f25a82df2bceca0114592c68765d1d0af25b84
   by: research preamble
 0PA2 integral.elementary_primes:
   hash: 903093113d52b189c7f102f4bfc816c0745ede5dedc4c838bd8fe248311084f0
@@ -8269,6 +8281,9 @@
 0UDG integral.anisotropic_primes:
   hash: 92d6bf1c4dda8996eb65000fb03cb5e4837d52e6a73f3807c4492af76bbc4883
   by: research preamble
+0UDG integral.discriminant_sequence:
+  hash: 7ccb39bb7787b594115fd5c70d0595655c0e2f205eeb1017d269dc8fd5a3679d
+  by: research preamble
 0UDG integral.elementary_primes:
   hash: a109c190c716d8bdf6e5870b7f5164d9e3a72646b5967735b0429cfdcedaf6fd
   by: research preamble
@@ -8505,6 +8520,9 @@
   by: research preamble
 0VYL integral.anisotropic_primes:
   hash: de4c1b1915ddae2b5f549363d17925b06a80d272578923fa8e109e4799bda179
+  by: research preamble
+0VYL integral.discriminant_sequence:
+  hash: d21bb45881751feec1910b92d3a044680aa37d87a381bbabc315ab2313c1ccc6
   by: research preamble
 0VYL integral.elementary_primes:
   hash: a7a913c9d2a23e5cd8e625578f935cbfd407bf59d96f978b34ea341249839c38
@@ -28159,6 +28177,15 @@
 69B8 form.integer_valued:
   hash: cf17b68e8bca0e2ff1b3f113afd6cd97250298d80e41b0bcc4108b5e04d94631
   by: research preamble
+69B8 integral.anisotropic_primes:
+  hash: 966e94400743dc4e862b79f2b57f70d147224adfcf21763fc8715ec848de553e
+  by: research preamble
+69B8 integral.discriminant_form:
+  hash: cb925aca1cedb675d089b1ee9a9c12047ca38c866820f0bd752a69bd1a23792f
+  by: research preamble
+69B8 integral.discriminant_orbits:
+  hash: 092e0381c95c4ef1a3f25c2c8993e456420c0e8e7881e9c5e08746cddde5c3e9
+  by: research preamble
 69B8 integral.elementary_primes:
   hash: cef8a4747b35e3393f82088ce0caecc8202ddc26736d388e51c089e8ea8ee4a2
   by: research preamble
@@ -28171,8 +28198,20 @@
 69B8 integral.hyperbolic_index:
   hash: ec817218e01fbcbf1f9cda79f8ec53e4f8097c8e2a8e7150e2c27006c14c0054
   by: research preamble
+69B8 integral.local_densities:
+  hash: 58a390b1e8919acae9b7c28045495d8b809b1e29448cd7ba4d18363681e08486
+  by: research preamble
+69B8 integral.local_representations:
+  hash: c8b69cdfa6a83f03e45edfeaecb5189afa607eba263c543304babf272c6ec47f
+  by: research preamble
+69B8 integral.modular_scale:
+  hash: 48cff4ab463c2f0f4f3719141b30e000bc2f7e5d998ebc6fa7e7ea86817f9f47
+  by: research preamble
 69B8 integral.overlattice_count:
   hash: 9afff80e2fdd90d8031331603538cf8481382e842f180346b02efa977e860a73
+  by: research preamble
+69B8 integral.primitive_orbits:
+  hash: 0cb9acb6811f3d9991c77295364f7f935b9a94bf025f720f7d023fc99fe14994
   by: research preamble
 69B8 integral.spinor_genera:
   hash: f74f8cbfb2fcb59584de507243f9cd1c2be424785341fdf84e383b9a64ef7cd5
