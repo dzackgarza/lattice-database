@@ -644,10 +644,6 @@
   hash: d7c64037632fee89953decdc013e161f16f25e3ddeb85d56b82be0231cf40d1f
   seconds: 27
   lost: true
-1F3J integral.discriminant_form:
-  hash: c08589ccbc2f9a75e8c437a4e42c44467b6bd8ea997cdd5a6d37079b2190bc55
-  seconds: 0
-  lost: true
 1F6O integral.primitive_orbits:
   hash: aa9a82c8d21972721e8be9c08518da9a41ebe41fa9eafc96e77816086779ea31
   seconds: 0
@@ -1233,7 +1229,8 @@
   lost: true
 48YN integral.primitive_orbits[SOtilde]:
   hash: 9e1c166422b378d94310bb7b61abeb33d8e2cd6ec2a08cf2b0a62e00dcdedc04
-  seconds: 15073
+  seconds: 5257
+  lost: true
 4AI4 integral.hyperbolic_index:
   hash: cfd02157630c5b87965c89728ada3348a270c6686e306a7ba5471217e9f942d0
   seconds: 152
@@ -1252,10 +1249,6 @@
   lost: true
 58S6 integral.local_densities:
   hash: e5378e409c24f7701e373876b32586a87eb5a9cf04b7ada7350ac466781f0804
-  seconds: 0
-  lost: true
-69U0 integral.discriminant_sequence:
-  hash: 07501d22fda8a2cbf8673d93dd7c5ab6ad1004edb675938c8861b988d78c3170
   seconds: 0
   lost: true
 6JRR arithmetic-group.otilde-plus-t-co.index_in_orthogonal_group:
