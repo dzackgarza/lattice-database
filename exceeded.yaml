@@ -554,10 +554,9 @@
   hash: 6b959587ca571125d0f6b15b3286ccfb4df34becee301c0a9863c99fd1716e4e
   seconds: 0
   lost: true
-0X3P integral.discriminant_form:
-  hash: 8c3a63672fa760b6870be34b71eaf655f09b378131e89fc230bf6850d07435bd
-  seconds: 0
-  lost: true
+0YHQ integral.discriminant_form:
+  hash: fc22d75309e895f7dfeaa7d46ee22c0c92570fcc75f9900e582869526b2488e7
+  seconds: 5
 0YVT integral.elementary_primes:
   hash: e9a35b7da91dcd00dd2193b061e2e0619539524bab6b5805ec303e0514afa883
   seconds: 0
@@ -649,10 +648,6 @@
 1CZ4 integral.discriminant_form:
   hash: d9ace81ff310c9f2d93545001a6c2ebae53abd4735fbdf0278f88049ec4bcdb9
   seconds: 4
-1DN1 integral.discriminant_form:
-  hash: 284b08765772a90a5de76dac946be36cb3d40420a07ae1c089e22f21d18cbf01
-  seconds: 0
-  lost: true
 1DRM integral.genus_class_count:
   hash: b9116a9b09223f453b6990f0efa48f8670ad40d65cb4f5c32b3f8b2cb30e031e
   seconds: 10
@@ -1076,10 +1071,6 @@
 3G83 integral.discriminant_sequence:
   hash: 38cc9282b8039f67ea26194365dfd97600aec000f9cef11d6658e79098ced2c8
   seconds: 3132
-3G85 integral.discriminant_sequence:
-  hash: 38bd0d058c367e498ecd73289fe7d22ca9c9b867453fb4a02a1fd8d8d2d51484
-  seconds: 1667
-  lost: true
 3G8K integral.discriminant_sequence:
   hash: 4152cb42565b89dc4c1f337699fceb522af5c05dc43445b3a496cba841abca35
   seconds: 10
@@ -1098,6 +1089,10 @@
 3GEH integral.overlattice_count:
   hash: 75b98a72eb3d3314b6fd55e345ca2d1ed9bc31c3e559ecc31215d5b9823c122a
   seconds: 8
+  lost: true
+3GO8 integral.discriminant_sequence:
+  hash: c2756ef175cba01bf2a3c92053b3ac0df1f5678f15bed0887b2720462944cd84
+  seconds: 6909
   lost: true
 3GO8 integral.overlattice_count:
   hash: 73f92e88dc3c41f09fe3d704e2bb6eec69c13383e23ff0521b2c623891c8c865
@@ -1246,8 +1241,7 @@
   lost: true
 48YN integral.primitive_orbits[SOtilde]:
   hash: 9e1c166422b378d94310bb7b61abeb33d8e2cd6ec2a08cf2b0a62e00dcdedc04
-  seconds: 17936
-  lost: true
+  seconds: 15073
 4AI4 integral.hyperbolic_index:
   hash: cfd02157630c5b87965c89728ada3348a270c6686e306a7ba5471217e9f942d0
   seconds: 152
