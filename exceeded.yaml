@@ -664,6 +664,13 @@
 1FHM integral.discriminant_form:
   hash: 923cd0cf786d8f0aa9bb64d26998459a65f7f1bb59ae1f34cfe52a01c5ed7faa
   seconds: 5
+1G21 integral.discriminant_form:
+  hash: 2b1eddda132f6b001be00b3e71b9447058f89bc860b307ff8f151bc4ec111bdf
+  seconds: 1
+  lost: true
+  killed_by: memory
+  peak_bytes: 12792479744
+  limit_bytes: 1675943116
 1GME integral.discriminant_form:
   hash: 1d09cff47449c0554386e4a39c1a0a799d95326b3aade6ea4803631733612a18
   seconds: 0
@@ -728,6 +735,10 @@
   lost: true
 1VTN derive:
   hash: bbdf81859a7c83b1f25fef66b09c19c7fe6e0bf6a4e65c21fe5aad8eca91aef1
+  seconds: 0
+  lost: true
+1VTY definite.siegel_eisenstein_coefficients:
+  hash: aff476c4c0cc6b01e3fa79e2f838e3db2a154ca2b92d00a96e738c9d25e59cb2
   seconds: 0
   lost: true
 1XEP integral.spinor_genera:
@@ -1395,10 +1406,6 @@
 58S6 integral.local_densities:
   hash: e5378e409c24f7701e373876b32586a87eb5a9cf04b7ada7350ac466781f0804
   seconds: 0
-  lost: true
-5FQ6 integral.discriminant_sequence:
-  hash: 472943d0fafc968823a2a33fee9fc45d4ffeca8e4c56fd7ad1a41aa60c3abf32
-  seconds: 10
   lost: true
 6JRR arithmetic-group.otilde-plus-t-co.index_in_orthogonal_group:
   hash: acad0e18f0c158ad5bda122e435bae4133bd93287223e2a8ce2c8b611148e2d3
