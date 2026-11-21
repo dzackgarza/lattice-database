@@ -557,10 +557,6 @@
   hash: e9a35b7da91dcd00dd2193b061e2e0619539524bab6b5805ec303e0514afa883
   seconds: 0
   lost: true
-0ZJM integral.discriminant_form:
-  hash: 9248e2b8af00cdcca7976e4147cc50f5ee1b101f315699ea08e776bce915d3b6
-  seconds: 0
-  lost: true
 0ZPQ integral.discriminant_form:
   hash: 96e3f18e7259ad61f0c4a2c1c217071e35487d2bc8b41c9380de6910a22e9dd2
   seconds: 0
@@ -579,6 +575,10 @@
 124R integral.discriminant_form:
   hash: a201d7474bd27c640852bd514ae0cbf2530f1030e6c70ebd0123b788c9dec385
   seconds: 2
+12WY integral.discriminant_form:
+  hash: 4f9340ef6b1ecf1271eb7fb80198f58073809928b73c77917b20c40286a3e1f1
+  seconds: 0
+  lost: true
 135Y integral.genus_class_count:
   hash: 689494ca5adb8488fc95a4f406d1751e6e84acc6252b85cb91dbc6cd8b4d2b92
   seconds: 0
@@ -1219,6 +1219,10 @@
   hash: 515a93ce92ba527fc2f26325a66a09d17f46aeccec254f141d6e9f9c53cece3d
   seconds: 10
   lost: true
+3IAK integral.discriminant_sequence:
+  hash: bdc44ac1f4c5665c41ee7902a12b012c94214cee9ec5dd10a6bd421073bacd08
+  seconds: 1632
+  lost: true
 3IAM integral.discriminant_sequence:
   hash: cf4bab4542f104f8c4165bdb7118ddabd0e6dc338c2711c37eb5312384892827
   seconds: 9824
@@ -1226,10 +1230,6 @@
 3IAN integral.discriminant_sequence:
   hash: 0e4c1ba6b381b6895dd7024371941edaa9c476e490d33d4530574bf71ffaf8e6
   seconds: 17904
-  lost: true
-3IAO integral.discriminant_sequence:
-  hash: cbffe680be2b844cfc4a9d217bae10b396278314e7fa83a5d557180f55959aee
-  seconds: 8871
   lost: true
 3IAQ integral.discriminant_sequence:
   hash: 9c12e28836ec3c1bd7a0e6834f13290af00a0e327bf65b38f5d8886bfbccbbd1
