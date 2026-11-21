@@ -23,6 +23,7 @@ certifications:
   integral.anisotropic_primes: f1e86f7fff649c3c3fbcba3405944d5f984fc5ba1725ac1d634f8d95bfbfe585
   integral.local_representations: 1309589e9346a7c9867dce03cd207dcc1823fcb4a1cf56c8d8633ac1e3828506
   integral.local_densities: 9c4aca241af788e3a41a864d6733ce02049cee0e50afabb499f0f756514b46fe
+  integral.discriminant_sequence: 0bd699c4ea22543dbc99ca42d6a0b4720369af9825452b69cc66755a34551973
 rank: 4
 gram_tensor:
 - [1, 0, 0, 0]
@@ -45,6 +46,74 @@ integral:
   level: 18
   modular_scale: 9
   discriminant_group: [3, 3, 9]
+  discriminant_sequence:
+    discriminant_factors: [3, 3, 9]
+    discriminant_basis_lifts:
+    - ['0', 1/3, '0', '0']
+    - ['0', '0', 1/3, '0']
+    - ['0', '0', '0', 1/9]
+    discriminant_quadratic_gram:
+    - [1/3, '0', '0']
+    - ['0', 1/3, '0']
+    - ['0', '0', 1/9]
+    discriminant_group_order: 144
+    discriminant_generators:
+    - - [2, 0, 6]
+      - [0, 1, 3]
+      - [2, 2, 7]
+    - - [2, 0, 6]
+      - [0, 2, 6]
+      - [1, 1, 2]
+    - - [0, 1, 0]
+      - [2, 0, 6]
+      - [2, 0, 4]
+    image_generators:
+    - - [1, 0, 0]
+      - [0, 1, 0]
+      - [0, 0, 1]
+    - - [1, 0, 0]
+      - [0, 2, 0]
+      - [0, 0, 1]
+    - - [0, 1, 0]
+      - [1, 0, 0]
+      - [0, 0, 1]
+    - - [1, 0, 0]
+      - [0, 1, 0]
+      - [0, 0, 8]
+    image_order: 16
+    kernel_order: 2
+    coset_representatives:
+    - - [1, 0, 0]
+      - [0, 1, 0]
+      - [0, 0, 1]
+    - - [0, 1, 0]
+      - [1, 0, 3]
+      - [1, 0, 5]
+    - - [0, 1, 0]
+      - [1, 0, 3]
+      - [2, 0, 4]
+    - - [0, 1, 3]
+      - [1, 0, 0]
+      - [0, 1, 5]
+    - - [0, 1, 3]
+      - [1, 0, 0]
+      - [0, 2, 4]
+    - - [0, 1, 3]
+      - [1, 0, 3]
+      - [1, 1, 2]
+    - - [0, 1, 3]
+      - [1, 0, 3]
+      - [2, 2, 7]
+    - - [0, 1, 3]
+      - [1, 0, 6]
+      - [1, 2, 7]
+    - - [0, 1, 3]
+      - [1, 0, 6]
+      - [2, 1, 2]
+    mm_trivial: false
+    image_normal: false
+    quotient_generator_cosets: null
+    quotient_multiplication: null
   overlattice_count: 2
   bad_reduction_primes: [2, 3]
   quadratic_character: 1

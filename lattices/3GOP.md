@@ -23,6 +23,7 @@ certifications:
   integral.anisotropic_primes: 0f96349fac357e364b619be722d4c4e3320d7ff3bd9ad4b89c6c4227d38816eb
   integral.local_representations: 6867524834083d4f0cd3375cd34e7aa063f9849d5fabad27e834b4bc5e806e66
   integral.local_densities: c65873f1acf1af97ee1300a9456f71e7196d5eb1006e64aac4bb1c812e726a18
+  integral.discriminant_sequence: 709f6a71a033a6e0820d6530fc65c5648d3461a1a04ec6c8e47863c9725618f7
 rank: 4
 gram_tensor:
 - [2, 0, 0, 0]
@@ -45,6 +46,71 @@ integral:
   level: 64
   modular_scale: false
   discriminant_group: [2, 2, 32]
+  discriminant_sequence:
+    discriminant_factors: [2, 2, 32]
+    discriminant_basis_lifts:
+    - [-1/2, 1/2, '0', -1/2]
+    - ['0', -1/2, 1/2, '0']
+    - ['0', 1/16, -7/32, 1/32]
+    discriminant_quadratic_gram:
+    - ['0', 1/2, '0']
+    - [1/2, 1/2, 1/2]
+    - ['0', 1/2, 7/32]
+    discriminant_group_order: 32
+    discriminant_generators:
+    - - [1, 0, 16]
+      - [1, 1, 16]
+      - [1, 1, 9]
+    - - [1, 0, 16]
+      - [1, 1, 16]
+      - [1, 1, 25]
+    - - [1, 0, 16]
+      - [1, 1, 16]
+      - [1, 1, 23]
+    - - [1, 0, 16]
+      - [0, 1, 0]
+      - [1, 1, 25]
+    image_generators:
+    - - [1, 0, 0]
+      - [0, 1, 0]
+      - [0, 0, 31]
+    - - [1, 0, 16]
+      - [0, 1, 16]
+      - [0, 1, 7]
+    - - [1, 0, 16]
+      - [0, 1, 16]
+      - [0, 1, 25]
+    image_order: 4
+    kernel_order: 2
+    coset_representatives:
+    - - [1, 0, 0]
+      - [0, 1, 0]
+      - [0, 0, 1]
+    - - [1, 0, 0]
+      - [0, 1, 0]
+      - [0, 0, 15]
+    - - [1, 0, 0]
+      - [0, 1, 16]
+      - [1, 0, 1]
+    - - [1, 0, 0]
+      - [0, 1, 16]
+      - [1, 0, 15]
+    - - [1, 0, 0]
+      - [1, 1, 0]
+      - [0, 0, 1]
+    - - [1, 0, 0]
+      - [1, 1, 0]
+      - [0, 0, 15]
+    - - [1, 0, 0]
+      - [1, 1, 16]
+      - [1, 0, 1]
+    - - [1, 0, 0]
+      - [1, 1, 16]
+      - [1, 0, 15]
+    mm_trivial: false
+    image_normal: false
+    quotient_generator_cosets: null
+    quotient_multiplication: null
   overlattice_count: 10
   bad_reduction_primes: [2]
   quadratic_character: 8
