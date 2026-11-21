@@ -764,6 +764,122 @@
   hash: 37918b7e84d5761569817dfc0899a9eabc7fdb8c14715e2ccecd6d44d0886834
   seconds: 0
   lost: true
+20TE derive:
+  hash: 15ea4e92a11065fd413c2aeb5e753b70feb8cb248ab81be42a853a7c78d24d57
+  seconds: 46
+  lost: true
+  killed_by: memory
+  peak_bytes: 13179346944
+  limit_bytes: 1675943116
+20TR derive:
+  hash: 2427af1ab66c419e57c05d9b0763f3dec86a75afaf82c60f0066d88f76ccd138
+  seconds: 46
+  lost: true
+  killed_by: memory
+  peak_bytes: 13637926912
+  limit_bytes: 1675943116
+20TT derive:
+  hash: eb5d11fa90e96978851a53c4ee9c2a15c8bc438cb5f3dcd4d10c9c3626e29efa
+  seconds: 46
+  lost: true
+  killed_by: memory
+  peak_bytes: 13456580608
+  limit_bytes: 1675943116
+20WB derive:
+  hash: abedc0dc5dae4776000e7ea49d42a8826dfa23ff5150a59c4d16b39893ec207f
+  seconds: 46
+  lost: true
+  killed_by: memory
+  peak_bytes: 13540147200
+  limit_bytes: 1675943116
+20WP derive:
+  hash: bed02939cdd293ac87a04a0e71295c49647446de39a48036c1a678b9160e1291
+  seconds: 45
+  lost: true
+  killed_by: memory
+  peak_bytes: 13685223424
+  limit_bytes: 1675943116
+20X3 derive:
+  hash: 0f809acbb80a6467b351b23577353ed5b93bba08a30734259cbc97b09146ff32
+  seconds: 46
+  lost: true
+  killed_by: memory
+  peak_bytes: 13340508160
+  limit_bytes: 1675943116
+20X7 derive:
+  hash: b36a541136c8ecb171b7591722490bc5bbe92ade5f6c0481ea7ef529c94598a4
+  seconds: 46
+  lost: true
+  killed_by: memory
+  peak_bytes: 13471281152
+  limit_bytes: 1675943116
+20XK derive:
+  hash: 17f622e76758723ec803086cd75471a5aeb325646680e25b9180edd22fd3c4f3
+  seconds: 46
+  lost: true
+  killed_by: memory
+  peak_bytes: 13885906944
+  limit_bytes: 1675943116
+20XY derive:
+  hash: 48cbe1aa7996d2c013abd29e23ce44465b1a7a87cd7b225e95ede5fba9ab91ca
+  seconds: 46
+  lost: true
+  killed_by: memory
+  peak_bytes: 13683257344
+  limit_bytes: 1675943116
+20YT derive:
+  hash: c647bf0eb2a8f04c558a1977152cbffe60a62ad3b49d84871ac26da3194edeac
+  seconds: 46
+  lost: true
+  killed_by: memory
+  peak_bytes: 13843746816
+  limit_bytes: 1675943116
+20Z6 derive:
+  hash: 49c844c429383a0400511658385fc6fc4b817aed179a68e120b4ebe9c0bd0754
+  seconds: 45
+  lost: true
+  killed_by: memory
+  peak_bytes: 13725958144
+  limit_bytes: 1675943116
+210X derive:
+  hash: 5db58a26aa5f7bf532b5e8309afd736fb82e2df9e5ca8039792c7016609fb523
+  seconds: 50
+  lost: true
+  killed_by: memory
+  peak_bytes: 14255353856
+  limit_bytes: 1675943116
+211A derive:
+  hash: f7c8f589622dad85a93df725eb35c119e1586addb8c0563b9c4d202a52a59292
+  seconds: 51
+  lost: true
+  killed_by: memory
+  peak_bytes: 14346121216
+  limit_bytes: 1675943116
+211N derive:
+  hash: a9af060b12b5c68207c102b1d53f53b3a9bbef37144dd7b4cfd8cf5e30abcd03
+  seconds: 51
+  lost: true
+  killed_by: memory
+  peak_bytes: 13888937984
+  limit_bytes: 1675943116
+2123 derive:
+  hash: c077d5cf5fd51ee7e23e2ea48bc09c69863ccb418c262ae7ac93e761f545677c
+  seconds: 50
+  lost: true
+  killed_by: memory
+  peak_bytes: 14115061760
+  limit_bytes: 1675943116
+2125 derive:
+  hash: d936427564503786751503a5d106ae57ae49065a8eeceda5f19a2312e9e0ae72
+  seconds: 51
+  lost: true
+  killed_by: memory
+  peak_bytes: 14128005120
+  limit_bytes: 1675943116
+212B definite.siegel_eisenstein_coefficients:
+  hash: e20fd971be43165d97e156eba6e954e98ed7b7306249cd17fd78a81c50cfd411
+  seconds: 0
+  lost: true
 22NM derive:
   hash: 70fd813f60898f7e41dd64a4e36a3bae7bef91e9f482572a49a50d3e52a06342
   seconds: 0
@@ -1236,13 +1352,13 @@
   hash: 0e4c1ba6b381b6895dd7024371941edaa9c476e490d33d4530574bf71ffaf8e6
   seconds: 17904
   lost: true
-3IAP integral.discriminant_sequence:
-  hash: 7912944568808000ab39d7fd9fb21248f2ef9a340aef680cf86ecb2f4cf91d58
-  seconds: 19647
 3IAQ integral.discriminant_sequence:
   hash: 9c12e28836ec3c1bd7a0e6834f13290af00a0e327bf65b38f5d8886bfbccbbd1
   seconds: 1652
   lost: true
+3IAR integral.discriminant_sequence:
+  hash: 51b5773c00559c561b8b7fc355bfbe9bc39b781880bcad71dd68133940752590
+  seconds: 19672
 3IC9 integral.overlattice_count:
   hash: 05d572f4585d4e11a569f58a0f8f94553738c10eaaa518d52a7f28e8902c52b8
   seconds: 16
