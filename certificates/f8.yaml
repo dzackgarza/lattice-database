@@ -27721,6 +27721,12 @@
 5AIF integral.spinor_genus_count:
   hash: d75cf657a419b91c29577416241186e68e472253f48520880c13a4aaa36370cb
   by: research preamble
+64FK automorphisms.automorphism_group_generator_morphisms:
+  hash: ec6ed71acb84c63f290e12eaa0db0c0629b9000c6a20b4b05224988162d5110d
+  by: research preamble
+64FK automorphisms.automorphism_group_order:
+  hash: 0241d782a09b9b5038aa0e5a7d4802fc891cb266b9190817eb21598833bbe4cf
+  by: research preamble
 64FK derive:
   hash: 62189c41dbaccd89c6ced68ada539b13c8f47677a0fe6e89fbedc6371be54a1e
   by: research preamble
@@ -27735,6 +27741,9 @@
   by: research preamble
 64FK integral.genus_symbol:
   hash: 696f423a32b0242b4524005a164e39c2f00de1896c0e708082085edd0ec00c5e
+  by: research preamble
+64FK integral.hyperbolic_index:
+  hash: 127d77fa0f470b71e516a4d2cf7ac6cc0d1e32394698154938f23b0254a20f11
   by: research preamble
 64FK integral.overlattice_count:
   hash: dff5db907c6698256bc7893111697edf5b614e4fea764eb17ede65d3568579df
