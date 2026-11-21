@@ -1045,10 +1045,6 @@
   hash: 9c3997e11fbd178f2442405bde59614974dcdf6cda8e0a1dc15004705f641eb7
   seconds: 0
   lost: true
-3G5G integral.discriminant_sequence:
-  hash: b41756fa02d72066d946e75c6a6cc678df7672c29d7e086aef1d1e2f1a4ddc24
-  seconds: 14288
-  lost: true
 3G5G integral.overlattice_count:
   hash: 56dd2c36f3eba8041cae2af380c56c79748c8774cff278df6633f847c754f590
   seconds: 22
@@ -1160,6 +1156,9 @@
 3GRU integral.discriminant_sequence:
   hash: 0873c77aea247747beee5f6503d4678ca0c393ad59c2a14ff0e34fd7c44871c6
   seconds: 18241
+3GTS integral.discriminant_sequence:
+  hash: 26a906b9d9d22e2f60644bcb66ee493b586d333a3d2e8d30e57e85387eee4009
+  seconds: 19661
 3GVS integral.overlattice_count:
   hash: 08ed3d3d97ba6ede8efea82cce0080d3ea5206f140bdd1239f06276842783102
   seconds: 10
@@ -1271,6 +1270,10 @@
 58S6 integral.local_densities:
   hash: e5378e409c24f7701e373876b32586a87eb5a9cf04b7ada7350ac466781f0804
   seconds: 0
+  lost: true
+6ESH integral.hyperbolic_index:
+  hash: a755e7e203bb944e938e81cf1b6964afd2f4d0be886f0035bb6c27cd0c31c039
+  seconds: 37
   lost: true
 6JRR arithmetic-group.otilde-plus-t-co.index_in_orthogonal_group:
   hash: acad0e18f0c158ad5bda122e435bae4133bd93287223e2a8ce2c8b611148e2d3
