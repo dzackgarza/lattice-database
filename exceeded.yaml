@@ -489,10 +489,6 @@
   hash: 52f2df5d3e50422e9094aaba642361454f3f0553243c3e075e8ffa9f8b70baec
   seconds: 6
   lost: true
-0OJF integral.discriminant_form:
-  hash: 7959baf1034cbb6783fc47cf24fdac4b3a86ee09247ada1a68f30c95d1db449b
-  seconds: 0
-  lost: true
 0PDI integral.discriminant_form:
   hash: 721243039dbc88c969b949f6205bccf432459c7dc343430aa6037ddff9c34a4f
   seconds: 0
@@ -1041,6 +1037,10 @@
 3G5C integral.local_densities:
   hash: 9c3997e11fbd178f2442405bde59614974dcdf6cda8e0a1dc15004705f641eb7
   seconds: 0
+  lost: true
+3G5G integral.discriminant_sequence:
+  hash: b41756fa02d72066d946e75c6a6cc678df7672c29d7e086aef1d1e2f1a4ddc24
+  seconds: 5246
   lost: true
 3G5G integral.overlattice_count:
   hash: 56dd2c36f3eba8041cae2af380c56c79748c8774cff278df6633f847c754f590
