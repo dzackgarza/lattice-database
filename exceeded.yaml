@@ -490,10 +490,6 @@
   hash: 59f3e860a26817f0ea30db37aed80596a35ce07a4da85a02788a9faac7b514cb
   seconds: 0
   lost: true
-0N9W integral.discriminant_form:
-  hash: 6cc75f01f3a3d7c0cfebe4b3c592217dbf0e1392e423245c4ead54f371fd80fe
-  seconds: 0
-  lost: true
 0NFT integral.discriminant_form:
   hash: 52f2df5d3e50422e9094aaba642361454f3f0553243c3e075e8ffa9f8b70baec
   seconds: 6
@@ -504,10 +500,6 @@
   lost: true
 0POM integral.discriminant_form:
   hash: e75904bde8ae71175b947e54e046fc2e518c21d801f3a97a4a74324f0bf14e5a
-  seconds: 0
-  lost: true
-0PX0 integral.discriminant_form:
-  hash: b20ecf7fa09d193c1af34acf58c700e8f67f22f95d517791d57a104469741652
   seconds: 0
   lost: true
 0RVY integral.elementary_primes:
@@ -672,10 +664,13 @@
 1FHM integral.discriminant_form:
   hash: 923cd0cf786d8f0aa9bb64d26998459a65f7f1bb59ae1f34cfe52a01c5ed7faa
   seconds: 5
-1FSE integral.discriminant_form:
-  hash: 9b219a638942a16394de2822d14a341eb2dabaaeabc2d4fce23534d5c8826658
+1GME integral.discriminant_form:
+  hash: 1d09cff47449c0554386e4a39c1a0a799d95326b3aade6ea4803631733612a18
   seconds: 0
   lost: true
+  killed_by: memory
+  peak_bytes: 12287848448
+  limit_bytes: 1646340915
 1GRN integral.overlattice_count:
   hash: 2d69994bb46caf54ef5fc24bfc85749b4e47e08c0890c0841e7baa197fa96e52
   seconds: 0
@@ -691,6 +686,10 @@
 1IX9 integral.discriminant_form:
   hash: 6c5a7172663b567607ba60f697933a957f72ecae84923cd19c74ed70e8b7381f
   seconds: 6
+1JC2 integral.discriminant_form:
+  hash: c5935abc98328791d3904f63ee4f2cf63003c635615177f022766ffd881cbb62
+  seconds: 0
+  lost: true
 1JHS derive:
   hash: 92e01d55e9c92a8fec296efd4e16df38ebc785b48108f3375fe0d67c911b7dcb
   seconds: 10
@@ -1342,6 +1341,10 @@
   hash: 515a93ce92ba527fc2f26325a66a09d17f46aeccec254f141d6e9f9c53cece3d
   seconds: 10
   lost: true
+3IAK integral.discriminant_sequence:
+  hash: bdc44ac1f4c5665c41ee7902a12b012c94214cee9ec5dd10a6bd421073bacd08
+  seconds: 1632
+  lost: true
 3IAM integral.discriminant_sequence:
   hash: cf4bab4542f104f8c4165bdb7118ddabd0e6dc338c2711c37eb5312384892827
   seconds: 9824
@@ -1371,7 +1374,8 @@
   lost: true
 48YN integral.primitive_orbits[SOtilde]:
   hash: 9e1c166422b378d94310bb7b61abeb33d8e2cd6ec2a08cf2b0a62e00dcdedc04
-  seconds: 19531
+  seconds: 17936
+  lost: true
 4AI4 integral.hyperbolic_index:
   hash: cfd02157630c5b87965c89728ada3348a270c6686e306a7ba5471217e9f942d0
   seconds: 152

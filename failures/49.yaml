@@ -157,8 +157,37 @@
     database_revision: 62ac9ab95d226bf02e25637732cedfdeadc4cf81
     research_revision: b9d91213ecc4ce7395c571461bacfe3d80e36d0f
   notes: []
-1GRN integral.overlattice_count:
+1GME integral.discriminant_form:
   disposition: open
+  attempts:
+  - hash: 1d09cff47449c0554386e4a39c1a0a799d95326b3aade6ea4803631733612a18
+    gram_tensor:
+    - - 2
+      - 0
+      - 1
+      - 0
+    - - 0
+      - 2
+      - 0
+      - 0
+    - - 1
+      - 0
+      - 16
+      - 5
+    - - 0
+      - 0
+      - 5
+      - 28
+    reason: memory exhausted
+    stderr: ''
+    seconds: 0.009712973998830421
+    recorded_at: 2026-11-21 21:57:39.894062+00:00
+    run_url: https://github.com/dzackgarza/lattice-database/actions/runs/44898427386/attempts/1
+    database_revision: 62ac9ab95d226bf02e25637732cedfdeadc4cf81
+    research_revision: b9d91213ecc4ce7395c571461bacfe3d80e36d0f
+  notes: []
+1GRN integral.overlattice_count:
+  disposition: resolved
   attempts:
   - hash: 2d69994bb46caf54ef5fc24bfc85749b4e47e08c0890c0841e7baa197fa96e52
     gram_tensor:
