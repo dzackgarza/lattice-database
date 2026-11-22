@@ -30049,6 +30049,12 @@
 3IDF integral.spinor_genus_count:
   hash: 0f31092dfef96e9b8e03b3da4771766409c2845d87017e5db636b5b67a571dd4
   by: research preamble
+49GG automorphisms.automorphism_group_generator_morphisms:
+  hash: fae8adaa78ef51630137db67ddc3f56182e3d2342f00a4cc653509c8273133f4
+  by: research preamble
+49GG automorphisms.automorphism_group_order:
+  hash: 7d3b1c55941cc610871d995f47a8e5b594f017a8402b1b85e4f753ac874f68cb
+  by: research preamble
 49GG derive:
   hash: 0f10d9b2e30fbcc1d50662695cc70962178bf1d91c964d111866c8cc495710a7
   by: research preamble
@@ -30066,6 +30072,9 @@
   by: research preamble
 49GG integral.overlattice_count:
   hash: 814b4c40ecc256ca804febf1f58a98f860f3b2db934644e6fb63b7456c2607e6
+  by: research preamble
+49GG integral.primitive_orbits:
+  hash: 95f5ddca4d6df4dc442ed906a270626cb4b3dccd5f664644f6a22e8ed1531504
   by: research preamble
 49GG integral.spinor_genera:
   hash: d2a77fbadda09f4574467766d8e5b14fc716e2cb33447c765ca119e78412f848

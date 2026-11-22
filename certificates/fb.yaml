@@ -28222,11 +28222,17 @@
 3XSJ automorphisms.automorphism_group_generator_morphisms:
   hash: 90a48fdab95c031cd8f339d1fe392ca54aa6a7eab31f4b33f81e28f00e4aeb7c
   by: research preamble
+3XSJ automorphisms.automorphism_group_order:
+  hash: f0197d5ee7dcb298394a0713c53de4ea68987f4ff68dd04cd7d2eff57998125a
+  by: research preamble
 3XSJ derive:
   hash: 609eb9b3e8723f15b957e999267717f0309f90da454e4005e215024ba9446959
   by: research preamble
 3XSJ form.integer_valued:
   hash: d24c4debc60b1a0445dfc46ec0c3d75cb66d926916ffc3473d75a4cf71af2413
+  by: research preamble
+3XSJ integral.anisotropic_primes:
+  hash: 36b6c8c78e1c774045ffd7b03143f990789d803f3aa70614b682bc27007cb0e7
   by: research preamble
 3XSJ integral.elementary_primes:
   hash: 4276fdc7d8291fe680747791114b5b27b0500cf984d9ef2df76e0c02950a2172
@@ -28239,6 +28245,15 @@
   by: research preamble
 3XSJ integral.hyperbolic_index:
   hash: b39bce78ae2c046dce0e44b117500d2f48b081c579c1c367a4aa3fee46306760
+  by: research preamble
+3XSJ integral.local_densities:
+  hash: bb57845cdb894dd04ed285681333c0ee49e9e75527e441b4b267f5f576894a11
+  by: research preamble
+3XSJ integral.local_representations:
+  hash: e63c74958df8e2e0e11ea25958c3fdcac1fe09c98a31be7d8bf6ca03b16ca4ab
+  by: research preamble
+3XSJ integral.modular_scale:
+  hash: bbe59e8649ec45c5d5c676d26c67e9291f577ae269de5f4bccc6e8d8a1d983de
   by: research preamble
 3XSJ integral.overlattice_count:
   hash: ccd1a27b9413dc0139a722547ac197ce35d4e30e8491d6eba761a030a441cc6b
