@@ -649,10 +649,6 @@
   killed_by: memory
   peak_bytes: 13133455360
   limit_bytes: 1675943936
-1ANC integral.discriminant_form:
-  hash: 13441638f85bd52e67f8a9faeccf51a627ec5648b732dc778c1dfbb12cd14454
-  seconds: 0
-  lost: true
 1CZ4 integral.discriminant_form:
   hash: d9ace81ff310c9f2d93545001a6c2ebae53abd4735fbdf0278f88049ec4bcdb9
   seconds: 4
@@ -663,6 +659,10 @@
 1E4M definite.genus_theta_series:
   hash: d7c64037632fee89953decdc013e161f16f25e3ddeb85d56b82be0231cf40d1f
   seconds: 27
+  lost: true
+1EDQ integral.discriminant_form:
+  hash: 1a01708b6401b289dac938f1a84d394fbebf5bb1469e031143552b8911b739d2
+  seconds: 0
   lost: true
 1F6O integral.primitive_orbits:
   hash: aa9a82c8d21972721e8be9c08518da9a41ebe41fa9eafc96e77816086779ea31
@@ -1336,10 +1336,6 @@
 3GST integral.discriminant_sequence:
   hash: c5f00495e7d65902b3ba531288c4218f01fea0380f071f74da4ad885e8e46a21
   seconds: 7894
-3GT5 integral.discriminant_sequence:
-  hash: 0ef40d5f3db4506f5e075978a439b9685ff6b021b995323fae1543acd1892df7
-  seconds: 1867
-  lost: true
 3GTS integral.discriminant_sequence:
   hash: 26a906b9d9d22e2f60644bcb66ee493b586d333a3d2e8d30e57e85387eee4009
   seconds: 19661
