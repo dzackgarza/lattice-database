@@ -9346,3 +9346,251 @@
     database_revision: 62ac9ab95d226bf02e25637732cedfdeadc4cf81
     research_revision: b9d91213ecc4ce7395c571461bacfe3d80e36d0f
   notes: []
+6741 integral.primitive_orbits[Otilde+]:
+  disposition: open
+  attempts:
+  - hash: 7d89531a44c4aff3864d302b949cdd1f0b026fff026a8ca05dab6488e34005eb
+    gram_tensor:
+    - - -2
+      - 0
+      - 0
+      - 0
+      - 0
+    - - 0
+      - 4
+      - -2
+      - 0
+      - 0
+    - - 0
+      - -2
+      - 4
+      - -2
+      - 0
+    - - 0
+      - 0
+      - -2
+      - 4
+      - -2
+    - - 0
+      - 0
+      - 0
+      - -2
+      - 4
+    reason: exit status 1
+    stderr: "Traceback (most recent call last):\n  File \"<frozen runpy>\", line 203,
+      in _run_module_as_main\n  File \"<frozen runpy>\", line 88, in _run_code\n  File
+      \"/home/runner/work/lattice-database/lattice-database/src/latticedb/sage_genus.py\",
+      line 536, in <module>\n    main()\n    ~~~~^^\n  File \"/home/runner/work/lattice-database/lattice-database/src/latticedb/sage_genus.py\",
+      line 531, in main\n    _compute(request)\n    ~~~~~~~~^^^^^^^^^\n  File \"/home/runner/work/lattice-database/lattice-database/src/latticedb/sage_genus.py\",
+      line 514, in _compute\n    _run(tag, [field], lambda row=row, field=field, compute=compute:
+      {field: compute(lattice, row)})\n    ~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n
+      \ File \"/home/runner/work/lattice-database/lattice-database/src/latticedb/sage_genus.py\",
+      line 449, in _run\n    values = compute()\n  File \"/home/runner/work/lattice-database/lattice-database/src/latticedb/sage_genus.py\",
+      line 514, in <lambda>\n    _run(tag, [field], lambda row=row, field=field, compute=compute:
+      {field: compute(lattice, row)})\n                                                                             ~~~~~~~^^^^^^^^^^^^^^\n
+      \ File \"/home/runner/work/lattice-database/lattice-database/src/latticedb/sage_genus.py\",
+      line 125, in _primitive_isotropic_line_row\n    constant = subgroup.isotropic_orbit_representatives(1).cardinality()\n
+      \              ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^\n  File \"/repos/sage-extensions/src/sage_extensions/categories/group/predicate_subgroups.py\",
+      line 536, in isotropic_orbit_representatives\n    return _subgroup_isotropic_orbit_representatives(\n
+      \       self, rank, flag=flag\n    )\n  File \"/repos/sage-extensions/src/sage_extensions/timing.py\",
+      line 393, in timed\n    return function(*arguments, **keywords)\n  File \"/repos/sage-extensions/src/sage_extensions/categories/orthogonal_quotients.py\",
+      line 3713, in _subgroup_isotropic_orbit_representatives\n    stabilizer = quotient.exact_isotropic_stabilizer_generators(\n
+      \       representative, flag=flag\n    )\n  File \"/repos/sage-extensions/src/sage_extensions/categories/orthogonal_quotients.py\",
+      line 1623, in exact_isotropic_stabilizer_generators\n    raise ArithmeticError(\n
+      \   ...<4 lines>...\n    )\nArithmeticError: the stabilizer of Integral lattice
+      of rank 1 and signature (0, 0) in Orthogonal group O(Integral lattice of rank
+      5 and signature (4, 1)) has character image of order at least 32, and the stabilizer
+      of its divided discriminant data has order 96; no exhibited stabilizer element
+      closes the index 3, so the exact image chi(Stab) is not certified\n"
+    seconds: 6.481064880000304
+    recorded_at: 2026-11-22 19:15:15.071308+00:00
+    run_url: https://github.com/dzackgarza/lattice-database/actions/runs/45018144788/attempts/1
+    database_revision: 71701b6086cbdbfdda1f8ebcc469fef593f6ac26
+    research_revision: 8507b1b9dcc64ad3fb41beba6c138c9a45a094dd
+  notes: []
+6741 integral.primitive_orbits[Otilde]:
+  disposition: open
+  attempts:
+  - hash: c9800f8257599fc0591524b77f38b30b2f1d66f3a51e79b5e5e3df3af6ea707a
+    gram_tensor:
+    - - -2
+      - 0
+      - 0
+      - 0
+      - 0
+    - - 0
+      - 4
+      - -2
+      - 0
+      - 0
+    - - 0
+      - -2
+      - 4
+      - -2
+      - 0
+    - - 0
+      - 0
+      - -2
+      - 4
+      - -2
+    - - 0
+      - 0
+      - 0
+      - -2
+      - 4
+    reason: exit status 1
+    stderr: "Traceback (most recent call last):\n  File \"<frozen runpy>\", line 203,
+      in _run_module_as_main\n  File \"<frozen runpy>\", line 88, in _run_code\n  File
+      \"/home/runner/work/lattice-database/lattice-database/src/latticedb/sage_genus.py\",
+      line 536, in <module>\n    main()\n    ~~~~^^\n  File \"/home/runner/work/lattice-database/lattice-database/src/latticedb/sage_genus.py\",
+      line 531, in main\n    _compute(request)\n    ~~~~~~~~^^^^^^^^^\n  File \"/home/runner/work/lattice-database/lattice-database/src/latticedb/sage_genus.py\",
+      line 514, in _compute\n    _run(tag, [field], lambda row=row, field=field, compute=compute:
+      {field: compute(lattice, row)})\n    ~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n
+      \ File \"/home/runner/work/lattice-database/lattice-database/src/latticedb/sage_genus.py\",
+      line 449, in _run\n    values = compute()\n  File \"/home/runner/work/lattice-database/lattice-database/src/latticedb/sage_genus.py\",
+      line 514, in <lambda>\n    _run(tag, [field], lambda row=row, field=field, compute=compute:
+      {field: compute(lattice, row)})\n                                                                             ~~~~~~~^^^^^^^^^^^^^^\n
+      \ File \"/home/runner/work/lattice-database/lattice-database/src/latticedb/sage_genus.py\",
+      line 125, in _primitive_isotropic_line_row\n    constant = subgroup.isotropic_orbit_representatives(1).cardinality()\n
+      \              ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^\n  File \"/repos/sage-extensions/src/sage_extensions/categories/group/predicate_subgroups.py\",
+      line 536, in isotropic_orbit_representatives\n    return _subgroup_isotropic_orbit_representatives(\n
+      \       self, rank, flag=flag\n    )\n  File \"/repos/sage-extensions/src/sage_extensions/timing.py\",
+      line 393, in timed\n    return function(*arguments, **keywords)\n  File \"/repos/sage-extensions/src/sage_extensions/categories/orthogonal_quotients.py\",
+      line 3713, in _subgroup_isotropic_orbit_representatives\n    stabilizer = quotient.exact_isotropic_stabilizer_generators(\n
+      \       representative, flag=flag\n    )\n  File \"/repos/sage-extensions/src/sage_extensions/categories/orthogonal_quotients.py\",
+      line 1623, in exact_isotropic_stabilizer_generators\n    raise ArithmeticError(\n
+      \   ...<4 lines>...\n    )\nArithmeticError: the stabilizer of Integral lattice
+      of rank 1 and signature (0, 0) in Orthogonal group O(Integral lattice of rank
+      5 and signature (4, 1)) has character image of order at least 16, and the stabilizer
+      of its divided discriminant data has order 48; no exhibited stabilizer element
+      closes the index 3, so the exact image chi(Stab) is not certified\n"
+    seconds: 6.840298379999695
+    recorded_at: 2026-11-22 19:14:53.095239+00:00
+    run_url: https://github.com/dzackgarza/lattice-database/actions/runs/45018144788/attempts/1
+    database_revision: 71701b6086cbdbfdda1f8ebcc469fef593f6ac26
+    research_revision: 8507b1b9dcc64ad3fb41beba6c138c9a45a094dd
+  notes: []
+6741 integral.primitive_orbits[SOtilde+]:
+  disposition: open
+  attempts:
+  - hash: 2824b4dcdb269ac7f244d367c40f59a6c7649259a3c8df3c46bebd9f55aacd0c
+    gram_tensor:
+    - - -2
+      - 0
+      - 0
+      - 0
+      - 0
+    - - 0
+      - 4
+      - -2
+      - 0
+      - 0
+    - - 0
+      - -2
+      - 4
+      - -2
+      - 0
+    - - 0
+      - 0
+      - -2
+      - 4
+      - -2
+    - - 0
+      - 0
+      - 0
+      - -2
+      - 4
+    reason: exit status 1
+    stderr: "Traceback (most recent call last):\n  File \"<frozen runpy>\", line 203,
+      in _run_module_as_main\n  File \"<frozen runpy>\", line 88, in _run_code\n  File
+      \"/home/runner/work/lattice-database/lattice-database/src/latticedb/sage_genus.py\",
+      line 536, in <module>\n    main()\n    ~~~~^^\n  File \"/home/runner/work/lattice-database/lattice-database/src/latticedb/sage_genus.py\",
+      line 531, in main\n    _compute(request)\n    ~~~~~~~~^^^^^^^^^\n  File \"/home/runner/work/lattice-database/lattice-database/src/latticedb/sage_genus.py\",
+      line 514, in _compute\n    _run(tag, [field], lambda row=row, field=field, compute=compute:
+      {field: compute(lattice, row)})\n    ~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n
+      \ File \"/home/runner/work/lattice-database/lattice-database/src/latticedb/sage_genus.py\",
+      line 449, in _run\n    values = compute()\n  File \"/home/runner/work/lattice-database/lattice-database/src/latticedb/sage_genus.py\",
+      line 514, in <lambda>\n    _run(tag, [field], lambda row=row, field=field, compute=compute:
+      {field: compute(lattice, row)})\n                                                                             ~~~~~~~^^^^^^^^^^^^^^\n
+      \ File \"/home/runner/work/lattice-database/lattice-database/src/latticedb/sage_genus.py\",
+      line 125, in _primitive_isotropic_line_row\n    constant = subgroup.isotropic_orbit_representatives(1).cardinality()\n
+      \              ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^\n  File \"/repos/sage-extensions/src/sage_extensions/categories/group/predicate_subgroups.py\",
+      line 536, in isotropic_orbit_representatives\n    return _subgroup_isotropic_orbit_representatives(\n
+      \       self, rank, flag=flag\n    )\n  File \"/repos/sage-extensions/src/sage_extensions/timing.py\",
+      line 393, in timed\n    return function(*arguments, **keywords)\n  File \"/repos/sage-extensions/src/sage_extensions/categories/orthogonal_quotients.py\",
+      line 3713, in _subgroup_isotropic_orbit_representatives\n    stabilizer = quotient.exact_isotropic_stabilizer_generators(\n
+      \       representative, flag=flag\n    )\n  File \"/repos/sage-extensions/src/sage_extensions/categories/orthogonal_quotients.py\",
+      line 1623, in exact_isotropic_stabilizer_generators\n    raise ArithmeticError(\n
+      \   ...<4 lines>...\n    )\nArithmeticError: the stabilizer of Integral lattice
+      of rank 1 and signature (0, 0) in Orthogonal group O(Integral lattice of rank
+      5 and signature (4, 1)) has character image of order at least 64, and the stabilizer
+      of its divided discriminant data has order 192; no exhibited stabilizer element
+      closes the index 3, so the exact image chi(Stab) is not certified\n"
+    seconds: 7.020921770999848
+    recorded_at: 2026-11-22 19:15:56.325024+00:00
+    run_url: https://github.com/dzackgarza/lattice-database/actions/runs/45018144788/attempts/1
+    database_revision: 71701b6086cbdbfdda1f8ebcc469fef593f6ac26
+    research_revision: 8507b1b9dcc64ad3fb41beba6c138c9a45a094dd
+  notes: []
+6741 integral.primitive_orbits[SOtilde]:
+  disposition: open
+  attempts:
+  - hash: 216ce868e9fe2c11cef3dcfee82f6f42158149cc7dcafe6d8c1561d5b1efe82d
+    gram_tensor:
+    - - -2
+      - 0
+      - 0
+      - 0
+      - 0
+    - - 0
+      - 4
+      - -2
+      - 0
+      - 0
+    - - 0
+      - -2
+      - 4
+      - -2
+      - 0
+    - - 0
+      - 0
+      - -2
+      - 4
+      - -2
+    - - 0
+      - 0
+      - 0
+      - -2
+      - 4
+    reason: exit status 1
+    stderr: "Traceback (most recent call last):\n  File \"<frozen runpy>\", line 203,
+      in _run_module_as_main\n  File \"<frozen runpy>\", line 88, in _run_code\n  File
+      \"/home/runner/work/lattice-database/lattice-database/src/latticedb/sage_genus.py\",
+      line 536, in <module>\n    main()\n    ~~~~^^\n  File \"/home/runner/work/lattice-database/lattice-database/src/latticedb/sage_genus.py\",
+      line 531, in main\n    _compute(request)\n    ~~~~~~~~^^^^^^^^^\n  File \"/home/runner/work/lattice-database/lattice-database/src/latticedb/sage_genus.py\",
+      line 514, in _compute\n    _run(tag, [field], lambda row=row, field=field, compute=compute:
+      {field: compute(lattice, row)})\n    ~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n
+      \ File \"/home/runner/work/lattice-database/lattice-database/src/latticedb/sage_genus.py\",
+      line 449, in _run\n    values = compute()\n  File \"/home/runner/work/lattice-database/lattice-database/src/latticedb/sage_genus.py\",
+      line 514, in <lambda>\n    _run(tag, [field], lambda row=row, field=field, compute=compute:
+      {field: compute(lattice, row)})\n                                                                             ~~~~~~~^^^^^^^^^^^^^^\n
+      \ File \"/home/runner/work/lattice-database/lattice-database/src/latticedb/sage_genus.py\",
+      line 125, in _primitive_isotropic_line_row\n    constant = subgroup.isotropic_orbit_representatives(1).cardinality()\n
+      \              ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^\n  File \"/repos/sage-extensions/src/sage_extensions/categories/group/predicate_subgroups.py\",
+      line 536, in isotropic_orbit_representatives\n    return _subgroup_isotropic_orbit_representatives(\n
+      \       self, rank, flag=flag\n    )\n  File \"/repos/sage-extensions/src/sage_extensions/timing.py\",
+      line 393, in timed\n    return function(*arguments, **keywords)\n  File \"/repos/sage-extensions/src/sage_extensions/categories/orthogonal_quotients.py\",
+      line 3713, in _subgroup_isotropic_orbit_representatives\n    stabilizer = quotient.exact_isotropic_stabilizer_generators(\n
+      \       representative, flag=flag\n    )\n  File \"/repos/sage-extensions/src/sage_extensions/categories/orthogonal_quotients.py\",
+      line 1623, in exact_isotropic_stabilizer_generators\n    raise ArithmeticError(\n
+      \   ...<4 lines>...\n    )\nArithmeticError: the stabilizer of Integral lattice
+      of rank 1 and signature (0, 0) in Orthogonal group O(Integral lattice of rank
+      5 and signature (4, 1)) has character image of order at least 32, and the stabilizer
+      of its divided discriminant data has order 96; no exhibited stabilizer element
+      closes the index 3, so the exact image chi(Stab) is not certified\n"
+    seconds: 6.358991994999997
+    recorded_at: 2026-11-22 19:15:35.365058+00:00
+    run_url: https://github.com/dzackgarza/lattice-database/actions/runs/45018144788/attempts/1
+    database_revision: 71701b6086cbdbfdda1f8ebcc469fef593f6ac26
+    research_revision: 8507b1b9dcc64ad3fb41beba6c138c9a45a094dd
+  notes: []

@@ -1180,9 +1180,6 @@
   hash: 266ea9ad456ab70cfcebfa4812df4eb5093ed34106f1d37e6bc48d6904b08a81
   seconds: 0
   lost: true
-3GX5 integral.discriminant_sequence:
-  hash: ac5830bf83c01f73d9a9417b7f9de8b39dbfd51c20f84ed5872b139ccae22b93
-  seconds: 7637
 3GXO integral.overlattice_count:
   hash: 8392a80454dd1af739e9d6163b1538aaafd76392d9cca73846c1dc3e312e9aa8
   seconds: 10
@@ -1282,9 +1279,9 @@
 5RR1 integral.primitive_orbits[SOtilde]:
   hash: 2b2f37ca731c7f2c974be88ea8d147c4f3c85c99adec5cb66a320253d297072a
   seconds: 19709
-5XJI integral.primitive_orbits[SOtilde]:
-  hash: 96e8c8c33fb0d5bd0c7119aeba6c83148aa366c2cd2444edbcb529749b6cf5b1
-  seconds: 105
+5XTS integral.primitive_orbits[O]:
+  hash: da0effb9ca9b091b23ad79a6d8a4439e3ec908d76839b40ec500413656dbfc45
+  seconds: 546
   lost: true
 6JRR arithmetic-group.otilde-plus-t-co.index_in_orthogonal_group:
   hash: acad0e18f0c158ad5bda122e435bae4133bd93287223e2a8ce2c8b611148e2d3

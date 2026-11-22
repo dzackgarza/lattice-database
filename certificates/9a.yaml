@@ -25882,6 +25882,9 @@
 5HF6 form.integer_valued:
   hash: 45a7f045ae2d032347472b1eafd5220d24b2201099b6f9711b5502d1ba917da4
   by: research preamble
+5HF6 integral.anisotropic_primes:
+  hash: 0197402c254858ddd53cfbe34efca14cd71275e3ca05da1080e3668a496e2e11
+  by: research preamble
 5HF6 integral.elementary_primes:
   hash: 725fe4fb0347419a13bcc414d7ebc07a2e5beafd0af6dcc3ea13926bb26badf7
   by: research preamble
@@ -25894,8 +25897,20 @@
 5HF6 integral.hyperbolic_index:
   hash: 98f0f9269f96346376d0bf12010617218f871d2e53d387abb954bffc8721bc2c
   by: research preamble
+5HF6 integral.local_densities:
+  hash: 1e172dea9816e9767e15076d30a1f3baecea09c9f7f31ff0ed3d98b85e710e6d
+  by: research preamble
+5HF6 integral.local_representations:
+  hash: f564849e76f0334f35f645ddf508570e06978de4470b6bc0a6076394ec833bcc
+  by: research preamble
+5HF6 integral.modular_scale:
+  hash: 8c102012665a74abd5b128370ec72bca449da8976233a8b84c7dc709ec5bff50
+  by: research preamble
 5HF6 integral.overlattice_count:
   hash: 46549374c4a91bd33446b70e91c98359df2ee2214fa20b98f759193a3c61d906
+  by: research preamble
+5HF6 integral.primitive_orbits:
+  hash: 531651e12e0e7e82cb5c1131f5063c02ab91b81eb4b66e2c39ba9131021cead1
   by: research preamble
 5HF6 integral.spinor_genera:
   hash: 54c09b8194f25506568337a650c765359fffdce6abdd5ff2080c9da27e6094e6

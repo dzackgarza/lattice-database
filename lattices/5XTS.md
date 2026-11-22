@@ -14,6 +14,7 @@ certifications:
   integral.hyperbolic_index: 881bf55583f54a2eb478bd9ca46ac773407b1b25843abb3029e319ce673cfd15
   automorphisms.automorphism_group_order: 63a7e8954f9c08f2679aa6707aaa22f8b282ab91d37c2da300c2114c551e56ea
   automorphisms.automorphism_group_generator_morphisms: 3fc3c98336dc3bbae50f1def80dcc8a352fbb0897649c60634f5bf464329ec7d
+  integral.discriminant_form: 4f1041e7ef6531310ed09c1ad09f18fe489d9de1ffa76b558af6dd212ee8fff0
 rank: 5
 gram_tensor:
 - [2, 0, 0, 0, 0]
@@ -44,6 +45,10 @@ integral:
   spinor_genus_count: 1
   spinor_genera: [1]
   hyperbolic_index: 0
+  discriminant_form:
+    orthogonal_group_order: 288
+    isotropic_classes: 50
+    isotropic_orbits: 4
 automorphisms:
   automorphism_group_order: aleph0
   automorphism_group_generator_morphisms: [O(L) generator 1, O(L) generator 2, O(L) generator 3, O(L) generator 4, O(L) generator 5, O(L) generator 6, O(L) generator 7, O(L) generator 8, O(L) generator 9, O(L) generator 10, O(L) generator 11, O(L) generator 12, O(L) generator 13, O(L) generator 14, O(L) generator 15, O(L) generator 16, O(L) generator 17, O(L) generator 18, O(L) generator 19, O(L) generator 20, O(L) generator 21, O(L) generator 22, O(L) generator 23, O(L) generator 24, O(L) generator 25, O(L) generator 26, O(L) generator 27, O(L) generator 28, O(L) generator 29, O(L) generator 30, O(L) generator 31, O(L) generator 32, O(L) generator 33, O(L) generator 34, O(L) generator 35, O(L) generator 36, O(L) generator 37, O(L) generator 38, O(L) generator 39, O(L) generator 40, O(L) generator 41, O(L) generator 42, O(L) generator 43, O(L) generator 44, O(L) generator 45, O(L) generator 46, O(L) generator 47, O(L) generator 48, O(L) generator 49, O(L) generator 50, O(L) generator 51, O(L) generator 52, O(L) generator 53, O(L) generator 54, O(L) generator 55, O(L) generator 56]

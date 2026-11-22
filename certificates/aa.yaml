@@ -28215,11 +28215,20 @@
 659Q definite.automorphism_group_order:
   hash: 4155cad735efe0e4763607a07e5a925a70995d39db64f7b20e26bd1ba17e6a2e
   by: research preamble
+659Q definite.genus_theta_series:
+  hash: ee3e30787190fbcda34cfbc59fba24d0cf2e98645fd81e536040108117ba631c
+  by: research preamble
+659Q definite.theta_series_cuspidal_component:
+  hash: fc25bcb409f6e7359c3d26a059a46c2d9d50095a5dd9afd4eb95010e022e4280
+  by: research preamble
 659Q derive:
   hash: d437a68a8d09469fcc11ae360e893e563708db35787ded768951c0456eb6f53b
   by: research preamble
 659Q form.integer_valued:
   hash: f4ad707d316a9640dd18e588253755d150293d38192ef76a74dd8957ccbb3af7
+  by: research preamble
+659Q integral.anisotropic_primes:
+  hash: 3a8432695e813d3da89065b9e62415225f7722e4efd1b38e34b08a6e6302f745
   by: research preamble
 659Q integral.discriminant_sequence:
   hash: 86695bb5beecde68e968ea3069d65f9c8863c1bb82476e333de7b9dacf7d78e5
@@ -28236,8 +28245,20 @@
 659Q integral.hyperbolic_index:
   hash: 025ccf2603dee0498ded5c30f5100b4c33867973d190d2212e8eba340b29c9fc
   by: research preamble
+659Q integral.local_densities:
+  hash: 69e3611ffaa02d8f16dd16ce606e89a8526a4df15db8a09fbea90e58900c278d
+  by: research preamble
+659Q integral.local_representations:
+  hash: 87162c1654d9f8f1cebcd916268b7578c913f6f7e70a86a810b347245c86ff05
+  by: research preamble
+659Q integral.modular_scale:
+  hash: 5646a55ae4564edb51ea2e22a2e00bacdf1bfdc9958a9012d7be8d998dfb474d
+  by: research preamble
 659Q integral.overlattice_count:
   hash: 57c1c7891f2f2cfa2da8770000baad9083bab4d2549b5a015c8815e21a45c66b
+  by: research preamble
+659Q integral.primitive_orbits:
+  hash: 9bca736b4af4a1e2c5ef2855da6dde881f35744b6e48ace0b4467327bea407ac
   by: research preamble
 659Q integral.spinor_genera:
   hash: faafe7eea4d7519c5fe19337d5da427d746e836251a6b71b80b516fec73f5f5f
