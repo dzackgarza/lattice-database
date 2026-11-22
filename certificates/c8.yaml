@@ -19942,6 +19942,9 @@
 207O form.integer_valued:
   hash: a293f50629ce9fd8785304f5e735a9fc61bcfbdfd87ec8bf2f6a1e40455aa67b
   by: research preamble
+207O integral.anisotropic_primes:
+  hash: b5daa921f2f4ac584bf4b8e4523aaa4854e19bff84684114e29226d5bee9909e
+  by: research preamble
 207O integral.discriminant_form:
   hash: 424e03b42742d70d8f4fed64e7fea9bb83c8fe79cf47f4980c9aa67b8fa85976
   by: research preamble
@@ -19959,6 +19962,12 @@
   by: research preamble
 207O integral.hyperbolic_index:
   hash: 3d15c57692a82f12ce723e35746fa48295f001926d8603cca8067c0b3bf3f3d0
+  by: research preamble
+207O integral.local_densities:
+  hash: e025fc2e6067743c5f3f770d3e92038d105fde996c1b4898661a66637e05a985
+  by: research preamble
+207O integral.local_representations:
+  hash: dc857984f4e9b99c5b00fa1e9a9e56e53af41e548236774da959b10223553ab7
   by: research preamble
 207O integral.modular_scale:
   hash: 78062f48bd8b6999eee097b5eca681bb106a1947d611e6c282e0e0311ba171af
@@ -19993,6 +20002,9 @@
 20KF form.integer_valued:
   hash: 24810dbb55d85f6f3c2774680e5a930eb83161c4cccc69d18c91fdb0d2a3e048
   by: research preamble
+20KF integral.anisotropic_primes:
+  hash: eee9f365baef30bf98a603a34a96a7ce317a4b2034ce1d4c3a6b5981fcd4482d
+  by: research preamble
 20KF integral.discriminant_form:
   hash: 27e363ca04fb27d59e17bd4f5aaa3cb5586c3e6316ad900fe018531992f0cddd
   by: research preamble
@@ -20010,6 +20022,12 @@
   by: research preamble
 20KF integral.hyperbolic_index:
   hash: 6ddb5e0652452cc05143a3929f74be41f52261fc427ce0892159a0cbf03707b3
+  by: research preamble
+20KF integral.local_densities:
+  hash: 6c79628b950887c721286edf4362cd5622694920cec03f9fa2ea03ca520e5b85
+  by: research preamble
+20KF integral.local_representations:
+  hash: e8bc29734015dafda444e8c69c385bdce58030ec88181c0080f61b12a923f4ae
   by: research preamble
 20KF integral.modular_scale:
   hash: 532b3c94136133d34980a86999f09839ce80de24c66bfbe03792a579d493a291
@@ -20032,11 +20050,20 @@
 20UP definite.automorphism_group_order:
   hash: 8fc6f82de2e20540b54e2cde8b9820441dea3bbc88be7a76eb4005321ad01011
   by: research preamble
+20UP definite.genus_theta_series:
+  hash: eed1b6ba88840837dd0f186b72519a87b701c3ea3db3439a2ad981505ed9c4a1
+  by: research preamble
+20UP definite.theta_series_cuspidal_component:
+  hash: ebf2888d1607420da704b28ecdc22d0ce7f8ac5679c18dd207c94e9d2a7a44b7
+  by: research preamble
 20UP derive:
   hash: aff7790db0700f65e4e738772403e2f1c3bcaae58169ef11b9cb3b624d6181b2
   by: research preamble
 20UP form.integer_valued:
   hash: 91d09f51fde1d8adf10f2194afa00d586369bea7bc02a71825abeab2af92531b
+  by: research preamble
+20UP integral.anisotropic_primes:
+  hash: aa2b5ed0a3926f31e6a971c80e3d78fdcb97bab9f9f4f34483de50fce9267d4c
   by: research preamble
 20UP integral.discriminant_sequence:
   hash: c4469b5b55560fd72dca1f8612e6f93b4a072ca9b68aa4db0dd9675920919ec5
@@ -20053,8 +20080,20 @@
 20UP integral.hyperbolic_index:
   hash: e9c8912719b04861bc27d61595ca8624329a8821c5a70e696434301caee9a2ec
   by: research preamble
+20UP integral.local_densities:
+  hash: d5cbe055097f9b4a882cd2e8422c6872e645e89db2c5e4bb59fb6b243aa9e320
+  by: research preamble
+20UP integral.local_representations:
+  hash: d0a82ebbc162af06a6c15245d697d36bc6045b3e50fa42672cb13236f4320b9b
+  by: research preamble
+20UP integral.modular_scale:
+  hash: f24463c012a51863d6329c6d44dc430f8b76b727f94815f174768cd8c89f1921
+  by: research preamble
 20UP integral.overlattice_count:
   hash: c7875667f21978330569055622899f0e6b0bf72c68e11fe78409f6b1f9886a2e
+  by: research preamble
+20UP integral.primitive_orbits:
+  hash: 873500a74ef0c24d39079aaf6b177844b70c4e5f5cc117bdc9596c5ce045bf5a
   by: research preamble
 20UP integral.spinor_genera:
   hash: 3de710e4ba7fc065e9f884551b4b4599a150730aabacfeb9d17a95091b9c2886
