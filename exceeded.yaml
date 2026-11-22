@@ -711,10 +711,6 @@
   hash: c2d56853c688ca548dd50df42dc26996cbe6f8a73e77d63b9dc95c2c53e7aeb5
   seconds: 0
   lost: true
-1MSQ integral.discriminant_form:
-  hash: 8abab59cca92219654fd2b87c7ea8d96aeb815c545bd9887581d345593233a8d
-  seconds: 15
-  lost: true
 1UJ2 derive:
   hash: 67d45b33429de41171f34effa19d2ece2d8e00962b8167d9e182f44fc0c1a8b9
   seconds: 0
@@ -1152,6 +1148,10 @@
 3GTS integral.discriminant_sequence:
   hash: 26a906b9d9d22e2f60644bcb66ee493b586d333a3d2e8d30e57e85387eee4009
   seconds: 19661
+3GU5 integral.discriminant_sequence:
+  hash: e67b80066f6307eb6fc6e0d2671fd9e81a870a3fe3c800eae50690c33b244b3d
+  seconds: 821
+  lost: true
 3GVS integral.overlattice_count:
   hash: 08ed3d3d97ba6ede8efea82cce0080d3ea5206f140bdd1239f06276842783102
   seconds: 10
