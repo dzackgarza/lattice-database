@@ -26781,6 +26781,9 @@
 5FR4 form.integer_valued:
   hash: ffbd0c4c9fd21faf0b4fa8122b0af31b5a81aeb712e98bd1c83417e9707e3a2b
   by: research preamble
+5FR4 integral.anisotropic_primes:
+  hash: d786d2d27910682bc7760e7db55aac9674ed9375dd67ac30ba5942f3a6462554
+  by: research preamble
 5FR4 integral.elementary_primes:
   hash: 4501f7bc6a317377f8476d33e45c375d6bc070b88be10b670bd03e929ebbb035
   by: research preamble
@@ -26792,6 +26795,15 @@
   by: research preamble
 5FR4 integral.hyperbolic_index:
   hash: 500be705881dc9388a81447c6bba49ad07cfedfa2bee7d356b1f627332c352ba
+  by: research preamble
+5FR4 integral.local_densities:
+  hash: 5dcfefe3fb622560a7edd4f5859d53c59ad106fc1b19967b722bbaae32ed37ef
+  by: research preamble
+5FR4 integral.local_representations:
+  hash: 13be9c60a74440dc39348b5fbec6a2f80bc60160f8fe32595eecf4d77ec7f773
+  by: research preamble
+5FR4 integral.modular_scale:
+  hash: c6f02412b6d7aa4ae81ab4a807aeb30621ea789dc3b66a9916cd9029914ea1d0
   by: research preamble
 5FR4 integral.overlattice_count:
   hash: 81dc32ee93e18ce0d51e9c2dc095e8fc1041e3f34e1fc72d25cca31a0876cca0
@@ -26807,6 +26819,9 @@
   by: research preamble
 5MCO form.integer_valued:
   hash: 2b5b06aed89dfc39bbe8bf49db7637394370f82fb33d970bb9bf33eb84cfd836
+  by: research preamble
+5MCO integral.discriminant_form:
+  hash: 6d2560c747d51d01c08b79e9f2e7af81d0ea7e9eed712b1ef6156dab3aadbdb4
   by: research preamble
 5MCO integral.elementary_primes:
   hash: 0fff3191be9520c5ea5bdcc790f7fc86a819189d8e64af3de7560b036495adce

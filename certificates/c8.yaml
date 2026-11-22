@@ -29278,11 +29278,20 @@
 66I3 definite.automorphism_group_order:
   hash: 57ad8255aa306f780ba01588a8f000a83455ae8747e1ca028ded6543ddf479e5
   by: research preamble
+66I3 definite.genus_theta_series:
+  hash: 0c815f847f6846541cb1df1310261ae54a7ab83c4e4c37e404b4ee0d5ab951a5
+  by: research preamble
+66I3 definite.theta_series_cuspidal_component:
+  hash: 287358cfb0c1f8af7ff470bce45c185166bff925fa5e956c4ee764a853915d61
+  by: research preamble
 66I3 derive:
   hash: 8340705cef2c48da193de191303c513f68a3da60643e2a1145049db91fc86deb
   by: research preamble
 66I3 form.integer_valued:
   hash: 0d7aea350db2f44881578ffaa77897db8d6e7f67f57674adc251483fdfd97cdf
+  by: research preamble
+66I3 integral.anisotropic_primes:
+  hash: e4354e6e6419d5e405568253f30e1fe2f1777f7c38d8ae95fd725fdfb3dc70cf
   by: research preamble
 66I3 integral.discriminant_sequence:
   hash: 0ba0a8341f7473ab1edc9d4bea8ca4063fb2146ae1776b39fdf7184acc0cfae4
@@ -29299,8 +29308,20 @@
 66I3 integral.hyperbolic_index:
   hash: b46136bf61daa16fd1e8dfd79a25abf2dd389f56b4f943e4651ab88876712f4e
   by: research preamble
+66I3 integral.local_densities:
+  hash: 97926f8a062877bb131c079fdecd5ed9a0f87c368bf964682a42e98b2543730b
+  by: research preamble
+66I3 integral.local_representations:
+  hash: ac93f5f6acdea44497695b3406cf4ece8d73b242af092af70d908529b15539ee
+  by: research preamble
+66I3 integral.modular_scale:
+  hash: 96a3b873241b086a58b7bd46dc29fdbe9e3bed5d88ba47cd7e87a773f2d24d43
+  by: research preamble
 66I3 integral.overlattice_count:
   hash: ae0ab234d4bc04178dabd6815b2b2e86abc35ee8f868737bec5cba4326e1fa4f
+  by: research preamble
+66I3 integral.primitive_orbits:
+  hash: ca69ffc7914a20c4fc560e32237a6706924579deb3193370b4f4b0f063b386c3
   by: research preamble
 66I3 integral.spinor_genera:
   hash: 6c28761b2bb2722edc945ddbcbbbc6c6d75349fdef0c496ab89f9c643ece2c17

@@ -25912,6 +25912,9 @@
 5GUG form.integer_valued:
   hash: beee2e067e96d5f2fadcf21d7c231151f8f9348ba67dd64210a7e1e3f6735623
   by: research preamble
+5GUG integral.anisotropic_primes:
+  hash: 3121e8444248b45464e660310d761eaba852b107ec11a8e7a9a003c0d9a776bc
+  by: research preamble
 5GUG integral.elementary_primes:
   hash: e63fe6337875209946badf239332d40acfbcf8734aaf2c64e625c051e49d645e
   by: research preamble
@@ -25920,6 +25923,15 @@
   by: research preamble
 5GUG integral.genus_symbol:
   hash: 617ed67749b22e8c84d6dc142adcb7953c7bbdbdb787708d10b9283b4d5e48d8
+  by: research preamble
+5GUG integral.local_densities:
+  hash: f20dd7972526473e47da4b1e6dbdfd677ced31a4fe32f72d39313e6d590d33a9
+  by: research preamble
+5GUG integral.local_representations:
+  hash: b6e9ac6497ecd1409100bae00f3cda81b4fde23853b34db30db9dede377f2228
+  by: research preamble
+5GUG integral.modular_scale:
+  hash: 519d1beedc5d1ba952c257a2ef170633bac5ed3e7851f92f6731d789b7fe379b
   by: research preamble
 5GUG integral.overlattice_count:
   hash: 2e16d2a38984dae75dd98b5e97c6f52458a4a6362da81f6f4fe1950fbe671125
@@ -25936,6 +25948,12 @@
 66J1 form.integer_valued:
   hash: d70d480307078f3c138339e2f57cd3be930b94ae8f0318debbd62fe2c7c3df13
   by: research preamble
+66J1 integral.anisotropic_primes:
+  hash: 22e54c61bb076f73332832da5ab3aed436026d159b077490201e5bd2f0320813
+  by: research preamble
+66J1 integral.discriminant_orbits:
+  hash: 9c1ee2d8f277e773155a75c26dabd60854592cfc49d11884708b603124ea3f46
+  by: research preamble
 66J1 integral.elementary_primes:
   hash: e5841031ffee1e01838af15fd37328265bb1dae3bbbe5e503adfb154008eb308
   by: research preamble
@@ -25947,6 +25965,15 @@
   by: research preamble
 66J1 integral.hyperbolic_index:
   hash: f6f7ce1180ef8742f5b68a319f79ec45eb75b1dfbcbe1f579ab74cc174b4dad5
+  by: research preamble
+66J1 integral.local_densities:
+  hash: 1b79571309f2e96c60644c5f921044861fca91669476d2c6ee1583360a4f3c10
+  by: research preamble
+66J1 integral.local_representations:
+  hash: 669acf3060f61cf2b3f45f7a3f3ef5d24583bacebd768efbe3acdbace72ea227
+  by: research preamble
+66J1 integral.modular_scale:
+  hash: 9908636ec5b8ac9fa2a0aa188bc03ec324552054cfd8d311f91658a1d6abaf01
   by: research preamble
 66J1 integral.overlattice_count:
   hash: 8e78e75abfe242b2a12885e2cf64d3e8622c258a7268d81090647109593d6197

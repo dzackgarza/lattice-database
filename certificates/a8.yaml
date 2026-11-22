@@ -29235,6 +29235,9 @@
 5G9L form.integer_valued:
   hash: 386bdc75d466e898a1cc05baaee7c6283d3c2095cc4d8af53ebd94521b0da962
   by: research preamble
+5G9L integral.anisotropic_primes:
+  hash: e632ec0da65afdeba4a2322d9b2bb3122d421261a0e1cbd30ef634324dacb1ef
+  by: research preamble
 5G9L integral.elementary_primes:
   hash: 68a4b2826f0478045b741ef6de73142853198325af7a5f747921e8c54a0ad6cc
   by: research preamble
@@ -29246,6 +29249,15 @@
   by: research preamble
 5G9L integral.hyperbolic_index:
   hash: beff60784eb0383523b5b5db581c4567bd0d0748d5d4152c6c4659eb0e3a3860
+  by: research preamble
+5G9L integral.local_densities:
+  hash: a19d405b72a1b8d075ff612302d6c78eede7d763ec4a7ab3a1d5c3b70f201c37
+  by: research preamble
+5G9L integral.local_representations:
+  hash: 42c1d73da23cdd5e904bffeffb28aad3d1890772de495de3bb66f88a379d9088
+  by: research preamble
+5G9L integral.modular_scale:
+  hash: d7b20780958915c32ed11751cc5b5958cf7ba941ad12587b71ab79c325aeba1b
   by: research preamble
 5G9L integral.overlattice_count:
   hash: ac1d2c80c4773f5ce03d55b7b0de0f206967853420be9c848027428ea0523235
@@ -29325,6 +29337,9 @@
 6J9U form.integer_valued:
   hash: 95d28cb5ed929e1992046eb6ae70f8edb8b6304576b3c8420d4845c15abab556
   by: research preamble
+6J9U integral.anisotropic_primes:
+  hash: 070ce44d27bc7471a0dbea9b7fcc9cbd523dc81dac6ff9b6de94c8febafbe4a9
+  by: research preamble
 6J9U integral.discriminant_form:
   hash: b2422ec3836a246affb251057e1bd35d995203d52ac44b2dfb8893f200549b3e
   by: research preamble
@@ -29342,6 +29357,12 @@
   by: research preamble
 6J9U integral.hyperbolic_index:
   hash: af3d6138d1577f4b4007843b8fc93dc8ed310100840a3cf819e4bfa55740791d
+  by: research preamble
+6J9U integral.local_densities:
+  hash: b74336f824658fff1a736c694e12d08105e300beb7bcca3993abc779383b5018
+  by: research preamble
+6J9U integral.local_representations:
+  hash: 40c28e6eb41640a3d63f94e06dc477ea696d6e5d55f17facb4d6fbc0a7aad890
   by: research preamble
 6J9U integral.modular_scale:
   hash: 7c75f833e6cdcd973af9bd1ad06e848193667b3bd2d840149e67289d0ae5821e

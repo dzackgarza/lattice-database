@@ -26508,6 +26508,9 @@
 4QGY form.integer_valued:
   hash: dffff04d31364fa0ef8263cf42426ba1bf36d288cbf0c07a4c818d2f16494c59
   by: research preamble
+4QGY integral.anisotropic_primes:
+  hash: 935750788e9b671a88ed81b8a21b1d31b9c030d93f3d26169638153ba68626c5
+  by: research preamble
 4QGY integral.elementary_primes:
   hash: 1668a5f7e7161a3421752651abbc9d7e3455e43dc8930e6ee0d6ae0ec827381b
   by: research preamble
@@ -26516,6 +26519,15 @@
   by: research preamble
 4QGY integral.genus_symbol:
   hash: b24f5722ab1e06d4ff1ba25c8705fc7c98eb8c08c8bf6b93a20dff09fe38e441
+  by: research preamble
+4QGY integral.local_densities:
+  hash: dcf256bf648c34cb14233e194bb5b5d6afb6f8375d593811f0d1759162ca7a0c
+  by: research preamble
+4QGY integral.local_representations:
+  hash: b77a2fb52c938a70d7ba31eb64a83d6d132d3038e97771f75a6db1b7d5878502
+  by: research preamble
+4QGY integral.modular_scale:
+  hash: 0f7eb33ea4c30e55d7e819d059190b3373825ee3311a1351fcd2ccd25548c48f
   by: research preamble
 4QGY integral.overlattice_count:
   hash: ab3e25d2f7c60606fd6b52d626fb43c4421cf8e659f8917491149888164ab951
@@ -26538,6 +26550,12 @@
 66OA form.integer_valued:
   hash: dc6b3df538b59570253f56f61c99e793f75a8b7afe70fa66cfac513a1b6f7b8b
   by: research preamble
+66OA integral.anisotropic_primes:
+  hash: 096bb3d129c2287c9890f561066d739e7a78628397da99955909990920ae5292
+  by: research preamble
+66OA integral.discriminant_orbits:
+  hash: 7cbc9add1f269d5cb756993dddc7dc0302fdb6c1681744b78cd12cdce6922360
+  by: research preamble
 66OA integral.elementary_primes:
   hash: 4d80b600610eef07a4622b0aac1d367023afd69603bb295316bf002ad47372e9
   by: research preamble
@@ -26550,8 +26568,20 @@
 66OA integral.hyperbolic_index:
   hash: d8519bd82013e46501ed23ef7ad976de6bd628efa5bad8fb173c6f294988285a
   by: research preamble
+66OA integral.local_densities:
+  hash: 4a03b5164b65b1d7e407b54e0f19ef64787579b3cd89038da0d770208a01c6d2
+  by: research preamble
+66OA integral.local_representations:
+  hash: 0ba5e29635302202514e5425c1fb0afe258506202226c6cda49d0fd3dfc86151
+  by: research preamble
+66OA integral.modular_scale:
+  hash: 8c0027b3754b0d1b7bd22eecd0fac20b4233122c6594f6d2895301ccfd1e008a
+  by: research preamble
 66OA integral.overlattice_count:
   hash: 59256133966ff82ccdf40021e24006bb0ef3c5856687bb04941165ab93f81613
+  by: research preamble
+66OA integral.primitive_orbits:
+  hash: 67d0101eda9ca908734c5f839865e753bb5d011925668ef0efef6589bc60bef5
   by: research preamble
 66OA integral.spinor_genera:
   hash: c03668b55909efa605d85d1e2c92c18ffe1aa9bb2f54a1ee63f4df713838f79e
