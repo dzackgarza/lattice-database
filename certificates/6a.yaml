@@ -27634,11 +27634,20 @@
 440U integral.spinor_genus_count:
   hash: 0ee32591358b528230388f27cc72c547d3d976e9727e3fc387d639b96c66b712
   by: research preamble
+5HIA automorphisms.automorphism_group_generator_morphisms:
+  hash: 8ee015a1f1f16171ab82e8e89bd94136e9c8d4d2dc72063d0a698e5ccc4d31bb
+  by: research preamble
+5HIA automorphisms.automorphism_group_order:
+  hash: 20541e697edff9c8d9b8cfb9078285037db74ee7e26694d231dde610865ec8d1
+  by: research preamble
 5HIA derive:
   hash: 66c0c506ed73edb1b2df1e7429b5963b077d0fb9d0086b397ee8b0cbdf422a79
   by: research preamble
 5HIA form.integer_valued:
   hash: 520c6fdbe6b2311e8345b69a51fa2c3a3d945e622c9bdf94709246c5bd4b4604
+  by: research preamble
+5HIA integral.anisotropic_primes:
+  hash: 9f0fb823167838bf7aeb7cc741e9be09474d4375f2f5b4e537c61aec2c1fbf98
   by: research preamble
 5HIA integral.elementary_primes:
   hash: 1675ab866c9b46079dc226fd1f2fb8d577e652c56d48d665d13178cf354b9f78
@@ -27649,8 +27658,20 @@
 5HIA integral.genus_symbol:
   hash: 8bfa2d0fcb3c9cc950da2f20da6e893f27cd9574e70eadf3bc2b91e080fa5c4b
   by: research preamble
+5HIA integral.local_densities:
+  hash: 2ef243cba0f2f1c3a892d0a81161a1565eaab222ac0ff5bc0e08b8c855356390
+  by: research preamble
+5HIA integral.local_representations:
+  hash: b017ca61b8eb25c3db97d01c209af49d2378e30eccefabff6b40f20c17bed57c
+  by: research preamble
+5HIA integral.modular_scale:
+  hash: e8c413985afa34d8486840d78066320fadeae20ae2c96fc90b1e4dc0cd5c2cb9
+  by: research preamble
 5HIA integral.overlattice_count:
   hash: f0264e57b384d9cbf3c3104769790c4df4cff99b0b5f4bc95dbe9d37abce9906
+  by: research preamble
+5HIA integral.primitive_orbits:
+  hash: 5fe3c14ab31f390ca9e25fcf81ed7970aeb96653df48bb4f84b2c03c8337dab9
   by: research preamble
 5HIA integral.spinor_genera:
   hash: 7835260f0eaee92cbbbd0fe7e04e9b66a7942ef064a6b9f7e7220354eeae8aa1
