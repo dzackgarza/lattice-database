@@ -27667,11 +27667,23 @@
 4RDJ definite.automorphism_group_order:
   hash: f566c92d6e97de93e2822f3f7e70831b3bb274e5e81dabdb4dc498883d54d1ae
   by: research preamble
+4RDJ definite.genus_theta_series:
+  hash: d3216a4a85549d6bcaee95b1998619cbf6dee86bcdc1b6dd0c87615742e27444
+  by: research preamble
+4RDJ definite.siegel_eisenstein_coefficients:
+  hash: b7aaf4df52f6ee66cb81b6c4ae46f5d4427015e2da8eae35803a318c773c5ee3
+  by: research preamble
+4RDJ definite.theta_series_cuspidal_component:
+  hash: 9049408a7c54d9d0cb573f8d121f79ec237387f0453fc7dcfd539fbdc609aa81
+  by: research preamble
 4RDJ derive:
   hash: 83fe034b8ce837e26891dd0cadcc4662ab3c29b779356be31bf9a0281f5d890c
   by: research preamble
 4RDJ form.integer_valued:
   hash: aa249bdf8b2f6297a5c03cdfbf98b5a5a4f2ef784dd29511ae9c5486a1267802
+  by: research preamble
+4RDJ integral.anisotropic_primes:
+  hash: 50c989d862db36d1af8d586adf2f07827bc1dbede51448d2376b6b9c58d602e0
   by: research preamble
 4RDJ integral.discriminant_sequence:
   hash: f431403a6267c38179b19290dee05c2a2e73305d3cc8abc2780aa1064c321af4
@@ -27688,8 +27700,20 @@
 4RDJ integral.hyperbolic_index:
   hash: 87c48884a12f7e67d0cbdfabef6619784942538800e1967332314de5617e9f72
   by: research preamble
+4RDJ integral.local_densities:
+  hash: 14edf8a81ac84e91093d9d6355ea29bc9ced3d36cb32bb97207dae04a613f49b
+  by: research preamble
+4RDJ integral.local_representations:
+  hash: 8e9da20cb540a584a3d9f943b013037f44979e817ffbb23a20b7aff1e5313095
+  by: research preamble
+4RDJ integral.modular_scale:
+  hash: 8ab82413e897e51e2f2664a5898ce2c7da79e45e2c11604157705f3b949356cb
+  by: research preamble
 4RDJ integral.overlattice_count:
   hash: 1a93519ee2632984d09a6a196659606b09b2ab496695f929c67cbdf459f8e8a5
+  by: research preamble
+4RDJ integral.primitive_orbits:
+  hash: 7c0754dc7f95b910f67982817cbbd7ee62ecbe1762ae42eba8c8a6b9d402dfaa
   by: research preamble
 4RDJ integral.spinor_genera:
   hash: c3f93f20804abc4eed1f40f7cbac69c7b8874a760479bdd683dcdfdf927afc52

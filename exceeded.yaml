@@ -1250,10 +1250,6 @@
   hash: 8cb7ef7d73079f6dab7c15c2d594218d65ca768f8f835504e1350a5324ea9dc6
   seconds: 0
   lost: true
-4ID8 integral.primitive_orbits[SO]:
-  hash: dae1daa1417ae798750190ab6391bfbb19c7e60ed14f58e0404ac7e1de13f24b
-  seconds: 30
-  lost: true
 4QGY automorphisms.automorphism_group_generator_morphisms:
   hash: 34cab5bea4258fb5d2981ef12ec1ff85d68041508c4c379d32ccf473907d57b0
   seconds: 0
@@ -1265,6 +1261,10 @@
 58S6 integral.local_densities:
   hash: e5378e409c24f7701e373876b32586a87eb5a9cf04b7ada7350ac466781f0804
   seconds: 0
+  lost: true
+5XJI integral.primitive_orbits[SOtilde]:
+  hash: 96e8c8c33fb0d5bd0c7119aeba6c83148aa366c2cd2444edbcb529749b6cf5b1
+  seconds: 105
   lost: true
 6JRR arithmetic-group.otilde-plus-t-co.index_in_orthogonal_group:
   hash: acad0e18f0c158ad5bda122e435bae4133bd93287223e2a8ce2c8b611148e2d3
