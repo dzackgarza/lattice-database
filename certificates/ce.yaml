@@ -29923,11 +29923,20 @@
 3I6U integral.spinor_genus_count:
   hash: 5035ca6f13d883e4d66130c1db090ee84cf903d282d7733787c4a50e2428e2c9
   by: research preamble
+3QX5 automorphisms.automorphism_group_generator_morphisms:
+  hash: 0b3d5b48dd1f0be22c94e415bfc1ff26327bdedca52bf113385f2dd0e7dc287c
+  by: research preamble
+3QX5 automorphisms.automorphism_group_order:
+  hash: 55080dbf6c85b6182b85b69c0de1fe1b72f5734d9952feab46b8785a3f0860c5
+  by: research preamble
 3QX5 derive:
   hash: 5b12073d8892d49328c7ae1ba65e8506a3de6af807b28dcd1b348484a19bfec8
   by: research preamble
 3QX5 form.integer_valued:
   hash: 93212e98bb544aa4fe72a35c66bbe1296ac236f2d99e6f0322de6b5430c23a35
+  by: research preamble
+3QX5 integral.anisotropic_primes:
+  hash: 71053c6c57551a37bc8503bfc9f7194b3fc3a0501075cc855cd44deb3d05f468
   by: research preamble
 3QX5 integral.elementary_primes:
   hash: c008b575e78cbfed75617d8003e2456b03203510397c166069af9b6a2ea59c77
@@ -29938,8 +29947,20 @@
 3QX5 integral.genus_symbol:
   hash: 4c8364f8cbf5798c0944cffab8faa8799c94e1a571b271b713c8bd2b1eb45b68
   by: research preamble
+3QX5 integral.local_densities:
+  hash: 52ea0aa9548948defed42d6c2a2f10276b8249ae2183e4f24ff3756dbf8247e4
+  by: research preamble
+3QX5 integral.local_representations:
+  hash: 8a3e7e5781ccdb4a45c0768133a93da326e167043cfa462ad53e7ef261ebe312
+  by: research preamble
+3QX5 integral.modular_scale:
+  hash: 2374b2146e33cdc3e95d506e24d67b20b587846542f764dc9eef8d21030d12fd
+  by: research preamble
 3QX5 integral.overlattice_count:
   hash: 880464e82e598e1dcc84945b716ae226aa8a497549cecb2b7e1cfb9cddbf942c
+  by: research preamble
+3QX5 integral.primitive_orbits:
+  hash: 8665e9a74651d412fac6de59515cf0f85359b86de3ac4c74679862f0561a4793
   by: research preamble
 3QX5 integral.spinor_genera:
   hash: 768106685e6c51f0c916679e3f4030f75a4d5bc308de4f000ab6cf339ecf5b69

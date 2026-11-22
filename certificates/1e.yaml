@@ -202,6 +202,9 @@
 02JT integral.anisotropic_primes:
   hash: b9783e2bc706a64a13611e120fffa905e59e22099250c9412e46dfd84f013929
   by: research preamble
+02JT integral.discriminant_sequence:
+  hash: 87f758427820974bdb1b2621892bf8e1c2eb0c4d8404913966f4669231dd8864
+  by: research preamble
 02JT integral.elementary_primes:
   hash: d867270e78bebd615415a4637d0f79e0e246a0f55704342293569a820d856928
   by: research preamble
@@ -32935,11 +32938,20 @@
 3IBW integral.spinor_genus_count:
   hash: da1f184e3cab760be301eb8be6320f3159ff9bd598003ee7a2aee96045fe6c5a
   by: research preamble
+4BFK automorphisms.automorphism_group_generator_morphisms:
+  hash: ea609d2ecc639dcbaacaf51c9c1b5cb0f8653d07d20330b6adc916d0dd69514f
+  by: research preamble
+4BFK automorphisms.automorphism_group_order:
+  hash: c8c59e5c81f2d91f80d9137894ee4facd806ffb1b21c2902a35b1b9b17754b77
+  by: research preamble
 4BFK derive:
   hash: dbd441cc7cae807d58660f828227a69f16b4f03f6117bc9bb35d1b0235b9a362
   by: research preamble
 4BFK form.integer_valued:
   hash: 8e33afe5f3121a16fb73775c6bab8e19244a772db00f81a5f8aa5857ab24a37a
+  by: research preamble
+4BFK integral.anisotropic_primes:
+  hash: 7fa3b99fd544aa8a46e0dd178518ed500538f557ab2f8d504edb2ebbde8ea5e1
   by: research preamble
 4BFK integral.elementary_primes:
   hash: e35e303c5f34ffa0b606e89b410d6fb281b82dc99afbe0c645012bc298b086f5
@@ -32950,8 +32962,20 @@
 4BFK integral.genus_symbol:
   hash: 9a4c28ecfb1810109e4ae1c6f77820cedcfb9a9e868a52a503ebe4e47d518d34
   by: research preamble
+4BFK integral.local_densities:
+  hash: fc058e810ec3ca2cb681f330cc9f185df75e0adcb2506514716f9fac60294f04
+  by: research preamble
+4BFK integral.local_representations:
+  hash: ddd7a645e5ecb713a0d61af776c82eed011cd55c59c0a46488cc93abfd0f5465
+  by: research preamble
+4BFK integral.modular_scale:
+  hash: 9060975e786a4b0c36163b69fe9d0e895e408142d66d0bd5003265f6fbb622ae
+  by: research preamble
 4BFK integral.overlattice_count:
   hash: 678045221f86aae7354e2ff03ed13bf73735c1dce08631a2219f7f6ac79f2a69
+  by: research preamble
+4BFK integral.primitive_orbits:
+  hash: 0fe64b0b455b0e50dee348656e7363aebb34c2dcacdf80fb972b9acdb0a93dd3
   by: research preamble
 4BFK integral.spinor_genera:
   hash: bc66cdfb90681440e31fc477a1696589099f9614e3e524efe1920239e656a774
