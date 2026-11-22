@@ -23785,6 +23785,9 @@
 4R90 form.integer_valued:
   hash: 256ba9e14172ffbe64131223b4f7d4a18d4d65d4efe8d82622a396f72f826147
   by: research preamble
+4R90 integral.anisotropic_primes:
+  hash: bbcc65969d24f72311096ae077e2d8854566c623f10eed450910e513f9106fd5
+  by: research preamble
 4R90 integral.elementary_primes:
   hash: 61742c9588ab6960c61fcf5422b64e1c7681a239d60889029e23f834d3c18543
   by: research preamble
@@ -23797,8 +23800,20 @@
 4R90 integral.hyperbolic_index:
   hash: 62e6a634e375b655efe9811cb5336caa6b8b56a7b17b3159fad6805ce572ca46
   by: research preamble
+4R90 integral.local_densities:
+  hash: afddb3947305cfbabef64ac6cc2d32b857da406595b4abe38921d808c14a7cce
+  by: research preamble
+4R90 integral.local_representations:
+  hash: 7a57c60ad6bc5561d60d2b011dbf50e3a47fa8b60e35a678287a766bf217e332
+  by: research preamble
+4R90 integral.modular_scale:
+  hash: 1e9ed168d7602a1576adc3f5dc04e5cebd5dc9f498681a62e31d53010ab4df69
+  by: research preamble
 4R90 integral.overlattice_count:
   hash: bb1e6a51d25914f12e53a6607b365e1b25f0494d317db6eff702fc3ab63f395e
+  by: research preamble
+4R90 integral.primitive_orbits:
+  hash: cb999dca4eccd60a9ae80982c30794b82d28de123728cbd5d5083263e88fdbcb
   by: research preamble
 4R90 integral.spinor_genera:
   hash: 42886bd2ee3e797e40b5ddc13ebe674ceb457a165eec5345fdcf48c10da00bde

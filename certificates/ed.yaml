@@ -3574,6 +3574,9 @@
 0B09 integral.anisotropic_primes:
   hash: 2ca330a08ec5e542ce760be9e63fa785e7733c2580242a03e892e9967095acf7
   by: research preamble
+0B09 integral.discriminant_form:
+  hash: 76650f5cf1b78fc84acd8638e07e71e78a07902b872096ac179a5a9fd5eae6e7
+  by: research preamble
 0B09 integral.discriminant_sequence:
   hash: 3bc7e1ba6ee0ea617a682f64e8a185cc9b44499a075576af25cbb2a75ce04c7b
   by: research preamble
@@ -26178,11 +26181,20 @@
 3I8O integral.spinor_genus_count:
   hash: 16aaa7b2b33e52f4cd901e3e4015b488a9e73a453d17dff821336c55b80f2feb
   by: research preamble
+436G automorphisms.automorphism_group_generator_morphisms:
+  hash: 726bd66b2bf1016f260f1b9bb349e30d5cd0e0f0479943cbfc8fa7784fd2fec8
+  by: research preamble
+436G automorphisms.automorphism_group_order:
+  hash: 12f23614896ab83d88dee0d38bb1a86aeb0b9c94e23a69e919d8aeb8a123e488
+  by: research preamble
 436G derive:
   hash: 758f310da94d803f90f29b0bbabebb1c8eade85e86f69d433d67b4e824af3662
   by: research preamble
 436G form.integer_valued:
   hash: 6cf82ef33f99615a7d62b2d5b969eb4f092cebbe62deb05f4364b6ddac34eae4
+  by: research preamble
+436G integral.anisotropic_primes:
+  hash: c70d9e0994f68d4cdd4fa9777b01348a01e758a6957b728c42d094c53382d67c
   by: research preamble
 436G integral.elementary_primes:
   hash: 9332f101423f6013d5fe2ff7fb692de992346556e5a7a7467a9c03eeb169e3ff
@@ -26193,8 +26205,20 @@
 436G integral.genus_symbol:
   hash: 938b5003c1d8f3de02f4bb405e52ab5e95ae73e62b55d120d8cb8beceb1bc537
   by: research preamble
+436G integral.local_densities:
+  hash: 5df0626e63fadfc7aa647703ba2c143becaf50dc78bbb82f7c9a7259c8befee3
+  by: research preamble
+436G integral.local_representations:
+  hash: 3b4cba9c105bf24c9517a3e3d8f51c8d8cbb17c9cd280136abcaa478de3be61f
+  by: research preamble
+436G integral.modular_scale:
+  hash: 6b642df04d7d6adf2ced900a373f3b4edb2688a66ddb88a665749230d04c0d14
+  by: research preamble
 436G integral.overlattice_count:
   hash: b9a80573ce4f740283331b9713dc24985eb837c11190a7e47bd89112a6d9e79b
+  by: research preamble
+436G integral.primitive_orbits:
+  hash: 1a9cff4d4cf21f51ea331d621c46e00bead05bc4279beac655a67a1923d40cb9
   by: research preamble
 436G integral.spinor_genera:
   hash: 4c0df7572f98605953949fd19f8db3cdc7ce9609dadca38335a4b69252115271

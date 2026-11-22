@@ -2680,6 +2680,9 @@
 0AZK integral.anisotropic_primes:
   hash: f791b9e92d4d107bbc076dcf6c2379ccd759018ac50b903fe8edcc6ad1db6551
   by: research preamble
+0AZK integral.discriminant_form:
+  hash: 41da75bfb42e7e9bab9c20e34524acdcba848aff028835772050ebf694cd6ae6
+  by: research preamble
 0AZK integral.discriminant_sequence:
   hash: dc2d9b420978d85bd4061e7b4a9df4ab79f269feb2c7d42ea35ad717258e15ef
   by: research preamble
@@ -2739,6 +2742,9 @@
   by: research preamble
 0AZW integral.anisotropic_primes:
   hash: c01e2a741a9de4bee9d68572a92f208546a7d7a3e36aaae086305338dffaafb3
+  by: research preamble
+0AZW integral.discriminant_form:
+  hash: 0f21d056fc3429e252ba825b62d12343c31a48c90a005c245a3807a38f6ade88
   by: research preamble
 0AZW integral.discriminant_sequence:
   hash: 337fe09f68c52bf20ee10ed7a0a85f8d000574a34efe0f3144e9779ec5a28e57
@@ -25104,6 +25110,15 @@
 6GU2 form.integer_valued:
   hash: 688eba3009854f52ad94e7bfecc068e237c5f876bbad4e4e9d2a8124ad44dbc3
   by: research preamble
+6GU2 integral.anisotropic_primes:
+  hash: 59b8b7f2e9e8674f56a39562d0a119aa9530f2dcb9c64743edad43f20eb8c860
+  by: research preamble
+6GU2 integral.discriminant_form:
+  hash: ef1e204142c999fc89261b3d24fb2d7827b488ed7766938df40562420ed905a5
+  by: research preamble
+6GU2 integral.discriminant_orbits:
+  hash: d4331c0ad872f7d99b755fcee36edf8c2c4e5de4131e6235b617136d133aba7f
+  by: research preamble
 6GU2 integral.elementary_primes:
   hash: b1bd2c1390888ff698aebc87f933d20dd7893f8a27c7973f633658137a7acace
   by: research preamble
@@ -25116,8 +25131,20 @@
 6GU2 integral.hyperbolic_index:
   hash: 620618cd051fa0a3d523328f073330f075d8dac267e15789f98813df0e89eba7
   by: research preamble
+6GU2 integral.local_densities:
+  hash: 91cfa202fbd495cdd804b705137cd098bda11bbc75391dc52ed2597295ef3c92
+  by: research preamble
+6GU2 integral.local_representations:
+  hash: d1ac65cd6dad1b2fe889657d732511a451d972a01871117bea42925ef35f10a2
+  by: research preamble
+6GU2 integral.modular_scale:
+  hash: 9cb477bad193d2f1c5556e1628000dcb2fbdda8f71fb8fc3e92f86a80dcad4ca
+  by: research preamble
 6GU2 integral.overlattice_count:
   hash: 76e78c05e5b50581732aa7ad57ec78fb219904c6aac36f431f7c1d756fbb38c6
+  by: research preamble
+6GU2 integral.primitive_orbits:
+  hash: 224e19745df8709dfd5fc5a41abc57e0f104d0b823b81824630e1cada5c857f7
   by: research preamble
 6GU2 integral.spinor_genera:
   hash: a9edd37ec18c3a3bf64d48bc1d36a9be5cdfb44ac9ee02c8c260c8100d226de4

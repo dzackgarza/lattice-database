@@ -2977,6 +2977,9 @@
 0AXB integral.anisotropic_primes:
   hash: 72174c9ebec6c2be954332f48c6ef916b85b824e2f4cfddfaaae31b69b76fc35
   by: research preamble
+0AXB integral.discriminant_form:
+  hash: d28448b7648ba5e3397b76a05815b5b6e62b9b4488a08f86e47cd8b2aab1f3ce
+  by: research preamble
 0AXB integral.discriminant_sequence:
   hash: 5210bfcd720c44841c7ed92c2aecdcf10b16ec105ed1ba136b8545b0c8b540a4
   by: research preamble
@@ -24976,11 +24979,20 @@
 3I9X integral.spinor_genus_count:
   hash: 84e8b60df0972fe4e43acaf9a725a32e72d47f950cb07a3a105fe7353ad6a400
   by: research preamble
+4AXD automorphisms.automorphism_group_generator_morphisms:
+  hash: 45d1ceced5695630e9e62f56bec56f35e5e9cee32b622d46e269120175d1302f
+  by: research preamble
+4AXD automorphisms.automorphism_group_order:
+  hash: ae7884356ebefddf52059c4520c0f11011a4e0838dbabe33c8a829c374a2c0af
+  by: research preamble
 4AXD derive:
   hash: 64c28e1100e99c3e42c9cac50978303074c1dfb3645e24e1dad557094704cb53
   by: research preamble
 4AXD form.integer_valued:
   hash: 3c50705e02a18d20afeeeefcd14622a56659418c7b4164d9f529cee9b28b6316
+  by: research preamble
+4AXD integral.anisotropic_primes:
+  hash: 281828cdd5b7888f060b53291f7c2ac7baeac522faad9b86289249d33add43e0
   by: research preamble
 4AXD integral.elementary_primes:
   hash: d95fa5570fdc0ce5f767826501941f0b69c15498dd56d20e67128716c1cdfa0c
@@ -24991,8 +25003,20 @@
 4AXD integral.genus_symbol:
   hash: bb08bd66c0488da776f0f92482f36e334bdd04c2ac3f01e460a42b48a7442f57
   by: research preamble
+4AXD integral.local_densities:
+  hash: 6595ea5bb6810e52c8723092b20d20bd838c07c3f3acb77581bcf80317f593b0
+  by: research preamble
+4AXD integral.local_representations:
+  hash: a7bd440051ec66af092a2085e33a9730dd2dfec9d34fc639bd1e93e4fb110857
+  by: research preamble
+4AXD integral.modular_scale:
+  hash: a3313fa0132eb53042980a38cf1f95de16c30fd92508066659a38768cb586282
+  by: research preamble
 4AXD integral.overlattice_count:
   hash: 0389341b8210e455e674c6344caa82f3bfd91191ef074c8562d29b9a6828276e
+  by: research preamble
+4AXD integral.primitive_orbits:
+  hash: db05cef4e18a61efb3b375a9d3b7a383a8d6d4017abbcdcaa310b9e455be461d
   by: research preamble
 4AXD integral.spinor_genera:
   hash: 212b134188c58bf12b35efdbb5fcb60054b52f1e922b964894fae0e29bf29329
@@ -25000,11 +25024,20 @@
 4AXD integral.spinor_genus_count:
   hash: 079314d5b301f5a19dd18dcffedc7a803c62f82c0fbeb35b068a051de8afd172
   by: research preamble
+50V6 automorphisms.automorphism_group_generator_morphisms:
+  hash: 2f714a4304dd6668936b5202248af99e728dc1b5676b0b8fcf9b788af77a60bf
+  by: research preamble
+50V6 automorphisms.automorphism_group_order:
+  hash: 276f71aa91d6d2f8f7bc39ec9a841360ec0070adb0757783a9943ba0b3d74a69
+  by: research preamble
 50V6 derive:
   hash: 20fb97f803a82efb30a2c4e60392ea42ef7bd55f48357da5b7653e6a887cf412
   by: research preamble
 50V6 form.integer_valued:
   hash: 970bdb0407f538848bc50cbc66d85995bb59e93541039d9b168a0f8ad40b8b52
+  by: research preamble
+50V6 integral.anisotropic_primes:
+  hash: 29122e669d25ffff4c16ed43cdd080c67303d6faf847e966b2bedb47913b0860
   by: research preamble
 50V6 integral.elementary_primes:
   hash: 1430e8a5eed8690b27ef5e3cc0e7468bbf9d499233dea50ab0a95d74457fbb3a
@@ -25015,8 +25048,20 @@
 50V6 integral.genus_symbol:
   hash: d516adebf857e0a1c1c64f57db170519149a347365c4304155107240a1e38a32
   by: research preamble
+50V6 integral.local_densities:
+  hash: f17e23a91e0612e9c9e88e65c702742bf48d398033b17205ee574f5a17a8c850
+  by: research preamble
+50V6 integral.local_representations:
+  hash: c077e589a3d0d636955866e230b9b9486b0d86ce52e352e3348ef8e5aa747c7b
+  by: research preamble
+50V6 integral.modular_scale:
+  hash: 131a71abcefcd2ca04ce52657600875cd6ecbd14346232a8c8ed964aeaed836c
+  by: research preamble
 50V6 integral.overlattice_count:
   hash: cd44f94cf64d4d72a1db772b6e721c290752015b89d46a9279a1a51e07817bb9
+  by: research preamble
+50V6 integral.primitive_orbits:
+  hash: ad104f20db1e9a352d252544e88623a3825fdaaeea10275cb64af70de5c55b5b
   by: research preamble
 50V6 integral.spinor_genera:
   hash: 9865241670ab3291ec2ba9731d3bffc08057d797b6ccd0bcb2bdfe8df4c1f473
