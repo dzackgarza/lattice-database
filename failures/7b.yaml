@@ -9534,3 +9534,32 @@
     database_revision: 2955d1ba7f5d4e5e14ae41a55265c35c4d506e6e
     research_revision: 11ff4360c27d72e347fb6fd2d76bed2e76695902
   notes: []
+49GG integral.primitive_orbits[SOtilde]:
+  disposition: open
+  attempts:
+  - hash: ee067b3952ccd23eab3f3f53f750fa82504aaf4d367929b047f0459210cff0d5
+    gram_tensor:
+    - - 1
+      - 0
+      - 0
+      - 0
+    - - 0
+      - -1
+      - 0
+      - 0
+    - - 0
+      - 0
+      - 0
+      - -1
+    - - 0
+      - 0
+      - -1
+      - 0
+    reason: certification budget exhausted
+    stderr: ''
+    seconds: 19434.0
+    recorded_at: 2026-11-22 22:55:49.683941+00:00
+    run_url: https://github.com/dzackgarza/lattice-database/actions/runs/45018144788/attempts/1
+    database_revision: 71701b6086cbdbfdda1f8ebcc469fef593f6ac26
+    research_revision: 8507b1b9dcc64ad3fb41beba6c138c9a45a094dd
+  notes: []
