@@ -630,10 +630,6 @@
   hash: 85ce9c836f2df8b9f9faf8ba5f38041ee9f9d52c2168f83014abc0f89fd4302a
   seconds: 52
   lost: true
-18YE integral.discriminant_form:
-  hash: df3388571a89a8b27505dbe2c592bbec42d98ccf8f20a59de57ca914578a2c7b
-  seconds: 0
-  lost: true
 18YH integral.primitive_orbits:
   hash: 15faf7f6fbe50262ecbe3495984bd51aaa0a7a10130b827ba371217ab99b4de6
   seconds: 0
@@ -655,6 +651,10 @@
 1DRM integral.genus_class_count:
   hash: b9116a9b09223f453b6990f0efa48f8670ad40d65cb4f5c32b3f8b2cb30e031e
   seconds: 10
+  lost: true
+1DZ2 integral.discriminant_form:
+  hash: 04228eb34f5cc75efb10d560f72adab14a1cb3de242df6432a17c5ddbf4a1d5d
+  seconds: 0
   lost: true
 1E4M definite.genus_theta_series:
   hash: d7c64037632fee89953decdc013e161f16f25e3ddeb85d56b82be0231cf40d1f
