@@ -1147,10 +1147,6 @@
 3GTS integral.discriminant_sequence:
   hash: 26a906b9d9d22e2f60644bcb66ee493b586d333a3d2e8d30e57e85387eee4009
   seconds: 19661
-3GU4 integral.discriminant_sequence:
-  hash: bbf36c605466702aaecfa6bb03d65f0507a027c53322c3ac9986b6d0cde3c780
-  seconds: 188
-  lost: true
 3GVS integral.overlattice_count:
   hash: 08ed3d3d97ba6ede8efea82cce0080d3ea5206f140bdd1239f06276842783102
   seconds: 10
@@ -1166,6 +1162,10 @@
 3GW6 integral.overlattice_count:
   hash: 5cfdbc2ca9747a79ac1f371cec4fd066a539693acc0eda3b133425026d405dae
   seconds: 10
+  lost: true
+3GWP integral.discriminant_sequence:
+  hash: f729084ab956823135744d64fb06b79c93439223f02386023e6aee2b546af734
+  seconds: 661
   lost: true
 3GWR integral.overlattice_count:
   hash: 836db517473faaeaa34246fe1f1fa761d816846114d210a46b13530d6de2d5f8
