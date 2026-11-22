@@ -328,8 +328,7 @@
   seconds: 18244
 02QY definite.regular:
   hash: 717ba66479235a6e9cf534d9678a763c715b54ef0e583c63c3ee7e15bb9159fd
-  seconds: 14387
-  lost: true
+  seconds: 17245
 02TQ definite.regular:
   hash: 20e6a28c861ef03104834c52a671646d3ad68992aa0b1750a67913b8b09b64ee
   seconds: 6674
@@ -1480,6 +1479,10 @@
 3GXO integral.overlattice_count:
   hash: 8392a80454dd1af739e9d6163b1538aaafd76392d9cca73846c1dc3e312e9aa8
   seconds: 10
+  lost: true
+3GXQ integral.discriminant_sequence:
+  hash: 8e1cc02e7f27381fe52f7137455c586bf111c95867c66b19fecad12929754891
+  seconds: 3982
   lost: true
 3GY6 integral.discriminant_sequence:
   hash: eb2ef6f7d13c3b8094b54382ecbc300217a306e104a8479eddfca97bb4545580
