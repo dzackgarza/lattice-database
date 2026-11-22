@@ -31831,6 +31831,9 @@
 409F integral.anisotropic_primes:
   hash: 5e892ed9b788244596222fa109a743440a934cfecae5aa5f77dbeda3e2cb9408
   by: research preamble
+409F integral.discriminant_sequence:
+  hash: 13331635e4cf43fe14e3d7245c5a74bc107d277416bb674188d3ed73d969e6a0
+  by: research preamble
 409F integral.elementary_primes:
   hash: 97b02bcf33f1493f3119a3e270efbd8e5584b7d160542de643160a84bf5787ff
   by: research preamble
@@ -31867,11 +31870,17 @@
 4LKH automorphisms.automorphism_group_generator_morphisms:
   hash: 8e29e36b281d61e7b289aeae04cda451c02bc9525070c5a2facddf6f6d8cab1a
   by: research preamble
+4LKH automorphisms.automorphism_group_order:
+  hash: e8f606946a256451708427f2b5f444a4de00ef6661cbb7e3428de0aa7ea9338e
+  by: research preamble
 4LKH derive:
   hash: 57ee8662a1bf5695f08fc4e5f602bc587b3db1b439a37128b332fee7381c49fb
   by: research preamble
 4LKH form.integer_valued:
   hash: 419ce98db34dbb8cec3436df141522f71bdb20c6b58a380af66b5404923deb92
+  by: research preamble
+4LKH integral.anisotropic_primes:
+  hash: a6decef5d3e2c25b0a5b9b4d2f8807f5ab8ef470e111635ca71f9676c34961f5
   by: research preamble
 4LKH integral.elementary_primes:
   hash: 5bd4358aea47318b408a408281f715589735bfbcc1202fe292c5ff63181b1006
@@ -31884,6 +31893,15 @@
   by: research preamble
 4LKH integral.hyperbolic_index:
   hash: 05ec0c5968e1ccfae53dcee5594c30243c4f2fcccc7637b6762ae45815c0aa37
+  by: research preamble
+4LKH integral.local_densities:
+  hash: d52046d48b9d5b426bee1b161c11897eb2cc50b1e8c55e5c85cfbd78dbd9a085
+  by: research preamble
+4LKH integral.local_representations:
+  hash: de1bbf8925b74807ed76cbe86ce84e371159ab6601fe7c1265ea1cf5ffff931d
+  by: research preamble
+4LKH integral.modular_scale:
+  hash: db01413ba0d16ce884bbe7c5cdfa365d4660aa77dcb7173c84dce95297f13c53
   by: research preamble
 4LKH integral.overlattice_count:
   hash: 590c1f4b86f61c3be32b28d25043754c00a2ba8e3dd64a945679eae85b884ea9

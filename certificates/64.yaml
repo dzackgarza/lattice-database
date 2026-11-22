@@ -29458,11 +29458,17 @@
 58CX automorphisms.automorphism_group_generator_morphisms:
   hash: af4ed8d961fe937a53bc245a2824b39438ca4ed105b7c5d348649a5187fbf738
   by: research preamble
+58CX automorphisms.automorphism_group_order:
+  hash: bb5b9519e4ed3523dfac46ca652e0a92c955982b5c7d4b3e839c4e73f30b6025
+  by: research preamble
 58CX derive:
   hash: 4443c66673a01732aa5616ba5bfa720f90bc54160706bfe96be26fb298f9d46d
   by: research preamble
 58CX form.integer_valued:
   hash: 9ec16e1dde7cc132f3210458e6cd4765de5911ad1cfabbc204b4bbafd4c64c09
+  by: research preamble
+58CX integral.anisotropic_primes:
+  hash: c6faaf3b956d08fa697abdcb9cc4c74bae70cec0d620a845ed1cfadc9bd7b8a6
   by: research preamble
 58CX integral.elementary_primes:
   hash: d530edf4c424818b8b5a425cc9209474bfbecc56c8acc444c0bda278244de078
@@ -29475,6 +29481,15 @@
   by: research preamble
 58CX integral.hyperbolic_index:
   hash: a200beda11ac4e7c5f5c578669b3134a08828d70c7981a2a446d9689f448dd03
+  by: research preamble
+58CX integral.local_densities:
+  hash: 66b74203335592838289ce8e550c10ec237bbe5858decac64e3c674a7606c255
+  by: research preamble
+58CX integral.local_representations:
+  hash: a46b7a4cbad59504a438e20c701d3c28061e5d2f328c93b07784d7332022a561
+  by: research preamble
+58CX integral.modular_scale:
+  hash: 7d9d4b595e2a599086ec77df601e027d48e8cae33b504eeed0ff5ebf4f5a1e05
   by: research preamble
 58CX integral.overlattice_count:
   hash: 9bf01ad5fc93fcf7e797122b438f02838cffed4097d6efdb47ab4d0a6a0e9aae

@@ -22,6 +22,9 @@
 02JI integral.anisotropic_primes:
   hash: c5b91a9613fe1d7438db891d4f252882f2d829747644c5f0e0a6040449367f65
   by: research preamble
+02JI integral.discriminant_sequence:
+  hash: ae6e4973e94b97f3037822fef33413a97e73ae9521ba6e7a7c7f6cda540863be
+  by: research preamble
 02JI integral.elementary_primes:
   hash: 7f571257dd1a0a6ed50d414b00f8a6a862f35b3c6c0a0d888f4b961d5a3a4846
   by: research preamble
@@ -30682,11 +30685,17 @@
 52LK automorphisms.automorphism_group_generator_morphisms:
   hash: ac8193392521b7129d9acbdee57c4353d313c1a152388d83354e0bc26cc5145b
   by: research preamble
+52LK automorphisms.automorphism_group_order:
+  hash: 1cc1efac70da919833c7aa979f4938486bdf5060684f92afe36042123ef137fd
+  by: research preamble
 52LK derive:
   hash: 4a08277e2c712fcde8708cef263f99e5e48f362a95a28d8acccf892231c45428
   by: research preamble
 52LK form.integer_valued:
   hash: cfccbcb3a799717bcf9e7d98a7989b8315b91c568a5bfe1005ee52c8c75a97be
+  by: research preamble
+52LK integral.anisotropic_primes:
+  hash: d5f638bc3a4969a7a62f43817abaff94192ea1a2162a7d1c9b48ca56198d695a
   by: research preamble
 52LK integral.elementary_primes:
   hash: 3ccd8b4505c9da2a3990011bd1cbd94c64e29f8b488b2d12e93c8d4387b20893
@@ -30699,6 +30708,15 @@
   by: research preamble
 52LK integral.hyperbolic_index:
   hash: dfd78c96c5ddb38ad6ee88f65306badb2c0ea7da990007670a56558a57f554fc
+  by: research preamble
+52LK integral.local_densities:
+  hash: a99c2e7f38a54eb3a4ce761297689356a1b512e09c4cb381c62f49770a3e8573
+  by: research preamble
+52LK integral.local_representations:
+  hash: 6c5700fa347f8d69756249337694c58b9b7b597f3ea36b736d466b6d0fef8b10
+  by: research preamble
+52LK integral.modular_scale:
+  hash: bbee013c64be0c98c60c1c61f643278a41ac15b7839055f1611b7e5b74b1957b
   by: research preamble
 52LK integral.overlattice_count:
   hash: 5082e9bcf861a68329132aa7054bec26449ce0531d9b5f525f6e3d0511cf369c
