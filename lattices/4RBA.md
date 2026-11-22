@@ -15,6 +15,13 @@ certifications:
   definite.automorphism_group_order: 533a3e2385a8eebf70afed8c1bbf8b91822bac25e3ce8051d9dfcbec77cae0b3
   definite.automorphism_group_generator_morphisms: 2b4b870a462ef31a5f663fd797da9d9730ea561448d62e1d7787781fe6ab052b
   integral.discriminant_sequence: 08737882c75c9780811f74e59178e496924eb0a1661c3c614c1c8a49b8e20e8a
+  integral.primitive_orbits: 3c099d8b9fdd087b232867eed4264703bb3ec689cd74c1c5ecff4cfb4cbe12f7
+  integral.modular_scale: 5673676e073ff11df7005fda5ad4532fe7f6b0c9826cb4944181b297b1354546
+  definite.genus_theta_series: b1bdca9d13fa7cc4392ea828fcccc6960511fa065600f32f9ad1ac65db88dd89
+  definite.theta_series_cuspidal_component: b78de2085ebd68f1c449fa4924ae45bf9abe4baceec03e6ab2d33da13d64e3f8
+  integral.anisotropic_primes: b0fa1349ab045a1b4bb8237b7553cc4f351cb208db8038ca294fcc0681f79361
+  integral.local_representations: be3eedcc4c35cd4c837f0cee1b4a6dbbc0cb8f90df7eebef478f551de3e78d62
+  integral.local_densities: 72fd641a51eefd23c60912c3518f031a7f2e55dc92effb8e8c13f69ca1a3ec02
 rank: 5
 gram_tensor:
 - [1, 0, 0, 0, 0]
@@ -37,6 +44,7 @@ integral:
   elementary_primes: [5]
   parity: odd
   level: 10
+  modular_scale: false
   discriminant_group: [5]
   discriminant_sequence:
     discriminant_factors: [5]
@@ -68,6 +76,46 @@ integral:
   spinor_genus_count: 1
   spinor_genera: [2]
   hyperbolic_index: 0
+  primitive_orbits:
+    O:
+      constant: 0
+      z: [1, 1, 1, 1]
+      w: [0, 0, 0, 0]
+    SO:
+      constant: 0
+      z: [1, 1, 1, 1]
+      w: [0, 0, 0, 0]
+    Otilde:
+      constant: 0
+      z: [1, 1, 1, 1]
+      w: [0, 0, 0, 0]
+    SOtilde:
+      constant: 0
+      z: [1, 1, 1, 1]
+      w: [0, 0, 0, 0]
+    O+:
+      constant: 0
+      z: [1, 1, 1, 1]
+      w: [0, 0, 0, 0]
+    SO+:
+      constant: 0
+      z: [1, 1, 1, 1]
+      w: [0, 0, 0, 0]
+    Otilde+:
+      constant: 0
+      z: [1, 1, 1, 1]
+      w: [0, 0, 0, 0]
+    SOtilde+:
+      constant: 0
+      z: [1, 1, 1, 1]
+      w: [0, 0, 0, 0]
+  anisotropic_primes: []
+  local_representations: []
+  local_densities:
+  - prime: 2
+    densities: [7/8, 5/4, 5/4, 47/64, 5/8, 5/4, 5/4, 25/32]
+  - prime: 5
+    densities: [24/25, 24/25, 24/25, 24/25, 146/125, 24/25, 24/25, 24/25]
 definite:
   minimum: 1
   kissing_number: 2
@@ -78,6 +126,8 @@ definite:
   - [1, 0, 0, 0, 0]
   perfect: false
   theta_series: [1, 2, 20, 40, 32, 60, 100, 120, 120]
+  genus_theta_series: [1, 56/13, 280/13, 480/13, 376/13, 730/13, 1360/13, 1520/13, 1400/13]
+  theta_series_cuspidal_component: [0, -30/13, -20/13, 40/13, 40/13, 50/13, -60/13, 40/13, 160/13]
   root_system: [A4]
   roots:
   - type: A4

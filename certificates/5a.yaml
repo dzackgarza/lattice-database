@@ -28042,11 +28042,20 @@
 4FTK integral.spinor_genus_count:
   hash: 124167d6b1ad029a70af29f872ba8b8b9f85cfe9747e7f8d6035afe28c1e9579
   by: research preamble
+4QP1 automorphisms.automorphism_group_generator_morphisms:
+  hash: 5e1a2095afcda25d922dae2a613580974a362f455d86a92ea4d4aa951ea6d50e
+  by: research preamble
+4QP1 automorphisms.automorphism_group_order:
+  hash: b70523ed52fc2b46fa7b8603bce9144dffa34f3fa4d37dbdd95ff6f141df7477
+  by: research preamble
 4QP1 derive:
   hash: f697cce8a1b128948dd1731d53d83e613c4506ef40ce9ab8271b41d846b474f2
   by: research preamble
 4QP1 form.integer_valued:
   hash: 0a621876447f078b30cb12218eaaa345c290eaff8dd675ff1641f0e13241b7de
+  by: research preamble
+4QP1 integral.anisotropic_primes:
+  hash: c2e11bde397dd6db172ef322c611338ca6fa2f1f73f5f96df3009f7340d9394f
   by: research preamble
 4QP1 integral.elementary_primes:
   hash: 58933eaaca5c893132de7e5b24c034ab7f5c36a6a069db53d755d3cdf2943d58
@@ -28056,6 +28065,15 @@
   by: research preamble
 4QP1 integral.genus_symbol:
   hash: a25fbe111100947b551afc586cbc726c0926cc115f9a521ed89bc009a715c9bd
+  by: research preamble
+4QP1 integral.local_densities:
+  hash: cb1ded39be63789513257ffd42754ad8698d51b9b3f3613ae5ad132e98ebcb03
+  by: research preamble
+4QP1 integral.local_representations:
+  hash: 99adc9d65ffb490d0ea075a728e8ea8082fba571c496cc4bc9551d6af34ab240
+  by: research preamble
+4QP1 integral.modular_scale:
+  hash: 73d143fcef6ebf3563676b7b8224f5a648ff52bc6ed7affba62c1f728fba4c62
   by: research preamble
 4QP1 integral.overlattice_count:
   hash: 9c0d260e8a29a17ffbc49d1848e328e845b6e81186a0646feb326baf60dbd334

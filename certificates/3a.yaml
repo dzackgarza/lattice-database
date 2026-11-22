@@ -26044,6 +26044,15 @@
 5UMA form.integer_valued:
   hash: 0e9966c5ad55b73b1b0f53480931bc5ea96e64460d54629eaaad1439c968c6e8
   by: research preamble
+5UMA integral.anisotropic_primes:
+  hash: cecd370c88d022c46b4a563d89eaf9b65e87ee52aaf220a95ba713e8fa62d100
+  by: research preamble
+5UMA integral.discriminant_form:
+  hash: e33a3931e564dfa98595603974fc69bd88bd49899a1f7b39632bcb0e6c5457d6
+  by: research preamble
+5UMA integral.discriminant_orbits:
+  hash: 6279e75b374d8a691e8a9c6d448c250a6462b3d053ae247a0e740c86cea710df
+  by: research preamble
 5UMA integral.elementary_primes:
   hash: 72bbb5ddc078812a0df69594d18da1a08b85ffcff6af1b1abcec4226bff79fd2
   by: research preamble
@@ -26056,8 +26065,20 @@
 5UMA integral.hyperbolic_index:
   hash: 3d9eb81467ca3ffdd493c5ce3a7b1b24c31f4a669b48242aa0735d39a7a917d0
   by: research preamble
+5UMA integral.local_densities:
+  hash: 1fdcc4bef564800209ff39ea72aa1281b58302f50f644eb4cf615d36b656e4f3
+  by: research preamble
+5UMA integral.local_representations:
+  hash: f1559b2b35b9e47f021ba1aa8c66585022cf18a2f18848780303b173b3d11742
+  by: research preamble
+5UMA integral.modular_scale:
+  hash: 87c1fbfe196b616488cebd31a7338528687522e3cb1a0e774d893ed4475b9dcc
+  by: research preamble
 5UMA integral.overlattice_count:
   hash: e5f6c87eab5e47b40e95e8d641f7fec24cefd77d3ef77f9eef33e3e6617c65a2
+  by: research preamble
+5UMA integral.primitive_orbits:
+  hash: d2189f8a90d7bc9612b92bb7f007db6b08da09ec9f4461fc2090ae072310785c
   by: research preamble
 5UMA integral.spinor_genera:
   hash: 05d546874622efc206460f11d7694ff8db7a78f5917da85bffb84bc897a40cf8

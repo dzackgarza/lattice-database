@@ -25300,11 +25300,23 @@
 5ICG definite.automorphism_group_order:
   hash: 03c37a83b076f9b0bd879fd3d73f6ec2c34e371f78a781e277f95eceaf5819d6
   by: research preamble
+5ICG definite.genus_theta_series:
+  hash: 698ea970f4fda059c573175940f18ed651b3b209e442f9d96263362bb460f5ea
+  by: research preamble
+5ICG definite.siegel_eisenstein_coefficients:
+  hash: 5b237fd0d85bd5d7a0d1e11ec76f1d878bfb5f1bdb5c1a1462308a8a5706c500
+  by: research preamble
+5ICG definite.theta_series_cuspidal_component:
+  hash: 19bdf123a988126dc2a31b3593f41ac4dd1fabac8c42e2948b3cee3bf39bea2e
+  by: research preamble
 5ICG derive:
   hash: 85457b8e6ada062c249d926f0178117d6bb479eb6f9e9f80d6000e43abc2a894
   by: research preamble
 5ICG form.integer_valued:
   hash: 008b5136c8d7502c57ffde86c0cd63f6269e8dc502e73b96c55a9964cbb1b7f1
+  by: research preamble
+5ICG integral.anisotropic_primes:
+  hash: dfbb2e8aa5263d033536bd97987b25bc85a65cfd39730c223146b63f3f6bba0b
   by: research preamble
 5ICG integral.discriminant_sequence:
   hash: b1129f2970d6563990ad25a43a0fa738bba920561a67f8e26d84abe85a405152
@@ -25321,8 +25333,20 @@
 5ICG integral.hyperbolic_index:
   hash: fd8f0ee78b71835bcef0107552bf8c1ab30661d0052b8b61afa804ab49ef11e7
   by: research preamble
+5ICG integral.local_densities:
+  hash: 7b1e085fb7462bc745154c9682829d195a30694af214f75236a3c3f95fd3f273
+  by: research preamble
+5ICG integral.local_representations:
+  hash: de9adaff47db8a96fda7d6d68b6ead35619d557280f0428e80a99ad6202fbf51
+  by: research preamble
+5ICG integral.modular_scale:
+  hash: bb80e8c15629a030f60ee3be531859f7a1c6e24b8428e2f04de3d973bf53381c
+  by: research preamble
 5ICG integral.overlattice_count:
   hash: cd664ac3ecdc4532f732ee6cd29668ff9e20380f888c57e78e42d2636ad24442
+  by: research preamble
+5ICG integral.primitive_orbits:
+  hash: b0acdf41d9e0bb80b7dceefa9b352384f0cafe3e92160b0f8aa4253a2b33ddc6
   by: research preamble
 5ICG integral.spinor_genera:
   hash: 98f2db428c20d833471ce4b313958cb637370baead731d678c6a2551449a6873

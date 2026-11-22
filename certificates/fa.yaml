@@ -27193,6 +27193,9 @@
 4JIJ form.integer_valued:
   hash: dd364dde9ecc0a1ea3b186b485b78a115000c2d4201142f2d6b7b21b1e38353d
   by: research preamble
+4JIJ integral.anisotropic_primes:
+  hash: 49c6087098385a4f26ed2905f9df844d9f145b1997acbfdcd9fe83d398fa8bd4
+  by: research preamble
 4JIJ integral.elementary_primes:
   hash: 4690e16a66334dfdf8fb4c9929b32480ed0ae2fb2641d542ea9fcf9ecb820207
   by: research preamble
@@ -27205,6 +27208,15 @@
 4JIJ integral.hyperbolic_index:
   hash: eb6a8d3ab315b03ccb80a1317e3cffa5c5c62354dd85d709d2562151f6747f92
   by: research preamble
+4JIJ integral.local_densities:
+  hash: 4ca1b10e226e42abac423ff0fc4ccf3b485efaf74bce6e5025103e08b60c96cb
+  by: research preamble
+4JIJ integral.local_representations:
+  hash: 7d25e5a6d9d610b88cbd13f1409d65e774ad5e1ca5cde2895f9c4fd253cf218c
+  by: research preamble
+4JIJ integral.modular_scale:
+  hash: 89ef2c4e349b0a79aeaf147fcd61311bdd8badad8f796e9f89eab533c0a66e15
+  by: research preamble
 4JIJ integral.overlattice_count:
   hash: 41c9916f09849b31fcb7011ede72ca0f52ed30d54beb233c83e53b4d0657846d
   by: research preamble
@@ -27214,11 +27226,20 @@
 4JIJ integral.spinor_genus_count:
   hash: 0d1cddbe61e2dcae255e7a7f52d179227d8ed8c4815f440b38bd629a3c05cd52
   by: research preamble
+4PFJ automorphisms.automorphism_group_generator_morphisms:
+  hash: d76c59efbf7568ad96be4dc2c9f33e82a36b19632edca084203e3d4be7f35139
+  by: research preamble
+4PFJ automorphisms.automorphism_group_order:
+  hash: c9c8bac902377c337f2c99fcaf3e02cc82bb626f4634d1e5e8cdb876c68dff71
+  by: research preamble
 4PFJ derive:
   hash: 0337a986f4b98948a85c540ac44816ce80a242f6692f4f9bdee77050f61ef6a0
   by: research preamble
 4PFJ form.integer_valued:
   hash: 7100a555b0de0783474aa45fe8c285789e80871760ec3c4919a0f3e14d0076f2
+  by: research preamble
+4PFJ integral.anisotropic_primes:
+  hash: 54e6ae4481f5332a50230a4230063010a19a4c76b9063c2421e33ff04c8f8a5f
   by: research preamble
 4PFJ integral.elementary_primes:
   hash: f3cbdc38f7333a31beedeea5d198780e752af51c3c96c40337ae660c4db3b5af
@@ -27228,6 +27249,15 @@
   by: research preamble
 4PFJ integral.genus_symbol:
   hash: 66a9233019604d3a193a0124e56d02d7f6347f1fb67a0a4cc64087b9afd8ebe7
+  by: research preamble
+4PFJ integral.local_densities:
+  hash: c2583a5c7f3c8f822d4f898e96dedf8a0536ea5176506a24e0ff839b25651f6e
+  by: research preamble
+4PFJ integral.local_representations:
+  hash: e2667c7746c6e9fad38d68dc870f501befb86475f7dcf252c7fc5bf24a811476
+  by: research preamble
+4PFJ integral.modular_scale:
+  hash: 352f5ef02a70d951c75213cb4cb311aefba1aa6e472d09ca08b367a15985854e
   by: research preamble
 4PFJ integral.overlattice_count:
   hash: 7589fbfafa7050b77f41fe348d7060ff9c02ed4da63d04f1cdbe18e82fe38dfc
@@ -27250,6 +27280,9 @@
 4XYQ form.integer_valued:
   hash: fab12b5301cc20e4aaa98557a6e6cf43322407f3e4c3f306bd534096271f427f
   by: research preamble
+4XYQ integral.anisotropic_primes:
+  hash: 55ade8bb698b456c2f989d334e2cef4fd42412287d434e45efb57c1f8d9f107d
+  by: research preamble
 4XYQ integral.elementary_primes:
   hash: 225f8c94b8533894b6edd1e014167860a8d7f9f36a5bdd8dff95619b0ea2fbdf
   by: research preamble
@@ -27262,8 +27295,20 @@
 4XYQ integral.hyperbolic_index:
   hash: e999c445c829f262c1b27403e86badadde6d9309667901a7e7cd60393a8779b1
   by: research preamble
+4XYQ integral.local_densities:
+  hash: 1aabfa0d77434eb265beb4e34d19df30c4c541820c10f4c247bce056179c4ad0
+  by: research preamble
+4XYQ integral.local_representations:
+  hash: 8a041f4ec1abe4b45a6966e2f7f97578717e97a0cee963f32a3d020252ec7b02
+  by: research preamble
+4XYQ integral.modular_scale:
+  hash: d000bb4018d11a3e054a072698c94229b92db836a4c2e197224fe9f9ed21582f
+  by: research preamble
 4XYQ integral.overlattice_count:
   hash: 1ba88ccd2fa39494694d0208837db1617b9b49ef8129cbc8e6552b1318e3b9ec
+  by: research preamble
+4XYQ integral.primitive_orbits:
+  hash: 512c6cb85b9506ef33966b097513e783fc13e809eacf1ed38d41036f4474950b
   by: research preamble
 4XYQ integral.spinor_genera:
   hash: b09c69405d707429b5e6ff0a027fd993033a9fd66e066dc8877de5d13c28ef67

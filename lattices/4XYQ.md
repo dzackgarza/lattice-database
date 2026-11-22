@@ -14,6 +14,11 @@ certifications:
   integral.hyperbolic_index: e999c445c829f262c1b27403e86badadde6d9309667901a7e7cd60393a8779b1
   automorphisms.automorphism_group_order: cf50df9ff429457f2e726fa60f2d66e74316581d4dc4a0d61d5786f1b9056395
   automorphisms.automorphism_group_generator_morphisms: 5804967ff96dfcb2270e5a80fe579044ace67a42a586e123aa771675f9d8d198
+  integral.primitive_orbits: 512c6cb85b9506ef33966b097513e783fc13e809eacf1ed38d41036f4474950b
+  integral.modular_scale: d000bb4018d11a3e054a072698c94229b92db836a4c2e197224fe9f9ed21582f
+  integral.anisotropic_primes: 55ade8bb698b456c2f989d334e2cef4fd42412287d434e45efb57c1f8d9f107d
+  integral.local_representations: 8a041f4ec1abe4b45a6966e2f7f97578717e97a0cee963f32a3d020252ec7b02
+  integral.local_densities: 1aabfa0d77434eb265beb4e34d19df30c4c541820c10f4c247bce056179c4ad0
 rank: 5
 gram_tensor:
 - [-1, 0, 0, 0, 0]
@@ -36,6 +41,7 @@ integral:
   elementary_primes: []
   parity: odd
   level: 12
+  modular_scale: false
   discriminant_group: [6]
   overlattice_count: 1
   bad_reduction_primes: [2, 3]
@@ -44,6 +50,42 @@ integral:
   spinor_genus_count: 1
   spinor_genera: [1]
   hyperbolic_index: 1
+  primitive_orbits:
+    O:
+      constant: 2
+      z: []
+      w: []
+    O+:
+      constant: 2
+      z: []
+      w: []
+    SO:
+      constant: 2
+      z: []
+      w: []
+    SO+:
+      constant: 2
+      z: []
+      w: []
+    Otilde+:
+      constant: 2
+      z: []
+      w: []
+    SOtilde:
+      constant: 2
+      z: []
+      w: []
+    SOtilde+:
+      constant: 2
+      z: []
+      w: []
+  anisotropic_primes: []
+  local_representations: []
+  local_densities:
+  - prime: 2
+    densities: [1, 7/8, 1, 7/8, 1, 19/16, 1, 71/64]
+  - prime: 3
+    densities: [10/9, 10/9, 22/27, 10/9, 10/9, 20/27, 10/9, 10/9]
 automorphisms:
   automorphism_group_order: aleph0
   automorphism_group_generator_morphisms: [O(L) generator 1, O(L) generator 2, O(L) generator 3, O(L) generator 4, O(L) generator 5, O(L) generator 6, O(L) generator 7, O(L) generator 8, O(L) generator 9, O(L) generator 10, O(L) generator 11, O(L) generator 12, O(L) generator 13, O(L) generator 14]
