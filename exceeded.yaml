@@ -647,10 +647,6 @@
 1CZ4 integral.discriminant_form:
   hash: d9ace81ff310c9f2d93545001a6c2ebae53abd4735fbdf0278f88049ec4bcdb9
   seconds: 4
-1DBM integral.discriminant_form:
-  hash: 4bd24aa2ecaab24082c2ac665f7a5937a368f43a9f91b779f6fc432fdf92d475
-  seconds: 7
-  lost: true
 1DRM integral.genus_class_count:
   hash: b9116a9b09223f453b6990f0efa48f8670ad40d65cb4f5c32b3f8b2cb30e031e
   seconds: 10
@@ -666,6 +662,10 @@
 1FHM integral.discriminant_form:
   hash: 923cd0cf786d8f0aa9bb64d26998459a65f7f1bb59ae1f34cfe52a01c5ed7faa
   seconds: 5
+1FNI integral.discriminant_form:
+  hash: 797b1378c9666a7fd4bb5656f2145bf674439893c8870243ddf4c3cb1bfdbd3c
+  seconds: 0
+  lost: true
 1GRN integral.overlattice_count:
   hash: 2d69994bb46caf54ef5fc24bfc85749b4e47e08c0890c0841e7baa197fa96e52
   seconds: 0
