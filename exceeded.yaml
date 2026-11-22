@@ -493,10 +493,6 @@
   hash: 52f2df5d3e50422e9094aaba642361454f3f0553243c3e075e8ffa9f8b70baec
   seconds: 6
   lost: true
-0P2D integral.discriminant_form:
-  hash: cba5ae7e5ee90d547370c6d2af08c425517c71b17e56ff2d6e719b64243d1ee3
-  seconds: 0
-  lost: true
 0PDI integral.discriminant_form:
   hash: 721243039dbc88c969b949f6205bccf432459c7dc343430aa6037ddff9c34a4f
   seconds: 0
@@ -511,6 +507,10 @@
   lost: true
 0RVY integral.elementary_primes:
   hash: 811175d5f9f1d0b028f2eb38f41a5672d3bdc0e8d0fb282d3f26fc4769b8f652
+  seconds: 0
+  lost: true
+0RY0 integral.discriminant_form:
+  hash: ea9eea6fed19d27dba491d50a2955fbb87bfb99d57598199ca40140096ac9415
   seconds: 0
   lost: true
 0TTM integral.genus_class_count:
