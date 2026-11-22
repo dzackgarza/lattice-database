@@ -27799,6 +27799,15 @@
 64FK form.integer_valued:
   hash: af08bd46e5f1531bc0730fb544339bcfb4e50176343b008849c10e547246066e
   by: research preamble
+64FK integral.anisotropic_primes:
+  hash: 16479a7f84aa9d007c2c133a5390fe8b698107550ba36b05c2e11ee23aa94073
+  by: research preamble
+64FK integral.discriminant_form:
+  hash: c7ca724cf0fb163b609fa02aa1e1c10b8fd96f5c3a165924429d972012e3d26d
+  by: research preamble
+64FK integral.discriminant_orbits:
+  hash: d2dcb74f4520e8a501eb0f3780d1ef720760fef124ab7c5f3d7f4ebb9e4fb68f
+  by: research preamble
 64FK integral.elementary_primes:
   hash: e6ea0278184a2dd3c5c92c2e714ccddf1444a24967283614063b9748d76b0348
   by: research preamble
@@ -27811,8 +27820,20 @@
 64FK integral.hyperbolic_index:
   hash: 127d77fa0f470b71e516a4d2cf7ac6cc0d1e32394698154938f23b0254a20f11
   by: research preamble
+64FK integral.local_densities:
+  hash: e4b16e25258f29ef58f15e09afc37baa88f788cb8c7d9ebe64fa576685bbf376
+  by: research preamble
+64FK integral.local_representations:
+  hash: 9c3c89b7c2e0b1ca37421ce720e644427ed666e7f51e754492b35b515f92f747
+  by: research preamble
+64FK integral.modular_scale:
+  hash: d8c3c36baf10a0a49afbe830f12b7a292ec49f947da3bf298fa5c9b6a5acd253
+  by: research preamble
 64FK integral.overlattice_count:
   hash: dff5db907c6698256bc7893111697edf5b614e4fea764eb17ede65d3568579df
+  by: research preamble
+64FK integral.primitive_orbits:
+  hash: e55382519654c1678a8145ffb644209f05154bc06876248e3bb485b5c7e34c3c
   by: research preamble
 64FK integral.spinor_genera:
   hash: 114ecbc47367ca0f0fbee70295aacf12387a982fefafff0d744d45d0b51dbabf
