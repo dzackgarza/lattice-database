@@ -12,7 +12,12 @@ certifications:
   integral.spinor_genus_count: 3fdf918bca0b6342b93a8adc4b3371344585f465a1a03ec92f352fd78c489a0a
   integral.spinor_genera: ad5f67f4bd78020ad46557e2a5453f39fcfd8e5f1f667a6abb6f028c926ed4c3
   integral.hyperbolic_index: 90dccb75725cfbd31417828f947652b4234f108f3471031d6b005a9ca253a33b
-  automorphisms.automorphism_group_generator_morphisms: 319617bb42b26cc166f5273fdf601991dd657b7912774a69bc6e113fe023f8f6
+  automorphisms.automorphism_group_generator_morphisms: 6801a0f059d96d91533f6477d3f4eb61659c694d4e30175d46df12cbe343998d
+  automorphisms.automorphism_group_order: 1d332951106ed0c85b5af3e231d64141a912b916da4625364d93d3317625708e
+  integral.modular_scale: ee3bc00d36087494ed48037b896a9d69c089370480a156ec7bcf34e0f77e47fd
+  integral.anisotropic_primes: 5a6b090ff404865d99bd2ad2d2065e479a6a4dcb5ea1b5156c3167c797a71ec7
+  integral.local_representations: fa1018909430a6cd23f08b3f02f2c1703eaf47b6331e9867d8a7df502c43f7f9
+  integral.local_densities: 297e79d839553aba28ff71e83cbf08a7044a96b7b644b03c2e8909072e0453e3
 rank: 4
 gram_tensor:
 - [1, 0, 0, 0]
@@ -33,6 +38,7 @@ integral:
   elementary_primes: []
   parity: odd
   level: 12
+  modular_scale: false
   discriminant_group: [2, 2, 6]
   overlattice_count: 4
   bad_reduction_primes: [2, 3]
@@ -42,8 +48,16 @@ integral:
   spinor_genus_count: 1
   spinor_genera: [1]
   hyperbolic_index: 0
+  anisotropic_primes: []
+  local_representations: []
+  local_densities:
+  - prime: 2
+    densities: [1/2, 5/4, 3/2, 7/8, 3/2, 3/4, 1/2, 17/16, 1/2, 3/4, 3/2, 9/8]
+  - prime: 3
+    densities: [4/3, 2/3, 8/9, 4/3, 2/3, 10/9, 4/3, 2/3, 28/27, 4/3, 2/3, 8/9]
 automorphisms:
-  automorphism_group_generator_morphisms: [O(L) generator 1, O(L) generator 2, O(L) generator 3, O(L) generator 4, O(L) generator 5, O(L) generator 6, O(L) generator 7, O(L) generator 8]
+  automorphism_group_order: aleph0
+  automorphism_group_generator_morphisms: ['O(L) generator 1 #2', 'O(L) generator 2 #2', 'O(L) generator 3 #2', O(L) generator 4, O(L) generator 5, 'O(L) generator 6 #2', 'O(L) generator 7 #2', O(L) generator 8]
 indefinite:
   isotropic: true
 morphisms:
@@ -110,6 +124,46 @@ morphisms:
   - [0, -1, 0, 0]
   - [0, 0, -1, 0]
   - [0, 0, 0, -1]
+  scale: 1
+- target: 4MFT
+  name: 'O(L) generator 1 #2'
+  matrix:
+  - [1, 0, 0, 0]
+  - [0, 1, 0, 0]
+  - [0, 0, -1, 0]
+  - [0, 0, -1, 1]
+  scale: 1
+- target: 4MFT
+  name: 'O(L) generator 2 #2'
+  matrix:
+  - [9, 8, 12, -24]
+  - [-4, -3, -6, 12]
+  - [0, 0, 1, 0]
+  - [2, 2, 3, -5]
+  scale: 1
+- target: 4MFT
+  name: 'O(L) generator 3 #2'
+  matrix:
+  - [5, 4, 4, -12]
+  - [-2, -1, -2, 6]
+  - [2, 2, 3, -6]
+  - [2, 2, 2, -5]
+  scale: 1
+- target: 4MFT
+  name: 'O(L) generator 6 #2'
+  matrix:
+  - [9, 8, 12, -24]
+  - [-4, -3, -6, 12]
+  - [6, 6, 8, -15]
+  - [4, 4, 5, -10]
+  scale: 1
+- target: 4MFT
+  name: 'O(L) generator 7 #2'
+  matrix:
+  - [7, 0, 12, -24]
+  - [0, 1, 0, 0]
+  - [0, 0, 1, 0]
+  - [2, 0, 4, -7]
   scale: 1
 related:
 - tag: '0001'

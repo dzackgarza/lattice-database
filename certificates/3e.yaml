@@ -697,6 +697,9 @@
 0556 integral.anisotropic_primes:
   hash: c95b19d15722ee1af1e21e93571b97dc36916801a2baf0a18190949fe83122cf
   by: research preamble
+0556 integral.discriminant_sequence:
+  hash: f80dc4c098585282698a3fa896d069d31daa92294a708898eeb928ce6896e979
+  by: research preamble
 0556 integral.elementary_primes:
   hash: 6875b15baf51c2441cf29554e22c7a9a056159789d008465f73e52fbe1053734
   by: research preamble
@@ -759,6 +762,9 @@
   by: research preamble
 05CW integral.anisotropic_primes:
   hash: f1da1d0b8a68bb6255457c77b20c9c8c01299249bfa62f97424b72b247954556
+  by: research preamble
+05CW integral.discriminant_sequence:
+  hash: 44f7d8643c83e009ade1f0119fa1df54e9a5384729838d13f6670760b621e054
   by: research preamble
 05CW integral.elementary_primes:
   hash: 201b8513a3a67a7e8a7ce63c9c77936a69cd35b2d1848773b17942a134d34d27
@@ -28882,6 +28888,15 @@
 624Y form.integer_valued:
   hash: ae3b98ee1db2e01b0d817f88e39f108bfc34a647126cb32b2d1b44770f670626
   by: research preamble
+624Y integral.anisotropic_primes:
+  hash: 2e7d85d9d600b336099aa79a72e8ed09e5e67cb04b472d4aec8d99c0dd391d67
+  by: research preamble
+624Y integral.discriminant_form:
+  hash: b14e03a818233e59c3b5712f7beaeae10b22255ce985b5fcc38fde95e5221468
+  by: research preamble
+624Y integral.discriminant_orbits:
+  hash: 2eaf67986fd7e08b995d081ac079b2c55104001e87f4149bde7b2ebff3f4e98b
+  by: research preamble
 624Y integral.elementary_primes:
   hash: 2b3f45cc4679290cf06ff704d66bbbbc4c55ade7c6c5756a46ea098b908509b6
   by: research preamble
@@ -28893,6 +28908,15 @@
   by: research preamble
 624Y integral.hyperbolic_index:
   hash: b1d254bfdcdb84259093416f35057a1665005298601300a20bfdcf0c98a441d2
+  by: research preamble
+624Y integral.local_densities:
+  hash: 18eec1610d677a71116378509a3ae6afb7b5d28ed3e964afe9bd71ba7e8aaa29
+  by: research preamble
+624Y integral.local_representations:
+  hash: f5e964060d1c0476b3639107d098531ac8b7d3403fb33d7e30c200d82f99aac8
+  by: research preamble
+624Y integral.modular_scale:
+  hash: 029513fce74474ce175d095f5990bf7a65058fcf85529a3a6958cb8bfea34810
   by: research preamble
 624Y integral.overlattice_count:
   hash: 4fc7a4c11d1c9d08ed41df1dc92be57304c2e11c657bbd50fd0300819310e57e

@@ -979,6 +979,9 @@
 04YM integral.anisotropic_primes:
   hash: 21614f71cc5b301da375fc5e836ec04051c067c27bff0ff43ebca70940824339
   by: research preamble
+04YM integral.discriminant_sequence:
+  hash: ad05db134c47efd3e86341fff5378132c3d2ff19ebdf7f10753a499a929f84d8
+  by: research preamble
 04YM integral.elementary_primes:
   hash: aaeb99661ac3551fe48a28ea0fac153c079bd8c92dbc0668fa05c4b44030c176
   by: research preamble
@@ -2107,6 +2110,9 @@
 08SY integral.anisotropic_primes:
   hash: 9cb2bcf7ae690e2ad9b684f525f6eacf436027e0ed1f234c15c6a16e7a217346
   by: research preamble
+08SY integral.discriminant_sequence:
+  hash: 21d09e4a4784cae683cb1747f0005fe8d045aec2946a200d37e3443818fba4b4
+  by: research preamble
 08SY integral.elementary_primes:
   hash: 0ad2bd23b98f1d020455cbafa1ac056ddedb7834bb78b2fe1a5e524d57cf8166
   by: research preamble
@@ -2730,6 +2736,9 @@
   by: research preamble
 0AAU integral.anisotropic_primes:
   hash: cbb4c3a738070cf99f3d55347418feeea2d2908a28e3c732da7a01f4f9aa309d
+  by: research preamble
+0AAU integral.discriminant_sequence:
+  hash: 16109a9dbea36603f8e3500dc2cf05020fa30786e18629d18557bf601379bc63
   by: research preamble
 0AAU integral.elementary_primes:
   hash: 0a85942d557fc180ac14d891e5d86f849e847560aa542bcb3f8397425701e049
@@ -4488,6 +4497,9 @@
   by: research preamble
 0FMA integral.anisotropic_primes:
   hash: 2bbd36a7ad4bed1f1e6a9b60cdbd012b8af30ee25bd466f22fa14fd5d8b8eabd
+  by: research preamble
+0FMA integral.discriminant_sequence:
+  hash: 94e6aa3a56f415d4e7f9d0f4d12370839c1353d2c2a5d75ba814d7541bf2afaa
   by: research preamble
 0FMA integral.elementary_primes:
   hash: a09fe8fa5013f5568ff1863775e6e1c897befa24de9f0b53857d3417f31a7e00
@@ -32223,13 +32235,19 @@
   hash: 3bd30cc3fd48b8172ffa8a5990285e553cfc6bc3b723ba76a7061b25d1fb85ec
   by: research preamble
 4MFT automorphisms.automorphism_group_generator_morphisms:
-  hash: 319617bb42b26cc166f5273fdf601991dd657b7912774a69bc6e113fe023f8f6
+  hash: 6801a0f059d96d91533f6477d3f4eb61659c694d4e30175d46df12cbe343998d
+  by: research preamble
+4MFT automorphisms.automorphism_group_order:
+  hash: 1d332951106ed0c85b5af3e231d64141a912b916da4625364d93d3317625708e
   by: research preamble
 4MFT derive:
   hash: 7ba96a2f461a66b15fc7b9610cc675f8f77a561b9bfb184ce54cb5077ffe706d
   by: research preamble
 4MFT form.integer_valued:
   hash: adfe940161f003fea0539795e36bb8966c18245647798fe53b1fc4a74bc897f7
+  by: research preamble
+4MFT integral.anisotropic_primes:
+  hash: 5a6b090ff404865d99bd2ad2d2065e479a6a4dcb5ea1b5156c3167c797a71ec7
   by: research preamble
 4MFT integral.elementary_primes:
   hash: 4f1dad518cf1ef6a395f0dc748ba8718fa9a6706e050b1751c64aae6e4a6dc30
@@ -32242,6 +32260,15 @@
   by: research preamble
 4MFT integral.hyperbolic_index:
   hash: 90dccb75725cfbd31417828f947652b4234f108f3471031d6b005a9ca253a33b
+  by: research preamble
+4MFT integral.local_densities:
+  hash: 297e79d839553aba28ff71e83cbf08a7044a96b7b644b03c2e8909072e0453e3
+  by: research preamble
+4MFT integral.local_representations:
+  hash: fa1018909430a6cd23f08b3f02f2c1703eaf47b6331e9867d8a7df502c43f7f9
+  by: research preamble
+4MFT integral.modular_scale:
+  hash: ee3bc00d36087494ed48037b896a9d69c089370480a156ec7bcf34e0f77e47fd
   by: research preamble
 4MFT integral.overlattice_count:
   hash: 12aa7e0e78a0af0b5ab5e740d40210280c6133bcb894fe464614b8684fc625bd
