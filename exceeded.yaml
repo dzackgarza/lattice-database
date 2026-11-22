@@ -461,10 +461,6 @@
 077Q definite.regular:
   hash: 914902341abad2a39c8826f5252d6b055b15688bc1c8d16016333081f7fab22c
   seconds: 6640
-0B2H integral.discriminant_form:
-  hash: 1fd323f8398e3c38e288bf1bc8a323b813bb2a7affb60121409afa00fdfce9a4
-  seconds: 5
-  lost: true
 0EXT integral.primitive_orbits:
   hash: 6c6a09434f37e4c930476f5f9a27e1a7327c278278c894534876d89a6705c56e
   seconds: 0
@@ -1205,7 +1201,7 @@
   lost: true
 3IAC integral.discriminant_sequence:
   hash: 55ceace26bae724988f748a4a7bc6aff6b35c7b8dd97a66745923496c4004fac
-  seconds: 1542
+  seconds: 3344
   lost: true
 3IAC integral.overlattice_count:
   hash: 515a93ce92ba527fc2f26325a66a09d17f46aeccec254f141d6e9f9c53cece3d
