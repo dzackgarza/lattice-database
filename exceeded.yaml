@@ -1221,7 +1221,7 @@
   lost: true
 3GO8 integral.discriminant_sequence:
   hash: c2756ef175cba01bf2a3c92053b3ac0df1f5678f15bed0887b2720462944cd84
-  seconds: 8631
+  seconds: 10434
   lost: true
 3GO8 integral.overlattice_count:
   hash: 73f92e88dc3c41f09fe3d704e2bb6eec69c13383e23ff0521b2c623891c8c865
@@ -1366,10 +1366,6 @@
 48YN integral.primitive_orbits[SOtilde]:
   hash: 9e1c166422b378d94310bb7b61abeb33d8e2cd6ec2a08cf2b0a62e00dcdedc04
   seconds: 15073
-49GG integral.primitive_orbits[SOtilde]:
-  hash: ee067b3952ccd23eab3f3f53f750fa82504aaf4d367929b047f0459210cff0d5
-  seconds: 10524
-  lost: true
 4AI4 integral.hyperbolic_index:
   hash: cfd02157630c5b87965c89728ada3348a270c6686e306a7ba5471217e9f942d0
   seconds: 152
