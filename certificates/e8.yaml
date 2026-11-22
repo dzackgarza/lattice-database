@@ -25795,11 +25795,23 @@
 4U69 definite.automorphism_group_order:
   hash: 68fa8ef7b98de1b10a422044d056aac266c679070b0f59693276e4f51e97c329
   by: research preamble
+4U69 definite.genus_theta_series:
+  hash: 502c7edbcdcdbabdb2ad7ffe57dbfbc625371a424a913587702d73dbcc941d32
+  by: research preamble
+4U69 definite.siegel_eisenstein_coefficients:
+  hash: aced88ce76a1aa94de4179a992a591b02f907735cd8c86f1c1368ff3dd8da54a
+  by: research preamble
+4U69 definite.theta_series_cuspidal_component:
+  hash: 7ef9756a24f8285dd7f60622d1b9ff502629cc6d01bd632837f123c52465c8db
+  by: research preamble
 4U69 derive:
   hash: b26b52790156e9012fa7eeb15f4c38ffdb581e07153d7587fc4f9cb25f075270
   by: research preamble
 4U69 form.integer_valued:
   hash: c05a959567219266d788589bb74fffaba89b9f4672a2686ac18f5b61cb99ee62
+  by: research preamble
+4U69 integral.anisotropic_primes:
+  hash: ece26a739bdc0ac011b3d81fde0b307c7e0ac16f2ed4e1f96235f01b65bc6975
   by: research preamble
 4U69 integral.discriminant_sequence:
   hash: 59af96367679676f76b9396e8e319303ab64b9574ca8be304af6221154ac182b
@@ -25816,8 +25828,20 @@
 4U69 integral.hyperbolic_index:
   hash: f47e71d0d9110ba621db9c19eede71e1007aee73d1bac023213f6c1a3cafe5b6
   by: research preamble
+4U69 integral.local_densities:
+  hash: 713599756dd45dcaff2b8e00b7ebbdbc0011dfa8b655cca61d9f6c17d0ac4a12
+  by: research preamble
+4U69 integral.local_representations:
+  hash: 52c1f5f60e5bace8fba81c2fef970a8606c4ab7505c00018c19b6da059e141a1
+  by: research preamble
+4U69 integral.modular_scale:
+  hash: 89db4e534fd3f14b5bd5330fa633ca3f7794bfd681b1c016d372d2a7070e4028
+  by: research preamble
 4U69 integral.overlattice_count:
   hash: 6fac7d997fdd894db617f5d96972fff6cf55cd8b9ee75101edfbff862f719692
+  by: research preamble
+4U69 integral.primitive_orbits:
+  hash: 076af4d3c842040fcc361ed42dd1f949153f73d4cddba6ef7a4b772a9f3e547b
   by: research preamble
 4U69 integral.spinor_genera:
   hash: 1579673cce470354502cad880d4919286945d13ad21b6b8ed3ab7a0f5579ea38

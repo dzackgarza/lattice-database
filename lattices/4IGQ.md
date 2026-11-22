@@ -14,6 +14,11 @@ certifications:
   integral.hyperbolic_index: a86c5722f1bdaca58de079c130ceceb00ea58a8eaec323be8fa00302df0de9bd
   automorphisms.automorphism_group_order: 751c8aad7dd8f53be118e7bae2c5c1fd011165b4e8b828103a4fef002f0b1adf
   automorphisms.automorphism_group_generator_morphisms: 07717e7f50c6d5d68474ed183cc9f2d23b389c4ee5628ea63f353d653aa36455
+  integral.primitive_orbits: 4a0dba05762650273f8dafcf6d9240ef352f3fc8304c614c40ba3488a2545c82
+  integral.modular_scale: a65e8be1a97cecf736351618e4c58784b1faaee13219a03f082bc96766664152
+  integral.anisotropic_primes: 15113b467daf6257e92b6c7fa5be6dadb3e76b1e021e9ebbc0c181c6c26a1402
+  integral.local_representations: 79f41e4780b7986ccfb043ad39fa67a54f0c1278e905d25302a6e496a4809a37
+  integral.local_densities: bb1f0ebedc453a06c7fd50677113a9fe7066dbc8c68b3edf9c24127dbad032f4
 rank: 5
 gram_tensor:
 - [1, 0, 0, 0, 0]
@@ -36,6 +41,7 @@ integral:
   elementary_primes: [2]
   parity: odd
   level: 4
+  modular_scale: false
   discriminant_group: [2, 2, 2, 2]
   overlattice_count: 11
   bad_reduction_primes: [2]
@@ -44,6 +50,40 @@ integral:
   spinor_genus_count: 1
   spinor_genera: [1]
   hyperbolic_index: 0
+  primitive_orbits:
+    O:
+      constant: 1
+      z: []
+      w: []
+    O+:
+      constant: 1
+      z: []
+      w: []
+    SO:
+      constant: 1
+      z: []
+      w: []
+    SO+:
+      constant: 1
+      z: []
+      w: []
+    Otilde+:
+      constant: 6
+      z: []
+      w: []
+    SOtilde:
+      constant: 6
+      z: []
+      w: []
+    SOtilde+:
+      constant: 6
+      z: []
+      w: []
+  anisotropic_primes: []
+  local_representations: []
+  local_densities:
+  - prime: 2
+    densities: [1/2, 1, 1, 13/16, 3/2, 1, 1, 9/8]
 automorphisms:
   automorphism_group_order: aleph0
   automorphism_group_generator_morphisms: [O(L) generator 1, O(L) generator 2, O(L) generator 3, O(L) generator 4, O(L) generator 5, O(L) generator 6, O(L) generator 7, O(L) generator 8, O(L) generator 9, O(L) generator 10, O(L) generator 11, O(L) generator 12, O(L) generator 13]
