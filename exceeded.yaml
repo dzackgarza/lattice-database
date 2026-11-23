@@ -582,10 +582,6 @@
   hash: 689494ca5adb8488fc95a4f406d1751e6e84acc6252b85cb91dbc6cd8b4d2b92
   seconds: 0
   lost: true
-14AL integral.discriminant_form:
-  hash: 75ef2e18a2eb6d96fd79774530b0471a7ecefa4b7d57037c01a87c87bf1c988e
-  seconds: 0
-  lost: true
 14GP integral.genus_class_count:
   hash: ebbbead04771d1bd8cfebc45efa2ad3838a8aefdb3f2e0d9f3b23c7571dbc8d6
   seconds: 0
@@ -623,6 +619,10 @@
   seconds: 3
 16KU integral.genus_class_count:
   hash: 182a020bd256d7b9ee689e48b8cca285744e6713bd4e5c7b3dce7727fe1a7743
+  seconds: 0
+  lost: true
+16ZO integral.discriminant_form:
+  hash: 2d9d98edcc862a5163fe2e5d69aa80ce3c7b588078e28a6ff2928e4f015a40b7
   seconds: 0
   lost: true
 17G7 definite.genus_theta_series:
@@ -678,6 +678,9 @@
   hash: bdfbab998af3d055cc103b993daad459eda6edc5b8ed067deaf4732fa06bcbfb
   seconds: 0
   lost: true
+1IMV integral.discriminant_form:
+  hash: 831b517ba5326bc227a60bc74b56ef551d8038c1c1681d0f012f60b95378bd49
+  seconds: 5
 1IX9 integral.discriminant_form:
   hash: 6c5a7172663b567607ba60f697933a957f72ecae84923cd19c74ed70e8b7381f
   seconds: 6
