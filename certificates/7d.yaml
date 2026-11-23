@@ -24629,7 +24629,10 @@
   hash: dd0ba58d1fa258b296f79f83a1cd11a2542b2f14e280134a327826729f903ded
   by: research preamble
 6JRV automorphisms.automorphism_group_generator_morphisms:
-  hash: 6d87c97730062257bc5bbed3602760bdf1cdcd97ed18ab3b9c628dbb84c4cbea
+  hash: aa544fecfbd3044524d348031bff46678b483c87a3455408285093f095f4b1fb
+  by: research preamble
+6JRV automorphisms.automorphism_group_order:
+  hash: 257037461669048f52d4bdeecb49a87613c80a11549ce2e2199a70da3bc0a8f2
   by: research preamble
 6JRV derive:
   hash: e24cead1870354a79eedd18270adf86475f89b7b4182582669a2bc1d17e95572
@@ -24637,8 +24640,14 @@
 6JRV form.integer_valued:
   hash: 43b02a74f5618069e75727fadbfaac6367406b65fd3d38141101ed297c5960b4
   by: research preamble
+6JRV integral.anisotropic_primes:
+  hash: 53d343b69fd73b004ef63292575d8e4d90b276910b8abc378e3328e21c395ad3
+  by: research preamble
 6JRV integral.discriminant_form:
   hash: b0cabc8c0592e6bf625e7bd3ba401e35b9af4e535140fedbc29fcd7e40910c31
+  by: research preamble
+6JRV integral.discriminant_orbits:
+  hash: 6e949836ed27e7afb6c2d6c7365e6fd8dd27b92edecfb9d3a0419f9c558e0b1a
   by: research preamble
 6JRV integral.elementary_primes:
   hash: 9cf32c2901aa5c5ef04c7dc751106c116b252237293baeae886a105787245e2c
@@ -24652,11 +24661,20 @@
 6JRV integral.hyperbolic_index:
   hash: b3570b39bb544924dfbc5c98ce69e8a86d46d17a43dd023d95fe7e098d336c43
   by: research preamble
+6JRV integral.local_densities:
+  hash: b1fe935d4307186825a86faf50197a5cfd1851cfe2ed12216551213c6a68d614
+  by: research preamble
+6JRV integral.local_representations:
+  hash: d0f1798b716e810a1443087ff47c438add1ef7f9156c1aa1b2bca58a19e93208
+  by: research preamble
+6JRV integral.modular_scale:
+  hash: 7dbf2b488c4c224f0e4ce88a0140fa7ae44d6abd624bf58ee55d6fcf381d52af
+  by: research preamble
 6JRV integral.overlattice_count:
   hash: 8376fd5e25236a4d0ded66b50c1a37e775af0b26af5fede4da2941fc2c20bb96
   by: research preamble
 6JRV integral.primitive_orbits:
-  hash: bbe0ab89e66ee78dc6485646647d4fd5ae322fb13ed6de860c628a5e39b09f5b
+  hash: d2b4f98eff149203e2c2c8a22b04ddcaaea6404856afcc8d5247d564e2d9c6a8
   by: research preamble
 6JRV integral.spinor_genera:
   hash: c4645509a19d9d21ecd8b0b63d041a39801658fb0d2fb5e15292fc450b12132a

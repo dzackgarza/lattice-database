@@ -13,9 +13,15 @@ certifications:
   integral.spinor_genus_count: c2a8ab7737e98a7d0327cc69f35a07d17977cbcee2823bdde81782175c8936f8
   integral.spinor_genera: c4645509a19d9d21ecd8b0b63d041a39801658fb0d2fb5e15292fc450b12132a
   integral.hyperbolic_index: b3570b39bb544924dfbc5c98ce69e8a86d46d17a43dd023d95fe7e098d336c43
-  automorphisms.automorphism_group_generator_morphisms: 6d87c97730062257bc5bbed3602760bdf1cdcd97ed18ab3b9c628dbb84c4cbea
+  automorphisms.automorphism_group_generator_morphisms: aa544fecfbd3044524d348031bff46678b483c87a3455408285093f095f4b1fb
   integral.discriminant_form: b0cabc8c0592e6bf625e7bd3ba401e35b9af4e535140fedbc29fcd7e40910c31
-  integral.primitive_orbits: bbe0ab89e66ee78dc6485646647d4fd5ae322fb13ed6de860c628a5e39b09f5b
+  integral.primitive_orbits: d2b4f98eff149203e2c2c8a22b04ddcaaea6404856afcc8d5247d564e2d9c6a8
+  automorphisms.automorphism_group_order: 257037461669048f52d4bdeecb49a87613c80a11549ce2e2199a70da3bc0a8f2
+  integral.discriminant_orbits: 6e949836ed27e7afb6c2d6c7365e6fd8dd27b92edecfb9d3a0419f9c558e0b1a
+  integral.modular_scale: 7dbf2b488c4c224f0e4ce88a0140fa7ae44d6abd624bf58ee55d6fcf381d52af
+  integral.anisotropic_primes: 53d343b69fd73b004ef63292575d8e4d90b276910b8abc378e3328e21c395ad3
+  integral.local_representations: d0f1798b716e810a1443087ff47c438add1ef7f9156c1aa1b2bca58a19e93208
+  integral.local_densities: b1fe935d4307186825a86faf50197a5cfd1851cfe2ed12216551213c6a68d614
 rank: 5
 gram_tensor:
 - [0, 1, 0, 0, 0]
@@ -38,6 +44,7 @@ integral:
   elementary_primes: []
   parity: even
   level: 36
+  modular_scale: false
   discriminant_group: [18]
   overlattice_count: 2
   bad_reduction_primes: [2, 3]
@@ -59,10 +66,88 @@ integral:
       constant: 2
       z: []
       w: []
+    O+:
+      constant: 2
+      z: []
+      w: []
+    SO:
+      constant: 2
+      z: []
+      w: []
+    SO+:
+      constant: 2
+      z: []
+      w: []
+    SOtilde:
+      constant: 2
+      z: []
+      w: []
+    SOtilde+:
+      constant: 2
+      z: []
+      w: []
   discriminant_form:
     orthogonal_group_order: 2
     isotropic_classes: 3
     isotropic_orbits: 2
+  discriminant_orbits:
+    Otilde:
+      constant: 3
+      z: [0, 1, 0, 1]
+      w: [0, 2, 0, 1]
+    SOtilde:
+      constant: 3
+      z: [0, 1, 0, 1]
+      w: [0, 2, 0, 1]
+    Otilde+:
+      constant: 3
+      z: [0, 1, 0, 1]
+      w: [0, 2, 0, 1]
+    SOtilde+:
+      constant: 3
+      z: [0, 1, 0, 1]
+      w: [0, 2, 0, 1]
+    O:
+      constant: 2
+      z: [0, 1, 0, 1]
+      w: [0, 2, 0, 1]
+    SO:
+      constant: 2
+      z: [0, 1, 0, 1]
+      w: [0, 2, 0, 1]
+    O+:
+      constant: 2
+      z: [0, 1, 0, 1]
+      w: [0, 2, 0, 1]
+    SO+:
+      constant: 2
+      z: [0, 1, 0, 1]
+      w: [0, 2, 0, 1]
+  anisotropic_primes: []
+  local_representations:
+  - prime: 2
+    classes:
+    - representative: 1
+      least_valuation: 2
+    - representative: 3
+      least_valuation: 2
+    - representative: 5
+      least_valuation: 2
+    - representative: 7
+      least_valuation: 2
+    - representative: 2
+      least_valuation: 1
+    - representative: 6
+      least_valuation: 1
+    - representative: 10
+      least_valuation: 1
+    - representative: 14
+      least_valuation: 1
+  local_densities:
+  - prime: 2
+    densities: [0, 15/8, 0, 15/8, 0, 33/16, 0, 135/64]
+  - prime: 3
+    densities: [8/9, 8/9, 32/27, 8/9, 8/9, 32/27, 8/9, 8/9]
 automorphisms:
   automorphism_group_order: aleph0
   automorphism_group_generator_morphisms: [O(L) generator 1, O(L) generator 2, O(L) generator 3, O(L) generator 4, O(L) generator 5, 'O(L) generator 6 #2', 'O(L) generator 7 #2', O(L) generator 18, 'O(L) generator 9 #2', O(L) generator 14, O(L) generator 12, O(L) generator 11, O(L) generator 13, O(L) generator 10, O(L) generator 15, O(L) generator 19, O(L) generator 20, O(L) generator 8, O(L) generator 16, O(L) generator 17, 'O(L) generator 21 #2', 'O(L) generator 22 #2', 'O(L) generator 23 #2', O(L) generator 26, O(L) generator 27, O(L) generator 29, 'O(L) generator 27 #2', 'O(L) generator 28 #2', 'O(L) generator 29 #2', O(L) generator 21]
