@@ -64,7 +64,8 @@ integral:
     isotropic_classes: 3
     isotropic_orbits: 2
 automorphisms:
-  automorphism_group_generator_morphisms: [O(L) generator 1, O(L) generator 2, O(L) generator 3, O(L) generator 4, O(L) generator 5, O(L) generator 6, O(L) generator 7, O(L) generator 8, O(L) generator 9, O(L) generator 10, O(L) generator 11, O(L) generator 12, O(L) generator 13, O(L) generator 14, O(L) generator 15, O(L) generator 16, O(L) generator 17, O(L) generator 18, O(L) generator 19, O(L) generator 20, O(L) generator 21, O(L) generator 22, O(L) generator 23, O(L) generator 24, O(L) generator 25, O(L) generator 26, O(L) generator 27, O(L) generator 28, O(L) generator 29, O(L) generator 30, O(L) generator 31, O(L) generator 32, O(L) generator 33]
+  automorphism_group_order: aleph0
+  automorphism_group_generator_morphisms: [O(L) generator 1, O(L) generator 2, O(L) generator 3, O(L) generator 4, O(L) generator 5, 'O(L) generator 6 #2', 'O(L) generator 7 #2', O(L) generator 18, 'O(L) generator 9 #2', O(L) generator 14, O(L) generator 12, O(L) generator 11, O(L) generator 13, O(L) generator 10, O(L) generator 15, O(L) generator 19, O(L) generator 20, O(L) generator 8, O(L) generator 16, O(L) generator 17, 'O(L) generator 21 #2', 'O(L) generator 22 #2', 'O(L) generator 23 #2', O(L) generator 26, O(L) generator 27, O(L) generator 29, 'O(L) generator 27 #2', 'O(L) generator 28 #2', 'O(L) generator 29 #2', O(L) generator 21]
 indefinite:
   isotropic: true
 morphisms:
@@ -364,6 +365,87 @@ morphisms:
   - [27, -27, 109, 81, 540]
   - [36, -36, 144, 109, 720]
   - [-10, 10, -40, -30, -199]
+  scale: 1
+- target: 6JRV
+  name: 'O(L) generator 6 #2'
+  matrix:
+  - [0, 0, 1, 0, 0]
+  - [0, 0, 0, 1, 0]
+  - [1, 0, 0, 0, 0]
+  - [0, 1, 0, 0, 0]
+  - [0, 0, 0, 0, 1]
+  scale: 1
+- target: 6JRV
+  name: 'O(L) generator 7 #2'
+  matrix:
+  - [0, 0, 0, -1, 0]
+  - [0, 0, -1, 0, 0]
+  - [0, 1, 0, 0, 0]
+  - [1, 0, 0, 0, 0]
+  - [0, 0, 0, 0, 1]
+  scale: 1
+- target: 6JRV
+  name: 'O(L) generator 9 #2'
+  matrix:
+  - [0, 0, 1, 0, 0]
+  - [0, 0, 0, 1, 0]
+  - [-1, 0, 0, 0, 0]
+  - [0, -1, 0, 0, 0]
+  - [0, 0, 0, 0, 1]
+  scale: 1
+- target: 6JRV
+  name: 'O(L) generator 21 #2'
+  matrix:
+  - [0, 1, -3, -3, 18]
+  - [1, 0, 3, 3, -18]
+  - [3, -3, 10, 9, -54]
+  - [3, -3, 9, 10, -54]
+  - [-1, 1, -3, -3, 17]
+  scale: 1
+- target: 6JRV
+  name: 'O(L) generator 22 #2'
+  matrix:
+  - [0, 1, 0, -1, 0]
+  - [1, 0, 0, 1, 0]
+  - [1, -1, 1, 1, 0]
+  - [0, 0, 0, 1, 0]
+  - [0, 0, 0, 0, 1]
+  scale: 1
+- target: 6JRV
+  name: 'O(L) generator 23 #2'
+  matrix:
+  - [0, 1, 0, 0, 0]
+  - [1, 0, 0, 0, 0]
+  - [0, 0, 4, 9, 36]
+  - [0, 0, 9, 16, 72]
+  - [0, 0, 2, 4, 17]
+  scale: 1
+- target: 6JRV
+  name: 'O(L) generator 27 #2'
+  matrix:
+  - [0, 1, 0, 0, 0]
+  - [1, 0, 0, 0, 0]
+  - [0, 0, 0, 1, 0]
+  - [0, 0, 1, 0, 0]
+  - [0, 0, 0, 0, -1]
+  scale: 1
+- target: 6JRV
+  name: 'O(L) generator 28 #2'
+  matrix:
+  - [-8, 9, -18, -36, 144]
+  - [9, -8, 18, 36, -144]
+  - [18, -18, 36, 73, -288]
+  - [36, -36, 73, 144, -576]
+  - [8, -8, 16, 32, -127]
+  scale: 1
+- target: 6JRV
+  name: 'O(L) generator 29 #2'
+  matrix:
+  - [1, 0, 0, 0, 0]
+  - [0, 1, 0, 0, 0]
+  - [0, 0, 1, 0, 0]
+  - [0, 0, 9, 1, -18]
+  - [0, 0, 1, 0, -1]
   scale: 1
 ---
 
