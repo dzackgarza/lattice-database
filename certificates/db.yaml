@@ -28793,7 +28793,10 @@
   hash: fb431c3b4ff5309cb6cd1d607ba9dced9ea1ac856d5af6860fb280b6c6d19c6f
   by: research preamble
 69LT automorphisms.automorphism_group_generator_morphisms:
-  hash: b2d9456c8d0910ff4e5c9b464229cb27d358efbae3f300f378ecb9cefe0d3631
+  hash: 9a6e63f6394842622ccb78ad893394034cc86148f59af6cc36565355015dc318
+  by: research preamble
+69LT automorphisms.automorphism_group_order:
+  hash: 69f4f2a76f5864eaa1d4d1d68862092494386377b24fa45e0e63c3fec26a391b
   by: research preamble
 69LT derive:
   hash: a6c8618c2301fcd3b443eb8f5ee25d3dfba28bbd72c8e70e1276d682ea440d2d
@@ -28801,8 +28804,14 @@
 69LT form.integer_valued:
   hash: 6f8ffe7428e3397ed36f808b221defb903ca49e3ef377439cfa5aad9301b8a3c
   by: research preamble
+69LT integral.anisotropic_primes:
+  hash: f233a59b05d36269f37542c38f0c04de821f0c7fcc2ac89d5a5e7a76036b61ff
+  by: research preamble
 69LT integral.discriminant_form:
   hash: 20b14ecdfd48326731ecf5b06695823816075ef4f4dcb7325ad96c2d05654bb9
+  by: research preamble
+69LT integral.discriminant_orbits:
+  hash: 43959bb59a34feaed70f3feb1bd888ffe8efd72835d2ef1fe7635d9a435676e1
   by: research preamble
 69LT integral.elementary_primes:
   hash: d00c60306e316e365d6da580f1558401b7351b42ae9d09333d36e1f4f831fa0d
@@ -28815,6 +28824,15 @@
   by: research preamble
 69LT integral.hyperbolic_index:
   hash: b6df4962e2ac64ba657c9eafd6cccd6573b924eb08a7cceb8a1abf2de320ec6b
+  by: research preamble
+69LT integral.local_densities:
+  hash: 63602949f2a4700c4c0b22dccbbafdc340b992e056f802eb62dfa86f4fad4385
+  by: research preamble
+69LT integral.local_representations:
+  hash: f8e4da76d6f53d2bf74d4bd8711fdfeb858365ba725caf3e7d28a85dde65139e
+  by: research preamble
+69LT integral.modular_scale:
+  hash: e56dc8bee3c3d9962a3b78e105b408dd0be1a63071fd6b7dd0904d0031032a83
   by: research preamble
 69LT integral.overlattice_count:
   hash: 3141138ae0c1e240559dab5b4d643ca5abb58030d44ebf59116b97be075659b7

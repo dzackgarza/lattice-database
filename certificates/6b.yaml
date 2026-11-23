@@ -313,6 +313,9 @@
 03EK integral.anisotropic_primes:
   hash: 0e4a3e8d7bcd9db2e440f572e63ddc2e2afbd2f4ed41acb54cf59e7a987f109f
   by: research preamble
+03EK integral.discriminant_sequence:
+  hash: 241828ea1b2aaaf8de270c6efeca48545d6cc0a61fd23333e340fc8570c37d72
+  by: research preamble
 03EK integral.elementary_primes:
   hash: 8b022dda8bd4356543f29a132b503e4fdc4a05787c9f6785ef3e8b6ca8db45ca
   by: research preamble
@@ -32617,6 +32620,9 @@
 3S0F form.integer_valued:
   hash: 589a76c224b307b866d643ed03f4641fddb4d42065f582c39a7e833d8e5e0554
   by: research preamble
+3S0F integral.anisotropic_primes:
+  hash: 53eb5955fba3e95e682dd31e18c375693e1a064b8d221308f74e9149f5555cbd
+  by: research preamble
 3S0F integral.elementary_primes:
   hash: fb727b86afe8ec24fbb7fe4020f51439ad6a114ca37dbf2c8708faf027fe7905
   by: research preamble
@@ -32625,6 +32631,15 @@
   by: research preamble
 3S0F integral.genus_symbol:
   hash: 755eafd9febece974c54d2b01417f8c65bf5cfaea9ebba4f70dad999c13b4b73
+  by: research preamble
+3S0F integral.local_densities:
+  hash: a5808d0462acab8cdbba542978f5107310d9defb58c9d23b5a81ed7cda714d15
+  by: research preamble
+3S0F integral.local_representations:
+  hash: 89289eb6bb2222a1b017ed90e8093c54b8631edc9b4a20e7c8c0b1bb18ad612a
+  by: research preamble
+3S0F integral.modular_scale:
+  hash: 65d67ffb46f436ccae22fe8a0e1d29d5f3e55750a6e529e0c7245fb6e70ddd66
   by: research preamble
 3S0F integral.overlattice_count:
   hash: 5c10940ee8fcf54e50471e81d461c1e0cf7bee9be26d97610439c13d98fb0a47

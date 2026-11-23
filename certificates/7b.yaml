@@ -1015,6 +1015,9 @@
 06C8 integral.anisotropic_primes:
   hash: a719a504fc9f1d79ad71a29bc7219776c4a722061b73e3d5895f93edd638fc1f
   by: research preamble
+06C8 integral.discriminant_sequence:
+  hash: 43e888ca6c206cad3dc188c120fc946b9217775ad671ce4b91449da95af20ab9
+  by: research preamble
 06C8 integral.elementary_primes:
   hash: fc376901ed85702244d2e44d0905fa593eda1493491ff0f194b8b1d1860e26d8
   by: research preamble
@@ -1638,6 +1641,9 @@
   by: research preamble
 097L integral.anisotropic_primes:
   hash: 19d86b0eb6a83efcc6c41b4115ea00a8af73870aa38862b2d8898e66d310b494
+  by: research preamble
+097L integral.discriminant_sequence:
+  hash: f2e5e7331ceb5b097c53033218ac7e6928427ccd68ab9766043eaa52b9e9006b
   by: research preamble
 097L integral.elementary_primes:
   hash: 841d7d44ac81b8568c41bcb9315431fd8bb46e6c2efade9e4a43ee7e970ec525
@@ -30061,6 +30067,9 @@
 49GG form.integer_valued:
   hash: c0dfd3f5e308eec7db859c4f602881a3ab56c08887a05f622031c27424e1215e
   by: research preamble
+49GG integral.anisotropic_primes:
+  hash: 5da90a85dab44a5026ca93c97ed67c573a6ba29958a256ea82c98ec8ad1cf5de
+  by: research preamble
 49GG integral.elementary_primes:
   hash: d8f76adcc85eacaf9ac87c3359bdc409ba9f250a3e8b91f74d413645f31f7644
   by: research preamble
@@ -30070,11 +30079,20 @@
 49GG integral.genus_symbol:
   hash: d4059fad9d8507b69d580390a969a0b0c7f00fc86d6a340d317315b8219e9d18
   by: research preamble
+49GG integral.local_densities:
+  hash: a003cbf3dbfca608c7074baa676a78b3d34bdcd3b16248e3fde93d997e1de496
+  by: research preamble
+49GG integral.local_representations:
+  hash: 1ca6e7a6d8d8f06c45530c29381dc6d81ea8fcd62e82007652f75caf6a340b89
+  by: research preamble
+49GG integral.modular_scale:
+  hash: 73def076bc878977cf5f916162f08bb3b282904a3ec0771a0b62fa15ae6d9ddf
+  by: research preamble
 49GG integral.overlattice_count:
   hash: 814b4c40ecc256ca804febf1f58a98f860f3b2db934644e6fb63b7456c2607e6
   by: research preamble
 49GG integral.primitive_orbits:
-  hash: 95f5ddca4d6df4dc442ed906a270626cb4b3dccd5f664644f6a22e8ed1531504
+  hash: 40386f331dfabb250d73220e3d33b99e7d87931f16bd6aaf65316c7ff6626541
   by: research preamble
 49GG integral.spinor_genera:
   hash: d2a77fbadda09f4574467766d8e5b14fc716e2cb33447c765ca119e78412f848
