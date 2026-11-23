@@ -1664,9 +1664,6 @@
 3GX5 integral.discriminant_sequence:
   hash: ac5830bf83c01f73d9a9417b7f9de8b39dbfd51c20f84ed5872b139ccae22b93
   seconds: 19648
-3GX8 integral.discriminant_sequence:
-  hash: de1f6f8d3900127bda3e60a0bb1c5681aeee308ec1a06f7be280b7d1fe68d631
-  seconds: 19656
 3GXO integral.overlattice_count:
   hash: 8392a80454dd1af739e9d6163b1538aaafd76392d9cca73846c1dc3e312e9aa8
   seconds: 10
@@ -1732,10 +1729,6 @@
   hash: 3072abb556184c36e33747dd96e2dc1de4befdb4383257fa4d37035dd48d3c52
   seconds: 112
   lost: true
-3X6K integral.hyperbolic_index:
-  hash: 6dad9ab42035dd725471aec9ec1cf7f10f9784a9d3f41f225b835b45927897b2
-  seconds: 0
-  lost: true
 48YN integral.primitive_orbits[SOtilde]:
   hash: 9e1c166422b378d94310bb7b61abeb33d8e2cd6ec2a08cf2b0a62e00dcdedc04
   seconds: 15073
@@ -1754,6 +1747,10 @@
 4I8D automorphisms.automorphism_group_order:
   hash: 8cb7ef7d73079f6dab7c15c2d594218d65ca768f8f835504e1350a5324ea9dc6
   seconds: 0
+  lost: true
+52HJ integral.hyperbolic_index:
+  hash: 274205a409c28c0754f6ec6e2a6e32583766bd22135b2c9abda9cb9a94d75342
+  seconds: 40
   lost: true
 58S6 integral.local_densities:
   hash: e5378e409c24f7701e373876b32586a87eb5a9cf04b7ada7350ac466781f0804
