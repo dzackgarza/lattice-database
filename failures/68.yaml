@@ -7985,44 +7985,6 @@
     database_revision: 65345b00e799bbab07356bd75b7c199cb252e19c
     research_revision: 4ba7b9d10b8828834ad5df0ce776a7490ce0354b
   notes: []
-26FJ integral.genus_class_count:
-  disposition: open
-  attempts:
-  - hash: 8a290b11d2c83baeeffb58f2a2ccdc82d0140558afb889640b42cf3ca8dd359e
-    gram_tensor:
-    - - 2
-      - 0
-      - 0
-      - 0
-      - 0
-    - - 0
-      - 4
-      - 1
-      - 1
-      - 0
-    - - 0
-      - 1
-      - 4
-      - 1
-      - 1
-    - - 0
-      - 1
-      - 1
-      - 4
-      - -1
-    - - 0
-      - 0
-      - 1
-      - -1
-      - 8
-    reason: worker or runner lost (recovered from exceeded.yaml)
-    stderr: ''
-    seconds: 5.0
-    recorded_at: 2026-11-23 22:23:59.853944+00:00
-    run_url: https://github.com/dzackgarza/lattice-database/actions/runs/45276038245/attempts/1
-    database_revision: 1751249c20a197523104ce6a660b34ca21ff4493
-    research_revision: 4ba7b9d10b8828834ad5df0ce776a7490ce0354b
-  notes: []
 26V9 derive:
   disposition: open
   attempts:
@@ -8285,6 +8247,44 @@
       Algebraic Real 24/5 to Integer\n"
     seconds: 4.304330394999852
     recorded_at: 2026-11-23 22:41:47.885603+00:00
+    run_url: https://github.com/dzackgarza/lattice-database/actions/runs/45180138881/attempts/1
+    database_revision: 65345b00e799bbab07356bd75b7c199cb252e19c
+    research_revision: 4ba7b9d10b8828834ad5df0ce776a7490ce0354b
+  notes: []
+27AB derive:
+  disposition: open
+  attempts:
+  - hash: b6e03549c8a4c6b308e2a25c137de0b37162fd0d8628a14b523203ccd33fcc04
+    gram_tensor:
+    - - 2
+      - 0
+      - 1
+      - 0
+      - 1
+    - - 0
+      - 2
+      - 0
+      - 1
+      - 1
+    - - 1
+      - 0
+      - 6
+      - 1
+      - 0
+    - - 0
+      - 1
+      - 1
+      - 6
+      - 1
+    - - 1
+      - 1
+      - 0
+      - 1
+      - 8
+    reason: memory exhausted
+    stderr: ''
+    seconds: 36.11916813099924
+    recorded_at: 2026-11-23 23:06:49.799765+00:00
     run_url: https://github.com/dzackgarza/lattice-database/actions/runs/45180138881/attempts/1
     database_revision: 65345b00e799bbab07356bd75b7c199cb252e19c
     research_revision: 4ba7b9d10b8828834ad5df0ce776a7490ce0354b
