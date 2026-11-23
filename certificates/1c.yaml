@@ -26154,27 +26154,13 @@
   by: research preamble
 3IAH definite.regular:
   hash: 7e8c36aeb99f739493664ee1e5a20f83056069d9d85c709b8a74afc8533d3ba3
-  by: 'W. C. Jagy, I. Kaplansky and A. Schiemann, There are 913 regular ternary forms,
-    Mathematika 44 (1997), 332-341, form 652, as tabulated in A. G. Doyle, B. Muskat,
-    K. Pehlivan and K. S. Williams, Positive integers represented by regular primitive
-    positive-definite integral ternary quadratic forms, Integers 19 (2019), #A45,
-    Tables 1 and 2; regular by W. C. Jagy, I. Kaplansky and A. Schiemann, There are
-    913 regular ternary forms, Mathematika 44 (1997), 332-341.'
+  by: research preamble
 3IAH definite.siegel_eisenstein_coefficients:
   hash: ea753a7d23e5ab9c26410162cc448e70c77a397674ce158093347407254ffc51
   by: research preamble
 3IAH definite.spinor_regular:
   hash: 7624e8a2da5a7a92202152d2a7d44701ff314c414bf585d1747c65286feaf786
-  by: 'W. C. Jagy, I. Kaplansky and A. Schiemann, There are 913 regular ternary forms,
-    Mathematika 44 (1997), 332-341, form 652, as tabulated in A. G. Doyle, B. Muskat,
-    K. Pehlivan and K. S. Williams, Positive integers represented by regular primitive
-    positive-definite integral ternary quadratic forms, Integers 19 (2019), #A45,
-    Tables 1 and 2; regular by W. C. Jagy, I. Kaplansky and A. Schiemann, There are
-    913 regular ternary forms, Mathematika 44 (1997), 332-341; hence spinor regular,
-    since a form is spinor regular if it represents all the positive integers represented
-    by its spinor genus (A. G. Earnest and A. Haensch, Completeness of the list of
-    spinor regular ternary quadratic forms, arXiv:1711.05811v2 (2018), Abstract) and
-    the spinor genus lies in the genus.'
+  by: research preamble
 3IAH definite.theta_series_cuspidal_component:
   hash: a9dd7bf8a17da1ab57fd378c3ebf755f67ad87845ff0dfb32ecd091aaa6f2188
   by: research preamble
@@ -26186,6 +26172,9 @@
   by: research preamble
 3IAH integral.anisotropic_primes:
   hash: 9c819fe54aa6de92ba103b772a7f40bc7bf00cc7e240c3a70ae8acaaf4a618b3
+  by: research preamble
+3IAH integral.discriminant_sequence:
+  hash: f21aa51f2455ea7568052fdc1081e1194d4ea8ad5163ef966a3e5b4359269347
   by: research preamble
 3IAH integral.elementary_primes:
   hash: 535211f3a24f1a94b54f170b6538c2ab4d292fa0ffbca28df21d2c8b272cad1e
