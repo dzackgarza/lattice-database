@@ -670,10 +670,6 @@
 1FHM integral.discriminant_form:
   hash: 923cd0cf786d8f0aa9bb64d26998459a65f7f1bb59ae1f34cfe52a01c5ed7faa
   seconds: 5
-1GM0 integral.discriminant_form:
-  hash: bd36b87f4f3e20994c8533219e4bff48334955ba6d615de2e2798b9aca6b5a98
-  seconds: 0
-  lost: true
 1GRN integral.overlattice_count:
   hash: 2d69994bb46caf54ef5fc24bfc85749b4e47e08c0890c0841e7baa197fa96e52
   seconds: 0
@@ -1644,6 +1640,10 @@
 3IEA integral.hyperbolic_index:
   hash: 3072abb556184c36e33747dd96e2dc1de4befdb4383257fa4d37035dd48d3c52
   seconds: 112
+  lost: true
+3X6K integral.hyperbolic_index:
+  hash: 6dad9ab42035dd725471aec9ec1cf7f10f9784a9d3f41f225b835b45927897b2
+  seconds: 0
   lost: true
 48YN integral.primitive_orbits[SOtilde]:
   hash: 9e1c166422b378d94310bb7b61abeb33d8e2cd6ec2a08cf2b0a62e00dcdedc04
