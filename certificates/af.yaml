@@ -27885,11 +27885,20 @@
 3ICG integral.spinor_genus_count:
   hash: 4a31570620190d0319ab5bd14ca2df28bda7894dbc4e432655d682bceedcafb5
   by: research preamble
+42GI automorphisms.automorphism_group_generator_morphisms:
+  hash: a89195baaec26e4873e9357e455fc64713b8465b228a70f66132c676be145314
+  by: research preamble
+42GI automorphisms.automorphism_group_order:
+  hash: 48089a0941ef28d213711ab19c322c925d14f3449871b0a5305fc288f5c8012e
+  by: research preamble
 42GI derive:
   hash: e0e4afcaf53770b17fd53431cfec111879dfd48ffaa544f5bdd02bbdf4f51247
   by: research preamble
 42GI form.integer_valued:
   hash: 17bc3a48ccf0d93d77c8ae96eb79fcb213a9c74769d78c880a901385d9fbc137
+  by: research preamble
+42GI integral.anisotropic_primes:
+  hash: a81972066e379f950d3813965d15afff51dc85f2a76c527b2e42d9c1cf887940
   by: research preamble
 42GI integral.elementary_primes:
   hash: 9577e2040001199be9aac674d049243638d57372a2fc53cdbadd4f71fdb96050
@@ -27900,8 +27909,20 @@
 42GI integral.genus_symbol:
   hash: 9ea447bbb901c7dac658fcf9ba5792aca82dc033a9d84809678c411b41be390e
   by: research preamble
+42GI integral.local_densities:
+  hash: 99cf72e1949037e3c094bde9b4732c0ce5c20c4aefc3086fc10c46c916938075
+  by: research preamble
+42GI integral.local_representations:
+  hash: 57359e878dbdbd52ee0420d3a2fb61b13db8db9240519a8bd00283721598dd5e
+  by: research preamble
+42GI integral.modular_scale:
+  hash: 0c77e5f4f04af4efb8491451dfb4c9395887514de45aeb6a017ebb608018e178
+  by: research preamble
 42GI integral.overlattice_count:
   hash: afea4acd920118202b8f189a450da7f7bf90e13e1035cca72ce3f1695ebb95cb
+  by: research preamble
+42GI integral.primitive_orbits:
+  hash: 2df936b0d4ff3d4e9f000091b9ac6da856b211142cd7481adaca5abf2482e241
   by: research preamble
 42GI integral.spinor_genera:
   hash: c569282226c96d2293323915a039de2baa83610bec2e78369f479e1017d072a9

@@ -31645,6 +31645,9 @@
 3VDW form.integer_valued:
   hash: 233814e5e5c1765d8bd68d7f4c91d5742c81041f856cdcfc2a5198e071746ce4
   by: research preamble
+3VDW integral.anisotropic_primes:
+  hash: fb25bc127e7307ed02b10aed802223a0f3cec3b5949a94904b89b24699373085
+  by: research preamble
 3VDW integral.elementary_primes:
   hash: bc9f59d4c796baf2d7ce5a4536960c2181c5d151543e099f8758053bed8d6e46
   by: research preamble
@@ -31657,8 +31660,20 @@
 3VDW integral.hyperbolic_index:
   hash: 24a67b8bf5f72565e2046490ebbaea1729ee885b2be0b0e1c67511be6f279433
   by: research preamble
+3VDW integral.local_densities:
+  hash: 9796f5bf37f8d1fb98ba1cf80009406a24c99625a5e75a02f91469711c41c404
+  by: research preamble
+3VDW integral.local_representations:
+  hash: 43543e29a29522aac89ff631d63eeeb628d286a3657c181f8435805c5a06a9d5
+  by: research preamble
+3VDW integral.modular_scale:
+  hash: 7a2634225b5e6675d319ebc4d1729deab4afe5c461b23a75fd12d69403c451c4
+  by: research preamble
 3VDW integral.overlattice_count:
   hash: c8f8fe26ca413706ff17bcf77a09d8d6c453e97631c0a52acdaa151d4fc0f1f2
+  by: research preamble
+3VDW integral.primitive_orbits:
+  hash: efdc3acc31dae32efa6733d64e4147d26a756c0f7a5817db6bfcb162e7e66e35
   by: research preamble
 3VDW integral.spinor_genera:
   hash: ff43e40f8c94066e15ba9f4f4ef2e3c204d7daa1bde676d3662271ce941cfbde
