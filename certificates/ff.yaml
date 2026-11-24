@@ -29247,11 +29247,20 @@
 3IEU integral.spinor_genus_count:
   hash: 1187052cf2ccaf9f697bd77ce42464dfe65fa12f5bae25384ac12f9a3efa0939
   by: research preamble
+5FXC automorphisms.automorphism_group_generator_morphisms:
+  hash: a26886f2f11f7b4b0051b5dd556a8ded5343aa05bdbcb067f0f3aa3cb4f87f24
+  by: research preamble
+5FXC automorphisms.automorphism_group_order:
+  hash: 5153fea3845db2d283a24c64bcabc763fd8228ab6a97a14d61d7c600ee54e9ce
+  by: research preamble
 5FXC derive:
   hash: 9c227d6638d018ab07ba40200eef7c7b234f7c16b001d0eb21ef740d252825be
   by: research preamble
 5FXC form.integer_valued:
   hash: 0c10c89e97757cb7f4a2b16c7c8d89cb17ac33e0549f2d179dec265bc37fbee5
+  by: research preamble
+5FXC integral.anisotropic_primes:
+  hash: d7939119aae503e98f31e975cada45a36b19a4acc8aa40a2e83559e67429edb3
   by: research preamble
 5FXC integral.elementary_primes:
   hash: b4697877e085eabe9133329e4077ddf3ec56538fd679b01e4dc89835ec230435
@@ -29262,8 +29271,20 @@
 5FXC integral.genus_symbol:
   hash: bf624453ca64824554ae432a0308fcda6dc6843b52ff145376b732081480bf09
   by: research preamble
+5FXC integral.local_densities:
+  hash: bd4a3d443279b04d5ca68cebfe3f258be2483e0d7394cd4c8d04722d577ebc62
+  by: research preamble
+5FXC integral.local_representations:
+  hash: eb10223f55c87bdaf38e748c4c4b4b9802a573dfcf623943391b865e5a50b08a
+  by: research preamble
+5FXC integral.modular_scale:
+  hash: 161b4282db04ff0bbb0913c9e93427504aa4cbc5e472e4db6bf825b9625813d7
+  by: research preamble
 5FXC integral.overlattice_count:
   hash: 125d99daa57609e14cf2a465eb4302d4132ec9fb686d419e6bb08fd0c02b69d9
+  by: research preamble
+5FXC integral.primitive_orbits:
+  hash: 43a7c184cafeefa921de84262c7b56761a528f7d3531941fba200ca0ccac7104
   by: research preamble
 5FXC integral.spinor_genera:
   hash: 15b198612be5fc306142287c4fe78398350eb6b1a9a19ab36cbb7d052befa2b7

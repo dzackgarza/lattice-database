@@ -32575,6 +32575,15 @@
 5TPS form.integer_valued:
   hash: 389958ec5122a406bb046a42aa8e9e741a612b2803215c1c8abcbf9eb1db961d
   by: research preamble
+5TPS integral.anisotropic_primes:
+  hash: 101e17e873ba7469ec5ea90ac38fc10251269bb4f025082712c2a78c07c6b192
+  by: research preamble
+5TPS integral.discriminant_form:
+  hash: 369b7b2dd0df4203a5dbd059fdfc8b69445cd6d574312719bb9dce1ce1ab11c9
+  by: research preamble
+5TPS integral.discriminant_orbits:
+  hash: 71b28b06b3057e784699eb2cd906d03565222a395dc42979f376f31147b4f638
+  by: research preamble
 5TPS integral.elementary_primes:
   hash: cec8685f545532f2705ea8a19fdffb4b23fe9c44f8c0b8becaa01995374bb9f9
   by: research preamble
@@ -32587,8 +32596,20 @@
 5TPS integral.hyperbolic_index:
   hash: f21a59639a3728d876ef7b3ad5dface892f57317f00233b366246cd0d0cbdb12
   by: research preamble
+5TPS integral.local_densities:
+  hash: 6ee2c436565eecb9b2994bc7b8d498f6da07bcdd736959831631ac0b994b81d8
+  by: research preamble
+5TPS integral.local_representations:
+  hash: e84e31444c036d80aed10f3ee6e18136877307ad76b8c7689ce31d6391e5c7e8
+  by: research preamble
+5TPS integral.modular_scale:
+  hash: 045e8c456758ba7ace07beaa47de19a6514396ce2361777e843c79cee2260ac2
+  by: research preamble
 5TPS integral.overlattice_count:
   hash: 93eec18e8b8681ba99bb5185789254f3706dd3d3f1be4caaf2a8a06f85821b50
+  by: research preamble
+5TPS integral.primitive_orbits:
+  hash: 609d00c320468ae837a329b3132244f39a836da2f0290d5a45d38435c0acb18f
   by: research preamble
 5TPS integral.spinor_genera:
   hash: 0768451c6b64d66365a26cb1368b2dd2e51b5ae8a59d0f7d7a72a438b6fc6a69

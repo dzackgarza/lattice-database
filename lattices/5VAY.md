@@ -14,6 +14,7 @@ certifications:
   integral.hyperbolic_index: ddf1e32bb2191d1e533964ad2c22774d02e55c33c74bd3df62d7a42f50c72f70
   automorphisms.automorphism_group_order: c7341c7d581ea8324991ba908083adc2dbf60deeb105b397fcdf41e4fa74cc2b
   automorphisms.automorphism_group_generator_morphisms: 5a89af88b1ffffe261d65a9c6773dbe38e206445b77003128e3c09f533de43b9
+  integral.primitive_orbits: e69cc98ebeab8609da9fa91b8d928116b42f9662932aba875d1a2b3fe94d526b
 rank: 5
 gram_tensor:
 - [2, 0, 0, 0, 0]
@@ -44,6 +45,19 @@ integral:
   spinor_genus_count: 1
   spinor_genera: [1]
   hyperbolic_index: 1
+  primitive_orbits:
+    O:
+      constant: 2
+      z: []
+      w: []
+    O+:
+      constant: 2
+      z: []
+      w: []
+    SO:
+      constant: 2
+      z: []
+      w: []
 automorphisms:
   automorphism_group_order: aleph0
   automorphism_group_generator_morphisms: [O(L) generator 1, O(L) generator 2, O(L) generator 3, O(L) generator 4, O(L) generator 5, O(L) generator 6, O(L) generator 7, O(L) generator 8, O(L) generator 9, O(L) generator 10, O(L) generator 11, O(L) generator 12, O(L) generator 13, O(L) generator 14, O(L) generator 15]

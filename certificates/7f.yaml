@@ -29067,6 +29067,15 @@
 5WEU form.integer_valued:
   hash: 5e499d5fe78a78287304c30d9fbc7d4eca8789374fa10d35e6e03b1146e50bb3
   by: research preamble
+5WEU integral.anisotropic_primes:
+  hash: a470c2f5602771e9cee7c4285e95d6427836a7dfb90d582386c0474ae15626de
+  by: research preamble
+5WEU integral.discriminant_form:
+  hash: 6d1ded2a782696f9bd854f8379999357a41463c6d350f37e32a668a5a3be4705
+  by: research preamble
+5WEU integral.discriminant_orbits:
+  hash: 7c190f524fb2f770b2609c13b320fc96b3d70c438aae7baa0793c632989b2141
+  by: research preamble
 5WEU integral.elementary_primes:
   hash: b3b42bf898b2b39bcdae89ec677020df6943c2a86b5fd6c9a003203f4a994d27
   by: research preamble
@@ -29079,8 +29088,20 @@
 5WEU integral.hyperbolic_index:
   hash: b93830d97052966d7dc5baad52ba87090e391062529b8608e2929f3727db261b
   by: research preamble
+5WEU integral.local_densities:
+  hash: 564ac2452121dc49ab2b1121d315b0cc17e4afedbca4edb87712ba9c731e7fd8
+  by: research preamble
+5WEU integral.local_representations:
+  hash: 9bd4414d56701551365bab6d18463234071d281f9fb47e959d046fe35c89ce0f
+  by: research preamble
+5WEU integral.modular_scale:
+  hash: 140aff6b8cc488c99aeb15b7adaa2f1cbcd848f59abb990ed999f85a4b198cb7
+  by: research preamble
 5WEU integral.overlattice_count:
   hash: d01517971a2872bdec5b099c1895cdc960e3ed71b5d7197201363e17f776539d
+  by: research preamble
+5WEU integral.primitive_orbits:
+  hash: cdb2836b95a7a55e2f5ecbddc736075f194b6f705af7d4d90868511554995f37
   by: research preamble
 5WEU integral.spinor_genera:
   hash: 9a58936c7ba428b09c556f5bdd385a61db403bbc605e776e2938cebbdd7d8921
