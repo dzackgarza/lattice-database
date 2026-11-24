@@ -1,3 +1,32 @@
+02XO definite.regular:
+  disposition: open
+  attempts:
+  - hash: c85571e8c0274b5d143e2fa299295e5aff5142b26e78a47840ad280995c2f130
+    gram_tensor:
+    - - 1
+      - 0
+      - 0
+      - 0
+    - - 0
+      - 1
+      - 0
+      - 0
+    - - 0
+      - 0
+      - 3
+      - 0
+    - - 0
+      - 0
+      - 0
+      - 4
+    reason: memory exhausted
+    stderr: ''
+    seconds: 1211.7335812780002
+    recorded_at: 2026-11-24 01:03:36.333133+00:00
+    run_url: https://github.com/dzackgarza/lattice-database/actions/runs/45276038245/attempts/1
+    database_revision: 1751249c20a197523104ce6a660b34ca21ff4493
+    research_revision: 4ba7b9d10b8828834ad5df0ce776a7490ce0354b
+  notes: []
 02XO integral.discriminant_form:
   disposition: open
   attempts:
