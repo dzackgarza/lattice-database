@@ -489,7 +489,8 @@
   limit_bytes: 1646340915
 03A8 definite.spinor_regular:
   hash: 9afcb6ed5e5e0558fc915599b97813cb884a77216a8c5678759482a468e3d9cf
-  seconds: 415
+  seconds: 5197
+  lost: true
 03E4 definite.regular:
   hash: 367ee6be7b1ae2324d2f8b84ed17807c44014151c93049ad1053aae3f816df83
   seconds: 6558
@@ -1333,10 +1334,6 @@
   killed_by: memory
   peak_bytes: 14302081024
   limit_bytes: 1675943116
-26FJ integral.genus_class_count:
-  hash: 8a290b11d2c83baeeffb58f2a2ccdc82d0140558afb889640b42cf3ca8dd359e
-  seconds: 5
-  lost: true
 26JG derive:
   hash: 44277e20d292ff83432052dbeeba4cbfb3704989a75a03202e33fdb22898d949
   seconds: 41
@@ -1392,6 +1389,20 @@
   lost: true
   killed_by: memory
   peak_bytes: 13338517504
+  limit_bytes: 1675943116
+26TG derive:
+  hash: 6729dc532ca88d39bfcd32dab38b0b8484fc6e8a54603a3c88c37ce21dae36d0
+  seconds: 65
+  lost: true
+  killed_by: memory
+  peak_bytes: 14210396160
+  limit_bytes: 1675943116
+26V9 derive:
+  hash: 74c2f008fd192bf49df6713ce7b72f880a9342b2bb732264e7c5fb90497bbf7a
+  seconds: 56
+  lost: true
+  killed_by: memory
+  peak_bytes: 13520916480
   limit_bytes: 1675943116
 270Z derive:
   hash: e268cf9e1fa850d62af0e41ed657a93a532d639cbda65817de32710086f1e071
@@ -1555,6 +1566,13 @@
   killed_by: memory
   peak_bytes: 12547874816
   limit_bytes: 1675942297
+27AB derive:
+  hash: b6e03549c8a4c6b308e2a25c137de0b37162fd0d8628a14b523203ccd33fcc04
+  seconds: 48
+  lost: true
+  killed_by: memory
+  peak_bytes: 13241061376
+  limit_bytes: 1675943116
 27MV derive:
   hash: 0e044db65139bd9bd05948e9e080f7d642e6d3286c81d07d73401b6e67bceecf
   seconds: 41
@@ -2263,10 +2281,6 @@
 3G2S integral.discriminant_sequence:
   hash: 3658d7ea9f63abbf80880602a0c8917fae9bdabfe51c00f78ca897ab109ba0aa
   seconds: 19586
-3G2X integral.discriminant_sequence:
-  hash: 7e755070f83b43a978efe064632027c0d6f6e531902159255294654186089ff1
-  seconds: 4596
-  lost: true
 3G2Y integral.overlattice_count:
   hash: d85ac2e458a057585e6cac23b0ede6a7d7cc38f04a556d45595f5ae1f4c6f5cf
   seconds: 6
@@ -2399,12 +2413,13 @@
 3GSS integral.discriminant_sequence:
   hash: 1ab4cb27ac8324d3b55f87b49fe2d9638523863e9f43a210eb9460be1973101d
   seconds: 19659
+3GT4 integral.discriminant_sequence:
+  hash: 0b71cfa1ec6323490cdf078e7bed274e391e1d8babff618db14a96fe2c74b6d0
+  seconds: 1667
+  lost: true
 3GTS integral.discriminant_sequence:
   hash: 26a906b9d9d22e2f60644bcb66ee493b586d333a3d2e8d30e57e85387eee4009
   seconds: 19661
-3GTW integral.discriminant_sequence:
-  hash: 37a302f1e194ab1a33059fd3c84e4911c016a3c2867eea6dcf0a2c9c4e1dc48f
-  seconds: 8099
 3GV7 integral.discriminant_sequence:
   hash: 11bd986ed4009c6f4b842f2711f305e76eeda93e70e9bc4fc82cf6b28bb78e57
   seconds: 1581
@@ -2446,9 +2461,9 @@
   hash: eb2ef6f7d13c3b8094b54382ecbc300217a306e104a8479eddfca97bb4545580
   seconds: 763
   lost: true
-3GY8 integral.discriminant_sequence:
-  hash: 42eddbbcc1ac205b3adba0a12c95e5f826405df688ba03fd59fab4e7933d1010
-  seconds: 6735
+3GY7 integral.discriminant_sequence:
+  hash: 49b2f17d6dc2f29a97d2ed119dddd2d6f5d9a1382af99833ce5a8fd6b79c2d9c
+  seconds: 1593
   lost: true
 3I9Z integral.discriminant_sequence:
   hash: 7dbc0ada5ff76a2987b5d86e04984e775f24298fc19f497059ec85b07a744194
@@ -2479,6 +2494,10 @@
 3IAC integral.overlattice_count:
   hash: 515a93ce92ba527fc2f26325a66a09d17f46aeccec254f141d6e9f9c53cece3d
   seconds: 10
+  lost: true
+3IAL integral.discriminant_sequence:
+  hash: d0b8f7fea43f6ad56452985deedba4adafbfffe207e9d562ede679f482d8cdd1
+  seconds: 1547
   lost: true
 3IAM integral.discriminant_sequence:
   hash: cf4bab4542f104f8c4165bdb7118ddabd0e6dc338c2711c37eb5312384892827
@@ -2536,6 +2555,10 @@
 5VVR integral.primitive_orbits[Otilde+]:
   hash: 8711e002e5f7ea87be6a027737020c92a454fe2b7ad0a1b2a2a251097c0d1867
   seconds: 0
+  lost: true
+5XTS integral.primitive_orbits[O+]:
+  hash: a7e8c28a297e772d52198d47a41ec2c894efe14084ebeea87c6863c23695344f
+  seconds: 1652
   lost: true
 6JRR arithmetic-group.otilde-plus-t-co.index_in_orthogonal_group:
   hash: acad0e18f0c158ad5bda122e435bae4133bd93287223e2a8ce2c8b611148e2d3
