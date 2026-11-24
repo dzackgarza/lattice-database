@@ -726,10 +726,6 @@
   hash: ff001c37cb5dbdcf1279331de0414a5e76ddf89fd20ce18f50841b1a4491fe3e
   seconds: 0
   lost: true
-15QW integral.discriminant_form:
-  hash: 894422b1702d8925e4c03a73ba5f5eaf6f04a88945e312f62c184b2edad74a29
-  seconds: 0
-  lost: true
 15YT integral.discriminant_sequence:
   hash: 1924a617bce67901a8d87c2d9d9fe27571aa32ae210411a68ecaa9384f36f789
   seconds: 0
@@ -756,6 +752,10 @@
 17G7 definite.genus_theta_series:
   hash: 1c18a16c88690648f868735bc840b2ded6a493875cc708a03cf84d33976bed01
   seconds: 11
+  lost: true
+17X4 integral.discriminant_form:
+  hash: 6c84e9a7622b4ac3f181e7a466d2b28c121f33faedb309dc93a8ecef1c565658
+  seconds: 0
   lost: true
 18TJ integral.discriminant_sequence:
   hash: 85ce9c836f2df8b9f9faf8ba5f38041ee9f9d52c2168f83014abc0f89fd4302a
