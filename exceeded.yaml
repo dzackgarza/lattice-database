@@ -1714,10 +1714,6 @@
   hash: 73f92e88dc3c41f09fe3d704e2bb6eec69c13383e23ff0521b2c623891c8c865
   seconds: 5
   lost: true
-3GOR integral.discriminant_sequence:
-  hash: eca45725eb4b83e4be7e7cde6c66a27d91f942f353e217dc8cf52f965365f34f
-  seconds: 5258
-  lost: true
 3GOY integral.discriminant_sequence:
   hash: d394388127ea39aa300593ba7bfe1998b1e9c3bea2b715d0d9eda236d682e7e6
   seconds: 5287
@@ -1899,6 +1895,10 @@
 58S6 integral.local_densities:
   hash: e5378e409c24f7701e373876b32586a87eb5a9cf04b7ada7350ac466781f0804
   seconds: 0
+  lost: true
+5HB3 integral.discriminant_sequence:
+  hash: 40df09fedd726b95463d28eb95bfb9bd7ff088b1e88226c41e6d7c16297aaaf5
+  seconds: 20
   lost: true
 5RR1 integral.primitive_orbits[SOtilde]:
   hash: 2b2f37ca731c7f2c974be88ea8d147c4f3c85c99adec5cb66a320253d297072a
