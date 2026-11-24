@@ -393,9 +393,20 @@
   hash: 90510cf4edc8c706393e44c3e1feadde8a13950eb13155ef85c3174db473bd4b
   seconds: 610
   lost: true
+  killed_by: memory
+  peak_bytes: 633110528
+  limit_bytes: 1646340915
 031R definite.regular:
   hash: d0e6a0d78b3632981cb59be950776353f0bb88d6a14c0b9c8336c9f3be86b231
-  seconds: 6778
+  seconds: 1166
+  lost: true
+  killed_by: memory
+  peak_bytes: 678993920
+  limit_bytes: 1646340915
+031R definite.spinor_regular:
+  hash: ec7a803e07571ec860e188223ee4db88d201500b8d9af3f684401cac2a91938a
+  seconds: 615
+  lost: true
 0354 definite.regular:
   hash: 63bbadf4ff4faf3d5f46eb563263a7239ad21702bb7a5e0504cc9bec02bead15
   seconds: 6563
