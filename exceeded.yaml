@@ -880,10 +880,6 @@
   hash: 43ddb4cbbad734f83ffb5f5d21dd8da7461266bb70055d04f9d8bc076dc5942d
   seconds: 0
   lost: true
-20I1 integral.discriminant_form:
-  hash: 30f83a8eeaef8947ad5c37e48d2024705eb628f9c3625031da7e702f0c11f6a7
-  seconds: 0
-  lost: true
 20I5 derive:
   hash: aa3388cfb0facd3d56dc39699f20c23c133212356223d3bd33c05007efadbdeb
   seconds: 0
@@ -898,6 +894,10 @@
   lost: true
 22WM definite.genus_theta_series:
   hash: db2c67761ca07439200009ff404ef36acf5cd34ddfc747267124c03e39b063c3
+  seconds: 0
+  lost: true
+23HU integral.discriminant_form:
+  hash: f905a0510d3301474bc4ff7632f302a9d52d6ca2c0ac31d5236f0b3c8c4b8474
   seconds: 0
   lost: true
 24N7 derive:
@@ -1961,10 +1961,6 @@
 3GWR integral.overlattice_count:
   hash: 836db517473faaeaa34246fe1f1fa761d816846114d210a46b13530d6de2d5f8
   seconds: 5
-  lost: true
-3GWS integral.discriminant_sequence:
-  hash: a4cbe9ec32a6ff412ab9b807d45da25389bb06d4072beea50942fe811fcda5b0
-  seconds: 16002
   lost: true
 3GX5 integral.discriminant_sequence:
   hash: ac5830bf83c01f73d9a9417b7f9de8b39dbfd51c20f84ed5872b139ccae22b93
