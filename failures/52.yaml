@@ -1048,6 +1048,486 @@
     database_revision: 8ff86fa50075c14fb4ad52122c3eb37621291c9f
     research_revision: 1d90bedd2007439a2af980eadabcccdf83661551
   notes: []
+1Y3X integral.discriminant_form:
+  disposition: open
+  attempts:
+  - hash: bc179fff66f95a9c0efb9ca4aac8389daaabf64cb018e012d0d54e88499bf989
+    gram_tensor:
+    - - 2
+      - 0
+      - 1
+      - 0
+      - 0
+    - - 0
+      - 2
+      - 0
+      - 0
+      - 0
+    - - 1
+      - 0
+      - 4
+      - 1
+      - 1
+    - - 0
+      - 0
+      - 1
+      - 6
+      - 0
+    - - 0
+      - 0
+      - 1
+      - 0
+      - 8
+    reason: exit status 1
+    stderr: "Traceback (most recent call last):\n  File \"sage/misc/cachefunc.pyx\",
+      line 1965, in sage.misc.cachefunc.CachedMethodCaller.__call__\n    return cache[k]\nKeyError:
+      ((None,), ())\n\nDuring handling of the above exception, another exception occurred:\n\nTraceback
+      (most recent call last):\n  File \"<frozen runpy>\", line 203, in _run_module_as_main\n
+      \ File \"<frozen runpy>\", line 88, in _run_code\n  File \"/home/runner/work/lattice-database/lattice-database/src/latticedb/sage_genus.py\",
+      line 536, in <module>\n    main()\n    ~~~~^^\n  File \"/home/runner/work/lattice-database/lattice-database/src/latticedb/sage_genus.py\",
+      line 531, in main\n    _compute(request)\n    ~~~~~~~~^^^^^^^^^\n  File \"/home/runner/work/lattice-database/lattice-database/src/latticedb/sage_genus.py\",
+      line 516, in _compute\n    _run(\n    ~~~~^\n        tag,\n        ^^^^\n        [field],\n
+      \       ^^^^^^^^\n        lambda: {field: SERIES[field](lattice, request[\"series_bound\"])
+      if field in SERIES else VALUES[field](lattice)},\n        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n
+      \   )\n    ^\n  File \"/home/runner/work/lattice-database/lattice-database/src/latticedb/sage_genus.py\",
+      line 449, in _run\n    values = compute()\n  File \"/home/runner/work/lattice-database/lattice-database/src/latticedb/sage_genus.py\",
+      line 519, in <lambda>\n    lambda: {field: SERIES[field](lattice, request[\"series_bound\"])
+      if field in SERIES else VALUES[field](lattice)},\n                                                                                            ~~~~~~~~~~~~~^^^^^^^^^\n
+      \ File \"/home/runner/work/lattice-database/lattice-database/src/latticedb/sage_genus.py\",
+      line 364, in <lambda>\n    \"discriminant_form\": lambda lattice: _discriminant_form(lattice),\n
+      \                                        ~~~~~~~~~~~~~~~~~~^^^^^^^^^\n  File
+      \"/home/runner/work/lattice-database/lattice-database/src/latticedb/sage_genus.py\",
+      line 383, in _discriminant_form\n    inside = [orbit for orbit in form.orbits()
+      if set(orbit) <= isotropic]\n                                 ~~~~~~~~~~~^^\n
+      \ File \"sage/misc/cachefunc.pyx\", line 1970, in sage.misc.cachefunc.CachedMethodCaller.__call__\n
+      \   w = self._instance_call(*args, **kwds)\n  File \"sage/misc/cachefunc.pyx\",
+      line 1848, in sage.misc.cachefunc.CachedMethodCaller._instance_call\n    return
+      self.f(self._instance, *args, **kwds)\n  File \"/repos/sage-extensions/src/sage_extensions/categories/modules/framed/formed/form_modules.py\",
+      line 3823, in orbits\n    return _finite_form_orbits(self, group)\n  File \"/repos/sage-extensions/src/sage_extensions/categories/modules/framed/formed/form_modules.py\",
+      line 3036, in _finite_form_orbits\n    return finite_ordered_set(tuple(orbit.points()
+      for orbit in action.orbits()))\n                                                                ~~~~~~~~~~~~~^^\n
+      \ File \"/repos/sage-extensions/src/sage_extensions/categories/group/g_sets.py\",
+      line 1455, in __iter__\n    return iter(self._orbits())\n                ~~~~~~~~~~~~^^\n
+      \ File \"sage/misc/cachefunc.pyx\", line 2328, in sage.misc.cachefunc.CachedMethodCallerNoArgs.__call__\n
+      \   self.cache = f(self._instance)\n  File \"/repos/sage-extensions/src/sage_extensions/categories/group/g_sets.py\",
+      line 1440, in _orbits\n    labels = g_set._orbit_labels()\n  File \"sage/misc/cachefunc.pyx\",
+      line 2328, in sage.misc.cachefunc.CachedMethodCallerNoArgs.__call__\n    self.cache
+      = f(self._instance)\n  File \"/repos/sage-extensions/src/sage_extensions/categories/group/g_sets.py\",
+      line 630, in _orbit_labels\n    action_generators = group.group_generators()\n
+      \ File \"/repos/sage-extensions/src/sage_extensions/categories/group/groups.py\",
+      line 6073, in group_generators\n    self.selected_group_resolution().generators(name=\"Group
+      generators\"),\n    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^\n  File \"/repos/sage-extensions/src/sage_extensions/categories/group/groups.py\",
+      line 7131, in selected_group_resolution\n    return self.selected_resolution(OwnedGroups())\n
+      \          ~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^\n  File \"/repos/sage-extensions/src/sage_extensions/categories/abstract_categories/objects.py\",
+      line 383, in selected_resolution\n    resolution = selected.realize()\n  File
+      \"/repos/sage-extensions/src/sage_extensions/categories/abstract_categories/objects.py\",
+      line 116, in realize\n    return self._resolution_factory()\n           ~~~~~~~~~~~~~~~~~~~~~~~~^^\n
+      \ File \"/repos/sage-extensions/src/sage_extensions/categories/group/groups.py\",
+      line 1198, in selected_resolution\n    generators = generating_set()\n  File
+      \"sage/misc/cachefunc.pyx\", line 2328, in sage.misc.cachefunc.CachedMethodCallerNoArgs.__call__\n
+      \   self.cache = f(self._instance)\n  File \"/repos/sage-extensions/src/sage_extensions/categories/modules/framed/formed/torsion_form_modules.py\",
+      line 1979, in _computed_group_generators\n    tuple(self._from_engine(generator)
+      for generator in self._engine_group().gens())\n                                                        ~~~~~~~~~~~~~~~~~~^^\n
+      \ File \"sage/misc/cachefunc.pyx\", line 2328, in sage.misc.cachefunc.CachedMethodCallerNoArgs.__call__\n
+      \   self.cache = f(self._instance)\n  File \"/repos/sage-extensions/src/sage_extensions/categories/modules/framed/formed/torsion_form_modules.py\",
+      line 2029, in _engine_group\n    return _engine_orthogonal_group(self._engine_module())\n
+      \ File \"/repos/sage-extensions/src/sage_extensions/categories/modules/framed/formed/torsion_form_modules.py\",
+      line 3052, in _engine_orthogonal_group\n    matrices, part_order = _engine_two_primary_odd_orthogonal_generators(part,
+      gens)\n                           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^\n
+      \ File \"/repos/sage-extensions/src/sage_extensions/categories/modules/framed/formed/torsion_form_modules.py\",
+      line 3167, in _engine_two_primary_odd_orthogonal_generators\n    assert kernel.nrows()
+      == n - 1 and c * kernel.transpose() == 0, (\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError:
+      the complement of the half-integral direction must be its orthogonal complement\n"
+    seconds: 4.189293773000827
+    recorded_at: 2026-11-24 17:45:44.520013+00:00
+    run_url: https://github.com/dzackgarza/lattice-database/actions/runs/45407996724/attempts/1
+    database_revision: 8ff86fa50075c14fb4ad52122c3eb37621291c9f
+    research_revision: 1d90bedd2007439a2af980eadabcccdf83661551
+  notes: []
+1Y4P integral.discriminant_form:
+  disposition: open
+  attempts:
+  - hash: 800b4622403e7ea5577036ee3892756d6ec97c4bc85013a82340c67d1f4476db
+    gram_tensor:
+    - - 2
+      - 0
+      - 0
+      - 0
+      - 0
+    - - 0
+      - 2
+      - 0
+      - 1
+      - 1
+    - - 0
+      - 0
+      - 6
+      - 1
+      - 1
+    - - 0
+      - 1
+      - 1
+      - 6
+      - -1
+    - - 0
+      - 1
+      - 1
+      - -1
+      - 6
+    reason: exit status 1
+    stderr: "Traceback (most recent call last):\n  File \"sage/misc/cachefunc.pyx\",
+      line 1965, in sage.misc.cachefunc.CachedMethodCaller.__call__\n    return cache[k]\nKeyError:
+      ((None,), ())\n\nDuring handling of the above exception, another exception occurred:\n\nTraceback
+      (most recent call last):\n  File \"<frozen runpy>\", line 203, in _run_module_as_main\n
+      \ File \"<frozen runpy>\", line 88, in _run_code\n  File \"/home/runner/work/lattice-database/lattice-database/src/latticedb/sage_genus.py\",
+      line 536, in <module>\n    main()\n    ~~~~^^\n  File \"/home/runner/work/lattice-database/lattice-database/src/latticedb/sage_genus.py\",
+      line 531, in main\n    _compute(request)\n    ~~~~~~~~^^^^^^^^^\n  File \"/home/runner/work/lattice-database/lattice-database/src/latticedb/sage_genus.py\",
+      line 516, in _compute\n    _run(\n    ~~~~^\n        tag,\n        ^^^^\n        [field],\n
+      \       ^^^^^^^^\n        lambda: {field: SERIES[field](lattice, request[\"series_bound\"])
+      if field in SERIES else VALUES[field](lattice)},\n        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n
+      \   )\n    ^\n  File \"/home/runner/work/lattice-database/lattice-database/src/latticedb/sage_genus.py\",
+      line 449, in _run\n    values = compute()\n  File \"/home/runner/work/lattice-database/lattice-database/src/latticedb/sage_genus.py\",
+      line 519, in <lambda>\n    lambda: {field: SERIES[field](lattice, request[\"series_bound\"])
+      if field in SERIES else VALUES[field](lattice)},\n                                                                                            ~~~~~~~~~~~~~^^^^^^^^^\n
+      \ File \"/home/runner/work/lattice-database/lattice-database/src/latticedb/sage_genus.py\",
+      line 364, in <lambda>\n    \"discriminant_form\": lambda lattice: _discriminant_form(lattice),\n
+      \                                        ~~~~~~~~~~~~~~~~~~^^^^^^^^^\n  File
+      \"/home/runner/work/lattice-database/lattice-database/src/latticedb/sage_genus.py\",
+      line 383, in _discriminant_form\n    inside = [orbit for orbit in form.orbits()
+      if set(orbit) <= isotropic]\n                                 ~~~~~~~~~~~^^\n
+      \ File \"sage/misc/cachefunc.pyx\", line 1970, in sage.misc.cachefunc.CachedMethodCaller.__call__\n
+      \   w = self._instance_call(*args, **kwds)\n  File \"sage/misc/cachefunc.pyx\",
+      line 1848, in sage.misc.cachefunc.CachedMethodCaller._instance_call\n    return
+      self.f(self._instance, *args, **kwds)\n  File \"/repos/sage-extensions/src/sage_extensions/categories/modules/framed/formed/form_modules.py\",
+      line 3823, in orbits\n    return _finite_form_orbits(self, group)\n  File \"/repos/sage-extensions/src/sage_extensions/categories/modules/framed/formed/form_modules.py\",
+      line 3036, in _finite_form_orbits\n    return finite_ordered_set(tuple(orbit.points()
+      for orbit in action.orbits()))\n                                                                ~~~~~~~~~~~~~^^\n
+      \ File \"/repos/sage-extensions/src/sage_extensions/categories/group/g_sets.py\",
+      line 1455, in __iter__\n    return iter(self._orbits())\n                ~~~~~~~~~~~~^^\n
+      \ File \"sage/misc/cachefunc.pyx\", line 2328, in sage.misc.cachefunc.CachedMethodCallerNoArgs.__call__\n
+      \   self.cache = f(self._instance)\n  File \"/repos/sage-extensions/src/sage_extensions/categories/group/g_sets.py\",
+      line 1440, in _orbits\n    labels = g_set._orbit_labels()\n  File \"sage/misc/cachefunc.pyx\",
+      line 2328, in sage.misc.cachefunc.CachedMethodCallerNoArgs.__call__\n    self.cache
+      = f(self._instance)\n  File \"/repos/sage-extensions/src/sage_extensions/categories/group/g_sets.py\",
+      line 630, in _orbit_labels\n    action_generators = group.group_generators()\n
+      \ File \"/repos/sage-extensions/src/sage_extensions/categories/group/groups.py\",
+      line 6073, in group_generators\n    self.selected_group_resolution().generators(name=\"Group
+      generators\"),\n    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^\n  File \"/repos/sage-extensions/src/sage_extensions/categories/group/groups.py\",
+      line 7131, in selected_group_resolution\n    return self.selected_resolution(OwnedGroups())\n
+      \          ~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^\n  File \"/repos/sage-extensions/src/sage_extensions/categories/abstract_categories/objects.py\",
+      line 383, in selected_resolution\n    resolution = selected.realize()\n  File
+      \"/repos/sage-extensions/src/sage_extensions/categories/abstract_categories/objects.py\",
+      line 116, in realize\n    return self._resolution_factory()\n           ~~~~~~~~~~~~~~~~~~~~~~~~^^\n
+      \ File \"/repos/sage-extensions/src/sage_extensions/categories/group/groups.py\",
+      line 1198, in selected_resolution\n    generators = generating_set()\n  File
+      \"sage/misc/cachefunc.pyx\", line 2328, in sage.misc.cachefunc.CachedMethodCallerNoArgs.__call__\n
+      \   self.cache = f(self._instance)\n  File \"/repos/sage-extensions/src/sage_extensions/categories/modules/framed/formed/torsion_form_modules.py\",
+      line 1979, in _computed_group_generators\n    tuple(self._from_engine(generator)
+      for generator in self._engine_group().gens())\n                                                        ~~~~~~~~~~~~~~~~~~^^\n
+      \ File \"sage/misc/cachefunc.pyx\", line 2328, in sage.misc.cachefunc.CachedMethodCallerNoArgs.__call__\n
+      \   self.cache = f(self._instance)\n  File \"/repos/sage-extensions/src/sage_extensions/categories/modules/framed/formed/torsion_form_modules.py\",
+      line 2029, in _engine_group\n    return _engine_orthogonal_group(self._engine_module())\n
+      \ File \"/repos/sage-extensions/src/sage_extensions/categories/modules/framed/formed/torsion_form_modules.py\",
+      line 3052, in _engine_orthogonal_group\n    matrices, part_order = _engine_two_primary_odd_orthogonal_generators(part,
+      gens)\n                           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^\n
+      \ File \"/repos/sage-extensions/src/sage_extensions/categories/modules/framed/formed/torsion_form_modules.py\",
+      line 3167, in _engine_two_primary_odd_orthogonal_generators\n    assert kernel.nrows()
+      == n - 1 and c * kernel.transpose() == 0, (\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError:
+      the complement of the half-integral direction must be its orthogonal complement\n"
+    seconds: 3.2484814590006863
+    recorded_at: 2026-11-24 17:46:36.598753+00:00
+    run_url: https://github.com/dzackgarza/lattice-database/actions/runs/45407996724/attempts/1
+    database_revision: 8ff86fa50075c14fb4ad52122c3eb37621291c9f
+    research_revision: 1d90bedd2007439a2af980eadabcccdf83661551
+  notes: []
+1ZGO integral.discriminant_form:
+  disposition: open
+  attempts:
+  - hash: 0dd85eb48d18c232f89c910dc194c1bbfbee22c38f1efea6742a7c0314654411
+    gram_tensor:
+    - - 4
+      - 1
+      - 1
+      - 0
+      - 2
+    - - 1
+      - 4
+      - 1
+      - 0
+      - 2
+    - - 1
+      - 1
+      - 4
+      - 0
+      - 2
+    - - 0
+      - 0
+      - 0
+      - 4
+      - 2
+    - - 2
+      - 2
+      - 2
+      - 2
+      - 6
+    reason: exit status 1
+    stderr: "Traceback (most recent call last):\n  File \"sage/misc/cachefunc.pyx\",
+      line 1965, in sage.misc.cachefunc.CachedMethodCaller.__call__\n    return cache[k]\nKeyError:
+      ((None,), ())\n\nDuring handling of the above exception, another exception occurred:\n\nTraceback
+      (most recent call last):\n  File \"<frozen runpy>\", line 203, in _run_module_as_main\n
+      \ File \"<frozen runpy>\", line 88, in _run_code\n  File \"/home/runner/work/lattice-database/lattice-database/src/latticedb/sage_genus.py\",
+      line 536, in <module>\n    main()\n    ~~~~^^\n  File \"/home/runner/work/lattice-database/lattice-database/src/latticedb/sage_genus.py\",
+      line 531, in main\n    _compute(request)\n    ~~~~~~~~^^^^^^^^^\n  File \"/home/runner/work/lattice-database/lattice-database/src/latticedb/sage_genus.py\",
+      line 516, in _compute\n    _run(\n    ~~~~^\n        tag,\n        ^^^^\n        [field],\n
+      \       ^^^^^^^^\n        lambda: {field: SERIES[field](lattice, request[\"series_bound\"])
+      if field in SERIES else VALUES[field](lattice)},\n        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n
+      \   )\n    ^\n  File \"/home/runner/work/lattice-database/lattice-database/src/latticedb/sage_genus.py\",
+      line 449, in _run\n    values = compute()\n  File \"/home/runner/work/lattice-database/lattice-database/src/latticedb/sage_genus.py\",
+      line 519, in <lambda>\n    lambda: {field: SERIES[field](lattice, request[\"series_bound\"])
+      if field in SERIES else VALUES[field](lattice)},\n                                                                                            ~~~~~~~~~~~~~^^^^^^^^^\n
+      \ File \"/home/runner/work/lattice-database/lattice-database/src/latticedb/sage_genus.py\",
+      line 364, in <lambda>\n    \"discriminant_form\": lambda lattice: _discriminant_form(lattice),\n
+      \                                        ~~~~~~~~~~~~~~~~~~^^^^^^^^^\n  File
+      \"/home/runner/work/lattice-database/lattice-database/src/latticedb/sage_genus.py\",
+      line 383, in _discriminant_form\n    inside = [orbit for orbit in form.orbits()
+      if set(orbit) <= isotropic]\n                                 ~~~~~~~~~~~^^\n
+      \ File \"sage/misc/cachefunc.pyx\", line 1970, in sage.misc.cachefunc.CachedMethodCaller.__call__\n
+      \   w = self._instance_call(*args, **kwds)\n  File \"sage/misc/cachefunc.pyx\",
+      line 1848, in sage.misc.cachefunc.CachedMethodCaller._instance_call\n    return
+      self.f(self._instance, *args, **kwds)\n  File \"/repos/sage-extensions/src/sage_extensions/categories/modules/framed/formed/form_modules.py\",
+      line 3823, in orbits\n    return _finite_form_orbits(self, group)\n  File \"/repos/sage-extensions/src/sage_extensions/categories/modules/framed/formed/form_modules.py\",
+      line 3036, in _finite_form_orbits\n    return finite_ordered_set(tuple(orbit.points()
+      for orbit in action.orbits()))\n                                                                ~~~~~~~~~~~~~^^\n
+      \ File \"/repos/sage-extensions/src/sage_extensions/categories/group/g_sets.py\",
+      line 1455, in __iter__\n    return iter(self._orbits())\n                ~~~~~~~~~~~~^^\n
+      \ File \"sage/misc/cachefunc.pyx\", line 2328, in sage.misc.cachefunc.CachedMethodCallerNoArgs.__call__\n
+      \   self.cache = f(self._instance)\n  File \"/repos/sage-extensions/src/sage_extensions/categories/group/g_sets.py\",
+      line 1440, in _orbits\n    labels = g_set._orbit_labels()\n  File \"sage/misc/cachefunc.pyx\",
+      line 2328, in sage.misc.cachefunc.CachedMethodCallerNoArgs.__call__\n    self.cache
+      = f(self._instance)\n  File \"/repos/sage-extensions/src/sage_extensions/categories/group/g_sets.py\",
+      line 630, in _orbit_labels\n    action_generators = group.group_generators()\n
+      \ File \"/repos/sage-extensions/src/sage_extensions/categories/group/groups.py\",
+      line 6073, in group_generators\n    self.selected_group_resolution().generators(name=\"Group
+      generators\"),\n    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^\n  File \"/repos/sage-extensions/src/sage_extensions/categories/group/groups.py\",
+      line 7131, in selected_group_resolution\n    return self.selected_resolution(OwnedGroups())\n
+      \          ~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^\n  File \"/repos/sage-extensions/src/sage_extensions/categories/abstract_categories/objects.py\",
+      line 383, in selected_resolution\n    resolution = selected.realize()\n  File
+      \"/repos/sage-extensions/src/sage_extensions/categories/abstract_categories/objects.py\",
+      line 116, in realize\n    return self._resolution_factory()\n           ~~~~~~~~~~~~~~~~~~~~~~~~^^\n
+      \ File \"/repos/sage-extensions/src/sage_extensions/categories/group/groups.py\",
+      line 1198, in selected_resolution\n    generators = generating_set()\n  File
+      \"sage/misc/cachefunc.pyx\", line 2328, in sage.misc.cachefunc.CachedMethodCallerNoArgs.__call__\n
+      \   self.cache = f(self._instance)\n  File \"/repos/sage-extensions/src/sage_extensions/categories/modules/framed/formed/torsion_form_modules.py\",
+      line 1979, in _computed_group_generators\n    tuple(self._from_engine(generator)
+      for generator in self._engine_group().gens())\n                                                        ~~~~~~~~~~~~~~~~~~^^\n
+      \ File \"sage/misc/cachefunc.pyx\", line 2328, in sage.misc.cachefunc.CachedMethodCallerNoArgs.__call__\n
+      \   self.cache = f(self._instance)\n  File \"/repos/sage-extensions/src/sage_extensions/categories/modules/framed/formed/torsion_form_modules.py\",
+      line 2029, in _engine_group\n    return _engine_orthogonal_group(self._engine_module())\n
+      \ File \"/repos/sage-extensions/src/sage_extensions/categories/modules/framed/formed/torsion_form_modules.py\",
+      line 3052, in _engine_orthogonal_group\n    matrices, part_order = _engine_two_primary_odd_orthogonal_generators(part,
+      gens)\n                           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^\n
+      \ File \"/repos/sage-extensions/src/sage_extensions/categories/modules/framed/formed/torsion_form_modules.py\",
+      line 3167, in _engine_two_primary_odd_orthogonal_generators\n    assert kernel.nrows()
+      == n - 1 and c * kernel.transpose() == 0, (\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError:
+      the complement of the half-integral direction must be its orthogonal complement\n"
+    seconds: 4.755654090000462
+    recorded_at: 2026-11-24 17:58:35.735390+00:00
+    run_url: https://github.com/dzackgarza/lattice-database/actions/runs/45407996724/attempts/1
+    database_revision: 8ff86fa50075c14fb4ad52122c3eb37621291c9f
+    research_revision: 1d90bedd2007439a2af980eadabcccdf83661551
+  notes: []
+202M integral.discriminant_form:
+  disposition: open
+  attempts:
+  - hash: 47b24ec830dce2be37330942c64ba3515a584cb87f38f70e9ae23294a63fb68e
+    gram_tensor:
+    - - 2
+      - 0
+      - 0
+      - 0
+      - 0
+    - - 0
+      - 2
+      - 0
+      - 1
+      - 0
+    - - 0
+      - 0
+      - 4
+      - 2
+      - 2
+    - - 0
+      - 1
+      - 2
+      - 4
+      - 0
+    - - 0
+      - 0
+      - 2
+      - 0
+      - 18
+    reason: exit status 1
+    stderr: "Traceback (most recent call last):\n  File \"sage/misc/cachefunc.pyx\",
+      line 1965, in sage.misc.cachefunc.CachedMethodCaller.__call__\n    return cache[k]\nKeyError:
+      ((None,), ())\n\nDuring handling of the above exception, another exception occurred:\n\nTraceback
+      (most recent call last):\n  File \"<frozen runpy>\", line 203, in _run_module_as_main\n
+      \ File \"<frozen runpy>\", line 88, in _run_code\n  File \"/home/runner/work/lattice-database/lattice-database/src/latticedb/sage_genus.py\",
+      line 536, in <module>\n    main()\n    ~~~~^^\n  File \"/home/runner/work/lattice-database/lattice-database/src/latticedb/sage_genus.py\",
+      line 531, in main\n    _compute(request)\n    ~~~~~~~~^^^^^^^^^\n  File \"/home/runner/work/lattice-database/lattice-database/src/latticedb/sage_genus.py\",
+      line 516, in _compute\n    _run(\n    ~~~~^\n        tag,\n        ^^^^\n        [field],\n
+      \       ^^^^^^^^\n        lambda: {field: SERIES[field](lattice, request[\"series_bound\"])
+      if field in SERIES else VALUES[field](lattice)},\n        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n
+      \   )\n    ^\n  File \"/home/runner/work/lattice-database/lattice-database/src/latticedb/sage_genus.py\",
+      line 449, in _run\n    values = compute()\n  File \"/home/runner/work/lattice-database/lattice-database/src/latticedb/sage_genus.py\",
+      line 519, in <lambda>\n    lambda: {field: SERIES[field](lattice, request[\"series_bound\"])
+      if field in SERIES else VALUES[field](lattice)},\n                                                                                            ~~~~~~~~~~~~~^^^^^^^^^\n
+      \ File \"/home/runner/work/lattice-database/lattice-database/src/latticedb/sage_genus.py\",
+      line 364, in <lambda>\n    \"discriminant_form\": lambda lattice: _discriminant_form(lattice),\n
+      \                                        ~~~~~~~~~~~~~~~~~~^^^^^^^^^\n  File
+      \"/home/runner/work/lattice-database/lattice-database/src/latticedb/sage_genus.py\",
+      line 383, in _discriminant_form\n    inside = [orbit for orbit in form.orbits()
+      if set(orbit) <= isotropic]\n                                 ~~~~~~~~~~~^^\n
+      \ File \"sage/misc/cachefunc.pyx\", line 1970, in sage.misc.cachefunc.CachedMethodCaller.__call__\n
+      \   w = self._instance_call(*args, **kwds)\n  File \"sage/misc/cachefunc.pyx\",
+      line 1848, in sage.misc.cachefunc.CachedMethodCaller._instance_call\n    return
+      self.f(self._instance, *args, **kwds)\n  File \"/repos/sage-extensions/src/sage_extensions/categories/modules/framed/formed/form_modules.py\",
+      line 3823, in orbits\n    return _finite_form_orbits(self, group)\n  File \"/repos/sage-extensions/src/sage_extensions/categories/modules/framed/formed/form_modules.py\",
+      line 3036, in _finite_form_orbits\n    return finite_ordered_set(tuple(orbit.points()
+      for orbit in action.orbits()))\n                                                                ~~~~~~~~~~~~~^^\n
+      \ File \"/repos/sage-extensions/src/sage_extensions/categories/group/g_sets.py\",
+      line 1455, in __iter__\n    return iter(self._orbits())\n                ~~~~~~~~~~~~^^\n
+      \ File \"sage/misc/cachefunc.pyx\", line 2328, in sage.misc.cachefunc.CachedMethodCallerNoArgs.__call__\n
+      \   self.cache = f(self._instance)\n  File \"/repos/sage-extensions/src/sage_extensions/categories/group/g_sets.py\",
+      line 1440, in _orbits\n    labels = g_set._orbit_labels()\n  File \"sage/misc/cachefunc.pyx\",
+      line 2328, in sage.misc.cachefunc.CachedMethodCallerNoArgs.__call__\n    self.cache
+      = f(self._instance)\n  File \"/repos/sage-extensions/src/sage_extensions/categories/group/g_sets.py\",
+      line 630, in _orbit_labels\n    action_generators = group.group_generators()\n
+      \ File \"/repos/sage-extensions/src/sage_extensions/categories/group/groups.py\",
+      line 6073, in group_generators\n    self.selected_group_resolution().generators(name=\"Group
+      generators\"),\n    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^\n  File \"/repos/sage-extensions/src/sage_extensions/categories/group/groups.py\",
+      line 7131, in selected_group_resolution\n    return self.selected_resolution(OwnedGroups())\n
+      \          ~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^\n  File \"/repos/sage-extensions/src/sage_extensions/categories/abstract_categories/objects.py\",
+      line 383, in selected_resolution\n    resolution = selected.realize()\n  File
+      \"/repos/sage-extensions/src/sage_extensions/categories/abstract_categories/objects.py\",
+      line 116, in realize\n    return self._resolution_factory()\n           ~~~~~~~~~~~~~~~~~~~~~~~~^^\n
+      \ File \"/repos/sage-extensions/src/sage_extensions/categories/group/groups.py\",
+      line 1198, in selected_resolution\n    generators = generating_set()\n  File
+      \"sage/misc/cachefunc.pyx\", line 2328, in sage.misc.cachefunc.CachedMethodCallerNoArgs.__call__\n
+      \   self.cache = f(self._instance)\n  File \"/repos/sage-extensions/src/sage_extensions/categories/modules/framed/formed/torsion_form_modules.py\",
+      line 1979, in _computed_group_generators\n    tuple(self._from_engine(generator)
+      for generator in self._engine_group().gens())\n                                                        ~~~~~~~~~~~~~~~~~~^^\n
+      \ File \"sage/misc/cachefunc.pyx\", line 2328, in sage.misc.cachefunc.CachedMethodCallerNoArgs.__call__\n
+      \   self.cache = f(self._instance)\n  File \"/repos/sage-extensions/src/sage_extensions/categories/modules/framed/formed/torsion_form_modules.py\",
+      line 2029, in _engine_group\n    return _engine_orthogonal_group(self._engine_module())\n
+      \ File \"/repos/sage-extensions/src/sage_extensions/categories/modules/framed/formed/torsion_form_modules.py\",
+      line 3052, in _engine_orthogonal_group\n    matrices, part_order = _engine_two_primary_odd_orthogonal_generators(part,
+      gens)\n                           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^\n
+      \ File \"/repos/sage-extensions/src/sage_extensions/categories/modules/framed/formed/torsion_form_modules.py\",
+      line 3167, in _engine_two_primary_odd_orthogonal_generators\n    assert kernel.nrows()
+      == n - 1 and c * kernel.transpose() == 0, (\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError:
+      the complement of the half-integral direction must be its orthogonal complement\n"
+    seconds: 4.341107901998839
+    recorded_at: 2026-11-24 18:03:45.557341+00:00
+    run_url: https://github.com/dzackgarza/lattice-database/actions/runs/45407996724/attempts/1
+    database_revision: 8ff86fa50075c14fb4ad52122c3eb37621291c9f
+    research_revision: 1d90bedd2007439a2af980eadabcccdf83661551
+  notes: []
+202V integral.discriminant_form:
+  disposition: open
+  attempts:
+  - hash: e8cb2c5172c3e7d9b5edb71644f928c187e96b6ea2fbbf1c02eb6848453284bd
+    gram_tensor:
+    - - 2
+      - 1
+      - 0
+      - 1
+      - 0
+    - - 1
+      - 4
+      - 2
+      - 0
+      - 1
+    - - 0
+      - 2
+      - 4
+      - 0
+      - 0
+    - - 1
+      - 0
+      - 0
+      - 6
+      - -3
+    - - 0
+      - 1
+      - 0
+      - -3
+      - 8
+    reason: exit status 1
+    stderr: "Traceback (most recent call last):\n  File \"sage/misc/cachefunc.pyx\",
+      line 1965, in sage.misc.cachefunc.CachedMethodCaller.__call__\n    return cache[k]\nKeyError:
+      ((None,), ())\n\nDuring handling of the above exception, another exception occurred:\n\nTraceback
+      (most recent call last):\n  File \"<frozen runpy>\", line 203, in _run_module_as_main\n
+      \ File \"<frozen runpy>\", line 88, in _run_code\n  File \"/home/runner/work/lattice-database/lattice-database/src/latticedb/sage_genus.py\",
+      line 536, in <module>\n    main()\n    ~~~~^^\n  File \"/home/runner/work/lattice-database/lattice-database/src/latticedb/sage_genus.py\",
+      line 531, in main\n    _compute(request)\n    ~~~~~~~~^^^^^^^^^\n  File \"/home/runner/work/lattice-database/lattice-database/src/latticedb/sage_genus.py\",
+      line 516, in _compute\n    _run(\n    ~~~~^\n        tag,\n        ^^^^\n        [field],\n
+      \       ^^^^^^^^\n        lambda: {field: SERIES[field](lattice, request[\"series_bound\"])
+      if field in SERIES else VALUES[field](lattice)},\n        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n
+      \   )\n    ^\n  File \"/home/runner/work/lattice-database/lattice-database/src/latticedb/sage_genus.py\",
+      line 449, in _run\n    values = compute()\n  File \"/home/runner/work/lattice-database/lattice-database/src/latticedb/sage_genus.py\",
+      line 519, in <lambda>\n    lambda: {field: SERIES[field](lattice, request[\"series_bound\"])
+      if field in SERIES else VALUES[field](lattice)},\n                                                                                            ~~~~~~~~~~~~~^^^^^^^^^\n
+      \ File \"/home/runner/work/lattice-database/lattice-database/src/latticedb/sage_genus.py\",
+      line 364, in <lambda>\n    \"discriminant_form\": lambda lattice: _discriminant_form(lattice),\n
+      \                                        ~~~~~~~~~~~~~~~~~~^^^^^^^^^\n  File
+      \"/home/runner/work/lattice-database/lattice-database/src/latticedb/sage_genus.py\",
+      line 383, in _discriminant_form\n    inside = [orbit for orbit in form.orbits()
+      if set(orbit) <= isotropic]\n                                 ~~~~~~~~~~~^^\n
+      \ File \"sage/misc/cachefunc.pyx\", line 1970, in sage.misc.cachefunc.CachedMethodCaller.__call__\n
+      \   w = self._instance_call(*args, **kwds)\n  File \"sage/misc/cachefunc.pyx\",
+      line 1848, in sage.misc.cachefunc.CachedMethodCaller._instance_call\n    return
+      self.f(self._instance, *args, **kwds)\n  File \"/repos/sage-extensions/src/sage_extensions/categories/modules/framed/formed/form_modules.py\",
+      line 3823, in orbits\n    return _finite_form_orbits(self, group)\n  File \"/repos/sage-extensions/src/sage_extensions/categories/modules/framed/formed/form_modules.py\",
+      line 3036, in _finite_form_orbits\n    return finite_ordered_set(tuple(orbit.points()
+      for orbit in action.orbits()))\n                                                                ~~~~~~~~~~~~~^^\n
+      \ File \"/repos/sage-extensions/src/sage_extensions/categories/group/g_sets.py\",
+      line 1455, in __iter__\n    return iter(self._orbits())\n                ~~~~~~~~~~~~^^\n
+      \ File \"sage/misc/cachefunc.pyx\", line 2328, in sage.misc.cachefunc.CachedMethodCallerNoArgs.__call__\n
+      \   self.cache = f(self._instance)\n  File \"/repos/sage-extensions/src/sage_extensions/categories/group/g_sets.py\",
+      line 1440, in _orbits\n    labels = g_set._orbit_labels()\n  File \"sage/misc/cachefunc.pyx\",
+      line 2328, in sage.misc.cachefunc.CachedMethodCallerNoArgs.__call__\n    self.cache
+      = f(self._instance)\n  File \"/repos/sage-extensions/src/sage_extensions/categories/group/g_sets.py\",
+      line 630, in _orbit_labels\n    action_generators = group.group_generators()\n
+      \ File \"/repos/sage-extensions/src/sage_extensions/categories/group/groups.py\",
+      line 6073, in group_generators\n    self.selected_group_resolution().generators(name=\"Group
+      generators\"),\n    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^\n  File \"/repos/sage-extensions/src/sage_extensions/categories/group/groups.py\",
+      line 7131, in selected_group_resolution\n    return self.selected_resolution(OwnedGroups())\n
+      \          ~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^\n  File \"/repos/sage-extensions/src/sage_extensions/categories/abstract_categories/objects.py\",
+      line 383, in selected_resolution\n    resolution = selected.realize()\n  File
+      \"/repos/sage-extensions/src/sage_extensions/categories/abstract_categories/objects.py\",
+      line 116, in realize\n    return self._resolution_factory()\n           ~~~~~~~~~~~~~~~~~~~~~~~~^^\n
+      \ File \"/repos/sage-extensions/src/sage_extensions/categories/group/groups.py\",
+      line 1198, in selected_resolution\n    generators = generating_set()\n  File
+      \"sage/misc/cachefunc.pyx\", line 2328, in sage.misc.cachefunc.CachedMethodCallerNoArgs.__call__\n
+      \   self.cache = f(self._instance)\n  File \"/repos/sage-extensions/src/sage_extensions/categories/modules/framed/formed/torsion_form_modules.py\",
+      line 1979, in _computed_group_generators\n    tuple(self._from_engine(generator)
+      for generator in self._engine_group().gens())\n                                                        ~~~~~~~~~~~~~~~~~~^^\n
+      \ File \"sage/misc/cachefunc.pyx\", line 2328, in sage.misc.cachefunc.CachedMethodCallerNoArgs.__call__\n
+      \   self.cache = f(self._instance)\n  File \"/repos/sage-extensions/src/sage_extensions/categories/modules/framed/formed/torsion_form_modules.py\",
+      line 2029, in _engine_group\n    return _engine_orthogonal_group(self._engine_module())\n
+      \ File \"/repos/sage-extensions/src/sage_extensions/categories/modules/framed/formed/torsion_form_modules.py\",
+      line 3052, in _engine_orthogonal_group\n    matrices, part_order = _engine_two_primary_odd_orthogonal_generators(part,
+      gens)\n                           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^\n
+      \ File \"/repos/sage-extensions/src/sage_extensions/categories/modules/framed/formed/torsion_form_modules.py\",
+      line 3167, in _engine_two_primary_odd_orthogonal_generators\n    assert kernel.nrows()
+      == n - 1 and c * kernel.transpose() == 0, (\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError:
+      the complement of the half-integral direction must be its orthogonal complement\n"
+    seconds: 3.315890761999981
+    recorded_at: 2026-11-24 18:04:35.563091+00:00
+    run_url: https://github.com/dzackgarza/lattice-database/actions/runs/45407996724/attempts/1
+    database_revision: 8ff86fa50075c14fb4ad52122c3eb37621291c9f
+    research_revision: 1d90bedd2007439a2af980eadabcccdf83661551
+  notes: []
 2440 derive:
   disposition: open
   attempts:
