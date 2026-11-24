@@ -8461,44 +8461,6 @@
     database_revision: 65345b00e799bbab07356bd75b7c199cb252e19c
     research_revision: 4ba7b9d10b8828834ad5df0ce776a7490ce0354b
   notes: []
-27CU definite.genus_theta_series:
-  disposition: open
-  attempts:
-  - hash: d2dda852ce55255337171937697f6fc700e199993cc6e0e63f230b1dd52e1f56
-    gram_tensor:
-    - - 2
-      - 0
-      - 0
-      - 1
-      - 0
-    - - 0
-      - 4
-      - 0
-      - 0
-      - 2
-    - - 0
-      - 0
-      - 4
-      - 1
-      - 0
-    - - 1
-      - 0
-      - 1
-      - 4
-      - 2
-    - - 0
-      - 2
-      - 0
-      - 2
-      - 10
-    reason: worker or runner lost (recovered from exceeded.yaml)
-    stderr: ''
-    seconds: 0.0
-    recorded_at: 2026-11-24 21:02:56.055186+00:00
-    run_url: https://github.com/dzackgarza/lattice-database/actions/runs/45483305000/attempts/1
-    database_revision: 2440d26286c553779ba00c878e5d606581ae3a0b
-    research_revision: 0d4b0ffc15f5f46f30af390f49af3fcebdd47ced
-  notes: []
 27CU integral.discriminant_form:
   disposition: open
   attempts:
