@@ -710,6 +710,10 @@
   hash: 689494ca5adb8488fc95a4f406d1751e6e84acc6252b85cb91dbc6cd8b4d2b92
   seconds: 0
   lost: true
+13NR integral.discriminant_form:
+  hash: 5ff80fd6ab870e5f99727cf25862fc2727b77557fee7445d000c4604fa85aaf4
+  seconds: 0
+  lost: true
 14GP integral.genus_class_count:
   hash: ebbbead04771d1bd8cfebc45efa2ad3838a8aefdb3f2e0d9f3b23c7571dbc8d6
   seconds: 0
@@ -1760,10 +1764,6 @@
 3GRU integral.discriminant_sequence:
   hash: 0873c77aea247747beee5f6503d4678ca0c393ad59c2a14ff0e34fd7c44871c6
   seconds: 18241
-3GSE integral.discriminant_sequence:
-  hash: 63ffc8e48bcc12dab513c0970c3e5b3769740794da5584509c909720af05f982
-  seconds: 480
-  lost: true
 3GSS integral.discriminant_sequence:
   hash: 1ab4cb27ac8324d3b55f87b49fe2d9638523863e9f43a210eb9460be1973101d
   seconds: 19659
@@ -1792,10 +1792,6 @@
 3GWR integral.overlattice_count:
   hash: 836db517473faaeaa34246fe1f1fa761d816846114d210a46b13530d6de2d5f8
   seconds: 5
-  lost: true
-3GWS integral.discriminant_sequence:
-  hash: a4cbe9ec32a6ff412ab9b807d45da25389bb06d4072beea50942fe811fcda5b0
-  seconds: 6958
   lost: true
 3GX5 integral.discriminant_sequence:
   hash: ac5830bf83c01f73d9a9417b7f9de8b39dbfd51c20f84ed5872b139ccae22b93
