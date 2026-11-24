@@ -5655,6 +5655,44 @@
     database_revision: 8ff86fa50075c14fb4ad52122c3eb37621291c9f
     research_revision: 56bb3e64617d0dbe076e6b156dfa03065deb0d96
   notes: []
+27TO derive:
+  disposition: open
+  attempts:
+  - hash: 363a0eec465850a4eb9c3f2ce9d92b65b069b43a4cf934b5507f6fa6441703cd
+    gram_tensor:
+    - - 2
+      - 1
+      - 1
+      - 0
+      - 0
+    - - 1
+      - 4
+      - 0
+      - 0
+      - 2
+    - - 1
+      - 0
+      - 4
+      - 1
+      - -2
+    - - 0
+      - 0
+      - 1
+      - 6
+      - 0
+    - - 0
+      - 2
+      - -2
+      - 0
+      - 8
+    reason: memory exhausted
+    stderr: ''
+    seconds: 41.04129427600128
+    recorded_at: 2026-11-24 19:27:53.511096+00:00
+    run_url: https://github.com/dzackgarza/lattice-database/actions/runs/45407996724/attempts/1
+    database_revision: 8ff86fa50075c14fb4ad52122c3eb37621291c9f
+    research_revision: 56bb3e64617d0dbe076e6b156dfa03065deb0d96
+  notes: []
 2MRD integral.discriminant_form:
   disposition: open
   attempts:
