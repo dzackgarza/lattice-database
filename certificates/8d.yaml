@@ -26614,6 +26614,15 @@
 6DMR form.integer_valued:
   hash: 9a20cf190b52bbe924a73655bf9011e5f7ba53e98a067af99f83a1b3959db27d
   by: research preamble
+6DMR integral.anisotropic_primes:
+  hash: 580a243b79dcd091145464ffb2b62610b34d040343e4b3c21b6027910ce648da
+  by: research preamble
+6DMR integral.discriminant_form:
+  hash: 7e4e698a90ea1861bcdfd176058dabfa590638f139cad6e72ccef54bb71fcd86
+  by: research preamble
+6DMR integral.discriminant_orbits:
+  hash: c699d343a893c790d273f9a5274e34463f86ed9cbc8cd70644b005b2a3e446ee
+  by: research preamble
 6DMR integral.elementary_primes:
   hash: b5262bf5453a5cad09f8c8dc93114a3066d10c8a718ce087ff450c4deaf1b13b
   by: research preamble
@@ -26626,8 +26635,20 @@
 6DMR integral.hyperbolic_index:
   hash: 53d9fe79003b6cbfc3706a1276ab1eb330f0431ed9805c09ec7518c3c6b630e9
   by: research preamble
+6DMR integral.local_densities:
+  hash: 9bea1115dc5ad6e215e55efaf3a8e8a9b79b7270f4cdcf8b5be7d721e0785c1a
+  by: research preamble
+6DMR integral.local_representations:
+  hash: d540de1c0f712d1cd65d716cef81e91b5585e3b64b97cecf2a21d9fa29b55581
+  by: research preamble
+6DMR integral.modular_scale:
+  hash: 03d69dff1a9c4c43e7bb947772c510ea7fdaa8f876917a973636827445510f67
+  by: research preamble
 6DMR integral.overlattice_count:
   hash: d3dba22b07c4be0a0ba16d7cbdd67adeebec3a42b2295cf70854a33e1dab6c58
+  by: research preamble
+6DMR integral.primitive_orbits:
+  hash: 218fdd4b8a64f4638f3d9f5332cb448b74c61c7651272fb9baa2ac76ec7c10b8
   by: research preamble
 6DMR integral.spinor_genera:
   hash: 84503178df5577fb142b2d76012a977f6362d7dadc6ab717779a24d31797c143
