@@ -27467,6 +27467,15 @@
 5U8M form.integer_valued:
   hash: 341b6ab50a719b2464e084c8a45b070d4eca9a2e4d0cb5b9de2ab10eae6b8f6a
   by: research preamble
+5U8M integral.anisotropic_primes:
+  hash: edf97f9c861ba75ddf2ed22a05f98369879c77085f0ea0b6c89e1afd741260c0
+  by: research preamble
+5U8M integral.discriminant_form:
+  hash: d77134bb5216937dc0336f9f369c7f9f1dd6969b4302d8e1f17d875838d26c98
+  by: research preamble
+5U8M integral.discriminant_orbits:
+  hash: c8e3b9c7779c16734fbc89ca3cc9e1ab79f89d91289417c6cf9059d6a56264f3
+  by: research preamble
 5U8M integral.elementary_primes:
   hash: 0053ed8f1058d8e5e380c06b565534c68b9692ddd8b37474154d85e88ee50eda
   by: research preamble
@@ -27479,8 +27488,20 @@
 5U8M integral.hyperbolic_index:
   hash: b6f39aedb07400dc6cd70caf9a3ad55d3ee75e7fed99c8427a1908bb708d66f0
   by: research preamble
+5U8M integral.local_densities:
+  hash: d9618d1ca301f08409bff0203cb6ab19966394ef5c02898eb58b235bb08a72da
+  by: research preamble
+5U8M integral.local_representations:
+  hash: c7587246702c33d9fba69c2e8f41894e75a19671b0f5361f42420ea27438e2b3
+  by: research preamble
+5U8M integral.modular_scale:
+  hash: 9feb0b92f8bd36d4e8a70aa10adcf25c2e747c646a222ec02c2594164d9db5ac
+  by: research preamble
 5U8M integral.overlattice_count:
   hash: ce15733df8202fa93e52de18bcfc977d6ca8aedf591273929dc0a48d9171a523
+  by: research preamble
+5U8M integral.primitive_orbits:
+  hash: 8ddbfeb52929699dc56c0e8859124f6055a555de77df19b3f4c69613c3c111ac
   by: research preamble
 5U8M integral.spinor_genera:
   hash: cec446b01f42b197fed2615587e284b685b41944015a6b0f2652aeacdeac6d95
@@ -27500,6 +27521,15 @@
 5UTB form.integer_valued:
   hash: ff4f38a546a79ccfaab9b954bdb17cd5bde6f5d479aefcb79bcd55b3aaa75205
   by: research preamble
+5UTB integral.anisotropic_primes:
+  hash: 6c39fc049cc47ff981213354d0917ac243708ec8e14facc9a9d8c9a3c458cb15
+  by: research preamble
+5UTB integral.discriminant_form:
+  hash: f51d6c72b17ca57cfb978f6a3def45a040dc2087b2f48fe3e894fb1a8f002a9e
+  by: research preamble
+5UTB integral.discriminant_orbits:
+  hash: c6667d04d0eaab6645edb33e191f524e832f06b42991525e9211583aeac9c4ab
+  by: research preamble
 5UTB integral.elementary_primes:
   hash: a15bdbfd87b4da9da001f0c78f94ee1105f1b681d9d226546c02881a1d02a3a3
   by: research preamble
@@ -27512,8 +27542,20 @@
 5UTB integral.hyperbolic_index:
   hash: ef1930105b543c065ad6fac0e020dbd0be7f50757925d16c0a0fd28e1042234f
   by: research preamble
+5UTB integral.local_densities:
+  hash: 8a02647377259d32481d3ab791d4f3a085271516419b33b326e30828b8095da4
+  by: research preamble
+5UTB integral.local_representations:
+  hash: aa51f3323be7774021b0507f26ec0577321649ef5b5d54a6c0f998d6fc132674
+  by: research preamble
+5UTB integral.modular_scale:
+  hash: 03b3ae8983b9b9f256353133ab03c6ce607bec1f7b7a8106d1ce96af3e87e121
+  by: research preamble
 5UTB integral.overlattice_count:
   hash: 1ccaa25826c12838e3061b2300fd0e97616564b7f17d26bc2f7c0c9e81ac39d4
+  by: research preamble
+5UTB integral.primitive_orbits:
+  hash: 69fa0a77c0461601a0d72400ddad1d013d5acb977ed379e23c7d13c5fb1256a8
   by: research preamble
 5UTB integral.spinor_genera:
   hash: c24244a02655835bb059506188f91ac0a1568d78d134f9a5f076eb6bc58f6353

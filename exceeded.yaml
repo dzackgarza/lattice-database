@@ -1702,90 +1702,6 @@
 27VT integral.discriminant_form:
   hash: e6d8cb0324782790cfac918826f205b81534a0ef6670d8a187c996837382b771
   seconds: 3
-28L3 derive:
-  hash: 47ad0d7733e72f77803d49f945b47a025c2fc418d6163430f21644439ab816b0
-  seconds: 55
-  lost: true
-  killed_by: memory
-  peak_bytes: 13452652544
-  limit_bytes: 1675943116
-28LZ derive:
-  hash: a80055d833fac18341aee2a50f908d2adb3f5e42a26d540f43a919dca907e960
-  seconds: 51
-  lost: true
-  killed_by: memory
-  peak_bytes: 13332701184
-  limit_bytes: 1675943116
-28NG derive:
-  hash: 4faa18d123c6299bf6b4f549ba7e76b2392924896fc907defe99e71039762fa3
-  seconds: 51
-  lost: true
-  killed_by: memory
-  peak_bytes: 13340958720
-  limit_bytes: 1675943116
-28NY derive:
-  hash: 544990166884b7c14612a2d59d41fbbb3d9301a28e4872e077762919b85ed285
-  seconds: 51
-  lost: true
-  killed_by: memory
-  peak_bytes: 13560315904
-  limit_bytes: 1675943116
-28OP derive:
-  hash: 368c75b4cb494f6c5dd1f6f2a85498faf90fae9ab3344d9f03739dd1f3ffcf8d
-  seconds: 50
-  lost: true
-  killed_by: memory
-  peak_bytes: 13535903744
-  limit_bytes: 1675943116
-28OQ derive:
-  hash: 4375a6b52320a62195d581354e5f0a467597fa668f3964d02b692bf0a4569a7e
-  seconds: 51
-  lost: true
-  killed_by: memory
-  peak_bytes: 13312991232
-  limit_bytes: 1675943116
-28RM derive:
-  hash: 30ac1eb66b19cd3e4abadd1b1ace7c3f6a3d566eadbb2faa959eebd8a1c5e96c
-  seconds: 51
-  lost: true
-  killed_by: memory
-  peak_bytes: 13523218432
-  limit_bytes: 1675943116
-28RS derive:
-  hash: 1008c92a218591bf581084285f37c42f72852fc565474dd7381c9215214ade22
-  seconds: 51
-  lost: true
-  killed_by: memory
-  peak_bytes: 13443502080
-  limit_bytes: 1675943116
-28SA derive:
-  hash: 070ca5b7a16c47270c570cdbee2b7473438aff5d9cc78b6d0ff7f3a4f8845f94
-  seconds: 51
-  lost: true
-  killed_by: memory
-  peak_bytes: 13664198656
-  limit_bytes: 1675943116
-28SF derive:
-  hash: 5b9c8f549a047d1a05930fd79b7de2ec70cece4554ccdb3cc6be7ec4363e79ac
-  seconds: 51
-  lost: true
-  killed_by: memory
-  peak_bytes: 13592014848
-  limit_bytes: 1675943116
-28UK derive:
-  hash: de5a2614002c749c3b078564e668b931d4a6248ac2baabdf12cfa714cca3d756
-  seconds: 51
-  lost: true
-  killed_by: memory
-  peak_bytes: 13913616384
-  limit_bytes: 1675943116
-28V5 derive:
-  hash: cf5c461b075b2d52433f43054b44c62f7223ecfda79ca72c830e46e093d4e6d0
-  seconds: 50
-  lost: true
-  killed_by: memory
-  peak_bytes: 13472665600
-  limit_bytes: 1675943116
 28X6 derive:
   hash: 81ee8222d3fe9ee8abac63836e5b1cf91c319a0e701aef2a79baefe1a73e5e9d
   seconds: 55
@@ -2498,13 +2414,13 @@
   hash: e5378e409c24f7701e373876b32586a87eb5a9cf04b7ada7350ac466781f0804
   seconds: 0
   lost: true
-5MAC integral.primitive_orbits[Otilde]:
-  hash: b5a53f909566a3841e073d767a248ea24c3ba88b48ac441b6f30f71f4c4e395c
-  seconds: 90
-  lost: true
 5RR1 integral.primitive_orbits[SOtilde]:
   hash: 2b2f37ca731c7f2c974be88ea8d147c4f3c85c99adec5cb66a320253d297072a
   seconds: 19709
+5V89 integral.primitive_orbits[Otilde]:
+  hash: 194bea13fd0b7fd28913be1029be3614188c7c2c40e853f6b14545f914056c81
+  seconds: 95
+  lost: true
 6JRR arithmetic-group.otilde-plus-t-co.index_in_orthogonal_group:
   hash: acad0e18f0c158ad5bda122e435bae4133bd93287223e2a8ce2c8b611148e2d3
   seconds: 19628
