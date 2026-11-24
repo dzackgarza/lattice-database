@@ -25794,6 +25794,9 @@
 3VIB form.integer_valued:
   hash: 2f7f23d2c27f8de3e783bca325d73cc5cdac6a6a7ee9eea1ae45963aad4d3721
   by: research preamble
+3VIB integral.anisotropic_primes:
+  hash: c4e795b775e4c87e9eef5f042cc7920de2136908f720f6d0bde294ed0de2d187
+  by: research preamble
 3VIB integral.elementary_primes:
   hash: 7f9f1af07ee9b9e26755ab4afbca53979b905c601475e2b822e7ae0214e0b7cc
   by: research preamble
@@ -25806,8 +25809,20 @@
 3VIB integral.hyperbolic_index:
   hash: 09efc5c5482f87bcfbdb8959b56f8dbbdd99cddcd2d97d52261477d1073b2e0c
   by: research preamble
+3VIB integral.local_densities:
+  hash: b4090c8c0140c8c2b06f46f417898384fabf76fdb85ae53942c54f8da2cefefb
+  by: research preamble
+3VIB integral.local_representations:
+  hash: 6441de5baedbf89bc6c0168e84577ad2e421023ae82a112117a989f5b9328cf5
+  by: research preamble
+3VIB integral.modular_scale:
+  hash: 36712500f23e5ff8dceb1821ff964a022eb1e471a908a8a5953bdc0a8a8d7453
+  by: research preamble
 3VIB integral.overlattice_count:
   hash: 2c874bcfe2d4a830d41f08f82474ec1f8713f68d789467e534a6fe98573303d5
+  by: research preamble
+3VIB integral.primitive_orbits:
+  hash: 13aa7febbacaaca1e4badaddbfdf34439323c4f027367d1f626c25801be8695a
   by: research preamble
 3VIB integral.spinor_genera:
   hash: 79e4f44ea0df743630d5e1184b142df427d5f6e2b27e07ac78ae9b1ffa83f537
