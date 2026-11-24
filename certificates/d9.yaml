@@ -19993,6 +19993,12 @@
 2AWC definite.automorphism_group_order:
   hash: cb16011a246c4906a07397fe4c4e15406b124123b16069f06b2930240c7c58e0
   by: research preamble
+2AWC definite.genus_theta_series:
+  hash: 72bc10d7260e0c21d148af3a313830e27ee7fd8d7dc1bbfd41f2e6d6b8dcf1e2
+  by: research preamble
+2AWC definite.theta_series_cuspidal_component:
+  hash: db96f25433ffeaeefc25b8cb9e7dd36e26617e7e22b33d967cd91795ecf1838a
+  by: research preamble
 2AWC derive:
   hash: c80489a06d52a8211dc67e64070e104e9c8b23c2d72210e2413084deb02c5f2c
   by: research preamble
@@ -20017,8 +20023,14 @@
 2AWC integral.hyperbolic_index:
   hash: ba5ad07844760dbd9f85578de5b5eedd262cc3222a32ad510135075faac76821
   by: research preamble
+2AWC integral.modular_scale:
+  hash: a805a930248296f1183f489deb6f7fbdc26ab74be58fd4bac234c6e184644286
+  by: research preamble
 2AWC integral.overlattice_count:
   hash: e1f87da8a3c3eca0240b5cb8769514c7ae5a251ff7512a2fd9a3d9a9c4f80b04
+  by: research preamble
+2AWC integral.primitive_orbits:
+  hash: 779fef5ab74bde44342e4d1bf9ce061227a25780c34acda2b8e629016d9548a4
   by: research preamble
 2AWC integral.spinor_genera:
   hash: e7cfe35397f9efbd829e209ae3a7109b5a68c96c7123fa18bde78a5aa075968e
