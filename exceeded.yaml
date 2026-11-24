@@ -489,8 +489,7 @@
   limit_bytes: 1646340915
 03A8 definite.spinor_regular:
   hash: 9afcb6ed5e5e0558fc915599b97813cb884a77216a8c5678759482a468e3d9cf
-  seconds: 3394
-  lost: true
+  seconds: 415
 03E4 definite.regular:
   hash: 367ee6be7b1ae2324d2f8b84ed17807c44014151c93049ad1053aae3f816df83
   seconds: 6558
@@ -776,6 +775,10 @@
 1CZ4 integral.discriminant_form:
   hash: d9ace81ff310c9f2d93545001a6c2ebae53abd4735fbdf0278f88049ec4bcdb9
   seconds: 4
+1D95 integral.discriminant_form:
+  hash: ecdf764a646a1714d31a36c68f0ee39afea29fd7b0bc4012298194aeb4c55b34
+  seconds: 0
+  lost: true
 1DRM integral.genus_class_count:
   hash: b9116a9b09223f453b6990f0efa48f8670ad40d65cb4f5c32b3f8b2cb30e031e
   seconds: 10
@@ -1552,10 +1555,6 @@
   killed_by: memory
   peak_bytes: 12547874816
   limit_bytes: 1675942297
-27CU definite.genus_theta_series:
-  hash: d2dda852ce55255337171937697f6fc700e199993cc6e0e63f230b1dd52e1f56
-  seconds: 0
-  lost: true
 27MV derive:
   hash: 0e044db65139bd9bd05948e9e080f7d642e6d3286c81d07d73401b6e67bceecf
   seconds: 41
@@ -2297,10 +2296,6 @@
 3GV7 integral.discriminant_sequence:
   hash: 11bd986ed4009c6f4b842f2711f305e76eeda93e70e9bc4fc82cf6b28bb78e57
   seconds: 1581
-3GVI integral.discriminant_sequence:
-  hash: 096d7caa6bb4c44462fc6d1f0a5c8e45d1ce810ce6d8310e917369a2cdcecb51
-  seconds: 1667
-  lost: true
 3GVS integral.discriminant_sequence:
   hash: ef1b744c9b26e462be98dabc073db5869fd20faba0eefd12e4b0d1f393fcfb9b
   seconds: 19390
@@ -2375,7 +2370,7 @@
   lost: true
 3IAL integral.discriminant_sequence:
   hash: d0b8f7fea43f6ad56452985deedba4adafbfffe207e9d562ede679f482d8cdd1
-  seconds: 8789
+  seconds: 10592
   lost: true
 3IAM integral.discriminant_sequence:
   hash: cf4bab4542f104f8c4165bdb7118ddabd0e6dc338c2711c37eb5312384892827
@@ -2419,20 +2414,12 @@
   hash: 8cb7ef7d73079f6dab7c15c2d594218d65ca768f8f835504e1350a5324ea9dc6
   seconds: 0
   lost: true
-4ZLQ integral.primitive_orbits[Otilde+]:
-  hash: f950fe8eda4a26616d1fa203f6b9d971752b7796263a18613b89c46566b1912d
-  seconds: 0
-  lost: true
 52HJ integral.hyperbolic_index:
   hash: 274205a409c28c0754f6ec6e2a6e32583766bd22135b2c9abda9cb9a94d75342
   seconds: 40
   lost: true
 58S6 integral.local_densities:
   hash: e5378e409c24f7701e373876b32586a87eb5a9cf04b7ada7350ac466781f0804
-  seconds: 0
-  lost: true
-5K8E integral.primitive_orbits[Otilde+]:
-  hash: 10d53f671b0173afd9e82a7e721580f46f1cfd48f7496303bfe66b5312895033
   seconds: 0
   lost: true
 5RR1 integral.primitive_orbits[SOtilde]:
