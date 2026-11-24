@@ -9615,6 +9615,44 @@
     database_revision: 62ac9ab95d226bf02e25637732cedfdeadc4cf81
     research_revision: b9d91213ecc4ce7395c571461bacfe3d80e36d0f
   notes: []
+5XTS integral.primitive_orbits[O+]:
+  disposition: open
+  attempts:
+  - hash: a7e8c28a297e772d52198d47a41ec2c894efe14084ebeea87c6863c23695344f
+    gram_tensor:
+    - - 2
+      - 0
+      - 0
+      - 0
+      - 0
+    - - 0
+      - -4
+      - 6
+      - 0
+      - 0
+    - - 0
+      - 6
+      - -12
+      - 0
+      - 0
+    - - 0
+      - 0
+      - 0
+      - 4
+      - -6
+    - - 0
+      - 0
+      - 0
+      - -6
+      - 12
+    reason: worker or runner lost (recovered from exceeded.yaml)
+    stderr: ''
+    seconds: 1652.0
+    recorded_at: 2026-11-24 21:04:29.855515+00:00
+    run_url: https://github.com/dzackgarza/lattice-database/actions/runs/45483305000/attempts/1
+    database_revision: 2440d26286c553779ba00c878e5d606581ae3a0b
+    research_revision: 0d4b0ffc15f5f46f30af390f49af3fcebdd47ced
+  notes: []
 5XTS integral.primitive_orbits[O]:
   disposition: open
   attempts:

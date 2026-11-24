@@ -9967,39 +9967,12 @@
       - 6
       - -16
       - 44
-    reason: exit status 1
-    stderr: "Traceback (most recent call last):\n  File \"<frozen runpy>\", line 203,
-      in _run_module_as_main\n  File \"<frozen runpy>\", line 88, in _run_code\n  File
-      \"/home/runner/work/lattice-database/lattice-database/src/latticedb/sage_genus.py\",
-      line 536, in <module>\n    main()\n    ~~~~^^\n  File \"/home/runner/work/lattice-database/lattice-database/src/latticedb/sage_genus.py\",
-      line 531, in main\n    _compute(request)\n    ~~~~~~~~^^^^^^^^^\n  File \"/home/runner/work/lattice-database/lattice-database/src/latticedb/sage_genus.py\",
-      line 516, in _compute\n    _run(\n    ~~~~^\n        tag,\n        ^^^^\n        [field],\n
-      \       ^^^^^^^^\n        lambda: {field: SERIES[field](lattice, request[\"series_bound\"])
-      if field in SERIES else VALUES[field](lattice)},\n        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n
-      \   )\n    ^\n  File \"/home/runner/work/lattice-database/lattice-database/src/latticedb/sage_genus.py\",
-      line 449, in _run\n    values = compute()\n  File \"/home/runner/work/lattice-database/lattice-database/src/latticedb/sage_genus.py\",
-      line 519, in <lambda>\n    lambda: {field: SERIES[field](lattice, request[\"series_bound\"])
-      if field in SERIES else VALUES[field](lattice)},\n                                                                                            ~~~~~~~~~~~~~^^^^^^^^^\n
-      \ File \"/home/runner/work/lattice-database/lattice-database/src/latticedb/sage_genus.py\",
-      line 362, in <lambda>\n    \"discriminant_sequence\": lambda lattice: lattice.discriminant_sequence_data(),\n
-      \                                            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^\n
-      \ File \"/repos/sage-extensions/src/sage_extensions/categories/lattices.py\",
-      line 4490, in discriminant_sequence_data\n    return discriminant_sequence_data(self)\n
-      \ File \"/repos/sage-extensions/src/sage_extensions/categories/lattice_orbit_invariants.py\",
-      line 321, in discriminant_sequence_data\n    group_elements = list(group)\n
-      \ File \"/sage/.venv/lib/python3.14/site-packages/sage/groups/libgap_mixin.py\",
-      line 835, in __iter__\n    yield self.element_class(self, iterator.NextIterator())\n
-      \         ~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/sage/.venv/lib/python3.14/site-packages/sage/groups/abelian_gps/abelian_aut.py\",
-      line 118, in __init__\n    if x not in parent.gap():\n       ^^^^^^^^^^^^^^^^^^^^^\n
-      \ File \"sage/libs/gap/element.pyx\", line 794, in sage.libs.gap.element.GapElement.__contains__\n
-      \   return self._check_contains(other)\n  File \"sage/libs/gap/element.pyx\",
-      line 769, in sage.libs.gap.element.GapElement._check_contains\n    GAP_Enter()\nsage.libs.gap.util.GAPError:
-      Error, reached the pre-set memory limit\n(change it with the -o command line
-      option)\n"
-    seconds: 1929.7189325129998
-    recorded_at: 2026-11-24 20:16:10.405437+00:00
-    run_url: https://github.com/dzackgarza/lattice-database/actions/runs/45407996724/attempts/1
-    database_revision: efb45b5bdd13dfd2f61b6fbc60a504cc52006004
+    reason: worker or runner lost (recovered from exceeded.yaml)
+    stderr: ''
+    seconds: 1667.0
+    recorded_at: 2026-11-24 21:03:35.779715+00:00
+    run_url: https://github.com/dzackgarza/lattice-database/actions/runs/45483305000/attempts/1
+    database_revision: 2440d26286c553779ba00c878e5d606581ae3a0b
     research_revision: 0d4b0ffc15f5f46f30af390f49af3fcebdd47ced
   notes: []
 3GVI integral.overlattice_count:
