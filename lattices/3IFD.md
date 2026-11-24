@@ -2,6 +2,28 @@
 tag: 3IFD
 name: Constructed lattice 3IFD
 latex: L_{\mathrm{3IFD}}
+certifications:
+  derive: 03a310460ff15c001e4e0d27296d49e2e67dd10f9f7088c3d22e3cc6d32fbb09
+  form.integer_valued: e73ce3227be0bfef36c2adcd2150641c574324774e36173bf71de5f001334060
+  integral.elementary_primes: 7c64445d38efa2e271bb40d9903f4d2bdf3790a96e6acd9853e888bf50d6908e
+  integral.genus_symbol: 9a02b9a3b071751f87a0c2d38eb6e937e2cc616ff873d63eb8173c36e963ec0e
+  integral.genus_class_count: bb6466845247167a9b1da9cda97e64413d81fbb4a1db243cb9f14d2dcfea396b
+  integral.overlattice_count: 877531be4a0a7c1c3eb34fdb78750e0f6f1cdb441fe4b771c6cd3fd3bc0f41a8
+  integral.spinor_genus_count: d5f485f4280b8b97fd295e4f68e0fa50effc085d0a09505fbfe8b4ce2dae5ee0
+  integral.spinor_genera: 9d1c22e2e6f12d99ef8205c4a49552ba0b98c3b5140fc09d18b80df995febc1c
+  integral.hyperbolic_index: 9c22b4c911fc2f97640a0f86424ba56ae3b440907517d27682674628a987ae7e
+  definite.automorphism_group_order: a159109bfc33a7b4413676ffedc1a2f76380d13f6c52b1e35f3139756beb153c
+  definite.automorphism_group_generator_morphisms: 838b26d01e33e55297255949bda3ea4910ceb20a7bdf0a1cc6c0e8dcd6c6d2ae
+  integral.discriminant_sequence: 4144166c31bece19e1239d8cefb3ba0a09fdd843e7e5c90c7792011b8f20e79e
+  integral.discriminant_form: 7ae801340a3fa6cdd028ce1ccd74221d417511e9942f16d4e9c9514c3638646c
+  integral.primitive_orbits: 37e02319984d3cac8028e784ba5b68ffb476b1f728256a674f911763d88ae86e
+  integral.modular_scale: b0f48df0dbd4b622c7fa9e0dcdf920c28cf78f25070ed65937224d956ab0e8cd
+  definite.genus_theta_series: 069a2feeb5cf34ed0490dd9b01b8245f1a4dddfa3e5d4a8d866e4ed455155a56
+  definite.theta_series_cuspidal_component: a9594ad0714092d6aaa893b62818b0072a97923153cf094134c208306218bb6a
+  definite.siegel_eisenstein_coefficients: 32c7c13ce254b89151c5c9655c5b7938c01cada1cc5feb3331413648b2181276
+  integral.anisotropic_primes: 5807417e05f8c192c7e879aa0322baf56ef31a2286a679e5e06ba4e85c2e5e31
+  integral.local_representations: bb3d281bd49d5c047e972688e0ba3eca74468874a79cb2cb88b6d56014547dd3
+  integral.local_densities: d6a9f0f7bc4c981add8d9a067f459cfb1093d3fed205caf0bc19e93f64ff749d
 rank: 5
 gram_tensor:
 - [4, -2, 0, 0, 0]
@@ -9,6 +31,273 @@ gram_tensor:
 - [0, -2, 4, -2, 0]
 - [0, 0, -2, 4, -2]
 - [0, 0, 0, -2, 4]
+signature: [5, 0]
+determinant: 192
+definiteness: positive_definite
+dual_gram_tensor:
+- [5/12, 1/3, 1/4, 1/6, 1/12]
+- [1/3, 2/3, 1/2, 1/3, 1/6]
+- [1/4, 1/2, 3/4, 1/2, 1/4]
+- [1/6, 1/3, 1/2, 2/3, 1/3]
+- [1/12, 1/6, 1/4, 1/3, 5/12]
+form:
+  integer_valued: true
+integral:
+  elementary_primes: []
+  parity: even
+  level: 24
+  modular_scale: false
+  discriminant_group: [2, 2, 2, 2, 12]
+  discriminant_sequence:
+    discriminant_factors: [2, 2, 2, 2, 12]
+    discriminant_basis_lifts:
+    - [1/2, '0', '0', '0', '0']
+    - ['0', 1/2, '0', '0', '0']
+    - ['0', '0', 1/2, '0', '0']
+    - ['0', '0', '0', 1/2, '0']
+    - [-1/12, -1/6, -1/4, -1/3, 1/12]
+    discriminant_quadratic_gram:
+    - ['1', 1/2, '0', '0', '0']
+    - [1/2, '1', 1/2, '0', '0']
+    - ['0', 1/2, '1', 1/2, '0']
+    - ['0', '0', 1/2, '1', 1/2]
+    - ['0', '0', '0', 1/2, 5/12]
+    discriminant_group_order: 2880
+    discriminant_generators:
+    - - [1, 1, 1, 1, 0]
+      - [1, 1, 1, 0, 0]
+      - [1, 0, 1, 1, 6]
+      - [1, 0, 0, 1, 6]
+      - [0, 0, 1, 1, 11]
+    - - [1, 1, 1, 1, 0]
+      - [1, 1, 1, 0, 0]
+      - [1, 0, 1, 1, 6]
+      - [1, 1, 0, 1, 6]
+      - [0, 1, 1, 1, 5]
+    - - [1, 1, 1, 1, 0]
+      - [1, 1, 1, 0, 0]
+      - [1, 0, 1, 1, 6]
+      - [1, 1, 0, 1, 6]
+      - [0, 1, 1, 1, 11]
+    - - [1, 1, 1, 1, 0]
+      - [0, 1, 0, 1, 6]
+      - [1, 1, 0, 1, 6]
+      - [0, 1, 1, 0, 0]
+      - [0, 0, 0, 1, 11]
+    image_generators:
+    - - [1, 0, 1, 0, 6]
+      - [0, 0, 0, 1, 0]
+      - [0, 0, 1, 0, 0]
+      - [0, 1, 0, 0, 0]
+      - [0, 1, 1, 1, 11]
+    - - [1, 1, 1, 1, 0]
+      - [1, 0, 1, 0, 6]
+      - [1, 0, 1, 1, 6]
+      - [0, 0, 1, 0, 0]
+      - [0, 0, 1, 1, 11]
+    - - [1, 0, 0, 0, 0]
+      - [0, 1, 0, 1, 6]
+      - [1, 0, 1, 0, 6]
+      - [0, 0, 0, 1, 0]
+      - [0, 0, 0, 1, 11]
+    - - [1, 0, 0, 0, 0]
+      - [0, 1, 0, 0, 0]
+      - [1, 0, 0, 1, 6]
+      - [1, 0, 1, 0, 6]
+      - [0, 0, 0, 0, 1]
+    - - [1, 0, 0, 0, 0]
+      - [0, 1, 0, 0, 0]
+      - [0, 0, 1, 1, 0]
+      - [1, 0, 1, 0, 6]
+      - [1, 0, 1, 0, 7]
+    image_order: 1440
+    kernel_order: 1
+    coset_representatives:
+    - - [1, 0, 0, 0, 0]
+      - [0, 1, 0, 0, 0]
+      - [0, 0, 1, 0, 0]
+      - [0, 0, 0, 1, 0]
+      - [0, 0, 0, 0, 1]
+    - - [0, 0, 0, 1, 0]
+      - [0, 0, 1, 0, 0]
+      - [0, 1, 0, 0, 0]
+      - [1, 0, 0, 0, 0]
+      - [1, 1, 1, 1, 5]
+    mm_trivial: false
+    image_normal: true
+    quotient_generator_cosets: [0, 1, 0, 0]
+    quotient_multiplication:
+    - [0, 1]
+    - [1, 0]
+  overlattice_count: 122
+  bad_reduction_primes: [2, 3]
+  genus_symbol: 'II_{5,0} (2: 2^-4 [4^1]_7; 3: 1^-4 3^-1)'
+  genus_class_count: 1
+  spinor_genus_count: 1
+  spinor_genera: [1]
+  hyperbolic_index: 0
+  primitive_orbits:
+    O:
+      constant: 0
+      z: [0, 0, 0, 1]
+      w: [0, 0, 0, 0]
+    SO:
+      constant: 0
+      z: [0, 0, 0, 1]
+      w: [0, 0, 0, 0]
+    Otilde:
+      constant: 0
+      z: [0, 0, 0, 30]
+      w: [0, 0, 0, 0]
+    SOtilde:
+      constant: 0
+      z: [0, 0, 0, 30]
+      w: [0, 0, 0, 0]
+    O+:
+      constant: 0
+      z: [0, 0, 0, 1]
+      w: [0, 0, 0, 0]
+    SO+:
+      constant: 0
+      z: [0, 0, 0, 1]
+      w: [0, 0, 0, 0]
+    Otilde+:
+      constant: 0
+      z: [0, 0, 0, 30]
+      w: [0, 0, 0, 0]
+    SOtilde+:
+      constant: 0
+      z: [0, 0, 0, 30]
+      w: [0, 0, 0, 0]
+  discriminant_form:
+    orthogonal_group_order: 2880
+    isotropic_classes: 16
+    isotropic_orbits: 2
+  anisotropic_primes: []
+  local_representations:
+  - prime: 2
+    classes:
+    - representative: 1
+      least_valuation: 2
+    - representative: 3
+      least_valuation: 2
+    - representative: 5
+      least_valuation: 2
+    - representative: 7
+      least_valuation: 2
+    - representative: 2
+      least_valuation: 3
+    - representative: 6
+      least_valuation: 3
+    - representative: 10
+      least_valuation: 3
+    - representative: 14
+      least_valuation: 3
+  local_densities:
+  - prime: 2
+    densities: [0, 0, 0, 15/4, 0, 0, 0, 15/4]
+  - prime: 3
+    densities: [10/9, 10/9, 20/27, 10/9, 10/9, 22/27, 10/9, 10/9]
+definite:
+  minimum: 4
+  kissing_number: 30
+  automorphism_group_order: 1440
+  automorphism_group_generator_morphisms: [O(L) generator 1, O(L) generator 2, O(L) generator 3, O(L) generator 4, O(L) generator 5]
+  minimal_vectors:
+  - [-1, -1, -1, -1, -1]
+  - [-1, -1, -1, -1, 0]
+  - [-1, -1, -1, 0, 0]
+  - [-1, -1, 0, 0, 0]
+  - [-1, 0, 0, 0, 0]
+  - [0, -1, -1, -1, -1]
+  - [0, -1, -1, -1, 0]
+  - [0, -1, -1, 0, 0]
+  - [0, -1, 0, 0, 0]
+  - [0, 0, -1, -1, -1]
+  - [0, 0, -1, -1, 0]
+  - [0, 0, -1, 0, 0]
+  - [0, 0, 0, -1, -1]
+  - [0, 0, 0, -1, 0]
+  - [0, 0, 0, 0, -1]
+  - [0, 0, 0, 0, 1]
+  - [0, 0, 0, 1, 0]
+  - [0, 0, 0, 1, 1]
+  - [0, 0, 1, 0, 0]
+  - [0, 0, 1, 1, 0]
+  - [0, 0, 1, 1, 1]
+  - [0, 1, 0, 0, 0]
+  - [0, 1, 1, 0, 0]
+  - [0, 1, 1, 1, 0]
+  - [0, 1, 1, 1, 1]
+  - [1, 0, 0, 0, 0]
+  - [1, 1, 0, 0, 0]
+  - [1, 1, 1, 0, 0]
+  - [1, 1, 1, 1, 0]
+  - [1, 1, 1, 1, 1]
+  perfect: true
+  theta_series: [1, 0, 0, 0, 30, 0, 0, 0, 90]
+  genus_theta_series: [1, 0, 0, 0, 30, 0, 0, 0, 90]
+  theta_series_cuspidal_component: [0, 0, 0, 0, 0, 0, 0, 0, 0]
+  siegel_eisenstein_coefficients: [0, 0, 0, 30, 0, 0, 0, 90]
+  root_system: []
+  roots:
+  - type: A5
+    scale: 2
+    simple_roots:
+    - [0, 0, 0, 0, 1]
+    - [0, 0, 0, 1, 0]
+    - [0, 0, 1, 0, 0]
+    - [0, 1, 0, 0, 0]
+    - [1, 0, 0, 0, 0]
+root_sublattice:
+  invariant_factors: [1, 1, 1, 1, 1]
+  norms: [4]
+morphisms:
+- target: 3IFD
+  name: O(L) generator 1
+  matrix:
+  - [0, 0, 0, 0, 1]
+  - [0, 0, 0, 1, 0]
+  - [0, 0, 1, 0, 0]
+  - [0, 1, 0, 0, 0]
+  - [1, 0, 0, 0, 0]
+  scale: 1
+- target: 3IFD
+  name: O(L) generator 2
+  matrix:
+  - [-1, 0, 0, 0, 0]
+  - [-1, 0, 0, 0, 1]
+  - [-1, 0, 0, 1, 0]
+  - [-1, 0, 1, 0, 0]
+  - [0, -1, 1, 0, 0]
+  scale: 1
+- target: 3IFD
+  name: O(L) generator 3
+  matrix:
+  - [1, -1, 0, 0, 0]
+  - [0, -1, 0, 0, 0]
+  - [0, -1, 0, 0, 1]
+  - [0, -1, 0, 1, 0]
+  - [0, -1, 1, 0, 0]
+  scale: 1
+- target: 3IFD
+  name: O(L) generator 4
+  matrix:
+  - [1, 0, 0, 0, 0]
+  - [0, 1, 0, 0, 0]
+  - [0, 0, 1, 0, 0]
+  - [0, 0, 1, 0, -1]
+  - [0, 0, 1, -1, 0]
+  scale: 1
+- target: 3IFD
+  name: O(L) generator 5
+  matrix:
+  - [1, 0, 0, 0, 0]
+  - [0, 1, 0, 0, 0]
+  - [0, 0, 1, 0, 0]
+  - [0, 0, 1, 0, -1]
+  - [0, 0, 0, 1, -1]
+  scale: 1
 related:
 - tag: 3IFB
   relation: This presentation is obtained by scaling the form by -2 of 3IFB.
