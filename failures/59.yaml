@@ -9106,6 +9106,188 @@
     database_revision: dde534ecd9d7c61af3800d20eb1635bc7541f38a
     research_revision: 8ef80cd0b704a288754fd4a4a3fc8d16d272434b
   notes: []
+3LW5 integral.hyperbolic_index:
+  disposition: open
+  attempts:
+  - hash: 7dfd6935b2a6063d4cc57b71b46ad9ea05c00d96f2b83952f2681617d5787d43
+    gram_tensor:
+    - - 1
+      - 0
+      - 0
+      - 0
+      - 0
+    - - 0
+      - 1
+      - 0
+      - 0
+      - 0
+    - - 0
+      - 0
+      - 1
+      - 0
+      - 0
+    - - 0
+      - 0
+      - 0
+      - -1
+      - 0
+    - - 0
+      - 0
+      - 0
+      - 0
+      - -2
+    reason: exit status 1
+    stderr: "Traceback (most recent call last):\n  File \"sage/structure/parent.pyx\",
+      line 1273, in sage.structure.parent.Parent.__getitem__\n    meth = super().__getitem__\nAttributeError:
+      'super' object has no attribute '__getitem__'. Did you mean: '__getstate__'?\n\nDuring
+      handling of the above exception, another exception occurred:\n\nTraceback (most
+      recent call last):\n  File \"sage/structure/category_object.pyx\", line 858,
+      in sage.structure.category_object.CategoryObject.getattr_from_category\n    return
+      self._cached_methods[name]\nKeyError: '__getitem__'\n\nDuring handling of the
+      above exception, another exception occurred:\n\nTraceback (most recent call
+      last):\n  File \"sage/structure/parent.pyx\", line 1277, in sage.structure.parent.Parent.__getitem__\n
+      \   meth = self.getattr_from_category('__getitem__')\n  File \"sage/structure/category_object.pyx\",
+      line 867, in sage.structure.category_object.CategoryObject.getattr_from_category\n
+      \   attr = getattr_from_other_class(self, cls, name)\n  File \"sage/cpython/getattr.pyx\",
+      line 357, in sage.cpython.getattr.getattr_from_other_class\n    raise AttributeError(dummy_error_message)\nAttributeError:
+      '_SelectedFinitePresentationModules.parent_class[_PresentedModule].ObjectType'
+      object has no attribute 'list'\n\nDuring handling of the above exception, another
+      exception occurred:\n\nTraceback (most recent call last):\n  File \"sage/structure/category_object.pyx\",
+      line 858, in sage.structure.category_object.CategoryObject.getattr_from_category\n
+      \   return self._cached_methods[name]\nKeyError: 'list'\n\nDuring handling of
+      the above exception, another exception occurred:\n\nTraceback (most recent call
+      last):\n  File \"<frozen runpy>\", line 203, in _run_module_as_main\n  File
+      \"<frozen runpy>\", line 88, in _run_code\n  File \"/home/runner/work/lattice-database/lattice-database/src/latticedb/sage_genus.py\",
+      line 536, in <module>\n    main()\n    ~~~~^^\n  File \"/home/runner/work/lattice-database/lattice-database/src/latticedb/sage_genus.py\",
+      line 531, in main\n    _compute(request)\n    ~~~~~~~~^^^^^^^^^\n  File \"/home/runner/work/lattice-database/lattice-database/src/latticedb/sage_genus.py\",
+      line 516, in _compute\n    _run(\n    ~~~~^\n        tag,\n        ^^^^\n        [field],\n
+      \       ^^^^^^^^\n        lambda: {field: SERIES[field](lattice, request[\"series_bound\"])
+      if field in SERIES else VALUES[field](lattice)},\n        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n
+      \   )\n    ^\n  File \"/home/runner/work/lattice-database/lattice-database/src/latticedb/sage_genus.py\",
+      line 449, in _run\n    values = compute()\n  File \"/home/runner/work/lattice-database/lattice-database/src/latticedb/sage_genus.py\",
+      line 519, in <lambda>\n    lambda: {field: SERIES[field](lattice, request[\"series_bound\"])
+      if field in SERIES else VALUES[field](lattice)},\n                                                                                            ~~~~~~~~~~~~~^^^^^^^^^\n
+      \ File \"/home/runner/work/lattice-database/lattice-database/src/latticedb/sage_genus.py\",
+      line 361, in <lambda>\n    \"hyperbolic_index\": lambda lattice: int(lattice.integral_hyperbolic_index()),\n
+      \                                           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^\n
+      \ File \"/repos/sage-extensions/src/sage_extensions/categories/lattices.py\",
+      line 6583, in integral_hyperbolic_index\n    return self.hyperbolic_index()\n
+      \          ~~~~~~~~~~~~~~~~~~~~~^^\n  File \"sage/misc/cachefunc.pyx\", line
+      2328, in sage.misc.cachefunc.CachedMethodCallerNoArgs.__call__\n    self.cache
+      = f(self._instance)\n  File \"/repos/sage-extensions/src/sage_extensions/categories/lattices.py\",
+      line 6712, in hyperbolic_index\n    direct_index, _direct_splitting = self._direct_hyperbolic_splitting()\n
+      \                                     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^\n
+      \ File \"sage/misc/cachefunc.pyx\", line 2328, in sage.misc.cachefunc.CachedMethodCallerNoArgs.__call__\n
+      \   self.cache = f(self._instance)\n  File \"/repos/sage-extensions/src/sage_extensions/categories/lattices.py\",
+      line 6605, in _direct_hyperbolic_splitting\n    partner = isotropic.hyperbolic_partner()\n
+      \ File \"/repos/sage-extensions/src/sage_extensions/categories/lattices.py\",
+      line 10695, in hyperbolic_partner\n    for residue in projection.codomain():\n
+      \                  ~~~~~~~~~~~~~~~~~~~^^\n  File \"sage/structure/parent.pyx\",
+      line 1279, in sage.structure.parent.Parent.__getitem__\n    return self.list()[n]\n
+      \ File \"sage/structure/category_object.pyx\", line 852, in sage.structure.category_object.CategoryObject.__getattr__\n
+      \   return self.getattr_from_category(name)\n  File \"sage/structure/category_object.pyx\",
+      line 867, in sage.structure.category_object.CategoryObject.getattr_from_category\n
+      \   attr = getattr_from_other_class(self, cls, name)\n  File \"sage/cpython/getattr.pyx\",
+      line 357, in sage.cpython.getattr.getattr_from_other_class\n    raise AttributeError(dummy_error_message)\nAttributeError:
+      '_SelectedFinitePresentationModules.parent_class[_PresentedModule].ObjectType'
+      object has no attribute 'list'\n"
+    seconds: 0.3776403050001136
+    recorded_at: 2026-11-24 20:16:46.640833+00:00
+    run_url: https://github.com/dzackgarza/lattice-database/actions/runs/45407996724/attempts/1
+    database_revision: efb45b5bdd13dfd2f61b6fbc60a504cc52006004
+    research_revision: 0d4b0ffc15f5f46f30af390f49af3fcebdd47ced
+  notes: []
+4BH6 integral.hyperbolic_index:
+  disposition: open
+  attempts:
+  - hash: ecdf51751ea193116bd0352f29da0f92eb8ffa44be1103cfd4dc261b0c5003ee
+    gram_tensor:
+    - - 1
+      - 0
+      - 0
+      - 0
+      - 0
+    - - 0
+      - -1
+      - 0
+      - 0
+      - 0
+    - - 0
+      - 0
+      - -2
+      - 1
+      - 0
+    - - 0
+      - 0
+      - 1
+      - -2
+      - 1
+    - - 0
+      - 0
+      - 0
+      - 1
+      - -2
+    reason: exit status 1
+    stderr: "Traceback (most recent call last):\n  File \"sage/structure/parent.pyx\",
+      line 1273, in sage.structure.parent.Parent.__getitem__\n    meth = super().__getitem__\nAttributeError:
+      'super' object has no attribute '__getitem__'. Did you mean: '__getstate__'?\n\nDuring
+      handling of the above exception, another exception occurred:\n\nTraceback (most
+      recent call last):\n  File \"sage/structure/category_object.pyx\", line 858,
+      in sage.structure.category_object.CategoryObject.getattr_from_category\n    return
+      self._cached_methods[name]\nKeyError: '__getitem__'\n\nDuring handling of the
+      above exception, another exception occurred:\n\nTraceback (most recent call
+      last):\n  File \"sage/structure/parent.pyx\", line 1277, in sage.structure.parent.Parent.__getitem__\n
+      \   meth = self.getattr_from_category('__getitem__')\n  File \"sage/structure/category_object.pyx\",
+      line 867, in sage.structure.category_object.CategoryObject.getattr_from_category\n
+      \   attr = getattr_from_other_class(self, cls, name)\n  File \"sage/cpython/getattr.pyx\",
+      line 357, in sage.cpython.getattr.getattr_from_other_class\n    raise AttributeError(dummy_error_message)\nAttributeError:
+      '_SelectedFinitePresentationModules.parent_class[_PresentedModule].ObjectType'
+      object has no attribute 'list'\n\nDuring handling of the above exception, another
+      exception occurred:\n\nTraceback (most recent call last):\n  File \"sage/structure/category_object.pyx\",
+      line 858, in sage.structure.category_object.CategoryObject.getattr_from_category\n
+      \   return self._cached_methods[name]\nKeyError: 'list'\n\nDuring handling of
+      the above exception, another exception occurred:\n\nTraceback (most recent call
+      last):\n  File \"<frozen runpy>\", line 203, in _run_module_as_main\n  File
+      \"<frozen runpy>\", line 88, in _run_code\n  File \"/home/runner/work/lattice-database/lattice-database/src/latticedb/sage_genus.py\",
+      line 536, in <module>\n    main()\n    ~~~~^^\n  File \"/home/runner/work/lattice-database/lattice-database/src/latticedb/sage_genus.py\",
+      line 531, in main\n    _compute(request)\n    ~~~~~~~~^^^^^^^^^\n  File \"/home/runner/work/lattice-database/lattice-database/src/latticedb/sage_genus.py\",
+      line 516, in _compute\n    _run(\n    ~~~~^\n        tag,\n        ^^^^\n        [field],\n
+      \       ^^^^^^^^\n        lambda: {field: SERIES[field](lattice, request[\"series_bound\"])
+      if field in SERIES else VALUES[field](lattice)},\n        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n
+      \   )\n    ^\n  File \"/home/runner/work/lattice-database/lattice-database/src/latticedb/sage_genus.py\",
+      line 449, in _run\n    values = compute()\n  File \"/home/runner/work/lattice-database/lattice-database/src/latticedb/sage_genus.py\",
+      line 519, in <lambda>\n    lambda: {field: SERIES[field](lattice, request[\"series_bound\"])
+      if field in SERIES else VALUES[field](lattice)},\n                                                                                            ~~~~~~~~~~~~~^^^^^^^^^\n
+      \ File \"/home/runner/work/lattice-database/lattice-database/src/latticedb/sage_genus.py\",
+      line 361, in <lambda>\n    \"hyperbolic_index\": lambda lattice: int(lattice.integral_hyperbolic_index()),\n
+      \                                           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^\n
+      \ File \"/repos/sage-extensions/src/sage_extensions/categories/lattices.py\",
+      line 6583, in integral_hyperbolic_index\n    return self.hyperbolic_index()\n
+      \          ~~~~~~~~~~~~~~~~~~~~~^^\n  File \"sage/misc/cachefunc.pyx\", line
+      2328, in sage.misc.cachefunc.CachedMethodCallerNoArgs.__call__\n    self.cache
+      = f(self._instance)\n  File \"/repos/sage-extensions/src/sage_extensions/categories/lattices.py\",
+      line 6712, in hyperbolic_index\n    direct_index, _direct_splitting = self._direct_hyperbolic_splitting()\n
+      \                                     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^\n
+      \ File \"sage/misc/cachefunc.pyx\", line 2328, in sage.misc.cachefunc.CachedMethodCallerNoArgs.__call__\n
+      \   self.cache = f(self._instance)\n  File \"/repos/sage-extensions/src/sage_extensions/categories/lattices.py\",
+      line 6605, in _direct_hyperbolic_splitting\n    partner = isotropic.hyperbolic_partner()\n
+      \ File \"/repos/sage-extensions/src/sage_extensions/categories/lattices.py\",
+      line 10695, in hyperbolic_partner\n    for residue in projection.codomain():\n
+      \                  ~~~~~~~~~~~~~~~~~~~^^\n  File \"sage/structure/parent.pyx\",
+      line 1279, in sage.structure.parent.Parent.__getitem__\n    return self.list()[n]\n
+      \ File \"sage/structure/category_object.pyx\", line 852, in sage.structure.category_object.CategoryObject.__getattr__\n
+      \   return self.getattr_from_category(name)\n  File \"sage/structure/category_object.pyx\",
+      line 867, in sage.structure.category_object.CategoryObject.getattr_from_category\n
+      \   attr = getattr_from_other_class(self, cls, name)\n  File \"sage/cpython/getattr.pyx\",
+      line 357, in sage.cpython.getattr.getattr_from_other_class\n    raise AttributeError(dummy_error_message)\nAttributeError:
+      '_SelectedFinitePresentationModules.parent_class[_PresentedModule].ObjectType'
+      object has no attribute 'list'\n"
+    seconds: 0.5885178769999584
+    recorded_at: 2026-11-24 20:30:45.838736+00:00
+    run_url: https://github.com/dzackgarza/lattice-database/actions/runs/45407996724/attempts/1
+    database_revision: efb45b5bdd13dfd2f61b6fbc60a504cc52006004
+    research_revision: 0d4b0ffc15f5f46f30af390f49af3fcebdd47ced
+  notes: []
 5NW8 integral.discriminant_sequence:
   disposition: open
   attempts:
