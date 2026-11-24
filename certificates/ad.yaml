@@ -25836,11 +25836,20 @@
 4VMG definite.automorphism_group_order:
   hash: 0b3c7c2ccb7dad5bdf23f13d23bef9eade220af1fffd4c234a92d29851fdf884
   by: research preamble
+4VMG definite.genus_theta_series:
+  hash: 63de4995659bee7c6ba8ca270ebc54e9ab3dc3c78fe01babbd23a85a962d2b07
+  by: research preamble
+4VMG definite.theta_series_cuspidal_component:
+  hash: 43c4c5c02f0553eba99b3d95300da018fd46d25fb5bd8def172b92c4dbf67b0d
+  by: research preamble
 4VMG derive:
   hash: 5e3a4683811585bd9ab29687c5b2cbc28310f33005c1995856994f4457403aed
   by: research preamble
 4VMG form.integer_valued:
   hash: 2330767c1749507a845fbeeb6d3aa0151bc08f79b3644e25e26bd1d64b9fef29
+  by: research preamble
+4VMG integral.anisotropic_primes:
+  hash: 71523ad4ccf4652456c6f5b3d5740f223fc8a94a73bb85192a8b13a0e82e053a
   by: research preamble
 4VMG integral.discriminant_sequence:
   hash: 6f49dbb669dd6097cf5b19aea4daf2b12b44c15c0748716c62f8253495cdd949
@@ -25857,8 +25866,20 @@
 4VMG integral.hyperbolic_index:
   hash: ef0fd9cfabb48230bbb33b460452339f4a393d887dab5f455ef4c34ffbda6f6d
   by: research preamble
+4VMG integral.local_densities:
+  hash: a8dc384ecd0ca02cd38d9e47fd877e0c0445be2197e8d19234d8717bbfeada43
+  by: research preamble
+4VMG integral.local_representations:
+  hash: c807c4dc99d1aebdfed03264d5d64e84c6318ded739d54d7583fee555f19a769
+  by: research preamble
+4VMG integral.modular_scale:
+  hash: 987216be5caf4ae3b26d3525196a9cee18da59985efbe4f9374a3811fc94a9fa
+  by: research preamble
 4VMG integral.overlattice_count:
   hash: 25a25cb5ae9d553240963960719e844d3370aa8f8830710325d18cdbba470e3b
+  by: research preamble
+4VMG integral.primitive_orbits:
+  hash: c4f15d8ab91acdbb7f3ea0f04149160029c102f89a988512032227966b2dac85
   by: research preamble
 4VMG integral.spinor_genera:
   hash: 409a2ca673a92fe92acdbb6e86d9b499df4e9e48634632b1b147ac5a776e74d4

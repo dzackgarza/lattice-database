@@ -25941,6 +25941,9 @@
 4JOB form.integer_valued:
   hash: 6ba1c3e1ace16f12726043ea07d48ea9f2c0824700984b14659105878f973a5b
   by: research preamble
+4JOB integral.anisotropic_primes:
+  hash: 26c74f594fbf94175db6a259a154da0414720b2a50c7c421f0f3719f212050db
+  by: research preamble
 4JOB integral.elementary_primes:
   hash: 1702e3bd2bbd2540e48847eef871e4207daa6ceaa08db1a13d8616d4e2ea7c68
   by: research preamble
@@ -25949,6 +25952,15 @@
   by: research preamble
 4JOB integral.genus_symbol:
   hash: 7a69b145fd81a06f0d3a25a43a17d7e80f4c0dd0b400451c6ef8f34796857a0e
+  by: research preamble
+4JOB integral.local_densities:
+  hash: 0416a73446b846fd8b42762746d50a50b157c4991c659278331a670f5541e6b1
+  by: research preamble
+4JOB integral.local_representations:
+  hash: b0930e9ccf5a2aa4dd86479ba0ed72355da8fa011d6883a4e0323222b5b2e70d
+  by: research preamble
+4JOB integral.modular_scale:
+  hash: ac596fff969cef61544994c0c9f83c9d1385b4d49d6ff6a7bfcb84f0f2b1806f
   by: research preamble
 4JOB integral.overlattice_count:
   hash: fe41a79d5a605d4b320d94c9cec40524d9dfcb8799b10e69c3c2993c54d5f0d6
