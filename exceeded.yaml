@@ -377,11 +377,22 @@
   limit_bytes: 1646340915
 02XO definite.spinor_regular:
   hash: a5a1f3754e48fad7fea5c91285e6abb2ec89020610764e9b30a5ced8e36e23e7
-  seconds: 550
+  seconds: 570
   lost: true
+  killed_by: memory
+  peak_bytes: 641933312
+  limit_bytes: 1646340915
 0312 definite.regular:
   hash: 1dbd9c69d410f45b3f632879382d98ad7cf46fb151cdb7bf31459e0b11669576
-  seconds: 6588
+  seconds: 1151
+  lost: true
+  killed_by: memory
+  peak_bytes: 679596032
+  limit_bytes: 1646340915
+0312 definite.spinor_regular:
+  hash: 90510cf4edc8c706393e44c3e1feadde8a13950eb13155ef85c3174db473bd4b
+  seconds: 610
+  lost: true
 031R definite.regular:
   hash: d0e6a0d78b3632981cb59be950776353f0bb88d6a14c0b9c8336c9f3be86b231
   seconds: 6778

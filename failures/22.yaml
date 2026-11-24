@@ -27,6 +27,35 @@
     database_revision: 1751249c20a197523104ce6a660b34ca21ff4493
     research_revision: 4ba7b9d10b8828834ad5df0ce776a7490ce0354b
   notes: []
+02XO definite.spinor_regular:
+  disposition: open
+  attempts:
+  - hash: a5a1f3754e48fad7fea5c91285e6abb2ec89020610764e9b30a5ced8e36e23e7
+    gram_tensor:
+    - - 1
+      - 0
+      - 0
+      - 0
+    - - 0
+      - 1
+      - 0
+      - 0
+    - - 0
+      - 0
+      - 3
+      - 0
+    - - 0
+      - 0
+      - 0
+      - 4
+    reason: memory exhausted
+    stderr: ''
+    seconds: 570.8177373159997
+    recorded_at: 2026-11-24 01:13:38.444879+00:00
+    run_url: https://github.com/dzackgarza/lattice-database/actions/runs/45276038245/attempts/1
+    database_revision: 1751249c20a197523104ce6a660b34ca21ff4493
+    research_revision: 4ba7b9d10b8828834ad5df0ce776a7490ce0354b
+  notes: []
 02XO integral.discriminant_form:
   disposition: open
   attempts:
