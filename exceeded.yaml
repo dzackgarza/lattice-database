@@ -2772,6 +2772,10 @@
 5RR1 integral.primitive_orbits[SOtilde]:
   hash: 2b2f37ca731c7f2c974be88ea8d147c4f3c85c99adec5cb66a320253d297072a
   seconds: 19709
+5X07 integral.primitive_orbits[O]:
+  hash: c15f7857e04ebe36a8c0d9e1d31d436d2eb4b4323e5c5b7681198bd6f19c9831
+  seconds: 4863
+  lost: true
 5XTS integral.primitive_orbits[O+]:
   hash: a7e8c28a297e772d52198d47a41ec2c894efe14084ebeea87c6863c23695344f
   seconds: 12500
