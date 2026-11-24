@@ -31763,6 +31763,12 @@
 5VAY form.integer_valued:
   hash: 29aab95ca69c37d9b13758a8e23b3bda7113b6246495c6c22bcec6c1044f0080
   by: research preamble
+5VAY integral.anisotropic_primes:
+  hash: 451abaa89e0273021de41e2944a48fd9a456d3fa1d67ab1c97d81dad6b5e46c0
+  by: research preamble
+5VAY integral.discriminant_orbits:
+  hash: 09b786dd36ee10be2f9ff444d1ffc2d01aca9e67b0157dbcaed435253dd301b6
+  by: research preamble
 5VAY integral.elementary_primes:
   hash: 71e90897c2c3c6a1b02807b8f0208cff0d38ffa8e8f3e53231521bf5bbbf6442
   by: research preamble
@@ -31774,6 +31780,15 @@
   by: research preamble
 5VAY integral.hyperbolic_index:
   hash: ddf1e32bb2191d1e533964ad2c22774d02e55c33c74bd3df62d7a42f50c72f70
+  by: research preamble
+5VAY integral.local_densities:
+  hash: 9e38d61459f7f012577537bac1418cbd4b604a3e3e3714cfb2f528c1405dc10e
+  by: research preamble
+5VAY integral.local_representations:
+  hash: 6a4ca0832c76fca4399c3588ee7bf2adda024032e49b4133f9175e0a36efa23e
+  by: research preamble
+5VAY integral.modular_scale:
+  hash: e9ace537b52edc137065c93f2f8e8cbb10a1ba460847f2f92877eca13a07aa94
   by: research preamble
 5VAY integral.overlattice_count:
   hash: e9c39c7ae7aa7f0f482e31454fd892a93367c2653a3d52538bd642f9782a34d0
