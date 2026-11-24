@@ -7857,6 +7857,176 @@
     database_revision: 615f31b4998ac87e4bac4707c88bee176d70aabd
     research_revision: 0d4b0ffc15f5f46f30af390f49af3fcebdd47ced
   notes: []
+5V89 integral.primitive_orbits[Otilde+]:
+  disposition: open
+  attempts:
+  - hash: c287ba465dee2f2c7d1305cb243f08a3c8743bdc534910ad10cf7ab890e879d7
+    gram_tensor:
+    - - 2
+      - 0
+      - 0
+      - 0
+      - 0
+    - - 0
+      - 0
+      - 2
+      - 0
+      - 0
+    - - 0
+      - 2
+      - 0
+      - 0
+      - 0
+    - - 0
+      - 0
+      - 0
+      - -2
+      - 1
+    - - 0
+      - 0
+      - 0
+      - 1
+      - -2
+    reason: exit status 1
+    stderr: "Traceback (most recent call last):\n  File \"<frozen runpy>\", line 203,
+      in _run_module_as_main\n  File \"<frozen runpy>\", line 88, in _run_code\n  File
+      \"/home/runner/work/lattice-database/lattice-database/src/latticedb/sage_genus.py\",
+      line 536, in <module>\n    main()\n    ~~~~^^\n  File \"/home/runner/work/lattice-database/lattice-database/src/latticedb/sage_genus.py\",
+      line 531, in main\n    _compute(request)\n    ~~~~~~~~^^^^^^^^^\n  File \"/home/runner/work/lattice-database/lattice-database/src/latticedb/sage_genus.py\",
+      line 514, in _compute\n    _run(tag, [field], lambda row=row, field=field, compute=compute:
+      {field: compute(lattice, row)})\n    ~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n
+      \ File \"/home/runner/work/lattice-database/lattice-database/src/latticedb/sage_genus.py\",
+      line 449, in _run\n    values = compute()\n  File \"/home/runner/work/lattice-database/lattice-database/src/latticedb/sage_genus.py\",
+      line 514, in <lambda>\n    _run(tag, [field], lambda row=row, field=field, compute=compute:
+      {field: compute(lattice, row)})\n                                                                             ~~~~~~~^^^^^^^^^^^^^^\n
+      \ File \"/home/runner/work/lattice-database/lattice-database/src/latticedb/sage_genus.py\",
+      line 125, in _primitive_isotropic_line_row\n    constant = subgroup.isotropic_orbit_representatives(1).cardinality()\n
+      \              ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^\n  File \"/repos/sage-extensions/src/sage_extensions/categories/group/predicate_subgroups.py\",
+      line 536, in isotropic_orbit_representatives\n    return _subgroup_isotropic_orbit_representatives(\n
+      \       self, rank, flag=flag\n    )\n  File \"/repos/sage-extensions/src/sage_extensions/timing.py\",
+      line 393, in timed\n    return function(*arguments, **keywords)\n  File \"/repos/sage-extensions/src/sage_extensions/categories/orthogonal_quotients.py\",
+      line 3684, in _subgroup_isotropic_orbit_representatives\n    quotient.isotropic_line_stabilizer_image(representative)\n
+      \   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^\n  File \"/repos/sage-extensions/src/sage_extensions/categories/orthogonal_quotients.py\",
+      line 1359, in isotropic_line_stabilizer_image\n    if _split_signature_witness(lattice,
+      vector) is None:\n       ~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^\n  File \"/repos/sage-extensions/src/sage_extensions/categories/orthogonal_quotients.py\",
+      line 3185, in _split_signature_witness\n    if lattice.discriminant_representation()(witness)
+      != orthogonal.one():\n       ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^\n
+      \ File \"/repos/sage-extensions/src/sage_extensions/categories/group/groups.py\",
+      line 3457, in __call__\n    return normalize(self.codomain(), self._owned_function(point,
+      *args, **kwargs))\n                                      ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^\n
+      \ File \"/repos/sage-extensions/src/sage_extensions/categories/lattices.py\",
+      line 4252, in image\n    return isometry.discriminant_morphism()\n           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^\n
+      \ File \"sage/misc/cachefunc.pyx\", line 2328, in sage.misc.cachefunc.CachedMethodCallerNoArgs.__call__\n
+      \   self.cache = f(self._instance)\n  File \"/repos/sage-extensions/src/sage_extensions/categories/lattice_morphisms.py\",
+      line 2277, in discriminant_morphism\n    return group.from_morphism(self.discriminant_isometry())\n
+      \          ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/repos/sage-extensions/src/sage_extensions/categories/modules/framed/formed/torsion_form_modules.py\",
+      line 2281, in from_morphism\n    element = homomorphism(morphism)\n  File \"/repos/sage-extensions/src/sage_extensions/categories/group/groups.py\",
+      line 3457, in __call__\n    return normalize(self.codomain(), self._owned_function(point,
+      *args, **kwargs))\n                                      ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^\n
+      \ File \"/repos/sage-extensions/src/sage_extensions/categories/modules/framed/formed/torsion_form_modules.py\",
+      line 2323, in _normalized_form_automorphism\n    engine_automorphism = self._engine_group()(engine_matrix)\n
+      \                         ~~~~~~~~~~~~~~~~~~^^\n  File \"sage/misc/cachefunc.pyx\",
+      line 2328, in sage.misc.cachefunc.CachedMethodCallerNoArgs.__call__\n    self.cache
+      = f(self._instance)\n  File \"/repos/sage-extensions/src/sage_extensions/categories/modules/framed/formed/torsion_form_modules.py\",
+      line 2029, in _engine_group\n    return _engine_orthogonal_group(self._engine_module())\n
+      \ File \"/repos/sage-extensions/src/sage_extensions/categories/modules/framed/formed/torsion_form_modules.py\",
+      line 3052, in _engine_orthogonal_group\n    matrices, part_order = _engine_two_primary_odd_orthogonal_generators(part,
+      gens)\n                           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^\n
+      \ File \"/repos/sage-extensions/src/sage_extensions/categories/modules/framed/formed/torsion_form_modules.py\",
+      line 3167, in _engine_two_primary_odd_orthogonal_generators\n    assert kernel.nrows()
+      == n - 1 and c * kernel.transpose() == 0, (\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError:
+      the complement of the half-integral direction must be its orthogonal complement\n"
+    seconds: 326.6299478730007
+    recorded_at: 2026-11-24 21:53:40.120588+00:00
+    run_url: https://github.com/dzackgarza/lattice-database/actions/runs/45407996724/attempts/1
+    database_revision: 615f31b4998ac87e4bac4707c88bee176d70aabd
+    research_revision: 0d4b0ffc15f5f46f30af390f49af3fcebdd47ced
+  notes: []
+5V89 integral.primitive_orbits[Otilde]:
+  disposition: open
+  attempts:
+  - hash: 194bea13fd0b7fd28913be1029be3614188c7c2c40e853f6b14545f914056c81
+    gram_tensor:
+    - - 2
+      - 0
+      - 0
+      - 0
+      - 0
+    - - 0
+      - 0
+      - 2
+      - 0
+      - 0
+    - - 0
+      - 2
+      - 0
+      - 0
+      - 0
+    - - 0
+      - 0
+      - 0
+      - -2
+      - 1
+    - - 0
+      - 0
+      - 0
+      - 1
+      - -2
+    reason: exit status 1
+    stderr: "Traceback (most recent call last):\n  File \"<frozen runpy>\", line 203,
+      in _run_module_as_main\n  File \"<frozen runpy>\", line 88, in _run_code\n  File
+      \"/home/runner/work/lattice-database/lattice-database/src/latticedb/sage_genus.py\",
+      line 536, in <module>\n    main()\n    ~~~~^^\n  File \"/home/runner/work/lattice-database/lattice-database/src/latticedb/sage_genus.py\",
+      line 531, in main\n    _compute(request)\n    ~~~~~~~~^^^^^^^^^\n  File \"/home/runner/work/lattice-database/lattice-database/src/latticedb/sage_genus.py\",
+      line 514, in _compute\n    _run(tag, [field], lambda row=row, field=field, compute=compute:
+      {field: compute(lattice, row)})\n    ~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n
+      \ File \"/home/runner/work/lattice-database/lattice-database/src/latticedb/sage_genus.py\",
+      line 449, in _run\n    values = compute()\n  File \"/home/runner/work/lattice-database/lattice-database/src/latticedb/sage_genus.py\",
+      line 514, in <lambda>\n    _run(tag, [field], lambda row=row, field=field, compute=compute:
+      {field: compute(lattice, row)})\n                                                                             ~~~~~~~^^^^^^^^^^^^^^\n
+      \ File \"/home/runner/work/lattice-database/lattice-database/src/latticedb/sage_genus.py\",
+      line 125, in _primitive_isotropic_line_row\n    constant = subgroup.isotropic_orbit_representatives(1).cardinality()\n
+      \              ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^\n  File \"/repos/sage-extensions/src/sage_extensions/categories/group/predicate_subgroups.py\",
+      line 536, in isotropic_orbit_representatives\n    return _subgroup_isotropic_orbit_representatives(\n
+      \       self, rank, flag=flag\n    )\n  File \"/repos/sage-extensions/src/sage_extensions/timing.py\",
+      line 393, in timed\n    return function(*arguments, **keywords)\n  File \"/repos/sage-extensions/src/sage_extensions/categories/orthogonal_quotients.py\",
+      line 3684, in _subgroup_isotropic_orbit_representatives\n    quotient.isotropic_line_stabilizer_image(representative)\n
+      \   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^\n  File \"/repos/sage-extensions/src/sage_extensions/categories/orthogonal_quotients.py\",
+      line 1359, in isotropic_line_stabilizer_image\n    if _split_signature_witness(lattice,
+      vector) is None:\n       ~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^\n  File \"/repos/sage-extensions/src/sage_extensions/categories/orthogonal_quotients.py\",
+      line 3185, in _split_signature_witness\n    if lattice.discriminant_representation()(witness)
+      != orthogonal.one():\n       ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^\n
+      \ File \"/repos/sage-extensions/src/sage_extensions/categories/group/groups.py\",
+      line 3457, in __call__\n    return normalize(self.codomain(), self._owned_function(point,
+      *args, **kwargs))\n                                      ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^\n
+      \ File \"/repos/sage-extensions/src/sage_extensions/categories/lattices.py\",
+      line 4252, in image\n    return isometry.discriminant_morphism()\n           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^\n
+      \ File \"sage/misc/cachefunc.pyx\", line 2328, in sage.misc.cachefunc.CachedMethodCallerNoArgs.__call__\n
+      \   self.cache = f(self._instance)\n  File \"/repos/sage-extensions/src/sage_extensions/categories/lattice_morphisms.py\",
+      line 2277, in discriminant_morphism\n    return group.from_morphism(self.discriminant_isometry())\n
+      \          ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/repos/sage-extensions/src/sage_extensions/categories/modules/framed/formed/torsion_form_modules.py\",
+      line 2281, in from_morphism\n    element = homomorphism(morphism)\n  File \"/repos/sage-extensions/src/sage_extensions/categories/group/groups.py\",
+      line 3457, in __call__\n    return normalize(self.codomain(), self._owned_function(point,
+      *args, **kwargs))\n                                      ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^\n
+      \ File \"/repos/sage-extensions/src/sage_extensions/categories/modules/framed/formed/torsion_form_modules.py\",
+      line 2323, in _normalized_form_automorphism\n    engine_automorphism = self._engine_group()(engine_matrix)\n
+      \                         ~~~~~~~~~~~~~~~~~~^^\n  File \"sage/misc/cachefunc.pyx\",
+      line 2328, in sage.misc.cachefunc.CachedMethodCallerNoArgs.__call__\n    self.cache
+      = f(self._instance)\n  File \"/repos/sage-extensions/src/sage_extensions/categories/modules/framed/formed/torsion_form_modules.py\",
+      line 2029, in _engine_group\n    return _engine_orthogonal_group(self._engine_module())\n
+      \ File \"/repos/sage-extensions/src/sage_extensions/categories/modules/framed/formed/torsion_form_modules.py\",
+      line 3052, in _engine_orthogonal_group\n    matrices, part_order = _engine_two_primary_odd_orthogonal_generators(part,
+      gens)\n                           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^\n
+      \ File \"/repos/sage-extensions/src/sage_extensions/categories/modules/framed/formed/torsion_form_modules.py\",
+      line 3167, in _engine_two_primary_odd_orthogonal_generators\n    assert kernel.nrows()
+      == n - 1 and c * kernel.transpose() == 0, (\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError:
+      the complement of the half-integral direction must be its orthogonal complement\n"
+    seconds: 323.83769216400015
+    recorded_at: 2026-11-24 21:47:53.434582+00:00
+    run_url: https://github.com/dzackgarza/lattice-database/actions/runs/45407996724/attempts/1
+    database_revision: 615f31b4998ac87e4bac4707c88bee176d70aabd
+    research_revision: 0d4b0ffc15f5f46f30af390f49af3fcebdd47ced
+  notes: []
 5V89 integral.primitive_orbits[SO+]:
   disposition: open
   attempts:
@@ -7938,6 +8108,176 @@
       the complement of the half-integral direction must be its orthogonal complement\n"
     seconds: 316.5941175179996
     recorded_at: 2026-11-24 21:42:07.576026+00:00
+    run_url: https://github.com/dzackgarza/lattice-database/actions/runs/45407996724/attempts/1
+    database_revision: 615f31b4998ac87e4bac4707c88bee176d70aabd
+    research_revision: 0d4b0ffc15f5f46f30af390f49af3fcebdd47ced
+  notes: []
+5V89 integral.primitive_orbits[SOtilde+]:
+  disposition: open
+  attempts:
+  - hash: 009ae16e6846078b2662db267be2fec8fd72c2ea7309140988764ff6613ae111
+    gram_tensor:
+    - - 2
+      - 0
+      - 0
+      - 0
+      - 0
+    - - 0
+      - 0
+      - 2
+      - 0
+      - 0
+    - - 0
+      - 2
+      - 0
+      - 0
+      - 0
+    - - 0
+      - 0
+      - 0
+      - -2
+      - 1
+    - - 0
+      - 0
+      - 0
+      - 1
+      - -2
+    reason: exit status 1
+    stderr: "Traceback (most recent call last):\n  File \"<frozen runpy>\", line 203,
+      in _run_module_as_main\n  File \"<frozen runpy>\", line 88, in _run_code\n  File
+      \"/home/runner/work/lattice-database/lattice-database/src/latticedb/sage_genus.py\",
+      line 536, in <module>\n    main()\n    ~~~~^^\n  File \"/home/runner/work/lattice-database/lattice-database/src/latticedb/sage_genus.py\",
+      line 531, in main\n    _compute(request)\n    ~~~~~~~~^^^^^^^^^\n  File \"/home/runner/work/lattice-database/lattice-database/src/latticedb/sage_genus.py\",
+      line 514, in _compute\n    _run(tag, [field], lambda row=row, field=field, compute=compute:
+      {field: compute(lattice, row)})\n    ~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n
+      \ File \"/home/runner/work/lattice-database/lattice-database/src/latticedb/sage_genus.py\",
+      line 449, in _run\n    values = compute()\n  File \"/home/runner/work/lattice-database/lattice-database/src/latticedb/sage_genus.py\",
+      line 514, in <lambda>\n    _run(tag, [field], lambda row=row, field=field, compute=compute:
+      {field: compute(lattice, row)})\n                                                                             ~~~~~~~^^^^^^^^^^^^^^\n
+      \ File \"/home/runner/work/lattice-database/lattice-database/src/latticedb/sage_genus.py\",
+      line 125, in _primitive_isotropic_line_row\n    constant = subgroup.isotropic_orbit_representatives(1).cardinality()\n
+      \              ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^\n  File \"/repos/sage-extensions/src/sage_extensions/categories/group/predicate_subgroups.py\",
+      line 536, in isotropic_orbit_representatives\n    return _subgroup_isotropic_orbit_representatives(\n
+      \       self, rank, flag=flag\n    )\n  File \"/repos/sage-extensions/src/sage_extensions/timing.py\",
+      line 393, in timed\n    return function(*arguments, **keywords)\n  File \"/repos/sage-extensions/src/sage_extensions/categories/orthogonal_quotients.py\",
+      line 3684, in _subgroup_isotropic_orbit_representatives\n    quotient.isotropic_line_stabilizer_image(representative)\n
+      \   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^\n  File \"/repos/sage-extensions/src/sage_extensions/categories/orthogonal_quotients.py\",
+      line 1359, in isotropic_line_stabilizer_image\n    if _split_signature_witness(lattice,
+      vector) is None:\n       ~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^\n  File \"/repos/sage-extensions/src/sage_extensions/categories/orthogonal_quotients.py\",
+      line 3185, in _split_signature_witness\n    if lattice.discriminant_representation()(witness)
+      != orthogonal.one():\n       ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^\n
+      \ File \"/repos/sage-extensions/src/sage_extensions/categories/group/groups.py\",
+      line 3457, in __call__\n    return normalize(self.codomain(), self._owned_function(point,
+      *args, **kwargs))\n                                      ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^\n
+      \ File \"/repos/sage-extensions/src/sage_extensions/categories/lattices.py\",
+      line 4252, in image\n    return isometry.discriminant_morphism()\n           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^\n
+      \ File \"sage/misc/cachefunc.pyx\", line 2328, in sage.misc.cachefunc.CachedMethodCallerNoArgs.__call__\n
+      \   self.cache = f(self._instance)\n  File \"/repos/sage-extensions/src/sage_extensions/categories/lattice_morphisms.py\",
+      line 2277, in discriminant_morphism\n    return group.from_morphism(self.discriminant_isometry())\n
+      \          ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/repos/sage-extensions/src/sage_extensions/categories/modules/framed/formed/torsion_form_modules.py\",
+      line 2281, in from_morphism\n    element = homomorphism(morphism)\n  File \"/repos/sage-extensions/src/sage_extensions/categories/group/groups.py\",
+      line 3457, in __call__\n    return normalize(self.codomain(), self._owned_function(point,
+      *args, **kwargs))\n                                      ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^\n
+      \ File \"/repos/sage-extensions/src/sage_extensions/categories/modules/framed/formed/torsion_form_modules.py\",
+      line 2323, in _normalized_form_automorphism\n    engine_automorphism = self._engine_group()(engine_matrix)\n
+      \                         ~~~~~~~~~~~~~~~~~~^^\n  File \"sage/misc/cachefunc.pyx\",
+      line 2328, in sage.misc.cachefunc.CachedMethodCallerNoArgs.__call__\n    self.cache
+      = f(self._instance)\n  File \"/repos/sage-extensions/src/sage_extensions/categories/modules/framed/formed/torsion_form_modules.py\",
+      line 2029, in _engine_group\n    return _engine_orthogonal_group(self._engine_module())\n
+      \ File \"/repos/sage-extensions/src/sage_extensions/categories/modules/framed/formed/torsion_form_modules.py\",
+      line 3052, in _engine_orthogonal_group\n    matrices, part_order = _engine_two_primary_odd_orthogonal_generators(part,
+      gens)\n                           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^\n
+      \ File \"/repos/sage-extensions/src/sage_extensions/categories/modules/framed/formed/torsion_form_modules.py\",
+      line 3167, in _engine_two_primary_odd_orthogonal_generators\n    assert kernel.nrows()
+      == n - 1 and c * kernel.transpose() == 0, (\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError:
+      the complement of the half-integral direction must be its orthogonal complement\n"
+    seconds: 325.35342439500164
+    recorded_at: 2026-11-24 22:05:11.023576+00:00
+    run_url: https://github.com/dzackgarza/lattice-database/actions/runs/45407996724/attempts/1
+    database_revision: 615f31b4998ac87e4bac4707c88bee176d70aabd
+    research_revision: 0d4b0ffc15f5f46f30af390f49af3fcebdd47ced
+  notes: []
+5V89 integral.primitive_orbits[SOtilde]:
+  disposition: open
+  attempts:
+  - hash: 0795cf8ae14637d8a1640a6888f2f612451eb34367a6b4a2ef639466a29c57c3
+    gram_tensor:
+    - - 2
+      - 0
+      - 0
+      - 0
+      - 0
+    - - 0
+      - 0
+      - 2
+      - 0
+      - 0
+    - - 0
+      - 2
+      - 0
+      - 0
+      - 0
+    - - 0
+      - 0
+      - 0
+      - -2
+      - 1
+    - - 0
+      - 0
+      - 0
+      - 1
+      - -2
+    reason: exit status 1
+    stderr: "Traceback (most recent call last):\n  File \"<frozen runpy>\", line 203,
+      in _run_module_as_main\n  File \"<frozen runpy>\", line 88, in _run_code\n  File
+      \"/home/runner/work/lattice-database/lattice-database/src/latticedb/sage_genus.py\",
+      line 536, in <module>\n    main()\n    ~~~~^^\n  File \"/home/runner/work/lattice-database/lattice-database/src/latticedb/sage_genus.py\",
+      line 531, in main\n    _compute(request)\n    ~~~~~~~~^^^^^^^^^\n  File \"/home/runner/work/lattice-database/lattice-database/src/latticedb/sage_genus.py\",
+      line 514, in _compute\n    _run(tag, [field], lambda row=row, field=field, compute=compute:
+      {field: compute(lattice, row)})\n    ~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n
+      \ File \"/home/runner/work/lattice-database/lattice-database/src/latticedb/sage_genus.py\",
+      line 449, in _run\n    values = compute()\n  File \"/home/runner/work/lattice-database/lattice-database/src/latticedb/sage_genus.py\",
+      line 514, in <lambda>\n    _run(tag, [field], lambda row=row, field=field, compute=compute:
+      {field: compute(lattice, row)})\n                                                                             ~~~~~~~^^^^^^^^^^^^^^\n
+      \ File \"/home/runner/work/lattice-database/lattice-database/src/latticedb/sage_genus.py\",
+      line 125, in _primitive_isotropic_line_row\n    constant = subgroup.isotropic_orbit_representatives(1).cardinality()\n
+      \              ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^\n  File \"/repos/sage-extensions/src/sage_extensions/categories/group/predicate_subgroups.py\",
+      line 536, in isotropic_orbit_representatives\n    return _subgroup_isotropic_orbit_representatives(\n
+      \       self, rank, flag=flag\n    )\n  File \"/repos/sage-extensions/src/sage_extensions/timing.py\",
+      line 393, in timed\n    return function(*arguments, **keywords)\n  File \"/repos/sage-extensions/src/sage_extensions/categories/orthogonal_quotients.py\",
+      line 3684, in _subgroup_isotropic_orbit_representatives\n    quotient.isotropic_line_stabilizer_image(representative)\n
+      \   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^\n  File \"/repos/sage-extensions/src/sage_extensions/categories/orthogonal_quotients.py\",
+      line 1359, in isotropic_line_stabilizer_image\n    if _split_signature_witness(lattice,
+      vector) is None:\n       ~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^\n  File \"/repos/sage-extensions/src/sage_extensions/categories/orthogonal_quotients.py\",
+      line 3185, in _split_signature_witness\n    if lattice.discriminant_representation()(witness)
+      != orthogonal.one():\n       ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^\n
+      \ File \"/repos/sage-extensions/src/sage_extensions/categories/group/groups.py\",
+      line 3457, in __call__\n    return normalize(self.codomain(), self._owned_function(point,
+      *args, **kwargs))\n                                      ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^\n
+      \ File \"/repos/sage-extensions/src/sage_extensions/categories/lattices.py\",
+      line 4252, in image\n    return isometry.discriminant_morphism()\n           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^\n
+      \ File \"sage/misc/cachefunc.pyx\", line 2328, in sage.misc.cachefunc.CachedMethodCallerNoArgs.__call__\n
+      \   self.cache = f(self._instance)\n  File \"/repos/sage-extensions/src/sage_extensions/categories/lattice_morphisms.py\",
+      line 2277, in discriminant_morphism\n    return group.from_morphism(self.discriminant_isometry())\n
+      \          ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/repos/sage-extensions/src/sage_extensions/categories/modules/framed/formed/torsion_form_modules.py\",
+      line 2281, in from_morphism\n    element = homomorphism(morphism)\n  File \"/repos/sage-extensions/src/sage_extensions/categories/group/groups.py\",
+      line 3457, in __call__\n    return normalize(self.codomain(), self._owned_function(point,
+      *args, **kwargs))\n                                      ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^\n
+      \ File \"/repos/sage-extensions/src/sage_extensions/categories/modules/framed/formed/torsion_form_modules.py\",
+      line 2323, in _normalized_form_automorphism\n    engine_automorphism = self._engine_group()(engine_matrix)\n
+      \                         ~~~~~~~~~~~~~~~~~~^^\n  File \"sage/misc/cachefunc.pyx\",
+      line 2328, in sage.misc.cachefunc.CachedMethodCallerNoArgs.__call__\n    self.cache
+      = f(self._instance)\n  File \"/repos/sage-extensions/src/sage_extensions/categories/modules/framed/formed/torsion_form_modules.py\",
+      line 2029, in _engine_group\n    return _engine_orthogonal_group(self._engine_module())\n
+      \ File \"/repos/sage-extensions/src/sage_extensions/categories/modules/framed/formed/torsion_form_modules.py\",
+      line 3052, in _engine_orthogonal_group\n    matrices, part_order = _engine_two_primary_odd_orthogonal_generators(part,
+      gens)\n                           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^\n
+      \ File \"/repos/sage-extensions/src/sage_extensions/categories/modules/framed/formed/torsion_form_modules.py\",
+      line 3167, in _engine_two_primary_odd_orthogonal_generators\n    assert kernel.nrows()
+      == n - 1 and c * kernel.transpose() == 0, (\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError:
+      the complement of the half-integral direction must be its orthogonal complement\n"
+    seconds: 323.50483564099886
+    recorded_at: 2026-11-24 21:59:25.687123+00:00
     run_url: https://github.com/dzackgarza/lattice-database/actions/runs/45407996724/attempts/1
     database_revision: 615f31b4998ac87e4bac4707c88bee176d70aabd
     research_revision: 0d4b0ffc15f5f46f30af390f49af3fcebdd47ced
