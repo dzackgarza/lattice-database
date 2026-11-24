@@ -1,3 +1,32 @@
+039O definite.regular:
+  disposition: open
+  attempts:
+  - hash: f8e3fbd6924edea3446ee8491ff558dd8f6aa8cf084591f27c0f590e4bd835de
+    gram_tensor:
+    - - 1
+      - 0
+      - 0
+      - 0
+    - - 0
+      - 1
+      - 0
+      - 0
+    - - 0
+      - 0
+      - 2
+      - 1
+    - - 0
+      - 0
+      - 1
+      - 8
+    reason: memory exhausted
+    stderr: ''
+    seconds: 490.70713843699923
+    recorded_at: 2026-11-24 03:07:35.176730+00:00
+    run_url: https://github.com/dzackgarza/lattice-database/actions/runs/45276038245/attempts/1
+    database_revision: 1751249c20a197523104ce6a660b34ca21ff4493
+    research_revision: 4ba7b9d10b8828834ad5df0ce776a7490ce0354b
+  notes: []
 039O integral.discriminant_form:
   disposition: open
   attempts:
