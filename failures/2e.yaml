@@ -7147,6 +7147,35 @@
     database_revision: 96564d78fe9512a5232d9cf2bab6efc9a0cc5c39
     research_revision: 4ba7b9d10b8828834ad5df0ce776a7490ce0354b
   notes: []
+3GY8 integral.discriminant_sequence:
+  disposition: open
+  attempts:
+  - hash: 42eddbbcc1ac205b3adba0a12c95e5f826405df688ba03fd59fab4e7933d1010
+    gram_tensor:
+    - - 8
+      - 4
+      - 0
+      - 0
+    - - 4
+      - 7
+      - -2
+      - -2
+    - - 0
+      - -2
+      - 12
+      - -4
+    - - 0
+      - -2
+      - -4
+      - 12
+    reason: worker or runner lost (recovered from exceeded.yaml)
+    stderr: ''
+    seconds: 6735.0
+    recorded_at: 2026-11-23 22:24:36.932922+00:00
+    run_url: https://github.com/dzackgarza/lattice-database/actions/runs/45276038245/attempts/1
+    database_revision: 1751249c20a197523104ce6a660b34ca21ff4493
+    research_revision: 4ba7b9d10b8828834ad5df0ce776a7490ce0354b
+  notes: []
 3I2L integral.discriminant_form:
   disposition: open
   attempts:
