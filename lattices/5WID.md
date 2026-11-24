@@ -12,6 +12,11 @@ certifications:
   integral.spinor_genus_count: a9ea0aa3e749a453dfca20382604bd08c312f6fcaf1af8c323f8a671e7ef4adc
   integral.spinor_genera: 88c7c185862632897efce14a1d3b56a36bdd7a89b8f5798418dfbc0e4560baf9
   integral.hyperbolic_index: 3a3f2742cf3d1b9f7baba3036f9638a02aae8d58f77ec73bf6379bab5ae158f1
+  integral.discriminant_orbits: 86cd89b7aa0c07fde9b0b6966f8e194b54f2bf5f4d16754a05cd6ff08a3c3a4c
+  integral.modular_scale: a6a28ab4523b728662f88be767cfe69ddb0ab42c4d7a3c566442ec650478954b
+  integral.anisotropic_primes: 5047813c2f54425fa9306100ac20e9479cd63fdedc7a4dbf7ec308a820d88e6d
+  integral.local_representations: 1daf7cb0880dbf72eba15effe8f081cc97ce58a62a73d287d3778d3e9a038a5b
+  integral.local_densities: 1ebe279f5bf08a0e5deaaa68a1853466e9df1a5a2ea59cfeed5f88b36e03c66f
 rank: 5
 gram_tensor:
 - [2, 0, 0, 0, 0]
@@ -34,6 +39,7 @@ integral:
   elementary_primes: []
   parity: even
   level: 12
+  modular_scale: false
   discriminant_group: [2, 6, 6]
   overlattice_count: 4
   bad_reduction_primes: [2, 3]
@@ -42,6 +48,64 @@ integral:
   spinor_genus_count: 1
   spinor_genera: [1]
   hyperbolic_index: 1
+  discriminant_orbits:
+    Otilde:
+      constant: 1
+      z: [0, 2, 0, 4]
+      w: [0, 4, 0, 4]
+    SOtilde:
+      constant: 1
+      z: [0, 2, 0, 4]
+      w: [0, 4, 0, 4]
+    Otilde+:
+      constant: 1
+      z: [0, 2, 0, 4]
+      w: [0, 4, 0, 4]
+    SOtilde+:
+      constant: 1
+      z: [0, 2, 0, 4]
+      w: [0, 4, 0, 4]
+    O:
+      constant: 1
+      z: [0, 2, 0, 2]
+      w: [0, 2, 0, 2]
+    SO:
+      constant: 1
+      z: [0, 2, 0, 2]
+      w: [0, 2, 0, 2]
+    O+:
+      constant: 1
+      z: [0, 2, 0, 2]
+      w: [0, 2, 0, 2]
+    SO+:
+      constant: 1
+      z: [0, 2, 0, 2]
+      w: [0, 2, 0, 2]
+  anisotropic_primes: []
+  local_representations:
+  - prime: 2
+    classes:
+    - representative: 1
+      least_valuation: 2
+    - representative: 3
+      least_valuation: 2
+    - representative: 5
+      least_valuation: 2
+    - representative: 7
+      least_valuation: 2
+    - representative: 2
+      least_valuation: 1
+    - representative: 6
+      least_valuation: 1
+    - representative: 10
+      least_valuation: 1
+    - representative: 14
+      least_valuation: 1
+  local_densities:
+  - prime: 2
+    densities: [0, 13/8, 0, 9/4, 0, 9/4, 0, 109/64]
+  - prime: 3
+    densities: [4/3, 2/3, 28/27, 4/3, 2/3, 28/27, 4/3, 2/3]
 indefinite:
   isotropic: true
 morphisms: []

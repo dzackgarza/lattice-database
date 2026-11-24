@@ -29650,6 +29650,9 @@
 4PUK form.integer_valued:
   hash: 58345e2afb3bfeec12272a513747cd7ac9a48674e0b862b52165504c6e46a41d
   by: research preamble
+4PUK integral.anisotropic_primes:
+  hash: 3a8dfce1eb4011aad146db3a07c13061939a63e35d28ed5a2eb6e75a41ad96e2
+  by: research preamble
 4PUK integral.elementary_primes:
   hash: 4f2779542e3929762b7fa07d150d81397193e57bb838393bec492a26dddffc07
   by: research preamble
@@ -29658,6 +29661,15 @@
   by: research preamble
 4PUK integral.genus_symbol:
   hash: 1157f90249a7e9da3c597066f2d0a690e62a741725c9ee8463350fb6bd8ec794
+  by: research preamble
+4PUK integral.local_densities:
+  hash: 3f1504f06fd9e24ce63bae907eeff4098f13e858ac4117b8b382e68281f83809
+  by: research preamble
+4PUK integral.local_representations:
+  hash: 418bfb07af104475e961781e867adf9a6fe6dd4b85cd604cab32db128747e883
+  by: research preamble
+4PUK integral.modular_scale:
+  hash: 9231adaf0d539ac8d04162c9eb5d6b853302a036fc176902cbaaf83d56d71e4f
   by: research preamble
 4PUK integral.overlattice_count:
   hash: cb8646eb04de8f508cd57723449ad4731ad2e4e7e81039becc0e52b505389949
@@ -29680,6 +29692,15 @@
 5MEO form.integer_valued:
   hash: 97c1179c8ae10ca5ab349bda6e23d467debd67266ec445bfb6fe819be7ca3495
   by: research preamble
+5MEO integral.anisotropic_primes:
+  hash: 6e5975e9d0f73682872d0d353184d4eb2bbf39a381aa732fbe08a64f7b31fbe4
+  by: research preamble
+5MEO integral.discriminant_form:
+  hash: 5808a82d1227249808fa49fc7546ccc097ed76c9ee2dddc4bb36585a4ccbe419
+  by: research preamble
+5MEO integral.discriminant_orbits:
+  hash: c3508df8b2db48e8927f97e5d2f65f4bdb33e372a71a6abd05cbbe376a7c26ec
+  by: research preamble
 5MEO integral.elementary_primes:
   hash: ac7c16ef0a94a1db4d5c12b7fbe4fef45a33e7a4f2c56b42d474d02d9cf4623a
   by: research preamble
@@ -29692,8 +29713,20 @@
 5MEO integral.hyperbolic_index:
   hash: 25aa4c311a70e851d3decd7de6e02a4542426d8e895f8d0dccece5e4271d87fd
   by: research preamble
+5MEO integral.local_densities:
+  hash: dcc5387d598c9d36c6c18816cf13cd11b85732a1b588dd0212d1e879ae085385
+  by: research preamble
+5MEO integral.local_representations:
+  hash: a49c4df891305a4c68e83345da2b1a89ee4ec3852635acb6737aa0e4acd5e585
+  by: research preamble
+5MEO integral.modular_scale:
+  hash: ea4a600f92a021df11f02b239e6f729af9a3cc2ed0ca31c502300d6f538e4864
+  by: research preamble
 5MEO integral.overlattice_count:
   hash: e20816b8eb2522326d6ea05192705fd2542c34df6b7b54881763c6b9572ad450
+  by: research preamble
+5MEO integral.primitive_orbits:
+  hash: a31a7192a05bcfc2d27f44beb783c1ca7b6f075443d67b2831d50f68202a40d1
   by: research preamble
 5MEO integral.spinor_genera:
   hash: b5919edbd314142fc3eb1d69ceef3ad4fb6f1888157c3cb48e1fbadb163422ce

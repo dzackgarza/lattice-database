@@ -31876,6 +31876,9 @@
 5G8N form.integer_valued:
   hash: 7845f3a1d7b1ee9998368171277f69b314d5e4ff64353129e812b38d510f7b48
   by: research preamble
+5G8N integral.anisotropic_primes:
+  hash: c5821a74c85b3d6c6a62458b69dfa3af7688b287348423f582a2b614118742c8
+  by: research preamble
 5G8N integral.elementary_primes:
   hash: fe1a5c25d34647a25d3d2de6735b5a0d77a92c3369282a4518c05dbea3d03513
   by: research preamble
@@ -31888,8 +31891,20 @@
 5G8N integral.hyperbolic_index:
   hash: e6f40cab57bc67a9e46d552b85ae13a4695900859c3d89617c311bc084114d50
   by: research preamble
+5G8N integral.local_densities:
+  hash: a7a0206f1bd5cf3babe32951622cc1c9ae0c49569a6abbc270a775fa56b25bcd
+  by: research preamble
+5G8N integral.local_representations:
+  hash: 18bc558c53658a27663bc58897d0cc08b7407aef51a985e0196c2f0fa1b17e33
+  by: research preamble
+5G8N integral.modular_scale:
+  hash: 85da28be78272acc9578af507b89f687accd589db71b97983a9871ffa267a2ae
+  by: research preamble
 5G8N integral.overlattice_count:
   hash: c3eaecf3b9931409bd3a372d910f5e170795565c36d87ae2803f65480c4a396d
+  by: research preamble
+5G8N integral.primitive_orbits:
+  hash: 0d2f61177a37ba0db97d3e0b237f475cde9faf2bc3e40d558a6dffe2f4eed31f
   by: research preamble
 5G8N integral.spinor_genera:
   hash: 7662ea21df8e2fc20c24257fe4686f28184284b60a321e2903ea5206d06a5e82
@@ -31903,6 +31918,9 @@
 5GOZ form.integer_valued:
   hash: 367b3a9610b2f23d27ab13f9968ccbcd33d80eae216a14f1a9014cc585a1cab9
   by: research preamble
+5GOZ integral.anisotropic_primes:
+  hash: 2e6046cf765da0666e50c9b40551f31577fb6a319960ce93b49f56a47bba72ab
+  by: research preamble
 5GOZ integral.elementary_primes:
   hash: 0a7eaf8d505768d79c416fb3ad754746aa0150cd7346f36db166fafb8cf05fa0
   by: research preamble
@@ -31911,6 +31929,15 @@
   by: research preamble
 5GOZ integral.genus_symbol:
   hash: d44f2db16ddefc2c4064128558a9fd4af4ab8331dbc1d89807d8555e60841ada
+  by: research preamble
+5GOZ integral.local_densities:
+  hash: 5540bad36640cb867b767451e41c916bde5e852c3af79f7b29dc54c8a8d21acd
+  by: research preamble
+5GOZ integral.local_representations:
+  hash: 13ed1c0e6a1da0d14fd1e8c22b28bbcd7bfe3b84da9652d3cedb6e555d0fec4a
+  by: research preamble
+5GOZ integral.modular_scale:
+  hash: b2912c6e9afa39f6011a2e6930c8e96ab9abbb7f15b6f73853dc2b1290100e68
   by: research preamble
 5GOZ integral.overlattice_count:
   hash: 76180db381dc3b2cfe779e5fec7de8340dba0440176a1c1e45b77a09404a91b1
