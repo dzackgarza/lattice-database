@@ -217,6 +217,9 @@
 02Y4 integral.anisotropic_primes:
   hash: 5654d2a869f96ade8c054fdfd0d1d417ce985250fb36a2488f1fef5a56deaa0a
   by: research preamble
+02Y4 integral.discriminant_sequence:
+  hash: 51f83ae3ccaf30e93bfdc056e6be304c91d852c9ba7d577300c98d8210f7bdbc
+  by: research preamble
 02Y4 integral.elementary_primes:
   hash: afcf82375acc2dced1c469bdaaf120461d4f8fbc22717137058a76c6aa9c80dd
   by: research preamble
@@ -1785,6 +1788,9 @@
   by: research preamble
 08GG integral.anisotropic_primes:
   hash: 1bbec9544cdd173416166a82379a24bc9eb541fc5507a6450eb687af5ea76fc3
+  by: research preamble
+08GG integral.discriminant_sequence:
+  hash: c16ac5ace07d8645f82e011b59c1b0bb4ba59229d17b0b7c0991ee3eb247a429
   by: research preamble
 08GG integral.elementary_primes:
   hash: 855bfc5ab13be12cf2e5841213aaaccba3ab3c8a3f9ed1064c0feb1cdadacecc
@@ -31909,11 +31915,17 @@
 5595 automorphisms.automorphism_group_generator_morphisms:
   hash: df64ceade5ba623884533f8abd014ddab78795528b808d19f61455038936992d
   by: research preamble
+5595 automorphisms.automorphism_group_order:
+  hash: 1d49b7462e326fa7ef37afe73976675716483553ce5a643df4f878766991a9e2
+  by: research preamble
 5595 derive:
   hash: 6d2c8e61625f4ddee05df53b248bd0fb3ee29588960738d30d0a6cb9e6577d66
   by: research preamble
 5595 form.integer_valued:
   hash: 15c2bc04a1952e113cb78cf3e0a5b5107b426f7fa9f7078f9540a0917a80e126
+  by: research preamble
+5595 integral.anisotropic_primes:
+  hash: 7860734b5400b696106ce90c3423c96433adc8421a41b6769e21e0a49affbeaf
   by: research preamble
 5595 integral.elementary_primes:
   hash: 7e3870ac0f777b40926f6d4abb631b4c02b9d04155adc711c392d9988573f52c
@@ -31927,6 +31939,15 @@
 5595 integral.hyperbolic_index:
   hash: 87054624534d81b27d3b66b4a85793e00a0e3450b37c7ccb31882c989007aa37
   by: research preamble
+5595 integral.local_densities:
+  hash: 416d152744cc9608b3d52a275d27403cacf3556babd749af1460579baaea20aa
+  by: research preamble
+5595 integral.local_representations:
+  hash: 85be13aa87daaed00ce9e4c51dcf5684c6b31157978d13d1b83d6c3c8098a8d7
+  by: research preamble
+5595 integral.modular_scale:
+  hash: 13a8ff02acfda6579908d553d7a0441842ff986b8de06af0ca9c1bcb50efa62a
+  by: research preamble
 5595 integral.overlattice_count:
   hash: a1d0f6d53d116f236b227fe8bca12315629484664b78d74fa67aa52263d62f03
   by: research preamble
@@ -31939,14 +31960,23 @@
 5RC3 automorphisms.automorphism_group_generator_morphisms:
   hash: f3b958ed71ca6fcce94463ec75e6a27c98816adfd5df6ed50252a7977955b8e2
   by: research preamble
+5RC3 automorphisms.automorphism_group_order:
+  hash: 353ad53d53f1de82128e81dd5b6cf0a5ec03a4fcf1ee1552f992f8583ecc735a
+  by: research preamble
 5RC3 derive:
   hash: c97f0f7461f9e3474923375b18f50ddfd1b423d965c2474f7f6e9ebe69a8a80e
   by: research preamble
 5RC3 form.integer_valued:
   hash: 8fe9d1b7bcdca3eaccd897e246e4e8bdb14dc3046563ee72a9e3bd043a1b9b06
   by: research preamble
+5RC3 integral.anisotropic_primes:
+  hash: f7528ff35b5a37059da1bfc5d7005865fac98ba56ab34643b549fd8628990f98
+  by: research preamble
 5RC3 integral.discriminant_form:
   hash: 18d1848270981a2849a86a7e8ccdb390e6e78b48191dd7fdeadf68eb900c7c15
+  by: research preamble
+5RC3 integral.discriminant_orbits:
+  hash: 46b825713021e779c5ab04b995a233394ad4588e1be7930d8c400b2b4d3c2449
   by: research preamble
 5RC3 integral.elementary_primes:
   hash: 6830647db84ebaa055020e2fddd4aa6bc19593aeadc2b8bd84355dcefa1d1ede
@@ -31959,6 +31989,15 @@
   by: research preamble
 5RC3 integral.hyperbolic_index:
   hash: 8a22fd18a350ae4a118ee0e7fa5e6d3ee95e04bb1378d45e2420161735562f24
+  by: research preamble
+5RC3 integral.local_densities:
+  hash: 82acb223df4db7c8f5e5cd39b39550acb43d16e2ff57f3a5e5ecaa680ae7b530
+  by: research preamble
+5RC3 integral.local_representations:
+  hash: 17d8550fbd68f1a31ec6c2db46aae53203f3eac8b250c281a44785f809375a91
+  by: research preamble
+5RC3 integral.modular_scale:
+  hash: 4fc5c74696da19232f81b6a4b3c718e79da66acfcb9ebd8f867d60cdb9143caf
   by: research preamble
 5RC3 integral.overlattice_count:
   hash: 6c885f159e0561294d177a27e3e249a9d1e66c85d6b5196c98cb3ce898397374

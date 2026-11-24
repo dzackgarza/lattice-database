@@ -337,6 +337,9 @@
 0354 integral.anisotropic_primes:
   hash: 381e6ccd5d57368e231ae27d8f7c5bffc3e8811d82df2bc3232d1b1d1ed03920
   by: research preamble
+0354 integral.discriminant_sequence:
+  hash: 684c8cda850d98d4a3c4859d6e544e044fa5a8485f399346d9dbe0d1646156de
+  by: research preamble
 0354 integral.elementary_primes:
   hash: e90d4fd80c0c297212f0ffba05ad06348c02f4d47db503e8564bdd3d91ecc290
   by: research preamble
@@ -31529,13 +31532,19 @@
   hash: 845a199f1e05d30deaf9bf0d31423e4e88fd1797f9462dc50bd97c0ab7913e28
   by: research preamble
 4MHX automorphisms.automorphism_group_generator_morphisms:
-  hash: cc84216a80b1dc7ace82b511091224f2f9f5153ca4da64418225d58d55873009
+  hash: d4195f1fd5bf1daf80618ed8438f0c63d17bd1c847af4bc5d849027f1ccfe4b1
+  by: research preamble
+4MHX automorphisms.automorphism_group_order:
+  hash: 09247a339a9419596b640d720a691e02a3e4a9db6bbfcadd83b8724e3c9fc26f
   by: research preamble
 4MHX derive:
   hash: eb71fdb97a8ef17036f8f45f6da360d1cc041604c5ef484e52fda8e691aff81f
   by: research preamble
 4MHX form.integer_valued:
   hash: 4051369f96552620f733d7422aab03af347e28de585cd37a0587fa291adc4099
+  by: research preamble
+4MHX integral.anisotropic_primes:
+  hash: de3f12c020373b949b5f9fbc837068209bbd12ecc5de49cfdb4ff1f2f2ef5fec
   by: research preamble
 4MHX integral.elementary_primes:
   hash: 2e51ac95e40ff2cbdb2c62d6744b5512e2249f86809c68ab0a7a5636ec9153e5
@@ -31548,6 +31557,15 @@
   by: research preamble
 4MHX integral.hyperbolic_index:
   hash: d48b69defff8da8caec9ea117da3e37e871e1527999237801946ee718c0f5f71
+  by: research preamble
+4MHX integral.local_densities:
+  hash: 694b08317f61b7f32dfc3092dd33ca0da9c61b27757c4ba0a59c05b6cee673c8
+  by: research preamble
+4MHX integral.local_representations:
+  hash: 4d23416bea5c91d8a71462dee65205f0c4baa9c4ca0c20d30c1a8853752a8d71
+  by: research preamble
+4MHX integral.modular_scale:
+  hash: 4579f026ad39d0a6a88052d599c51f7cd5ef63f234b19f595a08008b144be8bd
   by: research preamble
 4MHX integral.overlattice_count:
   hash: 88b82f322ce6c66849c8ea06958460b28eb68fd064cea0d72d305f7e42ea7447

@@ -32335,14 +32335,23 @@
 6DZV automorphisms.automorphism_group_generator_morphisms:
   hash: ed774f206c519654535f6f8bb6990731df85ddc373a273542e46b742f5516f0d
   by: research preamble
+6DZV automorphisms.automorphism_group_order:
+  hash: 0d865e6e104d2d05f9549cc597f8c83967f0439bbd373bad3d7233af89f70c22
+  by: research preamble
 6DZV derive:
   hash: 09e3f453a74695e918d9ba5e9954d3dbe99574c8ced625f3d3b0d50248a518de
   by: research preamble
 6DZV form.integer_valued:
   hash: 7088ca861a965e352c73c9d348c8b77d469b638cf4cb80368e012f35a4d4fadb
   by: research preamble
+6DZV integral.anisotropic_primes:
+  hash: c79812679ba3a0529dda3b810feb08391787c3c7e6a7300ecdbe568bd7608a2e
+  by: research preamble
 6DZV integral.discriminant_form:
   hash: d2a45928938f62fd9d34bd96c60f6384bb72ac3afa29a188f305e983b32133c0
+  by: research preamble
+6DZV integral.discriminant_orbits:
+  hash: 03823042eaf3c6b5225f411693b4db585f52f1f0ecf0331f3b93b8e4559ea929
   by: research preamble
 6DZV integral.elementary_primes:
   hash: 389aebc8d5af9e17c80b76cd80e71abec0b8b0f6e02caf1fbf701ea4a92e8a01
@@ -32355,6 +32364,15 @@
   by: research preamble
 6DZV integral.hyperbolic_index:
   hash: 15618bdfecc3166c3b9f087f59fd24de9e73dc4e98bf5b690cbf865ae8b79292
+  by: research preamble
+6DZV integral.local_densities:
+  hash: ffc021705d2fb33607ab1b97a08c75846793a95ff283876baa9cdf085a29015a
+  by: research preamble
+6DZV integral.local_representations:
+  hash: d1c1a9f036e5dc2d3a493a1adf847f7d09410c805873dc60222cbff19c177d86
+  by: research preamble
+6DZV integral.modular_scale:
+  hash: 6d6a0d4520c0b3d8407398791a62c09e46fee8461e77f1dea6ff603871305fed
   by: research preamble
 6DZV integral.overlattice_count:
   hash: aae82ca6de151d42dabce36c2a2dc497040fd10b4515ea8f38646a23deafc03c
