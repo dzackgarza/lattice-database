@@ -329,20 +329,9 @@
 02QY definite.regular:
   hash: 717ba66479235a6e9cf534d9678a763c715b54ef0e583c63c3ee7e15bb9159fd
   seconds: 17959
-02QY definite.spinor_regular:
-  hash: 2c2249986849e756a6484ea651510ac82130a807e0b0dc6688428c86da95f03c
-  seconds: 1306
-  lost: true
-  killed_by: memory
-  peak_bytes: 698462208
-  limit_bytes: 1646340915
 02TQ definite.regular:
   hash: 20e6a28c861ef03104834c52a671646d3ad68992aa0b1750a67913b8b09b64ee
-  seconds: 1226
-  lost: true
-  killed_by: memory
-  peak_bytes: 682893312
-  limit_bytes: 1646340915
+  seconds: 6674
 02TQ definite.spinor_regular:
   hash: 927f3c7f2fc41a9c0ab926bc04673c7a8bbd40ee416762e28d8765c23820fe13
   seconds: 1026
@@ -1717,6 +1706,9 @@
 5RR1 integral.primitive_orbits[SOtilde]:
   hash: 2b2f37ca731c7f2c974be88ea8d147c4f3c85c99adec5cb66a320253d297072a
   seconds: 19709
+5XTS integral.primitive_orbits[O]:
+  hash: da0effb9ca9b091b23ad79a6d8a4439e3ec908d76839b40ec500413656dbfc45
+  seconds: 19696
 6JRR arithmetic-group.otilde-plus-t-co.index_in_orthogonal_group:
   hash: acad0e18f0c158ad5bda122e435bae4133bd93287223e2a8ce2c8b611148e2d3
   seconds: 19628
