@@ -154,6 +154,9 @@
 02LX integral.anisotropic_primes:
   hash: 37c207a3b3e92a710878e0b9041390c04245a1b1141eb887f173afc4a2b1e926
   by: research preamble
+02LX integral.discriminant_sequence:
+  hash: 256b171f1ccb0586721dec042870d48f59dcf2708a67e6a55e10f729ff228b5e
+  by: research preamble
 02LX integral.elementary_primes:
   hash: 9a9f2bbf0482441eff8dc3883e7e7000e4a4171c745ba19cfd2fd556b25606ae
   by: research preamble
@@ -1533,6 +1536,9 @@
   by: research preamble
 05MV integral.anisotropic_primes:
   hash: 43986bc4b5649a44681517dd0b05d9cf9236678ba24c6385396abfa75d254377
+  by: research preamble
+05MV integral.discriminant_sequence:
+  hash: 2172f90aaf606f21ec16364833cc1d0544e3f4ca1108acd92d2246a8d05236b0
   by: research preamble
 05MV integral.elementary_primes:
   hash: 72fe2f0b49dca0f0ee7c5389d30428dbb681765745f715a616111e131e261b04
@@ -29049,6 +29055,9 @@
   by: research preamble
 6EF4 automorphisms.automorphism_group_generator_morphisms:
   hash: d267f9b60f49043e873019020aaf65cdb622c543d2de8cb1eeefed664c828633
+  by: research preamble
+6EF4 automorphisms.automorphism_group_order:
+  hash: 0f02b981e6bfa303fbdbfc053dd97f4dae9b3ad99acf8a49b9d4fabf08f6b8c8
   by: research preamble
 6EF4 derive:
   hash: 2e5b5da687135c690f4b7c588cbfa3e5f723a8d61d7f1c6ec2f333a1cd098bca

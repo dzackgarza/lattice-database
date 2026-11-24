@@ -28,6 +28,9 @@
 0033 integral.anisotropic_primes:
   hash: 89ac911e2ca3dc38d54580425432db5ce61f8a6b9c7f738a77b24cdba26a0942
   by: research preamble
+0033 integral.discriminant_sequence:
+  hash: 505f66e1dc1fbc2ad034818dcad3f2c3acac502a04c2e931c61cc24aca67aea0
+  by: research preamble
 0033 integral.elementary_primes:
   hash: 94b158ad6cc85b3a0caecef6047ff0d78b1eb5f149d60cadf2697069d80f1edb
   by: research preamble
@@ -904,6 +907,9 @@
 05LO integral.anisotropic_primes:
   hash: df4c66aa5f725459311bc6f6f714b8a80311c9b45ee4fb9525476a48a900b892
   by: research preamble
+05LO integral.discriminant_sequence:
+  hash: 416efa989cbd9afed7253f7822fbe6e67b45bff306503d259e92c964989e0a9a
+  by: research preamble
 05LO integral.elementary_primes:
   hash: 7a85d5ae317e3cad4e1c4fcecad2f6d878c76fdf133a3f89a50d89db8b957d1a
   by: research preamble
@@ -1338,6 +1344,9 @@
   by: research preamble
 06O5 integral.anisotropic_primes:
   hash: 02810e81cf1830a962e4388232b3fb9c4a997849fd9f7b8b96ab9dd8903af896
+  by: research preamble
+06O5 integral.discriminant_sequence:
+  hash: ed968da2724557b9faa74c9017689b21ba8314bace13add5b825375d56fc3e55
   by: research preamble
 06O5 integral.elementary_primes:
   hash: 5679851cefe92c14599d65158056d829732f3d09d5ce1cf0032d4a8981b6ccd4
@@ -2655,6 +2664,9 @@
   by: research preamble
 0AOH integral.anisotropic_primes:
   hash: 5eda783b55384af09f49c4221386de43cfb680dc06704de77caf639efacbc0f2
+  by: research preamble
+0AOH integral.discriminant_sequence:
+  hash: 0e2301567d63232a0f51fb90c70c4f3642047ed72a177bb593ca48375ba8d523
   by: research preamble
 0AOH integral.elementary_primes:
   hash: 4184de5954f7c1c3e61058c64f3e0375a1f2fa332eaa19bdf31ff88408ddd067
@@ -26464,11 +26476,20 @@
 3GY0 integral.spinor_genus_count:
   hash: 35363cb0cd22ff43ffa9a3045d5cff14393a5795c3af66684ce94959452698d4
   by: research preamble
+49VE automorphisms.automorphism_group_generator_morphisms:
+  hash: d1608a75c16afe1fae04e54966fd5c37d76eeb7ac9b3cf58bc9e747b0e9d73e8
+  by: research preamble
+49VE automorphisms.automorphism_group_order:
+  hash: dc78963a420f5b2a9c8afb58af0e3105a1d16fee1e46a69d25241a333ad4ae53
+  by: research preamble
 49VE derive:
   hash: 7b519406c0a663a991b1ab0ede1bdd10d0c13d0ac1acc20a508396c0c91fc361
   by: research preamble
 49VE form.integer_valued:
   hash: cd76048919adc1236fd2c32af798a04c6d238adf66fae3fc58bb7443887c1280
+  by: research preamble
+49VE integral.anisotropic_primes:
+  hash: d21a232e5f273121d6732f124b1f1fbad0c0f582720d4073389ebe65aed857b1
   by: research preamble
 49VE integral.elementary_primes:
   hash: f8a23e297dc856c94d9884b2e35dcc759d247ff4c5b825099c91f18f8a3dc7f4
@@ -26478,6 +26499,15 @@
   by: research preamble
 49VE integral.genus_symbol:
   hash: 700a778c54837abf83722fd49d4ab79b492bc09e6b868d2bbce903d89d594c17
+  by: research preamble
+49VE integral.local_densities:
+  hash: 6ea3d8c80e881871ece71477b1b2e0f863d2cc21c17dd04b1106f14611c711d6
+  by: research preamble
+49VE integral.local_representations:
+  hash: 25c3298f5ad823b2b9b57b9132e629f241217b9e91ca48f2dda4636b4f07c226
+  by: research preamble
+49VE integral.modular_scale:
+  hash: 510f4a6a93594a0594b15f71fa1e3457f544c8fa45607dba71f074bfc7174bb6
   by: research preamble
 49VE integral.overlattice_count:
   hash: efe862ef39dad3e73d8c61c83691c7de0b58fe4337494063f29769aba8ed5f78
