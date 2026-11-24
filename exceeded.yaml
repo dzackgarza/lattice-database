@@ -844,10 +844,6 @@
   hash: c2d56853c688ca548dd50df42dc26996cbe6f8a73e77d63b9dc95c2c53e7aeb5
   seconds: 0
   lost: true
-1T5S integral.discriminant_form:
-  hash: cd1f65f5381a294f131053b93ba6cac19bce6b399858dd4badb9c76e9861cf99
-  seconds: 0
-  lost: true
 1UJ2 derive:
   hash: 67d45b33429de41171f34effa19d2ece2d8e00962b8167d9e182f44fc0c1a8b9
   seconds: 0
@@ -858,6 +854,10 @@
   lost: true
 1VTN derive:
   hash: bbdf81859a7c83b1f25fef66b09c19c7fe6e0bf6a4e65c21fe5aad8eca91aef1
+  seconds: 0
+  lost: true
+1X4T integral.discriminant_form:
+  hash: 7fbe0d7de8dafcd58dba5408f41d5b7f9803e44ba7ba23642eee04afabdfe4de
   seconds: 0
   lost: true
 1XEP integral.spinor_genera:
@@ -1870,10 +1870,6 @@
 3GWR integral.overlattice_count:
   hash: 836db517473faaeaa34246fe1f1fa761d816846114d210a46b13530d6de2d5f8
   seconds: 5
-  lost: true
-3GWS integral.discriminant_sequence:
-  hash: a4cbe9ec32a6ff412ab9b807d45da25389bb06d4072beea50942fe811fcda5b0
-  seconds: 12367
   lost: true
 3GX5 integral.discriminant_sequence:
   hash: ac5830bf83c01f73d9a9417b7f9de8b39dbfd51c20f84ed5872b139ccae22b93
