@@ -1714,6 +1714,10 @@
   hash: 73f92e88dc3c41f09fe3d704e2bb6eec69c13383e23ff0521b2c623891c8c865
   seconds: 5
   lost: true
+3GOR integral.discriminant_sequence:
+  hash: eca45725eb4b83e4be7e7cde6c66a27d91f942f353e217dc8cf52f965365f34f
+  seconds: 5258
+  lost: true
 3GOY integral.discriminant_sequence:
   hash: d394388127ea39aa300593ba7bfe1998b1e9c3bea2b715d0d9eda236d682e7e6
   seconds: 5287
@@ -1868,10 +1872,6 @@
 3IEA integral.hyperbolic_index:
   hash: 3072abb556184c36e33747dd96e2dc1de4befdb4383257fa4d37035dd48d3c52
   seconds: 112
-  lost: true
-48OA integral.hyperbolic_index:
-  hash: 5a960653683ca703498dfc7e7b8ec3e29e8977e255b176c1a83872fe74dc075e
-  seconds: 0
   lost: true
 48YN integral.primitive_orbits[SOtilde]:
   hash: 9e1c166422b378d94310bb7b61abeb33d8e2cd6ec2a08cf2b0a62e00dcdedc04
