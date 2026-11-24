@@ -27111,6 +27111,9 @@
 5G7H form.integer_valued:
   hash: fbd7fe4810d23e5d34425e6ca9273227f26bbcf5aa7ab9484b5bc1d5b10b566d
   by: research preamble
+5G7H integral.anisotropic_primes:
+  hash: 04804196b0ecee9542bfd613d174757ff99e165e3e26b8b1295ae75be4e9fdc1
+  by: research preamble
 5G7H integral.elementary_primes:
   hash: 0ad8b7d819e18ff3e8ee78e09312f1b0045a88dcc6fd91501786da7375fc50ea
   by: research preamble
@@ -27119,6 +27122,15 @@
   by: research preamble
 5G7H integral.genus_symbol:
   hash: 1dd4796d58464f836602af8430d39af9524ae1015c803a22ef989145e4f29bec
+  by: research preamble
+5G7H integral.local_densities:
+  hash: 5c94877a6a0511c4d4cb1a0b75fe648c2b28d56ebe52a63b69bc54237808ffe6
+  by: research preamble
+5G7H integral.local_representations:
+  hash: e4971621cff0369c05254a2f26a4ce8f503a8703f9db76cea6721e88edf8ece8
+  by: research preamble
+5G7H integral.modular_scale:
+  hash: ef96d64b8bde39266e854083a382150d910233f83868096b5818a232ebd19f0d
   by: research preamble
 5G7H integral.overlattice_count:
   hash: a3608231d89778e76b3d3d11d47e0975d79681c20f85279940c4994ab015aabe
@@ -27135,11 +27147,20 @@
 5KQ1 definite.automorphism_group_order:
   hash: a8b29ebfcacf9613866c3fb1b69ce2124cc35240ed4b99933ab3b6ab4fc0c70d
   by: research preamble
+5KQ1 definite.genus_theta_series:
+  hash: c92433a0387d1e01f8ff9389ce3785abc34547f0dd3cfa401a290287559497d3
+  by: research preamble
+5KQ1 definite.theta_series_cuspidal_component:
+  hash: 8660fa3ba2455a762854167616ca8143e5eb32e2490becdceaa6cbb4e84b70cd
+  by: research preamble
 5KQ1 derive:
   hash: 53776b330455d46b2a6ebb0d387758e918cc03bdc93b4f0436f78cc46bf36ce4
   by: research preamble
 5KQ1 form.integer_valued:
   hash: 183a7875e713154bbc953a79b0a62429a19f8aa3f82a7a6b30b2b9db550e28d3
+  by: research preamble
+5KQ1 integral.anisotropic_primes:
+  hash: bc7887028f34febf04480fba2126788591be1820c9bbc1f6451262170b0e940e
   by: research preamble
 5KQ1 integral.discriminant_sequence:
   hash: 1d40a628266ad8dacd1e31cecb0036dc27adcb465cf909b01fcdcc557fa2d766
@@ -27156,8 +27177,20 @@
 5KQ1 integral.hyperbolic_index:
   hash: 434537e8007c72fe7e34cd80604ed1b4d11166ab62ca94c9b0c167184b56a78f
   by: research preamble
+5KQ1 integral.local_densities:
+  hash: 6e7e1930fa7b7c1320aca36e4b620daa097d6c59041079fb7ff8470f59221fb9
+  by: research preamble
+5KQ1 integral.local_representations:
+  hash: d3d91534e3d9600ec84b18f833dc4491356e03c77a42bdf9ee9c16cd8030ed0b
+  by: research preamble
+5KQ1 integral.modular_scale:
+  hash: ccd0032aef2c8a34a67f1d12f6262a1c3e1d93579c65356caf0ab8d855055415
+  by: research preamble
 5KQ1 integral.overlattice_count:
   hash: b212cb3bfb10eef2d43beb8924952337cd572deecd70fb37871e8376832d691b
+  by: research preamble
+5KQ1 integral.primitive_orbits:
+  hash: e861abee53329bb7dd45536d356952204e21e7f7b04017dacc0970311492440b
   by: research preamble
 5KQ1 integral.spinor_genera:
   hash: fd3881317fee564f4eb0bf3b18358073b650f3dc60061682712870282fc640c0

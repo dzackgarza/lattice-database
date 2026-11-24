@@ -27946,6 +27946,9 @@
 48QA form.integer_valued:
   hash: 29e79d6dc5d8b9e34115187e868146caf1bf3cef992beedcc7339aa9fe282627
   by: research preamble
+48QA integral.anisotropic_primes:
+  hash: e1a05d342840ad4e79024c778f06e19a25df7afe3d516180395fda12d5d2b3fc
+  by: research preamble
 48QA integral.elementary_primes:
   hash: 8e9cc58e2c82f5f9debc682a91f939a4f7e05ebedd8beee6f5292b439e883e19
   by: research preamble
@@ -27954,6 +27957,15 @@
   by: research preamble
 48QA integral.genus_symbol:
   hash: 8f2caea65a14e3f3c07c6b0c89f69c4a0370ed8b3e0cb3850f678bd10b44016e
+  by: research preamble
+48QA integral.local_densities:
+  hash: ca2dfcd5151e6dc26f86b0136f767ce27727a6de8f3810be42adc4cc6b62a358
+  by: research preamble
+48QA integral.local_representations:
+  hash: e057b36d8a754e06ccf0107c45ef46b88293231f5dd97b7b56eb72fadaebebd8
+  by: research preamble
+48QA integral.modular_scale:
+  hash: d2395cf24c809fad9401a58afcede0d7c7477dd648292a5568f70fd4359339e0
   by: research preamble
 48QA integral.overlattice_count:
   hash: 9d423597ac65c1bf982759447dca3e9d6c7d5b3a2af3f0d3a19096d7722e1f48
@@ -27994,11 +28006,23 @@
 4ZO2 definite.automorphism_group_order:
   hash: 4ff66a3032e5fb27e552c650b1535521924695af169ca99dd65aee91214eb11f
   by: research preamble
+4ZO2 definite.genus_theta_series:
+  hash: 969beb71d44f35f0e5cfc479e5619414e08f063dea61e831dc53b440e7c56ddc
+  by: research preamble
+4ZO2 definite.siegel_eisenstein_coefficients:
+  hash: f493405f394ce057e7628d8195d7fcad98ef5d565110a46c08e99bbeb61a73c9
+  by: research preamble
+4ZO2 definite.theta_series_cuspidal_component:
+  hash: 0ed138a20bfab3799d1fe6d631c0d05d447aba0e9952087f062c4ba08fc772fc
+  by: research preamble
 4ZO2 derive:
   hash: faa5c78de50b0ecfee930c6d7c616c59323567ff88a1119138f63088786fbf8f
   by: research preamble
 4ZO2 form.integer_valued:
   hash: 6cb6d4f960224d1d6b58f57f231b6952e6a9ef88c89ca8acf2c14bf682a34599
+  by: research preamble
+4ZO2 integral.anisotropic_primes:
+  hash: 7dc23ee6d7094228fa5026d35ea6b6073380e86d5ad40fde07932a8b69296e9f
   by: research preamble
 4ZO2 integral.discriminant_sequence:
   hash: 47243d78cc75b3962e59b09a285e0ebc272e4ed35da88338abcb2360e83e49e1
@@ -28015,8 +28039,20 @@
 4ZO2 integral.hyperbolic_index:
   hash: 2f1494b292047aea2a5e1d223a6d4aea8d598dad37e4f5fb39edc6676214a0d5
   by: research preamble
+4ZO2 integral.local_densities:
+  hash: 051bf76c6e14380b75249261827b66abc667f78a52cc6ea50fe1b967b3521a79
+  by: research preamble
+4ZO2 integral.local_representations:
+  hash: 7c66444063107c48779b8ef1df0ea97e396f300132117b1fa050d38327286d4a
+  by: research preamble
+4ZO2 integral.modular_scale:
+  hash: ff65a4128f23b4c156eb49277a1f79262e4387a514b557a52c2222c8829f3ffe
+  by: research preamble
 4ZO2 integral.overlattice_count:
   hash: 14003438a74332c64079a343eb4936793e580044cf5aca862b4a6d69fcf8a342
+  by: research preamble
+4ZO2 integral.primitive_orbits:
+  hash: 541e2739d1c25fc522dcfc6c8825442cb0129b8abc0496187fef64abbe023f4d
   by: research preamble
 4ZO2 integral.spinor_genera:
   hash: d8a977a978daf8bdeb76a436d37bc121568f7c8112469b0cb86d0c197e46616d
