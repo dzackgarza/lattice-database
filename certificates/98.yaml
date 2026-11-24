@@ -18661,11 +18661,20 @@
 28BO definite.automorphism_group_order:
   hash: 18a8430e698104805c843618d2bf965f6f37401df66b3a1a24e6982f5161fbdf
   by: research preamble
+28BO definite.genus_theta_series:
+  hash: 1efb027c1ac58ea8f4bf8c95b69e29f29f38383bb258792457e06a339b5b75b6
+  by: research preamble
+28BO definite.theta_series_cuspidal_component:
+  hash: 95134066f040f2a6dd2029da48d6c863d7bafcd0119599e5f3b988dac2cd287c
+  by: research preamble
 28BO derive:
   hash: dddd2522c83e51fe2720b3119356ccde7a5fa01179b46c96cc4291ec3a27c165
   by: research preamble
 28BO form.integer_valued:
   hash: f33f60bee5c1a4bfc3c36cd37d39988f27ecf3f975e02c675ca60c98576c3480
+  by: research preamble
+28BO integral.anisotropic_primes:
+  hash: 4eaf39f27ebdca8f9d4bd24f29b5f5cb0b2bf965b18ea06f00255264b79d8567
   by: research preamble
 28BO integral.discriminant_sequence:
   hash: 26ed6ecf6aa9408a370da110ed1e3dc5afdcf63ca884d4d2b7fd01ab596fdf41
@@ -18682,8 +18691,20 @@
 28BO integral.hyperbolic_index:
   hash: 839386c815fc2dc58fd758022db9f0a106bd81853433df031ce0d00c199651f4
   by: research preamble
+28BO integral.local_densities:
+  hash: c9d1a3e1ad26635223a92ef5809fde562afa527786daeb692143b51112c484b5
+  by: research preamble
+28BO integral.local_representations:
+  hash: a9b54c15341d51c33a511b2cc5e1c1ca36466190d65e61e1e891fcb2f6ef8234
+  by: research preamble
+28BO integral.modular_scale:
+  hash: abe5dfff25e03de0755d7c2f49ebf7eec755dd6f4fcbb248746718dd187320f1
+  by: research preamble
 28BO integral.overlattice_count:
   hash: eba56dcafcaaf84a0c77df758c78710efe7894956794c6cbfcf1a3aa931864b9
+  by: research preamble
+28BO integral.primitive_orbits:
+  hash: 71014222852f1175662f354548f816c369b09225ac87f988e873b803a74b40c3
   by: research preamble
 28BO integral.spinor_genera:
   hash: 5dda449f652f36132b4d81b1b2166b70058b4da8f8ae1176d0342d9387b9beb5
