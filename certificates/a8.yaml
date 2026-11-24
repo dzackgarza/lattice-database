@@ -20458,11 +20458,20 @@
 28W4 definite.automorphism_group_order:
   hash: 6072048c1eabfe9d4946e65a54d67a1e98c7fe98aa992156c2b5d3ecfee34434
   by: research preamble
+28W4 definite.genus_theta_series:
+  hash: 71aa48d34e22693676b6d43223c610e71ce675acae27cc3267853f65eb06ea3a
+  by: research preamble
+28W4 definite.theta_series_cuspidal_component:
+  hash: e5e2313bd00356a6e1e05f1cbf7bdf4b4c1877422c3f33a08356e1defb64dc9a
+  by: research preamble
 28W4 derive:
   hash: 8a7cf04f216a3fa35057cd8939983a52211063b8c6093ac3f52535762ed139ab
   by: research preamble
 28W4 form.integer_valued:
   hash: da2c16a4553e5828aaac7fcdcf861c461eadabd7a4c326b59fe1e6f27fffb4b2
+  by: research preamble
+28W4 integral.discriminant_form:
+  hash: ca5b4eda41949959a2f93d8dbfdb99041d4b4fb987e8518dc18af5f5186f12bc
   by: research preamble
 28W4 integral.discriminant_sequence:
   hash: 95ba7e90a5235a80e6d08b24481f934ff54b82dca206965678c58fa9fbdfb202
@@ -20479,8 +20488,14 @@
 28W4 integral.hyperbolic_index:
   hash: 047fc77c3c050dba7a8b480140b75bef6d04c0efad756ed25044e7659a90b4f2
   by: research preamble
+28W4 integral.modular_scale:
+  hash: d69bb36e16b98ebff513aefef66c02c9e18019e6affdd5c7ef0c9dcee4a116ba
+  by: research preamble
 28W4 integral.overlattice_count:
   hash: 387fcf2185511d2ddf6c9b39c8e476309dce034b524a46a6efd49cc03ff42dbf
+  by: research preamble
+28W4 integral.primitive_orbits:
+  hash: d200bb69ed2d28beb75acca82e6e3e0da61fb53516cb712fdd2f6d1f5ea4ca12
   by: research preamble
 28W4 integral.spinor_genera:
   hash: 1d1448da14825b2dc62b849e7033bddddaebd089b20499f89f5511314ffcc732
