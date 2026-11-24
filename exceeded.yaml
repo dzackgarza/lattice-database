@@ -772,10 +772,6 @@
   killed_by: memory
   peak_bytes: 13133455360
   limit_bytes: 1675943936
-1CJV integral.discriminant_form:
-  hash: 2cd477f7fbf73a8907d2b3337cade53ab5d6d6fedfd327dfb06cc33c2f09c85d
-  seconds: 0
-  lost: true
 1CZ4 integral.discriminant_form:
   hash: d9ace81ff310c9f2d93545001a6c2ebae53abd4735fbdf0278f88049ec4bcdb9
   seconds: 4
@@ -1037,6 +1033,83 @@
   hash: a8efb7df865e7f51636bc49aa6fd78ef34c9fa568df953a47f06a5519e7e1f12
   seconds: 0
   lost: true
+25N2 derive:
+  hash: 15e985165256d4d5a113f3dd4ed5aab4bdaded36bd5fdfe0683010aadef99887
+  seconds: 61
+  lost: true
+  killed_by: memory
+  peak_bytes: 13142614016
+  limit_bytes: 1675943116
+25NG derive:
+  hash: 8a560be22912ee981ff6f1937013ef5efad57c137dcc8adb63dc5182114adb2f
+  seconds: 36
+  lost: true
+  killed_by: memory
+  peak_bytes: 14115782656
+  limit_bytes: 1675943116
+25R8 derive:
+  hash: cfa691c9ed5cbe7d6e88d96e851b277077fd0ac6c5a6a6e110d1f14a62d7fc27
+  seconds: 35
+  lost: true
+  killed_by: memory
+  peak_bytes: 13997166592
+  limit_bytes: 1675943116
+25SK derive:
+  hash: af2e19ddbf689a46178e65e1bd0d7f127468340557f11b304a9ecac27dc130c0
+  seconds: 36
+  lost: true
+  killed_by: memory
+  peak_bytes: 14170374144
+  limit_bytes: 1675943116
+25SP derive:
+  hash: 86f48f0467345e9f5fdbf949e45ececdbf71136994e3ec544b3d8e050c96de95
+  seconds: 35
+  lost: true
+  killed_by: memory
+  peak_bytes: 14336249856
+  limit_bytes: 1675943116
+25T7 derive:
+  hash: 4a8ba8fc0e3755230369448bcef8e3b145b38dc7f1961c16e6a02a165110fd57
+  seconds: 36
+  lost: true
+  killed_by: memory
+  peak_bytes: 13966757888
+  limit_bytes: 1675943116
+25TK derive:
+  hash: 84af5453507fbc27404a6e3b1d11087b8ae6542c080e3834727fc7dc4b4a1496
+  seconds: 40
+  lost: true
+  killed_by: memory
+  peak_bytes: 14102421504
+  limit_bytes: 1675943116
+25TQ derive:
+  hash: ab2a3a656f66dbc7921412b308942aaa8feb4dd002537cf5b09960fe9a9810e0
+  seconds: 40
+  lost: true
+  killed_by: memory
+  peak_bytes: 13648687104
+  limit_bytes: 1675943116
+25UT derive:
+  hash: 1ac8449ba81d0c16a6b37d7c874b36bf54388f55dd677bfc84ffa936c632a846
+  seconds: 40
+  lost: true
+  killed_by: memory
+  peak_bytes: 14009524224
+  limit_bytes: 1675943116
+25V5 derive:
+  hash: 2cef6fdcac31f6924bd9686a3b358e70f87e5807ae2b6a018a84f85ef5ac507c
+  seconds: 41
+  lost: true
+  killed_by: memory
+  peak_bytes: 13597712384
+  limit_bytes: 1675943116
+25V9 derive:
+  hash: 520461b07a59048fe3b0345307a769917cde11b42628ed318ab1be1eb073022f
+  seconds: 40
+  lost: true
+  killed_by: memory
+  peak_bytes: 13969518592
+  limit_bytes: 1675943116
 262S derive:
   hash: 099940eb2c7f129f7667a61417dd0db643b174f1fc2973905fd3401559f83f7f
   seconds: 36
@@ -1393,11 +1466,102 @@
   limit_bytes: 1675943116
 26MZ derive:
   hash: f80e0b988728361cf0b8bc99c853f60d2301a6a5e30e4f8227aa5343e820e455
-  seconds: 40
+  seconds: 41
   lost: true
+  killed_by: memory
+  peak_bytes: 13338517504
+  limit_bytes: 1675943116
+26OE derive:
+  hash: 46008c1e8ccdac2c26471296b5ffded3f6f503c987a7af82bc7cafc78bfed0cd
+  seconds: 36
+  lost: true
+  killed_by: memory
+  peak_bytes: 14001672192
+  limit_bytes: 1675943116
+26OG derive:
+  hash: bf16ef741bcc832d52ed2d874f0bbdf0f7c909772c38e2998e9b0da0149ae690
+  seconds: 36
+  lost: true
+  killed_by: memory
+  peak_bytes: 13825605632
+  limit_bytes: 1675943116
+26OY derive:
+  hash: 74f83ef5e1a54eeef27c5f972754482918b82f0f52299f339f39066aaca24533
+  seconds: 36
+  lost: true
+  killed_by: memory
+  peak_bytes: 13604298752
+  limit_bytes: 1675943116
+26QJ derive:
+  hash: 9742cdb74937a1bca8a12606f28d007b9e313a64ecb14b39ccdac85bb0c02bc2
+  seconds: 36
+  lost: true
+  killed_by: memory
+  peak_bytes: 13880655872
+  limit_bytes: 1675943116
+26QP derive:
+  hash: 1c522914364d18f1859d551271fb289fb7949ed842353bdfec8ad05d1a9b161b
+  seconds: 36
+  lost: true
+  killed_by: memory
+  peak_bytes: 13467123712
+  limit_bytes: 1675943116
+26QS derive:
+  hash: e18b2aa4c6284a0e359d817c4d05fb39066d4f3139ffbdc40f8018f60206ccd6
+  seconds: 36
+  lost: true
+  killed_by: memory
+  peak_bytes: 13756055552
+  limit_bytes: 1675943116
+26RD derive:
+  hash: 5cddfcfd67d3ea1f94a5e545ce38f4949c9169eeb9b28a1287120a551ecc97bb
+  seconds: 36
+  lost: true
+  killed_by: memory
+  peak_bytes: 13184159744
+  limit_bytes: 1675943116
+26RZ derive:
+  hash: 895280b719573abff6748299810e35f7b10b9b13eb61e8d6fe0965874ca76d5d
+  seconds: 36
+  lost: true
+  killed_by: memory
+  peak_bytes: 13399629824
+  limit_bytes: 1675943116
+26S2 derive:
+  hash: f467a3981b9db278269effdd5f2f2cc691dcc2cab60bfc6039c8e728ae072654
+  seconds: 36
+  lost: true
+  killed_by: memory
+  peak_bytes: 13566316544
+  limit_bytes: 1675943116
+26UB derive:
+  hash: 4abd31f89fa4f4124c67480f9a538fa09acca8389e94850983cd13901f8adead
+  seconds: 41
+  lost: true
+  killed_by: memory
+  peak_bytes: 13255749632
+  limit_bytes: 1675943116
+26UH derive:
+  hash: da20580fe2ab94343a1f3565da25038df711d5ba367d61f5626ccbd858e81c15
+  seconds: 41
+  lost: true
+  killed_by: memory
+  peak_bytes: 13419474944
+  limit_bytes: 1675943116
+26V1 derive:
+  hash: f1991a57dbe471a049496de20f8fb3afee2a392ee503cbc4eadc8d1820f2dd8b
+  seconds: 41
+  lost: true
+  killed_by: memory
+  peak_bytes: 13474668544
+  limit_bytes: 1675943116
 270Z derive:
   hash: e268cf9e1fa850d62af0e41ed657a93a532d639cbda65817de32710086f1e071
   seconds: 0
+  lost: true
+2722 derive:
+  hash: ff3cee7b034de1b677a335eadeabb441bd93e4dc3de3bf0a22ddb9fd4fc4bb92
+  seconds: 5
   lost: true
 272B derive:
   hash: 942a33115fc1a3791b5dd52303f4732d572d02c5b69b81fefe123f52f547b6a3
