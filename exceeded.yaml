@@ -1333,10 +1333,6 @@
   killed_by: memory
   peak_bytes: 14302081024
   limit_bytes: 1675943116
-26FJ integral.genus_class_count:
-  hash: 8a290b11d2c83baeeffb58f2a2ccdc82d0140558afb889640b42cf3ca8dd359e
-  seconds: 5
-  lost: true
 26JG derive:
   hash: 44277e20d292ff83432052dbeeba4cbfb3704989a75a03202e33fdb22898d949
   seconds: 41
@@ -1392,6 +1388,20 @@
   lost: true
   killed_by: memory
   peak_bytes: 13338517504
+  limit_bytes: 1675943116
+26TG derive:
+  hash: 6729dc532ca88d39bfcd32dab38b0b8484fc6e8a54603a3c88c37ce21dae36d0
+  seconds: 65
+  lost: true
+  killed_by: memory
+  peak_bytes: 14210396160
+  limit_bytes: 1675943116
+26V9 derive:
+  hash: 74c2f008fd192bf49df6713ce7b72f880a9342b2bb732264e7c5fb90497bbf7a
+  seconds: 56
+  lost: true
+  killed_by: memory
+  peak_bytes: 13520916480
   limit_bytes: 1675943116
 270Z derive:
   hash: e268cf9e1fa850d62af0e41ed657a93a532d639cbda65817de32710086f1e071
@@ -1555,6 +1565,17 @@
   killed_by: memory
   peak_bytes: 12547874816
   limit_bytes: 1675942297
+27AB derive:
+  hash: b6e03549c8a4c6b308e2a25c137de0b37162fd0d8628a14b523203ccd33fcc04
+  seconds: 48
+  lost: true
+  killed_by: memory
+  peak_bytes: 13241061376
+  limit_bytes: 1675943116
+27CU definite.genus_theta_series:
+  hash: d2dda852ce55255337171937697f6fc700e199993cc6e0e63f230b1dd52e1f56
+  seconds: 0
+  lost: true
 27MV derive:
   hash: 0e044db65139bd9bd05948e9e080f7d642e6d3286c81d07d73401b6e67bceecf
   seconds: 41

@@ -18331,11 +18331,20 @@
 25MO definite.automorphism_group_order:
   hash: f474b68f0e874c43b181828f6d636c40a1aa09356781e7b90a1ec5d33989b60d
   by: research preamble
+25MO definite.genus_theta_series:
+  hash: 7fd571344488c62ebbcef2180d0f7afed43e605fc861709ef800c247dccacd1b
+  by: research preamble
+25MO definite.theta_series_cuspidal_component:
+  hash: bfe85ce34b9ed0b5e73b168a7f57407eb5804b64a9da9f19107fa247fbcfd808
+  by: research preamble
 25MO derive:
   hash: 1c367ff7352514367c3e58eee3ff2214712000a9db103a2c071dda8117cbdb61
   by: research preamble
 25MO form.integer_valued:
   hash: e57e849634d4a6ab09721c820bce963e08a7f96120b2c7a6c1f9f9a1aeba691f
+  by: research preamble
+25MO integral.anisotropic_primes:
+  hash: 8017ca961213e1ed5afa8610bed628b8744f3366bb881edd3085b12cc159c968
   by: research preamble
 25MO integral.discriminant_sequence:
   hash: 5d100d2896e5a99de715bd380c05f06e0109bbd53ebd5682300c8c1fa186e1b5
@@ -18352,8 +18361,20 @@
 25MO integral.hyperbolic_index:
   hash: 1aa5292b04844ed97a1e4c32e98c8b19202ba66cfcc1eeb77d7d1d8c90f115ec
   by: research preamble
+25MO integral.local_densities:
+  hash: e1c3392c91e921bef4e442d7f8268e2b931fbc6a23a0299065a547347c39a831
+  by: research preamble
+25MO integral.local_representations:
+  hash: e3693f19237d03f3a3f6cfcf2ff1a98def5d64a004eb998ac520a1dabf1dd84b
+  by: research preamble
+25MO integral.modular_scale:
+  hash: 7aa0916a84bfa728be162dfe92d6b2ee4d35c2cc8c6e809f5d20446e2157e3a5
+  by: research preamble
 25MO integral.overlattice_count:
   hash: 72b823bb5a6deaad07677f5208d0eb01d42ff3ed2ae574d680cb7a1b772c0c55
+  by: research preamble
+25MO integral.primitive_orbits:
+  hash: 4e0f6c0b1d35d785685e64ff8d3550f281f617a3185993efdd69182d1cd01dbd
   by: research preamble
 25MO integral.spinor_genera:
   hash: dd468c83d1d9b8e3087445e8567b332c839ee964b086b0f0512b5b16cd726511
