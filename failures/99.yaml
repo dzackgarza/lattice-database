@@ -5727,6 +5727,158 @@
     database_revision: efb45b5bdd13dfd2f61b6fbc60a504cc52006004
     research_revision: 0d4b0ffc15f5f46f30af390f49af3fcebdd47ced
   notes: []
+2BLX derive:
+  disposition: open
+  attempts:
+  - hash: c572992cb02a8cbfbd903f5f9966930e0fb558bb7f887b9cd5abf10a55da274c
+    gram_tensor:
+    - - 4
+      - 0
+      - 1
+      - 2
+      - 2
+    - - 0
+      - 4
+      - 0
+      - 2
+      - 0
+    - - 1
+      - 0
+      - 6
+      - 3
+      - 0
+    - - 2
+      - 2
+      - 3
+      - 6
+      - 3
+    - - 2
+      - 0
+      - 0
+      - 3
+      - 6
+    reason: memory exhausted
+    stderr: ''
+    seconds: 41.041316127000755
+    recorded_at: 2026-11-24 23:01:01.621865+00:00
+    run_url: https://github.com/dzackgarza/lattice-database/actions/runs/45407996724/attempts/1
+    database_revision: efb45b5bdd13dfd2f61b6fbc60a504cc52006004
+    research_revision: 0d4b0ffc15f5f46f30af390f49af3fcebdd47ced
+  notes: []
+2BMA derive:
+  disposition: open
+  attempts:
+  - hash: 4c2bd331d592ffbf0f99f5852696f91a7fa1bdc6fa54614417dd17a88a0c9e58
+    gram_tensor:
+    - - 2
+      - 0
+      - 1
+      - 0
+      - 0
+    - - 0
+      - 2
+      - 0
+      - 0
+      - 1
+    - - 1
+      - 0
+      - 6
+      - 1
+      - 3
+    - - 0
+      - 0
+      - 1
+      - 8
+      - 3
+    - - 0
+      - 1
+      - 3
+      - 3
+      - 8
+    reason: memory exhausted
+    stderr: ''
+    seconds: 41.123685278000266
+    recorded_at: 2026-11-24 23:01:59.911883+00:00
+    run_url: https://github.com/dzackgarza/lattice-database/actions/runs/45407996724/attempts/1
+    database_revision: efb45b5bdd13dfd2f61b6fbc60a504cc52006004
+    research_revision: 0d4b0ffc15f5f46f30af390f49af3fcebdd47ced
+  notes: []
+2BOA derive:
+  disposition: open
+  attempts:
+  - hash: 539edf5b682dd3d4215236486579a662c8355192f036b46f6d980a3f84e97108
+    gram_tensor:
+    - - 2
+      - 1
+      - 0
+      - 1
+      - 0
+    - - 1
+      - 2
+      - 0
+      - 0
+      - 0
+    - - 0
+      - 0
+      - 6
+      - 0
+      - 2
+    - - 1
+      - 0
+      - 0
+      - 6
+      - 1
+    - - 0
+      - 0
+      - 2
+      - 1
+      - 10
+    reason: memory exhausted
+    stderr: ''
+    seconds: 36.07620994299941
+    recorded_at: 2026-11-24 23:10:55.904359+00:00
+    run_url: https://github.com/dzackgarza/lattice-database/actions/runs/45407996724/attempts/1
+    database_revision: efb45b5bdd13dfd2f61b6fbc60a504cc52006004
+    research_revision: 0d4b0ffc15f5f46f30af390f49af3fcebdd47ced
+  notes: []
+2BON derive:
+  disposition: open
+  attempts:
+  - hash: 7552c52979b5b5f432ba052591b8c55c233566f2e684860b4624fa32e091ed3b
+    gram_tensor:
+    - - 2
+      - 1
+      - 0
+      - 1
+      - 0
+    - - 1
+      - 2
+      - 0
+      - 1
+      - 1
+    - - 0
+      - 0
+      - 6
+      - 2
+      - 0
+    - - 1
+      - 1
+      - 2
+      - 8
+      - 4
+    - - 0
+      - 1
+      - 0
+      - 4
+      - 10
+    reason: memory exhausted
+    stderr: ''
+    seconds: 35.9985048310009
+    recorded_at: 2026-11-24 23:11:49.170257+00:00
+    run_url: https://github.com/dzackgarza/lattice-database/actions/runs/45407996724/attempts/1
+    database_revision: efb45b5bdd13dfd2f61b6fbc60a504cc52006004
+    research_revision: 0d4b0ffc15f5f46f30af390f49af3fcebdd47ced
+  notes: []
 2MNM integral.discriminant_form:
   disposition: open
   attempts:
