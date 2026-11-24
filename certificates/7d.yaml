@@ -24808,6 +24808,15 @@
 5QJX form.integer_valued:
   hash: ab02328e6152a00ebde533d67f761ddcfa71b09bf12e62d4ebf04c094eca6672
   by: research preamble
+5QJX integral.anisotropic_primes:
+  hash: b06b676f9fe9dbdaac1e1cfb2359ae5f8ac8129f1cae3f883dcd79ce8162a9b9
+  by: research preamble
+5QJX integral.discriminant_form:
+  hash: 7accdcb2161a20915140271bf266af748bbec7dcbc5d0a53041b65fd78d7e586
+  by: research preamble
+5QJX integral.discriminant_orbits:
+  hash: 02e4f516f32ea7e95d89b93f32fe4d63cf85a7d779ef312ad2ee156570e78249
+  by: research preamble
 5QJX integral.elementary_primes:
   hash: 4cbd44fbb210cc24c93bb7b38ba6f3e4751b39696469f3b4c551335e6d1403ad
   by: research preamble
@@ -24820,8 +24829,20 @@
 5QJX integral.hyperbolic_index:
   hash: 233c3c0d0d2ebf682c1538d9498a3bd68e3e0bb12c53e3984f456872b236dbdc
   by: research preamble
+5QJX integral.local_densities:
+  hash: 49a15bf7db25ca846c59ddf5946be26772967ba4708415796762a6bd4e0c0ff5
+  by: research preamble
+5QJX integral.local_representations:
+  hash: 97d53fa04206699b4abfe55933b8dbbc3fef1af6607fd1981b126111c4c97709
+  by: research preamble
+5QJX integral.modular_scale:
+  hash: b9719f331108195e22268f0e0c9b5e39b956ed1555ac9eda3f3261e81350c346
+  by: research preamble
 5QJX integral.overlattice_count:
   hash: 42cdb42a0dc59ea8e77c9d06e4494b64c711ce8d006c86ed414a7821e1723d8c
+  by: research preamble
+5QJX integral.primitive_orbits:
+  hash: e583ce7b587aeb29d11ef70f2f51b7b7fdb83b4cbc4c62cb3a426f078cf20850
   by: research preamble
 5QJX integral.spinor_genera:
   hash: 8333c7cc66d9a79ee1632e68a90fdea92ccb6a395897e78615446eb1ba31a9db
@@ -24835,6 +24856,12 @@
 65BQ form.integer_valued:
   hash: 577905223e23e073f9bcdb440868793ae8e29b440b0048f6f1d19e41dc08b974
   by: research preamble
+65BQ integral.anisotropic_primes:
+  hash: b914fd305b7163be9e3da1c7e476a78a75446c371e77ccdfe95650660eb24a77
+  by: research preamble
+65BQ integral.discriminant_orbits:
+  hash: 7f6bb2024cf777cc7699a7b0fce08d2c0cb7b82eeec897645fa9e0dc659c37d1
+  by: research preamble
 65BQ integral.elementary_primes:
   hash: 3ae7e1922b3c9bcb7d3c8b343622042dac14461d1eacf4d5c443c6299cece878
   by: research preamble
@@ -24846,6 +24873,15 @@
   by: research preamble
 65BQ integral.hyperbolic_index:
   hash: a5daaa342d89ec97d670f321bab79b00217bf0742e4837a0b35fb2751347bf52
+  by: research preamble
+65BQ integral.local_densities:
+  hash: a614198929caf4feae00df5ab43239244d8100005eb1baa168f2189a7b084973
+  by: research preamble
+65BQ integral.local_representations:
+  hash: 6cbd1fbcfa85574bc6a15ba929c125babda0919d2e60a7cf712cc1f44627900b
+  by: research preamble
+65BQ integral.modular_scale:
+  hash: 3ee37d1d009beabb2e96f49e71ab183eab9fdaf49be1a19d3c3f8096bf073e78
   by: research preamble
 65BQ integral.overlattice_count:
   hash: 6a494fe45e6e5e3d85c5c5ac9b0f5349105849433278e1b18efea0504caa1b3a

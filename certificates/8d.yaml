@@ -26392,11 +26392,23 @@
 5DKK definite.automorphism_group_order:
   hash: 934f88110302e7db1231728261db93ae4ff85b2256eecc5f3664b38558b009e5
   by: research preamble
+5DKK definite.genus_theta_series:
+  hash: 8cc4b8a05c95684e117940bab702ed3e284b3ee4f14e09b5cec65510aa7d0089
+  by: research preamble
+5DKK definite.siegel_eisenstein_coefficients:
+  hash: 1ec54869ea10fd0ec0e97c7ddf395f46156c9cd4c4bd67866f6f5d35355e9f4b
+  by: research preamble
+5DKK definite.theta_series_cuspidal_component:
+  hash: bc21a18b04cffb32d6f3b3a6d981e1042c6f70dde8aace4f87c83817777d9a82
+  by: research preamble
 5DKK derive:
   hash: 7e0b0ba1c06518a45233d70ba06660e4b7d1b97adb2a855d4577a1353af612e0
   by: research preamble
 5DKK form.integer_valued:
   hash: 3eb26294fe93be122edd2aaccd088be8ea992f99df1cab80a49a0e2aad94979d
+  by: research preamble
+5DKK integral.anisotropic_primes:
+  hash: 3f0d408545f19927ed32e66a4c19735baad6517d658166aa31260d13e5ebfd83
   by: research preamble
 5DKK integral.discriminant_sequence:
   hash: 7b57a55ca4ed7de047894231d7a9fd34c334610afa07b8dac62a5c30bdab0923
@@ -26413,8 +26425,20 @@
 5DKK integral.hyperbolic_index:
   hash: 64015d0f80933cd5bcae4fb1da1dd199e276199afd77f5738da350508d4aec50
   by: research preamble
+5DKK integral.local_densities:
+  hash: be5f4e3e635bd0fefcf28921117b9c706acf26653bb6b0afaf1653dd588d6925
+  by: research preamble
+5DKK integral.local_representations:
+  hash: 0e28e83df4f26237ec79b7fe6975cf6a9ad202fbdc8a42f8489faba9a7deba44
+  by: research preamble
+5DKK integral.modular_scale:
+  hash: 725058d33cb3af8bef96dc8f1d45168803856420b01bef0d0bbb8697196471a2
+  by: research preamble
 5DKK integral.overlattice_count:
   hash: bc68c3f00277327ac5a4225482b3434575520fe197e7b5fa397500fee18d1fa7
+  by: research preamble
+5DKK integral.primitive_orbits:
+  hash: 8c7187205c1629e5c6f8ed1ef277738355efed92ca4695d348e6a75ce9cf2f71
   by: research preamble
 5DKK integral.spinor_genera:
   hash: 076f790b085d41eb882f4ecc942c1b6b2e0b9bb1692cc2b67fc96d7ccba655ac

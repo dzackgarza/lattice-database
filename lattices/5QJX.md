@@ -14,6 +14,13 @@ certifications:
   integral.hyperbolic_index: 233c3c0d0d2ebf682c1538d9498a3bd68e3e0bb12c53e3984f456872b236dbdc
   automorphisms.automorphism_group_order: 37d514ed91e129262315e159d4734e9908e8e2f0a157b02e938b51d3070b48a7
   automorphisms.automorphism_group_generator_morphisms: 1d83d7119b7b7e6d72934e4f418542d74092973b39bcfb0594fdc309cec3d238
+  integral.discriminant_form: 7accdcb2161a20915140271bf266af748bbec7dcbc5d0a53041b65fd78d7e586
+  integral.primitive_orbits: e583ce7b587aeb29d11ef70f2f51b7b7fdb83b4cbc4c62cb3a426f078cf20850
+  integral.discriminant_orbits: 02e4f516f32ea7e95d89b93f32fe4d63cf85a7d779ef312ad2ee156570e78249
+  integral.modular_scale: b9719f331108195e22268f0e0c9b5e39b956ed1555ac9eda3f3261e81350c346
+  integral.anisotropic_primes: b06b676f9fe9dbdaac1e1cfb2359ae5f8ac8129f1cae3f883dcd79ce8162a9b9
+  integral.local_representations: 97d53fa04206699b4abfe55933b8dbbc3fef1af6607fd1981b126111c4c97709
+  integral.local_densities: 49a15bf7db25ca846c59ddf5946be26772967ba4708415796762a6bd4e0c0ff5
 rank: 5
 gram_tensor:
 - [2, 0, 0, 0, 0]
@@ -36,6 +43,7 @@ integral:
   elementary_primes: []
   parity: even
   level: 12
+  modular_scale: false
   discriminant_group: [2, 2, 2, 2, 6]
   overlattice_count: 31
   bad_reduction_primes: [2, 3]
@@ -44,6 +52,97 @@ integral:
   spinor_genus_count: 1
   spinor_genera: [1]
   hyperbolic_index: 0
+  primitive_orbits:
+    O:
+      constant: 1
+      z: []
+      w: []
+    O+:
+      constant: 1
+      z: []
+      w: []
+    SO:
+      constant: 1
+      z: []
+      w: []
+    SO+:
+      constant: 1
+      z: []
+      w: []
+    Otilde+:
+      constant: 5
+      z: []
+      w: []
+    SOtilde:
+      constant: 5
+      z: []
+      w: []
+    SOtilde+:
+      constant: 5
+      z: []
+      w: []
+  discriminant_form:
+    orthogonal_group_order: 240
+    isotropic_classes: 6
+    isotropic_orbits: 2
+  discriminant_orbits:
+    Otilde:
+      constant: 6
+      z: [0, 11, 0, 11]
+      w: [0, 7, 0, 11]
+    SOtilde:
+      constant: 6
+      z: [0, 11, 0, 11]
+      w: [0, 7, 0, 11]
+    Otilde+:
+      constant: 6
+      z: [0, 11, 0, 11]
+      w: [0, 7, 0, 11]
+    SOtilde+:
+      constant: 6
+      z: [0, 11, 0, 11]
+      w: [0, 7, 0, 11]
+    O:
+      constant: 2
+      z: [0, 2, 0, 2]
+      w: [0, 3, 0, 2]
+    SO:
+      constant: 2
+      z: [0, 2, 0, 2]
+      w: [0, 3, 0, 2]
+    O+:
+      constant: 2
+      z: [0, 2, 0, 2]
+      w: [0, 3, 0, 2]
+    SO+:
+      constant: 2
+      z: [0, 2, 0, 2]
+      w: [0, 3, 0, 2]
+  anisotropic_primes: []
+  local_representations:
+  - prime: 2
+    classes:
+    - representative: 1
+      least_valuation: 2
+    - representative: 3
+      least_valuation: 2
+    - representative: 5
+      least_valuation: 2
+    - representative: 7
+      least_valuation: 2
+    - representative: 2
+      least_valuation: 1
+    - representative: 6
+      least_valuation: 1
+    - representative: 10
+      least_valuation: 1
+    - representative: 14
+      least_valuation: 1
+  local_densities:
+  - prime: 2
+    densities: [0, 5/2, 0, 5/2, 0, 5/4, 0, 25/16]
+  - prime: 3
+    densities: [8/9, 8/9, 32/27, 8/9, 8/9, 34/27, 8/9, 8/9]
 automorphisms:
   automorphism_group_order: aleph0
   automorphism_group_generator_morphisms: [O(L) generator 1, O(L) generator 2, O(L) generator 3, O(L) generator 4, O(L) generator 5, O(L) generator 6, O(L) generator 7, O(L) generator 8]

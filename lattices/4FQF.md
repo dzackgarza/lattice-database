@@ -14,6 +14,11 @@ certifications:
   integral.hyperbolic_index: 2767d4af1b396a7e2cfb6b37538cfe9e40a7dbd54319392e15c5f422da038bcb
   automorphisms.automorphism_group_order: 1177e6feeb7a380a942041bfc2bccab0bd55ab8ffeabd9048c1f7abec2b524ea
   automorphisms.automorphism_group_generator_morphisms: b6c9ae355e00b2ddf4cd28c26d1c51d2a44e862c87c16e60f3a812504e6d899c
+  integral.primitive_orbits: adacf166f7a3219e70e36b09061b47022ac3759f04ada7afc168fdff241673b2
+  integral.modular_scale: daf442cde7a2569b0fe9f3332542da92b7345d55cfaec912e1a4c0a0d5e1bb01
+  integral.anisotropic_primes: 01352c42ea74a6d4be35ff6cc1838587d1491f02a2cb1b9d8a8ad25351719904
+  integral.local_representations: 982b33de75110f7e87c00384cae4044d8992b99dd3f407939f75918eebdc1369
+  integral.local_densities: 6f6da244ca624b0b6c653a4e339a7ee45a70d7aeb57768cb8adf017bc7ba5adb
 rank: 5
 gram_tensor:
 - [1, 0, 0, 0, 0]
@@ -36,6 +41,7 @@ integral:
   elementary_primes: []
   parity: odd
   level: 12
+  modular_scale: false
   discriminant_group: [2, 2, 2, 6]
   overlattice_count: 11
   bad_reduction_primes: [2, 3]
@@ -44,6 +50,42 @@ integral:
   spinor_genus_count: 1
   spinor_genera: [1]
   hyperbolic_index: 0
+  primitive_orbits:
+    O:
+      constant: 2
+      z: []
+      w: []
+    O+:
+      constant: 2
+      z: []
+      w: []
+    SO:
+      constant: 2
+      z: []
+      w: []
+    SO+:
+      constant: 2
+      z: []
+      w: []
+    Otilde+:
+      constant: 7
+      z: []
+      w: []
+    SOtilde:
+      constant: 7
+      z: []
+      w: []
+    SOtilde+:
+      constant: 7
+      z: []
+      w: []
+  anisotropic_primes: []
+  local_representations: []
+  local_densities:
+  - prime: 2
+    densities: [1/2, 1, 1, 17/16, 3/2, 1, 1, 7/8]
+  - prime: 3
+    densities: [10/9, 10/9, 22/27, 10/9, 10/9, 20/27, 10/9, 10/9]
 automorphisms:
   automorphism_group_order: aleph0
   automorphism_group_generator_morphisms: [O(L) generator 1, O(L) generator 2, O(L) generator 3, O(L) generator 4, O(L) generator 5, O(L) generator 6, O(L) generator 7, O(L) generator 8]

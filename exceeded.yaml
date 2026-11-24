@@ -2410,13 +2410,13 @@
 5RR1 integral.primitive_orbits[SOtilde]:
   hash: 2b2f37ca731c7f2c974be88ea8d147c4f3c85c99adec5cb66a320253d297072a
   seconds: 19709
+5VVR integral.primitive_orbits[Otilde+]:
+  hash: 8711e002e5f7ea87be6a027737020c92a454fe2b7ad0a1b2a2a251097c0d1867
+  seconds: 0
+  lost: true
 5X07 integral.primitive_orbits[O]:
   hash: c15f7857e04ebe36a8c0d9e1d31d436d2eb4b4323e5c5b7681198bd6f19c9831
   seconds: 1227
-  lost: true
-5XTS integral.primitive_orbits[O+]:
-  hash: a7e8c28a297e772d52198d47a41ec2c894efe14084ebeea87c6863c23695344f
-  seconds: 10697
   lost: true
 6JRR arithmetic-group.otilde-plus-t-co.index_in_orthogonal_group:
   hash: acad0e18f0c158ad5bda122e435bae4133bd93287223e2a8ce2c8b611148e2d3

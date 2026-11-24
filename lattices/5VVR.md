@@ -12,6 +12,7 @@ certifications:
   integral.spinor_genus_count: 6cb9b3dd5dbcb7ac308d81e8dadfdeabd66f3d9eba87550242c1c98f8b55cfd1
   integral.spinor_genera: 3082171abd8134bb4b56a58446462815221b0fa9ce52f7478ac561e33bcc0a5f
   integral.hyperbolic_index: 23c8d70652e5172dc8a7143a14ceb910af39d4a910c5b56c32feaca8907718bb
+  integral.discriminant_form: a7589028a9650f8eca536ea04159e2f11b8364edf51b017591a6d71bbdffaa10
 rank: 5
 gram_tensor:
 - [2, 0, 0, 0, 0]
@@ -42,6 +43,10 @@ integral:
   spinor_genus_count: 1
   spinor_genera: [1]
   hyperbolic_index: 0
+  discriminant_form:
+    orthogonal_group_order: 240
+    isotropic_classes: 6
+    isotropic_orbits: 2
 indefinite:
   isotropic: true
 morphisms: []
