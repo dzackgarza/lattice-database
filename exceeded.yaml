@@ -1707,27 +1707,6 @@
 27VT integral.discriminant_form:
   hash: e6d8cb0324782790cfac918826f205b81534a0ef6670d8a187c996837382b771
   seconds: 3
-291C derive:
-  hash: 5166777cfd15719ad7776b2461ba986af020c1e1ec35d47fb308788eaf0c7e2e
-  seconds: 44
-  lost: true
-  killed_by: memory
-  peak_bytes: 12582055936
-  limit_bytes: 1675839488
-291V derive:
-  hash: 13da77f9382fe97ff8460cefbd290049c5e4f7cd3bd38d8f9a9614c630aff317
-  seconds: 40
-  lost: true
-  killed_by: memory
-  peak_bytes: 13150625792
-  limit_bytes: 1675839488
-292J derive:
-  hash: 28737acbf5f388b05806508b5931073ac0b52c353883d6bc65dd1b794c7a951a
-  seconds: 40
-  lost: true
-  killed_by: memory
-  peak_bytes: 12559065088
-  limit_bytes: 1675839488
 292Q derive:
   hash: 484117bd3757154983f919c02d1910d3687c06ea63a107b350667e6df9f20adf
   seconds: 40
@@ -2361,7 +2340,7 @@
   lost: true
 3GWW integral.discriminant_sequence:
   hash: 9fe28d538d4282a19fff1921e5b1179b8dce50772c24399b183b49c257bfece4
-  seconds: 1664
+  seconds: 3467
   lost: true
 3GX5 integral.discriminant_sequence:
   hash: ac5830bf83c01f73d9a9417b7f9de8b39dbfd51c20f84ed5872b139ccae22b93
