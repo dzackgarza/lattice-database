@@ -33103,11 +33103,23 @@
 3P4D definite.automorphism_group_order:
   hash: 3f5ea3974e52407f03a5c3ba4b51661c0b80fcde21e68419eb18c234234a2fda
   by: research preamble
+3P4D definite.genus_theta_series:
+  hash: c100c76134184f2f697a596f7a06f2229f9dabafe22db228b576043301bb986c
+  by: research preamble
+3P4D definite.siegel_eisenstein_coefficients:
+  hash: 266ec6b676c8469d910fc109f48c67c8951c4bff2ada2ee50ed374fb24a56291
+  by: research preamble
+3P4D definite.theta_series_cuspidal_component:
+  hash: d67d1970064e348c0447f7b61eca5566f913a2ed162ee54745529e958378952e
+  by: research preamble
 3P4D derive:
   hash: fb6d8d12c62f999159609d4083980fd29d65b216e57ead3c68b20013825dc9a8
   by: research preamble
 3P4D form.integer_valued:
   hash: d15adad4fdb3c65a2a1a5c3d80edf4030e778a153a777b9a37a33a6fd7f26701
+  by: research preamble
+3P4D integral.anisotropic_primes:
+  hash: ffb479109332ee5084601ba4fe7d425a1e515938633a162ec83e221128d6729a
   by: research preamble
 3P4D integral.discriminant_sequence:
   hash: 7c714acc14671c8f9ec0fed346a79b96d473d9b23700d1c410cdf76e6f829850
@@ -33124,8 +33136,20 @@
 3P4D integral.hyperbolic_index:
   hash: 20aa8dd9fc0b595016bcc15bc0f59bc69f2d11ea0aa4073a2d7f58f1b0dd16e2
   by: research preamble
+3P4D integral.local_densities:
+  hash: a05da1a388aebea489bb390e58370060755406ec3f97f4fd13f3d81cf293a382
+  by: research preamble
+3P4D integral.local_representations:
+  hash: 0389144156b6ab0245a5c300c4e68925405fde9d3709175b25478efea353cf8f
+  by: research preamble
+3P4D integral.modular_scale:
+  hash: d6256f6265352ef094ebfb9bb91850471645e958389b70c083f0e96dd6283872
+  by: research preamble
 3P4D integral.overlattice_count:
   hash: d1be5b820f6545f65cd9de299587a29524ed13abd0ae8e3ff10a6bb1ee4b0712
+  by: research preamble
+3P4D integral.primitive_orbits:
+  hash: 2a7141be2c1a39d6dc25c3b9fe3d88f46c7d5ec4985939a8a9cb83236fba4a6d
   by: research preamble
 3P4D integral.spinor_genera:
   hash: 1982190106688455abbf123f61241e4f9f66ac14e0c14bd080df5c855a2702e2

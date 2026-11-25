@@ -11,6 +11,13 @@ certifications:
   integral.overlattice_count: 465a0399b93500e442b441683276517dc917af11280463611fa4f2dc86f1136c
   integral.spinor_genus_count: 7606e51827c2ce3b72c080fdb75146bb80a1c4dfb1a67534fd5f4968e432c6a2
   integral.spinor_genera: 6666752bf39350dd810827d6c86fded7cfdd65faf2420e02dbdf3a11075cb1a5
+  automorphisms.automorphism_group_order: 5f73727d1965807ac045e6c4d373922b9ab1461781751cc0260536a7067a3947
+  automorphisms.automorphism_group_generator_morphisms: a5c28d27ff1a97cce69b487b32e97616cce97be62817580f0816a127fe348ad3
+  integral.primitive_orbits: 00fb2769f56dc09819775a726b7c52a67a7fecade2fcdd47290b02bedad0763e
+  integral.modular_scale: e0b1553e3fc5c698ecb59f0df35ba819b20388131ea1ccc4e593afd4ef5ef936
+  integral.anisotropic_primes: 2f0c79bd19ee80a3bff10d1cc717b2df90d15ef97809ee9e6d2e76dc8ca9834d
+  integral.local_representations: 681da78e6c3cafecd546ff88774179bc198682f1df450f18c72bdb2e3158aec2
+  integral.local_densities: d0a63d31a660a84ffafe1afe7baf707fbd178d97ce689904449e24947f7cce02
 rank: 5
 gram_tensor:
 - [1, 0, 0, 0, 0]
@@ -33,6 +40,7 @@ integral:
   elementary_primes: []
   parity: odd
   level: 2
+  modular_scale: 1
   discriminant_group: []
   overlattice_count: 1
   bad_reduction_primes: [2]
@@ -40,9 +48,203 @@ integral:
   genus_class_count: 1
   spinor_genus_count: 1
   spinor_genera: [1]
+  primitive_orbits:
+    O:
+      constant: 1
+      z: []
+      w: []
+    O+:
+      constant: 1
+      z: []
+      w: []
+    SO:
+      constant: 1
+      z: []
+      w: []
+    SO+:
+      constant: 1
+      z: []
+      w: []
+    Otilde:
+      constant: 1
+      z: []
+      w: []
+    Otilde+:
+      constant: 1
+      z: []
+      w: []
+    SOtilde:
+      constant: 1
+      z: []
+      w: []
+    SOtilde+:
+      constant: 1
+      z: []
+      w: []
+  anisotropic_primes: []
+  local_representations: []
+  local_densities:
+  - prime: 2
+    densities: [11/8, 3/4, 3/4, 83/64, 9/8, 3/4, 3/4, 39/32]
+automorphisms:
+  automorphism_group_order: aleph0
+  automorphism_group_generator_morphisms: [O(L) generator 1, O(L) generator 2, O(L) generator 3, O(L) generator 4, O(L) generator 5, O(L) generator 6, O(L) generator 7, O(L) generator 8, O(L) generator 9, O(L) generator 10, O(L) generator 11, O(L) generator 12, O(L) generator 13, O(L) generator 14, O(L) generator 15, O(L) generator 16, O(L) generator 17]
 indefinite:
   isotropic: true
-morphisms: []
+morphisms:
+- target: 3SQE
+  name: O(L) generator 1
+  matrix:
+  - [0, 1, 0, 0, 0]
+  - [1, 0, 0, 0, 0]
+  - [0, 0, 1, 0, 0]
+  - [0, 0, 0, 1, 0]
+  - [0, 0, 0, 0, 1]
+  scale: 1
+- target: 3SQE
+  name: O(L) generator 2
+  matrix:
+  - [1, 0, 0, 0, 0]
+  - [0, 1, 0, 0, 0]
+  - [0, 0, 1, 0, 0]
+  - [0, 0, 0, 0, -1]
+  - [0, 0, 0, -1, 0]
+  scale: 1
+- target: 3SQE
+  name: O(L) generator 3
+  matrix:
+  - [1, 0, 0, 0, 0]
+  - [0, 1, 0, 0, 0]
+  - [0, 0, 1, 0, 0]
+  - [0, 0, 0, -1, 0]
+  - [0, 0, 0, 0, -1]
+  scale: 1
+- target: 3SQE
+  name: O(L) generator 4
+  matrix:
+  - [-1, 0, 0, 0, 0]
+  - [0, -1, 0, 0, 0]
+  - [0, 0, -1, 0, 0]
+  - [0, 0, 0, 1, 0]
+  - [0, 0, 0, 0, 1]
+  scale: 1
+- target: 3SQE
+  name: O(L) generator 5
+  matrix:
+  - [1, 0, 0, 0, 1]
+  - [0, 1, 0, 0, 0]
+  - [0, 0, 1, 0, 1]
+  - [-1, 0, 1, 1, 0]
+  - [0, 0, 0, 0, 1]
+  scale: 1
+- target: 3SQE
+  name: O(L) generator 6
+  matrix:
+  - [1, 0, 0, 0, 0]
+  - [0, 1, 0, 0, 1]
+  - [0, 0, 1, 0, 1]
+  - [0, -1, 1, 1, 0]
+  - [0, 0, 0, 0, 1]
+  scale: 1
+- target: 3SQE
+  name: O(L) generator 7
+  matrix:
+  - [1, 0, 0, 1, 0]
+  - [0, 1, 0, 0, 0]
+  - [0, 0, 1, 1, 0]
+  - [0, 0, 0, 1, 0]
+  - [-1, 0, 1, 0, 1]
+  scale: 1
+- target: 3SQE
+  name: O(L) generator 8
+  matrix:
+  - [-1, 2, 2, 0, 0]
+  - [-2, 1, 2, 0, 0]
+  - [-2, 2, 3, 0, 0]
+  - [0, 0, 0, 1, 0]
+  - [0, 0, 0, 0, 1]
+  scale: 1
+- target: 3SQE
+  name: O(L) generator 9
+  matrix:
+  - [1, 0, 0, 0, 0]
+  - [0, 1, 0, 1, 0]
+  - [0, 0, 1, 1, 0]
+  - [0, 0, 0, 1, 0]
+  - [0, -1, 1, 0, 1]
+  scale: 1
+- target: 3SQE
+  name: O(L) generator 10
+  matrix:
+  - [-1, 0, 0, 0, 0]
+  - [0, -1, 0, 0, 0]
+  - [0, 0, 1, 0, 0]
+  - [0, 0, 0, 1, 0]
+  - [0, 0, 0, 0, 1]
+  scale: 1
+- target: 3SQE
+  name: O(L) generator 11
+  matrix:
+  - [1, 0, 0, 0, 0]
+  - [0, 1, 0, 0, 1]
+  - [0, 0, 1, 0, -1]
+  - [0, -1, -1, 1, 0]
+  - [0, 0, 0, 0, 1]
+  scale: 1
+- target: 3SQE
+  name: O(L) generator 12
+  matrix:
+  - [1, 0, 0, 0, 0]
+  - [0, 1, 0, 1, 0]
+  - [0, 0, 1, -1, 0]
+  - [0, 0, 0, 1, 0]
+  - [0, -1, -1, 0, 1]
+  scale: 1
+- target: 3SQE
+  name: O(L) generator 13
+  matrix:
+  - [-7, -4, 8, 0, 0]
+  - [-4, -1, 4, 0, 0]
+  - [-8, -4, 9, 0, 0]
+  - [0, 0, 0, 1, 0]
+  - [0, 0, 0, 0, 1]
+  scale: 1
+- target: 3SQE
+  name: O(L) generator 14
+  matrix:
+  - [0, 1, 0, -1, 0]
+  - [1, 0, 0, 1, 0]
+  - [0, 0, 1, 0, 0]
+  - [0, 0, 0, 1, 0]
+  - [-1, 1, 0, -1, 1]
+  scale: 1
+- target: 3SQE
+  name: O(L) generator 15
+  matrix:
+  - [0, 1, 0, 0, 1]
+  - [1, 0, 0, 0, -1]
+  - [0, 0, 1, 0, 0]
+  - [1, -1, 0, 1, -1]
+  - [0, 0, 0, 0, 1]
+  scale: 1
+- target: 3SQE
+  name: O(L) generator 16
+  matrix:
+  - [-1, -4, 4, 0, 0]
+  - [-4, -7, 8, 0, 0]
+  - [-4, -8, 9, 0, 0]
+  - [0, 0, 0, -1, 0]
+  - [0, 0, 0, 0, -1]
+  scale: 1
+- target: 3SQE
+  name: O(L) generator 17
+  matrix:
+  - [1, 0, 0, 0, 0]
+  - [0, 1, 0, 0, 0]
+  - [0, 0, 1, 0, 0]
+  - [0, 0, 0, 1, 0]
+  - [0, 0, 0, 0, 1]
+  scale: 1
 related:
 - tag: '0001'
   relation: This presentation is obtained by orthogonal sum of 0001, 0001, 3ICW, 0016.
