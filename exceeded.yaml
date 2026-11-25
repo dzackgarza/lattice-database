@@ -887,13 +887,48 @@
   killed_by: memory
   peak_bytes: 12661956608
   limit_bytes: 1675943116
-1Y6C integral.discriminant_form:
-  hash: 489436a5bb96b08b994c626ed727b20f3718d7f096c4a92749206c419dc5ee34
-  seconds: 0
+1Y7Y derive:
+  hash: cd3fae2f1d8362e89b86d96433653cc75330caf5f7f10bd877a58a13aefbb6d8
+  seconds: 31
   lost: true
+  killed_by: memory
+  peak_bytes: 12899954688
+  limit_bytes: 1675943116
+1Y8G derive:
+  hash: da9c72bcdaa7f75206e2f502fbf11dfadb6b4c93f21029adeb70414a60749ae9
+  seconds: 31
+  lost: true
+  killed_by: memory
+  peak_bytes: 12786704384
+  limit_bytes: 1675943116
+1YA8 derive:
+  hash: 693314eb31ce2cadf2beb06e864e26993d210700a9320d848980b6e921593eba
+  seconds: 30
+  lost: true
+  killed_by: memory
+  peak_bytes: 12594675712
+  limit_bytes: 1675943116
+1YAT derive:
+  hash: 866a13b07d638a59755ea7244002fe2cf6f5486688588afaceb5768f42de4488
+  seconds: 30
+  lost: true
+  killed_by: memory
+  peak_bytes: 12621508608
+  limit_bytes: 1675943116
+1YDE derive:
+  hash: 39ba02d5addae2af44b022f297159649349dfa09fcdf20355f567dfaf0e9ef07
+  seconds: 30
+  lost: true
+  killed_by: memory
+  peak_bytes: 13007757312
+  limit_bytes: 1675943116
 1YDS integral.genus_class_count:
   hash: 43701248704ac476a2e87076e3517a579dc7a14927b53ffd7975a646d3978b4c
   seconds: 12
+  lost: true
+1YIH definite.siegel_eisenstein_coefficients:
+  hash: ed563f84ab1f354f96eca4fd85c732acfc05e5484cc7582f2cc925100a8b2e4c
+  seconds: 0
   lost: true
 1ZON integral.elementary_primes:
   hash: 3257bea340bac7a0a798770c1f57b877e9e9fb48914c44752fea07cbec1a2885
@@ -3169,10 +3204,6 @@
 3GWR integral.overlattice_count:
   hash: 836db517473faaeaa34246fe1f1fa761d816846114d210a46b13530d6de2d5f8
   seconds: 5
-  lost: true
-3GWW integral.discriminant_sequence:
-  hash: 9fe28d538d4282a19fff1921e5b1179b8dce50772c24399b183b49c257bfece4
-  seconds: 14313
   lost: true
 3GX5 integral.discriminant_sequence:
   hash: ac5830bf83c01f73d9a9417b7f9de8b39dbfd51c20f84ed5872b139ccae22b93
