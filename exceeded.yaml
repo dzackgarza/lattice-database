@@ -776,10 +776,6 @@
 1CZ4 integral.discriminant_form:
   hash: d9ace81ff310c9f2d93545001a6c2ebae53abd4735fbdf0278f88049ec4bcdb9
   seconds: 4
-1DAZ integral.discriminant_form:
-  hash: 6e9dfe9a0055734499d79ced91fa67e9f6ef0e7a8ce099444ec37af001e067f3
-  seconds: 0
-  lost: true
 1DRM integral.genus_class_count:
   hash: b9116a9b09223f453b6990f0efa48f8670ad40d65cb4f5c32b3f8b2cb30e031e
   seconds: 10
@@ -790,6 +786,10 @@
   lost: true
 1F6O integral.primitive_orbits:
   hash: aa9a82c8d21972721e8be9c08518da9a41ebe41fa9eafc96e77816086779ea31
+  seconds: 0
+  lost: true
+1FEG integral.discriminant_form:
+  hash: c37e24dea123e516ef685108645f036285ab65fc7b30cbd3b5861dd582518b78
   seconds: 0
   lost: true
 1FHM integral.discriminant_form:
@@ -1764,10 +1764,6 @@
   killed_by: memory
   peak_bytes: 13150625792
   limit_bytes: 1675839488
-292J derive:
-  hash: 28737acbf5f388b05806508b5931073ac0b52c353883d6bc65dd1b794c7a951a
-  seconds: 30
-  lost: true
 29FF derive:
   hash: e63d6a0e58079de58b673db6cd341ea7ecd2b664ef3ae9f101cd8664a9b54294
   seconds: 50
@@ -3024,12 +3020,6 @@
   hash: 8cb7ef7d73079f6dab7c15c2d594218d65ca768f8f835504e1350a5324ea9dc6
   seconds: 0
   lost: true
-4N33 automorphisms.automorphism_group_generator_morphisms:
-  hash: b1bdbcdade9c8b13fd6cec98d84636fc62e1d96b8c90b277dee038b69c3e889c
-  seconds: 19304
-4N33 automorphisms.automorphism_group_order:
-  hash: 7424a531255ff56a461b04c8f76fb810ba13d2dac8be3b64dcec72cc8b9f7b25
-  seconds: 19328
 4OEZ automorphisms.automorphism_group_generator_morphisms:
   hash: 87718923f329d6330375f064530195bd21116f30fb49583d8c56092276cf780c
   seconds: 17936
