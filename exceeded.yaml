@@ -856,10 +856,6 @@
   hash: da081cf84a8f2d0437ae03d373ada2f424f87d345a5e9290b27e043c02311eda
   seconds: 30
   lost: true
-1XDA integral.genus_class_count:
-  hash: 8447308a7d4ef70bcbbf74309119433e0d62849dcf818c842bc9f78869b1d7a2
-  seconds: 0
-  lost: true
 1XEP integral.spinor_genera:
   hash: 31e6986fe026d98e42c61972796bc9a750739bec7e9e797354e0faf70396d9de
   seconds: 0
@@ -867,6 +863,10 @@
 1XPY integral.genus_class_count:
   hash: d309ef81a8484bbbc0343c98be9a0ef2a1336faa9ee50e7f43d7940f94963fc7
   seconds: 28
+  lost: true
+1XSC integral.overlattice_count:
+  hash: 0ba7c4f3240c3a2d32d3fd8ee901b76fdb5c2eb50a17fcb071148508344ec609
+  seconds: 0
   lost: true
 1XZ4 integral.genus_class_count:
   hash: 74c16994c3b77952038ba93c20a18b544b6f1c57c52852339204c037805c0eac
@@ -2485,10 +2485,6 @@
 3GWR integral.overlattice_count:
   hash: 836db517473faaeaa34246fe1f1fa761d816846114d210a46b13530d6de2d5f8
   seconds: 5
-  lost: true
-3GWW integral.discriminant_sequence:
-  hash: 9fe28d538d4282a19fff1921e5b1179b8dce50772c24399b183b49c257bfece4
-  seconds: 10678
   lost: true
 3GX5 integral.discriminant_sequence:
   hash: ac5830bf83c01f73d9a9417b7f9de8b39dbfd51c20f84ed5872b139ccae22b93
