@@ -15,6 +15,12 @@ certifications:
   integral.hyperbolic_index: b4030415791c2355190850197798fa5e5bf595c71405e897db43d35cd3c84d6c
   definite.automorphism_group_order: e89501de3a146f1c8ae252d340e464c2fac9af6b0dd244d2b6a1205a6965bfce
   definite.automorphism_group_generator_morphisms: 1e8c7f4a65202389f85bcf2b43fad729d1f50e826bc5b98e0dc078832bdbdb71
+  integral.discriminant_sequence: ef112121e1331d74f1464e2e1dd1d84e7ecad409d670b94abd04f104fa6bf82d
+  integral.discriminant_form: 17c0d4da6486e698949ccbb8c61a726305703d828d0ff609d8cc2ba012270b63
+  integral.primitive_orbits: 0638b3c532d08b3e43330c81eef56cb9478c6da2337c80508136d087c92c4442
+  integral.modular_scale: 3211618fa0224d373080d9904df47646a040f2a36ea5a6a39c0124481fb3b4f4
+  definite.genus_theta_series: 82ed2a57f493eb73a2b55ec78394938b855f67f951ca1b881b59bc37ff0fddd1
+  definite.theta_series_cuspidal_component: e1e6823f46030933241e6a06a65d237e77267da1768f709f85d5e3d54943bfbe
 rank: 5
 gram_tensor:
 - [4, 2, 1, -1, 1]
@@ -37,7 +43,166 @@ integral:
   elementary_primes: []
   parity: even
   level: 48
+  modular_scale: false
   discriminant_group: [6, 6, 24]
+  discriminant_sequence:
+    discriminant_factors: [6, 6, 24]
+    discriminant_basis_lifts:
+    - [-37/6, '0', 1/6, '0', 1/2]
+    - ['-2', '0', '0', 1/6, 1/6]
+    - [-7/24, -1/24, '0', -5/24, 1/24]
+    discriminant_quadratic_gram:
+    - [5/3, 1/2, 1/6]
+    - [1/2, 1/3, 5/6]
+    - [1/6, 5/6, 13/24]
+    discriminant_group_order: 2304
+    discriminant_generators:
+    - - [5, 5, 20]
+      - [0, 5, 16]
+      - [4, 4, 23]
+    - - [5, 5, 20]
+      - [3, 4, 20]
+      - [1, 3, 3]
+    - - [5, 5, 20]
+      - [3, 4, 20]
+      - [1, 3, 21]
+    - - [5, 5, 20]
+      - [3, 4, 20]
+      - [3, 3, 11]
+    - - [5, 5, 20]
+      - [0, 5, 4]
+      - [3, 1, 19]
+    image_generators:
+    - - [5, 0, 0]
+      - [0, 5, 0]
+      - [0, 0, 23]
+    - - [5, 2, 4]
+      - [0, 5, 0]
+      - [4, 1, 1]
+    - - [5, 2, 4]
+      - [0, 5, 0]
+      - [0, 1, 1]
+    - - [1, 3, 0]
+      - [0, 5, 0]
+      - [0, 1, 1]
+    - - [1, 0, 12]
+      - [0, 1, 0]
+      - [0, 3, 7]
+    image_order: 64
+    kernel_order: 1
+    coset_representatives:
+    - - [1, 0, 0]
+      - [0, 1, 0]
+      - [0, 0, 1]
+    - - [0, 1, 4]
+      - [1, 2, 4]
+      - [1, 3, 3]
+    - - [0, 1, 4]
+      - [1, 2, 4]
+      - [1, 3, 13]
+    - - [0, 1, 4]
+      - [1, 2, 4]
+      - [1, 3, 19]
+    - - [0, 1, 4]
+      - [1, 2, 4]
+      - [1, 3, 21]
+    - - [0, 1, 16]
+      - [1, 2, 4]
+      - [4, 3, 1]
+    - - [0, 1, 16]
+      - [1, 2, 4]
+      - [4, 3, 7]
+    - - [0, 1, 16]
+      - [1, 2, 4]
+      - [4, 3, 9]
+    - - [0, 1, 16]
+      - [1, 2, 4]
+      - [4, 3, 15]
+    - - [1, 0, 0]
+      - [0, 1, 0]
+      - [0, 0, 7]
+    - - [1, 0, 0]
+      - [0, 1, 12]
+      - [3, 0, 1]
+    - - [1, 0, 0]
+      - [0, 1, 12]
+      - [3, 0, 7]
+    - - [1, 0, 0]
+      - [3, 1, 0]
+      - [3, 0, 1]
+    - - [1, 0, 0]
+      - [3, 1, 0]
+      - [3, 0, 7]
+    - - [1, 0, 0]
+      - [3, 1, 12]
+      - [0, 0, 1]
+    - - [1, 0, 0]
+      - [3, 1, 12]
+      - [0, 0, 7]
+    - - [1, 0, 4]
+      - [0, 1, 8]
+      - [0, 3, 17]
+    - - [1, 0, 4]
+      - [0, 1, 8]
+      - [0, 3, 23]
+    - - [1, 0, 4]
+      - [0, 1, 8]
+      - [2, 5, 1]
+    - - [1, 0, 4]
+      - [0, 1, 8]
+      - [2, 5, 7]
+    - - [1, 0, 4]
+      - [0, 1, 20]
+      - [3, 3, 5]
+    - - [1, 0, 4]
+      - [0, 1, 20]
+      - [3, 3, 11]
+    - - [1, 0, 4]
+      - [0, 1, 20]
+      - [5, 5, 13]
+    - - [1, 0, 4]
+      - [0, 1, 20]
+      - [5, 5, 19]
+    - - [1, 0, 4]
+      - [3, 1, 8]
+      - [0, 3, 17]
+    - - [1, 0, 4]
+      - [3, 1, 8]
+      - [0, 3, 23]
+    - - [1, 0, 4]
+      - [3, 1, 8]
+      - [2, 5, 1]
+    - - [1, 0, 4]
+      - [3, 1, 8]
+      - [2, 5, 7]
+    - - [1, 0, 4]
+      - [3, 1, 20]
+      - [3, 3, 5]
+    - - [1, 0, 4]
+      - [3, 1, 20]
+      - [3, 3, 11]
+    - - [1, 0, 4]
+      - [3, 1, 20]
+      - [5, 5, 13]
+    - - [1, 0, 4]
+      - [3, 1, 20]
+      - [5, 5, 19]
+    - - [2, 3, 0]
+      - [3, 1, 0]
+      - [0, 5, 17]
+    - - [2, 3, 0]
+      - [3, 1, 0]
+      - [0, 5, 23]
+    - - [2, 3, 12]
+      - [3, 1, 0]
+      - [1, 0, 1]
+    - - [2, 3, 12]
+      - [3, 1, 0]
+      - [1, 0, 7]
+    mm_trivial: false
+    image_normal: false
+    quotient_generator_cosets: null
+    quotient_multiplication: null
   overlattice_count: 55
   bad_reduction_primes: [2, 3]
   genus_symbol: 'II_{5,0} (2: 1^2:2^-2:[8^1]_7; 3: 1^-2 3^3)'
@@ -45,6 +210,43 @@ integral:
   spinor_genus_count: 1
   spinor_genera: [2]
   hyperbolic_index: 0
+  primitive_orbits:
+    O:
+      constant: 0
+      z: [0, 0, 0, 2]
+      w: [0, 0, 0, 0]
+    SO:
+      constant: 0
+      z: [0, 0, 0, 2]
+      w: [0, 0, 0, 0]
+    Otilde:
+      constant: 0
+      z: [0, 0, 0, 10]
+      w: [0, 0, 0, 0]
+    SOtilde:
+      constant: 0
+      z: [0, 0, 0, 10]
+      w: [0, 0, 0, 0]
+    O+:
+      constant: 0
+      z: [0, 0, 0, 2]
+      w: [0, 0, 0, 0]
+    SO+:
+      constant: 0
+      z: [0, 0, 0, 2]
+      w: [0, 0, 0, 0]
+    Otilde+:
+      constant: 0
+      z: [0, 0, 0, 10]
+      w: [0, 0, 0, 0]
+    SOtilde+:
+      constant: 0
+      z: [0, 0, 0, 10]
+      w: [0, 0, 0, 0]
+  discriminant_form:
+    orthogonal_group_order: 2304
+    isotropic_classes: 18
+    isotropic_orbits: 4
 definite:
   minimum: 4
   kissing_number: 10
@@ -63,6 +265,8 @@ definite:
   - [1, 0, 0, 0, 0]
   perfect: false
   theta_series: [1, 0, 0, 0, 10, 0, 12, 0, 18]
+  genus_theta_series: [1, 0, 4/5, 0, 42/5, 0, 64/5, 0, 82/5]
+  theta_series_cuspidal_component: [0, 0, -4/5, 0, 8/5, 0, -4/5, 0, 8/5]
   root_system: []
   roots:
   - type: B2
