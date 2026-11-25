@@ -1702,6 +1702,24 @@
   killed_by: memory
   peak_bytes: 14055350272
   limit_bytes: 1675943116
+291C derive:
+  hash: 5166777cfd15719ad7776b2461ba986af020c1e1ec35d47fb308788eaf0c7e2e
+  seconds: 44
+  lost: true
+  killed_by: memory
+  peak_bytes: 12582055936
+  limit_bytes: 1675839488
+291V derive:
+  hash: 13da77f9382fe97ff8460cefbd290049c5e4f7cd3bd38d8f9a9614c630aff317
+  seconds: 40
+  lost: true
+  killed_by: memory
+  peak_bytes: 13150625792
+  limit_bytes: 1675839488
+292J derive:
+  hash: 28737acbf5f388b05806508b5931073ac0b52c353883d6bc65dd1b794c7a951a
+  seconds: 30
+  lost: true
 29D1 definite.genus_theta_series:
   hash: ccdb07a351b844dd7a43e5af0b4c775d9543a20c73426104a88ac1825eb8da5a
   seconds: 601

@@ -19642,11 +19642,20 @@
 27C2 definite.automorphism_group_order:
   hash: 789094c582cdd7899e63847161f40542e5d62e13e379d39e36de1aa3a47c0171
   by: research preamble
+27C2 definite.genus_theta_series:
+  hash: fb929e198b8c2db4aa467974ff4bab684e6e92f7d78449ab1c2793b70ae11865
+  by: research preamble
+27C2 definite.theta_series_cuspidal_component:
+  hash: 146e7d83a24e431d06c4cb4423480c59f2b690404bcdb784ef94121004493d36
+  by: research preamble
 27C2 derive:
   hash: 94aeefbb90ebcfcfa7132786800fff26dce1d8fca51dc8edf1abb06d64f4a2a0
   by: research preamble
 27C2 form.integer_valued:
   hash: 809d2a010f739c0b4d7036e6f12a2afeded7843050f9efb9bfebf65d7d1f697e
+  by: research preamble
+27C2 integral.anisotropic_primes:
+  hash: de0c5af826315cfaca8267e45a2ad96fc1546b92d7617566fafca7d9d7ea38c7
   by: research preamble
 27C2 integral.discriminant_sequence:
   hash: ac2def5a7d6ed0e7742cc618486965b12d51f36f1b96182cfa0c44abbcd17ac6
@@ -19663,8 +19672,20 @@
 27C2 integral.hyperbolic_index:
   hash: ac4e530d6c474f9e26badc5d1a23fab935c23033770f39902e2a7ff95e388404
   by: research preamble
+27C2 integral.local_densities:
+  hash: 437b454a8f2e39e6c559577b6f414fd903f99714cd6230a3e1f18e78594aa44b
+  by: research preamble
+27C2 integral.local_representations:
+  hash: 2477700ffd37464efc39eb9c162f4fef2e8e05ef332401f7880c87b081023059
+  by: research preamble
+27C2 integral.modular_scale:
+  hash: 45e65ecdd7dd34c89318e665f7a5eefc21c4770df8ae406dede18c7518df2da6
+  by: research preamble
 27C2 integral.overlattice_count:
   hash: 66b6ae999e8bd9a1d89cbd5757c03d93bdcb0c35871cf301f8af4f3657670d2d
+  by: research preamble
+27C2 integral.primitive_orbits:
+  hash: dbc65f482b4d38044889d6a82c39c6c645d0d2fcfeb978201b7f8f5ad00b79a5
   by: research preamble
 27C2 integral.spinor_genera:
   hash: 036e885f30413b19f81038a49fdccfacf9de76faa5f28beffefeda32e61ef1a4
@@ -19678,11 +19699,20 @@
 27CW definite.automorphism_group_order:
   hash: b209072da9bc5960f3093b3c5031d64cc2948ed117d7f8c22ab85f994d877173
   by: research preamble
+27CW definite.genus_theta_series:
+  hash: ea257f702f10cf63b4468a83b8dc4ff496dcd4ee109b319e88d9ced0a39bc992
+  by: research preamble
+27CW definite.theta_series_cuspidal_component:
+  hash: 285aaaea06fc85ef27205cebe48769472b964bfa19c809983ca62335407572c3
+  by: research preamble
 27CW derive:
   hash: 4ab0f1b4f6ce4db842a2fe87c1d9693c91e23ee985894994bdcd5354daf94bc6
   by: research preamble
 27CW form.integer_valued:
   hash: 1c7a22672f04e23c0d6f0f56d5e478209fa643e726c0c9b25636eb86bdf6b86a
+  by: research preamble
+27CW integral.anisotropic_primes:
+  hash: 3fe8187f2ad6773b9e19564761d8f08efa91eeaa90d1b24c15efadb7f2f48f1f
   by: research preamble
 27CW integral.discriminant_sequence:
   hash: c0f0b97814c43b8d53a9117390df74f426edbfc00c6da5806b5aa31898158a6b
@@ -19699,8 +19729,20 @@
 27CW integral.hyperbolic_index:
   hash: a0dc67a309c736de6c684681e97fda65d85befc6b367b216f0d94c1823fca4dd
   by: research preamble
+27CW integral.local_densities:
+  hash: ffe2b88a5e70d918526ef829a548cff5b18872b228146a27972f76714584799e
+  by: research preamble
+27CW integral.local_representations:
+  hash: 758eb67586c72c291382a2c0235e45e0972dbab4e9f238ae53e8631615a8a63a
+  by: research preamble
+27CW integral.modular_scale:
+  hash: a432cb350898d414b049141b7bdd5dbdedc1ef75f28f1c3d60f9884651f7b934
+  by: research preamble
 27CW integral.overlattice_count:
   hash: 22517eb5bdeb180c58efc5041e91f062e0070176d84f9198f81b53d685416b98
+  by: research preamble
+27CW integral.primitive_orbits:
+  hash: 56675f2138db21457ee8efdf1fdd0de1fb26c0e331bde72cf13494c14d9682d7
   by: research preamble
 27CW integral.spinor_genera:
   hash: 293d484bfc8e5516f30e55057ab50b2b4adf04d00924268fda621ede20dfc020
@@ -30101,7 +30143,7 @@
   hash: 3689d72e14f97b8b42b2921dfa923a394522fca8ef5984b4cf8a7d9e1b8b9b4a
   by: research preamble
 5K8E integral.primitive_orbits:
-  hash: 79e369409c946e7d9a0439f9e9352cb204f824f1135d372553238ffa67aa00ac
+  hash: fef95d5d7a1e1ce2b41a62e6108ceb3d5c9199ad70ee1d3c19936338401c5756
   by: research preamble
 5K8E integral.spinor_genera:
   hash: 94460ee81f4523897d172256b27af547d9206043f8b7b99450fd92ee84c02eb9

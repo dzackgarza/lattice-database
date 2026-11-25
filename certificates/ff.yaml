@@ -18793,6 +18793,9 @@
 27V5 form.integer_valued:
   hash: b07a8ce57b3bbd60631fb7681cbcbb171d8db1950c4d6de0c4ac0a6910267be6
   by: research preamble
+27V5 integral.anisotropic_primes:
+  hash: a51f671e739d78367b0c1f42028f17ce872d2a9a9296c740556f8e4aa895ebcd
+  by: research preamble
 27V5 integral.discriminant_form:
   hash: d0e5f20064497b208dfed500c3dc85ff668b69391ed067a357417c0ad8ba61ee
   by: research preamble
@@ -18810,6 +18813,12 @@
   by: research preamble
 27V5 integral.hyperbolic_index:
   hash: d329362f704dd063aa7930f76c5b9d982a15facc810c5cdca7e9c0ca12b11e1c
+  by: research preamble
+27V5 integral.local_densities:
+  hash: e14b287c75bd9e5a34201475cd8320ae12819c42e0e7554294c6feb572177fa8
+  by: research preamble
+27V5 integral.local_representations:
+  hash: 210d8307dd992bb610f87a9be2846ea8957dd8cf9aff93569366184e0f5add95
   by: research preamble
 27V5 integral.modular_scale:
   hash: 7eda29b55ab36725001ada645f001723f19290a7ce96368a84e627843d05ac31
@@ -18832,11 +18841,20 @@
 28BF definite.automorphism_group_order:
   hash: 253fa028d615afc39e284f63fbae424ce6b07b9ede7c18f1134663b0ae3e4407
   by: research preamble
+28BF definite.genus_theta_series:
+  hash: 3e89cf2c13b76b89910e4f382e0c235f3e888795e6f7e5063730fc6e4f4675b7
+  by: research preamble
+28BF definite.theta_series_cuspidal_component:
+  hash: 07da81ce976fdf279f3f477c2dc7d67e2dc49dcffac56a3466913c978014bd2d
+  by: research preamble
 28BF derive:
   hash: f5a67dfa47d152aa342991ecc5e8a4983c47666dc85c29e82ca7b98e6aac52bb
   by: research preamble
 28BF form.integer_valued:
   hash: 9f4dbfe9776f9e58144eb90fee13ef409372aafdb2071a32ae013098a035890a
+  by: research preamble
+28BF integral.anisotropic_primes:
+  hash: 87de6a41e79ad2e7e50132a61cff2844d898724ea795fa5b2669c9084ee5dcce
   by: research preamble
 28BF integral.discriminant_sequence:
   hash: 8c18b4f44bb54df30dfd00ae1429e18ed336551f1d0159777dacbec3670652a9
@@ -18853,8 +18871,20 @@
 28BF integral.hyperbolic_index:
   hash: ac0bd7e3a872d557ffa32f8d0370eacd1751df2b3891fd8352c9cfae78bdc059
   by: research preamble
+28BF integral.local_densities:
+  hash: d86754aa7d53a38e86e793d41b19324a277e0004103fbb3b3b5231299e776697
+  by: research preamble
+28BF integral.local_representations:
+  hash: 06cf7070221077be74f0f3ef2136c487b421c1ea63d6d911b933faddec353faa
+  by: research preamble
+28BF integral.modular_scale:
+  hash: 1ddd23186f194757b91bba71f22af641429f127d02ade6b2253bd132534bb772
+  by: research preamble
 28BF integral.overlattice_count:
   hash: 4e838ccac23bd6f973ad0c84985f0cc7c7a5bd5b975ed3ea20cb17f8e22f4ad8
+  by: research preamble
+28BF integral.primitive_orbits:
+  hash: 3b804021642c1ca46ef9bf91fa7af9828ba914034dadeccaa59651dba5839fde
   by: research preamble
 28BF integral.spinor_genera:
   hash: 0cc712ec4ce013db4eb39c0d70afa2e476f791305bdabcfc239754cbd6bd99ee
@@ -18880,6 +18910,9 @@
 28QS form.integer_valued:
   hash: f8418161643a82b0568d8bba705adf9530265693d4bc7f5a23b32396552ff713
   by: research preamble
+28QS integral.anisotropic_primes:
+  hash: 3ce7be48ad955d9c9032ffacdd1c618b2e52c9624f767312b83c4d0d4a99d3b7
+  by: research preamble
 28QS integral.discriminant_form:
   hash: 3856d042b940592d9663cdbcd24c571fa445d208ee6bd280d4e846325aaff96c
   by: research preamble
@@ -18897,6 +18930,12 @@
   by: research preamble
 28QS integral.hyperbolic_index:
   hash: d8f58d889376ee0d0ef9fe0820015e03296e3ed7b490f1a1657b10bc6c97cd73
+  by: research preamble
+28QS integral.local_densities:
+  hash: 5f18595ea7375d75a1f60f8f1e3f8aa689f78fe29fa41c4a13ce9e0b4e3b6f9f
+  by: research preamble
+28QS integral.local_representations:
+  hash: 10d62feec732d465c251f000ba99d90cfebdd32c3903465143b0bcc0200e420c
   by: research preamble
 28QS integral.modular_scale:
   hash: 15d4b87c46626ae5d3f570d94505a9884b7ea44bf6e03bdfe5f3df2bdfd74095
