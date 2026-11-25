@@ -1794,11 +1794,7 @@
   limit_bytes: 1675943116
 2L9P derive:
   hash: 4ddcaf5951abfe350dd80a5dff0d293ee799869abf4e08e40c12f9c97c198a07
-  seconds: 71
-  lost: true
-  killed_by: memory
-  peak_bytes: 14258954240
-  limit_bytes: 1675942297
+  seconds: 34
 2RSZ integral.discriminant_form:
   hash: 415a8ddad5836ec21252d54cdbed3fb4c6e964d8667e7f91a82ef04dc6dab27b
   seconds: 6
@@ -2182,6 +2178,10 @@
 3GVT integral.overlattice_count:
   hash: 980f3cd45727183a8b2dc7d54ae624ff2174d1fe0dead0677e420e8cca92d16f
   seconds: 19
+  lost: true
+3GW5 integral.discriminant_sequence:
+  hash: 417905fde71f6c910205c1073b16421e331b759fa0950381f4ff6a46613480b5
+  seconds: 8895
   lost: true
 3GW5 integral.overlattice_count:
   hash: 4638adc325a0ee6d4d9136c3852ee4c80d348052095c2f530e2b1196e868f777
