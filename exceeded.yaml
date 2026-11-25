@@ -1569,10 +1569,6 @@
   killed_by: memory
   peak_bytes: 13241061376
   limit_bytes: 1675943116
-27CU definite.genus_theta_series:
-  hash: d2dda852ce55255337171937697f6fc700e199993cc6e0e63f230b1dd52e1f56
-  seconds: 0
-  lost: true
 27MV derive:
   hash: 0e044db65139bd9bd05948e9e080f7d642e6d3286c81d07d73401b6e67bceecf
   seconds: 41
@@ -1699,6 +1695,17 @@
 27VT integral.discriminant_form:
   hash: e6d8cb0324782790cfac918826f205b81534a0ef6670d8a187c996837382b771
   seconds: 3
+28H4 derive:
+  hash: 562087e4f66f892352674baee21d5f1f6abf9f1b01208440eeef47dcb40596d9
+  seconds: 62
+  lost: true
+  killed_by: memory
+  peak_bytes: 14055350272
+  limit_bytes: 1675943116
+29D1 definite.genus_theta_series:
+  hash: ccdb07a351b844dd7a43e5af0b4c775d9543a20c73426104a88ac1825eb8da5a
+  seconds: 601
+  lost: true
 2AS5 derive:
   hash: 7fa15cd1a4dd2d2d5efbb7847f82cd6cef272a42ea42a0c511ae65285cf7ac04
   seconds: 10
