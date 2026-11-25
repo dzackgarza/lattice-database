@@ -489,7 +489,7 @@
   limit_bytes: 1646340915
 03A8 definite.spinor_regular:
   hash: 9afcb6ed5e5e0558fc915599b97813cb884a77216a8c5678759482a468e3d9cf
-  seconds: 1562
+  seconds: 3364
   lost: true
 03E4 definite.regular:
   hash: 367ee6be7b1ae2324d2f8b84ed17807c44014151c93049ad1053aae3f816df83
@@ -1590,10 +1590,6 @@
   killed_by: memory
   peak_bytes: 13241061376
   limit_bytes: 1675943116
-27CU definite.genus_theta_series:
-  hash: d2dda852ce55255337171937697f6fc700e199993cc6e0e63f230b1dd52e1f56
-  seconds: 0
-  lost: true
 27MV derive:
   hash: 0e044db65139bd9bd05948e9e080f7d642e6d3286c81d07d73401b6e67bceecf
   seconds: 41
@@ -1716,6 +1712,13 @@
   lost: true
   killed_by: memory
   peak_bytes: 12824137728
+  limit_bytes: 1675943116
+28H4 derive:
+  hash: 562087e4f66f892352674baee21d5f1f6abf9f1b01208440eeef47dcb40596d9
+  seconds: 62
+  lost: true
+  killed_by: memory
+  peak_bytes: 14055350272
   limit_bytes: 1675943116
 29D1 definite.genus_theta_series:
   hash: ccdb07a351b844dd7a43e5af0b4c775d9543a20c73426104a88ac1825eb8da5a
@@ -2591,6 +2594,12 @@
   hash: 8cb7ef7d73079f6dab7c15c2d594218d65ca768f8f835504e1350a5324ea9dc6
   seconds: 0
   lost: true
+4N33 automorphisms.automorphism_group_generator_morphisms:
+  hash: b1bdbcdade9c8b13fd6cec98d84636fc62e1d96b8c90b277dee038b69c3e889c
+  seconds: 19304
+4N33 automorphisms.automorphism_group_order:
+  hash: 7424a531255ff56a461b04c8f76fb810ba13d2dac8be3b64dcec72cc8b9f7b25
+  seconds: 19328
 4ZLQ integral.primitive_orbits[Otilde+]:
   hash: f950fe8eda4a26616d1fa203f6b9d971752b7796263a18613b89c46566b1912d
   seconds: 0
