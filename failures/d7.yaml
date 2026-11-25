@@ -9037,6 +9037,216 @@
     database_revision: 8ff86fa50075c14fb4ad52122c3eb37621291c9f
     research_revision: 56bb3e64617d0dbe076e6b156dfa03065deb0d96
   notes: []
+63TL integral.primitive_orbits[Otilde+]:
+  disposition: open
+  attempts:
+  - hash: ba272945e8b8d4507c1e498e5c056197ef3d200d0e196b202cfe37bdad708d6b
+    gram_tensor:
+    - - -2
+      - 0
+      - 0
+      - 0
+      - 0
+    - - 0
+      - 0
+      - -1
+      - 0
+      - 0
+    - - 0
+      - -1
+      - 0
+      - 0
+      - 0
+    - - 0
+      - 0
+      - 0
+      - -2
+      - 3
+    - - 0
+      - 0
+      - 0
+      - 3
+      - -6
+    reason: exit status 1
+    stderr: "Traceback (most recent call last):\n  File \"sage/misc/cachefunc.pyx\",
+      line 1965, in sage.misc.cachefunc.CachedMethodCaller.__call__\n    return cache[k]\nKeyError:
+      (False, ((130884000065104, ((0, 1, -1, 2, 1),)),))\n\nDuring handling of the
+      above exception, another exception occurred:\n\nTraceback (most recent call
+      last):\n  File \"<frozen runpy>\", line 203, in _run_module_as_main\n  File
+      \"<frozen runpy>\", line 88, in _run_code\n  File \"/home/runner/work/lattice-database/lattice-database/src/latticedb/sage_genus.py\",
+      line 536, in <module>\n    main()\n    ~~~~^^\n  File \"/home/runner/work/lattice-database/lattice-database/src/latticedb/sage_genus.py\",
+      line 531, in main\n    _compute(request)\n    ~~~~~~~~^^^^^^^^^\n  File \"/home/runner/work/lattice-database/lattice-database/src/latticedb/sage_genus.py\",
+      line 514, in _compute\n    _run(tag, [field], lambda row=row, field=field, compute=compute:
+      {field: compute(lattice, row)})\n    ~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n
+      \ File \"/home/runner/work/lattice-database/lattice-database/src/latticedb/sage_genus.py\",
+      line 449, in _run\n    values = compute()\n  File \"/home/runner/work/lattice-database/lattice-database/src/latticedb/sage_genus.py\",
+      line 514, in <lambda>\n    _run(tag, [field], lambda row=row, field=field, compute=compute:
+      {field: compute(lattice, row)})\n                                                                             ~~~~~~~^^^^^^^^^^^^^^\n
+      \ File \"/home/runner/work/lattice-database/lattice-database/src/latticedb/sage_genus.py\",
+      line 125, in _primitive_isotropic_line_row\n    constant = subgroup.isotropic_orbit_representatives(1).cardinality()\n
+      \              ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^\n  File \"/repos/sage-extensions/src/sage_extensions/categories/group/predicate_subgroups.py\",
+      line 605, in isotropic_orbit_representatives\n    return _subgroup_isotropic_orbit_representatives(\n
+      \       self, rank, flag=flag\n    )\n  File \"/repos/sage-extensions/src/sage_extensions/timing.py\",
+      line 509, in timed\n    return function(*arguments, **keywords)\n  File \"/repos/sage-extensions/src/sage_extensions/categories/orthogonal_quotients.py\",
+      line 5076, in _subgroup_isotropic_orbit_representatives\n    tuple(_yield_subgroup_isotropic_orbit_representatives(subgroup,
+      rank, flag=flag))\n    ~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n
+      \ File \"/repos/sage-extensions/src/sage_extensions/categories/orthogonal_quotients.py\",
+      line 5041, in _yield_subgroup_isotropic_orbit_representatives\n    stabilizer
+      = quotient.exact_isotropic_stabilizer_generators(\n        representative, flag=flag\n
+      \   )\n  File \"sage/misc/cachefunc.pyx\", line 1970, in sage.misc.cachefunc.CachedMethodCaller.__call__\n
+      \   w = self._instance_call(*args, **kwds)\n  File \"sage/misc/cachefunc.pyx\",
+      line 1848, in sage.misc.cachefunc.CachedMethodCaller._instance_call\n    return
+      self.f(self._instance, *args, **kwds)\n  File \"/repos/sage-extensions/src/sage_extensions/categories/orthogonal_quotients.py\",
+      line 2023, in exact_isotropic_stabilizer_generators\n    raise ArithmeticError(\n
+      \   ...<2 lines>...\n    )\nArithmeticError: an ambient stabilizer generator
+      of Integral lattice of rank 1 and signature (0, 0) moves its divided discriminant
+      data: it does not stabilize Integral lattice of rank 1 and signature (0, 0)\n"
+    seconds: 1.9901838099999623
+    recorded_at: 2026-11-25 13:35:33.414414+00:00
+    run_url: https://github.com/dzackgarza/lattice-database/actions/runs/45620276217/attempts/1
+    database_revision: a73561aa67eccf4fb67d084a138f892d9748927a
+    research_revision: 9aea67c19a8fcee3cc65e015388a6bb9b708366a
+  notes: []
+63TL integral.primitive_orbits[SO+]:
+  disposition: open
+  attempts:
+  - hash: ad0774f6548bfa3c878b1d0876f5748279c6d0ca28796a53dcad23cfb871a6dc
+    gram_tensor:
+    - - -2
+      - 0
+      - 0
+      - 0
+      - 0
+    - - 0
+      - 0
+      - -1
+      - 0
+      - 0
+    - - 0
+      - -1
+      - 0
+      - 0
+      - 0
+    - - 0
+      - 0
+      - 0
+      - -2
+      - 3
+    - - 0
+      - 0
+      - 0
+      - 3
+      - -6
+    reason: exit status 1
+    stderr: "Traceback (most recent call last):\n  File \"sage/misc/cachefunc.pyx\",
+      line 1965, in sage.misc.cachefunc.CachedMethodCaller.__call__\n    return cache[k]\nKeyError:
+      (False, ((130018316773136, ((0, 1, -1, 2, 1),)),))\n\nDuring handling of the
+      above exception, another exception occurred:\n\nTraceback (most recent call
+      last):\n  File \"<frozen runpy>\", line 203, in _run_module_as_main\n  File
+      \"<frozen runpy>\", line 88, in _run_code\n  File \"/home/runner/work/lattice-database/lattice-database/src/latticedb/sage_genus.py\",
+      line 536, in <module>\n    main()\n    ~~~~^^\n  File \"/home/runner/work/lattice-database/lattice-database/src/latticedb/sage_genus.py\",
+      line 531, in main\n    _compute(request)\n    ~~~~~~~~^^^^^^^^^\n  File \"/home/runner/work/lattice-database/lattice-database/src/latticedb/sage_genus.py\",
+      line 514, in _compute\n    _run(tag, [field], lambda row=row, field=field, compute=compute:
+      {field: compute(lattice, row)})\n    ~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n
+      \ File \"/home/runner/work/lattice-database/lattice-database/src/latticedb/sage_genus.py\",
+      line 449, in _run\n    values = compute()\n  File \"/home/runner/work/lattice-database/lattice-database/src/latticedb/sage_genus.py\",
+      line 514, in <lambda>\n    _run(tag, [field], lambda row=row, field=field, compute=compute:
+      {field: compute(lattice, row)})\n                                                                             ~~~~~~~^^^^^^^^^^^^^^\n
+      \ File \"/home/runner/work/lattice-database/lattice-database/src/latticedb/sage_genus.py\",
+      line 125, in _primitive_isotropic_line_row\n    constant = subgroup.isotropic_orbit_representatives(1).cardinality()\n
+      \              ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^\n  File \"/repos/sage-extensions/src/sage_extensions/categories/group/predicate_subgroups.py\",
+      line 605, in isotropic_orbit_representatives\n    return _subgroup_isotropic_orbit_representatives(\n
+      \       self, rank, flag=flag\n    )\n  File \"/repos/sage-extensions/src/sage_extensions/timing.py\",
+      line 509, in timed\n    return function(*arguments, **keywords)\n  File \"/repos/sage-extensions/src/sage_extensions/categories/orthogonal_quotients.py\",
+      line 5076, in _subgroup_isotropic_orbit_representatives\n    tuple(_yield_subgroup_isotropic_orbit_representatives(subgroup,
+      rank, flag=flag))\n    ~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n
+      \ File \"/repos/sage-extensions/src/sage_extensions/categories/orthogonal_quotients.py\",
+      line 5041, in _yield_subgroup_isotropic_orbit_representatives\n    stabilizer
+      = quotient.exact_isotropic_stabilizer_generators(\n        representative, flag=flag\n
+      \   )\n  File \"sage/misc/cachefunc.pyx\", line 1970, in sage.misc.cachefunc.CachedMethodCaller.__call__\n
+      \   w = self._instance_call(*args, **kwds)\n  File \"sage/misc/cachefunc.pyx\",
+      line 1848, in sage.misc.cachefunc.CachedMethodCaller._instance_call\n    return
+      self.f(self._instance, *args, **kwds)\n  File \"/repos/sage-extensions/src/sage_extensions/categories/orthogonal_quotients.py\",
+      line 2023, in exact_isotropic_stabilizer_generators\n    raise ArithmeticError(\n
+      \   ...<2 lines>...\n    )\nArithmeticError: an ambient stabilizer generator
+      of Integral lattice of rank 1 and signature (0, 0) moves its divided discriminant
+      data: it does not stabilize Integral lattice of rank 1 and signature (0, 0)\n"
+    seconds: 1.9219246250002016
+    recorded_at: 2026-11-25 13:35:05.296407+00:00
+    run_url: https://github.com/dzackgarza/lattice-database/actions/runs/45620276217/attempts/1
+    database_revision: a73561aa67eccf4fb67d084a138f892d9748927a
+    research_revision: 9aea67c19a8fcee3cc65e015388a6bb9b708366a
+  notes: []
+63TL integral.primitive_orbits[SOtilde+]:
+  disposition: open
+  attempts:
+  - hash: 30db13b514fce1bbf84200540e3dd1384f0a74faac9617116744577999222025
+    gram_tensor:
+    - - -2
+      - 0
+      - 0
+      - 0
+      - 0
+    - - 0
+      - 0
+      - -1
+      - 0
+      - 0
+    - - 0
+      - -1
+      - 0
+      - 0
+      - 0
+    - - 0
+      - 0
+      - 0
+      - -2
+      - 3
+    - - 0
+      - 0
+      - 0
+      - 3
+      - -6
+    reason: exit status 1
+    stderr: "Traceback (most recent call last):\n  File \"sage/misc/cachefunc.pyx\",
+      line 1965, in sage.misc.cachefunc.CachedMethodCaller.__call__\n    return cache[k]\nKeyError:
+      (False, ((134999446890064, ((0, 1, -1, 2, 1),)),))\n\nDuring handling of the
+      above exception, another exception occurred:\n\nTraceback (most recent call
+      last):\n  File \"<frozen runpy>\", line 203, in _run_module_as_main\n  File
+      \"<frozen runpy>\", line 88, in _run_code\n  File \"/home/runner/work/lattice-database/lattice-database/src/latticedb/sage_genus.py\",
+      line 536, in <module>\n    main()\n    ~~~~^^\n  File \"/home/runner/work/lattice-database/lattice-database/src/latticedb/sage_genus.py\",
+      line 531, in main\n    _compute(request)\n    ~~~~~~~~^^^^^^^^^\n  File \"/home/runner/work/lattice-database/lattice-database/src/latticedb/sage_genus.py\",
+      line 514, in _compute\n    _run(tag, [field], lambda row=row, field=field, compute=compute:
+      {field: compute(lattice, row)})\n    ~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n
+      \ File \"/home/runner/work/lattice-database/lattice-database/src/latticedb/sage_genus.py\",
+      line 449, in _run\n    values = compute()\n  File \"/home/runner/work/lattice-database/lattice-database/src/latticedb/sage_genus.py\",
+      line 514, in <lambda>\n    _run(tag, [field], lambda row=row, field=field, compute=compute:
+      {field: compute(lattice, row)})\n                                                                             ~~~~~~~^^^^^^^^^^^^^^\n
+      \ File \"/home/runner/work/lattice-database/lattice-database/src/latticedb/sage_genus.py\",
+      line 125, in _primitive_isotropic_line_row\n    constant = subgroup.isotropic_orbit_representatives(1).cardinality()\n
+      \              ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^\n  File \"/repos/sage-extensions/src/sage_extensions/categories/group/predicate_subgroups.py\",
+      line 605, in isotropic_orbit_representatives\n    return _subgroup_isotropic_orbit_representatives(\n
+      \       self, rank, flag=flag\n    )\n  File \"/repos/sage-extensions/src/sage_extensions/timing.py\",
+      line 509, in timed\n    return function(*arguments, **keywords)\n  File \"/repos/sage-extensions/src/sage_extensions/categories/orthogonal_quotients.py\",
+      line 5076, in _subgroup_isotropic_orbit_representatives\n    tuple(_yield_subgroup_isotropic_orbit_representatives(subgroup,
+      rank, flag=flag))\n    ~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n
+      \ File \"/repos/sage-extensions/src/sage_extensions/categories/orthogonal_quotients.py\",
+      line 5041, in _yield_subgroup_isotropic_orbit_representatives\n    stabilizer
+      = quotient.exact_isotropic_stabilizer_generators(\n        representative, flag=flag\n
+      \   )\n  File \"sage/misc/cachefunc.pyx\", line 1970, in sage.misc.cachefunc.CachedMethodCaller.__call__\n
+      \   w = self._instance_call(*args, **kwds)\n  File \"sage/misc/cachefunc.pyx\",
+      line 1848, in sage.misc.cachefunc.CachedMethodCaller._instance_call\n    return
+      self.f(self._instance, *args, **kwds)\n  File \"/repos/sage-extensions/src/sage_extensions/categories/orthogonal_quotients.py\",
+      line 2023, in exact_isotropic_stabilizer_generators\n    raise ArithmeticError(\n
+      \   ...<2 lines>...\n    )\nArithmeticError: an ambient stabilizer generator
+      of Integral lattice of rank 1 and signature (0, 0) moves its divided discriminant
+      data: it does not stabilize Integral lattice of rank 1 and signature (0, 0)\n"
+    seconds: 1.0698631330001263
+    recorded_at: 2026-11-25 13:35:59.981363+00:00
+    run_url: https://github.com/dzackgarza/lattice-database/actions/runs/45620276217/attempts/1
+    database_revision: a73561aa67eccf4fb67d084a138f892d9748927a
+    research_revision: 9aea67c19a8fcee3cc65e015388a6bb9b708366a
+  notes: []
 6HFR automorphisms.automorphism_group_generator_morphisms:
   disposition: open
   attempts:

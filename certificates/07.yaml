@@ -33130,11 +33130,20 @@
 5GCQ definite.automorphism_group_order:
   hash: b710d77753f641119cbdc89041cc3e455da63dcc5500c6195f1b8277d15ca98a
   by: research preamble
+5GCQ definite.genus_theta_series:
+  hash: 286e6d4489810160604a4e372898a648fc7e7deca8d82df9f06e81f5f8cdefd3
+  by: research preamble
+5GCQ definite.theta_series_cuspidal_component:
+  hash: e69f0fff968202feb2f2d1f424f456d6bd372a2b791703a2549b4012330cecb9
+  by: research preamble
 5GCQ derive:
   hash: 1494c12a9cec11fa6b5bfe1c77de852d05052e74d1cc5803f993173ce87fd4a5
   by: research preamble
 5GCQ form.integer_valued:
   hash: 3306512c3985b0a8e6eb6d20d42d539dc28d1d3c093f3bc2665b384086445f5c
+  by: research preamble
+5GCQ integral.anisotropic_primes:
+  hash: aab85cb408b570e9ba70f6966c12ddc8163ccb16e16b59c9bc9d1376a7833a37
   by: research preamble
 5GCQ integral.discriminant_sequence:
   hash: b65cde54a989713d1ba4950c380e3647825b2a0d679b48ac98884f9b7dd3e37e
@@ -33151,8 +33160,20 @@
 5GCQ integral.hyperbolic_index:
   hash: 9268278efa99a4c081069e839b12c49c819fc116d08531136b13446e502b6bec
   by: research preamble
+5GCQ integral.local_densities:
+  hash: 7db12c861b90b5644d930fab7144370c3a420b1733b4f5eecdcc6f65d1239b95
+  by: research preamble
+5GCQ integral.local_representations:
+  hash: 713f2a91617474feabeab5bac8ba97e4396a45c954c1e2b65773c1972d100cf0
+  by: research preamble
+5GCQ integral.modular_scale:
+  hash: f3785602f0cb5a17f2a00354297d763517f0d878357187305d6bd22d3531c642
+  by: research preamble
 5GCQ integral.overlattice_count:
   hash: 4d1b06530495f9fc8464d34232db2ae216881cf7c48b2625fff24e9f37736897
+  by: research preamble
+5GCQ integral.primitive_orbits:
+  hash: c836b644284441bd36a22a7b2c0639fef2bd2fd0b9ab501168414684bb6cab3a
   by: research preamble
 5GCQ integral.spinor_genera:
   hash: 65a3ef827e8716dc89495e4ee17761223eaa0024be7548fb6e39e2e56072f96d

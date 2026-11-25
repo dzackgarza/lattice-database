@@ -30475,6 +30475,9 @@
 4DEX form.integer_valued:
   hash: 495be941c4606438a13bb6148619a5ce06dc069e2528c7d991e1f54aac47d18b
   by: research preamble
+4DEX integral.anisotropic_primes:
+  hash: 17320b853066e30f85b2f8e80352f6014756329fb458999a379eafc2ee96e060
+  by: research preamble
 4DEX integral.elementary_primes:
   hash: 40dad9a333c664e0ea1e102ee803076fae59d1629a1d096bc981a6bd573e5f25
   by: research preamble
@@ -30487,8 +30490,20 @@
 4DEX integral.hyperbolic_index:
   hash: 78a549ee92fec2ef73481b2e10968411c840dd808b2dc1a7f849f8c5d7e000c4
   by: research preamble
+4DEX integral.local_densities:
+  hash: f396082081bec357c6cc6eda01eb3ddcd2464450cabcadb4b34c72ea076bb74c
+  by: research preamble
+4DEX integral.local_representations:
+  hash: 50b9d4c632feaa5bf159fd52b00e7ddf9f7d302b9cae56d453e66daae2f65949
+  by: research preamble
+4DEX integral.modular_scale:
+  hash: 7a156e00981d41a8a30a6fff88ac2cedb05ec1e5795b5e7872cf457f2f374c6c
+  by: research preamble
 4DEX integral.overlattice_count:
   hash: e0ce6e2c8e8e18e46e62dc9e092429c2a7ba84d6167ebfa721bdc8ae6ac5091a
+  by: research preamble
+4DEX integral.primitive_orbits:
+  hash: 183dd49eb2dfb3553c3d85b20ddb481f3635745aa53d2235d9961fe32d941635
   by: research preamble
 4DEX integral.spinor_genera:
   hash: 66bef52e87b8fd3aaadd14bf34a7deaad62c74dde814cd6e388ac3e06c2bc278

@@ -33574,11 +33574,20 @@
 3GO2 integral.spinor_genus_count:
   hash: 68948b1c59b677df91ba41b5ce2ed7d8cb53a42d84b4c13cc7cedd7ca63d3886
   by: research preamble
+3T81 automorphisms.automorphism_group_generator_morphisms:
+  hash: ac94d8b6b8395a0877caf17792902dc576ccce14707b582975f0ed8684f25cc9
+  by: research preamble
+3T81 automorphisms.automorphism_group_order:
+  hash: 2647f2a4ea6d2f28187dbbdaf8e9a4cc305b1746bace558873bf8b28f26aa7eb
+  by: research preamble
 3T81 derive:
   hash: 8fad25418b7fb260799a5dff4b6b6f98c2e62c4f65794fb5b4af5371033ee902
   by: research preamble
 3T81 form.integer_valued:
   hash: 092f12bde517c7ed5b91c0069c6cd9480c742f94718c6d5a3d47467670ad6955
+  by: research preamble
+3T81 integral.anisotropic_primes:
+  hash: 591cbbece5bba66c9b3fb1cc0c0e94ca092385b6b8c16279c8f489336fd0ca9f
   by: research preamble
 3T81 integral.elementary_primes:
   hash: d3d3fbc38295c745f5cb6483245a271e7950a687e90ddfaf3ff9c6ffb200ea2d
@@ -33589,8 +33598,20 @@
 3T81 integral.genus_symbol:
   hash: 0d30cbad494572ab284555dffcee89fc51482103efe1d62d23e94722b19dacaa
   by: research preamble
+3T81 integral.local_densities:
+  hash: 2f888c6fdb1d950e1bfb21911dfba1e59af46894af72a4deb1104ab2c0babb7b
+  by: research preamble
+3T81 integral.local_representations:
+  hash: eb79b682ee6d395062a81878000ced0916e40d27558982e4bc243b756206cda7
+  by: research preamble
+3T81 integral.modular_scale:
+  hash: 46328d263175eec2e908d538b0fd745231ee1d0d1e00f802b30b31333c86b355
+  by: research preamble
 3T81 integral.overlattice_count:
   hash: 3fb769c53f4a090b6ed79e76598eafadcde7ff967444d88b24858f2a2ff35fc0
+  by: research preamble
+3T81 integral.primitive_orbits:
+  hash: 44894d3f53d2324f7771687fb505158cf22371c94681f4910babfe6c1e3d1d63
   by: research preamble
 3T81 integral.spinor_genera:
   hash: 840a59783cf62fe8214131eb0a5af4466988cd6f191e51db812a9ac893e9a5f1
