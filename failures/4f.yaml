@@ -7222,12 +7222,12 @@
       - 1
       - 3
       - 10
-    reason: memory exhausted
+    reason: worker or runner lost (recovered from exceeded.yaml)
     stderr: ''
-    seconds: 40.59042696000006
-    recorded_at: 2026-11-25 19:29:28.239175+00:00
-    run_url: https://github.com/dzackgarza/lattice-database/actions/runs/45620276217/attempts/1
-    database_revision: 57f3c8c937494e72ec2030c073907741840ddc91
+    seconds: 30.0
+    recorded_at: 2026-11-25 20:21:48.427415+00:00
+    run_url: https://github.com/dzackgarza/lattice-database/actions/runs/45690260687/attempts/1
+    database_revision: c8f7e86dfcd88c20c25b69609dacfaa27d1bb3f2
     research_revision: 1d56f41a080c1832c42ef7ab473743e41c10bb29
   notes: []
 2944 derive:

@@ -5106,6 +5106,44 @@
     database_revision: c4a9030dadbc586c0ae578bb64dd9ba3fc62ee87
     research_revision: 1d56f41a080c1832c42ef7ab473743e41c10bb29
   notes: []
+1W3V derive:
+  disposition: open
+  attempts:
+  - hash: 714031e78b09c422083d23bbfe660c60731fa7aa9f03529b6d48c82c064606a3
+    gram_tensor:
+    - - 2
+      - 1
+      - 1
+      - 1
+      - 0
+    - - 1
+      - 2
+      - 0
+      - 1
+      - 0
+    - - 1
+      - 0
+      - 4
+      - 2
+      - 0
+    - - 1
+      - 1
+      - 2
+      - 4
+      - 2
+    - - 0
+      - 0
+      - 0
+      - 2
+      - 24
+    reason: worker or runner lost (recovered from exceeded.yaml)
+    stderr: ''
+    seconds: 0.0
+    recorded_at: 2026-11-25 20:21:40.569623+00:00
+    run_url: https://github.com/dzackgarza/lattice-database/actions/runs/45690260687/attempts/1
+    database_revision: c8f7e86dfcd88c20c25b69609dacfaa27d1bb3f2
+    research_revision: 1d56f41a080c1832c42ef7ab473743e41c10bb29
+  notes: []
 1W5Z definite.siegel_eisenstein_coefficients:
   disposition: open
   attempts:

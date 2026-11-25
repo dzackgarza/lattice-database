@@ -9227,6 +9227,44 @@
     database_revision: 77ea9b167086fbcaf329f78253c3343ccf7db0cd
     research_revision: 0d4b0ffc15f5f46f30af390f49af3fcebdd47ced
   notes: []
+29D1 definite.genus_theta_series:
+  disposition: open
+  attempts:
+  - hash: ccdb07a351b844dd7a43e5af0b4c775d9543a20c73426104a88ac1825eb8da5a
+    gram_tensor:
+    - - 2
+      - 0
+      - 0
+      - 0
+      - 0
+    - - 0
+      - 2
+      - 0
+      - 0
+      - 0
+    - - 0
+      - 0
+      - 4
+      - 1
+      - 0
+    - - 0
+      - 0
+      - 1
+      - 4
+      - 0
+    - - 0
+      - 0
+      - 0
+      - 0
+      - 14
+    reason: worker or runner lost (recovered from exceeded.yaml)
+    stderr: ''
+    seconds: 601.0
+    recorded_at: 2026-11-25 20:22:21.382405+00:00
+    run_url: https://github.com/dzackgarza/lattice-database/actions/runs/45690260687/attempts/1
+    database_revision: c8f7e86dfcd88c20c25b69609dacfaa27d1bb3f2
+    research_revision: 1d56f41a080c1832c42ef7ab473743e41c10bb29
+  notes: []
 29D1 definite.siegel_eisenstein_coefficients:
   disposition: open
   attempts:

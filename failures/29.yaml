@@ -11199,6 +11199,82 @@
     database_revision: 972cd798ea14d57de15ad2d2ac01af7822d03c5b
     research_revision: 65b1618676dabee6abe5ba9a6678b165c6621b85
   notes: []
+44LI automorphisms.automorphism_group_generator_morphisms:
+  disposition: open
+  attempts:
+  - hash: 2d50e424fd70a09337d5b717025496a8199b71ce093d2f070fd801742d9c412f
+    gram_tensor:
+    - - 1
+      - 0
+      - 0
+      - 0
+      - 0
+    - - 0
+      - -1
+      - 0
+      - 0
+      - 0
+    - - 0
+      - 0
+      - -1
+      - 0
+      - 0
+    - - 0
+      - 0
+      - 0
+      - 2
+      - -3
+    - - 0
+      - 0
+      - 0
+      - -3
+      - 6
+    reason: worker or runner lost (recovered from exceeded.yaml)
+    stderr: ''
+    seconds: 1082.0
+    recorded_at: 2026-11-25 20:23:10.026225+00:00
+    run_url: https://github.com/dzackgarza/lattice-database/actions/runs/45690260687/attempts/1
+    database_revision: c8f7e86dfcd88c20c25b69609dacfaa27d1bb3f2
+    research_revision: 1d56f41a080c1832c42ef7ab473743e41c10bb29
+  notes: []
+44LI automorphisms.automorphism_group_order:
+  disposition: open
+  attempts:
+  - hash: a5023f8c96ab33dcbbed76653a5231784e723cf5cd82246090cfd45659df8494
+    gram_tensor:
+    - - 1
+      - 0
+      - 0
+      - 0
+      - 0
+    - - 0
+      - -1
+      - 0
+      - 0
+      - 0
+    - - 0
+      - 0
+      - -1
+      - 0
+      - 0
+    - - 0
+      - 0
+      - 0
+      - 2
+      - -3
+    - - 0
+      - 0
+      - 0
+      - -3
+      - 6
+    reason: worker or runner lost (recovered from exceeded.yaml)
+    stderr: ''
+    seconds: 1082.0
+    recorded_at: 2026-11-25 20:23:17.907837+00:00
+    run_url: https://github.com/dzackgarza/lattice-database/actions/runs/45690260687/attempts/1
+    database_revision: c8f7e86dfcd88c20c25b69609dacfaa27d1bb3f2
+    research_revision: 1d56f41a080c1832c42ef7ab473743e41c10bb29
+  notes: []
 44LI integral.hyperbolic_index:
   disposition: open
   attempts:
