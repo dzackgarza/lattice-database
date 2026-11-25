@@ -598,10 +598,6 @@
   hash: 1f84a79387cdfe51e3f96d179218f497df832fa5b0fdd34c872f095be61e21cb
   seconds: 0
   lost: true
-0L1Y integral.discriminant_form:
-  hash: 1583aa8fa7f2918393b958575db2abbb5934d15209e1aebeb2da2895c3889b8a
-  seconds: 0
-  lost: true
 0LX3 definite.siegel_eisenstein_coefficients:
   hash: 2d7301207cc43bb763f03cfdecc163a5304ed8c19b18274a86dd376fd527f8b6
   seconds: 0
@@ -625,6 +621,10 @@
 0NFT integral.discriminant_form:
   hash: 52f2df5d3e50422e9094aaba642361454f3f0553243c3e075e8ffa9f8b70baec
   seconds: 6
+  lost: true
+0PDE integral.discriminant_form:
+  hash: b06f71445bcbb264395700f67f33f6cde67fa67262e2d86442fdf2e47aa55397
+  seconds: 0
   lost: true
 0PDI integral.discriminant_form:
   hash: 721243039dbc88c969b949f6205bccf432459c7dc343430aa6037ddff9c34a4f
@@ -2565,10 +2565,6 @@
 3G2S integral.discriminant_sequence:
   hash: 3658d7ea9f63abbf80880602a0c8917fae9bdabfe51c00f78ca897ab109ba0aa
   seconds: 19586
-3G2X integral.discriminant_sequence:
-  hash: 7e755070f83b43a978efe064632027c0d6f6e531902159255294654186089ff1
-  seconds: 4596
-  lost: true
 3G2Y integral.overlattice_count:
   hash: d85ac2e458a057585e6cac23b0ede6a7d7cc38f04a556d45595f5ae1f4c6f5cf
   seconds: 6
@@ -2736,10 +2732,6 @@
 3GWR integral.overlattice_count:
   hash: 836db517473faaeaa34246fe1f1fa761d816846114d210a46b13530d6de2d5f8
   seconds: 5
-  lost: true
-3GWW integral.discriminant_sequence:
-  hash: 9fe28d538d4282a19fff1921e5b1179b8dce50772c24399b183b49c257bfece4
-  seconds: 8412
   lost: true
 3GX5 integral.discriminant_sequence:
   hash: ac5830bf83c01f73d9a9417b7f9de8b39dbfd51c20f84ed5872b139ccae22b93
