@@ -9645,12 +9645,12 @@
       - 0
       - -6
       - 12
-    reason: worker or runner lost (recovered from exceeded.yaml)
+    reason: certification budget exhausted
     stderr: ''
-    seconds: 1652.0
-    recorded_at: 2026-11-24 21:04:29.855515+00:00
-    run_url: https://github.com/dzackgarza/lattice-database/actions/runs/45483305000/attempts/1
-    database_revision: 2440d26286c553779ba00c878e5d606581ae3a0b
+    seconds: 19551.0
+    recorded_at: 2026-11-25 01:12:07.906025+00:00
+    run_url: https://github.com/dzackgarza/lattice-database/actions/runs/45407996724/attempts/1
+    database_revision: 48fc5c741811f5a60752a8151d6c9d45ab3707a5
     research_revision: 0d4b0ffc15f5f46f30af390f49af3fcebdd47ced
   notes: []
 5XTS integral.primitive_orbits[O]:
