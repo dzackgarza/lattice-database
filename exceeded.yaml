@@ -907,8 +907,50 @@
   hash: 43701248704ac476a2e87076e3517a579dc7a14927b53ffd7975a646d3978b4c
   seconds: 12
   lost: true
-1YIH definite.siegel_eisenstein_coefficients:
-  hash: ed563f84ab1f354f96eca4fd85c732acfc05e5484cc7582f2cc925100a8b2e4c
+1YJ0 derive:
+  hash: a9b3310a53dafe48562b416dfc816ffeb1002c9a691f0338c05f693b097241df
+  seconds: 32
+  lost: true
+  killed_by: memory
+  peak_bytes: 13033537536
+  limit_bytes: 1675943116
+1YJ3 derive:
+  hash: e3409febefa5d2c308984291c759fe466219fec69b311177d56f6cba1959f5ba
+  seconds: 30
+  lost: true
+  killed_by: memory
+  peak_bytes: 12826533888
+  limit_bytes: 1675943116
+1YKA derive:
+  hash: 08702fea39d8fea398ef16ee21df4e4f4e4c7dfb09ca25fe7648db1a9e52db83
+  seconds: 31
+  lost: true
+  killed_by: memory
+  peak_bytes: 13064163328
+  limit_bytes: 1675943116
+1YL6 derive:
+  hash: 5784a644361a9c559df2db4048fb676e51476617f61f838b980ebfbeb0ec1900
+  seconds: 31
+  lost: true
+  killed_by: memory
+  peak_bytes: 12980011008
+  limit_bytes: 1675943116
+1YLE derive:
+  hash: 6f3ec75d11a8ed2835101a54356dc44f9986f1fa12f8acbd7675ab58d36cacda
+  seconds: 31
+  lost: true
+  killed_by: memory
+  peak_bytes: 13147496448
+  limit_bytes: 1675943116
+1YLF derive:
+  hash: 2ddd6fa9fe2c1221fef383673a46d04e4590a5eb14e37dcfa053578cd31872c4
+  seconds: 31
+  lost: true
+  killed_by: memory
+  peak_bytes: 13129871360
+  limit_bytes: 1675943116
+1YS5 definite.siegel_eisenstein_coefficients:
+  hash: a98dd5e0da28490e8a82817fde2c626926e7a93db2b4b10fea98a0ebc5f271c8
   seconds: 0
   lost: true
 1ZON integral.elementary_primes:
