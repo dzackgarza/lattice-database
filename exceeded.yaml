@@ -670,6 +670,9 @@
   hash: fa36a0215c9394768ad0dc5fc9ba6fa459b7390e1e92dba69508d3952353013e
   seconds: 0
   lost: true
+0WT9 integral.discriminant_form:
+  hash: e1ec1a72b6e7def214436650c4cc338eabb391d10ebfd240bb39fc07c90c4a3c
+  seconds: 0
 0WV9 definite.genus_theta_series:
   hash: e13a2e1c9c0e0605678506eff7d2d27210d07d37dd2f67a9637c75bbf5ce0833
   seconds: 0
@@ -2939,10 +2942,6 @@
 3G2S integral.discriminant_sequence:
   hash: 3658d7ea9f63abbf80880602a0c8917fae9bdabfe51c00f78ca897ab109ba0aa
   seconds: 19586
-3G2X integral.discriminant_sequence:
-  hash: 7e755070f83b43a978efe064632027c0d6f6e531902159255294654186089ff1
-  seconds: 4596
-  lost: true
 3G2Y integral.overlattice_count:
   hash: d85ac2e458a057585e6cac23b0ede6a7d7cc38f04a556d45595f5ae1f4c6f5cf
   seconds: 6
@@ -3217,9 +3216,6 @@
 5RR1 integral.primitive_orbits[SOtilde]:
   hash: 2b2f37ca731c7f2c974be88ea8d147c4f3c85c99adec5cb66a320253d297072a
   seconds: 19709
-5X07 integral.primitive_orbits[O]:
-  hash: c15f7857e04ebe36a8c0d9e1d31d436d2eb4b4323e5c5b7681198bd6f19c9831
-  seconds: 11938
 5XTS integral.primitive_orbits[O+]:
   hash: a7e8c28a297e772d52198d47a41ec2c894efe14084ebeea87c6863c23695344f
   seconds: 19551
