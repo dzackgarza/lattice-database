@@ -1578,6 +1578,10 @@
   killed_by: memory
   peak_bytes: 13241061376
   limit_bytes: 1675943116
+27CU definite.genus_theta_series:
+  hash: d2dda852ce55255337171937697f6fc700e199993cc6e0e63f230b1dd52e1f56
+  seconds: 0
+  lost: true
 27MV derive:
   hash: 0e044db65139bd9bd05948e9e080f7d642e6d3286c81d07d73401b6e67bceecf
   seconds: 41
@@ -1704,13 +1708,6 @@
 27VT integral.discriminant_form:
   hash: e6d8cb0324782790cfac918826f205b81534a0ef6670d8a187c996837382b771
   seconds: 3
-28H4 derive:
-  hash: 562087e4f66f892352674baee21d5f1f6abf9f1b01208440eeef47dcb40596d9
-  seconds: 62
-  lost: true
-  killed_by: memory
-  peak_bytes: 14055350272
-  limit_bytes: 1675943116
 291C derive:
   hash: 5166777cfd15719ad7776b2461ba986af020c1e1ec35d47fb308788eaf0c7e2e
   seconds: 44
@@ -2709,7 +2706,7 @@
   seconds: 19648
 3GXL integral.discriminant_sequence:
   hash: ba3fea0b14a6361088d2a1124ed453dab6a5bcd9eed40d5fe0f9f0555c2b634f
-  seconds: 1572
+  seconds: 12420
   lost: true
 3GXO integral.overlattice_count:
   hash: 8392a80454dd1af739e9d6163b1538aaafd76392d9cca73846c1dc3e312e9aa8
@@ -2803,12 +2800,6 @@
   hash: 8cb7ef7d73079f6dab7c15c2d594218d65ca768f8f835504e1350a5324ea9dc6
   seconds: 0
   lost: true
-4N33 automorphisms.automorphism_group_generator_morphisms:
-  hash: b1bdbcdade9c8b13fd6cec98d84636fc62e1d96b8c90b277dee038b69c3e889c
-  seconds: 19304
-4N33 automorphisms.automorphism_group_order:
-  hash: 7424a531255ff56a461b04c8f76fb810ba13d2dac8be3b64dcec72cc8b9f7b25
-  seconds: 19328
 4OEZ automorphisms.automorphism_group_generator_morphisms:
   hash: 87718923f329d6330375f064530195bd21116f30fb49583d8c56092276cf780c
   seconds: 17936
