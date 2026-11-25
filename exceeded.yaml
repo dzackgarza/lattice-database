@@ -489,7 +489,8 @@
   limit_bytes: 1646340915
 03A8 definite.spinor_regular:
   hash: 9afcb6ed5e5e0558fc915599b97813cb884a77216a8c5678759482a468e3d9cf
-  seconds: 17792
+  seconds: 5167
+  lost: true
 03E4 definite.regular:
   hash: 367ee6be7b1ae2324d2f8b84ed17807c44014151c93049ad1053aae3f816df83
   seconds: 6558
@@ -1710,13 +1711,24 @@
   killed_by: memory
   peak_bytes: 14055350272
   limit_bytes: 1675943116
-292J derive:
-  hash: 28737acbf5f388b05806508b5931073ac0b52c353883d6bc65dd1b794c7a951a
+291C derive:
+  hash: 5166777cfd15719ad7776b2461ba986af020c1e1ec35d47fb308788eaf0c7e2e
+  seconds: 44
+  lost: true
+  killed_by: memory
+  peak_bytes: 12582055936
+  limit_bytes: 1675839488
+291V derive:
+  hash: 13da77f9382fe97ff8460cefbd290049c5e4f7cd3bd38d8f9a9614c630aff317
   seconds: 40
   lost: true
   killed_by: memory
-  peak_bytes: 12559065088
+  peak_bytes: 13150625792
   limit_bytes: 1675839488
+292J derive:
+  hash: 28737acbf5f388b05806508b5931073ac0b52c353883d6bc65dd1b794c7a951a
+  seconds: 30
+  lost: true
 29FF derive:
   hash: e63d6a0e58079de58b673db6cd341ea7ecd2b664ef3ae9f101cd8664a9b54294
   seconds: 50
@@ -2655,10 +2667,6 @@
 3GSS integral.discriminant_sequence:
   hash: 1ab4cb27ac8324d3b55f87b49fe2d9638523863e9f43a210eb9460be1973101d
   seconds: 19659
-3GT4 integral.discriminant_sequence:
-  hash: 0b71cfa1ec6323490cdf078e7bed274e391e1d8babff618db14a96fe2c74b6d0
-  seconds: 1667
-  lost: true
 3GTS integral.discriminant_sequence:
   hash: 26a906b9d9d22e2f60644bcb66ee493b586d333a3d2e8d30e57e85387eee4009
   seconds: 19661
@@ -2692,9 +2700,17 @@
   hash: 836db517473faaeaa34246fe1f1fa761d816846114d210a46b13530d6de2d5f8
   seconds: 5
   lost: true
+3GWW integral.discriminant_sequence:
+  hash: 9fe28d538d4282a19fff1921e5b1179b8dce50772c24399b183b49c257bfece4
+  seconds: 1664
+  lost: true
 3GX5 integral.discriminant_sequence:
   hash: ac5830bf83c01f73d9a9417b7f9de8b39dbfd51c20f84ed5872b139ccae22b93
   seconds: 19648
+3GXL integral.discriminant_sequence:
+  hash: ba3fea0b14a6361088d2a1124ed453dab6a5bcd9eed40d5fe0f9f0555c2b634f
+  seconds: 1572
+  lost: true
 3GXO integral.overlattice_count:
   hash: 8392a80454dd1af739e9d6163b1538aaafd76392d9cca73846c1dc3e312e9aa8
   seconds: 10
@@ -2702,10 +2718,6 @@
 3GY6 integral.discriminant_sequence:
   hash: eb2ef6f7d13c3b8094b54382ecbc300217a306e104a8479eddfca97bb4545580
   seconds: 763
-  lost: true
-3GY7 integral.discriminant_sequence:
-  hash: 49b2f17d6dc2f29a97d2ed119dddd2d6f5d9a1382af99833ce5a8fd6b79c2d9c
-  seconds: 1593
   lost: true
 3I9Z integral.discriminant_sequence:
   hash: 7dbc0ada5ff76a2987b5d86e04984e775f24298fc19f497059ec85b07a744194
@@ -2763,6 +2775,14 @@
 3IEA integral.hyperbolic_index:
   hash: 3072abb556184c36e33747dd96e2dc1de4befdb4383257fa4d37035dd48d3c52
   seconds: 112
+  lost: true
+44LI automorphisms.automorphism_group_generator_morphisms:
+  hash: 2d50e424fd70a09337d5b717025496a8199b71ce093d2f070fd801742d9c412f
+  seconds: 1082
+  lost: true
+44LI automorphisms.automorphism_group_order:
+  hash: a5023f8c96ab33dcbbed76653a5231784e723cf5cd82246090cfd45659df8494
+  seconds: 1082
   lost: true
 48YN integral.primitive_orbits[SOtilde]:
   hash: 9e1c166422b378d94310bb7b61abeb33d8e2cd6ec2a08cf2b0a62e00dcdedc04
