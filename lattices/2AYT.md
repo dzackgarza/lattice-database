@@ -3,6 +3,18 @@ tag: 2AYT
 name: nipp tbl.440.html:5273
 latex: nipp tbl.440.html:5273
 aliases: []
+certifications:
+  derive: b5bd5845e5a949074d5f6f109c3833574e52a60c559efe54df8b19ea2a9b1303
+  form.integer_valued: 5acf93258a533709244eec87c9541e76645b0d81123ac9f8e3a077c45043f955
+  integral.elementary_primes: 045cf0f2a857c66af30cfc6da463fae0bf6a1f3de55ceee394e991fc7dcedc64
+  integral.genus_symbol: 5adae6c4a7af37411b321745c7f7290e83ad8e945a3fc777e892316852a8fd11
+  integral.genus_class_count: bafa33e75d7090a50ee7f8e21b2ce5459b0760516d4d927cd4abbacf422773e6
+  integral.overlattice_count: c514c6f113916d1b1058a7c1c7c16b9cef7e46df627d1dfe0855dcba3d1c916a
+  integral.spinor_genus_count: 7e09dde62262fad8fff7b7608606912fd010ca04c16d85b2e55e0125b169627a
+  integral.spinor_genera: af77a1232c8f78e2fd76b0c5fb6b088fdabc6b4c4a50771fe7da95a9bebfd8e5
+  integral.hyperbolic_index: b4030415791c2355190850197798fa5e5bf595c71405e897db43d35cd3c84d6c
+  definite.automorphism_group_order: e89501de3a146f1c8ae252d340e464c2fac9af6b0dd244d2b6a1205a6965bfce
+  definite.automorphism_group_generator_morphisms: 1e8c7f4a65202389f85bcf2b43fad729d1f50e826bc5b98e0dc078832bdbdb71
 rank: 5
 gram_tensor:
 - [4, 2, 1, -1, 1]
@@ -13,6 +25,111 @@ gram_tensor:
 signature: [5, 0]
 determinant: 864
 definiteness: positive_definite
+dual_gram_tensor:
+- [13/24, -3/8, -1/6, 1/8, -1/8]
+- [-3/8, 13/24, 1/6, -1/8, 1/8]
+- [-1/6, 1/6, 1/3, 0, 0]
+- [1/8, -1/8, 0, 5/24, -1/24]
+- [-1/8, 1/8, 0, -1/24, 5/24]
+form:
+  integer_valued: true
+integral:
+  elementary_primes: []
+  parity: even
+  level: 48
+  discriminant_group: [6, 6, 24]
+  overlattice_count: 55
+  bad_reduction_primes: [2, 3]
+  genus_symbol: 'II_{5,0} (2: 1^2:2^-2:[8^1]_7; 3: 1^-2 3^3)'
+  genus_class_count: 2
+  spinor_genus_count: 1
+  spinor_genera: [2]
+  hyperbolic_index: 0
+definite:
+  minimum: 4
+  kissing_number: 10
+  automorphism_group_order: 64
+  automorphism_group_generator_morphisms: [O(L) generator 1, O(L) generator 2, O(L) generator 3, O(L) generator 4, O(L) generator 5]
+  minimal_vectors:
+  - [-1, 0, 0, 0, 0]
+  - [-1, 1, 0, 0, 0]
+  - [-1, 1, 1, 0, 0]
+  - [0, -1, 0, 0, 0]
+  - [0, 0, -1, 0, 0]
+  - [0, 0, 1, 0, 0]
+  - [0, 1, 0, 0, 0]
+  - [1, -1, -1, 0, 0]
+  - [1, -1, 0, 0, 0]
+  - [1, 0, 0, 0, 0]
+  perfect: false
+  theta_series: [1, 0, 0, 0, 10, 0, 12, 0, 18]
+  root_system: []
+  roots:
+  - type: B2
+    scale: 3
+    simple_roots:
+    - [0, 1, 1, 0, 0]
+    - [1, -1, -2, 0, 0]
+  - type: A1
+    scale: 6
+    simple_roots:
+    - [0, 0, 0, 1, 1]
+  - type: A1
+    scale: 2
+    simple_roots:
+    - [1, -1, 0, 0, 0]
+  - type: A1
+    scale: 4
+    simple_roots:
+    - [1, -1, 0, 1, -1]
+root_sublattice:
+  invariant_factors: [1, 1, 1, 2, 2]
+morphisms:
+- target: 2AYT
+  name: O(L) generator 1
+  matrix:
+  - [-1, 0, 0, 0, 0]
+  - [0, -1, 0, 0, 0]
+  - [0, 0, -1, 0, 0]
+  - [0, 0, 0, -1, 0]
+  - [0, 0, 0, 0, -1]
+  scale: 1
+- target: 2AYT
+  name: O(L) generator 2
+  matrix:
+  - [0, -1, 0, 0, 0]
+  - [0, 1, -1, 0, 0]
+  - [1, 1, 0, 0, 0]
+  - [0, 0, 0, 0, -1]
+  - [0, 0, 0, -1, 0]
+  scale: 1
+- target: 2AYT
+  name: O(L) generator 3
+  matrix:
+  - [1, 0, 1, 0, 0]
+  - [0, 1, -1, 0, 0]
+  - [0, 0, -1, 0, 0]
+  - [0, 0, 0, 0, -1]
+  - [0, 0, 0, -1, 0]
+  scale: 1
+- target: 2AYT
+  name: O(L) generator 4
+  matrix:
+  - [1, 0, 0, 0, 0]
+  - [0, 1, 0, 0, 0]
+  - [0, 0, 1, 0, 0]
+  - [0, 0, 0, 0, -1]
+  - [0, 0, 0, -1, 0]
+  scale: 1
+- target: 2AYT
+  name: O(L) generator 5
+  matrix:
+  - [1, 0, 0, -1, 1]
+  - [0, 1, 0, 1, -1]
+  - [0, 0, 1, 0, 0]
+  - [0, 0, 0, 0, 1]
+  - [0, 0, 0, 1, 0]
+  scale: 1
 families: []
 related: []
 references:
