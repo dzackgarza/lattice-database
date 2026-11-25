@@ -1794,11 +1794,7 @@
   limit_bytes: 1675943116
 2L9P derive:
   hash: 4ddcaf5951abfe350dd80a5dff0d293ee799869abf4e08e40c12f9c97c198a07
-  seconds: 71
-  lost: true
-  killed_by: memory
-  peak_bytes: 14258954240
-  limit_bytes: 1675942297
+  seconds: 34
 2RSZ integral.discriminant_form:
   hash: 415a8ddad5836ec21252d54cdbed3fb4c6e964d8667e7f91a82ef04dc6dab27b
   seconds: 6
@@ -2163,7 +2159,8 @@
   seconds: 19661
 3GV7 integral.discriminant_sequence:
   hash: 11bd986ed4009c6f4b842f2711f305e76eeda93e70e9bc4fc82cf6b28bb78e57
-  seconds: 1581
+  seconds: 14303
+  lost: true
 3GVI integral.discriminant_sequence:
   hash: 096d7caa6bb4c44462fc6d1f0a5c8e45d1ce810ce6d8310e917369a2cdcecb51
   seconds: 1667
@@ -2285,14 +2282,6 @@
 4I8D automorphisms.automorphism_group_order:
   hash: 8cb7ef7d73079f6dab7c15c2d594218d65ca768f8f835504e1350a5324ea9dc6
   seconds: 0
-  lost: true
-4N33 automorphisms.automorphism_group_generator_morphisms:
-  hash: b1bdbcdade9c8b13fd6cec98d84636fc62e1d96b8c90b277dee038b69c3e889c
-  seconds: 14070
-  lost: true
-4N33 automorphisms.automorphism_group_order:
-  hash: 7424a531255ff56a461b04c8f76fb810ba13d2dac8be3b64dcec72cc8b9f7b25
-  seconds: 14070
   lost: true
 4ZLQ integral.primitive_orbits[Otilde+]:
   hash: f950fe8eda4a26616d1fa203f6b9d971752b7796263a18613b89c46566b1912d
