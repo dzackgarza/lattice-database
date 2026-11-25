@@ -869,6 +869,10 @@
   hash: 32f9a153ddd9228e0820ae7dc3940d70c5c70c0576df8f1f5b9659a8eac7c2c0
   seconds: 0
   lost: true
+1XDA integral.genus_class_count:
+  hash: 8447308a7d4ef70bcbbf74309119433e0d62849dcf818c842bc9f78869b1d7a2
+  seconds: 0
+  lost: true
 1XEP integral.spinor_genera:
   hash: 31e6986fe026d98e42c61972796bc9a750739bec7e9e797354e0faf70396d9de
   seconds: 0
@@ -2777,14 +2781,6 @@
 3IEA integral.hyperbolic_index:
   hash: 3072abb556184c36e33747dd96e2dc1de4befdb4383257fa4d37035dd48d3c52
   seconds: 112
-  lost: true
-44LI automorphisms.automorphism_group_generator_morphisms:
-  hash: 2d50e424fd70a09337d5b717025496a8199b71ce093d2f070fd801742d9c412f
-  seconds: 8293
-  lost: true
-44LI automorphisms.automorphism_group_order:
-  hash: a5023f8c96ab33dcbbed76653a5231784e723cf5cd82246090cfd45659df8494
-  seconds: 8293
   lost: true
 48YN integral.primitive_orbits[SOtilde]:
   hash: 9e1c166422b378d94310bb7b61abeb33d8e2cd6ec2a08cf2b0a62e00dcdedc04
