@@ -23,6 +23,7 @@ certifications:
   definite.siegel_eisenstein_coefficients: a6f0fc79990039b6245c665b6460391efe747dc505f63e678c724f577d0d4039
   integral.anisotropic_primes: bd6d7423d576e97632ad1ff90c8e51ee948d36470196e5a60a4c9584d21c2b0b
   integral.local_densities: 2d50453edc0f6be03159f6ba419c79031cef2a9aaf9f9437c9fbeac3e30f6bbd
+  integral.discriminant_form: b4ade7c3c4b0baed7ed67c12a37bd2220be63b6cc2abbba5578ee53777381bca
 rank: 4
 gram_tensor:
 - [2, 0, 1, 0]
@@ -124,6 +125,10 @@ integral:
       constant: 0
       z: [0, 2, 0, 2]
       w: [0, 0, 0, 0]
+  discriminant_form:
+    orthogonal_group_order: 24
+    isotropic_classes: 5
+    isotropic_orbits: 3
   anisotropic_primes: []
   local_densities:
   - prime: 2
