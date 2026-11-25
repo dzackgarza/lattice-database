@@ -34,21 +34,84 @@ jobs:
           just tensor-boundary
       - name: Provision the shared Sage environment
         uses: ./.github/actions/sage
-      - name: Validate preamble owner contracts
-        run: |
-          docker exec -i --workdir "$GITHUB_WORKSPACE/research" \
-            --env "PYTHONPATH=$GITHUB_WORKSPACE/_ci-support/ai-review-ci/tool-artifacts/pytest_plugins:$GITHUB_WORKSPACE/research/src" \
-            sage-env /sage/.venv/bin/python -c 'import sage.all, sys, pytest; sys.exit(pytest.main(sys.argv[1:]))' \
-            -p qc_sage_session -p qc_unique_inventory \
-            tests/lattices/test_lattice_database_owner_contracts.sage \
-            tests/lattices/test_coordinate_diagonal_embeddings.py
+      # The database's own suite runs first, and without -x: this job is where the stored cards'
+      # certificate references are checked (`tests/test_stored_records.py`), and a step that fails
+      # before it must not hide a card that lost its references (#5, #21).
+      # `--continue-on-collection-errors`: six modules still import `dzack_research.preamble.categories`,
+      # which research's shim preamble no longer has, and pytest interrupts the whole run when a module
+      # fails to import — so those six, whose repair is theirs, would otherwise hide the checks of the
+      # 244 tests that do collect. The step is still red on them: pytest exits nonzero either way.
       - name: Run every lattice database test, including Sage sessions and source intake
         run: |
           docker exec -i --workdir "$GITHUB_WORKSPACE" \
-            --env "PYTHONPATH=$GITHUB_WORKSPACE/_ci-support/ai-review-ci/tool-artifacts/pytest_plugins:$GITHUB_WORKSPACE/research/src:$GITHUB_WORKSPACE/src" \
+            --env "PYTHONPATH=$GITHUB_WORKSPACE/_ci-support/ai-review-ci/tool-artifacts/pytest_plugins:$GITHUB_WORKSPACE/research/src:$GITHUB_WORKSPACE/src:/repos/sage-extensions/src" \
             sage-env /sage/.venv/bin/python \
             -c 'import sage.all, sys, pytest; sys.exit(pytest.main(sys.argv[1:]))' \
-            -p qc_sage_session -p qc_unique_inventory --durations=20 -x tests
+            -p qc_sage_session -p qc_unique_inventory --durations=20 --continue-on-collection-errors tests
+      # The owner contracts are the owner library's own suite, checked out at sage-extensions main;
+      # their first test starts the Julia bridge and is billed the owner's 60 s ceiling
+      # (sage-extensions#237). They report after the database's checks, and the job is red on either.
+      - name: Check out sage-extensions (actions/checkout v4)
+        if: always()
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          # The owner contracts run against sage-extensions itself, at main, which is what
+          # the Sage action installs through research; research's preamble is a shim.
+          repository: dzackgarza/sage-extensions
+          path: sage-extensions
+      # The owner's suite records the commit it ran at, and it reads that commit from the checkout's
+      # own git: its `pyproject.toml` addopts load `sage_extensions.testing.timing_record`, whose
+      # session end resolves `sage_extensions.timing.current_commit()`, `git -C <checkout> rev-parse
+      # HEAD`. `actions/checkout` writes the tree as the runner and `sage-env` runs as root, so git
+      # refuses a repository it cannot vouch for — and that refusal is a `CalledProcessError` inside
+      # `pytest_sessionfinish`, which ends the step on a traceback instead of on a verdict (#29: run
+      # 44304988129's step 9, `rev-parse HEAD` returning 128). The image sets no `HOME`, so the
+      # directory is named safe through the environment's config — `safe.directory` reaches git the
+      # way `-c` does — which is what the step below is handed too.
+      - name: Bind the sage-extensions checkout to the container's git
+        if: always()
+        run: |
+          checkout="$GITHUB_WORKSPACE/sage-extensions"
+          git_in_container() {
+            docker exec -i \
+              --env "GIT_CONFIG_COUNT=1" \
+              --env "GIT_CONFIG_KEY_0=safe.directory" \
+              --env "GIT_CONFIG_VALUE_0=$checkout" \
+              sage-env git "$@"
+          }
+          # `git -C` walks up, and this checkout sits inside the database's own repository, so a
+          # directory that is not a checkout would answer with the database's commit. The toplevel
+          # has to be the checkout itself, and HEAD has to resolve in it.
+          top="$(git_in_container -C "$checkout" rev-parse --show-toplevel 2>/dev/null || true)"
+          if [ "$top" != "$checkout" ] || ! commit="$(git_in_container -C "$checkout" rev-parse HEAD 2>/dev/null)"; then
+            echo "::error::the sage-extensions checkout at $checkout is not a repository this environment can read (git resolves the path to '${top:-nothing}'), so the owner's contracts cannot record the commit they ran at"
+            exit 1
+          fi
+          echo "The owner's contracts run at sage-extensions $commit"
+      - name: Validate preamble owner contracts
+        if: always()
+        run: |
+          # The owner's suite bills its own 60 s `--timeout` to the first test that reaches the Julia
+          # bridge, because starting the session is 61 s and every later call is free
+          # (sage-extensions#237). That ceiling is the owner's and is not raised here; what this step
+          # does is start the bridge *before* pytest exists, so no test's timer pays for it. Without
+          # this the step dies on its first test at 61 s; with it, the thirteen contracts run in
+          # about seven seconds.
+          # `--no-time-gates`: the owner's `suite_budget` plugin sets the session's exit status to
+          # TESTS_FAILED in `pytest_sessionfinish` whenever any selected test's *call phase* exceeded
+          # 20 s, whether the test passed or not. A run of this selection on a cold runner therefore
+          # prints "13 passed" and exits 1 (#29). Those ceilings are the owner's performance
+          # baselines for its own full suite, not assertions about this repository; the contracts
+          # still run and still decide the step.
+          docker exec -i --workdir "$GITHUB_WORKSPACE/sage-extensions" \
+            --env "PYTHONPATH=$GITHUB_WORKSPACE/_ci-support/ai-review-ci/tool-artifacts/pytest_plugins:$GITHUB_WORKSPACE/sage-extensions/src:/repos/sage-extensions/src" \
+            --env "GIT_CONFIG_COUNT=1" \
+            --env "GIT_CONFIG_KEY_0=safe.directory" \
+            --env "GIT_CONFIG_VALUE_0=$GITHUB_WORKSPACE/sage-extensions" \
+            sage-env /sage/.venv/bin/python -c 'import sage.all, sys, pytest; from sage.all import ZZ; from sage_extensions.categories.lattices import Lattices; Lattices(ZZ)([[2, -1], [-1, 2]]).orthogonal_group().order(); sys.exit(pytest.main(sys.argv[1:]))' \
+            -p qc_sage_session -p qc_unique_inventory --no-time-gates \
+            tests/lattices/test_lattice_database_owner_contracts.sage \
+            tests/lattices/test_coordinate_diagonal_embeddings.py
       - name: Stop the Sage environment
         if: always()
         run: docker rm --force sage-env

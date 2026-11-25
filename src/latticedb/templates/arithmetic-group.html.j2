@@ -25,6 +25,9 @@
     {% if group.data.index_in_orthogonal_group is not none %}<tr><th scope="row">Index in \(O(L)\)</th><td>{{ group.data.index_in_orthogonal_group }}</td></tr>{% endif %}
     {% if group.data.abstract_structure %}<tr><th scope="row">Description</th><td>{{ group.data.abstract_structure }}</td></tr>{% endif %}
     {% if group.data.generator_morphisms %}<tr><th scope="row">Generators</th><td>{{ group.data.generator_morphisms | join(", ") }}</td></tr>{% endif %}
+    {% if group.data.line_orbits is not none %}<tr><th scope="row">Orbits of primitive isotropic lines</th><td>{{ group.data.line_orbits }}</td></tr>{% endif %}
+    {% if group.data.plane_orbits is not none %}<tr><th scope="row">Orbits of primitive isotropic planes</th><td>{{ group.data.plane_orbits }}</td></tr>{% endif %}
+    {% if group.data.flag_orbits is not none %}<tr><th scope="row">Orbits of isotropic flags</th><td>{{ group.data.flag_orbits }}</td></tr>{% endif %}
   </tbody></table></section>
 
   {% if group.data.orbits %}

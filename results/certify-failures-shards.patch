@@ -1,0 +1,26 @@
+diff --git a/.github/workflows/certify-searches.yml b/.github/workflows/certify-searches.yml
+index bb9c998a63..f21ee64b7f 100644
+--- a/.github/workflows/certify-searches.yml
++++ b/.github/workflows/certify-searches.yml
+@@ -94,7 +94,7 @@ jobs:
+         shell: bash --noprofile --norc -e -o pipefail {0}
+         run: |
+           git config --global --add safe.directory "$GITHUB_WORKSPACE"
+-          git add -A lattices certificates exceeded.yaml failures.yaml
++          git add -A lattices certificates exceeded.yaml failures
+           git diff --cached --binary > "$RUNNER_TEMP/certification.patch"
+           git rev-parse HEAD > "$RUNNER_TEMP/certification-base.txt"
+       - name: Retain completed data even if integration fails
+diff --git a/.github/workflows/certify.yml b/.github/workflows/certify.yml
+index 016165703f..ee84a1ecd5 100644
+--- a/.github/workflows/certify.yml
++++ b/.github/workflows/certify.yml
+@@ -135,7 +135,7 @@ jobs:
+         shell: bash --noprofile --norc -e -o pipefail {0}
+         run: |
+           git config --global --add safe.directory "$GITHUB_WORKSPACE"
+-          git add -A lattices certificates exceeded.yaml failures.yaml
++          git add -A lattices certificates exceeded.yaml failures
+           git diff --cached --binary > "$RUNNER_TEMP/certification.patch"
+           git rev-parse HEAD > "$RUNNER_TEMP/certification-base.txt"
+       - name: Retain completed data even if integration fails

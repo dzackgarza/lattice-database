@@ -23,6 +23,7 @@ certifications:
   integral.anisotropic_primes: 2b107d3fa3f4491f3d26c79de544031853e12d4cca222fd015084abefb2c1601
   integral.local_representations: e8047e1d3f52de8c50063a3a7e9694d49c87445a32633fd0d5be279972b7c01a
   integral.local_densities: 1e8a8aa8682e44ae140af4fb32c907ddc41636b983409dd5276a63983a663b99
+  integral.discriminant_sequence: f6a71dbb62758e9be615fe04d85bfc6782b41511e9eeeff571976e7ea29b3f7d
 rank: 4
 gram_tensor:
 - [3, -1, -1, -1]
@@ -45,6 +46,95 @@ integral:
   level: 96
   modular_scale: false
   discriminant_group: [2, 2, 48]
+  discriminant_sequence:
+    discriminant_factors: [2, 2, 48]
+    discriminant_basis_lifts:
+    - [-1/2, 1/2, '0', '0']
+    - [-1/2, '0', 1/2, '0']
+    - [5/24, -3/16, -5/24, 1/48]
+    discriminant_quadratic_gram:
+    - ['0', 1/2, '0']
+    - [1/2, '0', '0']
+    - ['0', '0', 29/48]
+    discriminant_group_order: 192
+    discriminant_generators:
+    - - [1, 1, 24]
+      - [1, 0, 24]
+      - [0, 1, 1]
+    - - [1, 1, 24]
+      - [1, 0, 24]
+      - [0, 1, 41]
+    - - [1, 1, 24]
+      - [1, 0, 24]
+      - [0, 1, 47]
+    - - [1, 1, 24]
+      - [0, 1, 24]
+      - [1, 0, 47]
+    image_generators:
+    - - [1, 1, 0]
+      - [0, 1, 0]
+      - [0, 0, 47]
+    - - [1, 1, 0]
+      - [1, 0, 0]
+      - [0, 0, 1]
+    - - [0, 1, 0]
+      - [1, 0, 0]
+      - [0, 0, 1]
+    image_order: 12
+    kernel_order: 1
+    coset_representatives:
+    - - [1, 0, 0]
+      - [0, 1, 0]
+      - [0, 0, 1]
+    - - [0, 1, 0]
+      - [1, 0, 0]
+      - [0, 0, 7]
+    - - [0, 1, 0]
+      - [1, 0, 0]
+      - [0, 0, 17]
+    - - [0, 1, 0]
+      - [1, 0, 0]
+      - [0, 0, 23]
+    - - [0, 1, 0]
+      - [1, 0, 24]
+      - [0, 1, 1]
+    - - [0, 1, 0]
+      - [1, 0, 24]
+      - [0, 1, 7]
+    - - [0, 1, 0]
+      - [1, 0, 24]
+      - [0, 1, 17]
+    - - [0, 1, 0]
+      - [1, 0, 24]
+      - [0, 1, 23]
+    - - [0, 1, 24]
+      - [1, 0, 0]
+      - [1, 0, 1]
+    - - [0, 1, 24]
+      - [1, 0, 0]
+      - [1, 0, 7]
+    - - [0, 1, 24]
+      - [1, 0, 0]
+      - [1, 0, 17]
+    - - [0, 1, 24]
+      - [1, 0, 0]
+      - [1, 0, 23]
+    - - [0, 1, 24]
+      - [1, 0, 24]
+      - [1, 1, 1]
+    - - [0, 1, 24]
+      - [1, 0, 24]
+      - [1, 1, 7]
+    - - [0, 1, 24]
+      - [1, 0, 24]
+      - [1, 1, 17]
+    - - [0, 1, 24]
+      - [1, 0, 24]
+      - [1, 1, 23]
+    mm_trivial: false
+    image_normal: false
+    quotient_generator_cosets: null
+    quotient_multiplication: null
   overlattice_count: 18
   bad_reduction_primes: [2, 3]
   quadratic_character: 12

@@ -1,0 +1,9 @@
+[    0.2s] card row 4.3.8, cusp (0, 0, 2, 1, -4, -5, -7, -10, -8, -6, -4, -2), 11 walls
+[    5.7s] Gamma_En,2 built
+[    5.9s] reduction image at the card's cusp built
+generators_are_certified_complete: False
+generation_obstruction: the parabolic at the line 2*e_2 + e_3 - 4*e_4 - 5*e_5 - 7*e_6 - 10*e_7 - 8*e_8 - 6*e_9 - 4*e_10 - 2*e_11 has no constructed generator family: parabolic_stabilizer_generators is stated for a primitive isotropic plane and refuses rank one, and the port's line stabilizer generators are not a computational route at Sterk's first Enriques cusp; the reflection subgroup of G_v is available through reflection_generators, whose chamber is the reflection part of G_v
+[    5.9s] 11 classes of the walls, 2 of them roots of K_J
+[   17.1s] 28 stabilizer generators
+[  133.7s] 2 components, of sizes [1, 1]
+RESULT {'statement': '4.3.8', 'wall_classes': 11, 'roots': 2, 'components': 2, 'sizes': [1, 1], 'certified_complete': False}

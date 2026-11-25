@@ -1,0 +1,15 @@
+/sage/.venv/lib/python3.14/site-packages/pytest_asyncio/plugin.py:306: PytestDeprecationWarning: The configuration option "asyncio_default_fixture_loop_scope" is unset.
+The event loop scope for asynchronous fixtures will default to the fixture scope. Future versions of pytest-asyncio will default the loop scope for asynchronous fixtures to "function" scope. Set the default fixture loop scope explicitly in order to avoid unexpected behavior in the future. Valid fixture loop scopes are: "function", "class", "module", "package", "session". Set it to "fixture-scope" to keep the current behavior.
+
+  warnings.warn(PytestDeprecationWarning(_DEFAULT_FIXTURE_LOOP_SCOPE_UNSET))
+........                                                                 [100%]
+============================= slowest 10 durations =============================
+0.82s call     tests/test_bulk_sources.py::test_brandt_and_watson_source_forms_seed_valid_lattice_records
+0.24s call     tests/test_bulk_sources.py::test_regular_ternary_tables_seed_valid_lattice_records_with_their_proved_values
+0.14s call     tests/test_bulk_sources.py::test_brandt_intrau_tables_apply_their_distinct_parity_conventions
+0.10s call     tests/test_bulk_sources.py::test_union_archive_retains_repeated_names_at_distinct_positions
+0.06s call     tests/test_bulk_sources.py::test_nipp_tables_preserve_the_source_discriminants_and_group_orders
+0.06s call     tests/test_bulk_sources.py::test_the_nipp_matrices_are_square_and_integral_before_any_determinant
+
+(4 durations < 0.005s hidden.  Use -vv to show these durations.)
+8 passed in 2.49s

@@ -19,6 +19,7 @@ from __future__ import annotations
 
 import json
 import re
+from collections.abc import Iterable
 from dataclasses import dataclass
 from pathlib import Path
 
@@ -178,8 +179,59 @@ def _catalogue[Value: CatalogueRecord](root: Path, directory: str, schema: type[
     return tuple(entries)
 
 
-def load(root: Path) -> Corpus:
-    """The families, the retired tags, every entry of `root/lattices` in tag order, and every file of `root/morphisms`.
+def tags(root: Path) -> tuple[str, ...]:
+    """Every stored tag, in order, without reading a card: a certification shard selects its own."""
+    return tuple(path.stem for path in sorted((root / "lattices").glob("*.md")))
+
+
+def cards(root: Path, tags: Iterable[str]) -> Corpus:
+    """The cards of `tags` alone, as `load` would give them, without reading the rest of the corpus.
+
+    A per-tag request needs one card's Gram tensor and what the preamble makes of it; reading the
+    other 302,503 cards costs 7.3 GiB and is killed on a 15 GiB runner before the first computation
+    (#30). The arithmetic-group cards of those lattices are read, because a certification request
+    computes their `data.index_in_orthogonal_group` and generator names from that Gram tensor; a
+    card of another lattice is skipped before it is validated. The families, the retired tags and
+    the other catalogues are empty here, because a computation neither reads nor writes them; a
+    workflow that checks references uses `load`.
+    """
+    entries: list[Entry] = []
+    found: list[str] = []
+    named = set(tags)
+    for tag in sorted(named):
+        path = root / "lattices" / f"{tag}.md"
+        if not path.is_file():
+            found.append(f"{path}: no card for the requested tag {tag}")
+            continue
+        document = read_card(path)
+        try:
+            entries.append(Entry(Lattice.model_validate(document.metadata), document.content, path))
+        except ValidationError as error:
+            found.extend(_record_problems(path, error))
+    groups: list[CatalogueEntry[ArithmeticGroup]] = []
+    directory = root / "arithmetic-groups"
+    if directory.is_dir():
+        for path in sorted(directory.glob("*.md")):
+            document = read_card(path)
+            if document.metadata.get("lattice") not in named:
+                continue
+            try:
+                groups.append(CatalogueEntry(ArithmeticGroup.model_validate(document.metadata), document.content, path))
+            except ValidationError as error:
+                found.extend(_record_problems(path, error))
+    if found:
+        raise CorpusInvalid(tuple(found))
+    empty: tuple[()] = ()
+    return Corpus(tuple(entries), {}, {}, *(empty for _ in range(12)), tuple(groups))
+
+
+def load(root: Path, tags: Iterable[str] | None = None) -> Corpus:
+    """The families, the retired tags, every entry of `root/lattices` in tag order, and every catalogue record.
+
+    `tags` reads only those lattice cards and leaves the catalogues, the families and the retired tags whole, so that
+    a shard of `latticedb verify` costs the cards it checks rather than the corpus (#6). It is the caller's business
+    to read every card those cards and those catalogues name: a card that is absent is a reference problem, and
+    `checks.shard_closure` is the closure that makes one shard's read closed under naming.
 
     Raises `CorpusInvalid` with all problems when a file does not have the shape of its schema.
     """
@@ -200,7 +252,12 @@ def load(root: Path) -> Corpus:
         found.extend(_record_problems(retired_path, error))
     directory = root / "lattices"
     paths = sorted(directory.glob("*.md"))
-    if not paths:
+    if tags is not None:
+        chosen = frozenset(tags)
+        paths = [path for path in paths if path.stem in chosen]
+        if sorted(chosen - {path.stem for path in paths}):
+            found.append(f"{directory}: no card of {sorted(chosen - {path.stem for path in paths})}")
+    elif not paths:
         found.append(f"{directory}: no records")
     for path in paths:
         document = read_card(path)
@@ -402,6 +459,22 @@ def append_index(root: Path, tag: str, gram: GramTensor) -> None:
         assert data is not None
     data.grams.setdefault(gram_key(gram), []).append(tag)
     save_index(root, data)
+
+
+def stored_gram_index(root: Path) -> dict[str, list[str]] | None:
+    """Gram key -> tags, from the durable index file, or ``None`` when it does not cover the corpus.
+
+    `gram_index` promotes a card that gained a tensor and rebuilds the file when the card set has changed, which a
+    read-only check may not do: verification reports and never writes (`checks`). This reads the same file and answers
+    ``None`` for a file that no longer describes the cards on disk, so the caller falls back to the cards it holds.
+    """
+    paths = {path.stem for path in (root / "lattices").glob("*.md")}
+    data = _read_index(root)
+    if data is None:
+        return None
+    if ({tag for tags in data.grams.values() for tag in tags} | set(data.without)) != paths:
+        return None
+    return data.grams
 
 
 def gram_index(root: Path) -> dict[str, list[str]]:

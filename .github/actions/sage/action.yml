@@ -12,7 +12,7 @@ runs:
       uses: actions/cache/restore@0057852bfaa89a56745cba8c7296529d2fc39830
       with:
         path: ${{ runner.temp }}/julia
-        key: ${{ runner.os }}-julia-1.10.11-oscar-66037961702ae6ceea7fb3d5e1544b75dcc95511
+        key: ${{ runner.os }}-julia-bridge-depot-${{ hashFiles('research/pyproject.toml') }}
       id: julia-cache
     - name: Start the canonical research Sage environment
       run: |-
@@ -20,9 +20,7 @@ runs:
         docker run --detach --name sage-env \
           --volume "$GITHUB_WORKSPACE:$GITHUB_WORKSPACE" \
           --volume "$RUNNER_TEMP/julia:/julia" \
-          --env JULIA_DEPOT_PATH=/julia/depot \
-          --env MAXIMA_PREFIX=/sage/subprojects/maxima-5.47.0/share \
-          --env SAGE_JULIA_COMMAND=/julia/julia-1.10.11/bin/julia \
+          --env JULIA_DEPOT_PATH=/julia/depot:/opt/julia-depot: \
           --workdir "$GITHUB_WORKSPACE" \
           ghcr.io/dzackgarza/sage:develop sleep infinity
         docker exec -i -w "$GITHUB_WORKSPACE" sage-env \
@@ -43,19 +41,15 @@ runs:
           --reinstall-package pyyaml --only-binary pyyaml pytest
         docker exec -i sage-env uv pip check --python /sage/.venv/bin/python
       shell: bash
-    - name: Install Julia and the Oscar project of sage-julia-bridge
+    - name: Instantiate the Oscar project of sage-julia-bridge
       run: |-
         # The preamble reaches Oscar through sage-julia-bridge, which starts Julia in
-        # the bridge's own project (`julia_env`, pinned to Julia 1.10.11). The Sage
-        # image has no Julia, so the job installs that release and instantiates the
-        # project into the cached depot.
+        # the bridge's own project (`julia_env`). The image provides Julia and Oscar
+        # in its read-only /opt/julia-depot; the project resolves into the cached
+        # writable depot in front of it.
         docker exec -i sage-env bash -euc '
-          if [ ! -x /julia/julia-1.10.11/bin/julia ]; then
-            curl -fsSL https://julialang-s3.julialang.org/bin/linux/x64/1.10/julia-1.10.11-linux-x86_64.tar.gz \
-              | tar -xz -C /julia
-          fi
           project="$(/sage/.venv/bin/python -c "import pathlib, sage_julia_bridge; print(pathlib.Path(sage_julia_bridge.__file__).with_name(\"julia_env\"))")"
-          /julia/julia-1.10.11/bin/julia --project="$project" --startup-file=no --color=no -e "
+          julia --project="$project" --startup-file=no --color=no -e "
             using Pkg; Pkg.instantiate(); Pkg.precompile(); using Oscar
             println(\"Oscar \", Oscar.VERSION_NUMBER)"
         '

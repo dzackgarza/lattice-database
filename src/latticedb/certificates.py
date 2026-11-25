@@ -60,9 +60,18 @@ def _group_of(name: str) -> str:
     return group(name.split(" ", 1)[0])
 
 
-def load(root: Path) -> Certificates:
+def load(root: Path, tags: Iterable[str] | None = None) -> Certificates:
+    """The completed computations of every group, or of the groups `tags` fall in.
+
+    A per-tag request reads one card's groups and not the 2.4 million entries of the other 240
+    (#30). `save` writes a group whole, so a caller that passes `tags` here must pass the same tags
+    there: the groups it writes are then the ones it read in full.
+    """
+    chosen = None if tags is None else {group(tag) for tag in tags}
     held: Certificates = {}
     for path in sorted((root / CERTIFICATES_DIR).glob("*.yaml")):
+        if chosen is not None and path.stem not in chosen:
+            continue
         held.update(TypeAdapter(Certificates).validate_python(yaml.load(path.read_text(), Loader=yaml.CSafeLoader) or {}))
     return held
 

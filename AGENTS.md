@@ -1,5 +1,10 @@
 # Lattice database: agent guidance
 
+Use the [shared math container](https://github.com/dzackgarza/ai-review-ci/blob/main/SAGE-CONTAINER.md#use-the-image)
+(`ghcr.io/dzackgarza/sage:develop`) for Lean/elan, Sage with mypy, GAP,
+Julia/Oscar, Macaulay2, and Singular. The guide covers image pull/run commands,
+CI use, and the host launchers.
+
 `README.md` owns the schema, the commands and the conventions. This file states the purpose that
 governs every change to the database.
 
@@ -154,8 +159,11 @@ A timeout or unfinished computation has no certificate. A computation that ran f
 certification job without finishing is logged in `exceeded.yaml` and held for manual triage,
 so later CI runs spend their budgets on other work until an explicit retry is justified.
 
-Worker errors and memory failures enter `failures.yaml` with their input, stderr,
-runtime and CI provenance. Open entries quarantine the matching computation and input
+Worker errors and memory failures enter `failures/` with their input, stderr,
+runtime and CI provenance. A worker the run itself ended — killed for memory or by a
+signal — is a cost, not an error: its computation is logged in `exceeded.yaml` with the
+memory it held and the floor it crossed, the card is left as it was, and the run
+continues. Open entries quarantine the matching computation and input
 for manual triage. An explicit retry records the repair or investigation, releases the
 computation and retains its evidence; a successful retry resolves it. Completed values
 and the triage ledger are persisted together. `README.md` owns the inspection and

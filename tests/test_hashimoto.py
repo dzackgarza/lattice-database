@@ -1,11 +1,10 @@
 """Fast source-intake checks on the Hashimoto comparator that need no corpus."""
 
-from dzack_research.preamble.categories.lattices import Lattices
-from dzack_research.preamble.rings import session_ring_objects
+from sage_extensions.categories.lattices import Lattices
+from sage_extensions.rings import ZZ
 
 from latticedb import hashimoto
 
-ZZ = session_ring_objects()["ZZ"]
 
 
 def test_the_group_of_a_genus_symbol_is_the_sum_of_its_cyclic_factors() -> None:

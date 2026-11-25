@@ -4,9 +4,10 @@ from __future__ import annotations
 
 import json
 import re
+from collections.abc import Mapping
 from fractions import Fraction
 
-from dzack_research.preamble.categories.lattice_zeta_invariants import PartialLFactor, QuadraticCharacterDiscriminant, QuadraticHypersurfaceZetaFactorization
+from sage_extensions.categories.lattice_zeta_invariants import PartialLFactor, QuadraticCharacterDiscriminant, QuadraticHypersurfaceZetaFactorization
 
 from latticedb.model import (
     Lattice,
@@ -35,8 +36,10 @@ def group_tex(factors: tuple[int, ...]) -> str:
     return " \\oplus ".join(f"(\\mathbb{{Z}}/{factor})^{{{count}}}" if count > 1 else f"\\mathbb{{Z}}/{factor}" for factor, count in runs) or "0"
 
 
-def orbit_group_tex(group: OrbitGroup) -> str:
-    """TeX for a key of `integral.primitive_orbits`, such as `\\widetilde{SO}^+(L)` for `SOtilde+`."""
+def orbit_group_tex(group: str, named: Mapping[str, str] | None = None) -> str:
+    """TeX for a key of `integral.primitive_orbits`: `\\widetilde{SO}^+(L)` for `SOtilde+`, or a named subgroup's card TeX."""
+    if group not in ORBIT_GROUP_KEYS:
+        return (named or {}).get(group, group.replace("_", "\\_"))
     name, plus = group.removesuffix("+"), "^+" if group.endswith("+") else ""
     letters = name.removesuffix("tilde")
     return f"\\widetilde{{{letters}}}{plus}(L)" if name.endswith("tilde") else f"\\mathrm{{{letters}}}{plus}(L)"
@@ -93,19 +96,19 @@ def _l_factor_tex(factor: PartialLFactor) -> str:
 
 def cone_zeta_tex(lattice: Lattice) -> str:
     """Render the preamble-owned zeta factorization of the zero level."""
-    from dzack_research.preamble.categories.lattices import Lattices
-    from dzack_research.preamble.rings import session_ring_objects
+    from sage_extensions.categories.lattices import Lattices
+    from sage_extensions.rings import ZZ
 
-    owned = Lattices(session_ring_objects()["ZZ"])(lattice.gram_tensor)
+    owned = Lattices(ZZ)(lattice.gram_tensor)
     return _zeta_factorization_tex(owned.quadratic_hypersurface_zeta_factorization(cone=True))
 
 
 def nonzero_zeta_tex(lattice: Lattice) -> str:
     """Render the preamble-owned zeta factorization of a nonzero level."""
-    from dzack_research.preamble.categories.lattices import Lattices
-    from dzack_research.preamble.rings import session_ring_objects
+    from sage_extensions.categories.lattices import Lattices
+    from sage_extensions.rings import ZZ
 
-    owned = Lattices(session_ring_objects()["ZZ"])(lattice.gram_tensor)
+    owned = Lattices(ZZ)(lattice.gram_tensor)
     return _zeta_factorization_tex(owned.quadratic_hypersurface_zeta_factorization(cone=False))
 
 

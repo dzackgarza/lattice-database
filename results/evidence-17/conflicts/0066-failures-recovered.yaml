@@ -1,0 +1,147 @@
+0066 integral.primitive_orbits:
+  disposition: open
+  attempts:
+  - hash: d75a9ad628461d9fe52ed5af6fa86e762bfe928c79de000d52adc9086192142c
+    gram_tensor:
+    - - 0
+      - 1
+      - 0
+      - 0
+      - 0
+      - 0
+    - - 1
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+    - - 0
+      - 0
+      - -2
+      - 1
+      - 0
+      - 0
+    - - 0
+      - 0
+      - 1
+      - -2
+      - 1
+      - 1
+    - - 0
+      - 0
+      - 0
+      - 1
+      - -2
+      - 0
+    - - 0
+      - 0
+      - 0
+      - 1
+      - 0
+      - -2
+    reason: exit status 1
+    stderr: "Traceback (most recent call last):\n  File \"<frozen runpy>\", line 203,
+      in _run_module_as_main\n  File \"<frozen runpy>\", line 88, in _run_code\n  File
+      \"/home/runner/work/lattice-database/lattice-database/src/latticedb/sage_genus.py\",
+      line 313, in <module>\n    main()\n    ~~~~^^\n  File \"/home/runner/work/lattice-database/lattice-database/src/latticedb/sage_genus.py\",
+      line 308, in main\n    _compute(request)\n    ~~~~~~~~^^^^^^^^^\n  File \"/home/runner/work/lattice-database/lattice-database/src/latticedb/sage_genus.py\",
+      line 293, in _compute\n    _run(\n    ~~~~^\n        tag,\n        ^^^^\n        [field],\n
+      \       ^^^^^^^^\n        lambda: {field: SERIES[field](lattice, request[\"series_bound\"])
+      if field in SERIES else VALUES[field](lattice)},\n        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n
+      \   )\n    ^\n  File \"/home/runner/work/lattice-database/lattice-database/src/latticedb/sage_genus.py\",
+      line 253, in _run\n    _emit(tag, values)\n    ~~~~~^^^^^^^^^^^^^\n  File \"/home/runner/work/lattice-database/lattice-database/src/latticedb/sage_genus.py\",
+      line 242, in _emit\n    print(json.dumps({\"tag\": tag, \"by\": \"research preamble\",
+      **values}), flush=True)\n          ~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n
+      \ File \"/opt/uv-python/cpython-3.14.10-linux-x86_64-gnu/lib/python3.14/json/__init__.py\",
+      line 235, in dumps\n    return _default_encoder.encode(obj)\n           ~~~~~~~~~~~~~~~~~~~~~~~^^^^^\n
+      \ File \"/opt/uv-python/cpython-3.14.10-linux-x86_64-gnu/lib/python3.14/json/encoder.py\",
+      line 202, in encode\n    chunks = self.iterencode(o, _one_shot=True)\n  File
+      \"/opt/uv-python/cpython-3.14.10-linux-x86_64-gnu/lib/python3.14/json/encoder.py\",
+      line 263, in iterencode\n    return _iterencode(o, 0)\n  File \"/opt/uv-python/cpython-3.14.10-linux-x86_64-gnu/lib/python3.14/json/encoder.py\",
+      line 182, in default\n    raise TypeError(f'Object of type {o.__class__.__name__}
+      '\n                    f'is not JSON serializable')\nTypeError: Object of type
+      Cardinalities.parent_class is not JSON serializable\nwhen serializing dict item
+      'constant'\nwhen serializing dict item 'O'\nwhen serializing dict item 'primitive_orbits'\n"
+    seconds: 262.30779905500003
+    recorded_at: 2026-11-07 02:24:39.590402+00:00
+    run_url: https://github.com/dzackgarza/lattice-database/actions/runs/42326648686/attempts/1
+    database_revision: 78ef8ce6285aef04059b2c35e88a0ae1a3f57a96
+    research_revision: e94f00da5a9e4670e0480613dd6f5e3d87c75923
+  notes: []
+0092 definite.regular:
+  disposition: open
+  attempts:
+  - hash: d15e569c3b396c56a18a624afdabcc8f6786c3252eb3e24f3d7c28f187bee372
+    gram_tensor:
+    - - 2
+      - -1
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+    - - -1
+      - 2
+      - -1
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+    - - 0
+      - -1
+      - 2
+      - -1
+      - 0
+      - 0
+      - 0
+      - 0
+    - - 0
+      - 0
+      - -1
+      - 2
+      - -1
+      - 0
+      - 0
+      - 0
+    - - 0
+      - 0
+      - 0
+      - -1
+      - 2
+      - -1
+      - 0
+      - 0
+    - - 0
+      - 0
+      - 0
+      - 0
+      - -1
+      - 2
+      - -1
+      - 0
+    - - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - -1
+      - 2
+      - -1
+    - - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - -1
+      - 2
+    reason: certification budget exhausted (recovered from exceeded.yaml)
+    stderr: ''
+    seconds: 19571.0
+    recorded_at: 2026-10-23 11:39:31.430007+00:00
+    run_url: null
+    database_revision: dea30614e6711ce0b908fff7519c3fa6a99a3365
+    research_revision: null
+  notes: []

@@ -1,0 +1,16 @@
+...............................................FF...                     [100%]
+=================================== FAILURES ===================================
+_ test_coble_ordinary_group_generator_cards_are_persisted_and_certified[otilde-t-co-56] _
+.scratch/genus_candidate.py:1095: in test_coble_ordinary_group_generator_cards_are_persisted_and_certified
+    assert len(names) == expected_count
+E   assert 0 == 56
+E    +  where 0 = len([])
+_ test_coble_ordinary_group_generator_cards_are_persisted_and_certified[otilde-plus-t-co-95] _
+.scratch/genus_candidate.py:1095: in test_coble_ordinary_group_generator_cards_are_persisted_and_certified
+    assert len(names) == expected_count
+E   assert 0 == 95
+E    +  where 0 = len([])
+=========================== short test summary info ============================
+FAILED .scratch/genus_candidate.py::test_coble_ordinary_group_generator_cards_are_persisted_and_certified[otilde-t-co-56]
+FAILED .scratch/genus_candidate.py::test_coble_ordinary_group_generator_cards_are_persisted_and_certified[otilde-plus-t-co-95]
+2 failed, 50 passed in 615.62s (0:10:15)

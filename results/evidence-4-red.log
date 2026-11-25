@@ -1,0 +1,12 @@
+    return [{"prime": int(prime), "densities": [_rational(genus.local_density(prime, value)) for value in range(1, bound + 1)]} for prime in lattice.bad_reduction_primes()]
+                                                ~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/repo/src/latticedb/sage_genus.py", line 226, in _rational
+    number = Fraction(str(value))
+  File "/workspace/nucleus/work/home/sage-image/rootfs/opt/uv-python/cpython-3.14.10-linux-x86_64-gnu/lib/python3.14/fractions.py", line 261, in __new__
+    raise ValueError('Invalid literal for Fraction: %r' %
+                     numerator)
+ValueError: Invalid literal for Fraction: '(3)/(2)'
+=========================== short test summary info ============================
+FAILED tests/test_genus.py::test_a_rational_is_serialized_from_its_numerator_and_denominator_never_its_text
+FAILED tests/test_genus.py::test_certification_stores_the_exact_two_adic_densities_of_the_sum_of_three_squares
+2 failed, 47 deselected in 54.67s

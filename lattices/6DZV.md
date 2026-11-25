@@ -2,12 +2,162 @@
 tag: 6DZV
 name: Constructed lattice 6DZV
 latex: L_{\mathrm{6DZV}}
+certifications:
+  derive: 09e3f453a74695e918d9ba5e9954d3dbe99574c8ced625f3d3b0d50248a518de
+  form.integer_valued: 7088ca861a965e352c73c9d348c8b77d469b638cf4cb80368e012f35a4d4fadb
+  integral.elementary_primes: 389aebc8d5af9e17c80b76cd80e71abec0b8b0f6e02caf1fbf701ea4a92e8a01
+  integral.genus_symbol: 0a3f2a5fa4e5204fa8af3d2d4f14a3cea4b1249e2bdf0e49965755d418f7b276
+  integral.genus_class_count: d55b351141eb52f7682856cadfa83f967c99a2b9d1af061a8dd3bc19d98fadb2
+  integral.overlattice_count: aae82ca6de151d42dabce36c2a2dc497040fd10b4515ea8f38646a23deafc03c
+  integral.spinor_genus_count: 8b8d0db7b0d11212b44bba83a1d0bb3277e4b5cc90e258672a652c2763b0c1c8
+  integral.spinor_genera: f77ab95ed637f8cb4b78b441460e3023af0682d6d6418b55f66a915242d0820e
+  integral.hyperbolic_index: 15618bdfecc3166c3b9f087f59fd24de9e73dc4e98bf5b690cbf865ae8b79292
+  automorphisms.automorphism_group_generator_morphisms: ed774f206c519654535f6f8bb6990731df85ddc373a273542e46b742f5516f0d
+  integral.discriminant_form: d2a45928938f62fd9d34bd96c60f6384bb72ac3afa29a188f305e983b32133c0
+  automorphisms.automorphism_group_order: 0d865e6e104d2d05f9549cc597f8c83967f0439bbd373bad3d7233af89f70c22
+  integral.discriminant_orbits: 03823042eaf3c6b5225f411693b4db585f52f1f0ecf0331f3b93b8e4559ea929
+  integral.modular_scale: 6d6a0d4520c0b3d8407398791a62c09e46fee8461e77f1dea6ff603871305fed
+  integral.anisotropic_primes: c79812679ba3a0529dda3b810feb08391787c3c7e6a7300ecdbe568bd7608a2e
+  integral.local_representations: d1c1a9f036e5dc2d3a493a1adf847f7d09410c805873dc60222cbff19c177d86
+  integral.local_densities: ffc021705d2fb33607ab1b97a08c75846793a95ff283876baa9cdf085a29015a
 rank: 4
 gram_tensor:
 - [0, -2, 0, 0]
 - [-2, 0, 0, 0]
 - [0, 0, -2, 1]
 - [0, 0, 1, -2]
+signature: [1, 3]
+determinant: -12
+definiteness: indefinite
+dual_gram_tensor:
+- [0, -1/2, 0, 0]
+- [-1/2, 0, 0, 0]
+- [0, 0, -2/3, -1/3]
+- [0, 0, -1/3, -2/3]
+form:
+  integer_valued: true
+integral:
+  elementary_primes: []
+  parity: even
+  level: 6
+  modular_scale: false
+  discriminant_group: [2, 6]
+  overlattice_count: 4
+  bad_reduction_primes: [2, 3]
+  quadratic_character: -3
+  genus_symbol: 'II_{1,3} (2: 1^-2:2^2; 3: 1^-3 3^1)'
+  genus_class_count: 1
+  spinor_genus_count: 1
+  spinor_genera: [1]
+  hyperbolic_index: 0
+  discriminant_form:
+    orthogonal_group_order: 4
+    isotropic_classes: 3
+    isotropic_orbits: 2
+  discriminant_orbits:
+    Otilde:
+      constant: 3
+      z: [0, 1, 0, 2]
+      w: [0, 1, 0, 2]
+    SOtilde:
+      constant: 3
+      z: [0, 1, 0, 2]
+      w: [0, 1, 0, 2]
+    Otilde+:
+      constant: 3
+      z: [0, 1, 0, 2]
+      w: [0, 1, 0, 2]
+    SOtilde+:
+      constant: 3
+      z: [0, 1, 0, 2]
+      w: [0, 1, 0, 2]
+    O:
+      constant: 2
+      z: [0, 1, 0, 2]
+      w: [0, 1, 0, 2]
+    SO:
+      constant: 2
+      z: [0, 1, 0, 2]
+      w: [0, 1, 0, 2]
+    O+:
+      constant: 2
+      z: [0, 1, 0, 2]
+      w: [0, 1, 0, 2]
+    SO+:
+      constant: 2
+      z: [0, 1, 0, 2]
+      w: [0, 1, 0, 2]
+  anisotropic_primes: []
+  local_representations:
+  - prime: 2
+    classes:
+    - representative: 1
+      least_valuation: 2
+    - representative: 3
+      least_valuation: 2
+    - representative: 5
+      least_valuation: 2
+    - representative: 7
+      least_valuation: 2
+    - representative: 2
+      least_valuation: 1
+    - representative: 6
+      least_valuation: 1
+    - representative: 10
+      least_valuation: 1
+    - representative: 14
+      least_valuation: 1
+  local_densities:
+  - prime: 2
+    densities: [0, 3, 0, 1/2, 0, 3, 0, 7/4, 0, 3, 0, 1/2]
+  - prime: 3
+    densities: [4/3, 2/3, 10/9, 4/3, 2/3, 8/9, 4/3, 2/3, 28/27, 4/3, 2/3, 10/9]
+automorphisms:
+  automorphism_group_order: aleph0
+  automorphism_group_generator_morphisms: [O(L) generator 1, O(L) generator 2, O(L) generator 3, O(L) generator 4, O(L) generator 5]
+indefinite:
+  isotropic: true
+morphisms:
+- target: 6DZV
+  name: O(L) generator 1
+  matrix:
+  - [1, 0, 0, 0]
+  - [0, 1, 0, 0]
+  - [0, 0, 1, 0]
+  - [0, 0, 1, -1]
+  scale: 1
+- target: 6DZV
+  name: O(L) generator 2
+  matrix:
+  - [2, -1, -2, 1]
+  - [-1, 2, 2, -1]
+  - [2, -2, -3, 2]
+  - [0, 0, 0, 1]
+  scale: 1
+- target: 6DZV
+  name: O(L) generator 3
+  matrix:
+  - [1, -2, -1, -1]
+  - [0, 1, 0, 0]
+  - [0, -2, 0, -1]
+  - [0, -2, -1, 0]
+  scale: 1
+- target: 6DZV
+  name: O(L) generator 4
+  matrix:
+  - [1, -2, -1, -1]
+  - [-2, 7, 4, 1]
+  - [2, -6, -3, -2]
+  - [0, -2, 0, -1]
+  scale: 1
+- target: 6DZV
+  name: O(L) generator 5
+  matrix:
+  - [-1, 0, 0, 0]
+  - [0, -1, 0, 0]
+  - [0, 0, -1, 0]
+  - [0, 0, 0, -1]
+  scale: 1
 related:
 - tag: 3ICZ
   relation: This presentation is obtained by orthogonal sum of 3ICZ, 3ID0.

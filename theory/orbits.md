@@ -1,6 +1,6 @@
 ---
 title: Orbits of primitive vectors
-summary: The series $F_{L,\Gamma}(z, w)$ of $\Gamma$-orbits of primitive vectors of each norm, and the series $F_{A_L,\Gamma}(z, w)$ of $\Gamma$-orbits on the discriminant group, for eight subgroups $\Gamma$ of $O(L)$.
+summary: The series $F_{L,\Gamma}(z, w)$ of $\Gamma$-orbits of primitive vectors of each norm, whose constant term counts $\Gamma$-orbits of primitive isotropic lines, and the series $F_{A_L,\Gamma}(z, w)$ of $\Gamma$-orbits on the discriminant group, for eight subgroups $\Gamma$ of $O(L)$.
 order: 10
 ---
 
@@ -52,17 +52,31 @@ When $A_L = 0$, $\widetilde{O}(L) = O(L)$, and the eight groups are at most four
 ## The series of orbits {#primitive-orbits}
 
 ::: {.definition}
-For a subgroup $\Gamma$ of $O(L)$ and an integer $n$, $c_\Gamma(n)$ is the number of $\Gamma$-orbits on the primitive vectors $v \in L$ with $b(v, v) = n$, when it is finite.
+For a subgroup $\Gamma$ of $O(L)$ and an integer $n \neq 0$, $c_\Gamma(n)$ is the number of $\Gamma$-orbits on the primitive vectors $v \in L$ with $b(v, v) = n$, when it is finite.
+A *primitive isotropic line* is a rank-one isotropic sublattice $\mathbb{Z}v$ with $v$ primitive isotropic, and $c_\Gamma(0)$ is the number of $\Gamma$-orbits of them, when it is finite.
 The *series of orbits of primitive vectors* is $$F_{L,\Gamma}(z, w) = c_\Gamma(0) + \sum_{n \geq 1} c_\Gamma(n) z^n + \sum_{n \geq 1} c_\Gamma(-n) w^n \in \mathbb{Z}[[z, w]].$$
 :::
 
-So $F_{L,\Gamma}(0, 0)$ is the number of $\Gamma$-orbits of primitive isotropic vectors, the coefficient of $z^n$ is the number of $\Gamma$-orbits of primitive vectors of norm $n$, and the coefficient of $w^n$ is that of norm $-n$.
-A record states the coefficients that are known, through $z^4$ and $w^4$ at first, and a coefficient that is not known is null.
+The constant term counts primitive isotropic *lines* and not primitive isotropic vectors: every primitive isotropic vector has norm $0$, so it spans one of them, and the primitive vectors of the line $\mathbb{Z}v$ are exactly $v$ and $-v$, since $kv$ is imprimitive for $|k| \geq 2$ — so a line orbit is the union of at most two vector orbits, and the two counts are not the same count.
+A $\Gamma$-orbit of lines is the image of the $\Gamma$-orbits of its primitive vectors, and $\Gamma[v] = \Gamma[-v]$, so one line orbit is the union of the orbit of $v$ and the orbit of $-v$.
+Those are two orbits, or one when $-v = \gamma v$ for some $\gamma \in \Gamma$; by the [proposition below](#discriminant-orbits) that happens exactly when $v^* + L = -v^* + L$ in $A_L$, that is when $2(v^* + L) = 0$.
+So $$c_\Gamma(0) = \tfrac{1}{2}\bigl(c_\Gamma^{\mathrm{vec}}(0) + s_\Gamma\bigr),$$ where $c_\Gamma^{\mathrm{vec}}(0)$ is the number of $\Gamma$-orbits of primitive isotropic vectors and $s_\Gamma$ is the number of those orbits that are their own negative.
+The number a record stores in `integral.primitive_orbits[Γ].constant` is $c_\Gamma(0)$, the line count; the two counts agree exactly when every orbit is its own negative, as they do on a definite lattice, where both are $0$.
+The line count is the number of $0$-cusps of the Baily–Borel boundary, which is why it is the line count that a card stores.
+
+$c_\Gamma$ counts primitive isotropic *planes* as well, the rank-two totally isotropic sublattices $E = \mathbb{Z}v + \mathbb{Z}w$, and a record stores that number in `planes`: these are the $1$-cusps of the Baily–Borel boundary, as the lines are its $0$-cusps, and for a lattice of signature $(2, n)$ they are the next stratum of the same compactification.
+A lattice of signature $(1, n)$ has no isotropic plane, and on a definite lattice the count is $0$.
+A row whose key is not one of the eight standard groups names an arithmetic-group card of the same lattice, such as $\Gamma_{\mathrm{En},2}$, and its coefficients are that subgroup's.
+Where a source states the sizes of the $\Gamma$-orbits of isotropic planes and not only how many there are, the row states them in `orbit_lengths`, in the order its citation names them: their sum is the number of primitive isotropic planes, which for a source that counts $1$-cusps is the row's `planes`, and their number is the number of orbits, which is `planes` for a source that counts orbits.
+
+So $F_{L,\Gamma}(0, 0) = c_\Gamma(0)$ is the number of $\Gamma$-orbits of primitive isotropic lines, the coefficient of $z^n$ is the number of $\Gamma$-orbits of primitive vectors of norm $n$, and the coefficient of $w^n$ is that of norm $-n$.
+A record states the coefficients that are known, through $z^4$ and $w^4$ at first, and a coefficient that is not known is null; a count that the owner states to be countably infinite is `aleph0`, so a stated count is never dropped for being infinite.
+An indefinite card states the constant term alone: no positive or negative norm is bounded there.
 
 Each coefficient obeys these relations, which `latticedb check` verifies:
 
-- $c_\Gamma(n) = 0$ exactly when no primitive vector has norm $n$, for every $\Gamma$.
-  That is so for odd $n$ when $L$ is even, and for $n = 0$ and for $n$ of the sign opposite to $b$ when $L$ is definite.
+- $c_\Gamma(n) = 0$ exactly when no primitive vector has norm $n$, for every nonzero $n$ and every $\Gamma$; $c_\Gamma(0) = 0$ exactly when $L$ has no primitive isotropic vector.
+  That is so for odd $n$ when $L$ is even, and for $n$ of the sign opposite to $b$ when $L$ is definite.
 
 - When $n$ has no square factor $k^2 > 1$, every vector of norm $n$ is primitive, since $b(kv, kv) = k^2 b(v, v)$.
   Then $c_\Gamma(n) = 0$ exactly when the [theta series](definite-lattices.html#theta-series) has no vector of norm $n$.
@@ -134,9 +148,19 @@ Thus $O$, $SO$, $O^+$ and $SO^+$ have one image in $O(q_L)$.
 $L$ is even and indefinite, and $\operatorname{rank} L = 4 + \operatorname{rank} L_0 \geq l(A_L) + 4$, where $l$ is the minimal number of generators; so $O(L) \to O(q_L)$ is surjective ([Nikulin 1980](https://doi.org/10.1070/IM1980v014n01ABEH001060), Theorem 1.14.2).
 :::
 
-`latticedb certify` computes $F_{L,\Gamma}$ through $z^4$ and $w^4$ for a definite lattice, by enumerating its vectors, and $F_{A_L,\Gamma}$ through $z^4$ and $w^4$ and $n = 0$ for an even lattice whose hyperbolic index, stored or bounded from below by stored embeddings $U^k \to L$, is at least 2. The two are stored in `integral.primitive_orbits` and `integral.discriminant_orbits`. The class `TorsionQuadraticModule` of SageMath gives $A_L$, $q_L$ and generators of $O(q_L)$, and the orbits on $S_n$ are found by breadth-first search.
+`latticedb certify` computes $F_{L,\Gamma}$ through $z^4$ and $w^4$ for a definite lattice, by enumerating its vectors, and $F_{A_L,\Gamma}$ through $z^4$ and $w^4$ and $n = 0$ for an even lattice whose hyperbolic index, stored or bounded from below by stored embeddings $U^k \to L$, is at least 2. The two are stored in `integral.primitive_orbits` and `integral.discriminant_orbits`.
+`integral.primitive_orbits` is requested on an indefinite card too, and carries the coefficients that the owner's `primitive_orbit_series` returns for it: the constant term $c_\Gamma(0)$, the number of $\Gamma$-orbits of primitive isotropic **lines** of the [section above](#primitive-orbits), which the [proposition](#discriminant-orbits) counts through the isotropic classes of $A_L$, and no $z$- or $w$-coefficient, since no norm is bounded there.
+By that section $c_\Gamma(0)$ is not the number of $\Gamma$-orbits of primitive isotropic vectors unless every one of them is its own negative; the [example below](#discriminant-orbits) is a lattice where the two differ. The class `TorsionQuadraticModule` of SageMath gives $A_L$, $q_L$ and generators of $O(q_L)$, and the orbits on $S_n$ are found by breadth-first search.
 By the proposition above, $F_{A_L,\Gamma}$ equals $F_{L,\Gamma}$ on that class; outside it the two differ, and $F_{A_L,\Gamma}$ is what this computation yields.
 For an odd lattice the coefficients are stated with a `reference` that proves them.
+
+::: {.example}
+Let $L_9 = U \oplus U \oplus \langle -18 \rangle$, with basis $e, f, e_1, f_1, g$ and $b(g, g) = -18$, so that $A_{L_9} = \mathbb{Z}/18$ and the class of $k g / 18$ has $q_L = -k^2/18$ in $\mathbb{Q}/2\mathbb{Z}$.
+Then $q_L = 0$ exactly for $k = 0, 6, 12$, so by the proposition $\widetilde{O}(L_9)$ has three orbits of primitive isotropic vectors: $e$, and the vector $v = 3e + 3f + g$ with its negative.
+Indeed $v$ is primitive and isotropic, $\operatorname{div}(v) = 3$, and $v^* + L = e + f + g/3$ is the class $6$, while $(-v)^* + L = -e - f - g/3$ is the class $12$.
+The classes $6$ and $12$ are negatives of one another, so the orbits of $v$ and of $-v$ are one orbit of lines, and the class $0$ satisfies $2 \cdot 0 = 0$, so its orbit is its own negative and is another.
+So $\widetilde{O}(L_9)$ has $3$ orbits of primitive isotropic vectors and $c_{\widetilde{O}}(0) = 2$: two orbits of primitive isotropic lines.
+:::
 
 ::: {.example}
 Let $L = U^2 \oplus L'$ be even and unimodular.
@@ -145,3 +169,62 @@ For the K3 lattice $U^3 \oplus E_8(-1)^2$ this is [GHS 2013](https://arxiv.org/a
 :::
 
 GHS 2009: V. Gritsenko, K. Hulek and G. K. Sankaran, *Abelianisation of orthogonal groups and the fundamental group of modular varieties*, arXiv:0810.1614. GHS 2013: V. Gritsenko, K. Hulek and G. K. Sankaran, *Moduli of K3 surfaces and irreducible symplectic manifolds*, arXiv:1012.4155. Dawes 2022: M. Dawes, *Orbits in lattices*, arXiv:2205.10601.
+
+## Counts of polarizations {#polarizations}
+
+A numerical polarization of an Enriques surface $S$ is a primitive class $h \in \operatorname{Num}(S) = M(1/2) = U \oplus E_8(-1)$ with $h^2 = 2d > 0$ ([Dutour Sikirić–Hulek 2024](https://arxiv.org/abs/2302.01679), Section 2, p. 6).
+$U \oplus E_8(-1)$ is 2-reflective, and its Weyl group is its isometry group ((8), p. 9), so the $O(U \oplus E_8(-1))$-orbits of primitive vectors of one degree — the polarizations of that degree up to isometry — are counted in the fundamental domain $D$ of that Weyl group (Section 3.1, p. 8).
+Dutour Sikirić and Hulek write $\#h$ for that number in degree $2d$, and $\#\Gamma_h$ for the number of conjugacy classes of the groups $\Gamma_h = \pi_N^{-1}(\pi_M(O(M, h))) \subset O(N)$ that those polarizations define ((5) and Question 2.1, p. 7); that number equals the number of conjugacy classes of their images $\bar\Gamma_h = \pi_M(O(M, h)) \subset O^+(\mathbb{F}_2^{10})$, because $\pi_N$ is onto and its kernel lies in every $\Gamma_h$, and they tabulate both counts for $2d = 2, \dots, 72$ in Table 4, p. 17.
+
+A card stores the two counts under `integral.polarization_counts`, keyed by the degree $2d$ written as its decimal text — a stored mapping has string keys — and under the table's own names, each row citing the table and its page.
+The table's two cumulative columns are sums of the stored rows and are not values of their own, so they are not stored.
+
+## The chamber at a cusp {#chamber-at-a-cusp}
+
+Let $L$ be an [integral](lattices.html#integral) lattice of signature $(2, n)$ and let $\Gamma \leq O(L)$ be a subgroup.
+Its $0$-cusps are its [orbits of primitive isotropic lines](#primitive-orbits).
+For a primitive isotropic $v \in L$ the quotient $v^\perp/\mathbb{Z}v$ is an integral lattice of signature $(1, n-1)$, whose positive cone modulo $\mathbb{R}_{>0}$ is a hyperbolic space $\mathcal{H}$; the stabilizer $\Gamma_v$ of $v$ acts on it through its image $G_v \leq O(v^\perp/\mathbb{Z}v)$, and the subgroup $W_v$ generated by the reflections $\sigma_w$ in the vectors $w$ of negative square in $G_v$ is its reflection subgroup.
+
+::: {.definition}
+A *chamber at the cusp* $\mathbb{Z}v$ is a fundamental domain of $W_v$ in $\mathcal{H}$: a set $\{x \in \mathcal{H} : b(x, w_i) \geq 0 \text{ for every } i\}$ of finite volume whose boundary hyperplanes $w_i^\perp$ are the *walls*, none of them superfluous.
+A wall is a vector of negative square in $v^\perp$, and the walls of a chamber span $v^\perp/\mathbb{Z}v$ over $\mathbb{Q}$.
+:::
+
+Sterk's construction of these chambers for $\Gamma_{\mathrm{En},2}$ is Vinberg's algorithm (H. Sterk, *Compactifications of the period space of Enriques surfaces, Part I*, Math. Z. 207 (1991), 1–36, (4.3.2)–(4.3.4), pp. 17–19; È. B. Vinberg, *The groups of units of certain quadratic forms*, Mat. Sb. 87 (1972)), which is the owner's operation and not the database's.
+A chamber is described by its walls and by their *Coxeter diagram*: the vertices are the walls, and for two walls $w_i, w_j$ one sets
+$$g_{ij} = \frac{b(w_i, w_j)}{\sqrt{b(w_i, w_i)\, b(w_j, w_j)}},$$
+draws no edge when $g_{ij} = 0$, an edge of order $m$ when $g_{ij} = \cos(\pi/m)$ for $m = 3, 4, 6$, and an edge of order $\infty$ when $|g_{ij}| = 1$ (Sterk, Fig. 2, p. 18).
+Because $b(w_i, w_i) < 0$, the sign of $g_{ij}$ is the sign of $b(w_i, w_j)$ and does not change the diagram; and a pair with $b(w_i, w_j) = 0$ is no edge.
+Sterk marks a wall of square $-4$ with $\circ$ and one of square $-2$ with $\bullet$, and draws an arrow towards the wall of smaller $|b(w, w)|$ when two adjacent walls have different squares; the arrow is not part of the diagram here, because the Gram matrix the card stores fixes the squares.
+
+A record states the chamber in `integral.cusp_chambers`, keyed by the subgroup and then by cusp: the cusp $v$, the walls with the source's own names and their coordinates in the record basis, the statement, printed page and figure that print them, and the wall count, the Gram matrix $b(w_i, w_j)$ and the diagram.
+The walls are the source's transcription; the three invariants of them are what the card's Gram tensor says, computed once by the program the certificate names, and `latticedb certify` never requests the field, because no preamble operation searches for a chamber.
+A row whose wall has positive square, or whose walls do not span $v^\perp/\mathbb{Z}v$ over $\mathbb{Q}$, is a transcription defect and not a chamber.
+A source that prints a chamber only as a figure does not state it, and a card stores no row for that cusp.
+
+## The orbits of the root classes at a cusp {#root-classes-at-a-cusp}
+
+A *root class* at the cusp $\mathbb{Z}v$ is the class in the boundary lattice $K_J = v^\perp/\mathbb{Z}v$ of a root $r$ of $v^\perp$, a vector of square $b(r,r) = -2$; the class has the same square, because $b(v,v) = 0$ and $b(r,v) = 0$. Not every wall of the [chamber at that cusp](#chamber-at-a-cusp) is a root: a wall of square $-4$ is none, and a family that mixed them would count the orbits of the walls as the orbits of the roots. The stabilizer $\Gamma_v$ of $v$ in $\Gamma$ acts on $K_J$ through its image $G_v$, and the orbits of the root classes under it are what the restricted Enriques semifan is cut by.
+
+A record states them in `integral.cusp_root_orbits`, keyed by the subgroup and then by cusp, as `integral.cusp_chambers` is: the cusp $v$, the root classes as lifts in the record basis --- two lifts state one class exactly when their difference is a rational multiple of $v$, so a row names no basis of $K_J$ --- one representative per orbit, the number of orbits, and, where a source states that every symmetry of the chamber's Coxeter diagram is realized in $\Gamma_v$, the image $S$ of $\Gamma_v$ in that symmetry group, with its order and its generators as permutations of the walls (Sterk 1991, (4.3.2), p. 17, $G = W(G) \rtimes S$, and (4.3.3), p. 18).
+
+A count here is a decided value or no value at all. Two classes that an exhibited isometry of $G_v$ carries one to the other are one orbit; a singleton is *not* a proof that the classes are inequivalent, because a generating family of $\Gamma_v$ is not known at a primitive isotropic line (sage-extensions#603), so the owner's orbit call identifies classes and does not decompose the family. A row therefore states a count only where a source proves it, or where an exhibited isometry of $\Gamma_v$ identifies the classes --- the chamber's own symmetry, when a source states that it is realized in $\Gamma_v$, is such an isometry --- and `latticedb certify` never requests the field.
+One family needs no group at all: a cusp whose root family is a single class has one orbit whatever $\Gamma_v$ is, so its count is decided by the computation that finds the family, and `genus.store_cusp_root_orbits` writes and certifies such a row.
+
+## The polyhedron of a lattice of signature (1, n) {#polyhedron}
+
+A lattice $L$ of signature $(1, n)$ has no $0$-cusp of a Baily–Borel boundary: the hyperbolic space is $\mathcal{H} = \mathcal{H}^n$ itself, and the reflection group $W(L)$ has a fundamental polyhedron $P \subset \mathcal{H}$ of finite volume.
+A vertex of $P$ is *ideal* when it lies at infinity, on the light cone of $L \otimes \mathbb{R}$.
+
+::: {.theorem data-name="Vinberg"}
+The ideal vertices of $P$ are its maximal parabolic subdiagrams of rank $n - 1$: the subdiagrams of the Coxeter diagram of $P$ whose connected components are extended Dynkin diagrams, and whose rank, the number of their vertices minus their number of connected components, is $n - 1$.
+:::
+
+(È. B. Vinberg, *The groups of units of certain quadratic forms*, Mat. Sb. 87 (1972), as stated by Sterk, (4.3.3), p. 18.)
+
+A card of such a lattice states the number of ideal vertices in `integral.cusp_chambers` under the reflection group, with the statement, printed page and figure that print the diagram — and no cusp, because there is none — and states the walls as well when the source prints them.
+The count is read from the printed diagram and certified by the citation alone; a wall, its square and an arrow towards the shorter of two adjacent walls are the source's markings, as in the chamber at a cusp.
+A chamber that no source prints is [computed](records.html#computed) instead, by the preamble's Vinberg search: its walls are the returned roots, its ideal vertices are the returned primitive rays of square zero, and the certificate names the operation and its revision, because no citation proves it.
+$0$ is a cocompact chamber, whose polyhedron has no ideal vertex.
+A source that prints the maximal parabolic subdiagrams only modulo the symmetries of the diagram states a count of orbits, which is not the number of its ideal vertices: the vertices of one class are different vertices of the chamber.
+A row states those classes in `parabolic_orbits`, each as the subdiagrams of the orbit, and states `ideal_vertices` only where the number of the vertices themselves is known.

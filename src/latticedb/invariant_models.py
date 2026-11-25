@@ -2,9 +2,11 @@
 
 from __future__ import annotations
 
-from typing import Annotated, Literal, Self
+from fractions import Fraction
+from typing import Annotated, Literal, Self, get_args
 
 from pydantic import Field, model_validator
+from pydantic_core import PydanticCustomError
 
 from latticedb.record_types import (
     AdeType,
@@ -14,26 +16,121 @@ from latticedb.record_types import (
     Record,
     Reference,
     RootType,
+    Slug,
     Summand,
     VectorList,
 )
 
 OrbitGroup = Literal["O", "O+", "SO", "SO+", "Otilde", "Otilde+", "SOtilde", "SOtilde+"]
+"""The eight standard subgroups of $O(L)$."""
+
+STANDARD_SUBGROUPS: tuple[str, ...] = get_args(OrbitGroup)
+"""The keys of the eight standard subgroups, in the order the schema lists them."""
+
+Subgroup = OrbitGroup | Slug
+"""A subgroup of $O(L)$: one of the eight standard keys, or the slug of an arithmetic-group card of the same lattice, such as `gamma-en-2`."""
+
 """A subgroup $\\Gamma$ of $O(L)$: $S$ is the kernel of the determinant, `+` the kernel of the real spinor norm, and `tilde` the kernel of the action on $A_L$."""
 
 
-OrbitCounts = Annotated[tuple[Annotated[int, Field(ge=0)] | None, ...], Field(strict=False)]
+OrbitCount = Annotated[int, Field(ge=0)] | Literal["aleph0"] | None
+"""One coefficient: a count, `aleph0` where the owner states that there are countably many orbits, or null where it is not known."""
+
+OrbitCounts = Annotated[tuple[OrbitCount, ...], Field(strict=False)]
+
+
+class DiscriminantForm(Record):
+    """The invariants of the discriminant form $(A_L, q_L)$ that a card stores, computed from the Gram tensor.
+
+    The three are the order of the finite orthogonal group $O(A_L, q_L)$, the number of isotropic classes
+    $q_L(x) = 0$, and the number of its orbits on them (theory/discriminant-forms.md).
+    """
+
+    orthogonal_group_order: Annotated[int, Field(ge=1)] = Field(
+        description=(
+            "The order $|O(A_L, q_L)|$ of the orthogonal group of the discriminant form, the group of the "
+            "automorphisms $g$ of $A_L$ with $q_L(g x) = q_L(x)$. Computed by `latticedb certify` from the "
+            "Gram tensor through the owner's discriminant quadratic form, `orthogonal_group().order()`."
+        ),
+    )
+    isotropic_classes: Annotated[int, Field(ge=1)] = Field(
+        description=(
+            "The number of classes $x \\in A_L$ with $q_L(x) = 0$ in $\\mathbb{Q}/2\\mathbb{Z}$, the class $0$ "
+            "among them; computed by `latticedb certify` from the owner's `isotropic_elements()`."
+        ),
+    )
+    isotropic_orbits: Annotated[int, Field(ge=1)] = Field(
+        description=(
+            "The number of orbits of $O(A_L, q_L)$ on the isotropic classes. $q_L$ is constant on an orbit, so "
+            "they are the orbits of the owner's maintained partition that lie inside `isotropic_elements()`."
+        ),
+    )
+    reference: Reference | None = Field(default=None, description="The source, when a record states the numbers.")
+
+    @model_validator(mode="after")
+    def _orbits_fit_the_classes(self) -> Self:
+        """The orbits of a set partition it, and every orbit holds at least one class."""
+        if self.isotropic_orbits > self.isotropic_classes:
+            raise ValueError(f"{self.isotropic_orbits} orbits of {self.isotropic_classes} isotropic classes")
+        return self
+
+
+PolarizationDegree = Annotated[str, Field(pattern=r"^[0-9]+$")]
+"""The degree $2d$ of a polarization as a stored mapping keys it: its decimal text, `'2'`, `'4'`, ..."""
+
+
+class PolarizationRow(Record):
+    """Dutour Sikirić–Hulek's Table 4 line for one degree: the counts the table writes `#h` and `#Γ̄_h`.
+
+    The degree is that of a numerical polarization of an Enriques surface, $h^2 = 2d$ for a primitive
+    $h$ in $M(1/2) = U \\oplus E_8(-1) = \\operatorname{Num}(S)$ (arXiv:2302.01679, Section 2, p. 6).
+    """
+
+    polarizations: Annotated[int, Field(ge=0)] = Field(
+        alias="#h",
+        description=(
+            "The number `#h` of orbits of primitive vectors of this degree in the fundamental domain of the "
+            "Weyl group of $U \\oplus E_8(-1)$, which is that lattice's isometry group (arXiv:2302.01679, (8), p. 9): "
+            "the polarizations of this degree up to isometry (Table 4, p. 17; Table 3, p. 16, gives a "
+            "representative of each). Dutour Sikirić–Hulek state that these numbers agree with the corresponding "
+            "list in Ciliberto–Dedieu–Galati–Knutsen, Appendix."
+        ),
+    )
+    groups: Annotated[int, Field(ge=0)] = Field(
+        alias="#Γ̄_h",
+        description=(
+            "The number of conjugacy classes of the modular groups of this degree, which Table 4 of "
+            "arXiv:2302.01679, p. 17, prints as `#Γ_h` and defines in (5), p. 7, as the groups "
+            "$\\Gamma_h = \\pi_N^{-1}(\\pi_M(O(M, h))) \\subset O(N)$: this is that number, the same as the number of "
+            "conjugacy classes of their images $\\bar\\Gamma_h = \\pi_M(O(M, h)) \\subset O^+(\\mathbb{F}_2^{10})$, "
+            "because $\\pi_N$ is onto and its kernel lies in every $\\Gamma_h$ (Question 2.1, p. 7). Stored under the "
+            "key of the image, `#Γ̄_h`."
+        ),
+    )
+    reference: Reference | None = Field(default=None, description="The source of the two counts, with its table and page.")
 
 
 class PrimitiveOrbitSeries(Record):
     """The series $F_{L,\\Gamma}(z, w) = c_\\Gamma(0) + \\sum_{n \\geq 1} c_\\Gamma(n) z^n + \\sum_{n \\geq 1} c_\\Gamma(-n) w^n$ in $\\mathbb{Z}[[z, w]]$.
 
-    $c_\\Gamma(n)$ is the number of $\\Gamma$-orbits on the primitive vectors $v$ with $b(v, v) = n$. A coefficient that is not known is null.
+    For $n \\neq 0$, $c_\\Gamma(n)$ is the number of $\\Gamma$-orbits on the primitive vectors $v$ with $b(v, v) = n$.
+    $c_\\Gamma(0)$ is the number of $\\Gamma$-orbits of primitive isotropic *lines*, the rank-one isotropic sublattices, which is what a $0$-cusp of the Baily–Borel boundary is: the primitive vectors of a line $\\mathbb{Z}v$ are its two generators $v$ and $-v$ and no others, since $kv$ is imprimitive for $|k| \\geq 2$, so an orbit of vectors and its negative can be one orbit of lines and the two counts are not the same count.
+    A coefficient that is not known is null, and a count the owner states to be countably infinite is `aleph0`.
     """
 
-    constant: Annotated[int, Field(ge=0)] | None = Field(
+    constant: OrbitCount = Field(
         default=None,
-        description="$c_\\Gamma(0)$, the number of orbits of primitive isotropic vectors.",
+        description=(
+            "$c_\\Gamma(0)$, the number of $\\Gamma$-orbits of primitive isotropic lines, not of primitive isotropic vectors, or `aleph0` when the owner states that there are countably many. "
+            "The orbits of $v$ and of $-v$ are one line orbit unless $-v = \\gamma v$ for some $\\gamma \\in \\Gamma$, so the line count is at least half the vector count and equals it where every orbit is its own negative, as on a definite lattice, where both are 0."
+        ),
+    )
+    planes: Annotated[int, Field(ge=0)] | None = Field(
+        default=None,
+        description=(
+            "The number of $\\Gamma$-orbits of primitive isotropic planes, the rank-two totally isotropic sublattices: the one-dimensional boundary components of the Baily–Borel compactification. "
+            "A lattice of signature $(2, n)$ with $n \\geq 1$ has them; on a definite lattice the count is 0."
+        ),
     )
     z: OrbitCounts = Field(
         default=(),
@@ -43,10 +140,32 @@ class PrimitiveOrbitSeries(Record):
         default=(),
         description="$c_\\Gamma(-1), c_\\Gamma(-2), \\dots$: the coefficients of $w, w^2, \\dots$",
     )
+    orbit_lengths: Annotated[tuple[Annotated[int, Field(ge=1)], ...], Field(strict=False)] | None = Field(
+        default=None,
+        description=(
+            "The sizes of the $\\Gamma$-orbits of primitive isotropic planes, in the order the citation names them, where "
+            "a source states the split and not only the count. Their sum is the number of such planes and their number is "
+            "the number of orbits, so a row that also states `planes` agrees with one of the two: a source that counts "
+            "orbits states the count, and a source that counts 1-cusps states the total."
+        ),
+    )
     reference: Reference | None = Field(
         default=None,
         description="The source of the coefficients; absent when `latticedb certify` computes them.",
     )
+
+    @model_validator(mode="after")
+    def check_orbit_lengths(self) -> Self:
+        lengths = self.orbit_lengths
+        if lengths is None or self.planes is None:
+            return self
+        if len(lengths) != self.planes and sum(lengths) != self.planes:
+            raise PydanticCustomError(
+                "orbit_lengths_total",
+                "the orbit lengths {lengths} sum to {total} and number {count}, so they agree with neither reading of planes = {planes}: a row states the number of orbits or the number of planes",
+                {"lengths": list(lengths), "total": sum(lengths), "count": len(lengths), "planes": self.planes},
+            )
+        return self
 
     def coefficient(self, n: int) -> int | None:
         """$c_\\Gamma(n)$, or None when it is not stated."""
@@ -59,6 +178,311 @@ class PrimitiveOrbitSeries(Record):
     def degrees(self) -> range:
         """The $n$ for which the series can state $c_\\Gamma(n)$."""
         return range(-len(self.w), len(self.z) + 1)
+
+
+class ChamberWall(Record):
+    """One wall of a chamber: its vector in the record basis, and the source's name for it."""
+
+    name: Annotated[str, Field(min_length=1)] = Field(
+        description=(
+            "The wall's name as the source writes it, in TeX: `\\\\alpha_9`, `\\\\bar\\\\alpha_8`. A chamber a computation produced "
+            "has no source's names: its walls are `w_1`, ..., `w_n`, in the order the computation returns them."
+        ),
+    )
+    vector: IntegerVector = Field(description="The wall in the record basis.")
+
+
+class ChamberEdge(Record):
+    """One edge of a chamber's Coxeter diagram: two walls, and the order of the product of their reflections."""
+
+    a: Annotated[str, Field(min_length=1)] = Field(description="The name of one wall of the pair.")
+    b: Annotated[str, Field(min_length=1)] = Field(description="The name of the other wall.")
+    order: Annotated[int, Field(ge=3)] | Literal["inf"] = Field(
+        description=(
+            "The $m$ with $g_{ab} = \\\\cos(\\\\pi/m)$, where $g_{ab} = b(w_a, w_b)/\\\\sqrt{b(w_a,w_a)\\\\,b(w_b,w_b)}$: "
+            "the order of the product of the two reflections, and `inf` when $|g_{ab}| = 1$. "
+            "A pair with $b(w_a, w_b) = 0$ is no edge and is not listed."
+        ),
+    )
+
+
+class ParabolicOrbit(Record):
+    """One orbit of maximal parabolic subdiagrams of a chamber's Coxeter diagram.
+
+    A maximal parabolic subdiagram is a vertex at infinity of the chamber: a subdiagram each of whose
+    connected components is an extended Dynkin diagram and whose rank, the number of its vertices minus
+    the number of its components, is $n - 1$ (Vinberg 1972; Sterk 1991, (4.3.3), p. 18). A symmetry of
+    the diagram carries one to another, and an orbit under the symmetries a source or a computation
+    fixes is one class of them.
+    """
+
+    subdiagrams: Annotated[tuple[Annotated[tuple[str, ...], Field(strict=False)], ...], Field(strict=False, min_length=1)] = Field(
+        description="The subdiagrams of the orbit, each as the names of its walls, in the order the walls are stored.",
+    )
+
+
+class CuspChamber(Record):
+    """A fundamental chamber of a reflection group: at one $0$-cusp of an integral lattice of signature $(2, n)$, or of a lattice of signature $(1, n)$.
+
+    Its walls are the source's vectors in the record basis; the Gram matrix, the Coxeter diagram
+    and the wall count are computed from the card's Gram tensor (theory/orbits.md#chamber-at-a-cusp).
+    A lattice of signature $(1, n)$ has no $0$-cusp of a Baily–Borel boundary, so its row states no
+    `cusp`; it states the number of ideal vertices of the polyhedron when the source prints them, or when
+    a computation of the chamber produced it, in which case the row states no `statement` either and its
+    certificate names the program.
+    """
+
+    cusp: IntegerVector | None = Field(
+        default=None,
+        description=(
+            "A primitive isotropic vector spanning the $0$-cusp, in the record basis. Absent for the fundamental polyhedron of a "
+            "lattice of signature $(1, n)$, which is not a chamber at a cusp."
+        ),
+    )
+    statement: Annotated[str, Field(min_length=1)] | None = Field(
+        default=None,
+        description=(
+            "The source's numbered statement that prints the walls, such as `4.3.5`. Absent for a chamber that no source prints and that "
+            "a computation of the card's Gram tensor produced, whose certificate names the program and its revision."
+        ),
+    )
+    printed_page: Annotated[int, Field(ge=1)] | None = Field(
+        default=None,
+        description="The page of the source that prints the statement; absent with it.",
+    )
+    figure: Annotated[int, Field(ge=1)] | None = Field(
+        default=None,
+        description="The figure of the source that draws the diagram, when the statement has one.",
+    )
+    walls: Annotated[tuple[ChamberWall, ...], Field(strict=False, min_length=1)] | None = Field(
+        default=None,
+        description="The walls as the source prints them, each with the source's name for it.",
+    )
+    wall_count: Annotated[int, Field(ge=1)] | None = Field(
+        default=None,
+        description="The number of walls, $\\\\#I$: the number of entries of `walls`.",
+    )
+    gram: Annotated[tuple[Annotated[tuple[Rational, ...], Field(strict=False)], ...], Field(strict=False)] | None = Field(
+        default=None,
+        description=(
+            "The Gram matrix $b(w_i, w_j)$ of the walls, in the order of `walls`, computed from the card's "
+            "Gram tensor. Its diagonal is negative: a wall is a vector of negative square."
+        ),
+    )
+    diagram: Annotated[tuple[ChamberEdge, ...], Field(strict=False)] = Field(
+        default=(),
+        description="The edges of the Coxeter diagram of the chamber, one entry for each pair of walls that meets.",
+    )
+    ideal_vertices: Annotated[int, Field(ge=0)] | None = Field(
+        default=None,
+        description=(
+            "The number of ideal vertices of the chamber: the vertices of the polyhedron that lie at infinity, on the light cone. "
+            "By Vinberg's criterion these are its maximal parabolic subdiagrams of rank $n - 1$, the subdiagrams each of whose "
+            "connected components is an extended Dynkin diagram and whose rank, the number of vertices minus the number of "
+            "components, is $n - 1$ (Vinberg 1972; Sterk 1991, (4.3.3), p. 18). $0$ is a cocompact chamber. A source that prints "
+            "the subdiagrams only modulo the symmetries of the diagram states a count of orbits, and the row states neither."
+        ),
+    )
+    parabolic_orbits: Annotated[tuple[ParabolicOrbit, ...], Field(strict=False, min_length=1)] | None = Field(
+        default=None,
+        description=(
+            "The orbits of maximal parabolic subdiagrams of the chamber, one entry per orbit, each listing the "
+            "subdiagrams in it as the names of their walls. A source states them modulo the symmetries of the "
+            "diagram, which is a count of classes and not a count of ideal vertices: the vertices of one class "
+            "are different vertices of the chamber. Absent where neither a source nor a computation states the "
+            "classes, and `ideal_vertices` states the number of the vertices themselves."
+        ),
+    )
+    reference: Reference | None = Field(default=None, description="The source of the statement.")
+
+    @model_validator(mode="after")
+    def _chamber(self) -> Self:
+        """The count, the Gram matrix and the diagram are of the walls this row states."""
+        walls = () if self.walls is None else self.walls
+        if (self.walls is None) != (self.wall_count is None) or (self.walls is None) != (self.gram is None):
+            raise ValueError("a row states its walls, their count and their Gram matrix together")
+        if self.walls is None and self.ideal_vertices is None and self.parabolic_orbits is None:
+            raise ValueError("a row states the walls of a chamber or the number of ideal vertices of its polyhedron or the orbits of its maximal parabolic subdiagrams")
+        if (self.statement is None) != (self.printed_page is None):
+            raise ValueError("a row states the statement that prints it and its page together, or neither")
+        count = len(walls)
+        if self.wall_count is not None and self.wall_count != count:
+            raise ValueError(f"wall_count {self.wall_count} but {count} walls are stated")
+        names = [wall.name for wall in walls]
+        if len(set(names)) != count:
+            raise ValueError("each wall of a chamber has one name")
+        gram = () if self.gram is None else self.gram
+        if len(gram) != count or any(len(row) != count for row in gram):
+            raise ValueError("the Gram matrix of a chamber is square in its walls")
+        if any(gram[i][j] != gram[j][i] for i in range(count) for j in range(count)):
+            raise ValueError("the Gram matrix of a chamber is symmetric")
+        if any(gram[i][i] >= 0 for i in range(count)):
+            raise ValueError("a wall of a chamber has negative square")
+        if self.cusp is not None and any(len(wall.vector) != len(self.cusp) for wall in walls):
+            raise ValueError("the cusp and every wall have one coordinate per basis vector")
+        for orbit in self.parabolic_orbits or ():
+            for subdiagram in orbit.subdiagrams:
+                if not subdiagram or set(subdiagram) - set(names):
+                    raise ValueError(f"the subdiagram {tuple(subdiagram)} is not a set of walls of this chamber")
+        if self.parabolic_orbits is not None:
+            stated = [frozenset(subdiagram) for orbit in self.parabolic_orbits for subdiagram in orbit.subdiagrams]
+            if len(set(stated)) != len(stated):
+                raise ValueError("a subdiagram of two orbits of a chamber is one subdiagram")
+        pairs: set[tuple[str, str]] = set()
+        for edge in self.diagram:
+            if edge.a == edge.b or {edge.a, edge.b} - set(names):
+                raise ValueError(f"the edge {edge.a}-{edge.b} is not a pair of walls of this chamber")
+            pair = tuple(sorted((edge.a, edge.b)))
+            if pair in pairs:
+                raise ValueError(f"the pair {edge.a}-{edge.b} is one edge of the diagram")
+            pairs.add(pair)
+        return self
+
+
+def _multiple_of(difference: IntegerVector, base: IntegerVector) -> Fraction | None:
+    """The rational $t$ with `difference` $= t$ `base`, or `None` when the entries decide against it."""
+    multiplier: Fraction | None = None
+    for entry, coordinate in zip(difference, base):
+        if coordinate == 0:
+            if entry != 0:
+                return None
+            continue
+        ratio = Fraction(entry, coordinate)
+        if multiplier is None:
+            multiplier = ratio
+        elif multiplier != ratio:
+            return None
+    return multiplier
+
+
+class RootClassOrbit(Record):
+    """One orbit of the root classes of a cusp's boundary lattice, with a representative.
+
+    A *root class* at the cusp $\\mathbb{Z}v$ is the class in $K_J = v^\\perp/\\mathbb{Z}v$ of a root $r$ of $v^\\perp$,
+    a vector of square $b(r, r) = -2$; the class has the same square, because $b(v, v) = 0$ and $b(r, v) = 0$.
+    Two lifts state one class exactly when their difference is a rational multiple of $v$, so a row states its
+    classes unambiguously without naming a basis of $K_J$.
+    """
+
+    representative: IntegerVector = Field(
+        description=(
+            "One class of the orbit, as a lift in the record basis: a root $r \\\\in v^\\\\perp$ of square $-2$ with "
+            "$v$'s own coordinates."
+        ),
+    )
+    classes: Annotated[tuple[IntegerVector, ...], Field(strict=False, min_length=1)] = Field(
+        description=(
+            "Every class of the orbit, as lifts in the record basis, the representative first. Two entries that differ by a "
+            "multiple of $v$ are one class and not two."
+        ),
+    )
+    @model_validator(mode="after")
+    def _orbit(self) -> Self:
+        """The representative is one of the orbit's classes, and they lie in one lattice."""
+        if self.classes[0] != self.representative:
+            raise ValueError("an orbit states its representative first among its classes")
+        if len({len(vector) for vector in (self.representative, *self.classes)}) != 1:
+            raise ValueError("the classes of an orbit have one coordinate per basis vector")
+        return self
+
+
+class ChamberSymmetries(Record):
+    """The image of the cusp stabilizer in the symmetry group of the chamber's Coxeter diagram.
+
+    Sterk, "Compactifications of the period space of Enriques surfaces, Part I", Math. Z. 207 (1991): for a group $G$
+    whose reflection subgroup $W(G)$ has finite index, $G = W(G) \\rtimes S$ with $S$ a subgroup of the symmetries of the
+    fundamental polyhedron $P$ of $W(G)$ ((4.3.2), p. 17), and $S$ is identified with a subgroup of the symmetry group
+    of the Coxeter diagram $\\Sigma(G)$ ((4.3.3), p. 18). At the cusps (4.3.7)-(4.3.9) Sterk states that the diagram's
+    symmetries are realized in $\\Gamma_v$ (pp. 22-24), and prints $G_v = \\{\\pm 1\\} W_v \\rtimes \\mathbf{Z}/2$
+    at (4.3.7), p. 22.
+    """
+
+    order: Annotated[int, Field(ge=1)] = Field(
+        description="The order of $S$, the image of the cusp stabilizer in the symmetry group of the chamber's Coxeter diagram.",
+    )
+    generators: Annotated[tuple[IntegerVector, ...], Field(strict=False)] = Field(
+        description=(
+            "Generators of $S$ as permutations of the chamber's walls, in the order the cusp's `cusp_chambers` row lists "
+            "them: entry $i$ of a generator is the index, from $0$, of the wall that wall $i$ goes to. Empty when $S$ is "
+            "trivial."
+        ),
+    )
+
+    @model_validator(mode="after")
+    def _permutations(self) -> Self:
+        """Each generator is a permutation of one wall set."""
+        if len({len(generator) for generator in self.generators}) > 1:
+            raise ValueError("the generators permute one set of walls")
+        for generator in self.generators:
+            if sorted(generator) != list(range(len(generator))):
+                raise ValueError(f"{generator} is not a permutation of the walls")
+        if (self.order == 1) != (not self.generators):
+            raise ValueError("a trivial group has no generators, and a nontrivial one has some")
+        return self
+
+
+class CuspRootOrbitRow(Record):
+    """The orbits of the root classes of the boundary lattice at one $0$-cusp of a subgroup $\\Gamma \\leq O(L)$.
+
+    The cusp's root classes are those of the roots of $K_J = v^\\perp/\\mathbb{Z}v$ that the chamber at that cusp has a
+    wall in (theory/orbits.md#root-classes-at-a-cusp): the walls of square $-4$ are no roots, and a family that mixed
+    them would count the walls' orbits as the roots'. The orbits are the $\\Gamma_v$-orbits of them, $\\Gamma_v$ the
+    stabilizer of $v$ in $\\Gamma$.
+    """
+
+    cusp: IntegerVector = Field(
+        description="A primitive isotropic vector spanning the $0$-cusp, in the record basis, as in `cusp_chambers`.",
+    )
+    statement: Annotated[str, Field(min_length=1)] | None = Field(
+        default=None,
+        description=(
+            "The source's numbered statement that prints the chamber whose root classes these are, such as `4.3.8`. Absent "
+            "when no source prints that chamber, as in a `cusp_chambers` row that a computation produced."
+        ),
+    )
+    printed_page: Annotated[int, Field(ge=1)] | None = Field(
+        default=None,
+        description="The page of the source that prints the statement; absent with it.",
+    )
+    orbits: Annotated[tuple[RootClassOrbit, ...], Field(strict=False, min_length=1)] = Field(
+        description="The orbits of the root classes, one entry per orbit, each with its representative.",
+    )
+    orbit_count: Annotated[int, Field(ge=1)] = Field(
+        description=(
+            "The number of $\\\\Gamma_v$-orbits of the cusp's root classes: the number of entries of `orbits`. It is stored "
+            "only where a source or the certified generators of $\\\\Gamma_v$ decide it, for a family the certified "
+            "generators do not separate has no count here: a singleton orbit is not a proof of inequivalence."
+        ),
+    )
+    chamber_symmetries: ChamberSymmetries | None = Field(
+        default=None,
+        description=(
+            "The image $S$ of the cusp stabilizer in the symmetry group of the chamber's Coxeter diagram (Sterk 1991, "
+            "(4.3.2)-(4.3.3), pp. 17-18), computed from the card's Gram tensor as the permutations of the chamber's walls "
+            "that keep their Gram matrix, each checked to be an isometry of $K_J$. Stored where a source states that "
+            "every diagram symmetry is realized in $\\Gamma_v$; absent elsewhere."
+        ),
+    )
+    reference: Reference | None = Field(default=None, description="The source of the orbits, when a source states them.")
+
+    @model_validator(mode="after")
+    def _row(self) -> Self:
+        """The count is of the orbits stated, and the classes are classes of this cusp's boundary lattice."""
+        if (self.statement is None) != (self.printed_page is None):
+            raise ValueError("a row states the statement that prints its chamber and its page together, or neither")
+        if self.orbit_count != len(self.orbits):
+            raise ValueError(f"orbit_count {self.orbit_count} but {len(self.orbits)} orbits are stated")
+        classes = [vector for orbit in self.orbits for vector in orbit.classes]
+        if any(len(vector) != len(self.cusp) for vector in classes):
+            raise ValueError("the cusp and every class have one coordinate per basis vector")
+        # A lift that is a multiple of the cusp is the zero class of K_J, which is isotropic and not a root.
+        if any(_multiple_of(vector, self.cusp) is not None for vector in classes):
+            raise ValueError("a root class of K_J is no multiple of the cusp that defines it")
+        for index, vector in enumerate(classes):
+            for other in classes[:index]:
+                if _multiple_of(tuple(entry - rest for entry, rest in zip(vector, other)), self.cusp) is not None:
+                    raise ValueError(f"the class {vector} is stated by two orbits of the row at the cusp {self.cusp}")
+        return self
 
 
 class StabilizedObject(Record):
@@ -136,7 +560,32 @@ class GroupData(Record):
             "in the record basis. A group states a set of representatives, not necessarily all of them."
         ),
     )
+    line_orbits: Annotated[int, Field(ge=0)] | None = Field(
+        default=None,
+        description=(
+            "The number of $\\Gamma$-orbits of primitive isotropic lines, the rank-one isotropic sublattices: the $0$-cusps of the Baily–Borel boundary, "
+            "as `integral.primitive_orbits[\\Gamma].constant` states them on the lattice card, when a source or a computation counts them for this subgroup."
+        ),
+    )
+    plane_orbits: Annotated[int, Field(ge=0)] | None = Field(
+        default=None,
+        description=(
+            "The number of $\\Gamma$-orbits of primitive isotropic planes, the rank-two totally isotropic sublattices: the $1$-cusps, as "
+            "`integral.primitive_orbits[\\Gamma].planes` states them on the lattice card."
+        ),
+    )
+    flag_orbits: Annotated[int, Field(ge=0)] | None = Field(
+        default=None,
+        description="The number of $\\Gamma$-orbits of isotropic flags, a primitive isotropic line contained in a primitive isotropic plane: the incidence of the two strata.",
+    )
     reference: Reference | None = Field(default=None, description="The source of the structure and the representatives.")
+
+    @model_validator(mode="after")
+    def _orbit_counts(self) -> Self:
+        """A flag count is made of the two strata it joins, so it requires both counts."""
+        if self.flag_orbits is not None and (self.line_orbits is None or self.plane_orbits is None):
+            raise ValueError("a flag count requires the line and plane counts whose incidence it counts")
+        return self
 
 
 class DiscriminantSequenceData(Record):
@@ -260,6 +709,17 @@ class FormData(Record):
 class IntegralData(Record):
     """Stored invariants of an integer-valued lattice, when available."""
 
+    @model_validator(mode="after")
+    def _polarization_degrees(self) -> Self:
+        """A key is the decimal text of a degree $2d$: an even integer, written canonically, at least 2."""
+        for degree in (self.polarization_counts or {}):
+            value = int(degree)
+            if value < 2 or value % 2:
+                raise ValueError(f"{degree} is not a degree 2d of a polarization")
+            if str(value) != degree:
+                raise ValueError(f"{degree} is not the canonical decimal text of {value}")
+        return self
+
     elementary_primes: Annotated[tuple[Annotated[int, Field(ge=2)], ...], Field(strict=False, max_length=1)] | None = Field(
         default=None,
         description="The singleton [p] when the nontrivial discriminant group is elementary abelian of prime exponent p; [] when it is not; null means unknown.",
@@ -371,13 +831,70 @@ class IntegralData(Record):
             "(Nikulin 1980, Theorem 1.13.1*). Requires a nonzero determinant; absent when it is not computed."
         ),
     )
-    primitive_orbits: dict[OrbitGroup, PrimitiveOrbitSeries] | None = Field(
+    primitive_orbits: dict[Subgroup, PrimitiveOrbitSeries] | None = Field(
         default=None,
         description=(
             "For a group $\\Gamma \\subseteq O(L)$, the series $F_{L,\\Gamma}(z, w)$ whose coefficient $c_\\Gamma(n)$ is the number of $\\Gamma$-orbits of primitive "
-            "vectors $v$ with $b(v, v) = n$. The keys are `O`, `SO`, `O+`, `SO+`, `Otilde`, `SOtilde`, `Otilde+` and `SOtilde+`: $S$ is the kernel of the determinant, "
+            "vectors $v$ with $b(v, v) = n$ for $n \\neq 0$, whose constant term $c_\\Gamma(0)$ is the number of $\\Gamma$-orbits of primitive isotropic *lines*, "
+            "the rank-one isotropic sublattices, for an indefinite lattice (theory/orbits.md), and whose `planes` counts their primitive isotropic planes. "
+            "The keys are `O`, `SO`, `O+`, `SO+`, `Otilde`, `SOtilde`, `Otilde+` and `SOtilde+`, and the slug of an arithmetic-group card of the same lattice for a named subgroup: $S$ is the kernel of the determinant, "
             "$+$ the kernel of the real spinor norm, and $\\widetilde{O}(L)$ the kernel of $O(L) \\to O(A_L)$. "
-            "Computed by `latticedb certify` through $z^4$ and $w^4$ for a definite lattice; stated with a reference otherwise. Requires a nonzero determinant."
+            "Computed by `latticedb certify` from the preamble's `primitive_orbit_series`, which enumerates the vectors of a definite lattice "
+            "and returns the coefficients it owns for an indefinite one; the certificate binds the constant term and the first four $z$- and $w$-coefficients. "
+            "A coefficient that the operation does not return is stated with a reference. Requires a nonzero determinant."
+        ),
+    )
+    discriminant_form: DiscriminantForm | None = Field(
+        default=None,
+        description=(
+            "The invariants of the discriminant form $(A_L, q_L)$: $|O(A_L, q_L)|$, the number of isotropic "
+            "classes, and the number of $O(A_L, q_L)$-orbits on them (theory/discriminant-forms.md). Computed by "
+            "`latticedb certify` from the Gram tensor, and requested where the classes of $A_L$ are few enough to "
+            "partition, $|A_L| = |\\det L| \\leq 4096$."
+        ),
+    )
+    polarization_counts: dict[PolarizationDegree, PolarizationRow] | None = Field(
+        default=None,
+        description=(
+            "Dutour Sikirić–Hulek's Table 4 (arXiv:2302.01679, p. 17), keyed by the degree $2d$ of a numerical "
+            "polarization of an Enriques surface, written as its decimal text (`'2'`, `'4'`, ..., `'72'`) because a "
+            "stored mapping has string keys (`corpus.front_matter`): for each degree, `#h` is the number of orbits "
+            "of primitive vectors of that degree in $U \\oplus E_8(-1) = \\operatorname{Num}(S)$, and `#Γ̄_h` the "
+            "number of conjugacy classes of the modular groups $\\bar\\Gamma_h$ those polarizations define. The "
+            "table's two cumulative columns are not stored: each is the sum of these rows up to its degree. "
+            "Certified by the table's citation, so `latticedb certify` never recomputes it."
+        ),
+    )
+    cusp_chambers: dict[Subgroup, Annotated[tuple[CuspChamber, ...], Field(strict=False)]] | None = Field(
+        default=None,
+        description=(
+            "For a group $\\Gamma \\subseteq O(L)$ and a $0$-cusp $\\mathbb{Z}v$ of its Baily–Borel boundary, the chamber of the reflection "
+            "subgroup of the stabilizer of $v$ in the hyperbolic lattice $v^\\perp/\\mathbb{Z}v$: its walls as the source prints them, their Gram "
+            "matrix, the Coxeter diagram and the wall count (theory/orbits.md#chamber-at-a-cusp). A lattice of signature $(1, n)$ has no such cusp: "
+            "its row is the fundamental polyhedron of the reflection group of $L$ itself, and states the number of its ideal vertices when the source "
+            "prints them, and the walls when the source prints those. "
+            "The keys are `O`, `SO`, `O+`, `SO+`, `Otilde`, `SOtilde`, `Otilde+` and `SOtilde+`, and the slug of an arithmetic-group card of the "
+            "same lattice for a named subgroup such as `gamma-en-2`, as in `primitive_orbits`. "
+            "Certified by the citation of the statement that prints the walls together with the program that computed the Gram matrix, the "
+            "diagram and the count from the card's Gram tensor, so `latticedb certify` never recomputes it and never asks a Vinberg search for it. "
+            "A row that states only the ideal-vertex count is certified by the citation alone: that count is printed, not computed."
+        ),
+    )
+    cusp_root_orbits: dict[Subgroup, Annotated[tuple[CuspRootOrbitRow, ...], Field(strict=False)]] | None = Field(
+        default=None,
+        description=(
+            "For a group $\\\\Gamma \\\\subseteq O(L)$ and a $0$-cusp $\\\\mathbb{Z}v$, the orbits of the cusp's root classes "
+            "in the boundary lattice $K_J = v^\\\\perp/\\\\mathbb{Z}v$ under the cusp stabilizer $\\\\Gamma_v$: the orbit count, "
+            "one representative per orbit, and the symmetries of the cusp's chamber that the stabilizer realizes "
+            "(theory/orbits.md#root-classes-at-a-cusp). A root class is a class of square $-2$, and the class is a root "
+            "exactly when its lift is: the walls of the chamber at the cusp that are not roots are no part of the family. "
+            "The keys are `O`, `SO`, `O+`, `SO+`, `Otilde`, `SOtilde`, `Otilde+` and `SOtilde+`, and the slug of an "
+            "arithmetic-group card of the same lattice for a named subgroup such as `gamma-en-2`, as in "
+            "`cusp_chambers`: $S$ is the kernel of the determinant, $+$ the kernel of the real spinor norm, and "
+            "$\\\\widetilde{O}(L)$ the kernel of $O(L) \\\\to O(A_L)$. "
+            "A count is stated only where the certified generators of $\\\\Gamma_v$ or a source decide it: a family that those "
+            "generators do not separate has no count here, because a singleton orbit is not a proof of inequivalence, and "
+            "`latticedb certify` never requests the field."
         ),
     )
     discriminant_orbits: dict[OrbitGroup, PrimitiveOrbitSeries] | None = Field(
@@ -450,6 +967,31 @@ class RootSystemComponent(Record):
     @property
     def rank(self) -> int:
         return int(self.type[1:])
+
+
+class Automorphisms(Record):
+    r"""The isometry group of a lattice whose `definite` block does not state it, with its order.
+
+    An indefinite lattice's $O(L)$ may be finite or infinite — $|O(U)| = 4$, and $|O(U \oplus U(2))| = \aleph_0$ —
+    so the order is a field of this block, and the group is presented by the generators it stores, each an
+    isometry $L \to L$ of this card's Gram tensor. A definite lattice states the order with its generators
+    in `definite`.
+    """
+
+    automorphism_group_order: OrbitCount = Field(
+        default=None,
+        description=(
+            "Order of $O(L)$, computed by CI from the preamble operation `L.orthogonal_group()`: an integer where the group is finite, "
+            "and `aleph0` where the owner states a countably infinite group. $O(L)$ is a subgroup of $GL_n(\\mathbb{Z})$, so it is never uncountable."
+        ),
+    )
+    automorphism_group_generator_morphisms: Annotated[tuple[str, ...], Field(strict=False)] | None = Field(
+        default=None,
+        description=(
+            "Names of self-isometries in this card's `morphisms` field that generate $O(L)$, computed by CI from the preamble operation `L.orthogonal_group()`. "
+            "Each name is a morphism entry whose `target` is this card's tag and whose `scale` is 1."
+        ),
+    )
 
 
 class DefiniteData(Record):

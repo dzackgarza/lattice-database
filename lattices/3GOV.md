@@ -23,6 +23,7 @@ certifications:
   integral.anisotropic_primes: ea27a2cedb33df63e959c17dd0e480496e290d7a9f903b0d1e282c1b2b22ca1b
   integral.local_representations: 696379cef8e914d3ed34d6bb686e1fc90b7013aa1f02b8c6fc22bf0e347e9fee
   integral.local_densities: a008072da24e16f45adf040d88a9ec8e436d4450ee756f1906a39880a49d6342
+  integral.discriminant_sequence: 5df5ad6161a61fecf1eae5f2745eff2d2e2359a6d7ddcbd117bb6eb407650df4
 rank: 4
 gram_tensor:
 - [2, 0, 0, 0]
@@ -45,6 +46,77 @@ integral:
   level: 16
   modular_scale: false
   discriminant_group: [2, 8, 8]
+  discriminant_sequence:
+    discriminant_factors: [2, 8, 8]
+    discriminant_basis_lifts:
+    - [-1/2, 1/2, -1/2, '0']
+    - ['0', -5/8, 1/8, '0']
+    - ['0', '0', '0', 1/8]
+    discriminant_quadratic_gram:
+    - [1/2, 1/2, '0']
+    - [1/2, 3/8, '0']
+    - ['0', '0', 1/8]
+    discriminant_group_order: 64
+    discriminant_generators:
+    - - [1, 4, 4]
+      - [1, 1, 2]
+      - [1, 6, 7]
+    - - [1, 4, 4]
+      - [1, 5, 2]
+      - [1, 6, 7]
+    - - [1, 4, 4]
+      - [1, 7, 6]
+      - [1, 2, 1]
+    - - [1, 4, 4]
+      - [1, 7, 6]
+      - [1, 6, 3]
+    - - [1, 4, 4]
+      - [1, 7, 6]
+      - [1, 6, 7]
+    image_generators:
+    - - [1, 0, 0]
+      - [0, 1, 0]
+      - [0, 0, 1]
+    - - [1, 0, 0]
+      - [0, 7, 0]
+      - [0, 0, 1]
+    - - [1, 0, 0]
+      - [0, 5, 0]
+      - [0, 0, 1]
+    - - [1, 0, 0]
+      - [0, 1, 0]
+      - [0, 0, 7]
+    image_order: 8
+    kernel_order: 2
+    coset_representatives:
+    - - [1, 0, 0]
+      - [0, 1, 0]
+      - [0, 0, 1]
+    - - [1, 0, 0]
+      - [0, 1, 0]
+      - [0, 0, 3]
+    - - [1, 0, 0]
+      - [0, 1, 4]
+      - [0, 4, 1]
+    - - [1, 0, 0]
+      - [0, 1, 4]
+      - [0, 4, 3]
+    - - [1, 4, 4]
+      - [1, 1, 2]
+      - [1, 2, 1]
+    - - [1, 4, 4]
+      - [1, 1, 2]
+      - [1, 2, 5]
+    - - [1, 4, 4]
+      - [1, 1, 2]
+      - [1, 6, 3]
+    - - [1, 4, 4]
+      - [1, 1, 2]
+      - [1, 6, 7]
+    mm_trivial: false
+    image_normal: false
+    quotient_generator_cosets: null
+    quotient_multiplication: null
   overlattice_count: 18
   bad_reduction_primes: [2]
   quadratic_character: 8

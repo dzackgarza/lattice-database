@@ -12,6 +12,7 @@ from collections.abc import Sequence
 
 from latticedb.corpus import CatalogueEntry, Corpus
 from latticedb.geometric import ProjectiveComplexVariety, ToricHypersurfaceConstruction
+from latticedb.invariant_models import STANDARD_SUBGROUPS
 
 
 def slug_problems(entries: Sequence[CatalogueEntry]) -> list[str]:
@@ -62,10 +63,18 @@ def reference_problems(loaded: Corpus) -> list[str]:
         group_data = arithmetic.data
         if group_data.defining_relators is not None and group_data.generator_morphisms is None:
             found.append(f"{path}: relators require the generator list they are words in")
-        for name in group_data.generator_morphisms or ():
-            names = {morphism.name for morphism in lattice.morphisms if morphism.target == lattice.tag and morphism.scale == 1}
-            if name not in names:
-                found.append(f"{path}: generator {name} is not a named self-isometry of {lattice.tag}")
+        generators = group_data.generator_morphisms
+        if generators is not None:
+            # A generator is one isometry L -> L on the lattice card it names, so its name
+            # occurs once in the list and names exactly one morphism entry with scale 1.
+            names = [morphism.name for morphism in lattice.morphisms if morphism.target == lattice.tag and morphism.scale == 1]
+            if len(set(generators)) != len(generators):
+                found.append(f"{path}: each generator of {lattice.tag} occurs once in the generator list")
+            found.extend(
+                f"{path}: generator {name} is not one scale-1 self-morphism of {lattice.tag}"
+                for name in dict.fromkeys(generators)
+                if names.count(name) != 1
+            )
         if group_data.stabilized is not None:
             kind, identifier = group_data.stabilized.kind, group_data.stabilized.identifier
             available = {
@@ -96,6 +105,47 @@ def reference_problems(loaded: Corpus) -> list[str]:
                 found.append(f"{lattice_entry.path}: arithmetic group {slug} must be a card on this lattice")
         if lattice.orthogonal_group is not None and lattice.orthogonal_group not in lattice.arithmetic_groups:
             found.append(f"{lattice_entry.path}: orthogonal_group must also occur in arithmetic_groups")
+        for key in (lattice.integral.primitive_orbits or {}) if lattice.integral is not None else {}:
+            if key in STANDARD_SUBGROUPS:
+                continue
+            named = arithmetic_groups.get(key)
+            if named is None or named.lattice != lattice.tag:
+                found.append(f"{lattice_entry.path}: primitive_orbits names {key}, which is not an arithmetic-group card of {lattice.tag}")
+        chambers = (lattice.integral.cusp_chambers or {}) if lattice.integral is not None else {}
+        for key, rows in chambers.items():
+            if key not in STANDARD_SUBGROUPS:
+                named = arithmetic_groups.get(key)
+                if named is None or named.lattice != lattice.tag:
+                    found.append(f"{lattice_entry.path}: cusp_chambers names {key}, which is not an arithmetic-group card of {lattice.tag}")
+            if lattice.rank is None:
+                continue
+            seen: set[tuple[int, ...]] = set()
+            for row in rows:
+                # A row of a lattice of signature (1, n) states no cusp, and need not print its walls.
+                vectors = ([row.cusp] if row.cusp is not None else []) + [wall.vector for wall in row.walls or ()]
+                if any(len(vector) != lattice.rank for vector in vectors):
+                    found.append(f"{lattice_entry.path}: cusp_chambers[{key}] {row.statement or 'a computed chamber'}: the cusp and its walls have one coordinate per basis vector")
+                if row.cusp is not None:
+                    if tuple(row.cusp) in seen:
+                        found.append(f"{lattice_entry.path}: cusp_chambers[{key}]: two rows state the chamber at the cusp {row.cusp}")
+                    seen.add(tuple(row.cusp))
+        root_orbits = (lattice.integral.cusp_root_orbits or {}) if lattice.integral is not None else {}
+        for key, rows in root_orbits.items():
+            if key not in STANDARD_SUBGROUPS:
+                named = arithmetic_groups.get(key)
+                if named is None or named.lattice != lattice.tag:
+                    found.append(f"{lattice_entry.path}: cusp_root_orbits names {key}, which is not an arithmetic-group card of {lattice.tag}")
+            if lattice.rank is None:
+                continue
+            cusps: set[tuple[int, ...]] = set()
+            for row in rows:
+                where = f"cusp_root_orbits[{key}] at the cusp {list(row.cusp)}"
+                if len(row.cusp) != lattice.rank or any(len(vector) != lattice.rank for orbit in row.orbits for vector in orbit.classes):
+                    found.append(f"{lattice_entry.path}: {where}: the cusp and its classes have one coordinate per basis vector")
+                    continue
+                if tuple(row.cusp) in cusps:
+                    found.append(f"{lattice_entry.path}: cusp_root_orbits[{key}]: two rows state the orbits at the cusp {row.cusp}")
+                cusps.add(tuple(row.cusp))
 
     for genus_entry in loaded.genera:
         genus = genus_entry.value

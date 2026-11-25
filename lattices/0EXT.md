@@ -23,6 +23,7 @@ certifications:
   integral.anisotropic_primes: 8946c06cc1c26d722cff410f8bf2e4ed1634a3d23519a56d4bcdf3ba62898e02
   integral.local_representations: f158cfdc05bdccaef9c15d40bbe00b02af9b1569e39bccfdb6bf9854a17f87ff
   integral.local_densities: e9fc263aed182677e932208532c1c7a136457d9387118868b79081e1ec0810e6
+  integral.discriminant_form: 72199929818467e4f0784dbd4d6359569609781ded51789122e51fcffd03bb32
 rank: 4
 gram_tensor:
 - [4, 1, 0, 2]
@@ -73,6 +74,10 @@ integral:
   spinor_genus_count: 1
   spinor_genera: [51]
   hyperbolic_index: 0
+  discriminant_form:
+    orthogonal_group_order: 2
+    isotropic_classes: 1
+    isotropic_orbits: 1
   anisotropic_primes: []
   local_representations:
   - prime: 2

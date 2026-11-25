@@ -13,12 +13,19 @@ from collections.abc import Mapping, Sequence
 from fractions import Fraction
 from itertools import combinations
 
-from dzack_research.preamble.categories.coxeter_diagrams import CoxeterDiagrams, RootedCoxeterDiagrams
-from dzack_research.preamble.categories.lattices import DefiniteLattices, Lattices
-from dzack_research.preamble.categories.modules.framed.formed.form_modules import FormedModuleMor, FormModules, FreeFormModules
-from dzack_research.preamble.categories.modules.pure.modules import Modules
-from dzack_research.preamble.categories.rings.ring_foundation import _OwnedRingElement, _OwnedRingParent
-from dzack_research.preamble.rings import OwnedRings, session_ring_objects
+from sage_extensions.categories.coxeter_diagrams import CoxeterDiagrams, RootedCoxeterDiagrams
+from sage_extensions.categories.lattices import DefiniteLattices, Lattices
+from sage_extensions.categories.modules.framed.formed.form_modules import (
+    FormedModuleMor,
+    FormModules,
+    FreeFormModules,
+    _value_from_module_element,
+)
+from sage_extensions.categories.modules.pure.modules import Modules
+from sage_extensions.categories.rings.ring_foundation import _OwnedRingElement, _OwnedRingParent
+from sage_extensions.categories.rings.ring_foundation import OwnedRings
+from sage_extensions.rings import QQ as _OWNED_QQ
+from sage_extensions.rings import ZZ as _OWNED_ZZ
 
 from latticedb import model
 from latticedb.card_serialization import KEYS as KEYS
@@ -35,23 +42,43 @@ from latticedb.card_serialization import rational as rational
 from latticedb.card_serialization import record_text as record_text
 from latticedb.model import GramTensor, Lattice, Morphism, Yaml
 
-_SESSION_RINGS = session_ring_objects()
-_integers = _SESSION_RINGS["ZZ"]
-assert isinstance(_integers, _OwnedRingParent)
-ZZ: _OwnedRingParent = _integers
-_ring = _SESSION_RINGS["ZZ"]
-assert isinstance(_ring, OwnedRings.ParentMethods)
-integer_ring: OwnedRings.ParentMethods = _ring
-_domain = _SESSION_RINGS["ZZ"]
-assert isinstance(_domain, OwnedRings.NoZeroDivisors.Commutative.Nontrivial.ParentMethods)
-integer_domain: OwnedRings.NoZeroDivisors.Commutative.Nontrivial.ParentMethods = _domain
-QQ = _SESSION_RINGS["QQ"]
-_QQ_AS_ZZ_MODULE = Modules(QQ).restriction_of_scalars(integer_domain.fraction_field_map())(QQ)
+# The owner binds each session scalar once, in `sage_extensions.rings`; a caller that needs a
+# narrower static type asserts the category of that object rather than building a second one.
+assert isinstance(_OWNED_ZZ, _OwnedRingParent)
+ZZ: _OwnedRingParent = _OWNED_ZZ
+assert isinstance(_OWNED_ZZ, OwnedRings.ParentMethods)
+integer_ring: OwnedRings.ParentMethods = _OWNED_ZZ
+assert isinstance(_OWNED_ZZ, OwnedRings.NoZeroDivisors.Commutative.Nontrivial.ParentMethods)
+integer_domain: OwnedRings.NoZeroDivisors.Commutative.Nontrivial.ParentMethods = _OWNED_ZZ
+QQ = _OWNED_QQ
+_QQ_AS_ZZ_MODULE = Modules(QQ).restriction_of_scalars(integer_domain.fraction_field_map())(QQ.regular_module())
 
 
 def _fraction_of(value: _OwnedRingElement) -> Fraction:
     """A rational value of the preamble, as the `Fraction` a card stores."""
     return Fraction(int(value.numerator()), int(value.denominator()))
+
+
+def rational_gram(gram: GramTensor):
+    """Each stored rational entry as a member of the declared restricted regular module.
+
+    This is the value-object construction already present in `derive` before this change. An entry of
+    the restricted module is not a bare Sage `Fraction`; its constructor takes the appropriate value
+    element from the owned regular value object, not a coercion from an arbitrary scalar.
+    """
+    return tuple(
+        tuple(_QQ_AS_ZZ_MODULE.wrap(QQ(entry.numerator) / QQ(entry.denominator)) for entry in row)
+        for row in gram
+    )
+
+
+def _formed_norm_fraction(formed: FormModules.ParentMethods, element: tuple[int, ...]) -> Fraction:
+    """Read a formed norm through its value-module and regular-module identifications."""
+    norm = _value_from_module_element(formed, formed(element).q())
+    value_module = norm.parent()
+    if hasattr(value_module, "regular_module_identification"):
+        norm = value_module.regular_module_identification()(norm)
+    return _fraction_of(norm)
 
 
 def _integral_twist(formed: FormModules.ParentMethods) -> tuple[Lattices.ParentMethods, int]:
@@ -62,7 +89,13 @@ def _integral_twist(formed: FormModules.ParentMethods) -> tuple[Lattices.ParentM
     vectors define reflections; card fields stated in the original scale divide by `m`.
     """
     scale = formed.scale_submodule()
-    ideal = integer_domain.fractional_ideal(*(value.underlying_element() for value in scale.embedded_module_generators()))
+    scale_values = []
+    for value in scale.embedded_module_generators():
+        value_module = value.parent()
+        if hasattr(value_module, "regular_module_identification"):
+            value = value_module.regular_module_identification()(value)
+        scale_values.append(value)
+    ideal = integer_domain.fractional_ideal(*scale_values)
     multiplier = ZZ(int(ideal.principal_generator().denominator()))
     gram = formed.twist(multiplier).gram_tensor().change_ring(ZZ)
     return Lattices(ZZ)(gram), int(multiplier)
@@ -104,7 +137,7 @@ def _root_span_factors(formed: FormModules.ParentMethods, roots: tuple[tuple[int
     """
     if not roots:
         return ()
-    from dzack_research.preamble.categories.modules.framed.framed_free_modules import FramedFreeModules
+    from sage_extensions.categories.modules.framed.framed_free_modules import FramedFreeModules
 
     framed: object = formed
     assert isinstance(framed, FramedFreeModules.ParentMethods)
@@ -232,7 +265,7 @@ def _root_span(record: dict[str, Yaml], formed: FormModules.ParentMethods) -> tu
             roots = tuple(parsed_rows)
         case _:
             return None
-    block["norms"] = [rational(_fraction_of(formed(root).q().underlying_element())) for root in roots]
+    block["norms"] = [rational(_formed_norm_fraction(formed, root)) for root in roots]
     return _ordered(block, tuple(model.RootSpan.model_fields)), roots
 
 
@@ -243,7 +276,7 @@ def _root_sublattice(formed: FormModules.ParentMethods, roots: tuple[tuple[int, 
     alone still span the lattice.
     """
     rank = int(formed.module_rank())
-    norm_of = {root: _fraction_of(formed(root).q().underlying_element()) for root in roots}
+    norm_of = {root: _formed_norm_fraction(formed, root) for root in roots}
     factors = _root_span_factors(formed, roots)
     block: dict[str, Yaml] = {"invariant_factors": list(factors)}
     unimodular_span = (1,) * rank
@@ -280,7 +313,7 @@ def derive(record: dict[str, Yaml]) -> dict[str, Yaml]:
     gram = gram_tensor(record["gram_tensor"])
     rank = len(gram)
     module = integer_ring.free_module(rank)
-    formed = FormModules(ZZ)(module.bilinear_hom_space(_QQ_AS_ZZ_MODULE)(gram))
+    formed = FormModules(ZZ)(module.bilinear_hom_space(_QQ_AS_ZZ_MODULE)(rational_gram(gram)))
     # Inertia uses ordered scalar values on the rational extension; the original
     # ZZ-module retains the integral coordinates used by root and span operations.
     rational_lattice = Lattices(QQ)(gram)
@@ -473,8 +506,40 @@ def local_admission_problems(lattice: Lattice) -> list[str]:
                         found.append("integral.delta: delta is defined only for an even 2-elementary lattice")
                     elif integral.delta != int(owned.delta()):
                         found.append(f"integral.delta: stated {integral.delta}, computed {int(owned.delta())}")
+    cusp_root_orbits = (integral.cusp_root_orbits or {}) if integral is not None else {}
+    if cusp_root_orbits and lattice.rank is not None:
+        # A root class at the cusp v is the class in v^perp/ZZ v of a vector of square -2 that is orthogonal
+        # to v: both are the preamble's form on the stored vectors, not this module's arithmetic.
+        formed_cusps = FormModules(ZZ)(integer_ring.free_module(lattice.rank).bilinear_hom_space(_QQ_AS_ZZ_MODULE)(rational_gram(gram)))
+        for key, rows in cusp_root_orbits.items():
+            for row in rows:
+                where = f"integral.cusp_root_orbits[{key}] at the cusp {list(row.cusp)}"
+                cusp_entries = tuple(int(entry) for entry in row.cusp)
+                if _formed_norm_fraction(formed_cusps, cusp_entries) != 0:
+                    found.append(f"{where}: the cusp is not isotropic")
+                for orbit in row.orbits:
+                    for vector in orbit.classes:
+                        entries = tuple(int(entry) for entry in vector)
+                        if not formed_cusps(entries).is_orthogonal_to(formed_cusps(cusp_entries)):
+                            found.append(f"{where}: the class {list(vector)} does not lie in the v^perp of the cusp")
+                            continue
+                        square = _formed_norm_fraction(formed_cusps, entries)
+                        if square != -2:
+                            found.append(f"{where}: the class {list(vector)} has square {square}, not -2, so it is no root")
     formed = (
-        FormModules(ZZ)(integer_ring.free_module(lattice.rank).bilinear_hom_space(_QQ_AS_ZZ_MODULE)(gram))
+        FormModules(ZZ)(
+            integer_ring.free_module(lattice.rank).bilinear_hom_space(_QQ_AS_ZZ_MODULE)(
+                tuple(
+                    tuple(
+                        _QQ_AS_ZZ_MODULE.wrap(
+                            QQ(Fraction(value).numerator) / QQ(Fraction(value).denominator)
+                        )
+                        for value in row
+                    )
+                    for row in gram
+                )
+            )
+        )
         if lattice.definite is not None or lattice.root_span is not None
         else None
     )
@@ -489,6 +554,11 @@ def local_admission_problems(lattice: Lattice) -> list[str]:
                 found.append("definite.perfect: the stated value differs from L.is_voronoi_perfect()")
         if definite.automorphism_group_order is not None and (definite.automorphism_group_order <= 0 or definite.automorphism_group_order % 2 == 1):
             found.append("definite.automorphism_group_order: x -> -x is an isometry of order 2, so the order is even")
+    automorphisms = lattice.automorphisms
+    if automorphisms is not None and isinstance(automorphisms.automorphism_group_order, int):
+        order = automorphisms.automorphism_group_order
+        if order <= 0 or order % 2 == 1:
+            found.append("automorphisms.automorphism_group_order: x -> -x is an isometry of order 2, so a finite order is even")
     span = lattice.root_span
     if span is not None:
         assert formed is not None
@@ -517,7 +587,7 @@ def relational_admission_problems(lattice: Lattice, written: Mapping[str, Lattic
         missing = [summand.tag for summand in span.summands if summand.tag not in written]
         found.extend(f"root_span.summands: the tag {tag} is not in the corpus" for tag in missing)
         if not missing and span.summands:
-            target = FormModules(ZZ)(integer_ring.free_module(lattice.rank).bilinear_hom_space(_QQ_AS_ZZ_MODULE)(lattice.gram_tensor))
+            target = FormModules(ZZ)(integer_ring.free_module(lattice.rank).bilinear_hom_space(_QQ_AS_ZZ_MODULE)(rational_gram(lattice.gram_tensor)))
             offset = 0
             blocks = []
             valid = True
@@ -529,7 +599,7 @@ def relational_admission_problems(lattice: Lattice, written: Mapping[str, Lattic
                 if offset + source_record.rank > len(span.embedding):
                     valid = False
                     break
-                source = FormModules(ZZ)(integer_ring.free_module(source_record.rank).bilinear_hom_space(_QQ_AS_ZZ_MODULE)(source_record.gram_tensor)).twist(summand.scale)
+                source = FormModules(ZZ)(integer_ring.free_module(source_record.rank).bilinear_hom_space(_QQ_AS_ZZ_MODULE)(rational_gram(source_record.gram_tensor))).twist(summand.scale)
                 rows = span.embedding[offset : offset + source_record.rank]
                 images = tuple(target(row) for row in rows)
                 offset += source_record.rank
@@ -553,8 +623,8 @@ def morphism_problems(morphism: Morphism, source: Lattice, target: Lattice) -> l
         return [f"{morphism.name}: the matrix must have {target.rank} rows and {source.rank} columns"]
     if morphism.scale is None:
         raise ValueError("morphism scale must be stated before verifying the morphism")
-    source_formed = FormModules(ZZ)(integer_ring.free_module(source.rank).bilinear_hom_space(_QQ_AS_ZZ_MODULE)(source.gram_tensor)).twist(morphism.scale)
-    target_formed = FormModules(ZZ)(integer_ring.free_module(target.rank).bilinear_hom_space(_QQ_AS_ZZ_MODULE)(target.gram_tensor))
+    source_formed = FormModules(ZZ)(integer_ring.free_module(source.rank).bilinear_hom_space(_QQ_AS_ZZ_MODULE)(rational_gram(source.gram_tensor))).twist(morphism.scale)
+    target_formed = FormModules(ZZ)(integer_ring.free_module(target.rank).bilinear_hom_space(_QQ_AS_ZZ_MODULE)(rational_gram(target.gram_tensor)))
     found: list[str] = []
     if not _preserves_forms(
         source_formed,

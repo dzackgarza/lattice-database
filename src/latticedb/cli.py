@@ -126,12 +126,12 @@ def populate_standard_sums(
     max_content: Annotated[int, Parameter(help="Largest absolute form content after scaling (default: 2).")] = 2,
 ) -> None:
     """Author Gram presentations of all canonical sums of known untwisted indecomposables and their small twists."""
-    from dzack_research.preamble.categories.lattices import Lattices
-    from dzack_research.preamble.rings import session_ring_objects
+    from sage_extensions.categories.lattices import Lattices
+    from sage_extensions.rings import ZZ
 
     from latticedb import construction_corpus
 
-    category = Lattices(session_ring_objects()["ZZ"])
+    category = Lattices(ZZ)
     seeds = category.Untwisted().Indecomposable().known_objects(max_rank=max_rank)
     result = construction_corpus.populate_standard_sums(
         root, seeds, max_rank=max_rank, max_content=max_content
@@ -147,12 +147,12 @@ def populate_construction_prefix(
     max_content: Annotated[int, Parameter(help="Largest absolute form content to store.")] = 2,
 ) -> None:
     """Store a prefix of known lattice constructions, including tensors and gluings."""
-    from dzack_research.preamble.categories.lattices import Lattices
-    from dzack_research.preamble.rings import session_ring_objects
+    from sage_extensions.categories.lattices import Lattices
+    from sage_extensions.rings import ZZ
 
     from latticedb import construction_corpus
 
-    category = Lattices(session_ring_objects()["ZZ"])
+    category = Lattices(ZZ)
     seeds = category.Untwisted().Indecomposable().known_objects(max_rank=max_rank)
     result = construction_corpus.populate_construction_prefix(
         root, seeds, max_expressions=max_expressions, max_rank=max_rank, max_content=max_content
@@ -168,12 +168,12 @@ def populate_standard_products(
     max_inclusions_per_source: Annotated[int | None, Parameter(help="Optional count of gluing inclusions to visit per source.")] = None,
 ) -> None:
     """Author tensor products of all known small twists and their proper overlattices."""
-    from dzack_research.preamble.categories.lattices import Lattices
-    from dzack_research.preamble.rings import session_ring_objects
+    from sage_extensions.categories.lattices import Lattices
+    from sage_extensions.rings import ZZ
 
     from latticedb import construction_corpus
 
-    category = Lattices(session_ring_objects()["ZZ"])
+    category = Lattices(ZZ)
     seeds = category.Untwisted().Indecomposable().known_objects(max_rank=max_rank)
     result = construction_corpus.populate_standard_products(
         root, seeds, max_rank=max_rank, max_content=max_content,
@@ -309,16 +309,41 @@ def morphism(
 
 
 @app.command
-def verify(root: Root = Path()) -> None:
+def verify(
+    root: Root = Path(),
+    shard: Annotated[
+        str | None,
+        Parameter(help="`i/n`: verify only the cards whose tag falls in shard `i` of `n`; every shard by default."),
+    ] = None,
+) -> None:
     """Report stored-card inconsistencies without changing cards; mathematics is delegated to the preamble."""
+    selected: tuple[int, int] | None = None
+    if shard is not None:
+        index, count = (int(part) for part in shard.split("/"))
+        if not 0 <= index < count:
+            raise ValueError(f"shard {shard} names no shard of {count}")
+        selected = (index, count)
     try:
-        count, problems = checks.run(root)
+        verified, problems = checks.run(root, selected)
     except corpus.CorpusInvalid as invalid:
         print("\n".join(invalid.problems), file=sys.stderr)
         print(f"{len(invalid.problems)} problems", file=sys.stderr)
         sys.exit(1)
+    # Each verification process reports the peak memory it needed, and, when it verified one
+    # shard, that shard and how many cards it read: a run's log then says which cards were
+    # verified and what they cost. It is reported before the run refuses its problems, so a
+    # shard that finds one still records both (#6).
+    held = "" if selected is None else f" for {verified} cards in shard {selected[0]}/{selected[1]}"
+    line = f"memory: {checks.peak()} peak{held}"
+    print(line, flush=True)
+    # On a workflow runner the same line is also an annotation. A job log needs
+    # repository-admin rights to download and an annotation is part of the run's own API
+    # response, so a scheduled run's per-shard peaks are readable where they were not (#6).
+    if os.environ.get("GITHUB_ACTIONS") == "true":
+        title = "verify" if selected is None else f"shard {selected[0]}/{selected[1]}"
+        print(f"::notice title={title}::{line}", flush=True)
     _refuse(problems)
-    print(f"{count} lattice cards structurally verified")
+    print(f"{verified} lattice cards structurally verified")
 
 
 @app.command
@@ -346,8 +371,20 @@ def deduplicate(root: Root = Path()) -> None:
     leave `certificates/`: a value it certified is already on the earliest
     card under that card's own certificate.
     """
-    loaded = corpus.load(root)
-    held = certificates.load(root)
+    # What this run can certify is what it can see: the tags it names, or the tags its shard holds.
+    # Reading the whole corpus costs 7.3 GiB of cards and 1.8 GiB of certificates and about sixteen
+    # minutes before a worker starts (#30); a shard of 16 needs a sixteenth of that, and nothing it
+    # computes reads another shard's cards. `certificates.save` is given the same tags, so it writes
+    # only the groups it read in full.
+    visible: tuple[str, ...] = tag
+    if not visible and (index, count) != (0, 1):
+        visible = tuple(name for name in corpus.tags(root) if genus.in_shard(name, (index, count)))
+    if visible:
+        loaded = corpus.cards(root, visible)
+        held = certificates.load(root, visible)
+    else:
+        loaded = corpus.load(root)
+        held = certificates.load(root)
     retired: corpus.Retired = {}
     for tags in corpus.duplicate_grams(loaded.entries).values():
         earliest, *later = sorted(tags)
@@ -439,6 +476,14 @@ def certify(
         str,
         Parameter(help="`i/n`: certify only the cards whose tag falls in shard `i` of `n`, so `n` jobs share the corpus."),
     ] = "0/1",
+    phase: Annotated[
+        str,
+        Parameter(help="`all` runs the terminating fields and then the semi-decision searches; `fields` leaves the searches to another run; `searches` takes only them."),
+    ] = "all",
+    field: Annotated[
+        tuple[str, ...],
+        Parameter(help="Computation to run, such as `primitive_orbits` or one part of a row such as `primitive_orbits[Otilde].planes`; repeat for each. Every field when absent."),
+    ] = (),
     root: Root = Path(),
 ) -> None:
     """Compute uncertified card values, replace disagreements, and certify the computed results."""
@@ -446,9 +491,30 @@ def certify(
     index, count = (int(part) for part in shard.split("/"))
     if not 0 <= index < count:
         raise ValueError(f"shard {shard} names no shard of {count}")
-    loaded = corpus.load(root)
-    held = certificates.load(root)
-    genus.certify(root, loaded, held, tag, deadline, workers, (index, count))
+    # What this run can certify is what it can see: the tags it names, or the tags its shard holds.
+    # Reading the whole corpus costs 7.3 GiB of cards and 1.8 GiB of certificates and about sixteen
+    # minutes before a worker starts (#30); a shard of 16 needs a sixteenth of that, and nothing it
+    # computes reads another shard's cards. `certificates.save` is given the same tags, so it writes
+    # only the groups it read in full.
+    visible: tuple[str, ...] = tag
+    if not visible and (index, count) != (0, 1):
+        visible = tuple(name for name in corpus.tags(root) if genus.in_shard(name, (index, count)))
+    if visible:
+        loaded = corpus.cards(root, visible)
+        held = certificates.load(root, visible)
+    else:
+        loaded = corpus.load(root)
+        held = certificates.load(root)
+    match phase:
+        case "all":
+            searches = None
+        case "fields":
+            searches = False
+        case "searches":
+            searches = True
+        case _:
+            raise ValueError(f"phase {phase} is not one of all, fields or searches")
+    genus.certify(root, loaded, held, tag, deadline, workers, (index, count), searches, field)
 
 
 @app.command

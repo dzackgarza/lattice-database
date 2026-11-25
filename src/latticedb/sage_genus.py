@@ -11,22 +11,24 @@ import sys
 from collections.abc import Callable
 from fractions import Fraction
 
-from dzack_research.preamble.categories.abstract_categories.mor_categories import CategoricalMor
-from dzack_research.preamble.categories.hyperbolic_lattices import HyperbolicLattices
-from dzack_research.preamble.categories.lattices import Lattices
-from dzack_research.preamble.categories.modules.framed.formed.form_modules import FormModules
-from dzack_research.preamble.categories.modules.pure.modules import Modules
-from dzack_research.preamble.categories.rings.commutative_algebra import FormalPowerSeriesRings
-from dzack_research.preamble.categories.rings.ring_foundation import _OwnedRingElement
-from dzack_research.preamble.rings import OwnedRings, session_ring_objects
+from sage_extensions.categories.abstract_categories.mor_categories import CategoricalMor
+from sage_extensions.categories.hyperbolic_lattices import HyperbolicLattices
+from sage_extensions.categories.lattices import Lattices
+from sage_extensions.categories.modules.framed.formed.form_modules import FormModules
+from sage_extensions.categories.modules.pure.modules import Modules
+from sage_extensions.categories.rings.commutative_algebra import FormalPowerSeriesRings
+from sage_extensions.categories.sets.cardinals import Cardinal
+from sage_extensions.categories.rings.ring_foundation import LocalizationRings
+from sage_extensions.categories.rings.ring_foundation import _OwnedRingElement
+from sage_extensions.categories.rings.ring_foundation import OwnedRings
+from sage_extensions.rings import QQ, ZZ
 
 from latticedb import records
-from latticedb.genus import Request, applies
+from latticedb.genus import ARITHMETIC_PREFIX, Request, applies, orbit_row_parts
 from latticedb.model import Lattice
 
-_RINGS = session_ring_objects()
-OWNED_ZZ = _RINGS["ZZ"]
-OWNED_QQ = _RINGS["QQ"]
+OWNED_ZZ = ZZ
+OWNED_QQ = QQ
 
 
 JsonValue = object
@@ -52,7 +54,7 @@ def _integer_valued(lattice: Lattices.ParentMethods) -> bool:
     assert isinstance(integer_ring, OwnedRings.ParentMethods)
     integer_domain = OWNED_ZZ
     assert isinstance(integer_domain, OwnedRings.NoZeroDivisors.Commutative.Nontrivial.ParentMethods)
-    values = Modules(OWNED_QQ).restriction_of_scalars(integer_domain.fraction_field_map())(OWNED_QQ)
+    values = Modules(OWNED_QQ).restriction_of_scalars(integer_domain.fraction_field_map())(OWNED_QQ.regular_module())
     module = integer_ring.free_module(int(lattice.module_rank()))
     form = FormModules(OWNED_ZZ)(module.bilinear_hom_space(values)(lattice.gram_tensor()))
     return form.is_base_ring_valued()
@@ -66,12 +68,174 @@ def _elementary_primes(lattice: Lattices.ParentMethods) -> list[int]:
 
 
 def _orthogonal_group_data(lattice: Lattices.ParentMethods) -> dict[str, JsonValue]:
-    """Serialize the preamble-owned ``O(L)`` and its selected generators."""
+    """Serialize the preamble-owned ``O(L)``: its order, as a count, and its selected generators.
+
+    $O(L)$ of an indefinite lattice may be finite — $|O(U)| = 4$ — or countably infinite —
+    $|O(U \\oplus U(2))| = \\aleph_0$ — so the order is serialized on every card, through the same
+    cardinal conversion the orbit counts use, and a subgroup of $\\mathrm{GL}_n(\\mathbb{Z})$ is
+    never uncountable (#8).
+    """
     group = lattice.orthogonal_group()
+    generators = [_matrix_rows(generator) for generator in group.group_generators()]
     return {
-        "automorphism_group_order": int(group.cardinality()),
-        "automorphism_group_generator_morphisms": [_matrix_rows(generator) for generator in group.group_generators()],
+        "automorphism_group_order": _orbit_count(group.cardinality()),
+        "automorphism_group_generator_morphisms": generators,
     }
+
+
+def _standard_subgroup(lattice: Lattices.ParentMethods, standard_name: str) -> object:
+    r"""The preamble's subgroup $\Gamma \leq O(L)$ that a card's `standard_name` names.
+
+    $S$ is the kernel of the determinant, $\widetilde O$ the kernel of the reduction to
+    $O(A_L)$, and $O^{+}$ the kernel of the real spinor norm; each further key is the
+    intersection of the two its name joins (Gritsenko--Hulek--Sankaran, *Abelianisation of
+    orthogonal groups and the fundamental group of modular varieties*, arXiv:0810.1614, §1).
+    """
+    match standard_name:
+        case "O":
+            return lattice.Aut()
+        case "SO":
+            return lattice.SO()
+        case "O+":
+            return lattice.O_plus()
+        case "SO+":
+            return lattice.O_plus().intersection(lattice.SO())
+        case "Otilde":
+            return lattice.stable_orthogonal_group()
+        case "SOtilde":
+            return lattice.stable_orthogonal_group().intersection(lattice.SO())
+        case "Otilde+":
+            return lattice.stable_orthogonal_group().intersection(lattice.O_plus())
+        case "SOtilde+":
+            return lattice.stable_orthogonal_group().intersection(lattice.SO()).intersection(lattice.O_plus())
+    raise ValueError(f"{standard_name!r} is not one of the eight standard subgroups of O(L)")
+
+
+def _primitive_isotropic_line_row(lattice: Lattices.ParentMethods, row: str) -> dict[str, JsonValue]:
+    r"""One standard subgroup's constant term: its orbits of primitive isotropic **lines**.
+
+    This is the row `_orbit_series` would take from `lattice.primitive_orbit_series()` for $\Gamma$,
+    asked for on its own so that a subgroup that does not return costs its row and not the field:
+    the constant is `isotropic_orbit_representatives(1).cardinality()`, the owner's rank-one
+    primitive isotropic subobjects, and $z$ and $w$ are empty because no norm is bounded on an
+    indefinite lattice. The subgroup is the one `_standard_subgroup` names from `theory/orbits.md`,
+    which is the same eight the owner's series states.
+    """
+    subgroup = _standard_subgroup(lattice, row)
+    constant = subgroup.isotropic_orbit_representatives(1).cardinality()
+    return {row: {"constant": _orbit_count(constant), "z": [], "w": []}}
+
+
+def _finite_count(value: object, what: str) -> int:
+    """A finite count the owner states, as a card states it, or a refusal naming the count.
+
+    `_orbit_count` decides what a count is; the fields that state a finite count — a plane count, a
+    subgroup's orbit counts — refuse anything else by name instead of writing it into a field that
+    has no `aleph0`.
+    """
+    count = _orbit_count(value)
+    if not isinstance(count, int):
+        raise ValueError(f"the owner states {what} {count}, and the card states a finite count")
+    return count
+
+
+def _primitive_isotropic_plane_row(lattice: Lattices.ParentMethods, row: str) -> dict[str, JsonValue]:
+    r"""One standard subgroup's plane count: its orbits of primitive isotropic **planes**.
+
+    The count is the owner's retained cusp row of rank two, `cusps(2)`, which is the same orbit
+    row read as spans: it keeps a span per orbit and constructs the plane only when a reader asks
+    for its representative. The gathered row, `isotropic_orbit_representatives(2)`, returns one
+    constructed plane per orbit and holds them all — 189720 planes at about 68 KiB each on
+    $T_{\mathrm{Co}}$'s kernel rows, 13.9 GiB that no runner of this size gives (sage-extensions
+    #286) — while the span row answers the same count at about 3.5 GiB. A plane count is not a
+    series: the lattice has signature $(2, n)$, so planes have no coefficient of $z$ or $w$.
+
+    The subgroup is the one `_standard_subgroup` names from `theory/orbits.md`, as for the line
+    count beside it, so the two counts of one row are counts for one group.
+    """
+    subgroup = _standard_subgroup(lattice, row)
+    planes = _finite_count(
+        subgroup.cusps(2).cardinality(),
+        f"the plane count of {row}, a lattice of signature (2, n) whose orbits of primitive isotropic planes are finite,",
+    )
+    return {row: {"planes": planes}}
+
+
+def _index_in_orthogonal_group(group: object) -> int:
+    r"""``[O(L) : Gamma]``, from the owner's finite character image, not by enumerating cosets.
+
+    A subgroup that a card's `standard_name` names is a kernel, or an intersection of kernels,
+    of characters into finite groups: the discriminant reduction $\rho_L\colon O(L)\to O(A_L)$,
+    the determinant, and the real spinor norm. Its cosets are then the cosets of its image in
+    the finite product of those images, so the index is a quotient of two finite group orders
+    that the owner reads from the retained character data without listing an element
+    (`OrthogonalCharacterQuotient.index`). Asking the owner for the coset space itself
+    enumerates one point per coset, which on a large discriminant group is the whole finite
+    image: on 6JRR that is $|O(A_L,q)| = 46998591897600$ cosets of $\widetilde O(T_{\mathrm{Co}})$,
+    and the run that tried it was killed after 5609 s at 14.1 GiB. For a kernel of $\rho_L$
+    the same number is the finite order $|O(A_L,q)|$, and the character image states it at once.
+
+    A subgroup with no complete character condition keeps the owner's coset cardinality. The
+    ambient $O(L)$ itself is such a case, and it is the one place this route does not answer:
+    `L.Aut()` is the isometry Mor, which presents no `index`, so a card whose `standard_name` is
+    `O` fails here and its failure is a separate gap.
+    """
+    characters = getattr(group, "finite_character_quotient", None)
+    if characters is not None and group.character_data_is_complete():
+        return int(characters().index())
+    return int(group.index())
+
+
+def _incidence(group: object) -> object:
+    r"""A subgroup's line/plane building incidence, by the route the owner presents for it.
+
+    The owner presents two routes to one relation: `tits_building_incidence_by_divided_classes`,
+    which decides an edge from the divided class data of its line and refuses *by name* — raising,
+    and naming the other route — where a subgroup cuts no discriminant condition or is not
+    invariant under conjugation, and `tits_building_incidence`, which decides every edge from a
+    flag and two transporters and never refuses. The divided-class route is the affordable one:
+    on $T_{\mathrm{Co}}$'s kernel rows it returned the relation in 6132 s and 7973 s, at about
+    1.65 ms a plane, where the certificate route's records cost 13.68 KiB and 249016 B a plane
+    (sage-extensions#286, image run 44392429173). This is the owner's own `auto`, which takes the
+    class route wherever it applies: a group object that does not present the class route — the
+    ambient $O(L)$ presents the certificate route alone — is asked for the certificate route.
+    """
+    route = getattr(group, "tits_building_incidence_by_divided_classes", None)
+    if route is None:
+        return group.tits_building_incidence()
+    try:
+        return route()
+    except ValueError:
+        return group.tits_building_incidence()
+
+
+def _arithmetic_group_value(group: object, field: str) -> JsonValue:
+    """Serialize one computed field of a subgroup: its index in ``O(L)``, its generators, or an orbit count.
+
+    The index is the order of the finite character image ``chi(O(L))`` over that of ``chi(Gamma)``,
+    the exact coset count and never an enumeration of the cosets. A generator is an isometry of
+    ``L``, serialized in the same framing as the generators of ``O(L)``. The three orbit counts are
+    the subgroup's own counts of primitive isotropic lines, of primitive isotropic planes and of
+    isotropic flags, each read from the instrument that is cheap for its rank: a **line** is one
+    vector and its span, so the gathered `g.isotropic_orbit_representatives(1)` is the cheap row —
+    it is what the lattice card's own line row asks, 122--172 s on these kernel groups — where the
+    span instrument `g.cusps(1)` walks the same 527 orbits far more slowly; a **plane** is a rank-two
+    subobject whose construction and retention is what costs, so the span instrument `g.cusps(2)` is
+    the cheap row there, 1813--2171 s against 13.9 GiB gathered (sage-extensions#286). The flag count
+    is the cardinality of the incidence relation those two rows carry.
+    """
+    match field:
+        case "index_in_orthogonal_group":
+            return _index_in_orthogonal_group(group)
+        case "generator_morphisms":
+            return [_matrix_rows(generator) for generator in group.group_generators()]
+        case "line_orbits":
+            return _finite_count(group.isotropic_orbit_representatives(1).cardinality(), "the number of line orbits of this subgroup,")
+        case "plane_orbits":
+            return _finite_count(group.cusps(2).cardinality(), "the number of plane orbits of this subgroup,")
+        case "flag_orbits":
+            return _finite_count(_incidence(group).cardinality(), "the number of isotropic flag orbits of this subgroup,")
+    raise ValueError(f"{field!r} is not a computed field of an arithmetic group")
 
 
 def _root_span_data(lattice: Lattices.ParentMethods) -> dict[str, JsonValue]:
@@ -130,9 +294,9 @@ def _modular_scale(lattice: Lattices.ParentMethods) -> int | bool:
     return False if scale is None else int(scale)
 
 
-def _rational(value: int | Fraction | _OwnedRingElement) -> int | str:
-    """Serialize a preamble rational number as an integer or a string `p/q`."""
-    number = Fraction(str(value))
+def _rational(value: _OwnedRingElement | LocalizationRings.ElementMethods) -> int | str:
+    """Serialize a preamble rational number, from its numerator and denominator, as an integer or a string `p/q` in lowest terms."""
+    number = Fraction(int(value.numerator()), int(value.denominator()))
     return number.numerator if number.denominator == 1 else f"{number.numerator}/{number.denominator}"
 
 
@@ -196,8 +360,9 @@ VALUES = {
     "spinor_genera": lambda lattice: [int(value) for value in lattice.spinor_genus_class_numbers()],
     "hyperbolic_index": lambda lattice: int(lattice.integral_hyperbolic_index()),
     "discriminant_sequence": lambda lattice: lattice.discriminant_sequence_data(),
-    "primitive_orbits": lambda lattice: lattice.primitive_orbit_series(),
-    "discriminant_orbits": lambda lattice: lattice.discriminant_orbit_series(),
+    "primitive_orbits": lambda lattice: _orbit_series(lattice.primitive_orbit_series()),
+    "discriminant_form": lambda lattice: _discriminant_form(lattice),
+    "discriminant_orbits": lambda lattice: _orbit_series(lattice.discriminant_orbit_series()),
     "reflective": _reflective,
     "modular_scale": _modular_scale,
     "regular": _regular,
@@ -205,6 +370,63 @@ VALUES = {
     "anisotropic_primes": _anisotropic_primes,
     "local_representations": _local_representations,
 }
+
+
+def _discriminant_form(lattice) -> dict[str, JsonValue]:
+    """The order of $O(A_L, q_L)$, the isotropic classes and their orbits, at the owner's form.
+
+    The orbits are the owner's maintained partition of $A_L$; $q_L$ is constant on an orbit, so an
+    orbit whose classes are isotropic is an orbit of isotropic classes.
+    """
+    form = lattice.discriminant_quadratic_form()
+    isotropic = frozenset(form.isotropic_elements())
+    inside = [orbit for orbit in form.orbits() if set(orbit) <= isotropic]
+    return {
+        "orthogonal_group_order": int(form.orthogonal_group().order()),
+        "isotropic_classes": len(isotropic),
+        "isotropic_orbits": len(inside),
+    }
+
+
+def _orbit_count(value: object) -> object:
+    """One count of an orbit series, as a card states it.
+
+    The owner answers the constant term of an orbit series with the cardinality of its set of orbits —
+    a `Cardinalities` element, whose class is that category's `parent_class` — and not with an `int`,
+    which `json` then refuses (#16). The card states an exact count, so the cardinality's own API
+    decides what to write: `finite_value()` is "the ordinary nonnegative integer representing this
+    finite cardinal", and for a cardinal the owner states to be countably infinite the count is
+    `aleph0`, which the schema states. A cardinal beyond `aleph0` has no count this schema states —
+    `is_countably_infinite()` is False and `is_uncountable()` True — and is refused rather than
+    recorded as an `aleph0` the owner never stated.
+    """
+    if value is None or isinstance(value, int):
+        return value
+    if not isinstance(value, Cardinal):
+        raise TypeError(f"an orbit count is a cardinality or an int, not {type(value).__name__}")
+    if value.is_finite():
+        return value.finite_value()
+    if value.is_countably_infinite():
+        return "aleph0"
+    raise ValueError(f"the owner states the count {value} is uncountable; a card states an exact count or aleph0")
+
+
+def _orbit_series(series: dict[str, object]) -> dict[str, object]:
+    """An orbit series the owner returns, every count converted to what a card stores."""
+    converted: dict[str, object] = {}
+    for group, row in series.items():
+        if not isinstance(row, dict):
+            converted[group] = row
+            continue
+        entry = dict(row)
+        if "constant" in entry:
+            entry["constant"] = _orbit_count(entry["constant"])
+        for key in ("z", "w"):
+            values = entry.get(key)
+            if isinstance(values, (list, tuple)):
+                entry[key] = [_orbit_count(value) for value in values]
+        converted[group] = entry
+    return converted
 
 
 def _start(tag: str, fields: list[str]) -> None:
@@ -247,21 +469,50 @@ def _compute(request: Request) -> None:
         if stored.determinant == 0:
             return
         request["integral"] = stored.integral is not None
-        request["fields"] = [field for field in request["fields"] if field != "derive" and applies(field, stored)]
+        # An arithmetic-group field is a value of another card, computed from this Gram tensor, so the
+        # derived hypotheses of this card do not select it.
+        request["fields"] = [field for field in request["fields"] if field != "derive" and (field.startswith(ARITHMETIC_PREFIX) or applies(field, stored))]
     ring = OWNED_ZZ if request["integral"] else OWNED_QQ
     lattice = Lattices(ring)(request["gram"])
     joint = {field: (fields, compute) for fields, compute in JOINT for field in fields}
+    named = {str(group["slug"]): str(group["standard_name"]) for group in request.get("arithmetic_groups", [])}
+    subgroups: dict[str, object] = {}
+
+    def subgroup(slug: str) -> object:
+        """The subgroup's own group, built once per request rather than once per field."""
+        if slug not in subgroups:
+            subgroups[slug] = _standard_subgroup(lattice, named[slug])
+        return subgroups[slug]
+
     done: set[str] = set()
     for field in request["fields"]:
         if field in done:
             continue
+        if field.startswith(ARITHMETIC_PREFIX):
+            # One card's index and its generators are two fields of one group; each is certified alone.
+            slug, short = field[len(ARITHMETIC_PREFIX) :].rsplit(".", 1)
+            done.add(field)
+            _run(tag, [field], lambda: {field: _arithmetic_group_value(subgroup(slug), short)})
+            continue
         if field in joint:
-            # The answer is one computation, so every field of it is stored together.
+            # The answer is one computation, so every field of it that was asked for is
+            # announced until it finishes and stored together. A field of the computation
+            # this request did not ask for is not announced: it would be logged as an
+            # interruption and never stored.
             fields, compute = joint[field]
             done |= fields
-            _run(tag, sorted(fields), lambda: compute(lattice))
+            _run(tag, [asked for asked in sorted(fields) if asked in request["fields"]], lambda: compute(lattice))
             continue
         done.add(field)
+        parts = orbit_row_parts(field)
+        if parts is not None:
+            # One subgroup's row of an orbit series is one computation, and one part of it is
+            # one computation: the eight rows and their plane counts are asked separately, so a
+            # subgroup that does not return costs only the part that did not (#7).
+            _, row, axis = parts
+            compute = _primitive_isotropic_plane_row if axis == "planes" else _primitive_isotropic_line_row
+            _run(tag, [field], lambda row=row, field=field, compute=compute: {field: compute(lattice, row)})
+            continue
         _run(
             tag,
             [field],

@@ -23,6 +23,7 @@ certifications:
   integral.anisotropic_primes: 1bd05adcd1ba7e7b07faf7b36b3a5df918b699fd5a4651f96f0c77eed401a9ac
   integral.local_representations: 2dd7192b3a064140ff20200323b30d0109ba47f8f90b32c194411c82b3eec7c0
   integral.local_densities: 06d0dc2447394438df8dcff1ee7047fe96744a444bed9850ccece7c14b8e8cf2
+  integral.discriminant_sequence: 9c6047c6ac0c21160ded36b46049fab022486083ae46cf506114f366fdad8b47
 rank: 5
 gram_tensor:
 - [1, 0, 0, 0, 0]
@@ -47,6 +48,80 @@ integral:
   level: 8
   modular_scale: 4
   discriminant_group: [2, 2, 2, 4]
+  discriminant_sequence:
+    discriminant_factors: [2, 2, 2, 4]
+    discriminant_basis_lifts:
+    - ['0', 1/2, '0', '0', '0']
+    - ['0', '0', 1/2, '0', '0']
+    - ['0', '0', '0', 1/2, '0']
+    - ['0', '0', '0', '0', 1/4]
+    discriminant_quadratic_gram:
+    - [1/2, '0', '0', '0']
+    - ['0', 1/2, '0', '0']
+    - ['0', '0', 1/2, '0']
+    - ['0', '0', '0', 1/4]
+    discriminant_group_order: 48
+    discriminant_generators:
+    - - [1, 0, 0, 2]
+      - [0, 0, 1, 0]
+      - [0, 1, 0, 2]
+      - [1, 1, 0, 3]
+    - - [0, 0, 1, 2]
+      - [1, 0, 0, 2]
+      - [0, 1, 0, 0]
+      - [1, 0, 1, 3]
+    - - [1, 0, 0, 2]
+      - [0, 1, 0, 2]
+      - [0, 0, 1, 0]
+      - [1, 1, 0, 1]
+    - - [1, 0, 0, 2]
+      - [0, 1, 0, 2]
+      - [0, 0, 1, 0]
+      - [1, 1, 0, 3]
+    image_generators:
+    - - [1, 0, 0, 0]
+      - [0, 1, 0, 0]
+      - [0, 0, 1, 0]
+      - [0, 0, 0, 1]
+    - - [1, 0, 0, 0]
+      - [0, 1, 0, 0]
+      - [0, 0, 1, 0]
+      - [0, 0, 0, 1]
+    - - [1, 0, 0, 0]
+      - [0, 0, 1, 0]
+      - [0, 1, 0, 0]
+      - [0, 0, 0, 1]
+    - - [0, 0, 1, 0]
+      - [0, 1, 0, 0]
+      - [1, 0, 0, 0]
+      - [0, 0, 0, 1]
+    - - [1, 0, 0, 0]
+      - [0, 1, 0, 0]
+      - [0, 0, 1, 0]
+      - [0, 0, 0, 3]
+    image_order: 12
+    kernel_order: 16
+    coset_representatives:
+    - - [1, 0, 0, 0]
+      - [0, 1, 0, 0]
+      - [0, 0, 1, 0]
+      - [0, 0, 0, 1]
+    - - [0, 0, 1, 0]
+      - [0, 1, 0, 2]
+      - [1, 0, 0, 2]
+      - [1, 1, 0, 1]
+    - - [0, 0, 1, 2]
+      - [0, 1, 0, 0]
+      - [1, 0, 0, 2]
+      - [1, 0, 1, 1]
+    - - [0, 0, 1, 2]
+      - [0, 1, 0, 2]
+      - [1, 0, 0, 0]
+      - [0, 1, 1, 1]
+    mm_trivial: false
+    image_normal: false
+    quotient_generator_cosets: null
+    quotient_multiplication: null
   overlattice_count: 11
   bad_reduction_primes: [2]
   genus_symbol: 'I_{5,0} (2: [1^1 2^3 4^1]_5)'

@@ -1,0 +1,64 @@
+# #25: the suite collects every module, in the image
+
+`tests/` imported `dzack_research.preamble.categories.*` and `dzack_research.preamble.rings` in six
+modules, and research's preamble — the shim to sage-extensions, `__init__.py` and `all.py` at main —
+no longer has either package. pytest interrupts the whole run on a collection error, so six modules'
+worth of assertions had never run (run 42823973007, and the reproduction in
+`results/evidence-5-suite-collection.log`).
+
+Each module now imports the owner of what it uses from `sage_extensions`, at the paths the
+owner itself gives them. No assertion, test, or fixture changed; only the module each name is
+imported from:
+
+| file | imports moved |
+| --- | --- |
+| `tests/source_intake/test_hashimoto_source.py` | `categories.lattices.Lattices`, `rings.session_ring_objects` |
+| `tests/source_intake/test_nebe_sloane_source.py` | `categories.lattices.Lattices`, `categories.modules.framed.formed.form_modules.FormModules`, `categories.modules.pure.modules.Modules`, `rings.session_ring_objects` |
+| `tests/test_construction_corpus.py` | `categories.lattices.Lattices`, `rings.session_ring_objects` |
+| `tests/test_hashimoto.py` | `categories.lattices.Lattices`, `rings.session_ring_objects` |
+| `tests/test_owned_boundaries.py` | `categories.abstract_categories.mor_categories.CategoricalMor`, `categories.lattices.Lattices`, `categories.modules.framed.formed.form_modules.FormModules` and `.FormedModuleMor`, `categories.modules.module_morphisms.module_morphisms.ModuleMorphismMethods`, `rings.session_ring_objects` |
+| `tests/validation/test_construction.py` | `categories.lattices.Lattices`, `categories.modules.framed.formed.form_modules.FormModules`, `categories.modules.pure.modules.Modules`, `rings.session_ring_objects` |
+
+`lookup.sage` carried the same import, and `tests/test_lookup.sage` loads it, so it moves too; that
+was the seventh collection error once the six were fixed.
+
+## Collection, under the workflow's own invocation
+
+    $ run.sh -w /repo -b <checkout>:/repo -b ~/research:/repo/research \
+        -b ~/ai-review-ci/tool-artifacts/pytest_plugins:/plugins \
+        /usr/bin/env PYTHONPATH=/plugins:/repo/research/src:/repo/src \
+        /sage/.venv/bin/python -c 'import sage.all, sys, pytest; sys.exit(pytest.main(sys.argv[1:]))' \
+        --collect-only -q -p qc_sage_session -p qc_unique_inventory \
+        --continue-on-collection-errors tests
+    266 tests collected in 0.91s
+
+Before: `244 tests collected, 6 errors in 1.58s` and `!!! Interrupted: 6 errors during collection !!!`
+(`results/evidence-5-suite-collection.log`). After: no error line, and the `--continue-on-collection-errors`
+flag the workflow now carries has nothing to continue past.
+
+## What those modules then do, each run on its own in the image
+
+| module | result |
+| --- | --- |
+| `tests/test_hashimoto.py` | 2 passed |
+| `tests/test_owned_boundaries.py` | 3 passed |
+| `tests/source_intake/test_hashimoto_source.py` | 3 passed |
+| `tests/test_lookup.sage` | 1 passed |
+| `tests/source_intake/test_nebe_sloane_source.py` | 3 passed, 1 failed — `AssertionError: the determinant of the form on Free module on {0,...,85} over Integer Ring needs numerical scalar data …` from `sage_extensions/.../form_modules.py:4138`, on the 86×86 Shimada matrix |
+| `tests/test_construction_corpus.py` | 4 passed, 2 failed — `TensorProductModuleMorphismMethods.__init__() got an unexpected keyword argument 'surjectivity_premise'` |
+| `tests/validation/test_construction.py` | `Killed` (PYEXIT=137) in this 15 GiB VM before it finished |
+
+The three failures and the kill are not collection errors and not the import move: each resolves a
+name to the same sage-extensions object the shim re-exported, and each failure is raised inside
+sage-extensions' own code (`form_modules.py:4138`, the `TensorProductModuleMorphismMethods`
+constructor). They are assertions that had never run, meeting an owner whose API moved —
+`surjectivity_premise` is no longer a constructor argument. `tests/validation/test_construction.py`
+builds preamble objects for the stored cards and was killed for memory here; the verify workflow's
+swap (#26) is the same class of ceiling, and it is this module's problem too.
+
+Neither is repaired here: #25's acceptance is that every module collects, and the owner-side drift is
+a decision about the owner or about those assertions, not about an import.
+
+Note on the run above: `sage-image/run.sh` (proot) reports 0 for a guest killed by a signal, which is
+#22's defect; the per-module runs above echo the guest's own status (`PYEXIT=`) inside the image so a
+kill is visible.

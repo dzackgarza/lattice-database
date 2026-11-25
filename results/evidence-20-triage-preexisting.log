@@ -1,0 +1,34 @@
+13 cards, 26 contradicted fields reported
+
+0021 root_span.norms                                      before=True  now=True  pre-existing
+0021 root_span.roots                                      before=True  now=True  pre-existing
+0023 definite.regular                                     before=True  now=True  pre-existing
+0023 definite.spinor_regular                              before=True  now=True  pre-existing
+0024 hyperbolic.reflective                                before=True  now=True  pre-existing
+0024 root_span.norms                                      before=True  now=True  pre-existing
+0024 root_span.roots                                      before=True  now=True  pre-existing
+0026 hyperbolic.reflective                                before=True  now=True  pre-existing
+0026 root_span.norms                                      before=True  now=True  pre-existing
+0026 root_span.roots                                      before=True  now=True  pre-existing
+0268 hyperbolic.reflective                                before=True  now=True  pre-existing
+0268 root_span.norms                                      before=True  now=True  pre-existing
+0268 root_span.roots                                      before=True  now=True  pre-existing
+02AE definite.regular                                     before=True  now=True  pre-existing
+02AE definite.spinor_regular                              before=True  now=True  pre-existing
+02AF definite.regular                                     before=True  now=True  pre-existing
+02AF definite.spinor_regular                              before=True  now=True  pre-existing
+02AG definite.regular                                     before=True  now=True  pre-existing
+02AG definite.spinor_regular                              before=True  now=True  pre-existing
+02AH definite.regular                                     before=True  now=True  pre-existing
+02AH definite.spinor_regular                              before=True  now=True  pre-existing
+02AN definite.regular                                     before=True  now=True  pre-existing
+02AN definite.spinor_regular                              before=True  now=True  pre-existing
+02BQ definite.regular                                     before=True  now=True  pre-existing
+02BS definite.regular                                     before=True  now=True  pre-existing
+02BT definite.regular                                     before=True  now=True  pre-existing
+
+pre-existing: 26
+recovered: 0
+INDUCED: 0
+neither: 0
+PYEXIT=0

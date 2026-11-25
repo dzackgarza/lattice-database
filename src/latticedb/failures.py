@@ -10,10 +10,15 @@ from typing import Literal
 import yaml
 from pydantic import Field, TypeAdapter
 
-from latticedb import exceeded, storage
+from latticedb import certificates, exceeded, storage
 from latticedb.model import Lattice, Record
 
-FILE = "failures.yaml"
+DIRECTORY = "failures"
+"""The directory of failure shards: one YAML file per group of card tags, as `certificates/` has."""
+
+def group(computation: str) -> str:
+    """The shard of the card a computation belongs to, by the same hash that groups certificates."""
+    return certificates.group(computation.split(" ", 1)[0])
 
 
 class Attempt(Record):
@@ -38,14 +43,55 @@ Failures = dict[str, Failure]
 
 
 def load(root: Path) -> Failures:
-    path = root / FILE
-    if not path.exists():
-        return {}
-    return TypeAdapter(Failures).validate_python(yaml.load(path.read_text(), Loader=yaml.CSafeLoader) or {})
+    """Every shard: each entry is in the shard of its own card's tag, and no entry is in two shards.
+
+    A file holds the computations whose tag groups to its name; an entry found in another shard, or in
+    two shards, is an error and not a value to merge, because the shard a reader writes to must be the
+    shard that holds it.
+    """
+    entries: Failures = {}
+    directory = root / DIRECTORY
+    if not directory.is_dir():
+        return entries
+    for path in sorted(directory.glob("*.yaml")):
+        shard = TypeAdapter(Failures).validate_python(yaml.load(path.read_text(), Loader=yaml.CSafeLoader) or {})
+        for computation in shard:
+            owner = certificates.group(computation.split(" ", 1)[0])
+            if owner != path.stem:
+                raise ValueError(f"{path}: {computation} belongs to the shard {owner}, not {path.stem}")
+            if computation in entries:
+                raise ValueError(f"{path}: {computation} is also in another shard")
+        entries.update(shard)
+    return entries
 
 
 def save(root: Path, entries: Failures) -> None:
-    storage.write_text(root / FILE, yaml.dump({key: value.model_dump() for key, value in sorted(entries.items())}, Dumper=yaml.CSafeDumper, sort_keys=False, allow_unicode=True))
+    """Write each shard, and remove a shard that no longer holds an entry.
+
+    A shard holds the computations whose card tag hashes to its name, so the largest file is one
+    group's share of the ledger rather than the ledger: the whole publishes where a single file reached
+    the size a Git host refuses. Two runs of different cards usually rewrite different shards, but the
+    hash groups tags rather than partitioning them by hand, so two cards can share one shard; the
+    keyed-map merge driver (`.gitattributes`) merges that one file key by key.
+    """
+    directory = root / DIRECTORY
+    directory.mkdir(parents=True, exist_ok=True)
+    shards: dict[str, Failures] = {}
+    for computation, failure in entries.items():
+        shards.setdefault(group(computation), {})[computation] = failure
+    for name, shard in shards.items():
+        storage.write_text(
+            directory / f"{name}.yaml",
+            yaml.dump(
+                {key: value.model_dump() for key, value in sorted(shard.items())},
+                Dumper=yaml.CSafeDumper,
+                sort_keys=False,
+                allow_unicode=True,
+            ),
+        )
+    for path in directory.glob("*.yaml"):
+        if path.stem not in shards:
+            path.unlink()
 
 
 def blocked(entries: Failures, computation: str, lattice: Lattice) -> bool:
@@ -115,6 +161,5 @@ def recover(root: Path, lattices: dict[str, Lattice], interruptions: exceeded.In
         entry = entries.get(computation)
         if entry is not None and entry.attempts[-1].hash == interruption.hash:
             continue
-        reason = "worker or runner lost" if interruption.lost else "certification budget exhausted"
-        entries[computation] = record(root, computation, lattice, f"{reason} (recovered from exceeded.yaml)", "", interruption.seconds)
+        entries[computation] = record(root, computation, lattice, f"{exceeded.reason(interruption)} (recovered from exceeded.yaml)", "", interruption.seconds)
     return entries

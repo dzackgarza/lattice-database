@@ -2,12 +2,161 @@
 tag: 5NJS
 name: Constructed lattice 5NJS
 latex: L_{\mathrm{5NJS}}
+certifications:
+  derive: 031393fed268ff92c52f038c23d6c6f56bdee2b3256edb58e7c150c0881e1721
+  form.integer_valued: 62cff998b15a8b693164547b473d8f39709ab857021606e5c1d0980161e9cfbc
+  integral.elementary_primes: 609bd5b315b4cb3806ffff34677f33df9ebb133b80066cd1dd17f1d574d7f272
+  integral.genus_symbol: 987aeacdf8e76cb4eeefedcdfd80b59a8445958aaa14414fadde2d6805692b10
+  integral.genus_class_count: 2bb47f4ce57a77b45b3d101324e38c781b72489e71299ea212e91dab56dba191
+  integral.overlattice_count: 64ef84da91c78665bf40e002e30d22bfa64dc5f035bae5e5aba78d1552968298
+  integral.spinor_genus_count: fe1750cd48cefca58efd06a923fb0c2911f19d1eab128805d31dc7f415314035
+  integral.spinor_genera: 5cea719a89bc66be9749c03c4982a1449eb23841a4cd786381d5fc1c1d28849c
+  integral.hyperbolic_index: a9ee78511cf3877fba5a29a0cc16e885142c4fe4616999755b7f295060288921
+  automorphisms.automorphism_group_generator_morphisms: 1c10a00b9ec90e78464e5540d3160a84890d5960a7a654efba8c5bc85c60c5b2
+  integral.discriminant_form: dc8a70d23ba0481785375cb9546459ba03bff4b5525953992d971069fc633888
+  automorphisms.automorphism_group_order: df524389d7990ca8122a6ceb820f21db215cc9879cae91d17e4b0b0ae2a81322
+  integral.discriminant_orbits: cd0f1c5843ec8f94c3e400b08b02cff2ff85845de8f508a77270c2947389daee
+  integral.modular_scale: af9d886b0c994b4bc18490086b942614de7c2241af071e18bb839d3868079fc9
+  integral.anisotropic_primes: fe6fb954886cc3124a6397e794a44cd2fd8b1d0866b7ad6a8a60f10f80438e3b
+  integral.local_representations: 7e6c2c05695c5baf874410d6dfdba06bee7e9f77508d72d2b8a96f10fc48e6b1
+  integral.local_densities: c6424dd4195d4a41c4666766df9b02c4dd72859826909351b780e12e4cceed0e
 rank: 4
 gram_tensor:
 - [2, 0, 0, 0]
 - [0, 2, 0, 0]
 - [0, 0, 0, 2]
 - [0, 0, 2, 0]
+signature: [3, 1]
+determinant: -16
+definiteness: indefinite
+dual_gram_tensor:
+- [1/2, 0, 0, 0]
+- [0, 1/2, 0, 0]
+- [0, 0, 0, 1/2]
+- [0, 0, 1/2, 0]
+form:
+  integer_valued: true
+integral:
+  elementary_primes: [2]
+  parity: even
+  level: 4
+  modular_scale: 4
+  discriminant_group: [2, 2, 2, 2]
+  overlattice_count: 11
+  delta: 1
+  bad_reduction_primes: [2]
+  quadratic_character: -4
+  genus_symbol: 'II_{3,1} (2: [2^4]_2)'
+  genus_class_count: 1
+  spinor_genus_count: 1
+  spinor_genera: [1]
+  hyperbolic_index: 0
+  discriminant_form:
+    orthogonal_group_order: 12
+    isotropic_classes: 4
+    isotropic_orbits: 2
+  discriminant_orbits:
+    Otilde:
+      constant: 4
+      z: [0, 7, 0, 5]
+      w: [0, 3, 0, 5]
+    SOtilde:
+      constant: 4
+      z: [0, 7, 0, 5]
+      w: [0, 3, 0, 5]
+    Otilde+:
+      constant: 4
+      z: [0, 7, 0, 5]
+      w: [0, 3, 0, 5]
+    SOtilde+:
+      constant: 4
+      z: [0, 7, 0, 5]
+      w: [0, 3, 0, 5]
+    O:
+      constant: 2
+      z: [0, 2, 0, 3]
+      w: [0, 2, 0, 3]
+    SO:
+      constant: 2
+      z: [0, 2, 0, 3]
+      w: [0, 2, 0, 3]
+    O+:
+      constant: 2
+      z: [0, 2, 0, 3]
+      w: [0, 2, 0, 3]
+    SO+:
+      constant: 2
+      z: [0, 2, 0, 3]
+      w: [0, 2, 0, 3]
+  anisotropic_primes: []
+  local_representations:
+  - prime: 2
+    classes:
+    - representative: 1
+      least_valuation: 2
+    - representative: 3
+      least_valuation: 2
+    - representative: 5
+      least_valuation: 2
+    - representative: 7
+      least_valuation: 2
+    - representative: 2
+      least_valuation: 1
+    - representative: 6
+      least_valuation: 1
+    - representative: 10
+      least_valuation: 1
+    - representative: 14
+      least_valuation: 1
+  local_densities:
+  - prime: 2
+    densities: [0, 3, 0, 5/2, 0, 1, 0, 9/4, 0, 3, 0, 3/2]
+automorphisms:
+  automorphism_group_order: aleph0
+  automorphism_group_generator_morphisms: [O(L) generator 1, O(L) generator 2, O(L) generator 3, O(L) generator 4, O(L) generator 5]
+indefinite:
+  isotropic: true
+morphisms:
+- target: 5NJS
+  name: O(L) generator 1
+  matrix:
+  - [1, 0, 0, 0]
+  - [0, -1, 0, 0]
+  - [0, 0, 1, 0]
+  - [0, 0, 0, 1]
+  scale: 1
+- target: 5NJS
+  name: O(L) generator 2
+  matrix:
+  - [0, -1, 1, 0]
+  - [-1, 0, 1, 0]
+  - [0, 0, 1, 0]
+  - [1, 1, -1, 1]
+  scale: 1
+- target: 5NJS
+  name: O(L) generator 3
+  matrix:
+  - [-3, 0, 2, -2]
+  - [0, 1, 0, 0]
+  - [-2, 0, 2, -1]
+  - [2, 0, -1, 2]
+  scale: 1
+- target: 5NJS
+  name: O(L) generator 4
+  matrix:
+  - [0, -1, 0, 0]
+  - [-1, 0, 0, 0]
+  - [0, 0, 1, 0]
+  - [0, 0, 0, 1]
+  scale: 1
+- target: 5NJS
+  name: O(L) generator 5
+  matrix:
+  - [-1, 0, 0, 0]
+  - [0, -1, 0, 0]
+  - [0, 0, -1, 0]
+  - [0, 0, 0, -1]
+  scale: 1
 related:
 - tag: '0002'
   relation: This presentation is obtained by orthogonal sum of 0002, 0002, 0013.

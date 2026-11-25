@@ -1,0 +1,12 @@
+/sage/.venv/lib/python3.14/site-packages/pytest_asyncio/plugin.py:306: PytestDeprecationWarning: The configuration option "asyncio_default_fixture_loop_scope" is unset.
+The event loop scope for asynchronous fixtures will default to the fixture scope. Future versions of pytest-asyncio will default the loop scope for asynchronous fixtures to "function" scope. Set the default fixture loop scope explicitly in order to avoid unexpected behavior in the future. Valid fixture loop scopes are: "function", "class", "module", "package", "session". Set it to "fixture-scope" to keep the current behavior.
+
+  warnings.warn(PytestDeprecationWarning(_DEFAULT_FIXTURE_LOOP_SCOPE_UNSET))
+...                                                                      [100%]
+============================= slowest 10 durations =============================
+2.42s call     tests/source_intake/test_hoehn_mason_source.py::test_row_81_source_generators_are_the_seeded_self_isometries
+0.83s call     tests/source_intake/test_hoehn_mason_source.py::test_row_81_source_inclusion_is_the_seeded_leech_embedding
+0.01s call     tests/source_intake/test_hoehn_mason_source.py::test_row_81_entry_is_read_from_the_stored_ancillary_file
+
+(6 durations < 0.005s hidden.  Use -vv to show these durations.)
+3 passed in 3.74s

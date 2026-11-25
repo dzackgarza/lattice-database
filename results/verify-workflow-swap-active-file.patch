@@ -1,0 +1,37 @@
+diff --git a/.github/workflows/verify.yml b/.github/workflows/verify.yml
+index 91c8967e21..7b85ae98a2 100644
+--- a/.github/workflows/verify.yml
++++ b/.github/workflows/verify.yml
+@@ -18,7 +18,9 @@ env:
+   # 7.5 GiB of validated cards and 1.9 GiB of certificates before the mathematics, on a runner whose
+   # memory the image and its Julia bridge also use. That is where the scheduled runs died (exit 137,
+   # #6), so every shard job states the ceiling it is given here and reports the peak it needed.
+-  SWAP_GIB: 16
++  # Eight gibibytes, not sixteen: a hosted runner has about fourteen gigabytes of free disk, and its
++  # own swap file already occupies part of that (#26).
++  SWAP_GIB: 8
+ jobs:
+   plan:
+     # Sixteen jobs, one per shard, so one shard of the corpus is one job's memory: a shard killed
+@@ -78,11 +80,18 @@ jobs:
+     steps:
+       - name: Check out (actions/checkout v4)
+         uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+-      - name: State the memory ceiling and give this shard its swap
++      - name: Give this shard its swap and state its memory ceiling
+         run: |
+-          sudo fallocate -l "${SWAP_GIB}G" /swapfile || sudo dd if=/dev/zero of=/swapfile bs=1M count=$((SWAP_GIB * 1024))
++          # A hosted runner already has an *active* /swapfile, and writing that path while it is in
++          # use fails with "Text file busy" (#26). Turn the runner's own swap off, then allocate,
++          # enable and state this job's ceiling. Every command here must succeed: a runner that will
++          # not give the swap fails the job rather than running the verification under a ceiling the
++          # workflow did not state.
++          free -h
++          sudo swapoff -a
++          sudo fallocate -l "${SWAP_GIB}G" /swapfile
+           sudo chmod 600 /swapfile
+-          sudo mkswap -q /swapfile
++          sudo mkswap /swapfile
+           sudo swapon /swapfile
+           echo "memory ceiling: ${SWAP_GIB} GiB swap on top of the runner's RAM"
+           free -h

@@ -39,3 +39,4 @@ def merge_files(base: Path, ours: Path, theirs: Path) -> None:
     """Write the merge of `base`, `ours` and `theirs` to `ours`, as Git's merge driver protocol requires."""
     merged = merge(_load(base), _load(ours), _load(theirs))
     ours.write_text(yaml.dump(merged, Dumper=yaml.CSafeDumper, sort_keys=False, allow_unicode=True))
+

@@ -9,15 +9,14 @@ of the returned typed embeddings, and writes new morphism records.
 from pathlib import Path
 
 import frontmatter
-from dzack_research.preamble.categories.lattices import Lattices
-from dzack_research.preamble.rings import session_ring_objects
+from sage_extensions.categories.lattices import Lattices
+from sage_extensions.rings import ZZ
 from pydantic import TypeAdapter
 
 from latticedb import corpus, records
 from latticedb.corpus import Corpus
 from latticedb.model import Tag, Yaml
 
-ZZ = session_ring_objects()["ZZ"]
 
 
 def store(root: Path, loaded: Corpus) -> list[str]:

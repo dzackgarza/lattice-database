@@ -1,0 +1,31 @@
+---
+slug: otilde-plus-t-co
+name: Otilde+(T_Co)
+latex: \widetilde O^{+}(T_{\mathrm{Co}})
+lattice: 6JRR
+ambient_lie_group: o-2-9
+standard_name: Otilde+
+parent_group: otilde-t-co
+data:
+  abstract_structure: Otilde(T_Co) intersect O+(T_Co)
+  cardinality: aleph0
+  index_in_orthogonal_group: 93997183795200
+  generator_morphisms: [Otilde(T_Co) generator 1, Otilde(T_Co) generator 2, Otilde(T_Co) generator 3, Otilde(T_Co) generator 5, Otilde(T_Co) generator 6, Otilde(T_Co) generator 7, Otilde(T_Co) generator 8, Otilde(T_Co) generator 9, Otilde(T_Co) generator 10, Otilde(T_Co) generator 11, Otilde(T_Co) generator 12, Otilde(T_Co) generator 13, Otilde(T_Co) generator 14, Otilde(T_Co) generator 15, Otilde(T_Co) generator 16, Otilde(T_Co) generator 17, Otilde(T_Co) generator 18, Otilde(T_Co) generator 19, Otilde(T_Co) generator 20, Otilde(T_Co) generator 21, Otilde(T_Co) generator 22, Otilde(T_Co) generator 23, Otilde(T_Co) generator 24, Otilde(T_Co) generator 25, Otilde(T_Co) generator 26, Otilde+(T_Co) generator 26, Otilde(T_Co) generator 28, Otilde(T_Co) generator 29, Otilde(T_Co) generator 30, Otilde(T_Co) generator 31, Otilde(T_Co) generator 32, Otilde(T_Co) generator 33, Otilde(T_Co) generator 34, Otilde(T_Co) generator 35, Otilde(T_Co) generator 36, Otilde(T_Co) generator 37, Otilde(T_Co) generator 38, Otilde(T_Co) generator 39, Otilde(T_Co) generator 40, Otilde(T_Co) generator 41, Otilde(T_Co) generator 42, Otilde(T_Co) generator 43, Otilde(T_Co) generator 44, Otilde(T_Co) generator 45, Otilde(T_Co) generator 46, Otilde(T_Co) generator 47, Otilde(T_Co) generator 48, Otilde(T_Co) generator 49, Otilde(T_Co) generator 50, Otilde(T_Co) generator 51, Otilde(T_Co) generator 52, Otilde(T_Co) generator 53, Otilde(T_Co) generator 54, Otilde(T_Co) generator 55, Otilde(T_Co) generator 56, Otilde+(T_Co) generator 56, Otilde+(T_Co) generator 57, Otilde+(T_Co) generator 58, Otilde+(T_Co) generator 59, Otilde+(T_Co) generator 60, Otilde+(T_Co) generator 61, Otilde+(T_Co) generator 62, Otilde+(T_Co) generator 63, Otilde+(T_Co) generator 64, Otilde+(T_Co) generator 65, Otilde+(T_Co) generator 66, Otilde+(T_Co) generator 67, Otilde+(T_Co) generator 68, Otilde+(T_Co) generator 69, Otilde+(T_Co) generator 70, Otilde+(T_Co) generator 71, Otilde+(T_Co) generator 72, Otilde+(T_Co) generator 73, Otilde+(T_Co) generator 74, Otilde+(T_Co) generator 75, Otilde+(T_Co) generator 76, Otilde+(T_Co) generator 77, Otilde+(T_Co) generator 78, Otilde+(T_Co) generator 79, Otilde+(T_Co) generator 80, Otilde+(T_Co) generator 81, Otilde+(T_Co) generator 82, Otilde+(T_Co) generator 83, Otilde+(T_Co) generator 84, Otilde+(T_Co) generator 85, Otilde+(T_Co) generator 86, Otilde+(T_Co) generator 87, Otilde+(T_Co) generator 88, Otilde+(T_Co) generator 89, Otilde+(T_Co) generator 90, Otilde+(T_Co) generator 91, Otilde+(T_Co) generator 92, Otilde+(T_Co) generator 93, Otilde+(T_Co) generator 94, Otilde+(T_Co) generator 95]
+  line_orbits: 527
+  plane_orbits: 189720
+  flag_orbits: 569160
+  reference:
+    citation: 'sage-extensions `main` 47865446a7c37c85d873f91ac9d74cea472e208c, `results/issue286-the-stage-1-call.md`:373: 569160 edges over 527 line cusps and 189720 plane cusps for `Otilde+(T_Co) = ker(rho, sn_RR)`. The citation covers the three orbit counts only; the index and the generators are computations about the card of 6JRR''s Gram tensor and are certified there.'
+---
+
+$\widetilde O^{+}(T_{\mathrm{Co}}) = \widetilde O(T_{\mathrm{Co}}) \cap O^{+}(T_{\mathrm{Co}})$, the subgroup of the discriminant kernel that also lies in the kernel of the real spinor norm (`theory/orbits.md`); the determinant-one subgroup is $SO(T_{\mathrm{Co}})$, which is a different subgroup, and the two are not interchanged here.
+It is countably infinite and of finite index in $O(T_{\mathrm{Co}})$; the computation returned $93997183795200 = 2\,|O(A_{T_{\mathrm{Co}}}, q)|$, so its index in $\widetilde O(T_{\mathrm{Co}})$ is $2$: the real spinor norm is nontrivial on the discriminant kernel, and the finite character image $(\varphi, \mathrm{sn}_{\mathbb{R}})$ is all of $O(A_L) \times \{\pm 1\}$.
+
+`latticedb certify` asks the preamble for its index in $O(T_{\mathrm{Co}})$ and for the isometries of $T_{\mathrm{Co}}$ that generate it, at `L.stable_orthogonal_group().intersection(L.O_plus())`, and stores them as `data.index_in_orthogonal_group` and `data.generator_morphisms`, the generators as scale-$1$ `morphisms` entries of the card of [6JRR](../tag/6JRR.html).
+The two values are certified on that card under `arithmetic-group.otilde-plus-t-co.index_in_orthogonal_group` and `arithmetic-group.otilde-plus-t-co.generator_morphisms`.
+The **95 ordinary integral generators** of this index-two subgroup are stored as named self-isometries of [6JRR](../tag/6JRR.html), listed in `data.generator_morphisms`. They arise by exact Reidemeister--Schreier rewriting of the 56 proved generators of the full discriminant kernel using the real-spinor sign character. The source-hashed matrix certificate is `research/computations/reports/coble_kernel_positive_schreier_generators.json` (research theorem `thm:coble-positive-kernel-ninety-five-generators`, commit `d77e0deae2`); all 95 were independently accepted by the public positive discriminant-kernel predicate. The index and generator values are certified separately on the lattice card.
+
+That this subgroup is the group $\Gamma_{\mathrm{Co}}$ acting on the Coble period domain is **conjectural**.
+Dolgachev–Kondo, Proposition 3.2, p. 513, identifies the moduli space of Coble surfaces with an open subset of $\mathcal{D}(N)/O(N)$ and does not name the subgroup of $O(N)$ that acts; the identification $\Gamma_{\mathrm{Co}} = \widetilde O^{+}(T_{\mathrm{Co}})$ belongs to the family group of the research project, not to this database, and no count on the card of 6JRR rests on it.
+
+Its three orbit counts are cited, not computed: the record `results/issue286-the-stage-1-call.md` at `47865446a7c37c85d873f91ac9d74cea472e208c`:373 gives this subgroup 527 line cusps, 189720 plane cusps and 569160 incidence edges, and `data.reference` names it. `latticedb certify` can compute the counts for a standard subgroup; the record is what states them here, and a computed value that disagreed with it would be a defect on the record rather than a replacement for it.

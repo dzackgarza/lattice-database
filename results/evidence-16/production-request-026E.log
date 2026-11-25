@@ -1,0 +1,50 @@
+Traceback (most recent call last):
+  File "<frozen runpy>", line 203, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "/repo/src/latticedb/sage_genus.py", line 349, in <module>
+    main()
+    ~~~~^^
+  File "/repo/src/latticedb/sage_genus.py", line 344, in main
+    _compute(request)
+    ~~~~~~~~^^^^^^^^^
+  File "/repo/src/latticedb/sage_genus.py", line 329, in _compute
+    _run(
+    ~~~~^
+        tag,
+        ^^^^
+        [field],
+        ^^^^^^^^
+        lambda: {field: SERIES[field](lattice, request["series_bound"]) if field in SERIES else VALUES[field](lattice)},
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/repo/src/latticedb/sage_genus.py", line 288, in _run
+    values = compute()
+  File "/repo/src/latticedb/sage_genus.py", line 332, in <lambda>
+    lambda: {field: SERIES[field](lattice, request["series_bound"]) if field in SERIES else VALUES[field](lattice)},
+                                                                                            ~~~~~~~~~~~~~^^^^^^^^^
+  File "/repo/src/latticedb/sage_genus.py", line 207, in <lambda>
+    "primitive_orbits": lambda lattice: _orbit_series(lattice.primitive_orbit_series()),
+                                                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "/repos/sage-extensions/src/sage_extensions/categories/lattices.py", line 3305, in primitive_orbit_series
+    return primitive_orbit_series(self, bound=bound)
+  File "/repos/sage-extensions/src/sage_extensions/categories/lattice_orbit_invariants.py", line 136, in primitive_orbit_series
+    raise ValueError(f"primitive bounded orbit series requires a definite lattice, not {lattice}")
+ValueError: primitive bounded orbit series requires a definite lattice, not Integral lattice of rank 7 and signature (1, 6)
+Traceback (most recent call last):
+  File "/sage/.venv/bin/latticedb", line 10, in <module>
+    sys.exit(main())
+             ~~~~^^
+  File "/repo/src/latticedb/cli.py", line 519, in main
+    app()
+    ~~~^^
+  File "/sage/.venv/lib/python3.14/site-packages/cyclopts/core.py", line 2233, in __call__
+    result = _run_maybe_async_command(command, bound, resolved_backend)
+  File "/sage/.venv/lib/python3.14/site-packages/cyclopts/_run.py", line 44, in _run_maybe_async_command
+    return command(*bound.args, **bound.kwargs)
+  File "/repo/src/latticedb/cli.py", line 480, in certify
+    genus.certify(root, loaded, held, tag, deadline, workers, (index, count), searches)
+    ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/repo/src/latticedb/genus.py", line 782, in certify
+    raise ChildProcessError(f"{SAGE_MODULE} failed on " + ", ".join(worker_failures))
+ChildProcessError: /repo/src/latticedb/sage_genus.py failed on 026E (exit status 1)

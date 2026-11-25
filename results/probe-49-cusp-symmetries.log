@@ -1,0 +1,34 @@
+== (4.3.6) cusp [0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0]: 10 walls, K_J rank 10, det -256
+  symmetry identity: linear True, an isometry of K_J True
+  realized symmetries: 1; root walls: ['\\alpha_10']
+  root-wall orbit ['\\alpha_10']: induced permutation group of order 1
+== (4.3.7) cusp [0, 0, 1, 1, -2, -3, -4, -6, -5, -4, -3, -2]: 12 walls, K_J rank 10, det -256
+  symmetry identity: linear True, an isometry of K_J True
+  symmetry {'\\alpha_1': '\\alpha_6', '\\alpha_3': '\\alpha_5', '\\alpha_5': '\\alpha_3', '\\alpha_6': '\\alpha_1', '\\alpha_7': '\\alpha_12', '\\alpha_9': '\\alpha_13', '\\alpha_10': '\\alpha_11', '\\alpha_11': '\\alpha_10', '\\alpha_12': '\\alpha_7', '\\alpha_13': '\\alpha_9'}: linear True, an isometry of K_J True
+  realized symmetries: 2; root walls: ['\\alpha_9', '\\alpha_13']
+  root-wall orbit ['\\alpha_9', '\\alpha_13']: induced permutation group of order 2
+== (4.3.8) cusp [0, 0, 2, 1, -4, -5, -7, -10, -8, -6, -4, -2]: 11 walls, K_J rank 10, det -256
+  symmetry identity: linear True, an isometry of K_J True
+  symmetry {'\\alpha_2': '\\alpha_10', '\\alpha_3': '\\alpha_12', '\\alpha_4': '\\alpha_8', '\\alpha_5': '\\alpha_7', '\\alpha_7': '\\alpha_5', '\\alpha_8': '\\alpha_4', '\\alpha_9': '\\alpha_11', '\\alpha_10': '\\alpha_2', '\\alpha_11': '\\alpha_9', '\\alpha_12': '\\alpha_3'}: linear True, an isometry of K_J True
+  realized symmetries: 2; root walls: ['\\alpha_9', '\\alpha_11']
+  root-wall orbit ['\\alpha_9', '\\alpha_11']: induced permutation group of order 2
+== (4.3.9) cusp [2, 2, 0, 0, -4, -5, -7, -10, -8, -6, -4, -2]: 14 walls, K_J rank 10, det -256
+  symmetry identity: linear True, an isometry of K_J True
+  symmetry {'\\alpha_2': '\\alpha_5', '\\alpha_5': '\\alpha_2', '\\alpha_6': '\\alpha_10', '\\alpha_7': '\\overline{\\widetilde\\alpha}_8', '\\overline{\\widetilde\\alpha}_8': '\\alpha_7', '\\alpha_10': '\\alpha_6', '\\alpha_11': '\\alpha_12', '\\alpha_12': '\\alpha_11'}: linear True, an isometry of K_J True
+  symmetry {'\\alpha_2': '\\alpha_7', '\\alpha_4': '\\alpha_8', '\\alpha_5': '\\overline{\\widetilde\\alpha}_8', '\\alpha_6': '\\alpha_10', '\\alpha_7': '\\alpha_2', '\\alpha_8': '\\alpha_4', '\\overline{\\widetilde\\alpha}_8': '\\alpha_5', '\\alpha_10': '\\alpha_6', '\\alpha_11': '\\alpha_12', '\\alpha_12': '\\alpha_11', '\\alpha_13': '\\alpha_14', '\\alpha_14': '\\alpha_13'}: linear True, an isometry of K_J True
+  symmetry {'\\alpha_2': '\\overline{\\widetilde\\alpha}_8', '\\alpha_4': '\\alpha_8', '\\alpha_5': '\\alpha_7', '\\alpha_7': '\\alpha_5', '\\alpha_8': '\\alpha_4', '\\overline{\\widetilde\\alpha}_8': '\\alpha_2', '\\alpha_13': '\\alpha_14', '\\alpha_14': '\\alpha_13'}: linear True, an isometry of K_J True
+  symmetry {'\\widetilde\\alpha_1': '\\alpha_9', '\\alpha_4': '\\alpha_10', '\\alpha_5': '\\overline{\\widetilde\\alpha}_8', '\\alpha_6': '\\alpha_8', '\\alpha_8': '\\alpha_6', '\\overline{\\widetilde\\alpha}_8': '\\alpha_5', '\\alpha_9': '\\widetilde\\alpha_1', '\\alpha_10': '\\alpha_4', '\\alpha_11': '\\alpha_14', '\\alpha_12': '\\alpha_13', '\\alpha_13': '\\alpha_12', '\\alpha_14': '\\alpha_11'}: linear True, an isometry of K_J True
+  symmetry {'\\widetilde\\alpha_1': '\\alpha_9', '\\alpha_2': '\\alpha_5', '\\alpha_4': '\\alpha_6', '\\alpha_5': '\\alpha_7', '\\alpha_6': '\\alpha_8', '\\alpha_7': '\\overline{\\widetilde\\alpha}_8', '\\alpha_8': '\\alpha_10', '\\overline{\\widetilde\\alpha}_8': '\\alpha_2', '\\alpha_9': '\\widetilde\\alpha_1', '\\alpha_10': '\\alpha_4', '\\alpha_11': '\\alpha_14', '\\alpha_12': '\\alpha_13', '\\alpha_13': '\\alpha_11', '\\alpha_14': '\\alpha_12'}: linear True, an isometry of K_J True
+  symmetry {'\\widetilde\\alpha_1': '\\alpha_9', '\\alpha_2': '\\alpha_7', '\\alpha_4': '\\alpha_6', '\\alpha_6': '\\alpha_4', '\\alpha_7': '\\alpha_2', '\\alpha_8': '\\alpha_10', '\\alpha_9': '\\widetilde\\alpha_1', '\\alpha_10': '\\alpha_8', '\\alpha_11': '\\alpha_13', '\\alpha_12': '\\alpha_14', '\\alpha_13': '\\alpha_11', '\\alpha_14': '\\alpha_12'}: linear True, an isometry of K_J True
+  symmetry {'\\widetilde\\alpha_1': '\\alpha_9', '\\alpha_2': '\\overline{\\widetilde\\alpha}_8', '\\alpha_4': '\\alpha_10', '\\alpha_5': '\\alpha_2', '\\alpha_6': '\\alpha_4', '\\alpha_7': '\\alpha_5', '\\alpha_8': '\\alpha_6', '\\overline{\\widetilde\\alpha}_8': '\\alpha_7', '\\alpha_9': '\\widetilde\\alpha_1', '\\alpha_10': '\\alpha_8', '\\alpha_11': '\\alpha_13', '\\alpha_12': '\\alpha_14', '\\alpha_13': '\\alpha_12', '\\alpha_14': '\\alpha_11'}: linear True, an isometry of K_J True
+  realized symmetries: 8; root walls: ['\\alpha_11', '\\alpha_12', '\\alpha_13', '\\alpha_14']
+  root-wall orbit ['\\alpha_11', '\\alpha_12', '\\alpha_13', '\\alpha_14']: induced permutation group of order 8
+== part (b): the Coble cusp, delta = -alpha_11
+  edges at alpha_11: {'\\alpha_9': 4, '\\alpha_10': 4}
+  realized symmetries fixing alpha_11: ['identity', {'\\alpha_2': '\\overline{\\widetilde\\alpha}_8', '\\alpha_4': '\\alpha_8', '\\alpha_5': '\\alpha_7', '\\alpha_7': '\\alpha_5', '\\alpha_8': '\\alpha_4', '\\overline{\\widetilde\\alpha}_8': '\\alpha_2', '\\alpha_13': '\\alpha_14', '\\alpha_14': '\\alpha_13'}]
+  W_perp chamber walls and squares: [('\\widetilde\\alpha_1', -4), ('\\alpha_2', -4), ('\\alpha_4', -4), ('\\alpha_5', -4), ('\\alpha_6', -4), ('\\alpha_7', -4), ('\\alpha_8', -4), ('\\overline{\\widetilde\\alpha}_8', -4), ('beta(\\alpha_9)', -2), ('beta(\\alpha_10)', -2), ('\\alpha_12', -2), ('\\alpha_13', -2), ('\\alpha_14', -2)]
+  off-diagonal pairings all >= 0 (a Coxeter chamber in this sign convention): True
+  W_perp diagram edges: [('\\widetilde\\alpha_1', 'beta(\\alpha_9)', 'inf'), ('\\widetilde\\alpha_1', '\\alpha_13', 4), ('\\widetilde\\alpha_1', '\\alpha_14', 4), ('\\alpha_2', '\\alpha_4', 3), ('\\alpha_2', 'beta(\\alpha_10)', 4), ('\\alpha_4', '\\alpha_5', 3), ('\\alpha_4', '\\alpha_14', 4), ('\\alpha_5', '\\alpha_6', 3), ('\\alpha_6', '\\alpha_7', 3), ('\\alpha_6', '\\alpha_12', 4), ('\\alpha_7', '\\alpha_8', 3), ('\\alpha_8', '\\overline{\\widetilde\\alpha}_8', 3), ('\\alpha_8', '\\alpha_13', 4), ('\\overline{\\widetilde\\alpha}_8', 'beta(\\alpha_10)', 4), ('beta(\\alpha_9)', 'beta(\\alpha_10)', 'inf'), ('beta(\\alpha_9)', '\\alpha_12', 'inf')]
+  W_perp-classes of root walls (odd paths): [['beta(\\alpha_9)'], ['beta(\\alpha_10)'], ['\\alpha_12'], ['\\alpha_13'], ['\\alpha_14']]
+  orbits of the root classes under (s_11 x W_perp) x <symmetries fixing alpha_11>: [[['beta(\\alpha_9)']], [['beta(\\alpha_10)']], [['\\alpha_12']], [['\\alpha_13'], ['\\alpha_14']]]
+  count: 4

@@ -21,6 +21,7 @@ certifications:
   integral.anisotropic_primes: 16d0be55bec09eaabae0786055a1156dcd148196c1367128c38e9a662e5d0c10
   integral.local_representations: a5b9dc4b7b2e5448ba9751eb8e202862cde48d5d01bae58d7ce696c00d4164d8
   integral.local_densities: 3ba6888cdbd075d6f1bb19a5fde2dc46d79591d950c14d9007a347e0b8a4d616
+  integral.discriminant_sequence: 68eb7bb50b5c0063876d840a8810eff25340e643ac97e8abe48c72b9d537608a
 rank: 2
 gram_tensor:
 - [17, 7]
@@ -39,6 +40,60 @@ integral:
   level: 7280
   modular_scale: 3640
   discriminant_group: [3640]
+  discriminant_sequence:
+    discriminant_factors: [3640]
+    discriminant_basis_lifts:
+    - [-153/520, 1/3640]
+    discriminant_quadratic_gram:
+    - [1713/3640]
+    discriminant_group_order: 32
+    discriminant_generators:
+    - - [209]
+    - - [1611]
+    - - [1091]
+    - - [909]
+    - - [3639]
+    image_generators:
+    - - [3639]
+    image_order: 2
+    kernel_order: 1
+    coset_representatives:
+    - - [1]
+    - - [181]
+    - - [209]
+    - - [391]
+    - - [519]
+    - - [701]
+    - - [729]
+    - - [909]
+    - - [911]
+    - - [1091]
+    - - [1119]
+    - - [1301]
+    - - [1429]
+    - - [1611]
+    - - [1639]
+    - - [1819]
+    mm_trivial: false
+    image_normal: true
+    quotient_generator_cosets: [2, 13, 9, 7, 0]
+    quotient_multiplication:
+    - [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15]
+    - [1, 0, 12, 13, 5, 4, 7, 6, 9, 8, 11, 10, 2, 3, 15, 14]
+    - [2, 12, 0, 14, 6, 7, 4, 5, 10, 11, 8, 9, 1, 15, 3, 13]
+    - [3, 13, 14, 0, 8, 9, 10, 11, 4, 5, 6, 7, 15, 1, 2, 12]
+    - [4, 5, 6, 8, 0, 1, 2, 12, 3, 13, 14, 15, 7, 9, 10, 11]
+    - [5, 4, 7, 9, 1, 0, 12, 2, 13, 3, 15, 14, 6, 8, 11, 10]
+    - [6, 7, 4, 10, 2, 12, 0, 1, 14, 15, 3, 13, 5, 11, 8, 9]
+    - [7, 6, 5, 11, 12, 2, 1, 0, 15, 14, 13, 3, 4, 10, 9, 8]
+    - [8, 9, 10, 4, 3, 13, 14, 15, 0, 1, 2, 12, 11, 5, 6, 7]
+    - [9, 8, 11, 5, 13, 3, 15, 14, 1, 0, 12, 2, 10, 4, 7, 6]
+    - [10, 11, 8, 6, 14, 15, 3, 13, 2, 12, 0, 1, 9, 7, 4, 5]
+    - [11, 10, 9, 7, 15, 14, 13, 3, 12, 2, 1, 0, 8, 6, 5, 4]
+    - [12, 2, 1, 15, 7, 6, 5, 4, 11, 10, 9, 8, 0, 14, 13, 3]
+    - [13, 3, 15, 1, 9, 8, 11, 10, 5, 4, 7, 6, 14, 0, 12, 2]
+    - [14, 15, 3, 2, 10, 11, 8, 9, 6, 7, 4, 5, 13, 12, 0, 1]
+    - [15, 14, 13, 12, 11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1, 0]
   overlattice_count: 2
   bad_reduction_primes: [2, 5, 7, 13]
   quadratic_character: -3640

@@ -23,6 +23,7 @@ certifications:
   integral.anisotropic_primes: a52fd66f9491c3ffa113eb525dd7fb9a2662b1343f208bf4364c3517114667b8
   integral.local_representations: 0ea51c85f71293ba19d38bfc6bbdd183e8b4ab1423cea71548319468f062f2b3
   integral.local_densities: c4e9727568bd206cb1cc026aa12d1757593d7a084ab217319ad6ab9c449d72cd
+  integral.discriminant_sequence: ccd56cdf72dc9c4b03f6dd7e18b2e0f9c1cb77d32f8b6336523275c3fd24dd8b
 rank: 4
 gram_tensor:
 - [1, 0, 0, 0]
@@ -45,6 +46,71 @@ integral:
   level: 8
   modular_scale: false
   discriminant_group: [4, 4, 4]
+  discriminant_sequence:
+    discriminant_factors: [4, 4, 4]
+    discriminant_basis_lifts:
+    - ['0', 1/4, '0', '0']
+    - ['0', '0', 1/4, '0']
+    - ['0', '0', '0', 1/4]
+    discriminant_quadratic_gram:
+    - [1/4, '0', '0']
+    - ['0', 1/4, '0']
+    - ['0', '0', 1/4]
+    discriminant_group_order: 384
+    discriminant_generators:
+    - - [1, 0, 0]
+      - [0, 0, 1]
+      - [0, 1, 0]
+    - - [2, 1, 0]
+      - [2, 0, 3]
+      - [1, 2, 2]
+    - - [3, 2, 2]
+      - [2, 1, 2]
+      - [2, 2, 1]
+    image_generators:
+    - - [1, 0, 0]
+      - [0, 1, 0]
+      - [0, 0, 1]
+    - - [1, 0, 0]
+      - [0, 1, 0]
+      - [0, 0, 3]
+    - - [1, 0, 0]
+      - [0, 0, 1]
+      - [0, 1, 0]
+    - - [0, 0, 1]
+      - [0, 1, 0]
+      - [1, 0, 0]
+    image_order: 48
+    kernel_order: 2
+    coset_representatives:
+    - - [1, 0, 0]
+      - [0, 1, 0]
+      - [0, 0, 1]
+    - - [0, 0, 1]
+      - [1, 2, 0]
+      - [2, 1, 0]
+    - - [0, 1, 2]
+      - [0, 2, 1]
+      - [1, 0, 0]
+    - - [0, 1, 2]
+      - [1, 0, 0]
+      - [0, 2, 1]
+    - - [0, 1, 2]
+      - [1, 0, 2]
+      - [2, 2, 1]
+    - - [0, 1, 2]
+      - [2, 2, 1]
+      - [1, 0, 2]
+    - - [1, 2, 2]
+      - [2, 0, 1]
+      - [2, 1, 0]
+    - - [1, 2, 2]
+      - [2, 1, 2]
+      - [2, 2, 1]
+    mm_trivial: false
+    image_normal: false
+    quotient_generator_cosets: null
+    quotient_multiplication: null
   overlattice_count: 16
   bad_reduction_primes: [2]
   quadratic_character: 1

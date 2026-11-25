@@ -23,6 +23,7 @@ certifications:
   integral.anisotropic_primes: 64a713870e9e9d8c8cda348030e09ba496a4918137e85082cec5f78df3e7419c
   integral.local_representations: 8b0a8dbc0731154e97f64db269c9a9a38e7346023f0c3e589915a7b939a631b5
   integral.local_densities: c8d15b2e0e9a2b766133cfded44b89871cd5913cf9c533f1d42ceb9b0d7a7b83
+  integral.discriminant_sequence: a412d72922d05a81df6e96ed45f11dbb7d23399fad9194a658138112866ecb8d
 rank: 4
 gram_tensor:
 - [1, 0, 0, 0]
@@ -45,6 +46,74 @@ integral:
   level: 32
   modular_scale: false
   discriminant_group: [2, 2, 16]
+  discriminant_sequence:
+    discriminant_factors: [2, 2, 16]
+    discriminant_basis_lifts:
+    - ['0', 1/2, '0', '0']
+    - ['0', '0', 1/2, '0']
+    - ['0', '0', -3/16, 1/16]
+    discriminant_quadratic_gram:
+    - [1/2, '0', '0']
+    - ['0', 1/2, 1/2]
+    - ['0', 1/2, 3/16]
+    discriminant_group_order: 32
+    discriminant_generators:
+    - - [0, 1, 0]
+      - [1, 0, 8]
+      - [0, 1, 13]
+    - - [1, 0, 8]
+      - [0, 1, 0]
+      - [1, 0, 13]
+    - - [1, 0, 8]
+      - [0, 1, 8]
+      - [1, 1, 7]
+    - - [1, 0, 8]
+      - [0, 1, 8]
+      - [1, 1, 15]
+    image_generators:
+    - - [1, 0, 0]
+      - [0, 1, 0]
+      - [0, 0, 1]
+    - - [1, 0, 0]
+      - [0, 1, 0]
+      - [0, 0, 1]
+    - - [1, 0, 0]
+      - [0, 1, 0]
+      - [0, 0, 15]
+    - - [1, 0, 0]
+      - [0, 1, 8]
+      - [0, 1, 13]
+    image_order: 4
+    kernel_order: 4
+    coset_representatives:
+    - - [1, 0, 0]
+      - [0, 1, 0]
+      - [0, 0, 1]
+    - - [0, 1, 0]
+      - [1, 0, 0]
+      - [1, 1, 1]
+    - - [0, 1, 0]
+      - [1, 0, 0]
+      - [1, 1, 7]
+    - - [0, 1, 0]
+      - [1, 0, 8]
+      - [0, 1, 3]
+    - - [0, 1, 0]
+      - [1, 0, 8]
+      - [0, 1, 5]
+    - - [1, 0, 0]
+      - [0, 1, 0]
+      - [0, 0, 7]
+    - - [1, 0, 8]
+      - [0, 1, 0]
+      - [1, 0, 3]
+    - - [1, 0, 8]
+      - [0, 1, 0]
+      - [1, 0, 5]
+    mm_trivial: false
+    image_normal: false
+    quotient_generator_cosets: null
+    quotient_multiplication: null
   overlattice_count: 8
   bad_reduction_primes: [2]
   quadratic_character: 1

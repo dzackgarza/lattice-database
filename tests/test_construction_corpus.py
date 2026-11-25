@@ -4,13 +4,12 @@ from pathlib import Path
 
 import yaml
 
-from dzack_research.preamble.categories.lattices import Lattices
-from dzack_research.preamble.rings import session_ring_objects
+from sage_extensions.categories.lattices import Lattices
+from sage_extensions.rings import ZZ
 
 from latticedb import construction_corpus, corpus, records
 from latticedb.model import Lattice
 
-ZZ = session_ring_objects()["ZZ"]
 
 
 def test_rank_two_sum_corpus_contains_every_multiset_of_rank_one_twists(tmp_path: Path) -> None:

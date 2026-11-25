@@ -16,7 +16,7 @@ from pathlib import Path
 import frontmatter
 
 import latticedb
-from dzack_research.preamble.categories.lattices import Lattices
+from sage_extensions.categories.lattices import Lattices
 from latticedb.model import Lattice
 
 LATTICES = Path(latticedb.__file__).resolve().parents[2r] / "lattices"

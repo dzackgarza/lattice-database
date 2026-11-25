@@ -10,6 +10,8 @@ import yaml
 from latticedb import checks, cli, corpus, records, summands
 from latticedb.model import Yaml
 
+ROOT = Path(__file__).resolve().parent.parent
+
 
 def rank_one(tag: str) -> dict[str, Yaml]:
     """The lattice <1> of rank 1 with b(e_1, e_1) = 1: its two vectors of norm 1 are roots of type A1 at scale 1/2."""
@@ -356,3 +358,16 @@ def test_new_writes_a_fresh_gram_tensor_and_appends_the_index(tmp_path: Path) ->
     cli.new(gram="[[3]]", name="X", latex="X", root=tmp_path)
     assert (tmp_path / "lattices" / "0002.md").exists()
     assert corpus.gram_index(tmp_path) == {"2": ["0001"], "3": ["0002"]}
+
+
+def test_the_stored_corpus_loads_through_the_reader_that_every_workflow_starts_with() -> None:
+    """#15: `corpus.load` reads every shipped card, so no stored key or value is one the reader refuses.
+
+    `latticedb certify`'s first step on any card is this load, and a card it cannot read stops the whole
+    run before a computation starts: 0128's `integral.polarization_counts` was keyed by the integers
+    2, 4, ..., 72, and `dict[str, Yaml]` refuses an integer key, so every job of the 60-tag run died in
+    20 seconds with 48 validation errors. The stored mapping now keys its degrees by their text.
+    """
+    loaded = corpus.load(ROOT)
+    assert len(loaded.entries) > 300_000, f"{len(loaded.entries)} cards loaded"
+    assert any(entry.lattice.tag == "0128" for entry in loaded.entries)

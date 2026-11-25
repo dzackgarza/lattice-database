@@ -23,35 +23,36 @@ from collections.abc import Callable
 from fractions import Fraction
 from typing import Annotated, Self
 
-from dzack_research.preamble.categories.coxeter_diagrams import CoxeterDiagrams
-from dzack_research.preamble.categories.modules.framed.formed.form_modules import FormModules
-from dzack_research.preamble.categories.modules.pure.modules import Modules
-from dzack_research.preamble.categories.rings.ring_foundation import _OwnedRingParent
-from dzack_research.preamble.categories.satake_diagrams import SatakeDiagrams
-from dzack_research.preamble.categories.sets.indexed_families import finite_indexed_family_from_values
-from dzack_research.preamble.categories.vinberg_invariants import (
+from sage_extensions.categories.coxeter_diagrams import CoxeterDiagrams
+from sage_extensions.categories.modules.framed.formed.form_modules import FormModules
+from sage_extensions.categories.modules.pure.modules import Modules
+from sage_extensions.categories.rings.ring_foundation import _OwnedRingParent
+from sage_extensions.categories.satake_diagrams import SatakeDiagrams
+from sage_extensions.categories.sets.indexed_families import finite_indexed_family_from_values
+from sage_extensions.categories.vinberg_invariants import (
     VinbergInvariantMatrices,
 )
-from dzack_research.preamble.rings import OwnedRings, session_ring_objects
+from sage_extensions.categories.rings.ring_foundation import OwnedRings
+from sage_extensions.rings import QQ as _OWNED_QQ
+from sage_extensions.rings import ZZ as _OWNED_ZZ
 from pydantic import Field, TypeAdapter, ValidationError, model_validator
 from pydantic_core import PydanticCustomError
 
 from latticedb.model import GramTensor, Record, Slug, Yaml, rational
+from latticedb.records import rational_gram
 
 _CARTAN_PAIR = TypeAdapter(tuple[int, int])
 
-_SESSION_RINGS = session_ring_objects()
-_integers = _SESSION_RINGS["ZZ"]
-assert isinstance(_integers, _OwnedRingParent)
-ZZ: _OwnedRingParent = _integers
-_ring = _SESSION_RINGS["ZZ"]
-assert isinstance(_ring, OwnedRings.ParentMethods)
-integer_ring: OwnedRings.ParentMethods = _ring
-_domain = _SESSION_RINGS["ZZ"]
-assert isinstance(_domain, OwnedRings.NoZeroDivisors.Commutative.Nontrivial.ParentMethods)
-integer_domain: OwnedRings.NoZeroDivisors.Commutative.Nontrivial.ParentMethods = _domain
-QQ = _SESSION_RINGS["QQ"]
-_QQ_AS_ZZ_MODULE = Modules(QQ).restriction_of_scalars(integer_domain.fraction_field_map())(QQ)
+# The owner binds each session scalar once, in `sage_extensions.rings`; a caller that needs a
+# narrower static type asserts the category of that object rather than building a second one.
+assert isinstance(_OWNED_ZZ, _OwnedRingParent)
+ZZ: _OwnedRingParent = _OWNED_ZZ
+assert isinstance(_OWNED_ZZ, OwnedRings.ParentMethods)
+integer_ring: OwnedRings.ParentMethods = _OWNED_ZZ
+assert isinstance(_OWNED_ZZ, OwnedRings.NoZeroDivisors.Commutative.Nontrivial.ParentMethods)
+integer_domain: OwnedRings.NoZeroDivisors.Commutative.Nontrivial.ParentMethods = _OWNED_ZZ
+QQ = _OWNED_QQ
+_QQ_AS_ZZ_MODULE = Modules(QQ).restriction_of_scalars(integer_domain.fraction_field_map())(QQ.regular_module())
 
 
 class GraphVertex(Record):
@@ -167,7 +168,7 @@ class WeightedGraph(Record):
             case _:
                 return None
         module = integer_ring.free_module(len(gram))
-        return FormModules(ZZ)(module.bilinear_hom_space(_QQ_AS_ZZ_MODULE)(gram))
+        return FormModules(ZZ)(module.bilinear_hom_space(_QQ_AS_ZZ_MODULE)(rational_gram(gram)))
 
     def cartan_matrix(self) -> tuple[tuple[int, ...], ...] | None:
         """The generalized Cartan matrix the card states, or None when it states none."""

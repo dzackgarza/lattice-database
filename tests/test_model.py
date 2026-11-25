@@ -1,10 +1,12 @@
 """A record validates exactly when its fields have the shapes of the schema and each block is present exactly when its hypothesis holds."""
 
 import ast
+import math
 from collections.abc import Callable
 from fractions import Fraction
 from pathlib import Path
 
+import frontmatter
 import pytest
 from pydantic import ValidationError
 
@@ -25,6 +27,28 @@ def test_latticedb_has_no_direct_mathematical_engine_imports() -> None:
         assert not any(module == prefix or module.startswith(prefix + ".") for module in modules for prefix in forbidden), path.relative_to(ROOT)
     assert not (ROOT / "src" / "latticedb" / "roots.py").exists()
     assert not (ROOT / "src" / "latticedb" / "root_systems.py").exists()
+
+
+def test_the_certification_entry_point_imports_the_owner_names_it_uses() -> None:
+    """A name the owner deleted fails here, in the fast gate, and not once a certify job has started.
+
+    Certify run 44031688787 died two seconds into its first job with
+    `ImportError: cannot import name 'session_ring_objects' from 'sage_extensions.rings'`, raised
+    through `latticedb.cli` -> `bulk_index` -> `nebe_sloane` -> `corpus` -> `graphs`. That function
+    was deleted by sage-extensions#521 (`9eb6ee99a`), which binds each session scalar once as an
+    attribute of `sage_extensions.rings` instead; no test imported that module graph, so nothing
+    checked it before the container started. The object a module publishes is the owner's own, not
+    a copy of it: a caller that narrows the type it needs asserts the category of that object.
+    """
+    import latticedb.cli
+    from sage_extensions import rings
+
+    from latticedb import graphs, records, sage_genus
+
+    assert latticedb.cli.app is not None
+    assert graphs.ZZ is rings.ZZ and graphs.QQ is rings.QQ
+    assert records.ZZ is rings.ZZ and records.QQ is rings.QQ
+    assert sage_genus.OWNED_ZZ is rings.ZZ and sage_genus.OWNED_QQ is rings.QQ
 
 
 def test_model_does_not_recompute_authored_mathematical_invariants() -> None:
@@ -64,6 +88,47 @@ def test_definite_group_generators_name_scale_one_self_morphisms() -> None:
     bad["definite"] = bad_definite
     with pytest.raises(ValidationError, match="each generator name occurs once"):
         Lattice.model_validate(bad)
+
+
+def test_an_indefinite_card_states_its_generators_and_its_order() -> None:
+    """The block of an indefinite $O(L)$: the order, finite or `aleph0`, and generators that name self-isometries."""
+    record = u()
+    swap, minus = [[0, 1], [1, 0]], [[-1, 0], [0, -1]]
+    record["morphisms"] = [
+        {"target": "0016", "name": "the swap", "matrix": swap, "scale": 1},
+        {"target": "0016", "name": "minus the identity", "matrix": minus, "scale": 1},
+    ]
+    record["automorphisms"] = {"automorphism_group_order": 4, "automorphism_group_generator_morphisms": ["the swap", "minus the identity"]}
+    lattice = Lattice.model_validate(record)
+    assert lattice.automorphisms is not None
+    assert lattice.automorphisms.automorphism_group_generator_morphisms == ("the swap", "minus the identity")
+    assert lattice.automorphisms.automorphism_group_order == 4
+
+    # |O(U)| is finite, and the order of an indefinite lattice where it is not is the owner's
+    # countably infinite cardinal, which the schema states as `aleph0`.
+    infinite = record | {"automorphisms": {"automorphism_group_order": "aleph0"}}
+    validated = Lattice.model_validate(infinite)
+    assert validated.automorphisms is not None and validated.automorphisms.automorphism_group_order == "aleph0"
+
+    missing = record | {"automorphisms": {"automorphism_group_generator_morphisms": ["missing"]}}
+    with pytest.raises(ValidationError, match="each generator name occurs once"):
+        Lattice.model_validate(missing)
+
+
+def u() -> dict[str, Yaml]:
+    """The hyperbolic plane U = I_{1,1}: indefinite, even, unimodular, one orbit of primitive isotropic vectors."""
+    return {
+        "tag": "0016",
+        "name": "U",
+        "latex": "U",
+        "rank": 2,
+        "gram_tensor": [[0, 1], [1, 0]],
+        "signature": [1, 1],
+        "determinant": -1,
+        "definiteness": "indefinite",
+        "integral": {"parity": "even"},
+        "indefinite": {"isotropic": True},
+    }
 
 
 def e8() -> dict[str, Yaml]:
@@ -348,6 +413,17 @@ def test_the_series_of_orbits_of_a2_is_accepted() -> None:
     assert lattice.integral.primitive_orbits["SOtilde"].coefficient(-2) is None
 
 
+def test_an_orbit_row_may_state_planes_and_name_an_arithmetic_group() -> None:
+    """#3: the plane count and a subgroup named by an arithmetic-group slug are stored schema data."""
+    record = with_block(a2(), "integral", primitive_orbits={"O": {"constant": 2, "planes": 2}, "gamma-en-2": {"constant": 5}})
+    lattice = Lattice.model_validate(record)
+    assert lattice.integral is not None and lattice.integral.primitive_orbits is not None
+    assert lattice.integral.primitive_orbits["O"].planes == 2
+    assert lattice.integral.primitive_orbits["gamma-en-2"].constant == 5
+    with pytest.raises(ValidationError):
+        Lattice.model_validate(with_block(a2(), "integral", primitive_orbits={"O": {"constant": 2, "planes": -1}}))
+
+
 def test_orbit_series_are_stored_schema_data_not_mathematically_recomputed() -> None:
     lattice = Lattice.model_validate(with_orbits(a2(), O=[1, 1], SO=[0, 0], O_plus=[7, 3]))
     assert lattice.integral is not None
@@ -512,3 +588,344 @@ def test_sparse_card_preserves_stated_root_span_and_factors(rank: int | None) ->
 def test_sparse_cards_reject_inconsistent_stated_shapes(fields: dict[str, Yaml], expected: str) -> None:
     record = {"tag": "0001", "name": "Source-stated lattice", "latex": "L", **fields}
     assert expected in error_types(record)
+
+
+def test_a_polarization_count_row_is_stored_under_its_degree_with_the_tables_names() -> None:
+    """#10: Table 4's two counts of a degree are schema data, keyed by the degree and named as the table names them."""
+    record = with_block(a2(), "integral", polarization_counts={"2": {"#h": 1, "#Γ̄_h": 1}, "12": {"#h": 4, "#Γ̄_h": 3}})
+    lattice = Lattice.model_validate(record)
+    assert lattice.integral is not None and lattice.integral.polarization_counts is not None
+    assert lattice.integral.polarization_counts["12"].polarizations == 4
+    assert lattice.integral.polarization_counts["12"].groups == 3
+    with pytest.raises(ValidationError, match="not a degree"):
+        Lattice.model_validate(with_block(a2(), "integral", polarization_counts={"3": {"#h": 1, "#Γ̄_h": 1}}))
+    with pytest.raises(ValidationError, match="canonical"):
+        Lattice.model_validate(with_block(a2(), "integral", polarization_counts={"02": {"#h": 1, "#Γ̄_h": 1}}))
+    with pytest.raises(ValidationError):
+        Lattice.model_validate(with_block(a2(), "integral", polarization_counts={"2": {"#h": 1, "#gamma_h": 1}}))
+
+
+def test_a_discriminant_form_row_states_the_group_the_isotropic_classes_and_their_orbits() -> None:
+    """#12: the three invariants of (A_L, q_L) are schema data, and the orbits cannot outnumber the classes."""
+    record = with_block(a2(), "integral", discriminant_form={"orthogonal_group_order": 46998591897600, "isotropic_classes": 528, "isotropic_orbits": 2})
+    lattice = Lattice.model_validate(record)
+    assert lattice.integral is not None and lattice.integral.discriminant_form is not None
+    assert lattice.integral.discriminant_form.orthogonal_group_order == 46998591897600
+    assert lattice.integral.discriminant_form.isotropic_classes == 528
+    assert lattice.integral.discriminant_form.isotropic_orbits == 2
+    with pytest.raises(ValidationError, match="orbits of"):
+        Lattice.model_validate(with_block(a2(), "integral", discriminant_form={"orthogonal_group_order": 2, "isotropic_classes": 1, "isotropic_orbits": 2}))
+    with pytest.raises(ValidationError):
+        Lattice.model_validate(with_block(a2(), "integral", discriminant_form={"orthogonal_group_order": 0, "isotropic_classes": 1, "isotropic_orbits": 1}))
+
+
+def test_the_enriques_plane_orbit_lengths_are_stated_and_sum_to_their_total() -> None:
+    """#31: 029J states the two lengths of its Õ⁺ plane orbits, and they are its 24242 planes.
+
+    The split of the source's sentence — 527 and 23715 — is a structured row now, so a library reads
+    each length by tag instead of parsing the citation.
+    """
+    record = frontmatter.load(str(ROOT / "lattices" / "029J.md")).metadata
+    orbits = Lattice.model_validate(record).integral.primitive_orbits
+    assert orbits["Otilde+"].orbit_lengths == (527, 23715)
+    assert sum(orbits["Otilde+"].orbit_lengths) == orbits["Otilde+"].planes == 24242
+    assert orbits["O"].orbit_lengths == (527, 23715)
+    assert "The set of 24242 isotropic planes also has 2 orbits, and these are of length 527 and 23715 respectively." in orbits["Otilde+"].reference.citation
+
+
+def test_an_orbit_length_pair_that_agrees_with_neither_reading_of_planes_is_refused() -> None:
+    """A row's `planes` is either the number of orbits or the number of planes; the lengths must match one."""
+    from pydantic import ValidationError
+
+    from latticedb.invariant_models import PrimitiveOrbitSeries
+
+    PrimitiveOrbitSeries.model_validate({"planes": 2, "orbit_lengths": [527, 23715]})
+    PrimitiveOrbitSeries.model_validate({"planes": 24242, "orbit_lengths": [527, 23715]})
+    with pytest.raises(ValidationError, match="neither reading of planes"):
+        PrimitiveOrbitSeries.model_validate({"planes": 3, "orbit_lengths": [527, 23715]})
+    with pytest.raises(ValidationError):
+        PrimitiveOrbitSeries.model_validate({"orbit_lengths": [527, 0]})
+
+
+def test_a_polyhedron_of_a_one_n_lattice_states_its_ideal_vertices() -> None:
+    """#36: a lattice of signature (1, n) has no cusp, so its row states the number of ideal vertices."""
+    row = {"statement": "4.3.6", "printed_page": 21, "figure": 6, "ideal_vertices": 2}
+    lattice = Lattice.model_validate(with_block(a2(), "integral", cusp_chambers={"O": [row]}))
+    assert lattice.integral is not None and lattice.integral.cusp_chambers is not None
+    polyhedron = lattice.integral.cusp_chambers["O"][0]
+    assert polyhedron.cusp is None and polyhedron.walls is None, "the polyhedron of a (1, n) lattice is not a chamber at a cusp"
+    assert polyhedron.ideal_vertices == 2
+    cocompact = Lattice.model_validate(with_block(a2(), "integral", cusp_chambers={"O": [{**row, "ideal_vertices": 0}]}))
+    assert cocompact.integral is not None and cocompact.integral.cusp_chambers is not None
+    assert cocompact.integral.cusp_chambers["O"][0].ideal_vertices == 0, "a cocompact chamber has no ideal vertex"
+    with pytest.raises(ValidationError, match="walls of a chamber or the number of ideal vertices"):
+        Lattice.model_validate(with_block(a2(), "integral", cusp_chambers={"O": [{"statement": "4.3.6", "printed_page": 21}]}))
+    with pytest.raises(ValidationError, match="together"):
+        Lattice.model_validate(with_block(a2(), "integral", cusp_chambers={"O": [{**row, "walls": [{"name": "\\alpha_1", "vector": [1, 0]}]}]}))
+    with pytest.raises(ValidationError):
+        Lattice.model_validate(with_block(a2(), "integral", cusp_chambers={"O": [{**row, "ideal_vertices": -1}]}))
+
+
+def test_a_computed_chamber_states_its_walls_and_its_count_and_no_source() -> None:
+    """#36: a chamber no source prints states no statement, and its certificate names the program."""
+    row = {
+        "walls": [{"name": "w_1", "vector": [1, 0]}, {"name": "w_2", "vector": [1, 2]}],
+        "wall_count": 2,
+        "gram": [["-2", "2"], ["2", "-2"]],
+        "diagram": [{"a": "w_1", "b": "w_2", "order": 4}],
+        "ideal_vertices": 1,
+    }
+    lattice = Lattice.model_validate(with_block(a2(), "integral", cusp_chambers={"O": [row]}))
+    assert lattice.integral is not None and lattice.integral.cusp_chambers is not None
+    computed = lattice.integral.cusp_chambers["O"][0]
+    assert (computed.statement, computed.printed_page, computed.figure) == (None, None, None)
+    assert computed.ideal_vertices == 1 and computed.wall_count == 2
+    with pytest.raises(ValidationError, match="statement that prints it and its page together"):
+        Lattice.model_validate(with_block(a2(), "integral", cusp_chambers={"O": [{**row, "statement": "4.3.6"}]}))
+    with pytest.raises(ValidationError, match="statement that prints it and its page together"):
+        Lattice.model_validate(with_block(a2(), "integral", cusp_chambers={"O": [{**row, "printed_page": 21}]}))
+
+
+def test_a_chamber_states_the_orbits_of_its_maximal_parabolic_subdiagrams() -> None:
+    """#39: a source's classes are orbits of subdiagrams, not a count of vertices."""
+    row = {
+        "statement": "4.3.5",
+        "printed_page": 19,
+        "figure": 4,
+        "walls": [{"name": "\\alpha_1", "vector": [1, 0]}, {"name": "\\alpha_2", "vector": [1, 2]}, {"name": "\\alpha_3", "vector": [0, 1]}],
+        "wall_count": 3,
+        "gram": [["-4", "2", "0"], ["2", "-4", "2"], ["0", "2", "-4"]],
+        "parabolic_orbits": [{"subdiagrams": [["\\alpha_1", "\\alpha_2"]]}, {"subdiagrams": [["\\alpha_2", "\\alpha_3"], ["\\alpha_1", "\\alpha_3"]]}],
+    }
+    lattice = Lattice.model_validate(with_block(a2(), "integral", cusp_chambers={"g-e": [row]}))
+    assert lattice.integral is not None and lattice.integral.cusp_chambers is not None
+    chamber = lattice.integral.cusp_chambers["g-e"][0]
+    assert chamber.ideal_vertices is None, "orbits are not a count of the vertices themselves"
+    assert [len(orbit.subdiagrams) for orbit in chamber.parabolic_orbits] == [1, 2]
+    with pytest.raises(ValidationError, match="not a set of walls"):
+        Lattice.model_validate(with_block(a2(), "integral", cusp_chambers={"g-e": [{**row, "parabolic_orbits": [{"subdiagrams": [["\\alpha_1", "\\alpha_9"]]}]}]}))
+    with pytest.raises(ValidationError, match="one subdiagram"):
+        Lattice.model_validate(
+            with_block(
+                a2(),
+                "integral",
+                cusp_chambers={"g-e": [{**row, "parabolic_orbits": [{"subdiagrams": [["\\alpha_1", "\\alpha_2"]]}, {"subdiagrams": [["\\alpha_1", "\\alpha_2"]]}]}]},
+            )
+        )
+    with pytest.raises(ValidationError):
+        Lattice.model_validate(with_block(a2(), "integral", cusp_chambers={"g-e": [{**row, "parabolic_orbits": []}]}))
+
+
+def test_a_chamber_at_a_cusp_states_its_walls_its_count_its_gram_and_its_diagram() -> None:
+    """#33: a chamber row is the source's walls and the three invariants of them, and each must agree."""
+    row = {
+        "cusp": [1, 0],
+        "statement": "4.3.5",
+        "printed_page": 19,
+        "figure": 4,
+        "walls": [{"name": "\\alpha_1", "vector": [1, 0]}, {"name": "\\alpha_2", "vector": [1, 2]}],
+        "wall_count": 2,
+        "gram": [["-2", "2"], ["2", "-2"]],
+        "diagram": [{"a": "\\alpha_1", "b": "\\alpha_2", "order": 4}],
+    }
+    lattice = Lattice.model_validate(with_block(a2(), "integral", cusp_chambers={"gamma-en-2": [row]}))
+    assert lattice.integral is not None and lattice.integral.cusp_chambers is not None
+    chamber = lattice.integral.cusp_chambers["gamma-en-2"][0]
+    assert chamber.wall_count == 2 and chamber.gram[0][1] == 2
+    assert chamber.diagram[0].order == 4
+    with pytest.raises(ValidationError, match="wall_count"):
+        Lattice.model_validate(with_block(a2(), "integral", cusp_chambers={"gamma-en-2": [{**row, "wall_count": 3}]}))
+    with pytest.raises(ValidationError, match="negative square"):
+        Lattice.model_validate(with_block(a2(), "integral", cusp_chambers={"gamma-en-2": [{**row, "gram": [["2", "2"], ["2", "-2"]]}]}))
+    with pytest.raises(ValidationError, match="symmetric"):
+        Lattice.model_validate(with_block(a2(), "integral", cusp_chambers={"gamma-en-2": [{**row, "gram": [["-2", "0"], ["2", "-2"]]}]}))
+    with pytest.raises(ValidationError, match="not a pair of walls"):
+        Lattice.model_validate(with_block(a2(), "integral", cusp_chambers={"gamma-en-2": [{**row, "diagram": [{"a": "\\alpha_1", "b": "\\alpha_9", "order": 3}]}]}))
+    with pytest.raises(ValidationError, match="one edge"):
+        Lattice.model_validate(with_block(a2(), "integral", cusp_chambers={"gamma-en-2": [{**row, "diagram": [{"a": "\\alpha_1", "b": "\\alpha_2", "order": 4}, {"a": "\\alpha_2", "b": "\\alpha_1", "order": 6}]}]}))
+    with pytest.raises(ValidationError):
+        Lattice.model_validate(with_block(a2(), "integral", cusp_chambers={"gamma-en-2": [{**row, "diagram": [{"a": "\\alpha_1", "b": "\\alpha_2", "order": 2}]}]}))
+
+
+def test_the_enriques_cusp_chambers_are_the_sources_walls_and_the_cards_own_form() -> None:
+    """#33: Sterk's five printed chambers on 029J recompute from the card, with no Vinberg search.
+
+    Each wall is orthogonal to its cusp and of negative square, the stored Gram matrix is the card's
+    form on those walls, the count is the number of them, the walls span v^perp/Zv over Q, and the
+    stored diagram is the pairs with |g_ij| = cos(pi/m) of the source's table (Sterk, Fig. 2, p. 18).
+    """
+    record = frontmatter.load(str(ROOT / "lattices" / "029J.md")).metadata
+    lattice = Lattice.model_validate(record)
+    assert lattice.integral is not None and lattice.integral.cusp_chambers is not None
+    gram = [[Fraction(entry) for entry in row] for row in lattice.gram_tensor]
+
+    def b(u: tuple[int, ...], v: tuple[int, ...]) -> Fraction:
+        return sum(Fraction(u[i]) * gram[i][j] * Fraction(v[j]) for i in range(len(gram)) for j in range(len(gram)))
+
+    def rank(vectors: list[tuple[int, ...]]) -> int:
+        rows = [[Fraction(entry) for entry in vector] for vector in vectors]
+        count = 0
+        for column in range(len(gram)):
+            pivot = next((row for row in range(count, len(rows)) if rows[row][column] != 0), None)
+            if pivot is None:
+                continue
+            rows[count], rows[pivot] = rows[pivot], rows[count]
+            rows[count] = [entry / rows[count][column] for entry in rows[count]]
+            for row in range(len(rows)):
+                if row != count and rows[row][column] != 0:
+                    factor = rows[row][column]
+                    rows[row] = [a - factor * c for a, c in zip(rows[row], rows[count], strict=True)]
+            count += 1
+        return count
+
+    orders = {Fraction(1, 4): 3, Fraction(-1, 4): 3, Fraction(1, 2): 4, Fraction(-1, 2): 4, Fraction(3, 4): 6, Fraction(-3, 4): 6}
+    rows = lattice.integral.cusp_chambers["gamma-en-2"]
+    assert [(row.statement, row.printed_page, row.figure) for row in rows] == [
+        ("4.3.5", 19, 4),
+        ("4.3.6", 21, 6),
+        ("4.3.7", 22, 8),
+        ("4.3.8", 23, 10),
+        ("4.3.9", 24, 12),
+    ]
+    assert [row.wall_count for row in rows] == [12, 10, 12, 11, 14]
+    for row in rows:
+        cusp = tuple(row.cusp)
+        assert b(cusp, cusp) == 0, row.statement
+        assert math.gcd(*[abs(entry) for entry in cusp]) == 1, row.statement
+        walls = [tuple(wall.vector) for wall in row.walls]
+        assert all(b(cusp, wall) == 0 for wall in walls), row.statement
+        assert all(b(wall, wall) < 0 for wall in walls), row.statement
+        assert [[b(u, v) for v in walls] for u in walls] == [[Fraction(entry) for entry in r] for r in row.gram], row.statement
+        assert rank(walls) == len(gram) - 2, row.statement
+        expected = {}
+        for i in range(len(walls)):
+            for j in range(i + 1, len(walls)):
+                product = b(walls[i], walls[j])
+                if product == 0:
+                    continue
+                square = product * product / (b(walls[i], walls[i]) * b(walls[j], walls[j]))
+                expected[frozenset((row.walls[i].name, row.walls[j].name))] = "inf" if square == 1 else orders[square]
+        assert {frozenset((edge.a, edge.b)): edge.order for edge in row.diagram} == expected, row.statement
+
+
+def test_the_orbits_of_a_cusps_root_classes_state_their_count_and_the_chamber_symmetries() -> None:
+    """#43: a row states one representative per orbit, the count of them, and the image of the stabilizer in the chamber's diagram symmetries."""
+    row = {
+        "cusp": [1, 0],
+        "statement": "4.3.8",
+        "printed_page": 23,
+        "orbits": [
+            {"representative": [0, 3], "classes": [[0, 3]]},
+            {"representative": [1, 1], "classes": [[1, 1], [1, 2]]},
+        ],
+        "orbit_count": 2,
+        "chamber_symmetries": {"order": 2, "generators": [[1, 0, 2]]},
+    }
+    lattice = Lattice.model_validate(with_block(a2(), "integral", cusp_root_orbits={"gamma-en-2": [row]}))
+    assert lattice.integral is not None and lattice.integral.cusp_root_orbits is not None
+    orbits = lattice.integral.cusp_root_orbits["gamma-en-2"][0]
+    assert orbits.orbit_count == 2
+    assert [len(orbit.classes) for orbit in orbits.orbits] == [1, 2]
+    assert [orbit.representative for orbit in orbits.orbits] == [(0, 3), (1, 1)]
+    assert orbits.chamber_symmetries is not None and orbits.chamber_symmetries.generators == ((1, 0, 2),)
+    with pytest.raises(ValidationError, match="not a permutation"):
+        Lattice.model_validate(
+            with_block(a2(), "integral", cusp_root_orbits={"gamma-en-2": [{**row, "chamber_symmetries": {"order": 2, "generators": [[1, 1, 2]]}}]})
+        )
+    with pytest.raises(ValidationError, match="trivial group has no generators"):
+        Lattice.model_validate(
+            with_block(a2(), "integral", cusp_root_orbits={"gamma-en-2": [{**row, "chamber_symmetries": {"order": 1, "generators": [[1, 0, 2]]}}]})
+        )
+
+
+def test_a_root_class_row_refuses_a_count_that_is_not_of_its_orbits() -> None:
+    """#43: the count is of the orbits stated, the classes are classes, and the source is stated with its page."""
+    row = {
+        "cusp": [1, 0],
+        "statement": "4.3.8",
+        "printed_page": 23,
+        "orbits": [
+            {"representative": [0, 3], "classes": [[0, 3]]},
+            {"representative": [1, 1], "classes": [[1, 1]]},
+        ],
+        "orbit_count": 2,
+    }
+    with pytest.raises(ValidationError, match="orbit_count"):
+        Lattice.model_validate(with_block(a2(), "integral", cusp_root_orbits={"gamma-en-2": [{**row, "orbit_count": 1}]}))
+    # A multiple of the cusp is the zero class of K_J, which is isotropic and not a root.
+    with pytest.raises(ValidationError, match="no multiple of the cusp"):
+        Lattice.model_validate(
+            with_block(
+                a2(),
+                "integral",
+                cusp_root_orbits={"gamma-en-2": [{**row, "orbits": [{"representative": [1, 0], "classes": [[1, 0]]}], "orbit_count": 1}]},
+            )
+        )
+    # [1, 1] and [2, 1] differ by the cusp, so they are one class and not two orbits.
+    with pytest.raises(ValidationError, match="stated by two orbits"):
+        Lattice.model_validate(
+            with_block(
+                a2(),
+                "integral",
+                cusp_root_orbits={"gamma-en-2": [{**row, "orbits": [*row["orbits"], {"representative": [2, 1], "classes": [[2, 1]]}], "orbit_count": 3}]},
+            )
+        )
+    with pytest.raises(ValidationError, match="representative first"):
+        Lattice.model_validate(
+            with_block(
+                a2(),
+                "integral",
+                cusp_root_orbits={"gamma-en-2": [{**row, "orbits": [{"representative": [0, 3], "classes": [[1, 1], [0, 3]]}], "orbit_count": 1}]},
+            )
+        )
+    with pytest.raises(ValidationError, match="statement that prints its chamber and its page together"):
+        Lattice.model_validate(with_block(a2(), "integral", cusp_root_orbits={"gamma-en-2": [{**row, "printed_page": None}]}))
+    with pytest.raises(ValidationError):
+        Lattice.model_validate(with_block(a2(), "integral", cusp_root_orbits={"gamma-en-2": [{**row, "orbits": []}]}))
+
+
+def test_the_root_classes_of_the_enriques_cusps_are_the_walls_of_square_minus_two() -> None:
+    """#43: at Sterk's five cusps the roots of K_J among the walls are the (-2) walls, 0, 1, 2, 2 and 4 of them.
+
+    A wall $w$ of a chamber at the cusp $v$ lies in $v^\\perp$, so its class in $K_J = v^\\perp/\\mathbb{Z}v$ has
+    $q([w]) = b(w, w)$, and two walls give one class exactly when their difference is a rational multiple of
+    $v$. So the root classes of the cusp are computed from the card's Gram tensor alone, and this is the family
+    whose $\\Gamma_{\\mathrm{En},2}$-orbits the issue asks a row to count.
+    """
+    record = frontmatter.load(str(ROOT / "lattices" / "029J.md")).metadata
+    lattice = Lattice.model_validate(record)
+    assert lattice.integral is not None and lattice.integral.cusp_chambers is not None
+    gram = [[Fraction(entry) for entry in row] for row in lattice.gram_tensor]
+
+    def b(u: tuple[int, ...], v: tuple[int, ...]) -> Fraction:
+        return sum(Fraction(u[i]) * gram[i][j] * Fraction(v[j]) for i in range(len(gram)) for j in range(len(gram)))
+
+    def multiple(x: tuple[int, ...], v: tuple[int, ...]) -> Fraction | None:
+        """The same test the schema makes: the rational $t$ with $x = t v$, or `None`."""
+        ratio = None
+        for entry, coordinate in zip(x, v, strict=True):
+            if coordinate == 0:
+                if entry != 0:
+                    return None
+                continue
+            step = Fraction(entry, coordinate)
+            if ratio is None:
+                ratio = step
+            elif ratio != step:
+                return None
+        return ratio
+
+    counts = []
+    for row in lattice.integral.cusp_chambers["gamma-en-2"]:
+        cusp = tuple(row.cusp)
+        assert b(cusp, cusp) == 0, row.statement
+        walls = [tuple(wall.vector) for wall in row.walls]
+        assert all(b(cusp, wall) == 0 for wall in walls), row.statement
+        roots = [wall for wall in walls if b(wall, wall) == -2]
+        classes: list[tuple[int, ...]] = []
+        for wall in roots:
+            if all(multiple(tuple(a - c for a, c in zip(wall, seen, strict=True)), cusp) is None for seen in classes):
+                classes.append(wall)
+        assert len(classes) == len(roots), f"{row.statement}: two walls of square -2 give one root class"
+        counts.append(len(classes))
+    assert counts == [0, 1, 2, 2, 4], counts

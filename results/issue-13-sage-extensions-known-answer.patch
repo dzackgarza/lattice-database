@@ -1,0 +1,793 @@
+diff --git a/tests/cards/README.md b/tests/cards/README.md
+index 7609513..438961d 100644
+--- a/tests/cards/README.md
++++ b/tests/cards/README.md
+@@ -9,7 +9,8 @@ python3 tests/cards/refresh_lattice_database_enriques.py --ref <40-character dat
+ ```
+ 
+ `_provenance.ref` names the database commit the digest was read at; the digest
+-was last refreshed at `dbc9fc6add622459d60dba3dc62d3e4be6b903d7`. The script
++was last refreshed at `f9a1132aff2a379472206d080fae4bfa78a7ffee`, the database commit
++that landed the five `L_d` orbit rows (lattice-database#13). The script
+ fetches only the front matter of the named cards and keeps only the rows the
+ tests read, so a refresh is one HTTP request per card and the diff is the
+ database's change, not a transcription.
+@@ -31,7 +32,7 @@ What is read, and from where:
+ | `cusp_chambers[tag].rows[subgroup][i].walls`, `.statement`, `.cusp`, `.printed_page`, `.figure` | `lattices/029J.md` | `integral.cusp_chambers.{subgroup}.{wall_count,statement,cusp,printed_page,figure}` |
+ | `cusp_chambers[tag].certification` | same | `certifications.integral.cusp_chambers` — the stamp the database computed the block under |
+ | `cusp_diagrams[tag].rows[subgroup][i].{statement,vertices,edges,wall_count}` | `lattices/029J.md` | `integral.cusp_chambers.{subgroup}[i]`: the walls are the vertices and `diagram` the bonds, with an infinite order written `inf` on the card and `null` here |
+-| `primitive_orbit_series[tag].rows[subgroup].{constant,z,w}`, `.gram` | `lattices/0016.md`, `lattices/026E.md` | `integral.primitive_orbits.{subgroup}.{constant,z,w}` for the lattice of `gram_tensor`, with `certifications.integral.primitive_orbits` |
++| `primitive_orbit_series[tag].rows[subgroup].{constant,z,w,cited}`, `.gram` | `lattices/0016.md`, `lattices/026E.md`, `lattices/0012.md`, `lattices/6JRS.md`, `lattices/6JRT.md`, `lattices/6JRU.md`, `lattices/6JRV.md`, `lattices/6JRW.md` | `integral.primitive_orbits.{subgroup}.{constant,z,w}` for the lattice of `gram_tensor`, with `certifications.integral.primitive_orbits`; `cited` is whether the row carries a `reference`, so a row no source states is seen to be a certificate's |
+ | `hyperbolic_reflectivity[tag].reflective`, `.gram` | `lattices/0026.md` | `hyperbolic.reflective` for the lattice of `gram_tensor`, with `certifications.hyperbolic.reflective` and the card's `references` |
+ 
+ A test reads these by tag through `card(section, tag)`, bound as a builtin by
+diff --git a/tests/cards/lattice-database-enriques.json b/tests/cards/lattice-database-enriques.json
+index 2860f59..2d239d9 100644
+--- a/tests/cards/lattice-database-enriques.json
++++ b/tests/cards/lattice-database-enriques.json
+@@ -5,7 +5,7 @@
+    "lattice": "lattices/{tag}.md"
+   },
+   "generated_by": "tests/cards/refresh_lattice_database_enriques.py",
+-  "ref": "1e1cadcfdca4dba2c0084a0bdc095b2d691126a8",
++  "ref": "f9a1132aff2a379472206d080fae4bfa78a7ffee",
+   "repository": "dzackgarza/lattice-database",
+   "rows": {
+    "arithmetic_group": [
+@@ -3560,6 +3560,7 @@
+    "rank": 2,
+    "rows": {
+     "O": {
++     "cited": false,
+      "constant": 0,
+      "w": [
+       0,
+@@ -3575,6 +3576,7 @@
+      ]
+     },
+     "O+": {
++     "cited": false,
+      "constant": 0,
+      "w": [
+       0,
+@@ -3590,6 +3592,7 @@
+      ]
+     },
+     "Otilde": {
++     "cited": false,
+      "constant": 0,
+      "w": [
+       0,
+@@ -3605,6 +3608,7 @@
+      ]
+     },
+     "Otilde+": {
++     "cited": false,
+      "constant": 0,
+      "w": [
+       0,
+@@ -3620,6 +3624,7 @@
+      ]
+     },
+     "SO": {
++     "cited": false,
+      "constant": 0,
+      "w": [
+       0,
+@@ -3635,6 +3640,7 @@
+      ]
+     },
+     "SO+": {
++     "cited": false,
+      "constant": 0,
+      "w": [
+       0,
+@@ -3650,6 +3656,7 @@
+      ]
+     },
+     "SOtilde": {
++     "cited": false,
+      "constant": 0,
+      "w": [
+       0,
+@@ -3665,6 +3672,7 @@
+      ]
+     },
+     "SOtilde+": {
++     "cited": false,
+      "constant": 0,
+      "w": [
+       0,
+@@ -3705,41 +3713,49 @@
+    "rank": 2,
+    "rows": {
+     "O": {
++     "cited": false,
+      "constant": 1,
+      "w": [],
+      "z": []
+     },
+     "O+": {
++     "cited": false,
+      "constant": 1,
+      "w": [],
+      "z": []
+     },
+     "Otilde": {
++     "cited": false,
+      "constant": 1,
+      "w": [],
+      "z": []
+     },
+     "Otilde+": {
++     "cited": false,
+      "constant": 1,
+      "w": [],
+      "z": []
+     },
+     "SO": {
++     "cited": false,
+      "constant": 2,
+      "w": [],
+      "z": []
+     },
+     "SO+": {
++     "cited": false,
+      "constant": 2,
+      "w": [],
+      "z": []
+     },
+     "SOtilde": {
++     "cited": false,
+      "constant": 2,
+      "w": [],
+      "z": []
+     },
+     "SOtilde+": {
++     "cited": false,
+      "constant": 2,
+      "w": [],
+      "z": []
+@@ -3825,41 +3841,49 @@
+    "rank": 7,
+    "rows": {
+     "O": {
++     "cited": false,
+      "constant": 1,
+      "w": [],
+      "z": []
+     },
+     "O+": {
++     "cited": false,
+      "constant": 1,
+      "w": [],
+      "z": []
+     },
+     "Otilde": {
++     "cited": false,
+      "constant": 1,
+      "w": [],
+      "z": []
+     },
+     "Otilde+": {
++     "cited": false,
+      "constant": 1,
+      "w": [],
+      "z": []
+     },
+     "SO": {
++     "cited": false,
+      "constant": 1,
+      "w": [],
+      "z": []
+     },
+     "SO+": {
++     "cited": false,
+      "constant": 1,
+      "w": [],
+      "z": []
+     },
+     "SOtilde": {
++     "cited": false,
+      "constant": 1,
+      "w": [],
+      "z": []
+     },
+     "SOtilde+": {
++     "cited": false,
+      "constant": 1,
+      "w": [],
+      "z": []
+@@ -3870,6 +3894,356 @@
+     6
+    ],
+    "tag": "026E"
++  },
++  "6JRS": {
++   "certification": "66f4fd0377d69518bc0dccdbf83fe0492c8864efaef7db1791dd5a5d6883a1cf",
++   "determinant": -2,
++   "gram": [
++    [
++     0,
++     1,
++     0,
++     0,
++     0
++    ],
++    [
++     1,
++     0,
++     0,
++     0,
++     0
++    ],
++    [
++     0,
++     0,
++     0,
++     1,
++     0
++    ],
++    [
++     0,
++     0,
++     1,
++     0,
++     0
++    ],
++    [
++     0,
++     0,
++     0,
++     0,
++     -2
++    ]
++   ],
++   "latex": "L_{1}",
++   "name": "L_1",
++   "path": "lattices/6JRS.md",
++   "rank": 5,
++   "rows": {
++    "O": {
++     "cited": false,
++     "constant": 1,
++     "w": [],
++     "z": []
++    },
++    "Otilde": {
++     "cited": false,
++     "constant": 1,
++     "w": [],
++     "z": []
++    },
++    "Otilde+": {
++     "cited": false,
++     "constant": 1,
++     "w": [],
++     "z": []
++    }
++   },
++   "signature": [
++    2,
++    3
++   ],
++   "tag": "6JRS"
++  },
++  "6JRT": {
++   "certification": "8537eac6fefc10bdc48fc25bda59e12d5c75d8b68e8c244e14ca7a4f93b9a17c",
++   "determinant": -4,
++   "gram": [
++    [
++     0,
++     1,
++     0,
++     0,
++     0
++    ],
++    [
++     1,
++     0,
++     0,
++     0,
++     0
++    ],
++    [
++     0,
++     0,
++     0,
++     1,
++     0
++    ],
++    [
++     0,
++     0,
++     1,
++     0,
++     0
++    ],
++    [
++     0,
++     0,
++     0,
++     0,
++     -4
++    ]
++   ],
++   "latex": "L_{2}",
++   "name": "L_2",
++   "path": "lattices/6JRT.md",
++   "rank": 5,
++   "rows": {
++    "O": {
++     "cited": false,
++     "constant": 1,
++     "w": [],
++     "z": []
++    },
++    "Otilde": {
++     "cited": false,
++     "constant": 1,
++     "w": [],
++     "z": []
++    },
++    "Otilde+": {
++     "cited": false,
++     "constant": 1,
++     "w": [],
++     "z": []
++    }
++   },
++   "signature": [
++    2,
++    3
++   ],
++   "tag": "6JRT"
++  },
++  "6JRU": {
++   "certification": "eca9a44c0e247c7809b42786888fb16dabc7dbc100c4cb22a8b512b040200fea",
++   "determinant": -8,
++   "gram": [
++    [
++     0,
++     1,
++     0,
++     0,
++     0
++    ],
++    [
++     1,
++     0,
++     0,
++     0,
++     0
++    ],
++    [
++     0,
++     0,
++     0,
++     1,
++     0
++    ],
++    [
++     0,
++     0,
++     1,
++     0,
++     0
++    ],
++    [
++     0,
++     0,
++     0,
++     0,
++     -8
++    ]
++   ],
++   "latex": "L_{4}",
++   "name": "L_4",
++   "path": "lattices/6JRU.md",
++   "rank": 5,
++   "rows": {
++    "O": {
++     "cited": false,
++     "constant": 2,
++     "w": [],
++     "z": []
++    },
++    "Otilde": {
++     "cited": false,
++     "constant": 2,
++     "w": [],
++     "z": []
++    },
++    "Otilde+": {
++     "cited": false,
++     "constant": 2,
++     "w": [],
++     "z": []
++    }
++   },
++   "signature": [
++    2,
++    3
++   ],
++   "tag": "6JRU"
++  },
++  "6JRV": {
++   "certification": "bbe0ab89e66ee78dc6485646647d4fd5ae322fb13ed6de860c628a5e39b09f5b",
++   "determinant": -18,
++   "gram": [
++    [
++     0,
++     1,
++     0,
++     0,
++     0
++    ],
++    [
++     1,
++     0,
++     0,
++     0,
++     0
++    ],
++    [
++     0,
++     0,
++     0,
++     1,
++     0
++    ],
++    [
++     0,
++     0,
++     1,
++     0,
++     0
++    ],
++    [
++     0,
++     0,
++     0,
++     0,
++     -18
++    ]
++   ],
++   "latex": "L_{9}",
++   "name": "L_9",
++   "path": "lattices/6JRV.md",
++   "rank": 5,
++   "rows": {
++    "O": {
++     "cited": false,
++     "constant": 2,
++     "w": [],
++     "z": []
++    },
++    "Otilde": {
++     "cited": false,
++     "constant": 2,
++     "w": [],
++     "z": []
++    },
++    "Otilde+": {
++     "cited": false,
++     "constant": 2,
++     "w": [],
++     "z": []
++    }
++   },
++   "signature": [
++    2,
++    3
++   ],
++   "tag": "6JRV"
++  },
++  "6JRW": {
++   "certification": "6bc15dc76ab90b05bb0a5c6c62c10fdb6acbfa44fa869bf39aef776cc87c2a45",
++   "determinant": -72,
++   "gram": [
++    [
++     0,
++     1,
++     0,
++     0,
++     0
++    ],
++    [
++     1,
++     0,
++     0,
++     0,
++     0
++    ],
++    [
++     0,
++     0,
++     0,
++     1,
++     0
++    ],
++    [
++     0,
++     0,
++     1,
++     0,
++     0
++    ],
++    [
++     0,
++     0,
++     0,
++     0,
++     -72
++    ]
++   ],
++   "latex": "L_{36}",
++   "name": "L_36",
++   "path": "lattices/6JRW.md",
++   "rank": 5,
++   "rows": {
++    "O": {
++     "cited": false,
++     "constant": 4,
++     "w": [],
++     "z": []
++    },
++    "Otilde": {
++     "cited": false,
++     "constant": 4,
++     "w": [],
++     "z": []
++    },
++    "Otilde+": {
++     "cited": false,
++     "constant": 4,
++     "w": [],
++     "z": []
++    }
++   },
++   "signature": [
++    2,
++    3
++   ],
++   "tag": "6JRW"
+   }
+  }
+ }
+diff --git a/tests/cards/refresh_lattice_database_enriques.py b/tests/cards/refresh_lattice_database_enriques.py
+index dbf6d4e..7bbaa3c 100644
+--- a/tests/cards/refresh_lattice_database_enriques.py
++++ b/tests/cards/refresh_lattice_database_enriques.py
+@@ -56,6 +56,15 @@ PARABOLIC_SUBDIAGRAM_TAGS = ("0125",)
+ # lattice-database certify run of #375 certifies beside the hyperbolic plane.
+ PRIMITIVE_ORBIT_TAGS = ("0016", "026E", "0012")
+ 
++# The five L_d = U + U + <-2d> cards, d in {1, 2, 4, 9, 36}, whose
++# `integral.primitive_orbits` rows lattice-database#13 has `certify` mint from
++# `isotropic_orbit_representatives(1)` on the indefinite lattice: no source
++# states these counts, so a card row is a certificate and not a citation, and
++# the known-answer test is the only oracle there is.
++LAMBDA_ORBIT_TAGS = ("6JRS", "6JRT", "6JRU", "6JRV", "6JRW")
++
++PRIMITIVE_ORBIT_TAGS += LAMBDA_ORBIT_TAGS
++
+ # The catalogued lattice whose certified reflection verdict #344 reads.
+ REFLECTIVITY_TAGS = ("0026",)
+ 
+@@ -279,6 +288,9 @@ def primitive_orbit_series(ref: str, tag: str) -> dict:
+                 "constant": int(row["constant"]),
+                 "z": [int(entry) for entry in row.get("z", [])],
+                 "w": [int(entry) for entry in row.get("w", [])],
++                # Whether the card cites a source for this row: a row that no source
++                # states carries a certificate instead, and a test says which it is.
++                "cited": bool(row.get("reference")),
+             }
+             for subgroup, row in rows.items()
+         },
+diff --git a/tests/lattices/test_primitive_orbit_series_on_indefinite_lattices.sage b/tests/lattices/test_primitive_orbit_series_on_indefinite_lattices.sage
+index aa6aff7..dc6749a 100644
+--- a/tests/lattices/test_primitive_orbit_series_on_indefinite_lattices.sage
++++ b/tests/lattices/test_primitive_orbit_series_on_indefinite_lattices.sage
+@@ -1,53 +1,162 @@
+-r"""``primitive_orbit_series``'s ``constant`` term agrees with the line-orbit call on the same lattice.
++r"""``primitive_orbit_series``'s ``constant`` is the card row of ``U ⊕ U ⊕ ⟨-2d⟩``.
+ 
+ ``L_d = U ⊕ U ⊕ ⟨-2d⟩`` has rank five and signature ``(2, 3)``.  On an indefinite
+ lattice the series has one meaningful term: ``constant``, the number of
+-``Γ``-orbits of primitive isotropic lines.  This module asserts that term against
+-the same group's own orbit call rather than against a number written here, and
+-that the bounded terms are empty.
+-
+-No expected count appears in this file.  A printed count, a docstring or an issue
+-is not an oracle: the expected value of a known-answer test is a
+-lattice-database card value named by tag and certified by citation or
+-computation, and the five ``L_d`` cards do not exist yet.  What is asserted here
+-holds whatever the count turns out to be — the series and the orbit call are two
+-routes to one number, and they must agree on every lattice and every group:
+-
+-* ``constant`` equals ``isotropic_orbit_representatives(1).cardinality()`` for
+-  the same subgroup of ``O(L)``;
+-* ``z`` and ``w`` are empty, because no positive or negative norm is bounded on
+-  an indefinite lattice and the bounded fibre is infinite.
++``Γ``-orbits of primitive isotropic lines, which is the number
++``isotropic_orbit_representatives(1).cardinality()`` returns for the same
++subgroup; ``z`` and ``w`` are empty, since no positive or negative norm is
++bounded and the bounded fibre is infinite.
++
++No published source states these counts (``dzackgarza/lattice-database``#10, item
++3), so the five ``L_d`` cards state no citation for them: each row is what the
++database's ``latticedb certify`` minted from this library, and
++``integral.primitive_orbits``' certificate is the record of that computation
++(lattice-database#13).  A count this file typed would be a second oracle with no
++provenance, so none is typed.  The oracle is the card, read by tag from the digest
++the conftest binds as ``card``, and the tests pin both directions: the card's row
++for ``O``, ``Otilde`` and ``Otilde+`` is the library's count for that subgroup of
++``O(L)``, so a library that changes its answer fails here and a card that changes
++its number fails too.  On one card the two routes inside the library are compared
++as well, ``primitive_orbit_series()``'s ``constant`` against the subgroup's own
++orbit call.
++
++The lattice is built from the card's ``gram_tensor``, so the comparison is about
++the card's lattice and not about a form written here.
++
++The cards are tested one at a time because the count is a real computation:
++``L_36`` takes about half a minute for its three subgroups, and the session's
++``--timeout=60`` bounds one test.
+ """
+ 
+ from sage_extensions.all import *  # noqa: F401,F403
+ 
+-_LATTICES = (1, 2, 4, 9, 36)
++# The subgroups the cards state a row for, in the corpus's spelling, which is the
++# spelling the series' keys use.
++STATED_SUBGROUPS = ("O", "Otilde", "Otilde+")
++
++
++def stated(tag):
++    r"""The card ``tag``'s primitive-orbit rows, read by tag from the digest."""
++    return card("primitive_orbit_series", tag)
++
++
++def lattice_of(tag):
++    r"""The lattice card ``tag`` states, built from its own Gram matrix."""
++    return Lattices(ZZ)(stated(tag)["gram"])
++
++
++def subgroup_of(lattice, name):
++    r"""$\Gamma \leq O(L)$ that the corpus's name ``name`` denotes.
++
++    $S$ is the kernel of the determinant, $\widetilde O$ the kernel of the
++    reduction to $O(A_L)$ and $O^{+}$ the kernel of the real spinor norm, so each
++    further name is the intersection of the two it joins.
++    """
++    match name:
++        case "O":
++            return lattice.Aut()
++        case "Otilde":
++            return lattice.stable_orthogonal_group()
++        case "Otilde+":
++            return lattice.stable_orthogonal_group().intersection(lattice.O_plus())
++    raise ValueError(f"{name!r} is not one of the subgroups these cards state")
++
++
++def assert_the_rows_are_the_counts(tag) -> None:
++    r"""The card's three numbers are the library's three numbers.
++
++    A row the card does not state is a failure of the card and not a skip: the
++    assertion is that the three subgroups are exactly the rows stated, so a card
++    that drops one is caught here rather than passing on the rows it kept.
++    """
++    row_set = stated(tag)["rows"]
++    assert set(row_set) == set(STATED_SUBGROUPS), (tag, sorted(row_set))
++    lattice = lattice_of(tag)
++    for name in STATED_SUBGROUPS:
++        count = int(subgroup_of(lattice, name).isotropic_orbit_representatives(1).cardinality())
++        assert count == int(row_set[name]["constant"]), (tag, name, "card", row_set[name]["constant"])
++
+ 
++def test_the_rows_of_l_1_are_the_counts() -> None:
++    r"""``6JRS`` is $L_1 = U \oplus U \oplus \langle -2 \rangle$."""
++    assert_the_rows_are_the_counts("6JRS")
+ 
+-def _lattice(d):
+-    r"""``U ⊕ U ⊕ ⟨-2d⟩``, rank five and signature ``(2, 3)``."""
+-    return Lattices(ZZ)("U") + Lattices(ZZ)("U") + Lattices(ZZ)([[-2 * ZZ(d)]])
+ 
++def test_the_rows_of_l_2_are_the_counts() -> None:
++    r"""``6JRT`` is $L_2 = U \oplus U \oplus \langle -4 \rangle$."""
++    assert_the_rows_are_the_counts("6JRT")
+ 
+-def test_the_constant_term_agrees_with_the_line_orbit_call() -> None:
+-    r"""Two routes to one count, on every ``L_d`` and every subgroup of ``O(L)``."""
+-    for d in _LATTICES:
+-        lattice = _lattice(d)
+-        series = lattice.primitive_orbit_series()
+-        stable = lattice.stable_orthogonal_group()
+-        plus = lattice.O_plus()
+-        subgroups = {
+-            "O": lattice.Aut(),
+-            "Otilde": stable,
+-            "Otilde+": stable.intersection(plus),
+-        }
+-        for group, subgroup in subgroups.items():
+-            assert series[group]["constant"] == subgroup.isotropic_orbit_representatives(1).cardinality()
++
++def test_the_rows_of_l_4_are_the_counts() -> None:
++    r"""``6JRU`` is $L_4 = U \oplus U \oplus \langle -8 \rangle$."""
++    assert_the_rows_are_the_counts("6JRU")
++
++
++def test_the_rows_of_l_9_are_the_counts() -> None:
++    r"""``6JRV`` is $L_9 = U \oplus U \oplus \langle -18 \rangle$."""
++    assert_the_rows_are_the_counts("6JRV")
++
++
++def test_the_rows_of_l_36_are_the_counts() -> None:
++    r"""``6JRW`` is $L_{36} = U \oplus U \oplus \langle -72 \rangle$, the most expensive of the five."""
++    assert_the_rows_are_the_counts("6JRW")
++
++
++def test_the_series_agrees_with_the_orbit_call_and_with_the_card() -> None:
++    r"""The two routes inside the library give the card's number on ``6JRS``.
++
++    $U^2$ is a sublattice of every ``L_d``, so every row is at least one: the
++    comparison does not hold of two empty series.  The other four cards are the
++    per-tag tests' business, since the series asks all eight subgroups at once and
++    ``L_36`` would put this one over the session's per-test bound.
++    """
++    lattice = lattice_of("6JRS")
++    series = lattice.primitive_orbit_series()
++    for name in STATED_SUBGROUPS:
++        assert int(series[name]["constant"]) == int(stated("6JRS")["rows"][name]["constant"]), name
++        assert int(series[name]["constant"]) >= 1, name
+ 
+ 
+ def test_the_series_bounds_nothing_on_an_indefinite_lattice() -> None:
+-    r"""``z`` and ``w`` empty: a bounded fibre is infinite here, so only the constant term exists."""
+-    series = _lattice(9).primitive_orbit_series()
+-    for group in ("O", "Otilde", "Otilde+"):
+-        assert series[group]["z"] == []
+-        assert series[group]["w"] == []
++    r"""``z`` and ``w`` empty, on the cards and in the series: the bounded fibre is infinite here."""
++    for tag in ("6JRS", "6JRT", "6JRU", "6JRV", "6JRW"):
++        row_set = stated(tag)["rows"]
++        for name in STATED_SUBGROUPS:
++            assert row_set[name]["z"] == [], (tag, name)
++            assert row_set[name]["w"] == [], (tag, name)
++    series = lattice_of("6JRS").primitive_orbit_series()
++    for name in STATED_SUBGROUPS:
++        assert [int(entry) for entry in series[name]["z"]] == [], name
++        assert [int(entry) for entry in series[name]["w"]] == [], name
++
++
++def test_each_card_states_the_lattice_the_count_belongs_to() -> None:
++    r"""The card's rank, signature, determinant and Gram are the lattice's, so the counts are its counts.
++
++    A rank-and-signature check alone would not say the Gram matrix was read: the
++    determinant and the form itself are compared too, entrywise.
++    """
++    for tag in ("6JRS", "6JRT", "6JRU", "6JRV", "6JRW"):
++        row_set = stated(tag)
++        lattice = lattice_of(tag)
++        basis = tuple(lattice.module_generators())
++        assert int(lattice.module_rank()) == int(row_set["rank"]), tag
++        assert [int(entry) for entry in lattice.signature()] == [int(entry) for entry in row_set["signature"]], tag
++        assert int(lattice.determinant()) == int(row_set["determinant"]), tag
++        assert [[int(lattice.b(left, right)) for right in basis] for left in basis] == row_set["gram"], tag
++
++
++def test_the_rows_are_certified_by_computation_and_not_cited() -> None:
++    r"""Each row names a certificate and no citation, which is what the count has.
++
++    A cited row would carry a ``reference`` and would not need a certificate; these
++    rows have no source, so the card's stamp is the whole provenance of the number,
++    and a row that arrived without one would be a number nothing establishes.  The
++    stamp is hexadecimal, which a citation's prose is not.
++    """
++    for tag in ("6JRS", "6JRT", "6JRU", "6JRV", "6JRW"):
++        stamp = stated(tag)["certification"]
++        assert set(stamp) <= set("0123456789abcdef"), (tag, stamp)
++        assert stamp != "", (tag, stamp)
++        for name in STATED_SUBGROUPS:
++            assert stated(tag)["rows"][name]["cited"] is False, (tag, name)

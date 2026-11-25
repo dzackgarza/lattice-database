@@ -23,6 +23,7 @@ certifications:
   integral.anisotropic_primes: 1f5a4646798838e594e9727a1f932711bc8756cbec0a5b1bbd394a9586786906
   integral.local_representations: 141e2979cc9452187cc325a48e9fa3d105c62135ec5081cff79e48b75e10ce52
   integral.local_densities: 62064b384a0b6c603abf729616ee7c71efea6ab5734378bb833ae2ec4152b7a0
+  integral.discriminant_sequence: 5cd08c8761fd257f6e2fc2899ced11564d3174cef4085067864c2ebe29eb3cb6
 rank: 4
 gram_tensor:
 - [3, 0, 0, 0]
@@ -45,6 +46,71 @@ integral:
   level: 48
   modular_scale: false
   discriminant_group: [3, 3, 24]
+  discriminant_sequence:
+    discriminant_factors: [3, 3, 24]
+    discriminant_basis_lifts:
+    - ['0', 1/3, '0', '0']
+    - [-1/3, '0', '-1', '0']
+    - ['0', '0', -7/24, 1/12]
+    discriminant_quadratic_gram:
+    - [1/3, '0', '0']
+    - ['0', 1/3, '0']
+    - ['0', '0', 7/24]
+    discriminant_group_order: 192
+    discriminant_generators:
+    - - [2, 2, 16]
+      - [1, 1, 16]
+      - [2, 1, 21]
+    - - [2, 2, 16]
+      - [2, 2, 8]
+      - [1, 2, 21]
+    - - [2, 2, 16]
+      - [2, 2, 8]
+      - [2, 1, 3]
+    - - [2, 2, 16]
+      - [2, 2, 8]
+      - [2, 1, 21]
+    - - [2, 2, 16]
+      - [2, 2, 8]
+      - [2, 1, 15]
+    image_generators:
+    - - [2, 0, 0]
+      - [0, 2, 0]
+      - [0, 0, 23]
+    - - [0, 2, 0]
+      - [2, 0, 0]
+      - [0, 0, 11]
+    - - [0, 2, 0]
+      - [2, 0, 0]
+      - [0, 0, 1]
+    - - [1, 0, 0]
+      - [0, 2, 0]
+      - [0, 0, 1]
+    image_order: 32
+    kernel_order: 1
+    coset_representatives:
+    - - [1, 0, 0]
+      - [0, 1, 0]
+      - [0, 0, 1]
+    - - [0, 1, 0]
+      - [1, 0, 0]
+      - [0, 0, 5]
+    - - [1, 1, 8]
+      - [1, 1, 16]
+      - [1, 2, 3]
+    - - [1, 1, 8]
+      - [1, 1, 16]
+      - [1, 2, 9]
+    - - [1, 1, 8]
+      - [2, 2, 8]
+      - [1, 2, 3]
+    - - [1, 1, 8]
+      - [2, 2, 8]
+      - [1, 2, 9]
+    mm_trivial: false
+    image_normal: false
+    quotient_generator_cosets: null
+    quotient_multiplication: null
   overlattice_count: 10
   bad_reduction_primes: [2, 3]
   quadratic_character: 24

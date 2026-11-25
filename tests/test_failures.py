@@ -4,13 +4,16 @@ from __future__ import annotations
 
 import shutil
 import sys
+from datetime import UTC, datetime
 import time
 from pathlib import Path
+from typing import Any
 
 import pytest
 import yaml
 
 from latticedb import certificates, corpus, genus
+from latticedb import failures
 
 REPOSITORY = Path(__file__).resolve().parent.parent
 
@@ -37,9 +40,8 @@ def test_worker_startup_failure_is_persisted_and_requires_explicit_retry(tmp_pat
     monkeypatch.setenv("LATTICEDB_RUN_URL", "https://github.com/dzackgarza/lattice-database/actions/runs/39753434335")
     with pytest.raises(ChildProcessError):
         genus.certify(tmp_path, loaded, {}, (), time.time() + 30)
-    assert (tmp_path / "failures.yaml").exists(), "worker failure was discarded instead of queued for triage"
+    assert (tmp_path / failures.DIRECTORY).is_dir(), "worker failure was discarded instead of queued for triage"
 
-    from latticedb import failures
 
     queued = failures.load(tmp_path)["0012 worker"]
     assert queued.disposition == "open"
@@ -56,6 +58,55 @@ def test_worker_startup_failure_is_persisted_and_requires_explicit_retry(tmp_pat
     assert repeated.disposition == "open"
     assert len(repeated.attempts) == 2
     assert "repairing the worker environment" in repeated.notes[-1]
+
+
+def test_the_certify_command_takes_one_named_card_and_queues_its_worker_failure(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    """`latticedb certify --tag <TAG>` is the consumer command: one card, its failure queued, non-zero exit."""
+    from latticedb import cli, failures
+
+    (tmp_path / "lattices").mkdir()
+    for tag in ("0012", "0016"):
+        shutil.copy(REPOSITORY / "lattices" / f"{tag}.md", tmp_path / "lattices" / f"{tag}.md")
+    shutil.copy(REPOSITORY / corpus.FAMILIES_FILE, tmp_path / corpus.FAMILIES_FILE)
+    (tmp_path / corpus.RETIRED_FILE).write_text("{}\n")
+    # No preamble computation: the worker module is missing, so this exercises the command's
+    # per-card path and its failure route without calling Sage for a value.
+    monkeypatch.setattr(genus, "WORKER", [sys.executable, "-m", "latticedb.unavailable_worker"])
+    with pytest.raises(ChildProcessError, match="0012"):
+        cli.app(["certify", "--tag", "0012", "--minutes", "1", "--root", str(tmp_path)])
+    queued = failures.load(tmp_path)
+    assert set(queued) == {"0012 worker"}, "the run must ask only for the card it was named"
+    assert queued["0012 worker"].disposition == "open"
+    assert "latticedb.unavailable_worker" in queued["0012 worker"].attempts[-1].stderr
+    assert queued["0012 worker"].attempts[-1].gram_tensor == [[2, -1], [-1, 2]]
+
+
+def test_a_worker_that_ended_before_reading_its_request_is_queued_not_raised(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    """Run 42282409094: a worker that ends before its request is written must be triaged, not raised."""
+    loaded = specimen(tmp_path)
+    started = genus.subprocess.Popen
+
+    def started_and_ended(*arguments: object, **keywords: object) -> Any:
+        # The worker a startup failure leaves: it has already ended when the parent writes
+        # its first request, so the write loses the race with the module's import error.
+        process = started(*arguments, **keywords)
+        process.wait(timeout=60)
+        return process
+
+
+    monkeypatch.setattr(genus, "WORKER", [sys.executable, "-m", "latticedb.unavailable_worker"])
+    monkeypatch.setattr(genus.subprocess, "Popen", started_and_ended)
+    with pytest.raises(ChildProcessError):
+        genus.certify(tmp_path, loaded, {}, (), time.time() + 30)
+    assert (tmp_path / failures.DIRECTORY).is_dir(), "the write's BrokenPipeError was raised instead of the failure queued"
+    queued = failures.load(tmp_path)["0012 worker"]
+    assert queued.disposition == "open"
+    assert "latticedb.unavailable_worker" in queued.attempts[-1].stderr
+    assert queued.attempts[-1].gram_tensor == [[2, -1], [-1, 2]]
 
 
 def test_failed_operation_is_quarantined_by_input_without_blocking_other_work(tmp_path: Path) -> None:
@@ -85,7 +136,6 @@ def test_failed_operation_is_quarantined_by_input_without_blocking_other_work(tm
 
 
 def test_successful_retry_computes_and_resolves_its_failure(tmp_path: Path) -> None:
-    from latticedb import failures
 
     loaded = specimen(tmp_path)
     lattice = loaded.entries[0].lattice
@@ -125,7 +175,6 @@ def test_previous_timeouts_and_lost_workers_enter_manual_triage(tmp_path: Path) 
 
 
 def test_a_later_completed_certificate_resolves_recovered_failure(tmp_path: Path) -> None:
-    from latticedb import failures
 
     loaded = specimen(tmp_path)
     lattice = loaded.entries[0].lattice
@@ -134,3 +183,50 @@ def test_a_later_completed_certificate_resolves_recovered_failure(tmp_path: Path
     # Another runner may finish before the triage-ledger repair is deployed.
     genus.certify(tmp_path, loaded, specimen_certificates(), ("0012",), time.time())
     assert failures.load(tmp_path)[computation].disposition == "resolved"
+
+
+def test_a_ledger_entry_must_be_in_the_shard_of_its_own_tag(tmp_path: Path) -> None:
+    """#17: a computation's shard is `group(tag)`, and a misplaced or duplicated entry is an error."""
+
+    entry = {
+        "disposition": "open",
+        "attempts": [{"hash": "h", "gram_tensor": [[2]], "reason": "exit status 1", "stderr": "", "seconds": 1.0,
+                      "recorded_at": datetime(2026, 11, 7, tzinfo=UTC), "run_url": None, "database_revision": None,
+                      "research_revision": None}],
+        "notes": [],
+    }
+    (tmp_path / failures.DIRECTORY).mkdir()
+    owner = failures.group("0012 integral.genus_symbol")
+    (tmp_path / failures.DIRECTORY / f"{owner}.yaml").write_text(yaml.safe_dump({"0012 integral.genus_symbol": entry}))
+    assert set(failures.load(tmp_path)) == {"0012 integral.genus_symbol"}
+
+    other = next(f"{name:02x}" for name in range(256) if f"{name:02x}" != owner)
+    (tmp_path / failures.DIRECTORY / f"{other}.yaml").write_text(yaml.safe_dump({"0012 integral.genus_symbol": entry}))
+    with pytest.raises(ValueError, match="belongs to the shard"):
+        failures.load(tmp_path)
+
+    # The lawful pair must not live beside the misplaced copy left by the rejection above: that stray
+    # shard correctly still raises. Drop that file and assert the two distinct computations share the
+    # proper shard, then restore the misplaced entry for its own separate rejection.
+    misplaced = tmp_path / failures.DIRECTORY / f"{other}.yaml"
+    rejected = misplaced.read_bytes()
+    misplaced.unlink()
+    (tmp_path / failures.DIRECTORY / f"{owner}.yaml").write_text(
+        yaml.safe_dump({"0012 integral.genus_symbol": entry, "0012 genus_symbol": entry})
+    )
+    assert set(failures.load(tmp_path)) == {"0012 integral.genus_symbol", "0012 genus_symbol"}, (
+        "two different computations of one card are both in its own shard"
+    )
+    (tmp_path / failures.DIRECTORY / f"{other}.yaml").write_text(yaml.safe_dump({"0012 integral.genus_symbol": entry}))
+    # Duplicate occurrence, not just a wrong owner: the misplaced entry still has to be refused as
+    # long as its correct copy sits in the other shard too.
+    misplaced.write_bytes(rejected)
+    with pytest.raises(ValueError, match="belongs to the shard"):
+        failures.load(tmp_path)
+
+
+def test_the_ledger_is_no_longer_read_as_one_file(tmp_path: Path) -> None:
+    """#17: the single-file ledger is not a reader's format, so a stray one changes nothing."""
+
+    (tmp_path / "failures.yaml").write_text(yaml.safe_dump({"0012 integral.genus_symbol": {"disposition": "open", "attempts": []}}))
+    assert failures.load(tmp_path) == {}

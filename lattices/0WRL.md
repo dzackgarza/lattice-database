@@ -23,6 +23,7 @@ certifications:
   integral.anisotropic_primes: dc590078e7e1697713acbb951f7996cc9a4101f261a601e9619b87f45f316c7f
   integral.local_representations: bd2df130bbe1816dc6167e2632a249255557af92266cd15e3fdf28e76649ba97
   integral.local_densities: c7a12197142e877193cf3da9de98c36df3c7f552e2aebfd5d6ef8fe7a41bfaf4
+  integral.discriminant_sequence: 6d03e6bfa59a01e52437dece2dfaa4bd7b158db48d14b157fcf722b1c639e388
 rank: 4
 gram_tensor:
 - [2, 1, 0, 0]
@@ -45,6 +46,74 @@ integral:
   level: 18
   modular_scale: false
   discriminant_group: [3, 3, 9]
+  discriminant_sequence:
+    discriminant_factors: [3, 3, 9]
+    discriminant_basis_lifts:
+    - [-2/3, 1/3, '0', '0']
+    - ['0', '0', 1/3, '0']
+    - ['0', '0', '0', 1/9]
+    discriminant_quadratic_gram:
+    - [2/3, '0', '0']
+    - ['0', 1/3, '0']
+    - ['0', '0', 1/9]
+    discriminant_group_order: 72
+    discriminant_generators:
+    - - [2, 0, 6]
+      - [0, 1, 3]
+      - [2, 1, 8]
+    - - [2, 0, 6]
+      - [0, 2, 6]
+      - [2, 1, 8]
+    - - [2, 0, 6]
+      - [0, 2, 6]
+      - [1, 2, 1]
+    image_generators:
+    - - [2, 0, 0]
+      - [0, 1, 0]
+      - [0, 0, 1]
+    - - [2, 0, 0]
+      - [0, 1, 0]
+      - [0, 0, 1]
+    - - [1, 0, 0]
+      - [0, 2, 0]
+      - [0, 0, 1]
+    - - [1, 0, 0]
+      - [0, 1, 0]
+      - [0, 0, 8]
+    image_order: 8
+    kernel_order: 6
+    coset_representatives:
+    - - [1, 0, 0]
+      - [0, 1, 0]
+      - [0, 0, 1]
+    - - [1, 0, 0]
+      - [0, 1, 3]
+      - [0, 1, 5]
+    - - [1, 0, 0]
+      - [0, 1, 3]
+      - [0, 2, 4]
+    - - [1, 0, 3]
+      - [0, 1, 0]
+      - [1, 0, 7]
+    - - [1, 0, 3]
+      - [0, 1, 0]
+      - [2, 0, 2]
+    - - [1, 0, 3]
+      - [0, 1, 3]
+      - [1, 2, 1]
+    - - [1, 0, 3]
+      - [0, 1, 3]
+      - [2, 1, 8]
+    - - [1, 0, 3]
+      - [0, 1, 6]
+      - [1, 1, 1]
+    - - [1, 0, 3]
+      - [0, 1, 6]
+      - [2, 2, 8]
+    mm_trivial: false
+    image_normal: false
+    quotient_generator_cosets: null
+    quotient_multiplication: null
   overlattice_count: 10
   bad_reduction_primes: [2, 3]
   quadratic_character: 1

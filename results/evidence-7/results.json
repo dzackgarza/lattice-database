@@ -1,0 +1,91 @@
+{
+ "stages": {
+  "construct": {
+   "seconds": 0.23,
+   "peak_mib": 308
+  },
+  "O = L.Aut()": {
+   "seconds": 0.0,
+   "peak_mib": 308
+  },
+  "Otilde = L.stable_orthogonal_group()": {
+   "seconds": 0.06,
+   "peak_mib": 309
+  },
+  "O+ = L.O_plus()": {
+   "seconds": 0.01,
+   "peak_mib": 310
+  },
+  "SO = L.SO()": {
+   "seconds": 0.0,
+   "peak_mib": 310
+  },
+  "SOtilde = Otilde & SO": {
+   "seconds": 0.0,
+   "peak_mib": 310
+  },
+  "SO+ = O+ & SO": {
+   "seconds": 0.0,
+   "peak_mib": 310
+  },
+  "Otilde+ = Otilde & O+": {
+   "seconds": 0.0,
+   "peak_mib": 310
+  },
+  "SOtilde+ = SOtilde & O+": {
+   "seconds": 0.0,
+   "peak_mib": 310
+  },
+  "constant O": {
+   "seconds": 82.98,
+   "peak_mib": 586
+  },
+  "constant SO": {
+   "seconds": 0.02,
+   "peak_mib": 586
+  },
+  "constant O+": {
+   "seconds": 0.04,
+   "peak_mib": 586
+  },
+  "constant SO+": {
+   "seconds": 33.17,
+   "peak_mib": 620
+  },
+  "constant Otilde": {
+   "seconds": 30.94,
+   "peak_mib": 845
+  },
+  "constant SOtilde": {
+   "seconds": 39.17,
+   "peak_mib": 922
+  },
+  "constant Otilde+": {
+   "seconds": 52.42,
+   "peak_mib": 1033
+  }
+ },
+ "sage": "11.0.beta5",
+ "sage_extensions": "/work/sext/src/sage_extensions/__init__.py",
+ "sage_extensions_commit": "34c9be895206eb7756de3411eb4d8b0d1c53b059",
+ "dzack_research": "/repos/research/src/dzack_research/__init__.py",
+ "lattice": {
+  "rank": 11,
+  "determinant": -2048,
+  "signature": [
+   "2",
+   "9"
+  ],
+  "even": true,
+  "witt_index": 2
+ },
+ "constants": {
+  "O": 1,
+  "SO": 1,
+  "O+": 1,
+  "SO+": 1,
+  "Otilde": 527,
+  "SOtilde": 527,
+  "Otilde+": 527
+ }
+}

@@ -1,0 +1,54 @@
+# #27: the three failures #25 uncovered, measured against the owner this repository installs
+
+#25 reported three failing tests once the modules collected. #25's measurements ran against the
+sage-extensions copy the image bakes in at `/repos/sage-extensions` (`7b222e8621`). CI does not use
+that copy: `./.github/actions/sage` installs `research/pyproject.toml`'s git dependency into
+`/sage/.venv`, which is **sage-extensions main** at provisioning time. So each failure is measured
+twice, with the library at each revision and everything else identical
+(`PYTHONPATH=/sage-ext/src:...` puts a main checkout first).
+
+| test | library `7b222e8621` (image copy) | library `main` (38f8109) | disposition |
+| --- | --- | --- | --- |
+| `tests/source_intake/test_nebe_sloane_source.py::test_nebe_sloane_reads_the_full_matrix_of_shimada_86` | `AssertionError: the determinant … needs numerical scalar data, but it takes values in Fraction Field of Integer Ring restricted to Integer Ring` (inside `form_modules.py:4138`) | `TypeError: int() argument must be … not 'OwnedJoinCategory.element_class'` at our line `assert int(formed.determinant()) == entry.determinant` | **ours**: the call, fixed here |
+| `tests/test_construction_corpus.py::test_construction_prefix_stores_each_eligible_expression` | `TypeError: TensorProductModuleMorphismMethods.__init__() got an unexpected keyword argument 'surjectivity_premise'` | passes | owner, and already repaired at their main |
+| `tests/test_construction_corpus.py::test_standard_products_visit_tensor_and_gluing_families` | same `surjectivity_premise` | passes | owner, and already repaired at their main |
+
+Measured, `tests/test_construction_corpus.py`:
+
+    library 7b222e8621:  2 failed, 4 passed in 13.64s
+    library main 38f8109: 6 passed in 25.69s        (twice, identically)
+
+`sage_extensions.__file__` was printed in both runs to confirm which copy was imported.
+
+## 1. The determinant: this repository's call moved, and is fixed here
+
+At main the owner's `FormModules.determinant()` still returns its rational element, but `int()` on it
+raises; the value is read through the element's own `numerator()` and `denominator()`, which is
+exactly how `records.derive` reads the same quantity (`src/latticedb/records.py:325`). The test now
+does the same:
+
+    determinant = formed.determinant()
+    assert Fraction(int(determinant.numerator()), int(determinant.denominator())) == entry.determinant
+
+The assertion is the same equality of the same numbers against the archive's stated determinant; no
+value, tolerance or check is loosened. After the change, at main:
+
+    tests/source_intake/test_nebe_sloane_source.py   4 passed in 5.62s
+
+## 2. The tensor-product constructor: not ours, and fixed upstream
+
+`surjectivity_premise` does not appear anywhere in `src/latticedb`: the failing call chain is
+`lattices.py:2566` → `module_morphisms.py:3225` → `module_morphisms.py:2493` → the tensor-product
+morphism class, all inside sage-extensions. At their main the same two tests pass unchanged, so no
+issue is filed for it here; the failure was the image copy's revision. (The parallel defect at
+`7b222e8621` is real there — a class without the keyword is constructed with it — but it is not in
+main.)
+
+## 3. What else the same six modules do at main
+
+`tests/validation/test_construction.py` is not one of the three, and it does not fail: it is **killed**
+(`Killed`, `PYEXIT=137`) after eight minutes at main in this 15 GiB VM. It is the `corpus.load` of
+302,504 cards plus a preamble object for every endpoint of every stored morphism, in one process. That
+is #6's class of ceiling, not an owner-API question: the `tests` workflow has no swap step, and the
+verify workflow's shards are the jobs that do. Reported here rather than repaired, because the repair
+is a decision about where that check runs.

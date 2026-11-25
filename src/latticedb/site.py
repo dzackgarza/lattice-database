@@ -33,6 +33,9 @@ from latticedb.collection_query import matches_collection
 from latticedb.corpus import Entry, load, read_card
 from latticedb.geometric import HermitianSymmetricSpace, ProjectiveComplexVariety, RiemannianSymmetricSpace
 from latticedb.model import (
+    Automorphisms,
+    CuspChamber,
+    CuspRootOrbitRow,
     DefiniteData,
     FormData,
     HyperbolicData,
@@ -389,6 +392,16 @@ def fields() -> Iterator[tuple[str, str | None, type[BaseModel]]]:
         "integral.discriminant_orbits.<group>",
         PrimitiveOrbitSeries,
     )
+    yield (
+        "Chamber of a reflection group",
+        "integral.cusp_chambers.<group>[]",
+        CuspChamber,
+    )
+    yield (
+        "Orbits of the root classes at a cusp",
+        "integral.cusp_root_orbits.<group>[]",
+        CuspRootOrbitRow,
+    )
     yield "Definite lattice", "definite", DefiniteData
     yield (
         "Component of the root system of a definite lattice",
@@ -396,6 +409,7 @@ def fields() -> Iterator[tuple[str, str | None, type[BaseModel]]]:
         RootSystemComponent,
     )
     yield "Indefinite lattice", "indefinite", IndefiniteData
+    yield "Generators of an isometry group that is infinite", "automorphisms", Automorphisms
     yield "Hyperbolic lattice", "hyperbolic", HyperbolicData
     yield "Roots of a lattice that is not definite", "root_span", RootSpan
     yield "Related lattice", "related[]", Related
@@ -519,7 +533,9 @@ def build(root: Path, target: Path) -> int:
                 nullity=lattice.nullity,
                 prose=prose[index],
                 components_text=components.replace('"', ""),
-                related=[(by_tag[related.tag].lattice, related.relation) for related in lattice.related],
+                # A related tag the loaded corpus does not hold is no link; `checks.relations.problems`
+                # reports it against the whole corpus, and the build may be given a subset of the cards.
+                related=[(by_tag[related.tag].lattice, related.relation) for related in lattice.related if related.tag in by_tag],
                 span_name=root_span_name(lattice, lattices),
                 span_summands=span_summands(lattice, lattices),
                 span_images=summand_images(lattice, lattices),
@@ -540,6 +556,7 @@ def build(root: Path, target: Path) -> int:
                 ),
                 orthogonal_group=(arithmetic_groups.get(lattice.orthogonal_group) if lattice.orthogonal_group is not None else None),
                 arithmetic_groups=[arithmetic_groups[slug] for slug in lattice.arithmetic_groups if slug in arithmetic_groups],
+                subgroup_latex={slug: arithmetic_groups[slug].latex for slug in arithmetic_groups if arithmetic_groups[slug].lattice == lattice.tag},
                 previous=entries[index - 1].lattice if index > 0 else None,
                 following=entries[index + 1].lattice if index + 1 < len(entries) else None,
             )

@@ -1,0 +1,50 @@
+diff --git a/.github/workflows/tests.yml b/.github/workflows/tests.yml
+index ec9244dcc5..e898ef0165 100644
+--- a/.github/workflows/tests.yml
++++ b/.github/workflows/tests.yml
+@@ -59,6 +59,35 @@ jobs:
+           # the Sage action installs through research; research's preamble is a shim.
+           repository: dzackgarza/sage-extensions
+           path: sage-extensions
++      # The owner's suite records the commit it ran at, and it reads that commit from the checkout's
++      # own git: its `pyproject.toml` addopts load `sage_extensions.testing.timing_record`, whose
++      # session end resolves `sage_extensions.timing.current_commit()`, `git -C <checkout> rev-parse
++      # HEAD`. `actions/checkout` writes the tree as the runner and `sage-env` runs as root, so git
++      # refuses a repository it cannot vouch for — and that refusal is a `CalledProcessError` inside
++      # `pytest_sessionfinish`, which ends the step on a traceback instead of on a verdict (#29: run
++      # 44304988129's step 9, `rev-parse HEAD` returning 128). The image sets no `HOME`, so the
++      # directory is named safe through the environment's config — `safe.directory` reaches git the
++      # way `-c` does — which is what the step below is handed too.
++      - name: Bind the sage-extensions checkout to the container's git
++        if: always()
++        run: |
++          checkout="$GITHUB_WORKSPACE/sage-extensions"
++          git_in_container() {
++            docker exec -i \
++              --env "GIT_CONFIG_COUNT=1" \
++              --env "GIT_CONFIG_KEY_0=safe.directory" \
++              --env "GIT_CONFIG_VALUE_0=$checkout" \
++              sage-env git "$@"
++          }
++          # `git -C` walks up, and this checkout sits inside the database's own repository, so a
++          # directory that is not a checkout would answer with the database's commit. The toplevel
++          # has to be the checkout itself, and HEAD has to resolve in it.
++          top="$(git_in_container -C "$checkout" rev-parse --show-toplevel 2>/dev/null || true)"
++          if [ "$top" != "$checkout" ] || ! commit="$(git_in_container -C "$checkout" rev-parse HEAD 2>/dev/null)"; then
++            echo "::error::the sage-extensions checkout at $checkout is not a repository this environment can read (git resolves the path to '${top:-nothing}'), so the owner's contracts cannot record the commit they ran at"
++            exit 1
++          fi
++          echo "The owner's contracts run at sage-extensions $commit"
+       - name: Validate preamble owner contracts
+         if: always()
+         run: |
+@@ -76,6 +105,9 @@ jobs:
+           # still run and still decide the step.
+           docker exec -i --workdir "$GITHUB_WORKSPACE/sage-extensions" \
+             --env "PYTHONPATH=$GITHUB_WORKSPACE/_ci-support/ai-review-ci/tool-artifacts/pytest_plugins:$GITHUB_WORKSPACE/sage-extensions/src:/repos/sage-extensions/src" \
++            --env "GIT_CONFIG_COUNT=1" \
++            --env "GIT_CONFIG_KEY_0=safe.directory" \
++            --env "GIT_CONFIG_VALUE_0=$GITHUB_WORKSPACE/sage-extensions" \
+             sage-env /sage/.venv/bin/python -c 'import sage.all, sys, pytest; from sage.all import ZZ; from sage_extensions.categories.lattices import Lattices; Lattices(ZZ)([[2, -1], [-1, 2]]).orthogonal_group().order(); sys.exit(pytest.main(sys.argv[1:]))' \
+             -p qc_sage_session -p qc_unique_inventory --no-time-gates \
+             tests/lattices/test_lattice_database_owner_contracts.sage \

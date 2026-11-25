@@ -24,6 +24,7 @@ certifications:
   integral.anisotropic_primes: 06af8321f68de4daa46fcf8db8d5c6c7715e27b61c2e28572430b8cfc8dc58d8
   integral.local_representations: eb8aa6cdc7309ac68b03a1967cc4fc37e084490baa9ec43dc85486aa3e8ab509
   integral.local_densities: 68e90c450276cb75b41b802589851f0a1f4c871fbf8284ac92f04a997c3f4b83
+  integral.discriminant_form: 5844265ef9853c3024b14f848b74778de279ac78283414b16a3f22cd234f11bb
 rank: 4
 gram_tensor:
 - [2, 0, 1, 1]
@@ -125,6 +126,10 @@ integral:
       constant: 0
       z: [0, 2, 0, 2]
       w: [0, 0, 0, 0]
+  discriminant_form:
+    orthogonal_group_order: 8
+    isotropic_classes: 6
+    isotropic_orbits: 3
   anisotropic_primes: []
   local_representations:
   - prime: 2

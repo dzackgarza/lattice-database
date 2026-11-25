@@ -18,34 +18,35 @@ has the images of the source generators as its columns.
 from collections.abc import Mapping, Sequence
 from pathlib import Path
 
-from dzack_research.preamble.categories.abstract_categories.mor_categories import CategoricalMor
-from dzack_research.preamble.categories.lattices import Lattices
-from dzack_research.preamble.categories.modules.framed.formed.form_modules import (
+from sage_extensions.categories.abstract_categories.mor_categories import CategoricalMor
+from sage_extensions.categories.lattices import Lattices
+from sage_extensions.categories.modules.framed.formed.form_modules import (
     FormedModuleMor,
     FormModules,
 )
-from dzack_research.preamble.categories.modules.framed.framed_free_modules import FramedFreeModules
-from dzack_research.preamble.categories.modules.pure.modules import Modules
-from dzack_research.preamble.categories.rings.ring_foundation import _OwnedRingElement, _OwnedRingParent
-from dzack_research.preamble.rings import OwnedRings, session_ring_objects
+from sage_extensions.categories.modules.framed.framed_free_modules import FramedFreeModules
+from sage_extensions.categories.modules.pure.modules import Modules
+from sage_extensions.categories.rings.ring_foundation import _OwnedRingElement, _OwnedRingParent
+from sage_extensions.categories.rings.ring_foundation import OwnedRings
+from sage_extensions.rings import QQ as _OWNED_QQ
+from sage_extensions.rings import ZZ as _OWNED_ZZ
 from pydantic import BaseModel, ConfigDict, TypeAdapter
 
 from latticedb import corpus, hashimoto
 from latticedb.corpus import Matrix
 from latticedb.model import GramTensor, Lattice, Tag, rational
+from latticedb.records import rational_gram
 
-_SESSION_RINGS = session_ring_objects()
-_integers = _SESSION_RINGS["ZZ"]
-assert isinstance(_integers, _OwnedRingParent)
-ZZ: _OwnedRingParent = _integers
-_ring = _SESSION_RINGS["ZZ"]
-assert isinstance(_ring, OwnedRings.ParentMethods)
-integer_ring: OwnedRings.ParentMethods = _ring
-_domain = _SESSION_RINGS["ZZ"]
-assert isinstance(_domain, OwnedRings.NoZeroDivisors.Commutative.Nontrivial.ParentMethods)
-integer_domain: OwnedRings.NoZeroDivisors.Commutative.Nontrivial.ParentMethods = _domain
-QQ = _SESSION_RINGS["QQ"]
-_QQ_AS_ZZ_MODULE = Modules(QQ).restriction_of_scalars(integer_domain.fraction_field_map())(QQ)
+# The owner binds each session scalar once, in `sage_extensions.rings`; a caller that needs a
+# narrower static type asserts the category of that object rather than building a second one.
+assert isinstance(_OWNED_ZZ, _OwnedRingParent)
+ZZ: _OwnedRingParent = _OWNED_ZZ
+assert isinstance(_OWNED_ZZ, OwnedRings.ParentMethods)
+integer_ring: OwnedRings.ParentMethods = _OWNED_ZZ
+assert isinstance(_OWNED_ZZ, OwnedRings.NoZeroDivisors.Commutative.Nontrivial.ParentMethods)
+integer_domain: OwnedRings.NoZeroDivisors.Commutative.Nontrivial.ParentMethods = _OWNED_ZZ
+QQ = _OWNED_QQ
+_QQ_AS_ZZ_MODULE = Modules(QQ).restriction_of_scalars(integer_domain.fraction_field_map())(QQ.regular_module())
 LEECH_RANK = 24
 
 
@@ -106,7 +107,7 @@ def _formed(gram: GramTensor | None) -> FormModules.ParentMethods:
     if gram is None:
         raise ValueError("a Gram tensor must be stated before constructing the source module")
     module = integer_ring.free_module(len(gram))
-    return _formed_module(FormModules(ZZ)(module.bilinear_hom_space(_QQ_AS_ZZ_MODULE)(gram)))
+    return _formed_module(FormModules(ZZ)(module.bilinear_hom_space(_QQ_AS_ZZ_MODULE)(rational_gram(gram))))
 
 
 def _rows(target: Modules.ParentMethods, rows: Matrix) -> CategoricalMor.ElementMethods:

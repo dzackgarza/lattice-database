@@ -8,7 +8,7 @@ import pytest
 import yaml
 from pydantic import TypeAdapter, ValidationError
 
-from latticedb import checks, corpus
+from latticedb import certificates, checks, corpus, records
 from latticedb.catalogues import ArithmeticGroup, LatticeFamily, LieGroup
 from latticedb.geometric import GeometricObject
 
@@ -91,6 +91,122 @@ def test_group_orbit_and_genus_links_use_the_existing_lattice_records(
     loaded = corpus.load(tmp_path)
     assert loaded.arithmetic_groups[0].value.data.cardinality == 8
     assert loaded.genera[0].value.mass == Fraction(1, 12)
+
+
+def _arithmetic_group(generators: list[str] | None) -> dict[str, object]:
+    """An arithmetic-group card for A2 whose generators are named on the A2 card."""
+    data: dict[str, object] = {"cardinality": 6}
+    if generators is not None:
+        data["generator_morphisms"] = generators
+    return {
+        "slug": "a2-rotations",
+        "name": "Rotations of A2",
+        "latex": "C_{3}",
+        "lattice": "0012",
+        "ambient_lie_group": "o-0-2",
+        "data": data,
+    }
+
+
+def test_an_arithmetic_group_generator_is_one_scale_one_self_isometry_of_its_lattice(
+    tmp_path: Path,
+) -> None:
+    """Each name in `data.generator_morphisms` is one isometry L -> L on the card it names.
+
+    #34: the fixture holds the certificates its copies cite. Without them `checks` reports every cited
+    value of 0012 as contradicting a completed certificate the corpus does not hold — the generator
+    morphisms among them — and the filter below would be testing that instead of the generator list.
+    0012's own generator row does agree with its certificate, which is what the second assertion keeps.
+    """
+    (tmp_path / "lattices").mkdir()
+    (tmp_path / "lattices" / "0012.md").symlink_to(ROOT / "lattices" / "0012.md")
+    for name in ("families.yaml", "retired-tags.yaml"):
+        (tmp_path / name).symlink_to(ROOT / name)
+    (tmp_path / "lie-groups").mkdir()
+    (tmp_path / "lie-groups" / "o-0-2.md").symlink_to(ROOT / "lie-groups" / "o-0-2.md")
+    # Only this corpus's own card is certified here, so only its certificates join the fixture.
+    held = {name: certificate for name, certificate in certificates.load(ROOT, tags=["0012"]).items() if name.split(" ", 1)[0] == "0012"}
+    certificates.save(tmp_path, held, tags=["0012"])
+    path = tmp_path / "arithmetic-groups" / "a2-rotations.md"
+    _record(path, _arithmetic_group(["O(L) generator 1"]))
+    problems = checks.report(tmp_path)
+    assert [problem for problem in problems if "contradicts its completed computation certificate" in problem] == []
+    assert [problem for problem in problems if "generator" in problem] == []
+
+    _record(path, _arithmetic_group(["not an isometry", "O(L) generator 1", "O(L) generator 1"]))
+    problems = checks.report(tmp_path)
+    assert any("generator not an isometry is not one scale-1 self-morphism of 0012" in problem for problem in problems)
+    assert any("each generator of 0012 occurs once in the generator list" in problem for problem in problems)
+
+
+def test_an_arithmetic_group_states_its_line_plane_and_flag_counts() -> None:
+    """#10: the three stratum counts are nonnegative integers, and a flag count requires both strata."""
+    record = _arithmetic_group(None)
+    data = dict(record["data"])  # type: ignore[arg-type]
+    stated = ArithmeticGroup.model_validate(record | {"data": data | {"line_orbits": 1, "plane_orbits": 4, "flag_orbits": 7}})
+    assert (stated.data.line_orbits, stated.data.plane_orbits, stated.data.flag_orbits) == (1, 4, 7)
+    assert ArithmeticGroup.model_validate(record | {"data": data | {"plane_orbits": 9}}).data.plane_orbits == 9
+    assert ArithmeticGroup.model_validate(record).data.flag_orbits is None
+    with pytest.raises(ValidationError, match="a flag count requires"):
+        ArithmeticGroup.model_validate(record | {"data": data | {"flag_orbits": 7}})
+    with pytest.raises(ValidationError):
+        ArithmeticGroup.model_validate(record | {"data": data | {"line_orbits": -1}})
+
+
+def test_an_arithmetic_group_index_is_a_positive_integer_or_absent() -> None:
+    record = _arithmetic_group(None)
+    data = dict(record["data"])  # type: ignore[arg-type]
+    assert ArithmeticGroup.model_validate(record).data.index_in_orthogonal_group is None
+    assert ArithmeticGroup.model_validate(record | {"data": data | {"index_in_orthogonal_group": 67456}}).data.index_in_orthogonal_group == 67456
+    with pytest.raises(ValidationError):
+        ArithmeticGroup.model_validate(record | {"data": data | {"index_in_orthogonal_group": 0}})
+
+
+def test_the_coble_card_and_its_group_cards_state_only_their_defining_data() -> None:
+    """#7, #34: T_Co states its defining data and whatever `certify` has certified, and nothing else.
+
+    CI certifies the fields of this card one at a time — #34 found `integral.discriminant_form` certified
+    on it — so the test does not pin which of them are present. It asserts the rule that holds either
+    way: no block of the card gains a field that is not certified, every certificate names a field the
+    card states, and the blocks that #7 leaves to `certify` and to sage-extensions#286 are still absent.
+    The certified value is not to be deleted to make this pass.
+    """
+    card = frontmatter.load(str(ROOT / "lattices" / "6JRR.md")).metadata
+    assert card["name"] == "T_Co"
+    assert (card["rank"], card["signature"], card["determinant"], card["definiteness"]) == (11, [2, 9], -2048, "indefinite")
+    assert card["gram_tensor"][0][0] == 2 and card["gram_tensor"][1][2] == 2 and card["gram_tensor"][3][3] == -4
+    defining = {"integral.parity", "indefinite.isotropic"}
+    stated = {
+        f"{block}.{field}"
+        for block in ("form", "integral", "automorphisms", "definite", "root_span", "root_sublattice", "indefinite", "hyperbolic")
+        for field in (card.get(block) or {})
+    }
+    certified = {name for name in (card.get("certifications") or {}) if name != "derive"}
+    card_fields = {name for name in certified if not name.startswith("arithmetic-group.")}
+    # `derive` is one certificate over the preamble-derived fields it projects, so a field it
+    # supplies is certified although no per-field name cites it (`integral.discriminant_group`,
+    # `integral.level`, `integral.delta`, `integral.bad_reduction_primes` all arrive this way).
+    derived = {
+        f"{block}.{field}"
+        for block, values in records.derived_projection(card).items()
+        if isinstance(values, dict)
+        for field in values
+    }
+    assert stated - defining - derived == card_fields, "every field of T_Co beyond its defining data is one it certifies, and every certificate names a stated field"
+    assert "definite" not in card and "root_span" not in card and "root_sublattice" not in card
+    # A generator of one of the two group cards is a self-isometry of this card, so the card states it
+    # as a `morphisms` entry; the group card states its name. Neither is a field of this card.
+    assert all(morphism["target"] == "6JRR" and morphism["scale"] == 1 for morphism in card["morphisms"])
+    for slug in ("otilde-t-co", "otilde-plus-t-co"):
+        group = ArithmeticGroup.model_validate(frontmatter.load(str(ROOT / "arithmetic-groups" / f"{slug}.md")).metadata)
+        assert group.lattice == "6JRR"
+        assert group.ambient_lie_group == "o-2-9"
+        assert group.data.reference is None, "no source states these values; a computation does"
+        # A stated value is one a completed computation of this card establishes, and an absent one
+        # claims nothing: `latticedb certify --tag 6JRR` fills them, so neither state is pinned here.
+        for short in ("index_in_orthogonal_group", "generator_morphisms"):
+            assert (getattr(group.data, short) is None) != (f"arithmetic-group.{slug}.{short}" in certified), f"{slug} states {short} exactly when its certificate is cited"
+    assert ArithmeticGroup.model_validate(frontmatter.load(str(ROOT / "arithmetic-groups" / "otilde-plus-t-co.md")).metadata).parent_group == "otilde-t-co"
 
 
 def test_complete_intersection_configuration_has_the_stated_dimension() -> None:

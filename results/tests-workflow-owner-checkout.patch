@@ -1,0 +1,32 @@
+diff --git a/.github/workflows/tests.yml b/.github/workflows/tests.yml
+index ec9244dcc5..6ad1614fd2 100644
+--- a/.github/workflows/tests.yml
++++ b/.github/workflows/tests.yml
+@@ -74,6 +74,27 @@ jobs:
+           # prints "13 passed" and exits 1 (#29). Those ceilings are the owner's performance
+           # baselines for its own full suite, not assertions about this repository; the contracts
+           # still run and still decide the step.
++          # The owner's timing record resolves its own commit with `git -C <tree> rev-parse HEAD`
++          # (`sage_extensions.timing.current_commit`), where `<tree>` is the source tree of the
++          # `sage_extensions` the run imported: the checkout at `$GITHUB_WORKSPACE/sage-extensions`,
++          # which the PYTHONPATH below puts in front of the image's own copy. Two things make that call
++          # exit 128 from inside a contract rather than report anything:
++          # - step 8 runs with `if: always()`, so a failed checkout leaves no tree to read;
++          # - `actions/checkout` leaves the tree owned by the runner and the container's user is not
++          #   that user, so git refuses the repository as dubious. `certify.yml` and
++          #   `certify-searches.yml` add the workspace to `safe.directory` for the same reason.
++          # So the tree is named and checked here, as the container reads it, and a tree the container
++          # cannot see is this step's own failure with that sentence.
++          tree="$GITHUB_WORKSPACE/sage-extensions"
++          if [ ! -f "$tree/pyproject.toml" ] || [ ! -e "$tree/.git" ]; then
++            printf '::error file=.github/workflows/tests.yml::there is no sage-extensions checkout at %s, so the owner contracts have no tree to record their commit from; step 8 (Check out sage-extensions) did not leave one\n' "$tree" >&2
++            exit 1
++          fi
++          docker exec -i sage-env git config --global --add safe.directory "$tree"
++          if ! docker exec -i sage-env git -C "$tree" rev-parse --verify HEAD; then
++            printf '::error file=.github/workflows/tests.yml::the container cannot read the sage-extensions checkout at %s as a git repository, so the owner contracts cannot record the commit they ran at\n' "$tree" >&2
++            exit 1
++          fi
+           docker exec -i --workdir "$GITHUB_WORKSPACE/sage-extensions" \
+             --env "PYTHONPATH=$GITHUB_WORKSPACE/_ci-support/ai-review-ci/tool-artifacts/pytest_plugins:$GITHUB_WORKSPACE/sage-extensions/src:/repos/sage-extensions/src" \
+             sage-env /sage/.venv/bin/python -c 'import sage.all, sys, pytest; from sage.all import ZZ; from sage_extensions.categories.lattices import Lattices; Lattices(ZZ)([[2, -1], [-1, 2]]).orthogonal_group().order(); sys.exit(pytest.main(sys.argv[1:]))' \

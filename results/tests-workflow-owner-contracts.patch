@@ -1,0 +1,27 @@
+diff --git a/.github/workflows/tests.yml b/.github/workflows/tests.yml
+index 61d307ba6e..9db8ba9d44 100644
+--- a/.github/workflows/tests.yml
++++ b/.github/workflows/tests.yml
+@@ -34,19 +34,12 @@ jobs:
+           just tensor-boundary
+       - name: Provision the shared Sage environment
+         uses: ./.github/actions/sage
+-      - name: Read the installed sage-extensions revision
+-        id: sage-extensions
+-        run: |
+-          # The Sage action installs sage-extensions from main through research; its owner
+-          # contracts run from a checkout of that same commit.
+-          revision="$(docker exec sage-env /sage/.venv/bin/python -c 'import importlib.metadata, json; print(json.loads(importlib.metadata.distribution("sage-extensions").read_text("direct_url.json"))["vcs_info"]["commit_id"])')"
+-          echo "revision=$revision" >> "$GITHUB_OUTPUT"
+-          echo "sage-extensions $revision"
+-      - name: Check out the installed sage-extensions (actions/checkout v4)
++      - name: Check out sage-extensions (actions/checkout v4)
+         uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+         with:
++          # The owner contracts run against sage-extensions itself, at main, which is what
++          # the Sage action installs through research; research's preamble is a shim.
+           repository: dzackgarza/sage-extensions
+-          ref: ${{ steps.sage-extensions.outputs.revision }}
+           path: sage-extensions
+       - name: Validate preamble owner contracts
+         run: |

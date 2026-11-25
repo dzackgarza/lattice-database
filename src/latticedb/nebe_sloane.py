@@ -2,7 +2,11 @@
 
 Each entry page lists sections `NAME`, `DIMENSION`, `DET` (the entries of the
 Niemeier lattices name it `DETERMINANT`), `MINIMAL_NORM`, `KISSING_NUMBER`,
-`REFERENCES` and `GRAM`. The `GRAM` section gives the rank
+`REFERENCES` and `GRAM`. An entry of the standard-format archive may also state
+`GROUP_ORDER`, the order of its automorphism group, which the archive prints as
+an integer, as an integer followed by its prime-power factorisation, or as a
+list of prime powers; the entry pages print generators under `AUTO` and no
+order. The `GRAM` section gives the rank
 and then the components `b(e_i, e_j)`, row by row, for all `j` or for `j <= i`.
 `fetch` reads an entry page into an `Entry`; `archive_entry` reads a named entry
 from `union.gz`. `sources/nebe_sloane/<NAME>.json` stores it.
@@ -45,6 +49,7 @@ class Entry(BaseModel):
     determinant: int | None
     minimal_norm: int | None
     kissing_number: int | None
+    group_order: int | None = None
     references: tuple[str, ...]
     gram_tensor: tuple[tuple[int, ...], ...]
 
@@ -79,6 +84,39 @@ def determinant(token: str) -> int:
             value *= int(base) ** int(exponent) if separator else int(base)
         return value
     return integer(expression)
+
+
+def order(token: str) -> int:
+    """Read the catalogue's `GROUP_ORDER` in each of the forms it prints.
+
+    `48`; `737280 = 2^14 * 3^2 * 5`; `<2 10> <3 4> <5 3> <7 1>`; `<2, 12>, <3, 4>`;
+    `[ <2, 9>, <3, 1> ]`; `2^31 * 3^5 * 5^2 * 7 * 17 * 31`; and the order of `LAMBDA31`,
+    printed as `|Aut| = 336 * ... * 2` then `= 2^26 * 3^2 * 7 = 4227858432`. Every
+    form the section prints must give the same integer.
+    """
+    expression = " ".join(token.split())
+    pairs = re.findall(r"<\s*(\d+)\s*[, ]\s*(\d+)\s*>", expression)
+    if pairs:
+        return _prime_powers(pairs)
+    values = [value for value in (_product_of(segment) for segment in expression.split("=")) if value is not None]
+    assert values and all(value == values[-1] for value in values), f"the forms of {token} do not give one order"
+    return values[-1]
+
+
+def _prime_powers(factors: list[tuple[str, str]]) -> int:
+    """The integer a list of prime powers denotes; an absent exponent is 1."""
+    value = 1
+    for base, exponent in factors:
+        value *= int(base) ** int(exponent or 1)
+    return value
+
+
+def _product_of(text: str) -> int | None:
+    """The value of a product of integers and prime powers, or `None` where the text states no value."""
+    terms = [term for term in re.split(r"[\s*]+", text) if term]
+    if not terms or not all(re.fullmatch(r"\d+(?:\^\d+)?", term) for term in terms):
+        return None
+    return _prime_powers([term.partition("^")[::2] for term in terms])
 
 
 def components(lines: list[str]) -> tuple[tuple[int, ...], ...]:
@@ -116,6 +154,7 @@ def fetch(name: str) -> Entry:
         determinant=determinant(found["DET" if "DET" in found else "DETERMINANT"][0]) if "DET" in found or "DETERMINANT" in found else None,
         minimal_norm=integer(found["MINIMAL_NORM"][0]) if "MINIMAL_NORM" in found else None,
         kissing_number=integer(found["KISSING_NUMBER"][0]) if "KISSING_NUMBER" in found else None,
+        group_order=None,
         references=tuple(found.get("REFERENCES", [])),
         gram_tensor=components(found["GRAM"]),
     )
@@ -144,14 +183,17 @@ def archive_entry(archive: Path, name: str) -> Entry:
     assert len(matches) == 1, f"expected one archive entry named {name}, found {len(matches)}"
     found = matches[0]
     dimension = int(found["DIMENSION" if "DIMENSION" in found else "DIM"][0])
+    stated_determinant = found.get("DET") or found.get("DETERMINANT")
+    stated_order = found.get("GROUP_ORDER")
     return Entry(
         name=name,
         title=name,
         url=ARCHIVE,
         dimension=dimension,
-        determinant=determinant(found["DET"][0]) if "DET" in found else None,
+        determinant=determinant(stated_determinant[0]) if stated_determinant else None,
         minimal_norm=integer(found["MINIMAL_NORM"][0]) if "MINIMAL_NORM" in found else None,
         kissing_number=integer(found["KISSING_NUMBER"][0]) if "KISSING_NUMBER" in found else None,
+        group_order=order(" ".join(stated_order)) if stated_order else None,
         references=tuple(line.strip() for line in found.get("REFERENCES", []) if line.strip()),
         gram_tensor=maple_components(found["GRAM_MATRIX"], dimension) if "GRAM_MATRIX" in found else components(found["GRAM"]),
     )
@@ -182,12 +224,14 @@ def record(entry: Entry, name: str, latex: str, aliases: tuple[str, ...], famili
     }
     if entry.determinant is not None:
         fields["determinant"] = entry.determinant
-    if entry.minimal_norm is not None or entry.kissing_number is not None:
+    if entry.minimal_norm is not None or entry.kissing_number is not None or entry.group_order is not None:
         definite: dict[str, Yaml] = {}
         if entry.minimal_norm is not None:
             definite["minimum"] = entry.minimal_norm
         if entry.kissing_number is not None:
             definite["kissing_number"] = entry.kissing_number
+        if entry.group_order is not None:
+            definite["automorphism_group_order"] = entry.group_order
         fields["definite"] = definite
     prose = f"The components $b(e_i, e_j)$ are those of the section `GRAM` of the entry `{entry.name}` of the Catalogue of Lattices."
     if entry.references:
@@ -218,6 +262,8 @@ def stored_problems(root: Path, loaded: Corpus) -> list[str]:
             or (entry.determinant is not None and lattice.determinant != entry.determinant)
             or (entry.minimal_norm is not None and (definite is None or definite.minimum != entry.minimal_norm))
             or (entry.kissing_number is not None and (definite is None or definite.kissing_number != entry.kissing_number))
+            # The archive states an order for an indefinite lattice too, where a card has no field for it.
+            or (entry.group_order is not None and definite is not None and definite.automorphism_group_order != entry.group_order)
         ):
             problems.append(f"{path}: source-stated fields differ from record {lattice.tag}")
     return problems
