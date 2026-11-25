@@ -11,7 +11,7 @@ ai_review_ci_format_scheduled_dirs := "lattices"
 default:
     @just --list
 
-[doc("Run lattice-database workflows in the repository's Sage Python with both source")]
+[doc("Run lattice-database workflows in the repository's Sage Python with both source trees visible.")]
 [private]
 [positional-arguments]
 _latticedb *ARGS:
@@ -87,7 +87,7 @@ deploy:
 tag:
     just _latticedb next-tag
 
-[doc("Focused local model/schema gate. The preamble may be imported; lattice-db owns")]
+[doc("Focused local model/schema gate.")]
 test:
     PYTHONPATH="$HOME/research/src:src" "$(just -f ~/ai-review-ci/justfiles/sage.just -d . _sage-python)" -m pytest tests/test_model.py -q
 
@@ -112,7 +112,7 @@ duplicates:
 deduplicate:
     just _latticedb deduplicate
 
-[doc("MVP publication: inspect staged syntax only; model tests and architectural")]
+[doc("MVP publication: inspect staged syntax only; model tests and architectural ownership rules run in CI, not at every commit.")]
 test-commit:
     @just -f ~/ai-review-ci/justfiles/sage.just -d . test-commit
 
@@ -124,7 +124,7 @@ test-push:
 test-ci:
     @just -f ~/ai-review-ci/justfiles/sage.just -d . test-ci
 
-[doc("Detect coordinate conventions written in the database source (research")]
+[doc("Detect coordinate conventions written in the database source (research CONTRIBUTING.md, OWN-24): coordinate operations belong to research's preamble/tensors/.")]
 tensor-boundary:
     #!/usr/bin/env bash
     set -uo pipefail
