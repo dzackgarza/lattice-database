@@ -6224,13 +6224,13 @@
       - 1
       - 0
       - 180
-    reason: memory exhausted
+    reason: worker or runner lost (recovered from exceeded.yaml)
     stderr: ''
-    seconds: 56.448951123999905
-    recorded_at: 2026-11-26 19:10:28.767332+00:00
-    run_url: https://github.com/dzackgarza/lattice-database/actions/runs/45822826690/attempts/1
-    database_revision: b85384ef998ed04e90cd539ffdc7a5ee115d47e4
-    research_revision: 5a7ea9fbadef1e55d89ff044f2ddb2f9182571d8
+    seconds: 30.0
+    recorded_at: 2026-11-26 20:11:16.199532+00:00
+    run_url: https://github.com/dzackgarza/lattice-database/actions/runs/45885355973/attempts/1
+    database_revision: 223d14504d67823beb19110f7714ffe788f39348
+    research_revision: 1b67c0b67dbafa83c352eb5a30d668bff03a2110
   notes: []
 2CTH definite.siegel_eisenstein_coefficients:
   disposition: open
@@ -6304,44 +6304,6 @@
       Algebraic Real 3.200000000000000? to Integer\n"
     seconds: 0.8202332150003713
     recorded_at: 2026-11-26 19:30:44.704529+00:00
-    run_url: https://github.com/dzackgarza/lattice-database/actions/runs/45822826690/attempts/1
-    database_revision: b85384ef998ed04e90cd539ffdc7a5ee115d47e4
-    research_revision: 5a7ea9fbadef1e55d89ff044f2ddb2f9182571d8
-  notes: []
-2DK0 derive:
-  disposition: open
-  attempts:
-  - hash: b8641920dee662f68b7169ea9819a3e269ecacbc1951436a33f82c627e983191
-    gram_tensor:
-    - - 2
-      - 1
-      - 1
-      - 1
-      - 1
-    - - 1
-      - 4
-      - 0
-      - 1
-      - 1
-    - - 1
-      - 0
-      - 4
-      - 0
-      - 0
-    - - 1
-      - 1
-      - 0
-      - 6
-      - 2
-    - - 1
-      - 1
-      - 0
-      - 2
-      - 8
-    reason: memory exhausted
-    stderr: ''
-    seconds: 61.19011969299936
-    recorded_at: 2026-11-26 21:02:19.107695+00:00
     run_url: https://github.com/dzackgarza/lattice-database/actions/runs/45822826690/attempts/1
     database_revision: b85384ef998ed04e90cd539ffdc7a5ee115d47e4
     research_revision: 5a7ea9fbadef1e55d89ff044f2ddb2f9182571d8
