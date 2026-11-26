@@ -9692,6 +9692,82 @@
     database_revision: a73561aa67eccf4fb67d084a138f892d9748927a
     research_revision: 9aea67c19a8fcee3cc65e015388a6bb9b708366a
   notes: []
+4OEZ automorphisms.automorphism_group_generator_morphisms:
+  disposition: open
+  attempts:
+  - hash: 87718923f329d6330375f064530195bd21116f30fb49583d8c56092276cf780c
+    gram_tensor:
+    - - 1
+      - 0
+      - 0
+      - 0
+      - 0
+    - - 0
+      - 0
+      - 2
+      - 0
+      - 0
+    - - 0
+      - 2
+      - 0
+      - 0
+      - 0
+    - - 0
+      - 0
+      - 0
+      - -2
+      - 1
+    - - 0
+      - 0
+      - 0
+      - 1
+      - -2
+    reason: certification budget exhausted
+    stderr: ''
+    seconds: 19476.0
+    recorded_at: 2026-11-26 18:26:07.921691+00:00
+    run_url: https://github.com/dzackgarza/lattice-database/actions/runs/45822826690/attempts/1
+    database_revision: 14217be0b06293a263cc14a64e7b56183f0f56ab
+    research_revision: 5a7ea9fbadef1e55d89ff044f2ddb2f9182571d8
+  notes: []
+4OEZ automorphisms.automorphism_group_order:
+  disposition: open
+  attempts:
+  - hash: 05e21b5572e15ae05b50c67115f204939eaf2ebccd73f35c307153af55c5f985
+    gram_tensor:
+    - - 1
+      - 0
+      - 0
+      - 0
+      - 0
+    - - 0
+      - 0
+      - 2
+      - 0
+      - 0
+    - - 0
+      - 2
+      - 0
+      - 0
+      - 0
+    - - 0
+      - 0
+      - 0
+      - -2
+      - 1
+    - - 0
+      - 0
+      - 0
+      - 1
+      - -2
+    reason: certification budget exhausted
+    stderr: ''
+    seconds: 19498.0
+    recorded_at: 2026-11-26 18:26:29.642761+00:00
+    run_url: https://github.com/dzackgarza/lattice-database/actions/runs/45822826690/attempts/1
+    database_revision: 14217be0b06293a263cc14a64e7b56183f0f56ab
+    research_revision: 5a7ea9fbadef1e55d89ff044f2ddb2f9182571d8
+  notes: []
 4OEZ integral.hyperbolic_index:
   disposition: open
   attempts:
