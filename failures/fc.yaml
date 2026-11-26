@@ -422,6 +422,35 @@
     database_revision: 615f31b4998ac87e4bac4707c88bee176d70aabd
     research_revision: 0d4b0ffc15f5f46f30af390f49af3fcebdd47ced
   notes: []
+1L77 integral.discriminant_form:
+  disposition: open
+  attempts:
+  - hash: 725ebea70301ccbebe31e8284be6cc5001116497234bf9c004528b95c4787f7a
+    gram_tensor:
+    - - 4
+      - 2
+      - 2
+      - 1
+    - - 2
+      - 6
+      - 1
+      - 0
+    - - 2
+      - 1
+      - 10
+      - 5
+    - - 1
+      - 0
+      - 5
+      - 12
+    reason: worker or runner lost (recovered from exceeded.yaml)
+    stderr: ''
+    seconds: 0.0
+    recorded_at: 2026-11-26 20:09:32.152489+00:00
+    run_url: https://github.com/dzackgarza/lattice-database/actions/runs/45885355973/attempts/1
+    database_revision: 223d14504d67823beb19110f7714ffe788f39348
+    research_revision: 1b67c0b67dbafa83c352eb5a30d668bff03a2110
+  notes: []
 1NSK derive:
   disposition: open
   attempts:

@@ -6224,13 +6224,13 @@
       - 1
       - 0
       - 180
-    reason: memory exhausted
+    reason: worker or runner lost (recovered from exceeded.yaml)
     stderr: ''
-    seconds: 56.448951123999905
-    recorded_at: 2026-11-26 19:10:28.767332+00:00
-    run_url: https://github.com/dzackgarza/lattice-database/actions/runs/45822826690/attempts/1
-    database_revision: b85384ef998ed04e90cd539ffdc7a5ee115d47e4
-    research_revision: 5a7ea9fbadef1e55d89ff044f2ddb2f9182571d8
+    seconds: 30.0
+    recorded_at: 2026-11-26 20:11:16.199532+00:00
+    run_url: https://github.com/dzackgarza/lattice-database/actions/runs/45885355973/attempts/1
+    database_revision: 223d14504d67823beb19110f7714ffe788f39348
+    research_revision: 1b67c0b67dbafa83c352eb5a30d668bff03a2110
   notes: []
 2CTH definite.siegel_eisenstein_coefficients:
   disposition: open

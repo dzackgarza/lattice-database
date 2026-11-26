@@ -10010,6 +10010,44 @@
     database_revision: 2199b4285b99bed533429260cc96db08809b026d
     research_revision: 5a7ea9fbadef1e55d89ff044f2ddb2f9182571d8
   notes: []
+2DXI integral.genus_class_count:
+  disposition: open
+  attempts:
+  - hash: 8aff827318761d75594f2ba07305fb805112beeee85742bf45953375e17ac18a
+    gram_tensor:
+    - - 2
+      - 0
+      - 0
+      - 0
+      - 0
+    - - 0
+      - 4
+      - 0
+      - 2
+      - 0
+    - - 0
+      - 0
+      - 6
+      - 3
+      - 0
+    - - 0
+      - 2
+      - 3
+      - 6
+      - 3
+    - - 0
+      - 0
+      - 0
+      - 3
+      - 8
+    reason: worker or runner lost (recovered from exceeded.yaml)
+    stderr: ''
+    seconds: 0.0
+    recorded_at: 2026-11-26 20:11:30.976192+00:00
+    run_url: https://github.com/dzackgarza/lattice-database/actions/runs/45885355973/attempts/1
+    database_revision: 223d14504d67823beb19110f7714ffe788f39348
+    research_revision: 1b67c0b67dbafa83c352eb5a30d668bff03a2110
+  notes: []
 2DY7 derive:
   disposition: open
   attempts:

@@ -6943,13 +6943,13 @@
       - 1
       - 3
       - 8
-    reason: memory exhausted
+    reason: worker or runner lost (recovered from exceeded.yaml)
     stderr: ''
-    seconds: 35.1023631070002
-    recorded_at: 2026-11-26 19:13:04.496172+00:00
-    run_url: https://github.com/dzackgarza/lattice-database/actions/runs/45822826690/attempts/1
-    database_revision: eb2c98eeec10d38b07d293f4ecd75834675d0dab
-    research_revision: 5a7ea9fbadef1e55d89ff044f2ddb2f9182571d8
+    seconds: 0.0
+    recorded_at: 2026-11-26 20:10:39.506318+00:00
+    run_url: https://github.com/dzackgarza/lattice-database/actions/runs/45885355973/attempts/1
+    database_revision: 223d14504d67823beb19110f7714ffe788f39348
+    research_revision: 1b67c0b67dbafa83c352eb5a30d668bff03a2110
   notes: []
 1ZWA derive:
   disposition: open
