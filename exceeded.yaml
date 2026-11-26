@@ -887,6 +887,41 @@
   killed_by: memory
   peak_bytes: 12661956608
   limit_bytes: 1675943116
+1Y7Y derive:
+  hash: cd3fae2f1d8362e89b86d96433653cc75330caf5f7f10bd877a58a13aefbb6d8
+  seconds: 31
+  lost: true
+  killed_by: memory
+  peak_bytes: 12899954688
+  limit_bytes: 1675943116
+1Y8G derive:
+  hash: da9c72bcdaa7f75206e2f502fbf11dfadb6b4c93f21029adeb70414a60749ae9
+  seconds: 31
+  lost: true
+  killed_by: memory
+  peak_bytes: 12786704384
+  limit_bytes: 1675943116
+1YA8 derive:
+  hash: 693314eb31ce2cadf2beb06e864e26993d210700a9320d848980b6e921593eba
+  seconds: 30
+  lost: true
+  killed_by: memory
+  peak_bytes: 12594675712
+  limit_bytes: 1675943116
+1YAT derive:
+  hash: 866a13b07d638a59755ea7244002fe2cf6f5486688588afaceb5768f42de4488
+  seconds: 30
+  lost: true
+  killed_by: memory
+  peak_bytes: 12621508608
+  limit_bytes: 1675943116
+1YDE derive:
+  hash: 39ba02d5addae2af44b022f297159649349dfa09fcdf20355f567dfaf0e9ef07
+  seconds: 30
+  lost: true
+  killed_by: memory
+  peak_bytes: 13007757312
+  limit_bytes: 1675943116
 1YDS integral.genus_class_count:
   hash: 43701248704ac476a2e87076e3517a579dc7a14927b53ffd7975a646d3978b4c
   seconds: 12
@@ -991,8 +1026,119 @@
   limit_bytes: 1675943116
 1Z95 derive:
   hash: 514363b71ca9d596947e7e1d70c666c335f87327785bb1f6292a582ae5f99108
-  seconds: 30
+  seconds: 35
   lost: true
+  killed_by: memory
+  peak_bytes: 12696375296
+  limit_bytes: 1675943116
+1Z99 derive:
+  hash: 71352925692edbe92892fafc967c5791daac52a5b5cbe533cc2c282c9b3849a0
+  seconds: 36
+  lost: true
+  killed_by: memory
+  peak_bytes: 13457969152
+  limit_bytes: 1675943116
+1Z9S derive:
+  hash: ca6603b2ab64dc009d9c9e3892b7ccf5028abe5d755c59499793a8ecb80e2151
+  seconds: 36
+  lost: true
+  killed_by: memory
+  peak_bytes: 13581950976
+  limit_bytes: 1675943116
+1ZA3 derive:
+  hash: 139a6ebf79e14840c12f11608d2be8fe25887aa6b6ef0b3769c997999b8c91ac
+  seconds: 36
+  lost: true
+  killed_by: memory
+  peak_bytes: 12761759744
+  limit_bytes: 1675943116
+1ZA9 derive:
+  hash: 4c105b686d7139bb38e68ed8ed7a99c2ae6029cbd3d6306ace47ec0548446b19
+  seconds: 31
+  lost: true
+  killed_by: memory
+  peak_bytes: 13328875520
+  limit_bytes: 1675943116
+1ZAC derive:
+  hash: 2f6ff8080c18342e19c84ceb0917f357566a1ae34d152c74f7f055df41b02c19
+  seconds: 35
+  lost: true
+  killed_by: memory
+  peak_bytes: 12747476992
+  limit_bytes: 1675943116
+1ZAG derive:
+  hash: fe9f752b981dfc9476a6af7f421ed41b6b41467e0a88a156db4794f896b1501a
+  seconds: 31
+  lost: true
+  killed_by: memory
+  peak_bytes: 13315858432
+  limit_bytes: 1675943116
+1ZAH derive:
+  hash: ef1626c24dd34fe2f49ce813be9f3349bb368bcc58b408d85f522488914b5f9a
+  seconds: 31
+  lost: true
+  killed_by: memory
+  peak_bytes: 13202264064
+  limit_bytes: 1675943116
+1ZBP derive:
+  hash: 3b88eebfba580c8a4011a95fa1b9c693d60968094d829173948ea9951d22eb45
+  seconds: 36
+  lost: true
+  killed_by: memory
+  peak_bytes: 12740780032
+  limit_bytes: 1675943116
+1ZBT derive:
+  hash: 71c7d24d3d5d8916a7ba9878335b860c68ac65cfed19333e8aae070b93caee22
+  seconds: 35
+  lost: true
+  killed_by: memory
+  peak_bytes: 12699779072
+  limit_bytes: 1675943116
+1ZBU derive:
+  hash: ca60d728d80e1057eb3d77a015d627f4809579927633e0775cc42f77b48d7ae2
+  seconds: 36
+  lost: true
+  killed_by: memory
+  peak_bytes: 12730130432
+  limit_bytes: 1675943116
+1ZC6 derive:
+  hash: 329ef37c735d307e8245db4621aa55a10a8cefa3cfe188d41782a949b2ee94a4
+  seconds: 36
+  lost: true
+  killed_by: memory
+  peak_bytes: 12759367680
+  limit_bytes: 1675943116
+1ZCO derive:
+  hash: 43d126cf1044bdaafe6f338a43eef36163463b83f0f6bd0a65395b0acf5f7978
+  seconds: 36
+  lost: true
+  killed_by: memory
+  peak_bytes: 12792856576
+  limit_bytes: 1675943116
+1ZCW derive:
+  hash: 201bb8dbe3c1a159c4d38b0fac3d8f7ebdc6a8310998db7ce836d96f783b8706
+  seconds: 36
+  lost: true
+  killed_by: memory
+  peak_bytes: 12777963520
+  limit_bytes: 1675943116
+1ZDF derive:
+  hash: 8ea7666d4bf8f9af63ebea43605a6a02a70433f6fb8b4434640c112335ef5759
+  seconds: 36
+  lost: true
+  killed_by: memory
+  peak_bytes: 12791111680
+  limit_bytes: 1675943116
+1ZE9 derive:
+  hash: 30a4d2cae2cc7bfdc929c0268419efe840d6785fc3f5c7f934a4fdd1d0cbd9bc
+  seconds: 35
+  lost: true
+  killed_by: memory
+  peak_bytes: 12823326720
+  limit_bytes: 1675943116
+1ZH9 integral.genus_class_count:
+  hash: 249b0055cb87aa7795957e0763ffa0f982968c5e94a17a67714ad3099cb558c9
+  seconds: 1
 1ZON integral.elementary_primes:
   hash: 3257bea340bac7a0a798770c1f57b877e9e9fb48914c44752fea07cbec1a2885
   seconds: 22
@@ -3487,9 +3633,6 @@
   hash: 980f3cd45727183a8b2dc7d54ae624ff2174d1fe0dead0677e420e8cca92d16f
   seconds: 19
   lost: true
-3GW5 integral.discriminant_sequence:
-  hash: 417905fde71f6c910205c1073b16421e331b759fa0950381f4ff6a46613480b5
-  seconds: 19508
 3GW5 integral.overlattice_count:
   hash: 4638adc325a0ee6d4d9136c3852ee4c80d348052095c2f530e2b1196e868f777
   seconds: 5
