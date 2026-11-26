@@ -489,8 +489,7 @@
   limit_bytes: 1646340915
 03A8 definite.spinor_regular:
   hash: 9afcb6ed5e5e0558fc915599b97813cb884a77216a8c5678759482a468e3d9cf
-  seconds: 9857
-  lost: true
+  seconds: 17698
 03E4 definite.regular:
   hash: 367ee6be7b1ae2324d2f8b84ed17807c44014151c93049ad1053aae3f816df83
   seconds: 6558
@@ -3866,7 +3865,7 @@
   lost: true
 3GOD integral.discriminant_sequence:
   hash: c8971b85ce105eb0fd5cfce9597846219dccb40ab86ee416006e529fd235058b
-  seconds: 16059
+  seconds: 17862
   lost: true
 3GOF integral.discriminant_sequence:
   hash: 089a415a1235b6d2dbc6925803a92f59c4d22905d95818f33f91f9b32badcbe7
@@ -3973,10 +3972,6 @@
 3GXH integral.discriminant_sequence:
   hash: 4eede2cd3519ccf5aba1465e63f975c296b5c144179ab1087bfb842522186871
   seconds: 18991
-3GXL integral.discriminant_sequence:
-  hash: ba3fea0b14a6361088d2a1124ed453dab6a5bcd9eed40d5fe0f9f0555c2b634f
-  seconds: 1572
-  lost: true
 3GXO integral.overlattice_count:
   hash: 8392a80454dd1af739e9d6163b1538aaafd76392d9cca73846c1dc3e312e9aa8
   seconds: 10
