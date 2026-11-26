@@ -2368,13 +2368,17 @@
   hash: 10d53f671b0173afd9e82a7e721580f46f1cfd48f7496303bfe66b5312895033
   seconds: 0
   lost: true
-5QNM integral.hyperbolic_index:
-  hash: bcea4fbca244bf202b312e1504ed30aed72a876bb0b8ec751243065a84e35ff1
-  seconds: 60
-  lost: true
 5RR1 integral.primitive_orbits[SOtilde]:
   hash: 2b2f37ca731c7f2c974be88ea8d147c4f3c85c99adec5cb66a320253d297072a
   seconds: 19709
+5WD5 definite.automorphism_group_generator_morphisms:
+  hash: 82d8550063be7f6031a5ed31af4574ce43328249f78907a17789c372b98a912c
+  seconds: 1179
+  lost: true
+5WD5 definite.automorphism_group_order:
+  hash: 75e4d452f721225d3422335e3593dfe00406da4c8c25a4183d2dc3e2cf273933
+  seconds: 1179
+  lost: true
 5XTS integral.primitive_orbits[O+]:
   hash: a7e8c28a297e772d52198d47a41ec2c894efe14084ebeea87c6863c23695344f
   seconds: 1652
