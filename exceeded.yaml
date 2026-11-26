@@ -1993,55 +1993,6 @@
   hash: bd5f31895d58172e4c9b1ab0532696a5fd9e2ceb23a2c41dfe9b817a1a1f0f25
   seconds: 0
   lost: true
-2COE derive:
-  hash: 2895f69d84ff2ffe7b79ab6f35c18ef74bfd56b8c23e46daab480019825074b2
-  seconds: 56
-  lost: true
-  killed_by: memory
-  peak_bytes: 13925617664
-  limit_bytes: 1675943116
-2COK derive:
-  hash: 6d313becdf18b3725d4f3954eaf9fce9738c9f785f6c6067ff3a2adb6d5d01ee
-  seconds: 56
-  lost: true
-  killed_by: memory
-  peak_bytes: 14210060288
-  limit_bytes: 1675943116
-2CRD derive:
-  hash: ec2b6ee0578a58d95e968ad8be98d9c281d6a6d8ace5ae35303ab91ee080dbcd
-  seconds: 56
-  lost: true
-  killed_by: memory
-  peak_bytes: 14108979200
-  limit_bytes: 1675943116
-2CRG derive:
-  hash: 27485fc6414f96b45281f6df9ab592d5caef5258e17dcdf1502648898c0f148b
-  seconds: 56
-  lost: true
-  killed_by: memory
-  peak_bytes: 13519802368
-  limit_bytes: 1675943116
-2CRW derive:
-  hash: a386f71af7bd1674e018a73f40e5776d209212673e1c2b5e834fcc4db27a2112
-  seconds: 56
-  lost: true
-  killed_by: memory
-  peak_bytes: 13504188416
-  limit_bytes: 1675943116
-2CRX derive:
-  hash: 6e9a6841dc01d6d03b614a7b61d1959058a80380b9092c5c49a08d154b7c1ce1
-  seconds: 56
-  lost: true
-  killed_by: memory
-  peak_bytes: 13918601216
-  limit_bytes: 1675943116
-2CS8 derive:
-  hash: b41292a851f945b4f83aeb4957c5e625518e9a20d9803990c32037b80ee576e5
-  seconds: 56
-  lost: true
-  killed_by: memory
-  peak_bytes: 13947297792
-  limit_bytes: 1675943116
 2CZ7 derive:
   hash: 4a772cb843aabde4be56c2f34bb45a2f2f0fa9c86bbbbe7f9ecf4612d8e8dd98
   seconds: 51
@@ -2608,10 +2559,6 @@
 3GTS integral.discriminant_sequence:
   hash: 26a906b9d9d22e2f60644bcb66ee493b586d333a3d2e8d30e57e85387eee4009
   seconds: 19661
-3GUR integral.discriminant_sequence:
-  hash: 0b4b5325cf9951ad9435968a0b0052d516358c8d006bcfe2fe0d0f9eaf37c412
-  seconds: 561
-  lost: true
 3GV7 integral.discriminant_sequence:
   hash: 11bd986ed4009c6f4b842f2711f305e76eeda93e70e9bc4fc82cf6b28bb78e57
   seconds: 1581
@@ -2726,6 +2673,10 @@
 3IEA integral.hyperbolic_index:
   hash: 3072abb556184c36e33747dd96e2dc1de4befdb4383257fa4d37035dd48d3c52
   seconds: 112
+  lost: true
+3UNY integral.hyperbolic_index:
+  hash: cf4ea5b5efc4271dd7add2d1a74e3fe270b829163c9323dc3b5571bf33ea41e5
+  seconds: 0
   lost: true
 44LI automorphisms.automorphism_group_generator_morphisms:
   hash: 2d50e424fd70a09337d5b717025496a8199b71ce093d2f070fd801742d9c412f
