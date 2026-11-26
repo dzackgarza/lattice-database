@@ -3267,6 +3267,9 @@
   hash: c8971b85ce105eb0fd5cfce9597846219dccb40ab86ee416006e529fd235058b
   seconds: 12454
   lost: true
+3GOF integral.discriminant_sequence:
+  hash: 089a415a1235b6d2dbc6925803a92f59c4d22905d95818f33f91f9b32badcbe7
+  seconds: 4713
 3GP1 integral.overlattice_count:
   hash: dc927e7dffa463fb642e33538f94079ce2a08d4cff738b359d68d8d689fa7d5d
   seconds: 15
@@ -3433,6 +3436,10 @@
 44LI automorphisms.automorphism_group_order:
   hash: a5023f8c96ab33dcbbed76653a5231784e723cf5cd82246090cfd45659df8494
   seconds: 1082
+  lost: true
+44LI integral.discriminant_sequence:
+  hash: f557d54f77cc2caba00de2d5170ca532530aa421032960553ed051ec993f3e73
+  seconds: 12471
   lost: true
 48YN integral.primitive_orbits[SOtilde]:
   hash: 9e1c166422b378d94310bb7b61abeb33d8e2cd6ec2a08cf2b0a62e00dcdedc04
