@@ -2197,9 +2197,72 @@
   killed_by: memory
   peak_bytes: 14210064384
   limit_bytes: 1675943116
-2DXI integral.genus_class_count:
-  hash: 8aff827318761d75594f2ba07305fb805112beeee85742bf45953375e17ac18a
-  seconds: 0
+2DXT derive:
+  hash: 00139fdcd9a9275496c0105855570b4b9724d6579eaff4bdbd3a08dc2b1c6dd9
+  seconds: 61
+  lost: true
+  killed_by: memory
+  peak_bytes: 13948325888
+  limit_bytes: 1675943116
+2DY6 derive:
+  hash: dbc1bae9a0d9c8319e8b1c809c7967e315a86bf6dff29ede8a6ff3a8888d6468
+  seconds: 61
+  lost: true
+  killed_by: memory
+  peak_bytes: 13671735296
+  limit_bytes: 1675943116
+2DY7 derive:
+  hash: bad3b4d34497da93e46ab6d84d2a08556ccfb37146ed8e8ce867e445621b000a
+  seconds: 61
+  lost: true
+  killed_by: memory
+  peak_bytes: 13969973248
+  limit_bytes: 1675943116
+2E1T derive:
+  hash: c1dd61ea845405ac1eb142c5637d81f8c6b0a78605398cd238c41e27d0ec0a86
+  seconds: 61
+  lost: true
+  killed_by: memory
+  peak_bytes: 13707735040
+  limit_bytes: 1675943116
+2E26 derive:
+  hash: 7de0fb5fb3c478b16ec6c23a3cb46d9af042b5dd8a2b009ed5e8168471ffb8b1
+  seconds: 56
+  lost: true
+  killed_by: memory
+  peak_bytes: 14327836672
+  limit_bytes: 1675943116
+2E27 derive:
+  hash: 204c34d98c69e0fd5d5d9c7c1cf0d95bffea1beb95f4dc768b11e7469d1eaf77
+  seconds: 51
+  lost: true
+  killed_by: memory
+  peak_bytes: 14208782336
+  limit_bytes: 1675943116
+2E3C derive:
+  hash: 4ef229e75641466cf0b63d9cdcb56564f2b962f2fab11d2342c0038af39a46f4
+  seconds: 56
+  lost: true
+  killed_by: memory
+  peak_bytes: 14323236864
+  limit_bytes: 1675943116
+2E3L derive:
+  hash: e5cdbe23f0c2c3b9f08f01c2b24d480241c07021e3bacbc02d583db162f8d5bb
+  seconds: 50
+  lost: true
+  killed_by: memory
+  peak_bytes: 14246191104
+  limit_bytes: 1675943116
+2E40 derive:
+  hash: 26074ec39068d682d5803895fa9b6bc67ab08eae63eb1b49331e951aa224ba8a
+  seconds: 51
+  lost: true
+  killed_by: memory
+  peak_bytes: 14055288832
+  limit_bytes: 1675943116
+2E4N derive:
+  hash: eb42c2e85ff632448058abf1c8a60ac935e6fde4b43f3dde14cd32c2b4c7c0e6
+  seconds: 30
   lost: true
 2IVD derive:
   hash: 18bbc4cd68cdceeb3030401f77e87fe2d7899f45ca183ae445e359940127f1ae
