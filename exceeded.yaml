@@ -2159,10 +2159,6 @@
 3GQ2 integral.discriminant_sequence:
   hash: 96d8236f212099a9a6fc02562a01a03a45b59bb60f8aa132efa26565a6f0a801
   seconds: 19247
-3GQZ integral.discriminant_sequence:
-  hash: d0dbee6a8e3e6b889ec0a276f14b0ecfa06adede9bfa547dcf01a4908f505b50
-  seconds: 17880
-  lost: true
 3GRG integral.discriminant_sequence:
   hash: 01c3291850d9067945eec96dcf47cad2765768f42fc05ef8f529a6b93d5e7177
   seconds: 18980
@@ -2351,12 +2347,10 @@
   seconds: 19709
 5WD5 definite.automorphism_group_generator_morphisms:
   hash: 82d8550063be7f6031a5ed31af4574ce43328249f78907a17789c372b98a912c
-  seconds: 13828
-  lost: true
+  seconds: 15306
 5WD5 definite.automorphism_group_order:
   hash: 75e4d452f721225d3422335e3593dfe00406da4c8c25a4183d2dc3e2cf273933
-  seconds: 13828
-  lost: true
+  seconds: 15306
 5XTS integral.primitive_orbits[O+]:
   hash: a7e8c28a297e772d52198d47a41ec2c894efe14084ebeea87c6863c23695344f
   seconds: 1652
