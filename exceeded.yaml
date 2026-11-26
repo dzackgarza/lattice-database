@@ -869,6 +869,13 @@
   hash: 74c16994c3b77952038ba93c20a18b544b6f1c57c52852339204c037805c0eac
   seconds: 23
   lost: true
+1Y0V derive:
+  hash: d452958c6f6991caf41f0de0a1c25c0c888d525e52cfbc9c69785c7ea3dd5845
+  seconds: 31
+  lost: true
+  killed_by: memory
+  peak_bytes: 12661956608
+  limit_bytes: 1675943116
 1YDS integral.genus_class_count:
   hash: 43701248704ac476a2e87076e3517a579dc7a14927b53ffd7975a646d3978b4c
   seconds: 12
@@ -915,9 +922,107 @@
   killed_by: memory
   peak_bytes: 13129871360
   limit_bytes: 1675943116
-1YS5 definite.siegel_eisenstein_coefficients:
-  hash: a98dd5e0da28490e8a82817fde2c626926e7a93db2b4b10fea98a0ebc5f271c8
-  seconds: 0
+1YV5 derive:
+  hash: 450a4f6e586c7cf05e4c4570356783d879944e1fb8aac4efde110976ee9e8a60
+  seconds: 30
+  lost: true
+  killed_by: memory
+  peak_bytes: 13476818944
+  limit_bytes: 1675943116
+1YXL derive:
+  hash: ff7196218946746dd45a20e125385b32a53696d2f3086017fc82e47967b81b2b
+  seconds: 35
+  lost: true
+  killed_by: memory
+  peak_bytes: 12599803904
+  limit_bytes: 1675943116
+1YY6 derive:
+  hash: f527c21ddbeaea0adc4b7e50329503d1e6063a7cf28848fcd749ddd54e7adbfb
+  seconds: 35
+  lost: true
+  killed_by: memory
+  peak_bytes: 12525035520
+  limit_bytes: 1675943116
+1YYS derive:
+  hash: 991573bc41288e04208e9928731844b9e05a1103bd118d4c0b361c4ffb0bf220
+  seconds: 31
+  lost: true
+  killed_by: memory
+  peak_bytes: 13494431744
+  limit_bytes: 1675943116
+1YZ1 derive:
+  hash: 4f06db4b1639a8af5f7ac1424636c5e3ea8d500be4ea5a7a9f860f880b1882ad
+  seconds: 31
+  lost: true
+  killed_by: memory
+  peak_bytes: 13554630656
+  limit_bytes: 1675943116
+1YZG derive:
+  hash: ce4ea152919643f1a5cb08d2057b55eb42015f919c2376335f14f867600ec492
+  seconds: 30
+  lost: true
+  killed_by: memory
+  peak_bytes: 13682319360
+  limit_bytes: 1675943116
+1YZI derive:
+  hash: 78eb2d813bd7dc93458913df5b9afcdc6d5f54b180b2b8b8a5f3288f47233851
+  seconds: 30
+  lost: true
+  killed_by: memory
+  peak_bytes: 12465926144
+  limit_bytes: 1675943116
+1YZZ derive:
+  hash: b52f88928599067cb8e4226442d895764319c7232839bf6c0018c6ccbdad786c
+  seconds: 30
+  lost: true
+  killed_by: memory
+  peak_bytes: 12890468352
+  limit_bytes: 1675943116
+1Z03 derive:
+  hash: 3cdd8549b722f1f608580da2b137c34b6d666f43d3cc80a72b8a1d699b84ba4b
+  seconds: 30
+  lost: true
+  killed_by: memory
+  peak_bytes: 12562620416
+  limit_bytes: 1675943116
+1Z21 derive:
+  hash: 724c975acb6fc17d5cb61e709425f221df29fda02d5018905c9ece184f8ec985
+  seconds: 36
+  lost: true
+  killed_by: memory
+  peak_bytes: 12756815872
+  limit_bytes: 1675943116
+1Z88 derive:
+  hash: 83a39205e98d8f055849a57b41e8fe059258230ce39293062a1ea8357bf981fd
+  seconds: 36
+  lost: true
+  killed_by: memory
+  peak_bytes: 12668547072
+  limit_bytes: 1675943116
+1Z8H derive:
+  hash: e61338f09e97ce11f839ed8cafecf67f5793f07d7ac61794d56d9927c5ae9c9e
+  seconds: 36
+  lost: true
+  killed_by: memory
+  peak_bytes: 12716146688
+  limit_bytes: 1675943116
+1Z8V derive:
+  hash: 367640d06e2019763e28f91b7ce51eea45d6547233f418a01edfb42459717b11
+  seconds: 36
+  lost: true
+  killed_by: memory
+  peak_bytes: 12675411968
+  limit_bytes: 1675943116
+1Z8W derive:
+  hash: e28283a690d4b2206a9764d0cba096e07fb7d94529b7c48139c21b0529ffa2b3
+  seconds: 35
+  lost: true
+  killed_by: memory
+  peak_bytes: 12650352640
+  limit_bytes: 1675943116
+1Z95 derive:
+  hash: 514363b71ca9d596947e7e1d70c666c335f87327785bb1f6292a582ae5f99108
+  seconds: 30
   lost: true
 1ZON integral.elementary_primes:
   hash: 3257bea340bac7a0a798770c1f57b877e9e9fb48914c44752fea07cbec1a2885
@@ -2884,6 +2989,10 @@
 3GSS integral.discriminant_sequence:
   hash: 1ab4cb27ac8324d3b55f87b49fe2d9638523863e9f43a210eb9460be1973101d
   seconds: 19659
+3GT4 integral.discriminant_sequence:
+  hash: 0b71cfa1ec6323490cdf078e7bed274e391e1d8babff618db14a96fe2c74b6d0
+  seconds: 1667
+  lost: true
 3GTS integral.discriminant_sequence:
   hash: 26a906b9d9d22e2f60644bcb66ee493b586d333a3d2e8d30e57e85387eee4009
   seconds: 19661
@@ -2919,10 +3028,6 @@
 3GWR integral.overlattice_count:
   hash: 836db517473faaeaa34246fe1f1fa761d816846114d210a46b13530d6de2d5f8
   seconds: 5
-  lost: true
-3GWW integral.discriminant_sequence:
-  hash: 9fe28d538d4282a19fff1921e5b1179b8dce50772c24399b183b49c257bfece4
-  seconds: 17919
   lost: true
 3GX5 integral.discriminant_sequence:
   hash: ac5830bf83c01f73d9a9417b7f9de8b39dbfd51c20f84ed5872b139ccae22b93
