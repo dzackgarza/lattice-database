@@ -8122,12 +8122,12 @@
       - 0
       - 0
       - 24
-    reason: certification budget exhausted
+    reason: worker or runner lost (recovered from exceeded.yaml)
     stderr: ''
-    seconds: 19477.0
-    recorded_at: 2026-11-26 00:26:42.501855+00:00
-    run_url: https://github.com/dzackgarza/lattice-database/actions/runs/45620276217/attempts/1
-    database_revision: faf479987d5d9108920dbe89769d203b52c056c0
+    seconds: 1664.0
+    recorded_at: 2026-11-25 20:22:29.180219+00:00
+    run_url: https://github.com/dzackgarza/lattice-database/actions/runs/45690260687/attempts/1
+    database_revision: c8f7e86dfcd88c20c25b69609dacfaa27d1bb3f2
     research_revision: 1d56f41a080c1832c42ef7ab473743e41c10bb29
   notes: []
 3I65 integral.discriminant_form:
