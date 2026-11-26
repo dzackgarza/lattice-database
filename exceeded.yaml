@@ -2320,10 +2320,6 @@
 4N33 automorphisms.automorphism_group_order:
   hash: 7424a531255ff56a461b04c8f76fb810ba13d2dac8be3b64dcec72cc8b9f7b25
   seconds: 19328
-4N33 integral.discriminant_sequence:
-  hash: d68903df03a32333e65ebc187dc2ca086db7b2ac72b62dab2bec68bf0c82f297
-  seconds: 10639
-  lost: true
 4OEZ automorphisms.automorphism_group_generator_morphisms:
   hash: 87718923f329d6330375f064530195bd21116f30fb49583d8c56092276cf780c
   seconds: 17936
@@ -2351,11 +2347,11 @@
   seconds: 19709
 5WD5 definite.automorphism_group_generator_morphisms:
   hash: 82d8550063be7f6031a5ed31af4574ce43328249f78907a17789c372b98a912c
-  seconds: 4784
+  seconds: 6617
   lost: true
 5WD5 definite.automorphism_group_order:
   hash: 75e4d452f721225d3422335e3593dfe00406da4c8c25a4183d2dc3e2cf273933
-  seconds: 4784
+  seconds: 6617
   lost: true
 5XTS integral.primitive_orbits[O+]:
   hash: a7e8c28a297e772d52198d47a41ec2c894efe14084ebeea87c6863c23695344f
