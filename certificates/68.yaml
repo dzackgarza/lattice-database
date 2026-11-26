@@ -20596,6 +20596,9 @@
 2BTI form.integer_valued:
   hash: 50fd580d090a579040a4145237d30f1262faf119d3498a393a46afa3f5d6a322
   by: research preamble
+2BTI integral.anisotropic_primes:
+  hash: de6a01b4b192947fbfdff43f3d95072f9eb9c8601b8aa56c94c04e90bec89d85
+  by: research preamble
 2BTI integral.discriminant_form:
   hash: bb5acfa85aebfce3f788f1149fbe64582b01e10f2e17e1a58876a21450586530
   by: research preamble
@@ -20613,6 +20616,12 @@
   by: research preamble
 2BTI integral.hyperbolic_index:
   hash: fa614f3e721224c6e628c305d800114b42e025eea31e1375f58c441fbd2fc8db
+  by: research preamble
+2BTI integral.local_densities:
+  hash: 1490cfcebe2d55a913a2dbe5371f78f2e4859fe9e0b01079deef4de5cc16e3e1
+  by: research preamble
+2BTI integral.local_representations:
+  hash: c0e5e019e46610f0e453c31439ee14db8fee4565232880d6f74acd014b47f094
   by: research preamble
 2BTI integral.modular_scale:
   hash: 7dd3c7f0ba5a22c89cda3ae233ae2f680ad4a0b5781339407e0917460ef0c24c
@@ -20647,6 +20656,9 @@
 2CQN form.integer_valued:
   hash: 592dc9daee502a94329785c5f132f7c18d0762e59e881b89ff8e3e8fa9cdef80
   by: research preamble
+2CQN integral.anisotropic_primes:
+  hash: 617994641dd746dc1cdfe1c815a605b969d97d2fcdd49a483a8b2d38816faf83
+  by: research preamble
 2CQN integral.discriminant_form:
   hash: 439a9fb339b7795157341f276958626447e90c41f2d02d70f0f35c7e3409e6ff
   by: research preamble
@@ -20664,6 +20676,12 @@
   by: research preamble
 2CQN integral.hyperbolic_index:
   hash: 5da999289058f5e98f65b6cc34cbb2539790c870865cca895d164dcecaa3d929
+  by: research preamble
+2CQN integral.local_densities:
+  hash: 27ab0bd46eef2cb8e9c93d3f17553ddc2942acfd5a93bec2105c6ced8c69126c
+  by: research preamble
+2CQN integral.local_representations:
+  hash: 7d082c27732997f26cd3134ce902d03e71074719e79be98c38459dad86cc3c45
   by: research preamble
 2CQN integral.modular_scale:
   hash: 8b412fcd813c4af8ce09a832a5ab57f78eedacdf7bb8b84291f7bd63de280fe5
