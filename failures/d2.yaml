@@ -15174,6 +15174,44 @@
     database_revision: 8ff86fa50075c14fb4ad52122c3eb37621291c9f
     research_revision: 1d90bedd2007439a2af980eadabcccdf83661551
   notes: []
+4N33 integral.primitive_orbits[O]:
+  disposition: open
+  attempts:
+  - hash: c880c255c21e003961662005179aa66b15d7cf10981cf1aaa1b48eb517b74a0e
+    gram_tensor:
+    - - 1
+      - 0
+      - 0
+      - 0
+      - 0
+    - - 0
+      - 0
+      - 1
+      - 0
+      - 0
+    - - 0
+      - 1
+      - 0
+      - 0
+      - 0
+    - - 0
+      - 0
+      - 0
+      - -2
+      - 1
+    - - 0
+      - 0
+      - 0
+      - 1
+      - -2
+    reason: certification budget exhausted
+    stderr: ''
+    seconds: 18762.0
+    recorded_at: 2026-11-27 18:19:44.976424+00:00
+    run_url: https://github.com/dzackgarza/lattice-database/actions/runs/46000443211/attempts/1
+    database_revision: a133a0cd6ef8433203f53ed37971bac171588c29
+    research_revision: b417c471da10f6e32eb591a72e694c5af4683523
+  notes: []
 6EZI integral.discriminant_sequence:
   disposition: open
   attempts:
