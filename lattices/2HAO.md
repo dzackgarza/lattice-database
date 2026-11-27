@@ -16,6 +16,11 @@ certifications:
   definite.automorphism_group_order: 7b2f44f72d79abf4a47b9109c27da53c30314ddef62d1e6722627060fa1f0502
   definite.automorphism_group_generator_morphisms: 1e0a8e14faed950175f533a51e658e70622c6be1593bef49ec7f1179cbcd3901
   integral.discriminant_sequence: 34bd90c9a6aa995af584feb69826ac0aab866dfb529a22c1e4d738dd37b6ea4a
+  integral.discriminant_form: ef31cfe8f53dca56175e80c7bf6dc121b315a1e21f7a196c1b2a6a68be405d81
+  integral.primitive_orbits: 35f9fd0460e81b509b862304ae86bc7628df6711c94a7c03ac088497a02e0c7e
+  integral.modular_scale: 74437a1b7f7485053a5e412baacf197b5d4dd138eb55740fab15a439087e07dc
+  definite.genus_theta_series: da5c311fe5b90c03401c0c9790a6e55cb3ea6b369fdbd48d23c2446544f6da5a
+  definite.theta_series_cuspidal_component: 3f4a63dc61e8737c26b612cea5882d2bafdd6c3a3d401df814a886f56d02f150
 rank: 5
 gram_tensor:
 - [2, 0, 0, 0, 0]
@@ -38,6 +43,7 @@ integral:
   elementary_primes: []
   parity: even
   level: 240
+  modular_scale: false
   discriminant_group: [2, 4, 120]
   discriminant_sequence:
     discriminant_factors: [2, 4, 120]
@@ -112,6 +118,43 @@ integral:
   spinor_genus_count: 1
   spinor_genera: [25]
   hyperbolic_index: 0
+  primitive_orbits:
+    O:
+      constant: 0
+      z: [0, 2, 0, 2]
+      w: [0, 0, 0, 0]
+    SO:
+      constant: 0
+      z: [0, 2, 0, 2]
+      w: [0, 0, 0, 0]
+    Otilde:
+      constant: 0
+      z: [0, 2, 0, 3]
+      w: [0, 0, 0, 0]
+    SOtilde:
+      constant: 0
+      z: [0, 2, 0, 4]
+      w: [0, 0, 0, 0]
+    O+:
+      constant: 0
+      z: [0, 2, 0, 2]
+      w: [0, 0, 0, 0]
+    SO+:
+      constant: 0
+      z: [0, 2, 0, 2]
+      w: [0, 0, 0, 0]
+    Otilde+:
+      constant: 0
+      z: [0, 2, 0, 4]
+      w: [0, 0, 0, 0]
+    SOtilde+:
+      constant: 0
+      z: [0, 2, 0, 4]
+      w: [0, 0, 0, 0]
+  discriminant_form:
+    orthogonal_group_order: 32
+    isotropic_classes: 4
+    isotropic_orbits: 3
 definite:
   minimum: 2
   kissing_number: 4
@@ -124,6 +167,8 @@ definite:
   - [1, 0, 0, 0, 0]
   perfect: false
   theta_series: [1, 0, 4, 0, 6, 0, 8, 0, 12]
+  genus_theta_series: [1, 0, 136/65, 0, 384/65, 0, 952/65, 0, 1088/65]
+  theta_series_cuspidal_component: [0, 0, 124/65, 0, 6/65, 0, -432/65, 0, -308/65]
   root_system: [A1, A1]
   roots:
   - type: A1
