@@ -828,10 +828,6 @@
   hash: 5ec02122782c5210f413bb8d16db30dd35f3f8c8d17fdfa2b2f8245b12d1685c
   seconds: 0
   lost: true
-1L77 integral.discriminant_form:
-  hash: 725ebea70301ccbebe31e8284be6cc5001116497234bf9c004528b95c4787f7a
-  seconds: 0
-  lost: true
 1L94 integral.genus_class_count:
   hash: dc171c45d6e60e94dd569a98723eaf07c1aaa0a3d9a4870566205fdba96ca951
   seconds: 32
@@ -3409,10 +3405,6 @@
 3GRU integral.discriminant_sequence:
   hash: 0873c77aea247747beee5f6503d4678ca0c393ad59c2a14ff0e34fd7c44871c6
   seconds: 18241
-3GSR integral.discriminant_sequence:
-  hash: a4768ee39d81678cf4d6e8bb88fa4a8380d184e12d1efdc12f5843601e91fc76
-  seconds: 7072
-  lost: true
 3GSS integral.discriminant_sequence:
   hash: 1ab4cb27ac8324d3b55f87b49fe2d9638523863e9f43a210eb9460be1973101d
   seconds: 19659
@@ -3602,19 +3594,13 @@
   hash: a7e8c28a297e772d52198d47a41ec2c894efe14084ebeea87c6863c23695344f
   seconds: 1652
   lost: true
-64DV definite.automorphism_group_generator_morphisms:
-  hash: 6ada46a17fde59af6d6251a9c7d168b44dcef8de60a435bb69ce8b1f6d3aad12
-  seconds: 19319
-64DV definite.automorphism_group_order:
-  hash: 1e28b7d8e75778a5868ccc158f6189c5df3422e6e73c663d139bb65d0fc8bcac
-  seconds: 19345
 66NC definite.automorphism_group_generator_morphisms:
   hash: d045b467b278d99a904875d1903c4d606ba03fa478a85f1dd2e6066c4341ad31
-  seconds: 4237
+  seconds: 6040
   lost: true
 66NC definite.automorphism_group_order:
   hash: 41e5867437833688acb060ec98a13d5ee87e59ea518b0cd41a1b1ea41d377095
-  seconds: 4237
+  seconds: 6040
   lost: true
 6JRR arithmetic-group.otilde-plus-t-co.index_in_orthogonal_group:
   hash: acad0e18f0c158ad5bda122e435bae4133bd93287223e2a8ce2c8b611148e2d3
