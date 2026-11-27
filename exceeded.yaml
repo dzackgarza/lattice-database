@@ -2502,132 +2502,6 @@
   hash: 8aff827318761d75594f2ba07305fb805112beeee85742bf45953375e17ac18a
   seconds: 0
   lost: true
-2FN6 derive:
-  hash: bcf3646c00ea42b4674cae3cb0522e22b1b7eab67e47425d8e740ab72a75f48a
-  seconds: 50
-  lost: true
-  killed_by: memory
-  peak_bytes: 13080248320
-  limit_bytes: 1675943116
-2FSU derive:
-  hash: 7369404a4af76e43e1afdbf0f9d4567b5b82c363a0a4aa174d98e668d42bbf05
-  seconds: 46
-  lost: true
-  killed_by: memory
-  peak_bytes: 13316009984
-  limit_bytes: 1675943116
-2FTJ derive:
-  hash: 0851a6d29a82dce506bf9e22c61a6258c56ccfac7d9dbfed43a7823f5e7f7ca8
-  seconds: 45
-  lost: true
-  killed_by: memory
-  peak_bytes: 13358202880
-  limit_bytes: 1675943116
-2FTY derive:
-  hash: d7519eedf482c572158326efeb06e52663502b3c5dc21b4aaf91e8fae445f805
-  seconds: 45
-  lost: true
-  killed_by: memory
-  peak_bytes: 13011959808
-  limit_bytes: 1675943116
-2FV7 derive:
-  hash: 5c80febb06f29f8301315a2e418b41da9f2c695c9abb92b8c5917e82b034f072
-  seconds: 45
-  lost: true
-  killed_by: memory
-  peak_bytes: 13158174720
-  limit_bytes: 1675943116
-2FVK derive:
-  hash: e6ccc84c068be7e2b8e5e1ff0f3318a0256220cc6e78b796223db7c26d0ee7c4
-  seconds: 45
-  lost: true
-  killed_by: memory
-  peak_bytes: 12927627264
-  limit_bytes: 1675943116
-2FVU derive:
-  hash: 3663cb10404378840ae581327f1696d25d4e368bfaf8458d031acecc305155f6
-  seconds: 45
-  lost: true
-  killed_by: memory
-  peak_bytes: 12983734272
-  limit_bytes: 1675943116
-2FVV derive:
-  hash: 1dd70ed7be5fa3f625112a27323cd51ba44300bd3981263e15271124fef075d6
-  seconds: 45
-  lost: true
-  killed_by: memory
-  peak_bytes: 13096153088
-  limit_bytes: 1675943116
-2FX4 derive:
-  hash: 544ae64eaa60ddde5e52ec689269e4f9806b63dc64cb7816a7e37a316bceb814
-  seconds: 45
-  lost: true
-  killed_by: memory
-  peak_bytes: 12804255744
-  limit_bytes: 1675943116
-2FX7 derive:
-  hash: 54c106e22c436aa43fe89a83ba09822ccc74f900e14ab7d6681416bc439847d0
-  seconds: 45
-  lost: true
-  killed_by: memory
-  peak_bytes: 12913487872
-  limit_bytes: 1675943116
-2FXD derive:
-  hash: 3b0acfe5170a1bd042a24acda6a704aacf79542b84f8cddaf44dae95655679a4
-  seconds: 45
-  lost: true
-  killed_by: memory
-  peak_bytes: 12824317952
-  limit_bytes: 1675943116
-2FXE derive:
-  hash: 5f27e71f6f25a8247c2bdcc32a4ab998f2167faf187ec3d9e2858338891b7a29
-  seconds: 45
-  lost: true
-  killed_by: memory
-  peak_bytes: 12892983296
-  limit_bytes: 1675943116
-2FXI derive:
-  hash: 8d24d704738226b22641326e6d6ea0841662a1d90868d72f7bd69c53e0cb2d57
-  seconds: 45
-  lost: true
-  killed_by: memory
-  peak_bytes: 12838924288
-  limit_bytes: 1675943116
-2FXT derive:
-  hash: 6862c754f8b3f706111a482004d91a6d3c9aeb3ea7132d4a3901cb3d074cef4f
-  seconds: 45
-  lost: true
-  killed_by: memory
-  peak_bytes: 12732489728
-  limit_bytes: 1675943116
-2FYC derive:
-  hash: 923f7622c9bccc9b0652c91206e0763d8aabd6802a8227059401d564a4a393f8
-  seconds: 45
-  lost: true
-  killed_by: memory
-  peak_bytes: 12999966720
-  limit_bytes: 1675943116
-2FYD derive:
-  hash: 5c479844335c4a337cd789585145808ceca76845c61e2e4a0bc9fbe96c038687
-  seconds: 45
-  lost: true
-  killed_by: memory
-  peak_bytes: 12706521088
-  limit_bytes: 1675943116
-2FYV derive:
-  hash: 34a8d7497d5fd80cec73d7aaa6c955de5d1cf8a0fabdc61686cc26da88ebf272
-  seconds: 45
-  lost: true
-  killed_by: memory
-  peak_bytes: 12716036096
-  limit_bytes: 1675943116
-2FYY derive:
-  hash: 03c472d9beb251cabc9483a93b5e8c8116c8fb72b2f976eaf99b6da0bad64617
-  seconds: 51
-  lost: true
-  killed_by: memory
-  peak_bytes: 14021640192
-  limit_bytes: 1675943116
 2FZ0 derive:
   hash: c3a311d8df183aa6667ea1022408e19018d24579b1431fdd4303806d94032e56
   seconds: 45
@@ -3517,6 +3391,10 @@
 44LI automorphisms.automorphism_group_order:
   hash: a5023f8c96ab33dcbbed76653a5231784e723cf5cd82246090cfd45659df8494
   seconds: 1082
+  lost: true
+44LI integral.primitive_orbits[O]:
+  hash: 942884c9e5f20daa0f4719571338a60c01010b88f30ac8995a4ed58664dd2071
+  seconds: 7070
   lost: true
 48YN integral.primitive_orbits[SOtilde]:
   hash: 9e1c166422b378d94310bb7b61abeb33d8e2cd6ec2a08cf2b0a62e00dcdedc04
