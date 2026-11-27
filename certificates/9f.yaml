@@ -22207,6 +22207,9 @@
 2CQH form.integer_valued:
   hash: f3d6457b886f015bc2e4b2a5558a4e0f63915f0b4df0379f3275722f1d124c31
   by: research preamble
+2CQH integral.anisotropic_primes:
+  hash: a63a8a585cda3bfa116c2e48e801caf1934d6487a7485bf2a2ed6c4982fdfe28
+  by: research preamble
 2CQH integral.discriminant_form:
   hash: 52a9ac1fa55b1e2d38ed52b3bb63f3bd33439e6724e4f82389781ef06617f067
   by: research preamble
@@ -22224,6 +22227,12 @@
   by: research preamble
 2CQH integral.hyperbolic_index:
   hash: 0135ad80ff75d57dc6519dd8581475b6c5b224b72680c9a38c28c65b3d168030
+  by: research preamble
+2CQH integral.local_densities:
+  hash: e3eb8068f7a6e49dd5ef8030ce3943474d706179d42433c66ea2ece9770b1ae3
+  by: research preamble
+2CQH integral.local_representations:
+  hash: 20aba5714c5e7b0481eddda67d33e4f131a72666655151838b15c38facdd7b85
   by: research preamble
 2CQH integral.modular_scale:
   hash: f23192d9ed43574f3e735c56d642513be052f5c4e3b523be467f5aa243d2feed
@@ -22258,6 +22267,9 @@
 2CSR form.integer_valued:
   hash: 3fca5cf5871573f2ccf7a1e29af2a177f239838e9c1ab286c29c99c902780a7c
   by: research preamble
+2CSR integral.anisotropic_primes:
+  hash: 5c7818b116cb3a4838ebd2cfe0606f0d2ddc549a5149714da3d2944be25923e8
+  by: research preamble
 2CSR integral.discriminant_form:
   hash: 4b75a2b57465e7386994a4e2cb2b27b4296c813a3fec7b2c58faab398173cfda
   by: research preamble
@@ -22275,6 +22287,12 @@
   by: research preamble
 2CSR integral.hyperbolic_index:
   hash: f90abf6c105c2c46e42ed0a8cd99615e8533d2f8be7bfc767c5e4375850cd2f0
+  by: research preamble
+2CSR integral.local_densities:
+  hash: 819a12c213d16826d5aff0a27802b24ad8a97bc14eac0310ee8900f302c5be22
+  by: research preamble
+2CSR integral.local_representations:
+  hash: eb0be75940e0af9a27951d0067da7424642386989c099b5b45aa1f7361eda2e5
   by: research preamble
 2CSR integral.modular_scale:
   hash: 94a50b96847ef169cce801b6db3717e01c63a7896578df4ef5de7b183f79cc8a
@@ -22309,6 +22327,9 @@
 2CUS form.integer_valued:
   hash: cb02e620b7413f6885d733feffaaaf20260900ec425bf93538ab97c2a43303c3
   by: research preamble
+2CUS integral.anisotropic_primes:
+  hash: b6d95191a97dce6d01ef96d7aa18b99d2cedaacd45eacb081e0f1a101b4582c0
+  by: research preamble
 2CUS integral.discriminant_form:
   hash: d0e1dec17dcb58609ec4ab1969915b932e9d8d67c379bf47546508d02f933454
   by: research preamble
@@ -22326,6 +22347,12 @@
   by: research preamble
 2CUS integral.hyperbolic_index:
   hash: 20442d372d9ef4c5fceb3a6585fa8c0b522885c811058cc6be535f1d2c5c8b75
+  by: research preamble
+2CUS integral.local_densities:
+  hash: e582820a456f9334693de513e7948a29890a70ef58aba1f556161bf5623783f7
+  by: research preamble
+2CUS integral.local_representations:
+  hash: 56e11dfb58f503ac6d669bbe8c79e070f6448344d9a80341168bcda542c6e26a
   by: research preamble
 2CUS integral.modular_scale:
   hash: 6d4b2668826eb6bf8b45ebec4e9f6ca582e02462e332a906f445d82b8d7264f1
@@ -22360,6 +22387,9 @@
 2CVT form.integer_valued:
   hash: cc4cd90cfbec5a91187db04efa31587af3641c8986ed944ef51b30577b97fb36
   by: research preamble
+2CVT integral.anisotropic_primes:
+  hash: 60c48df81c6114f9afa86cc1035928239d4e695b3dd3dac4e790a3bae68bd699
+  by: research preamble
 2CVT integral.discriminant_form:
   hash: 557746baad091115129acf98c299b0f64c053c88f25a6fba18079c6496fda630
   by: research preamble
@@ -22377,6 +22407,12 @@
   by: research preamble
 2CVT integral.hyperbolic_index:
   hash: c79351730a672e849da030a4742455c35b87d68e1db176fc2e2f05a321582414
+  by: research preamble
+2CVT integral.local_densities:
+  hash: a1dca75a78486b4a8036ae22003ed8ad3a8b7b82939e54000be6259d26fe79c6
+  by: research preamble
+2CVT integral.local_representations:
+  hash: e80c05094895fc71121229f3940e6ebe34ac88c2dc8ec332f671099249f80d4e
   by: research preamble
 2CVT integral.modular_scale:
   hash: 93ef4ea76565be39389a5d8e10e25cf2ee22a403cc01357016f254ac15915bc9
@@ -22411,6 +22447,9 @@
 2D8W form.integer_valued:
   hash: 66c503478db216c1a9de6d69f68c27ddf151ad7cdb72777300901d2418b4fe67
   by: research preamble
+2D8W integral.anisotropic_primes:
+  hash: 7ec73c7df00bba5a349371bbd00d02516234999d3757db76a62cbdecf29ad9b4
+  by: research preamble
 2D8W integral.discriminant_form:
   hash: 935e0cf8ffcf53bde0dc6371c05878565e7190202f5c27cdd4b9d3db4378cebc
   by: research preamble
@@ -22428,6 +22467,12 @@
   by: research preamble
 2D8W integral.hyperbolic_index:
   hash: fc1935462971246aa320f9ae643c159ffd1f664c63f15980a9f94211f10203d5
+  by: research preamble
+2D8W integral.local_densities:
+  hash: 78d5166175893b874190c6a04c89c77d3c4ad2a3a9ec988e52c5d0676e3128c7
+  by: research preamble
+2D8W integral.local_representations:
+  hash: 8f05c378955dd742bb5ab1848fd026ca200f57ccb51536a29c2799207b00dea1
   by: research preamble
 2D8W integral.modular_scale:
   hash: 802c076238106ff5ad62b370c796fd112d79480c22153bee0695a8cb3195736c
@@ -22462,6 +22507,9 @@
 2F05 form.integer_valued:
   hash: 3fce0f418798814d021432860055097b1904d7fb49cff1c118f4d6ad74c0b804
   by: research preamble
+2F05 integral.anisotropic_primes:
+  hash: 4e61bf4221988a1760b8ebbb965efbc5c664bfd92797d8e466580000b14cc05f
+  by: research preamble
 2F05 integral.discriminant_form:
   hash: 91524d131d8573396e6887d26b70dfbce817580a2e4355cc138b1827a1649d5f
   by: research preamble
@@ -22479,6 +22527,12 @@
   by: research preamble
 2F05 integral.hyperbolic_index:
   hash: 623073894368a0d45b2e25e60ffe3e43433b04f39011e6fe48727fbbeede8ce5
+  by: research preamble
+2F05 integral.local_densities:
+  hash: 82fe895a7b0c42dee7297074f54150b13d900a88c9f546ea24f554e79e472f0e
+  by: research preamble
+2F05 integral.local_representations:
+  hash: ab4c756e61fe2b8e922c0a881f8e658120ca9a0d672c5d9e6739ad18b873dd3a
   by: research preamble
 2F05 integral.modular_scale:
   hash: 49e0afc45b9815132e1f2107dc02400af7220585e54cf99852da4ed37d8a6891
