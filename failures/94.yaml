@@ -10740,3 +10740,79 @@
     database_revision: a133a0cd6ef8433203f53ed37971bac171588c29
     research_revision: b417c471da10f6e32eb591a72e694c5af4683523
   notes: []
+5AXR definite.automorphism_group_generator_morphisms:
+  disposition: open
+  attempts:
+  - hash: 6ac48ab1cb23978ed1a0829c4925a00bb3b0a4ea2172e5c5a46cd0807d387d6a
+    gram_tensor:
+    - - -1
+      - 0
+      - 0
+      - 0
+      - 0
+    - - 0
+      - -2
+      - 0
+      - 0
+      - 0
+    - - 0
+      - 0
+      - -2
+      - 0
+      - 0
+    - - 0
+      - 0
+      - 0
+      - 4
+      - -6
+    - - 0
+      - 0
+      - 0
+      - -6
+      - 12
+    reason: certification budget exhausted
+    stderr: ''
+    seconds: 18008.0
+    recorded_at: 2026-11-27 18:19:22.304536+00:00
+    run_url: https://github.com/dzackgarza/lattice-database/actions/runs/46000443211/attempts/1
+    database_revision: a133a0cd6ef8433203f53ed37971bac171588c29
+    research_revision: b417c471da10f6e32eb591a72e694c5af4683523
+  notes: []
+5AXR definite.automorphism_group_order:
+  disposition: open
+  attempts:
+  - hash: c194318ae4091722416205f32107db356305b3e9e1a9bb497849523d823f73b7
+    gram_tensor:
+    - - -1
+      - 0
+      - 0
+      - 0
+      - 0
+    - - 0
+      - -2
+      - 0
+      - 0
+      - 0
+    - - 0
+      - 0
+      - -2
+      - 0
+      - 0
+    - - 0
+      - 0
+      - 0
+      - 4
+      - -6
+    - - 0
+      - 0
+      - 0
+      - -6
+      - 12
+    reason: certification budget exhausted
+    stderr: ''
+    seconds: 18025.0
+    recorded_at: 2026-11-27 18:19:42.050638+00:00
+    run_url: https://github.com/dzackgarza/lattice-database/actions/runs/46000443211/attempts/1
+    database_revision: a133a0cd6ef8433203f53ed37971bac171588c29
+    research_revision: b417c471da10f6e32eb591a72e694c5af4683523
+  notes: []
