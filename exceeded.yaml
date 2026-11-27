@@ -2855,10 +2855,6 @@
 4N33 automorphisms.automorphism_group_order:
   hash: 7424a531255ff56a461b04c8f76fb810ba13d2dac8be3b64dcec72cc8b9f7b25
   seconds: 19328
-4N33 integral.primitive_orbits[O]:
-  hash: c880c255c21e003961662005179aa66b15d7cf10981cf1aaa1b48eb517b74a0e
-  seconds: 17839
-  lost: true
 4OEZ automorphisms.automorphism_group_generator_morphisms:
   hash: 87718923f329d6330375f064530195bd21116f30fb49583d8c56092276cf780c
   seconds: 17936
@@ -2879,12 +2875,10 @@
   lost: true
 5ASJ definite.automorphism_group_generator_morphisms:
   hash: 6f8b1ebed31e80c0e8cfb12c3872c1aa24e4e4f28e3610366ad02e2fef94fa5a
-  seconds: 14750
-  lost: true
+  seconds: 16390
 5ASJ definite.automorphism_group_order:
   hash: c413152db43cec2fc4787f65fe71d63e4713014022bc3174080b8dfb32a02eb7
-  seconds: 14750
-  lost: true
+  seconds: 16390
 5K8E integral.primitive_orbits[Otilde+]:
   hash: 10d53f671b0173afd9e82a7e721580f46f1cfd48f7496303bfe66b5312895033
   seconds: 0
