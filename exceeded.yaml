@@ -2757,6 +2757,10 @@
 3GXH integral.discriminant_sequence:
   hash: 4eede2cd3519ccf5aba1465e63f975c296b5c144179ab1087bfb842522186871
   seconds: 18991
+3GXJ integral.discriminant_sequence:
+  hash: 5083c56ddc5a7826d85809ecbb9b9e2ef52ab9cbe25a7e1ea636edd9b361a517
+  seconds: 16091
+  lost: true
 3GXL integral.discriminant_sequence:
   hash: ba3fea0b14a6361088d2a1124ed453dab6a5bcd9eed40d5fe0f9f0555c2b634f
   seconds: 1572
@@ -2855,10 +2859,6 @@
 4N33 automorphisms.automorphism_group_order:
   hash: 7424a531255ff56a461b04c8f76fb810ba13d2dac8be3b64dcec72cc8b9f7b25
   seconds: 19328
-4N33 integral.primitive_orbits[O]:
-  hash: c880c255c21e003961662005179aa66b15d7cf10981cf1aaa1b48eb517b74a0e
-  seconds: 14233
-  lost: true
 4OEZ automorphisms.automorphism_group_generator_morphisms:
   hash: 87718923f329d6330375f064530195bd21116f30fb49583d8c56092276cf780c
   seconds: 17936
