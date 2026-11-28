@@ -8696,6 +8696,234 @@
     database_revision: 390482eb077edfe75223989a1ba20693dbc43f5d
     research_revision: 8b5c7cd0e931303e9dccbdb4c81510238a326306
   notes: []
+27RR definite.siegel_eisenstein_coefficients:
+  disposition: open
+  attempts:
+  - hash: fd4e3a2f70e3b57db7146cf3c4b1bdac3db06e401f6b206d7cb991e1129ca00d
+    gram_tensor:
+    - - 2
+      - 0
+      - 0
+      - 0
+      - 0
+    - - 0
+      - 2
+      - 0
+      - 0
+      - 0
+    - - 0
+      - 0
+      - 4
+      - 0
+      - 1
+    - - 0
+      - 0
+      - 0
+      - 4
+      - 2
+    - - 0
+      - 0
+      - 1
+      - 2
+      - 14
+    reason: exit status 1
+    stderr: "Traceback (most recent call last):\n  File \"<frozen runpy>\", line 203,
+      in _run_module_as_main\n  File \"<frozen runpy>\", line 88, in _run_code\n  File
+      \"/home/runner/work/lattice-database/lattice-database/src/latticedb/sage_genus.py\",
+      line 536, in <module>\n    main()\n    ~~~~^^\n  File \"/home/runner/work/lattice-database/lattice-database/src/latticedb/sage_genus.py\",
+      line 531, in main\n    _compute(request)\n    ~~~~~~~~^^^^^^^^^\n  File \"/home/runner/work/lattice-database/lattice-database/src/latticedb/sage_genus.py\",
+      line 516, in _compute\n    _run(\n    ~~~~^\n        tag,\n        ^^^^\n        [field],\n
+      \       ^^^^^^^^\n        lambda: {field: SERIES[field](lattice, request[\"series_bound\"])
+      if field in SERIES else VALUES[field](lattice)},\n        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n
+      \   )\n    ^\n  File \"/home/runner/work/lattice-database/lattice-database/src/latticedb/sage_genus.py\",
+      line 449, in _run\n    values = compute()\n  File \"/home/runner/work/lattice-database/lattice-database/src/latticedb/sage_genus.py\",
+      line 519, in <lambda>\n    lambda: {field: SERIES[field](lattice, request[\"series_bound\"])
+      if field in SERIES else VALUES[field](lattice)},\n                    ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n
+      \ File \"/home/runner/work/lattice-database/lattice-database/src/latticedb/sage_genus.py\",
+      line 338, in <lambda>\n    \"siegel_eisenstein_coefficients\": lambda lattice,
+      bound: _coefficients(lattice.genus().siegel_eisenstein_series(precision=bound
+      + 1), bound)[1:],\n                                                                           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^\n
+      \ File \"/repos/sage-extensions/src/sage_extensions/categories/lattices.py\",
+      line 1026, in siegel_eisenstein_series\n    self.siegel_eisenstein_coefficient(m)
+      for m in range(1, int(precision))\n    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^\n
+      \ File \"/repos/sage-extensions/src/sage_extensions/categories/lattices.py\",
+      line 1012, in siegel_eisenstein_coefficient\n    return rationals(RR(SR(coefficient)))\n
+      \ File \"/repos/sage-extensions/src/sage_extensions/categories/rings/ring_foundation.py\",
+      line 1830, in __call__\n    return self._element_constructor_(value)\n           ~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^\n
+      \ File \"/repos/sage-extensions/src/sage_extensions/categories/rings/ring_foundation.py\",
+      line 1807, in _element_constructor_\n    return self.fraction(value)\n           ~~~~~~~~~~~~~^^^^^^^\n
+      \ File \"/repos/sage-extensions/src/sage_extensions/categories/rings/ring_foundation.py\",
+      line 1715, in fraction\n    numerator = source_element(numerator)\n  File \"/repos/sage-extensions/src/sage_extensions/categories/rings/ring_foundation.py\",
+      line 1708, in source_element\n    return source(value)\n  File \"/repos/sage-extensions/src/sage_extensions/categories/rings/ring_foundation.py\",
+      line 6792, in __call__\n    return self._element_constructor_(value)\n           ~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^\n
+      \ File \"/repos/sage-extensions/src/sage_extensions/categories/rings/ring_foundation.py\",
+      line 6828, in _element_constructor_\n    self._engine(_rational_engine_value(self._engine,
+      _engine_element(parent, value)))\n    ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n
+      \ File \"sage/structure/parent.pyx\", line 899, in sage.structure.parent.Parent.__call__\n
+      \   return mor._call_(x)\n  File \"sage/structure/coerce_maps.pyx\", line 227,
+      in sage.structure.coerce_maps.NamedConvertMap._call_\n    cdef Element e = method(C)\n
+      \ File \"/sage/.venv/lib/python3.14/site-packages/sage/rings/qqbar.py\", line
+      5682, in _integer_\n    raise ValueError(lazy_string(\"Cannot coerce non-integral
+      Algebraic Real %s to Integer\", self))\nValueError: Cannot coerce non-integral
+      Algebraic Real 2.273103448275862? to Integer\n"
+    seconds: 0.5325448500007042
+    recorded_at: 2026-11-28 19:55:41.734727+00:00
+    run_url: https://github.com/dzackgarza/lattice-database/actions/runs/46142186623/attempts/1
+    database_revision: 390482eb077edfe75223989a1ba20693dbc43f5d
+    research_revision: 8b5c7cd0e931303e9dccbdb4c81510238a326306
+  notes: []
+27VD definite.siegel_eisenstein_coefficients:
+  disposition: open
+  attempts:
+  - hash: 9629c235e1779ffa548135a2b7c64f7decabd867abde91e0d75dc4b271623363
+    gram_tensor:
+    - - 2
+      - 0
+      - 0
+      - 1
+      - 1
+    - - 0
+      - 4
+      - 2
+      - 2
+      - 0
+    - - 0
+      - 2
+      - 4
+      - 0
+      - 2
+    - - 1
+      - 2
+      - 0
+      - 6
+      - 0
+    - - 1
+      - 0
+      - 2
+      - 0
+      - 10
+    reason: exit status 1
+    stderr: "Traceback (most recent call last):\n  File \"<frozen runpy>\", line 203,
+      in _run_module_as_main\n  File \"<frozen runpy>\", line 88, in _run_code\n  File
+      \"/home/runner/work/lattice-database/lattice-database/src/latticedb/sage_genus.py\",
+      line 536, in <module>\n    main()\n    ~~~~^^\n  File \"/home/runner/work/lattice-database/lattice-database/src/latticedb/sage_genus.py\",
+      line 531, in main\n    _compute(request)\n    ~~~~~~~~^^^^^^^^^\n  File \"/home/runner/work/lattice-database/lattice-database/src/latticedb/sage_genus.py\",
+      line 516, in _compute\n    _run(\n    ~~~~^\n        tag,\n        ^^^^\n        [field],\n
+      \       ^^^^^^^^\n        lambda: {field: SERIES[field](lattice, request[\"series_bound\"])
+      if field in SERIES else VALUES[field](lattice)},\n        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n
+      \   )\n    ^\n  File \"/home/runner/work/lattice-database/lattice-database/src/latticedb/sage_genus.py\",
+      line 449, in _run\n    values = compute()\n  File \"/home/runner/work/lattice-database/lattice-database/src/latticedb/sage_genus.py\",
+      line 519, in <lambda>\n    lambda: {field: SERIES[field](lattice, request[\"series_bound\"])
+      if field in SERIES else VALUES[field](lattice)},\n                    ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n
+      \ File \"/home/runner/work/lattice-database/lattice-database/src/latticedb/sage_genus.py\",
+      line 338, in <lambda>\n    \"siegel_eisenstein_coefficients\": lambda lattice,
+      bound: _coefficients(lattice.genus().siegel_eisenstein_series(precision=bound
+      + 1), bound)[1:],\n                                                                           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^\n
+      \ File \"/repos/sage-extensions/src/sage_extensions/categories/lattices.py\",
+      line 1026, in siegel_eisenstein_series\n    self.siegel_eisenstein_coefficient(m)
+      for m in range(1, int(precision))\n    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^\n
+      \ File \"/repos/sage-extensions/src/sage_extensions/categories/lattices.py\",
+      line 1012, in siegel_eisenstein_coefficient\n    return rationals(RR(SR(coefficient)))\n
+      \ File \"/repos/sage-extensions/src/sage_extensions/categories/rings/ring_foundation.py\",
+      line 1830, in __call__\n    return self._element_constructor_(value)\n           ~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^\n
+      \ File \"/repos/sage-extensions/src/sage_extensions/categories/rings/ring_foundation.py\",
+      line 1807, in _element_constructor_\n    return self.fraction(value)\n           ~~~~~~~~~~~~~^^^^^^^\n
+      \ File \"/repos/sage-extensions/src/sage_extensions/categories/rings/ring_foundation.py\",
+      line 1715, in fraction\n    numerator = source_element(numerator)\n  File \"/repos/sage-extensions/src/sage_extensions/categories/rings/ring_foundation.py\",
+      line 1708, in source_element\n    return source(value)\n  File \"/repos/sage-extensions/src/sage_extensions/categories/rings/ring_foundation.py\",
+      line 6792, in __call__\n    return self._element_constructor_(value)\n           ~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^\n
+      \ File \"/repos/sage-extensions/src/sage_extensions/categories/rings/ring_foundation.py\",
+      line 6828, in _element_constructor_\n    self._engine(_rational_engine_value(self._engine,
+      _engine_element(parent, value)))\n    ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n
+      \ File \"sage/structure/parent.pyx\", line 899, in sage.structure.parent.Parent.__call__\n
+      \   return mor._call_(x)\n  File \"sage/structure/coerce_maps.pyx\", line 227,
+      in sage.structure.coerce_maps.NamedConvertMap._call_\n    cdef Element e = method(C)\n
+      \ File \"/sage/.venv/lib/python3.14/site-packages/sage/rings/qqbar.py\", line
+      5682, in _integer_\n    raise ValueError(lazy_string(\"Cannot coerce non-integral
+      Algebraic Real %s to Integer\", self))\nValueError: Cannot coerce non-integral
+      Algebraic Real 3.409655172413793? to Integer\n"
+    seconds: 0.512432040000931
+    recorded_at: 2026-11-28 20:01:27.565909+00:00
+    run_url: https://github.com/dzackgarza/lattice-database/actions/runs/46142186623/attempts/1
+    database_revision: 390482eb077edfe75223989a1ba20693dbc43f5d
+    research_revision: 8b5c7cd0e931303e9dccbdb4c81510238a326306
+  notes: []
+27XT definite.siegel_eisenstein_coefficients:
+  disposition: open
+  attempts:
+  - hash: 55783ad2ebe9709131a3555356b5eeacfaf9bbfc866706cbef0fd2bba2f26a0e
+    gram_tensor:
+    - - 2
+      - 0
+      - 0
+      - 1
+      - 0
+    - - 0
+      - 2
+      - 0
+      - 1
+      - 0
+    - - 0
+      - 0
+      - 2
+      - 1
+      - 0
+    - - 1
+      - 1
+      - 1
+      - 10
+      - 0
+    - - 0
+      - 0
+      - 0
+      - 0
+      - 12
+    reason: exit status 1
+    stderr: "Traceback (most recent call last):\n  File \"<frozen runpy>\", line 203,
+      in _run_module_as_main\n  File \"<frozen runpy>\", line 88, in _run_code\n  File
+      \"/home/runner/work/lattice-database/lattice-database/src/latticedb/sage_genus.py\",
+      line 536, in <module>\n    main()\n    ~~~~^^\n  File \"/home/runner/work/lattice-database/lattice-database/src/latticedb/sage_genus.py\",
+      line 531, in main\n    _compute(request)\n    ~~~~~~~~^^^^^^^^^\n  File \"/home/runner/work/lattice-database/lattice-database/src/latticedb/sage_genus.py\",
+      line 516, in _compute\n    _run(\n    ~~~~^\n        tag,\n        ^^^^\n        [field],\n
+      \       ^^^^^^^^\n        lambda: {field: SERIES[field](lattice, request[\"series_bound\"])
+      if field in SERIES else VALUES[field](lattice)},\n        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n
+      \   )\n    ^\n  File \"/home/runner/work/lattice-database/lattice-database/src/latticedb/sage_genus.py\",
+      line 449, in _run\n    values = compute()\n  File \"/home/runner/work/lattice-database/lattice-database/src/latticedb/sage_genus.py\",
+      line 519, in <lambda>\n    lambda: {field: SERIES[field](lattice, request[\"series_bound\"])
+      if field in SERIES else VALUES[field](lattice)},\n                    ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n
+      \ File \"/home/runner/work/lattice-database/lattice-database/src/latticedb/sage_genus.py\",
+      line 338, in <lambda>\n    \"siegel_eisenstein_coefficients\": lambda lattice,
+      bound: _coefficients(lattice.genus().siegel_eisenstein_series(precision=bound
+      + 1), bound)[1:],\n                                                                           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^\n
+      \ File \"/repos/sage-extensions/src/sage_extensions/categories/lattices.py\",
+      line 1026, in siegel_eisenstein_series\n    self.siegel_eisenstein_coefficient(m)
+      for m in range(1, int(precision))\n    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^\n
+      \ File \"/repos/sage-extensions/src/sage_extensions/categories/lattices.py\",
+      line 1012, in siegel_eisenstein_coefficient\n    return rationals(RR(SR(coefficient)))\n
+      \ File \"/repos/sage-extensions/src/sage_extensions/categories/rings/ring_foundation.py\",
+      line 1830, in __call__\n    return self._element_constructor_(value)\n           ~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^\n
+      \ File \"/repos/sage-extensions/src/sage_extensions/categories/rings/ring_foundation.py\",
+      line 1807, in _element_constructor_\n    return self.fraction(value)\n           ~~~~~~~~~~~~~^^^^^^^\n
+      \ File \"/repos/sage-extensions/src/sage_extensions/categories/rings/ring_foundation.py\",
+      line 1715, in fraction\n    numerator = source_element(numerator)\n  File \"/repos/sage-extensions/src/sage_extensions/categories/rings/ring_foundation.py\",
+      line 1708, in source_element\n    return source(value)\n  File \"/repos/sage-extensions/src/sage_extensions/categories/rings/ring_foundation.py\",
+      line 6792, in __call__\n    return self._element_constructor_(value)\n           ~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^\n
+      \ File \"/repos/sage-extensions/src/sage_extensions/categories/rings/ring_foundation.py\",
+      line 6828, in _element_constructor_\n    self._engine(_rational_engine_value(self._engine,
+      _engine_element(parent, value)))\n    ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n
+      \ File \"sage/structure/parent.pyx\", line 899, in sage.structure.parent.Parent.__call__\n
+      \   return mor._call_(x)\n  File \"sage/structure/coerce_maps.pyx\", line 227,
+      in sage.structure.coerce_maps.NamedConvertMap._call_\n    cdef Element e = method(C)\n
+      \ File \"/sage/.venv/lib/python3.14/site-packages/sage/rings/qqbar.py\", line
+      5682, in _integer_\n    raise ValueError(lazy_string(\"Cannot coerce non-integral
+      Algebraic Real %s to Integer\", self))\nValueError: Cannot coerce non-integral
+      Algebraic Real 4.291666666666667? to Integer\n"
+    seconds: 0.5475789129995974
+    recorded_at: 2026-11-28 20:08:36.830102+00:00
+    run_url: https://github.com/dzackgarza/lattice-database/actions/runs/46142186623/attempts/1
+    database_revision: 390482eb077edfe75223989a1ba20693dbc43f5d
+    research_revision: 8b5c7cd0e931303e9dccbdb4c81510238a326306
+  notes: []
 2MVF integral.discriminant_form:
   disposition: open
   attempts:
