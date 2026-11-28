@@ -4663,12 +4663,10 @@
   lost: true
 3ICY root_span.norms:
   hash: 280b56fb25e5f3ea9dd5a424718d1a0882b87abeb0586db1862baac2154f4e79
-  seconds: 3035
-  lost: true
+  seconds: 13127
 3ICY root_span.roots:
   hash: 9e8529ead666503aabc3279e1ba2035a2ba4bf8751729d51d22676a551f961c7
-  seconds: 3035
-  lost: true
+  seconds: 13127
 3IEA integral.hyperbolic_index:
   hash: 3072abb556184c36e33747dd96e2dc1de4befdb4383257fa4d37035dd48d3c52
   seconds: 112
@@ -4680,6 +4678,10 @@
 44LI automorphisms.automorphism_group_order:
   hash: a5023f8c96ab33dcbbed76653a5231784e723cf5cd82246090cfd45659df8494
   seconds: 1082
+  lost: true
+44LI integral.primitive_orbits[O+]:
+  hash: 45d470d2132dd920cab146665e7830ac038b844df017d81d8c0874b8cb300306
+  seconds: 8924
   lost: true
 44LI integral.primitive_orbits[O]:
   hash: 942884c9e5f20daa0f4719571338a60c01010b88f30ac8995a4ed58664dd2071
