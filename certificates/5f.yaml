@@ -22450,11 +22450,29 @@
 2JGC integral.spinor_genus_count:
   hash: d60437c46d01a9f2714217fa9b307640dc7882198c7c362d793edc3c4066339c
   by: research preamble
+2JVE definite.automorphism_group_generator_morphisms:
+  hash: 6ea2dd3df80139ec5916fcc5ed39e5737efea8d3bc71d2d7c6c0b09c11e36d3d
+  by: research preamble
+2JVE definite.automorphism_group_order:
+  hash: 30575afde40d01545f317e52ead804ba2d124453cec60f289935628fed944df1
+  by: research preamble
+2JVE definite.genus_theta_series:
+  hash: de98a0fdf090bc0a3983c27176afe3e20e7b913dd31a8614e978958b7800066a
+  by: research preamble
+2JVE definite.theta_series_cuspidal_component:
+  hash: 020397f25d21f3a78897371f25959d50b8fe7d43041b61220d761602b0922ca2
+  by: research preamble
 2JVE derive:
   hash: 1036a4cfe9614ac8f9d72cbbbdb2c42269a2a824bee29ecd238d6432cb12e4ab
   by: research preamble
 2JVE form.integer_valued:
   hash: 7b604995cfde3536080db8dd97bfc9804540f7a90d365e7c20ed3ba4f206a8de
+  by: research preamble
+2JVE integral.discriminant_form:
+  hash: 6f1fca20df839ff4ac658c134810e79e48963846617c1182ef60528ff967aa90
+  by: research preamble
+2JVE integral.discriminant_sequence:
+  hash: 6103122767544c3e13770af04799fa0111dead800aee30a7ad735ad6a6e9d1cc
   by: research preamble
 2JVE integral.elementary_primes:
   hash: 215d59c1ce4c2ee1cce52a73a4d1a81de2268d3d7c34f40960f9733049acc64f
@@ -22464,6 +22482,24 @@
   by: research preamble
 2JVE integral.genus_symbol:
   hash: 5ddd1688771b51b9bedd0035936cc7beaae7492a2d42a47e8c72b41a7d99f6c6
+  by: research preamble
+2JVE integral.hyperbolic_index:
+  hash: d83c8cf4de18093c7c31fa300ca6fdfab9883dad2ed64c20e5f7f00cdcadab1b
+  by: research preamble
+2JVE integral.modular_scale:
+  hash: 4dfbe7c2e3981fc2859c15916680ae4b9d31b5c6dc40e627d1f334994b9e4924
+  by: research preamble
+2JVE integral.overlattice_count:
+  hash: b66432919fb1bc634a83f4300724f5a4fbb9067800ac1aec67e302485736ad89
+  by: research preamble
+2JVE integral.primitive_orbits:
+  hash: b8f3e022dd1e75dd6db2b95d3545802c327f44ac3d819edd6ea1f7500e59d4dd
+  by: research preamble
+2JVE integral.spinor_genera:
+  hash: 8b8c0778c687255ccd9d8703ba0728cf4aeb28eced32bb8150d73c2b9ccde9bf
+  by: research preamble
+2JVE integral.spinor_genus_count:
+  hash: 0eb5be6f9c6e96b5778f210ef0f73cdbee4260c8a051848a5665a69c25dd402f
   by: research preamble
 2MNU definite.automorphism_group_generator_morphisms:
   hash: 48d741226999fddf8757eead75b00be175de8b4db7375eea4bac80e72136caa6
