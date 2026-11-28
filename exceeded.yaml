@@ -3721,10 +3721,6 @@
   hash: e5378e409c24f7701e373876b32586a87eb5a9cf04b7ada7350ac466781f0804
   seconds: 0
   lost: true
-5FEV integral.hyperbolic_index:
-  hash: bb767ed9b7722fe801e79316426f1bdf2c4e51b626eaa1653932f8b4e034f65d
-  seconds: 120
-  lost: true
 5K8E integral.primitive_orbits[Otilde+]:
   hash: 10d53f671b0173afd9e82a7e721580f46f1cfd48f7496303bfe66b5312895033
   seconds: 0
@@ -3740,13 +3736,13 @@
 5RR1 integral.primitive_orbits[SOtilde]:
   hash: 2b2f37ca731c7f2c974be88ea8d147c4f3c85c99adec5cb66a320253d297072a
   seconds: 19709
-5UXL definite.automorphism_group_generator_morphisms:
-  hash: 9c3b410051e2e6a545ea38f8b59b15655e4f05fbcfdef0c20b500a27d342cbd3
-  seconds: 8893
+5U7O definite.automorphism_group_generator_morphisms:
+  hash: 984812cf9cd8c113f56f4a4f8413bb65227358345515909d87723fb96bfad4ca
+  seconds: 631
   lost: true
-5UXL definite.automorphism_group_order:
-  hash: c9ab66dd269bccff9cf22c7d7a500be0f626f58858444bdfa9b88df714761f90
-  seconds: 8893
+5U7O definite.automorphism_group_order:
+  hash: ea27567f0647705a2c20eb0e51063316186d229a73edd22c8130ec97a4103e29
+  seconds: 631
   lost: true
 5WNU definite.automorphism_group_generator_morphisms:
   hash: ee8fad109b365bc81b55aea46bbc65d5a0e10a80588a4bcedaabf97c6a079d89
