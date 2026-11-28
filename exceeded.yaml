@@ -3685,6 +3685,10 @@
 4OEZ automorphisms.automorphism_group_order:
   hash: 05e21b5572e15ae05b50c67115f204939eaf2ebccd73f35c307153af55c5f985
   seconds: 17936
+4OEZ integral.primitive_orbits[O]:
+  hash: aa34cd62f176857ab11c3df1eda24c1f796892c533563bc3c0db30d908572414
+  seconds: 5234
+  lost: true
 4PO5 integral.hyperbolic_index:
   hash: 30ae55c3c5f37e71f9c4455de88a2826e23ef18db546684235410ccfac7d1539
   seconds: 182
