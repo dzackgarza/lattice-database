@@ -12036,6 +12036,44 @@
     database_revision: 7182371755aeeda58cdc69ddbd93048920d6d428
     research_revision: 8b5c7cd0e931303e9dccbdb4c81510238a326306
   notes: []
+2LUO derive:
+  disposition: open
+  attempts:
+  - hash: fd4469707134e897ebb6cc92ae4888e7176dcd56c9023ade7af539f41fae79b9
+    gram_tensor:
+    - - 2
+      - 1
+      - 1
+      - 0
+      - 1
+    - - 1
+      - 4
+      - 0
+      - 2
+      - 0
+    - - 1
+      - 0
+      - 4
+      - 1
+      - 1
+    - - 0
+      - 2
+      - 1
+      - 8
+      - 2
+    - - 1
+      - 0
+      - 1
+      - 2
+      - 8
+    reason: memory exhausted
+    stderr: ''
+    seconds: 51.12238451399935
+    recorded_at: 2026-11-28 20:01:30.067130+00:00
+    run_url: https://github.com/dzackgarza/lattice-database/actions/runs/46142186623/attempts/1
+    database_revision: 7182371755aeeda58cdc69ddbd93048920d6d428
+    research_revision: 8b5c7cd0e931303e9dccbdb4c81510238a326306
+  notes: []
 2MPG integral.discriminant_form:
   disposition: open
   attempts:
