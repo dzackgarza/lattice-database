@@ -14,6 +14,11 @@ certifications:
   integral.hyperbolic_index: df9be445a0876539fad365b1a5e45231ff5956837c85fdc038caa9153ea1812f
   automorphisms.automorphism_group_order: e3f8d17630243066388eeec7f74540b519151758a7a52f62b96611084e6e7d79
   automorphisms.automorphism_group_generator_morphisms: 42dac7601cbce806ebf1c26237f2b9dbe94319f3d83bb6dccca83eec1f440282
+  integral.primitive_orbits: 01c62b84af21ca2af01c9e83a445084ed5a2f0a104081388b7f5f9d442aa3d48
+  integral.modular_scale: 8dc037bb0fa1653697920c9c1a9988cfc16c6f40c27edd30fccf5e10a941a182
+  integral.anisotropic_primes: 1b11ba26496876f6362fe0bc39235126c6abb61ebadf31e3134174d91e1675e2
+  integral.local_representations: f642d11286c7510890b532fa6a7e294f877c950c4ca9bfc561ed38c1490b23b9
+  integral.local_densities: ba2f3e47fce665d1be4a3ad26c11529d9b926f86994b415f9f43b94989616e5c
 rank: 5
 gram_tensor:
 - [1, 0, 0, 0, 0]
@@ -36,6 +41,7 @@ integral:
   elementary_primes: [3]
   parity: odd
   level: 6
+  modular_scale: false
   discriminant_group: [3]
   overlattice_count: 1
   bad_reduction_primes: [2, 3]
@@ -44,6 +50,38 @@ integral:
   spinor_genus_count: 1
   spinor_genera: [1]
   hyperbolic_index: 1
+  primitive_orbits:
+    O:
+      constant: 1
+      z: []
+      w: []
+    O+:
+      constant: 1
+      z: []
+      w: []
+    SO:
+      constant: 1
+      z: []
+      w: []
+    Otilde:
+      constant: 1
+      z: []
+      w: []
+    Otilde+:
+      constant: 1
+      z: []
+      w: []
+    SOtilde:
+      constant: 1
+      z: []
+      w: []
+  anisotropic_primes: []
+  local_representations: []
+  local_densities:
+  - prime: 2
+    densities: [7/8, 5/4, 5/4, 47/64, 5/8, 5/4, 5/4, 25/32]
+  - prime: 3
+    densities: [8/9, 8/9, 32/27, 8/9, 8/9, 34/27, 8/9, 8/9]
 automorphisms:
   automorphism_group_order: aleph0
   automorphism_group_generator_morphisms: [O(L) generator 1, O(L) generator 2, O(L) generator 3, O(L) generator 4, O(L) generator 5, O(L) generator 6]

@@ -32809,6 +32809,9 @@
 3SUT form.integer_valued:
   hash: 0b84a47ed3b4940b5f71b3ebe9360087fa282571d29b6895c49646807bc216e1
   by: research preamble
+3SUT integral.anisotropic_primes:
+  hash: ddbff5bfb221000f3c830c6c72b2f1fbdf970f3adece8df1a79c0ba2138ce18c
+  by: research preamble
 3SUT integral.elementary_primes:
   hash: 134140d6a26b7de5bf34b31d7bf35634dbd293bdc8a2f4a45f3e5a8c836e50e4
   by: research preamble
@@ -32821,8 +32824,20 @@
 3SUT integral.hyperbolic_index:
   hash: 0f8ebba6f15c7fe185016e780a374bfecb33c675daef2e52f058cd78686d5c05
   by: research preamble
+3SUT integral.local_densities:
+  hash: fd5e58bcf662de6e8b9af65f49aae3f7f187b609c019f15d96a20d5d7e864653
+  by: research preamble
+3SUT integral.local_representations:
+  hash: 3ad9480799c75ce2cc970f3697eb89d09c023d62b4e5ab64505acc0e096f562d
+  by: research preamble
+3SUT integral.modular_scale:
+  hash: 4a833764439778af3bfcc47b11e42067e2d7f890913326a08584499f553d7f8f
+  by: research preamble
 3SUT integral.overlattice_count:
   hash: 9526388c29c9f56a5bb81644b0161aa74f86831a1b8ce602d0c785c724e73929
+  by: research preamble
+3SUT integral.primitive_orbits:
+  hash: 34a789f56f7914df930553ee18229e544d5662882576f9611b5d96d808f46ff4
   by: research preamble
 3SUT integral.spinor_genera:
   hash: 20ee0ccf860c37342c06584cf2348dcea9b2061ba5e0d066354e258a41ecc437

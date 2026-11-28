@@ -29932,6 +29932,9 @@
 4Y7G form.integer_valued:
   hash: 4400dfc8d754c29b1604043c071ea329ded226140a39932ff6c588009de011c5
   by: research preamble
+4Y7G integral.anisotropic_primes:
+  hash: 40bbee36460e786c1b4c5bb0a0acd96b357437bdb49c4ede21cf58f3c2fcaa86
+  by: research preamble
 4Y7G integral.elementary_primes:
   hash: 1f73c6229d94f588166a080f29e3d615edb88774b52ba9753299667a81d43f4d
   by: research preamble
@@ -29944,8 +29947,20 @@
 4Y7G integral.hyperbolic_index:
   hash: 3c38180c639093f0b148dd97afa9f949d59eba9c3c5e289b70bb78631f4716c7
   by: research preamble
+4Y7G integral.local_densities:
+  hash: c12903e9ba2575704b1042807843358d519285629982dcf4d79301c8b6444eef
+  by: research preamble
+4Y7G integral.local_representations:
+  hash: 54796d121f54ac2f5f32847845c23a0b84453bc019b21dccf4d5d5a457076b34
+  by: research preamble
+4Y7G integral.modular_scale:
+  hash: f632d00717f21a5f6d07c813215ea49776aca4e87127f179f46cdec1b3310b14
+  by: research preamble
 4Y7G integral.overlattice_count:
   hash: 1149b61278d8038e1687d0d7581459bb281a88917c6d5088fb1d4ce9655f0c97
+  by: research preamble
+4Y7G integral.primitive_orbits:
+  hash: d027d76f99370f372d963818d57032fbd298e5d916fbb51376f891bbed9dc0f0
   by: research preamble
 4Y7G integral.spinor_genera:
   hash: b10bc1eac6be466ec73236aa191f60bfb0c0e59a00d92950a1e25207d406c460

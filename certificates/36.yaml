@@ -28,6 +28,9 @@
 0057 integral.anisotropic_primes:
   hash: 71f76935b0cb00e47c6cbe6461a6083a2965fa554aa01a7b4bc877cafcbaa40b
   by: research preamble
+0057 integral.discriminant_form:
+  hash: 7ab6f36d5254f284b8ba8c9c275ec9707090f90a6b5cccad78d6ac4f10212ccb
+  by: research preamble
 0057 integral.discriminant_sequence:
   hash: 5b3083b964c6d70f68be43daf80cf0905a650fe5c3450bdb059aea30711f194d
   by: research preamble
@@ -29560,11 +29563,20 @@
 3ICN integral.spinor_genus_count:
   hash: 6e595617f1cacbb6a912d3eabbb10370c7887c1056577c129e9133d7825c8427
   by: research preamble
+3Q77 automorphisms.automorphism_group_generator_morphisms:
+  hash: 254ccba328b9ce491089c219416a2c6e2fbad54e93de9cf52041ab705266a5df
+  by: research preamble
+3Q77 automorphisms.automorphism_group_order:
+  hash: cc1662a116ed6fdde3d17f971cf78a0a204ac38721b98f896731503de521430c
+  by: research preamble
 3Q77 derive:
   hash: 7ea18f0d5a66b86cce4f5041f33ee935792a9f3b4390eb665f46c9e7e220ab1e
   by: research preamble
 3Q77 form.integer_valued:
   hash: c10fe2a455fb208e3fdc5e03d97a262028677a30c2715170981df4c63e8f192a
+  by: research preamble
+3Q77 integral.anisotropic_primes:
+  hash: a11ed5c518e3e8e0625a32536d0f50301c7c59ffd478c9db41fc0638fe94c03c
   by: research preamble
 3Q77 integral.elementary_primes:
   hash: 1fcb0079264bb3b3d65e7bd7d354444c62c22db536f13d1108a2405e0e38540f
@@ -29575,8 +29587,20 @@
 3Q77 integral.genus_symbol:
   hash: 469d5cd566be9b1356584debd58a0c5f2a52354988530bf7165b1b917e8c8171
   by: research preamble
+3Q77 integral.local_densities:
+  hash: 2ba894ad2bd74a35df55ff31b213c483bbd9d659d88f70b00affb6b441e79204
+  by: research preamble
+3Q77 integral.local_representations:
+  hash: a422b816abfb6c4b588caeb8a3b20323307c468a979f117632f8637696a8bff4
+  by: research preamble
+3Q77 integral.modular_scale:
+  hash: 51a0a5ada72916d0a8a46632061be94448fd9349690af3e86b2fa886ad486973
+  by: research preamble
 3Q77 integral.overlattice_count:
   hash: 55bb0a9d74b10efcc0e64f3ae98fe31346613bb85e7c5e6d96b1f264665afa4c
+  by: research preamble
+3Q77 integral.primitive_orbits:
+  hash: a4ff6e49e4df91eadaaaff323565fc764ae552200776d88cbf999ce3d16fed0e
   by: research preamble
 3Q77 integral.spinor_genera:
   hash: 28341dbb30589391e88da82b0b3d5829eced91539cd0bae95e3152347c955001
