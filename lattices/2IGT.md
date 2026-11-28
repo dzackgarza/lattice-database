@@ -21,6 +21,9 @@ certifications:
   integral.modular_scale: 1fd14b530eb4602cafe5e31ee153cc5caf52190ea0ae61b02c0b9b4b6c5704b9
   definite.genus_theta_series: d09efd021300956454414290ae1846edf177e1d1b243fa5dd061b4c5cb119578
   definite.theta_series_cuspidal_component: bd53685f1bfe29263cc54deaf357e73109c03baab1dd1c4c4205ca1fb4626666
+  integral.anisotropic_primes: 7db1f67185d9411248d4442be57afaf0dbd19ea54f24a93662397711ad5f67a3
+  integral.local_representations: 6119dd740ddbf42dceaa68c0d114cd39069dc940d9026a928ff8b3c1579c14c9
+  integral.local_densities: 522b13ef50c76dd71455b9070e30a03eb42ad698148be438a380309749b8baaa
 rank: 5
 gram_tensor:
 - [4, 2, 1, 2, 0]
@@ -132,6 +135,31 @@ integral:
     orthogonal_group_order: 8
     isotropic_classes: 2
     isotropic_orbits: 2
+  anisotropic_primes: []
+  local_representations:
+  - prime: 2
+    classes:
+    - representative: 1
+      least_valuation: 2
+    - representative: 3
+      least_valuation: 2
+    - representative: 5
+      least_valuation: 2
+    - representative: 7
+      least_valuation: 2
+    - representative: 2
+      least_valuation: 1
+    - representative: 6
+      least_valuation: 1
+    - representative: 10
+      least_valuation: 1
+    - representative: 14
+      least_valuation: 1
+  local_densities:
+  - prime: 2
+    densities: [0, 2, 0, 31/16, 0, 2, 0, 17/8]
+  - prime: 61
+    densities: [3720/3721, 3720/3721, 3720/3721, 3720/3721, 3720/3721, 3720/3721, 3720/3721, 3720/3721]
 definite:
   minimum: 4
   kissing_number: 10
