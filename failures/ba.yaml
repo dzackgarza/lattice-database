@@ -590,64 +590,6 @@
     database_revision: 974976b97133d251da0e12a6146194b54d19bd2f
     research_revision: 11ff4360c27d72e347fb6fd2d76bed2e76695902
   notes: []
-054T definite.regular:
-  disposition: open
-  attempts:
-  - hash: d830cc1c8af9fba1afcec344840582bd03c803e0264c1329b14e0df4b07027b6
-    gram_tensor:
-    - - 1
-      - 0
-      - 0
-      - 0
-    - - 0
-      - 2
-      - 0
-      - 1
-    - - 0
-      - 0
-      - 2
-      - 0
-    - - 0
-      - 1
-      - 0
-      - 7
-    reason: memory exhausted
-    stderr: ''
-    seconds: 5.042125749999286
-    recorded_at: 2026-11-27 21:22:38.980399+00:00
-    run_url: https://github.com/dzackgarza/lattice-database/actions/runs/46057057806/attempts/1
-    database_revision: 342d8c611b6b9b10d07d272ea275fecdc91ef09e
-    research_revision: ac057001e18c827e6eddac665d7bc3df71cef551
-  notes: []
-054T definite.spinor_regular:
-  disposition: open
-  attempts:
-  - hash: 7a2f242f0b9424d3e471a313ffedbdb3f2f753647008f63a4d6ee58cc916c5ca
-    gram_tensor:
-    - - 1
-      - 0
-      - 0
-      - 0
-    - - 0
-      - 2
-      - 0
-      - 1
-    - - 0
-      - 0
-      - 2
-      - 0
-    - - 0
-      - 1
-      - 0
-      - 7
-    reason: memory exhausted
-    stderr: ''
-    seconds: 5.0480072049995215
-    recorded_at: 2026-11-27 21:22:56.241207+00:00
-    run_url: https://github.com/dzackgarza/lattice-database/actions/runs/46057057806/attempts/1
-    database_revision: 342d8c611b6b9b10d07d272ea275fecdc91ef09e
-    research_revision: ac057001e18c827e6eddac665d7bc3df71cef551
-  notes: []
 054T integral.discriminant_form:
   disposition: open
   attempts:
@@ -9322,6 +9264,348 @@
     database_revision: 779e9596e6b247439346c0be7bdc1c1c2b879c60
     research_revision: ac057001e18c827e6eddac665d7bc3df71cef551
   notes: []
+23UW definite.siegel_eisenstein_coefficients:
+  disposition: open
+  attempts:
+  - hash: 6a5a72354cad434bb212715173074c0159d84d3badf4e8ade0c3d5df3f4789b0
+    gram_tensor:
+    - - 2
+      - 1
+      - 0
+      - 0
+      - 1
+    - - 1
+      - 4
+      - 0
+      - 0
+      - 0
+    - - 0
+      - 0
+      - 4
+      - 0
+      - 2
+    - - 0
+      - 0
+      - 0
+      - 6
+      - 0
+    - - 1
+      - 0
+      - 2
+      - 0
+      - 6
+    reason: exit status 1
+    stderr: "Traceback (most recent call last):\n  File \"<frozen runpy>\", line 203,
+      in _run_module_as_main\n  File \"<frozen runpy>\", line 88, in _run_code\n  File
+      \"/home/runner/work/lattice-database/lattice-database/src/latticedb/sage_genus.py\",
+      line 536, in <module>\n    main()\n    ~~~~^^\n  File \"/home/runner/work/lattice-database/lattice-database/src/latticedb/sage_genus.py\",
+      line 531, in main\n    _compute(request)\n    ~~~~~~~~^^^^^^^^^\n  File \"/home/runner/work/lattice-database/lattice-database/src/latticedb/sage_genus.py\",
+      line 516, in _compute\n    _run(\n    ~~~~^\n        tag,\n        ^^^^\n        [field],\n
+      \       ^^^^^^^^\n        lambda: {field: SERIES[field](lattice, request[\"series_bound\"])
+      if field in SERIES else VALUES[field](lattice)},\n        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n
+      \   )\n    ^\n  File \"/home/runner/work/lattice-database/lattice-database/src/latticedb/sage_genus.py\",
+      line 449, in _run\n    values = compute()\n  File \"/home/runner/work/lattice-database/lattice-database/src/latticedb/sage_genus.py\",
+      line 519, in <lambda>\n    lambda: {field: SERIES[field](lattice, request[\"series_bound\"])
+      if field in SERIES else VALUES[field](lattice)},\n                    ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n
+      \ File \"/home/runner/work/lattice-database/lattice-database/src/latticedb/sage_genus.py\",
+      line 338, in <lambda>\n    \"siegel_eisenstein_coefficients\": lambda lattice,
+      bound: _coefficients(lattice.genus().siegel_eisenstein_series(precision=bound
+      + 1), bound)[1:],\n                                                                           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^\n
+      \ File \"/repos/sage-extensions/src/sage_extensions/categories/lattices.py\",
+      line 1026, in siegel_eisenstein_series\n    self.siegel_eisenstein_coefficient(m)
+      for m in range(1, int(precision))\n    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^\n
+      \ File \"/repos/sage-extensions/src/sage_extensions/categories/lattices.py\",
+      line 1012, in siegel_eisenstein_coefficient\n    return rationals(RR(SR(coefficient)))\n
+      \ File \"/repos/sage-extensions/src/sage_extensions/categories/rings/ring_foundation.py\",
+      line 1830, in __call__\n    return self._element_constructor_(value)\n           ~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^\n
+      \ File \"/repos/sage-extensions/src/sage_extensions/categories/rings/ring_foundation.py\",
+      line 1807, in _element_constructor_\n    return self.fraction(value)\n           ~~~~~~~~~~~~~^^^^^^^\n
+      \ File \"/repos/sage-extensions/src/sage_extensions/categories/rings/ring_foundation.py\",
+      line 1715, in fraction\n    numerator = source_element(numerator)\n  File \"/repos/sage-extensions/src/sage_extensions/categories/rings/ring_foundation.py\",
+      line 1708, in source_element\n    return source(value)\n  File \"/repos/sage-extensions/src/sage_extensions/categories/rings/ring_foundation.py\",
+      line 6792, in __call__\n    return self._element_constructor_(value)\n           ~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^\n
+      \ File \"/repos/sage-extensions/src/sage_extensions/categories/rings/ring_foundation.py\",
+      line 6828, in _element_constructor_\n    self._engine(_rational_engine_value(self._engine,
+      _engine_element(parent, value)))\n    ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n
+      \ File \"sage/structure/parent.pyx\", line 899, in sage.structure.parent.Parent.__call__\n
+      \   return mor._call_(x)\n  File \"sage/structure/coerce_maps.pyx\", line 227,
+      in sage.structure.coerce_maps.NamedConvertMap._call_\n    cdef Element e = method(C)\n
+      \ File \"/sage/.venv/lib/python3.14/site-packages/sage/rings/qqbar.py\", line
+      5682, in _integer_\n    raise ValueError(lazy_string(\"Cannot coerce non-integral
+      Algebraic Real %s to Integer\", self))\nValueError: Cannot coerce non-integral
+      Algebraic Real 2.550000000000000? to Integer\n"
+    seconds: 0.6162969399997564
+    recorded_at: 2026-11-27 19:15:20.043222+00:00
+    run_url: https://github.com/dzackgarza/lattice-database/actions/runs/46000443211/attempts/1
+    database_revision: 779e9596e6b247439346c0be7bdc1c1c2b879c60
+    research_revision: ac057001e18c827e6eddac665d7bc3df71cef551
+  notes: []
+23YX derive:
+  disposition: open
+  attempts:
+  - hash: 15cd89ffcc9326d7329cbf75f8c52ec710dacd018e0f41569643740dd5d19e88
+    gram_tensor:
+    - - 2
+      - 1
+      - 0
+      - 1
+      - 0
+    - - 1
+      - 2
+      - 0
+      - 0
+      - 0
+    - - 0
+      - 0
+      - 6
+      - 0
+      - 3
+    - - 1
+      - 0
+      - 0
+      - 6
+      - 2
+    - - 0
+      - 0
+      - 3
+      - 2
+      - 10
+    reason: memory exhausted
+    stderr: ''
+    seconds: 51.13711076199979
+    recorded_at: 2026-11-27 19:26:49.687903+00:00
+    run_url: https://github.com/dzackgarza/lattice-database/actions/runs/46000443211/attempts/1
+    database_revision: 779e9596e6b247439346c0be7bdc1c1c2b879c60
+    research_revision: ac057001e18c827e6eddac665d7bc3df71cef551
+  notes: []
+243G derive:
+  disposition: open
+  attempts:
+  - hash: 596fd079f55f612c2eaf54f6ceb0c8b80faac17f4ed24d5dfca45a8d03fc8a46
+    gram_tensor:
+    - - 4
+      - 2
+      - 1
+      - 0
+      - 1
+    - - 2
+      - 4
+      - -1
+      - 0
+      - 1
+    - - 1
+      - -1
+      - 4
+      - 1
+      - 0
+    - - 0
+      - 0
+      - 1
+      - 4
+      - 0
+    - - 1
+      - 1
+      - 0
+      - 0
+      - 6
+    reason: memory exhausted
+    stderr: ''
+    seconds: 46.157444355000735
+    recorded_at: 2026-11-27 19:37:16.526674+00:00
+    run_url: https://github.com/dzackgarza/lattice-database/actions/runs/46000443211/attempts/1
+    database_revision: 779e9596e6b247439346c0be7bdc1c1c2b879c60
+    research_revision: ac057001e18c827e6eddac665d7bc3df71cef551
+  notes: []
+2471 derive:
+  disposition: open
+  attempts:
+  - hash: 0364ed6a78b00bdf2a45e27457139e4bf4ae98917a49ee81fe33c0f15ab8e0e2
+    gram_tensor:
+    - - 2
+      - 1
+      - 1
+      - 0
+      - 0
+    - - 1
+      - 2
+      - 0
+      - 1
+      - 0
+    - - 1
+      - 0
+      - 4
+      - 1
+      - 1
+    - - 0
+      - 1
+      - 1
+      - 6
+      - 1
+    - - 0
+      - 0
+      - 1
+      - 1
+      - 16
+    reason: memory exhausted
+    stderr: ''
+    seconds: 51.12390055299966
+    recorded_at: 2026-11-27 19:46:53.642124+00:00
+    run_url: https://github.com/dzackgarza/lattice-database/actions/runs/46000443211/attempts/1
+    database_revision: 779e9596e6b247439346c0be7bdc1c1c2b879c60
+    research_revision: ac057001e18c827e6eddac665d7bc3df71cef551
+  notes: []
+24NU derive:
+  disposition: open
+  attempts:
+  - hash: 9d3d64279bf37aef4e4a1c37101d8129e087a906df5db71451b041f9cc3b9697
+    gram_tensor:
+    - - 2
+      - 0
+      - 0
+      - 0
+      - 1
+    - - 0
+      - 4
+      - 0
+      - 2
+      - 1
+    - - 0
+      - 0
+      - 4
+      - 1
+      - 1
+    - - 0
+      - 2
+      - 1
+      - 6
+      - 1
+    - - 1
+      - 1
+      - 1
+      - 1
+      - 6
+    reason: memory exhausted
+    stderr: ''
+    seconds: 46.16174628199951
+    recorded_at: 2026-11-27 20:35:13.118899+00:00
+    run_url: https://github.com/dzackgarza/lattice-database/actions/runs/46000443211/attempts/1
+    database_revision: 779e9596e6b247439346c0be7bdc1c1c2b879c60
+    research_revision: ac057001e18c827e6eddac665d7bc3df71cef551
+  notes: []
+25HT derive:
+  disposition: open
+  attempts:
+  - hash: 8f64a669d3f578ee1bbcfdb773ddf2e7fb3a8645d985e8d88f42011a6ee34ede
+    gram_tensor:
+    - - 2
+      - 0
+      - 0
+      - 1
+      - 0
+    - - 0
+      - 4
+      - 1
+      - 2
+      - 0
+    - - 0
+      - 1
+      - 4
+      - 2
+      - 1
+    - - 1
+      - 2
+      - 2
+      - 4
+      - 1
+    - - 0
+      - 0
+      - 1
+      - 1
+      - 14
+    reason: memory exhausted
+    stderr: ''
+    seconds: 46.13819951500045
+    recorded_at: 2026-11-27 22:09:11.468170+00:00
+    run_url: https://github.com/dzackgarza/lattice-database/actions/runs/46000443211/attempts/1
+    database_revision: 779e9596e6b247439346c0be7bdc1c1c2b879c60
+    research_revision: ac057001e18c827e6eddac665d7bc3df71cef551
+  notes: []
+25KO definite.siegel_eisenstein_coefficients:
+  disposition: open
+  attempts:
+  - hash: f221e7a012f4112db914b10800da2c2b2251b42003c220bae70d077d9f8b3e51
+    gram_tensor:
+    - - 2
+      - 1
+      - 1
+      - 0
+      - 0
+    - - 1
+      - 2
+      - 0
+      - 1
+      - 1
+    - - 1
+      - 0
+      - 6
+      - 2
+      - -1
+    - - 0
+      - 1
+      - 2
+      - 6
+      - 0
+    - - 0
+      - 1
+      - -1
+      - 0
+      - 12
+    reason: exit status 1
+    stderr: "Traceback (most recent call last):\n  File \"<frozen runpy>\", line 203,
+      in _run_module_as_main\n  File \"<frozen runpy>\", line 88, in _run_code\n  File
+      \"/home/runner/work/lattice-database/lattice-database/src/latticedb/sage_genus.py\",
+      line 536, in <module>\n    main()\n    ~~~~^^\n  File \"/home/runner/work/lattice-database/lattice-database/src/latticedb/sage_genus.py\",
+      line 531, in main\n    _compute(request)\n    ~~~~~~~~^^^^^^^^^\n  File \"/home/runner/work/lattice-database/lattice-database/src/latticedb/sage_genus.py\",
+      line 516, in _compute\n    _run(\n    ~~~~^\n        tag,\n        ^^^^\n        [field],\n
+      \       ^^^^^^^^\n        lambda: {field: SERIES[field](lattice, request[\"series_bound\"])
+      if field in SERIES else VALUES[field](lattice)},\n        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n
+      \   )\n    ^\n  File \"/home/runner/work/lattice-database/lattice-database/src/latticedb/sage_genus.py\",
+      line 449, in _run\n    values = compute()\n  File \"/home/runner/work/lattice-database/lattice-database/src/latticedb/sage_genus.py\",
+      line 519, in <lambda>\n    lambda: {field: SERIES[field](lattice, request[\"series_bound\"])
+      if field in SERIES else VALUES[field](lattice)},\n                    ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n
+      \ File \"/home/runner/work/lattice-database/lattice-database/src/latticedb/sage_genus.py\",
+      line 338, in <lambda>\n    \"siegel_eisenstein_coefficients\": lambda lattice,
+      bound: _coefficients(lattice.genus().siegel_eisenstein_series(precision=bound
+      + 1), bound)[1:],\n                                                                           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^\n
+      \ File \"/repos/sage-extensions/src/sage_extensions/categories/lattices.py\",
+      line 1026, in siegel_eisenstein_series\n    self.siegel_eisenstein_coefficient(m)
+      for m in range(1, int(precision))\n    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^\n
+      \ File \"/repos/sage-extensions/src/sage_extensions/categories/lattices.py\",
+      line 1012, in siegel_eisenstein_coefficient\n    return rationals(RR(SR(coefficient)))\n
+      \ File \"/repos/sage-extensions/src/sage_extensions/categories/rings/ring_foundation.py\",
+      line 1830, in __call__\n    return self._element_constructor_(value)\n           ~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^\n
+      \ File \"/repos/sage-extensions/src/sage_extensions/categories/rings/ring_foundation.py\",
+      line 1807, in _element_constructor_\n    return self.fraction(value)\n           ~~~~~~~~~~~~~^^^^^^^\n
+      \ File \"/repos/sage-extensions/src/sage_extensions/categories/rings/ring_foundation.py\",
+      line 1715, in fraction\n    numerator = source_element(numerator)\n  File \"/repos/sage-extensions/src/sage_extensions/categories/rings/ring_foundation.py\",
+      line 1708, in source_element\n    return source(value)\n  File \"/repos/sage-extensions/src/sage_extensions/categories/rings/ring_foundation.py\",
+      line 6792, in __call__\n    return self._element_constructor_(value)\n           ~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^\n
+      \ File \"/repos/sage-extensions/src/sage_extensions/categories/rings/ring_foundation.py\",
+      line 6828, in _element_constructor_\n    self._engine(_rational_engine_value(self._engine,
+      _engine_element(parent, value)))\n    ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n
+      \ File \"sage/structure/parent.pyx\", line 899, in sage.structure.parent.Parent.__call__\n
+      \   return mor._call_(x)\n  File \"sage/structure/coerce_maps.pyx\", line 227,
+      in sage.structure.coerce_maps.NamedConvertMap._call_\n    cdef Element e = method(C)\n
+      \ File \"/sage/.venv/lib/python3.14/site-packages/sage/rings/qqbar.py\", line
+      5682, in _integer_\n    raise ValueError(lazy_string(\"Cannot coerce non-integral
+      Algebraic Real %s to Integer\", self))\nValueError: Cannot coerce non-integral
+      Algebraic Real 3.272727272727273? to Integer\n"
+    seconds: 0.626153188999524
+    recorded_at: 2026-11-27 22:21:16.162956+00:00
+    run_url: https://github.com/dzackgarza/lattice-database/actions/runs/46000443211/attempts/1
+    database_revision: 779e9596e6b247439346c0be7bdc1c1c2b879c60
+    research_revision: ac057001e18c827e6eddac665d7bc3df71cef551
+  notes: []
 268K derive:
   disposition: open
   attempts:
@@ -9356,6 +9640,44 @@
     stderr: ''
     seconds: 51.146970105000946
     recorded_at: 2026-11-27 23:07:08.200124+00:00
+    run_url: https://github.com/dzackgarza/lattice-database/actions/runs/46000443211/attempts/1
+    database_revision: 779e9596e6b247439346c0be7bdc1c1c2b879c60
+    research_revision: ac057001e18c827e6eddac665d7bc3df71cef551
+  notes: []
+26TQ derive:
+  disposition: open
+  attempts:
+  - hash: cb0e50cf59188ede39d85743d81cc8c5cbf5d41dd17334514857f0ffd31801bd
+    gram_tensor:
+    - - 2
+      - 1
+      - 1
+      - 0
+      - 0
+    - - 1
+      - 2
+      - 0
+      - 0
+      - 0
+    - - 1
+      - 0
+      - 2
+      - 0
+      - 1
+    - - 0
+      - 0
+      - 0
+      - 6
+      - 0
+    - - 0
+      - 0
+      - 1
+      - 0
+      - 34
+    reason: memory exhausted
+    stderr: ''
+    seconds: 56.21343425800296
+    recorded_at: 2026-11-27 23:50:28.811556+00:00
     run_url: https://github.com/dzackgarza/lattice-database/actions/runs/46000443211/attempts/1
     database_revision: 779e9596e6b247439346c0be7bdc1c1c2b879c60
     research_revision: ac057001e18c827e6eddac665d7bc3df71cef551
