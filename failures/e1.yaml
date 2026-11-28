@@ -12354,6 +12354,82 @@
     database_revision: 10d4149aedf0455c080cb381ba1ff4073de937fa
     research_revision: 8f17a013db49176c29cc89e9b4f122203aafb9d6
   notes: []
+5UXL definite.automorphism_group_generator_morphisms:
+  disposition: open
+  attempts:
+  - hash: 9c3b410051e2e6a545ea38f8b59b15655e4f05fbcfdef0c20b500a27d342cbd3
+    gram_tensor:
+    - - 2
+      - 0
+      - 0
+      - 0
+      - 0
+    - - 0
+      - 0
+      - -1
+      - 0
+      - 0
+    - - 0
+      - -1
+      - 0
+      - 0
+      - 0
+    - - 0
+      - 0
+      - 0
+      - -4
+      - 6
+    - - 0
+      - 0
+      - 0
+      - 6
+      - -12
+    reason: certification budget exhausted
+    stderr: ''
+    seconds: 19422.0
+    recorded_at: 2026-11-28 17:36:26.685397+00:00
+    run_url: https://github.com/dzackgarza/lattice-database/actions/runs/46142186623/attempts/1
+    database_revision: 94adda0badc777e59618aa210009ce7dda7e4432
+    research_revision: 889f214f54198fb4e46fce69be1d80a84b062230
+  notes: []
+5UXL definite.automorphism_group_order:
+  disposition: open
+  attempts:
+  - hash: c9ab66dd269bccff9cf22c7d7a500be0f626f58858444bdfa9b88df714761f90
+    gram_tensor:
+    - - 2
+      - 0
+      - 0
+      - 0
+      - 0
+    - - 0
+      - 0
+      - -1
+      - 0
+      - 0
+    - - 0
+      - -1
+      - 0
+      - 0
+      - 0
+    - - 0
+      - 0
+      - 0
+      - -4
+      - 6
+    - - 0
+      - 0
+      - 0
+      - 6
+      - -12
+    reason: certification budget exhausted
+    stderr: ''
+    seconds: 19445.0
+    recorded_at: 2026-11-28 17:36:48.853551+00:00
+    run_url: https://github.com/dzackgarza/lattice-database/actions/runs/46142186623/attempts/1
+    database_revision: 94adda0badc777e59618aa210009ce7dda7e4432
+    research_revision: 889f214f54198fb4e46fce69be1d80a84b062230
+  notes: []
 6JRR arithmetic-group.otilde-plus-t-co.generator_morphisms:
   disposition: open
   attempts:
