@@ -10468,12 +10468,12 @@
       - 0
       - 6
       - -12
-    reason: worker or runner lost (recovered from exceeded.yaml)
+    reason: certification budget exhausted
     stderr: ''
-    seconds: 601.0
-    recorded_at: 2026-11-27 19:52:36.361882+00:00
-    run_url: https://github.com/dzackgarza/lattice-database/actions/runs/46057057806/attempts/1
-    database_revision: 342d8c611b6b9b10d07d272ea275fecdc91ef09e
+    seconds: 18480.0
+    recorded_at: 2026-11-28 00:00:17.287594+00:00
+    run_url: https://github.com/dzackgarza/lattice-database/actions/runs/46000443211/attempts/1
+    database_revision: 5d956eca1f125c1be553d783ac7d1a1d1f2332e0
     research_revision: ac057001e18c827e6eddac665d7bc3df71cef551
   notes: []
 66NC definite.automorphism_group_order:
@@ -10506,11 +10506,11 @@
       - 0
       - 6
       - -12
-    reason: worker or runner lost (recovered from exceeded.yaml)
+    reason: certification budget exhausted
     stderr: ''
-    seconds: 601.0
-    recorded_at: 2026-11-27 19:52:47.439845+00:00
-    run_url: https://github.com/dzackgarza/lattice-database/actions/runs/46057057806/attempts/1
-    database_revision: 342d8c611b6b9b10d07d272ea275fecdc91ef09e
+    seconds: 18504.0
+    recorded_at: 2026-11-28 00:00:41.394790+00:00
+    run_url: https://github.com/dzackgarza/lattice-database/actions/runs/46000443211/attempts/1
+    database_revision: 5d956eca1f125c1be553d783ac7d1a1d1f2332e0
     research_revision: ac057001e18c827e6eddac665d7bc3df71cef551
   notes: []
