@@ -22624,11 +22624,20 @@
 2IHA definite.automorphism_group_order:
   hash: afc8500347abc52801722c88b52c9b9480b8cd6521c898d15592b6608359db62
   by: research preamble
+2IHA definite.genus_theta_series:
+  hash: 9639564f22ddbf05d2bb9843148cdd33baa44e90330d93b2eee0ca9ca72b7c41
+  by: research preamble
+2IHA definite.theta_series_cuspidal_component:
+  hash: 1848c65c96171121eae91dceb42a4423702ef6e747fefaaac93c2d34ffe22a8c
+  by: research preamble
 2IHA derive:
   hash: 15ad53119845f1066a7c1a678fe6f45429cd104ddfbfa980612ad25fd7d0a0b1
   by: research preamble
 2IHA form.integer_valued:
   hash: 538ee247e1ad3c83b066f9b2f0526ceb6650212c4f403b44e533701e8557ab87
+  by: research preamble
+2IHA integral.discriminant_form:
+  hash: 9c0c9e6cc00cda1f7695dde0c3f382d54ced712bc0d4407663f51f631c40782b
   by: research preamble
 2IHA integral.discriminant_sequence:
   hash: 0ba47c2111d418c0ed1811460d93923206ddc7c4c3b1ea8dcb22ee44546a0d96
@@ -22645,8 +22654,14 @@
 2IHA integral.hyperbolic_index:
   hash: d25d87b44eaddd4a5941106351b5e545b3aa3cc4ff94b560096bb04a33cfa9ca
   by: research preamble
+2IHA integral.modular_scale:
+  hash: 9dda83378ae512ae1c9415e8209eac25d904ec4638a1843370ff20cca45459c2
+  by: research preamble
 2IHA integral.overlattice_count:
   hash: 532b18c8ef4c718f06d6983097cdc913d03403019f1eda0841dcfe1d88e86eb9
+  by: research preamble
+2IHA integral.primitive_orbits:
+  hash: e7613addf16a5b54ea4d9e4e9c2c6a453adcfdfba96ef195f35c822c8a61ad08
   by: research preamble
 2IHA integral.spinor_genera:
   hash: 488c10a06cb62cff0cc04f63d15d163cc217eec129d0300d4281d5c3ce9cb7f6
